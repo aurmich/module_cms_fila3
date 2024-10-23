@@ -10,10 +10,7 @@ use Spatie\Translatable\HasTranslations;
 /**
  * Modules\Cms\Models\PageContent.
  *
-<<<<<<< HEAD
- * @property array|null $blocks
-=======
- * @property string                          $blocks
+ * @property array|null                      $blocks
  * @property string|null                     $id
  * @property array|null                      $name
  * @property string|null                     $slug
@@ -24,7 +21,6 @@ use Spatie\Translatable\HasTranslations;
  * @property ProfileContract|null            $creator
  * @property mixed                           $translations
  * @property ProfileContract|null            $updater
- * @property string                          $blocks
  * @property string|null                     $id
  * @property array|null                      $name
  * @property string|null                     $slug
@@ -52,7 +48,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
->>>>>>> 49ebea7 (.)
  *
  * @mixin \Eloquent
  */
