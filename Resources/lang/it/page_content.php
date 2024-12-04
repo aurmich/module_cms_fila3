@@ -55,5 +55,8 @@ return [
         'activeLocale' => [
             'label' => 'activeLocale',
         ],
+        'create' => [
+            'label' => 'create',
+        ],
     ],
 ];
