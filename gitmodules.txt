@@ -1,5 +1,0 @@
-#tools
-[submodule "bashscripts"]
-	path = bashscripts
-	url = git@github.com:quaeris-tv/bashscripts_fila3.git
-
