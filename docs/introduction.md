@@ -1,20 +1,11 @@
 ---
-title: Introducendo Lang
-description: Introduzione a Module Lang
+title: Introducendo Cms
+description: Introduzione a Module Cms
 extends: _layouts.documentation
 section: content
 ---
 
-# Introducendo Lang {#introducendo-lang}
+# Introducendo Cms {#introducendo-cms}
 
 
-Il module_lang in Laravel è un pacchetto che serve a gestire le traduzioni in lingua. 
-
-In Laravel, le traduzioni servono a consentire all'applicazione di mostrare testo in diverse lingue. 
-
-Ad esempio, se si sta costruendo un'applicazione che dovrà essere utilizzata in Italia, Francia e Germania, si potrebbero creare file di lingua per ognuna di queste lingue che contengono le traduzioni del testo utilizzato nell'applicazione. 
-
-In questo modo, quando l'applicazione viene utilizzata in Italia, verrà visualizzato il testo tradotto in italiano; 
-
-quando viene utilizzata in Francia, verrà visualizzato il testo tradotto in francese, e così via.
-
+Il modulo "module_cms" è un pacchetto aggiuntivo per Laravel che fornisce funzionalità per creare e gestire un sistema di gestione dei contenuti (CMS).
