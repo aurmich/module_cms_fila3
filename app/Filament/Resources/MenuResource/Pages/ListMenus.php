@@ -6,6 +6,7 @@ namespace Modules\Cms\Filament\Resources\MenuResource\Pages;
 
 use Filament\Tables;
 use Filament\Actions\CreateAction;
+use Filament\Tables\Columns\TextColumn;
 use Modules\Cms\Filament\Resources\MenuResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 

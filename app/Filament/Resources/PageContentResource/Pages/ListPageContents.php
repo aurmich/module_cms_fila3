@@ -100,10 +100,5 @@ class ListPageContents extends XotBaseListRecords
         ];
     }
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            // TableLayoutToggleTableAction::make(),
-        ];
-    }
+    
 }

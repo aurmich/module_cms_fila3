@@ -11,7 +11,7 @@ class DashboardTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testRouteHome(): void
+    public function test_route_home(): void
     {
         $testResponse = $this->get('/');
 
@@ -22,7 +22,7 @@ class DashboardTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testRouteLogin(): void
+    public function test_route_login(): void
     {
         $testResponse = $this->get('/it/login');
 

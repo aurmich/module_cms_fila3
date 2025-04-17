@@ -130,12 +130,7 @@ class ListPages extends XotBaseListRecords
         ];
     }
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            // TableLayoutToggleTableAction::make(),
-        ];
-    }
+    
 
     protected function getPreviewModalView(): ?string
     {

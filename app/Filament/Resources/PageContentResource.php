@@ -24,8 +24,6 @@ class PageContentResource extends XotBaseResource
 
     protected static ?string $model = PageContent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     public static function getTranslatableLocales(): array
     {
         return ['it', 'en'];
@@ -34,36 +32,24 @@ class PageContentResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
-            Forms\Components\Grid::make()->columns(2)->schema([
-                Forms\Components\TextInput::make('name')
-                    ->columnSpan(1)
-                    ->required()
-                    ->lazy()
-                    ->afterStateUpdated(static function (Forms\Set $set, Forms\Get $get, string $state): void {
-                        if ($get('slug')) {
-                            return;
-                        }
-                        $set('slug', Str::slug($state));
-                    }),
+            'name' => Forms\Components\TextInput::make('name')
+                ->required()
+                ->lazy()
+                ->afterStateUpdated(static function (Forms\Set $set, Forms\Get $get, string $state): void {
+                    if ($get('slug')) {
+                        return;
+                    }
+                    $set('slug', Str::slug($state));
+                }),
 
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->columnSpan(1)
-                    ->afterStateUpdated(static fn (Forms\Set $set, string $state) => $set('slug', Str::slug($state))),
-            ]),
+            'slug' => Forms\Components\TextInput::make('slug')
+                ->required()
+                ->afterStateUpdated(static fn (Forms\Set $set, string $state) => $set('slug', Str::slug($state))),
 
-            Forms\Components\Section::make('Content')->schema([
+            'blocks' => Forms\Components\Section::make('Content')->schema([
                 PageContentBuilder::make('blocks')
-
-                    // ->required()
                     ->columnSpanFull(),
             ]),
-        ];
-    }
-
-    public static function getRelations(): array
-    {
-        return [
         ];
     }
 

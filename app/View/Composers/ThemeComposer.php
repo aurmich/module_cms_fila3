@@ -53,8 +53,9 @@ class ThemeComposer
     public function showPageContent(string $slug): Renderable
     {
         Assert::isInstanceOf($page = Page::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), Page::class, '['.__LINE__.']['.__FILE__.']');
-        // $page = Page::firstOrCreate(['slug' => $slug], ['content_blocks' => []]);
+
         $blocks = $page->content_blocks;
+
         if (! is_array($blocks)) {
             $blocks = [];
         }
@@ -77,11 +78,12 @@ class ThemeComposer
     {
         Assert::isInstanceOf($page = PageContent::firstOrCreate(['slug' => $slug], ['blocks' => []]), PageContent::class, '['.__LINE__.']['.__FILE__.']');
 
-        if (! is_array($page->blocks)) {
+        $blocks = $page->blocks;
+        if (! is_array($blocks)) {
             return view('ui::empty');
         }
 
-        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $page->blocks, model: $page);
+        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $blocks, model: $page);
 
         return $page->render();
     }

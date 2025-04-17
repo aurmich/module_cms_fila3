@@ -83,7 +83,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
         Folio::path($theme_path)
-            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+            ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -101,7 +101,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+                ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
                 ->middleware([
                     '*' => [
                     ],
@@ -127,7 +127,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         */
         app(RegisterLivewireComponentsAction::class)
             ->execute(
-                base_path('Themes/'.$this->xot->pub_theme.'/Http/Livewire'),
+                base_path('Themes/'.$this->xot->pub_theme.'/app/Http/Livewire'),
                 'Themes\\'.$this->xot->pub_theme,
                 $prefix,
             );
