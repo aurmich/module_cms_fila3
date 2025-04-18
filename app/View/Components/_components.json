@@ -12,5 +12,12 @@
         "module": null,
         "path": null,
         "ns": "Modules\\Cms\\View\\Components\\GuestLayout"
+    },
+    {
+        "name": "page-content",
+        "class": "PageContent",
+        "module": null,
+        "path": null,
+        "ns": "Modules\\Cms\\View\\Components\\PageContent"
     }
 ]

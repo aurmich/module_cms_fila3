@@ -22,6 +22,7 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\Xot\Services\LivewireService;
 use Nwidart\Modules\Facades\Module;
 use Webmozart\Assert\Assert;
+use Illuminate\Support\Facades\Blade;
 
 /**
  * Undocumented class.
@@ -63,8 +64,13 @@ class CmsServiceProvider extends XotBaseServiceProvider
         // $this->mergeConfigFrom(__DIR__.sprintf('/../config/%s.php', $configFileName), $configFileName);
 
         if ($this->xot->register_pub_theme) {
+            Assert::string($relativePath = config('modules.paths.generator.component-view.path'));
+            //$component_view_path = theme_path($this->xot->pub_theme, $relativePath);
+            $component_view_path = base_path('Themes/'.$this->xot->pub_theme.'/'.$relativePath);
+            Blade::anonymousComponentPath($component_view_path);
             Assert::isArray($paths = config('view.paths'));
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
+
             $paths = array_merge([$theme_path], $paths);
             Config::set('view.paths', $paths);
             Config::set('livewire.view_path', $theme_path.'/livewire');

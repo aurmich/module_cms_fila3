@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "name": "page.show",
+        "class": "Page\\Show",
+        "module": null,
+        "path": null,
+        "ns": "Modules\\Cms\\Http\\Livewire\\Page\\Show"
+    }
+]
