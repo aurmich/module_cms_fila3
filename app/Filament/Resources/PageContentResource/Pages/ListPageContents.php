@@ -27,48 +27,63 @@ class ListPageContents extends XotBaseListRecords
 
     // protected static string $resource = PageContentResource::class;
 
-    public function getGridTableColumns(): array
-    {
-        return [
-            Stack::make($this->getListTableColumns()),
-        ];
-    }
 
+
+    /**
+     * Definisce le colonne della tabella di elenco contenuti di pagina.
+     *
+     * @return array<string, \Filament\Tables\Columns\Column>
+     */
     public function getListTableColumns(): array
     {
         return [
-            TextColumn::make('name')
+            'name' => TextColumn::make('name')
                 ->sortable()
                 ->searchable(),
-            TextColumn::make('slug')
+            'slug' => TextColumn::make('slug')
                 ->sortable()
                 ->searchable(),
         ];
     }
 
+    /**
+     * Definisce i filtri della tabella.
+     *
+     * @return array<int, \Filament\Tables\Filters\Filter>
+     */
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
+    /**
+     * Definisce le azioni disponibili per ciascuna riga della tabella.
+     *
+     * @return array<string, \Filament\Tables\Actions\Action>
+     */
     public function getTableActions(): array
     {
         return [
-            ViewAction::make()
+            'view' => ViewAction::make()
                 ->label(''),
-            EditAction::make()
+            'edit' => EditAction::make()
                 ->label(''),
-            DeleteAction::make()
+            'delete' => DeleteAction::make()
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
+    /**
+     * Definisce le azioni bulk disponibili per più righe selezionate.
+     *
+     * @return array<string, \Filament\Tables\Actions\BulkAction>
+     */
     public function getTableBulkActions(): array
     {
         return [
-            DeleteBulkAction::make(),
+            'delete' => DeleteBulkAction::make(),
         ];
     }
 
@@ -99,6 +114,4 @@ class ListPageContents extends XotBaseListRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
-
-    
 }
