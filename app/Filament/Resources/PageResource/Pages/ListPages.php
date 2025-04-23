@@ -82,23 +82,29 @@ class ListPages extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
+     */
     public function getTableActions(): array
     {
         return [
-            ViewAction::make()
+            'view'   => ViewAction::make()
                 ->label(''),
-            EditAction::make()
+            'edit'   => EditAction::make()
                 ->label(''),
-            DeleteAction::make()
+            'delete' => DeleteAction::make()
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
+    /**
+     * @return array<string, \Filament\Tables\Actions\BulkAction>
+     */
     public function getTableBulkActions(): array
     {
         return [
-            DeleteBulkAction::make(),
+            'delete' => DeleteBulkAction::make(),
         ];
     }
 

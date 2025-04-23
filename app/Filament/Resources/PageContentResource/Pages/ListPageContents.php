@@ -60,14 +60,14 @@ class ListPageContents extends XotBaseListRecords
     /**
      * Definisce le azioni disponibili per ciascuna riga della tabella.
      *
-     * @return array<string, \Filament\Tables\Actions\Action>
+     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
      */
     public function getTableActions(): array
     {
         return [
-            'view' => ViewAction::make()
+            'view'   => ViewAction::make()
                 ->label(''),
-            'edit' => EditAction::make()
+            'edit'   => EditAction::make()
                 ->label(''),
             'delete' => DeleteAction::make()
                 ->label('')

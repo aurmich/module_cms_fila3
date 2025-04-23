@@ -25,12 +25,12 @@ class ListMenus extends XotBaseListRecords
     /**
      * Get list table columns.
      *
-     * @return array<Tables\Columns\Column>
+     * @return array<string, \Filament\Tables\Columns\Column>
      */
     public function getListTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('title'),
+            'title' => Tables\Columns\TextColumn::make('title'),
         ];
     }
 }
