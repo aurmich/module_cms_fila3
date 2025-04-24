@@ -82,6 +82,7 @@ class ListPages extends XotBaseListRecords
         ];
     }
 
+<<<<<<< HEAD
     /**
      * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
      */
@@ -93,11 +94,22 @@ class ListPages extends XotBaseListRecords
             'edit'   => EditAction::make()
                 ->label(''),
             'delete' => DeleteAction::make()
+=======
+    public function getTableActions(): array
+    {
+        return [
+            ViewAction::make()
+                ->label(''),
+            EditAction::make()
+                ->label(''),
+            DeleteAction::make()
+>>>>>>> cb39031 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
+<<<<<<< HEAD
     /**
      * @return array<string, \Filament\Tables\Actions\BulkAction>
      */
@@ -105,6 +117,12 @@ class ListPages extends XotBaseListRecords
     {
         return [
             'delete' => DeleteBulkAction::make(),
+=======
+    public function getTableBulkActions(): array
+    {
+        return [
+            DeleteBulkAction::make(),
+>>>>>>> cb39031 (.)
         ];
     }
 

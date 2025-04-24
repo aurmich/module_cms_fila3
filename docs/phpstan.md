@@ -120,4 +120,14 @@ Utilizzare Rector per correggere automaticamente le chiamate alle funzioni:
 ```bash
 composer require --dev rector/rector
 vendor/bin/rector process app/ --config vendor/thecodingmachine/safe/rector-migrate.php
+<<<<<<< HEAD
 ``` 
+=======
+```
+
+# Documentazione PHPStan
+
+## Analisi Specifiche per Modulo
+
+- [Analisi Assets dei Temi](themes/phpstan-assets-analysis.md) - Analisi dettagliata della gestione degli assets dei temi 
+>>>>>>> cb39031 (.)

@@ -13,6 +13,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Laravel\Folio\Folio;
+<<<<<<< HEAD
+=======
+use Livewire\Volt\Volt;
+>>>>>>> cb39031 (.)
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Tenant\Services\TenantService;
 use Modules\Xot\Actions\Livewire\RegisterLivewireComponentsAction;
@@ -113,10 +117,14 @@ class CmsServiceProvider extends XotBaseServiceProvider
                 ]);
         }
 
+<<<<<<< HEAD
         if (class_exists(\Livewire\Volt\Volt::class)) {
             /** @phpstan-ignore-next-line */
             \Livewire\Volt\Volt::mount($paths);
         }
+=======
+        Volt::mount($paths);
+>>>>>>> cb39031 (.)
     }
 
     /**

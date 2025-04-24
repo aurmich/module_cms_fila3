@@ -27,6 +27,7 @@ class ListPageContents extends XotBaseListRecords
 
     // protected static string $resource = PageContentResource::class;
 
+<<<<<<< HEAD
 
 
     /**
@@ -41,22 +42,42 @@ class ListPageContents extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             'slug' => TextColumn::make('slug')
+=======
+    public function getGridTableColumns(): array
+    {
+        return [
+            Stack::make($this->getListTableColumns()),
+        ];
+    }
+
+    public function getListTableColumns(): array
+    {
+        return [
+            TextColumn::make('name')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('slug')
+>>>>>>> cb39031 (.)
                 ->sortable()
                 ->searchable(),
         ];
     }
 
+<<<<<<< HEAD
     /**
      * Definisce i filtri della tabella.
      *
      * @return array<int, \Filament\Tables\Filters\Filter>
      */
+=======
+>>>>>>> cb39031 (.)
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
+<<<<<<< HEAD
     /**
      * Definisce le azioni disponibili per ciascuna riga della tabella.
      *
@@ -70,11 +91,22 @@ class ListPageContents extends XotBaseListRecords
             'edit'   => EditAction::make()
                 ->label(''),
             'delete' => DeleteAction::make()
+=======
+    public function getTableActions(): array
+    {
+        return [
+            ViewAction::make()
+                ->label(''),
+            EditAction::make()
+                ->label(''),
+            DeleteAction::make()
+>>>>>>> cb39031 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
+<<<<<<< HEAD
     /**
      * Definisce le azioni bulk disponibili per più righe selezionate.
      *
@@ -84,6 +116,12 @@ class ListPageContents extends XotBaseListRecords
     {
         return [
             'delete' => DeleteBulkAction::make(),
+=======
+    public function getTableBulkActions(): array
+    {
+        return [
+            DeleteBulkAction::make(),
+>>>>>>> cb39031 (.)
         ];
     }
 
@@ -114,4 +152,9 @@ class ListPageContents extends XotBaseListRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> cb39031 (.)
 }
