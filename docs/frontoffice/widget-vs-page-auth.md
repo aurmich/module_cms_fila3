@@ -2,7 +2,7 @@
 
 ## Introduzione
 
-Questo documento analizza le ragioni per cui, nel contesto specifico di SaluteOra, è preferibile utilizzare un widget Filament invece di una page per i form di autenticazione.
+Questo documento analizza le ragioni per cui, nel contesto specifico di <nome progetto>, è preferibile utilizzare un widget Filament invece di una page per i form di autenticazione.
 
 ⚠️ **IMPORTANTE**: 
 1. Tutte le implementazioni devono estendere le classi base di Xot con prefisso `XotBase`, mai direttamente le classi di Filament.
@@ -177,7 +177,7 @@ class RegisterWidget extends XotBaseWidget
 
 ## Conclusioni
 
-L'utilizzo di widget per l'autenticazione in SaluteOra offre numerosi vantaggi in termini di:
+L'utilizzo di widget per l'autenticazione in <nome progetto> offre numerosi vantaggi in termini di:
 - Flessibilità di integrazione
 - Performance ottimizzata
 - Manutenibilità del codice

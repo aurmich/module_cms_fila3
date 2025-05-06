@@ -44,7 +44,7 @@ Il processo di compilazione trasforma i file sorgente (CSS, JavaScript, ecc.) in
 Per compilare il tema, è necessario eseguire il seguente comando nella directory del tema:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm run build
 ```
 
@@ -88,7 +88,7 @@ Dopo la compilazione, è necessario copiare i file compilati nella directory pub
 Per pubblicare il tema compilato, è necessario eseguire il seguente comando:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm run copy
 ```
 
@@ -168,7 +168,7 @@ Le dipendenze frontend sono gestite tramite npm e definite nel file `package.jso
 Prima di compilare il tema per la prima volta, è necessario installare le dipendenze:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm install
 ```
 
@@ -177,7 +177,7 @@ npm install
 Per aggiornare le dipendenze:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm update
 ```
 

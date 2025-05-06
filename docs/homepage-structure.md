@@ -1,12 +1,12 @@
-# Struttura della Homepage in SaluteOra
+# Struttura della Homepage in <nome progetto>
 
 ## Introduzione
 
-Questo documento spiega la struttura e il funzionamento della homepage nel progetto SaluteOra, concentrandosi sull'architettura tecnica che combina Laravel Folio, il sistema di temi e la gestione dei contenuti tramite blocchi.
+Questo documento spiega la struttura e il funzionamento della homepage nel progetto <nome progetto>, concentrandosi sull'architettura tecnica che combina Laravel Folio, il sistema di temi e la gestione dei contenuti tramite blocchi.
 
 ## Architettura Generale
 
-La homepage di SaluteOra è implementata seguendo un'architettura modulare che separa il layout dalla gestione dei contenuti:
+La homepage di <nome progetto> è implementata seguendo un'architettura modulare che separa il layout dalla gestione dei contenuti:
 
 1. **Laravel Folio** - Gestisce il routing basato su file
 2. **Theme System** - Fornisce il layout e i componenti visivi
@@ -119,7 +119,7 @@ Esempio di un blocco di tipo hero:
     "type": "hero",
     "data": {
         "view": "ui::components.blocks.hero.v1",
-        "title": "Promozione della salute orale per le gestanti",
+        "title": "Promozione della <slogan> per le gestanti",
         "subtitle": "Servizi odontoiatrici gratuiti per donne in gravidanza",
         "image": "/images/hero/dental-care.jpg",
         "cta_text": "Scopri di più",
@@ -154,7 +154,7 @@ Alternativamente, è possibile modificare direttamente il file JSON della pagina
 
 ## Collegamento con i Temi
 
-La homepage utilizza il sistema di temi di SaluteOra:
+La homepage utilizza il sistema di temi di <nome progetto>:
 
 1. Il layout principale è definito in `laravel/Themes/One/resources/views/components/layouts/main.blade.php`
 2. Il layout marketing estende il layout principale

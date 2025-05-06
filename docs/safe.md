@@ -1,4 +1,4 @@
-# Utilizzo di Safe nel Progetto SaluteOra
+# Utilizzo di Safe nel Progetto <nome progetto>
 
 ## Introduzione
 

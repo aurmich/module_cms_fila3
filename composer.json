@@ -28,14 +28,7 @@
         }
     },
     "require": {
-<<<<<<< HEAD
-        "livewire/volt": "*"
-    },
-    "require-dev": {
-=======
-
-    },
-    "require_comment": {
+        "livewire/volt": "*",
         "ryangjchandler/orbit": "*",
         "illuminate/contracts": "^10.0|^11.0",
         "laraxot/module_lang_fila3": "*",
@@ -45,7 +38,7 @@
         "laraxot/module_xot_fila3": "*",
         "spatie/laravel-package-tools": "^1.11.3"
     },
-    "require-dev_comment": {
+    "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
         "larastan/larastan": "^2.0.1",
@@ -57,7 +50,6 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "spatie/laravel-ray": "^1.26"
->>>>>>> cb39031 (.)
     },
     "repositories": [
         {
@@ -94,5 +86,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-
 }

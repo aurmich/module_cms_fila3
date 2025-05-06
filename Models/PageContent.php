@@ -4,86 +4,108 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Modules\Tenant\Models\Traits\SushiToJsons;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * Modules\Cms\Models\PageContent.
+ * Modules\Cms\Models\PageContent
  *
- * @property array|null                                  $blocks
- * @property string|null                                 $id
- * @property array|null                                  $name
- * @property string|null                                 $slug
- * @property \Illuminate\Support\Carbon|null             $created_at
- * @property \Illuminate\Support\Carbon|null             $updated_at
- * @property string|null                                 $created_by
- * @property string|null                                 $updated_by
- * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property mixed                                       $translations
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @property string                                      $blocks
- * @property string|null                                 $id
- * @property array|null                                  $name
- * @property string|null                                 $slug
- * @property \Illuminate\Support\Carbon|null             $created_at
- * @property \Illuminate\Support\Carbon|null             $updated_at
- * @property string|null                                 $created_by
- * @property string|null                                 $updated_by
- * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property mixed                                       $translations
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @property int         $id
+ * @property string|null $lang
+ * @property string|null $title
+ * @property string|null $subtitle
+ * @property string|null $content
+ * @property string|null $meta_description
+ * @property string|null $meta_keywords
+ * @property int|null    $parent_id
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property string|null $slug
+ * @property string|null $layout
+ * @property string|null $image
+ * @property string|null $status
+ * @property int|null    $pos
  *
- * @method static \Modules\Cms\Database\Factories\PageContentFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  query()
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereBlocks($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
- *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
+ * @property-read PageContent|null $parent
+ * @property-read PageContent[]    $children
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereLayout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereMetaKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent wherePos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereSubtitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PageContent whereUpdatedBy($value)
  *
  * @mixin \Eloquent
  */
-class PageContent extends BaseModel
+class PageContent extends Model
 {
     use HasTranslations;
     use SushiToJsons;
 
     /** @var array<int, string> */
     public $translatable = [
-        'name',
-        'blocks',
+        'title',
+        'subtitle',
+        'content',
+        'meta_description',
+        'meta_keywords',
     ];
 
     /** @var list<string> */
     protected $fillable = [
-        'name',
+        'lang',
+        'title',
+        'subtitle',
+        'content',
+        'meta_description',
+        'meta_keywords',
+        'parent_id',
+        'created_by',
+        'updated_by',
         'slug',
-        'blocks',
+        'layout',
+        'image',
+        'status',
+        'pos',
     ];
 
-    protected array $schema = [
-        'id' => 'integer',
-        'name' => 'json',
-        'slug' => 'string',
-
-        'blocks' => 'json',
-
+    protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-
-        'created_by' => 'string',
-        'updated_by' => 'string',
+        'deleted_at' => 'datetime',
     ];
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 
     public function getRows(): array
     {
@@ -109,9 +131,16 @@ class PageContent extends BaseModel
             'id' => 'string',
             'uuid' => 'string',
 
-            'name' => 'string',
+            'title' => 'string',
+            'subtitle' => 'string',
+            'content' => 'string',
+            'meta_description' => 'string',
+            'meta_keywords' => 'string',
             'slug' => 'string',
-            'blocks' => 'array',
+            'layout' => 'string',
+            'image' => 'string',
+            'status' => 'string',
+            'pos' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

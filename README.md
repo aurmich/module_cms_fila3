@@ -1,6 +1,6 @@
-# Modulo CMS - SaluteOra
+# Modulo CMS - <nome progetto>
 
-Modulo per la gestione dei contenuti del sito SaluteOra.
+Modulo per la gestione dei contenuti del sito <nome progetto>.
 
 ## Caratteristiche
 
@@ -44,7 +44,7 @@ La documentazione è disponibile nella cartella `docs`:
 
 ```bash
 # Non è necessario installare il modulo separatamente, 
-# è già parte del progetto SaluteOra
+# è già parte del progetto <nome progetto>
 ```
 
 ### Configurazione

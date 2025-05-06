@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Modulo Cms
 
 Data: 2025-04-23 19:09:55
@@ -506,7 +506,7 @@ tests/Unit
 - [Analisi strutturale complessiva](/docs/phpstan/modules_structure_analysis.md)
 - [Report PHPStan](/docs/phpstan/)
 
-=======
+
 # Struttura del Modulo CMS
 
 ## Directory Principali
@@ -595,4 +595,4 @@ Modules/Cms/
 4. Aggiornare i riferimenti nei file di configurazione
 5. Aggiornare i riferimenti nelle views
 6. Aggiornare i riferimenti nelle routes 
->>>>>>> cb39031 (.)
+

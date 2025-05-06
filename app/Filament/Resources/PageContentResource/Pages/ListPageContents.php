@@ -25,10 +25,19 @@ class ListPageContents extends XotBaseListRecords
 {
     use ListRecords\Concerns\Translatable;
 
-    // protected static string $resource = PageContentResource::class;
+    protected static string $resource = PageContentResource::class;
 
-<<<<<<< HEAD
-
+    /**
+     * Definisce la vista a griglia della tabella.
+     *
+     * @return array<int, \Filament\Tables\Columns\Column>
+     */
+    public function getGridTableColumns(): array
+    {
+        return [
+            Stack::make($this->getListTableColumns()),
+        ];
+    }
 
     /**
      * Definisce le colonne della tabella di elenco contenuti di pagina.
@@ -42,42 +51,22 @@ class ListPageContents extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             'slug' => TextColumn::make('slug')
-=======
-    public function getGridTableColumns(): array
-    {
-        return [
-            Stack::make($this->getListTableColumns()),
-        ];
-    }
-
-    public function getListTableColumns(): array
-    {
-        return [
-            TextColumn::make('name')
-                ->sortable()
-                ->searchable(),
-            TextColumn::make('slug')
->>>>>>> cb39031 (.)
                 ->sortable()
                 ->searchable(),
         ];
     }
 
-<<<<<<< HEAD
     /**
      * Definisce i filtri della tabella.
      *
      * @return array<int, \Filament\Tables\Filters\Filter>
      */
-=======
->>>>>>> cb39031 (.)
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
-<<<<<<< HEAD
     /**
      * Definisce le azioni disponibili per ciascuna riga della tabella.
      *
@@ -91,22 +80,11 @@ class ListPageContents extends XotBaseListRecords
             'edit'   => EditAction::make()
                 ->label(''),
             'delete' => DeleteAction::make()
-=======
-    public function getTableActions(): array
-    {
-        return [
-            ViewAction::make()
-                ->label(''),
-            EditAction::make()
-                ->label(''),
-            DeleteAction::make()
->>>>>>> cb39031 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
-<<<<<<< HEAD
     /**
      * Definisce le azioni bulk disponibili per più righe selezionate.
      *
@@ -116,12 +94,6 @@ class ListPageContents extends XotBaseListRecords
     {
         return [
             'delete' => DeleteBulkAction::make(),
-=======
-    public function getTableBulkActions(): array
-    {
-        return [
-            DeleteBulkAction::make(),
->>>>>>> cb39031 (.)
         ];
     }
 
@@ -148,13 +120,23 @@ class ListPageContents extends XotBaseListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make(),
             Actions\LocaleSwitcher::make(),
         ];
     }
-<<<<<<< HEAD
-=======
 
-    
->>>>>>> cb39031 (.)
+    protected function getTableRecordUrlUsing(): ?callable
+    {
+        return null;
+    }
+
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'id';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
 }

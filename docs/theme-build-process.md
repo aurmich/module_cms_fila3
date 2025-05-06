@@ -102,7 +102,7 @@ Questo passaggio è cruciale perché sposta gli asset compilati in una posizione
 
 1. Naviga nella cartella del tema:
    ```bash
-   cd /var/www/html/saluteora/laravel/Themes/One
+   cd /var/www/html/<nome progetto>/laravel/Themes/One
    ```
 
 2. Esegui la build in modalità watch durante lo sviluppo:
@@ -127,7 +127,7 @@ Questo passaggio è cruciale perché sposta gli asset compilati in una posizione
 In ambiente di produzione, è consigliato utilizzare:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm ci           # Installa le dipendenze esatte
 npm run build    # Compila per la produzione
 npm run copy     # Pubblica gli asset
@@ -139,7 +139,7 @@ npm run copy     # Pubblica gli asset
 
 ```bash
 #!/bin/bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/<nome progetto>/laravel/Themes/One
 npm run build
 npm run copy
 echo "Theme assets built and published successfully!"

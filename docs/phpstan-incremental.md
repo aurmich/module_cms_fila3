@@ -54,7 +54,7 @@ Lo script progredisce attraverso i seguenti livelli:
 
 ## File di Configurazione
 
-Lo script opera sul file `phpstan.neon` nella directory principale. La configurazione è ottimizzata per il progetto SaluteOra, tenendo conto delle sue peculiarità:
+Lo script opera sul file `phpstan.neon` nella directory principale. La configurazione è ottimizzata per il progetto <nome progetto>, tenendo conto delle sue peculiarità:
 
 - Utilizzo di `XotBaseRouteServiceProvider` invece di `RouteServiceProvider`
 - Utilizzo di `XotBaseResource` invece di `Resource`

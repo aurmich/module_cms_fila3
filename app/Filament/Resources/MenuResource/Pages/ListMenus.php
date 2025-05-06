@@ -10,10 +10,9 @@ use Filament\Tables\Columns\TextColumn;
 use Modules\Cms\Filament\Resources\MenuResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
-
 class ListMenus extends XotBaseListRecords
 {
-    // protected static string $resource = MenuResource::class;
+    protected static string $resource = MenuResource::class;
 
     protected function getActions(): array
     {
@@ -25,20 +24,14 @@ class ListMenus extends XotBaseListRecords
     /**
      * Get list table columns.
      *
-<<<<<<< HEAD
      * @return array<string, \Filament\Tables\Columns\Column>
-=======
-     * @return array<Tables\Columns\Column>
->>>>>>> cb39031 (.)
      */
     public function getListTableColumns(): array
     {
         return [
-<<<<<<< HEAD
-            'title' => Tables\Columns\TextColumn::make('title'),
-=======
-            Tables\Columns\TextColumn::make('title'),
->>>>>>> cb39031 (.)
+            'title' => Tables\Columns\TextColumn::make('title')
+                ->searchable()
+                ->sortable(),
         ];
     }
 }

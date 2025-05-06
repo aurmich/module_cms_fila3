@@ -1,6 +1,6 @@
-# Filament Forms nel CMS di SaluteOra
+# Filament Forms nel CMS di <nome progetto>
 
-Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di SaluteOra, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
+Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di <nome progetto>, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
 
 ## Indice
 1. [Introduzione](#introduzione)
@@ -13,7 +13,7 @@ Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di 
 
 ## Introduzione
 
-Filament è il framework di amministrazione principale utilizzato in SaluteOra per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
+Filament è il framework di amministrazione principale utilizzato in <nome progetto> per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
 
 ### Vantaggi dei Form Filament
 
@@ -98,7 +98,7 @@ Grid::make([
 
 ### Creazione di un Componente Personalizzato
 
-Nel modulo CMS di SaluteOra, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
+Nel modulo CMS di <nome progetto>, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
 
 ```php
 namespace Modules\Cms\Filament\Forms\Components;
@@ -221,7 +221,7 @@ TextInput::make('delivery_address')
 
 ### Come Esporre i Form al Frontend
 
-In SaluteOra, spesso è necessario esporre i form Filament al frontend attraverso API:
+In <nome progetto>, spesso è necessario esporre i form Filament al frontend attraverso API:
 
 ```php
 // Modules/Cms/Http/Controllers/Api/FormController.php
@@ -338,7 +338,7 @@ public function form(Form $form): Form
 
 ### Log e Debug
 
-Per il debug dei form Filament in SaluteOra, è possibile utilizzare:
+Per il debug dei form Filament in <nome progetto>, è possibile utilizzare:
 
 ```php
 // Nei form, stampare lo stato
@@ -352,4 +352,4 @@ logger()->debug('Form data filled', $data);
 
 ## Conclusione
 
-I form Filament sono uno strumento potente nel CMS di SaluteOra che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
+I form Filament sono uno strumento potente nel CMS di <nome progetto> che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 

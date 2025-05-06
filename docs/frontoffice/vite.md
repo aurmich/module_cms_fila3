@@ -40,7 +40,7 @@ export default defineConfig({
 
 ### Configurazione Ambiente
 ```env
-VITE_APP_NAME="SaluteOra"
+VITE_APP_NAME="<nome progetto>"
 VITE_APP_URL="${APP_URL}"
 ```
 

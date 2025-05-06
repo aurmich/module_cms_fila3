@@ -47,19 +47,19 @@ theme-name/
 1. **composer.json**
 ```json
 {
-    "name": "saluteora/theme-name",
-    "description": "Tema per SaluteOra",
+    "name": "<nome progetto>/theme-name",
+    "description": "Tema per <nome progetto>",
     "type": "theme",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "SaluteOra\\Themes\\ThemeName\\": "src/"
+            "<nome progetto>\\Themes\\ThemeName\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "SaluteOra\\Themes\\ThemeName\\ThemeServiceProvider"
+                "<nome progetto>\\Themes\\ThemeName\\ThemeServiceProvider"
             ]
         }
     },
@@ -73,7 +73,7 @@ theme-name/
 2. **package.json**
 ```json
 {
-    "name": "saluteora/theme-name",
+    "name": "<nome progetto>/theme-name",
     "private": true,
     "scripts": {
         "dev": "vite",
@@ -161,7 +161,7 @@ module.exports = {
 ```php
 <?php
 
-namespace SaluteOra\Themes\ThemeName;
+namespace <nome progetto>\Themes\ThemeName;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -190,8 +190,8 @@ class ThemeServiceProvider extends ServiceProvider
 return [
     'name' => 'Theme Name',
     'version' => '1.0.0',
-    'author' => 'SaluteOra Team',
-    'description' => 'Tema per SaluteOra',
+    'author' => '<nome progetto> Team',
+    'description' => 'Tema per <nome progetto>',
     'active' => true,
     'assets' => [
         'css' => 'public/build/css/app.css',

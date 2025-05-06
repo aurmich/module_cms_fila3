@@ -21,17 +21,6 @@ use Spatie\Translatable\HasTranslations;
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property mixed                                       $translations
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @property string                                      $blocks
- * @property string|null                                 $id
- * @property array|null                                  $name
- * @property string|null                                 $slug
- * @property \Illuminate\Support\Carbon|null             $created_at
- * @property \Illuminate\Support\Carbon|null             $updated_at
- * @property string|null                                 $created_by
- * @property string|null                                 $updated_by
- * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property mixed                                       $translations
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  *
  * @method static \Modules\Cms\Database\Factories\PageContentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  newModelQuery()
@@ -49,10 +38,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
-<<<<<<< HEAD
-=======
- *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
->>>>>>> cb39031 (.)
  *
  * @mixin \Eloquent
  */

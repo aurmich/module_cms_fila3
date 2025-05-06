@@ -82,19 +82,9 @@ class ListPages extends XotBaseListRecords
         ];
     }
 
-<<<<<<< HEAD
     /**
      * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
      */
-    public function getTableActions(): array
-    {
-        return [
-            'view'   => ViewAction::make()
-                ->label(''),
-            'edit'   => EditAction::make()
-                ->label(''),
-            'delete' => DeleteAction::make()
-=======
     public function getTableActions(): array
     {
         return [
@@ -103,37 +93,27 @@ class ListPages extends XotBaseListRecords
             EditAction::make()
                 ->label(''),
             DeleteAction::make()
->>>>>>> cb39031 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
-<<<<<<< HEAD
     /**
      * @return array<string, \Filament\Tables\Actions\BulkAction>
      */
     public function getTableBulkActions(): array
     {
         return [
-            'delete' => DeleteBulkAction::make(),
-=======
-    public function getTableBulkActions(): array
-    {
-        return [
             DeleteBulkAction::make(),
->>>>>>> cb39031 (.)
         ];
     }
 
     public function table(Table $table): Table
     {
         return $table
-            // ->columns($this->getTableColumns())
             ->columns($this->layoutView->getTableColumns())
             ->contentGrid($this->layoutView->getTableContentGrid())
             ->headerActions($this->getTableHeaderActions())
-
             ->filters($this->getTableFilters())
             ->filtersLayout(FiltersLayout::AboveContent)
             ->persistFiltersInSession()
@@ -153,8 +133,6 @@ class ListPages extends XotBaseListRecords
             CreateAction::make(),
         ];
     }
-
-    
 
     protected function getPreviewModalView(): ?string
     {
