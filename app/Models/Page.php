@@ -61,9 +61,8 @@ use Spatie\Translatable\HasTranslations;
  *
  * @mixin \Eloquent
  */
-class Page extends BaseModel
+class Page extends BaseModelLang
 {
-    use HasTranslations;
     use SushiToJsons;
 
     /** @var array<int, string> */
@@ -106,32 +105,7 @@ class Page extends BaseModel
         return $this->getSushiRows();
     }
 
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title',
-            ],
-        ];
-    }
 
-    /**
-     * Get the path key to the item for the frontend only.
-     */
-    public function getFrontRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
-    /**
-     * Get the path key to the item for the frontend only.
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return url('/'.app()->getLocale().'/pages/'.$this->slug);
-    }
 
     /**
      * The attributes that should be mutated to dates.

@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
+use Modules\Cms\Datas\BlockData;
 use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
@@ -25,7 +26,7 @@ class PageContent extends Component
         if(!is_array($blocks)){
             $blocks = [];
         }
-        $this->blocks = $blocks;
+        $this->blocks = BlockData::collect($blocks);
     }
     /**
      * Get the view / contents that represents the component.

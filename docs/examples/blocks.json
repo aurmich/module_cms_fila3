@@ -1,0 +1,94 @@
+{
+    "blocks": {
+        "it": [
+            {
+                "name": {
+                    "it": "Logo",
+                    "en": "Logo"
+                },
+                "type": "logo",
+                "data": {
+                    "src": "/images/logo.svg",
+                    "alt":  "Logo",
+                    "width": 150,
+                    "height": 32,
+                    "url": "/"
+                }
+            },
+            {
+                "name": {
+                    "it": "Menu di Navigazione",
+                    "en": "Navigation Menu"
+                },
+                "type": "navigation",
+                "data": {
+                    "items": [
+                        {
+                            "label": {
+                                "it": "Home",
+                                "en": "Home"
+                            },
+                            "url": "/",
+                            "type": "link"
+                        },
+                        {
+                            "label": {
+                                "it": "Servizi",
+                                "en": "Services"
+                            },
+                            "url": "/servizi",
+                            "type": "link",
+                            "children": [
+                                {
+                                    "label": {
+                                        "it": "Prevenzione",
+                                        "en": "Prevention"
+                                    },
+                                    "url": "/servizi/prevenzione",
+                                    "type": "link"
+                                }
+                            ]
+                        }
+                    ],
+                    "alignment": "start",
+                    "orientation": "horizontal"
+                }
+            },
+            {
+                "name": {
+                    "it": "Azioni",
+                    "en": "Actions"
+                },
+                "type": "actions",
+                "data": {
+                    "items": [
+                        {
+                            "label": {
+                                "it": "Area Pazienti",
+                                "en": "Patient Area"
+                            },
+                            "url": "/area-pazienti",
+                            "type": "button",
+                            "style": "primary",
+                            "icon": "heroicon-o-user",
+                            "target": "_self"
+                        },
+                        {
+                            "label": {
+                                "it": "Prenota",
+                                "en": "Book Now"
+                            },
+                            "url": "/prenota",
+                            "type": "button",
+                            "style": "secondary",
+                            "icon": "heroicon-o-calendar",
+                            "target": "_self"
+                        }
+                    ],
+                    "alignment": "end",
+                    "gap": 4
+                }
+            }
+        ]
+    }
+}

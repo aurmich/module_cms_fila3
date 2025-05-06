@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Laravel\Folio\Folio;
+use Livewire\Volt\Volt;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Tenant\Services\TenantService;
 use Modules\Xot\Actions\Livewire\RegisterLivewireComponentsAction;
@@ -21,7 +22,6 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\Xot\Services\LivewireService;
 use Nwidart\Modules\Facades\Module;
 use Webmozart\Assert\Assert;
-use Illuminate\Support\Facades\Blade;
 
 /**
  * Undocumented class.
@@ -63,13 +63,8 @@ class CmsServiceProvider extends XotBaseServiceProvider
         // $this->mergeConfigFrom(__DIR__.sprintf('/../config/%s.php', $configFileName), $configFileName);
 
         if ($this->xot->register_pub_theme) {
-            Assert::string($relativePath = config('modules.paths.generator.component-view.path'));
-            //$component_view_path = theme_path($this->xot->pub_theme, $relativePath);
-            $component_view_path = base_path('Themes/'.$this->xot->pub_theme.'/'.$relativePath);
-            Blade::anonymousComponentPath($component_view_path);
             Assert::isArray($paths = config('view.paths'));
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
-
             $paths = array_merge([$theme_path], $paths);
             Config::set('view.paths', $paths);
             Config::set('livewire.view_path', $theme_path.'/livewire');
@@ -113,9 +108,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
                 ]);
         }
 
-        if (class_exists(\Livewire\Volt\Volt::class)) {
-            \Livewire\Volt\Volt::mount($paths);
-        }
+        Volt::mount($paths);
     }
 
     /**

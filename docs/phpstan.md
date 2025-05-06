@@ -1,59 +1,123 @@
-# Analisi PHPStan - Modulo CMS
+# Configurazione PHPStan per i moduli
 
-## Panoramica
+## Introduzione
 
-Questo documento descrive i risultati dell'analisi statica effettuata con PHPStan sul modulo CMS.
+Per analizzare il codice nei nostri moduli, utilizziamo PHPStan con l'estensione Larastan. Inoltre, consideriamo l'utilizzo di Safe per gestire meglio gli errori nelle funzioni PHP.
 
-## Livelli di Analisi
+## Configurazione base
 
-### Livello 0 (Base)
-- Controlli di sintassi
-- Verifica delle chiamate a funzioni/metodi esistenti
-- Controllo dei parametri obbligatori
+Il file `phpstan.neon.dist` dovrebbe essere configurato come segue:
 
-### Livello 1
-- Controllo dei tipi di base
-- Verifica delle proprietà dichiarate
-- Controllo dei valori di ritorno
+```neon
+includes:
+    - phpstan-baseline.neon
+    - ../../vendor/larastan/larastan/extension.neon
 
-### Livello 2
-- Controllo dei tipi più specifici
-- Verifica delle chiamate di metodi su tipi corretti
-- Controllo delle proprietà private/protected
+parameters:
+    level: 4
+    paths:
+        - app
 
-## Errori Comuni
+    excludePaths:
+        - app/Filament/Pages
+        - build
+        - vendor
+        - Tests
 
-1. **Proprietà non dichiarate**
-   - Problema: Accesso a proprietà non definite nei modelli
-   - Soluzione: Aggiungere @property nelle annotazioni PHPDoc
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+        - '#Access to an undefined property#'
+        - '#Call to an undefined method#'
 
-2. **Tipi di parametri mancanti**
-   - Problema: Parametri senza type hint
-   - Soluzione: Aggiungere dichiarazioni di tipo esplicite
+    checkMissingIterableValueType: false
+    
+    # Paths to scan
+    scanDirectories:
+        - ../../vendor/laravel/framework
+        - ../Xot
+```
 
-3. **Valori di ritorno non specificati**
-   - Problema: Metodi senza tipo di ritorno
-   - Soluzione: Aggiungere return type declarations
+## Note importanti per il progetto
 
-## Best Practices
+### ServiceProvider personalizzati
 
-1. **Documentazione**
-   - Usare PHPDoc completo per tutte le classi
-   - Documentare tutti i parametri e valori di ritorno
-   - Mantenere la documentazione aggiornata
+Nel progetto il progetto utilizziamo classi base personalizzate invece delle classi standard di Laravel:
 
-2. **Tipizzazione**
-   - Usare type hints per tutti i parametri
-   - Specificare sempre i tipi di ritorno
-   - Utilizzare union types quando necessario
+- Non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider` ma utilizziamo `XotBaseRouteServiceProvider`
+- Questo può causare problemi con Larastan che cerca le classi standard di Laravel
 
-3. **Testing**
-   - Scrivere test per tutti i casi edge
-   - Verificare i tipi di ritorno nei test
-   - Testare le eccezioni
+Per risolvere questi problemi, è importante:
+1. Escludere classi specifiche negli `ignoreErrors`
+2. Aggiungere i percorsi personalizzati nei `scanDirectories` (come ../Xot)
 
-## Collegamenti
+## Livelli di analisi
 
-- [Configurazione PHPStan](./phpstan-config.md)
-- [Guida alla Risoluzione](./phpstan-fixes.md)
-- [Best Practices](./best-practices.md)
+PHPStan offre diversi livelli di analisi, da 0 (più permissivo) a 9 (più restrittivo):
+
+- Livello 0: Errori di base
+- Livello 4: Consigliato per progetti esistenti
+- Livello 8: Consigliato per nuovi progetti
+- Livello 9: Massima restrizione
+
+## Baseline
+
+Per gestire errori esistenti in codice legacy, è possibile generare un file baseline:
+
+```bash
+./vendor/bin/phpstan analyse --generate-baseline
+```
+
+Questo creerà un file `phpstan-baseline.neon` con gli errori attuali ignorati.
+
+## Utilizzo di Safe
+
+Safe è una libreria che fornisce versioni sicure delle funzioni PHP che lanciano eccezioni anziché restituire false in caso di errore.
+
+### Installazione
+
+```bash
+composer require thecodingmachine/safe
+```
+
+### Uso
+
+Invece di:
+
+```php
+$content = file_get_contents('file.txt');
+if ($content === false) {
+    throw new Exception('Errore lettura file');
+}
+```
+
+Usare:
+
+```php
+use function Safe\file_get_contents;
+
+$content = file_get_contents('file.txt'); // Lancia un'eccezione in caso di errore
+```
+
+### Regola PHPStan
+
+Per verificare che tutte le funzioni PHP siano utilizzate in modo sicuro, installare:
+
+```bash
+composer require --dev thecodingmachine/phpstan-safe-rule
+```
+
+E aggiungere al file `phpstan.neon.dist`:
+
+```neon
+includes:
+    - vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+```
+
+## Correzione automatica
+
+Utilizzare Rector per correggere automaticamente le chiamate alle funzioni:
+
+```bash
+composer require --dev rector/rector
+vendor/bin/rector process app/ --config vendor/thecodingmachine/safe/rector-migrate.php
+``` 

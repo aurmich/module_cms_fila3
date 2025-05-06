@@ -1,6 +1,6 @@
-# Filament Forms nel CMS di <nome progetto>
+# Filament Forms nel CMS di il progetto
 
-Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di <nome progetto>, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
+Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di il progetto, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
 
 ## Indice
 1. [Introduzione](#introduzione)
@@ -13,7 +13,7 @@ Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di 
 
 ## Introduzione
 
-Filament è il framework di amministrazione principale utilizzato in <nome progetto> per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
+Filament è il framework di amministrazione principale utilizzato in il progetto per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
 
 ### Vantaggi dei Form Filament
 
@@ -98,7 +98,7 @@ Grid::make([
 
 ### Creazione di un Componente Personalizzato
 
-Nel modulo CMS di <nome progetto>, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
+Nel modulo CMS di il progetto, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
 
 ```php
 namespace Modules\Cms\Filament\Forms\Components;
@@ -221,7 +221,7 @@ TextInput::make('delivery_address')
 
 ### Come Esporre i Form al Frontend
 
-In <nome progetto>, spesso è necessario esporre i form Filament al frontend attraverso API:
+In il progetto, spesso è necessario esporre i form Filament al frontend attraverso API:
 
 ```php
 // Modules/Cms/Http/Controllers/Api/FormController.php
@@ -338,7 +338,7 @@ public function form(Form $form): Form
 
 ### Log e Debug
 
-Per il debug dei form Filament in <nome progetto>, è possibile utilizzare:
+Per il debug dei form Filament in il progetto, è possibile utilizzare:
 
 ```php
 // Nei form, stampare lo stato
@@ -352,4 +352,21 @@ logger()->debug('Form data filled', $data);
 
 ## Conclusione
 
-I form Filament sono uno strumento potente nel CMS di <nome progetto> che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
+I form Filament sono uno strumento potente nel CMS di il progetto che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
+
+## Collegamenti Bidirezionali
+- [README](README.md) - Documentazione principale del modulo
+- [Integrazione Filament](filament-integration.md) - Integrazione con Filament
+- [Componenti](filament-components.md) - Componenti Filament
+- [Resources](filament-resources.md) - Gestione risorse
+- [Widget](filament-widgets-in-blade.md) - Widget in Blade
+- [Personalizzazioni](filament-personalizzazioni-avanzate.md) - Personalizzazioni avanzate
+- [Form Sopra Tabella](filament-form-sopra-tabella.md) - Form sopra tabella
+
+## Vedi Anche
+- [Modulo UI](../UI/docs/README.md) - Componenti di interfaccia
+- [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
+- [Modulo Theme](../Theme/docs/README.md) - Gestione temi
+- [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
+- [Form Components](https://filamentphp.com/docs/3.x/forms/fields) - Componenti form
+- [Best Practices](https://filamentphp.com/docs/3.x/forms/best-practices) - Best practices form 

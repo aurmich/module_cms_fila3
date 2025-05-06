@@ -144,3 +144,10 @@ it('should demonstrate this matcher`s usage', async () => {
    - Aggiornare gli strumenti
    - Verificare le regole
    - Documentare i problemi 
+
+## Collegamenti tra versioni di testing.md
+* [testing.md](laravel/Modules/Xot/docs/packages/testing.md)
+* [testing.md](laravel/Modules/Xot/docs/development/testing.md)
+* [testing.md](laravel/Modules/Cms/docs/frontoffice/testing.md)
+* [testing.md](laravel/Themes/One/docs/testing.md)
+

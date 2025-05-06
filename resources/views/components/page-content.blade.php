@@ -2,6 +2,6 @@
     {{--
     <x-dynamic-component component="blocks.ticket-list.agid" />
     --}}
-    @include($block['data']['view'],$block['data'])
+    @include($block->view,$block->data)
 @endforeach
 

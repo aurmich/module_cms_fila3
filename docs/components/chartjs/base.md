@@ -40,3 +40,7 @@ title="Valori Giornalieri"
 ```
 
 Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
+## Collegamenti tra versioni di base.md
+* [base.md](laravel/Modules/Chart/docs/components/chartjs/base.md)
+* [base.md](laravel/Modules/Cms/docs/components/chartjs/base.md)
+

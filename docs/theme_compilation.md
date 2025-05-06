@@ -44,7 +44,7 @@ Il processo di compilazione trasforma i file sorgente (CSS, JavaScript, ecc.) in
 Per compilare il tema, è necessario eseguire il seguente comando nella directory del tema:
 
 ```bash
-cd /var/www/html/<nome progetto>/laravel/Themes/One
+cd /var/www/html/saluteora/laravel/Themes/One
 npm run build
 ```
 
@@ -88,7 +88,7 @@ Dopo la compilazione, è necessario copiare i file compilati nella directory pub
 Per pubblicare il tema compilato, è necessario eseguire il seguente comando:
 
 ```bash
-cd /var/www/html/<nome progetto>/laravel/Themes/One
+cd /var/www/html/saluteora/laravel/Themes/One
 npm run copy
 ```
 
@@ -168,7 +168,7 @@ Le dipendenze frontend sono gestite tramite npm e definite nel file `package.jso
 Prima di compilare il tema per la prima volta, è necessario installare le dipendenze:
 
 ```bash
-cd /var/www/html/<nome progetto>/laravel/Themes/One
+cd /var/www/html/saluteora/laravel/Themes/One
 npm install
 ```
 
@@ -177,7 +177,7 @@ npm install
 Per aggiornare le dipendenze:
 
 ```bash
-cd /var/www/html/<nome progetto>/laravel/Themes/One
+cd /var/www/html/saluteora/laravel/Themes/One
 npm update
 ```
 
@@ -198,58 +198,7 @@ npm update
 
 ## Troubleshooting
 
-### Errore: Unable to locate file in Vite manifest
-
-Un errore comune durante la gestione dei temi è:
-
-```
-Unable to locate file in Vite manifest: resources/css/app.css
-```
-
-Questo errore si verifica quando Vite non riesce a trovare i file compilati nel manifest. Può essere causato da:
-
-1. **Asset non compilati**: I file sorgente non sono stati compilati con Vite
-2. **Percorso errato nella direttiva @vite**: Il percorso specificato non corrisponde a quello nel manifest
-3. **Mancata pubblicazione degli asset**: I file compilati esistono ma non sono stati copiati nella directory pubblica
-4. **Manifest non aggiornato**: Il manifest è obsoleto rispetto ai file effettivi
-
-#### Soluzione
-
-Per risolvere questo problema, seguire questi passi:
-
-1. Navigare nella directory del tema:
-   ```bash
-   cd /var/www/html/_bases/base_fixcity_fila3_mono/laravel/Themes/NomeTema
-   ```
-
-2. Eseguire il comando per copiare e pubblicare gli asset:
-   ```bash
-   npm run copy
-   ```
-
-   Per il tema Sixteen, il comando specifico è:
-   ```bash
-   cd /var/www/html/_bases/base_fixcity_fila3_mono/laravel/Themes/Sixteen
-   npm run copy
-   ```
-
-3. Verificare che il comando abbia funzionato correttamente controllando la presenza dei file nella directory pubblica:
-   ```bash
-   ls -la ../../../public_html/themes/Sixteen/dist
-   ```
-
-4. Se il problema persiste, potrebbe essere necessario ricompilare gli asset:
-   ```bash
-   npm run build
-   npm run copy
-   ```
-
-5. Verificare che il percorso nella direttiva `@vite` corrisponda a quello nel file `manifest.json`:
-   ```php
-   @vite(['resources/css/app.css', 'resources/js/app.js'], 'themes/Sixteen/dist')
-   ```
-
-### Altri problemi comuni
+### Problemi Comuni
 
 1. **Errori di Compilazione**: Verificare la sintassi dei file CSS e JavaScript
 2. **Dipendenze Mancanti**: Assicurarsi che tutte le dipendenze siano installate con `npm install`
@@ -261,3 +210,8 @@ Per risolvere questo problema, seguire questi passi:
 1. **Pulizia della Cache**: Eliminare la directory `node_modules/.vite` e ricompilare
 2. **Reinstallazione delle Dipendenze**: Eliminare `node_modules` e reinstallare con `npm install`
 3. **Verifica dei Log**: Controllare i log di compilazione per identificare errori specifici
+
+## Collegamenti tra versioni di theme_compilation.md
+* [theme_compilation.md](docs/standards/theme_compilation.md)
+* [theme_compilation.md](laravel/Modules/Cms/docs/theme_compilation.md)
+

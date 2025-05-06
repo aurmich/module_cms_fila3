@@ -18,12 +18,20 @@ class PageContentBuilder
     ): Builder {
         $blocks = app(GetAllBlocksAction::class)->execute();
 
+
         $blocks = $blocks->map(
             function ($block) use ($context) {
                 Assert::isInstanceOf($block, ComponentFileData::class, '['.__LINE__.']['.__FILE__.']');
                 $class = $block->class;
-
-                return $class::make($context);
+                try{
+                    return $class::make(name: $block->name, context: $context);
+                }catch(\Error $e){
+                    dddx([
+                        'e'=>$e->getMessage(),
+                        'block'=>$block,
+                        'class'=>$class,
+                    ]);
+                }
             }
         );
 

@@ -1,4 +1,4 @@
-# Utilizzo di Safe nel Progetto <nome progetto>
+# Utilizzo di Safe nel Progetto il progetto
 
 ## Introduzione
 

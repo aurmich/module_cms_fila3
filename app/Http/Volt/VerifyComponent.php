@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Cms\Http\Volt;
 
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Webmozart\Assert\Assert;
@@ -28,8 +27,7 @@ class VerifyComponent extends Component
 
         return back()->with('status', 'verification-link-sent');
         */
-        Assert::notNull($user = Auth::user());
-        Assert::isInstanceOf($user, MustVerifyEmail::class);
+        Assert::notNull($user = auth()->user());
         if ($user->hasVerifiedEmail()) {
             redirect('/');
         }

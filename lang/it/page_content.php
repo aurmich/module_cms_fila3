@@ -1,35 +1,78 @@
-<?php return array (
+<?php
+
+return array (
   'navigation' => 
   array (
-    'name' => 'Contenuto Pagina',
+    'name' => 'Contenuti Pagina',
     'plural' => 'Contenuti Pagina',
     'group' => 
     array (
-      'name' => 'Site',
+      'name' => 'Gestione Contenuti',
+      'description' => 'Gestione dei contenuti delle pagine del sito',
     ),
-    'label' => 'page content.navigation',
+    'label' => 'Contenuti Pagina',
     'sort' => 87,
-    'icon' => 'page content.navigation',
+    'icon' => 'heroicon-o-document-text',
   ),
   'fields' => 
   array (
+    'id' => 
+    array (
+      'label' => 'ID',
+      'placeholder' => 'ID del contenuto pagina',
+    ),
     'name' => 
     array (
       'label' => 'Nome',
+      'placeholder' => 'Nome del contenuto',
     ),
     'slug' => 
     array (
       'label' => 'Slug',
+      'placeholder' => 'Slug del contenuto pagina',
     ),
-    'guard_name' => 'Guard',
-    'permissions' => 'Permessi',
-    'roles' => 'Ruoli',
-    'updated_at' => 'Aggiornato il',
-    'first_name' => 'Nome',
-    'last_name' => 'Cognome',
-    'content_blocks' => 
+    'blocks' => 
     array (
-      'label' => 'blocco componente',
+      'label' => 'Blocchi',
+      'placeholder' => 'Blocchi di contenuto',
+    ),
+    'created_at' => 
+    array (
+      'label' => 'Data Creazione',
+    ),
+    'updated_at' => 
+    array (
+      'label' => 'Ultima Modifica',
+    ),
+    'created_by' => 
+    array (
+      'label' => 'Creato da',
+      'placeholder' => 'Creato da',
+    ),
+    'updated_by' => 
+    array (
+      'label' => 'Aggiornato da',
+      'placeholder' => 'Aggiornato da',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
     ),
     'delete' => 
     array (
@@ -43,76 +86,28 @@
     array (
       'label' => 'view',
     ),
-    'openFilters' => 
-    array (
-      'label' => 'openFilters',
-    ),
-    'applyFilters' => 
-    array (
-      'label' => 'applyFilters',
-    ),
-    'resetFilters' => 
-    array (
-      'label' => 'resetFilters',
-    ),
-    'reorderRecords' => 
-    array (
-      'label' => 'reorderRecords',
-    ),
-    'toggleColumns' => 
-    array (
-      'label' => 'toggleColumns',
-    ),
   ),
-  'rating' => 
-  array (
-    'no_import' => 'Nessuna cifra inserita',
-    'import_zero' => 'Nessuna cifra inserita',
-    'import_min' => 'Hai superato la cifra di :credits: crediti',
-    'no_choice' => 'Nessuna opzione scelta',
-  ),
-  'single_expired' => 'Scaduto',
-  'expired' => 'Articolo scaduto, non si possono fare più scommesse',
-  'no_vote' => 'Siamo spiacenti, ma questa votazione è chiusa da :TIME, per favore prova a fare un altra previsione',
-  'your_bet' => 'La tua previsione',
-  'your_amount' => 'Previsione',
-  'if_win' => 'Se vinci',
   'actions' => 
   array (
-    'import' => 
-    array (
-      'fields' => 
-      array (
-        'import_file' => 'Seleziona un file XLS o CSV da caricare',
-      ),
-    ),
-    'export' => 
-    array (
-      'filename_prefix' => 'Aree al',
-      'columns' => 
-      array (
-        'name' => 'Nome area',
-        'parent_name' => 'Nome area livello superiore',
-      ),
-    ),
-    'activeLocale' => 
-    array (
-      'label' => 'activeLocale',
-    ),
-    'create' => 
-    array (
-      'label' => 'create',
-    ),
+    'view' => 'Visualizza Contenuto',
+    'create' => 'Crea Contenuto',
+    'edit' => 'Modifica Contenuto',
+    'delete' => 'Elimina Contenuto',
   ),
-  'plural' => 
+  'messages' => 
   array (
-    'model' => 
-    array (
-      'label' => 'page content.plural.model',
-    ),
+    'created' => 'Contenuto creato con successo',
+    'updated' => 'Contenuto aggiornato con successo',
+    'deleted' => 'Contenuto eliminato con successo',
+  ),
+  'validation' => 
+  array (
+    'name_required' => 'Il nome è obbligatorio',
+    'slug_unique' => 'Lo slug deve essere unico',
+    'blocks_required' => 'I blocchi di contenuto sono obbligatori',
   ),
   'model' => 
   array (
     'label' => 'page content.model',
   ),
-);
+);

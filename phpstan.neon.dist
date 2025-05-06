@@ -37,10 +37,10 @@ parameters:
     treatPhpDocTypesAsCertain: false
 
     scanFiles:
-        - ../Xot/app/Filament/Resources/Pages/XotBaseListRecords.php 
+        - ../Xot/app/Filament/Resources/Pages/XotBaseListRecords.php
         - ../Xot/app/Filament/Resources/XotBaseResource.php
 
     scanDirectories:
         - ../Xot/app
         - ../UI/app/Filament
-        - ../../vendor/laravel/framework 
+        - ../../vendor/laravel/framework

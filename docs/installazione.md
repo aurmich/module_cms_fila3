@@ -16,3 +16,8 @@ composer require laraxot/module_cms
 
 php artisan module_cms:install
 ```
+## Collegamenti tra versioni di installazione.md
+* [installazione.md](docs/installazione.md)
+* [installazione.md](laravel/Modules/Chart/docs/installazione.md)
+* [installazione.md](laravel/Modules/Cms/docs/installazione.md)
+

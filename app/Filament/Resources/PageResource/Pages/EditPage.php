@@ -7,18 +7,14 @@ namespace Modules\Cms\Filament\Resources\PageResource\Pages;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Cms\Filament\Resources\PageResource;
+use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
+use Modules\Lang\Filament\Resources\Pages\LangBaseEditRecord;
 
-class EditPage extends EditRecord
+class EditPage extends LangBaseEditRecord
 {
-    use EditRecord\Concerns\Translatable;
+
 
     protected static string $resource = PageResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\LocaleSwitcher::make(),
-            // Actions\DeleteAction::make(),
-        ];
-    }
+
 }

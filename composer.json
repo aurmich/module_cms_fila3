@@ -28,7 +28,9 @@
         }
     },
     "require": {
-        "livewire/volt": "*",
+
+    },
+    "require_comment": {
         "ryangjchandler/orbit": "*",
         "illuminate/contracts": "^10.0|^11.0",
         "laraxot/module_lang_fila3": "*",
@@ -38,7 +40,7 @@
         "laraxot/module_xot_fila3": "*",
         "spatie/laravel-package-tools": "^1.11.3"
     },
-    "require-dev": {
+    "require-dev_comment": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
         "larastan/larastan": "^2.0.1",
@@ -86,4 +88,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+
 }

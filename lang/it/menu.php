@@ -1,59 +1,116 @@
-<?php return array (
+<?php
+
+return array (
+  'navigation' => 
+  array (
+    'name' => 'Menu',
+    'plural' => 'Menu',
+    'group' => 
+    array (
+      'name' => 'Gestione Menu',
+      'description' => 'Gestione dei menu del sito',
+    ),
+    'label' => 'Menu',
+    'sort' => 57,
+    'icon' => 'heroicon-o-bars-3',
+  ),
   'fields' => 
   array (
-    'title' => 
+    'id' => 
     array (
-      'label' => 'Titolo',
+      'label' => 'ID',
+      'placeholder' => 'ID del menu',
     ),
-    'icon' => 
+    'name' => 
     array (
-      'label' => 'icon',
+      'label' => 'Nome',
+      'placeholder' => 'Nome del menu',
     ),
-    'image' => 
+    'slug' => 
     array (
-      'label' => 'image',
+      'label' => 'Slug',
+      'placeholder' => 'Slug del menu',
     ),
-    'items' => 
+    'description' => 
     array (
-      'label' => 'items',
-    ),
-    'url' => 
-    array (
-      'label' => 'url',
+      'label' => 'Descrizione',
+      'placeholder' => 'Descrizione del menu',
     ),
     'type' => 
     array (
-      'label' => 'type',
+      'label' => 'Tipo',
+      'placeholder' => 'Tipo di menu',
+      'options' => 
+      array (
+        'main' => 'Principale',
+        'footer' => 'Footer',
+        'sidebar' => 'Barra laterale',
+      ),
     ),
-  ),
-  'navigation' => 
-  array (
-    'group' => 
+    'status' => 
     array (
-      'name' => 'Site',
+      'label' => 'Stato',
+      'placeholder' => 'Stato del menu',
+      'options' => 
+      array (
+        'active' => 'Attivo',
+        'inactive' => 'Inattivo',
+        'draft' => 'Bozza',
+      ),
     ),
-    'plural' => 'Menu',
-    'name' => 'Menu',
-    'label' => 'menu.navigation',
-    'sort' => 32,
-    'icon' => 'menu.navigation',
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'message' => 
+    array (
+      'label' => 'message',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
   ),
   'actions' => 
   array (
-    'create' => 
-    array (
-      'tooltip' => 'Crea',
-    ),
+    'create' => 'Crea Menu',
+    'edit' => 'Modifica Menu',
+    'delete' => 'Elimina Menu',
+    'sort' => 'Ordina Voci',
+    'add_item' => 'Aggiungi Voce',
   ),
-  'plural' => 
+  'messages' => 
   array (
-    'model' => 
-    array (
-      'label' => 'menu.plural.model',
-    ),
+    'created' => 'Menu creato con successo',
+    'updated' => 'Menu aggiornato con successo',
+    'deleted' => 'Menu eliminato con successo',
+    'sorted' => 'Voci del menu ordinate con successo',
+    'item_added' => 'Voce aggiunta con successo',
+  ),
+  'validation' => 
+  array (
+    'name_required' => 'Il nome è obbligatorio',
+    'slug_unique' => 'Lo slug deve essere unico',
+    'type_in' => 'Il tipo deve essere uno tra: main, footer, sidebar',
   ),
   'model' => 
   array (
     'label' => 'menu.model',
   ),
-);
+);

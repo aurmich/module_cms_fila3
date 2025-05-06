@@ -25,13 +25,8 @@ class ListPageContents extends XotBaseListRecords
 {
     use ListRecords\Concerns\Translatable;
 
-    protected static string $resource = PageContentResource::class;
+    // protected static string $resource = PageContentResource::class;
 
-    /**
-     * Definisce la vista a griglia della tabella.
-     *
-     * @return array<int, \Filament\Tables\Columns\Column>
-     */
     public function getGridTableColumns(): array
     {
         return [
@@ -39,61 +34,41 @@ class ListPageContents extends XotBaseListRecords
         ];
     }
 
-    /**
-     * Definisce le colonne della tabella di elenco contenuti di pagina.
-     *
-     * @return array<string, \Filament\Tables\Columns\Column>
-     */
     public function getListTableColumns(): array
     {
         return [
-            'name' => TextColumn::make('name')
+            TextColumn::make('name')
                 ->sortable()
                 ->searchable(),
-            'slug' => TextColumn::make('slug')
+            TextColumn::make('slug')
                 ->sortable()
                 ->searchable(),
         ];
     }
 
-    /**
-     * Definisce i filtri della tabella.
-     *
-     * @return array<int, \Filament\Tables\Filters\Filter>
-     */
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
-    /**
-     * Definisce le azioni disponibili per ciascuna riga della tabella.
-     *
-     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
-     */
     public function getTableActions(): array
     {
         return [
-            'view'   => ViewAction::make()
+            ViewAction::make()
                 ->label(''),
-            'edit'   => EditAction::make()
+            EditAction::make()
                 ->label(''),
-            'delete' => DeleteAction::make()
+            DeleteAction::make()
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
-    /**
-     * Definisce le azioni bulk disponibili per più righe selezionate.
-     *
-     * @return array<string, \Filament\Tables\Actions\BulkAction>
-     */
     public function getTableBulkActions(): array
     {
         return [
-            'delete' => DeleteBulkAction::make(),
+            DeleteBulkAction::make(),
         ];
     }
 
@@ -120,23 +95,10 @@ class ListPageContents extends XotBaseListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
             Actions\LocaleSwitcher::make(),
         ];
     }
 
-    protected function getTableRecordUrlUsing(): ?callable
-    {
-        return null;
-    }
-
-    protected function getDefaultTableSortColumn(): ?string
-    {
-        return 'id';
-    }
-
-    protected function getDefaultTableSortDirection(): ?string
-    {
-        return 'desc';
-    }
+    
 }

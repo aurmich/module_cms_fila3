@@ -1,32 +1,20 @@
-<?php return array (
-  'fields' => 
-  array (
-    'view' => 
-    array (
-      'label' => 'view',
-    ),
-    '_tpl' => 
-    array (
-      'label' => '_tpl',
-    ),
-    'background_color' => 
-    array (
-      'label' => 'background_color',
-    ),
-    'background' => 
-    array (
-      'label' => 'background',
-    ),
-    'overlay_color' => 
-    array (
-      'label' => 'overlay_color',
-    ),
-  ),
-  'actions' => 
-  array (
-    'updateAction' => 
-    array (
-      'label' => 'updateAction',
-    ),
-  ),
-);
+<?php
+
+declare(strict_types=1);
+
+return [
+    'fields' => [
+        'view' => [
+            'label' => 'Visualizzazione',
+            'tooltip' => 'Seleziona la visualizzazione da mostrare',
+        ],
+    ],
+    'actions' => [
+        'updateAction' => [
+            'label' => 'Aggiorna Footer',
+            'tooltip' => 'Aggiorna le impostazioni del footer',
+            'icon' => 'heroicon-o-pencil',
+            'color' => 'primary',
+        ],
+    ],
+]; 
