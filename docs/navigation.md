@@ -33,6 +33,12 @@ return [
 $page->navigation
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di navigation.md
 * [navigation.md](laravel/Modules/Gdpr/docs/navigation.md)
@@ -42,5 +48,14 @@ $page->navigation
 * [navigation.md](laravel/Modules/Cms/docs/navigation.md)
 * [navigation.md](laravel/Modules/Cms/docs/components/navigation.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

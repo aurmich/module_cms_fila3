@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Laravel\Folio\Folio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Livewire\Volt\Volt;
 =======
 <<<<<<< HEAD
@@ -21,6 +22,9 @@ use Livewire\Volt\Volt;
 =======
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+use Livewire\Volt\Volt;
+>>>>>>> f1c9277 (.)
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Tenant\Services\TenantService;
 use Modules\Xot\Actions\Livewire\RegisterLivewireComponentsAction;
@@ -66,13 +70,11 @@ class CmsServiceProvider extends XotBaseServiceProvider
 
         if ($this->xot->register_pub_theme) {
             $this->registerNamespaces('pub_theme');
-
             $this->registerThemeConfig('pub_theme');
             $this->registerThemeLivewireComponents();
         }
 
         Assert::string($timezone = config('app.timezone') ?? 'Europe/Berlin');
-
         date_default_timezone_set($timezone);
     }
 
@@ -81,6 +83,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         parent::register();
 
         $this->xot = XotData::make();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -94,6 +97,8 @@ class CmsServiceProvider extends XotBaseServiceProvider
 >>>>>>> feb96d7 (.)
         // $configFileName = 'xra';
         // $this->mergeConfigFrom(__DIR__.sprintf('/../config/%s.php', $configFileName), $configFileName);
+=======
+>>>>>>> f1c9277 (.)
 
         if ($this->xot->register_pub_theme) {
 <<<<<<< HEAD
@@ -101,14 +106,18 @@ class CmsServiceProvider extends XotBaseServiceProvider
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
 =======
             Assert::string($relativePath = config('modules.paths.generator.component-view.path'));
-            //$component_view_path = theme_path($this->xot->pub_theme, $relativePath);
             $component_view_path = base_path('Themes/'.$this->xot->pub_theme.'/'.$relativePath);
             Blade::anonymousComponentPath($component_view_path);
+            
             Assert::isArray($paths = config('view.paths'));
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
+<<<<<<< HEAD
 
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+            
+>>>>>>> f1c9277 (.)
             $paths = array_merge([$theme_path], $paths);
             Config::set('view.paths', $paths);
             Config::set('livewire.view_path', $theme_path.'/livewire');
@@ -128,6 +137,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
         Folio::path($theme_path)
 <<<<<<< HEAD
+<<<<<<< HEAD
             ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
 =======
 <<<<<<< HEAD
@@ -136,13 +146,13 @@ class CmsServiceProvider extends XotBaseServiceProvider
             ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+>>>>>>> f1c9277 (.)
             ->middleware([
                 '*' => $base_middleware,
             ]);
 
-        /**
-         * @var Collection<Module>
-         */
         $modules = Module::collections();
         $paths = [];
         $paths[] = $theme_path;
@@ -162,6 +172,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
             $paths[] = $path;
             Folio::path($path)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
 =======
 <<<<<<< HEAD
@@ -170,9 +181,11 @@ class CmsServiceProvider extends XotBaseServiceProvider
                 ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+>>>>>>> f1c9277 (.)
                 ->middleware([
-                    '*' => [
-                    ],
+                    '*' => [],
                 ]);
         }
 
@@ -183,8 +196,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         Volt::mount($paths);
 =======
         if (class_exists(\Livewire\Volt\Volt::class)) {
-            /** @phpstan-ignore-next-line */
-            \Livewire\Volt\Volt::mount($paths);
+            Volt::mount($paths);
         }
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
@@ -195,15 +207,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
      */
     public function registerThemeLivewireComponents(): void
     {
-        // $prefix=$this->module_name.'::';
         $prefix = '';
-        /*
-        LivewireService::registerComponents(
-            base_path('Themes/'.$this->xot->pub_theme.'/Http/Livewire'),
-            'Themes\\'.$this->xot->pub_theme,
-            $prefix,
-        );
-        */
         app(RegisterLivewireComponentsAction::class)
             ->execute(
 <<<<<<< HEAD

@@ -55,10 +55,23 @@ Lo script progredisce attraverso i seguenti livelli:
 ## File di Configurazione
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Lo script opera sul file `phpstan.neon` nella directory principale. La configurazione è ottimizzata per il progetto il progetto, tenendo conto delle sue peculiarità:
 =======
+=======
+
+### Versione HEAD
+
+Lo script opera sul file `phpstan.neon` nella directory principale. La configurazione è ottimizzata per il progetto il progetto, tenendo conto delle sue peculiarità:
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 Lo script opera sul file `phpstan.neon` nella directory principale. La configurazione è ottimizzata per il progetto SaluteOra, tenendo conto delle sue peculiarità:
 >>>>>>> feb96d7 (.)
+
+---
+
 
 - Utilizzo di `XotBaseRouteServiceProvider` invece di `RouteServiceProvider`
 - Utilizzo di `XotBaseResource` invece di `Resource`
@@ -106,4 +119,3 @@ Lo script opera sul file `phpstan.neon` nella directory principale. La configura
 
 ## Conclusione
 
-L'analisi incrementale ti consente di migliorare gradualmente la qualità del codice, affrontando i problemi in ordine di importanza e complessità. Una volta raggiunto il livello 9, il codice sarà conforme agli standard più elevati di qualità e tipo-sicurezza. 

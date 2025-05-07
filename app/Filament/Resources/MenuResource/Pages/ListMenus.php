@@ -23,7 +23,7 @@ class ListMenus extends XotBaseListRecords
     }
 
     /**
-     * Get list table columns.
+     * Definisce le colonne della tabella di elenco menu.
      *
 <<<<<<< HEAD
      * @return array<Tables\Columns\Column>

@@ -145,6 +145,12 @@ it('should demonstrate this matcher`s usage', async () => {
    - Verificare le regole
    - Documentare i problemi 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di testing.md
 * [testing.md](laravel/Modules/Xot/docs/packages/testing.md)
@@ -152,5 +158,14 @@ it('should demonstrate this matcher`s usage', async () => {
 * [testing.md](laravel/Modules/Cms/docs/frontoffice/testing.md)
 * [testing.md](laravel/Themes/One/docs/testing.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

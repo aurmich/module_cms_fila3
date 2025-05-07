@@ -8,14 +8,20 @@ use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Modules\Cms\Filament\Resources\PageResource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
 use Modules\Lang\Filament\Resources\Pages\LangBaseCreateRecord;
 =======
 >>>>>>> feb96d7 (.)
+=======
+use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
+use Modules\Lang\Filament\Resources\Pages\LangBaseCreateRecord;
+>>>>>>> f1c9277 (.)
 
 /**
  * Summary of CreatePage.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 class CreatePage extends LangBaseCreateRecord
 {
@@ -25,9 +31,10 @@ class CreatePage extends LangBaseCreateRecord
 
 =======
 class CreatePage extends CreateRecord
+=======
+class CreatePage extends LangBaseCreateRecord
+>>>>>>> f1c9277 (.)
 {
-    use CreateRecord\Concerns\Translatable;
-
     protected static string $resource = PageResource::class;
 
     protected function getHeaderActions(): array

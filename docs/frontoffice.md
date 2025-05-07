@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Documentazione Frontoffice
 
 ## Introduzione
@@ -290,7 +296,13 @@ Per estendere il frontoffice con nuove funzionalità:
 - [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
 - [Documentazione Volt](volt-introduction.md) - Introduzione a Laravel Volt
 - [Documentazione Folio](folio-pages.md) - Gestione delle pagine con Laravel Folio
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Frontoffice CMS
 
 ## Introduzione
@@ -348,4 +360,10 @@ Il frontoffice del modulo CMS è la parte pubblica del sito web, accessibile agl
 - [Documentazione Vite](https://vite.dev/)
 - [Laravel News](https://laravel-news.com)
 - [Laracasts](https://laracasts.com)
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

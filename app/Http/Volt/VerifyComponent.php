@@ -17,31 +17,29 @@ use Livewire\Volt\Component;
 use Webmozart\Assert\Assert;
 
 /**
- * Summary of VerifyComponent.
+ * Componente per la verifica dell'email dell'utente.
  *
  * @see https://github.com/thedevdojo/genesis/blob/main/stubs/class/resources/views/pages/auth/verify.blade.php
  */
 class VerifyComponent extends Component
 {
+    /**
+     * Reinvia l'email di verifica.
+     */
     public function resend(): void
     {
-        /*
-        if (auth()->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard'));
-        }
-
-        auth()->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-        */
         Assert::notNull($user = auth()->user());
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
         Assert::isInstanceOf($user, MustVerifyEmail::class);
+<<<<<<< HEAD
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+
+>>>>>>> f1c9277 (.)
         if ($user->hasVerifiedEmail()) {
             redirect('/');
         }

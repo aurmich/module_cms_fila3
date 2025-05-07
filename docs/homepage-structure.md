@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Struttura della Homepage
 
 ## Introduzione
@@ -8,7 +14,13 @@ Questo documento descrive la struttura e il funzionamento della homepage nell'ap
 ## Architettura Generale
 
 La homepage è implementata seguendo un'architettura modulare che separa il layout dalla gestione dei contenuti:
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Struttura della Homepage in SaluteOra
 
 ## Introduzione
@@ -19,6 +31,9 @@ Questo documento spiega la struttura e il funzionamento della homepage nel proge
 
 La homepage di SaluteOra è implementata seguendo un'architettura modulare che separa il layout dalla gestione dei contenuti:
 >>>>>>> feb96d7 (.)
+
+---
+
 
 1. **Laravel Folio** - Gestisce il routing basato su file
 2. **Theme System** - Fornisce il layout e i componenti visivi
@@ -167,10 +182,23 @@ Alternativamente, è possibile modificare direttamente il file JSON della pagina
 ## Collegamento con i Temi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 La homepage utilizza il sistema di temi dell'applicazione:
 =======
+=======
+
+### Versione HEAD
+
+La homepage utilizza il sistema di temi dell'applicazione:
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 La homepage utilizza il sistema di temi di SaluteOra:
 >>>>>>> feb96d7 (.)
+
+---
+
 
 1. Il layout principale è definito in `laravel/Themes/One/resources/views/components/layouts/main.blade.php`
 2. Il layout marketing estende il layout principale
@@ -191,4 +219,3 @@ Per ottimizzare le performance della homepage:
 2. **Riutilizzabilità**: Creare blocchi personalizzabili e riutilizzabili
 3. **Localizzazione**: Gestire correttamente le traduzioni dei contenuti
 4. **Testing**: Verificare la responsiveness su diversi dispositivi
-5. **Manutenibilità**: Documentare le personalizzazioni e i blocchi personalizzati 

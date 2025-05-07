@@ -154,6 +154,12 @@ return [
    - Identificare i colli di bottiglia
    - Implementare soluzioni 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di performance.md
 * [performance.md](laravel/vendor/spatie/laravel-data/docs/advanced-usage/performance.md)
@@ -165,5 +171,14 @@ return [
 * [performance.md](laravel/Modules/Job/docs/packages/performance.md)
 * [performance.md](laravel/Modules/Cms/docs/frontoffice/performance.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

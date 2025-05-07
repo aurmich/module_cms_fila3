@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Routing e Pagine nel Modulo CMS
 
 ## Indice
@@ -167,7 +173,13 @@ La locale corrente può essere recuperata usando:
 
 ```php
 $locale = app()->getLocale();
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Routing e Pagine
 
 ## Introduzione
@@ -297,12 +309,24 @@ class Page extends Model
         {!! $page->content !!}
     </article>
 @endsection
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)
 ```
 
 ## Best Practices
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 ### Organizzazione delle Pagine
 
 1. **Modularità**: Creare directory dedicate per gruppi di pagine correlate
@@ -327,7 +351,13 @@ class Page extends Model
 1. **Validazione Input**: Validare tutti gli input utente
 2. **Sanitizzazione Output**: Sanitizzare l'output per prevenire XSS
 3. **CSRF Protection**: Implementare protezione CSRF per tutti i form
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 1. **SEO**
    - Utilizzare meta tags appropriati
    - Implementare sitemap
@@ -350,12 +380,21 @@ class Page extends Model
 - [Laravel News Folio](https://laravel-news.com/laravel-folio)
 >>>>>>> feb96d7 (.)
 
+---
+
+
 ## Troubleshooting
 
 ### Errori Comuni
 
 1. **Problemi di Routing**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
    - Verificare la struttura delle directory
    - Controllare la nomenclatura dei file
    - Assicurarsi che i file siano nella directory corretta
@@ -382,7 +421,13 @@ class Page extends Model
 * [routing.md](docs/routing.md)
 * [routing.md](laravel/Modules/Cms/docs/frontoffice/routing.md)
 
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
    - Verificare la configurazione delle route
    - Controllare i middleware
    - Aggiornare le dipendenze
@@ -396,4 +441,10 @@ class Page extends Model
    - Ottimizzare le query
    - Implementare il caching
    - Utilizzare CDN 
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

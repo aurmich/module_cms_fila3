@@ -76,6 +76,12 @@ Now that you’ve edited your configuration variables and know how to customize 
 npm run dev
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di getting-started.md
 * [getting-started.md](laravel/Modules/Gdpr/docs/getting-started.md)
@@ -84,5 +90,14 @@ npm run dev
 * [getting-started.md](laravel/Modules/Tenant/docs/it/getting-started.md)
 * [getting-started.md](laravel/Modules/Cms/docs/getting-started.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

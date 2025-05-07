@@ -17,7 +17,6 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Modules\Cms\Filament\Resources\PageContentResource;
-
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
@@ -25,18 +24,22 @@ class ListPageContents extends XotBaseListRecords
 {
     use ListRecords\Concerns\Translatable;
 
+<<<<<<< HEAD
     // protected static string $resource = PageContentResource::class;
 
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+>>>>>>> f1c9277 (.)
     public function getGridTableColumns(): array
     {
         return [
             Stack::make($this->getListTableColumns()),
         ];
     }
+<<<<<<< HEAD
 
     public function getListTableColumns(): array
     {
@@ -49,6 +52,8 @@ class ListPageContents extends XotBaseListRecords
 =======
 =======
 
+=======
+>>>>>>> f1c9277 (.)
 
     /**
      * Definisce le colonne della tabella di elenco contenuti di pagina.
@@ -149,11 +154,9 @@ class ListPageContents extends XotBaseListRecords
     public function table(Table $table): Table
     {
         return $table
-            // ->columns($this->getTableColumns())
             ->columns($this->layoutView->getTableColumns())
             ->contentGrid($this->layoutView->getTableContentGrid())
             ->headerActions($this->getTableHeaderActions())
-
             ->filters($this->getTableFilters())
             ->filtersLayout(FiltersLayout::AboveContent)
             ->persistFiltersInSession()

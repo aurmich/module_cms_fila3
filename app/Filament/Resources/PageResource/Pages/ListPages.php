@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources\PageResource\Pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Filament\Tables;
 use Filament\Actions;
 use Filament\Tables\Table;
@@ -28,23 +29,14 @@ class ListPages extends LangBaseListRecords
 =======
 use Filament\Actions;
 use Filament\Actions\CreateAction;
+=======
+>>>>>>> f1c9277 (.)
 use Filament\Resources\Pages\ListRecords;
-use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\ActionsPosition;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Table;
 use Modules\Cms\Filament\Resources\PageResource;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
-use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
-class ListPages extends XotBaseListRecords
+class ListPages extends ListRecords
 {
+<<<<<<< HEAD
     use ListRecords\Concerns\Translatable;
 >>>>>>> feb96d7 (.)
 
@@ -205,4 +197,7 @@ class ListPages extends XotBaseListRecords
     {
         return 'page';
     }
+=======
+    protected static string $resource = PageResource::class;
+>>>>>>> f1c9277 (.)
 }

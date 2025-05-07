@@ -111,6 +111,15 @@ Questo avviene perché il trait `SushiToJsons` carica tutti i JSON in `/config/l
 Consulta anche la documentazione di riferimento in root: ../../../../docs/gestione-homepage.md
 =======
 
+### Versione HEAD
+
+Questo avviene perché il trait `SushiToJsons` carica tutti i JSON in `/config/local/saluteora/database/content/pages/`, e la query Eloquent `Page::firstOrCreate(['slug'=>'home'], ...)` cerca nello "slug" interno di ogni file. Il file `1.json` contiene `"slug": "home"`, perciò viene restituito.
+
+Consulta anche la documentazione di riferimento in root: ../../../../docs/gestione-homepage.md
+
+### Versione Alternativa
+
+
 La connessione tra lo slug "home" e il file `1.json` avviene per i seguenti motivi:
 
 1. **Struttura del File JSON**: Il file `1.json` contiene un campo `"slug": "home"` che lo identifica come la pagina con slug "home"
@@ -120,6 +129,9 @@ La connessione tra lo slug "home" e il file `1.json` avviene per i seguenti moti
 
 È importante notare che **non è il nome del file** (1.json) a determinare lo slug, ma il **contenuto del file** stesso. Il nome del file corrisponde all'ID della pagina nel "database virtuale".
 >>>>>>> feb96d7 (.)
+
+---
+
 
 ## Vantaggi di Questa Architettura
 

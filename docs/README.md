@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Modulo CMS
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
@@ -247,7 +253,13 @@ npm run dev
 * [README.md](laravel/Themes/Two/docs/README.md)
 * [README.md](laravel/Themes/One/docs/README.md)
 
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Documentazione del Modulo CMS
 
 ## Struttura della Documentazione
@@ -355,4 +367,10 @@ Per contribuire alla documentazione:
 ---
 @see /docs/README.md
 @see /docs/cms/README.md
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

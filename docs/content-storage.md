@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Sistema di Archiviazione dei Contenuti JSON
 
 ## Introduzione
@@ -89,7 +95,13 @@ Per maggiori dettagli sulla struttura dei blocchi di contenuto, consulta la [doc
 ## Esempi Pratici
 
 ### Struttura del File JSON della Homepage
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Sistema di Archiviazione dei Contenuti
 
 ## Introduzione
@@ -229,17 +241,32 @@ Dove:
 Un tipico file JSON per una pagina contiene:
 >>>>>>> feb96d7 (.)
 
+---
+
+
 ```json
 {
     "id": "1",
     "title": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
         "it": "il progetto - Homepage"
     },
     "slug": "home",
     "content_blocks": {
         "it": [
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
         "it": "Titolo della Pagina"
     },
     "slug": "home",
@@ -247,11 +274,18 @@ Un tipico file JSON per una pagina contiene:
     "content_blocks": {
         "it": [
             // Array di blocchi di contenuto
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)
             {
                 "type": "hero",
                 "data": {
                     "view": "ui::components.blocks.hero.simple",
+<<<<<<< HEAD
 <<<<<<< HEAD
                     "title": "Benvenuti",
                     "subtitle": "Piattaforma per la salute orale"
@@ -259,11 +293,32 @@ Un tipico file JSON per una pagina contiene:
                     "title": "Titolo del blocco hero",
                     // Altri campi del blocco
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione HEAD
+
+                    "title": "Benvenuti",
+                    "subtitle": "Piattaforma per la salute orale"
+
+### Versione Alternativa
+
+                    "title": "Titolo del blocco hero",
+                    // Altri campi del blocco
+
+---
+
+>>>>>>> f1c9277 (.)
                 }
             },
             // Altri blocchi...
         ]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
     }
 }
 ```
@@ -285,7 +340,13 @@ Per approfondire il funzionamento tecnico del sistema:
 - [Sistema di Archiviazione dei Contenuti](../laravel/Modules/Cms/docs/content-storage.md) - Documentazione tecnica completa
 - [Gestione dei Blocchi di Contenuto](../laravel/Modules/Cms/docs/content.md) - Come funzionano i blocchi di contenuto
 - [Struttura delle Pagine](../laravel/Modules/Cms/docs/page-resource.md) - Informazioni sulle risorse Page
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
     },
     "sidebar_blocks": {
         "it": []
@@ -327,4 +388,10 @@ Per modificare i contenuti delle pagine, è possibile:
 2. **Traduzioni**: I contenuti possono essere tradotti utilizzando il trait `HasTranslations`
 3. **Override per Tenant**: Ogni tenant può avere la propria versione dei file di contenuto
 4. **Prestazioni**: I dati vengono caricati in memoria tramite Sushi, offrendo prestazioni elevate 
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

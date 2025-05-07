@@ -10,50 +10,78 @@ use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Modules\Cms\Datas\BlockData;
 =======
 >>>>>>> feb96d7 (.)
+=======
+use Modules\Cms\Datas\BlockData;
+>>>>>>> f1c9277 (.)
 use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
 
+/**
+ * Componente per la visualizzazione del contenuto di una pagina.
+ */
 class PageContent extends Component
 {
+    /**
+     * Lo slug della pagina.
+     *
+     * @var string
+     */
     public string $slug;
-    public array $blocks=[];
 
-    public function __construct(string $slug){
+    /**
+     * I blocchi di contenuto della pagina.
+     *
+     * @var array
+     */
+    public array $blocks = [];
+
+    /**
+     * Costruttore del componente.
+     *
+     * @param string $slug Lo slug della pagina
+     */
+    public function __construct(string $slug)
+    {
         $this->slug = $slug;
-        Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
-        $blocks = $page->content_blocks ;
-        if(!is_array($blocks)){
+        Assert::isInstanceOf(
+            $page = PageModel::firstOrCreate(
+                ['slug' => $slug],
+                ['title' => $slug, 'content_blocks' => []]
+            ),
+            PageModel::class,
+            '['.__LINE__.']['.__FILE__.']'
+        );
+        $blocks = $page->content_blocks;
+        if (!is_array($blocks)) {
             $blocks = [];
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         $this->blocks = BlockData::collect($blocks);
 =======
         $this->blocks = $blocks;
 >>>>>>> feb96d7 (.)
+=======
+        $this->blocks = BlockData::collect($blocks);
+>>>>>>> f1c9277 (.)
     }
+
     /**
-     * Get the view / contents that represents the component.
+     * Renderizza il componente.
+     *
+     * @return ViewContract
+     * @throws \Exception Se la vista non esiste
      */
     public function render(): ViewContract
     {
-        /*
-        $comps=Blade::getClassComponentAliases();
-        $paths = Blade::getAnonymousComponentPaths();
-        $filtered=Arr::where($comps,function ($value,$key){
-            return Str::startsWith($key,'blocks.');
-        });
-        dddx([
-            'filtered'=>$filtered
-            ,'paths'=>$paths
-        ]);
-        */
         $view = 'cms::components.page-content';
         $view_params = [];
-        if (! view()->exists($view)) {
+        if (!view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }
 

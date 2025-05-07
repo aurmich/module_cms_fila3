@@ -86,6 +86,12 @@ Trovati 8 errori al livello 9.
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_9.md
 * [level_9.md](laravel/Modules/Chart/docs/phpstan/level_9.md)
@@ -104,5 +110,14 @@ Trovati 8 errori al livello 9.
 * [level_9.md](laravel/Modules/Patient/docs/phpstan/level_9.md)
 * [level_9.md](laravel/Modules/Cms/docs/phpstan/level_9.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

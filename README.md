@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Modulo CMS
 
 Un modulo CMS modulare, estensibile e riutilizzabile per Laravel, con supporto per Filament, Volt e Folio.
@@ -116,7 +122,13 @@ class Show
         ]);
     }
 }
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Modulo CMS - SaluteOra
 
 Modulo per la gestione dei contenuti del sito SaluteOra.
@@ -147,12 +159,24 @@ Modules/Cms/
 ├── routes/                # File delle routes
 ├── tests/                 # Test del modulo
 └── docs/                  # Documentazione del modulo
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)
 ```
 
 ## Documentazione
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 - [Architettura](docs/architecture.md)
 - [Tecnologie](docs/technologies.md)
 - [Frontend](docs/frontoffice/README.md)
@@ -173,7 +197,13 @@ Le pull request sono benvenute. Per modifiche importanti, aprire prima una issue
 ## Licenza
 
 MIT
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 La documentazione è disponibile nella cartella `docs`:
 
 - [Struttura del Modulo](docs/structure.md)
@@ -236,4 +266,10 @@ Eseguire i test con:
 ```bash
 php artisan test --filter=Cms
 ```
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

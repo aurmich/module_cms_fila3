@@ -78,6 +78,12 @@ Trovati 7 errori al livello 5.
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_5.md
 * [level_5.md](laravel/Modules/Chart/docs/phpstan/level_5.md)
@@ -96,5 +102,14 @@ Trovati 7 errori al livello 5.
 * [level_5.md](laravel/Modules/Patient/docs/phpstan/level_5.md)
 * [level_5.md](laravel/Modules/Cms/docs/phpstan/level_5.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

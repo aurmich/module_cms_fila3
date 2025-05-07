@@ -10,8 +10,17 @@ use Modules\UI\Actions\Block\GetAllBlocksAction;
 use Modules\Xot\Datas\ComponentFileData;
 use Webmozart\Assert\Assert;
 
+/**
+ * Classe per la gestione del builder di contenuti pagina in Filament.
+ */
 class PageContentBuilder
 {
+    /**
+     * Crea un nuovo builder per i contenuti della pagina.
+     *
+     * @param string $name Nome del campo
+     * @param string $context Contesto di utilizzo (form, table, etc.)
+     */
     public static function make(
         string $name,
         string $context = 'form',
@@ -38,8 +47,20 @@ class PageContentBuilder
                 }
 =======
 
+<<<<<<< HEAD
                 return $class::make($context);
 >>>>>>> feb96d7 (.)
+=======
+                try {
+                    return $class::make(name: $block->name, context: $context);
+                } catch (\Error $e) {
+                    dddx([
+                        'e' => $e->getMessage(),
+                        'block' => $block,
+                        'class' => $class,
+                    ]);
+                }
+>>>>>>> f1c9277 (.)
             }
         );
 

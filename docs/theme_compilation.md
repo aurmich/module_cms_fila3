@@ -199,8 +199,18 @@ npm update
 ## Troubleshooting
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### Problemi Comuni
 =======
+=======
+
+### Versione HEAD
+
+### Problemi Comuni
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 ### Errore: Unable to locate file in Vite manifest
 
 Un errore comune durante la gestione dei temi è:
@@ -255,6 +265,9 @@ Per risolvere questo problema, seguire questi passi:
 ### Altri problemi comuni
 >>>>>>> feb96d7 (.)
 
+---
+
+
 1. **Errori di Compilazione**: Verificare la sintassi dei file CSS e JavaScript
 2. **Dipendenze Mancanti**: Assicurarsi che tutte le dipendenze siano installate con `npm install`
 3. **Problemi di Permessi**: Verificare i permessi delle directory di output
@@ -266,10 +279,25 @@ Per risolvere questo problema, seguire questi passi:
 2. **Reinstallazione delle Dipendenze**: Eliminare `node_modules` e reinstallare con `npm install`
 3. **Verifica dei Log**: Controllare i log di compilazione per identificare errori specifici
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di theme_compilation.md
 * [theme_compilation.md](docs/standards/theme_compilation.md)
 * [theme_compilation.md](laravel/Modules/Cms/docs/theme_compilation.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

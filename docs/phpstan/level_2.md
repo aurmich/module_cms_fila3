@@ -24,6 +24,12 @@ Trovati 1 errori al livello 2.
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_2.md
 * [level_2.md](laravel/Modules/Chart/docs/phpstan/level_2.md)
@@ -42,5 +48,14 @@ Trovati 1 errori al livello 2.
 * [level_2.md](laravel/Modules/Patient/docs/phpstan/level_2.md)
 * [level_2.md](laravel/Modules/Cms/docs/phpstan/level_2.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

@@ -36,11 +36,27 @@ type = "graph"
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
 ## Collegamenti tra versioni di graph.md
 * [graph.md](laravel/Modules/Chart/docs/components/graph.md)
 * [graph.md](laravel/Modules/Cms/docs/components/graph.md)
 
+<<<<<<< HEAD
 =======
 Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
+
+---
+
+>>>>>>> f1c9277 (.)

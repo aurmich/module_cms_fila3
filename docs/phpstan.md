@@ -38,18 +38,33 @@ parameters:
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 ## Note importanti per il progetto
 
 ### ServiceProvider personalizzati
 
 Nel progetto il progetto utilizziamo classi base personalizzate invece delle classi standard di Laravel:
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 ## Note importanti per SaluteOra
 
 ### ServiceProvider personalizzati
 
 Nel progetto SaluteOra utilizziamo classi base personalizzate invece delle classi standard di Laravel:
 >>>>>>> feb96d7 (.)
+
+---
+
 
 - Non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider` ma utilizziamo `XotBaseRouteServiceProvider`
 - Questo può causare problemi con Larastan che cerca le classi standard di Laravel
@@ -128,4 +143,3 @@ Utilizzare Rector per correggere automaticamente le chiamate alle funzioni:
 ```bash
 composer require --dev rector/rector
 vendor/bin/rector process app/ --config vendor/thecodingmachine/safe/rector-migrate.php
-``` 

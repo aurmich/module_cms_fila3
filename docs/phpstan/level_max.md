@@ -96,6 +96,12 @@ Trovati 9 errori al livello max.
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_max.md
 * [level_max.md](laravel/Modules/Chart/docs/phpstan/level_max.md)
@@ -114,5 +120,14 @@ Trovati 9 errori al livello max.
 * [level_max.md](laravel/Modules/Patient/docs/phpstan/level_max.md)
 * [level_max.md](laravel/Modules/Cms/docs/phpstan/level_max.md)
 
+<<<<<<< HEAD
 =======
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+
+---
+
+>>>>>>> f1c9277 (.)

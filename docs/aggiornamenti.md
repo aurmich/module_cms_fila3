@@ -32,11 +32,27 @@ php artisan splade:show-versions
 
 da   @components('theme::includes.components.(nome)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 a <x-(nome controllato)
 ## Collegamenti tra versioni di aggiornamenti.md
 * [aggiornamenti.md](laravel/Modules/Chart/docs/aggiornamenti.md)
 * [aggiornamenti.md](laravel/Modules/Cms/docs/aggiornamenti.md)
 
+<<<<<<< HEAD
 =======
 a <x-(nome controllato)
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione Alternativa
+
+a <x-(nome controllato)
+
+---
+
+>>>>>>> f1c9277 (.)

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ---
 description: 
 globs: 
@@ -6,6 +7,14 @@ alwaysApply: false
 ---
 =======
 # Regole del Progetto SaluteOra
+=======
+---
+description: Regole del Progetto
+globs: 
+alwaysApply: false
+---
+# Regole e Linee Guida del Progetto
+>>>>>>> f1c9277 (.)
 
 ## Metodologia di Lavoro
 
@@ -206,20 +215,18 @@ alwaysApply: false
 - Error tracking
 - Performance metrics
 - Security alerts
-- Usage statistics
+- Uptime monitoring
 
 ### Aggiornamenti
-- Security patches
-- Dependency updates
-- Feature updates
-- Bug fixes
+- Versioni minori mensili
+- Versioni maggiori trimestrali
+- Security patches immediate
+- Dependency updates settimanali
 
-## Supporto
-
-### Canali
-- Email support
+### Supporto
 - Ticket system
 - Chat support
+<<<<<<< HEAD
 - Phone support
 
 ### SLA
@@ -228,3 +235,7 @@ alwaysApply: false
 - Uptime > 99.9%
 - Backup restore < 4h
 >>>>>>> feb96d7 (.)
+=======
+- Knowledge base
+- Training sessions
+>>>>>>> f1c9277 (.)

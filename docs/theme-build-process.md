@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 # Processo di Build del Tema in il progetto
 
 Questo documento fornisce una panoramica del processo di build e pubblicazione del tema principale di il progetto. Per una documentazione più dettagliata, consultare il [documento completo nel modulo CMS](../../laravel/Modules/Cms/docs/theme-build-process.md).
@@ -46,7 +52,13 @@ Per ulteriori dettagli su come funziona l'integrazione, consultare la [documenta
 - [Personalizzazione del Tema](./theme-customization.md)
 - [Struttura dei Componenti](./theme-components.md)
 - [Integrazione con Filament](./filament-integration.md) 
+<<<<<<< HEAD
 =======
+=======
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Processo di Build e Pubblicazione del Tema
 
 ## Panoramica
@@ -240,4 +252,10 @@ Se il browser non riesce a trovare gli asset:
 ## Conclusione
 
 Il processo di build e pubblicazione del tema è un aspetto fondamentale dello sviluppo frontend nel modulo CMS. Seguendo il flusso di lavoro consigliato e comprendendo l'architettura sottostante, gli sviluppatori possono mantenere un processo di sviluppo efficiente e organizzato. 
+<<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+>>>>>>> f1c9277 (.)

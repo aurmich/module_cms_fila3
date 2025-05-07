@@ -29,9 +29,12 @@
     },
     "require": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+>>>>>>> f1c9277 (.)
 
     },
     "require_comment": {
@@ -57,8 +60,11 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "spatie/laravel-ray": "^1.26"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> f1c9277 (.)
         "livewire/volt": "*"
     },
     "require-dev": {

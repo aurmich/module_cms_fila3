@@ -6,10 +6,13 @@ namespace Modules\Cms\Tests\Unit;
 
 use Tests\TestCase;
 
+/**
+ * Test per il dashboard del CMS.
+ */
 class DashboardTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Test della rotta home.
      */
 <<<<<<< HEAD
     public function testRouteHome(): void
@@ -24,7 +27,7 @@ class DashboardTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * Test della rotta di login.
      */
 <<<<<<< HEAD
     public function testRouteLogin(): void

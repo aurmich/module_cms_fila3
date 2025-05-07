@@ -9,7 +9,7 @@ use Modules\Xot\Actions\Tree\GetTreeOptionsByModelClassAction;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 /**
- * Modules\Cms\Models\Menu.
+ * Modello Menu per la gestione delle strutture di navigazione.
  *
  * @property int                             $id
  * @property string                          $name
@@ -20,28 +20,12 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @property string|null                     $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null                     $deleted_by
- *
- * @method static \Illuminate\Database\Eloquent\Builder|Menu newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Menu newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Menu onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Menu query()
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereItems($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Menu withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Menu withoutTrashed()
- *
- * @property string                                                                                                     $title
- * @property int|null                                                                                                   $parent_id
- * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[]                                               $children
- * @property int|null                                                                                                   $children_count
+ * @property string                          $title
+ * @property int|null                        $parent_id
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $children
+ * @property int|null                        $children_count
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+<<<<<<< HEAD
  * @property int|null                                                                                                   $media_count
  * @property Menu|null                                                                                                  $parent
  * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[]                                               $ancestors                  The model's recursive parents.
@@ -142,6 +126,32 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
  *
+=======
+ * @property int|null                        $media_count
+ * @property Menu|null                       $parent
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $ancestors
+ * @property int|null                        $ancestors_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $ancestorsAndSelf
+ * @property int|null                        $ancestors_and_self_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $bloodline
+ * @property int|null                        $bloodline_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $childrenAndSelf
+ * @property int|null                        $children_and_self_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $descendants
+ * @property int|null                        $descendants_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $descendantsAndSelf
+ * @property int|null                        $descendants_and_self_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $parentAndSelf
+ * @property int|null                        $parent_and_self_count
+ * @property Menu|null                       $rootAncestor
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $siblings
+ * @property int|null                        $siblings_count
+ * @property \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Menu[] $siblingsAndSelf
+ * @property int|null                        $siblings_and_self_count
+ * @property \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ *
+>>>>>>> f1c9277 (.)
  * @mixin \Eloquent
  */
 class Menu extends BaseModel
@@ -160,7 +170,6 @@ class Menu extends BaseModel
         'id' => 'integer',
         'title' => 'string',
         'parent_id' => 'integer',
-
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'created_by' => 'string',
@@ -176,6 +185,8 @@ class Menu extends BaseModel
 =======
 >>>>>>> feb96d7 (.)
     /**
+     * Ottiene le opzioni per il menu ad albero.
+     *
      * @return array<string, string>
      */
     public static function getTreeMenuOptions(): array
@@ -189,17 +200,22 @@ class Menu extends BaseModel
 >>>>>>> feb96d7 (.)
     }
 
+    /**
+     * Ottiene le righe per Sushi.
+     *
+     * @return array
+     */
     public function getRows(): array
     {
         return $this->getSushiRows();
     }
 
-    /** @return array<string, string> */
+    /** 
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
-            'id' => 'string',
-            'uuid' => 'string',
             'items' => 'array',
         ];
     }

@@ -8,6 +8,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Cms\Filament\Resources\PageResource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
 use Modules\Lang\Filament\Resources\Pages\LangBaseEditRecord;
 
@@ -19,11 +20,13 @@ class EditPage extends LangBaseEditRecord
 
 
 =======
+=======
+use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
+use Modules\Lang\Filament\Resources\Pages\LangBaseEditRecord;
+>>>>>>> f1c9277 (.)
 
-class EditPage extends EditRecord
+class EditPage extends LangBaseEditRecord
 {
-    use EditRecord\Concerns\Translatable;
-
     protected static string $resource = PageResource::class;
 
     protected function getHeaderActions(): array

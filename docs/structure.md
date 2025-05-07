@@ -1,7 +1,22 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> feb96d7 (.)
+=======
+
+### Versione HEAD
+
+
+### Versione Alternativa
+
+
+### Versione HEAD
+
+
+---
+
+>>>>>>> f1c9277 (.)
 # Struttura del Modulo CMS
 
 ## Directory Principali
@@ -91,6 +106,12 @@ Modules/Cms/
 5. Aggiornare i riferimenti nelle views
 6. Aggiornare i riferimenti nelle routes 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+### Versione HEAD
+
+>>>>>>> f1c9277 (.)
 
 ## Collegamenti Bidirezionali
 - [README](README.md) - Documentazione principale del modulo
@@ -120,8 +141,17 @@ Modules/Cms/
 * [structure.md](laravel/Modules/Cms/docs/themes/structure.md)
 * [structure.md](laravel/Modules/Cms/docs/components/structure.md)
 
+<<<<<<< HEAD
 =======
 =======
+=======
+
+### Versione Alternativa
+
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Modulo Cms
 
 Data: 2025-04-23 19:09:55
@@ -629,5 +659,14 @@ tests/Unit
 - [Analisi strutturale complessiva](/docs/phpstan/modules_structure_analysis.md)
 - [Report PHPStan](/docs/phpstan/)
 
+<<<<<<< HEAD
 >>>>>>> origin/dev
 >>>>>>> feb96d7 (.)
+=======
+
+---
+
+
+---
+
+>>>>>>> f1c9277 (.)

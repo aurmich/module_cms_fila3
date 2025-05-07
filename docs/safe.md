@@ -1,8 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Utilizzo di Safe nel Progetto il progetto
 =======
+=======
+
+### Versione HEAD
+
+# Utilizzo di Safe nel Progetto il progetto
+
+### Versione Alternativa
+
+>>>>>>> f1c9277 (.)
 # Utilizzo di Safe nel Progetto SaluteOra
 >>>>>>> feb96d7 (.)
+
+---
+
 
 ## Introduzione
 
@@ -98,4 +111,3 @@ try {
 
 ## Performance
 
-L'impatto sulle performance è minimo, circa 700μs per richiesta. Questo è un compromesso accettabile rispetto al miglioramento della sicurezza e della leggibilità del codice. 
