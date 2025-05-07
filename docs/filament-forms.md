@@ -1,27 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Filament Forms nel CMS di il progetto
 
 Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di il progetto, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
-=======
-=======
-
-### Versione HEAD
-
-# Filament Forms nel CMS di il progetto
-
-Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di il progetto, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-# Filament Forms nel CMS di SaluteOra
-
-Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di SaluteOra, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
->>>>>>> feb96d7 (.)
-
----
-
 
 ## Indice
 1. [Introduzione](#introduzione)
@@ -34,24 +13,7 @@ Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di 
 
 ## Introduzione
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Filament è il framework di amministrazione principale utilizzato in il progetto per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
-=======
-=======
-
-### Versione HEAD
-
-Filament è il framework di amministrazione principale utilizzato in il progetto per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-Filament è il framework di amministrazione principale utilizzato in SaluteOra per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
->>>>>>> feb96d7 (.)
-
----
-
 
 ### Vantaggi dei Form Filament
 
@@ -136,24 +98,7 @@ Grid::make([
 
 ### Creazione di un Componente Personalizzato
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Nel modulo CMS di il progetto, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
-=======
-=======
-
-### Versione HEAD
-
-Nel modulo CMS di il progetto, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-Nel modulo CMS di SaluteOra, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
->>>>>>> feb96d7 (.)
-
----
-
 
 ```php
 namespace Modules\Cms\Filament\Forms\Components;
@@ -276,24 +221,7 @@ TextInput::make('delivery_address')
 
 ### Come Esporre i Form al Frontend
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 In il progetto, spesso è necessario esporre i form Filament al frontend attraverso API:
-=======
-=======
-
-### Versione HEAD
-
-In il progetto, spesso è necessario esporre i form Filament al frontend attraverso API:
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-In SaluteOra, spesso è necessario esporre i form Filament al frontend attraverso API:
->>>>>>> feb96d7 (.)
-
----
-
 
 ```php
 // Modules/Cms/Http/Controllers/Api/FormController.php
@@ -410,24 +338,7 @@ public function form(Form $form): Form
 
 ### Log e Debug
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Per il debug dei form Filament in il progetto, è possibile utilizzare:
-=======
-=======
-
-### Versione HEAD
-
-Per il debug dei form Filament in il progetto, è possibile utilizzare:
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-Per il debug dei form Filament in SaluteOra, è possibile utilizzare:
->>>>>>> feb96d7 (.)
-
----
-
 
 ```php
 // Nei form, stampare lo stato
@@ -441,13 +352,6 @@ logger()->debug('Form data filled', $data);
 
 ## Conclusione
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 I form Filament sono uno strumento potente nel CMS di il progetto che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
 
 ## Collegamenti Bidirezionali
@@ -466,16 +370,3 @@ I form Filament sono uno strumento potente nel CMS di il progetto che permettono
 - [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
 - [Form Components](https://filamentphp.com/docs/3.x/forms/fields) - Componenti form
 - [Best Practices](https://filamentphp.com/docs/3.x/forms/best-practices) - Best practices form 
-<<<<<<< HEAD
-=======
-I form Filament sono uno strumento potente nel CMS di SaluteOra che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-I form Filament sono uno strumento potente nel CMS di SaluteOra che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
-
----
-
->>>>>>> f1c9277 (.)

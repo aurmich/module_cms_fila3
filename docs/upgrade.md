@@ -27,28 +27,8 @@ Infine, se si sono pubblicati il file di configurazione o i modelli Blade, assic
 
 ```console
 php artisan module_cms:show-versions
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 ```
 ## Collegamenti tra versioni di upgrade.md
 * [upgrade.md](laravel/Modules/Lang/docs/upgrade.md)
 * [upgrade.md](laravel/Modules/Cms/docs/upgrade.md)
 
-<<<<<<< HEAD
-=======
-```
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-```
-
----
-
->>>>>>> f1c9277 (.)

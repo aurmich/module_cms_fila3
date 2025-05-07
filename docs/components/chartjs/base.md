@@ -39,28 +39,8 @@ title="Valori Giornalieri"
 </x-chartjs.base>
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
 ## Collegamenti tra versioni di base.md
 * [base.md](laravel/Modules/Chart/docs/components/chartjs/base.md)
 * [base.md](laravel/Modules/Cms/docs/components/chartjs/base.md)
 
-<<<<<<< HEAD
-=======
-Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
-
----
-
->>>>>>> f1c9277 (.)

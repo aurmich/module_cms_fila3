@@ -14,14 +14,6 @@ use Modules\Xot\Providers\XotBaseRouteServiceProvider;
 
 // public function boot(\Illuminate\Routing\Router $router)
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-// --- bases -----
-
-=======
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
 class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
     /**
@@ -38,30 +30,26 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
      * The module namespace.
      */
     protected string $module_ns = __NAMESPACE__;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> f1c9277 (.)
     public string $name = 'Cms';
-=======
-<<<<<<< HEAD
-=======
-    public string $name = 'Cms';
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
 
     public function boot(): void
     {
         parent::boot();
+        // 36     Cannot access offset 'router' on Illuminate\Contracts\Foundation\Application
+        // $router = $this->app['router'];
         $router = app('router');
+        // dddx([$router, $router1]);
+
+        // $this->registerLang();
         $this->registerRoutePattern($router);
         $this->registerMyMiddleware($router);
     }
 
     public function registerMyMiddleware(Router $router): void
     {
-        // Middleware registration if needed
+        // $router->pushMiddlewareToGroup('web', SetDefaultLocaleForUrlsMiddleware::class);
+        // $router->prependMiddlewareToGroup('web', SetDefaultLocaleForUrlsMiddleware::class);
+        // $router->prependMiddlewareToGroup('api', SetDefaultLocaleForUrlsMiddleware::class);
     }
 
     /*
@@ -92,6 +80,7 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
         // ---------- Lang Route Pattern
         $langs = config('laravellocalization.supportedLocales');
         if (! \is_array($langs)) {
+            // throw new \Exception('[.__LINE__.]['.class_basename(__CLASS__).']');
             $langs = ['it' => 'it', 'en' => 'en'];
         }
 
@@ -99,9 +88,10 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
         $lang_pattern = '/|'.$lang_pattern.'|/i';
 
         $router->pattern('lang', $lang_pattern);
-        
+        // -------------------------------------------------------------
         $models = config('morph_map');
         if (! \is_array($models)) {
+            // throw new Exception('[' . print_r($models, true) . '][' . __LINE__ . '][' . class_basename(__CLASS__) . ']');
             $models = [];
         }
 
@@ -110,6 +100,15 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
         $models_collect->map(
             static fn ($item) => Str::plural((string) $item)
         )->implode('|');
+        /*--pattern vuoto
+        dddx([
+            'lang_pattern' => $lang_pattern,
+            'container0_pattern' => $container0_pattern,
+            'config_path' => TenantService::getConfigPath('morph_map'),
+        ]);
+        */
+        // da erore livewire ?
+        // $router->pattern('container0', $container0_pattern);
     }
 
     // end registerRoutePattern

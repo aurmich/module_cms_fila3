@@ -151,27 +151,9 @@ npm run copy
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)
 - [Laravel Mix](https://laravel-mix.com/)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di themes.md
 * [themes.md](docs/rules/themes.md)
 * [themes.md](laravel/Modules/Xot/docs/themes.md)
 * [themes.md](laravel/Modules/Cms/docs/frontoffice/themes.md)
 
-<<<<<<< HEAD
-=======
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-
----
-
->>>>>>> f1c9277 (.)

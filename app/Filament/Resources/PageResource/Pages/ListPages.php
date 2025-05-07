@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Resources\PageResource\Pages;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Filament\Tables;
 use Filament\Actions;
 use Filament\Tables\Table;
@@ -26,19 +24,6 @@ use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
 class ListPages extends LangBaseListRecords
 {
-=======
-use Filament\Actions;
-use Filament\Actions\CreateAction;
-=======
->>>>>>> f1c9277 (.)
-use Filament\Resources\Pages\ListRecords;
-use Modules\Cms\Filament\Resources\PageResource;
-
-class ListPages extends ListRecords
-{
-<<<<<<< HEAD
-    use ListRecords\Concerns\Translatable;
->>>>>>> feb96d7 (.)
 
     protected static string $resource = PageResource::class;
 
@@ -65,16 +50,7 @@ class ListPages extends ListRecords
             ->bulkActions([]);
     }
     */
-<<<<<<< HEAD
 
-=======
-    public function getGridTableColumns(): array
-    {
-        return [
-            Stack::make($this->getListTableColumns()),
-        ];
-    }
->>>>>>> feb96d7 (.)
 
     /**
      * @return array<string, \Filament\Tables\Columns\Column>
@@ -95,66 +71,12 @@ class ListPages extends ListRecords
         ];
     }
 
-<<<<<<< HEAD
 
 
 
 
 
     public function tableOLD(Table $table): Table
-=======
-    public function getTableFilters(): array
-    {
-        return [
-        ];
-    }
-
-<<<<<<< HEAD
-    public function getTableActions(): array
-    {
-        return [
-            ViewAction::make()
-                ->label(''),
-            EditAction::make()
-                ->label(''),
-            DeleteAction::make()
-=======
-    /**
-     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
-     */
-    public function getTableActions(): array
-    {
-        return [
-            'view'   => ViewAction::make()
-                ->label(''),
-            'edit'   => EditAction::make()
-                ->label(''),
-            'delete' => DeleteAction::make()
->>>>>>> origin/dev
-                ->label('')
-                ->requiresConfirmation(),
-        ];
-    }
-
-<<<<<<< HEAD
-    public function getTableBulkActions(): array
-    {
-        return [
-            DeleteBulkAction::make(),
-=======
-    /**
-     * @return array<string, \Filament\Tables\Actions\BulkAction>
-     */
-    public function getTableBulkActions(): array
-    {
-        return [
-            'delete' => DeleteBulkAction::make(),
->>>>>>> origin/dev
-        ];
-    }
-
-    public function table(Table $table): Table
->>>>>>> feb96d7 (.)
     {
         return $table
             // ->columns($this->getTableColumns())
@@ -182,11 +104,7 @@ class ListPages extends ListRecords
         ];
     }
 
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> feb96d7 (.)
 
     protected function getPreviewModalView(): ?string
     {
@@ -197,7 +115,4 @@ class ListPages extends ListRecords
     {
         return 'page';
     }
-=======
-    protected static string $resource = PageResource::class;
->>>>>>> f1c9277 (.)
 }

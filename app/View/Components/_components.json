@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-[{"name":"app-layout","class":"AppLayout","module":null,"path":null,"ns":"Modules\\Cms\\View\\Components\\AppLayout"},{"name":"guest-layout","class":"GuestLayout","module":null,"path":null,"ns":"Modules\\Cms\\View\\Components\\GuestLayout"}]
-=======
->>>>>>> feb96d7 (.)
 [
     {
         "name": "app-layout",
@@ -25,7 +19,6 @@
         "module": null,
         "path": null,
         "ns": "Modules\\Cms\\View\\Components\\PageContent"
-<<<<<<< HEAD
     },
     {
         "name": "section",
@@ -35,8 +28,3 @@
         "ns": "Modules\\Cms\\View\\Components\\Section"
     }
 ]
-=======
-    }
-]
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)

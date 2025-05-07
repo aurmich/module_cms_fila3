@@ -67,13 +67,6 @@ Trovati 6 errori al livello 4.
 - [Documentazione PHPStan](https://phpstan.org/user-guide/getting-started)
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_4.md
 * [level_4.md](laravel/Modules/Chart/docs/phpstan/level_4.md)
@@ -92,14 +85,3 @@ Trovati 6 errori al livello 4.
 * [level_4.md](laravel/Modules/Patient/docs/phpstan/level_4.md)
 * [level_4.md](laravel/Modules/Cms/docs/phpstan/level_4.md)
 
-<<<<<<< HEAD
-=======
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-
----
-
->>>>>>> f1c9277 (.)

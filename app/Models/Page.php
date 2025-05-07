@@ -9,7 +9,7 @@ use Modules\Xot\Contracts\ProfileContract;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * Modello Page per la gestione delle pagine del CMS.
+ * Modules\Cms\Models\Page.
  *
  * @property string                          $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -22,27 +22,53 @@ use Spatie\Translatable\HasTranslations;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null                     $deleted_by
  * @property array|null                      $content_blocks
- * @property array|null                      $sidebar_blocks
- * @property array                           $footer_blocks
- * @property mixed                           $translations
- * @property ProfileContract|null            $creator
- * @property ProfileContract|null            $updater
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Page newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereContentBlocks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page withoutTrashed()
+ *
+ * @property array|null $sidebar_blocks
+ * @property array      $footer_blocks
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereFooterBlocks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereSidebarBlocks($value)
+ *
+ * @property mixed $translations
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereLocales(string $column, array $locales)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereJsonContainsLocale(string $column, string $locale, ?mixed $value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereJsonContainsLocales(string $column, array $locales, ?mixed $value)
+ *
+ * @property ProfileContract|null $creator
+ * @property ProfileContract|null $updater
+ *
+ * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
-<<<<<<< HEAD
 class Page extends BaseModelLang
 {
-=======
-class Page extends BaseModel
-{
-    use HasTranslations;
->>>>>>> feb96d7 (.)
     use SushiToJsons;
 
     /** @var array<int, string> */
     public $translatable = [
         'title',
+        // 'description',
         'content_blocks',
         'sidebar_blocks',
         'footer_blocks',
@@ -62,76 +88,35 @@ class Page extends BaseModel
         'title' => 'json',
         'slug' => 'string',
         'content' => 'string',
+
         'content_blocks' => 'json',
         'sidebar_blocks' => 'json',
         'footer_blocks' => 'json',
+
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
 
-    /**
-     * Ottiene le righe per Sushi.
-     *
-     * @return array
-     */
     public function getRows(): array
     {
         return $this->getSushiRows();
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-=======
-    /**
-     * Configurazione per la generazione dello slug.
-     *
-     * @return array
-     */
->>>>>>> f1c9277 (.)
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title',
-            ],
-        ];
-    }
 
     /**
-     * Ottiene il nome della chiave per il routing frontend.
+     * The attributes that should be mutated to dates.
      *
-     * @return string
-     */
-    public function getFrontRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
-    /**
-     * Ottiene l'URL della pagina.
-     *
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return url('/'.app()->getLocale().'/pages/'.$this->slug);
-    }
->>>>>>> feb96d7 (.)
-
-    /**
-     * Gli attributi che devono essere convertiti in date.
-     *
-     * @return array<string, string>
-     */
+     * @return array<string, string> */
     protected function casts(): array
     {
         return [
             'id' => 'string',
             'uuid' => 'string',
+            // 'images' => 'array',
             'date' => 'datetime',
             'published_at' => 'datetime',
             'active' => 'boolean',

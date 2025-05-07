@@ -5,60 +5,18 @@ extends: _layouts.documentation
 section: content
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 ## 🔗 Collegamenti
 - [Root – Gestione Contenuti](../../../docs/page-content-management.md)
 - [Blocchi di Contenuto](blocks.md)
 
-<<<<<<< HEAD
-=======
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-
----
-
->>>>>>> f1c9277 (.)
 # PageResource {#page-resource}
 
 PageResource serve a creare una pagina a blocchi dalla sezione "Pagine" di Filament, in modo simile a Fabricator.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 PageResource utilizza un field di tipo **Section**,
 
 La **Section** a sua volta recupera i blocchi dalle cartelle `Filament/Blocks` di tutti i moduli,
 fornendo così tutti i blocchi disponibili nel form.
-<<<<<<< HEAD
-=======
-=======
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-PageResource utilizza un field di tipo PageContent,
-
-PageContent a sua volta va a prendersi i blocchi dalle cartelle Filament/Blocks di tutti i moduli,
-e restituisce un array di blocchi tramite il Form Builder.
-
-Quindi questo mette a disposizione tutti i blocchi all'interno del page content.
->>>>>>> feb96d7 (.)
-
----
-
 
 Poi c'è la parte del rendering dei blocchi, che parte dalla rotta "index" del tema, creata tramite Folio.
 

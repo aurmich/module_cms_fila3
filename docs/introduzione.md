@@ -22,28 +22,8 @@ Per utilizzare il modulo, è necessario prima configurare l'applicazione per sup
 
 Una volta configurato il modulo, è possibile utilizzarlo per creare e gestire i post del Cms, gestire le categorie e i tag, e generare la struttura del Cms e le pagine del Cms. Per ulteriori informazioni su come utilizzare il modulo e su tutte le sue funzionalità, consultare la documentazione disponibile nel repository su GitHub.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 Dipende un po da tutti i Moduli.
 ## Collegamenti tra versioni di introduzione.md
 * [introduzione.md](laravel/Modules/Chart/docs/introduzione.md)
 * [introduzione.md](laravel/Modules/Cms/docs/introduzione.md)
 
-<<<<<<< HEAD
-=======
-Dipende un po da tutti i Moduli.
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-Dipende un po da tutti i Moduli.
-
----
-
->>>>>>> f1c9277 (.)

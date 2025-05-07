@@ -8,9 +8,20 @@ use Modules\Tenant\Models\Traits\SushiToJsons;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * Modello per la gestione dei contenuti delle pagine.
+ * Modules\Cms\Models\PageContent.
  *
  * @property array|null                                  $blocks
+ * @property string|null                                 $id
+ * @property array|null                                  $name
+ * @property string|null                                 $slug
+ * @property \Illuminate\Support\Carbon|null             $created_at
+ * @property \Illuminate\Support\Carbon|null             $updated_at
+ * @property string|null                                 $created_by
+ * @property string|null                                 $updated_by
+ * @property \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property mixed                                       $translations
+ * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @property string                                      $blocks
  * @property string|null                                 $id
  * @property array|null                                  $name
  * @property string|null                                 $slug
@@ -38,14 +49,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
-<<<<<<< HEAD
  *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
-=======
-<<<<<<< HEAD
- *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
-=======
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
  *
  * @mixin \Eloquent
  */
@@ -71,9 +75,12 @@ class PageContent extends BaseModel
         'id' => 'integer',
         'name' => 'json',
         'slug' => 'string',
+
         'blocks' => 'json',
+
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
@@ -93,15 +100,15 @@ class PageContent extends BaseModel
     }
 
     /**
-     * Gli attributi che devono essere convertiti in date.
+     * The attributes that should be mutated to dates.
      *
-     * @return array<string, string>
-     */
+     * @return array<string, string> */
     protected function casts(): array
     {
         return [
             'id' => 'string',
             'uuid' => 'string',
+
             'name' => 'string',
             'slug' => 'string',
             'blocks' => 'array',

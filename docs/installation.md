@@ -5,13 +5,6 @@ extends: _layouts.documentation
 section: content
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 # Installazione
 
 Questa guida descrive il processo di installazione del modulo CMS.
@@ -164,28 +157,3 @@ I log sono disponibili in:
 * [installation.md](laravel/Modules/Cms/docs/installation.md)
 * [installation.md](laravel/Themes/One/docs/installation.md)
 
-<<<<<<< HEAD
-=======
-=======
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-# Installazione {#installazione}
-
-Un'applicazione Laravel fresca è il modo ideale per iniziare con questo pacchetto. 
-
-Per installare il bacchetto basta mettere il seguente comando nella linea di comando:
-
-```console
-composer require laraxot/module_cms
-
-php artisan module_cms:install
-```
-<<<<<<< HEAD
->>>>>>> feb96d7 (.)
-=======
-
----
-
->>>>>>> f1c9277 (.)

@@ -93,13 +93,6 @@ Now that you’ve edited your configuration variables and know how to customize 
 # options: dev, prod
 npm run dev
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di readme.md
 * [readme.md](laravel/Modules/Gdpr/docs/readme.md)
@@ -108,14 +101,3 @@ npm run dev
 * [readme.md](laravel/Modules/Activity/docs/readme.md)
 * [readme.md](laravel/Modules/Cms/docs/readme.md)
 
-<<<<<<< HEAD
-=======
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-
----
-
->>>>>>> f1c9277 (.)

@@ -17,6 +17,7 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Modules\Cms\Filament\Resources\PageContentResource;
+
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
@@ -24,22 +25,14 @@ class ListPageContents extends XotBaseListRecords
 {
     use ListRecords\Concerns\Translatable;
 
-<<<<<<< HEAD
     // protected static string $resource = PageContentResource::class;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feb96d7 (.)
-=======
->>>>>>> f1c9277 (.)
     public function getGridTableColumns(): array
     {
         return [
             Stack::make($this->getListTableColumns()),
         ];
     }
-<<<<<<< HEAD
 
     public function getListTableColumns(): array
     {
@@ -48,53 +41,17 @@ class ListPageContents extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             TextColumn::make('slug')
-<<<<<<< HEAD
-=======
-=======
-
-=======
->>>>>>> f1c9277 (.)
-
-    /**
-     * Definisce le colonne della tabella di elenco contenuti di pagina.
-     *
-     * @return array<string, \Filament\Tables\Columns\Column>
-     */
-    public function getListTableColumns(): array
-    {
-        return [
-            'name' => TextColumn::make('name')
-                ->sortable()
-                ->searchable(),
-            'slug' => TextColumn::make('slug')
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
                 ->sortable()
                 ->searchable(),
         ];
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    /**
-     * Definisce i filtri della tabella.
-     *
-     * @return array<int, \Filament\Tables\Filters\Filter>
-     */
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feb96d7 (.)
     public function getTableActions(): array
     {
         return [
@@ -103,60 +60,26 @@ class ListPageContents extends XotBaseListRecords
             EditAction::make()
                 ->label(''),
             DeleteAction::make()
-<<<<<<< HEAD
-=======
-=======
-    /**
-     * Definisce le azioni disponibili per ciascuna riga della tabella.
-     *
-     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
-     */
-    public function getTableActions(): array
-    {
-        return [
-            'view'   => ViewAction::make()
-                ->label(''),
-            'edit'   => EditAction::make()
-                ->label(''),
-            'delete' => DeleteAction::make()
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feb96d7 (.)
     public function getTableBulkActions(): array
     {
         return [
             DeleteBulkAction::make(),
-<<<<<<< HEAD
-=======
-=======
-    /**
-     * Definisce le azioni bulk disponibili per più righe selezionate.
-     *
-     * @return array<string, \Filament\Tables\Actions\BulkAction>
-     */
-    public function getTableBulkActions(): array
-    {
-        return [
-            'delete' => DeleteBulkAction::make(),
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
         ];
     }
 
     public function table(Table $table): Table
     {
         return $table
+            // ->columns($this->getTableColumns())
             ->columns($this->layoutView->getTableColumns())
             ->contentGrid($this->layoutView->getTableContentGrid())
             ->headerActions($this->getTableHeaderActions())
+
             ->filters($this->getTableFilters())
             ->filtersLayout(FiltersLayout::AboveContent)
             ->persistFiltersInSession()
@@ -176,14 +99,6 @@ class ListPageContents extends XotBaseListRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
-<<<<<<< HEAD
 
     
-=======
-<<<<<<< HEAD
-
-    
-=======
->>>>>>> origin/dev
->>>>>>> feb96d7 (.)
 }

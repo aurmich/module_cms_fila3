@@ -77,13 +77,6 @@ Trovati 7 errori al livello 6.
 - [Documentazione PHPStan](https://phpstan.org/user-guide/getting-started)
 - [Tipi in PHP](https://www.php.net/manual/en/language.types.declarations.php)
 - [PSR-12: Standard di codifica](https://www.php-fig.org/psr/psr-12/)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 
 ## Collegamenti tra versioni di level_6.md
 * [level_6.md](laravel/Modules/Chart/docs/phpstan/level_6.md)
@@ -102,14 +95,3 @@ Trovati 7 errori al livello 6.
 * [level_6.md](laravel/Modules/Patient/docs/phpstan/level_6.md)
 * [level_6.md](laravel/Modules/Cms/docs/phpstan/level_6.md)
 
-<<<<<<< HEAD
-=======
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-
----
-
->>>>>>> f1c9277 (.)

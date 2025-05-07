@@ -40,25 +40,7 @@ export default defineConfig({
 
 ### Configurazione Ambiente
 ```env
-<<<<<<< HEAD
-<<<<<<< HEAD
 VITE_APP_NAME="il progetto"
-=======
-VITE_APP_NAME="SaluteOra"
->>>>>>> feb96d7 (.)
-=======
-
-### Versione HEAD
-
-VITE_APP_NAME="il progetto"
-
-### Versione Alternativa
-
-VITE_APP_NAME="SaluteOra"
-
----
-
->>>>>>> f1c9277 (.)
 VITE_APP_URL="${APP_URL}"
 ```
 

@@ -6,19 +6,12 @@ namespace Modules\Cms\Tests\Unit;
 
 use Tests\TestCase;
 
-/**
- * Test per il dashboard del CMS.
- */
 class DashboardTest extends TestCase
 {
     /**
-     * Test della rotta home.
+     * A basic test example.
      */
-<<<<<<< HEAD
     public function testRouteHome(): void
-=======
-    public function test_route_home(): void
->>>>>>> feb96d7 (.)
     {
         $testResponse = $this->get('/');
 
@@ -27,13 +20,9 @@ class DashboardTest extends TestCase
     }
 
     /**
-     * Test della rotta di login.
+     * A basic test example.
      */
-<<<<<<< HEAD
     public function testRouteLogin(): void
-=======
-    public function test_route_login(): void
->>>>>>> feb96d7 (.)
     {
         $testResponse = $this->get('/it/login');
 

@@ -15,29 +15,9 @@ Per installare il bacchetto basta mettere il seguente comando nella linea di com
 composer require laraxot/module_cms
 
 php artisan module_cms:install
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-### Versione HEAD
-
->>>>>>> f1c9277 (.)
 ```
 ## Collegamenti tra versioni di installazione.md
 * [installazione.md](docs/installazione.md)
 * [installazione.md](laravel/Modules/Chart/docs/installazione.md)
 * [installazione.md](laravel/Modules/Cms/docs/installazione.md)
 
-<<<<<<< HEAD
-=======
-```
->>>>>>> feb96d7 (.)
-=======
-
-### Versione Alternativa
-
-```
-
----
-
->>>>>>> f1c9277 (.)

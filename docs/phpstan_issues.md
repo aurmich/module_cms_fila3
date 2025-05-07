@@ -9,24 +9,7 @@ Nel tentativo di utilizzare PHPStan con Larastan in un progetto modulare Laravel
    Error thrown in /vendor/laravel/framework/src/Illuminate/Foundation/Application.php on line 961 while loading bootstrap file /vendor/larastan/larastan/bootstrap.php: Class "\Providers\RouteServiceProvider" not found
    ```
    
-<<<<<<< HEAD
-<<<<<<< HEAD
    **Nota importante**: Nel progetto il progetto non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider`, ma utilizziamo invece `XotBaseRouteServiceProvider`. Questo è uno dei motivi per cui Larastan può incontrare problemi nel riconoscere correttamente le classi del progetto.
-=======
-=======
-
-### Versione HEAD
-
-   **Nota importante**: Nel progetto il progetto non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider`, ma utilizziamo invece `XotBaseRouteServiceProvider`. Questo è uno dei motivi per cui Larastan può incontrare problemi nel riconoscere correttamente le classi del progetto.
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-   **Nota importante**: Nel progetto SaluteOra non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider`, ma utilizziamo invece `XotBaseRouteServiceProvider`. Questo è uno dei motivi per cui Larastan può incontrare problemi nel riconoscere correttamente le classi del progetto.
->>>>>>> feb96d7 (.)
-
----
-
 
 2. **Configurazione dei parametri**:
    Alcune opzioni di configurazione come `checkMissingIterableValueType` non sono supportate nella versione attuale di PHPStan.
@@ -109,3 +92,4 @@ Per progetti esistenti con molti errori, è consigliabile generare un file basel
 ./vendor/bin/phpstan analyse --generate-baseline
 ```
 
+Questo creerà un file `phpstan-baseline.neon` che ignora gli errori esistenti, permettendo di concentrarsi solo sui nuovi errori. 

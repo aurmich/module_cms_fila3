@@ -48,72 +48,18 @@ theme-name/
 ```json
 {
     "name": "saluteora/theme-name",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "description": "Tema per il progetto",
-=======
-    "description": "Tema per SaluteOra",
->>>>>>> feb96d7 (.)
-=======
-
-### Versione HEAD
-
-    "description": "Tema per il progetto",
-
-### Versione Alternativa
-
-    "description": "Tema per SaluteOra",
-
----
-
->>>>>>> f1c9277 (.)
     "type": "theme",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-<<<<<<< HEAD
-<<<<<<< HEAD
             "il progetto\\Themes\\ThemeName\\": "src/"
-=======
-            "SaluteOra\\Themes\\ThemeName\\": "src/"
->>>>>>> feb96d7 (.)
-=======
-
-### Versione HEAD
-
-            "il progetto\\Themes\\ThemeName\\": "src/"
-
-### Versione Alternativa
-
-            "SaluteOra\\Themes\\ThemeName\\": "src/"
-
----
-
->>>>>>> f1c9277 (.)
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "il progetto\\Themes\\ThemeName\\ThemeServiceProvider"
-=======
-                "SaluteOra\\Themes\\ThemeName\\ThemeServiceProvider"
->>>>>>> feb96d7 (.)
-=======
-
-### Versione HEAD
-
-                "il progetto\\Themes\\ThemeName\\ThemeServiceProvider"
-
-### Versione Alternativa
-
-                "SaluteOra\\Themes\\ThemeName\\ThemeServiceProvider"
-
----
-
->>>>>>> f1c9277 (.)
             ]
         }
     },
@@ -215,24 +161,7 @@ module.exports = {
 ```php
 <?php
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 namespace il progetto\Themes\ThemeName;
-=======
-=======
-
-### Versione HEAD
-
-namespace il progetto\Themes\ThemeName;
-
-### Versione Alternativa
-
->>>>>>> f1c9277 (.)
-namespace SaluteOra\Themes\ThemeName;
->>>>>>> feb96d7 (.)
-
----
-
 
 use Illuminate\Support\ServiceProvider;
 
@@ -261,29 +190,8 @@ class ThemeServiceProvider extends ServiceProvider
 return [
     'name' => 'Theme Name',
     'version' => '1.0.0',
-<<<<<<< HEAD
-<<<<<<< HEAD
     'author' => 'il progetto Team',
     'description' => 'Tema per il progetto',
-=======
-    'author' => 'SaluteOra Team',
-    'description' => 'Tema per SaluteOra',
->>>>>>> feb96d7 (.)
-=======
-
-### Versione HEAD
-
-    'author' => 'il progetto Team',
-    'description' => 'Tema per il progetto',
-
-### Versione Alternativa
-
-    'author' => 'SaluteOra Team',
-    'description' => 'Tema per SaluteOra',
-
----
-
->>>>>>> f1c9277 (.)
     'active' => true,
     'assets' => [
         'css' => 'public/build/css/app.css',
