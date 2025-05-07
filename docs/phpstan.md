@@ -37,11 +37,19 @@ parameters:
         - ../Xot
 ```
 
+<<<<<<< HEAD
 ## Note importanti per il progetto
 
 ### ServiceProvider personalizzati
 
 Nel progetto il progetto utilizziamo classi base personalizzate invece delle classi standard di Laravel:
+=======
+## Note importanti per SaluteOra
+
+### ServiceProvider personalizzati
+
+Nel progetto SaluteOra utilizziamo classi base personalizzate invece delle classi standard di Laravel:
+>>>>>>> feb96d7 (.)
 
 - Non estendiamo `Illuminate\Foundation\Support\Providers\RouteServiceProvider` ma utilizziamo `XotBaseRouteServiceProvider`
 - Questo può causare problemi con Larastan che cerca le classi standard di Laravel

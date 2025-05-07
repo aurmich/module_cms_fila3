@@ -32,6 +32,7 @@ return [
 // blade files
 $page->navigation
 ```
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di navigation.md
 * [navigation.md](laravel/Modules/Gdpr/docs/navigation.md)
@@ -41,3 +42,5 @@ $page->navigation
 * [navigation.md](laravel/Modules/Cms/docs/navigation.md)
 * [navigation.md](laravel/Modules/Cms/docs/components/navigation.md)
 
+=======
+>>>>>>> feb96d7 (.)

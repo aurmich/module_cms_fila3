@@ -137,8 +137,11 @@ export default defineConfig({
 - [ ] Aggiornare le dipendenze
 - [ ] Pulire la cache
 - [ ] Verificare la sicurezza 
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di troubleshooting.md
 * [troubleshooting.md](laravel/Modules/Xot/docs/troubleshooting.md)
 * [troubleshooting.md](laravel/Modules/Cms/docs/frontoffice/troubleshooting.md)
 
+=======
+>>>>>>> feb96d7 (.)

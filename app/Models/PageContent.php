@@ -49,7 +49,14 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
+<<<<<<< HEAD
  *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
+=======
+<<<<<<< HEAD
+ *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
  *
  * @mixin \Eloquent
  */

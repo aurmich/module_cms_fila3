@@ -13,7 +13,14 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Laravel\Folio\Folio;
+<<<<<<< HEAD
 use Livewire\Volt\Volt;
+=======
+<<<<<<< HEAD
+use Livewire\Volt\Volt;
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Tenant\Services\TenantService;
 use Modules\Xot\Actions\Livewire\RegisterLivewireComponentsAction;
@@ -22,13 +29,28 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\Xot\Services\LivewireService;
 use Nwidart\Modules\Facades\Module;
 use Webmozart\Assert\Assert;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Blade;
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 
 /**
  * Undocumented class.
  */
 class CmsServiceProvider extends XotBaseServiceProvider
 {
+<<<<<<< HEAD
     public string $name = 'Cms';
+=======
+<<<<<<< HEAD
+    public string $module_name = 'cms';
+=======
+    public string $name = 'Cms';
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 
     public XotData $xot;
 
@@ -59,12 +81,34 @@ class CmsServiceProvider extends XotBaseServiceProvider
         parent::register();
 
         $this->xot = XotData::make();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        $configFileName = 'xra';
+        $this->mergeConfigFrom(__DIR__.sprintf('/../Config/%s.php', $configFileName), $configFileName);
+
+        if ($this->xot->register_pub_theme) {
+            Assert::isArray($paths = config('view.paths'));
+            $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/Resources/views'));
+=======
+>>>>>>> feb96d7 (.)
         // $configFileName = 'xra';
         // $this->mergeConfigFrom(__DIR__.sprintf('/../config/%s.php', $configFileName), $configFileName);
 
         if ($this->xot->register_pub_theme) {
+<<<<<<< HEAD
             Assert::isArray($paths = config('view.paths'));
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
+=======
+            Assert::string($relativePath = config('modules.paths.generator.component-view.path'));
+            //$component_view_path = theme_path($this->xot->pub_theme, $relativePath);
+            $component_view_path = base_path('Themes/'.$this->xot->pub_theme.'/'.$relativePath);
+            Blade::anonymousComponentPath($component_view_path);
+            Assert::isArray($paths = config('view.paths'));
+            $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
+
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
             $paths = array_merge([$theme_path], $paths);
             Config::set('view.paths', $paths);
             Config::set('livewire.view_path', $theme_path.'/livewire');
@@ -83,7 +127,15 @@ class CmsServiceProvider extends XotBaseServiceProvider
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
         Folio::path($theme_path)
+<<<<<<< HEAD
             ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+=======
+<<<<<<< HEAD
+            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+=======
+            ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -95,20 +147,47 @@ class CmsServiceProvider extends XotBaseServiceProvider
         $paths = [];
         $paths[] = $theme_path;
         foreach ($modules as $module) {
+<<<<<<< HEAD
             $path = $module->getPath().'/resources/views/pages';
+=======
+<<<<<<< HEAD
+            $path = $module->getPath().'/Resources/views/pages';
+=======
+            $path = $module->getPath().'/resources/views/pages';
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
             if (! File::exists($path)) {
                 continue;
             }
             $paths[] = $path;
             Folio::path($path)
+<<<<<<< HEAD
                 ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+=======
+<<<<<<< HEAD
+                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+=======
+                ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
                 ->middleware([
                     '*' => [
                     ],
                 ]);
         }
 
+<<<<<<< HEAD
         Volt::mount($paths);
+=======
+<<<<<<< HEAD
+        Volt::mount($paths);
+=======
+        if (class_exists(\Livewire\Volt\Volt::class)) {
+            /** @phpstan-ignore-next-line */
+            \Livewire\Volt\Volt::mount($paths);
+        }
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
     }
 
     /**
@@ -127,7 +206,15 @@ class CmsServiceProvider extends XotBaseServiceProvider
         */
         app(RegisterLivewireComponentsAction::class)
             ->execute(
+<<<<<<< HEAD
                 base_path('Themes/'.$this->xot->pub_theme.'/app/Http/Livewire'),
+=======
+<<<<<<< HEAD
+                base_path('Themes/'.$this->xot->pub_theme.'/Http/Livewire'),
+=======
+                base_path('Themes/'.$this->xot->pub_theme.'/app/Http/Livewire'),
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
                 'Themes\\'.$this->xot->pub_theme,
                 $prefix,
             );
@@ -140,9 +227,21 @@ class CmsServiceProvider extends XotBaseServiceProvider
     {
         $xot = $this->xot;
 
+<<<<<<< HEAD
         Assert::string($theme = $xot->{$theme_type});
 
         $resource_path = 'Themes/'.$theme.'/resources';
+=======
+<<<<<<< HEAD
+        $theme = $xot->{$theme_type};
+
+        $resource_path = 'Themes/'.$theme.'/Resources';
+=======
+        Assert::string($theme = $xot->{$theme_type});
+
+        $resource_path = 'Themes/'.$theme.'/resources';
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
         $lang_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/lang'));
 
         $theme_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/views'));
@@ -155,7 +254,15 @@ class CmsServiceProvider extends XotBaseServiceProvider
     {
         $xot = $this->xot;
 
+<<<<<<< HEAD
         Assert::string($theme = $xot->{$theme_type});
+=======
+<<<<<<< HEAD
+        $theme = $xot->{$theme_type};
+=======
+        Assert::string($theme = $xot->{$theme_type});
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 
         $config_path = base_path('Themes/'.$theme.'/Config');
         if (! File::exists($config_path)) {

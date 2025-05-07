@@ -97,6 +97,7 @@ Le pagine custom devono essere collocate in `app/Filament/Pages`:
 1. **Convenzioni**
    - Devono estendere `Filament\Pages\Page`
    - Devono avere un template Blade corrispondente
+<<<<<<< HEAD
    - Devono avere un titolo e un slug descrittivi 
 ## Collegamenti tra versioni di filament.md
 * [filament.md](docs/tecnico/filament/filament.md)
@@ -109,3 +110,6 @@ Le pagine custom devono essere collocate in `app/Filament/Pages`:
 * [filament.md](laravel/Modules/Activity/docs/filament.md)
 * [filament.md](laravel/Modules/Cms/docs/filament.md)
 
+=======
+   - Devono avere un titolo e un slug descrittivi 
+>>>>>>> feb96d7 (.)

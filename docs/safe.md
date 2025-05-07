@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Utilizzo di Safe nel Progetto il progetto
+=======
+# Utilizzo di Safe nel Progetto SaluteOra
+>>>>>>> feb96d7 (.)
 
 ## Introduzione
 

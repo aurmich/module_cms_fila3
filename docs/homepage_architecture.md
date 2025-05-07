@@ -61,7 +61,11 @@ Questo file contiene una struttura che definisce i blocchi di contenuto della ho
 {
     "id": "1",
     "title": {
+<<<<<<< HEAD
         "it": "il progetto - Promozione della salute orale per le gestanti"
+=======
+        "it": "SaluteOra - Promozione della salute orale per le gestanti"
+>>>>>>> feb96d7 (.)
     },
     "slug": "home",
     "content": null,

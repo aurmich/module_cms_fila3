@@ -93,8 +93,16 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
+<<<<<<< HEAD
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
+=======
+<<<<<<< HEAD
+=======
+ * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
+ * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
  *
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
@@ -125,6 +133,14 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
+ * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
  *
  * @mixin \Eloquent
  */
@@ -151,6 +167,14 @@ class Menu extends BaseModel
         'updated_by' => 'string',
     ];
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    public static function getTreeMenuOptions(): array
+    {
+        return app(GetTreeOptionsByModelClassAction::class)->execute(Menu::class);
+=======
+>>>>>>> feb96d7 (.)
     /**
      * @return array<string, string>
      */
@@ -159,6 +183,10 @@ class Menu extends BaseModel
         /** @var class-string<\Modules\Xot\Contracts\HasRecursiveRelationshipsContract> $className */
         $className = Menu::class;
         return app(GetTreeOptionsByModelClassAction::class)->execute($className);
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
     }
 
     public function getRows(): array

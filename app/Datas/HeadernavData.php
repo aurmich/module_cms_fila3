@@ -16,6 +16,26 @@ class HeadernavData extends Data implements Wireable
     use WireableData;
 
     public ?string $background_color = null;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    public ?string $background = null;
+
+    public ?string $overlay_color = null;
+
+    public ?int $overlay_opacity = null;
+
+    public ?string $class = null;
+
+    public ?string $style = null;
+
+    /**
+     * @var view-string
+     */
+    public string $view;
+=======
+>>>>>>> feb96d7 (.)
     public ?string $background = null;
     public ?string $overlay_color = null;
     public ?int $overlay_opacity = null;
@@ -27,6 +47,10 @@ class HeadernavData extends Data implements Wireable
      * @var string
      */
     public $view = 'cms::components.headernav';
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 
     private static ?self $instance = null;
 
@@ -44,10 +68,25 @@ class HeadernavData extends Data implements Wireable
 
     public function view(): Renderable
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        $view_params = $this->toArray();
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
         if (! view()->exists($this->view)) {
             $message = 'The view ['.$this->view.'] does not exist';
             throw new \Exception($message);
         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        return view($this->view, $view_params);
+    }
+=======
+>>>>>>> feb96d7 (.)
         /** @var array<string, mixed> $view_params */
         $view_params = $this->toArray();
 
@@ -66,4 +105,8 @@ class HeadernavData extends Data implements Wireable
             'view' => ['nullable', 'string'],
         ];
     }
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 }

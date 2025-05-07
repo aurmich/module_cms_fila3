@@ -14,6 +14,14 @@ use Modules\Xot\Providers\XotBaseRouteServiceProvider;
 
 // public function boot(\Illuminate\Routing\Router $router)
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+// --- bases -----
+
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
     /**
@@ -30,7 +38,14 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
      * The module namespace.
      */
     protected string $module_ns = __NAMESPACE__;
+<<<<<<< HEAD
     public string $name = 'Cms';
+=======
+<<<<<<< HEAD
+=======
+    public string $name = 'Cms';
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 
     public function boot(): void
     {

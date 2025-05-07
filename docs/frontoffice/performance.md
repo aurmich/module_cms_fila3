@@ -153,6 +153,7 @@ return [
    - Analizzare le metriche
    - Identificare i colli di bottiglia
    - Implementare soluzioni 
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di performance.md
 * [performance.md](laravel/vendor/spatie/laravel-data/docs/advanced-usage/performance.md)
@@ -164,3 +165,5 @@ return [
 * [performance.md](laravel/Modules/Job/docs/packages/performance.md)
 * [performance.md](laravel/Modules/Cms/docs/frontoffice/performance.md)
 
+=======
+>>>>>>> feb96d7 (.)

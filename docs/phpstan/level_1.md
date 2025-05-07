@@ -3,6 +3,7 @@
 Data analisi: 2025-04-15 22:09:07
 
 🎉 **Congratulazioni!** Nessun errore trovato a questo livello.
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di level_1.md
 * [level_1.md](laravel/Modules/Chart/docs/phpstan/level_1.md)
@@ -21,3 +22,5 @@ Data analisi: 2025-04-15 22:09:07
 * [level_1.md](laravel/Modules/Patient/docs/phpstan/level_1.md)
 * [level_1.md](laravel/Modules/Cms/docs/phpstan/level_1.md)
 
+=======
+>>>>>>> feb96d7 (.)

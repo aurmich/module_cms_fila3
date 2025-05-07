@@ -8,6 +8,7 @@ section: content
 # Introducendo Cms {#introducendo-cms}
 
 
+<<<<<<< HEAD
 Il modulo "module_cms" è un pacchetto aggiuntivo per Laravel che fornisce funzionalità per creare e gestire un sistema di gestione dei contenuti (CMS).
 ## Collegamenti tra versioni di introduction.md
 * [introduction.md](laravel/vendor/spatie/laravel-event-sourcing/docs/getting-familiar-with-event-sourcing/introduction.md)
@@ -17,3 +18,6 @@ Il modulo "module_cms" è un pacchetto aggiuntivo per Laravel che fornisce funzi
 * [introduction.md](laravel/Modules/Lang/docs/introduction.md)
 * [introduction.md](laravel/Modules/Cms/docs/introduction.md)
 
+=======
+Il modulo "module_cms" è un pacchetto aggiuntivo per Laravel che fornisce funzionalità per creare e gestire un sistema di gestione dei contenuti (CMS).
+>>>>>>> feb96d7 (.)

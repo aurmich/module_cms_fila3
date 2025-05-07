@@ -105,9 +105,21 @@ Quando viene richiesta la homepage, il flusso di caricamento dei contenuti è il
 8. I blocchi di contenuto vengono estratti dal modello e passati al componente `Blocks` per il rendering
 
 ## Perché lo Slug "home" è Collegato al File 1.json
+<<<<<<< HEAD
 Questo avviene perché il trait `SushiToJsons` carica tutti i JSON in `/config/local/saluteora/database/content/pages/`, e la query Eloquent `Page::firstOrCreate(['slug'=>'home'], ...)` cerca nello "slug" interno di ogni file. Il file `1.json` contiene `"slug": "home"`, perciò viene restituito.
 
 Consulta anche la documentazione di riferimento in root: ../../../../docs/gestione-homepage.md
+=======
+
+La connessione tra lo slug "home" e il file `1.json` avviene per i seguenti motivi:
+
+1. **Struttura del File JSON**: Il file `1.json` contiene un campo `"slug": "home"` che lo identifica come la pagina con slug "home"
+2. **Caricamento dei Dati**: Quando `getSushiRows()` carica tutti i file JSON, crea un array di righe dove ogni riga contiene i dati di un file JSON
+3. **Query Eloquent**: Quando viene eseguita la query `Page::firstOrCreate(['slug' => 'home'], ...)`, Sushi cerca tra queste righe una con `slug` uguale a "home"
+4. **Corrispondenza**: Poiché il file `1.json` ha `"slug": "home"`, viene identificato come la pagina corrispondente
+
+È importante notare che **non è il nome del file** (1.json) a determinare lo slug, ma il **contenuto del file** stesso. Il nome del file corrisponde all'ID della pagina nel "database virtuale".
+>>>>>>> feb96d7 (.)
 
 ## Vantaggi di Questa Architettura
 

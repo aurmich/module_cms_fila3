@@ -70,8 +70,11 @@ In questo modo, puoi utilizzare Echarts con Laravel e Apache per creare un grafi
 
 
 
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di echarts.md
 * [echarts.md](laravel/Modules/Chart/docs/advanced/echarts.md)
 * [echarts.md](laravel/Modules/Cms/docs/advanced/echarts.md)
 
+=======
+>>>>>>> feb96d7 (.)

@@ -132,9 +132,12 @@ export function validateForm(data) {
    - Verificare le regole
    - Controllare i messaggi
    - Testare gli input 
+<<<<<<< HEAD
 
 ## Collegamenti tra versioni di security.md
 * [security.md](laravel/Modules/Gdpr/docs/packages/security.md)
 * [security.md](laravel/Modules/Cms/docs/frontoffice/security.md)
 * [security.md](laravel/Themes/One/docs/security.md)
 
+=======
+>>>>>>> feb96d7 (.)

@@ -27,6 +27,10 @@ class ListPageContents extends XotBaseListRecords
 
     // protected static string $resource = PageContentResource::class;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> feb96d7 (.)
     public function getGridTableColumns(): array
     {
         return [
@@ -41,17 +45,51 @@ class ListPageContents extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             TextColumn::make('slug')
+<<<<<<< HEAD
+=======
+=======
+
+
+    /**
+     * Definisce le colonne della tabella di elenco contenuti di pagina.
+     *
+     * @return array<string, \Filament\Tables\Columns\Column>
+     */
+    public function getListTableColumns(): array
+    {
+        return [
+            'name' => TextColumn::make('name')
+                ->sortable()
+                ->searchable(),
+            'slug' => TextColumn::make('slug')
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
                 ->sortable()
                 ->searchable(),
         ];
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    /**
+     * Definisce i filtri della tabella.
+     *
+     * @return array<int, \Filament\Tables\Filters\Filter>
+     */
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
     public function getTableFilters(): array
     {
         return [
         ];
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> feb96d7 (.)
     public function getTableActions(): array
     {
         return [
@@ -60,15 +98,51 @@ class ListPageContents extends XotBaseListRecords
             EditAction::make()
                 ->label(''),
             DeleteAction::make()
+<<<<<<< HEAD
+=======
+=======
+    /**
+     * Definisce le azioni disponibili per ciascuna riga della tabella.
+     *
+     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
+     */
+    public function getTableActions(): array
+    {
+        return [
+            'view'   => ViewAction::make()
+                ->label(''),
+            'edit'   => EditAction::make()
+                ->label(''),
+            'delete' => DeleteAction::make()
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
                 ->label('')
                 ->requiresConfirmation(),
         ];
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> feb96d7 (.)
     public function getTableBulkActions(): array
     {
         return [
             DeleteBulkAction::make(),
+<<<<<<< HEAD
+=======
+=======
+    /**
+     * Definisce le azioni bulk disponibili per più righe selezionate.
+     *
+     * @return array<string, \Filament\Tables\Actions\BulkAction>
+     */
+    public function getTableBulkActions(): array
+    {
+        return [
+            'delete' => DeleteBulkAction::make(),
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
         ];
     }
 
@@ -99,6 +173,14 @@ class ListPageContents extends XotBaseListRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
+<<<<<<< HEAD
 
     
+=======
+<<<<<<< HEAD
+
+    
+=======
+>>>>>>> origin/dev
+>>>>>>> feb96d7 (.)
 }
