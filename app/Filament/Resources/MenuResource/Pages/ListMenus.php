@@ -27,7 +27,7 @@ class ListMenus extends XotBaseListRecords
      *
      * @return array<Tables\Columns\Column>
      */
-    public function getListTableColumns(): array
+    public function getTableColumns(): array
     {
         return [
             Tables\Columns\TextColumn::make('title'),
