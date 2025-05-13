@@ -1,12 +1,8 @@
 {
     "name": "Cms",
     "alias": "cms",
-<<<<<<< HEAD
-    "description": "",
-=======
     "description": "Sistema di gestione dei contenuti per pagine, sezioni e componenti dinamici",
->>>>>>> c8a49e3 (.)
-    "keywords": [],
+    "keywords": ["cms", "content", "pages", "sections", "components"],
     "priority": 3,
     "active": 1,
     "order": 3,
@@ -15,7 +11,9 @@
         "Modules\\Cms\\Providers\\Filament\\AdminPanelProvider",
         "Modules\\Cms\\Providers\\Filament\\FrontPanelProvider"
     ],
-    "aliases": [],
+    "aliases": {},
     "files": [],
-    "requires": []
+    "requires": ["Xot", "UI", "Lang"],
+    "minimumCoreVersion": "10.0",
+    "phpVersion": "^8.1"
 }
