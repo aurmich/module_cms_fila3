@@ -1,7 +1,11 @@
 {
     "name": "Cms",
     "alias": "cms",
+<<<<<<< HEAD
     "description": "",
+=======
+    "description": "Sistema di gestione dei contenuti per pagine, sezioni e componenti dinamici",
+>>>>>>> c8a49e3 (.)
     "keywords": [],
     "priority": 3,
     "active": 1,
