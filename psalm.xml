@@ -23,7 +23,7 @@
         <file name="Providers/FilamentServiceProvider.php"/>
         <file name="Providers/RouteServiceProvider.php"/>
         <file name="Providers/SettingServiceProvider.php"/>
-        <file name="Resources/views/index.blade.php"/>
+        <file name="resources/views/index.blade.php"/>
         <file name="Routes/api.php"/>
         <file name="Routes/web.php"/>
         <file name="Settings/GeneralSettings.php"/>
