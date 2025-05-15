@@ -13,14 +13,12 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\Lang\Filament\Resources\LangBaseResource;
 use Modules\Cms\Filament\Resources\PageResource\Pages;
 
+/**
+ * @property Page $record
+ */
 class PageResource extends LangBaseResource
 {
-
-
     protected static ?string $model = Page::class;
-
-
-
 
     public static function getFormSchema(): array
     {

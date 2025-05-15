@@ -1,129 +1,134 @@
-# Sistema di Sezioni
+# Sezioni 
 
-Il sistema di sezioni è un componente fondamentale del CMS che permette di gestire aree riutilizzabili del sito attraverso un componente Blade dedicato.
+## Indice
+1. [Introduzione](#introduzione)
+2. [Struttura delle Sezioni](#struttura-delle-sezioni)
+3. [Gestione dei Contenuti](#gestione-dei-contenuti)
+4. [Integrazione con i Blocchi](#integrazione-con-i-blocchi)
+5. [Best Practices](#best-practices)
 
-## Componente Section
+## Introduzione
 
-### Panoramica
-Il componente `Section` (`Modules\Cms\View\Components\Section`) è responsabile per:
-- Caricare o creare sezioni dal database
-- Gestire i blocchi di contenuto
-- Renderizzare il template appropriato
+Le sezioni sono i contenitori principali per i blocchi di contenuto . Ogni sezione rappresenta un'area specifica della pagina e può contenere uno o più blocchi.
 
-### Utilizzo Base
-```php
-<x-section 
-    slug="header"           // Identificatore univoco
-    class="bg-white"        // Classi CSS opzionali
-    id="main-header"        // ID HTML opzionale
-/>
+## Struttura delle Sezioni
+
+### Configurazione JSON
+Le sezioni sono definite in file JSON nella directory `/laravel/config/local/saluteora/database/content/sections/`. Ogni sezione ha questa struttura:
+
+```json
+{
+    "id": "1",
+    "name": "Nome Sezione",
+    "slug": "slug-sezione",
+    "blocks": {
+        "it": [
+            // Array di blocchi
+        ]
+    },
+    "attributes": {
+        "class": "classi-css",
+        "id": "id-sezione",
+        "style": {
+            // Stili specifici
+        }
+    },
+    "created_at": "timestamp",
+    "updated_at": "timestamp",
+    "created_by": "user-id",
+    "updated_by": "user-id"
+}
 ```
 
-### Funzionamento
-1. **Ricerca/Creazione Sezione**
-   ```php
-   $section = SectionModel::firstOrCreate(
-       ['slug' => $slug],
-       [
-           'title' => $slug,
-           'content_blocks' => [],
-           'attributes' => [
-               'class' => $class,
-               'id' => $id
-           ]
-       ]
-   );
-   ```
+### Componenti Blade
+Le sezioni sono renderizzate usando componenti Blade in `/laravel/Themes/One/resources/views/components/sections/`:
 
-2. **Caricamento Blocchi**
-   ```php
-   $blocks = BlockData::collect($section->content_blocks);
-   ```
-
-3. **Rendering Template**
-   ```php
-   return view('pub_theme::components.sections.'.$this->slug);
-   ```
-
-## Modello Section
-
-### Schema
-```php
-Schema::create('sections', function (Blueprint $table) {
-    $table->uuid('id')->primary();
-    $table->string('slug')->unique();
-    $table->json('name');
-    $table->json('content_blocks')->nullable();
-    $table->json('attributes')->nullable();
-    $table->timestamps();
-});
-```
-
-### Relazioni
-- Può contenere multipli blocchi di contenuto
-- Può essere utilizzata in multiple pagine
-- Supporta attributi personalizzati
-
-## Template delle Sezioni
-
-### Struttura Base
 ```blade
-@props([
-    'section' => null,
-    'blocks' => [],
-    'class' => ''
-])
-
-<div {{ $attributes->merge([
-    'class' => ($section['attributes']['class'] ?? '') . ' ' . $class,
-    'id' => ($section['attributes']['id'] ?? '')
-]) }}>
-    {{-- Rendering dei blocchi --}}
+<!-- /components/sections/header.blade.php -->
+<section {{ $attributes }}>
     @foreach($blocks as $block)
         <x-dynamic-component 
-            :component="'cms::blocks.'.$block['type']"
+            :component="'blocks.'.$block['type']"
             :data="$block['data']"
         />
     @endforeach
-</div>
+</section>
 ```
 
-### Convenzioni
-1. I template devono essere nella directory `components/sections/` del tema
-2. Il nome del file deve corrispondere allo slug della sezione
-3. Devono supportare i props standard (`section`, `blocks`, `class`)
+## Gestione dei Contenuti
+
+### Localizzazione
+- Ogni sezione supporta più lingue
+- I blocchi sono organizzati per lingua
+- Le traduzioni sono gestite nei file JSON
+
+### Stili e Attributi
+- Classi CSS personalizzabili
+- ID univoci per targeting
+- Stili inline per personalizzazioni specifiche
+
+## Integrazione con i Blocchi
+
+### Esempio di Sezione Header
+```json
+{
+    "id": "1",
+    "name": "Header Principale",
+    "blocks": {
+        "it": [
+            {
+                "name": "Logo",
+                "type": "logo",
+                "data": {
+                    "view": "pub_theme::components.blocks.logo",
+                    "src": "patient::images/logo.svg"
+                }
+            },
+            {
+                "name": "Menu di Navigazione",
+                "type": "navigation",
+                "data": {
+                    "view": "pub_theme::components.blocks.navigation",
+                    "items": [
+                        {
+                            "label": "Home",
+                            "url": "/"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "attributes": {
+        "class": "sticky top-0 z-50 bg-white",
+        "id": "main-header"
+    }
+}
+```
 
 ## Best Practices
 
-1. **Organizzazione**:
-   - Una sezione per scopo specifico
-   - Riutilizzo attraverso il sito
-   - Mantenere la coerenza
+### 1. Struttura delle Sezioni
+- Mantenere le sezioni modulari
+- Documentare tutti gli attributi
+- Supportare la localizzazione
 
-2. **Blocchi**:
-   - Utilizzare blocchi appropriati
-   - Gestire stati vuoti
-   - Validare i dati
+### 2. Performance
+- Lazy loading per sezioni pesanti
+- Caching dei contenuti statici
+- Ottimizzazione delle risorse
 
-3. **Performance**:
-   - Cache delle sezioni
-   - Lazy loading quando appropriato
-   - Ottimizzazione query
+### 3. Accessibilità
+- Struttura semantica HTML
+- Attributi ARIA appropriati
+- Supporto per screen reader
 
-4. **Manutenibilità**:
-   - Documentare le sezioni
-   - Versionare i template
-   - Testing appropriato
+### 4. Responsive Design
+- Layout fluido
+- Breakpoint consistenti
+- Test su diversi dispositivi
 
 ## Collegamenti
-
-- [Documentazione Temi](../../Themes/One/docs/sections.md)
-- [Gestione Blocchi](blocks/README.md)
-- [Componenti View](components.md)
-- [Best Practices](best-practices/index.md) 
-
-## Collegamenti tra versioni di sections.md
-* [sections.md](docs/sections.md)
-* [sections.md](laravel/Modules/Cms/docs/sections.md)
-* [sections.md](laravel/Themes/One/docs/sections.md)
-
+- [Blocchi di Contenuto](./blocks.md)
+- [Flusso Frontoffice](./frontoffice-flow.md)
+- [Layout e Componenti](./struttura-layout-componenti-blade-saluteora.md)

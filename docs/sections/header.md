@@ -40,7 +40,60 @@ Esempio:
           "height": 32
         }
       },
-      ...
+      {
+        "type": "navigation",
+        "data": {
+          "view": "pub_theme::components.blocks.navigation",
+          "items": [...]
+        }
+      },
+      {
+        "type": "language-switcher",
+        "data": {
+          "view": "pub_theme::components.blocks.language-switcher",
+          "languages": [
+            {
+              "code": "it",
+              "name": "Italiano",
+              "flag": "/images/flags/it.svg"
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "flag": "/images/flags/en.svg"
+            }
+          ],
+          "current": "it"
+        }
+      },
+      {
+        "type": "user-menu",
+        "data": {
+          "view": "pub_theme::components.blocks.user-menu",
+          "avatar": {
+            "src": "/images/avatar.png",
+            "alt": "User Avatar"
+          },
+          "items": [
+            {
+              "label": "Profilo",
+              "url": "/profile",
+              "icon": "user"
+            },
+            {
+              "label": "Impostazioni",
+              "url": "/settings",
+              "icon": "cog"
+            },
+            {
+              "label": "Logout",
+              "url": "/logout",
+              "icon": "logout",
+              "method": "post"
+            }
+          ]
+        }
+      }
     ]
   },
   "attributes": { "class": "...", "id": "main-header", "style": { ... } }
@@ -50,12 +103,14 @@ Esempio:
 ## Blocchi Principali
 - **Logo**: vista `pub_theme::components.blocks.logo`
 - **Navigation**: vista `pub_theme::components.blocks.navigation`
-- **Actions**: vista `pub_theme::components.blocks.actions`
+- **Language Switcher**: vista `pub_theme::components.blocks.language-switcher`
+- **User Menu**: vista `pub_theme::components.blocks.user-menu`
 
 ## Path delle Blade
 - Logo: `Themes/<ThemeName>/resources/views/components/blocks/logo.blade.php`
 - Navigation: `Themes/<ThemeName>/resources/views/components/blocks/navigation.blade.php`
-- Actions: `Themes/<ThemeName>/resources/views/components/blocks/actions.blade.php`
+- Language Switcher: `Themes/<ThemeName>/resources/views/components/blocks/language-switcher.blade.php`
+- User Menu: `Themes/<ThemeName>/resources/views/components/blocks/user-menu.blade.php`
 
 ## Collegamenti
 - [Documentazione Blocchi](../blocks.md)

@@ -113,7 +113,7 @@ Il componente di registrazione gestisce la creazione di nuovi account utente.
                     </a>
 
                     <x-primary-button class="ml-4">
-                        {{ __('Register') }}
+                        {{ __('auth.register') }}
                     </x-primary-button>
                 </div>
             </form>

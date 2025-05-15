@@ -50,8 +50,18 @@ class CmsServiceProvider extends XotBaseServiceProvider
         }
 
         Assert::string($timezone = config('app.timezone') ?? 'Europe/Berlin');
-
         date_default_timezone_set($timezone);
+
+        // Verifica che la lingua predefinita sia supportata
+        $defaultLocale = config('app.locale');
+        $supportedLocales = config('laravellocalization.supportedLocales');
+        if (!isset($supportedLocales[$defaultLocale])) {
+            throw new \Exception(sprintf(
+                'La lingua predefinita "%s" non è supportata. Lingue supportate: %s',
+                $defaultLocale,
+                implode(', ', array_keys($supportedLocales))
+            ));
+        }
     }
 
     public function register(): void
@@ -59,8 +69,11 @@ class CmsServiceProvider extends XotBaseServiceProvider
         parent::register();
 
         $this->xot = XotData::make();
-        // $configFileName = 'xra';
-        // $this->mergeConfigFrom(__DIR__.sprintf('/../config/%s.php', $configFileName), $configFileName);
+
+        // Verifica che la configurazione di LaravelLocalization sia caricata
+        if (!config()->has('laravellocalization.supportedLocales')) {
+            $this->mergeConfigFrom(__DIR__.'/../config/laravellocalization.php', 'laravellocalization');
+        }
 
         if ($this->xot->register_pub_theme) {
             Assert::isArray($paths = config('view.paths'));
@@ -82,8 +95,17 @@ class CmsServiceProvider extends XotBaseServiceProvider
         $base_middleware = Arr::get($middleware, 'base', []);
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
+
+        // Ottieni la lingua corrente in modo sicuro
+        $currentLocale = app()->getLocale();
+        $supportedLocales = config('laravellocalization.supportedLocales', []);
+        if (!isset($supportedLocales[$currentLocale])) {
+            $currentLocale = array_key_first($supportedLocales) ?? 'it';
+            app()->setLocale($currentLocale);
+        }
+
         Folio::path($theme_path)
-            ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+            ->uri($currentLocale)
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -101,7 +123,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-                ->uri(LaravelLocalization::setLocale() ? LaravelLocalization::setLocale() : app()->getLocale())
+                ->uri($currentLocale)
                 ->middleware([
                     '*' => [
                     ],

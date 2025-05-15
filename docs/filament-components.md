@@ -2,7 +2,7 @@
 > **Collegamenti correlati**
 > - [FILAMENT_COMPONENTS.md tema One](../../../../Themes/One/docs/FILAMENT_COMPONENTS.md)
 
-# Utilizzo dei Componenti Filament in SaluteOra
+# Utilizzo dei Componenti Filament 
 
 ## Regola Fondamentale
 

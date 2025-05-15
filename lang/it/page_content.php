@@ -30,6 +30,8 @@ return array (
     array (
       'label' => 'Slug',
       'placeholder' => 'Slug del contenuto pagina',
+      'description' => 'slug',
+      'helper_text' => 'slug',
     ),
     'blocks' => 
     array (
@@ -90,9 +92,16 @@ return array (
   'actions' => 
   array (
     'view' => 'Visualizza Contenuto',
-    'create' => 'Crea Contenuto',
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
     'edit' => 'Modifica Contenuto',
     'delete' => 'Elimina Contenuto',
+    'activeLocale' => 
+    array (
+      'label' => 'activeLocale',
+    ),
   ),
   'messages' => 
   array (

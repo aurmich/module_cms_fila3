@@ -8,26 +8,22 @@ use Filament\Forms;
 // use Modules\Cms\Filament\Resources\PageContentResource\RelationManagers;
 use Filament\Forms\Form;
 // use Filament\Forms;
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Support\Str;
-use Modules\Cms\Filament\Fields\PageContentBuilder;
-use Modules\Cms\Filament\Resources\PageContentResource\Pages;
 use Modules\Cms\Models\PageContent;
+use Filament\Resources\Concerns\Translatable;
+use Modules\Cms\Filament\Fields\PageContentBuilder;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Lang\Filament\Resources\LangBaseResource;
+use Modules\Cms\Filament\Resources\PageContentResource\Pages;
 
 // use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PageContentResource extends XotBaseResource
+class PageContentResource extends LangBaseResource
 {
-    use Translatable;
-
     protected static ?string $model = PageContent::class;
 
-    public static function getTranslatableLocales(): array
-    {
-        return ['it', 'en'];
-    }
+   
 
     public static function getFormSchema(): array
     {
@@ -53,13 +49,5 @@ class PageContentResource extends XotBaseResource
         ];
     }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListPageContents::route('/'),
-            'create' => Pages\CreatePageContent::route('/create'),
-            'view' => Pages\ViewPageContent::route('/{record}'),
-            'edit' => Pages\EditPageContent::route('/{record}/edit'),
-        ];
-    }
+  
 }

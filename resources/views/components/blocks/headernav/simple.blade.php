@@ -49,7 +49,42 @@
                 --}}
                   
                 <div class="flex items-center w-auto">
-                    <x-profile.dropdown></x-profile.dropdown>
+                    <x-filament::dropdown>
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+                                <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" />
+                                <span class="ml-2">{{ auth()->user()->name }}</span>
+                            </button>
+                        </x-slot>
+
+                        <x-filament::dropdown.list>
+                            <x-filament::dropdown.list.item
+                                icon="heroicon-m-user"
+                                :href="route('profile.show')"
+                            >
+                                {{ __('Profile') }}
+                            </x-filament::dropdown.list.item>
+
+                            <x-filament::dropdown.list.item
+                                icon="heroicon-m-cog"
+                                :href="route('profile.show')"
+                            >
+                                {{ __('Settings') }}
+                            </x-filament::dropdown.list.item>
+
+                            <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+
+                            <form method="POST" action="{{ route('logout') }}" class="w-full">
+                                @csrf
+                                <x-filament::dropdown.list.item
+                                    icon="heroicon-m-arrow-right-on-rectangle"
+                                    type="submit"
+                                >
+                                    {{ __('Log Out') }}
+                                </x-filament::dropdown.list.item>
+                            </form>
+                        </x-filament::dropdown.list>
+                    </x-filament::dropdown>
                 </div>
                 
             @else

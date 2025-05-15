@@ -30,19 +30,11 @@ class ListPageContents extends XotBaseListRecords
     public function getGridTableColumns(): array
     {
         return [
-            Stack::make($this->getListTableColumns()),
+            Stack::make($this->getTableColumns()),
         ];
     }
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-    public function getTableComumns(): array
-=======
-    public function getListTableColumns(): array
->>>>>>> c27ecbf (.)
-=======
-    public function getTableComumns(): array
->>>>>>> Stashed changes
+    public function getTableColumns(): array
     {
         return [
             TextColumn::make('name')

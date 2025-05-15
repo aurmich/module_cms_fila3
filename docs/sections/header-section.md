@@ -1,89 +1,88 @@
 # Header Section
 
 ## Struttura
+L'header è una sezione che contiene vari blocchi di navigazione e contenuto.
 
-### 1. Blade Template
-```blade
-{{-- Themes/One/resources/views/components/sections/header.blade.php --}}
-<header {{ $attributes->merge([
-    'class' => ($section['attributes']['class'] ?? '') . ' ' . $class,
-    'id'    => ($section['attributes']['id'] ?? ''),
-    'style' => 'background-color:'.($section['attributes']['style']['background-color'] ?? '').'; color:'.($section['attributes']['style']['color'] ?? '').';'
-]) }}>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        @foreach($blocks as $block)
-            <div class="mx-2">
-                <x-dynamic-component
-                    :component="'cms::blocks.' . $block['type']"
-                    :data="$block['data']"
-                />
-            </div>
-        @endforeach
-    </div>
-
-    {{-- Mobile menu --}}
-    <div x-show="mobileMenuOpen"
-         class="md:hidden"
-         x-transition:enter="duration-150 ease-out"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="duration-100 ease-in"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
-        <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            @foreach($blocks as $block)
-                <x-dynamic-component :component="'cms::blocks.' . $block['type']" :data="$block['data']" />
-            @endforeach
-        </div>
-    </div>
-</header>
-```
-
-### 2. JSON Configuration
+## Esempio di Configurazione
 ```json
 {
-    "name": {
-        "it": "Header Principale",
-        "en": "Main Header"
-    },
-    "slug": "header",
+    "name": "Header Principale",
+    "type": "header",
     "blocks": [
         {
+            "name": "Logo",
             "type": "logo",
             "data": {
-                "src": "/images/logo.svg",
-                "alt": "Logo",
+                "view": "pub_theme::components.blocks.logo",
+                "src": "patient::images/logo.svg",
+                "alt": "{{ config('app.name') }}",
                 "width": 150,
                 "height": 32
             }
         },
         {
+            "name": "Menu di Navigazione",
             "type": "navigation",
             "data": {
+                "view": "pub_theme::components.blocks.navigation",
                 "items": [
-                    { "label": { "it": "Home", "en": "Home" }, "url": "/" }
-                ]
+                    {
+                        "label": "Home",
+                        "url": "/",
+                        "type": "link"
+                    },
+                    {
+                        "label": "Servizi",
+                        "url": "/servizi",
+                        "type": "link"
+                    }
+                ],
+                "alignment": "start",
+                "orientation": "horizontal"
             }
         },
         {
+            "name": "Azioni",
             "type": "actions",
             "data": {
                 "items": [
-                    { "label": { "it": "Area Pazienti", "en": "Patient Area" }, "url": "/area-pazienti", "variant": "primary" },
-                    { "label": { "it": "Prenota", "en": "Book" }, "url": "/prenota", "variant": "secondary" }
-                ]
+                    {
+                        "label": "Area Pazienti",
+                        "url": "/area-pazienti",
+                        "variant": "primary"
+                    },
+                    {
+                        "label": "Prenota",
+                        "url": "/prenota",
+                        "variant": "secondary"
+                    }
+                ],
+                "alignment": "end",
+                "gap": 4
             }
         }
-        // Altri blocchi
     ]
 }
 ```
 
-## Gestione Blocchi
-Il header è una sezione **generica** che consente di inserire e ordinare **qualsiasi** blocco disponibile nel sistema tramite `PageContentBuilder`.
+## Best Practices
 
-Per dettagli su configurazione e template, consulta: [Documentazione Sezione Header](../sections/header-section.md)
+### 1. Struttura dei Dati
+- Mantenere la struttura dei dati semplice e piatta
+- Non includere traduzioni nei dati JSON
+- Utilizzare il sistema di traduzioni di Laravel
+
+### 2. Menu Items
+- Ogni voce del menu deve avere una struttura semplice
+- Le etichette devono essere gestite tramite il sistema di traduzioni
+- Gli URL devono essere relativi e non includere la lingua
+
+### 3. Accessibilità
+- Utilizzare i componenti Filament per l'accessibilità
+- Mantenere la coerenza con il design system
+- Supportare la navigazione da tastiera
 
 ## Collegamenti
-- [Gestione Blocchi](../blocks/README.md)
-- [Componenti UI](../components/README.md)
+- [Documentazione Blocchi](./blocks.md)
+- [Best Practices UI/UX](./guida-implementazione-ux.md)
+- [Documentazione Accessibilità](./accessibility.md)

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Cms\View\Components;
 
-use Illuminate\View\Component;
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
+use Illuminate\View\Component;
+use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
 use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Section as SectionModel;
@@ -67,7 +68,13 @@ class Section extends Component
 
         $blocks = $section->blocks;
 
-        if (!is_array($blocks)) {
+        if(!is_array($blocks)){
+            $primary_lang=XotData::make()->primary_lang;
+            $blocks = $section->getTranslation('blocks',$primary_lang);
+        }
+        
+        
+        if(!is_array($blocks)){
             $blocks = [];
         }
 

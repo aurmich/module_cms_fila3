@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
+use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
 use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Page as PageModel;
@@ -23,6 +24,12 @@ class PageContent extends Component
         $this->slug = $slug;
         Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
         $blocks = $page->content_blocks ;
+        if(!is_array($blocks)){
+            $primary_lang=XotData::make()->primary_lang;
+            $blocks = $page->getTranslation('content_blocks',$primary_lang);
+        }
+        
+        
         if(!is_array($blocks)){
             $blocks = [];
         }
