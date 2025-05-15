@@ -55,7 +55,11 @@ class ListPages extends LangBaseListRecords
     /**
      * @return array<string, \Filament\Tables\Columns\Column>
      */
+<<<<<<< HEAD
     public function getTableComumns(): array
+=======
+    public function getListTableColumns(): array
+>>>>>>> c27ecbf (.)
     {
         return [
             'id' => Tables\Columns\TextColumn::make('id'),

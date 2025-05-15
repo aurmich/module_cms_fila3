@@ -34,7 +34,11 @@ class ListPageContents extends XotBaseListRecords
         ];
     }
 
+<<<<<<< HEAD
     public function getTableComumns(): array
+=======
+    public function getListTableColumns(): array
+>>>>>>> c27ecbf (.)
     {
         return [
             TextColumn::make('name')
