@@ -55,11 +55,15 @@ class ListPages extends LangBaseListRecords
     /**
      * @return array<string, \Filament\Tables\Columns\Column>
      */
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public function getTableComumns(): array
 =======
     public function getListTableColumns(): array
 >>>>>>> c27ecbf (.)
+=======
+    public function getTableComumns(): array
+>>>>>>> Stashed changes
     {
         return [
             'id' => Tables\Columns\TextColumn::make('id'),

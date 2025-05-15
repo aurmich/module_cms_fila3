@@ -1,6 +1,7 @@
 {
     "name": "Cms",
     "alias": "cms",
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     "description": "Sistema di gestione dei contenuti per pagine, sezioni e componenti dinamici",
     "keywords": ["cms", "content", "pages", "sections", "components"],
@@ -8,6 +9,10 @@
     "description": "",
     "keywords": [],
 >>>>>>> c27ecbf (.)
+=======
+    "description": "Sistema di gestione dei contenuti per pagine, sezioni e componenti dinamici",
+    "keywords": ["cms", "content", "pages", "sections", "components"],
+>>>>>>> Stashed changes
     "priority": 3,
     "active": 1,
     "order": 3,
@@ -16,6 +21,7 @@
         "Modules\\Cms\\Providers\\Filament\\AdminPanelProvider",
         "Modules\\Cms\\Providers\\Filament\\FrontPanelProvider"
     ],
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     "aliases": {},
     "files": [],
@@ -27,4 +33,11 @@
     "files": [],
     "requires": []
 >>>>>>> c27ecbf (.)
+=======
+    "aliases": {},
+    "files": [],
+    "requires": ["Xot", "UI", "Lang"],
+    "minimumCoreVersion": "10.0",
+    "phpVersion": "^8.1"
+>>>>>>> Stashed changes
 }

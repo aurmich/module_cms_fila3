@@ -25,11 +25,15 @@ class ListMenus extends XotBaseListRecords
      *
      * @return array<Tables\Columns\Column>
      */
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public function getTableComumns(): array
 =======
     public function getListTableColumns(): array
 >>>>>>> c27ecbf (.)
+=======
+    public function getTableComumns(): array
+>>>>>>> Stashed changes
     {
         return [
             Tables\Columns\TextColumn::make('title'),
