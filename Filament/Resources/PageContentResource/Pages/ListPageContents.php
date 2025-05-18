@@ -19,6 +19,10 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Modules\Cms\Filament\Resources\PageContentResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 class ListPageContents extends XotBaseListRecords
 {
@@ -33,7 +37,11 @@ class ListPageContents extends XotBaseListRecords
         ];
     }
 
+<<<<<<< Updated upstream
     public function getTableColumns(): array
+=======
+    public function getTableComumns(): array
+>>>>>>> Stashed changes
     {
         return [
             TextColumn::make('name')

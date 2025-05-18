@@ -27,7 +27,11 @@ class ListSections extends LangBaseListRecords
 
     protected static string $resource = SectionResource::class;
 
+<<<<<<< Updated upstream
     public function getTableColumns(): array
+=======
+    public function getTableComumns(): array
+>>>>>>> Stashed changes
     {
         return [
             'name' => TextColumn::make('name')
