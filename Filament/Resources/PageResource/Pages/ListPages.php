@@ -57,7 +57,11 @@ class ListPages extends XotBaseListRecords
         ];
     }
 
+<<<<<<< Updated upstream
     public function getTableComumns(): array
+=======
+    public function getTableColumns(): array
+>>>>>>> Stashed changes
     {
         return [
             TextColumn::make('title')
