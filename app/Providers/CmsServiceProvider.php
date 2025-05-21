@@ -93,6 +93,12 @@ class CmsServiceProvider extends XotBaseServiceProvider
             $middleware = [];
         }
         $base_middleware = Arr::get($middleware, 'base', []);
+        //$base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
+        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class;
+        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;
+        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class;
+        //$base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class;
+
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
 
@@ -105,7 +111,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         }
 
         Folio::path($theme_path)
-            ->uri($currentLocale)
+            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -123,10 +129,9 @@ class CmsServiceProvider extends XotBaseServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-                ->uri($currentLocale)
+                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
                 ->middleware([
-                    '*' => [
-                    ],
+                    '*' => $base_middleware,
                 ]);
         }
 
