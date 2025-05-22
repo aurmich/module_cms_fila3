@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-class DoctorTeam extends BasePivot
+use Parental\HasParent;
+
+class DoctorTeam extends TeamUser
 {
-    protected $connection = 'salute_ora';
+    use HasParent;
+    
+    //protected $connection = 'salute_ora'; //in teamuser è già impostato
 }

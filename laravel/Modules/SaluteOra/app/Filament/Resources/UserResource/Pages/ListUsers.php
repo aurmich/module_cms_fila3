@@ -2,44 +2,52 @@
 
 namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
 
-use Modules\SaluteOra\Filament\Resources\UserResource;
-use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Filament\Actions;
+use Filament\Tables\Columns\SelectColumn;
+use Modules\SaluteOra\Enums\UserStateEnum;
+use Filament\Tables\Actions as TableActions;
+use Modules\SaluteOra\States\User\UserState;
+use Modules\SaluteOra\Filament\Resources\UserResource;
+use Modules\UI\Filament\Tables\Columns\SelectStateColumn;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
 class ListUsers extends XotBaseListRecords
 {
     protected static string $resource = UserResource::class;
 
+   public function getTableColumns(): array
+   {
+    return [
+        ...parent::getTableColumns(),
+        'state'=>SelectStateColumn::make('state')
+        //'state'=>SelectColumn::make('state')->options(UserStateEnum::class)
+        //'state'=>SelectColumn::make('state')->options(UserState::class)
+    ];
+   }
+
     public function getTableActions(): array
     {
         return [
-            Actions\EditAction::make(),
-            Actions\ViewAction::make(),
-            Actions\Action::make('approve')
-                ->label(__('saluteora::user.actions.approve'))
+            ...parent::getTableActions(),
+            
+            /*
+            TableActions\Action::make('approve')
                 ->action(fn ($record) => $record->update(['state' => 'approved']))
                 ->requiresConfirmation()
                 ->color('success'),
-            Actions\Action::make('reject')
-                ->label(__('saluteora::user.actions.reject'))
+                TableActions\Action::make('reject')
                 ->action(fn ($record) => $record->update(['state' => 'rejected']))
                 ->requiresConfirmation()
                 ->color('danger'),
-            Actions\Action::make('suspend')
-                ->label(__('saluteora::user.actions.suspend'))
+                TableActions\Action::make('suspend')
                 ->action(fn ($record) => $record->update(['state' => 'suspended']))
                 ->requiresConfirmation()
                 ->color('warning'),
-            Actions\Action::make('reinstate')
-                ->label(__('saluteora::user.actions.reinstate'))
+                TableActions\Action::make('reinstate')
                 ->action(fn ($record) => $record->update(['state' => 'approved']))
                 ->requiresConfirmation()
                 ->color('info'),
+            */
         ];
-    }
-
-    public function getTableFilters(): array
-    {
-        return UserResource::getTableFilters();
     }
 }

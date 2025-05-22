@@ -1,0 +1,73 @@
+# Regola struttura path per i moduli Laravel
+
+Tutti i file di risorsa (Resource), enum e pages dei moduli Laravel devono essere posizionati in `Modules/<NomeModulo>/app/` e **mai** direttamente nella root del modulo o in sottocartelle come `Filament/Resources/` o `Enums/` fuori da `app/`.
+
+## Esempio corretto
+- Modules/SaluteOra/app/Filament/Resources/UserResource.php
+- Modules/SaluteOra/app/Filament/Resources/UserResource/Pages/CreateUser.php
+- Modules/SaluteOra/app/Enums/UserType.php
+- Modules/SaluteOra/app/Enums/UserState.php
+
+## Esempio errato
+- Modules/SaluteOra/Filament/Resources/UserResource.php
+- Modules/SaluteOra/Enums/UserType.php
+
+Questa regola garantisce coerenza, manutenibilità e rispetto delle convenzioni PSR-4 e delle best practice del progetto.
+
+Consulta anche la documentazione specifica dei moduli per dettagli e casi particolari.
+
+---
+
+# Gestione degli "State" nei moduli Laravel
+
+**Regola:** Per ogni campo di stato (es. `state` di User) usare sempre una State Class Spatie ([spatie/laravel-model-states](https://github.com/spatie/laravel-model-states)), **mai** un enum PHP.
+
+## Motivazione
+- Permette transizioni, validazione, logica custom, metodi di stato e side effect.
+- Fondamentale per domini "stateful" (utenti, workflow, moderazione, ecc.).
+
+## Esempio corretto
+```php
+use Spatie\ModelStates\State;
+use Spatie\ModelStates\StateConfig;
+
+abstract class UserState extends State {
+    public static function config(): StateConfig {
+        return parent::config()
+            ->default(Pending::class)
+            ->states([
+                Pending::class,
+                Approved::class,
+                Rejected::class,
+            ])
+            ->allowTransition(Pending::class, Approved::class)
+            ->allowTransition(Pending::class, Rejected::class);
+    }
+}
+class Pending extends UserState {}
+class Approved extends UserState {}
+class Rejected extends UserState {}
+```
+Nel modello:
+```php
+use Spatie\ModelStates\HasStates;
+class User extends Model {
+    use HasStates;
+    protected function states(): array {
+        return [
+            'state' => UserState::class,
+        ];
+    }
+}
+```
+
+## Errori comuni
+- **Undefined array key ...**: manca la dichiarazione di uno stato o la classe non esiste/è nel namespace errato.
+- **Enum PHP usato come state**: va migrato a State Class.
+
+## Docs collegate
+- [.windsurf/rules/model-states.mdc](../../../.windsurf/rules/model-states.mdc)
+- [SaluteOra/docs/uso-label-filament.mdc](../../SaluteOra/docs/uso-label-filament.mdc)
+- https://github.com/spatie/laravel-model-states
+
+[← Torna a SaluteOra/docs](../../SaluteOra/docs/uso-label-filament.mdc)

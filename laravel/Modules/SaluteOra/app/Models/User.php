@@ -3,12 +3,19 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Modules\User\Models\BaseUser;
-use Modules\SaluteOra\Models\Doctor;
-use Modules\SaluteOra\Models\Patient;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
+use Modules\SaluteOra\Enums\UserType;
+
+use Modules\SaluteOra\States\User\UserState;
 use Illuminate\Notifications\Notifiable;
+use Modules\SaluteOra\States\User\Active;
+use Modules\SaluteOra\States\User\Pending;
+use Modules\SaluteOra\States\User\Inactive;
+use Modules\SaluteOra\States\User\Rejected;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Modules\SaluteOra\States\User\Suspended;
+use Modules\SaluteOra\States\User\IntegrationRequested;
 
 /**
  * Modello User per il modulo Patient.
@@ -23,89 +30,43 @@ use Illuminate\Notifications\Notifiable;
 class User extends BaseUser
 {
     use LogsActivity, Notifiable;
+    use HasStates;
 
-    /**
-     * La connessione al database.
-     *
-     * @var string
-     */
+    /** @var string  */
     protected $connection = 'user';
 
-    /**
-     * La colonna che determina il tipo di utente.
-     *
-     * @var string
-     */
-    protected $childColumn = 'type';
 
-    /**
-     * I tipi di utente supportati.
-     *
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     protected $childTypes = [
         'patient' => Patient::class,
         'doctor' => Doctor::class,
+        'admin' => Admin::class,
     ];
 
-    /**
-     * Gli attributi predefiniti.
-     *
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed>  */
     protected $attributes = [
-        'state' => 'pending',
+        //'state' => Pending::class,
+        // 'state' => 'pending',
     ];
-
-    /**
-     * Gli attributi che devono essere nascosti nelle serializzazioni.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Gli attributi che devono essere convertiti in date.
-     *
-     * @var array<int, string>
-     */
-    protected $dates = [
-        'email_verified_at',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    /**
-     * Gli attributi che possono essere assegnati in massa.
-     *
-     * @var array<int, string>
-     */
+    
+    
+    /** @var array<int, string> */
     protected $fillable = [
         'name',
         'email',
         'password',
         'type',
         'state',
-        'email_verified_at',
-        'last_action_by',
-        'last_action_at',
-        'last_reason',
     ];
 
-    /**
-     * Override dei cast degli attributi.
-     *
-     * @return array<string, string>
-     */
+    /**  @return array<string, string>   */
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'type' => UserType::class,
+            'state' => UserState::class,
             'certifications' => 'array',
             'moderation_data' => 'array',
         ]);
@@ -130,7 +91,116 @@ class User extends BaseUser
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['state', 'moderation_data', 'type'])
+            ->logOnly(['name', 'email', 'type', 'state'])
             ->logOnlyDirty();
+    }
+
+    /**
+     * Verifica se l'utente ha dati validi per la transizione di stato.
+     *
+     * @return bool
+     */
+    /**
+     * Verifica se l'utente ha dati validi per la transizione di stato.
+     *
+     * @return bool
+     */
+    public function hasValidData(): bool
+    {
+        return !empty($this->name) && !empty($this->email);
+    }
+    
+    /**
+     * Transizione allo stato attivo.
+     *
+     * @return void
+     * @throws \Spatie\ModelStates\Exceptions\CouldNotPerformTransition
+     */
+    public function activate(): void
+    {
+        $this->state->transitionTo(Active::class);
+    }
+    
+    /**
+     * Transizione allo stato sospeso.
+     *
+     * @return void
+     * @throws \Spatie\ModelStates\Exceptions\CouldNotPerformTransition
+     */
+    public function suspend(): void
+    {
+        $this->state->transitionTo(Suspended::class);
+    }
+    
+    /**
+     * Transizione allo stato rifiutato.
+     *
+     * @return void
+     * @throws \Spatie\ModelStates\Exceptions\CouldNotPerformTransition
+     */
+    public function reject(): void
+    {
+        $this->state->transitionTo(Rejected::class);
+    }
+    
+    /**
+     * Transizione allo stato di richiesta integrazione.
+     *
+     * @return void
+     * @throws \Spatie\ModelStates\Exceptions\CouldNotPerformTransition
+     */
+    public function requestIntegration(): void
+    {
+        $this->state->transitionTo(IntegrationRequested::class);
+    }
+    
+    /**
+     * Verifica se l'utente è attivo.
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->state->equals(Active::class);
+    }
+    
+    /**
+     * Verifica se l'utente è in attesa.
+     *
+     * @return bool
+     */
+    public function isPending(): bool
+    {
+        return $this->state->equals(Pending::class);
+    }
+    
+    /**
+     * Verifica se l'utente è sospeso.
+     *
+     * @return bool
+     */
+    public function isSuspended(): bool
+    {
+        return $this->state->equals(Suspended::class);
+    }
+    
+    /**
+     * Verifica se l'utente è rifiutato.
+     *
+     * @return bool
+     */
+    public function isRejected(): bool
+    {
+        return $this->state->equals(Rejected::class);
+    }
+    
+    /**
+     * Verifica se è richiesta un'integrazione.
+     *
+     * @return bool
+     */
+    public function isIntegrationRequested(): bool
+    {
+        return $this->state->equals(IntegrationRequested::class);
     }
 }

@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\SaluteOra\Providers\Filament;
 
-use Modules\Xot\Providers\XotBaseServiceProvider;
 use Filament\Panel;
+use Modules\Xot\Providers\Filament\XotBasePanelProvider;
 
-class AdminPanelProvider extends XotBaseServiceProvider
+class AdminPanelProvider extends XotBasePanelProvider
 {
-    public string $name = 'SaluteOra';
+    protected string $module = 'SaluteOra';
 
     public function panel(Panel $panel): Panel
     {
+        $panel = parent::panel($panel);
 
-        return parent::panel($panel);
+        return $panel;
     }
 }

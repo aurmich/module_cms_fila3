@@ -203,4 +203,20 @@ class AppointmentWorkflowResource extends XotBaseResource
                 }),
         ];
     }
+    
+    /**
+     * Ottiene le pagine per la risorsa AppointmentWorkflow.
+     *
+     * @return array<string, class-string>
+     */
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListAppointmentWorkflows::route('/'),
+            'create' => Pages\CreateAppointmentWorkflow::route('/create'),
+            'edit' => Pages\EditAppointmentWorkflow::route('/{record}/edit'),
+            'view' => Pages\ViewAppointmentWorkflow::route('/{record}'),
+            'workflow' => Pages\WorkflowAppointment::route('/{record}/workflow'),
+        ];
+    }
 }

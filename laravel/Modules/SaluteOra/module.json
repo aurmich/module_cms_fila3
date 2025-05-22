@@ -4,7 +4,7 @@
     "description": "Gestione dei pazienti",
     "keywords": ["pazienti", "isee", "anamnesi", "documenti", "gestanti"],
     "priority": 10,
-    "active": 0,
+    "active": 1,
     "order": 10,
     "providers": [
         "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider",

@@ -2,6 +2,27 @@
 
 > **Regola fondamentale:** MAI utilizzare il metodo `->label()` nei componenti Filament, specialmente nei Blocks. Le etichette sono gestite automaticamente dal LangServiceProvider.
 
+# ⚠️ Regola fondamentale: MAI usare chiavi che terminano con `.navigation` nei file di traduzione
+
+- Usa sempre la struttura array per navigation:
+  ```php
+  'navigation' => [
+      'label' => 'Gestione Pazienti',
+      'group' => 'Pazienti',
+      'icon' => 'heroicon-o-user-group',
+      'color' => 'primary',
+  ],
+  ```
+- **Esempio ERRATO:**
+  ```php
+  'group' => 'patient.navigation',
+  'label' => 'patient.navigation',
+  ```
+- Consulta anche:
+  - [translation_keys_best_practices.md](../translation_keys_best_practices.md)
+  - [translation_keys_rules.md](../translation_keys_rules.md)
+  - [docs SaluteOra](../../SaluteOra/docs/translations.md)
+
 ## Struttura Corretta per le Traduzioni
 
 Le traduzioni in Filament devono seguire questa struttura nei file di traduzione:
@@ -75,3 +96,10 @@ TextInput::make('title')
 
 ### Link Bidirezionale
 Questo documento è linkato anche dalla documentazione del modulo Cms per garantire coerenza tra i moduli.
+
+# ⚠️ Regola vincolante: MAI usare ->label() nei componenti Filament
+
+- Tutte le label sono gestite tramite i file di traduzione del modulo.
+- Consulta anche:
+  - [docs SaluteOra](../../SaluteOra/docs/README.md)
+  - [docs Xot](../../Xot/docs/README.md)
