@@ -165,4 +165,10 @@ assets/
 - [Componenti](../components.md)
 - [Guida allo Stile](../style_guide.md)
 - [Best Practices](../best_practices.md) 
+
+## Collegamenti tra versioni di assets.md
+* [assets.md](laravel/Modules/Xot/docs/assets.md)
+* [assets.md](laravel/Modules/Cms/docs/themes/assets.md)
+* [assets.md](laravel/Themes/One/docs/assets.md)
+
  

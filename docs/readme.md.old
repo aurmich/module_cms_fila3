@@ -48,7 +48,7 @@ Ultimo aggiornamento: Fri Mar 28 18:55:21 CET 2025
 32. [Stato Finale del Progetto](stato-finale-progetto.md)
 
 ### Avanzato
-33. [Database](database.md) 
+33. [Database](database.md)
 34. [Enums](enums.md)
 35. [Bash Scripts](bashscripts.md)
 36. [Namespace Structure](namespace-structure.md)
@@ -87,4 +87,6 @@ Per iniziare da zero, seguire la guida [Installazione Iniziale](installazione-in
 - Installazione di Laravel Installer
 - Creazione del progetto base
 - Configurazione iniziale
-- Gestione delle migrazioni 
+- Gestione delle migrazioni
+
+- [Documentazione modulo Tenant](../laravel/Modules/Tenant/docs/README.md)

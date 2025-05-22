@@ -50,12 +50,19 @@ class SuperAdminCommand extends Command
         /** @var UserContract */
         $user = XotData::make()->getUserByEmail($email);
 
-        $role = Role::firstOrCreate(['name' => 'super-admin']);
+        // Create super-admin role with web guard
+        $role = Role::firstOrCreate(
+            ['name' => 'super-admin']
+        );
         $user->assignRole($role);
+
+        // Create module admin roles
         $modules_opts = array_keys(Module::all());
         foreach ($modules_opts as $module) {
             $role_name = Str::lower($module).'::admin';
-            $role = Role::firstOrCreate(['name' => $role_name]);
+            $role = Role::firstOrCreate(
+                ['name' => $role_name]
+            );
             $user->assignRole($role);
         }
 

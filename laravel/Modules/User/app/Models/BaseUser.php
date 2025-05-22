@@ -185,6 +185,8 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
 
     ];
 
+    protected $guard_name = "web";
+
     /** @var \Illuminate\Database\Eloquent\Relations\Pivot|null */
     public $pivot;
 

@@ -26,13 +26,9 @@
     },
     "autoload": {
         "psr-4": {
-<<<<<<< HEAD
-            "Modules\\Chart\\": "app/"
-=======
             "Modules\\Chart\\": "app/",
             "Modules\\Chart\\Database\\Factories\\": "database/factories/",
             "Modules\\Chart\\Database\\Seeders\\": "database/seeders/"
->>>>>>> 21462f4 (feat: add initial project structure with configuration files and actions for chart generation)
         }
     },
     "require": {

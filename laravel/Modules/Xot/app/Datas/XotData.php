@@ -317,12 +317,28 @@ class XotData extends Data implements Wireable
         return $class;
     }
 
-    public function getUserTypeResourceClass(string $type): string{
-        $class=$this->getUserTypeClass($type);
-        $resourceClass=Str::of($class)
-            ->replace('\Models\\', '\Filament\Resources\\')
+    public function getUserTypeResourceClass(string $type): string {
+        $class = $this->getUserTypeClass($type);
+        
+        // Extract the module name from the class namespace
+        $moduleName = Str::before(Str::after($class, 'Modules\\'), '\\');
+        
+        // Build the resource class path
+        $resourceClass = Str::of($class)
+            ->replace('\\Models\\', '\\Filament\\Resources\\')
             ->append('Resource')
             ->toString();
+            
+        // If the class doesn't exist, try the alternative path (app/Filament/Resources)
+        if (!class_exists($resourceClass)) {
+            $resourceClass = 'Modules\\' . $moduleName . '\\app\\Filament\\Resources\\' . 
+                          class_basename($class) . 'Resource';
+        }
+        
+        if (!class_exists($resourceClass)) {
+            throw new \RuntimeException("Resource class not found for type: {$type}. Tried: {$resourceClass}");
+        }
+        
         return $resourceClass;
     }
 

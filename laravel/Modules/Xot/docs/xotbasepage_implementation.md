@@ -53,7 +53,8 @@ class SettingsPage extends XotBasePage
 - organizzare le traduzioni nei file del modulo (`/Modules/NomeModulo/lang/`)
 
 ### 2. override di metodi
-- implementare `getFormSchema()` per definire la struttura del form
+- implementare `getFormSchema()` per definire la struttura del form SOLO nelle classi figlie che ne hanno bisogno
+- NON dichiarare mai abstract getFormSchema() in XotBasePage
 - non sovrascrivere metodi dichiarati come `final`
 - estendere i metodi hook dove possibile
 
@@ -173,3 +174,7 @@ class DashboardSettingsPolicy
 ## collegamento ad altre documentazioni
 - [pattern di estensione filament](/var/www/html/base_saluteora/laravel/Modules/Xot/docs/filament_extension_pattern.md)
 - [best practices filament](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/filament-best-practices.md)
+
+## ATTENZIONE: errori critici da evitare
+- NON dichiarare mai abstract getFormSchema() in XotBasePage: la classe base Filament lo implementa già. Fornire sempre una implementazione di default (array vuoto).
+- Se serve uno schema custom, sovrascrivere il metodo nella classe figlia.

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Base il progetto
 
 ## Panoramica
@@ -37,7 +36,5 @@ La documentazione è organizzata in modo modulare:
 - Seguire le [linee guida](laravel/Modules/Xot/docs/DOCUMENTATION-GUIDELINES.md) per la documentazione
 - Mantenere la documentazione aggiornata con il codice
 - Utilizzare termini generici nella documentazione dei moduli 
-=======
 # baseSaluteOra
 
->>>>>>> 0aa4b60 (Initial commit)

@@ -5,20 +5,25 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Widgets;
 
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Forms\Form as FilamentForm;
 use Illuminate\Support\Facades\Cache;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Widgets\WidgetConfiguration;
 use Filament\Widgets\Widget as FilamentWidget;
-use Modules\Xot\Actions\View\GetViewByClassAction;
-use Filament\Widgets\Concerns\InteractsWithPageTable;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Actions\Action;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 /**
- * @property bool $shouldRender
+ * Classe base astratta per tutti i widget Filament.
+ * Fornisce funzionalità comuni e standardizzate per la gestione dei widget.
  *
+ * @property bool $shouldRender Indica se il widget deve essere renderizzato
+ * @property string $title Titolo del widget
+ * @property string $icon Icona del widget
+ * @property array<string, mixed>|null $data Dati del form
  */
 abstract class XotBaseWidget extends FilamentWidget implements HasForms
 {
@@ -30,22 +35,27 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public string $icon = '';
     protected int|string|array $columnSpan = 'full';
     /**
-     * The view that should be rendered for the widget.
-     *
-     * This property allows either a string that can be rendered as a view
-     * (prefixed with a namespace like 'module-name::view-name') or a path to a
-     * Blade view file.
+     * La vista che deve essere renderizzata per il widget.
+     * Può essere un namespace (es. 'module-name::view-name') o un percorso Blade.
      *
      * @var view-string
      */
-    protected static string $view;
+    protected static string $view = '';
 
-
+    /**
+     * Lista degli eventi ascoltati dal widget.
+     *
+     * @var array<string, string>
+     */
     public array $listener = [
         'filters-updated' => 'filtersUpdated',
-
     ];
 
+    /**
+     * Dati del form.
+     *
+     * @var array<string, mixed>
+     */
     public ?array $data = [];
 
     /*
@@ -65,23 +75,37 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     }
     */
 
-
+    /**
+     * Ottiene lo schema del form.
+     * Deve essere implementato nelle classi figlie.
+     *
+     * @return array<int|string, \Filament\Forms\Components\Component>
+     */
     abstract public function getFormSchema(): array;
 
     /**
-     *  Cannot override final method Modules\Xot\Filament\Widgets\XotBaseWidget::form()
-     * percio' non finalize, se togli la funzione form non funziona
+     * Configura il form del widget.
+     *
+     * @param FilamentForm $form Il form da configurare
+     * @return FilamentForm Il form configurato
      */
-    public function form(Form $form): Form
+    public function form(FilamentForm $form): FilamentForm
     {
-        return $form
-            ->schema($this->getFormSchema())
-            //->columns(2)
-            ->statePath('data');
+        $form = $form->schema($this->getFormSchema());
+
+        if (method_exists($form, 'statePath')) {
+            $form->statePath('data');
+        }
+
+        return $form;
     }
 
-
-     protected function getFormActions(): array
+    /**
+     * Ottiene le azioni del form.
+     *
+     * @return array<int|string, Action>
+     */
+    protected function getFormActions(): array
     {
         return [
             Action::make('save')
@@ -90,8 +114,33 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         ];
     }
 
+    /**
+     * Salva i dati del form.
+     * Override nelle classi figlie se necessario.
+     *
+     * @return void
+     */
     public function save(): void
     {
+        // Implementare nelle classi figlie
+    }
 
+    /**
+     * Eseguito quando i filtri vengono aggiornati.
+     *
+     * @return void
+     */
+    public function filtersUpdated(): void
+    {
+        $this->reset('data');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getNavigationLabel(): string
+    {
+        return (string) (static::$navigationLabel ?? (string) str(static::getLabel())
+            ->headline());
     }
 }
