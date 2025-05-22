@@ -249,3 +249,129 @@ WHERE state = 'Modules\\SaluteOra\\States\\Active';
 - [ ] Tutte le classi di stato esistono nel nuovo namespace
 - [ ] Testate tutte le transizioni di stato
 - [ ] Aggiornata la documentazione 
+
+## 🔍 Debugging e Troubleshooting
+
+### Best Practices per il Debugging
+
+1. **Logging Dettagliato**
+   ```php
+   Log::info('Tentativo di transizione', [
+       'user_id' => $user->id,
+       'current_state' => get_class($user->state),
+       'target_state' => $newState,
+       'model_data' => $user->toArray()
+   ]);
+   ```
+
+2. **Validazione Robusta**
+   ```php
+   public function canTransitionTo(State $newState): bool
+   {
+       try {
+           if (!parent::canTransitionTo($newState)) {
+               Log::warning('Transizione non consentita dalla configurazione', [
+                   'from' => get_class($this),
+                   'to' => get_class($newState)
+               ]);
+               return false;
+           }
+
+           if (!$this->model->hasValidData()) {
+               Log::warning('Dati non validi per la transizione', [
+                   'user_id' => $this->model->id,
+                   'validation_errors' => $this->model->getErrors()
+               ]);
+               return false;
+           }
+
+           return true;
+       } catch (\Exception $e) {
+           Log::error('Errore durante la validazione della transizione', [
+               'error' => $e->getMessage(),
+               'trace' => $e->getTraceAsString()
+           ]);
+           return false;
+       }
+   }
+   ```
+
+3. **Gestione Eventi**
+   ```php
+   Event::listen(UserStateChanged::class, function (UserStateChanged $event) {
+       try {
+           Log::info('Transizione di stato completata', [
+               'user_id' => $event->user->id,
+               'old_state' => get_class($event->oldState),
+               'new_state' => get_class($event->newState)
+           ]);
+       } catch (\Exception $e) {
+           Log::error('Errore durante la gestione dell\'evento', [
+               'error' => $e->getMessage()
+           ]);
+       }
+   });
+   ```
+
+### Troubleshooting Guide
+
+1. **Verifica Stati nel Database**
+   ```sql
+   -- Lista tutti gli stati unici
+   SELECT DISTINCT state FROM users;
+   
+   -- Conta gli utenti per stato
+   SELECT state, COUNT(*) as count 
+   FROM users 
+   GROUP BY state;
+   
+   -- Trova utenti con stati potenzialmente invalidi
+   SELECT id, state 
+   FROM users 
+   WHERE state NOT LIKE 'Modules\\SaluteOra\\States%';
+   ```
+
+2. **Verifica Classi di Stato**
+   ```php
+   // Lista tutte le classi di stato disponibili
+   $stateClasses = collect(File::allFiles(app_path('States')))
+       ->map(function ($item) {
+           return 'Modules\\SaluteOra\\States\\' . str_replace(
+               ['/', '.php'],
+               ['\\', ''],
+               $item->getRelativePathname()
+           );
+       })
+       ->filter(function ($class) {
+           return class_exists($class) && is_subclass_of($class, State::class);
+       });
+   ```
+
+3. **Test di Integrazione**
+   ```php
+   public function test_state_transition_flow()
+   {
+       $user = User::factory()->create(['state' => Pending::class]);
+       
+       // Test transizione valida
+       $this->assertTrue($user->state->canTransitionTo(Approved::class));
+       $user->state->transitionTo(Approved::class);
+       $this->assertInstanceOf(Approved::class, $user->fresh()->state);
+       
+       // Test transizione invalida
+       $this->assertFalse($user->state->canTransitionTo(Pending::class));
+       $this->expectException(InvalidStateTransition::class);
+       $user->state->transitionTo(Pending::class);
+   }
+   ```
+
+### Checklist di Debugging
+
+- [ ] Verificare i log per errori o warning
+- [ ] Controllare gli stati nel database
+- [ ] Verificare l'esistenza di tutte le classi di stato
+- [ ] Testare le transizioni in ambiente di sviluppo
+- [ ] Monitorare gli eventi e i listener
+- [ ] Verificare la validazione dei dati
+- [ ] Controllare i namespace nel database
+- [ ] Testare le transizioni in tutti gli scenari possibili 

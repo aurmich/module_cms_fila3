@@ -91,3 +91,41 @@ class User extends Model {
 - [.windsurf/rules/model-states.mdc](../../../.windsurf/rules/model-states.mdc)
 - [Xot/docs/struttura-path-moduli.mdc](../../Xot/docs/struttura-path-moduli.mdc)
 - https://github.com/spatie/laravel-model-states
+
+---
+
+# Regole pratiche per "state" e enum in Filament
+
+## 1. Differenza tra enum PHP e Spatie Model State
+- **Enum PHP**: solo valori statici, nessuna logica di transizione, nessun metodo custom.
+- **Spatie Model State**: oggetti con logica, transizioni, metodi custom, side effect. Da usare SEMPRE per ogni campo "state" che rappresenta uno stato di workflow, utente, processo, ecc.
+
+## 2. Pattern per colonne Filament
+- Per visualizzare/gestire uno stato in una tabella Filament:
+    - Preferire un custom column (es. `SelectStateColumn`) che sa gestire Spatie State.
+    - Se serve una select statica, usare enum PHP solo per valori statici (es. tipo utente), MAI per lo stato.
+    - Esempio corretto:
+      ```php
+      use Modules\UI\Filament\Tables\Columns\SelectStateColumn;
+      use Modules\SaluteOra\States\User\UserState;
+      // ...
+      'state' => SelectStateColumn::make('state'),
+      // oppure, per enum statici:
+      use Modules\SaluteOra\Enums\UserTypeEnum;
+      'type' => SelectColumn::make('type')->options(UserTypeEnum::class),
+      ```
+
+## 3. Errori comuni da evitare
+- Namespace errato o path errato per state/enum: seguire la regola "tutto sotto app/" e PSR-4.
+- Usare enum PHP per campi che richiedono logica di stato: va SEMPRE usata una State Class Spatie.
+- Dimenticare di registrare tutti gli stati nella StateConfig.
+- Per SelectColumn, passare sempre la classe enum (per enum PHP) o la StateClass custom per Spatie.
+
+## 4. Scelta rapida
+- **Stato dinamico, workflow, transizioni?** → Spatie Model State.
+- **Valori statici, nessuna logica?** → enum PHP.
+
+## 5. Collegamenti e approfondimenti
+- [.windsurf/rules/model-states.mdc](../../../.windsurf/rules/model-states.mdc)
+- [Xot/docs/struttura-path-moduli.mdc](../../Xot/docs/struttura-path-moduli.mdc)
+- https://github.com/spatie/laravel-model-states

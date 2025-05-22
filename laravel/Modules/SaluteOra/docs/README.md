@@ -543,158 +543,46 @@ Vedi anche: [MIGLIORAMENTI_E_CORREZIONI.md](./MIGLIORAMENTI_E_CORREZIONI.md)
 
 - Se trovi chiavi `.navigation`, correggile subito e aggiorna la documentazione.
 
-## ⚠️ Regola fondamentale: Mai usare ->label() nei componenti Filament
+## ⚠️ Regola fondamentale: MAI usare enum PHP per i campi di stato
 
-- Tutte le label, placeholder, help, tooltip, description devono essere gestite tramite i file di traduzione del modulo, mai tramite `->label()`.
-- Il LangServiceProvider intercetta automaticamente le label tramite la struttura delle chiavi di traduzione.
-- Consulta anche:
-  - [Regole traduzioni Filament](../../Lang/docs/filament-translations.md)
-  - [Regole generali Xot](../../Xot/docs/README.md)
+- Per tutti i campi che rappresentano uno stato (es. user.state, moderation.state) si usa **solo** [spatie/laravel-model-states](https://github.com/spatie/laravel-model-states).
+- Le enum PHP (anche se chiamate UserStateEnum, ecc.) sono ammesse **solo** per tipi statici (es. UserType), **mai** per workflow, moderazione, pubblicazione, ecc.
 
-### Checklist revisione codice
-- [ ] Nessun uso di `->label()` nei componenti Filament
-- [ ] Tutte le label sono gestite tramite i file di traduzione
-- [ ] Namespace corretti (Modules\<NomeModulo>\Filament)
-- [ ] Nessuna estensione diretta di classi Filament
+### Struttura corretta
+- La classe principale di stato (es. `UserState`) va in `app/States/UserState.php`.
+- Le classi concrete (Pending, Active, ecc.) vanno in `app/States/User/`.
+- Se trovi una `UserState` in `app/States/User/UserState.php`, rinominala in `.old`.
+- Se trovi enum PHP per i campi di stato, eliminala e aggiorna tutti i riferimenti.
 
-# Errori comuni: path e namespace
-
-- Tutti i file PHP devono essere in `app/` (es: `app/Enums/UserType.php`, `app/Filament/Resources/UserResource.php`)
-- Il namespace non deve mai contenere `App` (es: `Modules\SaluteOra\Enums\UserType`)
-- La struttura fisica e quella logica devono essere coerenti, ma la root del codice è sempre `app/`
-- Se trovi file o namespace errati, correggi subito e aggiorna la doc
-- Vedi anche: [Regole generali Xot](../Xot/docs/README.md)
-
-## Checklist di Ripartenza (dopo restart)
-- Verifica che tutte le migration siano applicate (`users` aggiornata per STI)
-- Controlla che i trait NON siano duplicati nei modelli specializzati
-- Verifica la catena di ereditarietà: Doctor → User → BaseUser
-- Controlla che le ValidationException usino sempre `withMessages`
-- Assicurati che la documentazione sia aggiornata e neutra
-- Controlla i file chiave:
-  - [Doctor.php](app/Models/Doctor.php)
-  - [User.php](app/Models/User.php)
-  - [BaseUser.php](../User/app/Models/BaseUser.php)
-  - [DoctorResource.php](app/Filament/Resources/DoctorResource.php)
-  - [RegisterAction.php](app/Actions/RegisterAction.php)
-  - [RegistrationWidget.php](../User/app/Filament/Widgets/RegistrationWidget.php)
-  - [UserType.php](app/Enums/UserType.php)
-  - [UserState.php](app/Enums/UserState.php)
-- Consulta le sezioni:
-  - [Modello Doctor](Models/Doctor.md)
-  - [Errori di Validazione](errors/validation.md)
-  - [Migrazioni e STI](database/migrations.md)
-  - [Best Practices](ACTIONS_BEST_PRACTICES.md)
-  - [Ereditarietà](INHERITANCE_BEST_PRACTICES.md)
-  - [Analisi UserModeration](UserModeration_model_valutazione.md)
-
-## [2024-05-XX] Correzione risorse Filament: rispetto regole XotBaseResource
-- Rimossi da UserResource e ListUsers tutte le proprietà/metodi vietati: navigationIcon, table, getTableFilters, getBulkActions, ecc.
-- Le select usano ora direttamente gli enum (UserType::toSelectArray, UserState::toSelectArray)
-- Vedi anche: [Regole generali Xot](../Xot/docs/README.md)
-
-## Regola: Icone SVG custom per navigation.icon
-- Le icone SVG custom vanno salvate in `resources/svg/` del modulo, con nome `<modulo>-<icona>.svg` (es. `saluteora-doctor.svg`).
-- In navigation.icon dei file di traduzione si usa l'identificatore `<modulo>-<icona>` (es. `'icon' => 'saluteora-doctor'`).
-- Gli array vanno sempre in short syntax (`[]`).
-- Tutti i file PHP devono iniziare con `declare(strict_types=1);`.
-- Esempio:
-```php
-<?php
-declare(strict_types=1);
-return [
-    'navigation' => [
-        'icon' => 'saluteora-doctor',
-        // ...
-    ],
-];
-```
-- Vedi anche: [Regole generali Xot](../Xot/docs/README.md)
-
-- [2024-05-XX] Corretto: ListDoctorAvailabilities ora estende XotBaseListRecords (non più ListRecords). Vedi anche: [Regole generali Xot](../Xot/docs/README.md)
-
-## Regola fondamentale: Stati e workflow con Spatie Model States
-- Tutti i campi che rappresentano uno stato (es. user.state, moderation.state) devono usare [spatie/laravel-model-states](https://github.com/spatie/laravel-model-states), **non** enum PHP native.
-- Le enum PHP sono ammesse solo per tipi statici (es. UserType), **mai** per workflow, moderazione, pubblicazione, ecc.
-
-### Motivazione
-- Gestione delle transizioni tra stati (solo quelle consentite)
-- Logica custom per ogni stato (side effect, permessi, validazione)
-- Integrazione con Eloquent (cast automatico, query, observer)
-- Eventi sulle transizioni
-- Best practice per workflow e moderazione
-
-### Esempio pratico
+### Esempio ERRATO
 ```php
 // ERRATO
 use Modules\SaluteOra\Enums\UserStateEnum;
-protected $casts = [ 'state' => UserState::class ];
+protected $casts = [ 'state' => UserStateEnum::class ];
+```
 
+### Esempio CORRETTO
+```php
 // CORRETTO
 use Modules\SaluteOra\States\UserState;
 protected $casts = [ 'state' => UserState::class ];
-
-// State class
-class UserState extends State { ... }
 ```
 
-### Checklist
-- [ ] Nessun campo di stato usa enum PHP
-- [ ] Tutti i campi di stato usano Spatie Model States
-- [ ] Modelli, risorse, form, policy aggiornati
-- [ ] Doc aggiornata
-
-### Errori comuni
-- Usare enum PHP per i campi di stato
-- Dimenticare di configurare le transizioni
-- Non aggiornare la doc
-
-### Link doc
-- [Regole generali Xot](../Xot/docs/README.md)
-- [Spatie Model States](https://github.com/spatie/laravel-model-states)
-
-# Errori comuni: Model States (Spatie)
-
-## Esempio reale di errore
-```
-Undefined array key "Modules\SaluteOra\States\User\Pending"
-```
-- Stack trace: Spatie\ModelStates\StateCaster::get
-- Tipico durante login o istanziazione User
-
-## Cause tipiche
-- Uso di enum PHP per il campo di stato (es. UserState)
-- Mappatura degli stati incompleta o errata
-- Namespace delle classi di stato errato o classi mancanti
-- Valori nel database che non corrispondono alle chiavi mappate
-
-## Soluzione passo-passo
-1. **Elimina ogni uso di enum PHP per i campi di stato** (UserState, ecc.)
-2. **Crea la classe UserState** in Modules\SaluteOra\States\UserState che estende Spatie\ModelStates\State
-3. **Crea tutte le classi di stato concrete** (Pending, Active, ecc.) in Modules\SaluteOra\States\User\
-4. **Configura la mappatura degli stati** in UserState:
-   ```php
-   public static $states = [
-       'pending' => \Modules\SaluteOra\States\User\Pending::class,
-       'active' => \Modules\SaluteOra\States\User\Active::class,
-       // ...
-   ];
-   ```
-5. **Aggiorna il modello User**:
-   ```php
-   use Modules\SaluteOra\States\UserState;
-   protected $casts = [ 'state' => UserState::class ];
-   ```
-6. **Verifica i valori nel database**: tutti i valori in users.state devono essere tra le chiavi mappate (es. "pending", "active", ecc.)
-
-## Checklist di debug
-- [ ] Nessun campo di stato usa enum PHP
-- [ ] Tutte le classi di stato esistono e sono nel namespace corretto
-- [ ] La mappatura degli stati è completa
+### Checklist operativa
+- [ ] Nessun campo di stato usa enum PHP (nemmeno UserStateEnum)
+- [ ] La classe principale UserState è in app/States/UserState.php
+- [ ] Le classi concrete sono in app/States/User/
+- [ ] La mappatura degli stati è completa e aggiornata
 - [ ] I valori nel database corrispondono alle chiavi mappate
-- [ ] Doc aggiornata
+- [ ] Doc e checklist sempre aggiornate
 
-## Link utili
+### Warning
+> **Se ricevi errori come `Undefined array key ...` o problemi di cast, controlla subito:**
+> - Che non stai usando enum PHP per i campi di stato
+> - Che la struttura e la mappatura siano corrette
+> - Che i valori nel database siano coerenti
+
+### Link utili
 - [Regole generali Xot](../Xot/docs/README.md)
 - [Spatie Model States](https://github.com/spatie/laravel-model-states)
 
