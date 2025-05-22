@@ -118,14 +118,10 @@ use Illuminate\Support\Facades\Schema;
  *
  * @mixin \Eloquent
  */
-abstract class BaseUser extends Authenticatable
+abstract class BaseUser extends Authenticatable implements HasName, HasTenants, UserContract
 {
-    /**
-     * Guard coerente con Spatie/Permission: deve essere 'web'.
-     * @var string
-     */
-    protected $guard_name = 'web'; implements HasName, HasTenants, UserContract
-{
+    
+
     use HasApiTokens;
     use HasFactory;
     use HasRoles;
@@ -192,7 +188,11 @@ abstract class BaseUser extends Authenticatable
 
     ];
 
-    protected $guard_name = "web";
+    /**
+     * Guard coerente con Spatie/Permission: deve essere 'web'.
+     * @var string
+     */
+    protected $guard_name = 'web';
 
     /** @var \Illuminate\Database\Eloquent\Relations\Pivot|null */
     public $pivot;
