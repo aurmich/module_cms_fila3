@@ -296,4 +296,3 @@ php artisan lang:clear
 ## Conclusione
 
 Seguendo queste linee guida, potrai implementare un sistema di localizzazione robusto e manutenibile all'interno del framework Laraxot <nome progetto>. Ricorda che i file di localizzazione devono rimanere nella directory `lang` alla radice del modulo, rispettando le convenzioni standard di Laravel. 
-Seguendo queste linee guida, potrai implementare un sistema di localizzazione robusto e manutenibile all'interno del framework Laraxot <nome progetto>. Ricorda che i file di localizzazione devono rimanere nella directory `lang` alla radice del modulo, rispettando le convenzioni standard di Laravel. 

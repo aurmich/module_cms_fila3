@@ -1,3 +1,100 @@
+# Linee Guida PHPStan Livello 10
+
+## Introduzione
+Questo documento descrive le linee guida per mantenere la compatibilità con PHPStan livello 10 nel modulo Xot.
+
+## Best Practices
+
+### 1. Tipizzazione
+- Utilizzare sempre `declare(strict_types=1)` all'inizio dei file
+- Specificare i tipi di ritorno per tutti i metodi
+- Utilizzare tipi generici per le collezioni: `Collection<int|string, mixed>`
+- Specificare i tipi degli array: `array<int, string>`
+- Utilizzare union types quando appropriato: `string|int|float|bool`
+
+### 2. Documentazione
+- Documentare tutte le classi con una descrizione
+- Utilizzare annotazioni PHPDoc complete per i metodi
+- Specificare i tipi dei parametri nelle annotazioni
+- Documentare le eccezioni lanciate
+- Utilizzare `@throws` per le eccezioni
+
+### 3. Gestione dei Tipi
+- Utilizzare `strval()` per le conversioni esplicite a stringa
+- Verificare i tipi prima delle operazioni: `is_string()`, `is_array()`, etc.
+- Utilizzare type casting sicuro: `(string)`, `(int)`, etc.
+- Gestire i casi null con l'operatore nullsafe: `?->`
+- Utilizzare l'operatore di coalescenza nulla: `??`
+
+### 4. Collezioni e Array
+- Specificare i tipi degli indici e dei valori
+- Utilizzare `array_values()` per reindexare gli array
+- Utilizzare `array_map()` con tipi specificati
+- Evitare array misti quando possibile
+- Utilizzare `Collection` con tipi generici
+
+### 5. Gestione delle Eccezioni
+- Utilizzare tipi specifici per le eccezioni
+- Documentare le eccezioni lanciate
+- Utilizzare try-catch con tipi specifici
+- Evitare di catturare `\Exception` generiche
+- Utilizzare `\Throwable` per errori fatali
+
+## Esempi
+
+### Collezioni
+```php
+/**
+ * @param Collection<int|string, mixed> $collection
+ * @return array<int, string>
+ */
+public function processCollection(Collection $collection): array
+{
+    return array_map(
+        function (string|int|float|bool $value): string {
+            return strval($value);
+        },
+        array_values($collection->toArray())
+    );
+}
+```
+
+### Array
+```php
+/**
+ * @param array<int, string> $fields
+ * @return array<int, string>
+ */
+public function processFields(array $fields): array
+{
+    return array_map(
+        function (string|int|float|bool $field): string {
+            return strval($field);
+        },
+        array_values($fields)
+    );
+}
+```
+
+### Gestione Null
+```php
+/**
+ * @param string|null $value
+ * @return string
+ */
+public function processValue(?string $value): string
+{
+    return $value ?? '';
+}
+```
+
+## Collegamenti Correlati
+
+- [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
+- [Best Practices](./BEST-PRACTICES.md)
+- [Code Standards](./CODE-STANDARDS.md)
+- [Risoluzione Conflitti](./CONFLITTI_MERGE_RISOLTI.md)
+
 # Linee Guida per PHPStan Livello 10 - Regole Comuni
 
 Questo documento contiene le linee guida generali e le regole comuni per risolvere gli errori PHPStan di livello 10 in tutti i moduli del progetto Laraxot.
@@ -507,20 +604,6 @@ Anche se il file Actions si trova fisicamente in `Modules/Xot/app/Actions/`, il 
 Gli errori PHPStan relativi a questo problema sono spesso del tipo:
 ```
 Class 'Modules\Xot\app\Actions\MyAction' not found.
-```
-
-#### Esempio per i Comandi Console
-
-```php
-// CORRETTO
-namespace Modules\Xot\Console\Commands;
-
-// ERRATO
-namespace Modules\Xot\app\Console\Commands;
-```
-
-Errori PHPStan come `Class Modules\Xot\app\Console\Commands\DatabaseSchemaExportCommand not found` indicano che è necessario rimuovere il segmento `app` dal namespace.
-
 Class 'Modules\Xot\Actions\MyAction' not found.
 ```
 
@@ -537,16 +620,6 @@ Class 'Modules\Xot\Actions\MyAction' not found.
 | Filament Resources       | `Modules/Xot/app/Filament/Resources/`  | `Modules\Xot\Filament\Resources`  |
 
 #### Esempio per i Comandi Console
-
-```
-
-## Collegamenti tra versioni di PHPSTAN_LIVELLO10_LINEE_GUIDA.md
-* [PHPSTAN_LIVELLO10_LINEE_GUIDA.md](../../../Xot/docs/phpstan/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
-* [PHPSTAN_LIVELLO10_LINEE_GUIDA.md](../../../Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
-
-
-## Collegamenti tra versioni di phpstan_livello10_linee_guida.md
-* [phpstan_livello10_linee_guida.md](phpstan/phpstan_livello10_linee_guida.md)
 
 ```php
 // CORRETTO
