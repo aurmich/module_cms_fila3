@@ -70,4 +70,31 @@ class User extends Model {
 - [SaluteOra/docs/uso-label-filament.mdc](../../SaluteOra/docs/uso-label-filament.mdc)
 - https://github.com/spatie/laravel-model-states
 
+---
+
+# Regole pratiche per gestione di enum e state class
+
+## 1. Path e namespace
+- Tutti i file enum e state devono essere in `Modules/<NomeModulo>/app/Enums/` o `Modules/<NomeModulo>/app/States/<Dominio>/`.
+- Namespace sempre PSR-4: `Modules\<NomeModulo>\App\Enums\...` o `Modules\<NomeModulo>\App\States\<Dominio>\...`.
+
+## 2. Pattern per colonne Filament
+- Per campi "state" usare sempre una StateClass Spatie e un custom column (`SelectStateColumn`) per la tabella.
+- Per valori statici (tipo, ruolo, ecc.) usare enum PHP e `SelectColumn`.
+
+## 3. Errori comuni
+- Path errato (file enum/state fuori da app/).
+- Namespace errato.
+- Usare enum PHP per campi che richiedono logica di stato.
+- Non registrare tutti gli stati in StateConfig.
+
+## 4. Scelta rapida
+- **Stato dinamico, workflow, transizioni?** → State Class Spatie.
+- **Valori statici, nessuna logica?** → enum PHP.
+
+## 5. Collegamenti
+- [.windsurf/rules/model-states.mdc](../../../.windsurf/rules/model-states.mdc)
+- [SaluteOra/docs/uso-label-filament.mdc](../../SaluteOra/docs/uso-label-filament.mdc)
+- https://github.com/spatie/laravel-model-states
+
 [← Torna a SaluteOra/docs](../../SaluteOra/docs/uso-label-filament.mdc)

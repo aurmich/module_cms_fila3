@@ -182,3 +182,79 @@ WHERE state = 'Modules\\SaluteOra\\States\\Active';
 - [ ] Tutte le classi di stato esistono nel nuovo namespace
 - [ ] Testate tutte le transizioni di stato
 - [ ] Aggiornata la documentazione 
+
+## 🔍 Troubleshooting
+
+### Errori Comuni
+
+1. **Undefined array key**
+   - Causa: Il valore dello stato nel database non corrisponde a nessuna classe di stato esistente
+   - Soluzione: 
+     - Verificare che tutte le classi di stato esistano
+     - Controllare i namespace nel database
+     - Eseguire la migrazione dei namespace se necessario
+
+2. **InvalidStateTransition**
+   - Causa: Tentativo di transizione non consentita
+   - Soluzione:
+     - Verificare le regole di transizione in `canTransitionTo`
+     - Controllare le condizioni di business
+     - Aggiornare le regole se necessario
+
+3. **Class not found**
+   - Causa: Namespace errato o classe mancante
+   - Soluzione:
+     - Verificare i namespace delle classi
+     - Controllare l'autoloading
+     - Aggiornare il composer.json se necessario
+
+### Debugging
+
+1. **Log delle Transizioni**
+   ```php
+   Log::info('Transizione di stato', [
+       'user_id' => $user->id,
+       'old_state' => $user->state,
+       'new_state' => $newState
+   ]);
+   ```
+
+2. **Verifica Stati nel Database**
+   ```sql
+   SELECT DISTINCT state FROM users;
+   ```
+
+3. **Test delle Transizioni**
+   ```php
+   $user = User::find(1);
+   try {
+       $user->state->transitionTo(Approved::class);
+   } catch (\Exception $e) {
+       Log::error('Errore transizione', [
+           'error' => $e->getMessage(),
+           'user_id' => $user->id
+       ]);
+   }
+   ```
+
+### Best Practices per il Debugging
+
+1. **Logging**
+   - Implementare logging dettagliato per le transizioni
+   - Registrare tutti gli errori
+   - Mantenere traccia delle transizioni fallite
+
+2. **Validazione**
+   - Verificare sempre i dati prima della transizione
+   - Implementare controlli di sicurezza
+   - Gestire le eccezioni in modo appropriato
+
+3. **Testing**
+   - Testare tutti gli scenari possibili
+   - Verificare le transizioni invalide
+   - Testare gli eventi e i listener
+
+4. **Documentazione**
+   - Mantenere aggiornata la documentazione degli stati
+   - Documentare le transizioni consentite
+   - Registrare le modifiche e le correzioni 
