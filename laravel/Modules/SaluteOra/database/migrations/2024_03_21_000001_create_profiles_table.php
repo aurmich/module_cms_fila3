@@ -13,12 +13,12 @@ return new class extends XotBaseMigration
        $this->tableCreate(
         function (Blueprint $table): void {
             $table->id();
-            if ($this->hasTable('users')) {
-                $table->foreignIdFor(User::class, 'user_id')->constrained('users')->onDelete('cascade');
-            }
-            if (!$this->hasTable('users')) {
-                $table->string('user_id',36)->nullable();
-            }
+            // if ($this->hasTable('users')) {
+                // $table->foreignIdFor(User::class, 'user_id')->constrained('users')->onDelete('cascade');
+            // }
+            // if (!$this->hasTable('users')) {
+                // $table->string('user_id',36)->nullable();
+            // }
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();

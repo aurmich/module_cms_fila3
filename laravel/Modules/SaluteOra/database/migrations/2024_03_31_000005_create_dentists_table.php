@@ -19,7 +19,8 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
             $table->id();
             
-            $this->foreignIdFor($table,Tenant::class);
+            // $this->foreignIdFor($table,Tenant::class);
+            $table->foreignIdFor(Tenant::class);
             
             $table->string('name');
             $table->string('surname');
