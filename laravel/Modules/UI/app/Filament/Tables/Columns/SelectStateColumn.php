@@ -26,7 +26,8 @@ class SelectStateColumn extends SelectColumn
                 return array_combine($states, $states);
             }
             try{
-                $states=$record->getAttribute($name)->transitionableStates();
+                //$states=$record->getAttribute($name)->transitionableStates();
+                $states=$state->transitionableStates();
             }catch(Exception $e){
                 $states=$states=$record->getStatesFor($name)->toArray();;
             }
