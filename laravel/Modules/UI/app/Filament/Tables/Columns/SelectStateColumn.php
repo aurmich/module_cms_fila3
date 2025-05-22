@@ -22,6 +22,7 @@ class SelectStateColumn extends SelectColumn
         $this->options(function (Model $record ,$state): array {
             $name=$this->getName();
             if($state==null){
+
                 $states=Arr::wrap($record->getDefaultStateFor($name));
                 return array_combine($states, $states);
             }
@@ -29,12 +30,17 @@ class SelectStateColumn extends SelectColumn
                 //$states=$record->getAttribute($name)->transitionableStates();
                 $states=$state->transitionableStates();
             }catch(Exception $e){
-                $states=$states=$record->getStatesFor($name)->toArray();;
+                $states=$record->getStatesFor($name)->toArray();;
             }
-            $states[]=$state::$name;
+            $states=[$state::$name, ...$states];
+            $states=array_combine($states, $states);
+            //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);
 
+            return $states;
+        });
 
-            return array_combine($states, $states);
+        $this->beforeStateUpdated(function (Model $record, $state) {
+            $record->state->transitionTo($state);
         });
 
     }

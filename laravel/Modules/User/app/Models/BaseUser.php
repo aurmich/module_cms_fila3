@@ -120,7 +120,7 @@ use Illuminate\Support\Facades\Schema;
  */
 abstract class BaseUser extends Authenticatable implements HasName, HasTenants, UserContract
 {
-    
+
 
     use HasApiTokens;
     use HasFactory;
