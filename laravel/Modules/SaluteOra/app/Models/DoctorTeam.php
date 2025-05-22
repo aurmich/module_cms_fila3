@@ -5,5 +5,5 @@ namespace Modules\SaluteOra\Models;
 
 class DoctorTeam extends BasePivot
 {
-    protected $connection = 'patient';
+    protected $connection = 'salute_ora';
 }

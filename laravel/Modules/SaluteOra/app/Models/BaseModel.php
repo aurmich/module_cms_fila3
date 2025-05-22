@@ -40,7 +40,7 @@ abstract class BaseModel extends Model implements HasMedia
     protected $perPage = 30;
 
     /** @var string */
-    protected $connection = 'patient';
+    protected $connection = 'salute_ora';
 
     /** @var list<string> */
     protected $appends = [];

@@ -9,5 +9,5 @@ use Modules\User\Models\BaseProfile;
 
 class Profile extends BaseProfile{
     /** @var string */
-    protected $connection = 'patient';
+    protected $connection = 'salute_ora';
 } 
