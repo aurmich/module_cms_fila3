@@ -38,6 +38,7 @@ class GetComponentsAction
         }
 
         $exists = File::exists($components_json);
+        
         if ($exists && ! $force_recreate) {
             Assert::string($content = File::get($components_json), '['.__LINE__.']['.class_basename(static::class).']');
             $comps = json_decode($content, false);
@@ -84,14 +85,15 @@ class GetComponentsAction
                 if ($reflection->isAbstract()) {
                     continue;
                 }
-
+                
                 $comps[] = ComponentFileData::from([
                     'name' => $comp_name,
                     'class' => $class_name,
                     'ns' => $comp_ns,
                 ])->toArray();
-
+                
             } catch (\Exception $e) {
+                /*
                 dddx([
                     'comp_name' => $comp_name,
                     'class_name' => $class_name,
@@ -101,6 +103,8 @@ class GetComponentsAction
                     'prefix' => $prefix,
                     'message' => $e->getMessage(),
                 ]);
+                */
+                throw $e;
             }
         }
 
