@@ -279,27 +279,6 @@ Per blocchi di testo lunghi, valuta se usare chiavi dedicate in PHP (es. `onboar
   - Nei Blade, sostituire blocchi condizionali con `trans_choice()` o `@choice()`.
   - Evitare l'uso del JSON per le stringhe plurali.
 
-## ⚠️ Regola fondamentale: MAI usare chiavi che terminano con `.navigation` nei file di traduzione
-
-- Usa sempre la struttura array per navigation:
-  ```php
-  'navigation' => [
-      'label' => 'Gestione Pazienti',
-      'group' => 'Pazienti',
-      'icon' => 'heroicon-o-user-group',
-      'color' => 'primary',
-  ],
-  ```
-- **Esempio ERRATO:**
-  ```php
-  'group' => 'patient.navigation',
-  'label' => 'patient.navigation',
-  ```
-- Consulta anche:
-  - [translation_keys_rules.md](./translation_keys_rules.md)
-  - [filament-translations.md](./filament-translations.md)
-  - [docs SaluteOra](../../SaluteOra/docs/translations.md)
-
 ## Conclusione
 
 Seguire queste best practices per le chiavi di traduzione garantirà un'applicazione più manutenibile, coerente e facile da tradurre in più lingue. Ricorda sempre di utilizzare chiavi strutturate in inglese e mai stringhe in italiano come chiavi di traduzione.
