@@ -18,10 +18,10 @@ use Webmozart\Assert\Assert;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 /**
  * Base class for all custom pages in the application.
- * 
+ *
  * This class provides common functionality for custom pages,
  * following the architectural pattern of never extending Filament classes directly.
- * 
+ *
  * @property ?string $model
  * @property ?array $data
  */
@@ -82,7 +82,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
     /**
      * Get page title with automatic translation.
      */
-    public function getTitle(): string 
+    public function getTitle(): string
     {
         return static::transTitle();
     }
@@ -107,7 +107,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
 
     /**
      * Get the form schema for the page.
-     * 
+     *
      * @return array<string, Component|array<string, Component>>
      */
     protected function getFormSchema(): array
