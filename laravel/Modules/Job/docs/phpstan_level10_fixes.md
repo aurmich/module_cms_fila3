@@ -117,28 +117,4 @@ private function evaluateFunction(string $functionString): mixed
 
 1. Applicare principi simili agli altri file identificati nel modulo.
 2. Eseguire l'analisi PHPStan a livello 10 per verificare che le correzioni risolvano effettivamente gli errori.
-### Versione HEAD
-
 3. Documentare gli schemi e i pattern utilizzati per risolvere problemi simili in futuro. 
-## Collegamenti tra versioni di PHPSTAN_LEVEL10_FIXES.md
-* [PHPSTAN_LEVEL10_FIXES.md](docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Notify/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../User/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Lang/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Job/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Media/docs/PHPSTAN_LEVEL10_FIXES.md)
-
-
-## Collegamenti tra versioni di phpstan_level10_fixes.md
-* [phpstan_level10_fixes.md](../../Notify/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../User/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Lang/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Media/docs/phpstan_level10_fixes.md)
-
-
-### Versione Incoming
-
-3. Documentare gli schemi e i pattern utilizzati per risolvere problemi simili in futuro. 
-
----
-

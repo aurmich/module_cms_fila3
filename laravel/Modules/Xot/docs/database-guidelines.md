@@ -228,6 +228,66 @@ class NomeModello extends Model
 
     // Relazioni e metodi...
 }
+
+## Linee guida sulle Migrazioni
+
+Le migrazioni dei moduli Xot devono seguire le seguenti regole per garantire compatibilità, modularità e compliance con PHPStan livello 10.
+
+## Regola sulle classi anonime
+Tutte le migrazioni devono essere dichiarate come **classi anonime** restituite da:
+
+```php
+return new class extends XotBaseMigration {
+    // ...
+};
+```
+
+**Mai usare classi nominali:**
+```php
+// Sbagliato
+class CreatePerformanceOptionsTable extends XotBaseMigration {}
+```
+
+### Motivazione
+- Evita collisioni di nomi
+- Favorisce modularità, override, fallback
+- Compatibilità con Laravel 8+ e WindSurf
+- Compliance PHPStan livello 10
+
+### Warning
+- Le classi nominali possono causare errori in ambienti multi-tenant/modulari
+
+### Esempio pratico
+```php
+return new class extends XotBaseMigration {
+    public function up(): void { /* ... */ }
+    public function down(): void { /* ... */ }
+};
+```
+
+**Collegamenti:**
+- [Regola Performance](../../Performance/docs/database_migrations.md)
+- [Regole globali root](../../../docs/database_migrations.md)
+
+    /**
+     * Ottiene la sezione associata al socio.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sezione(): BelongsTo
+    {
+        return $this->belongsTo(Sezione::class, 'id_sezione', 'id_sezione');
+    }
+
+    /**
+     * Ottiene le convenzioni associate al socio.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function convenzioni(): HasMany
+    {
+        return $this->hasMany(SocioRichiestaConvenzione::class, 'id_socio', 'id_socio');
+    }
 ```
 
 ### 2. Documentazione delle Relazioni

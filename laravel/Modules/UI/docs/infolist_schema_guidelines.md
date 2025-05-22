@@ -200,11 +200,3 @@ return [
 ## Conclusione
 
 Seguendo queste linee guida, garantirai un'implementazione corretta e coerente del metodo `getInfolistSchema()`, facilitando la manutenzione del codice e prevenendo errori di tipo rilevati da PHPStan. Ricorda: usa **sempre** chiavi di tipo stringa per gli array restituiti. 
-## Collegamenti tra versioni di INFOLIST_SCHEMA_GUIDELINES.md
-* [INFOLIST_SCHEMA_GUIDELINES.md](../../../Xot/docs/filament/INFOLIST_SCHEMA_GUIDELINES.md)
-* [INFOLIST_SCHEMA_GUIDELINES.md](../../../UI/docs/INFOLIST_SCHEMA_GUIDELINES.md)
-
-
-## Collegamenti tra versioni di infolist_schema_guidelines.md
-* [infolist_schema_guidelines.md](../../Xot/docs/filament/infolist_schema_guidelines.md)
-

@@ -118,18 +118,3 @@ Dopo aver implementato tutte le correzioni, PHPStan al livello 10 non riporta pi
 1. Applicare principi simili ad altri moduli che potrebbero avere problemi simili
 2. Implementare linee guida di codifica per evitare errori simili in futuro
 3. Considerare l'utilizzo di strumenti di analisi statica come parte del processo di CI/CD 
-## Collegamenti tra versioni di PHPSTAN_LEVEL10_FIXES.md
-* [PHPSTAN_LEVEL10_FIXES.md](docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Notify/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../User/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Lang/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Job/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Media/docs/PHPSTAN_LEVEL10_FIXES.md)
-
-
-## Collegamenti tra versioni di phpstan_level10_fixes.md
-* [phpstan_level10_fixes.md](../../Notify/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../User/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Job/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Media/docs/phpstan_level10_fixes.md)
-
