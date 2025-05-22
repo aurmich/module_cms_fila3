@@ -1,171 +1,29 @@
-# Traduzioni nel Modulo Patient
+# Translation Management in Laravel Modules
 
-## Regola Fondamentale
-In questo modulo, come in tutto il progetto, **NON utilizzare mai** il metodo `->label()` nei componenti Filament. Le etichette vengono gestite automaticamente dal `LangServiceProvider` attraverso i file di traduzione.
+## Overview
+This document outlines the best practices for managing translations within a Laravel module. The goal is to ensure that the application can support multiple languages effectively, providing a seamless user experience across different locales.
 
-## Struttura dei File di Traduzione
+## Key Principles
+1. **Centralized Translation Files**: Store all translation strings in centralized JSON or PHP files within the module's `lang` directory to maintain organization and ease of access.
+2. **Dynamic Locale Handling**: Use dynamic methods to determine the current locale instead of hardcoding values, ensuring flexibility across different environments.
+3. **Automated Label Management**: Leverage service providers to automatically handle field labels and other translatable elements in forms and interfaces.
 
-### Patient Resource
-```php
-// lang/it/patient-resource.php
-return [
-    'fields' => [
-        'first_name' => [
-            'label' => 'Nome',
-            'placeholder' => 'Inserisci il nome',
-        ],
-        // ... altri campi
-    ],
-    'steps' => [
-        'personal_data_step' => [
-            'label' => 'Dati Personali',
-            'description' => 'Inserisci i tuoi dati personali',
-        ],
-        // ... altri step
-    ],
-];
-```
+## Implementation Guidelines
+- **Avoid `->label()` Method**: Do not use the `->label()` method in Filament components for field labeling. Instead, rely on the automated translation system managed by the `LangServiceProvider`.
+- **Expanded Translation Structure**: Use an expanded structure for field translations in language files. Follow the naming convention `module::resource.fields.field_name.label` to ensure clarity and consistency.
+- **Verify `LangServiceProvider` Registration**: Always confirm that the `LangServiceProvider` is correctly registered to handle translations dynamically.
 
-### Doctor Resource
-```php
-// lang/it/doctor-resource.php
-return [
-    'fields' => [
-        'full_name' => [
-            'label' => 'Nome e Cognome',
-            'placeholder' => 'Inserisci nome e cognome completi',
-        ],
-        // ... altri campi
-    ],
-    'steps' => [
-        'personal_info' => [
-            'label' => 'Informazioni Personali',
-            'description' => 'Inserisci le tue informazioni personali',
-        ],
-        // ... altri step
-    ],
-    'actions' => [
-        'approve' => [
-            'label' => 'Approva',
-            'tooltip' => 'Approva la registrazione del medico',
-        ],
-        // ... altre azioni
-    ],
-];
-```
+## Common Issues and Fixes
+- **Hardcoded Locales**: Avoid hardcoding locale values like 'it' or 'en'. Instead, use `app()->getLocale()` to retrieve the current locale dynamically.
+- **Missing Translation Keys**: Ensure all translatable strings are defined in the appropriate language files to prevent fallback to default text or errors.
 
-## Come Funziona
+## Documentation and Updates
+- Document any custom translation patterns or exceptions in the relevant module's documentation folder.
+- Update this document if new translation strategies or tools are introduced.
 
-1. Il `LangServiceProvider` intercetta la creazione dei componenti Filament
-2. Genera automaticamente le chiavi di traduzione basate su:
-   - Nome del modulo (`patient`)
-   - Nome della risorsa (`patient-resource` o `doctor-resource`)
-   - Nome del campo/step/azione
-
-## Esempi di Implementazione
-
-### ✅ CORRETTO
-```php
-// Nessun ->label() necessario
-Forms\Components\TextInput::make('first_name')
-    ->required()
-    ->maxLength(255);
-
-Forms\Components\Wizard\Step::make('personal_data_step')
-    ->schema(self::getPersonalDataStepSchema());
-```
-
-### ❌ ERRATO
-```php
-// NON fare questo
-Forms\Components\TextInput::make('first_name')
-    ->label('Nome')
-    ->required();
-
-Forms\Components\Wizard\Step::make('personal_data_step')
-    ->label('Dati Personali')
-    ->schema(self::getPersonalDataStepSchema());
-```
-
-## Vantaggi
-
-1. **Coerenza**: Tutte le etichette sono gestite in modo uniforme
-2. **Manutenibilità**: Le modifiche alle etichette richiedono solo l'aggiornamento dei file di traduzione
-3. **Multilingua**: Facile aggiunta di nuove lingue
-4. **Performance**: Ottimizzazioni di caching implementate nel LangServiceProvider
-
-## Collegamenti
-
-- [Documentazione Generale Traduzioni](../../Lang/docs/automatic-translations.md)
-- [Best Practices Filament](../../Xot/docs/filament_best_practices.md)
-- [Convenzioni di Codice](../../Xot/docs/code_conventions.md)
-
-## Aggiornamenti
-
-- **2024-03-21**: Rimossi tutti i `->label()` da `PatientResource` e `DoctorResource`
-- **2024-03-21**: Aggiunti file di traduzione `patient-resource.php` e `doctor-resource.php`
-- **2024-03-21**: Aggiornata documentazione con best practices e esempi
-
-# Traduzioni del Modulo Patient
-
-## Struttura
-
-Le traduzioni del modulo Patient sono organizzate in:
-
-```
-Modules/Patient/
-└── lang/
-    ├── it/
-    │   └── patient.php
-    └── en/
-        └── patient.php
-```
-
-## Collegamenti
-
-- [Modulo Lang](../../Lang/docs/module_lang.md) - Documentazione principale sulle traduzioni
-- [Regole Generali Traduzioni](../../Xot/docs/translations.md)
-- [Guida Sviluppatori](../docs/guida-sviluppatori.md)
-
-## Contenuto
-
-Il file `patient.php` contiene le traduzioni per:
-- Form di registrazione
-- Profilo paziente
-- Documenti medici
-- Appuntamenti
-- Prescrizioni
-
-## Esempi
-
-```php
-return [
-    'registration' => [
-        'label' => 'Registrazione Paziente',
-        'tooltip' => 'Completa la registrazione per accedere ai servizi'
-    ],
-    'profile' => [
-        'label' => 'Profilo Paziente',
-        'tooltip' => 'Gestisci le informazioni del tuo profilo'
-    ]
-];
-``` 
-## Collegamenti tra versioni di translations.md
-* [translations.md](laravel/Modules/Chart/docs/translations.md)
-* [translations.md](laravel/Modules/Reporting/docs/translations.md)
-* [translations.md](laravel/Modules/Gdpr/docs/translations.md)
-* [translations.md](laravel/Modules/Notify/docs/translations.md)
-* [translations.md](laravel/Modules/Xot/docs/roadmap/lang/translations.md)
-* [translations.md](laravel/Modules/Xot/docs/translations.md)
-* [translations.md](laravel/Modules/Dental/docs/translations.md)
-* [translations.md](laravel/Modules/User/docs/translations.md)
-* [translations.md](laravel/Modules/UI/docs/translations.md)
-* [translations.md](laravel/Modules/Lang/docs/packages/translations.md)
-* [translations.md](laravel/Modules/Lang/docs/translations.md)
-* [translations.md](laravel/Modules/Job/docs/translations.md)
-* [translations.md](laravel/Modules/Media/docs/translations.md)
-* [translations.md](laravel/Modules/Tenant/docs/translations.md)
-* [translations.md](laravel/Modules/Activity/docs/translations.md)
-* [translations.md](laravel/Modules/Patient/docs/translations.md)
-* [translations.md](laravel/Modules/Cms/docs/translations.md)
-
+## Links to Related Documentation
+- [Model Inheritance](./MODEL_INHERITANCE.md)
+- [Validation Errors](./VALIDATION_ERRORS.md)
+- [Namespace Conventions](./NAMESPACE_CONVENTIONS.md)
+- [Filament Customization](./FILAMENT_CUSTOMIZATION.md)
+- [URL Localization](./URL_LOCALIZATION.md)

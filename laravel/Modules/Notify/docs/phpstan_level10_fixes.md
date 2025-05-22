@@ -194,19 +194,3 @@ Fino ad ora, abbiamo risolto la maggior parte degli errori di livello 10 in entr
 4. Estendere le correzioni ad altri moduli utilizzando i pattern stabiliti
 
 5. Aggiornare le linee guida di sviluppo per prevenire errori simili in futuro 
-
-## Collegamenti tra versioni di PHPSTAN_LEVEL10_FIXES.md
-* [PHPSTAN_LEVEL10_FIXES.md](docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Notify/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../User/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Lang/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Job/docs/PHPSTAN_LEVEL10_FIXES.md)
-* [PHPSTAN_LEVEL10_FIXES.md](../../../Media/docs/PHPSTAN_LEVEL10_FIXES.md)
-
-
-## Collegamenti tra versioni di phpstan_level10_fixes.md
-* [phpstan_level10_fixes.md](../../User/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Lang/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Job/docs/phpstan_level10_fixes.md)
-* [phpstan_level10_fixes.md](../../Media/docs/phpstan_level10_fixes.md)
-

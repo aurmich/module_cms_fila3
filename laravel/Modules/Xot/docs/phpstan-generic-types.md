@@ -44,6 +44,7 @@ public function comments(): HasMany
  */
 public function tags(): BelongsToMany
 {
+    return $this->belongsToManyX(Tag::class);
     return $this->belongsToMany(Tag::class);
 }
 ```
@@ -144,20 +145,3 @@ class UserRepository implements UserRepositoryInterface
 ```
 
 Segui queste linee guida per risolvere la maggior parte degli errori relativi ai tipi generici nei tuoi modelli e relazioni Laravel. 
-## Collegamenti tra versioni di PHPSTAN-GENERIC-TYPES.md
-* [PHPSTAN-GENERIC-TYPES.md](../../../Xot/docs/phpstan/PHPSTAN-GENERIC-TYPES.md)
-* [PHPSTAN-GENERIC-TYPES.md](../../../Xot/docs/PHPSTAN-GENERIC-TYPES.md)
-
-
-## Collegamenti tra versioni di phpstan-generic-types.md
-### Versione HEAD
-
-* [phpstan-generic-types.md](../phpstan-generic-types.md)
-
-### Versione Incoming
-
-* [phpstan-generic-types.md](phpstan/phpstan-generic-types.md)
-
----
-
-

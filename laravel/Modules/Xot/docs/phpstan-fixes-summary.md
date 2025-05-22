@@ -195,20 +195,3 @@ Per una comprensione più completa delle correzioni necessarie, consultare:
 1. [NAMESPACE-RULES.md](./NAMESPACE-RULES.md) - Per le regole sui namespace
 2. [PHPSTAN-LEVEL9-GUIDE.md](./PHPSTAN-LEVEL9-GUIDE.md) - Per dettagli su come gestire errori livello 9
 3. [FILAMENT-TABLES.md](./FILAMENT-TABLES.md) - Per problemi specifici di Filament 
-## Collegamenti tra versioni di PHPSTAN-FIXES-SUMMARY.md
-* [PHPSTAN-FIXES-SUMMARY.md](../../../Xot/docs/phpstan/PHPSTAN-FIXES-SUMMARY.md)
-* [PHPSTAN-FIXES-SUMMARY.md](../../../Xot/docs/PHPSTAN-FIXES-SUMMARY.md)
-
-
-## Collegamenti tra versioni di phpstan-fixes-summary.md
-### Versione HEAD
-
-* [phpstan-fixes-summary.md](../phpstan-fixes-summary.md)
-
-### Versione Incoming
-
-* [phpstan-fixes-summary.md](phpstan/phpstan-fixes-summary.md)
-
----
-
-

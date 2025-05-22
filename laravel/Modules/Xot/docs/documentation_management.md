@@ -75,6 +75,32 @@ Quando si identifica una nuova regola o pattern importante:
    - Aggiornare `.windsurfrules`
    - Mantenere coerenza con altre documentazioni
 
+### 3. Gestione dei Prompt
+
+1. **Struttura dei Prompt**
+   - I prompt devono essere una singola stringa continua
+   - Non devono contenere formattazione o a capo
+   - Devono essere generici e riutilizzabili
+   - Non devono contenere riferimenti specifici al progetto
+
+2. **Documentazione dei Prompt**
+   - Ogni modifica al prompt deve essere documentata
+   - La documentazione deve spiegare il "perché" delle regole
+   - Deve essere aggiornata nelle cartelle docs appropriate
+   - Deve mantenere i collegamenti bidirezionali
+
+3. **Processo di Modifica**
+   - Analizzare l'impatto della modifica
+   - Aggiornare la documentazione nei moduli interessati
+   - Verificare la coerenza con altre regole
+   - Testare l'applicabilità delle modifiche
+
+4. **Best Practices**
+   - Mantenere i prompt generici e riutilizzabili
+   - Documentare le decisioni e le motivazioni
+   - Aggiornare la documentazione in tempo reale
+   - Verificare la coerenza con le convenzioni esistenti
+
 ### 3. Best Practices
 
 1. **Coerenza**
@@ -117,58 +143,4 @@ Quando si identifica una nuova regola o pattern importante:
 4. **Windsurf**
    - [ ] Aggiornare .windsurfrules
    - [ ] Verificare coerenza
-
    - [ ] Testare applicabilità 
-
-## Gestione dei Prompt
-
-### Analisi e Miglioramento dei Prompt
-Quando si analizza o migliora un prompt:
-
-1. **Documentazione Preliminare**
-   - Documentare l'analisi nel modulo appropriato
-   - Identificare punti di forza e debolezze
-   - Proporre miglioramenti specifici
-
-2. **Processo di Aggiornamento**
-   - Aggiornare prima la documentazione
-   - Implementare le modifiche al prompt
-   - Verificare la coerenza con le regole esistenti
-
-3. **Validazione**
-   - Testare il prompt aggiornato
-   - Verificare i collegamenti
-   - Controllare la coerenza con altri prompt
-
-4. **Aggiornamento Configurazioni**
-   - `.cursor/rules/`: regole per Cursor AI
-   - `.cursor/memories/`: memories per Cursor
-   - `.windsurfrules`: regole per Windsurf
-   - Documentazione nei moduli coinvolti
-
-### Struttura della Documentazione dei Prompt
-```
-Modules/Xot/docs/
-├── prompts.md            # Regole generali per i prompt
-├── prompt_rules.md       # Regole specifiche
-└── sections/
-    └── prompts/         # Documentazione dettagliata
-```
-
-### Best Practices per i Prompt
-1. **Analisi**
-   - Documentare il ragionamento
-   - Spiegare le modifiche proposte
-   - Identificare impatti potenziali
-
-2. **Implementazione**
-   - Seguire le regole documentate
-   - Mantenere la coerenza
-   - Aggiornare la documentazione
-
-3. **Manutenzione**
-   - Revisione periodica
-   - Aggiornamento delle regole
-   - Verifica dei collegamenti    - [ ] Testare applicabilità 
-b6f667c (.)
-   - Verifica dei collegamenti 

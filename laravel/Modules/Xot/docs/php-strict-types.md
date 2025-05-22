@@ -61,3 +61,16 @@ find Modules -name "*.php" -type f -exec grep -L "declare(strict_types=1)" {} \;
 ```
 
 Questo comando mostrerà tutti i file PHP che non hanno la dichiarazione `strict_types`.
+
+## Implementazioni Specifiche nei Moduli
+
+Ogni modulo può avere requisiti specifici per l'implementazione di `strict_types`. Consultare la documentazione specifica dei moduli:
+
+- [Implementazione nel Modulo UI](../../UI/docs/STRICT_TYPES_IMPLEMENTATION.md)
+
+## PHPStan e strict_types
+
+L'utilizzo di `declare(strict_types=1)` è un requisito fondamentale per la compatibilità con PHPStan livello 10. Per ulteriori dettagli, consultare:
+
+- [Linee Guida PHPStan Livello 10](./PHPStan/LEVEL10_LINEE_GUIDA.md)
+- [Workflow PHPStan](./PHPSTAN_WORKFLOW.md)
