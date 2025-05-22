@@ -1,0 +1,49 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Filament Actions Best Practices
+
+## Regole Fondamentali
+- Ogni azione deve essere una classe dedicata
+- Estendere `Filament\Actions\Action`
+- Implementare il metodo `handle()`
+- Documentare l'azione
+- Testare l'azione
+
+## Struttura
+- Namespace: `App\Filament\Actions` o `Modules\{Module}\Filament\Actions`
+- Nome classe: PascalCase + `Action` (es. `ApproveOrderAction`)
+- Metodi obbligatori: `handle()`, `authorize()`, `getConfirmationMessage()`, `getSuccessMessage()`, `getFailureMessage()`
+
+## Esempio Corretto
+```php
+class ApproveOrderAction extends Action
+{
+    public function handle($record)
+    {
+        // logica di approvazione
+    }
+}
+```
+
+## Best Practices
+- Classi dedicate per ogni azione
+- Test unitari per ogni azione
+- Messaggi di conferma, successo e fallimento personalizzati
+- Autorizzazione centralizzata
+
+## Checklist
+- [ ] Classe dedicata
+- [ ] Test unitari
+- [ ] Messaggi personalizzati
+- [ ] Autorizzazione implementata
+- [ ] Documentazione aggiornata
+
+## Collegamenti correlati
+- [Filament Best Practices](./filament-best-practices.mdc)
+- [Validation Rules](./validation.mdc)
+- [Migration Best Practices](./migrations.mdc)
+- [Error Handling](./error-handling.mdc)
+- [Checklist di Ripartenza](../docs/checklist-di-ripartenza.md)

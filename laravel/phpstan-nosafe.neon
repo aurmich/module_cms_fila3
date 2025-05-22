@@ -1,0 +1,58 @@
+includes:
+    - ./phpstan-baseline.neon
+    - ./vendor/larastan/larastan/extension.neon
+    - ./vendor/nesbot/carbon/extension.neon
+    - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: 3
+    parallel:
+        maximumNumberOfProcesses: 32
+        jobSize: 20
+        minimumNumberOfJobsPerProcess: 2
+
+    paths:
+        - ./Modules/Media
+        - ./Modules/UI
+        - ./Modules/Xot
+        - ./Modules/Lang
+        - ./Modules/Job
+
+    ignoreErrors:
+        - '#PHPDoc tag @mixin contains unknown class #'
+        - '#Static call to instance method Nwidart#'
+        - '#is used zero times and is not analysed#'
+        - "#^Unsafe usage of new static#"
+        - '#Method .+::.+ should return .+<.+, (.+)> but returns .+<.+, \$this\(\1\)>#'
+        - '#Cannot cast mixed to (string|float|double|int|bool|boolean).#'
+        - '#Call to function is_object\(\) with .+ will always evaluate to true.#'
+        - '#Unsafe usage of function json_decode#'
+        - '#Unsafe usage of function json_encode#'
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: larastan.noEnvCallsOutsideOfConfig
+        - identifier: method.unused
+
+    excludePaths:
+        - ./*/vendor/*
+        - ./*/build/*
+        - ./*/docs/*
+        - ./*/Tests/*
+        - ./*/phpinsights.php
+        - ./*/rector.php
+        - ./Modules/*/packages/*
+        - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
+        - ./Modules/*/scripts/*
+        - ./Modules/*/tests/*
+        - ./Modules/Xot/app/Actions/File/GetComponentsAction.php
+
+    bootstrapFiles:
+        - ./phpstan_constants.php
+
+    scanFiles:
+        - ./Modules/Xot/Helpers/Helper.php
+
+    editorUrl: 'vscode://file/%%file%%:%%line%%'
+    tmpDir: /tmp/phpstan
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false

@@ -1,0 +1,98 @@
+{
+    "id": "1",
+    "name": "Header Principale",
+    "slug": "header",
+    "blocks": {"it":[
+        {
+            "name":  "Logo",
+            "type": "logo",
+            "data": {
+                "view": "pub_theme::components.blocks.logo",
+                "src": "saluteora::images/logo.svg",
+                "alt":  "{{ config('app.name') }}",
+                "width": 150,
+                "height": 32
+            }
+        },
+        {
+            "name":  "Menu di Navigazione",
+
+            "type": "navigation",
+            "data": {
+                "view": "pub_theme::components.blocks.navigation",
+                "items": [
+                    {
+                        "label": "Home",
+                        "url": "/",
+                        "type": "link"
+                    },
+                    {
+                        "label": "Servizi",
+                        "url": "/servizi",
+                        "type": "link"
+                    },
+                    {
+                        "label": "Chi Siamo",
+                        "url": "/chi-siamo",
+                        "type": "link"
+                    },
+                    {
+                        "label": "Contatti",
+                        "url": "/contatti",
+                        "type": "link"
+                    }
+                ],
+                "alignment": "start",
+                "orientation": "horizontal"
+            }
+        },
+        {
+            "name": "Selettore Lingua",
+            "type": "language-selector",
+            "data": {
+                "view": "pub_theme::components.blocks.language-selector"
+            }
+        },
+        {
+            "name": "Dropdown Utente",
+            "type": "user-dropdown",
+            "data": {
+                "view": "pub_theme::components.blocks.navigation.user-dropdown",
+                "guest_view": "pub_theme::components.blocks.navigation.login-buttons",
+                "menu_items": [
+                    {
+                        "label": "Profilo",
+                        "url": "/profilo",
+                        "icon": "heroicon-o-user"
+                    },
+                    {
+                        "label": "Impostazioni",
+                        "url": "/impostazioni",
+                        "icon": "heroicon-o-cog-6-tooth"
+                    },
+                    {
+                        "type": "divider"
+                    },
+                    {
+                        "label": "Logout",
+                        "url": "/logout",
+                        "icon": "heroicon-o-arrow-left-on-rectangle"
+
+                    }
+                ]
+            }
+        }
+    ]},
+    "attributes": {
+        "class": "sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800",
+        "id": "main-header",
+        "style": {
+            "background-color": "var(--color-primary)",
+            "color": "#ffffff"
+        }
+    },
+    "created_at": "2024-04-28T13:40:10.000000Z",
+    "updated_at": "2024-04-28T13:40:10.000000Z",
+    "created_by": "01967bd5-7a4d-71c6-b1aa-594f6e9dee10",
+    "updated_by": "01967bd5-7a4d-71c6-b1aa-594f6e9dee10"
+}

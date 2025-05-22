@@ -1,0 +1,154 @@
+# Filament Best Practices for 
+
+## Overview
+Best practices for using Filament in modular Laravel projects, specifically tailored for the  project.
+
+## Rules
+
+### Extending Filament Classes
+- **DO NOT** extend Filament classes directly. Always create custom wrappers.
+- Use traits for reusable functionality.
+- Follow the composition over inheritance pattern.
+- Maintain compatibility with Filament updates.
+- Centralize common configurations in base classes.
+- Do not add custom static properties to resources (e.g., `$navigationIcon`, `$navigationGroup`, `$translationPrefix`).
+- Never use the `->label()` method directly in forms; use translation files instead.
+
+### Resource Guidelines
+- Remove `getRelations()` if it returns an empty array.
+- Remove `getPages()` if it contains only standard routes.
+- `getFormSchema()` must return an associative array with string keys.
+
+### List Records Guidelines
+- Remove `Actions()` if it returns only `createAction`.
+- `getListTableColumns()` must return an associative array with string keys.
+
+### Translation Rules
+- **NEVER** use the `->label()` method in Filament components.
+- Labels are managed automatically by the translation system.
+- Use the expanded structure for fields in translation files.
+- Follow the naming convention for translation keys: `module::resource.fields.field.label`.
+
+###  Specific Guidelines
+
+When creating Filament resources, adhere to the following conventions to maintain consistency with the project's architecture:
+
+```php
+// ❌ DO NOT
+use Filament\Resources\Resource;
+
+class DoctorResource extends Resource
+{
+    public function form(Form $form)
+    {
+        return $form->schema([...]);
+    }
+}
+
+// ✅ DO
+use Modules\Xot\Filament\Resources\XotBaseResource;
+
+class DoctorResource extends XotBaseResource
+{
+    public function form(Form $form)
+    {
+        return $form->schema([...]);
+    }
+}
+```
+
+#### Best Practices for Resources
+1. **NEVER** extend `Filament\Resources\Resource` directly.
+2. **ALWAYS** extend `Modules\Xot\Filament\Resources\XotBaseResource`.
+3. Utilize the base implementations provided by Xot.
+4. Maintain consistency with the rest of the system.
+5. Leverage the default functionalities of `XotBaseResource`.
+
+#### What NOT to Implement in XotBaseResource
+
+Avoid redefining properties or methods that are already managed by `XotBaseResource`:
+
+```php
+// ❌ DO NOT - These are already handled by XotBaseResource
+class DoctorResource extends XotBaseResource
+{
+    // ❌ ERROR: Do not define these properties when extending XotBaseResource
+    protected static ?string $navigationIcon = 'heroicon-o-user';  // NOT NECESSARY
+    protected static ?string $navigationGroup = 'Gestione';        // NOT NECESSARY
+    protected static ?int $navigationSort = 1;                     // NOT NECESSARY
+    
+    // ❌ ERROR: Use getListTableColumns() instead of getTableColumns()
+    public static function getTableColumns(): array                // NOT NECESSARY
+    {
+        return [...];
+    }
+    
+    public static function getRelations(): array                   // NOT NECESSARY
+    {
+        return [...];
+    }
+    
+    public static function getPages(): array                       // NOT NECESSARY if using only index, create, edit
+    {
+        return [
+            'index' => Pages\ListDoctors::route('/'),
+            'create' => Pages\CreateDoctor::route('/create'),
+            'edit' => Pages\EditDoctor::route('/{record}/edit'),
+        ];
+    }
+}
+
+// ✅ DO - Implement only module-specific elements
+class DoctorResource extends XotBaseResource
+{
+    public function form(Form $form): Form
+    {
+        return $form->schema([
+            // Module-specific schema
+        ]);
+    }
+    
+    // Implement getPages() ONLY if adding custom pages beyond index, create, edit
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListDoctors::route('/'),
+            'create' => Pages\CreateDoctor::route('/create'),
+            'edit' => Pages\EditDoctor::route('/{record}/edit'),
+            'custom' => Pages\CustomDoctor::route('/custom'),  // Only if a custom page is needed
+        ];
+    }
+}
+```
+
+## Additional Guidelines
+- Ensure that all Filament resources follow the project's coding standards (PSR-12).
+- Use type hints and return type declarations for methods in Filament resources.
+- Document custom methods or complex logic within Filament resources for clarity.
+
+## Example
+```php
+// Correct implementation of a Filament Resource
+class MyResource extends XotBaseResource
+{
+    public static function getFormSchema(): array
+    {
+        return [
+            'title' => Forms\Components\TextInput::make('title'),
+            'content' => Forms\Components\RichEditor::make('content'),
+        ];
+    }
+}
+```
+
+## Troubleshooting
+- If a static property override error occurs, remove the property from the resource and centralize it in the base class.
+- If translations are not applied, check the structure of the lang files and the absence of hardcoded `->label()`.
+
+## Related Rules
+- [Filament Resources](filament-resources.mdc)
+- [Filament Components](filament-components.mdc)
+- [Translation System](translation-system-rules.mdc)
+- [Filament Docs](https://filamentphp.com/docs)
+- [Best practices for reusable modules](module-documentation-neutrality.mdc)
+- [Model inheritance best practices](model-inheritance-best-practices.mdc)

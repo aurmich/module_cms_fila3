@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SaluteOra">
+  <title>SaluteOra</title>
+  
+  <!-- Testo principale "SALUTE ORA" -->
+  <g id="text-main" fill="#0d2b4a">
+    <!-- S -->
+    <path d="M10 20c0-2.2 1.8-4 4-4h5c2.2 0 4 1.8 4 4v1c0 2.2-1.8 4-4 4h-5c-2.2 0-4 1.8-4 4v1c0 2.2 1.8 4 4 4h5c2.2 0 4-1.8 4-4" fill="none" stroke="#0d2b4a" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- A -->
+    <path d="M30 15h3l5 20h-3l-1-4h-5l-1 4h-3l5-20zm1.5 12l-1.5-8-1.5 8h3z"/>
+    
+    <!-- L -->
+    <path d="M42 15h3v16h7v4h-10v-20z"/>
+    
+    <!-- U -->
+    <path d="M55 15h3v12c0 2.2 1.8 4 4 4s4-1.8 4-4v-12h3v12c0 4.4-3.6 8-8 8s-8-3.6-8-8v-12z"/>
+    
+    <!-- T -->
+    <path d="M72 15h9v4h-3v16h-3v-16h-3v-4z"/>
+    
+    <!-- E -->
+    <path d="M85 15h9v4h-6v4h5v3h-5v5h6v4h-9v-20z"/>
+    
+    <!-- Spazio tra SALUTE e ORA -->
+    
+    <!-- O -->
+    <path d="M100 25c0-5.5 4-10 9-10s9 4.5 9 10-4 10-9 10-9-4.5-9-10zm3 0c0 3.9 2.7 7 6 7s6-3.1 6-7-2.7-7-6-7-6 3.1-6 7z"/>
+    
+    <!-- R -->
+    <path d="M122 15h8c2.2 0 4 1.8 4 4v4c0 2.2-1.8 4-4 4h-5v8h-3v-20zm3 4v4h5v-4h-5z"/>
+    
+    <!-- A -->
+    <path d="M138 15h3l5 20h-3l-1-4h-5l-1 4h-3l5-20zm1.5 12l-1.5-8-1.5 8h3z"/>
+  </g>
+  
+  <!-- Testo secondario "le" in corsivo e grigio chiaro -->
+  <g id="text-secondary" fill="#666666" font-style="italic">
+    <path d="M150 25c0-1.1.9-2 2-2h3c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-3v1h5v2h-7v-7zm2 0v2h3v-2h-3z"/>
+    <path d="M160 20h2v12h-2v-12zm0-3h2v2h-2v-2z"/>
+  </g>
+</svg>

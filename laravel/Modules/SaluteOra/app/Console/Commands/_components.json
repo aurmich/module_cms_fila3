@@ -1,0 +1,9 @@
+[
+    {
+        "name": "analyze-patient-data-command",
+        "class": "AnalyzePatientDataCommand",
+        "module": null,
+        "path": null,
+        "ns": "Modules\\SaluteOra\\Console\\Commands\\AnalyzePatientDataCommand"
+    }
+]

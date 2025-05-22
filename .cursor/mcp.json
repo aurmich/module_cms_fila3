@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "sequential-thinking-npx": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "datapilot": {
+      "url": "http://localhost:7701/sse",
+      "type": "sse"
+    }
+  }
+}

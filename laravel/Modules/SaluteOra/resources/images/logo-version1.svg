@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="80" viewBox="0 0 360 80">
+  <defs>
+    <style>
+      .title { font-family: Inter, sans-serif; font-weight: 700; font-size: 48px; fill: #111827; }
+      .accent { fill: #10B981; }
+    </style>
+  </defs>
+  <text x="0" y="54" class="title">SALUTE </text>
+  <g transform="translate(200,0)">
+    <circle cx="40" cy="40" r="36" class="accent"/>
+    <path d="M25,30 C25,25 35,20 40,30 C45,20 55,25 55,30 C55,45 40,45 40,60 C40,45 25,45 25,30 Z" fill="white"/>
+  </g>
+  <text x="280" y="54" class="title">RALE</text>
+</svg>

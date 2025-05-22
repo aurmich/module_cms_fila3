@@ -1,0 +1,53 @@
+{
+  "name": "Lang Module Configuration",
+  "description": "Configuration for multi-language support using mcamara/laravel-localization",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "name": "translation-keys-format",
+      "description": "Translation keys should use dot notation",
+      "pattern": "__\\(['\"]([a-z0-9_]+\\.)+[a-z0-9_]+['\"]",
+      "severity": "warning"
+    },
+    {
+      "name": "missing-translation-keys",
+      "description": "Check for missing translation keys",
+      "pattern": "__\\(['\"]([a-z0-9_\\./]+)['\"]\.*\\)",
+      "severity": "error"
+    },
+    {
+      "name": "multilang",
+      "path": "rules/multilang.mdc"
+    }
+  ],
+  "templates": {
+    "language-file": {
+      "description": "Create a new language file",
+      "content": "<?php\n\nreturn [\n    /*\n    |--------------------------------------------------------------------------\n    | {{filename}} Language Lines\n    |--------------------------------------------------------------------------\n    |\n    | The following language lines are used in {{filename}} related pages.\n    |\n    */\n\n    'key' => 'translation',\n];"
+    },
+    "translation-method": {
+      "description": "Add a translation method",
+      "content": "{{ __(\"{{key}}\") }}"
+    }
+  },
+  "settings": {
+    "defaultLocale": "it",
+    "supportedLocales": ["it", "en"],
+    "langPath": "resources/lang"
+  },
+  "commands": {
+    "extract-strings": {
+      "command": "php artisan translation:extract",
+      "description": "Extract translation strings from source code"
+    },
+    "check-translations": {
+      "command": "php artisan translation:check",
+      "description": "Check for missing translations"
+    }
+  },
+  "documentation": {
+    "localization": "/Modules/Lang/docs/INTEGRATION_MC_LARAVEL_LOCALIZATION.md",
+    "best-practices": "/Modules/Lang/docs/TRANSLATION_KEYS_BEST_PRACTICES.md",
+    "mcamara-guide": "/Modules/Lang/docs/MCAMARA_IMPLEMENTATION_GUIDE.md"
+  }
+}
