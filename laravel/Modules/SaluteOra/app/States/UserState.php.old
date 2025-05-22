@@ -1,0 +1,82 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\States;
+
+use Spatie\ModelStates\State;
+use Spatie\ModelStates\StateConfig;
+use Modules\SaluteOra\States\User\Pending;
+use Modules\SaluteOra\States\User\Active;
+use Modules\SaluteOra\States\User\Inactive;
+use Modules\SaluteOra\States\User\Rejected;
+use Modules\SaluteOra\States\User\Suspended;
+use Modules\SaluteOra\States\User\IntegrationRequested;
+
+class UserState extends State
+{
+    public static function config(): StateConfig
+    {
+        return parent::config()
+            ->default(Pending::class)
+            ->allowTransition(Pending::class, Active::class)
+            ->allowTransition(Pending::class, Rejected::class)
+            ->allowTransition(Active::class, Inactive::class)
+            ->allowTransition(Active::class, Suspended::class)
+            ->allowTransition(Inactive::class, Active::class)
+            ->allowTransition(Suspended::class, Active::class)
+            ->allowTransition(Active::class, IntegrationRequested::class)
+            ->allowTransition(IntegrationRequested::class, Active::class);
+    }
+
+    public function getLabel(): string
+    {
+        return match($this::class) {
+            Pending::class => 'In attesa',
+            Active::class => 'Attivo',
+            Inactive::class => 'Non attivo',
+            Rejected::class => 'Rifiutato',
+            Suspended::class => 'Sospeso',
+            IntegrationRequested::class => 'Integrazione richiesta',
+            default => 'Sconosciuto',
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match($this::class) {
+            Pending::class => 'warning',
+            Active::class => 'success',
+            Inactive::class => 'gray',
+            Rejected::class => 'danger',
+            Suspended::class => 'gray',
+            IntegrationRequested::class => 'info',
+            default => 'gray',
+        };
+    }
+
+    public function getIcon(): string
+    {
+        return match($this::class) {
+            Pending::class => 'heroicon-o-clock',
+            Active::class => 'heroicon-o-check-circle',
+            Inactive::class => 'heroicon-o-x-circle',
+            Rejected::class => 'heroicon-o-x-mark',
+            Suspended::class => 'heroicon-o-pause-circle',
+            IntegrationRequested::class => 'heroicon-o-document-text',
+            default => 'heroicon-o-question-mark-circle',
+        };
+    }
+
+    public static function toSelectArray(): array
+    {
+        return [
+            Pending::class => 'In attesa',
+            Active::class => 'Attivo',
+            Inactive::class => 'Non attivo',
+            Rejected::class => 'Rifiutato',
+            Suspended::class => 'Sospeso',
+            IntegrationRequested::class => 'Integrazione richiesta',
+        ];
+    }
+} 

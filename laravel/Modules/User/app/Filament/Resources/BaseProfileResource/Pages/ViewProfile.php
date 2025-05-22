@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\User\Filament\Resources\BaseProfileResource\Pages;
 
 use Filament\Actions\DeleteAction;
-use Filament\Actions\EditAction;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -17,16 +16,7 @@ class ViewProfile extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecor
 {
     protected static string $resource = BaseProfileResource::class;
 
-    /*
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\EditAction::make(),
-            Actions\DeleteAction::make(),
-        ];
-    }
-    */
-
+   
     /**
      * @return array<string, \Filament\Infolists\Components\Component>
      */

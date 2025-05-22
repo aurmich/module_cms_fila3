@@ -3,6 +3,11 @@
 ## Descrizione
 Modulo per la gestione dei pazienti nel sistema sanitario.
 
+## Documentazione
+
+- [Convenzione per le icone SVG](docs/ICON_CONVENTION.md) - Linee guida per l'utilizzo e la creazione di icone SVG nel modulo
+- [Gestione degli Stati](docs/STATE_MANAGEMENT.md) - Guida all'utilizzo di spatie/laravel-model-states per la gestione degli stati
+
 ## Struttura del Modulo
 ```
 Patient/

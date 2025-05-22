@@ -9,13 +9,32 @@ use Illuminate\Support\Facades\DB;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Patient;
 use Carbon\Carbon;
+use Modules\User\Models\Tenant;
+use Modules\User\Models\Traits\HasTenants;
+use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Set;
+use Filament\Widgets\StatsOverview\Stat;
+use Filament\Widgets\Components\StatsOverview;
+use Filament\Widgets\Components\Stat as WidgetStat;
 
 class ClinicalStatsWidget extends Widget
 {
+    use HasTenants;
+    
     protected static ?int $sort = 2;
     
     protected static string $view = 'reporting::widgets.clinical-stats-widget';
     
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+
+    protected static ?string $navigationGroup = 'Statistiche';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = null;
+
     /**
      * Ottiene le statistiche cliniche per il widget.
      *
@@ -23,7 +42,7 @@ class ClinicalStatsWidget extends Widget
      */
     protected function getViewData(): array
     {
-        $tenantId = tenant()->id;
+        $tenantId = Auth::user()->currentTeam?->id;
         $today = Carbon::now();
         $startOfMonth = $today->copy()->startOfMonth();
         $endOfMonth = $today->copy()->endOfMonth();
@@ -177,5 +196,101 @@ class ClinicalStatsWidget extends Widget
         }
         
         return $months;
+    }
+
+    public static function getFormSchema(): array
+    {
+        return [
+            Select::make('tenant_id')
+                ->relationship('tenant', 'name')
+                ->required()
+                ->searchable()
+                ->preload()
+                ->live()
+                ->afterStateUpdated(fn (Set $set) => $set('doctor_id', null))
+                ->label(__('saluteora::clinical_stats.fields.tenant_id.label'))
+                ->placeholder(__('saluteora::clinical_stats.fields.tenant_id.placeholder'))
+                ->tooltip(__('saluteora::clinical_stats.fields.tenant_id.tooltip')),
+            Select::make('doctor_id')
+                ->relationship('doctor', 'name')
+                ->required()
+                ->searchable()
+                ->preload()
+                ->live()
+                ->label(__('saluteora::clinical_stats.fields.doctor_id.label'))
+                ->placeholder(__('saluteora::clinical_stats.fields.doctor_id.placeholder'))
+                ->tooltip(__('saluteora::clinical_stats.fields.doctor_id.tooltip')),
+            DatePicker::make('start_date')
+                ->required()
+                ->live()
+                ->label(__('saluteora::clinical_stats.fields.start_date.label'))
+                ->placeholder(__('saluteora::clinical_stats.fields.start_date.placeholder'))
+                ->tooltip(__('saluteora::clinical_stats.fields.start_date.tooltip')),
+            DatePicker::make('end_date')
+                ->required()
+                ->live()
+                ->label(__('saluteora::clinical_stats.fields.end_date.label'))
+                ->placeholder(__('saluteora::clinical_stats.fields.end_date.placeholder'))
+                ->tooltip(__('saluteora::clinical_stats.fields.end_date.tooltip')),
+        ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('saluteora::clinical_stats.navigation.label');
+    }
+
+    protected function getStats(): array
+    {
+        $tenantId = $this->tenant_id;
+        $doctorId = $this->doctor_id;
+        $startDate = $this->start_date;
+        $endDate = $this->end_date;
+
+        $query = Appointment::query()
+            ->when($tenantId, fn ($q) => $q->where('tenant_id', $tenantId))
+            ->when($doctorId, fn ($q) => $q->where('doctor_id', $doctorId))
+            ->when($startDate, fn ($q) => $q->where('start_time', '>=', $startDate))
+            ->when($endDate, fn ($q) => $q->where('end_time', '<=', $endDate));
+
+        $totalAppointments = $query->count();
+        $completedAppointments = (clone $query)->where('status', 'completed')->count();
+        $cancelledAppointments = (clone $query)->where('status', 'cancelled')->count();
+        $noShowAppointments = (clone $query)->where('status', 'no_show')->count();
+
+        $completionRate = $totalAppointments > 0 ? round(($completedAppointments / $totalAppointments) * 100, 2) : 0;
+        $cancellationRate = $totalAppointments > 0 ? round(($cancelledAppointments / $totalAppointments) * 100, 2) : 0;
+        $noShowRate = $totalAppointments > 0 ? round(($noShowAppointments / $totalAppointments) * 100, 2) : 0;
+
+        return [
+            Stat::make(__('saluteora::clinical_stats.stats.total_appointments'), $totalAppointments)
+                ->description(__('saluteora::clinical_stats.stats.total_appointments'))
+                ->descriptionIcon('heroicon-m-calendar')
+                ->color('gray'),
+            Stat::make(__('saluteora::clinical_stats.stats.completed_appointments'), $completedAppointments)
+                ->description(__('saluteora::clinical_stats.stats.completed_appointments'))
+                ->descriptionIcon('heroicon-m-check-circle')
+                ->color('success'),
+            Stat::make(__('saluteora::clinical_stats.stats.cancelled_appointments'), $cancelledAppointments)
+                ->description(__('saluteora::clinical_stats.stats.cancelled_appointments'))
+                ->descriptionIcon('heroicon-m-x-circle')
+                ->color('danger'),
+            Stat::make(__('saluteora::clinical_stats.stats.no_show_appointments'), $noShowAppointments)
+                ->description(__('saluteora::clinical_stats.stats.no_show_appointments'))
+                ->descriptionIcon('heroicon-m-exclamation-circle')
+                ->color('warning'),
+            Stat::make(__('saluteora::clinical_stats.stats.completion_rate'), $completionRate . '%')
+                ->description(__('saluteora::clinical_stats.stats.completion_rate'))
+                ->descriptionIcon('heroicon-m-chart-bar')
+                ->color('success'),
+            Stat::make(__('saluteora::clinical_stats.stats.cancellation_rate'), $cancellationRate . '%')
+                ->description(__('saluteora::clinical_stats.stats.cancellation_rate'))
+                ->descriptionIcon('heroicon-m-chart-bar')
+                ->color('danger'),
+            Stat::make(__('saluteora::clinical_stats.stats.no_show_rate'), $noShowRate . '%')
+                ->description(__('saluteora::clinical_stats.stats.no_show_rate'))
+                ->descriptionIcon('heroicon-m-chart-bar')
+                ->color('warning'),
+        ];
     }
 }

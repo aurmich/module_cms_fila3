@@ -5,67 +5,136 @@ return array (
   'navigation' => 
   array (
     'label' => 'Pazienti',
-    'sort' => 37,
-    'group' => 'patient.navigation',
+    'group' => 'Gestione Utenti',
+    'icon' => 'saluteora-patient',
+    'color' => 'primary',
+    'sort' => 7,
+    'tooltip' => 'Gestione dei pazienti e delle loro informazioni anagrafiche',
   ),
   'fields' => 
   array (
-    'newsletter' => 
-    array (
-      'label' => 'Newsletter',
-      'helper_text' => 'Iscrizione alla newsletter',
-      'placeholder' => 'Seleziona se desideri iscriverti alla newsletter',
-      'description' => 'Ricevi aggiornamenti sulle novità e promozioni',
-    ),
-    'privacy_acceptance' => 
-    array (
-      'label' => 'Accettazione Privacy',
-      'placeholder' => 'Accetta l\'informativa sulla privacy',
-      'helper_text' => 'Consenso obbligatorio',
-      'description' => 'Accetto il trattamento dei miei dati personali',
-    ),
     'first_name' => 
     array (
       'label' => 'Nome',
-      'placeholder' => 'Inserisci il tuo nome',
+      'placeholder' => 'Inserisci il nome',
       'helper_text' => 'Nome del paziente',
-      'description' => 'Il tuo nome anagrafico',
+      'description' => 'Il nome anagrafico del paziente',
+      'tooltip' => 'Deve corrispondere al nome sul documento d\'identità',
     ),
     'last_name' => 
     array (
       'label' => 'Cognome',
-      'placeholder' => 'Inserisci il tuo cognome',
+      'placeholder' => 'Inserisci il cognome',
       'helper_text' => 'Cognome del paziente',
-      'description' => 'Il tuo cognome anagrafico',
+      'description' => 'Il cognome anagrafico del paziente',
+      'tooltip' => 'Deve corrispondere al cognome sul documento d\'identità',
     ),
-    'address' => 
+    'fiscal_code' => 
     array (
-      'label' => 'Indirizzo',
-      'placeholder' => 'Inserisci il tuo indirizzo',
-      'helper_text' => 'Indirizzo di residenza',
-      'description' => 'Via/Piazza, numero civico',
+      'label' => 'Codice Fiscale',
+      'placeholder' => 'Inserisci il codice fiscale',
+      'helper_text' => 'Codice fiscale del paziente',
+      'description' => 'Codice fiscale come indicato sulla tessera sanitaria',
     ),
-    'city' => 
+    'birth_date' => 
     array (
-      'label' => 'Città',
-      'placeholder' => 'Inserisci la tua città',
-      'helper_text' => 'Città di residenza',
-      'description' => 'Comune di residenza',
+      'label' => 'Data di Nascita',
+      'placeholder' => 'Seleziona la data di nascita',
+      'helper_text' => 'Data di nascita del paziente',
+      'description' => 'Data di nascita come indicata sul documento d\'identità',
     ),
-    'phone' => 
+    'gender' => 
     array (
-      'label' => 'Telefono',
-      'placeholder' => 'Inserisci il tuo numero di telefono',
-      'helper_text' => 'Numero di telefono',
-      'description' => 'Numero di telefono per comunicazioni',
+      'label' => 'Genere',
+      'placeholder' => 'Seleziona il genere',
+      'helper_text' => 'Genere del paziente',
+      'options' => 
+      array (
+        'M' => 'Maschio',
+        'F' => 'Femmina',
+        'O' => 'Altro',
+      ),
+    ),
+    'is_pregnant' => 
+    array (
+      'label' => 'Gravidanza',
+      'helper_text' => 'Indica se il paziente è in gravidanza',
+      'description' => 'Seleziona se il paziente è attualmente in gravidanza',
     ),
     'email' => 
     array (
       'label' => 'Email',
-      'placeholder' => 'Inserisci la tua email',
-      'helper_text' => 'Indirizzo email',
+      'placeholder' => 'Inserisci l\'indirizzo email',
+      'helper_text' => 'Indirizzo email valido',
       'description' => 'Email del paziente',
       'tooltip' => 'Verrà utilizzata per le comunicazioni importanti',
+    ),
+    'phone' => 
+    array (
+      'label' => 'Telefono',
+      'placeholder' => 'Inserisci il numero di telefono',
+      'helper_text' => 'Numero di telefono principale',
+      'description' => 'Numero di telefono del paziente',
+      'tooltip' => 'Preferibilmente un numero mobile',
+    ),
+    'address' => 
+    array (
+      'label' => 'Indirizzo',
+      'placeholder' => 'Inserisci l\'indirizzo completo',
+      'helper_text' => 'Via/Piazza, numero civico',
+      'description' => 'Indirizzo di residenza del paziente',
+      'tooltip' => 'Inserisci l\'indirizzo completo con numero civico',
+    ),
+    'city' => 
+    array (
+      'label' => 'Città',
+      'placeholder' => 'Inserisci la città',
+      'helper_text' => 'Città di residenza',
+      'description' => 'Città di residenza del paziente',
+      'tooltip' => 'Inserisci la città di residenza attuale',
+    ),
+    'postal_code' => 
+    array (
+      'label' => 'CAP',
+      'placeholder' => 'Inserisci il CAP',
+      'helper_text' => 'Codice di avviamento postale',
+      'description' => 'Inserisci il CAP della città di residenza',
+    ),
+    'province' => 
+    array (
+      'label' => 'Provincia',
+      'placeholder' => 'Inserisci la provincia',
+      'helper_text' => 'Provincia di residenza',
+      'description' => 'Inserisci la provincia di residenza',
+    ),
+    'country' => 
+    array (
+      'label' => 'Paese',
+      'placeholder' => 'Inserisci il paese',
+      'helper_text' => 'Paese di residenza',
+      'description' => 'Inserisci il paese di residenza',
+      'default' => 'Italia',
+    ),
+    'isee_code' => 
+    array (
+      'label' => 'Codice ISEE',
+      'placeholder' => 'Inserisci il codice ISEE',
+      'helper_text' => 'Codice identificativo ISEE',
+      'description' => 'Inserisci il codice identificativo del certificato ISEE',
+    ),
+    'isee_value' => 
+    array (
+      'label' => 'Valore ISEE',
+      'placeholder' => 'Inserisci il valore ISEE',
+      'helper_text' => 'Valore economico ISEE',
+      'description' => 'Inserisci il valore economico del certificato ISEE',
+    ),
+    'isee_expiry_date' => 
+    array (
+      'label' => 'Scadenza ISEE',
+      'placeholder' => 'Seleziona la data di scadenza',
+      'helper_text' => 'Data di scadenza ISEE',
+      'description' => 'Inserisci la data di scadenza del certificato ISEE',
     ),
     'health_card' => 
     array (
@@ -88,7 +157,7 @@ return array (
       'label' => 'Certificato ISEE',
       'placeholder' => 'Carica il certificato ISEE',
       'helper_text' => 'Carica una copia del certificato ISEE',
-      'description' => 'Certificato ISEE in corso di validità',
+      'description' => 'Certificato ISEE valido',
       'tooltip' => 'Necessario per accedere alle agevolazioni',
     ),
     'pregnancy_certificate' => 
@@ -115,15 +184,68 @@ return array (
       'description' => 'Problemi dentali attuali o recenti',
       'tooltip' => 'Includi dolori, sensibilità o altri disturbi',
     ),
+    'notes' => 
+    array (
+      'label' => 'Note',
+      'placeholder' => 'Inserisci eventuali note',
+      'helper_text' => 'Note aggiuntive',
+      'description' => 'Inserisci eventuali note o informazioni aggiuntive',
+    ),
+    'privacy_acceptance' => 
+    array (
+      'label' => 'Accettazione Privacy',
+      'placeholder' => 'Accetta l\'informativa sulla privacy',
+      'helper_text' => 'Devi accettare l\'informativa sulla privacy',
+      'description' => 'Accetto il trattamento dei dati personali secondo l\'informativa sulla privacy',
+      'tooltip' => 'Leggi l\'informativa completa prima di accettare',
+    ),
+    'newsletter' => 
+    array (
+      'label' => 'Newsletter',
+      'helper_text' => 'Ricevi aggiornamenti sulle nostre attività',
+      'placeholder' => 'Seleziona se vuoi iscriverti alla newsletter',
+      'description' => 'Iscriviti alla nostra newsletter per ricevere aggiornamenti e novità',
+      'tooltip' => 'Puoi annullare l\'iscrizione in qualsiasi momento',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
+    'updated_at' => 
+    array (
+      'label' => 'updated_at',
+    ),
   ),
   'steps' => 
   array (
     'personal_data_step' => 
     array (
       'label' => 'Dati Personali',
-      'description' => 'Inserisci i tuoi dati anagrafici',
+      'description' => 'Inserisci i tuoi dati personali',
       'icon' => 'heroicon-o-user',
       'color' => 'primary',
+    ),
+    'contacts' => 
+    array (
+      'label' => 'Contatti',
+      'description' => 'Inserisci i dati di contatto del paziente',
+      'icon' => 'heroicon-o-phone',
     ),
     'documents_step' => 
     array (
@@ -138,6 +260,12 @@ return array (
       'description' => 'Informazioni preliminari per la visita',
       'icon' => 'heroicon-o-clipboard-document-list',
       'color' => 'warning',
+    ),
+    'health' => 
+    array (
+      'label' => 'Stato di Salute',
+      'description' => 'Inserisci le informazioni sullo stato di salute',
+      'icon' => 'heroicon-o-heart',
     ),
     'privacy_step' => 
     array (
@@ -188,5 +316,9 @@ return array (
       'label' => 'Visualizza',
       'tooltip' => 'Visualizza i dettagli del paziente',
     ),
+  ),
+  'model' => 
+  array (
+    'label' => 'patient.model',
   ),
 );

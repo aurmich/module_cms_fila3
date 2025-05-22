@@ -3,9 +3,9 @@
 namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
 
 use Modules\SaluteOra\Filament\Resources\UserResource;
-use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
+use Filament\Resources\Pages\CreateRecord;
 
-class CreateUser extends XotBaseCreateRecord
+class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 }

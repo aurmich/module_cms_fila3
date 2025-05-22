@@ -373,6 +373,13 @@ return array (
     array (
       'label' => '946595X2259X48869SQ01',
     ),
+    'state' => 
+    array (
+      'label' => 'state',
+      'description' => 'state',
+      'helper_text' => 'state',
+      'placeholder' => 'state',
+    ),
   ),
   'actions' => 
   array (

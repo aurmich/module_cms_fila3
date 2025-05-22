@@ -130,4 +130,32 @@ Prima di creare nuovi file Filament:
 ## Collegamenti
 - [namespace-vs-file-structure.md](./namespace-vs-file-structure.md)
 - [WINDSURF_RULES.md](./WINDSURF_RULES.md)
-- [CURSOR_RULES.md](./CURSOR_RULES.md) 
+- [CURSOR_RULES.md](./CURSOR_RULES.md)
+
+## Widget Filament
+
+### Struttura Directory Corretta
+```
+laravel/Modules/SaluteOra/
+└── app/                    
+    └── Filament/          
+        └── Widgets/
+            └── ClinicalStatsWidget.php
+```
+
+### Namespace Corretto
+```php
+namespace Modules\SaluteOra\Filament\Widgets;
+```
+
+### Import Corretti per Widget
+```php
+use Filament\Forms\Set;  // Per i componenti form
+use Filament\Widgets\StatsOverview\Stat;  // Per le statistiche
+```
+
+### Regole Specifiche per Widget
+1. I widget devono essere nella directory `app/Filament/Widgets/`
+2. Il namespace deve essere `Modules\SaluteOra\Filament\Widgets`
+3. Utilizzare sempre i namespace corretti per i componenti Filament
+4. Le traduzioni vanno gestite tramite LangServiceProvider 

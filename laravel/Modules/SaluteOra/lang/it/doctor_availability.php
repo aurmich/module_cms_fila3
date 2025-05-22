@@ -1,11 +1,10 @@
 <?php
 
-return array (
-  'navigation' => 
-  array (
-    'label' => 'doctor availability.navigation',
-    'group' => 'doctor availability.navigation',
-    'icon' => 'doctor availability.navigation',
-    'sort' => 6,
-  ),
-);
+return [
+    'navigation' => [
+        'label' => 'Disponibilità Medici',
+        'group' => 'Gestione',
+        'icon' => 'heroicon-o-calendar',
+        'sort' => 6,
+    ],
+];

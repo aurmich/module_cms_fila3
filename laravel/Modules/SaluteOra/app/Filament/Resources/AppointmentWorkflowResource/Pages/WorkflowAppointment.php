@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Filament\Resources\AppointmentWorkflowResource\Pages;
 
+use Filament\Actions;
 use Filament\Forms;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Form;
 use Filament\Pages\Concerns\InteractsWithFormActions;
-use Filament\Resources\Pages\Page;
 use Filament\Support\Exceptions\Halt;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Modules\SaluteOra\Actions\FinalizeAppointmentWorkflowAction;
 use Modules\SaluteOra\Actions\UpdateAppointmentWorkflowStepAction;
@@ -18,38 +20,39 @@ use Modules\SaluteOra\Filament\Resources\AppointmentWorkflowResource;
 use Modules\SaluteOra\Models\AppointmentWorkflow;
 use Modules\SaluteOra\Models\Dentist;
 use Modules\SaluteOra\Models\Patient;
+use Modules\Xot\Filament\Resources\Pages\XotBaseResourcePage;
 
-class WorkflowAppointment extends Page
+class WorkflowAppointment extends XotBaseResourcePage
 {
     use InteractsWithFormActions;
     
     protected static string $resource = AppointmentWorkflowResource::class;
-    protected static ?string $view = null; // Utilizziamo la vista predefinita di Filament
-    protected static ?string $title = 'Workflow Prenotazione Appuntamento';
+    
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
     
     /**
-     * @var AppointmentWorkflow
+     * Dati del form.
      */
-    public $record;
-    
-    /**
-     * @var array<string, mixed>
-     */
-    public $data = [];
+    public array $data = [];
     
     /**
      * Nome del passo corrente.
-     *
-     * @var string
      */
-    public string $currentStep;
+    protected string $currentStep = 'patient_info';
     
     /**
      * Elenco di tutti i passi disponibili.
      *
      * @var array<string, string>
      */
-    protected array $steps;
+    protected array $steps = [];
+    
+    /**
+     * Il record associato alla pagina.
+     *
+     * @var Model|int|string|null
+     */
+    public Model|int|string|null $record;
     
     /**
      * Hook chiamato all'inizializzazione del componente.
@@ -262,7 +265,7 @@ class WorkflowAppointment extends Page
     /**
      * Ottiene le azioni del form.
      */
-    protected function getFormActions(): array
+    public function getFormActions(): array
     {
         return [
             $this->getSubmitFormAction(),
@@ -281,9 +284,11 @@ class WorkflowAppointment extends Page
     
     /**
      * Ottiene i bottoni di navigazione del form.
+     * 
+     * @return string L'allineamento delle azioni del form
      */
-    protected function getFormActionsAlignment(): string
+    public function getFormActionsAlignment(): string
     {
-        return \Filament\Support\Enums\Alignment::Center;
+        return \Filament\Support\Enums\Alignment::Center->value;
     }
 }

@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\UI\Filament\Tables\Columns;
+
+use Exception;
+use Spatie\ModelStates\State;
+use Modules\SaluteOra\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Columns\SelectColumn;
+use Modules\SaluteOra\States\User\UserState;
+
+class SelectStateColumn extends SelectColumn
+{
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+      //  $this->selectablePlaceholder(false);
+        $this->options(function (Model $record ,$state): array {
+            $name=$this->getName();
+            
+            
+            try{
+                $states=$record->getAttribute($name)->transitionableStates();
+            }catch(Exception $e){
+                $states=$states=$record->getStatesFor($name)->toArray();;
+            }
+            $states[]=$state::$name;
+
+            
+            return array_combine($states, $states);
+        });
+       
+    }
+
+   
+}

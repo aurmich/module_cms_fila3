@@ -597,3 +597,104 @@ Consulta le [best practices aggiornate](./providers/service_provider_best_practi
 - Laravel 12.x
 - Estensioni PHP: PDO, JSON, cURL
 - Database: MySQL 8.0+ o PostgreSQL 13+
+
+## Regole generali per i moduli
+
+- Estendere sempre le classi XotBase per Filament, mai direttamente le classi Filament
+- Namespace corretto: Modules\<NomeModulo>\Filament
+- Tutte le label, placeholder, help, tooltip, description devono essere gestite tramite i file di traduzione del modulo, mai tramite ->label()
+- Consulta anche:
+  - [Regole traduzioni Filament](../../Lang/docs/filament-translations.md)
+  - [docs SaluteOra](../../SaluteOra/docs/README.md)
+
+## Regole generali per risorse Filament nei moduli
+
+- Tutte le risorse Filament dei moduli devono usare il namespace `Modules\\<NomeModulo>\\Filament\\Resources`.
+- Non devono mai dichiarare metodi come `getTableFilters`, `getBulkActions`, `getTableColumns` se estendono XotBaseResource.
+- Esempio di applicazione e correzione: vedi [README SaluteOra](../SaluteOra/docs/README.md)
+
+## Errori comuni: path e namespace
+
+- Tutti i file PHP dei moduli devono essere in `app/` (mai nella root modulo)
+- Il namespace non deve mai contenere `App` (es: `Modules\<NomeModulo>\Enums\UserType`)
+- La struttura fisica e quella logica devono essere coerenti, ma la root del codice è sempre `app/`
+- Se trovi file o namespace errati, correggi subito e aggiorna la doc
+- Esempio pratico e checklist: vedi [README SaluteOra](../SaluteOra/docs/README.md)
+
+## Regola generale: Icone SVG custom per navigation.icon nei moduli
+- Ogni modulo può salvare SVG custom animati in `resources/svg/`, con nome `<modulo>-<icona>.svg` (es. `saluteora-doctor.svg`).
+- Nei file di traduzione, la chiave navigation.icon deve essere l'identificatore `<modulo>-<icona>` (es. `'icon' => 'saluteora-doctor'`).
+- Gli array vanno sempre in short syntax (`[]`).
+- Tutti i file PHP devono iniziare con `declare(strict_types=1);`.
+- Esempio:
+```php
+<?php
+declare(strict_types=1);
+return [
+    'navigation' => [
+        'icon' => 'saluteora-doctor',
+        // ...
+    ],
+];
+```
+- Esempio pratico e doc: vedi [README SaluteOra](../SaluteOra/docs/README.md)
+
+## Regola generale: Stati e workflow con Spatie Model States
+- Tutti i campi che rappresentano uno stato (es. user.state, moderation.state) devono usare [spatie/laravel-model-states](https://github.com/spatie/laravel-model-states), **non** enum PHP native.
+- Le enum PHP sono ammesse solo per tipi statici (es. UserType), **mai** per workflow, moderazione, pubblicazione, ecc.
+
+### Motivazione
+- Gestione delle transizioni tra stati (solo quelle consentite)
+- Logica custom per ogni stato (side effect, permessi, validazione)
+- Integrazione con Eloquent (cast automatico, query, observer)
+- Eventi sulle transizioni
+- Best practice per workflow e moderazione
+
+### Esempio pratico
+```php
+// ERRATO
+use Modules\SaluteOra\Enums\UserStateEnum;
+protected $casts = [ 'state' => UserState::class ];
+
+// CORRETTO
+use Modules\SaluteOra\States\UserState;
+protected $casts = [ 'state' => UserState::class ];
+
+// State class
+class UserState extends State { ... }
+```
+
+### Checklist
+- [ ] Nessun campo di stato usa enum PHP
+- [ ] Tutti i campi di stato usano Spatie Model States
+- [ ] Modelli, risorse, form, policy aggiornati
+- [ ] Doc aggiornata
+
+### Errori comuni
+- Usare enum PHP per i campi di stato
+- Dimenticare di configurare le transizioni
+- Non aggiornare la doc
+
+### Link doc
+- [README SaluteOra](../../laravel/Modules/SaluteOra/docs/README.md)
+- [Spatie Model States](https://github.com/spatie/laravel-model-states)
+
+# Debug Model States (Spatie)
+
+## Esempio di errore reale
+```
+Undefined array key "Modules\SaluteOra\States\User\Pending"
+```
+- Stack trace: Spatie\ModelStates\StateCaster::get
+- Tipico durante login o istanziazione User
+
+## Checklist di debug
+- [ ] Verifica che nessun campo di stato usi enum PHP
+- [ ] Tutte le classi di stato esistano e siano nel namespace corretto
+- [ ] La mappatura degli stati sia completa
+- [ ] I valori nel database corrispondano alle chiavi mappate
+- [ ] Doc aggiornata
+
+## Link utili
+- [README SaluteOra](../../laravel/Modules/SaluteOra/docs/README.md)
+- [Spatie Model States](https://github.com/spatie/laravel-model-states)

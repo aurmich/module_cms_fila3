@@ -157,3 +157,55 @@ Class "Modules\SaluteOra\app\Providers\SaluteOraServiceProvider" not found
 **Consulta anche:**
 - [MIGLIORAMENTI_E_CORREZIONI.md](./MIGLIORAMENTI_E_CORREZIONI.md)
 - [naming-conventions.md](./naming-conventions.md)
+
+## Errori Comuni e Come Evitarli
+
+### 1. File fuori da app/
+
+❌ **ERRATO**:
+```
+Modules/SaluteOra/Enums/UserType.php
+Modules/SaluteOra/Filament/Resources/UserResource.php
+```
+
+✅ **CORRETTO**:
+```
+Modules/SaluteOra/app/Enums/UserType.php
+Modules/SaluteOra/app/Filament/Resources/UserResource.php
+```
+
+### 2. Namespace errato
+
+❌ **ERRATO**:
+```php
+namespace Modules\SaluteOra\app\Enums;
+namespace Modules\SaluteOra\app\Filament\Resources;
+```
+
+✅ **CORRETTO**:
+```php
+namespace Modules\SaluteOra\Enums;
+namespace Modules\SaluteOra\Filament\Resources;
+```
+
+### Checklist Anti-Errore
+
+Prima di creare nuovi file o spostare file esistenti:
+
+1. [ ] Verifica che il file sia sotto la directory `app/`
+2. [ ] Controlla che il namespace non contenga `app\`
+3. [ ] Esegui `composer dump-autoload` dopo ogni modifica
+4. [ ] Verifica che l'IDE riconosca correttamente il file
+5. [ ] Controlla che i test passino
+
+### Strumenti di Verifica
+
+Per verificare la struttura corretta:
+
+```bash
+# Verifica la struttura delle directory
+find laravel/Modules/SaluteOra -type f -name "*.php" | grep -v "app/"
+
+# Verifica i namespace
+grep -r "namespace Modules\\SaluteOra\\app" laravel/Modules/SaluteOra
+```

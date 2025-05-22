@@ -1,0 +1,93 @@
+# Uso scorretto di `->label()` nei componenti Filament
+
+**Regola:** Non usare mai `->label()` nei componenti Filament. Le etichette devono essere gestite tramite i file di traduzione del modulo, sfruttando il LangServiceProvider.
+
+## Regola sulla struttura dei path
+
+Tutti i file di risorsa, enum e pages devono essere posizionati in `Modules/SaluteOra/app/` e **mai** direttamente nella root del modulo o in sottocartelle come `Filament/Resources/` o `Enums/` fuori da `app/`.
+
+**Esempio corretto:**
+
+- `Modules/SaluteOra/app/Filament/Resources/UserResource.php`
+- `Modules/SaluteOra/app/Filament/Resources/UserResource/Pages/CreateUser.php`
+- `Modules/SaluteOra/app/Enums/UserType.php`
+- `Modules/SaluteOra/app/Enums/UserState.php`
+
+**Esempio errato:**
+
+- `Modules/SaluteOra/Filament/Resources/UserResource.php`
+- `Modules/SaluteOra/Enums/UserType.php`
+
+Questa regola è fondamentale per la coerenza del progetto. Consulta anche Xot/docs per la regola generale.
+
+[Vai a Xot/docs →](../../Xot/docs/struttura-path-moduli.mdc)
+
+## Causa dell'errore
+- In `/Modules/SaluteOra/app/Filament/Resources/UserResource.php` è stato trovato l'uso di `->label()`, in contrasto con la regola documentata in `/Modules/Lang/docs/traduzioni-navigation.mdc`.
+- Questo può derivare da codice legacy o mancato aggiornamento alle regole del progetto.
+
+## Correzione
+- Rimuovere ogni uso di `->label()`.
+- Assicurarsi che tutte le etichette siano definite nei file di traduzione (`/Modules/SaluteOra/lang/it/user.php`, `/Modules/SaluteOra/lang/en/user.php`).
+- Se mancano chiavi di traduzione, aggiungerle.
+
+## Collegamenti
+- [Regola generale in Lang/docs](../../Lang/docs/traduzioni-navigation.mdc)
+- [Regola generale in Xot/docs](../../Xot/docs/traduzioni-navigation.mdc)
+
+## Stato
+- Da applicare anche ad altri file che presentano lo stesso problema.
+
+---
+
+# Uso corretto degli "State" nei modelli Laravel
+
+**Regola:** Per ogni campo di stato (es. `state` di User) usare sempre una State Class Spatie ([spatie/laravel-model-states](https://github.com/spatie/laravel-model-states)), **mai** un enum PHP.
+
+## Motivazione
+- Permette transizioni, validazione, logica custom, metodi di stato e side effect.
+- Fondamentale per domini "stateful" (utenti, workflow, moderazione, ecc.).
+
+## Esempio corretto
+```php
+use Spatie\ModelStates\State;
+use Spatie\ModelStates\StateConfig;
+
+abstract class UserState extends State {
+    public static function config(): StateConfig {
+        return parent::config()
+            ->default(Pending::class)
+            ->states([
+                Pending::class,
+                Approved::class,
+                Rejected::class,
+            ])
+            ->allowTransition(Pending::class, Approved::class)
+            ->allowTransition(Pending::class, Rejected::class);
+    }
+}
+class Pending extends UserState {}
+class Approved extends UserState {}
+class Rejected extends UserState {}
+```
+Nel modello:
+```php
+use Spatie\ModelStates\HasStates;
+class User extends Model {
+    use HasStates;
+    protected function states(): array {
+        return [
+            'state' => UserState::class,
+        ];
+    }
+}
+```
+
+## Errori comuni
+- **Undefined array key ...**: manca la dichiarazione di uno stato o la classe non esiste/è nel namespace errato.
+- **Enum PHP usato come state**: va migrato a State Class.
+
+## Docs collegate
+- [.windsurf/rules/model-states.mdc](../../../.windsurf/rules/model-states.mdc)
+- [Xot/docs/struttura-path-moduli.mdc](../../Xot/docs/struttura-path-moduli.mdc)
+- https://github.com/spatie/laravel-model-states

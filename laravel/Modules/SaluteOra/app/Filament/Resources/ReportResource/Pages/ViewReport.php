@@ -20,15 +20,13 @@ class ViewReport extends XotBaseViewRecord
     protected static string $resource = ReportResource::class;
 
     /**
-     * Configura l'infolist per visualizzare i dettagli del report.
+     * Restituisce lo schema dell'infolist per visualizzare i dettagli del report.
      *
-     * @param Infolist $infolist
-     * @return Infolist
+     * @return array<string, \Filament\Infolists\Components\Component>
      */
-    public function infolist(Infolist $infolist): Infolist
+    protected function getInfolistSchema(): array
     {
-        return $infolist
-            ->schema([
+        return [
                 Infolists\Components\Section::make('Informazioni Report')
                     ->schema([
                         Infolists\Components\TextEntry::make('name')
@@ -126,7 +124,7 @@ class ViewReport extends XotBaseViewRecord
                                 return new HtmlString($html);
                             }),
                     ]),
-            ]);
+            ];
     }
 
     /**

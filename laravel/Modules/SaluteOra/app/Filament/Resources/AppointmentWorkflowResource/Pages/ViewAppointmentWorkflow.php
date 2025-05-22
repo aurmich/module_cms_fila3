@@ -19,12 +19,13 @@ class ViewAppointmentWorkflow extends XotBaseViewRecord
     protected static string $resource = AppointmentWorkflowResource::class;
 
     /**
-     * Configura l'infolist per visualizzare i dettagli del workflow.
+     * Restituisce lo schema dell'infolist per visualizzare i dettagli del workflow.
+     * 
+     * @return array<string, \Filament\Infolists\Components\Component>
      */
-    public function infolist(Infolist $infolist): void
+    protected function getInfolistSchema(): array
     {
-        $infolist
-            ->schema([
+        return [
                 Section::make('Informazioni Workflow')
                     ->schema([
                         TextEntry::make('patient.full_name')
@@ -87,7 +88,7 @@ class ViewAppointmentWorkflow extends XotBaseViewRecord
                             ->columnSpanFull()
                             ->view('dental::appointment-workflow.step-data-view'),
                     ]),
-            ]);
+        ];
     }
 
     /**
