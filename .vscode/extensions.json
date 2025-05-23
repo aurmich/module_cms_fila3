@@ -11,6 +11,9 @@
         "codingyu.laravel-goto-view",
         "damms005.devdb",
         "mohamedbenhida.laravel-intellisense",
-        "block.vscode-mcp-extension"
+        "block.vscode-mcp-extension",
+        "aurorabiz.blade-ui-kit",
+        "laravel.vscode-laravel",
+        "porifa.laravel-intelephense"
     ]
 }
