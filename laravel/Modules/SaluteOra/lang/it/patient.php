@@ -231,6 +231,10 @@ return array (
     array (
       'label' => 'updated_at',
     ),
+    'created_at' => 
+    array (
+      'label' => 'created_at',
+    ),
   ),
   'steps' => 
   array (

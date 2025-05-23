@@ -42,19 +42,19 @@ abstract class UserState extends State
             ->allowTransition(Pending::class, Active::class, Transitions\PendingToActive::class)
             ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
             ->allowTransition(Pending::class, IntegrationRequested::class, Transitions\PendingToIntegrationRequested::class)
-            
+
             // Active transitions
             ->allowTransition(Active::class, Suspended::class, Transitions\ActiveToSuspended::class)
             ->allowTransition(Active::class, Inactive::class, Transitions\ActiveToInactive::class)
             ->allowTransition(Active::class, IntegrationRequested::class, Transitions\ActiveToIntegrationRequested::class)
-            
+
             // Rejected transitions
             ->allowTransition(Rejected::class, Pending::class, Transitions\RejectedToPending::class)
-            
+
             // Suspended transitions
             ->allowTransition(Suspended::class, Active::class, Transitions\SuspendedToActive::class)
             ->allowTransition(Suspended::class, Inactive::class, Transitions\SuspendedToInactive::class)
-            
+
             // Register all states
             ->registerState(Pending::class)
             ->registerState(Active::class)

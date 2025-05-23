@@ -2,12 +2,11 @@
 
 namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
 
-use Filament\Infolists;
-use Modules\SaluteOra\Filament\Resources\UserResource;
+use Modules\User\Filament\Resources\UserResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord;
-use Modules\SaluteOra\Filament\Resources\UserResource\Pages\BaseViewUser;
+use Filament\Infolists;
 
-class ViewUser extends BaseViewUser
+abstract class BaseViewUser extends XotBaseViewRecord
 {
     protected static string $resource = UserResource::class;
 
