@@ -19,10 +19,10 @@
 - [Convenzioni](/docs/conventions.md)
 - [Naming Conventions](/docs/naming-conventions.md)
 - [Schema Conventions](/docs/schema_conventions.md)
-- [PHPStan Level 10](/docs/PHPSTAN_LEVEL10_FIXES.md)
-- [Error Resolution Guidelines](/docs/ERROR_RESOLUTION_GUIDELINES.md) - Standardized process for identifying, documenting, and resolving errors.
-- [Documentation Standards](/docs/DOCUMENTATION_STANDARDS.md) - Guidelines for maintaining consistent and reusable documentation across projects.
-- [Path and Namespace Conventions](/docs/PATH_AND_NAMESPACE_CONVENTIONS.md) - Best practices for file paths and namespace structures.
+- [PHPStan Level 10](/docs/phpstan_level10_fixes.md)
+- [Error Resolution Guidelines](/docs/error_resolution_guidelines.md) - Standardized process for identifying, documenting, and resolving errors.
+- [Documentation Standards](/docs/documentation_standards.md) - Guidelines for maintaining consistent and reusable documentation across projects.
+- [Path and Namespace Conventions](/docs/path_and_namespace_conventions.md) - Best practices for file paths and namespace structures.
 
 ## Framework e Componenti
 - [Laravel App](/docs/laravel-app)

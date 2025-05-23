@@ -131,6 +131,18 @@ return array (
     array (
       'label' => 'first_name',
     ),
+    'edit_name' => 
+    array (
+      'label' => 'edit_name',
+    ),
+    'edit-name' => 
+    array (
+      'label' => 'edit-name',
+    ),
+    'name_edit' => 
+    array (
+      'label' => 'name_edit',
+    ),
   ),
   'actions' => 
   array (

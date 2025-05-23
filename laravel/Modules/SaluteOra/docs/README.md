@@ -14,39 +14,39 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 
 ## Indice della Documentazione
 
-- [Indice Completo](INDEX.md) - Panoramica di tutta la documentazione disponibile
+- [Indice Completo](index.md) - Panoramica di tutta la documentazione disponibile
 
 ### Architettura e Pattern
 
-- [Single Table Inheritance](SINGLE_TABLE_INHERITANCE.md) - Pattern STI per i modelli utente
-- [Best Practices per l'Ereditarietà](INHERITANCE_BEST_PRACTICES.md) - Linee guida per l'ereditarietà delle classi
-- [Model Inheritance Pattern](MODEL_INHERITANCE_PATTERN.md) - Pattern di ereditarietà per i modelli
+- [Single Table Inheritance](single_table_inheritance.md) - Pattern STI per i modelli utente
+- [Best Practices per l'Ereditarietà](inheritance_best_practices.md) - Linee guida per l'ereditarietà delle classi
+- [Model Inheritance Pattern](model_inheritance_pattern.md) - Pattern di ereditarietà per i modelli
 
 ### Best Practices
 
-- [Actions Best Practices](ACTIONS_BEST_PRACTICES.md) - Linee guida per le Actions
-- [Data Transfer Objects](DATA_TRANSFER_OBJECTS_COMPLETE.md) - Implementazione e utilizzo dei DTO
-- [Migrations Best Practices](MIGRATIONS_BEST_PRACTICES.md) - Linee guida per le migrazioni
-- [Error Handling Best Practices](ERROR_HANDLING_BEST_PRACTICES.md) - Gestione degli errori
-- [Enums Best Practices](ENUMS_BEST_PRACTICES.md) - Utilizzo degli enum in PHP 8.2+
+- [Actions Best Practices](actions_best_practices.md) - Linee guida per le Actions
+- [Data Transfer Objects](data_transfer_objects_complete.md) - Implementazione e utilizzo dei DTO
+- [Migrations Best Practices](migrations_best_practices.md) - Linee guida per le migrazioni
+- [Error Handling Best Practices](error_handling_best_practices.md) - Gestione degli errori
+- [Enums Best Practices](enums_best_practices.md) - Utilizzo degli enum in PHP 8.2+
 
 ### Filament
 
-- [Filament Label Translation System](FILAMENT_LABEL_TRANSLATION_SYSTEM.md) - Sistema di traduzione delle etichette
-- [Filament Resources Implementation](FILAMENT_RESOURCES_IMPLEMENTATION.md) - Implementazione dei resource
+- [Filament Label Translation System](filament_label_translation_system.md) - Sistema di traduzione delle etichette
+- [Filament Resources Implementation](filament_resources_implementation.md) - Implementazione dei resource
 
 ### Modelli
 
-- [Doctor](Models/Doctor.md) - Documentazione del modello Doctor
-- [User](Models/User.md) - Documentazione del modello User
-- [DoctorRegistrationWorkflow](Models/DoctorRegistrationWorkflow.md) - Workflow di registrazione dei medici
+- [Doctor](models/doctor.md) - Documentazione del modello Doctor
+- [User](models/user.md) - Documentazione del modello User
+- [DoctorRegistrationWorkflow](models/doctor_registration_workflow.md) - Workflow di registrazione dei medici
 
 > **Nota:** La moderazione utenti è ora gestita direttamente tramite il modello User. Vedi [moderation-architettura.md](./moderation-architettura.md)
 
 ### Processi
 
-- [Doctor Registration Process](DOCTOR_REGISTRATION_PROCESS.md) - Processo di registrazione dei medici
-- [Doctor Registration Workflow](DOCTOR_REGISTRATION_WORKFLOW.md) - Workflow di registrazione dei medici
+- [Doctor Registration Process](doctor_registration_process.md) - Processo di registrazione dei medici
+- [Doctor Registration Workflow](doctor_registration_workflow.md) - Workflow di registrazione dei medici
 
 ## Regole Fondamentali
 
@@ -284,61 +284,6 @@ Per dettagli e motivazioni vedi:
 
 ## Collegamenti
 - [Modello Doctor](./Models/Doctor.md)
-- [DoctorResource: Step Informazioni Personali](./filament/resources/doctor-resource.md)
-- [Standard Xot: Ereditarietà dei Modelli](../Xot/docs/standards/README.md)
-- [Struttura progetto e STI](./architecture/struttura-progetto.md)
-- [Migrazioni e database](./database/migrations.md)
-
-# Errori di Validazione Custom
-
-Per restituire errori custom nei form, usa sempre:
-
-```php
-throw \Illuminate\Validation\ValidationException::withMessages([
-    'campo' => ['Messaggio di errore personalizzato.'],
-]);
-```
-
-Vedi dettagli in [errors/validation.md](./errors/validation.md)
-
-# Regola: Non duplicare trait già presenti nei modelli base
-
-Se un trait (es. HasFactory) è già presente in un modello base (es. BaseUser), **non aggiungerlo** nei modelli che lo estendono (es. User, Doctor, Patient).
-
-Motivazione: evitare ridondanza, warning, confusione e problemi di override.
-
-## Checklist di Ripartenza (dopo restart)
-- Verifica che tutte le migration siano applicate (`users` aggiornata per STI)
-- Controlla che i trait NON siano duplicati nei modelli specializzati
-- Verifica la catena di ereditarietà: Doctor → User → BaseUser
-- Controlla che le ValidationException usino sempre `withMessages`
-- Assicurati che la documentazione sia aggiornata e neutra
-- Controlla i file chiave:
-  - [Doctor.php](app/Models/Doctor.php)
-  - [User.php](app/Models/User.php)
-  - [BaseUser.php](../User/app/Models/BaseUser.php)
-  - [DoctorResource.php](app/Filament/Resources/DoctorResource.php)
-  - [RegisterAction.php](app/Actions/RegisterAction.php)
-  - [RegistrationWidget.php](../User/app/Filament/Widgets/RegistrationWidget.php)
-  - [UserType.php](app/Enums/UserType.php)
-  - [UserState.php](app/Enums/UserState.php)
-- Consulta le sezioni:
-  - [Modello Doctor](Models/Doctor.md)
-  - [Errori di Validazione](errors/validation.md)
-  - [Migrazioni e STI](database/migrations.md)
-  - [Best Practices](ACTIONS_BEST_PRACTICES.md)
-  - [Ereditarietà](INHERITANCE_BEST_PRACTICES.md)
-  - [Analisi UserModeration](UserModeration_model_valutazione.md)
-
-## Regole Fondamentali
-- Documentazione sempre neutra
-- Mai duplicare trait già presenti nei modelli base
-- Usare sempre il trait HasParent per STI
-- Validazione custom solo con ValidationException::withMessages
-- Aggiornare sempre la doc PRIMA di ogni modifica
-
-## Collegamenti
-- [Modello Doctor](Models/Doctor.md)
 - [Migrazioni](database/migrations.md)
 - [Errori di Validazione](errors/validation.md)
 - [Ereditarietà](INHERITANCE_BEST_PRACTICES.md)
@@ -591,4 +536,3 @@ protected $casts = [ 'state' => UserState::class ];
 - Le classi concrete (Pending, Active, ecc.) vanno in `app/States/User/`.
 - Se trovi una `UserState` in `app/States/User/UserState.php`, rinominala in `.old` e rimuovila dopo verifica.
 - **Motivazione:** coerenza con PSR-4, autoloading, best practice Spatie Model States, chiarezza architetturale.
-

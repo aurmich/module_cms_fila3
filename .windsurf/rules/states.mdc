@@ -3,32 +3,6 @@ description:
 globs:
 alwaysApply: false
 ---
-# Regole per gli Stati e le Transizioni
-
-## Struttura Directory
-- Le classi di transizione devono essere nella sottodirectory `Transitions/` della directory dello stato
-- Il namespace deve essere `Modules\<nome_modulo>\States\<entità>`
-
-## Convenzioni di Nomenclatura
-- Classi di stato: nome descrittivo (es. `Pending`, `Active`)
-- Classi di transizione: pattern `FromStateToState` (es. `PendingToActive`)
-
-## Implementazione
-- Estendere `Transition` di Spatie
-- Implementare costruttore con stato di partenza
-- Implementare `canTransition()` e `handle()`
-- Utilizzare `$this->state->getModel()` per accedere al modello
-
-## Best Practices
-- Mantenere la logica di transizione atomica
-- Documentare le condizioni di transizione
-- Utilizzare il trait `HasStates` nel modello
-- Definire le transizioni nel metodo `config()`
-
-## Collegamenti
-- [Documentazione Stati SaluteOra](mdc:../../laravel/Modules/SaluteOra/docs/STATES.md)
-- [Regole Generali Stati](mdc:../../laravel/Modules/Xot/docs/STATES.md)
-
 # Regole per Stati e Transizioni
 
 ## Quando

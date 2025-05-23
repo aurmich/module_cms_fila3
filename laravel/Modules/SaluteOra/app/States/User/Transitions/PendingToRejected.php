@@ -11,7 +11,7 @@ use Modules\SaluteOra\Models\User;
 
 class PendingToRejected extends Transition
 {
-    public function __construct(public User $user) {}
+    public function __construct(public User $user, public ?string $message='') {}
 
     public function handle(): User
     {

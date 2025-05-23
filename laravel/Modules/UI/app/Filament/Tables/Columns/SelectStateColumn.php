@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Support\Arr;
 use Spatie\ModelStates\State;
 use Modules\SaluteOra\Models\User;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\SelectColumn;
 use Modules\SaluteOra\States\User\UserState;
@@ -39,11 +41,16 @@ class SelectStateColumn extends SelectColumn
             return $states;
         });
 
+
         $this->beforeStateUpdated(function (Model $record, $state) {
-            $record->state->transitionTo($state);
+            $message='';
+            $record->state->transitionTo($state,$message);
         });
 
+
     }
+
+
 
 
 }
