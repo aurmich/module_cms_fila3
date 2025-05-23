@@ -15,5 +15,13 @@ return array (
     array (
       'label' => 'verified',
     ),
+    'email' => 
+    array (
+      'label' => 'email',
+    ),
+    'name' => 
+    array (
+      'label' => 'name',
+    ),
   ),
 );

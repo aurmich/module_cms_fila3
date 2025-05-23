@@ -11,13 +11,13 @@ use Modules\SaluteOra\Models\User;
 
 class SuspendedToActive extends Transition
 {
-    public function __construct(public User $user) {
-        //dddx('a');
+    public function __construct(public User $user, public ?string $message='') {
+
     }
 
     public function handle(): User
     {
-        //dddx('ab');
+
         $this->user->state = new Active($this->user);
         $this->user->save();
         return $this->user;
