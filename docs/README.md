@@ -20,23 +20,6 @@
 > - [README.md tema Two](../../../../laravel/Themes/Two/docs/README.md)
 > - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
 
-> - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
-> - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
-> - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
-> - [README.md modulo Dental](../../../../laravel/Modules/Dental/docs/README.md)
-> - [README.md modulo GDPR](../../../../laravel/Modules/Gdpr/docs/README.md)
-> - [README.md modulo User](../../../../laravel/Modules/User/docs/README.md)
-> - [README.md modulo Lang](../../../../laravel/Modules/Lang/docs/README.md)
-> - [README.md modulo Media](../../../../laravel/Modules/Media/docs/README.md)
-> - [README.md modulo Notify](../../../../laravel/Modules/Notify/docs/README.md)
-> - [README.md modulo Reporting](../../../../laravel/Modules/Reporting/docs/README.md)
-> - [README.md modulo Tenant](../../../../laravel/Modules/Tenant/docs/README.md)
-> - [README.md modulo UI](../../../../laravel/Modules/UI/docs/README.md)
-> - [README.md modulo Xot](../../../../laravel/Modules/Xot/docs/README.md)
-> - [README.md modulo Chart](../../../../laravel/Modules/Chart/docs/README.md)
-> - [README.md tema One](../../../../laravel/Themes/One/docs/README.md)
-> - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
-
 # Jigsaw Docs Starter Template
 
 ## Introduzione
@@ -120,7 +103,7 @@ Per domande o problemi, consultare:
 1. La [documentazione ufficiale](https://saluteora.com/docs)
 2. Il [forum di supporto](https://saluteora.com/forum)
 3. Il team di sviluppo via [email](mailto:support@saluteora.com)
-> Tip: This configuration file is also where you’ll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official [Jigsaw documentation](https://jigsaw.tighten.co/docs/collections/) to learn more.
+> Tip: This configuration file is also where you'll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official [Jigsaw documentation](https://jigsaw.tighten.co/docs/collections/) to learn more.
 
 ---
 
@@ -157,7 +140,7 @@ Files that don't require processing (such as images and fonts) can be added dire
 
 ## Building Your Site
 
-Now that you’ve edited your configuration variables and know how to customize your styles and content, let’s build the site.
+Now that you've edited your configuration variables and know how to customize your styles and content, let's build the site.
 
 ```bash
 # build static files with Jigsaw
@@ -245,4 +228,25 @@ npm run dev
 * [README.md](laravel/Modules/Cms/docs/components/README.md)
 * [README.md](laravel/Themes/Two/docs/README.md)
 * [README.md](laravel/Themes/One/docs/README.md)
+
+## Obiettivi Funzionali
+- Gestione dei contenuti e delle pagine
+- Supporto per blocchi di contenuto personalizzabili
+- Integrazione con Filament per l'amministrazione
+
+## Decisioni Architetturali
+- Utilizzo di XotBaseResource per le risorse Filament
+- Implementazione di traduzioni tramite file di lingua
+- Gestione delle relazioni tra contenuti e utenti
+
+## Collegamenti
+- [Documentazione Principale](../../docs/README.md)
+- [Regole Globali](../../docs/REGOLE_GLOBALI.md)
+- [Convenzioni di Denominazione](../../docs/NAMING_CONVENTIONS.md)
+
+## Backlink
+- [Modulo User](../User/docs/README.md)
+- [Modulo Xot](../Xot/docs/README.md)
+- [Modulo Blog](../Blog/docs/README.md)
+- [Modulo Predict](../Predict/docs/README.md)
 
