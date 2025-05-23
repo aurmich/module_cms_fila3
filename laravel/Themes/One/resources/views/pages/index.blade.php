@@ -27,7 +27,9 @@ new class extends Component
 ?>
 
 <x-layouts.app>
+    @volt('home')
     <div>
-       <x-page-content slug="home" />
+        <x-page side="content" slug="home" :type="auth()->user()?->type->value"/>
     </div>
+    @endvolt
 </x-layouts.app>
