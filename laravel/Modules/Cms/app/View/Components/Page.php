@@ -44,17 +44,7 @@ class Page extends Component
      */
     public function render(): ViewContract
     {
-        /*
-        $comps=Blade::getClassComponentAliases();
-        $paths = Blade::getAnonymousComponentPaths();
-        $filtered=Arr::where($comps,function ($value,$key){
-            return Str::startsWith($key,'blocks.');
-        });
-        dddx([
-            'filtered'=>$filtered
-            ,'paths'=>$paths
-        ]);
-        */
+
         $view = 'cms::components.page-content';
         $view_params = [];
         if (! view()->exists($view)) {

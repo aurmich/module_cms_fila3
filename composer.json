@@ -3,6 +3,7 @@
         "phpstan/phpstan": "^2.1"
     },
     "require": {
-        "dotswan/filament-grapesjs-v3": "*"
+        "dotswan/filament-grapesjs-v3": "*",
+        "spatie/laravel-queueable-action": "^2.16"
     }
 }

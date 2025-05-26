@@ -32,4 +32,10 @@ Il componente si integra con i widget FullCalendar del modulo SaluteOra seguendo
 
 ## Collegamenti
 - [Documentazione Frontend](/docs/frontend/calendar-component.md)
-- [Regole FullCalendar](/Modules/SaluteOra/docs/fullcalendar_implementation_guide.md) 
+- [Regole FullCalendar](/Modules/SaluteOra/docs/fullcalendar_implementation_guide.md)
+
+## File Correlati
+
+- `resources/views/livewire/components/calendar.blade.php`: Template del componente
+- `lang/it/calendar.php`: File di traduzione
+- `app/Filament/Widgets/*CalendarWidget.php`: Widget Filament 

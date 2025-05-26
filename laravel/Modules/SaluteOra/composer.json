@@ -1,28 +1,22 @@
 {
-    "name": "exabytesrl/module_saluteora",
-    "description": "",
+    "name": "saluteora/module",
+    "description": "SaluteOra Module",
     "authors": [
         {
-            "name": "Marco Sottana",
-            "email": "marco.sottana@gmail.com"
+            "name": "SaluteOra Team",
+            "email": "team@saluteora.com"
         }
     ],
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider",
-                "Modules\\SaluteOra\\Providers\\Filament\\AdminPanelProvider"
-            ],
-            "aliases": {
-
-            }
+                "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider"
+            ]
         }
     },
     "autoload": {
         "psr-4": {
-            "Modules\\SaluteOra\\": "app/",
-            "Modules\\SaluteOra\\Database\\Factories\\": "database/factories/",
-            "Modules\\SaluteOra\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\SaluteOra\\": ""
         }
     },
     "autoload-dev": {

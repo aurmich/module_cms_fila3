@@ -48,6 +48,7 @@
                     "view": "pub_theme::components.blocks.calendar",
                     "title": "Calendario",
                     "subtitle": "I tuoi appuntamenti programmati",
+                    "type": "patient",
                     "events": [
                         {
                             "title": "Controllo Prenatale",

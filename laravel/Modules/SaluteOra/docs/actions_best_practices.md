@@ -4,6 +4,30 @@
 
 Le Actions sono classi che implementano una singola responsabilità (principio SRP) e rappresentano un'operazione o un caso d'uso specifico dell'applicazione. In questo modulo, utilizziamo il pattern Action per incapsulare la logica di business e renderla riutilizzabile e testabile.
 
+## Convenzioni dei Nomi e dei Namespace
+
+### Struttura dei Namespace
+
+I namespace delle Actions devono seguire questa struttura:
+
+```
+Modules\<ModuleName>\Actions\<Domain>\<ActionName>Action
+```
+
+Dove:
+- `<ModuleName>`: Nome del modulo in PascalCase (es. `SaluteOra`)
+- `<Domain>`: Dominio o contesto dell'azione (es. `Patient`, `Doctor`, `Calendar`)
+- `<ActionName>`: Nome descrittivo dell'azione in PascalCase (es. `FetchEvents`)
+
+**Esempi:**
+- `Modules\SaluteOra\Actions\Patient\Calendar\FetchEventsAction`
+- `Modules\SaluteOra\Actions\Doctor\Appointment\CreateAppointmentAction`
+
+### Convenzioni di Nome
+- I nomi delle classi devono terminare con `Action`
+- I nomi dei file devono corrispondere esattamente ai nomi delle classi
+- I namespace non devono contenere `App\`
+
 ## Struttura di una Action
 
 Una Action ben strutturata dovrebbe seguire questi principi:
@@ -463,3 +487,36 @@ public function execute(array $data): Doctor
 ## Conclusione
 
 Le Actions sono un pattern potente per organizzare la logica di business nell'applicazione. Seguendo le best practices descritte in questo documento, puoi creare Actions robuste, testabili e manutenibili che rappresentano i casi d'uso della tua applicazione in modo chiaro e conciso.
+
+# Best Practices per Actions (Queueable)
+
+## Regola Fondamentale
+
+Tutte le Actions che possono essere eseguite in modo asincrono o che richiedono scalabilità devono SEMPRE usare il trait `Spatie\QueueableAction\QueueableAction`.
+
+- Permette di eseguire l'action sia in modo sincrono che asincrono (onQueue)
+- Garantisce compatibilità con Horizon, retry, chain, ecc.
+- Favorisce la testabilità e la separazione delle responsabilità
+
+## Esempio
+```php
+use Spatie\QueueableAction\QueueableAction;
+
+final class FetchEventsAction
+{
+    use QueueableAction;
+    // ...
+}
+```
+
+## Motivazione
+- Scalabilità: permette di delegare carichi pesanti alla coda
+- Performance: evita blocchi nel thread principale
+- Standardizzazione: tutte le actions seguono lo stesso pattern
+
+## Collegamenti
+- [queueable-actions-guide.md](queueable-actions-guide.md)
+- [Xot/docs/struttura-path-moduli.mdc](../../Xot/docs/struttura-path-moduli.mdc)
+- [directory-structure.md](directory-structure.md)
+- [README.md](README.md)
+- [fullcalendar_parental_widgets.md](fullcalendar_parental_widgets.md)

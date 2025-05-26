@@ -1123,4 +1123,55 @@ Questa implementazione fornisce:
 5. **Performance**: Caching intelligente per tenant
 6. **Sanitario**: Funzionalità specifiche per ambiente medico
 
-Il sistema garantisce che ogni tipo di utente veda solo i dati appropriati, mantenendo la sicurezza e la privacy richieste in ambito sanitario. 
+Il sistema garantisce che ogni tipo di utente veda solo i dati appropriati, mantenendo la sicurezza e la privacy richieste in ambito sanitario.
+
+# Flusso Prenotazione Paziente con FullCalendar
+
+## Esperienza Utente
+
+1. **Scelta dello Studio**
+   - Il paziente, dopo aver effettuato il login, seleziona lo studio dentistico presso cui desidera prenotare.
+   - Questa scelta è fondamentale per isolare la disponibilità e le regole di prenotazione per ogni studio (multi-tenant).
+   - ![Selezione studio](../images/7.png)
+
+2. **Visualizzazione Calendario**
+   - Dopo la selezione dello studio, viene mostrato il calendario (FullCalendar) con evidenziati i giorni prenotabili.
+   - I giorni disponibili sono calcolati in base alle regole di business dello studio, alle fasce orarie e alle disponibilità dei dottori.
+   - I giorni non prenotabili sono disabilitati o non cliccabili.
+   - ![Calendario giorni disponibili](../images/8.png)
+
+3. **Selezione Giorno**
+   - Il paziente clicca su un giorno disponibile.
+   - Sotto il calendario, vengono mostrati gli orari disponibili per la prenotazione in quel giorno (slot orari).
+   - ![Orari disponibili](../images/9.png)
+
+4. **Scelta Orario e Conferma**
+   - Il paziente seleziona uno degli orari disponibili e conferma la prenotazione.
+   - Il sistema verifica in tempo reale la disponibilità e registra l'appuntamento.
+   - Viene mostrata una conferma visiva e inviata una notifica.
+
+## Motivazione Scelta FullCalendar
+
+- **Standard di mercato**: FullCalendar è la libreria di riferimento per la gestione di calendari interattivi in ambito web, usata da moltissimi prodotti enterprise e open source.
+- **Flessibilità**: Permette di personalizzare la visualizzazione (giorno, settimana, mese), integrare facilmente logiche di business, e supporta eventi dinamici, drag&drop, e responsive design.
+- **Accessibilità**: Supporta localizzazione, accessibilità e mobile out-of-the-box.
+- **Ecosistema**: Ampio supporto di plugin, documentazione, community e compatibilità con framework moderni.
+- **Performance**: Gestisce bene dataset anche di grandi dimensioni grazie a virtualizzazione e lazy loading.
+- **Alternativa**: Soluzioni custom sarebbero più costose, meno manutenibili e meno standardizzate. Altre librerie non offrono lo stesso livello di maturità e supporto.
+
+## Architettura e Implicazioni
+
+- **Multi-tenant**: Ogni studio ha regole e disponibilità proprie; la selezione dello studio filtra tutti i dati e le azioni successive.
+- **Widget Calendar**: Il widget FullCalendar viene configurato dinamicamente in base allo studio selezionato e al tipo utente (paziente, dottore, admin).
+- **Slot Orari**: Gli slot vengono calcolati lato backend e restituiti in risposta alla selezione del giorno, garantendo coerenza e prevenendo overbooking.
+- **Sicurezza**: Il paziente può vedere solo i giorni/orari effettivamente prenotabili secondo le policy dello studio.
+- **UX**: Il flusso è ottimizzato per semplicità, immediatezza e riduzione degli errori.
+
+## Riferimenti Immagini
+- [7.png](../images/7.png): Selezione studio
+- [8.png](../images/8.png): Visualizzazione giorni disponibili
+- [9.png](../images/9.png): Orari disponibili per il giorno selezionato
+
+## Note
+- Il sistema può essere facilmente esteso per gestire regole di business più complesse (es. limiti di prenotazione, fasce prioritarie, promemoria, ecc.)
+- FullCalendar consente di integrare facilmente logiche di validazione, feedback visivo e notifiche in tempo reale.
