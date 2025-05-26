@@ -3,88 +3,269 @@
 ## Overview
 - Widgets: Develop three FullCalendar widgets for different user types: Patient, Doctor, and Admin.
 - Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
-- User Types: Implement user types (Doctor, Patient, Admin) using the Parental package for single table inheritance.
+# FullCalendar Widget Implementation
 
-## Widget Types
+## Overview
+- Widgets: Develop three FullCalendar widgets for different user types: Patient, Doctor, and Admin.
+- Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
+# FullCalendar Widget Implementation per SaluteOra
 
-### Patient Calendar Widget
-- Purpose: Allows patients to view their own appointments.
-- Features:
-  - Displays personal appointments.
-  - Provides links to appointment details.
-  - Sends reminder notifications.
+## Panoramica
 
-### Doctor Calendar Widget
-- Purpose: Enables doctors to view appointments for their selected practice location.
-- Features:
-  - Shows appointments for patients at the selected location.
-  - Allows filtering by date and time.
-  - Supports appointment status management (scheduled, confirmed, completed, canceled).
+Implementazione di 3 widget FullCalendar per l'applicazione sanitaria SaluteOra:
+- **PatientCalendarWidget**: Vista calendario per pazienti (sola lettura)
+- **DoctorCalendarWidget**: Vista calendario per dottori (CRUD completo)
+- **AdminCalendarWidget**: Vista calendario per amministratori (vista globale)
 
-### Admin Calendar Widget
-- Purpose: Provides a comprehensive view of all appointments across all locations.
-- Features:
-  - Access to all appointment data.
-  - Advanced filtering and reporting capabilities.
-  - Management of all practice locations.
+## Collegamenti alla Documentazione
 
-## Multi-Tenancy Setup
-- Configuration: Follow Filament's tenancy documentation to set up tenant registration, profile pages, and tenant-aware routes.
-- Customization: Customize tenant menus and relationships to fit the healthcare context.
+- [Componente Calendar Frontend](../../../../docs/frontend/calendar-component.md)
+- [Configurazione FullCalendar](./fullcalendar_configuration.md)
+- [Implementazione Multi-Tenant](./fullcalendar_parental_widgets.md)
+- [Best Practices FullCalendar](./fullcalendar-best-practices.md)
+- [Compilazione Temi](../../../../docs/frontend/compilazione_temi.md)
 
-## User Type Implementation with Parental
-- Installation: Install the Parental package using Composer:
-  ```bash
-  composer require tightenco/parental
-  ```
-- Parent Model: Define a parent model (e.g., `User`) using the `HasChildren` trait.
-  ```php
-  namespace App\Models;
+## Architettura
 
-  use Illuminate\Database\Eloquent\Model;
-  use Parental\HasChildren;
+### Estensione delle Classi Base
+- **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste)
+- Utilizzare il trait `Modules\SaluteOra\Traits\HasFullCalendarConfig` per configurazioni comuni
 
-  class User extends Model
-  {
-      use HasChildren;
-      // Additional logic
-  }
-  ```
-- Child Models: Define child models (e.g., `Doctor`, `Patient`, `Admin`) using the `HasParent` trait.
-  ```php
-  namespace App\Models;
+### Multi-Tenancy con Parental STI
+- **Single Table Inheritance**: Utilizzo di `tightenco/parental` per tipi utente
+- **3 tipi di utente**: Patient, Doctor, Admin (non ruoli ma tipi)
+- **Tenancy di Filament**: Utilizzare `Filament::getTenant()` per studio corrente
+- **Isolamento dati**: Ogni widget filtra automaticamente per permessi utente
 
-  use Parental\HasParent;
+## Widget Implementati
 
-  class Doctor extends User
-  {
-      use HasParent;
-      // Additional logic specific to doctors
-  }
-  ```
+### 1. PatientCalendarWidget
+```php
+namespace Modules\SaluteOra\Filament\Widgets;
 
-## Implementation Steps
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use Modules\SaluteOra\Traits\HasFullCalendarConfig;
 
-### Step 1: Install FullCalendar
-- Command: `composer require saade/filament-fullcalendar:^3.0`
+class PatientCalendarWidget extends FullCalendarWidget
+{
+    use HasFullCalendarConfig;
 
-### Step 2: Create Widgets
-- Command: `php artisan make:filament-widget PatientCalendarWidget --module=SaluteOra`
-- Base Class: Extend `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`.
+    public Model|string|null $model = Appointment::class;
+    protected static ?int $sort = 1;
+    protected static ?string $maxHeight = '600px';
+}
+```
 
-### Step 3: Configure Widgets
-- Configuration: Use the `config()` method to set up calendar options such as `firstDay`, `locale`, `timezone`, and `businessHours`.
+**Caratteristiche:**
+- Vista: `timeGridWeek`
+- Accesso: Solo `UserType::PATIENT`
+- Filtro: `where('patient_id', auth()->id())`
+- Funzionalità: Solo visualizzazione (sola lettura)
+- Configurazione: `config('fullcalendar.widgets.patient')`
 
-### Step 4: Fetch Events
-- Method: Implement `fetchEvents()` to retrieve and display events based on user type and tenancy.
+### 2. DoctorCalendarWidget
+```php
+namespace Modules\SaluteOra\Filament\Widgets;
 
-## Best Practices
-- Security: Ensure data is filtered for the current user and sensitive information is protected.
-- Performance: Optimize queries and implement caching where appropriate.
-- Accessibility: Ensure the UI is accessible and complies with WCAG standards.
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use Modules\SaluteOra\Traits\HasFullCalendarConfig;
 
-## Additional Resources
-- [FullCalendar Documentation](https://fullcalendar.io/docs)
-- [Filament Tenancy Documentation](https://filamentphp.com/docs/3.x/panels/tenancy)
-- [Saade FullCalendar Plugin GitHub](https://github.com/saade/filament-fullcalendar)
-- [Parental GitHub Repository](https://github.com/tighten/parental)
+class DoctorCalendarWidget extends FullCalendarWidget
+{
+    use HasFullCalendarConfig;
+
+    public Model|string|null $model = Appointment::class;
+    protected static ?int $sort = 1;
+    protected static ?string $maxHeight = '600px';
+}
+```
+
+**Caratteristiche:**
+- Vista: `timeGridWeek`
+- Accesso: `UserType::DOCTOR` + tenancy
+- Filtro: `where('studio_id', Filament::getTenant()->id)`
+- Funzionalità: CRUD completo, drag&drop, resize
+- Configurazione: `config('fullcalendar.widgets.doctor')`
+
+### 3. AdminCalendarWidget
+```php
+namespace Modules\SaluteOra\Filament\Widgets;
+
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use Modules\SaluteOra\Traits\HasFullCalendarConfig;
+
+class AdminCalendarWidget extends FullCalendarWidget
+{
+    use HasFullCalendarConfig;
+
+    public Model|string|null $model = Appointment::class;
+    protected static ?int $sort = 1;
+    protected static ?string $maxHeight = '600px';
+}
+```
+
+**Caratteristiche:**
+- Vista: `dayGridMonth`
+- Accesso: `UserType::ADMIN`
+- Filtro: Tutti gli appuntamenti (opzionale per studio)
+- Funzionalità: Vista globale, filtri avanzati
+- Configurazione: `config('fullcalendar.widgets.admin')`
+
+## Trait HasFullCalendarConfig
+
+```php
+namespace Modules\SaluteOra\Traits;
+
+trait HasFullCalendarConfig
+{
+    public function config(): array
+    {
+        return [
+            'locale' => 'it',
+            'timezone' => 'Europe/Rome',
+            'firstDay' => 1, // Lunedì
+            'headerToolbar' => [
+                'left' => 'prev,next today',
+                'center' => 'title',
+                'right' => 'dayGridMonth,timeGridWeek,timeGridDay'
+            ],
+            'businessHours' => [
+                'daysOfWeek' => [1, 2, 3, 4, 5, 6], // Lun-Sab
+                'startTime' => '08:00',
+                'endTime' => '19:00',
+            ],
+            'slotDuration' => '00:30:00',
+            'eventTimeFormat' => [
+                'hour' => '2-digit',
+                'minute' => '2-digit',
+                'hour12' => false,
+            ],
+        ];
+    }
+}
+```
+
+## Sicurezza e Controlli Accesso
+
+### Middleware EnsureUserType
+```php
+// Protezione panel per tipo utente
+EnsureUserType::class.':patient'
+EnsureUserType::class.':doctor'
+EnsureUserType::class.':admin'
+```
+
+### Policy AppointmentPolicy
+```php
+public function viewAny(User $user): bool
+{
+    return match ($user->type) {
+        UserType::ADMIN => true,
+        UserType::DOCTOR => $user->isActive(),
+        UserType::PATIENT => $user->isActive(),
+        default => false,
+    };
+}
+```
+
+## Performance e Ottimizzazioni
+
+### Caching
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    $cacheKey = $this->getCacheKey($fetchInfo);
+    
+    return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+        return $this->getEventsQuery($fetchInfo)
+            ->with(['patient', 'doctor', 'studio'])
+            ->limit(100)
+            ->get()
+            ->map(fn ($appointment) => $this->transformToEventData($appointment))
+            ->toArray();
+    });
+}
+```
+
+### Query Optimization
+- **SEMPRE** utilizzare eager loading: `with(['patient', 'doctor', 'studio'])`
+- **SEMPRE** limitare query con `limit(100)`
+- **SEMPRE** filtrare per range di date
+- **SEMPRE** utilizzare caching con TTL appropriato
+
+## Configurazione Centralizzata
+
+File: `config/fullcalendar.php`
+```php
+return [
+    'widgets' => [
+        'patient' => [
+            'defaultView' => 'timeGridWeek',
+            'editable' => false,
+            'selectable' => false,
+        ],
+        'doctor' => [
+            'defaultView' => 'timeGridWeek',
+            'editable' => true,
+            'selectable' => true,
+            'eventDurationEditable' => true,
+        ],
+        'admin' => [
+            'defaultView' => 'dayGridMonth',
+            'editable' => false,
+            'selectable' => false,
+        ],
+    ],
+    'colors' => [
+        'appointment_types' => [
+            'consultation' => '#3B82F6',
+            'cleaning' => '#10B981',
+            'treatment' => '#F59E0B',
+            'emergency' => '#EF4444',
+        ],
+        'appointment_status' => [
+            'scheduled' => '#6B7280',
+            'confirmed' => '#10B981',
+            'completed' => '#059669',
+            'cancelled' => '#EF4444',
+        ],
+    ],
+];
+```
+
+## Testing
+
+### Test Obbligatori
+```php
+// Test caricamento eventi
+public function test_can_fetch_events_for_date_range()
+
+// Test permessi per tipo utente
+public function test_patient_can_view_only_own_appointments()
+public function test_doctor_can_view_studio_appointments()
+public function test_admin_can_view_all_appointments()
+
+// Test tenancy
+public function test_doctor_cannot_view_other_studio_appointments()
+
+// Test performance
+public function test_events_are_limited_to_reasonable_number()
+```
+
+## Filosofia e Zen
+
+### Principi Guida
+- **Semplicità**: Widget facili da comprendere e mantenere
+- **Coerenza**: Schema colori e comportamenti uniformi
+- **Accessibilità**: Supporto screen reader e navigazione keyboard
+- **Performance**: Caricamento rapido con caching intelligente
+- **Sicurezza**: Protezione dati sensibili sempre prioritaria
+
+### Approccio Sanitario
+- Priorità alla sicurezza dei dati pazienti
+- Interfaccia intuitiva per operatori sanitari
+- Gestione emergenze con priorità visive chiare (🚨)
+- Workflow ottimizzati per ambiente ospedaliero multi-studio
+- Conformità normative settore sanitario
+- Audit trail completo per responsabilità legali

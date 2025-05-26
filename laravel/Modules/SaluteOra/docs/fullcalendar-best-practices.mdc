@@ -3,3 +3,379 @@ description:
 globs:
 alwaysApply: false
 ---
+# FullCalendar Best Practices per SaluteOra
+
+## Regole Fondamentali
+
+### 1. Estensione Widget
+- NON estendere mai direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- Utilizzare sempre `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget`
+- Rispettare il namespace: `Modules\SaluteOra\Filament\Widgets\`
+
+### 2. Namespace e Struttura
+```php
+// CORRETTO
+namespace Modules\SaluteOra\Filament\Widgets;
+use Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget;
+
+// SBAGLIATO
+namespace Modules\SaluteOra\App\Filament\Widgets;
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+```
+
+### 3. Traduzioni
+- NON utilizzare `->label()` nei componenti
+- Utilizzare i file di traduzione: `__('saluteora::calendar.event_title')`
+- File traduzioni in: `Modules/SaluteOra/lang/it/calendar.php`
+
+### 4. Enum per Options
+- Convertire sempre array di opzioni in Enum
+- Utilizzare `->enum(AppointmentStatus::class)` invece di array hardcoded
+
+### 5. Metodi Obbligatori
+```php
+// Metodi che devono restituire array associativo con chiavi stringa
+public function getFormSchema(): array
+{
+    return [
+        'patient_section' => Forms\Components\Section::make()
+            ->schema([...]),
+        'appointment_details' => Forms\Components\Section::make()
+            ->schema([...]),
+    ];
+}
+```
+
+## Sicurezza e Privacy
+
+### 1. Filtro Dati Sensibili
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    // Filtrare sempre per utente corrente
+    $query = Appointment::query()
+        ->where('patient_id', auth()->user()->patient?->id);
+    
+    // Non esporre dati medici nei tooltip
+    return $query->get()->map(function ($appointment) {
+        return EventData::make()
+            ->title($appointment->patient->initials) // Non nome completo
+            ->extendedProps([
+                'type' => 'appointment', // Generico
+                // NON includere: diagnosi, note mediche, etc.
+            ]);
+    })->toArray();
+}
+```
+
+### 2. Autorizzazioni
+```php
+public static function canView(): bool
+{
+    return auth()->user()->can('view_appointment_calendar');
+}
+
+public function fetchEvents(array $fetchInfo): array
+{
+    // Verificare sempre i permessi
+    if (!auth()->user()->can('view_appointments')) {
+        return [];
+    }
+    
+    // Logica di recupero eventi...
+}
+```
+
+## Performance
+
+### 1. Query Optimization
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    return Appointment::query()
+        ->with(['patient:id,first_name,last_name', 'dentist:id,first_name,last_name'])
+        ->whereBetween('appointment_date', [$fetchInfo['start'], $fetchInfo['end']])
+        ->limit(100) // Limitare sempre i risultati
+        ->get()
+        ->map($this->transformToEventData(...))
+        ->toArray();
+}
+```
+
+### 2. Caching
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    $cacheKey = sprintf(
+        'calendar_events_%s_%s_%s',
+        auth()->id(),
+        $fetchInfo['start'],
+        $fetchInfo['end']
+    );
+
+    return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+        return $this->getEventsFromDatabase($fetchInfo);
+    });
+}
+```
+
+## Configurazione Standard
+
+### 1. Config Base SaluteOra
+```php
+public function config(): array
+{
+    return [
+        'firstDay' => 1, // Lunedì
+        'locale' => 'it',
+        'timezone' => 'Europe/Rome',
+        'businessHours' => [
+            'daysOfWeek' => [1, 2, 3, 4, 5], // Lun-Ven
+            'startTime' => '08:00',
+            'endTime' => '18:00',
+        ],
+        'slotDuration' => '00:15:00',
+        'snapDuration' => '00:15:00',
+        'allDaySlot' => false,
+        'nowIndicator' => true,
+        'selectable' => true,
+        'editable' => true,
+        'eventResizableFromStart' => true,
+        'eventDurationEditable' => true,
+        'eventStartEditable' => true,
+    ];
+}
+```
+
+### 2. Colori Stati Appuntamenti
+```php
+private function getStatusColor(AppointmentStatus $status): string
+{
+    return match ($status) {
+        AppointmentStatus::SCHEDULED => '#3b82f6', // Blue
+        AppointmentStatus::CONFIRMED => '#10b981', // Green
+        AppointmentStatus::IN_PROGRESS => '#f59e0b', // Amber
+        AppointmentStatus::COMPLETED => '#059669', // Emerald
+        AppointmentStatus::CANCELLED => '#ef4444', // Red
+        AppointmentStatus::NO_SHOW => '#6b7280', // Gray
+        default => '#6b7280',
+    };
+}
+```
+
+## Accessibilità
+
+### 1. Tooltip Accessibili
+```javascript
+function({ event, el }){
+    el.setAttribute("x-tooltip", "tooltip");
+    el.setAttribute("x-data", "{ 
+        tooltip: event.title + '\\n' + 
+                 'Orario: ' + event.start.toLocaleTimeString('it-IT') + '\\n' +
+                 'Stato: ' + event.extendedProps.status
+    }");
+    
+    // Aggiungere attributi ARIA
+    el.setAttribute("aria-label", event.title);
+    el.setAttribute("role", "button");
+    el.setAttribute("tabindex", "0");
+}
+```
+
+### 2. Keyboard Navigation
+```php
+public function config(): array
+{
+    return [
+        // ... altre configurazioni
+        'eventClick' => 'function(info) { 
+            // Gestire click e Enter key
+            if (info.jsEvent.type === "click" || info.jsEvent.key === "Enter") {
+                // Azione
+            }
+        }',
+    ];
+}
+```
+
+## Testing
+
+### 1. Test Widget
+```php
+/** @test */
+public function it_can_fetch_appointments_for_date_range(): void
+{
+    $appointment = Appointment::factory()->create([
+        'appointment_date' => now()->addDays(1),
+    ]);
+
+    $widget = new AppointmentCalendarWidget();
+    $events = $widget->fetchEvents([
+        'start' => now()->format('Y-m-d'),
+        'end' => now()->addWeek()->format('Y-m-d'),
+    ]);
+
+    $this->assertCount(1, $events);
+    $this->assertEquals($appointment->id, $events[0]['id']);
+}
+```
+
+### 2. Test Permessi
+```php
+/** @test */
+public function it_respects_user_permissions(): void
+{
+    $user = User::factory()->create();
+    $this->actingAs($user);
+
+    $widget = new AppointmentCalendarWidget();
+    $events = $widget->fetchEvents([
+        'start' => now()->format('Y-m-d'),
+        'end' => now()->addWeek()->format('Y-m-d'),
+    ]);
+
+    $this->assertEmpty($events);
+}
+```
+
+## Errori Comuni da Evitare
+
+### 1. Namespace Sbagliato
+```php
+// SBAGLIATO
+namespace Modules\SaluteOra\App\Filament\Widgets;
+
+// CORRETTO
+namespace Modules\SaluteOra\Filament\Widgets;
+```
+
+### 2. Estensione Diretta
+```php
+// SBAGLIATO
+class MyWidget extends \Saade\FilamentFullCalendar\Widgets\FullCalendarWidget
+
+// CORRETTO
+class MyWidget extends \Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget
+```
+
+### 3. Uso di ->label()
+```php
+// SBAGLIATO
+Forms\Components\TextInput::make('title')
+    ->label('Titolo Appuntamento')
+
+// CORRETTO
+Forms\Components\TextInput::make('title')
+    // Il label viene preso da lang/it/appointment.php
+```
+
+### 4. Array Options Hardcoded
+```php
+// SBAGLIATO
+Forms\Components\Select::make('status')
+    ->options([
+        'scheduled' => 'Programmato',
+        'confirmed' => 'Confermato',
+    ])
+
+// CORRETTO
+Forms\Components\Select::make('status')
+    ->enum(AppointmentStatus::class)
+```
+
+### 5. Metodi che Non Restituiscono Array Associativo
+```php
+// SBAGLIATO
+public function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('title'),
+        Forms\Components\Select::make('status'),
+    ];
+}
+
+// CORRETTO
+public function getFormSchema(): array
+{
+    return [
+        'title_field' => Forms\Components\TextInput::make('title'),
+        'status_field' => Forms\Components\Select::make('status'),
+    ];
+}
+```
+
+## Integrazione Multi-Modulo
+
+### 1. Eventi da Altri Moduli
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    $events = collect();
+    
+    // Eventi dal modulo SaluteOra
+    $appointments = $this->getAppointments($fetchInfo);
+    $events = $events->merge($appointments);
+    
+    // Eventi dal modulo Notification
+    if (class_exists(\Modules\Notification\Models\Reminder::class)) {
+        $reminders = $this->getReminders($fetchInfo);
+        $events = $events->merge($reminders);
+    }
+    
+    return $events->toArray();
+}
+```
+
+### 2. Configurazione Condivisa
+```php
+// config/saluteora.php
+return [
+    'fullcalendar' => [
+        'license_key' => env('FULLCALENDAR_LICENSE_KEY'),
+        'default_view' => 'timeGridWeek',
+        'business_hours' => [
+            'start' => '08:00',
+            'end' => '18:00',
+            'days' => [1, 2, 3, 4, 5],
+        ],
+    ],
+];
+```
+
+## Documentazione Obbligatoria
+
+### 1. PHPDoc Completo
+```php
+/**
+ * Widget per la gestione del calendario appuntamenti SaluteOra.
+ * 
+ * Questo widget permette di visualizzare, creare, modificare ed eliminare
+ * appuntamenti odontoiatrici per donne in gravidanza.
+ * 
+ * @see \Modules\SaluteOra\Models\Appointment
+ * @see \Modules\SaluteOra\Enums\AppointmentStatus
+ */
+class AppointmentCalendarWidget extends XotBaseFullCalendarWidget
+{
+    /**
+     * Recupera gli eventi per il range di date specificato.
+     * 
+     * @param array $fetchInfo Array contenente 'start' e 'end' date
+     * @return array Array di EventData per FullCalendar
+     */
+    public function fetchEvents(array $fetchInfo): array
+    {
+        // ...
+    }
+}
+```
+
+### 2. README Aggiornato
+- Aggiornare sempre il README del modulo
+- Documentare nuovi widget e funzionalità
+- Includere esempi di utilizzo
+- Linkare alla documentazione completa
+
+---
+
+*Queste regole devono essere seguite rigorosamente per mantenere la coerenza e la qualità del codice nel progetto SaluteOra.*
