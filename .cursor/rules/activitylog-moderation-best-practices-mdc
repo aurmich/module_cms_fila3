@@ -1,6 +1,6 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # Best Practice: ActivityLog per la Moderazione Utenti

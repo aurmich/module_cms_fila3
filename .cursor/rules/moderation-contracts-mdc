@@ -1,6 +1,6 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # Contratti e Interfacce per la Moderazione Utenti

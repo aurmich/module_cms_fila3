@@ -1,7 +1,7 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # Best Practices Event Sourcing & CQRS (Modulo Activity)
 
@@ -30,5 +30,5 @@ alwaysApply: false
 - https://github.com/spatie/laravel-event-sourcing
 - https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing
 - https://github.com/spatie/larabank-event-projector
-- [README Activity](../../laravel/Modules/Activity/docs/README.md)
-- [event-sourcing.md](../../laravel/Modules/Activity/docs/event-sourcing.md)
+- [README Activity](mdc:../../laravel/Modules/Activity/docs/README.md)
+- [event-sourcing.md](mdc:../../laravel/Modules/Activity/docs/event-sourcing.md)
