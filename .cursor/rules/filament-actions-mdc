@@ -1,7 +1,7 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # Filament Actions Best Practices
 
@@ -42,8 +42,8 @@ class ApproveOrderAction extends Action
 - [ ] Documentazione aggiornata
 
 ## Collegamenti correlati
-- [Filament Best Practices](./filament-best-practices.mdc)
-- [Validation Rules](./validation.mdc)
-- [Migration Best Practices](./migrations.mdc)
-- [Error Handling](./error-handling.mdc)
-- [Checklist di Ripartenza](../docs/checklist-di-ripartenza.md)
+- [Filament Best Practices](mdc:filament-best-practices.mdc)
+- [Validation Rules](mdc:validation.mdc)
+- [Migration Best Practices](mdc:migrations.mdc)
+- [Error Handling](mdc:error-handling.mdc)
+- [Checklist di Ripartenza](mdc:../docs/checklist-di-ripartenza.md)
