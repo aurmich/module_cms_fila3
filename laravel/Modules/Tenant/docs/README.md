@@ -1,5 +1,84 @@
 # Modulo Tenant - Modular Monolith
 
+## Architettura Modular Monolith: Best Practices 2025
+
+Questa sezione integra i principi dell'articolo "Architecting Laravel the Right Way: Modular Monoliths Done Right" (Mohamad Shahkhajeh, 2025) e le migliori pratiche moderne per la progettazione di moduli Laravel realmente indipendenti e manutenibili.
+
+### 1. Cos'è un Modular Monolith?
+Un monolite modulare è un'unica applicazione con moduli interni **ben separati**, ognuno con il proprio dominio, interfacce minime esposte e logica interna nascosta. Si distribuisce una sola app, ma ogni modulo è isolato e pronto per evolvere (anche verso microservizi, se necessario).
+
+### 2. Struttura a Livelli (Hexagonal/DDD)
+Ogni modulo segue una struttura ispirata all'architettura esagonale:
+
+```
+Modules/Tenant
+├── Domain         # Logica di dominio pura (entità, value object, regole)
+├── Application    # Casi d'uso (es. CreateTenant, UpdateTenant)
+├── Infrastructure # Accesso a DB, servizi esterni, repository
+├── UI             # Controller, Livewire, API, Filament
+```
+
+**Nessun livello deve "sanguinare" nell'altro!**
+
+### 3. Regole d'Oro della Modularità
+- Ogni modulo ha uno scopo chiaro (es. Tenant, User, Billing)
+- Gli internals sono nascosti: esporre solo contracts/eventi
+- Dipendere da astrazioni, mai da dettagli di altri moduli
+- Usare service provider per registrare servizi e binding
+- Comunicare tra moduli solo tramite eventi o contracts
+
+### 4. Shared Kernel (Nucleo condiviso)
+- Solo logica davvero condivisa (es. Currency, UserRole)
+- Deve essere piccolo, stabile, astratto
+- Evitare di trasformarlo in un "junk drawer"
+
+### 5. Testing
+- La logica di dominio e i casi d'uso devono essere testabili in puro PHP, senza bootstrap di Laravel
+- Esempio:
+```php
+$tenantCreator = new CreateTenant($tenantRepository);
+$tenantCreator->handle($request);
+```
+
+### 6. Transizione Graduale
+- Non serve riscrivere tutto: isolare un dominio alla volta
+- Creare la struttura a livelli, spostare la logica, registrare provider, bindare interfacce
+- Ripetere per ogni modulo
+
+### 7. Vantaggi
+- Deploy veloce, debug semplice, meno complessità
+- Ogni team può "possedere" un modulo
+- Pronto per evolvere verso microservizi solo se serve
+
+### 8. Esempio di struttura modulo
+```
+Modules/Tenant
+├── Domain
+│   ├── Tenant.php
+│   ├── TenantStatus.php
+├── Application
+│   ├── CreateTenant.php
+│   ├── UpdateTenant.php
+├── Infrastructure
+│   ├── TenantRepository.php
+├── UI
+│   ├── TenantController.php
+```
+
+### 9. Comunicazione tra moduli
+- **Eventi**: preferire event-driven (es. event(new TenantCreated($tenant)))
+- **Contracts**: esporre solo interfacce pubbliche
+- **Mai** chiamate statiche dirette tra moduli
+
+### 10. Riferimenti e collegamenti
+- [structure.md](structure.md) — Dettaglio struttura cartelle e PSR-4
+- [module_tenant.md](module_tenant.md) — Dettaglio dominio Tenant
+- [risoluzione_conflitti.md](risoluzione_conflitti.md) — Gestione conflitti tra moduli
+- [../User/docs/structure.md](../../User/docs/structure.md) — Esempio struttura modulo User
+- [../Xot/docs/structure.md](../../Xot/docs/structure.md) — Regole generali modular monolith
+
+---
+
 ## Introduzione
 
 Il modulo Tenant implementa un sistema di multi-tenancy seguendo l'approccio Modular Monolith, che combina i vantaggi dell'architettura modulare con la semplicità di un'applicazione monolitica.
@@ -47,57 +126,41 @@ Tenant/
 └── Tests/            # Test unitari e di integrazione
 ```
 
-## Best Practices
+## Best Practices (aggiornate 2025)
 
 ### 1. Isolamento
-
 - Ogni modulo deve essere il più possibile indipendente
 - Evitare dipendenze circolari tra moduli
 - Utilizzare eventi per la comunicazione tra moduli
 - Definire interfacce chiare per l'interazione tra moduli
+- **Non accedere mai direttamente agli internals di altri moduli**
 
 ### 2. Gestione delle Dipendenze
-
-```php
-// Service Provider del modulo
-public function register()
-{
-    $this->app->bind(TenantRepositoryInterface::class, TenantRepository::class);
-    $this->app->bind(TenantServiceInterface::class, TenantService::class);
-}
-```
+- Usare service provider per registrare binding e servizi
+- Dipendere sempre da contracts/interfacce, mai da classi concrete di altri moduli
+- Comunicare tramite eventi o contracts
 
 ### 3. Eventi e Listener
-
-```php
-// Evento
-class TenantCreated
-{
-    public function __construct(public Tenant $tenant)
-    {
-    }
-}
-
-// Listener
-class HandleTenantCreated
-{
-    public function handle(TenantCreated $event): void
-    {
-        // Logica di gestione
-    }
-}
-```
+- Preferire eventi per la comunicazione asincrona tra moduli
+- Ogni modulo può ascoltare eventi di altri moduli tramite listener
 
 ### 4. Contracts e Interfacce
+- Esporre solo ciò che è necessario tramite contracts
+- Nascondere la logica interna del modulo
 
-```php
-interface TenantRepositoryInterface
-{
-    public function findById(int $id): ?Tenant;
-    public function create(array $data): Tenant;
-    public function update(Tenant $tenant, array $data): bool;
-}
-```
+### 5. Shared Kernel
+- Mantenere il kernel condiviso piccolo e stabile
+- Usare solo per costanti, enum, value object comuni
+
+### 6. Testing
+- Testare la logica di dominio e i casi d'uso in puro PHP
+- Usare test di integrazione per la comunicazione tra moduli
+
+### 7. Transizione e Manutenzione
+- Migrare gradualmente verso la struttura a livelli
+- Documentare ogni passaggio e aggiornamento
+
+---
 
 ## Integrazione con Altri Moduli
 
