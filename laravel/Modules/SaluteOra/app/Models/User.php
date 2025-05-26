@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 
+use Spatie\Permission\Traits\HasRoles;
 use Modules\User\Models\BaseUser;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
@@ -30,6 +31,8 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  */
 class User extends BaseUser
 {
+    use HasRoles;
+    
     use LogsActivity, Notifiable;
     use HasStates;
 

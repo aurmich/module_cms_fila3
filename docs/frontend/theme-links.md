@@ -51,3 +51,38 @@ Per compilare e pubblicare un tema:
    ```
 
 Per maggiori dettagli, consultare la [documentazione completa sulla compilazione dei temi](laravel/Modules/Cms/docs/theme_compilation.md).
+
+# Collegamenti Temi Frontend
+
+## Componenti Disponibili
+
+### Componenti Blocks
+- [Calendar Component](./calendar-component.md) - Componente calendario per appuntamenti
+- [Hero Component](../../laravel/Themes/One/resources/views/components/blocks/hero.blade.php)
+- [CTA Component](../../laravel/Themes/One/resources/views/components/blocks/cta.blade.php)
+- [Stats Component](../../laravel/Themes/One/resources/views/components/blocks/stats.blade.php)
+
+### Integrazione Backend
+- [Widget FullCalendar Backend](../../laravel/Modules/SaluteOra/docs/fullcalendar_widget_implementation.mdc)
+- [Configurazione FullCalendar](../../laravel/Modules/SaluteOra/docs/fullcalendar_configuration.md)
+
+### Compilazione e Build
+- [Compilazione Temi](./compilazione_temi.md)
+- [Frontend Development](./frontend-development.md)
+
+## Convenzioni
+
+### Naming
+- Componenti: PascalCase per file (es. `Calendar.blade.php`)
+- Props: kebab-case (es. `studio-id`, `patient-id`)
+- CSS Classes: Tailwind CSS + DaisyUI
+
+### Struttura
+- Tutti i componenti in `laravel/Themes/One/resources/views/components/`
+- Blocks in sottocartella `blocks/`
+- UI components in sottocartella `ui/`
+
+### Documentazione
+- Ogni componente deve avere documentazione in `docs/frontend/`
+- Collegamenti bidirezionali obbligatori
+- Esempi di utilizzo inclusi

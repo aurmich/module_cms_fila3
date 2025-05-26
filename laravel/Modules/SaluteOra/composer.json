@@ -31,7 +31,8 @@
         }
     },
     "require": {
-        "saade/filament-fullcalendar": "^3.2"
+        "saade/filament-fullcalendar": "^3.2",
+        "spatie/laravel-permission": "^6.0"
     },
     "repositories": [
         {

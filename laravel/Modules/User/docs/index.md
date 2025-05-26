@@ -51,6 +51,13 @@ This document serves as the central index for the User module, providing guidanc
 - [Routing Best Practices](./ROUTING_BEST_PRACTICES.md)
 - [Session Management](./SESSION_MANAGEMENT.md)
 
+## FullCalendar Scheduler Documentation
+- [📋 Documentation Summary](./fullcalendar-scheduler-documentation-summary.md) - **Panoramica completa documentazione**
+- [🔧 Troubleshooting Guide](./fullcalendar-scheduler-license-troubleshooting.md) - **Guida completa troubleshooting**
+- [⚡ Quick Reference](./fullcalendar-scheduler-quick-reference.md) - **Riferimento rapido problemi comuni**
+- [📖 Scheduler License](./fullcalendar-scheduler-license.md) - Configurazione base licenze
+- [🔑 License Key Guide](./scheduler_license_key.md) - Guida rapida chiavi licenza
+
 ## Sottocartelle
 
 ### Models

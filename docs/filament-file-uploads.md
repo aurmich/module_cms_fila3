@@ -98,7 +98,7 @@ protected $casts = [
 ];
 
 // In Laravel 12.x, utilizzare il metodo casts()
-public function casts(): array
+protected function casts(): array
 {
     return array_merge(parent::casts(), [
         'certifications' => 'array',
@@ -110,7 +110,7 @@ public function casts(): array
 
 ```php
 // Nel modello Doctor
-public function casts(): array
+protected function casts(): array
 {
     return array_merge(parent::casts(), [
         'certifications' => 'array',

@@ -11,13 +11,13 @@ abstract class BaseModel extends XotBaseModel
     use HasFactory;
     use InteractsWithMedia;
     use Updater;
-    
+
     protected $connection = 'patient';
 }
 
 class Doctor extends BaseModel
 {
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'availability' => 'array',
@@ -131,4 +131,4 @@ return [
 ## Collegamenti
 - [Workflow Registrazione](docs/registration-workflow.md)
 - [Gestione Dottori](docs/doctors.md)
-- [Sistema Appuntamenti](docs/appointments.md) 
+- [Sistema Appuntamenti](docs/appointments.md)

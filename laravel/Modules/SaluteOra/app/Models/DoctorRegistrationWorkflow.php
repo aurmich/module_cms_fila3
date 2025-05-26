@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class DoctorRegistrationWorkflow extends BaseModel
 {
     use SoftDeletes, BelongsToTenant;
-    
+
     /**
      * Connessione al database da utilizzare.
      *
@@ -56,7 +56,7 @@ class DoctorRegistrationWorkflow extends BaseModel
      *
      * @return array<string, string>
      */
-    public function casts(): array
+    protected function casts(): array
     {
         return [
             'step_data' => 'array',
@@ -199,4 +199,4 @@ class DoctorRegistrationWorkflow extends BaseModel
 
         return $stepIndex !== false && $currentIndex >= $stepIndex;
     }
-} 
+}

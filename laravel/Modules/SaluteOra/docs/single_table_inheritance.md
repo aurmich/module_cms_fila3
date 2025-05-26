@@ -95,7 +95,7 @@ class Doctor extends User
         'status',
     ];
 
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'certifications' => 'array',
@@ -138,7 +138,7 @@ class Patient extends User
         // Altri campi specifici del paziente
     ];
 
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'birth_date' => 'date',

@@ -107,7 +107,7 @@ class Doctor extends User
      *
      * @return array<string, string>
      */
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'certifications' => 'array',
@@ -157,7 +157,7 @@ class Patient extends User
      *
      * @return array<string, string>
      */
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'birth_date' => 'date',
@@ -267,7 +267,7 @@ protected $casts = [
 ];
 
 // ✅ CORRETTO
-public function casts(): array
+protected function casts(): array
 {
     return array_merge(parent::casts(), [
         'certifications' => 'array',
