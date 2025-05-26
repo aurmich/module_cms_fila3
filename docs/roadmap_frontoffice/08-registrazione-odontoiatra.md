@@ -252,7 +252,7 @@ Il processo di registrazione avviene tramite un widget Filament personalizzato s
 
 Il widget `RegistrationWidget` è una componente chiave per la registrazione degli utenti nel sistema SaluteOra. Situato in `/var/www/html/saluteora/laravel/Modules/User/app/Filament/Widgets/RegistrationWidget.php`, estende `XotBaseWidget` e utilizza i tratti di Filament per gestire i form. Ecco i dettagli del suo funzionamento:
 
-- **Inizializzazione**: Il metodo `mount(string $type)` riceve il tipo di utente (ad esempio, 'doctor') come parametro. Questo tipo viene utilizzato per determinare la classe di risorsa appropriata tramite `XotData::make()->getUserTypeResourceClass($type)`.
+- **Inizializzazione**: Il metodo `mount(string $type)` riceve il tipo di utente (ad esempio, 'doctor') come parametro. Questo tipo viene utilizzato per determinare la classe di risorsa appropriata tramite `XotData::make()->getUserResourceClassByType($type)`.
 - **Schema del Form**: Il metodo `getFormSchema()` delega alla classe di risorsa (ad esempio, `DoctorResource`) per ottenere lo schema del form tramite `getFormSchemaWidget()`. Questo approccio modulare permette di personalizzare i campi del form per ogni tipo di utente.
 - **Vista Associata**: Il widget utilizza la vista `pub_theme::filament.widgets.registration` per il rendering dell'interfaccia utente.
 

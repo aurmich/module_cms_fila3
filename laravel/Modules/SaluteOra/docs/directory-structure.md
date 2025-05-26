@@ -140,3 +140,49 @@ Modules/SaluteOra/
 
 - `app/Actions/Calendar/`: Contiene le classi relative alla gestione del calendario
   - `Calendar.php`: Implementazione principale del componente calendario
+
+# Regola sui Path dei File di Codice
+
+Tutti i file di codice (Actions, Models, Controllers, ecc.) dei moduli Laravel DEVONO essere posizionati nella cartella `app/` del modulo:
+
+- **Path corretto:** `Modules/NomeModulo/app/Actions/...`
+- **Path errato:** `Modules/NomeModulo/Actions/...`
+
+## Motivazione
+- Rispetta PSR-4 e autoload Composer
+- Garantisce coerenza tra moduli
+- Evita errori di caricamento e path
+- Facilita la manutenzione e la ricerca
+
+## Esempio
+```php
+// Corretto
+Modules/SaluteOra/app/Actions/Patient/Calendar/FetchEventsAction.php
+
+// Errato
+Modules/SaluteOra/Actions/Patient/Calendar/FetchEventsAction.php
+```
+
+## Collegamenti
+- Vedi anche: Xot/docs/struttura-path-moduli.mdc
+- Aggiornare sempre la documentazione dei moduli e Xot in caso di modifica della struttura.
+
+# Regola Namespace per Actions
+
+**Il namespace dei file sotto app/ deve essere sempre `Modules\\<NomeModulo>\\Actions\\...` e MAI `Modules\\<NomeModulo>\\App\\Actions\\...`**
+
+## Motivazione
+- Rispetta PSR-4 e autoload Composer
+- Garantisce coerenza tra moduli
+- Evita errori di caricamento e path
+
+## Esempio
+```php
+// Corretto
+namespace Modules\SaluteOra\Actions\Patient\Calendar;
+
+// Errato
+namespace Modules\SaluteOra\App\Actions\Patient\Calendar;
+```
+
+Vedi anche: Xot/docs/struttura-path-moduli.mdc
