@@ -13,7 +13,7 @@ use Modules\Xot\Models\XotBaseModel;
 
 abstract class BaseModel extends XotBaseModel
 {
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'created_at' => 'datetime',
@@ -48,7 +48,7 @@ namespace Modules\Notify\Models;
 
 class NotificationTemplate extends BaseModel
 {
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'preview_data' => 'array',

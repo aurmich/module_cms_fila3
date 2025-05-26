@@ -43,6 +43,30 @@
                 }
             },
             {
+                "type": "calendar",
+                "data": {
+                    "view": "pub_theme::components.blocks.calendar",
+                    "title": "Calendario",
+                    "subtitle": "I tuoi appuntamenti programmati",
+                    "events": [
+                        {
+                            "title": "Controllo Prenatale",
+                            "start": "2024-05-25T10:30:00",
+                            "end": "2024-05-25T11:30:00",
+                            "backgroundColor": "#3788d8",
+                            "textColor": "#ffffff"
+                        },
+                        {
+                            "title": "Igiene Orale",
+                            "start": "2024-06-01T15:00:00",
+                            "end": "2024-06-01T16:00:00",
+                            "backgroundColor": "#3788d8",
+                            "textColor": "#ffffff"
+                        }
+                    ]
+                }
+            },
+            {
                 "type": "info",
                 "data": {
                     "view": "pub_theme::components.blocks.info",

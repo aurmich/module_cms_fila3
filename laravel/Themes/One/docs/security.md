@@ -80,8 +80,10 @@ class Password implements Rule
 
 ### Crittografia
 ```php
-// app/Services/EncryptionService.php
-class EncryptionService
+// app/Actions/EncryptionAction.php
+class EncryptionAction
+{
+    use QueueableAction;
 {
     public function encrypt($data)
     {
@@ -97,8 +99,10 @@ class EncryptionService
 
 ### Sanitizzazione Input
 ```php
-// app/Services/SanitizationService.php
-class SanitizationService
+// app/Actions/SanitizationAction.php
+class SanitizationAction
+{
+    use QueueableAction;
 {
     public function sanitize($input)
     {

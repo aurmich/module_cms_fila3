@@ -133,7 +133,7 @@ Forms\Components\Select::make('day')
 use Modules\Xot\Enums\DayOfWeek;
 
 // In un modello Eloquent con Laravel 12.x
-public function casts(): array
+protected function casts(): array
 {
     return [
         'day_of_week' => DayOfWeek::class,

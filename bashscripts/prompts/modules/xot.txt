@@ -11,8 +11,8 @@ abstract class XotBaseModel extends Model
     use HasFactory;
     use SoftDeletes;
     use Updater;
-    
-    public function casts(): array
+
+    protected function casts(): array
     {
         return [
             'created_at' => 'datetime',
@@ -44,7 +44,7 @@ abstract class XotBaseServiceProvider extends ServiceProvider
 {
     public string $name;  // DEVE essere public
     protected string $module_ns;
-    
+
     final public function register(): void;
     final public function boot(): void;
 }
@@ -111,7 +111,7 @@ trait Updater
         static::creating(function ($model) {
             $model->created_by = auth()->id();
         });
-        
+
         static::updating(function ($model) {
             $model->updated_by = auth()->id();
         });
@@ -138,4 +138,4 @@ trait HasXotTable
 1. MAI modificare i metodi finali
 2. Implementare TUTTI i metodi astratti
 3. Mantenere la documentazione aggiornata
-4. Seguire i pattern stabiliti 
+4. Seguire i pattern stabiliti

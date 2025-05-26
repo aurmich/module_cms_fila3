@@ -1,0 +1,90 @@
+# FullCalendar Widget Implementation
+
+## Overview
+- Widgets: Develop three FullCalendar widgets for different user types: Patient, Doctor, and Admin.
+- Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
+- User Types: Implement user types (Doctor, Patient, Admin) using the Parental package for single table inheritance.
+
+## Widget Types
+
+### Patient Calendar Widget
+- Purpose: Allows patients to view their own appointments.
+- Features:
+  - Displays personal appointments.
+  - Provides links to appointment details.
+  - Sends reminder notifications.
+
+### Doctor Calendar Widget
+- Purpose: Enables doctors to view appointments for their selected practice location.
+- Features:
+  - Shows appointments for patients at the selected location.
+  - Allows filtering by date and time.
+  - Supports appointment status management (scheduled, confirmed, completed, canceled).
+
+### Admin Calendar Widget
+- Purpose: Provides a comprehensive view of all appointments across all locations.
+- Features:
+  - Access to all appointment data.
+  - Advanced filtering and reporting capabilities.
+  - Management of all practice locations.
+
+## Multi-Tenancy Setup
+- Configuration: Follow Filament's tenancy documentation to set up tenant registration, profile pages, and tenant-aware routes.
+- Customization: Customize tenant menus and relationships to fit the healthcare context.
+
+## User Type Implementation with Parental
+- Installation: Install the Parental package using Composer:
+  ```bash
+  composer require tightenco/parental
+  ```
+- Parent Model: Define a parent model (e.g., `User`) using the `HasChildren` trait.
+  ```php
+  namespace App\Models;
+
+  use Illuminate\Database\Eloquent\Model;
+  use Parental\HasChildren;
+
+  class User extends Model
+  {
+      use HasChildren;
+      // Additional logic
+  }
+  ```
+- Child Models: Define child models (e.g., `Doctor`, `Patient`, `Admin`) using the `HasParent` trait.
+  ```php
+  namespace App\Models;
+
+  use Parental\HasParent;
+
+  class Doctor extends User
+  {
+      use HasParent;
+      // Additional logic specific to doctors
+  }
+  ```
+
+## Implementation Steps
+
+### Step 1: Install FullCalendar
+- Command: `composer require saade/filament-fullcalendar:^3.0`
+
+### Step 2: Create Widgets
+- Command: `php artisan make:filament-widget PatientCalendarWidget --module=SaluteOra`
+- Base Class: Extend `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`.
+
+### Step 3: Configure Widgets
+- Configuration: Use the `config()` method to set up calendar options such as `firstDay`, `locale`, `timezone`, and `businessHours`.
+
+### Step 4: Fetch Events
+- Method: Implement `fetchEvents()` to retrieve and display events based on user type and tenancy.
+
+## Best Practices
+- Security: Ensure data is filtered for the current user and sensitive information is protected.
+- Performance: Optimize queries and implement caching where appropriate.
+- Accessibility: Ensure the UI is accessible and complies with WCAG standards.
+
+## Additional Resources
+- [FullCalendar Documentation](https://fullcalendar.io/docs)
+- [Filament Tenancy Documentation](https://filamentphp.com/docs/3.x/panels/tenancy)
+- [Saade FullCalendar Plugin GitHub](https://github.com/saade/filament-fullcalendar)
+- [Parental GitHub Repository](https://github.com/tighten/parental)

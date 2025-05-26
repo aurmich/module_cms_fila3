@@ -16,7 +16,7 @@ protected $casts = [
 ### ✅ Utilizzare invece il metodo `casts()`:
 
 ```php
-public function casts(): array
+protected function casts(): array
 {
     return [
         'birth_date' => 'date',
@@ -40,7 +40,7 @@ public function casts(): array
 La classe `XotBaseModel` implementa già un metodo `casts()` base con diversi cast comuni:
 
 ```php
-public function casts(): array
+protected function casts(): array
 {
     return [
         'id' => 'string',
@@ -60,7 +60,7 @@ public function casts(): array
 Quando estendi questa classe, assicurati di includere i cast del genitore con:
 
 ```php
-public function casts(): array
+protected function casts(): array
 {
     return array_merge(parent::casts(), [
         // Tuoi cast specifici

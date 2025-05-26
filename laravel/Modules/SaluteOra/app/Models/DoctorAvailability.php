@@ -17,7 +17,7 @@ class DoctorAvailability extends BaseModel
         'is_available',
     ];
 
-    public function casts(): array
+    protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'day' => DayOfWeek::class,
