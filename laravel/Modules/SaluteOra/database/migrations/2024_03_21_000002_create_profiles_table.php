@@ -35,6 +35,9 @@ return new class extends XotBaseMigration
     // -- UPDATE --
     $this->tableUpdate(
         function (Blueprint $table): void {
+            if(!$this->hasColumn('user_id')){
+                $table->string('user_id', 36)->nullable()->index();
+            }
             $this->updateTimestamps($table,true);
         }
     );

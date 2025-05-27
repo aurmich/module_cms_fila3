@@ -24,27 +24,29 @@ new class extends Component
 <x-layouts.app>
     @volt('register')
     <div class="register-container">
-        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+        <div class="min-h-screen bg-[#E6EBF7] py-12">
             <!-- Logo e intestazione -->
-            <div class="text-center mb-8">
+            <div class="text-center mb-16">
                 <div class="flex justify-center mb-4">
                     <x-ui.logo class="h-12 text-blue-900" />
                 </div>
                 <h1 class="text-3xl font-light text-blue-900">Benvenuto in <span class="font-bold">SaluteOra</span></h1>
-                <p class="text-gray-600 mt-2">Crea il tuo account per accedere a tutti i servizi4</p>
+                <p class="text-gray-600 mt-2">Crea il tuo account per accedere a tutti i servizi</p>
             </div>
 
             <!-- Card contenente il form di registrazione -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="w-full flex justify-around">
                 @foreach($types as $type => $class)
-                    <x-filament::button size="sm" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
+                <div class="w-80 h-80 rounded-lg flex justify-center items-center bg-[#F9F9F9] hover:bg-white hover:cursor-pointer shadow-2xl">
+                    <a class="text-2xl text-[#1A467F] hover:text-primary-400 transition-colors" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
                         {{ ucfirst($type) }}
-                    </x-filament::button>
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>
 
-        <div class="mt-8 text-center text-sm text-gray-500">
+        <div class="bg-[#E6EBF7] text-center text-sm text-gray-500">
             <p>Hai bisogno di assistenza? <a href="#" class="text-blue-800 hover:underline">Contattaci</a></p>
         </div>
     </div>
