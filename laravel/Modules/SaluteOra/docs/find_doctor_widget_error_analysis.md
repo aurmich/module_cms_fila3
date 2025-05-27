@@ -91,4 +91,53 @@ Il widget `FindDoctorAndAppointmentWidget` è stato implementato in modo diverso
 - Mantenere la coerenza con il design system esistente
 - Seguire le best practices di Filament e del modulo Xot
 - Aggiornare regolarmente la documentazione quando si fanno modifiche
-- Separare gli step del wizard in metodi dedicati per migliorare la manutenibilità 
+- Separare gli step del wizard in metodi dedicati per migliorare la manutenibilità
+
+# Analisi errori FindDoctorAndAppointmentWidget.php
+
+## 1. Uso errato di ->label() e ->placeholder()
+- **Errore:** Uso di ->label() e ->placeholder() nei componenti Filament.
+- **Causa:** In SaluteOra/Xot, la localizzazione è gestita automaticamente tramite LangServiceProvider e i file di lingua del modulo. Non bisogna mai usare ->label(), ->placeholder() o stringhe tradotte direttamente nei componenti.
+- **Soluzione:** Rimuovere tutte le chiamate a ->label() e ->placeholder(). Usare solo la chiave campo (es. 'specialization', 'location', ecc.).
+- **Best practice:** Vedi anche: ../../Xot/docs/filament_widget_regole.md
+
+## 2. Uso errato di ->options(AppointmentType::class)
+- **Errore:** Passare direttamente l'enum PHP come opzione a Select.
+- **Causa:** Gli enum PHP nativi non sono supportati direttamente da Filament per le opzioni. Serve un metodo statico custom che restituisca un array associativo.
+- **Soluzione:** Implementare un metodo statico asSelectArray() nell'enum e usarlo: ->options(AppointmentType::asSelectArray())
+- **Best practice:** Documentare sempre l'uso degli enum nei form in enums_best_practices.md
+
+## 3. Replicazione di trait/interfacce/metodi della base
+- **Errore:** Replicare trait, interfacce o metodi già presenti in XotBaseWidget.
+- **Causa:** Non aver studiato la classe base prima di estendere.
+- **Soluzione:** Rimuovere ogni implementazione/uso di trait/interfacce/metodi già presenti nella base. Studiare sempre la base prima di estendere.
+- **Best practice:** Vedi anche: ../../Xot/docs/filament_widget_regole.md
+
+## 4. Gestione errata degli step del wizard
+- **Errore:** Restituzione di null o componenti non validi negli step del wizard.
+- **Causa:** Ogni step deve restituire sempre un array di componenti Filament validi, mai null.
+- **Soluzione:** Verificare che ogni metodo get*Step() restituisca sempre un array di componenti validi.
+
+## 5. Simulazione dati e logica incompleta
+- **Errore:** Metodi come createAppointment e sendConfirmation sono placeholder e non implementano la logica reale.
+- **Causa:** Codice incompleto o lasciato come TODO.
+- **Soluzione:** Implementare la logica reale o documentare chiaramente che si tratta di stub temporanei.
+
+## 6. Altri errori comuni
+- **Uso di costanti enum non esistenti:** Es: AppointmentType::CHECKUP se non esiste il case CHECKUP.
+- **Uso di metodi statici non esistenti sugli enum:** Es: AppointmentType::getOptions().
+- **Montaggio errato del widget come componente Livewire:** Non usare @livewire(FindDoctorAndAppointmentWidget::class) nelle blade.
+
+---
+
+## Best Practice
+- Studiare sempre la classe base XotBaseWidget prima di estendere.
+- Non replicare mai trait/interfacce/metodi già presenti nella base.
+- Usare solo chiavi campo nei form component, senza label/placeholder manuali.
+- Usare sempre metodi statici custom per le opzioni degli enum.
+- Documentare ogni errore e soluzione nella cartella docs del modulo.
+- Aggiornare le regole in .mdc per Cursor e Windsurf.
+
+---
+
+**Ultimo aggiornamento:** {{DATA}} 

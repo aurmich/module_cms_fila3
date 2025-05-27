@@ -783,3 +783,31 @@ TextInput::make('location')->label(__('modulo::campo.label'))
 > Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
 
 **Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
+
+## Regole di Ereditarietà: Trait e Interfacce
+
+- Non replicare mai trait, interfacce o logica già presenti nella classe base che si estende (es. XotBaseWidget).
+- Studiare sempre la classe base prima di estendere.
+- Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
+
+### Esempio errato
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget implements HasForms
+{
+    use InteractsWithForms; // ERRORE: già presente in XotBaseWidget
+}
+```
+
+### Esempio corretto
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget
+{
+    // NIENTE implements HasForms, NIENTE use InteractsWithForms
+}
+```
+
+**Motivazione:** DRY, KISS, manutenzione, coerenza, evitare conflitti e ridondanza.
+
+> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
+
+**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)

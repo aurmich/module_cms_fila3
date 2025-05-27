@@ -10,13 +10,16 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider"
+                "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider",
+                "Modules\\SaluteOra\\Providers\\Filament\\AdminPanelProvider"
             ]
         }
     },
     "autoload": {
         "psr-4": {
-            "Modules\\SaluteOra\\": ""
+            "Modules\\SaluteOra\\": "app/",
+            "Modules\\SaluteOra\\Database\\Factories\\": "database/factories/",
+            "Modules\\SaluteOra\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {

@@ -19,6 +19,8 @@ class Region extends GeoJsonModel
      */
     public static function all(): Collection
     {
-        return static::loadData()->pluck('region')->unique()->values();
+        $res=static::loadData()->pluck('regione')->unique()->values();
+
+        return $res;
     }
 }

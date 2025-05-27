@@ -19,6 +19,6 @@ class Province extends GeoJsonModel
      */
     public static function byRegion(string $region): Collection
     {
-        return static::loadData()->where('region', $region)->pluck('province')->unique()->values();
+        return static::loadData()->where('regione.codice', $region)->pluck('provincia')->unique()->values();
     }
 }

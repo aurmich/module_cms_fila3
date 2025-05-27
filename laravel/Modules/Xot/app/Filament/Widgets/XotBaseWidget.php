@@ -93,9 +93,9 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     {
         $form = $form->schema($this->getFormSchema());
 
-        if (method_exists($form, 'statePath')) {
+        //if (method_exists($form, 'statePath')) {
             $form->statePath('data');
-        }
+        //}
 
         return $form;
     }
