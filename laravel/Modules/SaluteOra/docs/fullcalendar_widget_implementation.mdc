@@ -10,43 +10,52 @@
 - Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
 # FullCalendar Widget Implementation per SaluteOra
 
-## Panoramica
+## Architettura con Parental STI
 
-Implementazione di 3 widget FullCalendar per l'applicazione sanitaria SaluteOra:
-- **PatientCalendarWidget**: Vista calendario per pazienti (sola lettura)
-- **DoctorCalendarWidget**: Vista calendario per dottori (CRUD completo)
-- **AdminCalendarWidget**: Vista calendario per amministratori (vista globale)
+### Single Table Inheritance
+- **Parental Package**: Utilizzo di `tightenco/parental` per STI
+- **User Types**: Patient, Doctor, Admin (non ruoli ma tipi di utente)
+- **Tenancy**: Sistema multi-tenant di Filament per gestione studi
+- **Isolamento**: Dati automaticamente filtrati per permessi utente
 
-## Collegamenti alla Documentazione
+### Modelli Base
+```php
+// User.php - Modello padre con STI
+class User extends Authenticatable
+{
+    use HasChildren, HasFactory, Notifiable, HasApiTokens;
 
-- [Componente Calendar Frontend](../../../../docs/frontend/calendar-component.md)
-- [Configurazione FullCalendar](./fullcalendar_configuration.md)
-- [Implementazione Multi-Tenant](./fullcalendar_parental_widgets.md)
-- [Best Practices FullCalendar](./fullcalendar-best-practices.md)
-- [Compilazione Temi](../../../../docs/frontend/compilazione_temi.md)
+    protected array $childTypes = [
+        'patient' => Patient::class,
+        'doctor' => Doctor::class,
+        'admin' => Admin::class,
+    ];
+}
 
-## Architettura
+// Doctor.php - Estende User con tenancy
+class Doctor extends User
+{
+    use HasParent, BelongsToTenant;
 
-### Estensione delle Classi Base
-- **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
-- **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste)
-- Utilizzare il trait `Modules\SaluteOra\Traits\HasFullCalendarConfig` per configurazioni comuni
+    public function getTenantKey(): string
+    {
+        return 'studio_id';
+    }
+}
+```
 
-### Multi-Tenancy con Parental STI
-- **Single Table Inheritance**: Utilizzo di `tightenco/parental` per tipi utente
-- **3 tipi di utente**: Patient, Doctor, Admin (non ruoli ma tipi)
-- **Tenancy di Filament**: Utilizzare `Filament::getTenant()` per studio corrente
-- **Isolamento dati**: Ogni widget filtra automaticamente per permessi utente
-
-## Widget Implementati
+## Widget FullCalendar Implementati
 
 ### 1. PatientCalendarWidget
+- **Estende**: `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- **Namespace**: `Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget`
+- **Modello**: `Appointment`
+- **Vista**: `timeGridWeek`
+- **Accesso**: Solo pazienti autenticati
+- **Filtro**: `where('patient_id', auth()->id())`
+- **Funzionalità**: Solo visualizzazione (sola lettura)
+
 ```php
-namespace Modules\SaluteOra\Filament\Widgets;
-
-use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
-use Modules\SaluteOra\Traits\HasFullCalendarConfig;
-
 class PatientCalendarWidget extends FullCalendarWidget
 {
     use HasFullCalendarConfig;
@@ -54,23 +63,66 @@ class PatientCalendarWidget extends FullCalendarWidget
     public Model|string|null $model = Appointment::class;
     protected static ?int $sort = 1;
     protected static ?string $maxHeight = '600px';
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->type === UserType::PATIENT;
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        $cacheKey = $this->getCacheKey($fetchInfo);
+
+        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+            return Appointment::query()
+                ->where('patient_id', auth()->id())
+                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
+                ->with(['doctor', 'studio'])
+                ->limit(100)
+                ->get()
+                ->map(fn($appointment) => EventData::make()
+                    ->id($appointment->id)
+                    ->title($this->formatEventTitle($appointment))
+                    ->start($appointment->start_time)
+                    ->end($appointment->end_time)
+                    ->backgroundColor($this->getAppointmentStatusColor($appointment->status->value))
+                    ->borderColor($this->getAppointmentTypeColor($appointment->type->value))
+                    ->textColor('#ffffff')
+                    ->extendedProps([
+                        'doctor_name' => $appointment->doctor?->full_name,
+                        'status' => $appointment->status->value,
+                        'type' => $appointment->type->value,
+                        'tooltip' => $this->formatTooltip($appointment),
+                        'can_edit' => false,
+                    ])
+                )
+                ->toArray();
+        });
+    }
+
+    public function getFormSchema(): array
+    {
+        return [
+            'readonly_info' => Section::make('Informazioni')
+                ->schema([
+                    Placeholder::make('readonly_info')
+                        ->content('I pazienti possono solo visualizzare i propri appuntamenti. Per modifiche, contattare il proprio medico.'),
+                ]),
+        ];
+    }
 }
 ```
 
-**Caratteristiche:**
-- Vista: `timeGridWeek`
-- Accesso: Solo `UserType::PATIENT`
-- Filtro: `where('patient_id', auth()->id())`
-- Funzionalità: Solo visualizzazione (sola lettura)
-- Configurazione: `config('fullcalendar.widgets.patient')`
-
 ### 2. DoctorCalendarWidget
+- **Estende**: `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- **Namespace**: `Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget`
+- **Modello**: `Appointment`
+- **Vista**: `timeGridWeek`
+- **Accesso**: Dottori con tenancy studio
+- **Filtro**: `where('studio_id', Filament::getTenant()->id)`
+- **Funzionalità**: CRUD completo, drag&drop, resize
+
 ```php
-namespace Modules\SaluteOra\Filament\Widgets;
-
-use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
-use Modules\SaluteOra\Traits\HasFullCalendarConfig;
-
 class DoctorCalendarWidget extends FullCalendarWidget
 {
     use HasFullCalendarConfig;
@@ -78,23 +130,89 @@ class DoctorCalendarWidget extends FullCalendarWidget
     public Model|string|null $model = Appointment::class;
     protected static ?int $sort = 1;
     protected static ?string $maxHeight = '600px';
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->type === UserType::DOCTOR &&
+               Filament::getTenant() !== null;
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        $cacheKey = $this->getCacheKey($fetchInfo);
+
+        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+            $query = Appointment::query()
+                ->where('studio_id', Filament::getTenant()->id)
+                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
+                ->with(['patient', 'doctor']);
+
+            // Se non studio_admin, mostra solo propri appuntamenti
+            if (!auth()->user()->hasRole('studio_admin')) {
+                $query->where('doctor_id', auth()->id());
+            }
+
+            return $query->limit(100)
+                ->get()
+                ->map(fn($appointment) => EventData::make()
+                    ->id($appointment->id)
+                    ->title($this->formatEventTitle($appointment))
+                    ->start($appointment->start_time)
+                    ->end($appointment->end_time)
+                    ->backgroundColor($this->getAppointmentTypeColor($appointment->type->value))
+                    ->borderColor($this->getAppointmentStatusColor($appointment->status->value))
+                    ->textColor('#ffffff')
+                    ->extendedProps([
+                        'patient_name' => $appointment->patient?->full_name,
+                        'doctor_name' => $appointment->doctor?->full_name,
+                        'status' => $appointment->status->value,
+                        'type' => $appointment->type->value,
+                        'tooltip' => $this->formatTooltip($appointment),
+                        'can_edit' => $this->canEditAppointment($appointment),
+                    ])
+                )
+                ->toArray();
+        });
+    }
+
+    public function getFormSchema(): array
+    {
+        return [
+            'appointment_details' => Section::make('Dettagli Appuntamento')
+                ->schema([
+                    Select::make('patient_id')
+                        ->relationship('patient', 'full_name')
+                        ->searchable()
+                        ->required(),
+                    Select::make('type')
+                        ->options(AppointmentType::class)
+                        ->required(),
+                    DateTimePicker::make('start_time')
+                        ->required(),
+                    DateTimePicker::make('end_time')
+                        ->required(),
+                    Select::make('status')
+                        ->options(AppointmentStatus::class)
+                        ->default(AppointmentStatus::SCHEDULED),
+                    Textarea::make('notes')
+                        ->rows(3),
+                    Toggle::make('emergency'),
+                ]),
+        ];
+    }
 }
 ```
 
-**Caratteristiche:**
-- Vista: `timeGridWeek`
-- Accesso: `UserType::DOCTOR` + tenancy
-- Filtro: `where('studio_id', Filament::getTenant()->id)`
-- Funzionalità: CRUD completo, drag&drop, resize
-- Configurazione: `config('fullcalendar.widgets.doctor')`
-
 ### 3. AdminCalendarWidget
+- **Estende**: `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- **Namespace**: `Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget`
+- **Modello**: `Appointment`
+- **Vista**: `dayGridMonth`
+- **Accesso**: Solo admin
+- **Filtro**: Tutti gli appuntamenti (opzionale per studio)
+- **Funzionalità**: Vista globale, filtri avanzati
+
 ```php
-namespace Modules\SaluteOra\Filament\Widgets;
-
-use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
-use Modules\SaluteOra\Traits\HasFullCalendarConfig;
-
 class AdminCalendarWidget extends FullCalendarWidget
 {
     use HasFullCalendarConfig;
@@ -102,23 +220,88 @@ class AdminCalendarWidget extends FullCalendarWidget
     public Model|string|null $model = Appointment::class;
     protected static ?int $sort = 1;
     protected static ?string $maxHeight = '600px';
+
+    public static function canView(): bool
+    {
+        return auth()->user()?->type === UserType::ADMIN;
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        $cacheKey = $this->getCacheKey($fetchInfo);
+
+        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+            return Appointment::query()
+                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
+                ->with(['patient', 'doctor', 'studio'])
+                ->limit(100) // Limite per performance
+                ->get()
+                ->map(fn($appointment) => EventData::make()
+                    ->id($appointment->id)
+                    ->title($this->formatEventTitle($appointment))
+                    ->start($appointment->start_time)
+                    ->end($appointment->end_time)
+                    ->backgroundColor($this->getStudioColor($appointment->studio))
+                    ->borderColor($this->getAppointmentStatusColor($appointment->status->value))
+                    ->textColor('#ffffff')
+                    ->extendedProps([
+                        'studio_name' => $appointment->studio?->name,
+                        'doctor_name' => $appointment->doctor?->full_name,
+                        'patient_name' => $appointment->patient?->full_name,
+                        'status' => $appointment->status->value,
+                        'type' => $appointment->type->value,
+                        'tooltip' => $this->formatTooltip($appointment),
+                        'can_edit' => true,
+                    ])
+                )
+                ->toArray();
+        });
+    }
+
+    public function getFormSchema(): array
+    {
+        return [
+            'appointment_details' => Section::make('Dettagli Appuntamento')
+                ->schema([
+                    Select::make('studio_id')
+                        ->relationship('studio', 'name')
+                        ->searchable()
+                        ->required(),
+                    Select::make('doctor_id')
+                        ->relationship('doctor', 'full_name')
+                        ->searchable()
+                        ->required(),
+                    Select::make('patient_id')
+                        ->relationship('patient', 'full_name')
+                        ->searchable()
+                        ->required(),
+                    Select::make('type')
+                        ->options(AppointmentType::class)
+                        ->required(),
+                    DateTimePicker::make('start_time')
+                        ->required(),
+                    DateTimePicker::make('end_time')
+                        ->required(),
+                    Select::make('status')
+                        ->options(AppointmentStatus::class)
+                        ->default(AppointmentStatus::SCHEDULED),
+                    Textarea::make('notes')
+                        ->rows(3),
+                    Toggle::make('emergency'),
+                ]),
+        ];
+    }
 }
 ```
-
-**Caratteristiche:**
-- Vista: `dayGridMonth`
-- Accesso: `UserType::ADMIN`
-- Filtro: Tutti gli appuntamenti (opzionale per studio)
-- Funzionalità: Vista globale, filtri avanzati
-- Configurazione: `config('fullcalendar.widgets.admin')`
 
 ## Trait HasFullCalendarConfig
 
 ```php
-namespace Modules\SaluteOra\Traits;
-
 trait HasFullCalendarConfig
 {
+    /**
+     * Configurazione base per tutti i widget FullCalendar
+     */
     public function config(): array
     {
         return [
@@ -128,111 +311,365 @@ trait HasFullCalendarConfig
             'headerToolbar' => [
                 'left' => 'prev,next today',
                 'center' => 'title',
-                'right' => 'dayGridMonth,timeGridWeek,timeGridDay'
+                'right' => 'dayGridMonth,timeGridWeek,timeGridDay',
+            ],
+            'buttonText' => [
+                'today' => 'Oggi',
+                'month' => 'Mese',
+                'week' => 'Settimana',
+                'day' => 'Giorno',
             ],
             'businessHours' => [
                 'daysOfWeek' => [1, 2, 3, 4, 5, 6], // Lun-Sab
                 'startTime' => '08:00',
                 'endTime' => '19:00',
             ],
-            'slotDuration' => '00:30:00',
             'eventTimeFormat' => [
                 'hour' => '2-digit',
                 'minute' => '2-digit',
                 'hour12' => false,
             ],
+            'slotDuration' => '00:30:00',
+            'slotMinTime' => '08:00:00',
+            'slotMaxTime' => '19:00:00',
+            'height' => 'auto',
+            'aspectRatio' => 1.35,
+            'eventDisplay' => 'block',
+            'displayEventTime' => true,
+            'displayEventEnd' => true,
+            'dayMaxEvents' => true,
+            'moreLinkClick' => 'popover',
         ];
     }
+
+    /**
+     * Genera chiave cache per eventi
+     */
+    protected function getCacheKey(array $fetchInfo): string
+    {
+        $user = auth()->user();
+        $tenant = Filament::getTenant();
+
+        return sprintf(
+            'fullcalendar_events_%s_%s_%s_%s_%s',
+            class_basename(static::class),
+            $user?->id ?? 'guest',
+            $user?->type?->value ?? 'unknown',
+            $tenant?->id ?? 'no_tenant',
+            md5(serialize($fetchInfo))
+        );
+    }
+
+    /**
+     * Formatta il titolo dell'evento
+     */
+    protected function formatEventTitle(Appointment $appointment): string
+    {
+        if ($appointment->emergency) {
+            return "🚨 {$appointment->title}";
+        }
+
+        return $appointment->title ?: $appointment->type->getLabel();
+    }
+
+    /**
+     * Formatta tooltip per l'evento
+     */
+    protected function formatTooltip(Appointment $appointment): string
+    {
+        $lines = [
+            "Tipo: {$appointment->type->getLabel()}",
+            "Stato: {$appointment->status->getLabel()}",
+            "Orario: {$appointment->start_time->format('H:i')} - {$appointment->end_time->format('H:i')}",
+        ];
+
+        if ($appointment->patient) {
+            $lines[] = "Paziente: {$appointment->patient->full_name}";
+        }
+
+        if ($appointment->doctor) {
+            $lines[] = "Medico: {$appointment->doctor->full_name}";
+        }
+
+        if ($appointment->notes) {
+            $lines[] = "Note: {$appointment->notes}";
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Ottiene colore per tipo appuntamento
+     */
+    protected function getAppointmentTypeColor(string $type): string
+    {
+        return match ($type) {
+            'consultation' => '#3b82f6', // blu
+            'cleaning' => '#10b981', // verde
+            'treatment' => '#f59e0b', // arancione
+            'emergency' => '#ef4444', // rosso
+            'followup' => '#8b5cf6', // viola
+            'surgery' => '#6b7280', // grigio
+            'orthodontics' => '#ec4899', // rosa
+            'prevention' => '#059669', // verde scuro
+            default => '#6b7280',
+        };
+    }
+
+    /**
+     * Ottiene colore per stato appuntamento
+     */
+    protected function getAppointmentStatusColor(string $status): string
+    {
+        return match ($status) {
+            'scheduled' => '#3b82f6', // blu
+            'confirmed' => '#10b981', // verde
+            'in_progress' => '#f59e0b', // arancione
+            'completed' => '#059669', // verde scuro
+            'cancelled' => '#ef4444', // rosso
+            'no_show' => '#dc2626', // rosso scuro
+            'rescheduled' => '#8b5cf6', // viola
+            'pending' => '#6b7280', // grigio
+            default => '#6b7280',
+        };
+    }
+
+    /**
+     * Ottiene colore per studio
+     */
+    protected function getStudioColor(Studio $studio): string
+    {
+        // Genera colore basato sull'ID dello studio
+        $colors = [
+            '#3b82f6', '#10b981', '#f59e0b', '#ef4444',
+            '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'
+        ];
+
+        return $colors[$studio->id % count($colors)];
+    }
+
+    /**
+     * Verifica se l'utente può modificare l'appuntamento
+     */
+    protected function canEditAppointment(Appointment $appointment): bool
+    {
+        $user = auth()->user();
+
+        return match ($user?->type) {
+            UserType::ADMIN => true,
+            UserType::DOCTOR => $appointment->doctor_id === $user->id ||
+                               $user->hasRole('studio_admin'),
+            UserType::PATIENT => false,
+            default => false,
+        };
+    }
 }
+```
+
+## Enum Implementati
+
+### AppointmentStatus
+```php
+enum AppointmentStatus: string implements HasLabel, HasColor
+{
+    case SCHEDULED = 'scheduled';
+    case CONFIRMED = 'confirmed';
+    case IN_PROGRESS = 'in_progress';
+    case COMPLETED = 'completed';
+    case CANCELLED = 'cancelled';
+    case NO_SHOW = 'no_show';
+    case RESCHEDULED = 'rescheduled';
+    case PENDING = 'pending';
+
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::SCHEDULED => 'Programmato',
+            self::CONFIRMED => 'Confermato',
+            self::IN_PROGRESS => 'In corso',
+            self::COMPLETED => 'Completato',
+            self::CANCELLED => 'Annullato',
+            self::NO_SHOW => 'Assente',
+            self::RESCHEDULED => 'Riprogrammato',
+            self::PENDING => 'In attesa',
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::SCHEDULED => 'primary',
+            self::CONFIRMED => 'success',
+            self::IN_PROGRESS => 'warning',
+            self::COMPLETED => 'success',
+            self::CANCELLED => 'danger',
+            self::NO_SHOW => 'danger',
+            self::RESCHEDULED => 'info',
+            self::PENDING => 'gray',
+        };
+    }
+
+    public function isActive(): bool
+    {
+        return in_array($this, [
+            self::SCHEDULED,
+            self::CONFIRMED,
+            self::IN_PROGRESS,
+        ]);
+    }
+
+    public function isFinal(): bool
+    {
+        return in_array($this, [
+            self::COMPLETED,
+            self::CANCELLED,
+            self::NO_SHOW,
+        ]);
+    }
+}
+```
+
+## Configurazioni
+
+### File di Configurazione
+```php
+// config/fullcalendar.php
+return [
+    'widgets' => [
+        'patient' => [
+            'editable' => false,
+            'selectable' => false,
+            'initialView' => 'timeGridWeek',
+        ],
+        'doctor' => [
+            'editable' => true,
+            'selectable' => true,
+            'initialView' => 'timeGridWeek',
+        ],
+        'admin' => [
+            'editable' => true,
+            'selectable' => true,
+            'initialView' => 'dayGridMonth',
+        ],
+    ],
+    'colors' => [
+        'appointment_types' => [
+            'consultation' => '#3b82f6',
+            'cleaning' => '#10b981',
+            'treatment' => '#f59e0b',
+            'emergency' => '#ef4444',
+            'followup' => '#8b5cf6',
+            'surgery' => '#6b7280',
+            'orthodontics' => '#ec4899',
+            'prevention' => '#059669',
+        ],
+        'appointment_status' => [
+            'scheduled' => '#3b82f6',
+            'confirmed' => '#10b981',
+            'in_progress' => '#f59e0b',
+            'completed' => '#059669',
+            'cancelled' => '#ef4444',
+            'no_show' => '#dc2626',
+            'rescheduled' => '#8b5cf6',
+            'pending' => '#6b7280',
+        ],
+    ],
+    'performance' => [
+        'cache_ttl' => 300, // 5 minuti
+        'max_events' => 100,
+        'lazy_fetching' => true,
+    ],
+];
 ```
 
 ## Sicurezza e Controlli Accesso
 
 ### Middleware EnsureUserType
 ```php
-// Protezione panel per tipo utente
-EnsureUserType::class.':patient'
-EnsureUserType::class.':doctor'
-EnsureUserType::class.':admin'
+class EnsureUserType
+{
+    public function handle(Request $request, Closure $next, string $userType): Response
+    {
+        if (!auth()->check()) {
+            abort(401);
+        }
+
+        if (auth()->user()->type->value !== $userType) {
+            abort(403, 'Accesso negato per questo tipo di utente');
+        }
+
+        return $next($request);
+    }
+}
 ```
 
 ### Policy AppointmentPolicy
 ```php
-public function viewAny(User $user): bool
+class AppointmentPolicy
 {
-    return match ($user->type) {
-        UserType::ADMIN => true,
-        UserType::DOCTOR => $user->isActive(),
-        UserType::PATIENT => $user->isActive(),
-        default => false,
-    };
+    public function viewAny(User $user): bool
+    {
+        return match ($user->type) {
+            UserType::ADMIN => true,
+            UserType::DOCTOR => true,
+            UserType::PATIENT => true,
+            default => false,
+        };
+    }
+
+    public function view(User $user, Appointment $appointment): bool
+    {
+        return match ($user->type) {
+            UserType::ADMIN => true,
+            UserType::DOCTOR => $appointment->doctor_id === $user->id ||
+                               ($user->hasRole('studio_admin') &&
+                                $appointment->studio_id === $user->studio_id),
+            UserType::PATIENT => $appointment->patient_id === $user->id,
+            default => false,
+        };
+    }
+
+    public function create(User $user): bool
+    {
+        return match ($user->type) {
+            UserType::ADMIN => true,
+            UserType::DOCTOR => true,
+            UserType::PATIENT => false,
+            default => false,
+        };
+    }
+
+    public function update(User $user, Appointment $appointment): bool
+    {
+        return match ($user->type) {
+            UserType::ADMIN => true,
+            UserType::DOCTOR => $appointment->doctor_id === $user->id ||
+                               ($user->hasRole('studio_admin') &&
+                                $appointment->studio_id === $user->studio_id),
+            UserType::PATIENT => false,
+            default => false,
+        };
+    }
 }
 ```
 
 ## Performance e Ottimizzazioni
 
 ### Caching
-```php
-public function fetchEvents(array $fetchInfo): array
-{
-    $cacheKey = $this->getCacheKey($fetchInfo);
-    
-    return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
-        return $this->getEventsQuery($fetchInfo)
-            ->with(['patient', 'doctor', 'studio'])
-            ->limit(100)
-            ->get()
-            ->map(fn ($appointment) => $this->transformToEventData($appointment))
-            ->toArray();
-    });
-}
-```
+- Cache degli eventi per 5 minuti
+- Chiave cache specifica per utente, tipo e tenant
+- Invalidazione automatica su modifiche
 
 ### Query Optimization
-- **SEMPRE** utilizzare eager loading: `with(['patient', 'doctor', 'studio'])`
-- **SEMPRE** limitare query con `limit(100)`
-- **SEMPRE** filtrare per range di date
-- **SEMPRE** utilizzare caching con TTL appropriato
+- Eager loading delle relazioni
+- Limite di 100 eventi per chiamata
+- Filtri per range di date
+- Indici database appropriati
 
-## Configurazione Centralizzata
-
-File: `config/fullcalendar.php`
-```php
-return [
-    'widgets' => [
-        'patient' => [
-            'defaultView' => 'timeGridWeek',
-            'editable' => false,
-            'selectable' => false,
-        ],
-        'doctor' => [
-            'defaultView' => 'timeGridWeek',
-            'editable' => true,
-            'selectable' => true,
-            'eventDurationEditable' => true,
-        ],
-        'admin' => [
-            'defaultView' => 'dayGridMonth',
-            'editable' => false,
-            'selectable' => false,
-        ],
-    ],
-    'colors' => [
-        'appointment_types' => [
-            'consultation' => '#3B82F6',
-            'cleaning' => '#10B981',
-            'treatment' => '#F59E0B',
-            'emergency' => '#EF4444',
-        ],
-        'appointment_status' => [
-            'scheduled' => '#6B7280',
-            'confirmed' => '#10B981',
-            'completed' => '#059669',
-            'cancelled' => '#EF4444',
-        ],
-    ],
-];
-```
+### Responsive Design
+- Configurazioni responsive per mobile
+- Vista `listWeek` per schermi piccoli
+- Altezza adattiva
 
 ## Testing
 
@@ -251,15 +688,27 @@ public function test_doctor_cannot_view_other_studio_appointments()
 
 // Test performance
 public function test_events_are_limited_to_reasonable_number()
+
+// Test sicurezza
+public function test_sensitive_data_is_protected()
+public function test_middleware_blocks_wrong_user_type()
 ```
+
+## Collegamenti Correlati
+
+- [FullCalendar Index](fullcalendar_index.mdc) - Indice completo documentazione
+- [FullCalendar Configuration](fullcalendar_configuration.mdc) - Configurazioni dettagliate
+- [FullCalendar Migration Guide](fullcalendar_migration_guide.mdc) - Guida migrazione
+- [Filament Best Practices](filament-best-practices.mdc) - Regole generali Filament
+- [Namespace Rules](namespace-vs-file-structure.md) - Regole namespace e struttura file
 
 ## Filosofia e Zen
 
 ### Principi Guida
 - **Semplicità**: Widget facili da comprendere e mantenere
-- **Coerenza**: Schema colori e comportamenti uniformi
+- **Coerenza**: Schema colori e comportamenti uniformi tra widget
 - **Accessibilità**: Supporto screen reader e navigazione keyboard
-- **Performance**: Caricamento rapido con caching intelligente
+- **Performance**: Caricamento rapido e fluido con caching intelligente
 - **Sicurezza**: Protezione dati sensibili sempre prioritaria
 
 ### Approccio Sanitario
@@ -269,3 +718,5 @@ public function test_events_are_limited_to_reasonable_number()
 - Workflow ottimizzati per ambiente ospedaliero multi-studio
 - Conformità normative settore sanitario
 - Audit trail completo per responsabilità legali
+
+Ricorda: ogni widget calendar deve essere progettato pensando all'operatore sanitario che lo utilizzerà in situazioni di stress e urgenza. La chiarezza, l'immediatezza e la sicurezza sono fondamentali per un sistema sanitario affidabile.
