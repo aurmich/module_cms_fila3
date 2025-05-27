@@ -37,11 +37,11 @@ new class extends Component
             <!-- Card contenente il form di registrazione -->
             <div class="w-full flex justify-around">
                 @foreach($types as $type => $class)
+                <a class="text-2xl text-[#1A467F] hover:text-primary-400 transition-colors" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
                 <div class="w-80 h-80 rounded-lg flex justify-center items-center bg-[#F9F9F9] hover:bg-white hover:cursor-pointer shadow-2xl">
-                    <a class="text-2xl text-[#1A467F] hover:text-primary-400 transition-colors" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
                         {{ ucfirst($type) }}
-                    </a>
-                </div>
+                    </div>
+                </a>
                 @endforeach
             </div>
         </div>
