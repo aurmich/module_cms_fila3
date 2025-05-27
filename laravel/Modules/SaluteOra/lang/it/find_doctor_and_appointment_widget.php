@@ -53,5 +53,37 @@ return array (
       'helper_text' => 'date',
       'description' => 'date',
     ),
+    'cap' => 
+    array (
+      'description' => 'cap',
+      'helper_text' => 'cap',
+      'placeholder' => 'cap',
+      'label' => 'cap',
+    ),
+    'search' => 
+    array (
+      'description' => 'search',
+      'helper_text' => 'search',
+      'placeholder' => 'search',
+      'label' => 'search',
+    ),
+    'city' => 
+    array (
+      'description' => 'city',
+    ),
+    'region' => 
+    array (
+      'description' => 'region',
+      'helper_text' => 'region',
+      'placeholder' => 'region',
+      'label' => 'region',
+    ),
+    'province' => 
+    array (
+      'description' => 'province',
+      'helper_text' => 'province',
+      'placeholder' => 'province',
+      'label' => 'province',
+    ),
   ),
 );

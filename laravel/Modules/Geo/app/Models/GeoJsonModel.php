@@ -15,7 +15,7 @@ abstract class GeoJsonModel
     /**
      * Percorso relativo al file json (da ridefinire nelle sottoclassi se necessario)
      */
-    protected static string $jsonFile = 'Resources/json/comuni.json';
+    protected static string $jsonFile = 'resources/json/comuni.json';
 
     /**
      * Carica e cache-izza i dati dal file json.

@@ -26,3 +26,29 @@ TextInput::make('location')->label(__('modulo::campo.label'))
 **Motivazione:** coerenza, manutenzione, override, policy di qualità.
 
 > Aggiornare sempre anche i file .mdc in .windsurf/rules
+
+# Regola: Ereditarietà e Trait nei Widget Filament
+
+- Non replicare mai trait, interfacce o logica già presenti nella classe base che si estende (es. XotBaseWidget).
+- Studiare sempre la classe base prima di estendere.
+- Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
+
+## Esempio errato
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget implements HasForms
+{
+    use InteractsWithForms; // ERRORE: già presente in XotBaseWidget
+}
+```
+
+## Esempio corretto
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget
+{
+    // NIENTE implements HasForms, NIENTE use InteractsWithForms
+}
+```
+
+**Motivazione:** DRY, KISS, manutenzione, coerenza, evitare conflitti e ridondanza.
+
+> Aggiornare sempre anche i file .mdc in .windsurf/rules
