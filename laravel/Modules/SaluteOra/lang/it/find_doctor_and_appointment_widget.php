@@ -7,6 +7,14 @@ return array (
     array (
       'label' => 'search',
     ),
+    'confirmation' => 
+    array (
+      'label' => 'confirmation',
+    ),
+    'date_time' => 
+    array (
+      'label' => 'date_time',
+    ),
   ),
   'fields' => 
   array (
@@ -30,6 +38,20 @@ return array (
       'placeholder' => 'appointment_type',
       'helper_text' => 'appointment_type',
       'description' => 'appointment_type',
+    ),
+    'time' => 
+    array (
+      'description' => 'time',
+      'helper_text' => 'time',
+      'label' => 'time',
+      'placeholder' => 'time',
+    ),
+    'date' => 
+    array (
+      'label' => 'date',
+      'placeholder' => 'date',
+      'helper_text' => 'date',
+      'description' => 'date',
     ),
   ),
 );

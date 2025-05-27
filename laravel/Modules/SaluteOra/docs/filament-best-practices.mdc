@@ -12,6 +12,14 @@ alwaysApply: true
 
 # Regole Complete per Filament nel Progetto
 
+## Crosscheck documentazione UI/Wizard
+- Prima di sviluppare o modificare uno step di wizard, componente UI o widget, è OBBLIGATORIO consultare tutti i file di documentazione associati (markdown, blade, html in `/docs/images/` e documenti funzionali in `/docs/`).
+- Annotare sempre nel codice il riferimento ai file consultati.
+- Aggiornare la documentazione se ci sono discrepanze tra documentazione e implementazione.
+- Cross-referenziare nei file di documentazione lo step/widget coinvolto e viceversa.
+- Questa regola è obbligatoria per tutti i wizard, UI step e componenti interattivi.
+
+
 ## When
 - Stai creando o modificando una Filament Resource che estende XotBaseResource
 - Stai lavorando con Filament Pages che estendono XotBase*

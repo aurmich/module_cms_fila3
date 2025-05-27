@@ -1,0 +1,73 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# FindDoctorAndAppointmentWidget Error Analysis
+
+## Error Description
+The widget implementation deviated from documentation by:
+- Using a single `location` TextInput instead of hierarchical fields
+- Missing Region -> Province -> City -> CAP structure
+- Ignoring UI/UX patterns from documentation
+
+## Root Causes
+1. Incomplete documentation review
+2. Over-simplification of functionality
+3. Ignored UI/UX patterns
+
+## Prevention Steps
+1. Read all documentation files thoroughly
+2. Implement hierarchical structure
+3. Follow UI/UX patterns
+4. Test against requirements
+
+## Correct Implementation
+```php
+protected function getSearchStep(): array
+{
+    return [
+        Wizard\Step::make('search')
+            ->schema([
+                Fieldset::make('dentist_search')
+                    ->schema([
+                        Select::make('region')
+                            ->options(fn () => Region::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('province', null)),
+                        
+                        Select::make('province')
+                            ->options(fn (Get $get) => Province::where('region_id', $get('region'))->pluck('name', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('city', null))
+                            ->visible(fn (Get $get) => filled($get('region'))),
+                        
+                        Select::make('city')
+                            ->options(fn (Get $get) => City::where('province_id', $get('province'))->pluck('name', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(fn (Set $set) => $set('cap', null))
+                            ->visible(fn (Get $get) => filled($get('province'))),
+                        
+                        Select::make('cap')
+                            ->options(fn (Get $get) => Cap::where('city_id', $get('city'))->pluck('code', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->visible(fn (Get $get) => filled($get('city'))),
+                    ]),
+            ])
+    ];
+}
+```
+
+## Key Lessons
+1. Documentation is the source of truth
+2. Don't oversimplify functionality
+3. Follow UI/UX patterns
+4. Test against requirements
+5. Maintain consistency with design
