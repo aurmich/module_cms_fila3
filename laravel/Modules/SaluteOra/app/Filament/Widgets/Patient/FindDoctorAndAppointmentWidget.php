@@ -131,7 +131,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                             TextInput::make('location')
                                 ->required(),
                             Select::make('appointment_type')
-                                ->options(AppointmentType::getOptions())
+                                ->options(AppointmentType::class)
                                 ->required()
                                 ->default(AppointmentType::CHECKUP->value),
                         ]),
