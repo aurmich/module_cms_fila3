@@ -14,6 +14,8 @@
         "block.vscode-mcp-extension",
         "aurorabiz.blade-ui-kit",
         "laravel.vscode-laravel",
-        "porifa.laravel-intelephense"
+        "porifa.laravel-intelephense",
+        "bmewburn.vscode-intelephense-client",
+        "davidanson.vscode-markdownlint"
     ]
 }

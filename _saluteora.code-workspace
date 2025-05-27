@@ -44,7 +44,9 @@
 			"onecentlin.laravel-blade",
 			"ihunte.laravel-blade-wrapper",
 			"damms005.devdb",
-			"block.vscode-mcp-extension"
+			"block.vscode-mcp-extension",
+			"bmewburn.vscode-intelephense-client",
+			"davidanson.vscode-markdownlint"
 		]
 	}
 }

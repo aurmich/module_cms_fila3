@@ -43,17 +43,17 @@ Undefined array key "Modules\SaluteOra\States\User\Pending"
 - [ ] Modelli, risorse, form, policy aggiornati
 - [ ] Doc aggiornata
 
+## Errori comuni
+- Usare enum PHP per i campi di stato
+- Dimenticare di configurare le transizioni
+- Non aggiornare la doc
+
 ## Checklist di debug
 - [ ] Nessun campo di stato usa enum PHP
 - [ ] Tutte le classi di stato esistono e sono nel namespace corretto
 - [ ] La mappatura degli stati è completa
 - [ ] I valori nel database corrispondono alle chiavi mappate
 - [ ] Doc aggiornata
-
-## Errori comuni
-- Usare enum PHP per i campi di stato
-- Dimenticare di configurare le transizioni
-- Non aggiornare la doc
 
 ## Reminder
 Se ricevi questo errore:
