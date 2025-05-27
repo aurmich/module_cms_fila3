@@ -78,7 +78,7 @@ new class extends Component
 
                 <!-- Form di registrazione -->
                 <div class="p-6">
-                    @livewire(\Modules\User\Filament\Widgets\RegistrationWidget::class)
+                {{--    @livewire(\Modules\User\Filament\Widgets\RegistrationWidget::class)--}}
                 </div>
             </div>
 
