@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-/**
- * Model readonly per i CAP italiani, ispirato a Squire.
- * Legge i dati da json tramite GeoJsonModel.
- * Vedi Geo/docs/geo-json-model.md, module_geo.md, Xot/module-structure.md
- */
-
 use Illuminate\Support\Collection;
 
-class Cap extends GeoJsonModel
+/**
+ * @deprecated Usare Modules\Geo\Models\Comune. Questa classe è solo una facciata legacy per compatibilità.
+ * Tutti i metodi delegano a Comune.
+ * Vedi Geo/docs/geo_entities.md
+ */
+class Cap
 {
     /**
-     * Restituisce la lista unica dei CAP per città.
+     * Restituisce tutti i CAP unici (proxy).
      */
-    public static function byCity(string $city): Collection
+    public static function all(): Collection
     {
-        return static::loadData()->where('city', $city)->pluck('cap')->unique()->values();
+        return Comune::allCaps();
+    }
+
+    /**
+     * Restituisce i CAP per città (proxy).
+     */
+    public static function byCity(string $cityName): Collection
+    {
+        return Comune::byCity($cityName)->pluck('cap')->unique();
     }
 }

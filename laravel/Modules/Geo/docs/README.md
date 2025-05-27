@@ -1,7 +1,7 @@
 # Modulo Geo
 
 ## Descrizione
-Il modulo Geo gestisce i dati geografici italiani (regioni, province, città e CAP) utilizzando un file JSON come fonte dati principale. Questo approccio offre vantaggi significativi in termini di performance e manutenibilità rispetto all'utilizzo di un database tradizionale.
+Il modulo Geo gestisce i dati geografici italiani (regioni, province, città e CAP) utilizzando un file JSON come fonte dati principale attraverso la classe `GeoJsonModel`. Questo approccio offre vantaggi significativi in termini di performance e manutenibilità rispetto all'utilizzo di un database tradizionale, come documentato nell'[analisi comparativa con Laravel Sushi](./geojsonmodel-vs-sushi.md).
 
 ## Architettura
 
