@@ -10,45 +10,199 @@ globs:
   - '*/Filament/Resources/*.php'
 alwaysApply: true
 
-# Regola: Estensione di XotBaseResource
+# Regole Complete per Filament nel Progetto
 
 ## When
 - Stai creando o modificando una Filament Resource che estende XotBaseResource
+- Stai lavorando con Filament Pages che estendono XotBase*
+- Stai creando Filament Widgets che estendono XotBaseWidget
+- Stai definendo namespace per componenti Filament
 
 ## Then
-- **NON** dichiarare mai:
-  - `protected static ?string $navigationGroup`  
-  - `protected static ?string $navigationLabel`  
-  - `public static function table(Table $table): Table`
-- Tutta la logica di navigazione e tabella deve essere gestita tramite i metodi e le convenzioni fornite da XotBaseResource e dai trait associati.
-- Se hai bisogno di personalizzare la navigazione o la tabella, utilizza i metodi previsti da XotBaseResource o crea un trait/wrapper dedicato, MAI ridefinire queste proprietà/metodi direttamente nella Resource.
+
+### Estensioni Obbligatorie
+- **Resources**: SEMPRE estendere `Modules\Xot\Filament\Resources\XotBaseResource`
+- **Pages**: SEMPRE estendere le corrispondenti `Modules\Xot\Filament\Resources\Pages\XotBase*`
+- **Widgets**: SEMPRE estendere `Modules\Xot\Filament\Widgets\XotBaseWidget`
+- **MAI** estendere direttamente le classi Filament standard
+
+### Proprietà/Metodi VIETATI in XotBaseResource
+**NON** dichiarare mai:
+- `protected static ?string $navigationGroup`
+- `protected static ?string $navigationLabel`
+- `protected static ?string $navigationIcon`
+- `protected static ?string $translationPrefix`
+- `public static function table(Table $table): Table`
+- `public static function getListTableColumns(): array`
+- `public static function getTableFilters(): array`
+- `public static function getBulkActions(): array`
+- `public static function getPages(): array` (se restituisce solo index,create,edit o index,create,edit,view)
+
+### Namespace Corretti
+- **SEMPRE**: `Modules\<NomeModulo>\Filament\Resources`
+- **MAI**: `Modules\<NomeModulo>\App\Filament\Resources`
+- I file devono essere in `app/Filament/Resources/` ma il namespace NON include `app`
+
+### Metodi Obbligatori con Array Associativo
+I seguenti metodi devono SEMPRE restituire un array associativo con chiavi string:
+- `getFormSchema(): array` - chiavi: sezioni del form
+- `getTableActions(): array` - chiavi: nomi delle azioni
+- `getTableColumns(): array` - chiavi: nomi delle colonne
+- `getTableFilters(): array` - chiavi: nomi dei filtri
+- `getTableBulkActions(): array` - chiavi: nomi delle azioni bulk
+
+### Traduzioni
+- **MAI** utilizzare `->label()` sui componenti Filament
+- **SEMPRE** utilizzare i file di traduzione in `Modules/<NomeModulo>/lang/<lingua>/`
+- Il LangServiceProvider gestisce automaticamente le traduzioni
+
+### Enum vs Array Options
+- Se una select ha options che sono un array, convertire agli enum PHP 8.1+
+- Utilizzare enum con `HasLabel`, `HasIcon`, `HasColor` quando appropriato
 
 ## Because
-- La ridefinizione di queste proprietà/metodi rompe la coerenza e la centralizzazione della logica fornita da XotBaseResource.
-- Evita bug, override indesiderati e comportamenti incoerenti tra moduli.
-- Garantisce che tutte le risorse seguano lo stesso flusso di configurazione e siano facilmente aggiornabili.
-- Permette di applicare patch e miglioramenti globali senza dover modificare ogni Resource manualmente.
+
+### Filosofia del Progetto
+- **DRY (Don't Repeat Yourself)**: Centralizzazione evita duplicazioni
+- **KISS (Keep It Simple, Stupid)**: Configurazione semplice e uniforme
+- **Coerenza**: Tutti i moduli seguono le stesse regole
+- **Manutenibilità**: Modifiche globali senza toccare ogni risorsa
+- **Scalabilità**: Architettura che cresce senza complessità
+
+### Motivazioni Tecniche
+- La gestione di navigationGroup/navigationLabel/navigationIcon è centralizzata nella classe base o nei provider
+- I metodi table(), getListTableColumns(), etc. sono gestiti tramite trait, macro o configurazione centralizzata
+- Dichiarare questi elementi causa override indesiderati, perdita di automazione e incoerenza tra moduli
+- I metodi che restituiscono array associativo permettono maggiore flessibilità e configurabilità
+- Il namespace senza `app` rispetta la mappatura PSR-4 del progetto
+
+## Examples
+
+### Esempio ERRATO
+```php
+class UserModerationResource extends XotBaseResource
+{
+    protected static ?string $navigationGroup = 'User Management'; // ERRORE
+    protected static ?string $navigationLabel = 'User Moderation'; // ERRORE
+    protected static ?string $navigationIcon = 'heroicon-o-users'; // ERRORE
+
+    public static function table(Table $table): Table { ... } // ERRORE
+
+    public static function getFormSchema(): array
+    {
+        return [
+            TextInput::make('name')->label('Nome'), // ERRORE: ->label()
+        ];
+    }
+}
+```
+
+### Esempio CORRETTO
+```php
+namespace Modules\SaluteOra\Filament\Resources; // Namespace corretto
+
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Modules\SaluteOra\Enums\UserStatusEnum;
+
+class UserModerationResource extends XotBaseResource
+{
+    // Solo metodi e proprietà specifiche non già gestite dalla base
+    // NIENTE navigationGroup/navigationLabel/navigationIcon/table()
+
+    public static function getFormSchema(): array
+    {
+        return [
+            'personal_info' => Section::make()
+                ->schema([
+                    TextInput::make('name'), // Traduzione automatica via LangServiceProvider
+                    TextInput::make('email'),
+                ]),
+            'preferences' => Section::make()
+                ->schema([
+                    Select::make('status')
+                        ->options(UserStatusEnum::class), // Enum invece di array
+                ]),
+        ];
+    }
+
+    public static function getTableColumns(): array
+    {
+        return [
+            'name' => TextColumn::make('name')->sortable(),
+            'email' => TextColumn::make('email')->searchable(),
+            'status' => TextColumn::make('status')->badge(),
+        ];
+    }
+}
+```
+
+### Esempio Filament Page CORRETTO
+```php
+namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
+
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+
+class ListUsers extends XotBaseListRecords
+{
+    protected static string $resource = UserResource::class;
+
+    // Nessun metodo table() o getTableColumns() qui
+    // Tutto gestito dalla risorsa e dalla classe base
+}
+```
 
 ## Common Pitfalls
-- **Errore:** Dichiarare `$navigationGroup` o `$navigationLabel` in una Resource che estende XotBaseResource
-  - **Soluzione:** Rimuovere la dichiarazione, usare la configurazione centralizzata
-- **Errore:** Ridefinire il metodo statico `table(Table $table): Table`
-  - **Soluzione:** Usare i metodi previsti da XotBaseResource o i trait
-- **Errore:** Copiare esempi da documentazione Filament standard senza adattarli all'architettura XotBaseResource
-  - **Soluzione:** Seguire sempre le regole del progetto e la documentazione custom
 
-## Esempio ERRATO
-```php
-class UserResource extends XotBaseResource {
-    protected static ?string $navigationGroup = 'Utenti'; // VIETATO
-    public static function table(Table $table): Table { ... } // VIETATO
-}
-```
+### Errori di Namespace
+- **Errore**: Utilizzare `Modules\SaluteOra\App\Filament\Resources`
+- **Soluzione**: Utilizzare `Modules\SaluteOra\Filament\Resources`
 
-## Esempio CORRETTO
-```php
-class UserResource extends XotBaseResource {
-    // Nessuna dichiarazione di navigationGroup, navigationLabel o table
-    // Personalizzazioni solo tramite metodi/trait previsti
-}
-```
+### Errori di Estensione
+- **Errore**: Estendere `Filament\Resources\Resource` direttamente
+- **Soluzione**: Estendere sempre `Modules\Xot\Filament\Resources\XotBaseResource`
+
+### Errori di Configurazione
+- **Errore**: Dichiarare `$navigationGroup` in una Resource che estende XotBaseResource
+- **Soluzione**: Rimuovere la dichiarazione, usare la configurazione centralizzata
+
+### Errori di Traduzioni
+- **Errore**: Utilizzare `->label('Nome')` sui componenti
+- **Soluzione**: Rimuovere `->label()` e definire la traduzione nei file lang
+
+### Errori di Struttura File
+- **Errore**: Creare file in `Modules/SaluteOra/Filament/Resources/`
+- **Soluzione**: Creare file in `Modules/SaluteOra/app/Filament/Resources/`
+
+## Checklist Completa
+
+### Prima di Creare/Modificare File Filament
+- [ ] File posizionato in `app/Filament/`?
+- [ ] Namespace corretto senza `app`?
+- [ ] Estende la classe XotBase* appropriata?
+- [ ] Nessuna proprietà navigationGroup/navigationLabel/navigationIcon?
+- [ ] Nessun metodo table() se estende XotBaseResource?
+- [ ] Metodi restituiscono array associativo con chiavi string?
+- [ ] Nessun `->label()` sui componenti?
+- [ ] Array options convertiti in enum?
+
+### Dopo Creazione/Modifica
+- [ ] IDE riconosce correttamente il file?
+- [ ] Autoloading funziona (`php artisan` non da errori)?
+- [ ] Traduzioni funzionano correttamente?
+- [ ] Navigazione Filament appare correttamente?
+- [ ] Test passano?
+
+## Link e Documentazione Correlata
+- [Namespace vs File Structure](./namespace-vs-file-structure.md)
+- [Filament Namespace Rules](./filament-namespace-rules.md)
+- [README SaluteOra](./README.md)
+- [README Xot Filament](../../Xot/docs/filament/README.md)
+- [Regole Cursor](../../../.cursor/rules/filament-xotbase-resource-best-practices.mdc)
+- [Regole Windsurf](../../../.windsurf/rules/filament-xotbase-resource-best-practices.mdc)
+
+---
+**Queste regole sono vincolanti e devono essere applicate in tutti i moduli che utilizzano Filament.**

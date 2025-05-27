@@ -757,3 +757,29 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
+
+## Regole per Widget Filament: Path View e Localizzazione
+
+- Tutti i widget Filament devono avere la view in `modulo::filament.widgets.nome-widget`.
+- Non usare mai `modulo::widgets.nome-widget` o altri path non standard.
+- Non usare mai ->label(), ->placeholder(), __() o trans() nei form component (TextInput, Select, ecc).
+- La localizzazione è centralizzata tramite LangServiceProvider e i file di lingua del modulo.
+- Le chiavi dei campi devono corrispondere a quelle dei file di lingua.
+
+### Esempio corretto
+```php
+protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
+TextInput::make('location')->required()
+```
+
+### Esempio errato
+```php
+protected static string $view = 'saluteora::widgets.find-doctor-and-appointment';
+TextInput::make('location')->label(__('modulo::campo.label'))
+```
+
+**Motivazione:** coerenza, manutenzione, override, policy di qualità.
+
+> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
+
+**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)

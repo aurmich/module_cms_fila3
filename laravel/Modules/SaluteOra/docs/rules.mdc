@@ -3,3 +3,32 @@ description:
 globs:
 alwaysApply: false
 ---
+# Regole SaluteOra
+
+## Namespace
+
+### Quando
+- Stai creando o modificando classi in un modulo
+- Stai spostando file tra cartelle
+- Stai creando nuovi moduli
+
+### Allora
+- Usa sempre il namespace corretto senza `App`
+- Segui la struttura `Modules\{Modulo}\{Categoria}`
+- Non riflettere la struttura fisica delle cartelle nel namespace
+
+### Perché
+- Mantenere coerenza tra i moduli
+- Evitare confusione tra struttura fisica e logica
+- Seguire le best practices di Laravel Modules
+
+### Esempi
+```php
+// CORRETTO
+namespace Modules\SaluteOra\Actions\Patient\Calendar;
+
+// ERRATO
+namespace Modules\SaluteOra\App\Actions\Patient\Calendar;
+```
+
+## ... existing rules ...
