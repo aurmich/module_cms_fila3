@@ -5,6 +5,12 @@ alwaysApply: false
 ---
 # Regole SaluteOra
 
+## Crosscheck documentazione wizard/UI
+- Prima di ogni sviluppo o modifica di wizard, step o UI, consultare tutti i file di documentazione associati (markdown, blade, html in `/docs/images/`, documenti funzionali in `/docs/`).
+- Annotare nel codice il riferimento ai file consultati.
+- Aggiornare la documentazione se necessario e cross-referenziare tra codice e documentazione.
+
+
 ## Namespace
 
 ### Quando

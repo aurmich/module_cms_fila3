@@ -36,11 +36,13 @@ enum DentistSpecialization: string implements HasLabel
             self::FORENSIC => __('saluteora::app.forensic_dentist'),
         };
     }
-
+ 
+    /*
     public static function getOptions(): array
     {
         return collect(self::cases())->mapWithKeys(fn ($case) => [
             $case->value => $case->getLabel()
         ])->toArray();
     }
+        */
 }

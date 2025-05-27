@@ -1,0 +1,153 @@
+---
+description: Regole per l'implementazione dei Wizard in SaluteOra
+globs: ['**/app/Filament/Widgets/**/*.php', '**/app/Filament/Resources/**/*.php']
+alwaysApply: true
+---
+
+# Regole per i Wizard in SaluteOra
+
+## Architettura a Step Separati
+
+### 1. Struttura delle Directory
+
+```
+app/
+  Wizard/
+    Steps/
+      PersonalInfoStep.php
+      ContactInfoStep.php
+      AppointmentStep.php
+    WizardState.php
+    WizardManager.php
+    Contracts/
+      WizardStepContract.php
+  Providers/
+    WizardServiceProvider.php
+```
+
+### 2. Interfaccia dello Step
+
+Ogni step deve implementare la seguente interfaccia:
+
+```php
+interface WizardStepContract
+{
+    public static function buildForm(Form $form): Form;
+    public static function handle(array $data, WizardState $state): void;
+    public static function validate(array $data): array;
+    public static function getLabel(): string;
+    public static function getIcon(): string;
+}
+```
+
+### 3. Esempio di Implementazione
+
+```php
+class PersonalInfoStep implements WizardStepContract
+{
+    public static function buildForm(Form $form): Form
+    {
+        return $form->schema([
+            TextInput::make('first_name')
+                ->required()
+                ->maxLength(255),
+            // Altri campi...
+        ]);
+    }
+    
+    public static function handle(array $data, WizardState $state): void
+    {
+        $state->updateData('personal_info', $data);
+    }
+    
+    public static function validate(array $data): array
+    {
+        return Validator::make($data, [
+            'first_name' => ['required', 'string', 'max:255'],
+            // Altre regole di validazione...
+        ])->validate();
+    }
+    
+    public static function getLabel(): string
+    {
+        return 'Informazioni Personali';
+    }
+    
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-user';
+    }
+}
+```
+
+### 4. Gestione dello Stato
+
+```php
+class WizardState
+{
+    public function __construct(
+        protected array $data = [],
+        protected int $currentStep = 0,
+        protected array $completedSteps = []
+    ) {}
+    
+    public function updateData(string $key, array $value): self
+    {
+        $this->data[$key] = $value;
+        return $this;
+    }
+    
+    public function toArray(): array
+    {
+        return [
+            'data' => $this->data,
+            'current_step' => $this->currentStep,
+            'completed_steps' => $this->completedSteps,
+        ];
+    }
+}
+```
+
+## Analisi dell'Errore
+
+L'errore nell'implementazione del wizard di ricerca dentista è stato documentato in [analisi_errore_wizard.md](./analisi_errore_wizard.md).
+
+## Regole Obbligatorie
+
+1. **Struttura del Codice**
+   - Ogni step del wizard deve essere una classe separata
+   - Utilizzare i trait forniti da Filament per la gestione dello stato
+   - Implementare l'interfaccia `WizardStep` per ogni step
+
+2. **Validazione**
+   - Ogni step deve validare i propri dati
+   - Implementare la validazione lato client e server
+   - Fornire messaggi di errore chiari e contestuali
+
+3. **Navigazione**
+   - Consentire la navigazione tra gli step solo se i dati sono validi
+   - Salvare lo stato a ogni step
+   - Fornire un feedback visivo dello stato corrente
+
+## Best Practice
+
+- **Separazione delle Responsabilità**
+  - Mantenere la logica di business separata dalla UI
+  - Utilizzare i form request per la validazione
+  - Centralizzare la logica di salvataggio
+
+- **Performance**
+  - Caricare i dati in modo lazy
+  - Utilizzare il caching per i dati statici
+  - Ottimizzare le query al database
+
+## Monitoraggio e Logging
+
+- Registrare gli errori di validazione
+- Tracciare l'avanzamento degli utenti nel wizard
+- Monitorare i tassi di completamento/abbandono
+
+## Collegamenti Utili
+- [Analisi Errori Precedenti](./analisi_errore_wizard.md)
+- [Linee Guida Filament](../docs/filament-best-practices.md)
+- [Standard di Codice](../docs/coding-standards.md)

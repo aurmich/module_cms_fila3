@@ -127,6 +127,13 @@ Aggiungi queste regole a `phpcs.xml`:
 
 ## Workflow di Sviluppo
 
+### Crosscheck documentazione UI/Wizard
+- Prima di sviluppare o modificare wizard, step o UI, è OBBLIGATORIO consultare tutti i file di documentazione associati (markdown, blade, html in `/docs/images/`, documenti funzionali in `/docs/`).
+- Annotare sempre nel codice il riferimento ai file consultati.
+- Aggiornare la documentazione se ci sono discrepanze tra documentazione e implementazione.
+- Cross-referenziare nei file di documentazione lo step/widget coinvolto e viceversa.
+
+
 ### Creazione di un Nuovo Enum
 
 1. Crea un nuovo file nella directory `app/Enums/`
