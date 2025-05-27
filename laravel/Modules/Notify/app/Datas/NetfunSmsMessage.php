@@ -6,7 +6,7 @@ namespace Modules\Notify\Datas;
 
 use Spatie\LaravelData\Data;
 
-class NetfunSmsMessage extends Data
+class NetfunSMSMessage extends Data
 {
     public function __construct(
         public string $to,
