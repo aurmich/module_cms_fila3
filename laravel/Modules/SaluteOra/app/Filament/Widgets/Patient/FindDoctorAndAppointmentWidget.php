@@ -19,12 +19,12 @@ use Filament\Forms\Set;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Modules\Geo\Models\Region;
+use Modules\Geo\Models\Province;
+use Modules\Geo\Models\City;
+use Modules\Geo\Models\Cap;
 use Modules\SaluteOra\Enums\AppointmentType;
 use Modules\SaluteOra\Enums\DentistSpecialization;
-use Modules\SaluteOra\Models\Region;
-use Modules\SaluteOra\Models\Province;
-use Modules\SaluteOra\Models\City;
-use Modules\SaluteOra\Models\Cap;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Spatie\Permission\Traits\HasRoles;
 
