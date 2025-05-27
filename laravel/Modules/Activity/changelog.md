@@ -1,12 +1,5 @@
 # Changelog
 
-All notable changes to `:package_name` will be documented in this file.
-
-## 1.0.0 - 202X-XX-XX
-
-- initial release
-# Changelog
-
 Tutte le modifiche notevoli a questo modulo saranno documentate in questo file.
 
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
