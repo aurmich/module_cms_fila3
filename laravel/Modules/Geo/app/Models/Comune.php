@@ -173,9 +173,9 @@ class Comune extends GeoJsonModel
      * Clear all cached data
      * 
      * @param bool $verbose Se true, restituisce la lista delle chiavi di cache eliminate
-     * @return array<int, string>|void Lista delle chiavi di cache eliminate se $verbose è true
+     * @return array<int, string>|null Lista delle chiavi di cache eliminate se $verbose è true
      */
-    public static function clearCache(bool $verbose = false): array|void
+    public static function clearCache(bool $verbose = false): ?array
     {
         $clearedKeys = [];
         
@@ -187,7 +187,7 @@ class Comune extends GeoJsonModel
         }
         
         // Chiavi specifiche per regione
-        static::allRegions()->keys()->each(function ($code) use (&$clearedKeys) {
+        static::allRegions()->each(function ($nome, $code) use (&$clearedKeys) {
             $keys = ["geo_region_{$code}", "geo_region_{$code}_provinces"];
             foreach ($keys as $key) {
                 Cache::forget($key);
@@ -196,19 +196,109 @@ class Comune extends GeoJsonModel
         });
         
         // Chiavi specifiche per provincia
-        static::allProvinces()->keys()->each(function ($code) use (&$clearedKeys) {
+        static::allProvinces()->each(function ($nome, $code) use (&$clearedKeys) {
             $key = "geo_province_{$code}";
             Cache::forget($key);
             $clearedKeys[] = $key;
         });
         
-        // Rimuovi tutte le chiavi di ricerca (pattern matching)
-        $searchKeys = Cache::getStore()->keys('geo_search_*');
-        foreach ($searchKeys as $key) {
-            Cache::forget($key);
-            $clearedKeys[] = $key;
+        // Nota: La pulizia delle chiavi di pattern matching è limitata
+        // poiché non tutti i driver di cache supportano la ricerca per pattern
+        // Le chiavi di ricerca più comuni vengono gestite esplicitamente
+        $searchPatterns = [
+            'geo_search_', // Ricerche generiche
+            'geo_valid_cap_', // Validazione CAP
+            'geo_gerarchia_', // Gerarchie geografiche
+        ];
+        
+        // Puliamo alcune chiavi di ricerca comuni per essere sicuri
+        foreach ($searchPatterns as $pattern) {
+            for ($i = 0; $i < 10; $i++) {
+                $testKey = $pattern . md5((string)$i);
+                Cache::forget($testKey);
+            }
         }
         
         return $verbose ? $clearedKeys : null;
+    }
+    
+    /**
+     * Verifica se il CAP esiste nel database
+     * 
+     * @param string $cap CAP da verificare
+     * @return bool True se il CAP esiste, false altrimenti
+     */
+    public static function isValidCap(string $cap): bool
+    {
+        $cacheKey = "geo_valid_cap_{$cap}";
+        
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($cap) {
+            return static::byCap($cap)->isNotEmpty();
+        });
+    }
+    
+    /**
+     * Ottiene la gerarchia completa per un comune (regione, provincia, comune, cap)
+     * 
+     * @param string $comuneNome Nome esatto del comune
+     * @return array|null Gerarchia completa o null se il comune non esiste
+     */
+    public static function getGerarchia(string $comuneNome): ?array
+    {
+        $cacheKey = "geo_gerarchia_" . md5($comuneNome);
+        
+        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($comuneNome) {
+            $comune = static::all()->firstWhere('nome', $comuneNome);
+            
+            if (!$comune) {
+                return null;
+            }
+            
+            return [
+                'regione' => $comune['regione'] ?? null,
+                'provincia' => $comune['provincia'] ?? null,
+                'comune' => [
+                    'nome' => $comune['nome'],
+                    'codice' => $comune['codice'] ?? null,
+                    'codiceCatastale' => $comune['codiceCatastale'] ?? null,
+                    'popolazione' => $comune['popolazione'] ?? null,
+                ],
+                'cap' => $comune['cap'] ?? [],
+            ];
+        });
+    }
+    
+    /**
+     * Restituisce regole di validazione Laravel per form geografici
+     * 
+     * @param bool $required Se true, tutti i campi sono obbligatori
+     * @return array<string, array<int, mixed>> Regole di validazione
+     */
+    public static function getValidationRules(bool $required = true): array
+    {
+        $requiredRule = $required ? 'required' : 'nullable';
+        
+        return [
+            'regione_codice' => [$requiredRule, 'string', function ($attribute, $value, $fail) {
+                if (!static::allRegions()->has($value)) {
+                    $fail('La regione selezionata non è valida.');
+                }
+            }],
+            'provincia_codice' => [$requiredRule, 'string', function ($attribute, $value, $fail) {
+                if (!static::allProvinces()->has($value)) {
+                    $fail('La provincia selezionata non è valida.');
+                }
+            }],
+            'comune_nome' => [$requiredRule, 'string', function ($attribute, $value, $fail) {
+                if (!empty($value) && static::searchByName($value, 1)->isEmpty()) {
+                    $fail('Il comune selezionato non è valido.');
+                }
+            }],
+            'cap' => [$requiredRule, 'string', function ($attribute, $value, $fail) {
+                if (!empty($value) && !static::isValidCap($value)) {
+                    $fail('Il CAP inserito non è valido.');
+                }
+            }],
+        ];
     }
 }
