@@ -180,10 +180,10 @@ class Address extends BaseModel
      *
      * @return string
      */
-    public function getFormattedAddressAttribute(): ?string
+    public function getFormattedAddressAttribute(?string $value): ?string
     {
-        if ($this->formatted_address) {
-            return $this->formatted_address;
+        if ($value) {
+            return $value;
         }
         
         $parts = [];

@@ -115,10 +115,41 @@ class AddressResource extends XotBaseResource
                         ->maxLength(255)
                         ->columnSpan(2),
                     */
+                    /*
                     'locality' => Forms\Components\TextInput::make('locality')
                         ->required()
                         ->maxLength(255)
                         ->columnSpan(2),
+                    */
+                    
+                    'locality' => Select::make('locality')
+                    ->options(function (Get $get) {
+                        $region = $get('administrative_area_level_1');
+                        if (!$region) {
+                            return [];
+                        }
+                        $province = $get('administrative_area_level_2');
+                        if (!$province) {
+                            return [];
+                        }
+                        
+                        $res=Comune::query()
+                            ->where('regione->codice', $region)
+                            ->where('provincia->codice', $province)
+                            ->select('nome','codice')
+                            ->distinct()
+                            ->orderBy('nome')
+                            ->get()
+                            ->pluck('nome', 'codice')
+                            ->toArray();
+                        
+                        return $res;
+                    })
+                    ->searchable()
+                    ->required()
+                    ->live()
+                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
+                    
                     /*
                     'postal_code' => Forms\Components\TextInput::make('postal_code')
                         ->maxLength(20)
@@ -134,9 +165,12 @@ class AddressResource extends XotBaseResource
                         if (!$province) {
                             return [];
                         }
+                        $city = $get('locality');
+                        
                         $res=Comune::query()
                             ->where('regione->codice', $region)
                             ->where('provincia->codice', $province)
+                            ->when($city, fn($query) => $query->where('codice', $city))
                             ->select('cap')
                             ->distinct()
                             ->orderBy('cap')
