@@ -1,0 +1,39 @@
+# Pattern di Ereditarietà dei Modelli
+
+## Regola Fondamentale
+Tutti i modelli all'interno di un modulo DEVONO estendere la classe `BaseModel` del proprio modulo, MAI direttamente `Illuminate\Database\Eloquent\Model`.
+
+## Implementazione
+- Ogni modulo ha una propria classe `BaseModel` nella directory `Models`
+- La classe `BaseModel` del modulo estende `Modules\Xot\Models\XotBaseModel`
+- Tutti i modelli del modulo estendono la classe `BaseModel` del proprio modulo
+
+## Catena di Ereditarietà
+```
+Illuminate\Database\Eloquent\Model
+    ↑
+Modules\Xot\Models\XotBaseModel
+    ↑
+Modules\{ModuleName}\Models\BaseModel
+    ↑
+Modules\{ModuleName}\Models\{ConcreteModel}
+```
+
+## Motivazione
+1. Coesione: Comportamenti specifici del modulo sono centralizzati
+2. DRY: Funzionalità comuni non vengono duplicate
+3. Astrazione: Cambiamenti globali possono essere implementati in un solo punto
+4. Consistenza: Tutti i modelli seguono lo stesso pattern architetturale
+
+## Verifiche Automatiche
+- Strumenti di lint devono segnalare modelli che estendono direttamente `Model`
+- I code review devono sempre controllare la corretta ereditarietà
+
+## Anti-Pattern
+```php
+// ERRATO: Estensione diretta di Illuminate\Database\Eloquent\Model
+class Studio extends Model { /* ... */ }
+
+// ERRATO: Estensione di BaseModel di un altro modulo
+class Doctor extends \Modules\User\Models\BaseModel { /* ... */ }
+```

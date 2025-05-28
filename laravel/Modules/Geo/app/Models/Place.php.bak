@@ -34,7 +34,7 @@ class Place extends BaseModel implements HasGeolocation
         'point_of_interest',
         'political'
     ];
-    use HasFactory;
+    
 
     protected $fillable = [
         'id', 'post_id', 'post_type', 'model_id', 'model_type',

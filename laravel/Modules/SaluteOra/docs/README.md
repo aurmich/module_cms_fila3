@@ -100,10 +100,23 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 ### 3. Ereditarietà dei Modelli
 
 **Regole per l'ereditarietà:**
-- I modelli specializzati (es. Doctor, Patient) **devono** estendere il modello User del modulo Patient
-- Devono usare sempre il trait `\Parental\HasParent` per il corretto funzionamento dello STI
-- MAI ridichiarare trait già presenti nelle classi genitori (es. HasFactory)
-- Tutta la logica comune va nel modello User, mentre i modelli specializzati contengono solo le specificità
+- I modelli specializzati (es. Doctor, Patient, Studio, ecc.) **devono** estendere il modello BaseModel del modulo di appartenenza (es. `Modules\SaluteOra\Models\BaseModel`), **mai** direttamente `Illuminate\Database\Eloquent\Model`.
+- Devono usare sempre il trait `\Parental\HasParent` per il corretto funzionamento dello STI (se applicabile).
+- MAI ridichiarare trait già presenti nelle classi genitori (es. HasFactory).
+- Tutta la logica comune va nel modello base, mentre i modelli specializzati contengono solo le specificità.
+
+**Motivazione filosofica:**
+- Centralizzazione della logica comune (connessione, cast, factory, ecc.)
+- Coerenza architetturale tra tutti i moduli
+- Facilità di override e personalizzazione
+- DRY: nessuna duplicazione di logica tra modelli
+- Zen: "Un solo BaseModel per domarli tutti"
+
+**Checklist:**
+- [ ] Nessun modello estende direttamente `Model` di Laravel
+- [ ] Tutti i modelli estendono il BaseModel del modulo
+- [ ] La logica comune è centralizzata
+- [ ] La documentazione è aggiornata
 
 ## Funzionalità Core
 
@@ -571,3 +584,41 @@ protected $casts = [ 'state' => UserState::class ];
 - Le classi concrete (Pending, Active, ecc.) vanno in `app/States/User/`.
 - Se trovi una `UserState` in `app/States/User/UserState.php`, rinominala in `.old` e rimuovila dopo verifica.
 - **Motivazione:** coerenza con PSR-4, autoloading, best practice Spatie Model States, chiarezza architetturale.
+
+## StudioResource (Filament)
+
+- Implementata la risorsa Filament per il modello Studio secondo tutte le regole del progetto.
+- Estende `Modules\Xot\Filament\Resources\XotBaseResource`.
+- Namespace: `Modules\SaluteOra\Filament\Resources`.
+- Nessuna proprietà navigationLabel/navigationGroup.
+- Nessun uso di `->label()` nei form: tutte le etichette sono gestite tramite il file di traduzione `lang/it/studio.php`.
+- Form strutturato in Section, colonne e filtri associativi, relazioni pronte per appointments e doctors.
+- Docs consultati: `docs/filament-best-practices.mdc`, `docs/README.md`, `lang/it/studio.php`.
+- Policy DRY, KISS, zen, coerenza architetturale.
+
+Vedi anche:
+- [filament-best-practices.mdc](./filament-best-practices.mdc)
+- [lang/it/studio.php](../lang/it/studio.php)
+
+## Aggiornamento gestione indirizzi Studio
+
+- I campi `address`, `city`, `postal_code` sono stati **rimossi** dal modello e dalla tabella `studios`.
+- La gestione degli indirizzi avviene ora tramite relazione morphMany verso il modello `Address` del modulo Geo.
+- Ogni Studio può avere più indirizzi (es. sede legale, operativa, ecc.), normalizzati e riusabili secondo Schema.org.
+- Motivazione: **riuso, normalizzazione, DRY, policy multi-modulo, zen della semantica**.
+- Per dettagli sulla struttura degli indirizzi, vedi la documentazione del modulo Geo.
+
+Esempio di accesso all'indirizzo principale:
+```php
+$studio->addresses()->where('is_primary', true)->first();
+```
+
+Esempio di accesso all'indirizzo completo:
+```php
+$studio->getFullAddress();
+```
+
+Tutte le viste, risorse Filament e API devono ora usare la relazione `addresses` per la gestione degli indirizzi Studio.
+
+### Form Components Custom
+- [OpeningHoursField: gestione orari di apertura](form-components/opening-hours-field.md) - Campo custom Filament per orari di apertura, compatibile Spatie/opening-hours, UX avanzata

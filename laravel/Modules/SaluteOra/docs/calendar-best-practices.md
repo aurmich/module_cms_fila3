@@ -235,4 +235,13 @@ Log::channel('appointments')->info('Date disponibili calcolate', [
 
 - [Implementazione del Calendario](calendar-date-picker-implementation.md)
 - [Gestione degli Appuntamenti](appointment-management.md)
-- [Documentazione Filament](https://filamentphp.com/docs) 
+- [Documentazione Filament](https://filamentphp.com/docs)
+
+## Gestione Orari di Apertura: Best Practice
+
+Per la gestione degli orari di apertura di studi, risorse e servizi, utilizzare SEMPRE il campo custom [OpeningHoursField](../form-components/opening-hours-field.md), che garantisce:
+- Compatibilità diretta con la libreria Spatie/opening-hours
+- UX avanzata e validazione live
+- Serializzazione standard e riuso in più moduli
+
+Vedi anche: [form-components/README.md](../form-components/README.md) 

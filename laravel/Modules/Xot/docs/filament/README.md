@@ -90,3 +90,35 @@ Questa documentazione si applica a tutti i moduli che utilizzano Filament per il
 * [README.md](../../../../Themes/Two/docs/README.md)
 * [README.md](../../../../Themes/One/docs/README.md)
 
+## Regola sulle closure void nelle azioni custom Filament
+
+### Motivazione
+- Le closure dichiarate come `void` nelle azioni custom Filament devono solo eseguire effetti collaterali e **non restituire mai un valore**.
+- Restituire un valore (anche implicito) genera errori a runtime e viola la policy DRY/KISS/zen.
+
+### Esempio ERRATO
+```php
+->action(fn (Studio $record): void => $record->activate()) // ERRORE: activate() restituisce void, ma la closure lo "ritorna"
+```
+
+### Esempio CORRETTO
+```php
+->action(fn (Studio $record): void => $record->activate()) // CORRETTO: nessun return
+// oppure
+->action(function (Studio $record): void {
+    $record->activate();
+    // nessun return
+})
+```
+
+### Policy
+- Tutte le closure void devono solo eseguire effetti collaterali, mai return.
+- Aggiornare la documentazione ogni volta che si corregge questo errore.
+
+### Collegamento
+- Vedi anche: [SaluteOra/docs/filament-best-practices.mdc](../../../SaluteOra/docs/filament-best-practices.mdc)
+
+### Checklist
+- [ ] Nessuna closure void restituisce un valore
+- [ ] Tutte le azioni custom rispettano la signature void
+
