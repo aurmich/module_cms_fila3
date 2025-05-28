@@ -221,3 +221,190 @@ class Comune extends GeoJsonModel
 
 - Tutti i filtri e le select dinamiche ora usano solo il modello Comune.
 - Vedi anche [geo_entities.md](./geo_entities.md) per motivazione e percentuali di adozione.
+
+## Analisi: Comune come modello Sushi
+
+### Motivazione
+- Sushi permette di usare Eloquent su dati statici senza DB, caricando i dati da array/config/json e usando SQLite in RAM.
+- Potremmo implementare Comune come modello Sushi per avere:
+  - Query Eloquent (where, order, relazioni, accessors, mutators)
+  - Route model binding
+  - Compatibilità con package che richiedono Eloquent
+  - API uniforme per chi lavora solo con Eloquent
+
+### Vantaggi (nel nostro contesto)
+- **90%**: Query Eloquent, relazioni, accessors, mutators, route model binding
+- **80%**: Facilità di test e mock (Sushi è molto usato nei test)
+- **80%**: Compatibilità con package Laravel che richiedono Eloquent
+- **70%**: Possibilità di aggiungere facilmente relazioni virtuali (es: region/province/city come belongsTo)
+- **70%**: API più uniforme per chi lavora solo con Eloquent
+
+### Svantaggi (nel nostro contesto)
+- **80%**: Dipendenza da package esterno (Sushi)
+- **70%**: Richiede estensione PHP SQLite abilitata (non sempre disponibile su hosting condivisi o ambienti dockerizzati minimal)
+- **60%**: Gestione cache meno trasparente rispetto a Laravel cache (Sushi usa SQLite in RAM, non la cache Laravel)
+- **60%**: Minor trasparenza per chi non conosce Sushi (debug, override, ecc.)
+- **50%**: Per dataset > 20.000 record, performance e RAM vanno testate
+- **0%**: Scrittura: sempre readonly
+
+### Esempio pratico di modello Sushi
+
+```php
+namespace Modules\Geo\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Sushi\Sushi;
+
+class ComuneSushi extends Model
+{
+    use Sushi;
+
+    public function getRows(): array
+    {
+        // Carica il json come array associativo
+        $json = file_get_contents(module_path('Geo', 'resources/json/comuni.json'));
+        return json_decode($json, true);
+    }
+
+    // Esempio di relazione virtuale
+    public function regione()
+    {
+        return $this->belongsTo(RegionSushi::class, 'regione.codice', 'codice');
+    }
+}
+```
+
+### Raccomandazioni per il nostro progetto
+- **Consigliato**:
+  - Se serve compatibilità Eloquent completa (relazioni, accessors, mutators, route model binding)
+  - Se si vuole integrare con package Laravel che richiedono Eloquent
+  - Se si lavora in ambienti dove SQLite è sempre disponibile
+- **Sconsigliato**:
+  - Se si vuole massima trasparenza, semplicità, portabilità e nessuna dipendenza esterna
+  - Se si lavora in ambienti dove SQLite non è garantito
+  - Se si vuole usare la cache Laravel per invalidazione e slicing avanzato
+
+### Considerazioni finali
+- **Comune Sushi** è una soluzione potente per chi vuole Eloquent completo su dati statici, ma introduce una dipendenza e un requisito tecnico (SQLite) che va valutato per ogni ambiente.
+- **Comune (GeoJsonModel)** rimane la soluzione più trasparente, portabile e "zen" per la maggior parte dei progetti multi-modulo, open-source, e per chi vuole massima leggibilità e controllo.
+- **Strategia consigliata**: mantenere Comune (GeoJsonModel) come default, ma documentare e testare una variante Sushi per chi ha bisogno di Eloquent puro.
+
+---
+
+- Vedi anche [geo_entities.md](./geo_entities.md) per motivazione e percentuali di adozione.
+
+## Approfondimento: Sushi (calebporzio/sushi) per modelli geografici
+
+### Cos'è Sushi?
+- Sushi è un "array driver" per Eloquent: permette di creare modelli Eloquent da array, JSON, config, API, senza DB reale.
+- I dati vengono caricati in una tabella SQLite temporanea (in RAM o su disco), e puoi usare TUTTE le query Eloquent, relazioni, accessors, mutators, route model binding, validazione exists, ecc.
+- Perfetto per dati statici, reference, lookup, fixture, demo, test, blog, config, ruoli, geo, ecc.
+
+### Come funziona
+- Si usa il trait `Sushi` su un modello Eloquent.
+- Si fornisce un array statico (`$rows`) o si implementa `getRows()` per caricare i dati (anche da file json, csv, API, ecc).
+- Sushi crea una tabella SQLite e la popola con i dati forniti.
+- Puoi definire schema custom, relazioni, accessors, mutators, chunk size, cache reference path, ecc.
+
+### Esempio pratico: ComuneSushi
+
+```php
+namespace Modules\Geo\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Sushi\Sushi;
+
+class ComuneSushi extends Model
+{
+    use Sushi;
+
+    public function getRows(): array
+    {
+        $json = file_get_contents(module_path('Geo', 'resources/json/comuni.json'));
+        return json_decode($json, true);
+    }
+
+    // Relazione virtuale (esempio)
+    public function regione()
+    {
+        return $this->belongsTo(RegionSushi::class, 'regione.codice', 'codice');
+    }
+
+    // Se vuoi cache persistente tra richieste
+    protected function sushiShouldCache() { return true; }
+    protected function sushiCacheReferencePath() { return module_path('Geo', 'resources/json/comuni.json'); }
+}
+```
+
+### Vantaggi
+- **100%** API Eloquent completa: where, order, relazioni, accessors, mutators, route model binding, validazione exists, Scout, ecc.
+- **90%** Perfetto per test, fixture, demo, prototipi, dati reference, blog, config, geo, ruoli, ecc.
+- **80%** Puoi caricare dati da qualsiasi fonte (array, json, csv, API, config, ecc.)
+- **80%** Nessuna migrazione, nessun DB server, nessun seeder
+- **80%** Puoi definire schema custom, chunk size, cache reference path
+- **70%** Compatibile con Backpack, Filament, Nova, package Eloquent
+
+### Svantaggi e caveat
+- **80%** Dipendenza da package esterno (Sushi)
+- **80%** Richiede estensione PHP SQLite abilitata (non sempre disponibile su hosting condivisi o docker minimal)
+- **70%** Gestione cache: se il file json cambia, serve bustare la cache (usa sushiCacheReferencePath)
+- **60%** Dove serve massima trasparenza/portabilità, GeoJsonModel è più "zen"
+- **60%** Dove serve slicing avanzato/cache Laravel, GeoJsonModel è più flessibile
+- **50%** Per dataset > 20.000 record, testare RAM e performance
+- **30%** Alcuni metodi Eloquent (es. whereHas tra modelli Sushi diversi) non funzionano (perché ogni modello ha un DB SQLite separato)
+- **0%** Scrittura: sempre readonly
+
+### Percentuali e scenari
+- **ComuneSushi**: consigliato per chi vuole Eloquent puro, relazioni, validazione exists, route model binding, compatibilità package, test, demo, prototipi, blog, config, geo reference, ecc. (~20-30% dei casi in progetti Laravel puri, SaaS, package, admin panel avanzati)
+- **GeoJsonModel**: consigliato per massima trasparenza, portabilità, semplicità, multi-modulo, open-source, slicing/cache avanzato, ambienti senza SQLite, team che vogliono leggibilità e controllo. (~70-80% dei casi in progetti multi-modulo, open-source, multi-tenant, geo reference, ecc.)
+
+### Consigli operativi
+- Se vuoi Eloquent completo, relazioni, validazione exists, route model binding, compatibilità con package Laravel, **Sushi è la scelta migliore**.
+- Se vuoi massima trasparenza, portabilità, nessuna dipendenza, cache Laravel, slicing avanzato, **GeoJsonModel è la scelta migliore**.
+- Puoi mantenere entrambi: `Comune` (GeoJsonModel) come default, `ComuneSushi` come variante Eloquent per chi ne ha bisogno.
+- Documenta sempre la scelta e i caveat in docs.
+
+### Collegamenti
+- [Sito ufficiale Sushi](https://usesushi.dev/)
+- [GitHub Sushi](https://github.com/calebporzio/sushi)
+- [Esempi avanzati](https://jasonlbeggs.com/blog/laravel-sushi)
+- [geo_entities.md](./geo_entities.md)
+
+---
+
+## Esempio di implementazione completa per ComuneSushi
+
+```php
+namespace Modules\Geo\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Sushi\Sushi;
+
+class ComuneSushi extends Model
+{
+    use Sushi;
+
+    public function getRows(): array
+    {
+        $json = file_get_contents(module_path('Geo', 'resources/json/comuni.json'));
+        return json_decode($json, true);
+    }
+
+    protected function sushiShouldCache() { return true; }
+    protected function sushiCacheReferencePath() { return module_path('Geo', 'resources/json/comuni.json'); }
+
+    // Esempio: relazioni virtuali
+    public function regione()
+    {
+        return $this->belongsTo(RegionSushi::class, 'regione.codice', 'codice');
+    }
+    public function provincia()
+    {
+        return $this->belongsTo(ProvinceSushi::class, 'provincia.codice', 'codice');
+    }
+}
+```
+
+---
+
+- Vedi anche [geo_entities.md](./geo_entities.md) e [squire-integration.md](./squire-integration.md) per altri confronti e strategie.
