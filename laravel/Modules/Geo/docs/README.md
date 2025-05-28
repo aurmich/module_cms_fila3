@@ -108,4 +108,53 @@ $geoService->clearCache();
 - [Documentazione JSON Database](json-database.md)
 - [Documentazione Squire](squire-integration.md)
 - [Best Practices Filament](../../../docs/filament-best-practices.md)
-- [Clean Code](../../../docs/clean-code.md) 
+- [Clean Code](../../../docs/clean-code.md)
+
+# Gestione dati geografici statici in Geo
+
+## Strategie implementative
+
+### 1. GeoJsonModel (readonly da file JSON)
+- Modello base che legge tutti i dati da un unico file JSON (`comuni.json`), esponendo metodi statici per regioni, province, città, cap, ecc.
+- **Vantaggi:** semplicità, trasparenza, versionamento git, zero dipendenze, performance ottima fino a 10-20k record, auditabilità.
+- **Svantaggi:** no join/relazioni, no query avanzate, non adatto a dataset >50k record, solo metodi Collection.
+- **Percentuale preferenza:** 55-70% (caso d'uso statico tipico)
+- **Approfondisci:** [geo-json-model.md](geo-json-model.md), [comune-unificazione-analisi.md](comune-unificazione-analisi.md)
+
+### 2. Sushi (Eloquent Model virtuale)
+- Usa il trait Sushi per caricare i dati da array/config/json/API in una tabella SQLite temporanea in memoria, con API Eloquent completa (join, relazioni, morph, query avanzate).
+- **Vantaggi:** API Eloquent completa, compatibilità Filament, query avanzate, relazioni, morph, refactoring facile.
+- **Svantaggi:** richiede SQLite attivo, overhead bootstrap, meno trasparente, id instabili se non definiti, non adatto a dataset >50k record, dipendenza esterna.
+- **Percentuale preferenza:** 30-45% (se servono query Eloquent avanzate)
+- **Approfondisci:** [comune-sushi-analisi.md](comune-sushi-analisi.md), [comune-sushi-implementazione.md](comune-sushi-implementazione.md), [geo-sushi-comparison.md](geo-sushi-comparison.md)
+
+### 3. SushiToJsons (CRUD su file JSON per record)
+- Trait che estende Sushi e popola i dati da una serie di file JSON (uno per record), simulando CRUD su file, con supporto multitenant e schema esplicito.
+- **Vantaggi:** dati modificabili senza DB, API Eloquent completa, multitenancy, ogni record ispezionabile/versionabile come file.
+- **Svantaggi:** più complesso, performance limitata su grandi dataset, fragile (coerenza file), richiede schema esplicito, non adatto a dati solo readonly.
+- **Percentuale preferenza:** <5% (solo se serve CRUD su file e multitenancy)
+- **Approfondisci:** [comune-sushi-implementazione.md](comune-sushi-implementazione.md) (sezione 8), [Tenant/app/Models/Traits/SushiToJsons.php]
+
+---
+
+## Raccomandazioni sintetiche
+- **Per dati statici** (es. comuni italiani): preferire GeoJsonModel o Sushi puro.
+- **Per dati modificabili senza DB** e multitenancy: valutare SushiToJsons.
+- **Per query Eloquent avanzate** (join, morph, relazioni): valutare Sushi, ma solo se SQLite è garantito.
+- **Documentare sempre la scelta e aggiornare i test.**
+
+---
+
+## Collegamenti principali
+- [geo-json-model.md](geo-json-model.md)
+- [comune-unificazione-analisi.md](comune-unificazione-analisi.md)
+- [comune-sushi-analisi.md](comune-sushi-analisi.md)
+- [comune-sushi-implementazione.md](comune-sushi-implementazione.md)
+- [geo-sushi-comparison.md](geo-sushi-comparison.md)
+- [module_geo.md](module_geo.md)
+- [Tenant/app/Models/Traits/SushiToJsons.php]
+
+---
+
+**Ultimo aggiornamento:** {{date('Y-m-d')}}
+Responsabile: Cascade AI 
