@@ -20,6 +20,6 @@ class ViewStudio extends XotBaseViewRecord
      */
     protected function getInfolistSchema(): array
     {
-        return StudioResource::getInfolistSchema();
+        return [];
     }
 }
