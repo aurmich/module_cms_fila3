@@ -19,7 +19,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Chart\\Providers\\ChartServiceProvider"
+                "Modules\\Chart\\Providers\\ChartServiceProvider",
+                "Modules\\Chart\\Providers\\Filament\\AdminPanelProvider"
             ],
             "aliases": {}
         }

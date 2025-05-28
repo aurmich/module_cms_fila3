@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Modules\SaluteOra\Enums\AppointmentStatus;
-use Modules\SaluteOra\Enums\AppointmentType;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 
 class Calendar extends Component
 {
@@ -115,7 +115,7 @@ class Calendar extends Component
 
     public function getTypesProperty()
     {
-        return collect(AppointmentType::cases())->mapWithKeys(fn ($type) => [
+        return collect(AppointmentTypeEnum::cases())->mapWithKeys(fn ($type) => [
             $type->value => $type->getLabel()
         ]);
     }

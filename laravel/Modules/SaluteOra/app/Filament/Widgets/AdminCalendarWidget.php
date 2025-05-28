@@ -13,9 +13,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Modules\SaluteOra\Enums\AppointmentStatus;
-use Modules\SaluteOra\Enums\AppointmentType;
-use Modules\SaluteOra\Enums\UserType;
+use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Studio;
 use Modules\SaluteOra\Traits\HasFullCalendarConfig;
@@ -72,7 +72,7 @@ class AdminCalendarWidget extends FullCalendarWidget
      */
     public static function canView(): bool
     {
-        return Auth::check() && Auth::user()?->type === UserType::ADMIN;
+        return Auth::check() && Auth::user()?->type === UserTypeEnum::ADMIN->value;
     }
 
     /**
@@ -143,16 +143,20 @@ class AdminCalendarWidget extends FullCalendarWidget
                         ->relationship('patient', 'full_name')
                         ->searchable()
                         ->required(),
-                    Select::make('type')
-                        ->options(AppointmentType::class)
+                    'type' => Select::make('type')
+                        ->label('Tipo')
+                        ->options(AppointmentTypeEnum::class)
+                        ->searchable()
                         ->required(),
                     DateTimePicker::make('start_time')
                         ->required(),
                     DateTimePicker::make('end_time')
                         ->required(),
-                    Select::make('status')
-                        ->options(AppointmentStatus::class)
-                        ->default(AppointmentStatus::SCHEDULED),
+                    'status' => Select::make('status')
+                        ->label('Stato')
+                        ->options(AppointmentStatusEnum::class)
+                        ->searchable()
+                        ->default(AppointmentStatusEnum::SCHEDULED->value),
                     Textarea::make('notes')
                         ->rows(3),
                     Toggle::make('emergency'),
@@ -205,7 +209,7 @@ class AdminCalendarWidget extends FullCalendarWidget
         ]);
     }
 
-        /**
+    /**
      * Gestisce la selezione di un range di date.
      *
      * @param string $start
@@ -340,7 +344,7 @@ class AdminCalendarWidget extends FullCalendarWidget
         return [
             'today_appointments' => Appointment::whereDate('start_time', $today)->count(),
             'week_appointments' => Appointment::whereBetween('start_time', [$today, $endOfWeek])->count(),
-            'pending_appointments' => Appointment::where('status', AppointmentStatus::PENDING)->count(),
+            'pending_appointments' => Appointment::where('status', AppointmentStatusEnum::PENDING->value)->count(),
             'emergency_appointments' => Appointment::emergency()->whereDate('start_time', '>=', $today)->count(),
             'total_studios' => Studio::where('active', true)->count(),
         ];

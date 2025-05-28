@@ -183,6 +183,9 @@ class Appointment extends Model
 
 ```php
 // AppointmentType.php
+// Path corretto: Modules/SaluteOra/app/Enums/AppointmentType.php
+use Modules\SaluteOra\App\Enums\AppointmentType;
+
 enum AppointmentType: string implements HasLabel
 {
     case CONSULTATION = 'consultation';
@@ -224,6 +227,9 @@ enum AppointmentStatus: string implements HasLabel
     }
 }
 ```
+
+> **Nota di prevenzione:**
+> L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
 
 ## Widget FullCalendar
 

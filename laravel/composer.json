@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "dotswan/filament-grapesjs-v3": "^1.1",
+        "laravel/folio": "^1.1",
         "laravel/framework": "^12.0",
         "laravel/passport": "*",
         "laravel/tinker": "^2.10.1",
@@ -28,8 +29,7 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Modules\\\\": "Modules/"
+            "Database\\Seeders\\": "database/seeders/"
         },
         "exclude-from-classmap": [
             "**/backup/**",

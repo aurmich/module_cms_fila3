@@ -7,7 +7,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\SaluteOra\Models\User;
 use Filament\Forms\Components\Select;
-use Modules\SaluteOra\Enums\UserType;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -34,7 +34,7 @@ class UserResource extends XotBaseResource
                 ->maxLength(255)
                 ->unique(ignoreRecord: true),
             Forms\Components\Select::make('type')
-                ->options(UserType::class)
+                ->options(UserTypeEnum::class)
                 ->required(),
             SelectState::make('state'),
             /*
@@ -74,7 +74,7 @@ class UserResource extends XotBaseResource
             ])
             ->filters([
                 SelectFilter::make('type')
-                    ->options(UserType::class),
+                    ->options(UserTypeEnum::class),
                 SelectFilter::make('state')
                     ->options(UserState::class),
             ])

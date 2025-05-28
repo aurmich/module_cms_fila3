@@ -7,7 +7,7 @@ namespace Modules\SaluteOra\Traits;
 use Filament\Facades\Filament;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Studio;
-use Modules\SaluteOra\Enums\UserType;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 
 /**
  * Trait per configurazioni comuni dei widget FullCalendar.
@@ -223,10 +223,10 @@ trait HasFullCalendarConfig
         }
 
         return match ($user->type) {
-            UserType::ADMIN => true,
-            UserType::DOCTOR => $appointment->doctor_id === $user->id ||
+            UserTypeEnum::ADMIN => true,
+            UserTypeEnum::DOCTOR => $appointment->doctor_id === $user->id ||
                                $user->hasRole('studio_admin'),
-            UserType::PATIENT => false,
+            UserTypeEnum::PATIENT => false,
             default => false,
         };
     }
@@ -246,11 +246,11 @@ trait HasFullCalendarConfig
         }
 
         return match ($user->type) {
-            UserType::ADMIN => true,
-            UserType::DOCTOR => $appointment->doctor_id === $user->id ||
+            UserTypeEnum::ADMIN => true,
+            UserTypeEnum::DOCTOR => $appointment->doctor_id === $user->id ||
                                ($user->hasRole('studio_admin') &&
                                 $appointment->studio_id === $user->studio_id),
-            UserType::PATIENT => $appointment->patient_id === $user->id,
+            UserTypeEnum::PATIENT => $appointment->patient_id === $user->id,
             default => false,
         };
     }

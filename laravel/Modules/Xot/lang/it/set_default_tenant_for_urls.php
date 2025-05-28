@@ -39,5 +39,16 @@ return array (
       'helper_text' => 'remember',
       'placeholder' => 'remember',
     ),
+    'cap' => 
+    array (
+      'description' => 'cap',
+      'helper_text' => 'cap',
+      'placeholder' => 'cap',
+      'label' => 'cap',
+    ),
+    'city' => 
+    array (
+      'description' => 'city',
+    ),
   ),
 );

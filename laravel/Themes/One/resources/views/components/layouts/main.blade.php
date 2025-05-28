@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        {{--
+            Policy: il layout DEVE includere @livewireStyles e @livewireScripts per evitare errori 419 Page Expired nei widget Filament/Livewire.
+            Vedi docs/widget-deleting-method-error.md e docs/rules/filament_best_practices.md
+        --}}
 
         {!! $_theme->metatags() !!}
         <!-- Used to add dark mode right away, adding here prevents any flicker -->
@@ -20,7 +24,7 @@
 			}
 		</style>
 		@filamentStyles
-
+        @livewireStyles
 
         @vite(['resources/css/app.css'],'themes/One')
 
@@ -33,6 +37,7 @@
         --}}
         @livewire('notifications')
 		@filamentScripts
+        @livewireScripts
         @vite(['resources/js/app.js'],'themes/One')
         <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
     </body>

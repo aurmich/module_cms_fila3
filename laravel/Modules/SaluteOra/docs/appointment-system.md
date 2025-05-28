@@ -405,3 +405,10 @@ class AppointmentCalendarTest extends TestCase
    - Timeline view
    - Resource timeline view
    - Custom views for different user roles
+
+## Path corretto per AppointmentType:
+## Modules/SaluteOra/app/Enums/AppointmentType.php
+use Modules\SaluteOra\App\Enums\AppointmentType;
+
+> **Nota di prevenzione:**
+> L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.

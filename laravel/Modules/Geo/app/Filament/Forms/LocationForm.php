@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Geo\App\Filament\Forms;
+namespace Modules\Geo\Filament\Forms;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Get;
@@ -14,6 +14,7 @@ use Modules\Geo\App\Services\GeoDataService;
  * Questo form fornisce una selezione a cascata per regione, provincia, città e CAP.
  * 
  * @see \Modules\Geo\docs\json-database.md
+ * @see Modules\Geo\Filament\Forms\LocationForm
  */
 class LocationForm
 {

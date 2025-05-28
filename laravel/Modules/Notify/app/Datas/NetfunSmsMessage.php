@@ -6,7 +6,7 @@ namespace Modules\Notify\Datas;
 
 use Spatie\LaravelData\Data;
 
-class NetfunSMSMessage extends Data
+class NetfunSmsMessage extends Data
 {
     public function __construct(
         public string $to,
@@ -16,7 +16,7 @@ class NetfunSMSMessage extends Data
         public ?string $scheduled_date = null
     ) {
     }
-
+    /*
     public static function fromArray(array $data): self
     {
         return new self(
@@ -27,4 +27,5 @@ class NetfunSMSMessage extends Data
             scheduled_date: $data['scheduled_date'] ?? null
         );
     }
+        */
 }

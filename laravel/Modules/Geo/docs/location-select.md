@@ -374,3 +374,15 @@ class LocationSelectTest extends TestCase
 ## License
 
 MIT
+
+## Nota importante
+
+**Il namespace corretto per la classe LocationForm è:**
+
+```php
+use Modules\Geo\Filament\Forms\LocationForm;
+```
+
+Non utilizzare mai `Modules\Geo\App\Filament\Forms\LocationForm`.
+
+> Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path o del namespace.
