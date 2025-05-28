@@ -408,3 +408,87 @@ class ComuneSushi extends Model
 ---
 
 - Vedi anche [geo_entities.md](./geo_entities.md) e [squire-integration.md](./squire-integration.md) per altri confronti e strategie.
+
+## Approccio avanzato: SushiToJsons (CRUD, multi-tenant, Eloquent + JSON)
+
+### Cos'è SushiToJsons?
+- Trait che unisce Sushi (Eloquent su array/JSON) e persistenza su file JSON (uno per record).
+- Permette di avere modelli Eloquent CRUD-abili senza DB, con dati salvati come file JSON (tipicamente uno per tenant o per record).
+- Usa la directory `database/content/<table>` per salvare i file, risolvendo il path tramite un servizio multi-tenant.
+- Implementa i metodi Eloquent `creating`, `updating`, `deleting` per scrivere/aggiornare/cancellare i file JSON.
+- Usa una proprietà `$schema` per sapere quali campi leggere/scrivere.
+
+### Vantaggi
+- **100%** API Eloquent completa (query, relazioni, accessors, mutators, validazione exists, route model binding, ecc.)
+- **100%** CRUD completo: puoi creare, aggiornare, cancellare record (i dati sono file JSON)
+- **100%** Multi-tenant: ogni tenant ha la sua directory di dati
+- **90%** Versionamento e trasparenza: i dati sono file JSON, facilmente versionabili, esportabili, ispezionabili
+- **80%** Nessun DB server: solo filesystem e SQLite in RAM per Sushi
+- **80%** Perfetto per dati configurabili dall'utente, reference custom, configurazioni, demo, test
+
+### Svantaggi e limiti
+- **80%** Performance: per grandi dataset (migliaia di file), la lettura/scrittura su filesystem può essere lenta rispetto a un DB vero
+- **70%** Consistenza: nessuna transazionalità tra file, rischio di inconsistenze in caso di crash durante operazioni multiple
+- **70%** Gestione schema: serve mantenere lo schema manualmente e assicurarsi che tutti i file siano coerenti
+- **60%** Dipendenza da Sushi, File, e da un servizio custom per path multi-tenant
+- **60%** Dipendenza dal filesystem: su storage lento o non persistente può essere problematico
+- **0%** Non adatto a dati reference statici nazionali (meglio GeoJsonModel)
+
+### Esempio pratico di trait SushiToJsons
+
+```php
+namespace Modules\Tenant\Models\Traits;
+
+use Illuminate\Support\Facades\File;
+use Modules\Tenant\Services\TenantService;
+use Sushi\Sushi;
+
+trait SushiToJsons
+{
+    use Sushi;
+
+    public function getSushiRows(): array
+    {
+        $tbl = $this->getTable();
+        $path = TenantService::filePath('database/content/'.$tbl);
+        $files = File::glob($path.'/*.json');
+        $rows = [];
+        foreach ($files as $file) {
+            $json = File::json($file);
+            $item = [];
+            foreach ($this->schema ?? [] as $name => $type) {
+                $value = $json[$name] ?? null;
+                $item[$name] = is_array($value) ? json_encode($value) : $value;
+            }
+            $rows[] = $item;
+        }
+        return $rows;
+    }
+
+    // Metodi per persistenza CRUD (creating, updating, deleting) vedi trait completo
+}
+```
+
+### Scenari d'uso consigliati
+- **Comune configurabile per tenant**: ogni tenant può avere comuni personalizzati, CRUD completo, dati versionabili
+- **Reference custom, configurazioni, dati utente**: dove serve CRUD, multi-tenant, versionamento
+- **Demo, test, prototipi**: dati facilmente ispezionabili e modificabili
+
+### Confronto con GeoJsonModel e Sushi puro
+- **GeoJsonModel**: solo readonly, unico file json, massima performance e semplicità, ideale per reference statici nazionali
+- **Sushi puro**: Eloquent su array/json, solo readonly, nessun CRUD, ideale per dati reference Eloquent-like
+- **SushiToJsons**: CRUD completo, multi-tenant, Eloquent API, persistenza su file, ideale per dati configurabili e reference custom
+
+### Percentuali e raccomandazioni
+- **Comune reference nazionale**: 90% GeoJsonModel (readonly, unico file, performance, semplicità)
+- **Comune configurabile per tenant**: 80% SushiToJsons (CRUD, multi-tenant, versionamento, Eloquent API)
+- **Comune Eloquent puro, solo readonly**: 20% Sushi semplice (carica da unico JSON, nessun CRUD)
+
+### Consigli operativi
+- Usa SushiToJsons solo se serve CRUD, multi-tenant, versionamento e API Eloquent completa.
+- Per dati reference statici, resta su GeoJsonModel.
+- Documenta sempre la scelta e i caveat in docs.
+
+---
+
+- Vedi anche [geo_entities.md](./geo_entities.md) e [squire-integration.md](./squire-integration.md) per altri confronti e strategie.
