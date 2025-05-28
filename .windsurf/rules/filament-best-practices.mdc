@@ -233,3 +233,9 @@ Le view dei widget Filament devono essere solo wrapper per $this->form. Niente m
 
 ## Vietato ->label() e ->placeholder() nei form component
 Tutti i form component devono usare solo chiavi campo, senza label o placeholder inline. Le etichette e i placeholder sono gestiti tramite i file di traduzione del modulo e il LangServiceProvider. Motivazione: coerenza, centralizzazione, override semplice, policy di qualità. Collegamento a docs/xot.md.
+
+## Regola: trait solo se riusabili
+I trait vanno creati solo se riutilizzati in più classi. Vietato creare trait per una sola classe. Se la logica è specifica di un solo modello, va implementata direttamente nella classe. Motivazione: semplicità, KISS, manutenibilità, evitare complessità inutile. Collegamento a docs/xot.md.
+
+## Policy di naming enum
+Il nome della classe enum DEVE sempre corrispondere al nome del file (es. UserTypeEnum.php -> enum UserTypeEnum: string ...). Aggiornare sempre sia il nome del file che il nome della classe. Motivazione: coerenza, autoloading, refactoring semplice. Collegamento a docs/xot.md e docs/enum-naming-policy.md.

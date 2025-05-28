@@ -8,6 +8,11 @@
 ## Overview
 - Widgets: Develop three FullCalendar widgets for different user types: Patient, Doctor, and Admin.
 - Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
+# FullCalendar Widget Implementation
+
+## Overview
+- Widgets: Develop three FullCalendar widgets for different user types: Patient, Doctor, and Admin.
+- Multi-Tenancy: Use Filament's multi-tenancy to manage doctors working across multiple locations.
 # FullCalendar Widget Implementation per SaluteOra
 
 ## Architettura con Parental STI
@@ -720,3 +725,10 @@ public function test_middleware_blocks_wrong_user_type()
 - Audit trail completo per responsabilità legali
 
 Ricorda: ogni widget calendar deve essere progettato pensando all'operatore sanitario che lo utilizzerà in situazioni di stress e urgenza. La chiarezza, l'immediatezza e la sicurezza sono fondamentali per un sistema sanitario affidabile.
+
+## Path corretto per AppointmentType:
+## Modules/SaluteOra/app/Enums/AppointmentType.php
+use Modules\SaluteOra\App\Enums\AppointmentType;
+
+> **Nota di prevenzione:**
+> L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
