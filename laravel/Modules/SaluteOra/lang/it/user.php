@@ -1,13 +1,13 @@
 <?php
 
 return array (
-  'fields' => 
+  'fields' =>
   array (
-    'id' => 
+    'id' =>
     array (
       'label' => 'ID',
     ),
-    'name' => 
+    'name' =>
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
@@ -15,7 +15,7 @@ return array (
       'description' => 'name',
       'helper_text' => 'name',
     ),
-    'email' => 
+    'email' =>
     array (
       'label' => 'Email',
       'placeholder' => 'Inserisci l\'email',
@@ -23,10 +23,10 @@ return array (
       'description' => 'email',
       'helper_text' => 'email',
     ),
-    'type' => 
+    'type' =>
     array (
       'label' => 'Tipo',
-      'options' => 
+      'options' =>
       array (
         'patient' => 'Paziente',
         'doctor' => 'Dottore',
@@ -36,10 +36,10 @@ return array (
       'helper_text' => 'type',
       'placeholder' => 'type',
     ),
-    'state' => 
+    'state' =>
     array (
       'label' => 'Stato',
-      'options' => 
+      'options' =>
       array (
         'pending' => 'In attesa',
         'approved' => 'Approvato',
@@ -51,149 +51,149 @@ return array (
       'helper_text' => 'state',
       'placeholder' => 'state',
     ),
-    'phone' => 
+    'phone' =>
     array (
       'label' => 'Telefono',
     ),
-    'address' => 
+    'address' =>
     array (
       'label' => 'Indirizzo',
     ),
-    'city' => 
+    'city' =>
     array (
       'label' => 'Città',
     ),
-    'registration_number' => 
+    'registration_number' =>
     array (
       'label' => 'Numero iscrizione',
     ),
-    'status' => 
+    'status' =>
     array (
       'label' => 'Status',
     ),
-    'certifications' => 
+    'certifications' =>
     array (
       'label' => 'Certificazioni',
     ),
-    'moderation_data' => 
+    'moderation_data' =>
     array (
       'label' => 'Dati moderazione',
     ),
-    'password' => 
+    'password' =>
     array (
       'label' => 'Password',
       'placeholder' => 'Inserisci la password',
       'tooltip' => 'Password dell\'utente',
     ),
-    'password_confirmation' => 
+    'password_confirmation' =>
     array (
       'label' => 'Conferma password',
     ),
-    'created_at' => 
+    'created_at' =>
     array (
       'label' => 'Data creazione',
     ),
-    'updated_at' => 
+    'updated_at' =>
     array (
       'label' => 'Data aggiornamento',
     ),
-    'roles' => 
+    'roles' =>
     array (
       'label' => 'Ruoli',
       'placeholder' => 'Seleziona i ruoli',
       'tooltip' => 'Ruoli assegnati all\'utente',
     ),
-    'applyFilters' => 
+    'applyFilters' =>
     array (
       'label' => 'applyFilters',
     ),
-    'toggleColumns' => 
+    'toggleColumns' =>
     array (
       'label' => 'toggleColumns',
     ),
-    'reorderRecords' => 
+    'reorderRecords' =>
     array (
       'label' => 'reorderRecords',
     ),
-    'resetFilters' => 
+    'resetFilters' =>
     array (
       'label' => 'resetFilters',
     ),
-    'openFilters' => 
+    'openFilters' =>
     array (
       'label' => 'openFilters',
     ),
-    'last_name' => 
+    'last_name' =>
     array (
       'label' => 'last_name',
     ),
-    'first_name' => 
+    'first_name' =>
     array (
       'label' => 'first_name',
     ),
-    'edit_name' => 
+    'edit_name' =>
     array (
       'label' => 'edit_name',
     ),
-    'edit-name' => 
+    'edit-name' =>
     array (
       'label' => 'edit-name',
     ),
-    'name_edit' => 
+    'name_edit' =>
     array (
       'label' => 'name_edit',
     ),
   ),
-  'actions' => 
+  'actions' =>
   array (
-    'approve' => 
+    'approve' =>
     array (
       'label' => 'approve',
     ),
-    'reject' => 
+    'reject' =>
     array (
       'label' => 'reject',
     ),
     'request_integration' => 'Richiedi integrazione',
-    'reinstate' => 
+    'reinstate' =>
     array (
       'label' => 'reinstate',
     ),
-    'suspend' => 
+    'suspend' =>
     array (
       'label' => 'suspend',
     ),
-    'view' => 
+    'view' =>
     array (
       'label' => 'view',
     ),
-    'edit' => 
+    'edit' =>
     array (
       'label' => 'Modifica',
       'icon' => 'heroicon-o-pencil',
       'color' => 'primary',
     ),
-    'delete' => 
+    'delete' =>
     array (
       'label' => 'Elimina',
       'icon' => 'heroicon-o-trash',
       'color' => 'danger',
     ),
-    'create' => 
+    'create' =>
     array (
       'label' => 'create',
     ),
   ),
-  'navigation' => 
+  'navigation' =>
   array (
-    'label' => 'Utenti',
+    'label' => 'Utenti Generici',
     'group' => 'Gestione Utenti',
     'icon' => 'heroicon-o-user',
     'color' => 'primary',
     'sort' => 44,
   ),
-  'model' => 
+  'model' =>
   array (
-    'label' => 'user.model',
+    'label' => 'Utente',
   ),
 );

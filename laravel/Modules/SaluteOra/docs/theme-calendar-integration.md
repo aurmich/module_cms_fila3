@@ -78,15 +78,15 @@ Il componente tema deve:
         $user = auth()->user();
         
         match ($user->type) {
-            \Modules\SaluteOra\Enums\UserType::PATIENT => [
+            \Modules\SaluteOra\Enums\UserTypeEnum::PATIENT => [
                 $widgetClass = \Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class,
                 $canView = true
             ],
-            \Modules\SaluteOra\Enums\UserType::DOCTOR => [
+            \Modules\SaluteOra\Enums\UserTypeEnum::DOCTOR => [
                 $widgetClass = \Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class,
                 $canView = \Filament\Facades\Filament::getTenant() !== null
             ],
-            \Modules\SaluteOra\Enums\UserType::ADMIN => [
+            \Modules\SaluteOra\Enums\UserTypeEnum::ADMIN => [
                 $widgetClass = \Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget::class,
                 $canView = true
             ],

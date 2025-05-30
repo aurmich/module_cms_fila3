@@ -12,10 +12,5 @@ class EditDoctor extends XotBaseEditRecord
 {
     protected static string $resource = DoctorResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
+   
 }

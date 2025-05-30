@@ -191,3 +191,41 @@ public function up(): void
 - [Modello Patient](../Models/Patient.md)
 - [Single Table Inheritance](../SINGLE_TABLE_INHERITANCE.md)
 - [Best Practices per l'Ereditarietà](../INHERITANCE_BEST_PRACTICES.md)
+
+## Policy sulle migration XotBaseMigration
+
+- Chi estende `XotBaseMigration` **non deve mai** dichiarare il metodo `down()`.
+- La gestione del rollback è centralizzata e automatica nella base Xot, per evitare duplicazione, errori e conflitti.
+- Motivazione: DRY, coerenza, nessun lock-in, manutenzione semplificata.
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Politica: rollback sicuro, refactoring semplice, policy multi-tenant.
+- Zen: codice pulito, nessun errore di override.
+
+**Esempio corretto:**
+```php
+return new class() extends XotBaseMigration {
+    public function up(): void
+    {
+        $this->tableCreate(function (Blueprint $table): void {
+            // ...
+        });
+    }
+    // NIENTE metodo down()
+};
+```
+
+## Policy su timestamp e soft delete nelle migration XotBaseMigration
+
+- Per aggiungere timestamp e soft delete, usare **solo** `$this->updateTimestamps($table, true)` dentro il blocco `tableUpdate`.
+- Non usare mai `$table->timestamps()` direttamente: si rischia di perdere coerenza, duplicare logica e rompere la policy di centralizzazione Xot.
+- Motivazione: DRY, coerenza, nessun lock-in, manutenzione semplificata.
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Politica: gestione centralizzata, refactoring semplice, policy multi-tenant.
+- Zen: codice pulito, nessun errore di override.
+
+**Esempio corretto:**
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    $this->updateTimestamps($table, true);
+});
+```

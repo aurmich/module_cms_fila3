@@ -16,7 +16,7 @@ use Modules\User\Filament\Actions\ChangePasswordAction;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\User\Filament\Resources\UserResource\Pages\BaseListUsers;
 use Modules\User\Filament\Resources\UserResource\Widgets\UserOverview;
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class ListUsers extends BaseListUsers
 {

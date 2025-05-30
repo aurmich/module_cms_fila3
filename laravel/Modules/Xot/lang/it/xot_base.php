@@ -9,5 +9,21 @@ return array (
       'description' => 'view',
       'helper_text' => 'view',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'detach' => 
+    array (
+      'label' => 'detach',
+    ),
+    'attach' => 
+    array (
+      'label' => 'attach',
+    ),
   ),
 );

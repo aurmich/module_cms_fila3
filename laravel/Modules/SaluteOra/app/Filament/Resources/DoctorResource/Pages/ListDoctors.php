@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Resources\DoctorResource\Pages;
 
 use Filament\Actions;
+use Filament\Facades\Filament;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Support\Facades\FilamentView;
 use Modules\SaluteOra\Filament\Resources\DoctorResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-use Filament\Tables\Columns\TextColumn;
 
 class ListDoctors extends XotBaseListRecords
 {
     protected static string $resource = DoctorResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+    
+   
+    
 
     public function getTableColumns(): array
     {
@@ -33,4 +32,6 @@ class ListDoctors extends XotBaseListRecords
                 ->badge(),
         ];
     }
+
+   
 }

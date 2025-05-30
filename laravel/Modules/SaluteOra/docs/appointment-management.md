@@ -368,4 +368,67 @@ class AppointmentLogger
 
 - [Implementazione del Calendario](calendar-date-picker-implementation.md)
 - [Best Practices per i Calendari](calendar-best-practices.md)
-- [Documentazione Filament](https://filamentphp.com/docs) 
+- [Documentazione Filament](https://filamentphp.com/docs)
+
+## [AGGIORNAMENTO 2024-06-XX] - Standardizzazione Traduzioni
+
+La struttura delle traduzioni per gli appuntamenti è stata aggiornata secondo le regole di progetto, la filosofia DRY/KISS, la religione della centralizzazione e la politica del nessun lock-in. Tutte le chiavi sono ora in inglese, strutturate gerarchicamente e coerenti con le best practice del modulo Lang.
+
+### Nuova struttura esempio (estratto da lang/it/appointment.php):
+
+```php
+return [
+    'navigation' => [
+        'label' => 'Appuntamenti',
+        'group' => 'Gestione Clinica',
+        'icon' => 'heroicon-o-calendar',
+        'color' => 'success',
+        'sort' => 3,
+        'tooltip' => 'Gestione degli appuntamenti e delle visite',
+    ],
+    'model' => [
+        'label' => 'Appuntamento',
+        'plural' => 'Appuntamenti',
+    ],
+    'fields' => [
+        'title' => [...],
+        'doctor_id' => [...],
+        'patient_id' => [...],
+        'studio_id' => [...],
+        'start_time' => [...],
+        'end_time' => [...],
+        'status' => [...],
+        'notes' => [...],
+        'reason' => [...],
+    ],
+    'actions' => [...],
+    'filters' => [...],
+    'calendar' => [...],
+    'notifications' => [...],
+    'messages' => [...],
+];
+```
+
+- Le chiavi sono solo in inglese, mai in italiano.
+- Ogni campo ha label, placeholder, helper_text, description.
+- Gli status sono centralizzati e coerenti con enums e states.php.
+- Le azioni sono DRY e riutilizzabili.
+- La documentazione Lang è ora collegata: vedi [Lang/translation-standards.md](../../Lang/docs/translation-standards.md) e [Lang/translation_keys_best_practices.md](../../Lang/docs/translation_keys_best_practices.md).
+
+### Motivazione della correzione
+- Evitare errori di duplicazione, chiavi ambigue, lock-in e mancanza di coerenza tra moduli.
+- Garantire la massima manutenibilità e la serenità del codice (zen).
+
+### Checklist per evitare errori futuri
+- Usare sempre chiavi inglesi e struttura gerarchica.
+- Aggiornare la documentazione Lang e SaluteOra ad ogni modifica.
+- Non duplicare chiavi tra moduli.
+- Validare la presenza di tutte le chiavi in tutte le lingue.
+- Seguire la filosofia DRY, KISS, centralizzazione.
+
+---
+
+Per dettagli sulle regole di traduzione, vedi anche:
+- [Lang/translation-standards.md](../../Lang/docs/translation-standards.md)
+- [Lang/translation_keys_best_practices.md](../../Lang/docs/translation_keys_best_practices.md)
+- [SaluteOra/filament-best-practices.mdc](./filament-best-practices.mdc) 

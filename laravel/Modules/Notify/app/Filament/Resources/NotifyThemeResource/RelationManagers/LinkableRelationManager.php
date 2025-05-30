@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Filament\Resources\NotifyThemeResource\RelationManagers;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Filament\Forms\Components\TextInput;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
+
 
 class LinkableRelationManager extends XotBaseRelationManager
 {

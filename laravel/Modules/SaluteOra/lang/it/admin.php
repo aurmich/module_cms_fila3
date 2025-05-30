@@ -1,11 +1,11 @@
 <?php
 
 return array (
-  'navigation' => 
+  'navigation' =>
   array (
-    'label' => 'admin.navigation',
-    'group' => 'admin.navigation',
-    'icon' => 'admin.navigation',
+    'label' => 'Segreteria',
+    'group' => 'Gestione Utenti',
+    'icon' => 'saluteora-admin',
     'sort' => 95,
   ),
 );

@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Spatie\Activitylog\LogOptions;
+use Modules\User\Models\BaseTenant;
 use Filament\Models\Contracts\HasName;
 use Modules\SaluteOra\Models\BaseModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\User\Models\Traits\IsTenant;
+use Modules\Xot\Models\Traits\RelationX;
 use Modules\Geo\Models\Traits\HasAddress;
+use Modules\User\Contracts\TenantContract;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Modello Studio per il sistema multi-tenant.
@@ -36,12 +41,14 @@ use Spatie\Activitylog\LogOptions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Address> $addresses
  */
-class Studio extends BaseModel implements HasName
+class Studio extends BaseTenant
 {
     use LogsActivity;
     use HasAddress;
+    
 
-    // La connessione è già definita in BaseModel come 'salute_ora'
+   /** @var string */
+   protected $connection = 'salute_ora';
 
     /** @var string */
     protected $table = 'studios';
@@ -49,6 +56,7 @@ class Studio extends BaseModel implements HasName
     /** @var array<string> */
     protected $fillable = [
         'name',
+        'slug',
         'phone',
         'email',
         'website',
@@ -70,14 +78,14 @@ class Studio extends BaseModel implements HasName
         ];
     }
 
-    /**
+    /*
      * Implementazione del contratto HasName per Filament tenancy.
-     */
+    
     public function getFilamentName(): string
     {
         return $this->name;
     }
-
+    */
     /**
      * Configurazione per il logging delle attività.
      */
@@ -96,11 +104,20 @@ class Studio extends BaseModel implements HasName
     }
 
     /**
-     * Relazione con i dottori dello studio.
+     * Relazione molti-a-molti con i dottori che lavorano nello studio.
+     * 
+     * IMPORTANTE: Questa è una relazione cross-database, dove:
+     * - Doctor risiede nel database 'user'
+     * - Studio risiede nel database 'salute_ora'
+     * - doctor_studio (pivot) risiede nel database 'salute_ora'
+     *
+     * @return BelongsToMany
      */
-    public function doctors(): HasMany
+    public function doctors(): BelongsToMany
     {
-        return $this->hasMany(Doctor::class, 'tenant_id');
+        // Per una relazione cross-database, non possiamo usare belongsToManyX
+        // Dobbiamo specificare esplicitamente tutti i parametri
+        return $this->belongsToManyX(Doctor::class);
     }
 
     /**

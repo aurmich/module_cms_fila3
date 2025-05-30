@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
 # Regola: Path View Widget Filament e Localizzazione
@@ -69,3 +69,128 @@ I trait vanno creati solo se riutilizzati in più classi. Vietato creare trait p
 
 ## Policy di naming enum
 Il nome della classe enum DEVE sempre corrispondere al nome del file (es. UserTypeEnum.php -> enum UserTypeEnum: string ...). Aggiornare sempre sia il nome del file che il nome della classe. Motivazione: coerenza, autoloading, refactoring semplice. Collegamento a docs/xot.md e docs/enum-naming-policy.md.
+
+## Regola Obbligatoria: getTableColumns nelle ListRecords
+
+- Tutte le pagine che estendono XotBaseListRecords DEVONO implementare il metodo getTableColumns().
+- Il metodo deve restituire un array associativo con chiavi stringa (nome campo).
+- Le colonne vanno ricavate dal modello e dalla migrazione, senza inventare campi.
+- Le etichette sono gestite solo tramite i file di traduzione del modulo (mai ->label()).
+- Motivazione: coerenza, automazione, DRY, compatibilità con TableLayoutEnum e HasXotTable.
+- Aggiornare sempre anche questa regola nei file .mdc locali.
+
+## Regola: Relazioni molti-a-molti tra entità
+
+- Se due entità possono essere collegate in modo simmetrico (es. uno studio ha molti dottori e un dottore può lavorare in più studi), usare sempre belongsToManyX.
+- La tabella pivot deve essere gestita in modo centralizzato e documentata.
+- Motivazione filosofica: massima flessibilità, nessun lock-in, simmetria tra le entità.
+- Politica: ogni modulo può estendere la relazione senza vincoli.
+- Zen: la relazione è fluida, ogni entità può collaborare con più controparti.
+- I RelationManager devono usare la relazione belongsToManyX e la chiave corretta.
+- Aggiornare sempre la documentazione locale e globale.
+
+## Regola: Vietato duplicare trait già presenti nella catena di ereditarietà
+
+- I trait (es. SoftDeletes, BelongsToTenant, RelationX, HasFactory, Notifiable, ecc.) vanno dichiarati **solo** nella classe base o dove servono per la prima volta.
+- Vietato ridichiararli nei modelli figli (es. Doctor, Patient) se già presenti in User/BaseUser.
+- Motivazione filosofica: centralizzazione, DRY, nessun lock-in, serenità del codice.
+- Politica: evitare conflitti, warning, override indesiderati.
+- Zen: un solo punto di verità, codice pulito e manutenibile.
+
+**Esempio corretto:**
+```php
+class Doctor extends User {
+    use HasParent;
+    // NIENTE altri trait già ereditati
+}
+```
+
+**Esempio errato:**
+```php
+class Doctor extends User {
+    use HasParent, SoftDeletes, BelongsToTenant, RelationX; // ❌ ERRORE
+}
+```
+
+Aggiornare sempre la documentazione locale e globale se si modifica la catena di ereditarietà.
+
+## Regola: Modello pivot custom per relazioni molti-a-molti con dati aggiuntivi
+
+- Se una relazione molti-a-molti richiede dati aggiuntivi (es. orari, flag, policy), usare sempre un modello pivot custom (es. DoctorStudio).
+- La tabella pivot deve avere chiave primaria composta e campi aggiuntivi documentati.
+- Motivazione filosofica: la relazione è un'entità a sé, non solo un legame.
+- Politica: audit trail, policy multi-tenant, massima estendibilità.
+- Zen: la relazione è fluida, ma tracciabile e arricchita di significato.
+- Aggiornare sempre la documentazione locale e globale se si aggiungono/modificano campi o logiche nella tabella pivot.
+
+**Nota importante:**
+La logica di `belongsToManyX` centralizza automaticamente la gestione del modello pivot, dei campi extra e delle policy multi-tenant. **Non va mai** aggiunto chaining come `->using()`, `->withPivot()`, `->withTimestamps()`: è tutto gestito dal trait.
+
+**Motivazione:** DRY, nessun lock-in, un solo punto di verità, coerenza con la filosofia Xot.
+
+**Esempio:**
+```php
+public function studios(): BelongsToMany
+{
+    return $this->belongsToManyX(Studio::class);
+}
+```
+
+## Regola: Chiavi esterne nelle tabelle pivot
+
+- Usare sempre `$table->foreignIdFor(Modello::class)` per le chiavi esterne nelle tabelle pivot (es. doctor_id, studio_id).
+- Non usare mai `$table->uuid()` o `$table->integer()` manuale: si perde type safety, coerenza e integrazione con Eloquent.
+- Motivazione: coerenza, type safety, DRY, migliore integrazione con Eloquent, nessun lock-in.
+- Filosofia: un solo punto di verità, nessuna duplicazione, rispetto della struttura modulare.
+- Politica: audit trail, policy multi-tenant, massima estendibilità.
+- Zen: serenità del codice, nessun errore di mapping, refactoring sicuro.
+
+**Esempio corretto:**
+```php
+$table->foreignIdFor(\Modules\SaluteOra\Models\Doctor::class)
+    ->comment('ID del dottore (riferimento alla tabella users)');
+$table->foreignIdFor(\Modules\SaluteOra\Models\Studio::class)
+    ->comment('ID dello studio (riferimento alla tabella studios)');
+```
+
+## Regola: Niente metodo down() nelle migration che estendono XotBaseMigration
+
+- Chi estende `XotBaseMigration` **non deve mai** dichiarare il metodo `down()`.
+- La gestione del rollback è centralizzata e automatica nella base Xot, per evitare duplicazione, errori e conflitti.
+- Motivazione: DRY, coerenza, nessun lock-in, manutenzione semplificata.
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Politica: rollback sicuro, refactoring semplice, policy multi-tenant.
+- Zen: codice pulito, nessun errore di override.
+
+**Esempio corretto:**
+```php
+return new class() extends XotBaseMigration {
+    public function up(): void
+    {
+        $this->tableCreate(function (Blueprint $table): void {
+            // ...
+        });
+    }
+    // NIENTE metodo down()
+};
+```
+
+## Regola: Timestamp e soft delete nelle migration XotBaseMigration
+
+- Per aggiungere timestamp e soft delete, usare **solo** `$this->updateTimestamps($table, true)` dentro il blocco `tableUpdate`.
+- Non usare mai `$table->timestamps()` direttamente: si rischia di perdere coerenza, duplicare logica e rompere la policy di centralizzazione Xot.
+- Motivazione: DRY, coerenza, nessun lock-in, manutenzione semplificata.
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Politica: gestione centralizzata, refactoring semplice, policy multi-tenant.
+- Zen: codice pulito, nessun errore di override.
+
+**Esempio corretto:**
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    $this->updateTimestamps($table, true);
+});
+```
+
+## Regola: Pivot custom devono estendere BasePivot e niente protected $table
+
+- I pivot custom (es. DoctorStudio) devono **sempre** estendere BasePivot.

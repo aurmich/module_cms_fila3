@@ -35,6 +35,7 @@ class UserResource extends XotBaseResource
                 ->unique(ignoreRecord: true),
             Forms\Components\Select::make('type')
                 ->options(UserTypeEnum::class)
+                ->enum(UserTypeEnum::class)
                 ->required(),
             SelectState::make('state'),
             /*

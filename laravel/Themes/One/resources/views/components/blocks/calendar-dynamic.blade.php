@@ -20,7 +20,7 @@
 ])
 
 @php
-    use Modules\SaluteOra\Enums\UserType;
+    use Modules\SaluteOra\Enums\UserTypeEnum;
     use Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget;
     use Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget;
     use Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget;

@@ -3,9 +3,9 @@
 return array (
   'single' => 'Studio',
   'plural' => 'Studi',
-  'fields' => 
+  'fields' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'label' => 'name',
       'placeholder' => 'name',
@@ -15,42 +15,42 @@ return array (
     'address' => 'Indirizzo',
     'city' => 'Città',
     'postal_code' => 'CAP',
-    'phone' => 
+    'phone' =>
     array (
       'label' => 'phone',
       'placeholder' => 'phone',
       'helper_text' => 'phone',
       'description' => 'phone',
     ),
-    'email' => 
+    'email' =>
     array (
       'label' => 'email',
       'placeholder' => 'email',
       'helper_text' => 'email',
       'description' => 'email',
     ),
-    'website' => 
+    'website' =>
     array (
       'description' => 'website',
       'helper_text' => 'website',
       'placeholder' => 'website',
       'label' => 'website',
     ),
-    'registration_number' => 
+    'registration_number' =>
     array (
       'description' => 'registration_number',
       'helper_text' => 'registration_number',
       'placeholder' => 'registration_number',
       'label' => 'registration_number',
     ),
-    'vat_number' => 
+    'vat_number' =>
     array (
       'description' => 'vat_number',
       'helper_text' => 'vat_number',
       'placeholder' => 'vat_number',
       'label' => 'vat_number',
     ),
-    'description' => 
+    'description' =>
     array (
       'description' => 'description',
       'helper_text' => 'description',
@@ -59,52 +59,72 @@ return array (
     ),
     'opening_hours' => 'Orari di apertura',
     'services' => 'Servizi',
-    'active' => 
+    'active' =>
     array (
       'description' => 'active',
+      'label' => 'active',
     ),
-    'created_at' => 'Creato il',
+    'created_at' =>
+    array (
+      'label' => 'created_at',
+    ),
     'updated_at' => 'Aggiornato il',
     'deleted_at' => 'Eliminato il',
-    'resetFilters' => 
+    'resetFilters' =>
     array (
       'label' => 'resetFilters',
     ),
-    'addresses' => 
+    'addresses' =>
     array (
       'description' => 'addresses',
       'helper_text' => 'addresses',
       'placeholder' => 'addresses',
       'label' => 'addresses',
     ),
-    'applyFilters' => 
+    'applyFilters' =>
     array (
       'label' => 'applyFilters',
     ),
-    'toggleColumns' => 
+    'toggleColumns' =>
     array (
       'label' => 'toggleColumns',
     ),
+    'reorderRecords' =>
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'openFilters' =>
+    array (
+      'label' => 'openFilters',
+    ),
+    'id' =>
+    array (
+      'label' => 'id',
+    ),
+    'attach' =>
+    array (
+      'label' => 'attach',
+    ),
   ),
-  'actions' => 
+  'actions' =>
   array (
     'activate' => 'Attiva',
     'deactivate' => 'Disattiva',
   ),
-  'messages' => 
+  'messages' =>
   array (
     'activated' => 'Studio attivato con successo.',
     'deactivated' => 'Studio disattivato con successo.',
   ),
-  'navigation' => 
+  'navigation' =>
   array (
     'sort' => 18,
-    'label' => 'studio.navigation',
-    'icon' => 'studio.navigation',
-    'group' => 'studio.navigation',
+    'label' => 'Studi',
+    'icon' => 'saluteora-studio',
+    'group' => 'Gestione Studi',
   ),
-  'model' => 
+  'model' =>
   array (
-    'label' => 'studio.model',
+    'label' => 'Studio',
   ),
 );

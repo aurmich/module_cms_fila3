@@ -212,5 +212,38 @@ class ListUsers extends XotBaseListRecords
 - [Regole Cursor](../../../.cursor/rules/filament-xotbase-resource-best-practices.mdc)
 - [Regole Windsurf](../../../.windsurf/rules/filament-xotbase-resource-best-practices.mdc)
 
+## Errore comune: "A void function must not return a value" nelle azioni Filament
+
+### Motivazione
+- Le closure passate a ->action(fn (...) : void => ...) nelle azioni custom Filament **non devono restituire alcun valore**.
+- La signature void indica che la funzione esegue solo effetti collaterali (es. update, delete, ecc.) e non deve mai contenere un return implicito o esplicito.
+- Restituire un valore (anche null) genera errori a runtime e viola la policy DRY/KISS/zen.
+
+### Esempio ERRATO
+```php
+->action(fn (Studio $record): void => $record->activate()) // ERRORE: activate() restituisce void, ma la closure lo "ritorna"
+```
+
+### Esempio CORRETTO
+```php
+->action(fn (Studio $record): void => $record->activate()) // CORRETTO: la closure chiama activate() ma non restituisce nulla
+// oppure
+->action(function (Studio $record): void {
+    $record->activate();
+    // nessun return
+})
+```
+
+### Policy
+- Tutte le azioni custom devono rispettare la signature void e non restituire valori.
+- Aggiornare la documentazione e la checklist ogni volta che si corregge questo errore.
+
+### Collegamento
+- Vedi anche: [Xot/docs/filament/README.md](../../Xot/docs/filament/README.md)
+
+### Checklist aggiornata
+- [ ] Nessuna closure di azione custom restituisce un valore se dichiarata void
+- [ ] Tutte le azioni custom rispettano la signature void
+
 ---
 **Queste regole sono vincolanti e devono essere applicate in tutti i moduli che utilizzano Filament.**

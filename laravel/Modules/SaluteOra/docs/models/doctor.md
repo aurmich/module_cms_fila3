@@ -225,4 +225,173 @@ class Doctor extends User {
 
 Motivazione: evitare ridondanza, warning, confusione e problemi di override.
 
+## RelationManager in Filament
+
+Entrambi i RelationManager (StudioResource/DoctorsRelationManager e DoctorResource/StudiosRelationManager) devono implementare AttachAction personalizzato per la gestione cross-db, con query manuali e connessione esplicita tramite on().
+
+### Esempio simmetrico
+
+```php
+// StudioResource/RelationManagers/DoctorsRelationManager.php
+Tables\Actions\AttachAction::make()
+    ->preloadRecordSelect(false)
+    ->recordSelect(fn (Forms\Components\Select $select) => $select
+        ->searchable()
+        ->getSearchResultsUsing(function (string $search) {
+            return Doctor::on('user')
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                })
+                ->whereNotIn('id', $this->getOwnerRecord()->doctors->modelKeys())
+                ->limit(10)
+                ->get()
+                ->mapWithKeys(fn ($doctor) => [
+                    $doctor->getKey() => "{$doctor->full_name} <{$doctor->email}>"
+                ])
+                ->toArray();
+        })
+    );
+
+// DoctorResource/RelationManagers/StudiosRelationManager.php
+Tables\Actions\AttachAction::make()
+    ->preloadRecordSelect(false)
+    ->recordSelect(fn (Forms\Components\Select $select) => $select
+        ->searchable()
+        ->getSearchResultsUsing(function (string $search) {
+            return Studio::on('salute_ora')
+                ->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('address', 'like', "%{$search}%");
+                })
+                ->whereNotIn('id', $this->getOwnerRecord()->studios->modelKeys())
+                ->limit(10)
+                ->get()
+                ->mapWithKeys(fn ($studio) => [
+                    $studio->getKey() => "{$studio->name} ({$studio->address})"
+                ])
+                ->toArray();
+        })
+    );
+```
+
+## Best practice anti-duplicazione trait
+
+- I trait `SoftDeletes`, `BelongsToTenant`, `RelationX` sono già presenti nella catena di ereditarietà (User/BaseUser) e **NON devono mai** essere dichiarati in Doctor.
+- Motivazione filosofica: centralizzazione della logica, nessun lock-in, manutenzione semplificata.
+- Politica: evitare conflitti, warning, override indesiderati.
+- Zen: serenità del codice, un solo punto di verità.
+
+**Esempio corretto:**
+```php
+class Doctor extends User {
+    use HasParent;
+    // NIENTE altri trait già ereditati
+}
+```
+
+**Esempio errato:**
+```php
+class Doctor extends User {
+    use HasParent, SoftDeletes, BelongsToTenant, RelationX; // ❌ ERRORE
+}
+```
+
+Aggiornare sempre la documentazione e le regole globali se si modifica la catena di ereditarietà.
+
+## Modello pivot DoctorStudio
+
+La relazione molti-a-molti tra Doctor e Studio è gestita tramite un modello pivot custom `DoctorStudio`.
+
+- **Filosofia:** la relazione non è solo una semplice associazione, ma porta con sé informazioni aggiuntive (es. orari, studio principale, policy multi-tenant).
+- **Struttura:**
+  - Modello: `Modules\SaluteOra\Models\DoctorStudio`
+  - Tabella: `doctor_studio`
+  - Campi: `doctor_id`, `studio_id`, `schedule` (json), `is_primary` (bool), timestamps
+- **Policy:**
+  - La chiave primaria è composta (`doctor_id`, `studio_id`)
+  - I campi aggiuntivi permettono di gestire orari e priorità
+  - La relazione è simmetrica e auditabile
+- **Migrazione:** [2025_05_30_000001_create_doctor_studio_table.php](../../database/migrations/2025_05_30_000001_create_doctor_studio_table.php)
+  - Usare sempre foreignIdFor(Doctor::class) e foreignIdFor(Studio::class) per le chiavi esterne, mai uuid manuale. Motivazione: coerenza, type safety, migliore integrazione con Eloquent, filosofia zen.
+- **Best practice:**
+  - Usare sempre un modello pivot custom quando servono dati aggiuntivi sulla relazione
+  - Documentare sempre la struttura e la logica della tabella pivot
+  - Aggiornare la documentazione e le policy globali se si aggiungono campi o logiche
+
+**Nota importante:**
+La logica di `belongsToManyX` centralizza automaticamente la gestione del modello pivot, dei campi extra e delle policy multi-tenant. **Non serve** aggiungere chaining come `->using()`, `->withPivot()`, `->withTimestamps()`: è tutto gestito dal trait.
+
+**Motivazione:** DRY, nessun lock-in, un solo punto di verità, coerenza con la filosofia Xot.
+
+**Esempio di relazione nel modello Doctor:**
+```php
+public function studios(): BelongsToMany
+{
+    return $this->belongsToManyX(Studio::class);
+}
+```
+
+**Esempio di relazione nel modello Studio:**
+```php
+public function doctors(): BelongsToMany
+{
+    return $this->belongsToManyX(Doctor::class);
+}
+```
+
+## Policy sulla relazione studios()
+
+- La relazione studios() deve usare solo belongsToManyX senza chaining superfluo (niente ->using, ->withPivot, ->withTimestamps).
+- Motivazione: DRY, centralizzazione della logica, nessun lock-in, coerenza con la filosofia Xot.
+- La logica di belongsToManyX gestisce automaticamente modello pivot, campi extra e timestamps.
+- Vedi anche: [studio-doctor-relationship.md](../studio-doctor-relationship.md) e [.windsurf/rules/models.md](../../../../.windsurf/rules/models.md)
+
+## Policy sulle chiavi esterne nelle tabelle pivot
+
+- Usare sempre `$table->foreignIdFor(Modello::class)` per le chiavi esterne nelle tabelle pivot (es. doctor_id, studio_id).
+- Non usare mai `$table->uuid()` o `$table->integer()` manuale: si perde type safety, coerenza e integrazione con Eloquent.
+- Motivazione: coerenza, type safety, DRY, migliore integrazione con Eloquent, nessun lock-in.
+- Filosofia: un solo punto di verità, nessuna duplicazione, rispetto della struttura modulare.
+- Politica: audit trail, policy multi-tenant, massima estendibilità.
+
+**Esempio corretto:**
+```php
+$table->foreignIdFor(\Modules\SaluteOra\Models\Doctor::class)
+    ->comment('ID del dottore (riferimento alla tabella users)');
+$table->foreignIdFor(\Modules\SaluteOra\Models\Studio::class)
+    ->comment('ID dello studio (riferimento alla tabella studios)');
+```
+
+## Policy su timestamp e soft delete nelle migrazioni Xot
+
+- Nelle migrazioni che estendono XotBaseMigration **non si usa mai** $table->timestamps().
+- Si usa sempre $this->tableUpdate con updateTimestamps($table, true) dopo la creazione della tabella.
+- Motivazione: centralizzazione della logica, coerenza, DRY, gestione automatica di soft delete e campi utente.
+- Vedi anche: [.windsurf/rules/models.md](../../../../.windsurf/rules/models.md)
+
+## Policy su BasePivot e nome tabella
+
+- Chi estende BasePivot **non deve mai** dichiarare protected $table: la gestione del nome tabella è centralizzata in BasePivot/Xot.
+- Motivazione: DRY, coerenza, nessun lock-in, filosofia zen.
+- Vedi anche: [.windsurf/rules/models.md](../../../../.windsurf/rules/models.md)
+
+## Policy sui pivot custom (BasePivot)
+
+- I pivot custom (es. DoctorStudio) devono **sempre** estendere BasePivot.
+- Non dichiarare mai `protected $table`: la gestione della tabella è centralizzata e automatica secondo la filosofia Xot.
+- Motivazione: type safety, DRY, coerenza, nessun lock-in, serenità del codice.
+- Filosofia: un solo punto di verità, nessuna duplicazione, rispetto della struttura modulare.
+- Politica: gestione centralizzata, refactoring semplice, policy multi-tenant.
+- Zen: codice pulito, nessun errore di mapping o override.
+
+**Esempio corretto:**
+```php
+class DoctorStudio extends BasePivot
+{
+    // NIENTE protected $table
+    // ...
+}
+```
+
 ---

@@ -122,3 +122,54 @@ return [
 - Le traduzioni sono gestite automaticamente dal `LangServiceProvider`
 - Non è necessario usare `->label()` nei componenti Filament
 - Le etichette vengono risolte automaticamente in base al nome del campo
+
+## [AGGIORNAMENTO 2024-06-XX] - Esempio appointment.php
+
+La struttura delle traduzioni per le risorse cliniche (es. appuntamenti) è stata aggiornata per garantire:
+- Centralizzazione delle chiavi
+- Struttura gerarchica e inglese
+- Coerenza enum/fields/actions/messages
+- Nessun lock-in, massima serenità zen
+
+### Esempio appointment.php
+
+```php
+return [
+    'navigation' => [...],
+    'model' => [...],
+    'fields' => [
+        'title' => [...],
+        'doctor_id' => [...],
+        'patient_id' => [...],
+        'studio_id' => [...],
+        'start_time' => [...],
+        'end_time' => [...],
+        'status' => [...],
+        'notes' => [...],
+        'reason' => [...],
+    ],
+    'actions' => [...],
+    'filters' => [...],
+    'calendar' => [...],
+    'notifications' => [...],
+    'messages' => [...],
+];
+```
+
+### Motivazione filosofica, logica, religiosa, politica
+- DRY: nessuna duplicazione
+- KISS: struttura semplice e leggibile
+- Centralizzazione: un solo punto di verità
+- Nessun lock-in: ogni modulo può evolvere senza dipendenze nascoste
+- Serenità zen: codice e traduzioni sempre coerenti
+
+### Collegamenti
+- [SaluteOra/docs/appointment-management.md](../../SaluteOra/docs/appointment-management.md)
+- [Lang/translation_keys_best_practices.md](./translation_keys_best_practices.md)
+
+### Checklist aggiornata
+- Usare solo chiavi inglesi e struttura gerarchica
+- Validare la presenza di tutte le chiavi in tutte le lingue
+- Aggiornare la documentazione ogni volta che si modifica una risorsa clinica
+- Non duplicare chiavi tra moduli
+- Seguire sempre la filosofia DRY, KISS, centralizzazione

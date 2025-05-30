@@ -279,6 +279,19 @@ Per blocchi di testo lunghi, valuta se usare chiavi dedicate in PHP (es. `onboar
   - Nei Blade, sostituire blocchi condizionali con `trans_choice()` o `@choice()`.
   - Evitare l'uso del JSON per le stringhe plurali.
 
+## [AGGIORNAMENTO 2024-06-XX] - Correzione appointment.php
+
+La traduzione appointment.php del modulo SaluteOra è stata riscritta secondo le regole di centralizzazione, DRY, KISS, nessun lock-in, e struttura gerarchica inglese. Tutte le chiavi sono ora coerenti con enums, actions, messages, filters, calendar, notifications. La motivazione è filosofica (un solo punto di verità), logica (manutenzione semplice), religiosa (nessuna duplicazione), politica (nessun lock-in tra moduli), zen (serenità del codice).
+
+Vedi esempio e motivazione in [SaluteOra/docs/appointment-management.md](../../SaluteOra/docs/appointment-management.md) e [translation-standards.md](./translation-standards.md).
+
+### Checklist aggiornata
+- Usare solo chiavi inglesi e struttura gerarchica
+- Validare la presenza di tutte le chiavi in tutte le lingue
+- Aggiornare la documentazione ogni volta che si modifica una risorsa clinica
+- Non duplicare chiavi tra moduli
+- Seguire sempre la filosofia DRY, KISS, centralizzazione
+
 ## Conclusione
 
 Seguire queste best practices per le chiavi di traduzione garantirà un'applicazione più manutenibile, coerente e facile da tradurre in più lingue. Ricorda sempre di utilizzare chiavi strutturate in inglese e mai stringhe in italiano come chiavi di traduzione.

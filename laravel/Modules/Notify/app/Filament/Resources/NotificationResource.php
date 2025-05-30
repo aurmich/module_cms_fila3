@@ -9,7 +9,7 @@ use Filament\Forms\Components\Textarea;
 use Modules\Notify\Filament\Resources\NotificationResource\Pages;
 use Modules\Notify\Models\Notification;
 use Modules\Xot\Filament\Resources\XotBaseResource;
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class NotificationResource extends XotBaseResource
 {
@@ -49,5 +49,5 @@ class NotificationResource extends XotBaseResource
         ];
     }
 
-   
+
 }
