@@ -184,7 +184,7 @@ function({ event, el }){
 
 ### 2. Keyboard Navigation
 ```php
-public function config(): array
+public function options(): array
 {
     return [
         // ... altre configurazioni

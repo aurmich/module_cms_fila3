@@ -3,10 +3,6 @@ description: >
   Regola fondamentale per la correzione degli errori e la propagazione delle best practice nei moduli Laravel/Filament/Xot.
 globs:
   - '**/*.php'
-  - 'laravel/Modules/*/app/Filament/**/*.php'
-  - 'laravel/Modules/*/lang/*/*.php'
-alwaysApply: true
----
 # Correzione errori, documentazione e propagazione
 
 ## Procedura obbligatoria
@@ -30,6 +26,12 @@ alwaysApply: true
 - Aggiorna la documentazione di Xot e dei moduli coinvolti.
 - Aggiorna anche questa regola in `.windsurf/rules/correzioni-e-propagazione.mdc`.
 - Aggiorna le tue memories interne e la knowledge base.
+
+---
+Ultimo aggiornamento: 2025-05-27
+Responsabile: Cascade AI
+
+Le classi che estendono \Modules\Xot\Filament\Resources\Pages\XotBaseListRecords devono avere il metodo getTableColumns() che restituisce un array associativo con chiavi stringa, colonne ricavate dal modello o dalla migrazione. Policy aggiornata e propagata in [Xot/docs/filament/listrecords.md](../../laravel/Modules/Xot/docs/filament/listrecords.md) e [SaluteOra/docs/resources/studio-resource.md](../../laravel/Modules/SaluteOra/docs/resources/studio-resource.md).
 
 ---
 Ultimo aggiornamento: 2025-05-27

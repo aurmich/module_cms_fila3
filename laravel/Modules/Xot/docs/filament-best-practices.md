@@ -811,3 +811,20 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
 > Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
 
 **Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
+
+## Policy DRY su Disponibilità e Prenotazione
+
+La disponibilità e la prenotazione sono sempre rappresentate da record Appointment con type=status specifici (es. type=availability, status=available). Non vanno mai create tabelle custom per la disponibilità. Tutte le logiche di calendario, slot, prenotazione e approvazione sono centralizzate su Appointment.
+
+### Esempio di query DRY
+```php
+Appointment::where('doctor_id', $doctorId)
+    ->where('type', AppointmentTypeEnum::AVAILABILITY)
+    ->where('status', AppointmentStatusEnum::AVAILABLE)
+    ->get();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità

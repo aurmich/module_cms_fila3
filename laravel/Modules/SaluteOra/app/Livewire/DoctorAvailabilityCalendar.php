@@ -1,0 +1,214 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\Livewire;
+
+use Carbon\Carbon;
+use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+use Modules\SaluteOra\Models\Appointment;
+use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\DoctorAvailability;
+use Modules\SaluteOra\Traits\HasFullCalendarConfig;
+use Modules\Xot\Enums\DayOfWeek;
+
+/**
+ * Componente Livewire per visualizzare il calendario delle disponibilità del medico.
+ */
+class DoctorAvailabilityCalendar extends Component
+{
+    use HasFullCalendarConfig;
+    
+    /**
+     * Modalità di visualizzazione del calendario.
+     */
+    public string $calendarView = 'timeGridWeek';
+    
+    /**
+     * Data corrente del calendario.
+     */
+    public string $currentDate;
+    
+    /**
+     * Lingua del calendario.
+     */
+    public string $locale;
+    
+    /**
+     * Flag per mostrare/nascondere gli appuntamenti.
+     */
+    public bool $showAppointments = true;
+    
+    /**
+     * Flag per mostrare/nascondere le disponibilità.
+     */
+    public bool $showAvailability = true;
+    
+    /**
+     * Inizializzazione del componente.
+     */
+    public function mount(): void
+    {
+        $this->currentDate = now()->format('Y-m-d');
+        $this->locale = app()->getLocale() ?: 'it';
+    }
+    
+    /**
+     * Ottiene gli eventi per il calendario.
+     */
+    public function getEvents(): array
+    {
+        $events = [];
+        $doctor = Doctor::where('id', Auth::id())->first();
+        
+        if (!$doctor) {
+            return $events;
+        }
+        
+        // Aggiungi appuntamenti
+        if ($this->showAppointments) {
+            $appointments = Appointment::where('doctor_id', $doctor->id)
+                ->with(['patient', 'studio'])
+                ->get();
+                
+            foreach ($appointments as $appointment) {
+                $colorMap = [
+                    AppointmentStatusEnum::Pending->value => '#FFA500', // Arancione per in attesa
+                    AppointmentStatusEnum::Confirmed->value => '#4CAF50', // Verde per confermati
+                    AppointmentStatusEnum::Completed->value => '#2196F3', // Blu per completati
+                    AppointmentStatusEnum::Cancelled->value => '#F44336', // Rosso per cancellati
+                    AppointmentStatusEnum::NoShow->value => '#9E9E9E', // Grigio per no-show
+                ];
+                
+                $events[] = [
+                    'id' => 'appointment_' . $appointment->id,
+                    'title' => $appointment->patient->full_name,
+                    'start' => $appointment->start_time->format('Y-m-d\TH:i:s'),
+                    'end' => $appointment->end_time->format('Y-m-d\TH:i:s'),
+                    'url' => route('filament.saluteora.resources.appointments.edit', ['record' => $appointment->id]),
+                    'color' => $colorMap[$appointment->status->value] ?? '#000000',
+                    'textColor' => '#FFFFFF',
+                    'allDay' => false,
+                    'extendedProps' => [
+                        'type' => 'appointment',
+                        'status' => $appointment->status->value,
+                        'patientName' => $appointment->patient->full_name,
+                        'studioName' => $appointment->studio->name,
+                        'description' => $appointment->title,
+                    ],
+                ];
+            }
+        }
+        
+        // Aggiungi disponibilità
+        if ($this->showAvailability) {
+            $availability = DoctorAvailability::where('doctor_id', $doctor->id)->get();
+            $currentDate = Carbon::parse($this->currentDate);
+            $startOfWeek = $currentDate->copy()->startOfWeek();
+            $endOfWeek = $currentDate->copy()->endOfWeek();
+            
+            // Costruisci eventi di disponibilità per la settimana corrente
+            foreach ($availability as $slot) {
+                $day = $slot->day->value; // 1 = Lunedì, 7 = Domenica
+                $dayOfWeek = $startOfWeek->copy()->addDays($day - 1);
+                
+                if ($dayOfWeek->between($startOfWeek, $endOfWeek) && $slot->is_available) {
+                    $startTime = Carbon::parse($slot->start_time)->format('H:i:s');
+                    $endTime = Carbon::parse($slot->end_time)->format('H:i:s');
+                    
+                    $events[] = [
+                        'id' => 'availability_' . $slot->id,
+                        'title' => __('saluteora::doctor_availability.available'),
+                        'start' => $dayOfWeek->format('Y-m-d') . 'T' . $startTime,
+                        'end' => $dayOfWeek->format('Y-m-d') . 'T' . $endTime,
+                        'color' => 'rgba(76, 175, 80, 0.3)', // Verde trasparente
+                        'textColor' => '#4CAF50',
+                        'allDay' => false,
+                        'rendering' => 'background',
+                        'extendedProps' => [
+                            'type' => 'availability',
+                        ],
+                    ];
+                }
+            }
+        }
+        
+        return $events;
+    }
+    
+    /**
+     * Aggiorna la vista del calendario.
+     */
+    public function updateCalendarView(string $view): void
+    {
+        $this->calendarView = $view;
+    }
+    
+    /**
+     * Aggiorna la data corrente del calendario.
+     */
+    public function updateCurrentDate(string $date): void
+    {
+        $this->currentDate = $date;
+    }
+    
+    /**
+     * Toggles per mostrare/nascondere gli appuntamenti.
+     */
+    public function toggleAppointments(): void
+    {
+        $this->showAppointments = !$this->showAppointments;
+    }
+    
+    /**
+     * Toggles per mostrare/nascondere le disponibilità.
+     */
+    public function toggleAvailability(): void
+    {
+        $this->showAvailability = !$this->showAvailability;
+    }
+    
+    /**
+     * Renderizza il componente.
+     */
+    public function render()
+    {
+        return view('saluteora::livewire.doctor-availability-calendar', [
+            'events' => $this->getEvents(),
+            'calendarOptions' => [
+                'initialView' => $this->calendarView,
+                'initialDate' => $this->currentDate,
+                'locale' => $this->locale,
+                'headerToolbar' => [
+                    'left' => 'prev,next today',
+                    'center' => 'title',
+                    'right' => 'dayGridMonth,timeGridWeek,timeGridDay',
+                ],
+                'slotMinTime' => '08:00:00',
+                'slotMaxTime' => '20:00:00',
+                'slotDuration' => '00:15:00',
+                'allDaySlot' => false,
+                'weekends' => true,
+                'editable' => false,
+                'selectable' => false,
+                'nowIndicator' => true,
+                'dayMaxEvents' => true,
+                'eventTimeFormat' => [
+                    'hour' => '2-digit',
+                    'minute' => '2-digit',
+                    'hour12' => false,
+                ],
+                'businessHours' => [
+                    [
+                        'daysOfWeek' => [1, 2, 3, 4, 5], // Lunedì a Venerdì
+                        'startTime' => '09:00',
+                        'endTime' => '18:00',
+                    ],
+                ],
+            ],
+        ]);
+    }
+}

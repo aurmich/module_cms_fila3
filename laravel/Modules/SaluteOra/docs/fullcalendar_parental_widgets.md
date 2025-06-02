@@ -1181,3 +1181,56 @@ Il sistema garantisce che ogni tipo di utente veda solo i dati appropriati, mant
 ## Note
 - Il sistema può essere facilmente esteso per gestire regole di business più complesse (es. limiti di prenotazione, fasce prioritarie, promemoria, ecc.)
 - FullCalendar consente di integrare facilmente logiche di validazione, feedback visivo e notifiche in tempo reale.
+
+## [AGGIORNAMENTO 2024-06-XX] - Disponibilità solo su appointments
+
+**Regola fondamentale:**
+- Le disponibilità dei dottori vanno gestite solo tramite la tabella `appointments` (con `patient_id` null o flag dedicato).
+- È vietato creare tabelle o modelli separati (es. doctor_availabilities) per le disponibilità.
+- Tutto il calendario (FullCalendar/Filament) lavora su appointments, distinguendo tra disponibilità e appuntamenti tramite i campi esistenti.
+
+**Motivazione:**
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Logica: DRY, KISS, nessun lock-in, massima compatibilità con FullCalendar e Filament.
+- Religione: non avrai altro modello di disponibilità all'infuori di Appointment.
+- Politica: ogni modulo è autonomo, ma rispetta la centralizzazione delle entità.
+- Zen: serenità, nessun errore di sync, nessuna tabella fantasma, nessun refactor doloroso.
+
+**Checklist aggiornata:**
+- Gestire sempre le disponibilità tramite appointments
+- Vietato creare/gestire tabelle o modelli separati per le disponibilità
+- Aggiornare la documentazione ogni volta che si modifica la logica di disponibilità/appuntamenti
+- Seguire sempre la filosofia DRY, KISS, centralizzazione
+
+**Collegamenti:**
+- [calendar/doctor-availability-management.md](calendar/doctor-availability-management.md)
+- [calendar/widgets/doctor-calendar-widget.md](calendar/widgets/doctor-calendar-widget.md)
+- [appointment-management.md](appointment-management.md)
+
+## Policy di implementazione widget FullCalendar (2024)
+
+- I widget FullCalendar **devono sempre** essere implementati come classi custom che estendono FullCalendarWidget.
+- Tutte le opzioni vanno fornite tramite override del metodo config().
+- Gli eventi vanno forniti tramite override di fetchEvents().
+- **Non usare mai** FullCalendarWidget::make()->options() o ->config() o ->events(): questi metodi non esistono e generano errori.
+- Nelle pagine Filament, includere solo la classe custom nei metodi getHeaderWidgets() o simili.
+
+### Esempio corretto
+
+```php
+// Widget custom
+class DoctorCalendarWidget extends FullCalendarWidget {
+    public function config(): array { /* ... */ }
+    public function fetchEvents(array $fetchInfo): array { /* ... */ }
+}
+
+// Nella pagina
+protected function getHeaderWidgets(): array {
+    return [\Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class];
+}
+```
+
+### Errori comuni da evitare
+
+- Usare FullCalendarWidget::make()->options([...]) // ❌ ERRORE
+- Usare metodi fluenti su FullCalendarWidget // ❌ ERRORE

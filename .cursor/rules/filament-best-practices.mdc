@@ -194,3 +194,44 @@ $this->tableUpdate(function (Blueprint $table): void {
 ## Regola: Pivot custom devono estendere BasePivot e niente protected $table
 
 - I pivot custom (es. DoctorStudio) devono **sempre** estendere BasePivot.
+
+## Regola: Cast enum solo nei modelli specifici del modulo
+
+- I cast enum (es. 'type' => UserTypeEnum::class) vanno dichiarati **solo** nei modelli specifici del modulo (es. SaluteOra\User), **mai** nella base condivisa (es. BaseUser).
+- Motivazione: evitare di sporcare il modulo User condiviso tra più progetti, garantire modularità e nessun lock-in.
+- Filosofia: ogni modulo è autonomo, rispetto della struttura modulare, serenità del codice.
+- Politica: type safety, DRY, nessun errore di cast, refactoring sicuro.
+- Zen: un solo punto di verità, nessuna duplicazione, nessun errore runtime.
+
+**Esempio corretto:**
+```php
+// In Modules\SaluteOra\Models\User.php
+protected function casts(): array
+{
+    return array_merge(parent::casts(), [
+        'type' => UserTypeEnum::class,
+        // ...
+    ]);
+}
+```
+
+## Policy FullCalendar (2024)
+- I widget FullCalendar devono essere sempre classi custom che estendono FullCalendarWidget.
+- Tutte le opzioni vanno in config(), gli eventi in fetchEvents().
+- Vietato usare FullCalendarWidget::make()->options() o metodi fluenti: questi metodi non esistono e generano errori.
+- Nelle pagine Filament, includere solo la classe custom nei metodi getHeaderWidgets() o simili.
+
+### Esempio corretto
+```php
+class DoctorCalendarWidget extends FullCalendarWidget {
+    public function config(): array { /* ... */ }
+    public function fetchEvents(array $fetchInfo): array { /* ... */ }
+}
+protected function getHeaderWidgets(): array {
+    return [\Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class];
+}
+```
+
+### Errori comuni da evitare
+- Usare FullCalendarWidget::make()->options([...]) // ❌ ERRORE
+- Usare metodi fluenti su FullCalendarWidget // ❌ ERRORE

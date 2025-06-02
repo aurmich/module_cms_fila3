@@ -1,5 +1,8 @@
 <?php
 
+// DEPRECATO: Vietato usare questo modello. Tutte le disponibilità dei dottori vanno gestite solo tramite la tabella appointments (con patient_id null o type AVAILABILITY). Vedi docs/appointment-management.md e docs/calendar/doctor-availability-management.md
+// Questo file va eliminato appena possibile.
+
 declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;

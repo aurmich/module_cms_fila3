@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Modules\SaluteOra\Enums\AppointmentStatus;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
+use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Appointment Model for the SaluteOra Module.
@@ -68,7 +69,7 @@ class Appointment extends BaseModel
             'start_time' => 'datetime',
             'end_time' => 'datetime',
             'type' => AppointmentTypeEnum::class,
-            'status' => AppointmentStatus::class,
+            'status' => AppointmentStatusEnum::class,
             'emergency' => 'boolean',
         ]);
     }

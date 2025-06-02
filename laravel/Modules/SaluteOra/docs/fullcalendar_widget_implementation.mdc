@@ -306,8 +306,10 @@ trait HasFullCalendarConfig
 {
     /**
      * Configurazione base per tutti i widget FullCalendar
+     * 
+     * Per la versione 3.2.4 del pacchetto saade/filament-fullcalendar
      */
-    public function config(): array
+    public function options(): array
     {
         return [
             'locale' => 'it',

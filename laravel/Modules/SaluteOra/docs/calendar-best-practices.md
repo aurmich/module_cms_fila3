@@ -244,4 +244,21 @@ Per la gestione degli orari di apertura di studi, risorse e servizi, utilizzare 
 - UX avanzata e validazione live
 - Serializzazione standard e riuso in più moduli
 
-Vedi anche: [form-components/README.md](../form-components/README.md) 
+Vedi anche: [form-components/README.md](../form-components/README.md)
+
+## Policy DRY sulla Disponibilità
+
+La disponibilità del dottore è sempre rappresentata da record Appointment con type=status specifici (es. type=availability, status=available). Non vanno mai create tabelle custom per la disponibilità. Tutte le logiche di calendario, slot, prenotazione e approvazione sono centralizzate su Appointment.
+
+### Esempio di query DRY
+```php
+Appointment::where('doctor_id', $doctorId)
+    ->where('type', AppointmentTypeEnum::AVAILABILITY)
+    ->where('status', AppointmentStatusEnum::AVAILABLE)
+    ->get();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità

@@ -509,4 +509,32 @@ Questa architettura garantisce scalabilità, manutenibilità e conformità alle 
 - [Integrazione FullCalendar](fullcalendar_integration.md)
 - [Widget FullCalendar](fullcalendar_widgets.md)
 - [Documentazione FullCalendar](https://fullcalendar.io/docs)
-- [Laravel Configuration](https://laravel.com/docs/configuration) 
+- [Laravel Configuration](https://laravel.com/docs/configuration)
+
+## Policy di implementazione widget FullCalendar (2024)
+
+- I widget FullCalendar **devono sempre** essere implementati come classi custom che estendono FullCalendarWidget.
+- Tutte le opzioni vanno fornite tramite override del metodo config().
+- Gli eventi vanno forniti tramite override di fetchEvents().
+- **Non usare mai** FullCalendarWidget::make()->options() o ->config() o ->events(): questi metodi non esistono e generano errori.
+- Nelle pagine Filament, includere solo la classe custom nei metodi getHeaderWidgets() o simili.
+
+### Esempio corretto
+
+```php
+// Widget custom
+class DoctorCalendarWidget extends FullCalendarWidget {
+    public function config(): array { /* ... */ }
+    public function fetchEvents(array $fetchInfo): array { /* ... */ }
+}
+
+// Nella pagina
+protected function getHeaderWidgets(): array {
+    return [\Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class];
+}
+```
+
+### Errori comuni da evitare
+
+- Usare FullCalendarWidget::make()->options([...]) // ❌ ERRORE
+- Usare metodi fluenti su FullCalendarWidget // ❌ ERRORE

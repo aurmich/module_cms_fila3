@@ -11,3 +11,7 @@ Le classi che estendono \Modules\Xot\Filament\Resources\Pages\XotBaseListRecords
 ---
 Ultimo aggiornamento: 2025-05-27
 Responsabile: Cascade AI
+
+- I widget FullCalendar devono sempre essere implementati come classi custom che estendono FullCalendarWidget, con override di config() e fetchEvents().
+- Non usare mai FullCalendarWidget::make()->options() o metodi fluenti: questi metodi non esistono e generano errori.
+- Nelle pagine Filament, includere solo la classe custom nei metodi getHeaderWidgets() o simili.

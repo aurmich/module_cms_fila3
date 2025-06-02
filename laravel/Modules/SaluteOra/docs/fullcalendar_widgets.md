@@ -761,3 +761,28 @@ I widget FullCalendar per SaluteOra forniscono una base solida per la gestione d
 
 > **Nota di prevenzione:**
 > L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
+
+## [AGGIORNAMENTO 2024-06-XX] - Disponibilità solo su appointments
+
+**Regola fondamentale:**
+- Le disponibilità dei dottori vanno gestite solo tramite la tabella `appointments` (con `type` = `AVAILABILITY`).
+- È vietato creare tabelle o modelli separati (es. doctor_availabilities) per le disponibilità.
+- Tutto il calendario (FullCalendar/Filament) lavora su appointments, distinguendo tra disponibilità e appuntamenti tramite i campi esistenti.
+
+**Motivazione:**
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Logica: DRY, KISS, nessun lock-in, massima compatibilità con FullCalendar e Filament.
+- Religione: "Non avrai altro modello all'infuori di appointments".
+- Politica: centralizzazione, audit trail, refactoring sicuro.
+- Zen: serenità nella manutenzione.
+
+**Checklist:**
+- [x] Nessun modello/tabella separata per disponibilità
+- [x] Tutte le query calendar filtrano per type
+- [x] Documentazione aggiornata
+- [x] Colori e icone diverse per disponibilità
+
+**Collegamenti:**
+- [appointment-management.md](appointment-management.md)
+- [calendar/doctor-availability-management.md](calendar/doctor-availability-management.md)
+- [fullcalendar_parental_widgets.md](fullcalendar_parental_widgets.md)

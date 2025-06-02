@@ -26,6 +26,12 @@ return [
         "edit" => [
             "title" => "Modifica Appuntamento",
         ],
+        "availability" => [
+            "title" => "Gestione Disponibilità",
+            "heading" => "Calendario Disponibilità",
+            "subheading" => "Gestisci le tue disponibilità e approva gli appuntamenti",
+            "description" => "Crea slot di disponibilità per permettere ai pazienti di prenotare appuntamenti e gestisci gli appuntamenti esistenti."
+        ],
     ],
     "fields" => [
         "title" => [
@@ -168,6 +174,78 @@ return [
         "week_view" => "Settimanale",
         "month_view" => "Mensile",
     ],
+    
+    "availability" => [
+        "title" => "Disponibilità",
+        "add" => "Aggiungi disponibilità",
+        "edit" => "Modifica disponibilità",
+        "delete" => "Elimina disponibilità",
+    ],
+    
+    "legend" => [
+        "description" => "Legenda dei colori e delle icone utilizzate nel calendario.",
+        "types" => "Tipi di Evento",
+        "icons" => "Significato Icone",
+        "availability" => "Disponibilità",
+        "pending" => "Appuntamento in attesa",
+        "confirmed" => "Appuntamento confermato",
+        "completed" => "Appuntamento completato",
+        "cancelled" => "Appuntamento annullato",
+        "availability_icon" => "Slot di disponibilità",
+        "pending_icon" => "Appuntamento in attesa di conferma",
+        "confirmed_icon" => "Appuntamento confermato",
+        "completed_icon" => "Appuntamento completato",
+        "cancelled_icon" => "Appuntamento annullato",
+        "instructions" => "Istruzioni",
+        "instruction_add" => "Clicca su uno slot vuoto o sul pulsante '+' per aggiungere una nuova disponibilità.",
+        "instruction_edit" => "Clicca su un evento esistente per modificarlo o cambiarne lo stato.",
+        "instruction_delete" => "Nelle opzioni di modifica, clicca 'Elimina' per rimuovere una disponibilità o un appuntamento non confermato.",
+        "instruction_approve" => "Per approvare un appuntamento, cambia lo stato da 'In attesa' a 'Confermato'.",
+    ],
+    
+    "actions" => [
+        "create" => [
+            "label" => "Nuovo appuntamento",
+            "tooltip" => "Crea un nuovo appuntamento",
+        ],
+        "edit" => [
+            "label" => "Modifica",
+            "tooltip" => "Modifica i dettagli dell'appuntamento",
+        ],
+        "delete" => [
+            "label" => "Elimina",
+            "tooltip" => "Rimuovi questo appuntamento",
+            "confirmation" => "Sei sicuro di voler eliminare questo appuntamento?",
+        ],
+        "view" => [
+            "label" => "Visualizza",
+            "tooltip" => "Visualizza i dettagli dell'appuntamento",
+        ],
+        "confirm" => [
+            "label" => "Conferma",
+            "tooltip" => "Conferma questo appuntamento",
+        ],
+        "cancel" => [
+            "label" => "Annulla",
+            "tooltip" => "Annulla questo appuntamento",
+        ],
+        "reschedule" => [
+            "label" => "Riprogramma",
+            "tooltip" => "Cambia data e ora dell'appuntamento",
+        ],
+        "mark_completed" => [
+            "label" => "Completa",
+            "tooltip" => "Segna come completato",
+        ],
+        "mark_no_show" => [
+            "label" => "Non presentato",
+            "tooltip" => "Segna come non presentato",
+        ],
+        "legend" => [
+            "label" => "Legenda",
+            "modal_heading" => "Legenda del Calendario",
+        ],
+    ],
     "notifications" => [
         "reminder" => [
             "title" => "Promemoria Appuntamento",
@@ -194,5 +272,9 @@ return [
         "unavailable_slot" => "Questo orario non è disponibile per il medico selezionato",
         "past_date" => "Non è possibile fissare un appuntamento nel passato",
         "unavailable" => "Il medico non è disponibile in questo orario",
+        "availability_created" => "Disponibilità creata con successo",
+        "availability_updated" => "Disponibilità aggiornata con successo",
+        "availability_deleted" => "Disponibilità eliminata con successo",
+        "appointment_updated" => "Appuntamento aggiornato con successo",
     ],
 ];

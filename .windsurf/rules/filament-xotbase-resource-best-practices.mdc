@@ -1,7 +1,7 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # Regole per l'Estensione di XotBaseResource (Filament)
 
@@ -125,11 +125,33 @@ class UserModerationResource extends XotBaseResource
 - **Scalabilità**: Architettura che cresce senza complessità
 
 ## Link e Documentazione
-- [README Filament Best Practices](../laravel/Modules/SaluteOra/docs/filament-best-practices.mdc)
-- [README XotBaseResource](../laravel/Modules/Xot/docs/README.md)
-- [README SaluteOra](../laravel/Modules/SaluteOra/docs/README.md)
-- [Namespace vs File Structure](../laravel/Modules/SaluteOra/docs/namespace-vs-file-structure.md)
-- [Filament Namespace Rules](../laravel/Modules/SaluteOra/docs/filament-namespace-rules.md)
+- [README Filament Best Practices](mdc:../laravel/Modules/SaluteOra/docs/filament-best-practices.mdc)
+- [README XotBaseResource](mdc:../laravel/Modules/Xot/docs/README.md)
+- [README SaluteOra](mdc:../laravel/Modules/SaluteOra/docs/README.md)
+- [Namespace vs File Structure](mdc:../laravel/Modules/SaluteOra/docs/namespace-vs-file-structure.md)
+- [Filament Namespace Rules](mdc:../laravel/Modules/SaluteOra/docs/filament-namespace-rules.md)
+
+## Gestione Doctor come User (STI/Parental)
+
+Nel sistema SaluteOra (e in tutti i moduli Xot), il dottore (**Doctor**) non è una tabella separata, ma un tipo di User gestito tramite Single Table Inheritance (STI) o Parental. La tabella di riferimento è sempre `users`, e il tipo è identificato dal campo `type` (stringa o enum).
+
+- **Vietato** cercare la colonna `user_id` nella tabella `users` (non esiste).
+- **Vietato** creare join o modelli duplicati per Doctor.
+- **Tutta la logica di fetch, policy, tenancy, va fatta su User filtrando per type = 'doctor'** (o enum).
+
+### Esempio di query corretta
+```php
+User::where('id', $id)->where('type', 'doctor')->firstOrFail();
+// oppure con enum
+User::where('id', $id)->where('type', UserTypeEnum::DOCTOR->value)->firstOrFail();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: User è la tabella, Doctor è solo un "type"
+- Nessuna duplicazione: niente modelli, tabelle, join inutili
+- DRY, KISS, serenità del codice: tutto centralizzato, nessun errore di mapping, refactoring sicuro
+- Politica: ogni modulo è autonomo, ma rispetta la centralizzazione delle entità
+- Religione: "Non avrai altro modello di dottore all'infuori di User"
 
 ---
 **Questa regola è vincolante e va applicata in tutti i moduli che usano XotBaseResource.**
