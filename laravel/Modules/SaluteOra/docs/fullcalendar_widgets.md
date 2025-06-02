@@ -786,3 +786,11 @@ I widget FullCalendar per SaluteOra forniscono una base solida per la gestione d
 - [appointment-management.md](appointment-management.md)
 - [calendar/doctor-availability-management.md](calendar/doctor-availability-management.md)
 - [fullcalendar_parental_widgets.md](fullcalendar_parental_widgets.md)
+
+## Collegamenti
+
+- [Indice e link FullCalendar root](../../../../docs/fullcalendar_widgets_and_tenancy.mdc)
+- [Regole generali FullCalendar/Xot](../../../Xot/docs/filament_widget_regole.md)
+- [Stub: fullcalendar-implementation.md](./fullcalendar-implementation.md)
+- [Stub: fullcalendar-correct-implementation.md](./fullcalendar-correct-implementation.md)
+- [Stub: fullcalendar-implementation-guide.md](./fullcalendar-implementation-guide.md)
