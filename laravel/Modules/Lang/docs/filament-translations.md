@@ -103,3 +103,12 @@ Questo documento è linkato anche dalla documentazione del modulo Cms per garant
 - Consulta anche:
   - [docs SaluteOra](../../SaluteOra/docs/README.md)
   - [docs Xot](../../Xot/docs/README.md)
+
+## Policy DRY sulle Traduzioni di Disponibilità/Appuntamenti
+
+Tutte le label, placeholder, messaggi e azioni relativi a disponibilità e appuntamenti sono centralizzate nel file di traduzione appointment.php del modulo. Non vanno mai create label custom o tabelle custom per la disponibilità. Tutte le logiche di fetch, creazione, modifica, cancellazione sono centralizzate su Appointment.
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità

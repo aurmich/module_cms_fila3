@@ -196,3 +196,28 @@ protected function getHeaderWidgets(): array
 - [Admin Calendar Widget](./admin-calendar-widget.md)
 - [Patient Calendar Widget](./patient-calendar-widget.md)
 - [Filament Tenancy](https://filamentphp.com/docs/3.x/panels/tenancy)
+
+## [AGGIORNAMENTO 2024-06-XX] - Disponibilità solo su appointments
+
+**Regola fondamentale:**
+- Le disponibilità dei dottori vanno gestite solo tramite la tabella `appointments` (con `patient_id` null o flag dedicato).
+- È vietato creare tabelle o modelli separati (es. doctor_availabilities) per le disponibilità.
+- Tutto il calendario (FullCalendar/Filament) lavora su appointments, distinguendo tra disponibilità e appuntamenti tramite i campi esistenti.
+
+**Motivazione:**
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Logica: DRY, KISS, nessun lock-in, massima compatibilità con FullCalendar e Filament.
+- Religione: non avrai altro modello di disponibilità all'infuori di Appointment.
+- Politica: ogni modulo è autonomo, ma rispetta la centralizzazione delle entità.
+- Zen: serenità, nessun errore di sync, nessuna tabella fantasma, nessun refactor doloroso.
+
+**Checklist aggiornata:**
+- Gestire sempre le disponibilità tramite appointments
+- Vietato creare/gestire tabelle o modelli separati per le disponibilità
+- Aggiornare la documentazione ogni volta che si modifica la logica di disponibilità/appuntamenti
+- Seguire sempre la filosofia DRY, KISS, centralizzazione
+
+**Collegamenti:**
+- [../../appointment-management.md](../../appointment-management.md)
+- [../../fullcalendar_parental_widgets.md](../../fullcalendar_parental_widgets.md)
+- [../doctor-availability-management.md](../doctor-availability-management.md)

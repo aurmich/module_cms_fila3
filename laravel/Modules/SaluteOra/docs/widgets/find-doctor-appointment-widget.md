@@ -310,3 +310,24 @@ La view deve essere solo un wrapper per $this->form. Niente markup custom, nient
 
 ## Regola: vietato usare ->label() e ->placeholder() nei form component
 Tutti i form component devono usare solo chiavi campo, senza label o placeholder inline. Le etichette e i placeholder sono gestiti tramite i file di traduzione del modulo e il LangServiceProvider. Motivazione: coerenza, centralizzazione, override semplice, policy di qualità. Collegamento a docs/rules/filament_best_practices.md e docs/xot.md.
+
+## Policy DRY: disponibilità e appuntamenti
+
+La disponibilità e la prenotazione sono sempre gestite tramite il modello Appointment:
+- Gli slot disponibili sono Appointment con type=availability, status=available
+- Le prenotazioni sono Appointment con altri type/status
+
+Non vanno mai create tabelle custom per la disponibilità. Tutte le logiche di fetch, creazione, modifica, cancellazione sono centralizzate su Appointment.
+
+### Esempio di fetch slot disponibili
+```php
+Appointment::where('doctor_id', $doctorId)
+    ->where('type', AppointmentTypeEnum::AVAILABILITY)
+    ->where('status', AppointmentStatusEnum::AVAILABLE)
+    ->get();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità

@@ -75,8 +75,10 @@ class RegisterAction
                     'certifications' => $data['certifications'] ?? null,
                 ]);
 
-                // Ricarica l'utente per ottenere l'istanza di Doctor
-                $doctor = Doctor::where('user_id', $existingUser->id)->first();
+                // Ricarica l'utente per ottenere l'istanza di Doctor usando il pattern STI
+                // Nota: Con Single Table Inheritance, l'utente è direttamente il dottore
+                // dopo aver cambiato il type a 'doctor'
+                $doctor = Doctor::find($existingUser->id);
 
                 if ($doctor) {
                     return $doctor;

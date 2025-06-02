@@ -36,6 +36,25 @@ public function panel(Panel $panel): Panel
 }
 ```
 
+## Gestione Disponibilità: Policy DRY
+
+La disponibilità del dottore NON è mai gestita tramite una tabella custom (es. doctor_availabilities), ma solo tramite il modello Appointment:
+- Gli slot disponibili sono Appointment con type=availability, status=available
+- Gli appuntamenti richiesti/confermati sono Appointment con altri type/status
+
+### Esempio di fetch slot disponibili
+```php
+Appointment::where('doctor_id', $doctorId)
+    ->where('type', AppointmentTypeEnum::AVAILABILITY)
+    ->where('status', AppointmentStatusEnum::AVAILABLE)
+    ->get();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità
+
 ## Widget Specifici per Tipo Utente
 
 ### 1. Widget Paziente - `PatientAppointmentWidget`
@@ -207,7 +226,7 @@ class PatientAppointmentWidget extends FullCalendarWidget
 
 ### 2. Widget Dottore - `DoctorStudioAppointmentWidget`
 
-Widget per dottori che mostra gli appuntamenti dello studio selezionato tramite tenancy.
+Il widget mostra sia gli slot di disponibilità (Appointment type=availability, status=available) sia gli appuntamenti (altri type/status). Tutte le azioni CRUD sono centralizzate su Appointment. Nessuna tabella custom.
 
 ```php
 <?php
@@ -972,3 +991,31 @@ Questa implementazione fornisce un sistema completo di gestione appuntamenti mul
 
 > **Nota di prevenzione:**
 > L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
+
+## Policy di Centralizzazione Configurazione FullCalendar
+
+La configurazione del calendario FullCalendar DEVE essere centralizzata nel metodo `config()` del widget custom che estende `FullCalendarWidget`.
+
+- **Vietato** usare metodi fluenti come `->config()` su FullCalendarWidget::make().
+- **Obbligatorio** override del metodo `config(): array` nel widget custom.
+- Tutte le opzioni (headerToolbar, initialView, slotDuration, ecc.) vanno definite in `config()`.
+
+### Esempio corretto
+```php
+class DoctorAvailabilityCalendarWidget extends FullCalendarWidget
+{
+    public function config(): array
+    {
+        return [
+            'headerToolbar' => [...],
+            'initialView' => 'timeGridWeek',
+            // ...altre opzioni
+        ];
+    }
+}
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: configurazione centralizzata, nessuna duplicazione
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità

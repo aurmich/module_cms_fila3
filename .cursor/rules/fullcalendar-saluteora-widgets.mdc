@@ -303,3 +303,29 @@ public function test_middleware_blocks_wrong_user_type()
 - Backup e restore per tenant specifici
 
 Ricorda: ogni widget calendar deve essere progettato pensando all'operatore sanitario che lo utilizzerà in situazioni di stress e urgenza. La chiarezza, l'immediatezza e la sicurezza sono fondamentali per un sistema sanitario affidabile.
+
+## Errori comuni nella configurazione FullCalendarWidget
+
+### 1. Errori di sintassi array
+- **Errore tipico:** chiudere un array con `])` invece che solo `]`, oppure lasciare una virgola in eccesso.
+- **Corretto:**
+```php
+'businessHours' => [
+    'startTime' => '08:00',
+    'endTime' => '19:00',
+    'daysOfWeek' => [1, 2, 3, 4, 5],
+],
+```
+
+### 2. Errori di import Action
+- **Errore tipico:** `use Filament\Pages\Actions\Action;` (classe non trovata)
+- **Corretto:** `use Filament\Actions\Action;`
+
+### 3. Errori di configurazione FullCalendar
+- **Errore tipico:** usare `->config([...])` su `FullCalendarWidget::make()`
+- **Corretto:** override del metodo `config()` in un widget custom.
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: sintassi e import corretti, configurazione centralizzata
+- DRY, KISS, serenità del codice: niente hack, niente override strani, tutto documentato e coerente
+- Politica: ogni modulo è autonomo, ma rispetta la centralizzazione delle entità e dei componenti
