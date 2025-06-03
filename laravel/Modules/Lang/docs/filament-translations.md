@@ -75,8 +75,6 @@ TextInput::make('title')
 
 ### Link Bidirezionale
 Questo documento è linkato anche dalla documentazione del modulo Cms per garantire coerenza tra i moduli.
-<<<<<<< HEAD
-=======
 
 # ⚠️ Regola vincolante: MAI usare ->label() nei componenti Filament
 
@@ -93,4 +91,3 @@ Tutte le label, placeholder, messaggi e azioni relativi a disponibilità e appun
 - Un solo punto di verità: nessuna duplicazione, nessun lock-in
 - DRY, KISS, serenità del codice
 - Refactoring sicuro, massima estendibilità
->>>>>>> 2c07066 (.)

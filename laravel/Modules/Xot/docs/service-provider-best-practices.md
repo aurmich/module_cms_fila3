@@ -439,11 +439,8 @@ class RouteServiceProvider extends ServiceProvider
 4. I file di route siano nei percorsi corretti (web.php, api.php, admin.php)
 
 ### Problema: Eventi non ascoltati
-<<<<<<< HEAD
 b6f667c (.)
 ### Errore: Eventi non ascoltati
-=======
->>>>>>> 0e2182f (.)
 
 **Soluzione:** Verificare che:
 1. L'Event Provider estenda `BaseEventServiceProvider`
@@ -467,7 +464,6 @@ b6f667c (.)
 - [XotBaseServiceProvider](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/Providers/XotBaseServiceProvider.php)
 - [XotBaseRouteServiceProvider](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/Providers/XotBaseRouteServiceProvider.php)
 - [BaseEventServiceProvider](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/Providers/BaseEventServiceProvider.php)
-<<<<<<< HEAD
 
 
 # Best Practices per ServiceProvider
@@ -718,5 +714,3 @@ public function boot(): void
 
 **Collegamento:** Vedi anche [XotBaseServiceProvider.md](./XotBaseServiceProvider.md)
 - [filament-best-practices.md](filament-best-practices.md)
-=======
->>>>>>> 0e2182f (.)

@@ -14,7 +14,6 @@ Il modulo Xot è il core del sistema, fornisce funzionalità base e componenti r
 
 ## Componenti Principali
 
-<<<<<<< HEAD
 ### 1. Base Classes
 - `BaseModel`: Classe base per tutti i modelli
 - `BaseController`: Controller base con funzionalità comuni
@@ -26,7 +25,6 @@ Il modulo Xot è il core del sistema, fornisce funzionalità base e componenti r
 - `HasSlug`: Gestione slug automatica
 - `HasStatus`: Gestione stati dei modelli
 - `HasTimestamps`: Gestione timestamp estesa
-=======
 
 - [Volt Folio Best Practices](./VOLT_FOLIO_BEST_PRACTICES.md) - Best practices per Volt e Folio
 - [Volt Folio Best Practices](./VOLT_FOLIO_BEST_PRACTICES.md) - Best practices per Volt e Foliob6f667c (.)
@@ -36,7 +34,6 @@ Il modulo Xot è il core del sistema, fornisce funzionalità base e componenti r
 - [Filament Integration](./filament_integration.md) - Integrazione con Filament
 - [Widgets](./widgets.md) - Sistema widget
 - [Resources](./resources.md) - Gestione risorse
->>>>>>> 0e2182f (.)
 
 ### 3. Interfaces
 - `RepositoryInterface`: Contratto base per i repository
@@ -336,7 +333,6 @@ Consulta le [best practices aggiornate](./providers/service_provider_best_practi
 - [Collegamento a docs/links.md della root](../../../../docs/links.md)
 - **Zen**: Semplicità, concentrazione sul presente, armonia e serenità nello sviluppo.
 
-<<<<<<< HEAD
 ## Errori Comuni e Soluzioni (Best Practice)
 
 1. **ValidationException custom**
@@ -439,7 +435,6 @@ Dopo ogni restart, esegui la checklist sopra per evitare errori ricorrenti.
 ---
 
 - [ ] Rispetta la [regola PSR-4 Namespace](./psr4-namespaces.md) per tutti i file in app/
-=======
 ## Proprietà fondamentali del ServiceProvider (Laraxot/PTVX)
 
 Tutti i provider dei moduli che estendono XotBaseServiceProvider **devono** dichiarare:
@@ -493,4 +488,3 @@ docs/
 - [x] Nessun file .sh fuori da bashscripts/
 - [x] Documentazione aggiornata
 - [x] Struttura coerente in tutti i moduli
->>>>>>> 0e2182f (.)

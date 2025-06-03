@@ -165,7 +165,6 @@ git commit -m "Risolto conflitto in file di configurazione"
 
 ## Collegamenti Bidirezionali
 
-<<<<<<< HEAD
 Il file presenta conflitti riguardanti le funzionalità PostCSS da abilitare:
 
 1. **Versione 1**: Configurazione base con solo tailwindcss e autoprefixer
@@ -239,7 +238,6 @@ I seguenti file di configurazione sono stati recentemente risolti:
 - [Documentazione PostCSS](https://postcss.org/)
 - [Documentazione Rector](https://getrector.org/documentation)
 - [Documentazione sulla Risoluzione dei Conflitti Bash](CONFLICT_RESOLUTION_BASH.md)
-=======
 # Risoluzione dei Conflitti nei File di Configurazione
 
 ## Problema
@@ -339,7 +337,6 @@ I seguenti file di configurazione sono stati recentemente risolti:
 - [Documentazione PostCSS](https://postcss.org/)
 - [Documentazione Rector](https://getrector.org/documentation)
 - [Documentazione sulla Risoluzione dei Conflitti Bash](CONFLICT_RESOLUTION_BASH.md)
->>>>>>> 5338a990 (.)
 =======
 # Risoluzione dei Conflitti nei File di Configurazione
 

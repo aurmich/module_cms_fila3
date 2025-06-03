@@ -85,7 +85,6 @@ Verifica e corregge i problemi comuni di namespace nei file PHP, che sono spesso
 #### Descrizione
 Analizza i conflitti e fornisce statistiche e suggerimenti per la risoluzione.
 
-<<<<<<< HEAD
 ### sync_to_disk.sh
 
 Il file presenta un conflitto tra due approcci distinti:
@@ -255,8 +254,6 @@ I seguenti file sono stati recentemente risolti:
 - `sync_to_disk.sh`: Mantenuta versione avanzata con migliore feedback e gestione esclusioni
 - `fix_merge_conflicts.sh`: Corretta la logica di individuazione e rimozione dei marker di conflitto per garantire la pulizia completa di tutti i tre tipi di marker 
 
-=======
->>>>>>> 4d4d6cb7 (.)
 Questa documentazione è collegata bidirezionalmente con la [documentazione principale sulla risoluzione dei conflitti](../../docs/bashscripts_conflict_resolution.md) nella root del progetto. 
 =======
 #### Utilizzo

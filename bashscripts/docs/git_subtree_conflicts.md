@@ -513,7 +513,7 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - [Documentazione Generale sulla Risoluzione dei Conflitti](../../docs/bashscripts_conflict_resolution.md)
 f000df5 (.)
 
-<<<<<<< HEAD
+
 ## Problema
 
 Durante lo sviluppo del progetto sono stati identificati diversi script di gestione git subtree con conflitti di merge non risolti. Questi script sono fondamentali per la corretta gestione dei sottoprogetti e la sincronizzazione tra repository. I conflitti presenti impediscono il corretto funzionamento degli script e potrebbero causare problemi di integrità nel repository.

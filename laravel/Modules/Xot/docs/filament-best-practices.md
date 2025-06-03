@@ -17,10 +17,8 @@ Best practice generiche per l'utilizzo di Filament in moduli Laravel riutilizzab
 // ❌ Anti-pattern
 class MyResource extends \Filament\Resources\Resource {}
 
-<<<<<<< HEAD
 // ✅ Best practice
 class MyResource extends \Modules\Xot\Filament\Resources\XotBaseResource {}
-=======
 class UserResource extends XotBaseResource
 {
     // ...
@@ -519,14 +517,13 @@ public static function table(Table $table): Table
         ->defaultPaginationPageOption(25)
         ->paginated([10, 25, 50, 100]);
 }
->>>>>>> 0e2182f (.)
 ```
 
 ## Troubleshooting
 - Se compare un errore di override di proprietà statiche, rimuovere la proprietà dal resource e centralizzare nella base
 - Se le traduzioni non vengono applicate, controllare la struttura dei file lang e l'assenza di ->label() hardcoded
 
-<<<<<<< HEAD
+
 ## Collegamenti
 - [Filament Docs](https://filamentphp.com/docs)
 - [Best practices moduli riutilizzabili](../module-documentation-neutrality.md)
@@ -598,9 +595,6 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
-<<<<<<< HEAD
->>>>>>> 0e2182f (.)
-=======
 
 ## Regole per Widget Filament: Path View e Localizzazione
 
