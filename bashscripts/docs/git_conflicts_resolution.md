@@ -29,7 +29,6 @@ Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei n
 
 ## Processo di Risoluzione
 
-<<<<<<< HEAD
 ## Note Importanti
 - Tutti i file sono stati mantenuti nella versione<!-- REVISIONE MANUALE: File aggiornato per chiarezza e tracciabilità. Vedi anche [README globale](/docs/README.md) e gli altri file di risoluzione conflitti. -->
 
@@ -40,16 +39,13 @@ Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei n
 - I namespace sono stati mantenuti corretti secondo la struttura del modulo
 - Sono stati rimossi solo i marcatori di conflitto, mantenendo il codice funzionale
 - I file di backup sono stati creati con il timestamp per sicurezza
-=======
 ### Fase 1: Identificazione
 ```bash
 # Visualizzare tutti i file con conflitti
 git status
->>>>>>> d83fe8da (.)
 
 # Trovare i marker di conflitto
 
-<<<<<<< HEAD
 ## Verifica Post-Risoluzione
 Si consiglia di:
 1. Eseguire i test del modulo
@@ -59,9 +55,7 @@ Si consiglia di:
 5. Testare le traduzioni
 6. Verificare il funzionamento delle factory nei test
 7. Testare il modulo in ambiente di sviluppo
-=======
 ```
->>>>>>> d83fe8da (.)
 
 ### Fase 2: Analisi
 Per ogni file in conflitto:
@@ -69,7 +63,6 @@ Per ogni file in conflitto:
 2. Determinare quali modifiche devono essere mantenute
 3. Considerare le dipendenze e gli impatti delle modifiche
 
-<<<<<<< HEAD
 ## Prossimi Passi
 1. Eseguire `composer dump-autoload` per aggiornare l'autoloader
 2. Eseguire `php artisan config:clear` per pulire la cache
@@ -78,7 +71,6 @@ Per ogni file in conflitto:
 - `Modules\Predict\Providers` per i service provider
 - `Modules\Predict\Database\Factories` per le factory
 - `Modules\Predict\lang\it` per i file di traduzione
-=======
 ### Fase 3: Risoluzione
 Scegliere una delle seguenti strategie:
 
@@ -120,7 +112,6 @@ namespace Modules\NomeModulo\App\Models;
 namespace Modules\NomeModulo\App\Http\Controllers;
 namespace Modules\NomeModulo\App\Filament;
 ```
->>>>>>> d83fe8da (.)
 
 ## Best Practices per Evitare Conflitti
 
@@ -131,13 +122,10 @@ namespace Modules\NomeModulo\App\Filament;
 5. **Documentare**: Mantenere aggiornata la documentazione
 6. **Seguire le Convenzioni**: Rispettare sempre le convenzioni di namespace e tipizzazione
 
-<<<<<<< HEAD
 ## Prossimi Passi
 1. Eseguire `composer dump-autoload` per aggiornare l'autoloader
 2. Eseguire `php artisan config:clear` per pulire la cache
 3. Verificare che tutte le risorse Filament siano registrate correttamente
-=======
->>>>>>> 4d4d6cb7 (.)
 4. Testare il modulo in ambiente di sviluppo 
 =======
 ## Risoluzione di Casi Specifici

@@ -51,14 +51,12 @@ Lo script fornisce feedback colorato per:
 - Non gestisce conflitti complessi che potrebbero richiedere merge manuale
 - Mantiene sempre la versione HEAD, che potrebbe non essere sempre la scelta desiderata
 
-<<<<<<< HEAD
 ## Revisione Manuale
 File aggiornato per chiarezza, eliminata duplicazione. Vedi anche [README globale](/docs/README.md) e [scripts_conflict_resolution.md](scripts_conflict_resolution.md).
 
 [Backlink: Documentazione Globale](/docs/README.md)
 [Backlink: scripts_conflict_resolution.md](scripts_conflict_resolution.md)
 [Backlink: git_conflicts_resolution.md](git_conflicts_resolution.md)
-=======
 ## Casi d'Uso Avanzati
 
 ### 1. Risoluzione Selettiva
@@ -94,4 +92,3 @@ Dopo l'esecuzione dello script, è consigliabile verificare che tutti i conflitt
 - [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
 - [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
 - [Risoluzione Conflitti nei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
->>>>>>> d83fe8da (.)

@@ -420,7 +420,6 @@ class UserController extends Controller
 - **Etica**: Onestà, rispetto, responsabilità, attenzione all'impatto sociale e ambientale.
 - **Zen**: Semplicità, concentrazione sul presente, armonia e serenità nello sviluppo.
 
-<<<<<<< HEAD
 ## Gestione storage traduzioni: PHP vs JSON
 Vedi [translations-storage.md](./translations-storage.md) per un confronto dettagliato tra i due approcci, vantaggi, svantaggi e raccomandazioni per il progetto.
 
@@ -568,7 +567,6 @@ Tutti i comandi console del modulo sono autoregistrati tramite `XotBaseServicePr
 - Per approfondimenti, vedi [lang-service-provider.md](./lang-service-provider.md) e [PHILOSOPHY.md](./PHILOSOPHY.md).
 
 > Qualsiasi registrazione manuale è un errore e va rimossa.
-=======
 ## Proprietà fondamentali del ServiceProvider (Laraxot/PTVX)
 
 Tutti i provider dei moduli che estendono XotBaseServiceProvider **devono** dichiarare:
@@ -621,4 +619,3 @@ docs/
 - [x] Nessun file .sh fuori da bashscripts/
 - [x] Documentazione aggiornata
 - [x] Struttura coerente in tutti i moduli
->>>>>>> ce1c80e (.)

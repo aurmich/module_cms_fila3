@@ -30,7 +30,6 @@ Funzione centralizzata (in `custom.sh`) per impostare:
 - Push verso remoti multipli
 - Logging e gestione errori
 
-<<<<<<< HEAD
 ## Best Practice
 - Usare sempre `git_config_setup`
 - Eseguire backup prima di operazioni critiche
@@ -81,7 +80,6 @@ Script per il push dei subtree. Funzionalità:
 2. Errori di path: verificare la configurazione Windows
 3. Problemi di permessi: controllare fileMode e symlinks
 
-=======
 # Script Git
 
 Questi script sono utilizzati per automatizzare le operazioni Git nel progetto.
@@ -130,7 +128,6 @@ Script per il push dei subtree. Funzionalità:
 2. Errori di path: verificare la configurazione Windows
 3. Problemi di permessi: controllare fileMode e symlinks
 
->>>>>>> 5338a990 (.)
 =======
 # Script Git
 

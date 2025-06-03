@@ -144,7 +144,6 @@ Quando si identifica una nuova regola o pattern importante:
    - [ ] Aggiornare .windsurfrules
    - [ ] Verificare coerenza
    - [ ] Testare applicabilità 
-<<<<<<< HEAD
 
 ## Gestione dei Prompt
 
@@ -198,5 +197,3 @@ Modules/Xot/docs/
    - Verifica dei collegamenti    - [ ] Testare applicabilità 
 b6f667c (.)
    - Verifica dei collegamenti 
-=======
->>>>>>> 0e2182f (.)

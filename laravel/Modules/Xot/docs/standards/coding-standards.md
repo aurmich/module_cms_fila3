@@ -150,10 +150,7 @@ Ogni modifica ai dati sensibili deve essere:
 
 Il codice del progetto **deve** aderire ai seguenti principi fondamentali:
 b6f667c (.)
-<<<<<<< HEAD
-=======
 
->>>>>>> 0e2182f (.)
 Il codice del progetto il progetto **deve** aderire ai seguenti principi fondamentali:
 
 1. **Robustezza**: Il codice deve funzionare correttamente anche in condizioni impreviste o avverse
@@ -350,10 +347,7 @@ class StorePatientRequest extends FormRequest
             'birth_date' => ['required', 'date', 'before:today'],
             'tax_code' => ['required', 'string', 'size:16', 'unique:patients,tax_code'],
 b6f667c (.)
-<<<<<<< HEAD
-=======
 
->>>>>>> 0e2182f (.)
             'tax_code' => ['required', 'string', 'size:16', 'unique:patients,tax_code'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -633,10 +627,7 @@ git commit -m "fix: correzione calcolo età paziente"
 * [coding-standards.md](../../../Xot/docs/standards/coding-standards.md)
 * [coding-standards.md](../../../Xot/docs/conventions/coding-standards.md)
 b6f667c (.)
-<<<<<<< HEAD
-=======
 
->>>>>>> 0e2182f (.)
 ## Collegamenti Correlati
 
 - [Convenzioni](../../../docs/conventions.md)

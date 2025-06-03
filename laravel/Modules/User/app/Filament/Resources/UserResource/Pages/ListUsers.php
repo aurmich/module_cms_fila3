@@ -13,13 +13,8 @@ use Illuminate\Database\Query\Builder;
 use Modules\User\Filament\Actions\ChangePasswordAction;
 use Modules\User\Filament\Resources\UserResource;
 use Modules\User\Filament\Resources\UserResource\Widgets\UserOverview;
-<<<<<<< HEAD
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
-=======
-use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
->>>>>>> 7ace243 (.)
 
 class ListUsers extends XotBaseListRecords
 {

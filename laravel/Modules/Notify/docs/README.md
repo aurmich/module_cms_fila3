@@ -476,7 +476,6 @@ docs/
 - [x] Documentazione aggiornata
 - [x] Struttura coerente in tutti i moduli
 
-<<<<<<< HEAD
 ## Politica, Filosofia, Religione, Etica, Zen
 
 - **Politica**: Il modulo promuove collaborazione, trasparenza e inclusività, senza discriminazioni.
@@ -493,5 +492,3 @@ Segui SEMPRE le regole sui namespace:
 - Collegamento bidirezionale: vedi anche [links.md nella root](../../../../docs/links.md)
 
 b0005ff (.)
-=======
->>>>>>> 085d2be (.)

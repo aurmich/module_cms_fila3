@@ -79,7 +79,6 @@ Modules/<NomeModulo>/docs/phpstan/
    - Directory non trovata
    - Permessi insufficienti
    - PHPStan non installato
-<<<<<<< HEAD
 
 ## Gestione dei Conflitti
 In caso di conflitti durante l'analisi dei moduli:
@@ -92,7 +91,6 @@ In caso di conflitti durante l'analisi dei moduli:
 - [Documentazione PHPStan](../../docs/phpstan/PHPSTAN_WORKFLOW.md)
 - [Linee Guida Moduli](../../docs/MODULES.md)
 - [Risoluzione Conflitti](../../docs/development/CONFLICT_RESOLUTION.md)
-=======
    - Configurazione PHPStan errata
 
 ## Pattern di Risoluzione Errori
@@ -160,4 +158,3 @@ jobs:
 - [Struttura dei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
 - [Best Practices PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
 - [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
->>>>>>> d83fe8da (.)

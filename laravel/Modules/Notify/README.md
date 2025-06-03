@@ -298,14 +298,12 @@ app(SendNotificationAction::class)->execute(
 <x-notify::notification-list :notifications="$notifications" />
 ```
 
-<<<<<<< HEAD
 ## Configurazione
 Il modulo può essere configurato tramite il file `config/notify.php`:
 - Canali di notifica
 - Template
 - Impostazioni SMTP
 - Configurazioni specifiche per modulo
-=======
 ### Feature Test
 - Template CRUD operations
 - Email sending
@@ -472,4 +470,3 @@ This project is distributed under the MIT license. See the [LICENSE](LICENSE) fi
 Este proyecto está distribuido bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
  185a07e (.)
 
->>>>>>> 085d2be (.)

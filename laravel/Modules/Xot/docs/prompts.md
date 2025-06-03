@@ -42,10 +42,7 @@ I prompt sono file di testo che contengono istruzioni per l'AI. Devono seguire q
 
 5. **Collegamenti**:
 b6f667c (.)
-<<<<<<< HEAD
-=======
 
->>>>>>> 0e2182f (.)
 6. **Collegamenti**:
    - Questo documento deve essere collegato nella root `docs/` con un link bidirezionale
    - Gli altri moduli devono avere un link a questo documento
@@ -186,7 +183,4 @@ Il prompt `docs.txt` serve come:
    ```
 b6f667c (.)
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0e2182f (.)
