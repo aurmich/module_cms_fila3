@@ -1,196 +1,26 @@
-# Best Practices per Filament Resources in Laraxot
+# Filament Best Practices (Moduli Riutilizzabili)
 
-Questo documento definisce le linee guida ufficiali e le best practices per l'implementazione delle risorse Filament all'interno del framework Laraxot.
+## Descrizione
+Best practice generiche per l'utilizzo di Filament in moduli Laravel riutilizzabili. Nessun riferimento a nomi di progetto o brand.
 
-## Regole Generali per XotBaseResource e Filament
+## Regole principali
+- NON estendere mai direttamente le classi di Filament: creare sempre wrapper personalizzati
+- Utilizzare traits per funzionalità riutilizzabili
+- Seguire il pattern di composizione invece dell'ereditarietà
+- Mantenere la compatibilità con gli aggiornamenti di Filament
+- Centralizzare le configurazioni comuni nelle classi base
+- Non inserire proprietà statiche custom nei resource (es. $navigationIcon, $navigationGroup, $translationPrefix)
+- Non usare ->label() direttamente nei form: usare sempre i file di traduzione
 
-## Filosofia del Progetto
-
-Il progetto utilizza un'architettura basata su classi base personalizzate (`XotBase*`) che estendono le classi Filament standard. Questo approccio garantisce:
-
-- **Centralizzazione**: Configurazioni e comportamenti comuni gestiti in un unico punto
-- **Coerenza**: Tutti i moduli seguono le stesse regole e convenzioni
-- **Manutenibilità**: Modifiche globali senza toccare ogni singola risorsa
-- **Scalabilità**: Architettura che cresce senza aumentare la complessità
-
-## Regole Fondamentali per XotBaseResource
-
-### Proprietà/Metodi VIETATI
-
-**Se una classe estende `XotBaseResource`, NON deve mai dichiarare:**
-
-- `protected static ?string $navigationGroup`
-- `protected static ?string $navigationLabel`
-- `protected static ?string $navigationIcon`
-- `protected static ?string $translationPrefix`
-- `public static function table(Table $table): Table`
-- `public static function getListTableColumns(): array`
-- `public static function getTableFilters(): array`
-- `public static function getBulkActions(): array`
-- `public static function getPages(): array` (se restituisce solo index,create,edit o index,create,edit,view)
-
-### Motivazioni
-
-1. **Gestione Centralizzata**: Queste proprietà sono gestite automaticamente dalla classe base o dai provider
-2. **Evitare Override**: Dichiarare questi elementi causa comportamenti incoerenti
-3. **Automazione**: La configurazione avviene tramite convenzioni e configurazioni centralizzate
-4. **Flessibilità**: I metodi che restituiscono array associativo permettono maggiore configurabilità
-
-## Namespace e Struttura File
-
-### Regola Critica
-**I file devono essere in `app/` ma il namespace NON include `app`**
-
-### Esempi Corretti
-- **File**: `Modules/<Nome>/app/Filament/Resources/UserResource.php`
-- **Namespace**: `Modules\<Nome>\Filament\Resources` (SENZA `app`)
-
-### Estensioni Obbligatorie
-- **Resources**: `Modules\Xot\Filament\Resources\XotBaseResource`
-- **Pages**: `Modules\Xot\Filament\Resources\Pages\XotBase*`
-- **Widgets**: `Modules\Xot\Filament\Widgets\XotBaseWidget`
-
-## Metodi con Array Associativo
-
-I seguenti metodi devono SEMPRE restituire un array associativo con chiavi string:
-
-- `getFormSchema(): array` - chiavi: sezioni del form
-- `getTableActions(): array` - chiavi: nomi delle azioni
-- `getTableColumns(): array` - chiavi: nomi delle colonne
-- `getTableFilters(): array` - chiavi: nomi dei filtri
-- `getTableBulkActions(): array` - chiavi: nomi delle azioni bulk
-
-### Esempio
+## Esempi
 ```php
-public static function getFormSchema(): array
-{
-    return [
-        'personal_info' => Section::make()
-            ->schema([
-                TextInput::make('name'),
-                TextInput::make('email'),
-            ]),
-        'preferences' => Section::make()
-            ->schema([
-                Select::make('status')->options(StatusEnum::class),
-            ]),
-    ];
-}
-```
+// ❌ Anti-pattern
+class MyResource extends \Filament\Resources\Resource {}
 
-## Traduzioni
-
-### Regole
-- **MAI** utilizzare `->label()` sui componenti Filament
-- **SEMPRE** utilizzare i file di traduzione in `Modules/<Nome>/lang/<lingua>/`
-- Il LangServiceProvider gestisce automaticamente le traduzioni
-
-### Motivazione
-Il sistema di traduzione automatico elimina la necessità di specificare manualmente le etichette, garantendo coerenza e facilità di manutenzione.
-
-## Enum vs Array Options
-
-### Regola
-Se una select ha options che sono un array, convertire agli enum PHP 8.1+
-
-### Esempio
-```php
-// ❌ ERRATO
-Select::make('status')->options([
-    'active' => 'Attivo',
-    'inactive' => 'Inattivo',
-])
-
-// ✅ CORRETTO
-Select::make('status')->options(StatusEnum::class)
-```
-
-## Checklist per Sviluppatori
-
-### Prima di Creare/Modificare File Filament
-- [ ] File posizionato in `app/Filament/`?
-- [ ] Namespace corretto senza `app`?
-- [ ] Estende la classe XotBase* appropriata?
-- [ ] Nessuna proprietà navigationGroup/navigationLabel/navigationIcon?
-- [ ] Nessun metodo table() se estende XotBaseResource?
-- [ ] Metodi restituiscono array associativo con chiavi string?
-- [ ] Nessun `->label()` sui componenti?
-- [ ] Array options convertiti in enum?
-
-### Dopo Creazione/Modifica
-- [ ] IDE riconosce correttamente il file?
-- [ ] Autoloading funziona (`php artisan` non da errori)?
-- [ ] Traduzioni funzionano correttamente?
-- [ ] Navigazione Filament appare correttamente?
-- [ ] Test passano?
-
-## Errori Comuni
-
-### Namespace Errati
-- **Errore**: `Modules\SaluteOra\App\Filament\Resources`
-- **Soluzione**: `Modules\SaluteOra\Filament\Resources`
-
-### Estensioni Dirette
-- **Errore**: Estendere `Filament\Resources\Resource`
-- **Soluzione**: Estendere `Modules\Xot\Filament\Resources\XotBaseResource`
-
-### Proprietà Vietate
-- **Errore**: Dichiarare `$navigationGroup` in XotBaseResource
-- **Soluzione**: Rimuovere la dichiarazione, usare configurazione centralizzata
-
-## Documentazione Correlata
-
-### Moduli Specifici
-- [SaluteOra Filament Best Practices](../../SaluteOra/docs/filament-best-practices.mdc)
-- [SaluteOra Namespace Rules](../../SaluteOra/docs/filament-namespace-rules.md)
-- [SaluteOra README](../../SaluteOra/docs/README.md)
-
-### Regole Globali
-- [Regole Cursor XotBaseResource](../../../.cursor/rules/filament-xotbase-resource-best-practices.mdc)
-- [Regole Windsurf XotBaseResource](../../../.windsurf/rules/filament-xotbase-resource-best-practices.mdc)
-- [Regole Namespace](../../../.cursor/rules/namespace-structure-rules.mdc)
-
-### Standard di Riferimento
-- [PSR-4 Autoloading](https://www.php-fig.org/psr/psr-4/)
-- [Laravel Modules Documentation](https://nwidart.com/laravel-modules/)
-- [Filament Documentation](https://filamentphp.com/docs)
-
-## Principi DRY e KISS
-
-### DRY (Don't Repeat Yourself)
-- Centralizzazione delle configurazioni comuni
-- Riutilizzo di trait e classi base
-- Evitare duplicazione di codice tra moduli
-
-### KISS (Keep It Simple, Stupid)
-- Convenzioni chiare e semplici
-- Configurazione automatica quando possibile
-- Riduzione della complessità cognitiva
-
-## Zen del Progetto
-
-> "La semplicità è la sofisticazione suprema. Un sistema ben progettato nasconde la complessità dietro un'interfaccia semplice."
-
-- **Coerenza**: Ogni modulo segue le stesse regole
-- **Prevedibilità**: Gli sviluppatori sanno sempre cosa aspettarsi
-- **Manutenibilità**: Le modifiche sono facili e sicure
-- **Scalabilità**: Il sistema cresce senza aumentare la complessità
-
----
-
-**Queste regole sono vincolanti per tutti i moduli che utilizzano XotBaseResource e devono essere seguite rigorosamente per mantenere la coerenza e la qualità del progetto.**
-
-## Regole Fondamentali
-
-### 1. Utilizzo delle Classi Base Corrette
-
-#### ✅ DO - Estendere XotBaseResource
-
-È **obbligatorio** che tutte le risorse Filament estendano `XotBaseResource` invece della classe standard di Filament:
-
-```php
-use Modules\Xot\Filament\Resources\XotBaseResource;
-
+<<<<<<< HEAD
+// ✅ Best practice
+class MyResource extends \Modules\Xot\Filament\Resources\XotBaseResource {}
+=======
 class UserResource extends XotBaseResource
 {
     // ...
@@ -689,10 +519,21 @@ public static function table(Table $table): Table
         ->defaultPaginationPageOption(25)
         ->paginated([10, 25, 50, 100]);
 }
+>>>>>>> 0e2182f (.)
 ```
 
 ## Troubleshooting
+- Se compare un errore di override di proprietà statiche, rimuovere la proprietà dal resource e centralizzare nella base
+- Se le traduzioni non vengono applicate, controllare la struttura dei file lang e l'assenza di ->label() hardcoded
 
+<<<<<<< HEAD
+## Collegamenti
+- [Filament Docs](https://filamentphp.com/docs)
+- [Best practices moduli riutilizzabili](../module-documentation-neutrality.md)
+- [Ereditarietà modelli](../model-inheritance-best-practices.md)
+
+
+=======
 ### Problema: Form non visualizzato correttamente
 
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
@@ -757,6 +598,9 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
+<<<<<<< HEAD
+>>>>>>> 0e2182f (.)
+=======
 
 ## Regole per Widget Filament: Path View e Localizzazione
 
@@ -828,3 +672,4 @@ Appointment::where('doctor_id', $doctorId)
 - Un solo punto di verità: nessuna duplicazione, nessun lock-in
 - DRY, KISS, serenità del codice
 - Refactoring sicuro, massima estendibilità
+>>>>>>> 460d425 (.)

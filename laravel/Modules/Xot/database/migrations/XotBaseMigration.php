@@ -138,6 +138,11 @@ abstract class XotBaseMigration extends Migration
         return $this->getConn()->hasColumn($this->getTable(), $column);
     }
 
+    public function hasTable(string $table): bool
+    {
+        return $this->getConn()->hasTable($table);
+    }
+
     public function getColumnType(string $column): string
     {
         try {
@@ -375,10 +380,4 @@ abstract class XotBaseMigration extends Migration
     {
         return DB::connection($this->getConnection())->getDriverName();
     }
-    public function foreignIdFor($table, $class) {
-        $table->foreignIdFor($class);
-    } 
-    public function hasTable($table) {
-        return $this->getConn()->hasTable($table);
-    } 
 }// end XotBaseMigration

@@ -4,11 +4,11 @@
 Lo script `analyze_modules.sh` esegue l'analisi PHPStan su tutti i moduli Laravel presenti nella cartella `laravel/Modules/`. Per ogni modulo, esegue l'analisi a tutti i livelli di PHPStan (da 1 a max) e salva i risultati in formato JSON nella cartella `docs/phpstan` di ogni modulo.
 
 ## Posizione
-`/var/www/html/ptvx/bashscripts/analyze_modules.sh`
+`/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/analyze_modules.sh`
 
 ## Utilizzo
 ```bash
-cd /var/www/html/ptvx
+cd /var/www/html/_bases/base_ptvx_fila3_mono
 ./bashscripts/analyze_modules.sh
 ```
 
@@ -40,7 +40,7 @@ Modules/<NomeModulo>/docs/phpstan/
 - Configurazione PHPStan in `laravel/phpstan.neon`
 
 ## Variabili di Ambiente
-- `BASE_DIR`: Directory base del progetto (`/var/www/html/ptvx/laravel`)
+- `BASE_DIR`: Directory base del progetto (`/var/www/html/_bases/base_ptvx_fila3_mono/laravel`)
 - `MODULES_DIR`: Directory dei moduli (`$BASE_DIR/Modules`)
 - `LEVELS`: Array dei livelli PHPStan da analizzare
 
@@ -79,6 +79,7 @@ Modules/<NomeModulo>/docs/phpstan/
    - Directory non trovata
    - Permessi insufficienti
    - PHPStan non installato
+<<<<<<< HEAD
 
 ## Gestione dei Conflitti
 In caso di conflitti durante l'analisi dei moduli:
@@ -91,3 +92,72 @@ In caso di conflitti durante l'analisi dei moduli:
 - [Documentazione PHPStan](../../docs/phpstan/PHPSTAN_WORKFLOW.md)
 - [Linee Guida Moduli](../../docs/MODULES.md)
 - [Risoluzione Conflitti](../../docs/development/CONFLICT_RESOLUTION.md)
+=======
+   - Configurazione PHPStan errata
+
+## Pattern di Risoluzione Errori
+Durante l'analisi PHPStan potrebbero emergere errori ricorrenti. Ecco le soluzioni più comuni:
+
+### 1. Tipizzazione nelle Collection
+Utilizzare annotazioni PHPDoc appropriate per specificare il tipo di elementi in una Collection:
+```php
+/** @var Collection<int, User> $users */
+$users = User::all();
+```
+
+### 2. Tipi Nullable
+Quando una proprietà o un parametro può essere null, specificarlo esplicitamente:
+```php
+public function findUser(?int $id): ?User
+{
+    // Implementazione
+}
+```
+
+### 3. Cast nei Modelli
+Assicurarsi che la proprietà `$casts` nei modelli sia correttamente tipizzata:
+```php
+/**
+ * @var array<string, string>
+ */
+protected $casts = [
+    'email_verified_at' => 'datetime',
+];
+```
+
+### 4. Verifiche di Nullità
+Quando si accede a proprietà o metodi di oggetti potenzialmente null, verificare prima che non siano null:
+```php
+if ($user !== null) {
+    $email = $user->email;
+}
+```
+
+## Integrazione con CI/CD
+Lo script può essere integrato in pipeline CI/CD per automatizzare l'analisi del codice:
+
+```yaml
+# Esempio di configurazione GitHub Actions
+name: PHPStan Analysis
+on: [push, pull_request]
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Install Dependencies
+        run: composer install --no-progress
+      - name: Run Module Analysis
+        run: ./bashscripts/analyze_modules.sh
+```
+
+## Collegamenti Bidirezionali
+- [Configurazione PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/docs/phpstan.md)
+- [Struttura dei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
+- [Best Practices PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
+- [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
+>>>>>>> d83fe8da (.)

@@ -5,7 +5,9 @@
  43df3e0 (.)
 
 
+
  0440c57 (.)
+
 // WHY: Recupera il nome della relazione 'table' associata all'istanza corrente.
 // WHAT: Usa il metodo getRelationValue per ottenere la proprietà 'name' della relazione.
 $this->getRelationValue('table')->name;
@@ -30,12 +32,15 @@ $this->getRelationValue('table')->name
 
 
  cb513be (.)
+
  43df3e0 (.)
+
 
 $this->getRelationValue('table')->name
 
 
  0440c57 (.)
+
 $query->when($request->filled('q'), function (Builder $query) use ($request) {
     $query->where(function (Builder $query) use ($request) {
         $query->where('name', 'like', "%{$request->get('q')}%")
@@ -48,6 +53,7 @@ $this->getRelationValue('table')->name
 
 
  cb513be (.)
+
 $query->when($request->filled('q'), function (Builder $query) use ($request) {
     $query->where(function (Builder $query) use ($request) {
         $query->where('name', 'like', "%{$request->get('q')}%")
@@ -67,10 +73,14 @@ $query->when($request->filled('q'), function (Builder $query) use ($request) {
 
 
  cb513be (.)
+
 })
  43df3e0 (.)
 
 
+
  cb513be (.)
+
 })
  0440c57 (.)
+

@@ -25,40 +25,38 @@ php bashscripts/check_form_schema.php
 ```
 
 ### Output
-Il comando genererà un output simile a:
+Esempio di output:
 ```
 XotBaseResource Classes Form Schema Check
 ====
 
-❌ 3 classes missing getFormSchema method:
-
-- UserResource in /var/www/html/base_techplanner_fila3/laravel/Modules/User/Http/Resources/UserResource.php
-- ProfileResource in /var/www/html/base_techplanner_fila3/laravel/Modules/Profile/Http/Resources/ProfileResource.php
-- EventResource in /var/www/html/base_techplanner_fila3/laravel/Modules/Event/Http/Resources/EventResource.php
+❌ 3 classi senza getFormSchema:
+- UserResource in Modules/User/Http/Resources/UserResource.php
+- ProfileResource in Modules/Profile/Http/Resources/ProfileResource.php
+- EventResource in Modules/Event/Http/Resources/EventResource.php
 ```
 
-### Risoluzione Conflitti Applicata
-- Migliorato il codice con tipi PHP fortemente tipizzati
-- Utilizzate le funzioni Safe per una maggiore sicurezza
-- Aggiunta documentazione di tipo tramite annotazioni PHPDoc
-- Implementati controlli più robusti con cast di tipo espliciti
-- Aggiunto controllo per `SplFileInfo` per maggiore sicurezza
-
-### Integrazione con il Workflow di Sviluppo
-È consigliabile eseguire questo script:
-- Prima di ogni commit importante
-- Come parte del processo di CI/CD
-- Durante le revisioni del codice
+### Best Practice e Integrazione
+- Utilizzare tipi PHP forti e annotazioni PHPDoc
+- Integrare lo script nel workflow CI/CD (es. GitHub Actions, GitLab CI)
+- Eseguire lo script prima di ogni commit importante e durante le review
+- Preferire l'uso di Spatie Laravel Data per la validazione e la tipizzazione dei dati
+- Utilizzare strumenti come PHPStan e PHP-CS-Fixer per garantire la qualità del codice
 
 ## Altri Script di Verifica della Qualità
 
 ### check_before_phpstan.sh
 Esegue controlli preliminari prima dell'analisi con PHPStan.
 
-# Script di Verifica della Qualità del Codice
+### phpstan_docs_generator.sh
+Genera la documentazione dei risultati di PHPStan.
 
-Questa documentazione descrive gli script utilizzati per verificare e migliorare la qualità del codice nel progetto.
+## Raccomandazioni Generali
+- Documentare sempre le regole di qualità e i criteri di accettazione
+- Aggiornare la documentazione ogni volta che vengono introdotti nuovi controlli
+- Integrare i controlli di qualità nel processo di sviluppo e deploy
 
+<<<<<<< HEAD
 ## check_form_schema.php
 
 ### Descrizione
@@ -290,3 +288,9 @@ Esegue controlli preliminari prima dell'analisi con PHPStan.
 =======
 >>>>>>> 4d4d6cb7 (.)
 ### phpstan_docs_generator.sh 
+=======
+## Risorse Utili
+- [PHPStan](https://phpstan.org/)
+- [Spatie Laravel Data](https://spatie.be/docs/laravel-data/v4/introduction)
+- [CI/CD Best Practices](https://docs.github.com/en/actions/guides/building-and-testing-php) 
+>>>>>>> d83fe8da (.)

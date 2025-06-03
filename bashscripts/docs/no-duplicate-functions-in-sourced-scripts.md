@@ -87,4 +87,5 @@ function validate_input() {
 > **NOTA IMPORTANTE**: Questa regola è stata aggiornata a seguito di errori gravi di duplicazione riscontrati in diversi script .sh. Il suo rispetto è considerato **CRITICO** per la manutenibilità del progetto.
 
  43df3e0 (.)
+
 aurmich/dev

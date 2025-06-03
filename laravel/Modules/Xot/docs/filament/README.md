@@ -90,35 +90,34 @@ Questa documentazione si applica a tutti i moduli che utilizzano Filament per il
 * [README.md](../../../../Themes/Two/docs/README.md)
 * [README.md](../../../../Themes/One/docs/README.md)
 
-## Regola sulle closure void nelle azioni custom Filament
+# Regole generali per XotBaseResource
 
-### Motivazione
-- Le closure dichiarate come `void` nelle azioni custom Filament devono solo eseguire effetti collaterali e **non restituire mai un valore**.
-- Restituire un valore (anche implicito) genera errori a runtime e viola la policy DRY/KISS/zen.
+## Proprietà e metodi vietati nei Resource
 
-### Esempio ERRATO
+Chi estende XotBaseResource **non deve mai** dichiarare o ridefinire:
+- `protected static ?string $navigationIcon`
+- `protected static ?string $navigationGroup`
+- `protected static ?string $translationPrefix`
+- `public static function table(...)`
+- `public static function getListTableColumns(): array`
+
+**Motivazione:**
+- La logica di navigazione, traduzione e colonne è centralizzata per garantire coerenza e manutenibilità.
+- Ridefinire queste proprietà/metodi nei resource porta a conflitti, duplicazione, errori di autoload e perdita di coerenza.
+- Override solo tramite configurazione o metodi previsti, mai tramite ridefinizione diretta.
+
+**Esempio corretto:**
 ```php
-->action(fn (Studio $record): void => $record->activate()) // ERRORE: activate() restituisce void, ma la closure lo "ritorna"
+// ❌ NON FARE
+protected static ?string $translationPrefix = 'doctor-resource';
+$prefix = static::$translationPrefix;
+->placeholder(__($prefix . '.first_name'))
+
+// ✅ FARE
+->placeholder(__('patient::doctor-resource.first_name'))
 ```
 
-### Esempio CORRETTO
-```php
-->action(fn (Studio $record): void => $record->activate()) // CORRETTO: nessun return
-// oppure
-->action(function (Studio $record): void {
-    $record->activate();
-    // nessun return
-})
-```
-
-### Policy
-- Tutte le closure void devono solo eseguire effetti collaterali, mai return.
-- Aggiornare la documentazione ogni volta che si corregge questo errore.
-
-### Collegamento
-- Vedi anche: [SaluteOra/docs/filament-best-practices.mdc](../../../SaluteOra/docs/filament-best-practices.mdc)
-
-### Checklist
-- [ ] Nessuna closure void restituisce un valore
-- [ ] Tutte le azioni custom rispettano la signature void
+## Moduli che fanno riferimento a questa regola
+- [Patient: DoctorResource](../../../Patient/docs/filament/resources/doctor-resource.md)
+// Aggiungere qui altri moduli se necessario
 

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 use Modules\Cms\Models\Page;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;

@@ -6,19 +6,22 @@ namespace Modules\User\Filament\Resources\UserResource\Pages;
 
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ExportBulkAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Query\Builder;
-use Filament\Tables\Columns\TextColumn;
-use Modules\Xot\Contracts\UserContract;
-use Filament\Tables\Actions\ExportBulkAction;
-use Modules\User\Filament\Resources\UserResource;
 use Modules\User\Filament\Actions\ChangePasswordAction;
-use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-use Modules\User\Filament\Resources\UserResource\Pages\BaseListUsers;
+use Modules\User\Filament\Resources\UserResource;
 use Modules\User\Filament\Resources\UserResource\Widgets\UserOverview;
+<<<<<<< HEAD
+use Modules\Xot\Contracts\UserContract;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+=======
 use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
+>>>>>>> 7ace243 (.)
 
-class ListUsers extends BaseListUsers
+class ListUsers extends XotBaseListRecords
 {
     protected static string $resource = UserResource::class;
 
@@ -28,15 +31,15 @@ class ListUsers extends BaseListUsers
     public function getTableColumns(): array
     {
         return [
-            //'id' => TextColumn::make('id'),
+            'id' => TextColumn::make('id'),
             'name' => TextColumn::make('name')
                 ->searchable(),
             'email' => TextColumn::make('email')
                 ->searchable(),
-            //'email_verified_at' => TextColumn::make('email_verified_at')
-            //    ->dateTime(),
-            //'created_at' => TextColumn::make('created_at')
-            //    ->dateTime(),
+            'email_verified_at' => TextColumn::make('email_verified_at')
+                ->dateTime(),
+            'created_at' => TextColumn::make('created_at')
+                ->dateTime(),
         ];
     }
 

@@ -67,7 +67,7 @@ abstract class BaseModel extends Model implements HasMedia
     }
 
     /** @return array<string, string> */
-    protected function casts(): array
+    public function casts(): array
     {
         return [
             'id' => 'string',

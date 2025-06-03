@@ -1,23 +1,18 @@
 <?php
 
 return array (
-  'fields' =>
+  'fields' => 
   array (
-    'email' =>
+    'email' => 
     array (
       'label' => 'email',
-      'description' => 'email',
-      'helper_text' => 'email',
-      'placeholder' => 'email',
     ),
-    'password' =>
+    'password' => 
     array (
       'label' => 'password',
       'description' => 'password',
-      'helper_text' => 'password',
-      'placeholder' => 'password',
     ),
-    'remember' =>
+    'remember' => 
     array (
       'label' => 'remember',
       'description' => 'remember',

@@ -200,6 +200,7 @@ Questa fase si concentra sugli strumenti di verifica e controllo della qualità 
 
 [0;34mℹ️ [2025-04-22 11:23:26] Scelto blocco incoming (1 linee vs 1)[0m
  43df3e0 (.)
+
 [0;34mℹ️ [2025-04-22 11:23:26] Scelto blocco incoming (1 linee vs 1)[0m
 # 🔍 Fase 3: Verifica
 
@@ -892,6 +893,7 @@ Questa fase si concentra sugli strumenti di verifica e controllo della qualità 
 
 [0;34mℹ️ [2025-04-22 11:23:26] Scelto blocco HEAD (197 linee vs 1)[0m
  43df3e0 (.)
+
 aurmich/dev
 
 ## Collegamenti tra versioni di 03_verification.md

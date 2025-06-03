@@ -11,8 +11,11 @@ class GetModulePathByGeneratorAction
     public function execute(string $moduleName, string $generatorPath): string
     {
         $relativePath = config('modules.paths.generator.'.$generatorPath.'.path');
-
-        $res = module_path($moduleName, $relativePath);
+        try{
+            $res = module_path($moduleName, $relativePath);
+        }catch(\Error $e){
+            throw new \Exception($e->getMessage()."\n module name: [".$moduleName."]\n generator path: [". $generatorPath."]\n relative path: [". $relativePath."]");
+        }
         Assert::string($res);
 
         return $res;

@@ -15,7 +15,7 @@ Questo documento descrive il sistema di gestione delle dipendenze del tema "One"
     "type": "project",
     "require": {
         "php": "^8.1",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^12.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8"
     },
