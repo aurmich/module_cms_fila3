@@ -4,7 +4,7 @@ return [
     'login' => [
         'title' => 'Accedi',
         'or' => 'oppure',
-        'create_account' => 'crea un account',
+        'create_account' => 'Crea un account',
         'email' => 'Email',
         'password' => 'Password',
         'remember_me' => 'Ricordami',
