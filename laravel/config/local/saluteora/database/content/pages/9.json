@@ -14,7 +14,7 @@
                     "view": "pub_theme::components.blocks.hero.simple2",
                     "title": "Bentornata, [Nome Paziente]",
                     "subtitle": "Ecco la tua dashboard personale per la salute orale in gravidanza",
-                    "background_color": "bg-gradient-to-r from-blue-50 to-white",
+                    "background_color": "bg-white",
                     "text_color": "text-gray-900"
                 }
             },
@@ -125,7 +125,7 @@
                     "view": "pub_theme::components.blocks.hero.simple2",
                     "title": "Welcome Back, [Patient Name]",
                     "subtitle": "Your personal dashboard for oral health during pregnancy",
-                    "background_color": "bg-gradient-to-r from-blue-50 to-white",
+                    "background_color": "bg-[#EBF5FF]",
                     "text_color": "text-gray-900"
                 }
             },

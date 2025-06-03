@@ -48,13 +48,6 @@
                 }
             },
             {
-                "name": "Selettore Lingua",
-                "type": "language-selector",
-                "data": {
-                    "view": "pub_theme::components.blocks.language-selector"
-                }
-            },
-            {
                 "name": "Dropdown Utente",
                 "type": "user-dropdown",
                 "data": {
@@ -80,6 +73,13 @@
                             "icon": "heroicon-o-arrow-left-on-rectangle"
                         }
                     ]
+                }
+            },
+            {
+                "name": "Selettore Lingua",
+                "type": "language-selector",
+                "data": {
+                    "view": "pub_theme::components.blocks.language-selector"
                 }
             }
         ]

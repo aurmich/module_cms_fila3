@@ -42,19 +42,19 @@ $authenticate = function() {
                 <x-filament::icon name="heroicon-o-home" class="w-auto h-10 mx-auto text-primary-600" />
             </a>
 
-            <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-gray-900 dark:text-white">
+            <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#1A467F]">
                 {{ __('auth.login.title') }}
             </h2>
             <div class="text-sm leading-5 text-center text-gray-600 dark:text-gray-400 space-x-0.5">
                 <span>{{ __('auth.login.or') }}</span>
-                <a href="{{ route('register') }}" class="text-primary-600 hover:text-primary-500 font-medium">
+                <a href="{{ route('register') }}" class="text-[#0D9488] font-medium">
                     {{ __('auth.login.create_account') }}
                 </a>
             </div>
         </div>
 
         <div class="mt-8 mx-auto w-full max-w-md">
-            <div class="px-10 py-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+            <div class="px-10 py-8 bg-white dark:bg-gray-800 rounded-lg">
                 @volt('auth.login')
                 <form wire:submit="authenticate" class="space-y-6">
                     <x-ui.input
@@ -85,14 +85,14 @@ $authenticate = function() {
                             wire:model="remember"
                         />
 
-                        <a href="{{ route('password.request') }}" class="text-primary-600 hover:text-primary-500 font-medium">
+                        <a href="{{ route('password.request') }}" class="text-[#0D9488] hover:text-primary-500 font-medium">
                             {{ __('auth.login.forgot_password') }}
                         </a>
                     </div>
 
-                    <x-ui.button type="primary" rounded="md" submit="true" class="w-full">
+                    <x-filament::button rounded="md" class="w-full !bg-[#0D9488]">
                         {{ __('auth.login.submit') }}
-                    </x-ui.button>
+                    </x-filament::button>
                 </form>
                 @endvolt
             </div>

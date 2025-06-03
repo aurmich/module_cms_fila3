@@ -59,7 +59,7 @@ class DoctorResource extends XotBaseResource
      */
     protected static function getSubmitButton(): string
     {
-        return '<button type="submit" class="w-full bg-blue-900 text-white text-lg font-medium py-3 px-6 rounded-full hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center">
+        return '<button type="submit" class="w-full bg-[#1A467F] text-white text-lg font-medium py-3 px-6 rounded-full shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center">
             <span>ACCETTA E CONTINUA</span>
         </button>';
     }

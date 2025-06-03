@@ -29,7 +29,7 @@ new class extends Component
 
 <x-layouts.app>
     @volt('register.type')
-    <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <div class="min-h-screen bg-white pb-5">
         <!-- Logo e intestazione -->
         <div class="text-center mb-8">
             <div class="flex justify-center mb-4">
@@ -40,7 +40,7 @@ new class extends Component
         </div>
 
         <!-- Card contenente il form di registrazione -->
-        <div id="doctor-section" class="rounded-2xl shadow-xl overflow-hidden">
+        <div id="doctor-section" class="rounded-2xl overflow-hidden">
             <!-- Form di registrazione -->
             @livewire(\Modules\User\Filament\Widgets\RegistrationWidget::class, ['type' => $type])
         </div>
