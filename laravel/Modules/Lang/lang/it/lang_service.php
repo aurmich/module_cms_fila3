@@ -1,9 +1,9 @@
 <?php
 
 return array (
-  'fields' =>
+  'fields' => 
   array (
-    'created_at' =>
+    'created_at' => 
     array (
       'label' => 'Data di creazione',
       'placeholder' => 'Seleziona data',
@@ -11,7 +11,7 @@ return array (
       'description' => 'created_at',
       'helper_text' => 'created_at',
     ),
-    'updated_at' =>
+    'updated_at' => 
     array (
       'label' => 'Ultima modifica',
       'placeholder' => 'Seleziona data',
@@ -19,26 +19,25 @@ return array (
       'description' => 'updated_at',
       'helper_text' => 'updated_at',
     ),
-    'name' =>
+    'name' => 
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'tooltip' => 'Nome dell\'elemento',
     ),
-    'description' =>
+    'description' => 
     array (
       'label' => 'Descrizione',
       'placeholder' => 'Inserisci una descrizione',
       'tooltip' => 'Breve descrizione dell\'elemento',
     ),
-    'values' =>
+    'values' => 
     array (
       'label' => 'Valori',
       'placeholder' => 'Inserisci i valori',
       'tooltip' => 'Lista dei valori associati',
-      'description' => 'values',
     ),
-    'value' =>
+    'value' => 
     array (
       'label' => 'Valore',
       'placeholder' => 'Inserisci un valore',
@@ -46,41 +45,41 @@ return array (
       'description' => 'value',
       'helper_text' => 'value',
     ),
-    'email' =>
+    'email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'esempio@dominio.it',
       'tooltip' => 'Indirizzo email valido',
     ),
-    'password' =>
+    'password' => 
     array (
       'label' => 'Password',
       'placeholder' => '\\u2022\\u2022\\u2022\\u2022\\u2022\\u2022\\u2022\\u2022',
       'tooltip' => 'Password di accesso',
     ),
-    'password_expires_at' =>
+    'password_expires_at' => 
     array (
       'label' => 'Scadenza password',
       'placeholder' => 'Seleziona data',
       'tooltip' => 'Data di scadenza della password',
     ),
-    'email_verified_at' =>
+    'email_verified_at' => 
     array (
       'label' => 'Email verificata il',
       'placeholder' => 'Data verifica',
       'tooltip' => 'Data di verifica dell\'email',
     ),
-    'remember' =>
+    'remember' => 
     array (
       'label' => 'Ricordami',
       'tooltip' => 'Mantieni la sessione attiva',
     ),
-    'id' =>
+    'id' => 
     array (
       'label' => 'ID',
       'tooltip' => 'Identificativo univoco',
     ),
-    'isActive' =>
+    'isActive' => 
     array (
       'label' => 'Attivo',
       'tooltip' => 'Indica se l\'elemento è attivo',
@@ -88,352 +87,304 @@ return array (
       'helper_text' => 'isActive',
       'placeholder' => 'isActive',
     ),
-    'file' =>
+    'file' => 
     array (
       'label' => 'File',
       'placeholder' => 'Seleziona file',
       'tooltip' => 'Seleziona un file da caricare',
     ),
-    'data_scadenza' =>
+    'data_scadenza' => 
     array (
       'label' => 'Data di scadenza',
     ),
-    'indirizzo' =>
+    'indirizzo' => 
     array (
       'label' => 'Indirizzo',
     ),
-    'telefono' =>
+    'telefono' => 
     array (
       'label' => 'Telefono',
     ),
-    'workgroup' =>
+    'workgroup' => 
     array (
-      'denominazione' =>
+      'denominazione' => 
       array (
         'label' => 'Gruppo di lavoro',
         'placeholder' => 'Seleziona il gruppo',
         'tooltip' => 'Gruppo di lavoro associato',
-        'description' => 'workgroup.denominazione',
-        'helper_text' => 'workgroup.denominazione',
       ),
     ),
-    'data_inizio_esecuzione' =>
+    'data_inizio_esecuzione' => 
     array (
       'label' => 'Data inizio esecuzione',
       'placeholder' => 'Seleziona la data di inizio',
       'tooltip' => 'Data di inizio dell\'esecuzione',
-      'description' => 'data_inizio_esecuzione',
-      'helper_text' => 'data_inizio_esecuzione',
     ),
-    'data_fine_esecuzione' =>
+    'data_fine_esecuzione' => 
     array (
       'label' => 'Data fine esecuzione',
       'placeholder' => 'Seleziona la data di fine',
       'tooltip' => 'Data di fine dell\'esecuzione',
-      'description' => 'data_fine_esecuzione',
-      'helper_text' => 'data_fine_esecuzione',
     ),
-    'toggleColumns' =>
+    'toggleColumns' => 
     array (
       'label' => 'Gestisci colonne',
       'tooltip' => 'Mostra/Nascondi colonne della tabella',
     ),
-    'reorderRecords' =>
+    'reorderRecords' => 
     array (
       'label' => 'Riordina',
       'tooltip' => 'Riordina gli elementi',
     ),
-    'resetFilters' =>
+    'resetFilters' => 
     array (
       'label' => 'Reimposta filtri',
       'tooltip' => 'Rimuovi tutti i filtri applicati',
     ),
-    'applyFilters' =>
+    'applyFilters' => 
     array (
       'label' => 'Applica filtri',
       'tooltip' => 'Applica i filtri selezionati',
     ),
-    'openFilters' =>
+    'openFilters' => 
     array (
       'label' => 'Filtri',
       'tooltip' => 'Apri il pannello dei filtri',
     ),
-    'longitude' =>
+    'longitude' => 
     array (
       'label' => 'Longitudine',
     ),
-    'latitude' =>
+    'latitude' => 
     array (
       'label' => 'Latitudine',
     ),
-    'unit' =>
+    'unit' => 
     array (
       'label' => 'Unità',
     ),
-    'deleted_at' =>
+    'deleted_at' => 
     array (
       'label' => 'Data di eliminazione',
     ),
-    'radius' =>
+    'radius' => 
     array (
       'label' => 'Raggio',
     ),
-    'polizza_convenzione_pratica_sconto' =>
+    'polizza_convenzione_pratica_sconto' => 
     array (
       'label' => 'Polizza convenzione pratica sconto',
     ),
-    'data_pagamento' =>
+    'data_pagamento' => 
     array (
       'label' => 'Data pagamento',
     ),
-    'polizza_convenzione_istanza' =>
+    'polizza_convenzione_istanza' => 
     array (
-      'polizza_convenzione' =>
+      'polizza_convenzione' => 
       array (
-        'compagnia_assicurativa' =>
+        'compagnia_assicurativa' => 
         array (
-          'nome' =>
+          'nome' => 
           array (
             'label' => 'Nome compagnia assicurativa',
           ),
         ),
-        'nome' =>
+        'nome' => 
         array (
           'label' => 'Nome polizza convenzione',
         ),
       ),
     ),
-    'stato_pratica' =>
+    'stato_pratica' => 
     array (
-      'descrizione' =>
+      'descrizione' => 
       array (
         'label' => 'Descrizione stato pratica',
       ),
     ),
-    'cliente' =>
+    'cliente' => 
     array (
-      'nominativo' =>
+      'nominativo' => 
       array (
         'label' => 'Nominativo cliente',
       ),
     ),
-    'roles' =>
+    'roles' => 
     array (
-      'name' =>
+      'name' => 
       array (
         'label' => 'Nome ruolo',
       ),
     ),
-    'competent_health_unit' =>
+    'competent_health_unit' => 
     array (
       'label' => 'Unità sanitaria competente',
     ),
-    'tax_code' =>
+    'tax_code' => 
     array (
       'label' => 'Codice fiscale',
     ),
-    'vat_number' =>
+    'vat_number' => 
     array (
       'label' => 'Partita IVA',
     ),
-    'company_office' =>
+    'company_office' => 
     array (
       'label' => 'Sede aziendale',
     ),
-    'business_closed' =>
+    'business_closed' => 
     array (
       'label' => 'Attività chiusa',
     ),
-    'company_name' =>
+    'company_name' => 
     array (
       'label' => 'Nome azienda',
     ),
-    'street_number' =>
+    'street_number' => 
     array (
       'label' => 'Numero civico',
     ),
-    'province' =>
+    'province' => 
     array (
       'label' => 'Provincia',
     ),
-    'postal_code' =>
+    'postal_code' => 
     array (
       'label' => 'CAP',
     ),
-    'fax' =>
+    'fax' => 
     array (
       'label' => 'Fax',
     ),
-    'mobile' =>
+    'mobile' => 
     array (
       'label' => 'Cellulare',
     ),
-    'notes' =>
+    'notes' => 
     array (
       'label' => 'Note',
     ),
-    'activity' =>
+    'activity' => 
     array (
       'label' => 'Attività',
     ),
-    'determina' =>
+    'determina' => 
     array (
       'label' => 'Determina',
-      'description' => 'determina',
-      'helper_text' => 'determina',
-      'placeholder' => 'determina',
     ),
-    'data_aggiudicazione' =>
+    'data_aggiudicazione' => 
     array (
       'label' => 'Data aggiudicazione',
-      'description' => 'data_aggiudicazione',
-      'helper_text' => 'data_aggiudicazione',
-      'placeholder' => 'data_aggiudicazione',
     ),
-    'updated_by' =>
+    'updated_by' => 
     array (
       'description' => 'updated_by',
       'helper_text' => 'updated_by',
       'placeholder' => 'updated_by',
       'label' => 'updated_by',
     ),
-    'created_by' =>
+    'created_by' => 
     array (
       'description' => 'created_by',
       'helper_text' => 'created_by',
       'placeholder' => 'created_by',
       'label' => 'created_by',
     ),
-    'layout' =>
+    'layout' => 
     array (
       'label' => 'layout',
     ),
-    'newstate' =>
+    'newstate' => 
     array (
       'description' => 'newstate',
       'helper_text' => 'newstate',
       'placeholder' => 'newstate',
       'label' => 'newstate',
     ),
-    'icon' =>
+    'icon' => 
     array (
       'description' => 'icon',
       'label' => 'icon',
       'placeholder' => 'icon',
       'helper_text' => 'icon',
     ),
-    'user' =>
+    'user' => 
     array (
       'label' => 'user',
     ),
-    'attributes' =>
+    'attributes' => 
     array (
       'label' => 'attributes',
     ),
-    '946595X2254X48249SQ01' =>
+    '946595X2254X48249SQ01' => 
     array (
       'label' => '946595X2254X48249SQ01',
     ),
-    '946595X2255X48257SQ01' =>
+    '946595X2255X48257SQ01' => 
     array (
       'label' => '946595X2255X48257SQ01',
     ),
-    '946595X2256X48262SQ01' =>
+    '946595X2256X48262SQ01' => 
     array (
       'label' => '946595X2256X48262SQ01',
     ),
-    '946595X2257X48264' =>
+    '946595X2257X48264' => 
     array (
       'label' => '946595X2257X48264',
     ),
-    '946595X2257X48265SQ01' =>
+    '946595X2257X48265SQ01' => 
     array (
       'label' => '946595X2257X48265SQ01',
     ),
-    '946595X2258X48268SQ01' =>
+    '946595X2258X48268SQ01' => 
     array (
       'label' => '946595X2258X48268SQ01',
     ),
-    '946595X2259X48269SQ01' =>
+    '946595X2259X48269SQ01' => 
     array (
       'label' => '946595X2259X48269SQ01',
     ),
-    '946595X2259X48843SQ01' =>
+    '946595X2259X48843SQ01' => 
     array (
       'label' => '946595X2259X48843SQ01',
     ),
-    '946595X2259X48847SQ01' =>
+    '946595X2259X48847SQ01' => 
     array (
       'label' => '946595X2259X48847SQ01',
     ),
-    '946595X2259X48270SQ01' =>
+    '946595X2259X48270SQ01' => 
     array (
       'label' => '946595X2259X48270SQ01',
     ),
-    '946595X2259X48850SQ01' =>
+    '946595X2259X48850SQ01' => 
     array (
       'label' => '946595X2259X48850SQ01',
     ),
-    '946595X2259X48852SQ01' =>
+    '946595X2259X48852SQ01' => 
     array (
       'label' => '946595X2259X48852SQ01',
     ),
-    '946595X2259X48271SQ01' =>
+    '946595X2259X48271SQ01' => 
     array (
       'label' => '946595X2259X48271SQ01',
     ),
-    '946595X2259X48869SQ01' =>
+    '946595X2259X48869SQ01' => 
     array (
       'label' => '946595X2259X48869SQ01',
-    'individuale_spread_money' =>
-    array (
-      'label' => 'individuale_spread_money',
     ),
-    'organizzativa_spread_money' =>
+    'state' => 
     array (
-      'label' => 'organizzativa_spread_money',
+      'label' => 'state',
+      'description' => 'state',
+      'helper_text' => 'state',
+      'placeholder' => 'state',
     ),
-    'periodo' =>
+    'changePassword' => 
     array (
-      'label' => 'periodo',
+      'label' => 'changePassword',
     ),
-    'copy_valutatore_id_from_individuale' =>
-    array (
-      'label' => 'copy_valutatore_id_from_individuale',
-    ),
-    'reparto' =>
-    array (
-      'label' => 'reparto',
-    ),
-    'qualifica' =>
-    array (
-      'label' => 'qualifica',
-    ),
-    'info' =>
-    array (
-      'label' => 'info',
-    ),
-    'lavoratore' =>
-    array (
-      'label' => 'lavoratore',
-    ),
-    'soldi' =>
-    array (
-      'label' => 'soldi',
-    ),
-    'pdf' =>
-    array (
-      'label' => 'pdf',
-    ),
-    'anno_valutatore' =>
-    array (
-      'label' => 'anno_valutatore',
-    ),
-    'motivo/invio_email' =>
-    array (
-      'label' => 'motivo/invio_email',
-    ),
-    'recordId' =>
+    'recordId' => 
     array (
       'description' => 'recordId',
       'label' => 'recordId',
@@ -441,106 +392,83 @@ return array (
       'helper_text' => 'recordId',
     ),
   ),
-  'actions' =>
+  'actions' => 
   array (
-    'save' =>
+    'save' => 
     array (
       'label' => 'Salva',
       'tooltip' => 'Salva le modifiche',
     ),
-    'cancel' =>
+    'cancel' => 
     array (
       'label' => 'Annulla',
       'tooltip' => 'Annulla le modifiche',
     ),
-    'create' =>
+    'create' => 
     array (
       'label' => 'Crea nuovo',
       'tooltip' => 'Crea un nuovo elemento',
     ),
-    'createAnother' =>
+    'createAnother' => 
     array (
       'label' => 'Crea un altro',
       'tooltip' => 'Crea un altro elemento dopo questo',
     ),
-    'edit' =>
+    'edit' => 
     array (
       'label' => 'Modifica',
       'tooltip' => 'Modifica questo elemento',
     ),
-    'delete' =>
+    'delete' => 
     array (
       'label' => 'Elimina',
       'tooltip' => 'Elimina questo elemento',
     ),
-    'associate' =>
+    'associate' => 
     array (
       'label' => 'Associa',
       'tooltip' => 'Associa ad un elemento esistente',
     ),
-    'dissociate' =>
+    'dissociate' => 
     array (
       'label' => 'Dissocia',
       'tooltip' => 'Rimuovi l\'associazione',
     ),
-    'attach' =>
+    'attach' => 
     array (
       'label' => 'Collega',
       'tooltip' => 'Collega ad un elemento esistente',
     ),
-    'detach' =>
+    'detach' => 
     array (
       'label' => 'Scollega',
       'tooltip' => 'Rimuovi il collegamento',
     ),
-    'authenticate' =>
+    'authenticate' => 
     array (
       'label' => 'Accedi',
       'tooltip' => 'Effettua l\'accesso',
     ),
-    'downloadExample' =>
+    'downloadExample' => 
     array (
       'label' => 'Scarica esempio',
       'tooltip' => 'Scarica un file di esempio',
     ),
-    'copy_from_last_year_' =>
+    'copy_from_last_year_' => 
     array (
       'label' => 'copy_from_last_year_',
     ),
-    'win_action' =>
+    'win_action' => 
     array (
       'label' => 'win_action',
     ),
-    'bet_action' =>
+    'bet_action' => 
     array (
       'label' => 'bet_action',
-    'GeneratePDFProjectReportAction' =>
-    array (
-      'label' => 'GeneratePDFProjectReportAction',
     ),
-    'export_xls' =>
+    'export_xls' => 
     array (
       'label' => 'export_xls',
-    ),
-    'trova_esclusi' =>
-    array (
-      'label' => 'trova_esclusi',
-    ),
-    'copy_valutatore_id_from_individuale' =>
-    array (
-      'label' => 'copy_valutatore_id_from_individuale',
-    ),
-    'populate_year' =>
-    array (
-      'label' => 'populate_year',
-    ),
-    'Carica/Aggiorna Dipendenti' =>
-    array (
-      'label' => 'Carica/Aggiorna Dipendenti',
-    ),
-    'import_valutatori_' =>
-    array (
-      'label' => 'import_valutatori_',
     ),
   ),
 );

@@ -2,6 +2,23 @@
 
 Questo documento definisce le linee guida ufficiali per la struttura dei moduli all'interno del framework <nome progetto>.
 
+---
+
+## Gestione dati geografici statici: GeoJsonModel readonly (ispirato a Squire)
+
+Per tutti i dati geografici statici (regioni, province, comuni, cap) di dimensioni gestibili, NON creare tabelle/migration dedicate. Utilizzare invece un modello base readonly (`GeoJsonModel`) che legge i dati direttamente da file JSON (es: `Modules/Geo/resources/json/comuni.json`).
+
+- I model specialistici (Region, Province, City, Cap) devono estendere la base GeoJsonModel e fornire metodi di filtro.
+- Versionare sempre il file json e documentare la struttura.
+- Aggiornare la documentazione di Geo/docs, SaluteOra/docs e questa stessa doc con collegamenti bidirezionali.
+
+Per dettagli implementativi e best practice vedi:
+- [Geo/docs/geo-json-model.md](../../Geo/docs/geo-json-model.md)
+- [SaluteOra/docs/geo-integration.md](../../SaluteOra/docs/geo-integration.md)
+- [Questa stessa doc (Xot/module-structure.md)](module-structure.md)
+
+---
+
 ## Service Provider
 
 ### Convenzioni Base

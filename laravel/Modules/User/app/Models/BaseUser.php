@@ -120,9 +120,12 @@ use Illuminate\Support\Facades\Schema;
  */
 abstract class BaseUser extends Authenticatable implements HasName, HasTenants, UserContract
 {
+
+
     use HasApiTokens;
     use HasFactory;
     use HasRoles;
+    // Guard coerente con Spatie/Permission
     use HasUuids;
     use Notifiable;
     use RelationX;
@@ -184,6 +187,12 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     protected $childTypes = [
 
     ];
+
+    /**
+     * Guard coerente con Spatie/Permission: deve essere 'web'.
+     * @var string
+     */
+    protected $guard_name = 'web';
 
     /** @var \Illuminate\Database\Eloquent\Relations\Pivot|null */
     public $pivot;
@@ -397,25 +406,6 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
 
 
 
-    /**
-     * Get the role name for the current team.
-     *
-     * @return array<int, string>
-     */
-    /**
-     * Get all role names associated with the user.
-     *
-     * @return array<int, string>
-     */
-    public function getRoleNames(): array
-    {
-        /** @var array<int, string> */
-        return $this->roles()->pluck('name')->filter()->values()->toArray();
-    }
-
-
-
-
 
     public function authentications(): MorphMany
     {
@@ -459,26 +449,5 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
         return false;
     }
 
-    /**
-     * Get all permission names associated with the user's roles.
-     *
-     * @return array<int, string>
-     */
-    public function getPermissionNames(): array
-    {
-        $roles = $this->roles()->with('permissions')->get();
-        if ($roles->isEmpty()) {
-            return [];
-        }
 
-        $permissions = collect();
-        foreach ($roles as $role) {
-            if (isset($role->permissions) && $role->permissions !== null) {
-                $permissions = $permissions->merge($role->permissions);
-            }
-        }
-
-        /** @var array<int, string> */
-        return $permissions->pluck('name')->values()->toArray();
-    }
 }

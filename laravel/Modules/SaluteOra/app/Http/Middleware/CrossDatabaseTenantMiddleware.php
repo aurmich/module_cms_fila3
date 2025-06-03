@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\SaluteOra\app\Http\Middleware;
+namespace Modules\SaluteOra\Http\Middleware;
 
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\IdentifyTenant;
@@ -49,7 +49,7 @@ class CrossDatabaseTenantMiddleware extends IdentifyTenant
 
     /**
      * Registra uno scope personalizzato per gestire correttamente le query cross-database
-     * 
+     *
      * @param Model $tenant Il tenant corrente
      * @return void
      */
@@ -75,7 +75,7 @@ class CrossDatabaseTenantMiddleware extends IdentifyTenant
             public function apply(Builder $builder, Model $model): void
             {
                 $relationshipName = $this->getOwnershipRelationship($model);
-                
+
                 if (empty($relationshipName) || !method_exists($model, $relationshipName)) {
                     return;
                 }
@@ -93,8 +93,8 @@ class CrossDatabaseTenantMiddleware extends IdentifyTenant
                         ->from(DB::raw($tenantTable))
                         ->join(
                             'saluteora_data.doctor_studio',
-                            $tenantTable . '.id', 
-                            '=', 
+                            $tenantTable . '.id',
+                            '=',
                             'saluteora_data.doctor_studio.studio_id'
                         )
                         ->whereColumn(
@@ -109,15 +109,15 @@ class CrossDatabaseTenantMiddleware extends IdentifyTenant
             protected function getOwnershipRelationship(Model $model): ?string
             {
                 $resource = Filament::getResourceForModel($model::class);
-                
+
                 if ($resource === null) {
                     return null;
                 }
-                
+
                 if (property_exists($resource, 'tenantOwnershipRelationshipName')) {
                     return $resource::$tenantOwnershipRelationshipName;
                 }
-                
+
                 return (string) str($this->tenantModel)
                     ->classBasename()
                     ->pluralStudly()
@@ -130,7 +130,7 @@ class CrossDatabaseTenantMiddleware extends IdentifyTenant
 
     /**
      * Risolve il tenant dalla richiesta
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      * @return Model|null
      */

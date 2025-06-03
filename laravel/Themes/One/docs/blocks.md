@@ -226,3 +226,159 @@ Assicurarsi che i nomi dei parametri nel database corrispondano a quelli attesi 
 
 - Il blocco `feature_sections` utilizza il parametro `sections` invece di `features`
 - Il blocco `stats` utilizza il parametro `number` invece di `value` per i valori delle statistiche
+
+## Gestione Link Dinamici
+
+### Problema
+Quando si definiscono i blocchi in JSON (es. `database/content/pages/*.json`), i link dinamici come `{{ route('register') }}` vengono interpretati come stringhe letterali e non come espressioni Blade.
+
+```json
+{
+    "type": "hero",
+    "data": {
+        "cta_link": "{{ route('register') }}"  // ❌ Non funziona - viene interpretato come stringa
+    }
+}
+```
+
+### Soluzioni Possibili
+
+1. **Utilizzo di Route Keys**
+   ```json
+   {
+       "type": "hero",
+       "data": {
+           "cta_link": "@route:register"  // ✅ Definire una sintassi custom
+       }
+   }
+   ```
+   
+   Nel componente Blade:
+   ```php
+   @props([
+       'cta_link' => '#'
+   ])
+   
+   @php
+       // Risolvi il link se inizia con @route:
+       if (Str::startsWith($cta_link, '@route:')) {
+           $routeName = Str::after($cta_link, '@route:');
+           $cta_link = route($routeName);
+       }
+   @endphp
+   ```
+
+2. **Utilizzo di Link Predefiniti**
+   ```json
+   {
+       "type": "hero",
+       "data": {
+           "cta_link": "register"  // ✅ Usa una chiave predefinita
+       }
+   }
+   ```
+   
+   Nel componente Blade:
+   ```php
+   @props([
+       'cta_link' => '#'
+   ])
+   
+   @php
+       $predefinedRoutes = [
+           'register' => route('register'),
+           'login' => route('login'),
+           // ...altri route predefiniti
+       ];
+       
+       $cta_link = $predefinedRoutes[$cta_link] ?? $cta_link;
+   @endphp
+   ```
+
+3. **Utilizzo di un Service Provider**
+   ```php
+   // LinkResolverServiceProvider
+   public function boot()
+   {
+       Blade::directive('resolveLink', function ($expression) {
+           return "<?php echo app('link.resolver')->resolve($expression); ?>";
+       });
+   }
+   ```
+   
+   Nel JSON:
+   ```json
+   {
+       "type": "hero",
+       "data": {
+           "cta_link": "route:register"  // ✅ Sintassi personalizzata
+       }
+   }
+   ```
+
+### Best Practices
+
+1. **Sicurezza**
+   - Validare sempre i nomi delle route prima di risolverli
+   - Implementare una whitelist di route permesse
+   - Evitare l'esecuzione diretta di codice dai file JSON
+
+2. **Manutenibilità**
+   - Documentare tutte le route disponibili
+   - Mantenere un elenco centralizzato dei link predefiniti
+   - Utilizzare costanti per i nomi delle route
+
+3. **Performance**
+   - Cachare la risoluzione dei link quando possibile
+   - Evitare lookup ripetuti delle stesse route
+   - Considerare il caching dei file JSON processati
+
+### Implementazione Raccomandata
+
+La soluzione raccomandata è utilizzare il pattern dei Link Predefiniti, in quanto:
+- È più sicuro (nessuna esecuzione di codice dal JSON)
+- È più performante (lookup diretto)
+- È più facile da mantenere (elenco centralizzato)
+- È più facile da documentare
+
+```php
+// LinkResolver.php
+class LinkResolver
+{
+    protected $links = [
+        'register' => ['type' => 'route', 'name' => 'register'],
+        'login' => ['type' => 'route', 'name' => 'login'],
+        'home' => ['type' => 'url', 'value' => '/'],
+        // ...
+    ];
+    
+    public function resolve($key)
+    {
+        if (!isset($this->links[$key])) {
+            return $key; // Ritorna il valore originale se non trovato
+        }
+        
+        $link = $this->links[$key];
+        return $link['type'] === 'route' 
+            ? route($link['name']) 
+            : $link['value'];
+    }
+}
+```
+
+### Aggiornamento dei Blocchi Esistenti
+
+Per aggiornare i blocchi esistenti:
+1. Identificare tutti i link dinamici nei file JSON
+2. Convertirli nel nuovo formato
+3. Aggiornare la documentazione dei blocchi
+4. Aggiornare i test per verificare la risoluzione dei link
+
+## Collegamenti tra versioni di blocks.md
+* [blocks.md](laravel/Modules/Xot/docs/blocks.md)
+* [blocks.md](laravel/Modules/User/resources/views/docs/blocks.md)
+* [blocks.md](laravel/Modules/UI/docs/blocks.md)
+* [blocks.md](laravel/Modules/Cms/docs/blocks.md)
+* [blocks.md](laravel/Themes/One/docs/blocks.md)
+* [blocks.md](laravel/Themes/One/docs/components/blocks.md)
+

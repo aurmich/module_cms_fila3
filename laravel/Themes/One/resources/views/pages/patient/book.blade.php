@@ -6,10 +6,10 @@
 
 {{-- Template standard per l'integrazione dei widget --}}
 <x-layouts.app>
-    <div class="page-container">
-        <div class="content-wrapper">
-            @livewire(\Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget::class)
-        </div>
+<div class="page-container">
+    <div class="content-wrapper">
+        @livewire(\Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget::class)
     </div>
-    </x-layouts.app>
+</div>
+</x-layouts.app>
 

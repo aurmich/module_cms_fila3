@@ -81,13 +81,13 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
     public function getDescription(): ?string
     {
         return match($this) {
-            self::MONDAY => __('patient::common.days.description.monday'),
-            self::TUESDAY => __('patient::common.days.description.tuesday'),
-            self::WEDNESDAY => __('patient::common.days.description.wednesday'),
-            self::THURSDAY => __('patient::common.days.description.thursday'),
-            self::FRIDAY => __('patient::common.days.description.friday'),
-            self::SATURDAY => __('patient::common.days.description.saturday'),
-            self::SUNDAY => __('patient::common.days.description.sunday'),
+            self::MONDAY => __('saluteora::common.days.description.monday'),
+            self::TUESDAY => __('saluteora::common.days.description.tuesday'),
+            self::WEDNESDAY => __('saluteora::common.days.description.wednesday'),
+            self::THURSDAY => __('saluteora::common.days.description.thursday'),
+            self::FRIDAY => __('saluteora::common.days.description.friday'),
+            self::SATURDAY => __('saluteora::common.days.description.saturday'),
+            self::SUNDAY => __('saluteora::common.days.description.sunday'),
         };
     }
 

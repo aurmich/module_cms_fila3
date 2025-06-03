@@ -250,3 +250,8 @@ export const initHeatmaps = () => {
 - [Componenti](../components.md)
 - [Guida allo Stile](../style_guide.md)
 - [Best Practices](../best_practices.md) 
+
+## Collegamenti tra versioni di monitoring.md
+* [monitoring.md](laravel/Modules/Job/docs/packages/monitoring.md)
+* [monitoring.md](laravel/Themes/One/docs/monitoring.md)
+

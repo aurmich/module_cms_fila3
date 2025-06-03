@@ -15,7 +15,7 @@ class AnalyzePerformanceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'xot:analyze-performance 
+    protected $signature = 'xot:analyze-performance
                             {--module= : Nome del modulo da analizzare}
                             {--type=all : Tipo di analisi (autoloader, cache, queries, all)}';
 
@@ -74,13 +74,13 @@ class AnalyzePerformanceCommand extends Command
         $this->newLine();
 
         $basePath = base_path('laravel/Modules');
-        
+
         if ($module) {
             $modulePath = $basePath . '/' . $module;
             $this->analyzeModuleAutoloader($module, $modulePath);
         } else {
             $modules = File::directories($basePath);
-            
+
             foreach ($modules as $modulePath) {
                 $moduleName = basename($modulePath);
                 $this->analyzeModuleAutoloader($moduleName, $modulePath);
@@ -98,33 +98,33 @@ class AnalyzePerformanceCommand extends Command
     protected function analyzeModuleAutoloader(string $moduleName, string $modulePath): void
     {
         $this->info("Modulo: {$moduleName}");
-        
+
         // Verifica problemi di case sensitivity
         $caseSensitivityIssues = $this->checkCaseSensitivity($modulePath);
-        
+
         if (count($caseSensitivityIssues) > 0) {
             $this->error("Problemi di case sensitivity trovati:");
-            
+
             foreach ($caseSensitivityIssues as $issue) {
                 $this->line(" - {$issue}");
             }
         } else {
             $this->info("✓ Nessun problema di case sensitivity trovato");
         }
-        
+
         // Verifica problemi di namespace
         $namespaceIssues = $this->checkNamespaces($modulePath, $moduleName);
-        
+
         if (count($namespaceIssues) > 0) {
             $this->error("Problemi di namespace trovati:");
-            
+
             foreach ($namespaceIssues as $issue) {
                 $this->line(" - {$issue}");
             }
         } else {
             $this->info("✓ Nessun problema di namespace trovato");
         }
-        
+
         $this->newLine();
     }
 
@@ -137,24 +137,24 @@ class AnalyzePerformanceCommand extends Command
     protected function checkCaseSensitivity(string $modulePath): array
     {
         $issues = [];
-        
+
         // Directory standard che dovrebbero essere in lowercase
         $standardDirs = ['app', 'config', 'database', 'resources', 'routes', 'tests', 'views'];
-        
+
         foreach ($standardDirs as $dir) {
             // Cerca directory con lo stesso nome ma case diversa
             $finder = new Finder();
             $finder->directories()->in($modulePath)->depth('< 2')->name('/^' . preg_quote($dir, '/') . '$/i');
-            
+
             foreach ($finder as $directory) {
                 $dirName = $directory->getRelativePathname();
-                
+
                 if ($dirName !== $dir) {
                     $issues[] = "Directory '{$dirName}' dovrebbe essere '{$dir}' (lowercase)";
                 }
             }
         }
-        
+
         return $issues;
     }
 
@@ -168,47 +168,47 @@ class AnalyzePerformanceCommand extends Command
     protected function checkNamespaces(string $modulePath, string $moduleName): array
     {
         $issues = [];
-        
+
         // Cerca tutti i file PHP
         $finder = new Finder();
         $finder->files()->in($modulePath)->name('*.php');
-        
+
         foreach ($finder as $file) {
             $content = $file->getContents();
-            
+
             // Estrai il namespace
             if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
                 $namespace = $matches[1];
-                
+
                 // Verifica se il namespace contiene 'app'
                 if (Str::contains($namespace, 'Modules\\' . $moduleName . '\\app\\')) {
                     $issues[] = "File {$file->getRelativePathname()} contiene 'app' nel namespace: {$namespace}";
                 }
-                
+
                 // Verifica se il namespace rispetta la struttura delle directory
                 $relativePath = $file->getRelativePathname();
                 $expectedNamespacePath = str_replace(['/', '.php'], ['\\', ''], $relativePath);
-                
+
                 // Rimuovi il nome del file dal namespace atteso
                 $expectedNamespacePath = substr($expectedNamespacePath, 0, strrpos($expectedNamespacePath, '\\'));
-                
+
                 // Costruisci il namespace atteso
                 $expectedNamespace = 'Modules\\' . $moduleName . '\\' . $expectedNamespacePath;
-                
+
                 // Normalizza i namespace per il confronto
                 $normalizedNamespace = str_replace('\\\\', '\\', $namespace);
                 $normalizedExpectedNamespace = str_replace('\\\\', '\\', $expectedNamespace);
-                
+
                 // Confronta i namespace ignorando 'app/'
                 $normalizedNamespace = str_replace('\\app\\', '\\', $normalizedNamespace);
                 $normalizedExpectedNamespace = str_replace('\\app\\', '\\', $normalizedExpectedNamespace);
-                
+
                 if ($normalizedNamespace !== $normalizedExpectedNamespace && !Str::endsWith($file->getRelativePathname(), 'routes.php')) {
                     $issues[] = "File {$file->getRelativePathname()} ha namespace '{$namespace}' ma dovrebbe essere '{$expectedNamespace}'";
                 }
             }
         }
-        
+
         return $issues;
     }
 
@@ -222,11 +222,11 @@ class AnalyzePerformanceCommand extends Command
     {
         $this->info('Analisi Cache:');
         $this->newLine();
-        
+
         // Ottieni statistiche della cache
         $cacheDriver = config('cache.default');
         $this->info("Driver cache: {$cacheDriver}");
-        
+
         if ($cacheDriver === 'redis') {
             $this->analyzeRedisCache();
         } elseif ($cacheDriver === 'file') {
@@ -234,10 +234,10 @@ class AnalyzePerformanceCommand extends Command
         } else {
             $this->info("Analisi non disponibile per il driver {$cacheDriver}");
         }
-        
+
         // Analizza l'utilizzo della cache nel codice
         $this->analyzeCacheUsage($module);
-        
+
         $this->newLine();
     }
 
@@ -251,23 +251,23 @@ class AnalyzePerformanceCommand extends Command
         try {
             $redis = app('redis')->connection();
             $info = $redis->info();
-            
+
             $this->info("Statistiche Redis:");
             $this->line(" - Memoria utilizzata: " . $this->formatBytes($info['used_memory'] ?? 0));
             $this->line(" - Picco memoria: " . $this->formatBytes($info['used_memory_peak'] ?? 0));
             $this->line(" - Chiavi totali: " . ($info['db0']['keys'] ?? 0));
             $this->line(" - Hit ratio: " . $this->calculateHitRatio($info['keyspace_hits'] ?? 0, $info['keyspace_misses'] ?? 0));
-            
+
             // Verifica chiavi cache che potrebbero causare problemi
             $keys = $redis->keys('*');
             $largeKeys = [];
-            
+
             foreach ($keys as $key) {
                 $type = $redis->type($key);
-                
+
                 if ($type === 'string') {
                     $size = $redis->strlen($key);
-                    
+
                     if ($size > 1024 * 1024) { // Maggiore di 1MB
                         $largeKeys[] = [
                             'key' => $key,
@@ -277,10 +277,10 @@ class AnalyzePerformanceCommand extends Command
                     }
                 }
             }
-            
+
             if (count($largeKeys) > 0) {
                 $this->warn("Chiavi cache di grandi dimensioni trovate:");
-                
+
                 foreach ($largeKeys as $key) {
                     $this->line(" - {$key['key']} ({$key['size']}, TTL: {$key['ttl']})");
                 }
@@ -298,20 +298,20 @@ class AnalyzePerformanceCommand extends Command
     protected function analyzeFileCache(): void
     {
         $cachePath = config('cache.stores.file.path');
-        
+
         if (!File::exists($cachePath)) {
             $this->error("Directory cache non trovata: {$cachePath}");
             return;
         }
-        
+
         $files = File::files($cachePath);
         $totalSize = 0;
         $largeFiles = [];
-        
+
         foreach ($files as $file) {
             $size = $file->getSize();
             $totalSize += $size;
-            
+
             if ($size > 1024 * 1024) { // Maggiore di 1MB
                 $largeFiles[] = [
                     'file' => $file->getFilename(),
@@ -319,14 +319,14 @@ class AnalyzePerformanceCommand extends Command
                 ];
             }
         }
-        
+
         $this->info("Statistiche Cache File:");
         $this->line(" - File totali: " . count($files));
         $this->line(" - Dimensione totale: " . $this->formatBytes($totalSize));
-        
+
         if (count($largeFiles) > 0) {
             $this->warn("File cache di grandi dimensioni trovati:");
-            
+
             foreach ($largeFiles as $file) {
                 $this->line(" - {$file['file']} ({$file['size']})");
             }
@@ -342,15 +342,15 @@ class AnalyzePerformanceCommand extends Command
     protected function analyzeCacheUsage(?string $module): void
     {
         $this->info("Analisi utilizzo cache nel codice:");
-        
+
         $basePath = base_path('laravel/Modules');
-        
+
         if ($module) {
             $modulePath = $basePath . '/' . $module;
             $this->analyzeModuleCacheUsage($module, $modulePath);
         } else {
             $modules = File::directories($basePath);
-            
+
             foreach ($modules as $modulePath) {
                 $moduleName = basename($modulePath);
                 $this->analyzeModuleCacheUsage($moduleName, $modulePath);
@@ -368,11 +368,11 @@ class AnalyzePerformanceCommand extends Command
     protected function analyzeModuleCacheUsage(string $moduleName, string $modulePath): void
     {
         $this->line("Modulo: {$moduleName}");
-        
+
         // Cerca tutti i file PHP
         $finder = new Finder();
         $finder->files()->in($modulePath)->name('*.php');
-        
+
         $cacheUsage = [
             'put' => 0,
             'get' => 0,
@@ -381,12 +381,12 @@ class AnalyzePerformanceCommand extends Command
             'flush' => 0,
             'tags' => 0
         ];
-        
+
         $flushUsage = [];
-        
+
         foreach ($finder as $file) {
             $content = $file->getContents();
-            
+
             // Conta le chiamate ai metodi della cache
             $cacheUsage['put'] += substr_count($content, 'cache()->put') + substr_count($content, 'Cache::put');
             $cacheUsage['get'] += substr_count($content, 'cache()->get') + substr_count($content, 'Cache::get');
@@ -394,33 +394,33 @@ class AnalyzePerformanceCommand extends Command
             $cacheUsage['forget'] += substr_count($content, 'cache()->forget') + substr_count($content, 'Cache::forget');
             $cacheUsage['flush'] += substr_count($content, 'cache()->flush') + substr_count($content, 'Cache::flush');
             $cacheUsage['tags'] += substr_count($content, 'cache()->tags') + substr_count($content, 'Cache::tags');
-            
+
             // Trova le chiamate a flush
             if (preg_match_all('/cache\(\)->flush\(\)|Cache::flush\(\)/', $content, $matches)) {
                 $flushUsage[] = $file->getRelativePathname();
             }
         }
-        
+
         $this->line(" - Chiamate put: {$cacheUsage['put']}");
         $this->line(" - Chiamate get: {$cacheUsage['get']}");
         $this->line(" - Chiamate remember: {$cacheUsage['remember']}");
         $this->line(" - Chiamate forget: {$cacheUsage['forget']}");
         $this->line(" - Chiamate flush: {$cacheUsage['flush']}");
         $this->line(" - Chiamate tags: {$cacheUsage['tags']}");
-        
+
         if (count($flushUsage) > 0) {
             $this->warn("  Chiamate a flush() trovate nei seguenti file:");
-            
+
             foreach ($flushUsage as $file) {
                 $this->line("   - {$file}");
             }
         }
-        
+
         // Suggerimenti per l'ottimizzazione
         if ($cacheUsage['flush'] > 0 && $cacheUsage['tags'] === 0) {
             $this->warn("  Suggerimento: Utilizzare cache()->tags() invece di cache()->flush() per invalidazioni più mirate");
         }
-        
+
         if ($cacheUsage['get'] > $cacheUsage['remember'] * 2) {
             $this->warn("  Suggerimento: Considerare l'utilizzo di cache()->remember() invece di cache()->get() per ridurre le cache miss");
         }
@@ -436,22 +436,22 @@ class AnalyzePerformanceCommand extends Command
     {
         $this->info('Analisi Query:');
         $this->newLine();
-        
+
         // Abilita il log delle query
         DB::enableQueryLog();
-        
+
         // Esegui alcune operazioni di base per analizzare le query
         $this->simulateBasicOperations($module);
-        
+
         // Ottieni il log delle query
         $queries = DB::getQueryLog();
-        
+
         // Analizza le query
         $this->analyzeQueryLog($queries);
-        
+
         // Disabilita il log delle query
         DB::disableQueryLog();
-        
+
         $this->newLine();
     }
 
@@ -473,8 +473,8 @@ class AnalyzePerformanceCommand extends Command
             }
         } elseif ($module === 'Patient') {
             // Simula operazioni paziente
-            if (class_exists('\\Modules\\Patient\\Models\\Patient')) {
-                $patientClass = '\\Modules\\Patient\\Models\\Patient';
+            if (class_exists('\\Modules\\SaluteOra\\Models\\Patient')) {
+                $patientClass = '\\Modules\\SaluteOra\\Models\\Patient';
                 $patientClass::first();
                 $patientClass::count();
             }
@@ -496,16 +496,16 @@ class AnalyzePerformanceCommand extends Command
     protected function analyzeQueryLog(array $queries): void
     {
         $this->info("Query eseguite: " . count($queries));
-        
+
         $slowQueries = [];
         $duplicateQueries = [];
         $queryCount = [];
-        
+
         foreach ($queries as $query) {
             $sql = $query['query'];
             $bindings = $query['bindings'];
             $time = $query['time'];
-            
+
             // Identifica query lente
             if ($time > 100) { // Più di 100ms
                 $slowQueries[] = [
@@ -513,20 +513,20 @@ class AnalyzePerformanceCommand extends Command
                     'time' => $time
                 ];
             }
-            
+
             // Conta query duplicate
             $queryKey = $sql . json_encode($bindings);
-            
+
             if (!isset($queryCount[$queryKey])) {
                 $queryCount[$queryKey] = [
                     'count' => 0,
                     'sql' => $this->interpolateQuery($sql, $bindings)
                 ];
             }
-            
+
             $queryCount[$queryKey]['count']++;
         }
-        
+
         // Identifica query duplicate
         foreach ($queryCount as $key => $data) {
             if ($data['count'] > 1) {
@@ -536,30 +536,30 @@ class AnalyzePerformanceCommand extends Command
                 ];
             }
         }
-        
+
         // Mostra query lente
         if (count($slowQueries) > 0) {
             $this->warn("Query lente trovate:");
-            
+
             foreach ($slowQueries as $query) {
                 $this->line(" - {$query['time']}ms: {$query['sql']}");
             }
         }
-        
+
         // Mostra query duplicate
         if (count($duplicateQueries) > 0) {
             $this->warn("Query duplicate trovate:");
-            
+
             foreach ($duplicateQueries as $query) {
                 $this->line(" - {$query['count']} volte: {$query['sql']}");
             }
         }
-        
+
         // Suggerimenti per l'ottimizzazione
         if (count($duplicateQueries) > 0) {
             $this->info("Suggerimento: Utilizzare il caching per ridurre le query duplicate");
         }
-        
+
         if (count($slowQueries) > 0) {
             $this->info("Suggerimento: Ottimizzare le query lente con indici appropriati o riscrivendole");
         }
@@ -575,12 +575,12 @@ class AnalyzePerformanceCommand extends Command
     protected function interpolateQuery(string $query, array $bindings): string
     {
         $sql = $query;
-        
+
         foreach ($bindings as $binding) {
             $value = is_numeric($binding) ? $binding : "'" . $binding . "'";
             $sql = preg_replace('/\?/', $value, $sql, 1);
         }
-        
+
         return $sql;
     }
 
@@ -595,10 +595,10 @@ class AnalyzePerformanceCommand extends Command
         if ($bytes <= 0) {
             return '0 B';
         }
-        
+
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
         $i = floor(log($bytes, 1024));
-        
+
         return round($bytes / pow(1024, $i), 2) . ' ' . $units[$i];
     }
 
@@ -612,13 +612,13 @@ class AnalyzePerformanceCommand extends Command
     protected function calculateHitRatio(int $hits, int $misses): string
     {
         $total = $hits + $misses;
-        
+
         if ($total === 0) {
             return '0%';
         }
-        
+
         $ratio = ($hits / $total) * 100;
-        
+
         return round($ratio, 2) . '%';
     }
 }

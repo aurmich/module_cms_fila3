@@ -19,14 +19,17 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Chart\\Providers\\ChartServiceProvider"
+                "Modules\\Chart\\Providers\\ChartServiceProvider",
+                "Modules\\Chart\\Providers\\Filament\\AdminPanelProvider"
             ],
             "aliases": {}
         }
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Chart\\": "app/"
+            "Modules\\Chart\\": "app/",
+            "Modules\\Chart\\Database\\Factories\\": "database/factories/",
+            "Modules\\Chart\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "require": {

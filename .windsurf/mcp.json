@@ -1,37 +1,36 @@
 {
   "mcpServers": {
-    "datapilot": {},
-    "fetch": {
-      "url": "http://localhost:3000/mcp",
-      "type": "http"
-    },
-    "mysql": {
-      "url": "mysql://user:password@localhost:3306/saluteora",
-      "type": "mysql"
-    },
-    "postgres": {
-      "url": "postgres://user:password@localhost:5432/saluteora",
-      "type": "postgres"
-    },
-    "redis": {
-      "url": "redis://localhost:6379",
-      "type": "redis"
-    },
-    "everything": {
-      "url": "http://localhost:3000/mcp",
-      "type": "http"
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
     },
     "memory": {
-      "url": "http://localhost:3003/mcp",
-      "type": "http"
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/var/www/html/_bases/"]
     },
     "puppeteer": {
-      "url": "http://localhost:3006/mcp",
-      "type": "http"
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {}
     },
-    "sequential-thinking": {
-      "url": "http://localhost:3008/mcp",
-      "type": "http"
+    "mcp-package-docs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-package-docs"
+      ]
     }
+  
   }
 }

@@ -17,7 +17,7 @@ Aggiungi il tema al tuo `composer.json`:
 ```json
 {
     "require": {
-        "<nome progetto>/theme-one": "^1.0"
+        "saluteora/theme-one": "^1.0"
     }
 }
 ```
@@ -98,7 +98,7 @@ Personalizza la configurazione del tema in `config/theme.php`:
 ```php
 return [
     'name' => 'One',
-    'description' => 'Tema predefinito per <nome progetto>',
+    'description' => 'Tema predefinito per il progetto',
     'version' => '1.0.0',
     // ...
 ];
@@ -285,3 +285,13 @@ Se riscontri problemi di compatibilità con i blocchi, assicurati che:
 5. **Sicurezza**: Assicurati che il tema sia sicuro e non contenga vulnerabilità.
 6. **Performance**: Ottimizza sempre le performance del tema.
 7. **Supporto**: Fornisci sempre supporto per il tema. 
+
+## Collegamenti tra versioni di installation.md
+* [installation.md](laravel/Modules/Xot/docs/filament/installation.md)
+* [installation.md](laravel/Modules/Xot/docs/installation.md)
+* [installation.md](laravel/Modules/Xot/docs/base/installation.md)
+* [installation.md](laravel/Modules/User/resources/views/docs/installation.md)
+* [installation.md](laravel/Modules/Lang/docs/installation.md)
+* [installation.md](laravel/Modules/Cms/docs/installation.md)
+* [installation.md](laravel/Themes/One/docs/installation.md)
+

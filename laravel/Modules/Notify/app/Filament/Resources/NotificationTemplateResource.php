@@ -18,6 +18,27 @@ class NotificationTemplateResource extends XotBaseResource
 {
     protected static ?string $model = NotificationTemplate::class;
 
+    protected static ?string $navigationIcon = 'heroicon-o-bell';
+
+    protected static ?string $navigationGroup = 'Sistema';
+
+    protected static ?int $navigationSort = 48;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('notify::template.navigation.label');
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('notify::template.navigation.group');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('notify::template.navigation.label');
+    }
+
     public static function getFormSchema(): array
     {
         return [

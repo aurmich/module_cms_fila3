@@ -4,6 +4,69 @@
 
 Un **Prediction Market** è un mercato in cui i partecipanti possono scommettere sul risultato di eventi futuri, come elezioni, risultati sportivi o trend di mercato. Questo use case descrive come il modulo `Activity` può essere utilizzato per implementare un sistema di prediction market utilizzando l'approccio di Event Sourcing in Laravel.
 
+## Meccanismo di Pricing: Logarithmic Market Scoring Rule (LMSR)
+
+Il sistema utilizza il **Logarithmic Market Scoring Rule (LMSR)** come meccanismo di pricing automatizzato. Questo approccio offre diversi vantaggi:
+
+1. **Liquidità Continua**: Il LMSR garantisce che ci sia sempre un prezzo disponibile per ogni outcome, eliminando la necessità di ordini di acquisto/vendita.
+2. **Pricing Automatico**: I prezzi vengono calcolati automaticamente in base alla formula:
+   ```
+   p_i = e^q_i / Σ(e^q_j)
+   ```
+   dove:
+   - p_i è il prezzo dell'outcome i
+   - q_i è la quantità di quote dell'outcome i
+   - e è la base del logaritmo naturale
+
+3. **Gestione del Rischio**: Il parametro b (liquidity parameter) controlla la profondità del mercato e la volatilità dei prezzi.
+
+### Implementazione LMSR
+
+```php
+namespace Modules\Activity\Services;
+
+class LMSRMarketMaker
+{
+    private float $b; // liquidity parameter
+    private array $quantities;
+    
+    public function __construct(float $b, array $initialQuantities)
+    {
+        $this->b = $b;
+        $this->quantities = $initialQuantities;
+    }
+    
+    public function calculatePrice(int $outcomeIndex): float
+    {
+        $sum = 0;
+        foreach ($this->quantities as $q) {
+            $sum += exp($q / $this->b);
+        }
+        return exp($this->quantities[$outcomeIndex] / $this->b) / $sum;
+    }
+    
+    public function calculateCost(array $quantities): float
+    {
+        $sum = 0;
+        foreach ($quantities as $q) {
+            $sum += exp($q / $this->b);
+        }
+        return $this->b * log($sum);
+    }
+    
+    public function updateQuantities(array $newQuantities): void
+    {
+        $this->quantities = $newQuantities;
+    }
+}
+```
+
+### Eventi LMSR
+
+1. **MarketMakerInitialized**: Registra l'inizializzazione del market maker con il parametro b e le quantità iniziali.
+2. **PriceUpdated**: Registra l'aggiornamento dei prezzi dopo ogni trade.
+3. **LiquidityParameterChanged**: Registra modifiche al parametro b per regolare la liquidità del mercato.
+
 ## Obiettivi
 
 - Permettere agli utenti di creare mercati di previsione per eventi specifici.
@@ -14,9 +77,12 @@ Un **Prediction Market** è un mercato in cui i partecipanti possono scommettere
 ## Eventi Principali
 
 1. **MarketCreated**: Registra la creazione di un nuovo mercato di previsione con dettagli come nome, descrizione, data di scadenza e possibili risultati.
-2. **BetPlaced**: Registra una scommessa piazzata da un utente su un risultato specifico di un mercato.
-3. **MarketResolved**: Registra la risoluzione di un mercato, indicando il risultato vincitore e distribuendo i premi agli utenti che hanno scommesso correttamente.
-4. **UserBalanceUpdated**: Registra l'aggiornamento del saldo di un utente dopo la risoluzione di un mercato.
+2. **MarketMakerInitialized**: Registra l'inizializzazione del market maker LMSR con il parametro b e le quantità iniziali per ogni outcome.
+3. **BetPlaced**: Registra una scommessa piazzata da un utente su un risultato specifico di un mercato, includendo il prezzo calcolato dal LMSR.
+4. **PriceUpdated**: Registra l'aggiornamento dei prezzi dopo ogni trade, mantenendo la tracciabilità delle variazioni di prezzo.
+5. **LiquidityParameterChanged**: Registra modifiche al parametro b per regolare la liquidità del mercato.
+6. **MarketResolved**: Registra la risoluzione di un mercato, indicando il risultato vincitore e distribuendo i premi agli utenti che hanno scommesso correttamente.
+7. **UserBalanceUpdated**: Registra l'aggiornamento del saldo di un utente dopo la risoluzione di un mercato.
 
 ## Radice Aggregate
 
@@ -25,16 +91,25 @@ Un **Prediction Market** è un mercato in cui i partecipanti possono scommettere
 ```php
 namespace Modules\Activity\Aggregates;
 
+use Modules\Activity\Services\LMSRMarketMaker;
+
 class PredictionMarketAggregateRoot
 {
     private $uuid;
     private $bets = [];
     private $status = 'open';
+    private $marketMaker;
     
-    public static function create(string $uuid, string $name, string $description, array $outcomes, string $expiryDate): self
+    public static function create(string $uuid, string $name, string $description, array $outcomes, string $expiryDate, float $b): self
     {
         $aggregate = new self();
         $aggregate->recordThat(new MarketCreated($uuid, $name, $description, $outcomes, $expiryDate));
+        
+        // Inizializza il market maker con quantità iniziali uguali per tutti gli outcomes
+        $initialQuantities = array_fill(0, count($outcomes), 0);
+        $aggregate->marketMaker = new LMSRMarketMaker($b, $initialQuantities);
+        $aggregate->recordThat(new MarketMakerInitialized($uuid, $b, $initialQuantities));
+        
         return $aggregate;
     }
     
@@ -43,18 +118,38 @@ class PredictionMarketAggregateRoot
         if ($this->status !== 'open') {
             throw new \Exception('Cannot place bet on a closed market');
         }
-        $this->recordThat(new BetPlaced($this->uuid, $userId, $outcome, $amount));
+        
+        // Calcola il prezzo usando LMSR
+        $outcomeIndex = array_search($outcome, $this->outcomes);
+        $price = $this->marketMaker->calculatePrice($outcomeIndex);
+        
+        // Aggiorna le quantità e registra l'evento
+        $newQuantities = $this->marketMaker->getQuantities();
+        $newQuantities[$outcomeIndex] += $amount;
+        $this->marketMaker->updateQuantities($newQuantities);
+        
+        $this->recordThat(new BetPlaced($this->uuid, $userId, $outcome, $amount, $price));
+        $this->recordThat(new PriceUpdated($this->uuid, $this->marketMaker->getCurrentPrices()));
+    }
+    
+    public function updateLiquidityParameter(float $newB)
+    {
+        $this->marketMaker->setB($newB);
+        $this->recordThat(new LiquidityParameterChanged($this->uuid, $newB));
+        $this->recordThat(new PriceUpdated($this->uuid, $this->marketMaker->getCurrentPrices()));
     }
     
     public function resolve(string $winningOutcome)
     {
         $this->status = 'resolved';
         $this->recordThat(new MarketResolved($this->uuid, $winningOutcome));
-        // Logica per calcolare e distribuire i premi
+        
+        // Calcola i premi usando i prezzi finali del LMSR
+        $finalPrices = $this->marketMaker->getCurrentPrices();
         foreach ($this->bets as $bet) {
             if ($bet['outcome'] === $winningOutcome) {
-                // Calcola premio
-                $prize = $bet['amount'] * 2; // Esempio semplificato
+                $outcomeIndex = array_search($bet['outcome'], $this->outcomes);
+                $prize = $bet['amount'] * (1 / $finalPrices[$outcomeIndex]);
                 $this->recordThat(new UserBalanceUpdated($bet['userId'], $prize));
             }
         }
@@ -63,11 +158,17 @@ class PredictionMarketAggregateRoot
     protected function applyMarketCreated(MarketCreated $event)
     {
         $this->uuid = $event->uuid;
+        $this->outcomes = $event->outcomes;
     }
     
     protected function applyBetPlaced(BetPlaced $event)
     {
-        $this->bets[] = ['userId' => $event->userId, 'outcome' => $event->outcome, 'amount' => $event->amount];
+        $this->bets[] = [
+            'userId' => $event->userId,
+            'outcome' => $event->outcome,
+            'amount' => $event->amount,
+            'price' => $event->price
+        ];
     }
     
     private function recordThat($event)

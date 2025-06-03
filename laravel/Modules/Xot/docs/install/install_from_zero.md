@@ -89,7 +89,7 @@ edit file composer.json
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.3",
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^11.9",
         "nwidart/laravel-modules": "^11.0"
     },
     "require-dev": {

@@ -121,5 +121,12 @@ return array (
       'placeholder' => 'appointment_time',
       'label' => 'appointment_time',
     ),
+    'test_field' => 
+    array (
+      'description' => 'test_field',
+      'helper_text' => 'test_field',
+      'placeholder' => 'test_field',
+      'label' => 'test_field',
+    ),
   ),
 );

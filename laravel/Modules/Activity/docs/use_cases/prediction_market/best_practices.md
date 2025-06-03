@@ -15,7 +15,7 @@ Questa sezione raccoglie le migliori pratiche per progettare e gestire un predic
 ## 3. Liquidità del Mercato
 
 - **Lezione da Piattaforme Reali**: Ruckus Market e Projection Finance utilizzano Automated Market Makers (AMM) e incentivi per fornitori di liquidità.
-- **Applicazione**: Garantire che i mercati abbiano sempre liquidità sufficiente implementando meccanismi AMM o ricompensando chi fornisce liquidità con token o benefici interni.
+- **Applicazione**: Garantire che i mercati abbiano sempre liquidità sufficiente implementando meccanismi AMM, come la Logarithmic Market Scoring Rule (LMSR), che garantisce prezzi dinamici e liquidità automatica anche con pochi utenti. Vedi `lmsr.md` per dettagli.
 
 ## 4. Incentivazione per Previsioni Accurate
 

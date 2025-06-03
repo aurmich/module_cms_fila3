@@ -40,7 +40,7 @@ use Illuminate\Support\Carbon;
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-class TeamUser extends BasePivot
+class TeamUser extends BaseTeamUser
 {
     protected $connection = 'user';
 }

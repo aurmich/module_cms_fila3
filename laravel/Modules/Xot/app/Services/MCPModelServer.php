@@ -67,7 +67,7 @@ class MCPModelServer extends MCPServer
         // Validazione estensioni
         if (isset($context['extends'])) {
             $parent = $class->getParentClass();
-            if (!$parent || $parent->getName() !== "Modules\\Patient\\Models\\{$context['extends']}") {
+            if (!$parent || $parent->getName() !== "Modules\\SaluteOra\\Models\\{$context['extends']}") {
                 return false;
             }
         }
@@ -77,7 +77,7 @@ class MCPModelServer extends MCPServer
 
     protected function getModelClass(string $model): ?ReflectionClass
     {
-        $namespace = "Modules\\Patient\\Models\\{$model}";
+        $namespace = "Modules\\SaluteOra\\Models\\{$model}";
         return class_exists($namespace) ? new ReflectionClass($namespace) : null;
     }
 

@@ -12,7 +12,6 @@ use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
-use Modules\SaluteOra\Filament\Widgets\DoctorAvailabilityCalendarWidget;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\User;
 use Modules\Xot\Filament\Pages\XotBasePage;
@@ -35,35 +34,7 @@ class DoctorAvailabilityCalendar extends XotBasePage
 
     protected static string $view = 'saluteora::filament.pages.doctor-availability-calendar';
 
-    /**
-     * Ottenere il titolo della pagina.
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return __('saluteora::appointment.pages.availability.title');
-    }
 
-    /**
-     * Ottenere la descrizione dell'header.
-     *
-     * @return string
-     */
-    public function getHeading(): string
-    {
-        return __('saluteora::appointment.pages.availability.heading');
-    }
-
-    /**
-     * Ottenere la descrizione della pagina.
-     *
-     * @return string|null
-     */
-    public function getSubheading(): ?string
-    {
-        return __('saluteora::appointment.pages.availability.subheading');
-    }
 
     /**
      * Registrare le azioni della pagina.
@@ -74,28 +45,14 @@ class DoctorAvailabilityCalendar extends XotBasePage
     {
         return [
             FilamentAction::make('refresh')
-                ->label(__('saluteora::appointment.actions.refresh'))
                 ->action(fn () => $this->refresh())
                 ->icon('heroicon-o-arrow-path'),
             FilamentAction::make('legenda')
-                ->label(__('saluteora::appointment.actions.legend.label'))
                 ->modalHeading(__('saluteora::appointment.actions.legend.modal_heading'))
                 ->modalContent(view('saluteora::components.appointment-legend')),
         ];
     }
 
-    /**
-     * Crea il widget del calendario.
-     *
-     * @return DoctorAvailabilityCalendarWidget
-     */
-    protected function calendarWidget(): DoctorAvailabilityCalendarWidget
-    {
-        $doctor = $this->getCurrentDoctor();
-        $studio = Filament::getTenant();
-
-        return new DoctorAvailabilityCalendarWidget($doctor, $studio);
-    }
 
     /**
      * Registrare i widget della pagina.
@@ -105,7 +62,7 @@ class DoctorAvailabilityCalendar extends XotBasePage
     protected function getHeaderWidgets(): array
     {
         return [
-            $this->calendarWidget(),
+
         ];
     }
 
