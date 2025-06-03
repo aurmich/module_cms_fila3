@@ -38,10 +38,10 @@ new class extends Component
 
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <x-ui.link href="{{ route('home') }}">
-                <x-ui.logo class="w-auto h-10 mx-auto text-gray-700 fill-current dark:text-gray-100" />
+                <img src="/img/saluteOra-new-logo.png" class="w-auto h-10 mx-auto text-gray-700 fill-current dark:text-gray-100" />
             </x-ui.link>
 
-            <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-gray-800 dark:text-gray-200">
+            <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#1A467F]">
                 Reset password
             </h2>
             <div class="text-sm leading-5 text-center text-gray-600 dark:text-gray-400 space-x-0.5">
@@ -70,15 +70,14 @@ new class extends Component
                     </div>
                 </div>
                 @else
-                <form wire:submit="sendResetPasswordLink" class="space-y-6">
+                <form wire:submit="sendResetPasswordLink" class="space-y-6 flex-col items-center">
                     <x-ui.input label="Email address" type="email" id="email" name="email" wire:model="email" />
-                    <x-ui.button type="primary" rounded="md" submit="true">Send password reset link</x-ui.button>
+                    <x-filament::button type="primary" rounded="md" submit="true">Send password reset link</x-filament::button>
                 </form>
                 @endif
             </div>
         </div>
         @endvolt
-
     </div>
 
 </x-layouts.main>

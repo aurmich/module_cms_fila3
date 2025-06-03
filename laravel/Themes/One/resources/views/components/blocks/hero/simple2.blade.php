@@ -30,7 +30,7 @@
                         <div class="rounded-md shadow">
                             <a 
                                 href="{{ Blade::render($cta_link) }}"
-                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-[#1A467F] text-white md:py-4 md:text-lg md:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
+                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-[#1A467F] !text-white md:py-4 md:text-lg md:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
                                 role="button"
                                 aria-label="{{ $cta_text }}"
                             >
