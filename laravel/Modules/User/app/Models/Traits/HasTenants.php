@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Modules\User\Models\Traits;
 
 use Filament\Panel;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Collection;
-use Modules\User\Contracts\TeamContract;
 use Modules\Xot\Datas\XotData;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Modules\User\Contracts\TeamContract;
+use Modules\Xot\Actions\Panel\ApplyTenancyToPanelAction;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 // use Modules\User\Models\OwnerRole;
 

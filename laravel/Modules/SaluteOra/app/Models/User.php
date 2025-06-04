@@ -32,8 +32,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  */
 class User extends BaseUser
 {
-    use HasRoles;
-    use LogsActivity, Notifiable;
+    use LogsActivity;
     use HasStates;
 
     /** @var string  */

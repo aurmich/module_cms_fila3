@@ -4,12 +4,12 @@ return array (
   'name' => 'Pazienti',
   'navigation' => 
   array (
-    'label' => 'Pazienti',
-    'group' => 'Gestione Utenti',
-    'icon' => 'saluteora-patient',
-    'color' => 'primary',
-    'sort' => 7,
-    'tooltip' => 'Gestione dei pazienti e delle loro informazioni anagrafiche',
+    'label' => 'Anagrafica Pazienti',
+    'group' => 'Pazienti',
+    'icon' => 'heroicon-o-users',
+    'color' => 'blue',
+    'sort' => 3,
+    'tooltip' => 'Gestisci l\'anagrafica e le informazioni dei pazienti',
   ),
   'fields' => 
   array (

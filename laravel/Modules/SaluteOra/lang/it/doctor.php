@@ -5,11 +5,11 @@ return array (
   'navigation' =>
   array (
     'label' => 'Medici',
-    'group' => 'Gestione Utenti',
-    'icon' => 'saluteora-doctor',
-    'color' => 'primary',
-    'sort' => 7,
-    'tooltip' => 'Gestione dei medici e delle loro informazioni professionali',
+    'group' => 'Team Medico',
+    'icon' => 'heroicon-o-user-group',
+    'color' => 'emerald',
+    'sort' => 2,
+    'tooltip' => 'Gestisci il personale medico e le relative informazioni professionali',
   ),
   'steps' =>
   array (

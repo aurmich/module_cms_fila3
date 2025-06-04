@@ -5,12 +5,12 @@ declare(strict_types=1);
 return [
     "name" => "Appuntamenti",
     "navigation" => [
-        "label" => "Appuntamenti",
-        "group" => "Gestione Clinica",
-        "icon" => "heroicon-o-calendar",
-        "color" => "success",
-        "sort" => 3,
-        "tooltip" => "Gestione degli appuntamenti e delle visite",
+        "label" => "Calendario Appuntamenti",
+        "group" => "Agenda",
+        "icon" => "heroicon-o-calendar-days",
+        "color" => "sky",
+        "sort" => 1,
+        "tooltip" => "Visualizza e gestisci tutti gli appuntamenti e le visite",
     ],
     "model" => [
         "label" => "Appuntamento",
