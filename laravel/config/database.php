@@ -103,6 +103,7 @@ return [
         ],
 
         'setting' => [
+
             'driver' => 'mysql',
             'url' => env('SETTING_DATABASE_URL'),
             'host' => env('SETTING_DB_HOST', '127.0.0.1'),

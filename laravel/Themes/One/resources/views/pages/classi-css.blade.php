@@ -40,5 +40,7 @@
 <div class="!border-[#0D9488]">Border</div>
 <div class="!bg-[#0D9488]">Background</div>
 <div class="border-[#1A467F]">Border</div>
-<div class="border-black">BorderBlack</div>
+<div class="!border-black">BorderBlack</div>
+<div class="mb-12">Margin bottom</div>
+<div class="m-6">Margin</div>
 </x-layouts.app>
