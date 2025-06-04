@@ -1,11 +1,14 @@
 <?php
 
 return array (
+  'name' => 'Anamnesi',
   'navigation' => 
   array (
-    'label' => 'Temporary Label',
-    'group' => 'Temporary Group',
-    'icon' => 'heroicon-o-document',
-    'sort' => 27,
+    'label' => 'Cartelle Cliniche',
+    'group' => 'Pazienti',
+    'icon' => 'heroicon-o-clipboard-document-list',
+    'color' => 'indigo',
+    'sort' => 4,
+    'tooltip' => 'Gestisci le cartelle cliniche e la storia medica dei pazienti',
   ),
 );

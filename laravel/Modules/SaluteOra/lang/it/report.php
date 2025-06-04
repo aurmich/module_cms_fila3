@@ -1,11 +1,14 @@
 <?php
 
 return array (
+  'name' => 'Report',
   'navigation' => 
   array (
-    'label' => 'Temporary Label',
-    'group' => 'Temporary Group',
-    'icon' => 'heroicon-o-document',
-    'sort' => 60,
+    'label' => 'Report e Statistiche',
+    'group' => 'Amministrazione',
+    'icon' => 'heroicon-o-chart-bar',
+    'color' => 'teal',
+    'sort' => 20,
+    'tooltip' => 'Visualizza report e statistiche delle attività cliniche',
   ),
 );

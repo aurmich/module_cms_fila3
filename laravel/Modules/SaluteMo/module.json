@@ -1,0 +1,16 @@
+{
+    "name": "SaluteMo",
+    "alias": "salutemo",
+    "description": "Gestione dei pazienti per il comune di Modena",
+    "keywords": ["pazienti", "cartelle cliniche", "modena"],
+    "priority": 10,
+    "active": 1,
+    "order": 10,
+    "providers": [
+        "Modules\\SaluteMo\\Providers\\SaluteMoServiceProvider",
+        "Modules\\SaluteMo\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "aliases": {
+    },
+    "files": []
+}
