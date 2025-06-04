@@ -23,9 +23,9 @@ trait HasTenants
      **/
     public function canAccessTenant(Model $tenant): bool
     {
-        // return $this->teams->contains($tenant);
+
         return $this->tenants()->whereKey($tenant)->exists();
-        // return true;
+
     }
 
     public function getTenants(Panel $panel): array|Collection
@@ -35,7 +35,7 @@ trait HasTenants
 
     /**
      * Get all of the tenants the user belongs to.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Illuminate\Database\Eloquent\Model>
      */
     public function tenants(): BelongsToMany
@@ -45,7 +45,8 @@ trait HasTenants
         $tenant_class = $xot->getTenantClass();
 
         // $this->setConnection('mysql');
-        return $this->belongsToManyX($tenant_class, null, null, 'tenant_id');
+        //return $this->belongsToManyX($tenant_class, null, null, 'tenant_id');
+        return $this->belongsToManyX($tenant_class);
         // ->as('membership')
     }
 }

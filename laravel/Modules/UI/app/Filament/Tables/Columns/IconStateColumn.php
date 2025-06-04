@@ -24,38 +24,44 @@ class IconStateColumn extends IconColumn
     {
         parent::setUp();
         //$this->getStateUsing(fn() => true); // the column requires a state to be passed to it
-        $this->icon(fn($state): string => $state->icon()); // always show the 'edit' icon
-        $this->color(fn($state): string => $state->color()); // always show the 'edit' icon
+        $this->icon(fn($state): string => $state->icon());
+        $this->color(fn($state): string => $state->color());
         $this->tooltip(fn($state): string => $state->label());
         //$this->label('aaa');
 
         $this->action(Action::make('change-state')
             ->form([
-                Select::make('state')->options(function (Model $record ,$state): array {
-                    $name=$this->getName();
-                    $state=$record->getAttribute($name);
-                    if($state==null){
-                        $states=Arr::wrap($record->getDefaultStateFor($name));
-                        return array_combine($states, $states);
-                    }
-                    try{
-                        //$states=$record->getAttribute($name)->transitionableStates();
-                        $states=$state->transitionableStates();
-                    }catch(Exception $e){
-                        $states=$record->getStatesFor($name)->toArray();;
-                    }
-                    $states=[$state::$name, ...$states];
-                    $states=array_combine($states, $states);
-                    //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);
+                Select::make('state')
+                    ->options(
+                        function (Model $record ,string $state): array {
 
-                    return $states;
-                }),
+                            $name=$this->getName();
+                            $state=$record->getAttribute($name);
+                            if($state==null){
+                                $states=Arr::wrap($record->getDefaultStateFor($name));
+                                return array_combine($states, $states);
+                            }
+                            try{
+                                //$states=$record->getAttribute($name)->transitionableStates();
+                                $states=$state->transitionableStates();
+                            }catch(Exception $e){
+                                $states=$record->getStatesFor($name)->toArray();;
+                            }
+                            $states=[$state::$name, ...$states];
+                            $states=array_combine($states, $states);
+                            //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);
+
+                            return $states;
+                        }
+                    ),
                 Textarea::make('message'),
             ])
-            ->fillForm(fn($record) => [
-                'state' => $record->state::$name,
-
-            ])
+            ->fillForm(function($record){
+                //dddx($record->state);//Modules\SaluteOra\States\User\Pending
+                return [
+                    'state' => $record->state::$name,
+                ];
+            })
             ->action(function($record, $data) {
                 //dddx(['record'=>$record, 'data'=>$data]);
                 $record->state->transitionTo($data['state'],$data['message']);

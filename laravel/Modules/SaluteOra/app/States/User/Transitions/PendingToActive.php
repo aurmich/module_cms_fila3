@@ -21,9 +21,9 @@ class PendingToActive extends Transition
     public function handle(): User
     {
         // Additional logic before transition can be added here
-        //$this->user->state = new Active($this->user);
-        //$this->user->save();
-        dddx('a');
+        $this->user->state = new Active($this->user);
+        $this->user->save();
+
         return $this->user;
     }
 }

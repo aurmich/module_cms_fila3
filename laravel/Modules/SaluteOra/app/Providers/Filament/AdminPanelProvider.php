@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Providers\Filament;
 
 use Filament\Panel;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Filament\Http\Middleware\Authenticate;
@@ -42,10 +43,14 @@ class AdminPanelProvider extends XotBasePanelProvider
      */
     public function panel(Panel $panel): Panel
     {
-        // Configurazione pannello base
         $panel = parent::panel($panel);
+        $user = Filament::auth()->user();
+        $type= $user?->type;
+        if($type!=null){
+            dddx($type);
+        }
+
         $panel = app(ApplyTenancyToPanelAction::class)->execute($panel);
-        // Aggiungi configurazioni specifiche per il modulo SaluteOra
         $this->configurePanel($panel);
 
         return $panel;

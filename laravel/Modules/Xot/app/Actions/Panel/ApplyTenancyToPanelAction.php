@@ -27,18 +27,18 @@ class ApplyTenancyToPanelAction
         //     ->tenantProfile(EditTenantProfile::class);
 
         // Controlla se l'utente è superadmin
-        $user = Auth::user();
+        //$user = Auth::user();
 
-        if (Gate::allows('superadmin', $user)) {
+        //if (Gate::allows('superadmin', $user)) {
             // Configurazione completa per superadmin
             $panel
-                ->tenant($tenant_class, slugAttribute: 'slug')
+                ->tenant($tenant_class, 'slug', 'tenants')
                 ->tenantRegistration(RegisterTenant::class)
                 ->tenantProfile(EditTenantProfile::class);
-        } else {
+        //} else {
             // Configurazione limitata per non-superadmin
-            $panel->tenant($tenant_class, slugAttribute: 'slug');
-        }
+            //$panel->tenant($tenant_class, slugAttribute: 'slug');
+        //}
 
         return $panel;
     }
