@@ -73,6 +73,34 @@ trait TransTrait
     }
 
     /**
+     * Get translation key for a given class name.
+     */
+    public static function getKeyTransClass(string $class): string
+    {
+        $piece=Str::of($class)->explode('\\')->toArray();
+        $type=$piece[2];
+        $module=Str::of($class)->between('Modules\\','\\'.$type.'\\')->toString();
+
+        $module_low=Str::of($module)->lower()->toString();
+
+        $model=Str::of($class)->between('\\'.$type.'\\','\\')->toString();
+        $model_snake=Str::of($model)->snake()->toString();
+        $key=$module_low.'::'.$model_snake;
+
+        return $key;
+    }
+
+    /**
+     * Get translation for a given class name.
+     */
+    public static function transClass(string $class, string $key): string
+    {
+        $class_key = static::getKeyTransClass($class);
+        $key_full=$class_key.'.'.$key;
+        return trans($key_full);
+    }
+
+    /**
      * Get translation for a given function name.
      */
     public static function transFunc(string $func, bool $exceptionIfNotExist = false): string

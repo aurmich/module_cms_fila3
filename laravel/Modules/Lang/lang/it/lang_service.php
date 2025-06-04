@@ -470,5 +470,9 @@ return array (
     array (
       'label' => 'export_xls',
     ),
+    'register' => 
+    array (
+      'label' => 'register',
+    ),
   ),
 );

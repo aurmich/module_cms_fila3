@@ -30,6 +30,8 @@ use Livewire\Component;
 class PatientResource extends XotBaseResource
 {
     protected static ?string $model = Patient::class;
+    //protected static ?string $tenantOwnershipRelationshipName = 'tenants';
+    //protected static ?string $tenantRelationshipName = 'studios';
 
     /**
      * Get the form schema for the registration wizard
@@ -60,7 +62,7 @@ class PatientResource extends XotBaseResource
             //->submitAction(new HtmlString(self::getSubmitButton()))
         ];
     }
-    
+
     /**
      * Get the personal data step for the wizard
      *
@@ -95,7 +97,7 @@ class PatientResource extends XotBaseResource
                 ->unique(Patient::class),
         ];
     }
-    
+
     /**
      * Get the documents step for the wizard
      *
@@ -126,7 +128,7 @@ class PatientResource extends XotBaseResource
                 ->maxSize(5120),
         ];
     }
-    
+
     /**
      * Get the pre-visit information step for the wizard
      */
@@ -145,7 +147,7 @@ class PatientResource extends XotBaseResource
                 ->maxLength(65535),
         ];
     }
-    
+
     /**
      * Get the privacy step for the wizard
      */
@@ -172,7 +174,7 @@ class PatientResource extends XotBaseResource
                 ->columnSpanFull(),
         ];
     }
-    
+
     /**
      * Get the thank you page HTML after registration
      *

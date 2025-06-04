@@ -39,7 +39,6 @@ use Parental\HasParent;
  */
 class Patient extends User
 {
-    use HasFactory;
     use HasParent;
 
 
@@ -68,23 +67,5 @@ class Patient extends User
         ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return parent::belongsTo(User::class, 'user_id');
-    }
 
-    /**
-     * Verifica se il paziente ha dati validi per la transizione di stato.
-     *
-     * @return bool
-     */
-    public function hasValidData(): bool
-    {
-        return parent::hasValidData() &&
-            !empty($this->date_of_birth) &&
-            !empty($this->gender);
-    }
 }

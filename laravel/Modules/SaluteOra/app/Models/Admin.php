@@ -9,7 +9,11 @@ use Modules\SaluteOra\Models\User;
 use Parental\HasParent;
 
 /**
- * Class Patient
+ * Class Admin
+ *
+ * NOTA: Il trait HasFactory è stato rimosso perché già incluso nella catena di ereditarietà (BaseUser -> User -> Admin).
+ * Dichiararlo qui è ridondante e può causare warning o confusione.
+ * Vedi docs/DRY-model-traits.md
  *
  * @property string $id
  * @property string $user_id
@@ -22,30 +26,25 @@ use Parental\HasParent;
  * @property string|null $created_by
  * @property string|null $updated_by
  * @property-read \Modules\SaluteOra\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereDateOfBirth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereDateOfBirth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUserId($value)
  * @mixin \Eloquent
  */
 class Admin extends User
 {
-    use HasFactory;
     use HasParent;
 
-    /**
-     * @var string
-     */
-    protected $table = 'patients';
 
     /**
      * @var array<int, string>
@@ -65,28 +64,11 @@ class Admin extends User
      */
     protected function casts(): array
     {
-        return [
-            'date_of_birth' => 'date',
-        ];
+        return array_merge(parent::casts(), [
+            //'certifications' => 'array',
+            //'availability' => 'array',
+        ]);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return parent::belongsTo(User::class, 'user_id');
-    }
 
-    /**
-     * Verifica se il paziente ha dati validi per la transizione di stato.
-     *
-     * @return bool
-     */
-    public function hasValidData(): bool
-    {
-        return parent::hasValidData() &&
-            !empty($this->date_of_birth) &&
-            !empty($this->gender);
-    }
 }
