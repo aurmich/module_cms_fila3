@@ -37,16 +37,16 @@ new class extends Component
             <!-- Card contenente il form di registrazione -->
             <div class="w-full lg:flex justify-around">
                 @foreach($types as $type => $class)
-<div class="flex justify-center">
-    <a class="w-full flex flex-col items-center mb-7" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
-        <div class="w-80 h-80 rounded-full bg-white shadow-2xl">
-        
-        </div>
-    <x-filament::button class="text-2xl !text-white transition-colors rounded-lg flex justify-center items-center !bg-[#1A467F] hover:bg-[#0D9488] hover:cursor-pointer shadow-2xl mt-5 text-lg p-5">
-            {{ ucfirst($type) }}
-    </x-filament::button>
-    </a>
-</div>
+                <div class="flex justify-center">
+                    <a class="w-full flex flex-col items-center mb-7" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
+                        <div class="w-80 h-80 rounded-full bg-white shadow-2xl">
+                        
+                        </div>
+                    <x-filament::button class="text-2xl !text-white transition-colors rounded-lg flex justify-center items-center !bg-[#1A467F] hover:bg-[#0D9488] hover:cursor-pointer shadow-2xl mt-5 text-lg p-5">
+                            {{ ucfirst($type) }}
+                    </x-filament::button>
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>
