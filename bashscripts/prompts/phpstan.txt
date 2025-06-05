@@ -9,7 +9,7 @@ Per ogni correzione:
 Regole chiave:
 - Ogni modulo è indipendente e ha il proprio composer.json, namespace e autoload (senza "app" nel namespace).
 - Non modificare mai phpstan.neon.
-- Le funzioni getListTableColumns, getTableActions e getTableBulkActions devono restituire array con chiavi stringa. Se restituiscono solo azioni standard (ViewAction, EditAction, DeleteAction o DeleteBulkAction), rimuovile; se contengono azioni aggiuntive, includi ...parent::getTableActions().
+- Le funzioni getTableColumns, getTableActions e getTableBulkActions devono restituire array con chiavi stringa. Se restituiscono solo azioni standard (ViewAction, EditAction, DeleteAction o DeleteBulkAction), rimuovile; se contengono azioni aggiuntive, includi ...parent::getTableActions().
 - Le funzionalità come ->colors($metatag->getColors()) devono avere i metodi definiti in MetatagData; se mancanti, documenta il perché e implementali nel modulo corretto.
 - Non usare mai ->label(''), ma gestire le etichette tramite i file di traduzione localizzati nei moduli (LangServiceProvider).
 - Se servono script shell, usa solo cartelle bashscripts esistenti.

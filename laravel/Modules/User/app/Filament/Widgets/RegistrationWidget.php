@@ -33,7 +33,7 @@ class RegistrationWidget extends XotBaseWidget
     public function mount(string $type): void
     {
         $this->type = $type;
-        $this->resource = XotData::make()->getUserResourceClassByType($type);
+        $this->resource = XotData::make()->getUserTypeResourceClass($type);
         $this->model = $this->resource::getModel();
         $this->action=Str::of($this->model)->replace('\Models\\', '\Actions\\')->append('\RegisterAction')->toString();
         $this->form->fill();
@@ -54,19 +54,19 @@ class RegistrationWidget extends XotBaseWidget
         $this->validate();
 
         // Creazione del dottore
-        $doctor = \Modules\SaluteOra\Models\Doctor::create([
+        $doctor = \Modules\Patient\Models\Doctor::create([
             'full_name' => $data['full_name'] ?? ($data['first_name'] . ' ' . $data['last_name']),
             'email' => $data['email'] ?? '',
             'phone' => $data['phone'] ?? '',
             'certification' => $data['certification'] ?? null,
-            'state' => \Modules\SaluteOra\States\Pending::class, // Imposta lo stato iniziale
+            'state' => \Modules\Patient\States\Pending::class, // Imposta lo stato iniziale
         ]);
 
         // Creazione del workflow di registrazione
-        $workflow = \Modules\SaluteOra\Models\DoctorRegistrationWorkflow::create([
+        $workflow = \Modules\Patient\Models\DoctorRegistrationWorkflow::create([
             'doctor_id' => $doctor->id,
             'current_step' => 'personal_info_step',
-            'status' => \Modules\SaluteOra\Models\DoctorRegistrationWorkflow::STATUS_PENDING_MODERATION,
+            'status' => \Modules\Patient\Models\DoctorRegistrationWorkflow::STATUS_PENDING_MODERATION,
             'started_at' => now(),
             'last_interaction_at' => now(),
             'session_id' => session()->getId(),
@@ -83,7 +83,7 @@ class RegistrationWidget extends XotBaseWidget
     /**
      * Invia l'email di conferma della registrazione.
      */
-    protected function sendConfirmationEmail(\Modules\SaluteOra\Models\Doctor $doctor): void
+    protected function sendConfirmationEmail(\Modules\Patient\Models\Doctor $doctor): void
     {
         $email = new \Modules\Notify\Emails\SpatieEmail($doctor, 'registration_pending');
 

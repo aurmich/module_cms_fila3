@@ -75,7 +75,6 @@ return array (
       ),
       'description' => 'new_password',
       'helper_text' => 'new_password',
-      'placeholder' => 'new_password',
     ),
   ),
   'actions' => 

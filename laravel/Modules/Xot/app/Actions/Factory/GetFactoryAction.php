@@ -41,7 +41,6 @@ class GetFactoryAction
         
         $factory_class = $this->getFactoryClass($model_class);
         
-        
         if (class_exists($factory_class)) {
             /** @var Factory $factory */
             $factory = $factory_class::new();
@@ -52,7 +51,7 @@ class GetFactoryAction
                 
             return $factory;
         }
-        
+
         $this->createFactory($model_class);
 
         // Lancia un'eccezione con informazioni specifiche

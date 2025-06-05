@@ -209,8 +209,3 @@ Theme::asset('css/main.css', [
 - [Componenti](../components.md)
 - [Guida allo Stile](../style_guide.md)
 - [Best Practices](../best_practices.md) 
-
-## Collegamenti tra versioni di config.md
-* [config.md](laravel/Modules/Xot/docs/config.md)
-* [config.md](laravel/Themes/One/docs/config.md)
-

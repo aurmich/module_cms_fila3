@@ -55,7 +55,7 @@ class NotificationTemplate extends BaseModel
         'grapesjs_data',
     ];
 
-    protected function casts(): array
+    public function casts(): array
     {
         return array_merge(parent::casts(), [
             'preview_data' => 'array',
@@ -245,4 +245,4 @@ class NotificationTemplate extends BaseModel
         $this->grapesjs_data = $data;
         return $this;
     }
-}
+} 

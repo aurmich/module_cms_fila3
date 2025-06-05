@@ -113,6 +113,7 @@ php artisan key:generate
 
   APP_NAME=il progetto
  80ec88ee9 (.)
+
   APP_ENV=local
   APP_DEBUG=true
   APP_URL=http://localhost
@@ -1233,3 +1234,4 @@ php artisan user:assign-module
 
   ```
  80ec88ee9 (.)
+

@@ -7,15 +7,11 @@ namespace Modules\Xot\Actions\Export;
 // use Modules\Xot\Services\ArrayService;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Xot\Exports\ViewExport;
 use Spatie\QueueableAction\QueueableAction;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-/**
- * Classe per l'esportazione di viste in formato Excel.
- */
 class ExportXlsByView
 {
     use QueueableAction;
@@ -23,28 +19,29 @@ class ExportXlsByView
     /**
      * Esporta una vista in Excel.
      *
-     * @param Collection<int|string, mixed> $rows La collezione da esportare
-     * @param array<int, string> $fields Campi da includere nell'export
+     * @param View $view Vista da esportare
      * @param string $filename Nome del file Excel
-     * @param string|null $transKey Chiave di traduzione per i campi
-     *
+     * @param array<string>|null $fields Campi da includere nell'export
+     * 
      * @return BinaryFileResponse
      */
     public function execute(
-        Collection $rows,
-        array $fields,
+        View $view,
         string $filename = 'test.xlsx',
-        ?string $transKey = null,
+        ?array $fields = null,
     ): BinaryFileResponse {
-        // Assicuriamo che $fields sia un array di stringhe
-        $stringFields = array_map(function (string|int|float|bool $field): string {
+        // Se $fields non è null, assicuriamo che sia un array di stringhe
+        $stringFields = null;
+        if (is_array($fields)) {
+            $stringFields = array_map(function ($field) {
                 return strval($field);
             }, array_values($fields));
+        }
 
         $export = new ViewExport(
-            rows: $rows,
-            fields: $stringFields,
-            transKey: $transKey
+            view: $view,
+            transKey: null,
+            fields: $stringFields
         );
 
         return Excel::download($export, $filename);

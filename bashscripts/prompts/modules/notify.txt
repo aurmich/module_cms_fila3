@@ -11,13 +11,13 @@ abstract class BaseModel extends XotBaseModel
     use HasFactory;
     use InteractsWithMedia;
     use Updater;
-
+    
     protected $connection = 'notify';
 }
 
 class NotificationTemplate extends BaseModel
 {
-    protected function casts(): array
+    public function casts(): array
     {
         return array_merge(parent::casts(), [
             'preview_data' => 'array',
@@ -125,4 +125,4 @@ Grapesjs::make('grapesjs_data')
 ## Collegamenti
 - [Documentazione GrapesJS](docs/grapesjs.md)
 - [Template Management](docs/templates.md)
-- [Notification System](docs/notifications.md)
+- [Notification System](docs/notifications.md) 

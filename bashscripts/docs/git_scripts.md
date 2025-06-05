@@ -30,6 +30,7 @@ Funzione centralizzata (in `custom.sh`) per impostare:
 - Push verso remoti multipli
 - Logging e gestione errori
 
+<<<<<<< HEAD
 ## Best Practice
 - Usare sempre `git_config_setup`
 - Eseguire backup prima di operazioni critiche
@@ -230,4 +231,6 @@ Script per il push dei subtree. Funzionalità:
 
 =======
 >>>>>>> 4d4d6cb7 (.)
+=======
+>>>>>>> d83fe8da (.)
 [Torna alla documentazione principale](/docs/maintenance.md#git-management) 

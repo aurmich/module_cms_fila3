@@ -69,11 +69,7 @@ abstract class XotBaseServiceProvider extends ServiceProvider
         $this->callAfterResolving(BladeIconsFactory::class, function (BladeIconsFactory $factory) {
             $assetsPath = app(GetModulePathByGeneratorAction::class)->execute($this->name, 'assets');
             $svgPath=$assetsPath.'/../svg';
-            try {
-                $factory->add( $this->nameLower, ['path' => $svgPath,'prefix' => $this->nameLower]);
-            } catch (\Throwable $e) {
-                // Ignore missing SVG path
-            }
+            $factory->add( $this->nameLower, ['path' => $svgPath,'prefix' => $this->nameLower]);
         });
         //$svgPath = app(GetModulePathByGeneratorAction::class)->execute($this->name, 'svg');
         /*

@@ -57,7 +57,7 @@ class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    public function casts(): array
     {
         return [
             'created_at' => 'datetime',

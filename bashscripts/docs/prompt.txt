@@ -41,7 +41,7 @@
 - Non definire table() (gestito dalla pagina index)
 
 ## PAGINE DI LISTA
-- Usare metodi specifici: getListTableColumns(), getTableFilters(), getTableActions()
+- Usare metodi specifici: getTableColumns(), getTableFilters(), getTableActions()
 - Usare array associativi con chiavi string per componenti
 
 ## MIGRAZIONI

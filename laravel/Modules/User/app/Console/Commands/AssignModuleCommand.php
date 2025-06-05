@@ -73,15 +73,8 @@ class AssignModuleCommand extends Command
 
         foreach ($modules as $module) {
             $module_low = Str::lower(is_string($module) ? $module : (string) $module);
-            $role_name = $module_low.'::admin';
-
-            // Create or get the role with the web guard
-            $role = Role::firstOrCreate(
-                ['name' => $role_name],
-                []
-            );
-
-            // Assign the role to the user
+            $role = $module_low.'::admin';
+            $role = Role::firstOrCreate(['name' => $role]);
             $user->assignRole($role);
         }
 

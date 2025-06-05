@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 use function Laravel\Folio\name;
 use Livewire\Volt\Component;
 use Livewire\Attributes\Validate;

@@ -4,20 +4,20 @@
 
 ### 1. Models
 ```php
-namespace Modules\SaluteOra\Models;
+namespace Modules\Patient\Models;
 
 abstract class BaseModel extends XotBaseModel
 {
     use HasFactory;
     use InteractsWithMedia;
     use Updater;
-
+    
     protected $connection = 'patient';
 }
 
 class Doctor extends BaseModel
 {
-    protected function casts(): array
+    public function casts(): array
     {
         return array_merge(parent::casts(), [
             'availability' => 'array',
@@ -31,7 +31,7 @@ class Doctor extends BaseModel
 
 ### 2. Resources
 ```php
-namespace Modules\SaluteOra\Filament\Resources;
+namespace Modules\Patient\Filament\Resources;
 
 class DoctorResource extends XotBaseResource
 {
@@ -53,7 +53,7 @@ class DoctorResource extends XotBaseResource
 
 ### 3. Providers
 ```php
-namespace Modules\SaluteOra\Providers;
+namespace Modules\Patient\Providers;
 
 class PatientServiceProvider extends XotBaseServiceProvider
 {
@@ -131,4 +131,4 @@ return [
 ## Collegamenti
 - [Workflow Registrazione](docs/registration-workflow.md)
 - [Gestione Dottori](docs/doctors.md)
-- [Sistema Appuntamenti](docs/appointments.md)
+- [Sistema Appuntamenti](docs/appointments.md) 

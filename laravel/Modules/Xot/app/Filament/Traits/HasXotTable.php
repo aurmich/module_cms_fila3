@@ -39,7 +39,9 @@ trait HasXotTable
     public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
 
     protected static bool $canReplicate = false;
+
     protected static bool $canView = true;
+
     protected static bool $canEdit = true;
 
     /**
@@ -214,13 +216,27 @@ trait HasXotTable
             ->filters($this->getTableFilters())
             ->filtersLayout(FiltersLayout::AboveContent)
             ->filtersFormColumns($this->getTableFiltersFormColumns())
-            ->persistFiltersInSession()
-            ->headerActions($this->getTableHeaderActions())
-            ->actions($this->getTableActions())
-            ->bulkActions($this->getTableBulkActions())
+            ->persistFiltersInSession();
+
+        // Verifica i metodi disponibili prima di chiamarli
+        if (method_exists($this, 'getTableHeaderActions')) {
+            $table = $table->headerActions($this->getTableHeaderActions());
+        }
+
+        if (method_exists($this, 'getTableActions')) {
+            $table = $table->actions($this->getTableActions());
+        }
+
+        if (method_exists($this, 'getTableBulkActions')) {
+            $table = $table->bulkActions($this->getTableBulkActions());
+        }
+
+        $table = $table
             ->actionsPosition(ActionsPosition::BeforeColumns)
             ->emptyStateActions($this->getTableEmptyStateActions())
-            ->striped()
+            ->striped();
+
+        $table = $table
             ->paginated($this->getTablePaginated());
         /*
             ->defaultSort(

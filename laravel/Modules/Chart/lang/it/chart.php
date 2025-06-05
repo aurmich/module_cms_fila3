@@ -1,6 +1,4 @@
-<?php
-
-return array (
+<?php return array (
   'fields' => 
   array (
     'id' => 
@@ -56,8 +54,4 @@ return array (
       'label' => 'transparency',
     ),
   ),
-  'navigation' => 
-  array (
-    'sort' => 20,
-  ),
-);
+);

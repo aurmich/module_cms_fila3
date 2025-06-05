@@ -227,7 +227,6 @@ dummy_push(){
     git add -A
     git commit -am "$msg"
     git push -u "$org" HEAD:"$branch"
-    #oco --yes
 }
 
 declare -A PARSED_KV  # Dizionario globale (o può essere passato per riferimento)

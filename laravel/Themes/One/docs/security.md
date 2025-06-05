@@ -80,10 +80,8 @@ class Password implements Rule
 
 ### Crittografia
 ```php
-// app/Actions/EncryptionAction.php
-class EncryptionAction
-{
-    use QueueableAction;
+// app/Services/EncryptionService.php
+class EncryptionService
 {
     public function encrypt($data)
     {
@@ -99,10 +97,8 @@ class EncryptionAction
 
 ### Sanitizzazione Input
 ```php
-// app/Actions/SanitizationAction.php
-class SanitizationAction
-{
-    use QueueableAction;
+// app/Services/SanitizationService.php
+class SanitizationService
 {
     public function sanitize($input)
     {
@@ -226,9 +222,3 @@ export const validateInput = (input, pattern) => {
 - [Componenti](../components.md)
 - [Guida allo Stile](../style_guide.md)
 - [Best Practices](../best_practices.md) 
-
-## Collegamenti tra versioni di security.md
-* [security.md](laravel/Modules/Gdpr/docs/packages/security.md)
-* [security.md](laravel/Modules/Cms/docs/frontoffice/security.md)
-* [security.md](laravel/Themes/One/docs/security.md)
-

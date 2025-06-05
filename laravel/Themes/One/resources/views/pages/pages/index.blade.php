@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 use Modules\Cms\Models\Page;
 use Illuminate\View\View;
 use function Laravel\Folio\render;
@@ -73,7 +72,7 @@ render(function (View $view) {
                 Archivio Pagine
             </h1>
             <p class="text-lg text-gray-600 mb-6">
-                Esplora tutte le pagine informative disponibili in il progetto
+                Esplora tutte le pagine informative disponibili in <nome progetto>
             </p>
 
             <div class="flex flex-col md:flex-row justify-between gap-4 mb-8">

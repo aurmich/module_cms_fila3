@@ -63,10 +63,7 @@ abstract class XotBaseResource extends FilamentResource
     /**
      * @return array<string|int,\Filament\Forms\Components\Component>
      */
-    public static function getFormSchema(): array
-    {
-        return [];
-    }
+    abstract public static function getFormSchema(): array;
 
     final public static function form(Form $form): Form
     {
@@ -121,7 +118,7 @@ abstract class XotBaseResource extends FilamentResource
         $edit = $edit;
         /** @var class-string<\Filament\Resources\Pages\Page> $view */
         $view = $view;
-
+        
         /** @var array<string, \Filament\Resources\Pages\PageRegistration> $pages */
         $pages = [
             'index' => $index::route('/'),
@@ -145,7 +142,7 @@ abstract class XotBaseResource extends FilamentResource
         $reflector = new \ReflectionClass(static::class);
         $filename = $reflector->getFileName();
         Assert::string($filename);
-
+        
         $path = Str::of($filename)
             ->before('.php')
             ->append(DIRECTORY_SEPARATOR)
@@ -154,7 +151,7 @@ abstract class XotBaseResource extends FilamentResource
 
         $files = glob($path.DIRECTORY_SEPARATOR.'*RelationManager.php');
         Assert::isArray($files);
-
+        
         /** @var array<class-string<\Filament\Resources\RelationManagers\RelationManager>> $res */
         $res = [];
         foreach ($files as $file) {
@@ -163,7 +160,7 @@ abstract class XotBaseResource extends FilamentResource
                 ->before('.php')
                 ->prepend(static::class.'\RelationManagers\\')
                 ->toString();
-
+            
             if (class_exists($className)) {
                 Assert::subclassOf($className, \Filament\Resources\RelationManagers\RelationManager::class);
                 $res[] = $className;

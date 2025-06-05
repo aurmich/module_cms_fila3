@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Resources\TeamResource\Pages;
 
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Section;
 use Modules\User\Filament\Resources\TeamResource;
@@ -32,5 +33,10 @@ class ViewTeam extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord
         ];
     }
 
-   
+    protected function getHeaderActions(): array
+    {
+        return [
+            EditAction::make(),
+        ];
+    }
 }

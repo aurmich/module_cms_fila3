@@ -1,22 +1,24 @@
 <?php
 
 return array (
-  'navigation' =>
+  'navigation' => 
   array (
     'icon' => 'icona-template-notifica',
     'sort' => 52,
+    'group' => 'notification template.navigation',
+    'label' => 'notification template.navigation',
   ),
-  'fields' =>
+  'fields' => 
   array (
-    'resetFilters' =>
+    'resetFilters' => 
     array (
       'label' => 'resetFilters',
     ),
-    'applyFilters' =>
+    'applyFilters' => 
     array (
       'label' => 'applyFilters',
     ),
-    'openFilters' =>
+    'openFilters' => 
     array (
       'label' => 'openFilters',
     ),
