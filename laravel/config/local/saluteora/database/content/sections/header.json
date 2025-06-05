@@ -69,7 +69,7 @@
                         },
                         {
                             "label": "Logout",
-                            "url": "/logout",
+                            "url": "/it/auth/logout",
                             "icon": "heroicon-o-arrow-left-on-rectangle"
                         }
                     ]

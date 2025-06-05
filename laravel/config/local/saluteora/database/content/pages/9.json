@@ -21,7 +21,7 @@
             {
                 "type": "feature_sections",
                 "data": {
-                    "view": "pub_theme::components.blocks.feature_sections.v1",
+                    "view": "pub_theme::components.blocks.feature_sections.action-buttons",
                     "title": "Prossimi Appuntamenti",
                     "subtitle": "I tuoi prossimi appuntamenti programmati",
                     "sections": [
@@ -105,17 +105,6 @@
                         }
                     ]
                 }
-            },
-            {
-                "type": "cta",
-                "data": {
-                    "view": "pub_theme::components.blocks.cta.centered",
-                    "title": "Hai domande sulla tua salute orale in gravidanza?",
-                    "description": "Il nostro team di specialisti è a tua disposizione per qualsiasi dubbio o necessità. Contattaci per un consulto personalizzato.",
-                    "cta_text": "Richiedi un consulto",
-                    "cta_link": "/contatti",
-                    "background_color": "bg-blue-50"
-                }
             }
         ],
         "en": [
@@ -132,7 +121,7 @@
             {
                 "type": "feature_sections",
                 "data": {
-                    "view": "pub_theme::components.blocks.feature_sections.v1",
+                    "view": "pub_theme::components.blocks.feature_sections.action-buttons",
                     "title": "Upcoming Appointments",
                     "subtitle": "Your scheduled appointments",
                     "sections": [
