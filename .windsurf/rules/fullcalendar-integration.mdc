@@ -2,12 +2,12 @@
 
 ## Project Standards Compliance
 
-This document outlines the standards and best practices for integrating FullCalendar with Filament in the SaluteOra module, following the project's architecture and coding standards.
+This document outlines the standards and best practices for integrating FullCalendar with Filament in the <nome progetto> module, following the project's architecture and coding standards.
 
 ## Important Notes
 
 1. **Base Classes**: Always extend from XotBase classes
-2. **Namespaces**: Use `Modules\SaluteOra\Filament` for all Filament components
+2. **Namespaces**: Use `Modules\<nome progetto>\Filament` for all Filament components
 3. **Translations**: Utilize language files instead of `->label()` methods
 4. **Documentation**: Keep documentation in sync with code changes
 5. **Testing**: Ensure all integrations are properly tested
@@ -19,7 +19,7 @@ This document outlines the standards and best practices for integrating FullCale
 All calendar widgets must extend `XotBaseFullCalendarWidget`:
 
 ```php
-namespace Modules\SaluteOra\Filament\Widgets;
+namespace Modules\<nome progetto>\Filament\Widgets;
 
 use Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget;
 
@@ -59,11 +59,11 @@ abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
     // Required properties
     protected static ?string $model = null;
     protected static string $heading = 'Calendar';
-    
+
     // Required methods
     abstract protected function getEventsQuery();
     abstract protected function mapToEvent($model): array;
-    
+
     // Recommended to override
     protected function getCalendarConfig(): array;
     protected function getHeaderActions(): array;
@@ -82,19 +82,19 @@ protected function mapToEvent($model): array
         'title' => $model->title,
         'start' => $model->start,
         'end' => $model->end,
-        
+
         // Recommended fields
         'allDay' => (bool) $model->all_day,
         'backgroundColor' => $model->color,
         'borderColor' => $model->color,
         'textColor' => $this->getContrastColor($model->color),
-        
+
         // Extended properties
         'extendedProps' => [
             'description' => $model->description,
             // Add other model attributes as needed
         ],
-        
+
         // URLs
         'url' => route('filament.resources.appointments.edit', $model),
     ];
@@ -110,7 +110,7 @@ protected function mapToEvent($model): array
 protected function getEventsQuery()
 {
     $doctor = Filament::auth()->user()->doctor;
-    
+
     return parent::getEventsQuery()
         ->where('doctor_id', $doctor->id)
         ->where('clinic_id', Filament::getTenant()?->id)
@@ -168,7 +168,7 @@ use Illuminate\Support\Facades\Cache;
 public function fetchEvents(array $fetchInfo): array
 {
     $cacheKey = 'calendar-events-' . Filament::getTenant()?->id . '-' . md5(json_encode($fetchInfo));
-    
+
     return Cache::remember($cacheKey, now()->addHour(), function () use ($fetchInfo) {
         return parent::fetchEvents($fetchInfo);
     });
@@ -247,7 +247,7 @@ public function fetchEvents(array $fetchInfo): array
     if (!Gate::allows('viewAny', Appointment::class)) {
         return [];
     }
-    
+
     return parent::fetchEvents($fetchInfo);
 }
 ```
@@ -265,11 +265,11 @@ public function onEventDrop($eventId, $eventData): void
         'start' => 'required|date',
         'end' => 'required|date|after:start',
     ]);
-    
+
     if ($validator->fails()) {
         throw new \Exception('Invalid event data');
     }
-    
+
     // Process the update
 }
 ```
@@ -284,11 +284,11 @@ public function test_doctor_can_view_own_appointments()
     $doctor = User::factory()->doctor()->create();
     $clinic = Clinic::factory()->create();
     $doctor->clinics()->attach($clinic);
-    
+
     $appointment = Appointment::factory()
         ->for($clinic)
         ->create(['doctor_id' => $doctor->id]);
-    
+
     $this->actingAs($doctor)
         ->get(route('filament.resources.appointments.index'))
         ->assertOk()

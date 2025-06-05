@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ## Gestione Doctor come User (STI/Parental)
 
-Nel sistema SaluteOra (e in tutti i moduli Xot), il dottore (**Doctor**) non è una tabella separata, ma un tipo di User gestito tramite Single Table Inheritance (STI) o Parental. La tabella di riferimento è sempre `users`, e il tipo è identificato dal campo `type` (stringa o enum).
+Nel sistema <nome progetto> (e in tutti i moduli Xot), il dottore (**Doctor**) non è una tabella separata, ma un tipo di User gestito tramite Single Table Inheritance (STI) o Parental. La tabella di riferimento è sempre `users`, e il tipo è identificato dal campo `type` (stringa o enum).
 
 - **Vietato** cercare la colonna `user_id` nella tabella `users` (non esiste).
 - **Vietato** creare join o modelli duplicati per Doctor.

@@ -29,7 +29,7 @@ I collegamenti nei file .md devono essere sempre relativi, mai assoluti.
 
 ## Regola BaseModel
 
-Tutti i modelli di un modulo devono estendere il BaseModel del modulo stesso (es. `Modules\SaluteOra\Models\BaseModel`), **mai** direttamente `Illuminate\Database\Eloquent\Model`.
+Tutti i modelli di un modulo devono estendere il BaseModel del modulo stesso (es. `Modules\<nome progetto>\Models\BaseModel`), **mai** direttamente `Illuminate\Database\Eloquent\Model`.
 
 ### Motivazione filosofica
 - Centralizzazione della logica comune (connessione, cast, factory, ecc.)

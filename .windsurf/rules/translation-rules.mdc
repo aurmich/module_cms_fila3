@@ -1,10 +1,10 @@
 ---
-description: Regole complete per le traduzioni in Laraxot/PTVX
+description: Regole complete per le traduzioni in Laraxot/<nome progetto>
 globs: ["**/*.php", "**/*.blade.php", "**/lang/**/*.php"]
 alwaysApply: true
 ---
 
-# Regole per le Traduzioni in Laraxot/PTVX
+# Regole per le Traduzioni in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -144,24 +144,24 @@ return [
     'navigation_icon' => 'heroicon-o-chart-bar',
     'navigation_sort' => 1,
     'description' => 'Gestione delle performance organizzative',
-    
+
     // Campi
     'fields' => [
         // ...
     ],
-    
+
     // Azioni
     'actions' => [
         // ...
     ],
-    
+
     // Messaggi
     'messages' => [
         'saved' => 'Salvato con successo',
         'error' => 'Si è verificato un errore',
         // ...
     ],
-    
+
     // Notifiche
     'notifications' => [
         // ...

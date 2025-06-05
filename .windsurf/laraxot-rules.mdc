@@ -1,4 +1,4 @@
-# Regole e Best Practices Laraxot - PTVX
+# Regole e Best Practices Laraxot - <nome progetto>
 
 ## Regole Fondamentali Modelli e Namespace
 
@@ -24,7 +24,7 @@
 
 ## PHPStan Compliance
 
-- Eseguire PHPStan sempre da `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
 - Usare minimo livello 9 (`./vendor/bin/phpstan analyze --level=9`)
 - Mai usare `$casts` property, utilizzare il metodo `casts()`:
   ```php

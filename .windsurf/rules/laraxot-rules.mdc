@@ -1,10 +1,10 @@
 ---
-description: Regole fondamentali e best practices per lo sviluppo con Laraxot/WindSurf in PTVX
+description: Regole fondamentali e best practices per lo sviluppo con Laraxot/WindSurf in <nome progetto>
 globs: ["**/*.php", "**/*.blade.php", "**/*.js", "**/*.ts", "**/*.vue"]
 alwaysApply: true
 ---
 
-# Regole Fondamentali WindSurf/Laraxot - PTVX
+# Regole Fondamentali WindSurf/Laraxot - <nome progetto>
 
 ## Struttura dei Modelli
 
@@ -96,7 +96,7 @@ alwaysApply: true
 ## PHPStan Compliance
 
 ### Esecuzione
-- Eseguire PHPStan sempre da `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
 - Utilizzare `./vendor/bin/phpstan analyze` (MAI `php artisan test:phpstan`)
 - Livello minimo 9 per tutti i moduli
 

@@ -2,13 +2,13 @@
 
 ## Context
 
-This document provides metadata for Cursor about the integration of `mcamara/laravel-localization` into the `saluteora` project.
+This document provides metadata for Cursor about the integration of `mcamara/laravel-localization` into the `<nome progetto>` project.
 
 ## Key Points
 
 - **Package**: `mcamara/laravel-localization`
 - **Purpose**: Enhance localization capabilities in Laravel applications.
-- **Suggested Actions**: 
+- **Suggested Actions**:
   - Add package to `composer.json`.
   - Configure supported languages.
   - Register middleware for language redirects.

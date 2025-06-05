@@ -8,7 +8,7 @@
 
 ## Errore Identificato
 
-Il file `calendar.blade.php` del tema One conteneva un'implementazione completa di FullCalendar da zero (697 righe), duplicando funzionalità già presenti nei widget Filament del modulo SaluteOra.
+Il file `calendar.blade.php` del tema One conteneva un'implementazione completa di FullCalendar da zero (697 righe), duplicando funzionalità già presenti nei widget Filament del modulo <nome progetto>.
 
 ### Problemi Specifici
 1. **Duplicazione Codice**: Ricreava tutto il calendario invece di usare widget esistenti
@@ -77,7 +77,7 @@ Theme Component → Widget Filament → Trait Config → Sicurezza Centralizzata
 ### Pattern Corretto
 ```php
 // ✅ CORRETTO
-@livewire(\Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class)
+@livewire(\Modules\<nome progetto>\Filament\Widgets\PatientCalendarWidget::class)
 
 // ❌ SBAGLIATO
 <div id="calendar"></div>
@@ -88,7 +88,7 @@ Theme Component → Widget Filament → Trait Config → Sicurezza Centralizzata
 
 1. `laravel/Themes/One/resources/views/components/blocks/calendar.blade.php` - Completamente riscritto
 2. `laravel/Themes/One/README.md` - Documentazione aggiornata
-3. `laravel/Modules/SaluteOra/docs/theme-calendar-integration.md` - Nuova documentazione
+3. `laravel/Modules/<nome progetto>/docs/theme-calendar-integration.md` - Nuova documentazione
 4. `.cursor/rules/theme-widget-integration.mdc` - Nuove regole
 5. `.windsurf/rules/theme-widget-integration.mdc` - Nuove regole
 

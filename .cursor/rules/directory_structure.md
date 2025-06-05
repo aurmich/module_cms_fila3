@@ -1,4 +1,4 @@
-# Regole per la Struttura delle Directory nei Moduli Laraxot PTVX
+# Regole per la Struttura delle Directory nei Moduli Laraxot <nome progetto>
 
 ## Due Principi Fondamentali
 

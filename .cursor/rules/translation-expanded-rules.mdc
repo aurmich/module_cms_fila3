@@ -1,10 +1,10 @@
 ---
-description: Regole dettagliate per l'implementazione e la struttura dei file di traduzione in progetti Laraxot/PTVX
+description: Regole dettagliate per l'implementazione e la struttura dei file di traduzione in progetti Laraxot/<nome progetto>
 globs: ["**/lang/**/*.php", "**/Filament/**/*.php", "**/resources/views/**/*.blade.php"]
 alwaysApply: true
 ---
 
-# Regole per i File di Traduzione in Laraxot/PTVX
+# Regole per i File di Traduzione in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -214,15 +214,15 @@ return [
 ```blade
 <x-filament::page>
     <h2>{{ __('modulename::pages.dashboard.title') }}</h2>
-    
+
     <p>{{ __('modulename::pages.dashboard.description') }}</p>
-    
+
     <x-filament::button
         wire:click="createItem"
     >
         {{ __('modulename::actions.create.label') }}
     </x-filament::button>
-    
+
     @if($items->isEmpty())
         <div class="mt-4">
             <p>{{ __('modulename::messages.empty_states.default') }}</p>
@@ -247,7 +247,7 @@ protected function getFormSchema(): array
             ->placeholder(__('modulename::fields.name.placeholder'))
             ->helperText(__('modulename::fields.name.help'))
             ->required(),
-            
+
         Forms\Components\Select::make('role')
             ->label(__('modulename::fields.role.label'))
             ->placeholder(__('modulename::fields.role.placeholder'))
@@ -277,7 +277,7 @@ public function table(Table $table): Table
                 ->label(__('modulename::fields.name.label'))
                 ->searchable()
                 ->sortable(),
-                
+
             Tables\Columns\TextColumn::make('role')
                 ->label(__('modulename::fields.role.label'))
                 ->formatStateUsing(fn (string $state): string => __("modulename::fields.role.options.{$state}")),
@@ -289,7 +289,7 @@ public function table(Table $table): Table
         ->actions([
             Tables\Actions\EditAction::make()
                 ->label(__('modulename::actions.edit.label')),
-                
+
             Tables\Actions\DeleteAction::make()
                 ->label(__('modulename::actions.delete.label'))
                 ->modalHeading(__('modulename::actions.delete.modal_heading'))
@@ -320,7 +320,7 @@ return [
     'name_label' => 'Nome',
     'name_placeholder' => 'Inserisci il nome',
     'name_help' => 'Inserisci il nome completo',
-    
+
     'email_label' => 'Email',
     'email_placeholder' => 'Inserisci l\'indirizzo email',
     'email_help' => 'L\'email verrà utilizzata per accedere al sistema',

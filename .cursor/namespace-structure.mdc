@@ -1,4 +1,4 @@
-# Namespace Structure Rules for PTVX Modules
+# Namespace Structure Rules for <nome progetto> Modules
 
 ## CRITICAL RULE: Namespace vs File Path
 
@@ -18,8 +18,8 @@ namespace Modules\ModuleName\[Folder];
 
 ### ✅ CORRECT
 ```php
-// File: /laravel/Modules/SaluteOra/app/Enums/AppointmentType.php
-namespace Modules\SaluteOra\Enums;
+// File: /laravel/Modules/<nome progetto>/app/Enums/AppointmentType.php
+namespace Modules\<nome progetto>\Enums;
 
 // File: /laravel/Modules/Geo/app/Filament/Forms/LocationForm.php
 namespace Modules\Geo\Filament\Forms;
@@ -34,8 +34,8 @@ namespace Modules\User\Models;
 namespace Modules\Geo\App\Filament\Forms;
 
 // WRONG - File not in app directory
-// File: /laravel/Modules/SaluteOra/Enums/AppointmentType.php
-// Should be: /laravel/Modules/SaluteOra/app/Enums/AppointmentType.php
+// File: /laravel/Modules/<nome progetto>/Enums/AppointmentType.php
+// Should be: /laravel/Modules/<nome progetto>/app/Enums/AppointmentType.php
 ```
 
 ## Quick Reference
@@ -56,11 +56,11 @@ namespace Modules\Geo\App\Filament\Forms;
 
 ```bash
 # After creating/modifying files
-cd /var/www/html/_bases/base_saluteora/laravel
+cd /var/www/html/_bases/base_<nome progetto>/laravel
 composer dumpautoload
 
 # Find files with incorrect namespaces
-grep -r "namespace Modules.*App\\\\" /var/www/html/_bases/base_saluteora/laravel/Modules/
+grep -r "namespace Modules.*App\\\\" /var/www/html/_bases/base_<nome progetto>/laravel/Modules/
 ```
 
 ## Composer Autoload Configuration

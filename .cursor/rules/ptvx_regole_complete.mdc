@@ -1,4 +1,4 @@
-# Regole Cursor complete per Laraxot PTVX
+# Regole Cursor complete per Laraxot <nome progetto>
 
 ## Modelli ed Ereditarietà
 
@@ -151,10 +151,10 @@ ModuleName/
 - Esempio:
   ```php
   <?php
-  
+
   use Illuminate\Database\Schema\Blueprint;
   use Modules\Xot\Database\Migrations\XotBaseMigration;
-  
+
   return new class extends XotBaseMigration {
       /**
        * Run the migrations.
@@ -163,7 +163,7 @@ ModuleName/
       {
           // Implementazione
       }
-      
+
       // Non implementare mai il metodo down
   };
   ```
@@ -253,7 +253,7 @@ public static function getTableColumns(): array
 public function setUp(): void
 {
     parent::setUp();
-    
+
     $this->label(trans('module-name::actions.export.label'))
          ->icon('heroicon-o-document-download')
          ->color('success')
@@ -327,7 +327,7 @@ return [
 ### Esecuzione
 - Eseguire sempre dalla directory Laravel root:
   ```bash
-  cd /var/www/html/ptvx/laravel
+  cd /var/www/html/<nome progetto>/laravel
   ./vendor/bin/phpstan analyze [target] --level=9
   ```
 
@@ -336,7 +336,7 @@ return [
    ```php
    // ❌ ERRATO
    public function execute()
-   
+
    // ✅ CORRETTO
    public function execute(): ReturnType
    ```
@@ -345,7 +345,7 @@ return [
    ```php
    // ❌ ERRATO
    public function getAlAttribute($value)
-   
+
    // ✅ CORRETTO
    public function getAlAttribute(?string $value): ?string
    ```
@@ -354,7 +354,7 @@ return [
    ```php
    // ❌ ERRATO
    protected $fillable = ['field1', 'field2'];
-   
+
    // ✅ CORRETTO
    /** @var list<string> */
    protected $fillable = ['field1', 'field2'];
@@ -364,7 +364,7 @@ return [
    ```php
    // ❌ ERRATO: Accesso a proprietà non dichiarate
    $model->anno;
-   
+
    // ✅ CORRETTO: Dichiarazione proprietà
    /**
     * @property int $anno
@@ -380,7 +380,7 @@ return [
     * @return bool|Response
     */
    public function viewAny(User $user): bool
-   
+
    // ✅ CORRETTO: Allineamento tipi
    /**
     * @return bool
@@ -392,7 +392,7 @@ return [
    ```php
    // ❌ ERRATO: Accesso a proprietà indefinite
    $user->random_field;
-   
+
    // ✅ CORRETTO: Usare metodi corretti di Faker
    $faker->randomElement(['a', 'b', 'c']);
    ```
@@ -418,11 +418,11 @@ $message = "Value: " . (is_scalar($value) ? (string) $value : '');
 ## Documentazione e Manutenzione
 
 ### Struttura Documentazione
-- **Documentazione Root**: `/var/www/html/ptvx/docs/`
+- **Documentazione Root**: `/var/www/html/<nome progetto>/docs/`
   - Linee guida globali
   - Standard di codice generali
   - Link bidirezionali a doc moduli
-  
+
 - **Documentazione Modulo**: `Modules/<NomeModulo>/docs/`
   - Architettura specifica del modulo
   - API e integrazione

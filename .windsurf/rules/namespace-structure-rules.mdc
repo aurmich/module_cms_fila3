@@ -22,43 +22,43 @@ alwaysApply: false
 
 | Aspetto | Pattern | Esempio |
 |---------|---------|---------|
-| **Struttura File** | `Modules/<NomeModulo>/app/<Path>` | `Modules/SaluteOra/app/Filament/Resources/DoctorResource.php` |
-| **Namespace** | `Modules\<NomeModulo>\<Path>` | `Modules\SaluteOra\Filament\Resources\DoctorResource` |
+| **Struttura File** | `Modules/<NomeModulo>/app/<Path>` | `Modules/<nome progetto>/app/Filament/Resources/DoctorResource.php` |
+| **Namespace** | `Modules\<NomeModulo>\<Path>` | `Modules\<nome progetto>\Filament\Resources\DoctorResource` |
 
 ## Errore Critico: File fuori da app/
 
 ### ❌ ERRATO - File fuori da app/
 ```
-Modules/SaluteOra/Enums/UserType.php
-Modules/SaluteOra/Actions/RegisterAction.php
-Modules/SaluteOra/Models/Doctor.php
-Modules/SaluteOra/Providers/ServiceProvider.php
-Modules/SaluteOra/Filament/Resources/UserResource.php
+Modules/<nome progetto>/Enums/UserType.php
+Modules/<nome progetto>/Actions/RegisterAction.php
+Modules/<nome progetto>/Models/Doctor.php
+Modules/<nome progetto>/Providers/ServiceProvider.php
+Modules/<nome progetto>/Filament/Resources/UserResource.php
 ```
 
 ### ✅ CORRETTO - File in app/
 ```
-Modules/SaluteOra/app/Enums/UserType.php
-Modules/SaluteOra/app/Actions/RegisterAction.php
-Modules/SaluteOra/app/Models/Doctor.php
-Modules/SaluteOra/app/Providers/ServiceProvider.php
-Modules/SaluteOra/app/Filament/Resources/UserResource.php
+Modules/<nome progetto>/app/Enums/UserType.php
+Modules/<nome progetto>/app/Actions/RegisterAction.php
+Modules/<nome progetto>/app/Models/Doctor.php
+Modules/<nome progetto>/app/Providers/ServiceProvider.php
+Modules/<nome progetto>/app/Filament/Resources/UserResource.php
 ```
 
 ## Namespace Corretti
 
 ### ❌ ERRATO - Namespace con app
 ```php
-namespace Modules\SaluteOra\app\Enums;
-namespace Modules\SaluteOra\app\Filament\Resources;
-namespace Modules\SaluteOra\app\Models;
+namespace Modules\<nome progetto>\app\Enums;
+namespace Modules\<nome progetto>\app\Filament\Resources;
+namespace Modules\<nome progetto>\app\Models;
 ```
 
 ### ✅ CORRETTO - Namespace senza app
 ```php
-namespace Modules\SaluteOra\Enums;
-namespace Modules\SaluteOra\Filament\Resources;
-namespace Modules\SaluteOra\Models;
+namespace Modules\<nome progetto>\Enums;
+namespace Modules\<nome progetto>\Filament\Resources;
+namespace Modules\<nome progetto>\Models;
 ```
 
 ## Casi Specifici
@@ -162,23 +162,23 @@ namespace Modules\SaluteOra\Models;
 
 ### Errore: Provider non trovato
 ```
-Class "Modules\SaluteOra\app\Providers\ServiceProvider" not found
+Class "Modules\<nome progetto>\app\Providers\ServiceProvider" not found
 ```
-**Soluzione**: Namespace errato, deve essere `Modules\SaluteOra\Providers`
+**Soluzione**: Namespace errato, deve essere `Modules\<nome progetto>\Providers`
 
 ### Errore: Resource non trovata
 ```
-Class "Modules\SaluteOra\App\Filament\Resources\UserResource" not found
+Class "Modules\<nome progetto>\App\Filament\Resources\UserResource" not found
 ```
-**Soluzione**: Namespace errato, deve essere `Modules\SaluteOra\Filament\Resources`
+**Soluzione**: Namespace errato, deve essere `Modules\<nome progetto>\Filament\Resources`
 
 ### Errore: Autoloading fallito
 **Soluzione**: File fuori da `app/`, spostare nella directory corretta
 
 ## Link e Documentazione
-- [Namespace vs File Structure](../laravel/Modules/SaluteOra/docs/namespace-vs-file-structure.md)
-- [Filament Namespace Rules](../laravel/Modules/SaluteOra/docs/filament-namespace-rules.md)
-- [README SaluteOra](../laravel/Modules/SaluteOra/docs/README.md)
+- [Namespace vs File Structure](../laravel/Modules/<nome progetto>/docs/namespace-vs-file-structure.md)
+- [Filament Namespace Rules](../laravel/Modules/<nome progetto>/docs/filament-namespace-rules.md)
+- [README <nome progetto>](../laravel/Modules/<nome progetto>/docs/README.md)
 - [README Xot](../laravel/Modules/Xot/docs/README.md)
 - [PSR-4 Autoloading](https://www.php-fig.org/psr/psr-4/)
 

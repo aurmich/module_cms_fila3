@@ -1,10 +1,10 @@
 ---
-description: Regole per l'implementazione del componente FullCalendar di Saade per Filament in Laraxot PTVX
+description: Regole per l'implementazione del componente FullCalendar di Saade per Filament in Laraxot <nome progetto>
 globs: ["**/Filament/Widgets/*Calendar*.php", "**/Models/Evento.php"]
 alwaysApply: true
 ---
 
-# Regole per il Componente FullCalendar in Laraxot PTVX
+# Regole per il Componente FullCalendar in Laraxot <nome progetto>
 
 ## Struttura di Base
 
@@ -129,7 +129,7 @@ public function getFormSchema(): array
  * Recupera gli eventi da visualizzare nel calendario.
  *
  * @param array<string, mixed> $fetchInfo
- * 
+ *
  * @return array<int, array<string, mixed>>
  */
 public function fetchEvents(array $fetchInfo): array

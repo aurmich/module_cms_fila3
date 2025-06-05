@@ -1,15 +1,15 @@
 ---
-description: Regole complete per l'utilizzo di PHPStan in Laraxot/PTVX
+description: Regole complete per l'utilizzo di PHPStan in Laraxot/<nome progetto>
 globs: ["**/*.php"]
 alwaysApply: true
 ---
 
-# Regole PHPStan Complete per Laraxot/PTVX
+# Regole PHPStan Complete per Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
 - **Livello Minimo:** Utilizzare PHPStan livello 9 per tutto il codice nuovo
-- **Esecuzione:** Eseguire sempre dalla directory `/var/www/html/ptvx/laravel`
+- **Esecuzione:** Eseguire sempre dalla directory `/var/www/html/<nome progetto>/laravel`
 - **Tipizzazione Rigorosa:** Evitare `mixed` a meno che non sia assolutamente necessario
 - **Documentazione:** Documentare ogni pattern di risoluzione in `docs/`
 - **Aggiornamento Continuo:** Aggiornare le rules e configurazioni PHPStan regolarmente
@@ -17,7 +17,7 @@ alwaysApply: true
 ## Esecuzione Corretta
 
 ```bash
-cd /var/www/html/ptvx/laravel
+cd /var/www/html/<nome progetto>/laravel
 ./vendor/bin/phpstan analyze [target] --level=9 --memory-limit=2G
 ```
 
@@ -51,7 +51,7 @@ class MioModello extends BaseModel
 {
     /** @var list<string> */
     protected $fillable = ['nome', 'stabi'];
-    
+
     /**
      * @return array<string, string>
      */
@@ -186,7 +186,7 @@ public function definition(): array
 phpstan:
   stage: test
   script:
-    - cd /var/www/html/ptvx/laravel
+    - cd /var/www/html/<nome progetto>/laravel
     - ./vendor/bin/phpstan analyze Modules --level=9
   only:
     - merge_requests
@@ -266,5 +266,5 @@ $variabile = $oggetto->proprietaNonStandard;
 ## Risorse
 
 - [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
-- [Modules/Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md](/var/www/html/ptvx/laravel/Modules/Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
-- [docs/PHPSTAN_LEVEL10_FIXES.md](/var/www/html/ptvx/docs/PHPSTAN_LEVEL10_FIXES.md)
+- [Modules/Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md](/var/www/html/<nome progetto>/laravel/Modules/Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
+- [docs/PHPSTAN_LEVEL10_FIXES.md](/var/www/html/<nome progetto>/docs/PHPSTAN_LEVEL10_FIXES.md)

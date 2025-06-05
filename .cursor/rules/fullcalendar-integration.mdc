@@ -1,12 +1,12 @@
 ---
-description: Rules for integrating and using the FullCalendar component in Laraxot/PTVX applications
+description: Rules for integrating and using the FullCalendar component in Laraxot/<nome progetto> applications
 globs: ["**/Filament/Widgets/*Calendar*.php", "**/docs/**/full_calendar.md", "**/Models/**/Event.php", "**/Models/*Calendar*.php"]
 alwaysApply: true
 ---
 
-# FullCalendar Integration Rules in Laraxot/PTVX
+# FullCalendar Integration Rules in Laraxot/<nome progetto>
 
-> **NOTE**: This document is the official reference for integrating Saade's FullCalendar component for Filament in Laraxot PTVX projects. Follow these guidelines strictly.
+> **NOTE**: This document is the official reference for integrating Saade's FullCalendar component for Filament in Laraxot <nome progetto> projects. Follow these guidelines strictly.
 
 ## Core Principles
 
@@ -36,7 +36,7 @@ class {ModuleName}CalendarWidget extends BaseCalendarWidget
      * @var class-string<\Illuminate\Database\Eloquent\Model>
      */
     protected string $model = {ModuleName}Event::class;
-    
+
     // Specific implementation...
 }
 ```

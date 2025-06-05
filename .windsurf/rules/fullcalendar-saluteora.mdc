@@ -3,14 +3,14 @@ description:
 globs:
 alwaysApply: false
 ---
-# Regole FullCalendar Multi-Tenant per SaluteOra
+# Regole FullCalendar Multi-Tenant per <nome progetto>
 
 ## Principi Fondamentali
 
 ### Estensione delle Classi Base
 - **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
 - **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste nel modulo Xot)
-- Utilizzare il trait `Modules\SaluteOra\Traits\HasFullCalendarConfig` per configurazioni comuni
+- Utilizzare il trait `Modules\<nome progetto>\Traits\HasFullCalendarConfig` per configurazioni comuni
 
 ### Architettura Multi-Tenant
 - **3 livelli di accesso**: Paziente, Dottore (con tenancy), Admin
@@ -19,10 +19,10 @@ alwaysApply: false
 - **Sicurezza**: Policy e controlli di accesso sempre implementati
 
 ### Namespace e Struttura
-- Widget calendar: `Modules\SaluteOra\Filament\Widgets\`
-- Modelli: `Modules\SaluteOra\Models\`
-- Enum: `Modules\SaluteOra\Enums\`
-- Trait: `Modules\SaluteOra\Traits\`
+- Widget calendar: `Modules\<nome progetto>\Filament\Widgets\`
+- Modelli: `Modules\<nome progetto>\Models\`
+- Enum: `Modules\<nome progetto>\Enums\`
+- Trait: `Modules\<nome progetto>\Traits\`
 
 ## Widget Multi-Tenant Principali
 
@@ -323,10 +323,10 @@ public function test_tenant_switching_filters_data_correctly()
 ## Documentazione
 
 ### File di Documentazione
-- [fullcalendar_multi_tenant_widgets.md](../laravel/Modules/SaluteOra/docs/fullcalendar_multi_tenant_widgets.md)
-- [fullcalendar_integration.md](../laravel/Modules/SaluteOra/docs/fullcalendar_integration.md)
-- [fullcalendar_widgets.md](../laravel/Modules/SaluteOra/docs/fullcalendar_widgets.md)
-- [fullcalendar_configuration.md](../laravel/Modules/SaluteOra/docs/fullcalendar_configuration.md)
+- [fullcalendar_multi_tenant_widgets.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_multi_tenant_widgets.md)
+- [fullcalendar_integration.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_integration.md)
+- [fullcalendar_widgets.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_widgets.md)
+- [fullcalendar_configuration.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_configuration.md)
 
 ## Filosofia Multi-Tenant
 

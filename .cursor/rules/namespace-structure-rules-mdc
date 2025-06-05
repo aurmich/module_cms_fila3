@@ -15,7 +15,7 @@ Motivazione: PSR-4, autoload Composer, coerenza, manutenzione.
 Esempio:
 ```php
 // Corretto
-Modules/SaluteOra/app/Actions/Patient/Calendar/FetchEventsAction.php
+Modules/<nome progetto>/app/Actions/Patient/Calendar/FetchEventsAction.php
 // Errato
-Modules/SaluteOra/Actions/Patient/Calendar/FetchEventsAction.php
+Modules/<nome progetto>/Actions/Patient/Calendar/FetchEventsAction.php
 ```

@@ -14,8 +14,8 @@ alwaysApply: false
 - **Namespace**: `Modules\<Nome>\Filament\Resources` (SENZA `app`)
 
 ### Errori da NON Ripetere MAI
-- ❌ File fuori da `app/`: `Modules/SaluteOra/Enums/UserType.php`
-- ❌ Namespace con `app`: `Modules\SaluteOra\app\Filament\Resources`
+- ❌ File fuori da `app/`: `Modules/<nome progetto>/Enums/UserType.php`
+- ❌ Namespace con `app`: `Modules\<nome progetto>\app\Filament\Resources`
 
 ### Estensioni Obbligatorie
 - Filament Resources → `Modules\Xot\Filament\Resources\XotBaseResource`

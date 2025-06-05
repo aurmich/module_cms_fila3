@@ -1,12 +1,12 @@
 ---
-description: Rules for FullCalendar component implementation in Laraxot/PTVX projects
+description: Rules for FullCalendar component implementation in Laraxot/<nome progetto> projects
 globs: ["**/Filament/Widgets/*Calendar*.php", "**/resources/views/**/*calendar*.blade.php", "**/Models/Event.php", "**/Controllers/**/*Calendar*Controller.php"]
 alwaysApply: true
 ---
 
-# FullCalendar Implementation Rules in Laraxot/PTVX
+# FullCalendar Implementation Rules in Laraxot/<nome progetto>
 
-> **IMPORTANT NOTE**: This document is the official reference for implementing the Saade FullCalendar component for Filament in Laraxot PTVX projects. The rules defined here must be strictly followed in all implementations.
+> **IMPORTANT NOTE**: This document is the official reference for implementing the Saade FullCalendar component for Filament in Laraxot <nome progetto> projects. The rules defined here must be strictly followed in all implementations.
 
 ## Core Principles
 
@@ -38,7 +38,7 @@ class ModuleNameCalendarWidget extends BaseCalendarWidget
      * @var class-string<\Illuminate\Database\Eloquent\Model>
      */
     protected string $model = Event::class;
-    
+
     /**
      * Configure widget properties.
      *
@@ -47,7 +47,7 @@ class ModuleNameCalendarWidget extends BaseCalendarWidget
     public function setUp(): void
     {
         parent::setUp();
-        
+
         $this->selectable(true)
             ->editable(true)
             ->timezone(config('app.timezone'))
@@ -75,13 +75,13 @@ public function getFormSchema(): array
             ->placeholder(__('modulename::calendar.fields.title.placeholder'))
             ->helperText(__('modulename::calendar.fields.title.help'))
             ->required(),
-            
+
         Forms\Components\Grid::make()
             ->schema([
                 Forms\Components\DateTimePicker::make('start_date')
                     ->label(__('modulename::calendar.fields.start_date.label'))
                     ->required(),
-                    
+
                 Forms\Components\DateTimePicker::make('end_date')
                     ->label(__('modulename::calendar.fields.end_date.label'))
                     ->required(),
@@ -100,7 +100,7 @@ public function getFormSchema(): array
         Forms\Components\TextInput::make('title')
             ->label('Title') // Hardcoded string
             ->placeholder('Enter an event title'), // Hardcoded string
-            
+
         Forms\Components\DateTimePicker::make('start_date')
             ->label('Start date'), // Hardcoded string
     ];
@@ -265,7 +265,7 @@ public function eventDidMount(): string
         // Alpine.js tooltip
         el.setAttribute("x-tooltip", "tooltip");
         el.setAttribute("x-data", "{ tooltip: '"+event.extendedProps.description || event.title+"' }");
-        
+
         // Appearance customization
         if (event.extendedProps.priority === 'high') {
             el.classList.add('border-red-500', 'border-l-4');
@@ -355,7 +355,7 @@ Before considering a FullCalendar implementation complete:
 public function setUp(): void
 {
     parent::setUp();
-    
+
     $this->selectable()
         ->editable()
         ->timezone(config('app.timezone'))
@@ -370,7 +370,7 @@ public function setUp(): void
  * Fetch events to display in the calendar.
  *
  * @param array<string, mixed> $fetchInfo
- * 
+ *
  * @return array<int, array<string, mixed>>
  */
 public function fetchEvents(array $fetchInfo): array

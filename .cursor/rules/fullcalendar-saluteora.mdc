@@ -3,14 +3,14 @@ description:
 globs:
 alwaysApply: true
 ---
-# Regole FullCalendar Multi-Tenant per SaluteOra
+# Regole FullCalendar Multi-Tenant per <nome progetto>
 
 ## Principi Fondamentali
 
 ### Estensione delle Classi Base
 - **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
 - **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste nel modulo Xot)
-- Utilizzare il trait `Modules\SaluteOra\Traits\HasFullCalendarConfig` per configurazioni comuni
+- Utilizzare il trait `Modules\<nome progetto>\Traits\HasFullCalendarConfig` per configurazioni comuni
 
 ### AdminPanelProvider - Configurazione Centralizzata
 - **SEMPRE** configurare FullCalendar nel `AdminPanelProvider.php`
@@ -26,12 +26,12 @@ alwaysApply: true
 - **Sicurezza**: Policy e controlli di accesso sempre implementati
 
 ### Namespace e Struttura
-- Widget calendar: `Modules\SaluteOra\Filament\Widgets\`
-- Modelli: `Modules\SaluteOra\Models\`
-- Enum: `Modules\SaluteOra\Enums\`
-- Trait: `Modules\SaluteOra\Traits\`
-- Middleware: `Modules\SaluteOra\Http\Middleware\`
-- Provider: `Modules\SaluteOra\Providers\Filament\AdminPanelProvider`
+- Widget calendar: `Modules\<nome progetto>\Filament\Widgets\`
+- Modelli: `Modules\<nome progetto>\Models\`
+- Enum: `Modules\<nome progetto>\Enums\`
+- Trait: `Modules\<nome progetto>\Traits\`
+- Middleware: `Modules\<nome progetto>\Http\Middleware\`
+- Provider: `Modules\<nome progetto>\Providers\Filament\AdminPanelProvider`
 
 ## AdminPanelProvider - Implementazione Corretta
 
@@ -40,7 +40,7 @@ alwaysApply: true
 ```php
 <?php
 
-namespace Modules\SaluteOra\Providers\Filament;
+namespace Modules\<nome progetto>\Providers\Filament;
 
 use Filament\Panel;
 use Modules\Xot\Providers\Filament\XotBasePanelProvider;
@@ -48,7 +48,7 @@ use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends XotBasePanelProvider
 {
-    protected string $module = 'SaluteOra';
+    protected string $module = '<nome progetto>';
 
     public function panel(Panel $panel): Panel
     {
@@ -324,7 +324,7 @@ EventData::make()
 #### eventClassNames - Classi CSS Dinamiche
 ```javascript
 'eventClassNames' => 'function(arg) {
-    const classes = ["fc-event-saluteora"];
+    const classes = ["fc-event-<nome progetto>"];
 
     if (arg.event.extendedProps.emergency) {
         classes.push("fc-event-emergency");
@@ -370,10 +370,10 @@ EventData::make()
 
 ## CSS Personalizzato Obbligatorio
 
-### Classi CSS per Temi SaluteOra
+### Classi CSS per Temi <nome progetto>
 ```css
-/* Tema SaluteOra */
-.fc-saluteora-theme {
+/* Tema <nome progetto> */
+.fc-<nome progetto>-theme {
     --fc-border-color: #e5e7eb;
     --fc-button-bg-color: #3b82f6;
     --fc-button-border-color: #3b82f6;
@@ -534,10 +534,10 @@ public function test_fullcalendar_config_is_complete()
 ## Documentazione Aggiornata
 
 ### File di Documentazione da Mantenere
-- [fullcalendar_configuration.md](../laravel/Modules/SaluteOra/docs/fullcalendar_configuration.md) - Configurazioni complete con AdminPanelProvider
-- [fullcalendar_parental_widgets.md](../laravel/Modules/SaluteOra/docs/fullcalendar_parental_widgets.md) - Architettura completa con Parental STI
-- [fullcalendar_implementation_guide.md](../laravel/Modules/SaluteOra/docs/fullcalendar_implementation_guide.md) - Guida step-by-step
-- [theme-calendar-integration.md](../laravel/Modules/SaluteOra/docs/theme-calendar-integration.md) - Integrazione con temi
+- [fullcalendar_configuration.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_configuration.md) - Configurazioni complete con AdminPanelProvider
+- [fullcalendar_parental_widgets.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_parental_widgets.md) - Architettura completa con Parental STI
+- [fullcalendar_implementation_guide.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_implementation_guide.md) - Guida step-by-step
+- [theme-calendar-integration.md](../laravel/Modules/<nome progetto>/docs/theme-calendar-integration.md) - Integrazione con temi
 
 ### Aggiornamento Documentazione
 - **SEMPRE** aggiornare documentazione per nuove configurazioni AdminPanelProvider

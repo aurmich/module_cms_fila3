@@ -39,12 +39,12 @@ Repository: https://github.com/spatie/laravel-queueable-action
 ```php
 <?php
 
-namespace Modules\SaluteOra\Actions;
+namespace Modules\<nome progetto>\Actions;
 
 use Spatie\QueueableAction\QueueableAction;
-use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\Patient;
-use Modules\SaluteOra\Models\Doctor;
+use Modules\<nome progetto>\Models\Appointment;
+use Modules\<nome progetto>\Models\Patient;
+use Modules\<nome progetto>\Models\Doctor;
 
 class CreateAppointmentAction
 {
@@ -78,12 +78,12 @@ class CreateAppointmentAction
 ```php
 <?php
 
-namespace Modules\SaluteOra\Actions;
+namespace Modules\<nome progetto>\Actions;
 
 use Spatie\QueueableAction\QueueableAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Notifications\AppointmentReminderNotification;
+use Modules\<nome progetto>\Models\Appointment;
+use Modules\<nome progetto>\Notifications\AppointmentReminderNotification;
 
 class SendAppointmentReminderAction implements ShouldQueue
 {
@@ -94,7 +94,7 @@ class SendAppointmentReminderAction implements ShouldQueue
         $appointment->patient->notify(
             new AppointmentReminderNotification($appointment)
         );
-        
+
         $appointment->update([
             'reminder_sent_at' => now(),
         ]);
@@ -106,10 +106,10 @@ class SendAppointmentReminderAction implements ShouldQueue
 ```php
 <?php
 
-namespace Modules\SaluteOra\Http\Controllers;
+namespace Modules\<nome progetto>\Http\Controllers;
 
-use Modules\SaluteOra\Actions\CreateAppointmentAction;
-use Modules\SaluteOra\Actions\SendAppointmentReminderAction;
+use Modules\<nome progetto>\Actions\CreateAppointmentAction;
+use Modules\<nome progetto>\Actions\SendAppointmentReminderAction;
 
 class AppointmentController extends Controller
 {
@@ -138,10 +138,10 @@ class AppointmentController extends Controller
 ```php
 <?php
 
-namespace Modules\SaluteOra\Filament\Widgets;
+namespace Modules\<nome progetto>\Filament\Widgets;
 
-use Modules\SaluteOra\Actions\GetAppointmentsForCalendarAction;
-use Modules\SaluteOra\Actions\UpdateAppointmentAction;
+use Modules\<nome progetto>\Actions\GetAppointmentsForCalendarAction;
+use Modules\<nome progetto>\Actions\UpdateAppointmentAction;
 
 class DoctorCalendarWidget extends XotBaseFullCalendarWidget
 {
@@ -175,9 +175,9 @@ class DoctorCalendarWidget extends XotBaseFullCalendarWidget
 namespace Tests\Unit\Actions;
 
 use Tests\TestCase;
-use Modules\SaluteOra\Actions\CreateAppointmentAction;
-use Modules\SaluteOra\Models\Patient;
-use Modules\SaluteOra\Models\Doctor;
+use Modules\<nome progetto>\Actions\CreateAppointmentAction;
+use Modules\<nome progetto>\Models\Patient;
+use Modules\<nome progetto>\Models\Doctor;
 
 class CreateAppointmentActionTest extends TestCase
 {
@@ -185,7 +185,7 @@ class CreateAppointmentActionTest extends TestCase
     {
         $patient = Patient::factory()->create();
         $doctor = Doctor::factory()->create();
-        
+
         $appointment = CreateAppointmentAction::make()->execute(
             patient: $patient,
             doctor: $doctor,
@@ -206,7 +206,7 @@ class CreateAppointmentActionTest extends TestCase
 
 ## Struttura Directory
 ```
-Modules/SaluteOra/
+Modules/<nome progetto>/
 ├── Actions/
 │   ├── Appointments/
 │   │   ├── CreateAppointmentAction.php
@@ -261,7 +261,7 @@ class AppointmentAction
 class CreateAppointmentAction
 {
     use QueueableAction;
-    
+
     public function execute(Patient $patient, Doctor $doctor, ...): Appointment
     {
         // Logica specifica e testabile
@@ -289,7 +289,7 @@ class CreateAppointmentAction
         private AppointmentRepository $repository,
         private NotificationService $notifications
     ) {}
-    
+
     public function execute(...): Appointment
     {
         $appointment = $this->repository->create(...);
@@ -304,7 +304,7 @@ class CreateAppointmentAction
 class CreateAppointmentAction
 {
     use QueueableAction;
-    
+
     public function execute(array $data): Appointment
     {
         $validated = validator($data, [
@@ -313,7 +313,7 @@ class CreateAppointmentAction
             'start_time' => 'required|date|after:now',
             'end_time' => 'required|date|after:start_time',
         ])->validate();
-        
+
         return Appointment::create($validated);
     }
 }
@@ -326,7 +326,7 @@ class CreateAppointmentAction
 class GetAppointmentsForCalendarAction
 {
     use QueueableAction;
-    
+
     public function execute(string $startDate, string $endDate, int $doctorId): array
     {
         return cache()->remember(
@@ -343,18 +343,18 @@ class GetAppointmentsForCalendarAction
 class CreateAppointmentAction
 {
     use QueueableAction;
-    
+
     public function execute(...): Appointment
     {
         Log::info('Creating appointment', ['patient_id' => $patient->id]);
-        
+
         $appointment = Appointment::create([...]);
-        
+
         Log::info('Appointment created', ['appointment_id' => $appointment->id]);
-        
+
         return $appointment;
     }
 }
 ```
 
-## Questa regola è FONDAMENTALE e deve essere sempre seguita in tutto il progetto SaluteOra.
+## Questa regola è FONDAMENTALE e deve essere sempre seguita in tutto il progetto <nome progetto>.

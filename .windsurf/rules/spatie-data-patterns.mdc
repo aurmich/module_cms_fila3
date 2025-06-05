@@ -1,10 +1,10 @@
 ---
-description: Pattern e best practice per l'utilizzo di Spatie Laravel Data in progetti Laraxot/PTVX
+description: Pattern e best practice per l'utilizzo di Spatie Laravel Data in progetti Laraxot/<nome progetto>
 globs: ["**/Data/**/*.php", "**/Services/**/*.php"]
 alwaysApply: true
 ---
 
-# Pattern per Spatie Laravel Data in Laraxot/PTVX
+# Pattern per Spatie Laravel Data in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -36,20 +36,20 @@ class UserData extends Data
     public function __construct(
         #[Required, StringType]
         public readonly string $name,
-        
+
         #[Required, StringType]
         public readonly string $email,
-        
+
         #[WithCast(DateTimeInterfaceCast::class)]
         public readonly ?\DateTimeInterface $created_at = null,
-        
+
         #[WithCast(DateTimeInterfaceCast::class)]
         public readonly ?\DateTimeInterface $updated_at = null,
-        
+
         public readonly ?int $id = null,
     ) {
     }
-    
+
     /**
      * Crea un nuovo UserData da un modello User.
      *
@@ -66,7 +66,7 @@ class UserData extends Data
             id: $user->id,
         );
     }
-    
+
     /**
      * Crea un'istanza del modello User da questo Data Object.
      *
@@ -77,10 +77,10 @@ class UserData extends Data
         $user = $this->id
             ? \Modules\ModuleName\Models\User::findOrFail($this->id)
             : new \Modules\ModuleName\Models\User();
-            
+
         $user->name = $this->name;
         $user->email = $this->email;
-        
+
         return $user;
     }
 }
@@ -108,20 +108,20 @@ class ProductData extends Data
     public function __construct(
         #[Required, StringType, Min(3), Max(255)]
         public readonly string $name,
-        
+
         #[Required, StringType]
         public readonly string $description,
-        
+
         #[Required, Numeric, Min(0)]
         public readonly float $price,
-        
+
         #[Required, Numeric, Min(0)]
         public readonly int $quantity,
-        
+
         public readonly ?int $id = null,
     ) {
     }
-    
+
     /**
      * Definisce regole di validazione addizionali.
      *
@@ -133,7 +133,7 @@ class ProductData extends Data
             'name' => ['unique:products,name'],
         ];
     }
-    
+
     /**
      * Definisce messaggi di errore personalizzati.
      *
@@ -167,7 +167,7 @@ class UserDataCollection extends DataCollection
     ) {
         parent::__construct($items);
     }
-    
+
     /**
      * Crea una collezione da un elenco di modelli.
      *
@@ -180,7 +180,7 @@ class UserDataCollection extends DataCollection
             $users->map(fn ($user) => UserData::fromModel($user))->all()
         );
     }
-    
+
     /**
      * Restituisce il tipo di dato nella collezione.
      *
@@ -218,7 +218,7 @@ class OrderData extends Data
         public readonly ?int $id = null,
     ) {
     }
-    
+
     /**
      * Crea un OrderData da un modello Order con relazioni.
      *
@@ -231,11 +231,11 @@ class OrderData extends Data
         if (!$order->relationLoaded('items')) {
             $order->load('items');
         }
-        
+
         if (!$order->relationLoaded('user')) {
             $order->load('user');
         }
-        
+
         return new self(
             order_number: $order->order_number,
             total_amount: $order->total_amount,
@@ -279,7 +279,7 @@ final class StatusEnum extends Enum
             'archived' => __('modulename::enums.status.archived'),
         ];
     }
-    
+
     /**
      * Determina se lo stato è considerato attivo.
      */
@@ -312,7 +312,7 @@ use Modules\ModuleName\Models\User;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    
+
     /**
      * Form schema per Filament.
      *
@@ -328,7 +328,7 @@ class UserResource extends Resource
                     ->placeholder(__('modulename::fields.name.placeholder'))
                     ->required()
                     ->maxLength(255),
-                    
+
                 Forms\Components\TextInput::make('email')
                     ->label(__('modulename::fields.email.label'))
                     ->placeholder(__('modulename::fields.email.placeholder'))
@@ -337,7 +337,7 @@ class UserResource extends Resource
                     ->maxLength(255),
             ]);
     }
-    
+
     /**
      * Gestisce la creazione del record usando Data Objects.
      *
@@ -348,11 +348,11 @@ class UserResource extends Resource
     {
         // Converte dati del form in Data Object
         $userData = UserData::from($data);
-        
+
         // Crea un nuovo utente dal Data Object
         $user = $userData->toModel();
         $user->save();
-        
+
         return $user;
     }
 }
@@ -388,7 +388,7 @@ class UserData extends Data
     public readonly string $name;
     public readonly string $email;
     public readonly ?int $id = null;
-    
+
     // Manca il costruttore esplicito
 }
 ```
@@ -409,7 +409,7 @@ class UserData extends Data
         public readonly ?int $id = null,
     ) {
     }
-    
+
     // Mancano metodi helper per convertire da/a modello
 }
 ```
@@ -451,21 +451,21 @@ Ogni modulo che utilizza Spatie Laravel Data deve includere:
 2. **Esempio di Documentazione**
    ```markdown
    # Data Objects in ModuleName
-   
+
    Questo modulo utilizza Spatie Laravel Data per implementare il pattern DTO.
-   
+
    ## UserData
    Rappresenta i dati di un utente.
-   
+
    ### Proprietà
    - `name` (string): Nome dell'utente
    - `email` (string): Email dell'utente
    - `id` (int|null): ID dell'utente, null se nuovo
-   
+
    ### Metodi
    - `fromModel(User $user)`: Crea un UserData da un modello User
    - `toModel()`: Converte il DTO in un modello User
-   
+
    ### Esempio d'uso
    ```php
    // Creazione da array
@@ -473,10 +473,10 @@ Ogni modulo che utilizza Spatie Laravel Data deve includere:
        'name' => 'Mario Rossi',
        'email' => 'mario@example.com',
    ]);
-   
+
    // Creazione da modello
    $userData = UserData::fromModel($user);
-   
+
    // Conversione in modello
    $user = $userData->toModel();
    ```

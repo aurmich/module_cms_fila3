@@ -1,10 +1,10 @@
 ---
-description: Regole per l'implementazione di view custom Filament in progetti Laraxot/PTVX
+description: Regole per l'implementazione di view custom Filament in progetti Laraxot/<nome progetto>
 globs: ["**/Filament/Pages/*.php", "**/Filament/Resources/**/*.php", "**/resources/views/filament/**/*.blade.php"]
 alwaysApply: true
 ---
 
-# Regole per le View Custom Filament in Laraxot/PTVX
+# Regole per le View Custom Filament in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -23,9 +23,9 @@ alwaysApply: true
 <x-filament::page>
     <div>
         <h2>{{ __('modulename::filament.pages.custom_page.title') }}</h2>
-        
+
         <p>{{ __('modulename::filament.pages.custom_page.description') }}</p>
-        
+
         @if($items->count() > 0)
             <ul>
                 @foreach($items as $item)
@@ -46,9 +46,9 @@ alwaysApply: true
 <div>
     {{-- Manca il wrapper <x-filament::page> --}}
     <h2>Titolo della pagina</h2> {{-- Testo hardcoded invece di traduzione --}}
-    
+
     <p>Descrizione della pagina</p> {{-- Testo hardcoded invece di traduzione --}}
-    
+
     @if($items->count() > 0)
         <ul>
             @foreach($items as $item)
@@ -101,7 +101,7 @@ class CustomPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'modulename::filament.pages.custom-page';
-    
+
     /**
      * Dati da passare alla view.
      *
@@ -114,7 +114,7 @@ class CustomPage extends Page
             'title' => __('modulename::filament.pages.custom_page.title'),
         ];
     }
-    
+
     /**
      * Opzionale: override del metodo render per logica aggiuntiva.
      */
@@ -138,14 +138,14 @@ Le view custom possono utilizzare componenti Filament:
         <x-slot name="heading">
             {{ __('modulename::filament.sections.overview.heading') }}
         </x-slot>
-        
+
         <x-slot name="description">
             {{ __('modulename::filament.sections.overview.description') }}
         </x-slot>
-        
+
         {{-- Contenuto della sezione --}}
     </x-filament::section>
-    
+
     <x-filament::card>
         {{-- Contenuto della card --}}
     </x-filament::card>
@@ -248,7 +248,7 @@ La documentazione delle view custom deve includere:
 
 ## Pattern e Best Practice
 
-1. **Separare Logica e Presentazione**: 
+1. **Separare Logica e Presentazione**:
    - La logica complessa va nella classe Page
    - La view dovrebbe occuparsi solo della presentazione
 

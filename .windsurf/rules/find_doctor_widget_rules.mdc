@@ -1,14 +1,14 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
 # FindDoctorAndAppointmentWidget Rules
 
 ## Architecture Rules
-1. Use correct namespace: `Modules\SaluteOra\Filament\Widgets\Patient`
+1. Use correct namespace: `Modules\<nome progetto>\Filament\Widgets\Patient`
 2. Extend `XotBaseWidget` from `Modules\Xot\Filament\Widgets`
-3. Use module's translation files in `Modules/SaluteOra/lang/<language>`
+3. Use module's translation files in `Modules/<nome progetto>/lang/<language>`
 4. Never use `->label()` directly, use translation files
 5. Separate wizard steps into distinct functions for clean code
 

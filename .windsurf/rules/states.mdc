@@ -60,5 +60,5 @@ class ActiveToSuspended extends Transition
 ```
 
 ## Collegamenti
-- [Documentazione Stati](mdc:../laravel/Modules/SaluteOra/docs/STATES.md)
+- [Documentazione Stati](mdc:../laravel/Modules/<nome progetto>/docs/STATES.md)
 - [Documentazione Spatie Model States](mdc:https:/spatie.be/docs/laravel-model-states)

@@ -306,6 +306,42 @@ Per dettagli e motivazioni vedi:
 - Motivazione: centralizzazione, DRY, coerenza, override gestito dalla base.
 - Vedi anche: [filament-resources.md](filament-resources.md)
 
+## ⚠️ REGOLA CRITICA: getTableColumns() Obbligatorio in ListRecords
+
+**Problema ricorrente:** `BadMethodCallException: Method getTableColumns does not exist`
+
+- Tutte le pagine che estendono `XotBaseListRecords` DEVONO implementare il metodo `getTableColumns()`.
+- Il metodo deve restituire un array associativo con chiavi stringa (nome campo).
+- Le colonne vanno ricavate dal modello e dalla migrazione, senza inventare campi.
+- Le etichette sono gestite solo tramite i file di traduzione del modulo (mai ->label()).
+- **Motivazione:** coerenza, automazione, DRY, compatibilità con TableLayoutEnum e HasXotTable.
+
+**Fix implementato:** [ListAppointments getTableColumns](list_appointments_gettablecolumns_fix.md)
+
+**Template obbligatorio:**
+```php
+public function getTableColumns(): array
+{
+    return [
+        'field_name' => TextColumn::make('field_name')
+            ->searchable()
+            ->sortable(),
+        // ...
+    ];
+}
+```
+
+**Checklist:**
+- [ ] Estende XotBaseListRecords?
+- [ ] Implementa getTableColumns()?
+- [ ] Array associativo con chiavi stringa?
+- [ ] Colonne basate sul modello reale?
+- [ ] PHPDoc completo?
+
+**Regole correlate:**
+- [.cursor/rules/gettablecolumns_mandatory_fix.mdc](../../../.cursor/rules/gettablecolumns_mandatory_fix.mdc)
+- [.windsurf/rules/gettablecolumns_mandatory_fix.mdc](../../../.windsurf/rules/gettablecolumns_mandatory_fix.mdc)
+
 ## Regola fondamentale: aggiornamento documentazione e XotBaseResource
 
 - Prima di ogni implementazione o modifica, aggiornare sempre la documentazione nelle cartelle docs del modulo coinvolto.

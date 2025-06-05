@@ -1,4 +1,4 @@
-# Regole e Best Practices Laraxot - PTVX
+# Regole e Best Practices Laraxot - <nome progetto>
 
 ## Struttura del Modello e Tipizzazione
 
@@ -76,7 +76,7 @@
 
 ## PHPStan e Qualità del Codice
 
-- Eseguire PHPStan da `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan da `/var/www/html/<nome progetto>/laravel`
 - Usare `./vendor/bin/phpstan analyze` (mai `php artisan test:phpstan`)
 - Livello 9 come standard minimo
 - Dichiarare `declare(strict_types=1);` in ogni file

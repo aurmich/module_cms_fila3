@@ -1,10 +1,10 @@
 ---
-description: Regole per l'implementazione di Widget Filament in progetti Laraxot/PTVX
+description: Regole per l'implementazione di Widget Filament in progetti Laraxot/<nome progetto>
 globs: ["**/Filament/Widgets/*.php"]
 alwaysApply: true
 ---
 
-# Regole per Widget Filament in Laraxot/PTVX
+# Regole per Widget Filament in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -97,9 +97,9 @@ class StatsOverviewWidget extends BaseWidget
     {
         return [
             Stat::make('Totale elementi', ModelName::count()), // ❌ Stringa hardcoded
-            
+
             Stat::make('Valore medio', ModelName::avg('value')), // ❌ Stringa hardcoded
-            
+
             Stat::make('Tasso di completamento', function () { // ❌ Manca tipizzazione
                 return number_format(
                     (ModelName::where('is_completed', true)->count() / ModelName::count()) * 100
@@ -186,7 +186,7 @@ use Modules\ModuleName\Models\ModelName;
 class ModelNameChart extends ChartWidget
 {
     protected static ?string $heading = null;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -292,7 +292,7 @@ class LatestModelNameWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('modulename::fields.name.label'))
                     ->searchable(),
-                    
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('modulename::fields.created_at.label'))
                     ->dateTime(),
@@ -322,7 +322,7 @@ class ModuleNameCalendarWidget extends BaseCalendarWidget
      * @var \Illuminate\Database\Eloquent\Model|string|null
      */
     public $model = EventModel::class;
-    
+
     /**
      * Configurazione del calendario.
      *
@@ -339,7 +339,7 @@ class ModuleNameCalendarWidget extends BaseCalendarWidget
             ],
         ];
     }
-    
+
     /**
      * Schema del form per gli eventi.
      *
@@ -352,11 +352,11 @@ class ModuleNameCalendarWidget extends BaseCalendarWidget
                 ->label(__('modulename::calendar.fields.title.label'))
                 ->placeholder(__('modulename::calendar.fields.title.placeholder'))
                 ->required(),
-                
+
             Forms\Components\DateTimePicker::make('starts_at')
                 ->label(__('modulename::calendar.fields.starts_at.label'))
                 ->required(),
-                
+
             Forms\Components\DateTimePicker::make('ends_at')
                 ->label(__('modulename::calendar.fields.ends_at.label'))
                 ->required(),
@@ -398,7 +398,7 @@ class FilamentServiceProvider extends ServiceProvider
         Livewire::component('modulename::model-name-chart', \Modules\ModuleName\Filament\Widgets\ModelNameChart::class);
         Livewire::component('modulename::latest-model-name-widget', \Modules\ModuleName\Filament\Widgets\LatestModelNameWidget::class);
         Livewire::component('modulename::module-name-calendar-widget', \Modules\ModuleName\Filament\Widgets\ModuleNameCalendarWidget::class);
-        
+
         // Registra i componenti dei widget nelle pagine
         FilamentView::registerRenderHook(
             'panels::page.start',
@@ -426,7 +426,7 @@ class Dashboard extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
     protected static string $view = 'modulename::filament.pages.dashboard';
-    
+
     /**
      * Widget da visualizzare nella pagina.
      *
@@ -438,7 +438,7 @@ class Dashboard extends Page
             \Modules\ModuleName\Filament\Widgets\StatsOverviewWidget::class,
         ];
     }
-    
+
     /**
      * Widget da visualizzare nella pagina.
      *
@@ -560,7 +560,7 @@ class StatsOverviewWidgetTest extends TestCase
     {
         // Arrange
         ModelName::factory()->count(5)->create();
-        
+
         // Act & Assert
         Livewire::test(StatsOverviewWidget::class)
             ->assertSee('Totale elementi')

@@ -43,10 +43,10 @@ alwaysApply: false
 
 @php
     $widgetClass = match($type) {
-        'patient' => \Modules\SaluteOra\Filament\Widgets\PatientWidget::class,
-        'doctor' => \Modules\SaluteOra\Filament\Widgets\DoctorWidget::class,
-        'admin' => \Modules\SaluteOra\Filament\Widgets\AdminWidget::class,
-        default => \Modules\SaluteOra\Filament\Widgets\DefaultWidget::class,
+        'patient' => \Modules\<nome progetto>\Filament\Widgets\PatientWidget::class,
+        'doctor' => \Modules\<nome progetto>\Filament\Widgets\DoctorWidget::class,
+        'admin' => \Modules\<nome progetto>\Filament\Widgets\AdminWidget::class,
+        default => \Modules\<nome progetto>\Filament\Widgets\DefaultWidget::class,
     };
 @endphp
 

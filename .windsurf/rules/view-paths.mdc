@@ -17,13 +17,13 @@ protected static string $view = 'modulename::filament.widgets.view-name';
 
 ### Correct
 ```php
-protected static string $view = 'saluteora::filament.widgets.find-doctor';
+protected static string $view = '<nome progetto>::filament.widgets.find-doctor';
 ```
 
 ### Incorrect
 ```php
 // Missing 'filament' segment
-protected static string $view = 'saluteora::widgets.find-doctor';
+protected static string $view = '<nome progetto>::widgets.find-doctor';
 ```
 
 ## How to Fix

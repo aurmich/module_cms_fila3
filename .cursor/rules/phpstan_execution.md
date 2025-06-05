@@ -1,11 +1,11 @@
-# Esecuzione di PHPStan in Laraxot PTVX
+# Esecuzione di PHPStan in Laraxot <nome progetto>
 
 ## Comando Corretto
 
-Per eseguire PHPStan in Laraxot PTVX, è necessario utilizzare il seguente formato di comando:
+Per eseguire PHPStan in Laraxot <nome progetto>, è necessario utilizzare il seguente formato di comando:
 
 ```bash
-cd /var/www/html/_bases/base_ptvx_fila3/laravel
+cd /var/www/html/_bases/base_<nome progetto>_fila3/laravel
 ./vendor/bin/phpstan analyse --level=9 --memory-limit=2G Modules/NomeModulo
 ```
 
@@ -27,7 +27,7 @@ Per analizzare rapidamente tutti i moduli e salvare i risultati:
 
 ```bash
 #!/bin/bash
-cd /var/www/html/_bases/base_ptvx_fila3/laravel
+cd /var/www/html/_bases/base_<nome progetto>_fila3/laravel
 mkdir -p phpstan_results
 for module in Modules/*; do
     if [ -d "$module" ]; then

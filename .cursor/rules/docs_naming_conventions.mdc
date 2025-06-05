@@ -1,10 +1,10 @@
 ---
-description: Convenzioni di naming per file e cartelle docs in Laraxot PTVX
+description: Convenzioni di naming per file e cartelle docs in Laraxot <nome progetto>
 globs: ["**/docs/**/*"]
 alwaysApply: true
 ---
 
-# Convenzioni di naming per cartelle docs in Laraxot PTVX
+# Convenzioni di naming per cartelle docs in Laraxot <nome progetto>
 
 ## Regole fondamentali
 

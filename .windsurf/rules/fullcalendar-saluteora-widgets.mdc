@@ -3,14 +3,14 @@ description:
 globs:
 alwaysApply: false
 ---
-# Regole FullCalendar Widget per SaluteOra
+# Regole FullCalendar Widget per <nome progetto>
 
 ## Principi Fondamentali
 
 ### Estensione delle Classi Base
 - **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
 - **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste nel modulo Xot)
-- Utilizzare il trait `Modules\SaluteOra\Traits\HasFullCalendarConfig` per configurazioni comuni
+- Utilizzare il trait `Modules\<nome progetto>\Traits\HasFullCalendarConfig` per configurazioni comuni
 
 ### Architettura Multi-Tenant con Parental STI
 - **Single Table Inheritance**: Utilizzo di `tightenco/parental` per tipi utente
@@ -20,11 +20,11 @@ alwaysApply: false
 - **Sicurezza**: Policy e controlli di accesso sempre implementati
 
 ### Namespace e Struttura
-- Widget calendar: `Modules\SaluteOra\Filament\Widgets\`
-- Modelli: `Modules\SaluteOra\Models\`
-- Enum: `Modules\SaluteOra\Enums\`
-- Trait: `Modules\SaluteOra\Traits\`
-- Middleware: `Modules\SaluteOra\Http\Middleware\`
+- Widget calendar: `Modules\<nome progetto>\Filament\Widgets\`
+- Modelli: `Modules\<nome progetto>\Models\`
+- Enum: `Modules\<nome progetto>\Enums\`
+- Trait: `Modules\<nome progetto>\Traits\`
+- Middleware: `Modules\<nome progetto>\Http\Middleware\`
 
 ## Implementazione Widget
 

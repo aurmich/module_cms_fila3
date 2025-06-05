@@ -1,14 +1,14 @@
 ---
-description: Regole per la documentazione in Laraxot PTVX
+description: Regole per la documentazione in Laraxot <nome progetto>
 globs: ["**/docs/**/*.md", "docs/**/*.md"]
 alwaysApply: true
 ---
 
-# Regole per la Documentazione in Laraxot PTVX
+# Regole per la Documentazione in Laraxot <nome progetto>
 
 ## Struttura Documentazione
 
-### Root Documentation (/var/www/html/ptvx/docs/)
+### Root Documentation (/var/www/html/<nome progetto>/docs/)
 Contiene documentazione globale del progetto:
 - Linee guida architetturali
 - Convenzioni di codice

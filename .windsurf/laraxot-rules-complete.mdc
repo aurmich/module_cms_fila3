@@ -1,4 +1,4 @@
-# Regole Fondamentali WindSurf/Laraxot - PTVX
+# Regole Fondamentali WindSurf/Laraxot - <nome progetto>
 
 ## Struttura dei Modelli
 
@@ -90,7 +90,7 @@
 ## PHPStan Compliance
 
 ### Esecuzione
-- Eseguire PHPStan sempre da `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
 - Utilizzare `./vendor/bin/phpstan analyze` (MAI `php artisan test:phpstan`)
 - Livello minimo 9 per tutti i moduli
 

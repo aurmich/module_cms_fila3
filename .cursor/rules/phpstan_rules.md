@@ -1,4 +1,4 @@
-# Regole PHPStan per il Progetto PTVX
+# Regole PHPStan per il Progetto <nome progetto>
 
 Questo documento definisce le regole globali per garantire la compatibilità con PHPStan livello 9 in tutti i moduli.
 

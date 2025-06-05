@@ -33,8 +33,8 @@ alwaysApply: false
 
 ### Corretto
 ```php
-// File: ./Modules/SaluteOra/app/Http/Livewire/Calendar.php
-namespace Modules\SaluteOra\Http\Livewire;
+// File: ./Modules/<nome progetto>/app/Http/Livewire/Calendar.php
+namespace Modules\<nome progetto>\Http\Livewire;
 
 // File: ./Modules/Tenant/database/factories/DomainFactory.php
 namespace Modules\Tenant\Database\Factories;
@@ -43,8 +43,8 @@ namespace Modules\Tenant\Database\Factories;
 ### Errato
 ```php
 // ERRATO: File nella directory sbagliata
-// File: ./Modules/SaluteOra/app/Actions/Calendar/Calendar.php
-namespace Modules\SaluteOra\Http\Livewire;
+// File: ./Modules/<nome progetto>/app/Actions/Calendar/Calendar.php
+namespace Modules\<nome progetto>\Http\Livewire;
 
 // ERRATO: Directory con underscore
 // File: ./Modules/Tenant/database/Factories_/DomainFactory.php

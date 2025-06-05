@@ -183,13 +183,13 @@ class MyResource extends XotBaseResource
 
 ## Esempio corretto
 ```php
-protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
+protected static string $view = '<nome progetto>::filament.widgets.find-doctor-and-appointment';
 TextInput::make('location')->required()
 ```
 
 ## Esempio errato
 ```php
-protected static string $view = 'saluteora::widgets.find-doctor-and-appointment';
+protected static string $view = '<nome progetto>::widgets.find-doctor-and-appointment';
 TextInput::make('location')->label(__('modulo::campo.label'))
 ```
 
@@ -317,9 +317,9 @@ public function studios(): BelongsToMany
 
 **Esempio corretto:**
 ```php
-$table->foreignIdFor(\Modules\SaluteOra\Models\Doctor::class)
+$table->foreignIdFor(\Modules\<nome progetto>\Models\Doctor::class)
     ->comment('ID del dottore (riferimento alla tabella users)');
-$table->foreignIdFor(\Modules\SaluteOra\Models\Studio::class)
+$table->foreignIdFor(\Modules\<nome progetto>\Models\Studio::class)
     ->comment('ID dello studio (riferimento alla tabella studios)');
 ```
 

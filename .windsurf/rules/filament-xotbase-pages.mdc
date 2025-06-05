@@ -38,5 +38,5 @@ class ListDoctors extends XotBaseListRecords { ... }
 - Dimenticare override/metodi custom nella XotBase
 
 ## Link doc
-- [README SaluteOra](../../laravel/Modules/SaluteOra/docs/README.md)
+- [README <nome progetto>](../../laravel/Modules/<nome progetto>/docs/README.md)
 - [README Xot](../../laravel/Modules/Xot/docs/README.md)

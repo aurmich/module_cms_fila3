@@ -21,6 +21,9 @@ use Modules\Geo\Filament\Resources\AddressResource;
 class StudioResource extends XotBaseResource
 {
     protected static ?string $model = Studio::class;
+    //protected static ?string $tenantOwnershipRelationshipName = 'owner';
+    //protected static ?string $tenantRelationshipName = 'blogPosts';
+    protected static bool $isScopedToTenant = false;
 
     public static function getFormSchema(): array
     {
@@ -91,5 +94,5 @@ class StudioResource extends XotBaseResource
         ];
     }
 
-   
+
 }
