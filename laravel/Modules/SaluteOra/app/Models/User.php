@@ -7,6 +7,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Modules\User\Models\BaseUser;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Support\Facades\Log;
 
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Illuminate\Notifications\Notifiable;
@@ -32,12 +33,12 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
 class User extends BaseUser
 {
     use HasRoles;
-    
     use LogsActivity, Notifiable;
     use HasStates;
 
     /** @var string  */
-    protected $connection = 'user';
+    //protected $connection = 'user';
+    protected $connection = 'salute_ora';
 
 
     /**
@@ -45,9 +46,14 @@ class User extends BaseUser
      * Utilizziamo l'enum UserTypeEnum per una gestione tipizzata e sicura
      */
     protected $childTypes = [
+        /*
         UserTypeEnum::ADMIN->value => Admin::class,
         UserTypeEnum::DOCTOR->value => Doctor::class,
         UserTypeEnum::PATIENT->value => Patient::class,
+        */
+        'admin' => Admin::class,
+        'doctor' => Doctor::class,
+        'patient' => Patient::class,
     ];
 
     /** @var array<string, mixed>  */
@@ -66,13 +72,21 @@ class User extends BaseUser
         'state',
     ];
 
-    /**  @return array<string, string>   */
+    /**
+     * Cast custom per il campo type:
+     * - Va dichiarato solo nel modello User del modulo SaluteOra, mai nella base User generica.
+     * - Motivazione: evitare di sporcare il modulo User condiviso tra più progetti.
+     * - Filosofia: ogni modulo è autonomo, nessun lock-in, rispetto della modularità.
+     * - Politica: type safety, DRY, serenità del codice, nessun errore di cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'type' => UserTypeEnum::class,
+            //'type' => UserTypeEnum::class, // Sintassi corretta per Laravel 12
             'state' => UserState::class,
             'certifications' => 'array',
             'moderation_data' => 'array',
@@ -213,10 +227,26 @@ class User extends BaseUser
 
     /**
      * Get the user's type as a UserTypeEnum enum.
+     *
+     * Gestione robusta dell'attributo type con nullable safety.
+     *
+     * Importante: Questo override è nel modello User di SaluteOra (modulo specifico),
+     * MAI nel modulo User generico che deve restare puro e riutilizzabile.
+     *
+     * Principio di modularità: ogni modifica specifica rimane nei moduli specifici.
      */
-    public function getTypeAttribute($value): UserTypeEnum
+    public function getTypeAttribute($value): ?UserTypeEnum
     {
-        return $value instanceof UserTypeEnum ? $value : UserTypeEnum::from($value);
+        // Se già è un enum, lo restituiamo direttamente
+        if ($value instanceof UserTypeEnum) {
+            return $value;
+        }
+        if(empty($value)){
+            return UserTypeEnum::default();
+        }
+        // Utilizziamo il metodo tryFrom dell'enum che gestisce internamente
+        // i casi null/empty e cattura le eccezioni ValueError
+        return UserTypeEnum::tryFrom($value);
     }
 
     /**

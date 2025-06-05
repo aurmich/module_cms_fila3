@@ -45,27 +45,31 @@ abstract class XotBaseRelationManager extends RelationManager
 
     public function getFormSchema(): array
     {
-        return [];
+        return $this->getResource()::getFormSchema();
     }
 
     public function getTableActions(): array
     {
         return [
             Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
+            //Tables\Actions\DeleteAction::make(),
+            Tables\Actions\DetachAction::make(),
         ];
     }
 
     public function getTableBulkActions(): array
     {
         return [
-            Tables\Actions\DeleteBulkAction::make(),
+            //Tables\Actions\DeleteBulkAction::make(),
+            Tables\Actions\DetachBulkAction::make(),
         ];
     }
 
     public function getTableHeaderActions(): array
     {
-        return [];
+        return [
+            Tables\Actions\AttachAction::make(),
+        ];
     }
 
     public function getTableFilters(): array

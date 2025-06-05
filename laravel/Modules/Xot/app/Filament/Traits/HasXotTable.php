@@ -133,10 +133,8 @@ trait HasXotTable
      *
      * @return array<string, Tables\Columns\Column>
      */
-    public function getTableColumns(): array
-    {
-        return [];
-    }
+    abstract public function getTableColumns(): array;
+    
 
     /**
      * Get table filters form columns.

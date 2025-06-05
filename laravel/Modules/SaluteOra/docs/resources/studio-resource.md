@@ -28,7 +28,7 @@ Modules/SaluteOra/app/Filament/
 La classe principale `StudioResource` estende `XotBaseResource` e implementa i seguenti metodi principali:
 
 - `getFormSchema()`: Schema del form per la creazione e modifica degli studi
-- `getListTableColumns()`: Colonne da visualizzare nella lista degli studi
+- `getTableColumns()`: Colonne da visualizzare nella lista degli studi (ora implementato in `ListStudios` come richiesto da XotBaseListRecords, array associativo con chiavi stringa, colonne ricavate dal modello e dalla migrazione)
 - `getListTableFilters()`: Filtri disponibili per la lista degli studi
 - `getListTableActions()`: Azioni disponibili nella lista degli studi
 
@@ -36,7 +36,7 @@ La classe principale `StudioResource` estende `XotBaseResource` e implementa i s
 
 La risorsa Studio implementa le seguenti pagine standard:
 
-- `ListStudios`: Visualizzazione e gestione dell'elenco degli studi
+- `ListStudios`: Visualizzazione e gestione dell'elenco degli studi. Implementa il metodo `getTableColumns()` secondo la policy aggiornata (vedi anche [Xot/docs/filament/listrecords.md](../../../Xot/docs/filament/listrecords.md)).
 - `CreateStudio`: Creazione di un nuovo studio
 - `EditStudio`: Modifica di uno studio esistente
 
@@ -103,9 +103,37 @@ La risorsa Studio implementa le seguenti funzionalità:
 
 La risorsa Studio mantiene relazioni con altre entità del sistema:
 
-- **Doctors**: Relazione one-to-many con i dottori che operano nello studio
+- **Doctors**: Relazione molti-a-molti con i dottori che lavorano nello studio (belongsToManyX)
 - **Appointments**: Relazione one-to-many con gli appuntamenti che si svolgono presso lo studio
 - **Addresses**: Relazione polimorfica con gli indirizzi associati allo studio
+
+## RelationManager: Associazione Dottori-Studi
+
+Per visualizzare e gestire i dottori che lavorano in uno studio e gli studi in cui lavora un dottore, sono implementati i RelationManager Filament:
+
+- **StudioResource/RelationManagers/DoctorsRelationManager.php**: mostra i dottori associati a uno studio (relazione molti-a-molti tramite belongsToManyX).
+- **DoctorResource/RelationManagers/StudiosRelationManager.php**: mostra gli studi associati a un dottore (relazione molti-a-molti tramite belongsToManyX).
+
+### Filosofia, logica e motivazione
+- La relazione molti-a-molti riflette la realtà sanitaria: un dottore può lavorare in più studi e uno studio può avere più dottori.
+- Si usa belongsToManyX per massima flessibilità, DRY, e per supportare pivot custom e policy multi-tenant.
+- La simmetria della relazione permette una gestione coerente, audit trail e policy di sicurezza centralizzate.
+- La documentazione e la struttura del codice sono pensate per essere zen, chiare e facilmente estendibili.
+
+### Best Practice
+- Seguire la struttura: ogni RelationManager in una sottocartella RelationManagers della rispettiva risorsa.
+- Usare sempre XotBaseRelationManager come classe base.
+- Le colonne della tabella devono essere coerenti con il modello e la migrazione.
+- Nessun uso di ->label(), solo traduzioni da file lang.
+- Documentare sempre la relazione e aggiornare la documentazione correlata.
+- Vedi anche: [Xot/docs/filament/listrecords.md](../../../Xot/docs/filament/listrecords.md)
+
+### Collegamenti
+- [Modello Studio](../../app/Models/Studio.php)
+- [Modello Doctor](../../app/Models/Doctor.php)
+- [Best Practices Filament](../filament-best-practices.mdc)
+- [README SaluteOra](../README.md)
+- [README Xot Filament](../../../Xot/docs/filament/README.md)
 
 ## Best Practices
 
@@ -131,65 +159,4 @@ Se una closure dichiarata come `fn (Studio $record): void => ...` restituisce un
 - Scrivere `->action(fn (Studio $record): void => $record->activate())` è errato se `activate()` restituisce qualcosa.
 
 ### Soluzione
-- Usare closure senza dichiarazione `: void` **oppure** assicurarsi che la funzione chiamata non restituisca nulla.
-- Esempio corretto:
-  ```php
-  ->action(fn (Studio $record) => $record->activate())
-  ```
-- Oppure, se serve la dichiarazione `: void`, assicurarsi che la funzione chiamata sia anch'essa void.
-
-### Filosofia e best practice
-- Seguire sempre la coerenza tra dichiarazione e comportamento delle closure.
-- Aggiornare la doc ogni volta che si introduce una nuova action custom.
-- Vedi anche: [filament-best-practices.mdc](../../filament-best-practices.mdc)
-
-### Collegamenti
-- [Filament Best Practices](../../filament-best-practices.md)
-- [XotBaseResource Guidelines](../../../Xot/docs/filament/README.md)
-
-## Regola: Firma corretta di getInfolistSchema nelle pagine View
-
-- Tutte le classi che estendono `XotBaseViewRecord` DEVONO implementare il metodo:
-
-```php
-protected function getInfolistSchema(): array
-```
-
-- **Mai** dichiarare il metodo come `public static`.
-- La firma deve essere identica a quella astratta nella classe base.
-- La logica può essere centralizzata nella risorsa (es. `StudioResource::getInfolistSchema()`), ma la firma deve essere rispettata.
-
-### Motivazione, filosofia, zen
-- Coerenza con la base Xot: tutte le pagine View sono polimorfe e lavorano su istanza, non su classe.
-- Evita errori di compatibilità e override accidentali.
-- Permette l'override futuro senza breaking change.
-- Segue la regola DRY: la logica può essere centralizzata, la firma deve essere coerente.
-
-### Collegamenti
-- [README Filament Xot](../../../Xot/docs/filament/README.md)
-- [filament-best-practices.mdc](../../filament-best-practices.mdc)
-
-## Checklist finale (aggiornata)
-- [ ] Tutte le pagine View implementano `protected function getInfolistSchema(): array`
-- [ ] Nessuna pagina View dichiara il metodo come static o public
-- [ ] La logica è centralizzata nella risorsa, la firma è sempre coerente
-
-## Gestione indirizzi (addresses)
-
-La gestione degli indirizzi in StudioResource avviene tramite un repeater che riutilizza lo schema del form di AddressResource:
-
-```php
-'addresses' => Forms\Components\Repeater::make('addresses')
-    ->relationship('addresses')
-    ->schema(Modules\Geo\Filament\Resources\AddressResource::getFormSchema())
-```
-
-### Motivazione
-- DRY: nessuna duplicazione di logica
-- Coerenza UI tra tutti i moduli
-- Manutenzione centralizzata
-
-## Collegamenti
-- [../../Geo/docs/filament.md](../../Geo/docs/filament.md)
-- [../../Geo/docs/models/address.md](../../Geo/docs/models/address.md)
-- [../../Geo/docs/has-address-trait.md](../../Geo/docs/has-address-trait.md)
+- Usare closure senza dichiarazione `: void`

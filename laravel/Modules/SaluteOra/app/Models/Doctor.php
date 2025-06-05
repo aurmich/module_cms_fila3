@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Tenant\Traits\BelongsToTenant;
+use Modules\SaluteOra\Models\DoctorStudio;
 use Parental\HasParent;
 
 /**
@@ -39,8 +39,6 @@ use Parental\HasParent;
 class Doctor extends User
 {
     use HasParent;
-    use SoftDeletes;
-    use BelongsToTenant;
 
     /**
      * Gli attributi che sono mass assignable.
@@ -85,17 +83,43 @@ class Doctor extends User
         return $this->hasOne(DoctorRegistrationWorkflow::class, 'doctor_id');
     }
 
+
+
     /**
-     * Verifica se il dottore ha dati validi per la transizione di stato.
+     * Relazione molti-a-molti con gli studi in cui il dottore lavora.
      *
-     * @return bool
+     * IMPORTANTE: Questa è una relazione cross-database, dove:
+     * - Doctor risiede nel database 'user'
+     * - Studio risiede nel database 'salute_ora'
+     * - doctor_studio (pivot) risiede nel database 'saluteora_data'
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function hasValidData(): bool
+    public function studios(): BelongsToMany
     {
-        return parent::hasValidData() &&
-            !empty($this->first_name) &&
-            !empty($this->last_name) &&
-            !empty($this->registration_number) &&
-            !empty($this->specialization);
+        /*
+        // Utilizziamo parametri espliciti per la relazione cross-database
+        $pivot = \Modules\SaluteOra\Models\DoctorStudio::class;
+        $pivotModel = app($pivot);
+
+        // Definiamo esplicitamente le tabelle con le loro connessioni
+        $studioTable = 'salute_ora.studios'; // Specifichiamo esplicitamente il database
+        $pivotTable = $pivotModel->getConnection()->getDatabaseName() . '.' . $pivotModel->getTable();
+
+        return $this->belongsToMany(
+            \Modules\SaluteOra\Models\Studio::class,
+            $pivotTable,
+            'user_id',
+            'studio_id',
+            'id',
+            'id',
+            'studios'
+        )
+        ->using($pivot)
+        ->withPivot(['is_primary', 'schedule'])
+        ->withTimestamps();
+        */
+        return $this->belongsToManyX(Studio::class);
     }
+    // Implementazione della relazione BelongsToMany con Studio completata
 }

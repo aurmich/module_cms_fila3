@@ -1,0 +1,61 @@
+# Principio di Indipendenza tra Moduli
+
+## Regola Fondamentale
+
+I moduli di base (come `User`) **NON DEVONO MAI** contenere riferimenti o dipendenze verso moduli specifici (come `SaluteOra`).
+
+## Corretto ✅
+
+```php
+// Nel modulo specifico (SaluteOra), gestiamo i nostri enum specifici
+namespace Modules\SaluteOra\Models;
+
+use Modules\SaluteOra\Enums\UserTypeEnum;
+
+class User extends \Modules\User\Models\BaseUser
+{
+    // Override del getter per gestire l'enum specifico
+    public function getTypeAttribute($value): ?UserTypeEnum
+    {
+        // Implementazione specifica qui
+    }
+}
+```
+
+## Errato ❌
+
+```php
+// Nel modulo base (User), MAI riferirsi a moduli specifici
+namespace Modules\User\Models;
+
+class BaseUser extends Authenticatable
+{
+    protected function casts(): array
+    {
+        return [
+            // ERRORE IMPERDONABILE! Dipendenza verso un modulo specifico
+            'type' => \Modules\SaluteOra\Enums\UserTypeEnum::class,
+        ];
+    }
+}
+```
+
+## Motivazione
+
+1. **Evitare Dipendenze Circolari**: I moduli di base devono essere riutilizzabili in diversi progetti
+2. **Principio di Astrazione**: I livelli più bassi non devono conoscere quelli più alti
+3. **Legge di Demetra**: Un componente deve avere conoscenza limitata di altri componenti
+4. **Purezza Modulare**: Ogni modulo mantiene la propria integrità e responsabilità
+
+## Errore da Non Commettere Mai
+
+Inserire un riferimento a `\Modules\SaluteOra\Enums\UserTypeEnum` nel modulo `User` generico è un errore architetturale grave che:
+
+1. Rende impossibile utilizzare il modulo `User` senza `SaluteOra`
+2. Viola il principio di modularità e indipendenza
+3. Contamina un modulo generico con dipendenze specifiche
+4. Crea un accoppiamento stretto tra componenti che dovrebbero essere separati
+
+## Documentazione Completa
+
+Vedi `/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/models/enum-handling.md`

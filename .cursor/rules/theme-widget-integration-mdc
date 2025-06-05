@@ -27,11 +27,11 @@ I temi NON devono mai ricreare funzionalità esistenti nei moduli Filament. Devo
 // Fare questo - richiama widget esistente
 @php
     $widgetClass = match (auth()->user()?->type) {
-        \Modules\SaluteOra\Enums\UserType::PATIENT =>
+        \Modules\SaluteOra\Enums\UserTypeEnum::PATIENT =>
             \Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class,
-        \Modules\SaluteOra\Enums\UserType::DOCTOR =>
+        \Modules\SaluteOra\Enums\UserTypeEnum::DOCTOR =>
             \Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class,
-        \Modules\SaluteOra\Enums\UserType::ADMIN =>
+        \Modules\SaluteOra\Enums\UserTypeEnum::ADMIN =>
             \Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget::class,
         default => null
     };

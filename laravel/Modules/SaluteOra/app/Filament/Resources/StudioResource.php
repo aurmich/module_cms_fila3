@@ -14,6 +14,7 @@ use Modules\SaluteOra\Models\Studio;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Filament\Resources\StudioResource\Pages;
+use Modules\SaluteOra\Filament\Resources\StudioResource\RelationManagers;
 use Modules\Geo\Models\Address;
 use Modules\Geo\Filament\Resources\AddressResource;
 
@@ -72,7 +73,7 @@ class StudioResource extends XotBaseResource
 
             'services' => Forms\Components\TagsInput::make('services')
                 ->columnSpanFull(),
-            
+
             'active' => Forms\Components\Toggle::make('active')
                 ->default(true),
             */
@@ -90,5 +91,5 @@ class StudioResource extends XotBaseResource
         ];
     }
 
-    
+   
 }

@@ -13,7 +13,7 @@ use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
 
 
 
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 
 

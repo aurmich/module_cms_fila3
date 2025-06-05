@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
-use Illuminate\Auth\Middleware\Authenticate as MiddlewareAuthenticate;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Support\Facades\Auth;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Illuminate\Support\Facades\Auth;
-use Modules\SaluteOra\Enums\UserType;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Modules\Xot\Actions\Panel\ApplyTenancyToPanelAction;
+use Modules\Xot\Providers\Filament\XotBasePanelProvider;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget;
 use Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget;
-use Modules\Xot\Providers\Filament\XotBasePanelProvider;
-use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
+use Illuminate\Auth\Middleware\Authenticate as MiddlewareAuthenticate;
 
 /**
  * Provider per il pannello admin di SaluteOra.
@@ -43,7 +44,7 @@ class AdminPanelProvider extends XotBasePanelProvider
     {
         // Configurazione pannello base
         $panel = parent::panel($panel);
-
+        $panel = app(ApplyTenancyToPanelAction::class)->execute($panel);
         // Aggiungi configurazioni specifiche per il modulo SaluteOra
         $this->configurePanel($panel);
 

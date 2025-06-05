@@ -34,7 +34,11 @@ class Place extends BaseModel implements HasGeolocation
         'point_of_interest',
         'political'
     ];
+<<<<<<< HEAD:app/Models/Place.php
     
+=======
+    use HasFactory;
+>>>>>>> 2bcfd38 (fix Address):laravel/Modules/Geo/app/Models/Place.php
 
     protected $fillable = [
         'id', 'post_id', 'post_type', 'model_id', 'model_type',

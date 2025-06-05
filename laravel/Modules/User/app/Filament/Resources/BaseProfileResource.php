@@ -15,7 +15,7 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 
 
 
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 
 

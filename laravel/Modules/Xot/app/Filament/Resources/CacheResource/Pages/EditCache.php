@@ -10,7 +10,7 @@ use Modules\Xot\Filament\Resources\CacheResource;
 
 
 
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 
 

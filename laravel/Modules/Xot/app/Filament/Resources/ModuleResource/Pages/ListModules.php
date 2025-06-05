@@ -16,7 +16,7 @@ use Modules\Xot\Filament\Resources\ModuleResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Nwidart\Modules\Facades\Module;
 
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManagers\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class ListModules extends XotBaseListRecords
 {
@@ -79,7 +79,7 @@ class ListModules extends XotBaseListRecords
             EditAction::make()
                 ,
             DeleteAction::make()
-                
+
                 ->requiresConfirmation(),
         ];
     }

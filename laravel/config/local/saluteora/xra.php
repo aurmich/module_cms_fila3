@@ -14,4 +14,5 @@ return [
     'disable_frontend_dynamic_route' => false,
     'register_adm_theme' => false,
     'register_pub_theme' => true,
+    'tenant_class' => 'Modules\SaluteOra\Models\Studio',
 ];

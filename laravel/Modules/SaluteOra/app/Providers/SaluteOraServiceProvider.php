@@ -35,6 +35,17 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../../config/auth.php', 'auth'
         );
+        
+        // Registra gli observer dei modelli
+        $this->bootObservers();
+    }
+    
+    /**
+     * Registra gli observer per i modelli del modulo.
+     */
+    protected function bootObservers(): void
+    {
+        \Modules\SaluteOra\Models\Studio::observe(\Modules\SaluteOra\Observers\StudioObserver::class);
     }
 
     /*
