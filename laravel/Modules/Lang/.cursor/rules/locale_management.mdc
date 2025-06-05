@@ -1,0 +1,166 @@
+# Gestione delle Lingue - Riferimento Veloce
+
+## Configurazione Base
+
+### Impostazioni Principali
+```php
+// config/app.php
+'locale' => 'it',
+'fallback_locale' => 'en',
+'faker_locale' => 'it_IT',
+```
+
+### mcamara/laravel-localization
+```php
+// config/laravellocalization.php
+'supportedLocales' => [
+    'it' => ['name' => 'Italiano', 'script' => 'Latn', 'native' => 'Italiano', 'regional' => 'it_IT'],
+    'en' => ['name' => 'English', 'script' => 'Latn', 'native' => 'English', 'regional' => 'en_GB'],
+],
+'hideDefaultLocaleInURL' => true,
+```
+
+## Helper per la Lingua
+
+### Impostare la Lingua
+```php
+App::setLocale('it');
+Session::put('locale', 'it');
+```
+
+### Ottenere la Lingua Corrente
+```php
+$locale = App::currentLocale();
+$locale = app()->getLocale();
+```
+
+### Verificare la Lingua
+```php
+if (App::isLocale('it')) {
+    // Codice per l'italiano
+}
+
+// Verifica se è supportata
+$isSupported = in_array($locale, array_keys(config('laravellocalization.supportedLocales')));
+```
+
+## Middleware per la Lingua
+
+### Implementazione Base
+```php
+// app/Http/Middleware/SetLocale.php
+public function handle($request, Closure $next)
+{
+    if (Session::has('locale')) {
+        App::setLocale(Session::get('locale'));
+    }
+    
+    return $next($request);
+}
+```
+
+### Registrazione Middleware
+```php
+// app/Http/Kernel.php
+protected $middlewareGroups = [
+    'web' => [
+        // ...
+        \App\Http\Middleware\SetLocale::class,
+    ],
+];
+```
+
+## Best Practice
+
+### 1. Struttura delle Traduzioni
+```
+lang/
+├── it/
+│   ├── auth.php
+│   ├── validation.php
+│   └── modules/
+│       ├── patient.php
+│       └── doctor.php
+└── en/
+    └── ...
+```
+
+### 2. Helper Personalizzati
+```php
+// Ottenere il nome della lingua
+function get_locale_name($locale = null)
+{
+    return LaravelLocalization::getSupportedLocales()[$locale ?? App::getLocale()]['name'] ?? $locale;
+}
+
+// Traduzione con fallback
+function translate_with_fallback($key, $replace = [], $locale = null)
+{
+    $translation = __($key, $replace, $locale);
+    
+    if ($translation === $key && App::getLocale() !== config('app.fallback_locale')) {
+        $translation = __($key, $replace, config('app.fallback_locale'));
+    }
+    
+    return $translation;
+}
+```
+
+## Comandi Utili
+
+```bash
+# Pubblicare le traduzioni Laravel
+php artisan lang:publish
+
+# Verificare le traduzioni mancanti
+php artisan translations:missing it
+
+# Pulire la cache
+php artisan view:clear
+php artisan config:clear
+```
+
+## Esempi Avanzati
+
+### Middleware Completo
+```php
+public function handle($request, Closure $next)
+{
+    // 1. Verifica la lingua nella sessione
+    if (Session::has('locale')) {
+        App::setLocale(Session::get('locale'));
+    }
+    
+    // 2. Verifica la lingua nell'URL
+    $locale = $request->segment(1);
+    if (in_array($locale, array_keys(config('laravellocalization.supportedLocales')))) {
+        App::setLocale($locale);
+        Session::put('locale', $locale);
+    }
+    
+    // 3. Verifica l'header Accept-Language
+    if (!$request->hasHeader('X-Language')) {
+        $preferredLanguage = $request->getPreferredLanguage(
+            array_keys(config('laravellocalization.supportedLocales'))
+        );
+        
+        if ($preferredLanguage) {
+            App::setLocale($preferredLanguage);
+            Session::put('locale', $preferredLanguage);
+        }
+    }
+    
+    return $next($request);
+}
+```
+
+### Test delle Traduzioni
+```php
+// tests/Feature/LocaleTest.php
+public function test_locale_switch()
+{
+    $response = $this->get(route('change-locale', 'en'));
+    $response->assertSessionHas('locale', 'en');
+    $this->assertEquals('en', app()->getLocale());
+}
+```

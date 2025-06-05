@@ -1,0 +1,151 @@
+# Riferimento Veloce: Traduzione Validazioni
+
+## Attributi Personalizzati
+```php
+// Form Request
+public function attributes()
+{
+    return [
+        'email' => 'indirizzo email',
+        'password' => 'password',
+    ];
+}
+```
+
+## Messaggi Personalizzati
+```php
+public function messages()
+{
+    return [
+        'email.required' => 'Il campo :attribute è obbligatorio.',
+        'email.email' => 'Inserisci un indirizzo email valido.',
+        'password.required' => 'La :attribute è obbligatoria.',
+    ];
+}
+```
+
+## Campi Array
+```php
+public function attributes()
+{
+    return [
+        'products.*.name' => 'nome prodotto',
+        'products.*.quantity' => 'quantità',
+    ];
+}
+
+public function messages()
+{
+    return [
+        'products.*.name.required' => 'Il nome del prodotto :position è obbligatorio.',
+        'products.*.quantity.integer' => 'La quantità deve essere un numero intero.',
+    ];
+}
+```
+
+## BaseFormRequest
+```php
+// app/Http/Requests/BaseFormRequest.php
+abstract class BaseFormRequest extends FormRequest
+{
+    public function attributes()
+    {
+        return [
+            'email' => __('auth.fields.email'),
+            'password' => __('auth.fields.password'),
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'required' => 'Il campo :attribute è obbligatorio.',
+            'email' => 'Inserisci un indirizzo email valido.',
+        ];
+    }
+}
+```
+
+## Comandi Utili
+
+```bash
+# Pulisci la cache delle viste
+dev@1d1b1b1b1b1b:/var/www/html$ php artisan view:clear
+
+# Pulisci la cache della configurazione
+dev@1d1b1b1b1b1b:/var/www/html$ php artisan config:clear
+
+# Pulisci la cache dell'applicazione
+dev@1d1b1b1b1b1b:/var/www/html$ php artisan cache:clear
+```
+
+## Struttura File di Traduzione
+
+`lang/it/validation.php`
+```php
+return [
+    'accepted' => 'Il campo :attribute deve essere accettato.',
+    'active_url' => 'Il campo :attribute non è un URL valido.',
+    // ...
+    'attributes' => [
+        'name' => 'nome',
+        'email' => 'indirizzo email',
+    ],
+];
+```
+
+## Esempi di Utilizzo
+
+### Validazione Base
+```php
+// Controller
+$validated = $request->validate([
+    'email' => 'required|email',
+    'password' => 'required|min:8',
+]);
+```
+
+### Form Request
+```php
+// app/Http/Requests/StoreUserRequest.php
+class StoreUserRequest extends BaseFormRequest
+{
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
+    }
+    
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), [
+            'name' => __('user.fields.name'),
+            'email' => __('user.fields.email'),
+        ]);
+    }
+}
+```
+
+## Suggerimenti per il Debug
+
+1. **Verifica le traduzioni mancanti**
+   ```bash
+   grep -r "__('" resources/views/
+   ```
+
+2. **Cerca chiavi di traduzione non utilizzate**
+   ```bash
+   grep -r "__('auth." lang/
+   ```
+
+3. **Verifica i messaggi di validazione**
+   ```php
+   // In un controller
+   $validator = Validator::make($request->all(), $rules);
+   if ($validator->fails()) {
+       dd($validator->errors());
+   }
+   ```

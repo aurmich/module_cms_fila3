@@ -1,0 +1,109 @@
+# Quick Reference: mcamara/laravel-localization
+
+## Installazione Rapida
+
+```bash
+composer require mcamara/laravel-localization
+php artisan vendor:publish --provider="Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+```
+
+## Configurazione Base
+
+`config/laravellocalization.php`
+```php
+'supportedLocales' => [
+    'it' => ['name' => 'Italiano', 'script' => 'Latn', 'native' => 'Italiano', 'regional' => 'it_IT'],
+    'en' => ['name' => 'English', 'script' => 'Latn', 'native' => 'English', 'regional' => 'en_GB'],
+],
+'hideDefaultLocaleInURL' => true,
+'useAcceptLanguageHeader' => true,
+```
+
+## Implementazione Route
+
+```php
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+// Gruppo principale
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localize']
+], function() {
+    // Esempio route con traduzione
+    Route::get(LaravelLocalization::transRoute('routes.about'), [AboutController::class, 'index']);
+});
+
+// Route API (senza localizzazione)
+Route::prefix('api')->group(function() {
+    Route::post('/webhook', [WebhookController::class, 'handle']);
+});
+```
+
+## Helper per le Viste
+
+### Selettore Lingua
+```blade
+@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+       class="{{ $localeCode === app()->getLocale() ? 'active' : '' }}">
+        {{ $properties['native'] }}
+    </a>
+@endforeach
+```
+
+### Link Localizzati
+```blade
+<!-- Link alla home nella lingua corrente -->
+<a href="{{ LaravelLocalization::getLocalizedURL() }}">Home</a>
+
+<!-- Link specificando la lingua -->
+<a href="{{ LaravelLocalization::getLocalizedURL('it') }}">Italiano</a>
+```
+
+## Comandi Artisan
+
+```bash
+# Cache route tradotte
+php artisan route:trans:cache
+
+# Mostra route tradotte
+php artisan route:trans:list it
+
+# Pulisci cache
+php artisan route:trans:clear
+```
+
+## Soluzione Problemi Comuni
+
+### Livewire
+```php
+// In AppServiceProvider
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/livewire/update', $handle)
+        ->middleware('web')
+        ->prefix(LaravelLocalization::setLocale());
+});
+```
+
+### Route API
+Aggiungi le route API al gruppo di esclusione in `config/laravellocalization.php`:
+```php
+'urlsIgnored' => ['api/*'],
+```
+
+### Traduzioni Mancanti
+Crea i file di traduzione in `resources/lang/{locale}/routes.php`:
+```php
+return [
+    'about' => 'chi-siamo',
+    'contact' => 'contatti',
+];
+```
+
+## Best Practice
+
+1. Usa sempre `LaravelLocalization::getLocalizedURL()` per generare URL
+2. Mantieni le chiavi di traduzione in inglese
+3. Testa tutte le lingue dopo ogni modifica
+4. Usa `route:trans:cache` invece di `route:cache`
+5. Documenta le nuove chiavi di traduzione

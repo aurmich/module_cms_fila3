@@ -1,0 +1,27 @@
+{
+    "name": "saluteora/theme-two",
+    "description": "Tema Two per SaluteOra",
+    "type": "theme",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "SaluteOra\\Themes\\Two\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SaluteOra\\Themes\\Two\\ThemeServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^10.0",
+        "filament/filament": "^3.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "pestphp/pest": "^2.0"
+    }
+}

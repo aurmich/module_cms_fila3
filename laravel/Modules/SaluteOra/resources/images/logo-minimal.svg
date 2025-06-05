@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 150 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SaluteOra">
+    <title>SaluteOra</title>
+
+    <!-- Icona - Croce stilizzata -->
+    <g id="icon" class="fill-primary-600 dark:fill-primary-400">
+        <!-- Base della croce -->
+        <path d="M16 4c-6.627 0-12 5.373-12 12 0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.627-5.373-12-12-12zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z"/>
+        <!-- Braccio orizzontale -->
+        <path d="M16 8c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z"/>
+        <!-- Braccio verticale -->
+        <path d="M16 12c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4z"/>
+    </g>
+
+    <!-- Testo "SaluteOra" con font minimalista -->
+    <g id="text" class="fill-gray-900 dark:fill-gray-100">
+        <!-- Lettera S -->
+        <path d="M40 8c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2H42c-1.1 0-2-.9-2-2V8z"/>
+        <!-- Lettera A -->
+        <path d="M58 8h4l6 16h-4l-1-3h-8l-1 3h-4l6-16zm2 4l-2 6h4l-2-6z"/>
+        <!-- Lettera L -->
+        <path d="M70 8h4v14h-4V8z"/>
+        <!-- Lettera U -->
+        <path d="M76 8h4v11c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V8h4v11c0 3.3-2.7 6-6 6h-4c-3.3 0-6-2.7-6-6V8z"/>
+        <!-- Lettera T -->
+        <path d="M92 8h12v4H96v10h-4V12H92V8z"/>
+        <!-- Lettera E -->
+        <path d="M106 8h12v4h-8v3h6v4h-6v5h8v4h-12V8z"/>
+        <!-- Lettera O -->
+        <path d="M120 8c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+        <!-- Lettera R -->
+        <path d="M134 8h4l6 8-6 8h-4V8zm0 8h2l2-4-2-4h-2v8z"/>
+        <!-- Lettera A -->
+        <path d="M146 8h4l6 16h-4l-1-3h-8l-1 3h-4l6-16zm2 4l-2 6h4l-2-6z"/>
+    </g>
+</svg>

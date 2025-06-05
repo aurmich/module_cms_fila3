@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Notify\Contracts;
+
+use Modules\Notify\Datas\SmsData;
+
+/**
+ * Interface per tutte le azioni di invio SMS.
+ * 
+ * Tutte le implementazioni di provider SMS devono implementare questa interfaccia
+ * per garantire una coerenza nel modo in cui vengono gestiti i messaggi SMS
+ * indipendentemente dal provider specifico utilizzato.
+ */
+interface SmsProviderActionInterface
+{
+    /**
+     * Invia un messaggio SMS utilizzando il provider specifico.
+     *
+     * @param SmsData $smsData I dati del messaggio SMS da inviare
+     * @return array Risultato dell'operazione con almeno la chiave 'success'
+     * @throws \Exception Se l'invio fallisce per motivi tecnici
+     */
+    public function execute(SmsData $smsData): array;
+}

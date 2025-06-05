@@ -1,0 +1,140 @@
+---
+description: Regole per il sistema di traduzione in applicazioni Laravel con Filament, che definiscono la struttura delle chiavi di traduzione, l'organizzazione dei file e le best practices per garantire un'applicazione multilingua manutenibile e scalabile.
+globs: *.php, *.blade.php, resources/lang/**/*.php
+---
+
+# Regole per il Sistema di Traduzione
+
+## When
+
+- Stai creando o modificando file di traduzione
+- Stai utilizzando la funzione `__()` per tradurre testo
+- Stai definendo componenti Filament con etichette, placeholder o messaggi di aiuto
+- Stai creando notifiche che includono testo da tradurre
+- Stai utilizzando enum con valori che devono essere visualizzati all'utente
+
+## Then
+
+- Utilizza sempre chiavi di traduzione strutturate gerarchicamente (`modulo::risorsa.fields.campo.label`)
+- NON utilizzare mai testo diretto nelle funzioni di traduzione (`__('Accedi')`)
+- NON utilizzare mai il metodo `->label()` nei componenti Filament
+- Organizza i file di traduzione per modulo e risorsa
+- Implementa metodi helper nelle enum per ottenere le etichette tradotte
+- Imposta esplicitamente il destinatario quando utilizzi `SpatieEmail` nelle notifiche
+
+## Because
+
+- Le chiavi di traduzione strutturate migliorano la manutenibilità e facilitano l'aggiunta di nuove lingue
+- Il testo diretto nelle funzioni di traduzione rende difficile la gestione delle traduzioni
+- Il metodo `->label()` bypassa il sistema di traduzione automatico gestito dal LangServiceProvider
+- L'organizzazione dei file di traduzione per modulo e risorsa facilita la gestione delle traduzioni
+- I metodi helper nelle enum centralizzano la logica di traduzione e migliorano la coerenza
+- `SpatieEmail` non imposta automaticamente il destinatario basandosi sull'oggetto `$notifiable`
+
+## Examples
+
+### Struttura Gerarchica delle Chiavi
+
+```php
+// CORRETTO
+__('patient::doctor-resource.fields.first_name.label')
+__('user::auth.login.button.label')
+__('dental::appointment.fields.date.label')
+
+// ERRATO
+__('Nome')
+__('Accedi')
+__('Data')
+```
+
+### Organizzazione dei File di Traduzione
+
+```php
+// resources/lang/it/patient/doctor-resource.php
+return [
+    'fields' => [
+        'first_name' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome',
+            'help' => 'Inserisci il nome del dottore',
+        ],
+        'last_name' => [
+            'label' => 'Cognome',
+            'placeholder' => 'Inserisci il cognome',
+            'help' => 'Inserisci il cognome del dottore',
+        ],
+    ],
+    'actions' => [
+        'create' => [
+            'label' => 'Crea Dottore',
+            'success' => 'Dottore creato con successo',
+            'error' => 'Errore durante la creazione del dottore',
+        ],
+    ],
+];
+```
+
+### Componenti Filament
+
+```php
+// CORRETTO
+Forms\Components\TextInput::make('first_name')
+    // Il LangServiceProvider gestirà automaticamente la traduzione
+
+// ERRATO
+Forms\Components\TextInput::make('first_name')
+    ->label('Nome')
+```
+
+### Enum con Traduzioni
+
+```php
+enum DoctorStatus: string
+{
+    case PENDING = 'pending';
+    case APPROVED = 'approved';
+    case REJECTED = 'rejected';
+    
+    public function getLabel(): string
+    {
+        return match($this) {
+            self::PENDING => __('patient::enums.doctor_status.pending'),
+            self::APPROVED => __('patient::enums.doctor_status.approved'),
+            self::REJECTED => __('patient::enums.doctor_status.rejected'),
+        };
+    }
+}
+```
+
+### Notifiche con SpatieEmail
+
+```php
+public function toMail($notifiable): SpatieEmail
+{
+    $email = new SpatieEmail($this->record, $this->slug);
+    
+    // ESSENZIALE: imposta esplicitamente il destinatario
+    if (method_exists($notifiable, 'routeNotificationFor')) {
+        $email->to($notifiable->routeNotificationFor('mail'));
+    }
+    
+    return $email;
+}
+```
+
+## Common Pitfalls
+
+- **Errore**: Utilizzare testo diretto nelle funzioni di traduzione
+  **Soluzione**: Utilizzare chiavi di traduzione strutturate
+
+- **Errore**: Utilizzare il metodo `->label()` nei componenti Filament
+  **Soluzione**: Lasciare che il LangServiceProvider gestisca automaticamente le traduzioni
+
+- **Errore**: Non impostare esplicitamente il destinatario quando si utilizza `SpatieEmail`
+  **Soluzione**: Aggiungere sempre `$email->to($notifiable->routeNotificationFor('mail'))`
+
+- **Errore**: Duplicare le traduzioni in più file
+  **Soluzione**: Organizzare le traduzioni per modulo e risorsa
+
+- **Errore**: Hardcodare le etichette delle enum
+  **Soluzione**: Utilizzare metodi helper per ottenere le etichette tradotte

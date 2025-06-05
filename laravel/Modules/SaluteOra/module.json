@@ -1,0 +1,19 @@
+{
+    "name": "SaluteOra",
+    "alias": "saluteora",
+    "description": "Gestione dei pazienti",
+    "keywords": ["pazienti", "isee", "anamnesi", "documenti", "gestanti"],
+    "priority": 10,
+    "active": 0,
+    "order": 10,
+    "providers": [
+        "Modules\\SaluteOra\\Providers\\SaluteOraServiceProvider",
+        "Modules\\SaluteOra\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "aliases": {
+    },
+    "files": [
+
+    ]
+
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SaluteOra Icon">
+  <title>SaluteOra Icon</title>
+  
+  <!-- Sfondo circolare blu scuro -->
+  <circle cx="25" cy="25" r="25" fill="#0d2b4a"/>
+  
+  <!-- Lettere "SO" stilizzate in bianco -->
+  <g id="icon" fill="#ffffff">
+    <!-- S stilizzata -->
+    <path d="M15 15c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2v-2zm0 10c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2v-2z" stroke-width="0.5" stroke="#ffffff"/>
+    
+    <!-- O stilizzata -->
+    <path d="M25 25c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10zm4 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6z" stroke-width="0.5" stroke="#ffffff"/>
+  </g>
+  
+  <!-- Elementi decorativi - onde fluide in background -->
+  <path d="M5 35c5-2 10 2 15 0s10-2 15 0 10 2 15 0" stroke="#1a4980" fill="none" stroke-width="1.5" opacity="0.3"/>
+  <path d="M5 40c5-2 10 2 15 0s10-2 15 0 10 2 15 0" stroke="#1a4980" fill="none" stroke-width="1.5" opacity="0.2"/>
+</svg>

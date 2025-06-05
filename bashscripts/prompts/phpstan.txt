@@ -1,0 +1,17 @@
+PHPStan è già installato nella cartella laravel e si esegue con ./vendor/bin/phpstan. Analizza ogni modulo in laravel/Modules (dal livello 1 al 10) in modo sistematico e strutturato, salvando i report JSON nella cartella docs/phpstan di ciascun modulo (es: laravel/Modules/Auth/docs/phpstan/level_1.json). Prima di correggere, studia e aggiorna la documentazione specifica del modulo e crea collegamenti bidirezionali con la documentazione generale nella cartella docs della root, che funge da indice centrale.
+
+Per ogni correzione:
+- Aggiorna prima la documentazione tecnica del modulo, poi quella generale nella root.
+- Implementa la soluzione architettonicamente più coerente, non la più facile.
+- Dopo ogni correzione, verifica l'integrità dell'applicazione.
+- Procedi in modo autonomo, sistematico e senza interruzioni.
+
+Regole chiave:
+- Ogni modulo è indipendente e ha il proprio composer.json, namespace e autoload (senza "app" nel namespace).
+- Non modificare mai phpstan.neon.
+- Le funzioni getListTableColumns, getTableActions e getTableBulkActions devono restituire array con chiavi stringa. Se restituiscono solo azioni standard (ViewAction, EditAction, DeleteAction o DeleteBulkAction), rimuovile; se contengono azioni aggiuntive, includi ...parent::getTableActions().
+- Le funzionalità come ->colors($metatag->getColors()) devono avere i metodi definiti in MetatagData; se mancanti, documenta il perché e implementali nel modulo corretto.
+- Non usare mai ->label(''), ma gestire le etichette tramite i file di traduzione localizzati nei moduli (LangServiceProvider).
+- Se servono script shell, usa solo cartelle bashscripts esistenti.
+
+La documentazione approfondita e tecnica si trova nelle cartelle docs di ciascun modulo; la root contiene solo l'indice e i link bidirezionali. Dopo ogni livello di analisi fornisci un riepilogo delle modifiche, delle scelte architetturali e degli impatti futuri attesi.

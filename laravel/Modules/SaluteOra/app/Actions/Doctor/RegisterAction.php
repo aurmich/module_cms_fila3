@@ -1,0 +1,184 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\Actions\Doctor;
+
+use Modules\SaluteOra\Models\User;
+use Illuminate\Support\Facades\DB;
+use Modules\SaluteOra\Models\Doctor;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Modules\SaluteOra\Datas\DoctorData;
+use Modules\Notify\Emails\SpatieEmail;
+use Modules\Notify\Models\MailTemplate;
+use Modules\SaluteOra\Enums\DoctorStatus;
+use Illuminate\Validation\ValidationException;
+use Modules\SaluteOra\Enums\DoctorRegistrationStatus;
+use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
+
+class RegisterAction
+{
+    /**
+     * Esegue l'azione di registrazione del dottore.
+     *
+     * @param array<string, mixed> $data
+     * @return Doctor
+     */
+    public function execute(array $data): Doctor
+    {
+        // Verifica se esiste già un utente con questa email
+        // Nota: Dobbiamo cercare nella tabella users, non solo tra i dottori
+        $existingUser = Doctor::where('email', $data['email'])->first();
+        if ($existingUser) {
+            /*
+            throw new \Illuminate\Validation\ValidationException([
+                'email' => ['Un dottore con questa email è già registrato.'],
+            ]);
+            */
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'email' => ['Validation Message #1'],
+                'field_name_2' => ['Validation Message #2'],
+             ]);
+             throw $error;
+        }
+        $doctor = Doctor::create($data);
+        // Creazione del workflow di registrazione
+        DoctorRegistrationWorkflow::create([
+            'doctor_id' => $doctor->id,
+            'current_step' => 'personal-info',
+            'status' => 'pending',
+            'started_at' => now(),
+            'last_interaction_at' => now(),
+            'session_id' => session()->getId(),
+        ]);
+        // Invio email di conferma
+        $this->sendConfirmationEmail($doctor);
+        return $doctor;
+        /*
+        if ($existingUser) {
+            // Se l'utente esiste già, verifica se è già un dottore
+            if ($existingUser->type === 'doctor') {
+                // L'utente è già registrato come dottore
+                throw new \Illuminate\Validation\ValidationException(
+                    validator([], [])->errors()->add('email', 'Un dottore con questa email è già registrato.')
+                );
+            }
+
+            // Utilizziamo una transazione per garantire l'integrità dei dati
+            return DB::transaction(function () use ($existingUser, $data) {
+                // Se l'utente esiste ma non è un dottore, aggiorna i suoi dati
+                $existingUser->update([
+                    'type' => 'doctor',
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'certifications' => $data['certifications'] ?? null,
+                ]);
+
+                // Ricarica l'utente per ottenere l'istanza di Doctor
+                $doctor = Doctor::where('user_id', $existingUser->id)->first();
+
+                if ($doctor) {
+                    return $doctor;
+                }
+
+                // Se non esiste un record Doctor, crealo
+                $status = $this->getDoctorRegistrationStatus();
+                $doctorData = array_merge(
+                    $data,
+                    ['user_id' => $existingUser->id, 'status' => $status]
+                );
+                unset($doctorData['email'], $doctorData['password'], $doctorData['first_name'], $doctorData['last_name']);
+
+                return Doctor::create($doctorData);
+            });
+        } else {
+            // Se l'utente non esiste, crealo utilizzando una transazione
+            return DB::transaction(function () use ($data) {
+                $userData = [
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'type' => 'doctor',
+                ];
+
+                $user = User::create($userData);
+
+                $status = $this->getDoctorRegistrationStatus();
+                $doctorData = array_merge(
+                    $data,
+                    ['user_id' => $user->id, 'status' => $status]
+                );
+                unset($doctorData['first_name'], $doctorData['last_name'], $doctorData['email'], $doctorData['password']);
+
+                $doctor = Doctor::create($doctorData);
+
+                // Creazione del workflow di registrazione
+                DoctorRegistrationWorkflow::create([
+                    'doctor_id' => $doctor->id,
+                    'current_step' => 'personal-info',
+                    'status' => 'pending',
+                    'started_at' => now(),
+                    'last_interaction_at' => now(),
+                    'session_id' => session()->getId(),
+                ]);
+
+                // Invio email di conferma
+                $this->sendConfirmationEmail($doctor);
+
+                return $doctor;
+            });
+        }
+        */
+    }
+
+    /**
+     * Ottiene lo stato di registrazione del dottore.
+     *
+     * @return string
+     */
+    private function getDoctorRegistrationStatus(): string
+    {
+        if (!class_exists(DoctorRegistrationStatus::class)) {
+            return 'pending';
+        }
+
+        try {
+            $cases = DoctorRegistrationStatus::cases();
+            foreach ($cases as $case) {
+                if (strtolower($case->name) === 'pending') {
+                    return $case->value;
+                }
+            }
+            return 'pending';
+        } catch (\Exception $e) {
+            return 'pending';
+        }
+    }
+
+    /**
+     * Invia l'email di conferma della registrazione.
+     *
+     * @param Doctor $doctor
+     * @return void
+     */
+    protected function sendConfirmationEmail(Doctor $doctor): void
+    {
+        // Verifica se esiste già il template, altrimenti crealo
+        if (!MailTemplate::where('slug', 'doctor_registration_pending')->exists()) {
+            MailTemplate::create([
+                'mailable' => SpatieEmail::class,
+                'slug' => 'doctor_registration_pending',
+                'subject' => 'Benvenuto, {{ first_name }}',
+                'html_template' => '<p>Gentile {{ first_name }} {{ last_name }},</p><p>La tua registrazione come dottore è in attesa di approvazione. Ti contatteremo presto.</p>',
+                'text_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione come dottore è in attesa di approvazione. Ti contatteremo presto.'
+            ]);
+        }
+
+        $email = new SpatieEmail($doctor, 'doctor_registration_pending');
+        Mail::to($doctor->email)
+            ->locale(app()->getLocale())
+            ->send($email);
+    }
+}

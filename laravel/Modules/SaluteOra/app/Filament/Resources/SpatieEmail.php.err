@@ -1,0 +1,116 @@
+<?php
+
+namespace Modules\SaluteOra\Filament\Resources;
+
+use Illuminate\Contracts\Mail\Mailable;
+use Illuminate\Mail\Mailable as BaseMailable;
+
+class SpatieEmail extends BaseMailable implements Mailable
+{
+    public $to;
+    public $cc;
+    public $bcc;
+    public $replyTo;
+    public $from;
+    public $sender;
+    public $returnPath;
+    public $subject;
+    public $view;
+    public $textView;
+    public $viewData;
+    public $attachments;
+    public $rawAttachments;
+    public $callbacks;
+
+    public function __construct($to, $subject, $view, $textView, $viewData = [])
+    {
+        $this->to = $to;
+        $this->subject = $subject;
+        $this->view = $view;
+        $this->textView = $textView;
+        $this->viewData = $viewData;
+    }
+
+    public function to($address, $name = null)
+    {
+        $this->to = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function cc($address, $name = null)
+    {
+        $this->cc = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function bcc($address, $name = null)
+    {
+        $this->bcc = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function replyTo($address, $name = null)
+    {
+        $this->replyTo = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function from($address, $name = null)
+    {
+        $this->from = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function sender($address, $name = null)
+    {
+        $this->sender = ['address' => $address, 'name' => $name];
+        return $this;
+    }
+
+    public function returnPath($address)
+    {
+        $this->returnPath = $address;
+        return $this;
+    }
+
+    public function subject($subject)
+    {
+        $this->subject = $subject;
+        return $this;
+    }
+
+    public function view($view)
+    {
+        $this->view = $view;
+        return $this;
+    }
+
+    public function textView($textView)
+    {
+        $this->textView = $textView;
+        return $this;
+    }
+
+    public function viewData($viewData)
+    {
+        $this->viewData = $viewData;
+        return $this;
+    }
+
+    public function attach($file, array $options = [])
+    {
+        $this->attachments[] = ['file' => $file, 'options' => $options];
+        return $this;
+    }
+
+    public function attachData($data, $name, array $options = [])
+    {
+        $this->rawAttachments[] = ['data' => $data, 'name' => $name, 'options' => $options];
+        return $this;
+    }
+
+    public function build()
+    {
+        return $this;
+    }
+}

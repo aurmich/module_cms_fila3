@@ -1,0 +1,9 @@
+[
+    {
+        "name": "patient-registration-wizard",
+        "class": "PatientRegistrationWizard",
+        "module": null,
+        "path": null,
+        "ns": "Modules\\SaluteOra\\View\\Components\\PatientRegistrationWizard"
+    }
+]

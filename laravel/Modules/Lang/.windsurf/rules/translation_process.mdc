@@ -1,0 +1,138 @@
+# Regole per il Processo di Traduzione
+
+## Struttura dei File
+
+### Convenzioni
+- Usa `snake_case` per i nomi dei file
+- Mantieni le chiavi in inglese
+- Usa la notazione puntata per le gerarchie
+
+### Esempio Struttura
+```
+lang/
+├── it/
+│   ├── auth.php
+│   └── modules/
+│       └── patient.php
+└── en/
+    └── ...
+```
+
+## Best Practice
+
+### 1. Convenzioni per le Chiavi
+- Usa `snake_case`
+- Sii descrittivo ma conciso
+- Usa la notazione puntata per le gerarchie
+
+### 2. Gestione dei Parametri
+```php
+// Buono
+'welcome' => 'Benvenuto, :name!',
+
+// Utilizzo
+__('messages.welcome', ['name' => 'Mario']);
+
+// Da evitare
+'welcome_mario' => 'Benvenuto, Mario!',
+```
+
+### 3. Plurale/Singolare
+```php
+'apples' => '{0} Nessuna mela|{1} Una mela|[2,*] :count mele',
+```
+
+## Strumenti Consigliati
+
+### 1. Laravel Lang
+```bash
+# Installazione
+composer require laravel-lang/common --dev
+
+# Aggiungere una lingua
+php artisan lang:add it
+```
+
+### 2. Verifica Traduzioni
+```bash
+# Verificare le traduzioni mancanti
+php artisan translations:missing it
+
+# Verificare la sintassi
+php -l lang/it/auth.php
+```
+
+## Automazione
+
+### 1. Comandi Personalizzati
+
+`app/Console/Commands/ExtractTranslations.php`
+```php
+protected $signature = 'translations:extract 
+    {locale : The target locale}
+    {--source=resources/views : Source directory to scan}
+    {--output=lang : Output directory}';
+```
+
+### 2. GitHub Actions
+
+`.github/workflows/translations.yml`
+```yaml
+name: Check Translations
+
+on: [push, pull_request]
+
+jobs:
+  check-translations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Check Missing Translations
+        run: |
+          php artisan translations:missing it --json > missing.json
+          if [ -s missing.json ]; then
+            echo "Missing translations found!"
+            cat missing.json
+            exit 1
+          fi
+```
+
+## Validazione
+
+### Regole per le Chiavi
+- Le chiavi devono essere in inglese
+- Usa la notazione puntata per le gerarchie
+- Mantieni le chiavi brevi e descrittive
+
+### Esempi
+```php
+// Buono
+__('auth.failed')
+__('validation.required', ['attribute' => 'email'])
+
+// Da evitare
+__('autenticazione_fallita')
+__('il_campo_è_obbligatorio')
+```
+
+## Risoluzione dei Problemi
+
+### 1. Traduzioni Mancanti
+```bash
+# Verificare le chiavi mancanti
+php artisan translations:missing it
+
+# Verificare la cache
+php artisan view:clear
+php artisan config:clear
+```
+
+### 2. Problemi di Codifica
+```bash
+# Convertire in UTF-8 senza BOM
+find lang -type f -name "*.php" -o -name "*.json" | xargs dos2unix
+```

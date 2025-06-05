@@ -1,0 +1,154 @@
+# Regole per la Gestione delle Lingue
+
+## Configurazione
+
+### File di Configurazione
+
+`config/app.php`
+```php
+'locale' => 'it',  // Lingua predefinita
+'fallback_locale' => 'en',  // Lingua di fallback
+'faker_locale' => 'it_IT',  // Localizzazione per Faker
+```
+
+`config/laravellocalization.php`
+```php
+'supportedLocales' => [
+    'it' => [
+        'name' => 'Italiano',
+        'script' => 'Latn',
+        'native' => 'Italiano',
+        'regional' => 'it_IT',
+    ],
+    'en' => [
+        'name' => 'English',
+        'script' => 'Latn',
+        'native' => 'English',
+        'regional' => 'en_GB',
+    ],
+],
+'hideDefaultLocaleInURL' => true,
+```
+
+## Convenzioni di Codice
+
+### Struttura delle Cartelle
+```
+lang/
+├── it/
+│   ├── auth.php
+│   ├── validation.php
+│   └── modules/
+│       ├── patient.php
+│       └── doctor.php
+└── en/
+    └── ...
+```
+
+### Convenzioni per i Nomi
+- Usa `snake_case` per i nomi dei file
+- Usa `camelCase` per le chiavi di traduzione
+- Usa la notazione puntata per le gerarchie
+
+## Best Practice
+
+### 1. Traduzioni
+- Usa sempre le funzioni di traduzione di Laravel (`__()`, `trans()`)
+- Non concatenare stringhe nelle traduzioni
+- Usa i parametri per le parti dinamiche
+
+### 2. Middleware
+- Implementa un middleware per gestire la lingua
+- Salva la preferenza dell'utente nella sessione
+- Rispetta l'header `Accept-Language`
+
+### 3. Performance
+- Abilita la cache delle viste in produzione
+- Usa `route:trans:cache` invece di `route:cache`
+
+## Validazione
+
+### Regole per le Chiavi
+- Le chiavi devono essere in inglese
+- Usa la notazione puntata per le gerarchie
+- Mantieni le chiavi brevi e descrittive
+
+### Esempi
+```php
+// Buono
+__('auth.failed')
+__('validation.required', ['attribute' => 'email'])
+
+// Da evitare
+__('autenticazione_fallita')
+__('il_campo_è_obbligatorio')
+```
+
+## Comandi Utili
+
+```bash
+# Pubblicare le traduzioni Laravel
+php artisan lang:publish
+
+# Verificare le traduzioni mancanti
+php artisan translations:missing it
+
+# Pulire la cache
+php artisan view:clear
+php artisan config:clear
+```
+
+## Struttura Consigliata per i Moduli
+
+### 1. File di Traduzione
+```php
+// lang/it/modules/patient.php
+return [
+    'title' => 'Paziente',
+    'fields' => [
+        'name' => 'Nome',
+        'surname' => 'Cognome',
+    ],
+    'validation' => [
+        'required' => 'Il campo :attribute è obbligatorio',
+    ]
+];
+```
+
+### 2. Utilizzo nei Controller
+```php
+// Ottenere una traduzione
+$title = __('modules.patient.title');
+
+// Con parametri
+$message = __('modules.patient.welcome', ['name' => $user->name]);
+
+// Validazione
+$request->validate([
+    'name' => 'required',
+], [
+    'name.required' => __('modules.patient.validation.required', ['attribute' => 'nome']),
+]);
+```
+
+## Test
+
+### Configurazione
+`phpunit.xml`
+```xml
+<php>
+    <env name="APP_LOCALE" value="it"/>
+    <env name="APP_FALLBACK_LOCALE" value="en"/>
+</php>
+```
+
+### Esempio di Test
+```php
+public function test_locale_switch()
+{
+    $response = $this->get(route('change-locale', 'en'));
+    
+    $response->assertSessionHas('locale', 'en');
+    $this->assertEquals('en', app()->getLocale());
+}
+```
