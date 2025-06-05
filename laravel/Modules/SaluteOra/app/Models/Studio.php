@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Filament\Models\Contracts\HasName;
-use Illuminate\Database\Eloquent\Model;
+use Modules\SaluteOra\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Geo\Models\Traits\HasAddress;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -19,9 +20,6 @@ use Spatie\Activitylog\LogOptions;
  *
  * @property int $id
  * @property string $name
- * @property string|null $address
- * @property string|null $city
- * @property string|null $postal_code
  * @property string|null $phone
  * @property string|null $email
  * @property string|null $website
@@ -36,14 +34,14 @@ use Spatie\Activitylog\LogOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Doctor> $doctors
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Address> $addresses
  */
-class Studio extends Model implements HasName
+class Studio extends BaseModel implements HasName
 {
-    use SoftDeletes;
     use LogsActivity;
+    use HasAddress;
 
-    /** @var string */
-    protected $connection = 'mysql';
+    // La connessione è già definita in BaseModel come 'salute_ora'
 
     /** @var string */
     protected $table = 'studios';
@@ -51,9 +49,6 @@ class Studio extends Model implements HasName
     /** @var array<string> */
     protected $fillable = [
         'name',
-        'address',
-        'city',
-        'postal_code',
         'phone',
         'email',
         'website',
@@ -91,8 +86,6 @@ class Studio extends Model implements HasName
         return LogOptions::defaults()
             ->logOnly([
                 'name',
-                'address',
-                'city',
                 'phone',
                 'email',
                 'registration_number',
@@ -124,14 +117,6 @@ class Studio extends Model implements HasName
     public function scopeActive($query)
     {
         return $query->where('active', true);
-    }
-
-    /**
-     * Scope per studi in una specifica città.
-     */
-    public function scopeInCity($query, string $city)
-    {
-        return $query->where('city', $city);
     }
 
     /**
@@ -233,20 +218,6 @@ class Studio extends Model implements HasName
     }
 
     /**
-     * Ottiene l'indirizzo completo formattato.
-     */
-    public function getFullAddress(): string
-    {
-        $parts = array_filter([
-            $this->address,
-            $this->postal_code,
-            $this->city,
-        ]);
-
-        return implode(', ', $parts);
-    }
-
-    /**
      * Ottiene le informazioni di contatto formattate.
      */
     public function getContactInfo(): array
@@ -256,5 +227,13 @@ class Studio extends Model implements HasName
             'email' => $this->email,
             'website' => $this->website,
         ]);
+    }
+
+    /**
+     * Restituisce i servizi come stringa leggibile per Filament.
+     */
+    public function getServicesStringAttribute(): string
+    {
+        return is_array($this->services) ? implode(', ', $this->services) : (string) $this->services;
     }
 }

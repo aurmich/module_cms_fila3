@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
 # Documentation Naming Convention Rule
@@ -35,3 +35,12 @@ docs/form-architecture.md
 - [Coding Standards](mdc:../../docs/standards/coding-standards.md)
 
 > [2025-05-28] Policy aggiornata: tutti i file e cartelle in docs/ devono essere lowercase, tranne README.md. Motivazione: coerenza, portabilità, manutenzione.
+
+## Policy sui collegamenti
+- Tutti i link nei file .md DEVONO essere sempre relativi rispetto alla posizione del file.
+- Motivazione: portabilità, refactoring sicuro, navigazione autonoma del modulo.
+- Logica: nessun path assoluto, nessun lock-in.
+- Politica: ogni modulo è autonomo.
+- Filosofia: un solo punto di verità.
+- Religione: "Non avrai altro path all'infuori del relativo".
+- Zen: serenità nella navigazione, nessun link rotto dopo un refactor.
