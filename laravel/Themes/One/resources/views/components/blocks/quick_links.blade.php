@@ -12,7 +12,7 @@
         3 => 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
         4 => 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
     ][$columns] ?? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
-
+    
     // Assicuriamoci che links sia sempre un array
     $links = is_array($links) ? $links : [];
 @endphp
@@ -24,7 +24,7 @@
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ $title }}</h2>
             </div>
         @endif
-
+        
         <div class="grid {{ $gridClasses }} gap-6 lg:gap-8">
             @foreach($links as $link)
                 @php
@@ -35,7 +35,7 @@
                     $badge = $link['badge'] ?? null;
                     $badgeColor = $link['badge_color'] ?? 'bg-blue-100 text-blue-800';
                 @endphp
-
+                
                 <a href="{{ $url }}" class="group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-500 rounded-lg border border-gray-100 hover:border-blue-200 transition-all duration-200 hover:shadow-md">
                     <div class="flex flex-col items-center text-center">
                         @if($icon)
@@ -43,7 +43,7 @@
                                 <i class="{{ $icon }} h-6 w-6 text-blue-600" aria-hidden="true"></i>
                             </div>
                         @endif
-
+                        
                         <div class="mt-4">
                             <h3 class="text-base font-semibold text-gray-900">
                                 <span class="absolute inset-0" aria-hidden="true"></span>
@@ -53,7 +53,7 @@
                                 <p class="mt-1 text-sm text-gray-500">{{ $description }}</p>
                             @endif
                         </div>
-
+                        
                         @if(isset($badge))
                             <span class="mt-4 inline-flex items-center rounded-md px-2.5 py-0.5 text-sm font-medium {{ $badgeColor }}">
                                 {{ $badge }}

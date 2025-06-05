@@ -196,8 +196,3 @@ php artisan view:cache
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Laravel Blade](https://laravel.com/docs/blade)
 - [Vite](https://vitejs.dev/guide/) 
-
-## Collegamenti tra versioni di theme.md
-* [theme.md](laravel/Modules/Xot/docs/filament/theme.md)
-* [theme.md](laravel/Themes/One/docs/theme.md)
-

@@ -1,26 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Themes\One\Providers;
 
+use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Support\ServiceProvider;
-use Filament\Support\Assets\FilamentAsset;
+use Modules\Xot\Providers\XotBaseThemeServiceProvider;
 
-class ThemeServiceProvider extends ServiceProvider
+class ThemeServiceProvider extends XotBaseThemeServiceProvider
 {
-    public function boot()
+    public string $name = 'One';
+    public string $nameLower = 'one';
+    protected string $module_dir = __DIR__;
+    protected string $module_ns = __NAMESPACE__;
+
+    public function register(): void
     {
-        // Registra il tema
-        FilamentAsset::register([
-            'name' => 'one',
-            'path' => 'themes/one',
+        FilamentIcon::register([
+            'logo' => asset('themes/One/svg/logo.svg'),
         ]);
-
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'one');
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
     }
 
-    public function register()
+    public function boot(): void
     {
-        //
+        parent::boot();
+        // Aggiungi qui solo logica specifica del tema
     }
-}
+} 

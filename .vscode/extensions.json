@@ -16,6 +16,7 @@
         "laravel.vscode-laravel",
         "porifa.laravel-intelephense",
         "bmewburn.vscode-intelephense-client",
-        "davidanson.vscode-markdownlint"
+        "davidanson.vscode-markdownlint",
+        "tomoki1207.pdf"
     ]
 }

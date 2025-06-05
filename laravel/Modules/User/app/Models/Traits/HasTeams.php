@@ -68,11 +68,8 @@ trait HasTeams
     /**
      * Check if the user belongs to a specific team.
      */
-    public function belongsToTeam(?TeamContract $team): bool
+    public function belongsToTeam(\Modules\User\Contracts\TeamContract $team): bool
     {
-        if ($team === null) {
-            return false;
-        }
         $found = $this->teams()->where('teams.id', $team->id)->first();
         if ($found === null) {
             return false;
@@ -354,8 +351,12 @@ trait HasTeams
      *
      * @param \Modules\User\Contracts\TeamContract $team
      */
-    public function switchTeam(?TeamContract $team): bool
+    public function switchTeam(?\Modules\User\Contracts\TeamContract $team): bool
     {
+        if ($team === null) {
+            return false;
+        }
+
         if (! $this->belongsToTeam($team)) {
             return false;
         }

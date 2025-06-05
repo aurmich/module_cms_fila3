@@ -26,9 +26,9 @@
         }
     },
     "require": {
+        "coolsam/flatpickr": "^4.1",
         "owenvoke/blade-fontawesome": "*"
     },
-    "require-dev": {},
     "repositories": [
         {
             "type": "path",

@@ -79,3 +79,9 @@ public function addMember(Team $team, User $user)
 
 **Vedi anche:**
 - [README User](mdc:README.md)
+
+## Regola fondamentale sulle migration
+
+- Tutte le migration devono essere nella cartella `database/migrations` del modulo di riferimento.
+- Mai mettere migration custom in `laravel/database/migrations`.
+- Vedi motivazione e checklist in [PATH_CONVENTIONS.md](./PATH_CONVENTIONS.md).

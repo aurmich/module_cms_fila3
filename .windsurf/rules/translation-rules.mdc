@@ -1,0 +1,242 @@
+---
+description: Regole complete per le traduzioni in Laraxot/PTVX
+globs: ["**/*.php", "**/*.blade.php", "**/lang/**/*.php"]
+alwaysApply: true
+---
+
+# Regole per le Traduzioni in Laraxot/PTVX
+
+## Principi Fondamentali
+
+- **Struttura Espansa:** Utilizzare SEMPRE la struttura espansa per campi e azioni
+- **No Hardcoded:** MAI utilizzare stringhe hardcoded in Filament o altri componenti UI
+- **Consistenza:** Mantenere coerenza nelle convenzioni di naming
+- **Completezza:** Includere label, tooltip, placeholder e messaggi per ogni elemento
+- **Documentazione:** Documentare traduzioni speciali o complesse
+
+## Struttura Standard per i File di Traduzione
+
+### Campi - Struttura Corretta ✅
+
+```php
+// Modules/Performance/lang/it/resource-name.php
+return [
+    'fields' => [
+        'nome_campo' => [
+            'label' => 'Etichetta Campo',
+            'tooltip' => 'Descrizione di aiuto',
+            'placeholder' => 'Esempio di input',
+            'help' => 'Testo di aiuto sotto il campo'
+        ],
+        // Altri campi...
+    ],
+];
+```
+
+### Campi - Struttura Errata ❌
+
+```php
+// MAI FARE QUESTO
+return [
+    'fields' => [
+        'nome_campo' => 'Etichetta Campo',
+    ],
+];
+```
+
+### Azioni - Struttura Corretta ✅
+
+```php
+// Modules/Performance/lang/it/resource-name.php
+return [
+    'actions' => [
+        'approva' => [
+            'label' => 'Approva',
+            'icon' => 'heroicon-o-check',
+            'color' => 'success',
+            'tooltip' => 'Approva questo record',
+            'modal_heading' => 'Conferma approvazione',
+            'modal_description' => 'Sei sicuro di voler approvare?',
+            'success' => 'Record approvato con successo',
+            'error' => 'Errore durante l\'approvazione'
+        ],
+        // Altre azioni...
+    ],
+];
+```
+
+### Azioni - Struttura Errata ❌
+
+```php
+// MAI FARE QUESTO
+return [
+    'actions' => [
+        'approva' => 'Approva',
+    ],
+];
+```
+
+## Struttura delle Directory
+
+- Traduzioni specifiche del modulo: `Modules/[NomeModulo]/lang/[locale]/`
+- Traduzioni globali: `resources/lang/[locale]/`
+
+```
+Modules/Performance/lang/
+├── it/
+│   ├── performanca-organizzativa.php
+│   ├── performance-individuale.php
+│   ├── actions.php
+│   └── common.php
+└── en/
+    ├── performanca-organizzativa.php
+    ├── performance-individuale.php
+    ├── actions.php
+    └── common.php
+```
+
+## Convenzioni di Naming
+
+- File: kebab-case per i nomi dei file (es. `performance-individuale.php`)
+- Chiavi: snake_case per le chiavi di traduzione (es. `nome_campo`)
+- Risorse: suffisso `-resource` per i file di traduzione delle risorse Filament
+
+## Utilizzo Corretto nelle View
+
+### Blade Templates
+
+```blade
+{{-- ✅ CORRETTO --}}
+<label>{{ trans('module::resource.fields.nome.label') }}</label>
+
+{{-- ❌ ERRATO --}}
+<label>Nome</label>
+```
+
+### Filament Resources
+
+```php
+// ✅ CORRETTO
+TextInput::make('nome')
+
+// ❌ ERRATO
+TextInput::make('nome')->label('Nome')
+```
+
+## Pluralizzazione e Variabili
+
+```php
+// Pluralizzazione
+'message' => '{1} Hai :count messaggio|[2,*] Hai :count messaggi',
+
+// Variabili
+'welcome' => 'Benvenuto, :name!',
+```
+
+## Sezioni Comuni nei File di Traduzione
+
+```php
+return [
+    // Metadati della risorsa
+    'label' => 'Performance Organizzativa',
+    'plural_label' => 'Performance Organizzative',
+    'navigation_group' => 'Performance',
+    'navigation_icon' => 'heroicon-o-chart-bar',
+    'navigation_sort' => 1,
+    'description' => 'Gestione delle performance organizzative',
+    
+    // Campi
+    'fields' => [
+        // ...
+    ],
+    
+    // Azioni
+    'actions' => [
+        // ...
+    ],
+    
+    // Messaggi
+    'messages' => [
+        'saved' => 'Salvato con successo',
+        'error' => 'Si è verificato un errore',
+        // ...
+    ],
+    
+    // Notifiche
+    'notifications' => [
+        // ...
+    ],
+];
+```
+
+## Validazione e Messaggi di Errore
+
+```php
+'validation' => [
+    'required' => 'Il campo :attribute è obbligatorio',
+    'min' => [
+        'string' => 'Il campo :attribute deve contenere almeno :min caratteri',
+    ],
+    // ...
+],
+```
+
+## Conversione da Struttura Semplice a Espansa
+
+### Prima (semplice)
+
+```php
+return [
+    'nome' => 'Nome',
+    'cognome' => 'Cognome',
+];
+```
+
+### Dopo (espansa)
+
+```php
+return [
+    'fields' => [
+        'nome' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome',
+            'help' => 'Nome completo della persona'
+        ],
+        'cognome' => [
+            'label' => 'Cognome',
+            'placeholder' => 'Inserisci il cognome',
+            'help' => 'Cognome della persona'
+        ],
+    ],
+];
+```
+
+## Note Importanti
+
+- MAI utilizzare `->label()` nei componenti Filament
+- Assicurarsi che tutte le stringhe visualizzate all'utente provengano dai file di traduzione
+- Evitare traduzioni duplicate in moduli diversi
+- Utilizzare traduzioni gerarchiche per elementi condivisi
+- Documentare convenzioni speciali nei file `docs/` del modulo
+
+## Troubleshooting
+
+### Traduzioni non visualizzate
+- Verificare che il file di traduzione sia nella posizione corretta
+- Controllare che la struttura sia conforme alle linee guida
+- Verificare che il nome del campo corrisponda alla chiave nel file di traduzione
+- Controllare che il service provider del modulo estenda `XotBaseServiceProvider` e chiami `parent::boot()`
+
+### Label hardcoded visibili invece delle traduzioni
+- Verificare di non usare `->label()` nei componenti Filament
+- Controllare che il file di traduzione contenga la chiave corretta
+- Verificare che LangServiceProvider sia registrato correttamente
+
+## Checklist per Nuove Traduzioni
+
+- [ ] File di traduzione nella directory corretta
+- [ ] Struttura espansa per campi e azioni
+- [ ] Pluralizzazioni gestite correttamente
+- [ ] Parametri utilizzati per testi dinamici
+- [ ] File commentati per facilitare la manutenzione
+- [ ] Nessun componente Filament utilizza `->label()`

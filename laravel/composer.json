@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "coolsam/flatpickr": "^4.1",
         "dotswan/filament-grapesjs-v3": "^1.1",
         "laravel/folio": "^1.1",
         "laravel/framework": "^12.0",

@@ -197,34 +197,3 @@ Applicare la stessa regola per la registrazione delle traduzioni JSON.
 **Collegamento:**
 Vedi anche [registerBladeIcons.md](./registerBladeIcons.md) per la gestione centralizzata dei path.
 
-## Console Commands: Religione, Politica, Filosofia, Zen
-
-### Principio
-La registrazione dei comandi console è automatica: ogni comando presente in Console/Commands viene autoregistrato dalla base.
-
-### Cosa NON fare
-**NON** aggiungere mai manualmente:
-```php
-$this->commands([
-    ...
-]);
-```
-
-### Cosa fare
-- Definire i comandi nella cartella Console/Commands
-- Lasciare che la base li autoregistri
-
-### Motivazione
-- DRY, KISS, Zen, Politica, Filosofia: meno codice, più coerenza, meno errori
-- La responsabilità è centralizzata
-
-### Collegamenti correlati
-- [Regola DRY](../../../.cursor/rules/dry.mdc)
-- [Regola Zen](../../../.windsurf/rules/zen.mdc)
-- [Regola KISS](../../../.windsurf/rules/kiss.mdc)
-- [Politica](../../../.windsurf/rules/politica.mdc)
-- [Filosofia](../../../.windsurf/rules/filosofia.mdc)
-
-### Zen finale
-> "Il miglior comando è quello che non devi mai registrare a mano."
-

@@ -9,6 +9,7 @@ Il modulo Performance gestisce le valutazioni delle performance e la distribuzio
 Il modulo Performance mantiene documentazione dettagliata nelle seguenti aree:
 
 - [Struttura e Funzionamento Generale](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Performance/docs/readme.md)
+- [Struttura e Funzionamento Generale](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Performance/docs/README.md)
 - [Modelli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Performance/docs/models.md)
 - [Flusso di Calcolo Performance Organizzativa](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Performance/docs/organizzativa-flow.md)
 - [Modelli Performance Organizzativa](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Performance/docs/organizzativa-models.md)

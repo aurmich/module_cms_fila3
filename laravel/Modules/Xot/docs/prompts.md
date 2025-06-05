@@ -42,7 +42,6 @@ I prompt sono file di testo che contengono istruzioni per l'AI. Devono seguire q
 
 5. **Collegamenti**:
 b6f667c (.)
-
 6. **Collegamenti**:
    - Questo documento deve essere collegato nella root `docs/` con un link bidirezionale
    - Gli altri moduli devono avere un link a questo documento
@@ -61,9 +60,7 @@ Per la regola universale sui prompt condivisi (come quelli in bashscripts/prompt
 
 - [Miglioramenti al Prompt docs.txt](./prompt_docs_improvements.md)b6f667c (.)
 
-
 - [Miglioramenti al Prompt docs.txt](./prompt_docs_improvements.md)b6f667c (.)
-
 
 ## Collegamenti tra versioni di prompts.md
 * [prompts.md](docs/prompts.md)
@@ -182,5 +179,4 @@ Il prompt `docs.txt` serve come:
    [Documento](./path/relativo) #tag-correlati
    ```
 b6f667c (.)
-
 

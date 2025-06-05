@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Actions\Export;
 
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Xot\Exports\CollectionExport;
 use Spatie\QueueableAction\QueueableAction;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
+/**
+ * Classe per l'esportazione di collezioni in formato Excel.
+ */
 class ExportXlsByCollection
 {
     use QueueableAction;
@@ -19,11 +23,11 @@ class ExportXlsByCollection
     /**
      * Esporta una collezione in Excel.
      *
-     * @param Collection $collection La collezione da esportare
+     * @param Collection<int|string, mixed> $collection La collezione da esportare
      * @param string $filename Nome del file Excel
      * @param string|null $transKey Chiave di traduzione per i campi
      * @param array<int, string> $fields Campi da includere nell'export
-     * 
+     *
      * @return BinaryFileResponse
      */
     public function execute(
@@ -34,7 +38,7 @@ class ExportXlsByCollection
     ): BinaryFileResponse {
         // Assicuriamo che $fields sia un array di stringhe
         $stringFields = array_map(function (string|int|float|bool $field): string {
-            return (string) $field;
+            return strval($field);
         }, array_values($fields));
 
         $export = new CollectionExport(
@@ -49,10 +53,10 @@ class ExportXlsByCollection
     /**
      * Esporta una collezione in Excel utilizzando PhpSpreadsheet direttamente.
      *
-     * @param Collection $rows La collezione da esportare
-     * @param array<string> $fields Campi da includere nell'export
+     * @param Collection<int|string, mixed> $rows La collezione da esportare
+     * @param array<int, string> $fields Campi da includere nell'export
      * @param string $filename Nome del file Excel
-     * 
+     *
      * @return string Il percorso del file generato
      */
     public function executeWithSpreadsheet(Collection $rows, array $fields, string $filename): string
@@ -72,10 +76,10 @@ class ExportXlsByCollection
     /**
      * Scrive l'intestazione nel foglio Excel.
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Il foglio Excel
-     * @param array<string> $fields I campi da utilizzare come intestazioni
+     * @param Worksheet $sheet Il foglio Excel
+     * @param array<int, string> $fields I campi da utilizzare come intestazioni
      */
-    protected function writeHeader(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, array $fields): void
+    protected function writeHeader(Worksheet $sheet, array $fields): void
     {
         foreach ($fields as $col => $field) {
             $sheet->setCellValueByColumnAndRow($col + 1, 1, $field);
@@ -85,11 +89,11 @@ class ExportXlsByCollection
     /**
      * Scrive le righe nel foglio di lavoro.
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Il foglio di lavoro
-     * @param \Illuminate\Support\Collection $rows I dati da scrivere
-     * @param array<string> $fields I campi da utilizzare per le colonne
+     * @param Worksheet $sheet Il foglio di lavoro
+     * @param Collection<int|string, mixed> $rows I dati da scrivere
+     * @param array<int, string> $fields I campi da utilizzare per le colonne
      */
-    protected function writeRows(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, Collection $rows, array $fields): void
+    protected function writeRows(Worksheet $sheet, Collection $rows, array $fields): void
     {
         $row = 2;
         foreach ($rows as $data) {
