@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: true
 ---
 # Regola: Path View Widget Filament e Localizzazione
@@ -52,3 +52,20 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
 **Motivazione:** DRY, KISS, manutenzione, coerenza, evitare conflitti e ridondanza.
 
 > Aggiornare sempre anche i file .mdc in .windsurf/rules
+
+> [2025-05-28] Policy aggiornata: tutte le pagine di form devono includere direttamente solo widget Filament modulari, mai form custom. Motivazione: coerenza architetturale, manutenzione, DRY, troubleshooting semplificato.
+
+## Livewire e Filament: inclusione obbligatoria di @livewireStyles e @livewireScripts
+Per evitare errori 419 Page Expired nei widget Filament/Livewire, il layout DEVE includere @livewireStyles subito dopo @filamentStyles e @livewireScripts subito dopo @filamentScripts. Vedi anche docs/widget-deleting-method-error.md.
+
+## View widget: solo wrapper per $this->form
+Le view dei widget Filament devono essere solo wrapper per $this->form. Niente markup custom, niente logica Livewire/AlpineJS, niente gestione CSRF manuale. Tutta la logica va nel widget PHP o nel tema. Motivazione: coerenza, DRY, KISS, troubleshooting semplificato. Collegamento a docs/xot.md.
+
+## Vietato ->label() e ->placeholder() nei form component
+Tutti i form component devono usare solo chiavi campo, senza label o placeholder inline. Le etichette e i placeholder sono gestiti tramite i file di traduzione del modulo e il LangServiceProvider. Motivazione: coerenza, centralizzazione, override semplice, policy di qualità. Collegamento a docs/xot.md.
+
+## Regola: trait solo se riusabili
+I trait vanno creati solo se riutilizzati in più classi. Vietato creare trait per una sola classe. Se la logica è specifica di un solo modello, va implementata direttamente nella classe. Motivazione: semplicità, KISS, manutenibilità, evitare complessità inutile. Collegamento a docs/xot.md.
+
+## Policy di naming enum
+Il nome della classe enum DEVE sempre corrispondere al nome del file (es. UserTypeEnum.php -> enum UserTypeEnum: string ...). Aggiornare sempre sia il nome del file che il nome della classe. Motivazione: coerenza, autoloading, refactoring semplice. Collegamento a docs/xot.md e docs/enum-naming-policy.md.

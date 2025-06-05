@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Modules\Geo\App\Filament\Widgets;
+namespace Modules\Geo\Filament\Widgets;
 
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Modules\Geo\App\Filament\Forms\LocationForm;
+use Modules\Geo\Filament\Forms\LocationForm;
 
 /**
  * Widget per la selezione della località.
@@ -50,7 +50,7 @@ class LocationWidget extends XotBaseWidget
     /**
      * Form per la selezione della località.
      */
-    private LocationForm $locationForm;
+    private \Modules\Geo\Filament\Forms\LocationForm $locationForm;
 
     /**
      * Costruttore.
@@ -58,7 +58,7 @@ class LocationWidget extends XotBaseWidget
     public function __construct()
     {
         parent::__construct();
-        $this->locationForm = new LocationForm();
+        $this->locationForm = new \Modules\Geo\Filament\Forms\LocationForm();
     }
 
     /**

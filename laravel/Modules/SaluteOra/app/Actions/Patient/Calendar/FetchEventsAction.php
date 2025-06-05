@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Collection;
 use Spatie\QueueableAction\QueueableAction;
-use Modules\SaluteOra\Enums\UserType;
-use Modules\SaluteOra\Enums\AppointmentStatus;
-use Modules\SaluteOra\Enums\AppointmentType;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
 
 /**
@@ -31,7 +31,7 @@ final class FetchEventsAction
         try {
             $user = Auth::user();
 
-            if (!$user || $user->type !== UserType::PATIENT) {
+            if (!$user || $user->type !== UserTypeEnum::PATIENT) {
                 throw new \RuntimeException('Unauthorized: User is not a patient');
             }
 
@@ -135,14 +135,14 @@ final class FetchEventsAction
             return '#dc3545';
         }
         return match ($appointment->type) {
-            AppointmentType::CONSULTATION => '#fd7e14',
-            AppointmentType::CLEANING => '#17a2b8',
-            AppointmentType::TREATMENT => '#28a745',
-            AppointmentType::EMERGENCY => '#dc3545',
-            AppointmentType::FOLLOWUP => '#ffc107',
-            AppointmentType::SURGERY => '#6f42c1',
-            AppointmentType::ORTHODONTICS => '#6f42c1',
-            AppointmentType::PREVENTION => '#17a2b8',
+            AppointmentTypeEnum::CONSULTATION => '#fd7e14',
+            AppointmentTypeEnum::CLEANING => '#17a2b8',
+            AppointmentTypeEnum::TREATMENT => '#28a745',
+            AppointmentTypeEnum::EMERGENCY => '#dc3545',
+            AppointmentTypeEnum::FOLLOWUP => '#ffc107',
+            AppointmentTypeEnum::SURGERY => '#6f42c1',
+            AppointmentTypeEnum::ORTHODONTICS => '#6f42c1',
+            AppointmentTypeEnum::PREVENTION => '#17a2b8',
             default => '#3490dc',
         };
     }

@@ -77,3 +77,14 @@ Per prevenire questo tipo di errori in futuro:
 - [Documentazione Ufficiale Filament - Widgets](https://filamentphp.com/docs/3.x/panels/widgets)
 - [Documentazione Ufficiale Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
 - [Gestione degli Errori in Laravel](https://laravel.com/docs/errors)
+
+## Page expired (419) su select nei form Filament
+Se la pagina va in 419 Page Expired quando si interagisce con un select, la causa è quasi sempre il token CSRF mancante o non aggiornato. In Laravel/Livewire/Filament, assicurarsi che:
+- Il tag <meta name="csrf-token"> sia presente nell'head (in layout/app)
+- Il middleware VerifyCsrfToken sia attivo
+- Non ci siano errori di sessione/scadenza cookie
+- Se usi @livewire, il layout DEVE includere @livewireScripts e @livewireStyles
+- Se usi Jetstream/Volt, il layout DEVE includere @vite('resources/js/app.js') o equivalente
+- Se usi proxy o domini multipli, controlla che il dominio del cookie sia corretto
+- Se usi AJAX custom, includi sempre il token CSRF nelle richieste
+Soluzione: verifica layout, sessione, cookie, e che il token sia sempre presente e aggiornato.

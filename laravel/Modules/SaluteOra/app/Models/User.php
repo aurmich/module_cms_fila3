@@ -8,7 +8,7 @@ use Modules\User\Models\BaseUser;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
 
-use Modules\SaluteOra\Enums\UserType;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Illuminate\Notifications\Notifiable;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Pending;
@@ -40,11 +40,14 @@ class User extends BaseUser
     protected $connection = 'user';
 
 
-    /** @var array<string, string> */
+    /**
+     * Mappatura dei tipi di utente con le relative classi
+     * Utilizziamo l'enum UserTypeEnum per una gestione tipizzata e sicura
+     */
     protected $childTypes = [
-        'patient' => Patient::class,
-        'doctor' => Doctor::class,
-        'admin' => Admin::class,
+        UserTypeEnum::ADMIN->value => Admin::class,
+        UserTypeEnum::DOCTOR->value => Doctor::class,
+        UserTypeEnum::PATIENT->value => Patient::class,
     ];
 
     /** @var array<string, mixed>  */
@@ -69,7 +72,7 @@ class User extends BaseUser
         return array_merge(parent::casts(), [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'type' => UserType::class,
+            'type' => UserTypeEnum::class,
             'state' => UserState::class,
             'certifications' => 'array',
             'moderation_data' => 'array',
@@ -206,5 +209,69 @@ class User extends BaseUser
     public function isIntegrationRequested(): bool
     {
         return $this->state->equals(IntegrationRequested::class);
+    }
+
+    /**
+     * Get the user's type as a UserTypeEnum enum.
+     */
+    public function getTypeAttribute($value): UserTypeEnum
+    {
+        return $value instanceof UserTypeEnum ? $value : UserTypeEnum::from($value);
+    }
+
+    /**
+     * Set the user's type using a UserTypeEnum enum.
+     */
+    public function setTypeAttribute($value): void
+    {
+        $this->attributes['type'] = $value instanceof UserTypeEnum ? $value->value : $value;
+    }
+
+    /**
+     * Determine if the user is an admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->type === UserTypeEnum::ADMIN;
+    }
+
+    /**
+     * Determine if the user is a doctor.
+     */
+    public function isDoctor(): bool
+    {
+        return $this->type === UserTypeEnum::DOCTOR;
+    }
+
+    /**
+     * Determine if the user is a patient.
+     */
+    public function isPatient(): bool
+    {
+        return $this->type === UserTypeEnum::PATIENT;
+    }
+
+    /**
+     * Scope per query: solo admin.
+     */
+    public function scopeAdmins($query)
+    {
+        return $query->where('type', UserTypeEnum::ADMIN->value);
+    }
+
+    /**
+     * Scope per query: solo dottori.
+     */
+    public function scopeDoctors($query)
+    {
+        return $query->where('type', UserTypeEnum::DOCTOR->value);
+    }
+
+    /**
+     * Scope per query: solo pazienti.
+     */
+    public function scopePatients($query)
+    {
+        return $query->where('type', UserTypeEnum::PATIENT->value);
     }
 }

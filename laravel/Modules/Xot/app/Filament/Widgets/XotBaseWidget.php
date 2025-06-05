@@ -34,13 +34,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public string $title = '';
     public string $icon = '';
     protected int|string|array $columnSpan = 'full';
-    /**
-     * La vista che deve essere renderizzata per il widget.
-     * Può essere un namespace (es. 'module-name::view-name') o un percorso Blade.
-     *
-     * @var view-string
-     */
-    protected static string $view = '';
 
     /**
      * Lista degli eventi ascoltati dal widget.

@@ -212,4 +212,6 @@ class GeoDataService
 ## Collegamenti
 - [Documentazione Squire](../../Geo/docs/squire-integration.md)
 - [Best Practices Filament](../../../docs/filament-best-practices.md)
-- [Clean Code](../../../docs/clean-code.md) 
+- [Clean Code](../../../docs/clean-code.md)
+
+**Nota:** Il namespace corretto per LocationForm è `Modules\Geo\Filament\Forms\LocationForm`. Non usare mai `Modules\Geo\App\Filament\Forms\LocationForm`. 

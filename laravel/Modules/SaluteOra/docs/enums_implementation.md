@@ -36,7 +36,7 @@ Assicurati di utilizzare PHP 8.1+ e Laravel 9+. Non sono necessari pacchetti agg
 
 namespace App\Enums;
 
-enum UserType: string
+enum UserTypeEnum: string
 {
     case ADMIN = 'admin';
     case DOCTOR = 'doctor';
@@ -64,7 +64,7 @@ enum UserType: string
 
 ## Enum per i Tipi Utente
 
-### UserType Enum
+### UserTypeEnum Enum
 
 ```php
 <?php
@@ -73,7 +73,7 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum UserType: string implements HasLabel
+enum UserTypeEnum: string implements HasLabel
 {
     case ADMIN = 'admin';
     case DOCTOR = 'doctor';
@@ -130,7 +130,7 @@ enum UserType: string implements HasLabel
 
 namespace App\Models;
 
-use App\Enums\UserType;
+use App\Enums\UserTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Parental\HasChildren;
 
@@ -147,46 +147,46 @@ class User extends Authenticatable
     ];
     
     protected $casts = [
-        'type' => UserType::class,
+        'type' => UserTypeEnum::class,
         'email_verified_at' => 'datetime',
     ];
     
     protected $childTypes = [
-        UserType::ADMIN->value => Admin::class,
-        UserType::DOCTOR->value => Doctor::class,
-        UserType::PATIENT->value => Patient::class,
+        UserTypeEnum::ADMIN->value => Admin::class,
+        UserTypeEnum::DOCTOR->value => Doctor::class,
+        UserTypeEnum::PATIENT->value => Patient::class,
     ];
     
     // Metodi di utilità
     public function isAdmin(): bool
     {
-        return $this->type === UserType::ADMIN;
+        return $this->type === UserTypeEnum::ADMIN;
     }
     
     public function isDoctor(): bool
     {
-        return $this->type === UserType::DOCTOR;
+        return $this->type === UserTypeEnum::DOCTOR;
     }
     
     public function isPatient(): bool
     {
-        return $this->type === UserType::PATIENT;
+        return $this->type === UserTypeEnum::PATIENT;
     }
     
     // Scope per query
     public function scopeAdmins($query)
     {
-        return $query->where('type', UserType::ADMIN->value);
+        return $query->where('type', UserTypeEnum::ADMIN->value);
     }
     
     public function scopeDoctors($query)
     {
-        return $query->where('type', UserType::DOCTOR->value);
+        return $query->where('type', UserTypeEnum::DOCTOR->value);
     }
     
     public function scopePatients($query)
     {
-        return $query->where('type', UserType::PATIENT->value);
+        return $query->where('type', UserTypeEnum::PATIENT->value);
     }
 }
 ```
@@ -196,13 +196,13 @@ class User extends Authenticatable
 ### Selezione in un Form
 
 ```php
-use App\Enums\UserType;
+use App\Enums\UserTypeEnum;
 use Filament\Forms\Components\Select;
 
 Select::make('type')
     ->label('Tipo Utente')
-    ->options(UserType::class) // Sfrutta l'interfaccia HasLabel
-    ->enum(UserType::class)
+    ->options(UserTypeEnum::class) // Sfrutta l'interfaccia HasLabel
+    ->enum(UserTypeEnum::class)
     ->required()
     ->searchable()
     ->reactive()
@@ -214,12 +214,12 @@ Select::make('type')
 ### Filtri in una Tabella
 
 ```php
-use App\Enums\UserType;
+use App\Enums\UserTypeEnum;
 use Filament\Tables\Filters\SelectFilter;
 
 SelectFilter::make('type')
     ->label('Filtra per Tipo')
-    ->options(UserType::class) // Sfrutta l'interfaccia HasLabel
+    ->options(UserTypeEnum::class) // Sfrutta l'interfaccia HasLabel
     ->multiple()
     ->query(function (Builder $query, array $state) {
         if (! empty($state['values'])) {
@@ -231,14 +231,14 @@ SelectFilter::make('type')
 ### Colonne nella Tabella
 
 ```php
-use App\Enums\UserType;
+use App\Enums\UserTypeEnum;
 use Filament\Tables\Columns\TextColumn;
 
 TextColumn::make('type')
     ->label('Tipo')
     ->badge()
-    ->color(fn (string $state): string => UserType::from($state)->getColor())
-    ->formatStateUsing(fn (string $state): string => UserType::from($state)->getLabel())
+    ->color(fn (string $state): string => UserTypeEnum::from($state)->getColor())
+    ->formatStateUsing(fn (string $state): string => UserTypeEnum::from($state)->getLabel())
     ->sortable()
     ->searchable();
 ```
@@ -261,27 +261,27 @@ TextColumn::make('type')
 use Illuminate\Validation\Rules\Enum;
 
 $request->validate([
-    'type' => ['required', new Enum(UserType::class)],
+    'type' => ['required', new Enum(UserTypeEnum::class)],
 ]);
 ```
 
 ### Cast Personalizzato
 
 ```php
-use App\Enums\UserType;
+use App\Enums\UserTypeEnum;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-class UserTypeCast implements CastsAttributes
+class UserTypeEnumCast implements CastsAttributes
 {
     public function get(Model $model, string $key, $value, array $attributes)
     {
-        return UserType::from($value);
+        return UserTypeEnum::from($value);
     }
 
     public function set(Model $model, string $key, $value, array $attributes)
     {
-        if ($value instanceof UserType) {
+        if ($value instanceof UserTypeEnum) {
             return $value->value;
         }
         
@@ -294,7 +294,7 @@ class UserTypeCast implements CastsAttributes
 
 ```php
 protected $casts = [
-    'type' => UserTypeCast::class,
+    'type' => UserTypeEnumCast::class,
 ];
 ```
 
@@ -305,9 +305,9 @@ Crea un file di traduzione in `lang/en/enums.php`:
 ```php
 return [
     'user_type' => [
-        UserType::ADMIN->value => 'Administrator',
-        UserType::DOCTOR->value => 'Doctor',
-        UserType::PATIENT->value => 'Patient',
+        UserTypeEnum::ADMIN->value => 'Administrator',
+        UserTypeEnum::DOCTOR->value => 'Doctor',
+        UserTypeEnum::PATIENT->value => 'Patient',
     ],
 ];
 ```

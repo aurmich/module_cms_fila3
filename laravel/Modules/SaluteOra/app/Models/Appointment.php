@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Modules\SaluteOra\Enums\AppointmentStatus;
-use Modules\SaluteOra\Enums\AppointmentType;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 
 /**
  * Appointment Model for the SaluteOra Module.
@@ -24,7 +24,7 @@ use Modules\SaluteOra\Enums\AppointmentType;
  * @property string $title
  * @property \Carbon\Carbon $start_time
  * @property \Carbon\Carbon $end_time
- * @property AppointmentType $type
+ * @property AppointmentTypeEnum $type
  * @property AppointmentStatus $status
  * @property string|null $notes
  * @property bool $emergency
@@ -67,7 +67,7 @@ class Appointment extends BaseModel
         return array_merge(parent::casts(), [
             'start_time' => 'datetime',
             'end_time' => 'datetime',
-            'type' => AppointmentType::class,
+            'type' => AppointmentTypeEnum::class,
             'status' => AppointmentStatus::class,
             'emergency' => 'boolean',
         ]);
@@ -188,7 +188,7 @@ class Appointment extends BaseModel
      */
     public function isEmergency(): bool
     {
-        return $this->emergency || $this->type === AppointmentType::EMERGENCY;
+        return $this->emergency || $this->type === AppointmentTypeEnum::EMERGENCY;
     }
 
     /**
@@ -261,7 +261,7 @@ class Appointment extends BaseModel
     {
         return $query->where(function ($q) {
             $q->where('emergency', true)
-              ->orWhere('type', AppointmentType::EMERGENCY);
+              ->orWhere('type', AppointmentTypeEnum::EMERGENCY);
         });
     }
 }

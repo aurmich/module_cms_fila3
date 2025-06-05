@@ -15,6 +15,18 @@ return array (
     array (
       'label' => 'date_time',
     ),
+    'confirm' => 
+    array (
+      'label' => 'confirm',
+    ),
+    'time' => 
+    array (
+      'label' => 'time',
+    ),
+    'date' => 
+    array (
+      'label' => 'date',
+    ),
   ),
   'fields' => 
   array (
@@ -70,6 +82,9 @@ return array (
     'city' => 
     array (
       'description' => 'city',
+      'helper_text' => 'city',
+      'placeholder' => 'city',
+      'label' => 'city',
     ),
     'region' => 
     array (
@@ -84,6 +99,27 @@ return array (
       'helper_text' => 'province',
       'placeholder' => 'province',
       'label' => 'province',
+    ),
+    'appointment_date' => 
+    array (
+      'description' => 'appointment_date',
+      'helper_text' => 'appointment_date',
+      'placeholder' => 'appointment_date',
+      'label' => 'appointment_date',
+    ),
+    'notes' => 
+    array (
+      'description' => 'notes',
+      'helper_text' => 'notes',
+      'placeholder' => 'notes',
+      'label' => 'notes',
+    ),
+    'appointment_time' => 
+    array (
+      'description' => 'appointment_time',
+      'helper_text' => 'appointment_time',
+      'placeholder' => 'appointment_time',
+      'label' => 'appointment_time',
     ),
   ),
 );

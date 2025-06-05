@@ -65,7 +65,7 @@ namespace Modules\SaluteOra\Filament\Widgets;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Enums\AppointmentStatus;
-use Modules\SaluteOra\Enums\AppointmentType;
+use Modules\SaluteOra\App\Enums\AppointmentType;
 use Saade\FilamentFullCalendar\Data\EventData;
 use Filament\Forms;
 
@@ -757,4 +757,7 @@ I widget FullCalendar per SaluteOra forniscono una base solida per la gestione d
 - [Integrazione FullCalendar](fullcalendar_integration.md)
 - [Documentazione FullCalendar](https://fullcalendar.io/docs)
 - [Plugin Saade](https://filamentphp.com/plugins/saade-fullcalendar)
-- [Filament Widgets](https://filamentphp.com/docs/3.x/panels/widgets) 
+- [Filament Widgets](https://filamentphp.com/docs/3.x/panels/widgets)
+
+> **Nota di prevenzione:**
+> L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.

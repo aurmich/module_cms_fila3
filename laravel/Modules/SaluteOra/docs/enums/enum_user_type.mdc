@@ -3,10 +3,10 @@ description:
 globs:
 alwaysApply: false
 ---
-# Regola Enum UserType (STI Parental)
+# Regola Enum UserTypeEnum (STI Parental)
 
 ## Obiettivo
-Gestire SEMPRE il tipo utente tramite enum PHP 8.1+ (UserType), MAI tramite costanti stringa o integer.
+Gestire SEMPRE il tipo utente tramite enum PHP 8.1+ (UserTypeEnum), MAI tramite costanti stringa o integer.
 
 ## Definizione
 ```php
@@ -14,7 +14,7 @@ namespace Modules\SaluteOra\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum UserType: string implements HasLabel
+enum UserTypeEnum: string implements HasLabel
 {
     case ADMIN = 'admin';
     case DOCTOR = 'doctor';
@@ -32,11 +32,11 @@ enum UserType: string implements HasLabel
 ```
 
 ## Regole
-- Usare SEMPRE l'enum UserType per il campo `type` nei modelli User/Patient/Doctor/Admin (STI Parental)
+- Usare SEMPRE l'enum UserTypeEnum per il campo `type` nei modelli User/Patient/Doctor/Admin (STI Parental)
 - Cast automatico Eloquent:
   ```php
   protected $casts = [
-      'type' => UserType::class,
+      'type' => UserTypeEnum::class,
   ];
   ```
 - In Filament, usare l'enum per:
@@ -50,7 +50,7 @@ enum UserType: string implements HasLabel
 - Implementare HasLabel per label UI
 - Usare l'enum direttamente in Select/Radio/Badge:
   ```php
-  Select::make('type')->options(UserType::class)
+  Select::make('type')->options(UserTypeEnum::class)
   ```
 - Vedi: [Filament Enums Docs](mdc:https:/filamentphp.com/docs/3.x/support/enums)
 

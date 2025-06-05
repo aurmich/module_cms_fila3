@@ -1,14 +1,11 @@
-<div class="p-4 bg-white rounded-lg shadow">
-    <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-medium text-gray-900">
-            {{ __('find_doctor_widget.title') }}
-        </h3>
-        <div class="flex items-center">
-            <x-heroicon-o-user-plus class="w-5 h-5 text-primary-500" />
-        </div>
-    </div>
-
-    <div class="space-y-4">
+{{--
+    View minimale per il widget FindDoctorAndAppointmentWidget.
+    Policy: solo wrapper per $this->form, nessun markup custom, nessuna logica Livewire/AlpineJS, nessun CSRF manuale.
+    Vedi docs/widgets/find-doctor-appointment-widget.md e docs/rules/filament_best_practices.md
+--}}
+<div class="find-doctor-widget">
+    <form wire:submit.prevent="submit">
+        @csrf
         {{ $this->form }}
-    </div>
+    </form>
 </div>

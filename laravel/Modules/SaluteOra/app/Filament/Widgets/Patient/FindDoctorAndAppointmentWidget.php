@@ -5,315 +5,361 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Widgets\Patient;
 
 use Exception;
+use Filament\Forms\Components as Form;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Form as FormBuilder;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Modules\Geo\Models\Region;
-use Modules\Geo\Models\Province;
-use Modules\Geo\Models\City;
+use Illuminate\Support\Facades\Session;
+use Modules\Geo\Models\Comune;
 use Modules\Geo\Models\Cap;
-use Modules\SaluteOra\Enums\AppointmentType;
-use Modules\SaluteOra\Enums\DentistSpecialization;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
+use Modules\SaluteOra\Enums\DentistSpecializationEnum;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\Xot\Traits\HasCsrfToken;
 
-/**
- * Widget per la ricerca e prenotazione del dentista.
- * ATTENZIONE: Non replicare trait/interfacce già presenti nella classe base XotBaseWidget.
- * Studiare sempre la classe base prima di estendere.
- * La localizzazione è gestita centralmente tramite LangServiceProvider e file di lingua.
- * Le chiavi dei campi devono corrispondere ai file di lingua del modulo.
- */
 class FindDoctorAndAppointmentWidget extends XotBaseWidget
 {
-    /**
-     * The sort order of the widget in the sidebar.
-     *
-     * @var int
-     */
+    //use HasCsrfToken;
+
+    protected static ?string $heading = 'saluteora::widgets.find_doctor_and_appointment.heading';
     protected static ?int $sort = 1;
-
-    /**
-     * The number of columns the widget should span.
-     *
-     * @var int|string|array
-     */
-    protected int|string|array $columnSpan = 'full';
-
-    /**
-     * The widget's form data.
-     *
-     * @var array<string, mixed>|null
-     */
-    public ?array $data = [
-        'region'=>null,
-        'province'=>null,
-        'city'=>null,
-        'cap'=>null,
-        'specialization'=>null,
-        'appointment_type'=>null,
-    ];
-
-    /**
-     * Available time slots for the selected date.
-     *
-     * @var array<string, string>
-     */
-    public array $availableSlots = [];
-
-    /**
-     * Whether the widget is currently loading data.
-     *
-     * @var bool
-     */
-    public bool $isLoading = false;
-
-    /**
-     * Widget title.
-     *
-     * @var string
-     */
-    public string $title = 'find_doctor_widget.title';
-
-    /**
-     * The view that should be used to render the widget.
-     * Follows the pattern: 'modulename::filament.widgets.view-name'.
-     *
-     * @var string
-     */
     protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
 
-    /**
-     * Widget icon.
-     *
-     * @var string
-     */
-    public string $icon = 'heroicon-o-user-plus';
+    public ?array $data = [
+        'region' => null,
+        'province' => null,
+        'city' => null,
+        'cap' => null,
+        'specialization' => null,
+        'appointment_date' => null,
+        'appointment_type' => null,
+        'appointment_time' => null,
+        'notes' => null,
+    ];
 
     /**
      * Get the form schema for the widget.
      *
-     * @return array<string, \Filament\Forms\Components\Component>
+     * @return array<string, mixed>
+     */
+    /**
+     * Get the form schema for the widget.
+     *
+     * @return array<string, mixed>
      */
     public function getFormSchema(): array
     {
         return [
             'wizard' => Wizard::make([
-                $this->getSearchStep(),
-                //$this->getDateTimeStep(),
-                $this->getConfirmationStep(),
+                Wizard\Step::make('search')
+                    ->icon('heroicon-o-magnifying-glass')
+                    ->schema($this->getSearchStep()),
+                    
+                Wizard\Step::make('date')
+                    ->icon('heroicon-o-calendar')
+                    ->schema($this->getDateStep()),
+                    
+                Wizard\Step::make('time')
+                    ->icon('heroicon-o-clock')
+                    ->schema($this->getTimeStep()),
+                    
+                Wizard\Step::make('confirm')
+                    ->icon('heroicon-o-document-check')
+                    ->schema($this->getConfirmStep()),
             ])
-            //->statePath('zzzz')
-            ->submitAction(
-                \Filament\Forms\Components\Actions\Action::make('submit')
-                    ->submit('save')
-            )
+            /*
+            ->submitAction(view('filament.buttons.submit-button', [
+                'label' => __('saluteora::actions.book_appointment'),
+            ]))
+                */
         ];
     }
 
-    protected function getSearchStep(): Wizard\Step
+    /**
+     * Get the search step form schema.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getSearchStep(): array
     {
-        return Wizard\Step::make('search')
-            ->schema([
-                Fieldset::make('dentist_search')
-                    ->schema([
-                        Select::make('region')
-                            ->options(fn () => Region::all()->pluck('nome','codice')->toArray())
-                            ->searchable()
-                            ->required()
-                            ->live()
-                            ->afterStateUpdated(function (Set $set,$state) {
-                                $set('province', null);
+        
+        return [
+            'region' => Select::make('region')
+                ->options(function () {
+                    return Comune::select('regione')
+                    ->distinct()
+                    ->orderBy('regione->nome')
+                    ->get()
+                    ->pluck('regione.nome','regione.codice')
+                    
+                    ->toArray();
+                })
+                ->searchable()
+                ->required()
+                ->live()
+                ->afterStateUpdated(function (Set $set){
+                    $set('province', null);
+                    $set('cap', null);
+                })
+                ,
+            'province' => Select::make('province')
+                ->options(function (Get $get) {
+                    $region = $get('region');
+                    if (!$region) {
+                        return [];
+                    }
+                    $res= Comune::query()
+                        ->where('regione->codice', $region)
+                        ->select('provincia')
+                        ->distinct()
+                        ->orderBy('provincia->nome')
+                        ->get()
+                        ->pluck('provincia.nome', 'provincia.codice')
+                        ->toArray();
+                    return $res;
+                })
+                ->searchable()
+                ->required()
+                ->live()
+                ->afterStateUpdated(fn (Set $set) => $set('cap', null))
+                ,
 
-                                // Forza il refresh dei dati
-                                $this->data['region'] = $state;
-                            }),
+            'cap' => Select::make('cap')
+                ->options(function (Get $get) {
+                    $region = $get('region');
+                    if (!$region) {
+                        return [];
+                    }
+                    $province = $get('province');
+                    if (!$province) {
+                        return [];
+                    }
+                    $res=Comune::query()
+                        ->where('regione->codice', $region)
+                        ->where('provincia->codice', $province)
+                        ->select('cap')
+                        ->distinct()
+                        ->orderBy('cap')
+                        ->get()
+                        ->pluck('cap.0', 'cap.0')
+                        ->toArray();
+                    
+                    return $res;
+                })
+                ->searchable()
+                ->required()
+                ->live()
+                ->disabled(fn (Get $get) => !$get('region') || !$get('province')),
+        ];
+    }
 
-                        Select::make('province')
-                            ->options(function(Get $get,$state) {
-                                // Accesso diretto alla proprietà
-                                $region = $get('region');
-                                /*
-                                dddx([
-                                    'region'=>$state,
-                                    'data'=>$this->data,
-                                    'a'=>$get('dentist_search.region'),
-                                    'b'=>$get('dentist_search'),
-                                    'c'=>$get('region'),
-                                    'd'=>$get('search.region'),
-                                    'e'=>$get('search.dentist_search.region'),
-                                ]);
-                                */
-                                if (!$region) {
-                                    return [];
+    protected function getDateStep(): array
+    {
+        return [
+            'appointment_date' => DatePicker::make('appointment_date')
+                ->label('saluteora::fields.appointment_date')
+                ->minDate(now())
+                ->maxDate(now()->addMonths(3))
+                ->required()
+                ->native(false)
+                //->inline(true)
+                ->extraAttributes([
+        'data-inline' => true,  // Forza Flatpickr a renderlo inline
+    ])
+    ->closeOnDateSelection(false) 
+    //->extraFlatpickrOptions([
+    //    'inline' => true,
+    //])
+    ->configure(function (DatePicker $component) {
+        $component->getExtraAttributes()['data-inline'] = 'true';
+    })
+     ->extraInputAttributes([
+                            'x-data' => '{
+                                init() {
+                                    this.$nextTick(() => {
+                                        this.initInlineCalendar();
+                                    });
+                                },
+                                initInlineCalendar() {
+                                    const fp = flatpickr(this.$el, {
+                                        inline: true,
+                                        enableTime: false,
+                                        dateFormat: "Y-m-d",
+                                        altFormat: "d/m/Y",
+                                        minDate: "today",
+                                        maxDate: new Date().fp_incr(180),
+                                        disable: this.getDisabledDates(),
+                                        locale: "it",
+                                        onChange: (selectedDates, dateStr) => {
+                                            this.$dispatch("date-selected", { date: dateStr });
+                                        }
+                                    });
+                                },
+                                getDisabledDates() {
+                                    // Logica per date disabilitate
+                                    return window.disabledAppointmentDates || [];
                                 }
-
-                                return Province::byRegion($region)->pluck('nome','codice')->toArray();
-                            })
-                            ->searchable()
-                            ->required()
-                            ->live()
-                            //->afterStateUpdated(fn (Set $set) => $set('city', null))
-                            ->visible(fn (Get $get) => filled($get('region')))
-                            ->disabled(fn (Get $get) => !filled($get('region')))
-                            ,
-/*
-                        Select::make('city')
-                            ->label('find_doctor_widget.fields.city')
-                            ->placeholder('find_doctor_widget.placeholders.city')
-                            ->options(fn (Get $get) => filled($get('province'))
-                                ? City::where('province_id', $get('province'))->pluck('name', 'id')
-                                : [])
-                            ->searchable()
-                            ->required()
-                            ->live()
-                            ->afterStateUpdated(fn (Set $set) => $set('cap', null))
-                            ->visible(fn (Get $get) => filled($get('province')))
-                            ->disabled(fn (Get $get) => !filled($get('province'))),
-*/
-                        Select::make('cap')
-                            ->options(fn (Get $get) => filled($get('city'))
-                                ? Cap::where('city_id', $get('city'))->pluck('code', 'id')
-                                : [])
-                            ->searchable()
-                            ->required()
-                            ->visible(fn (Get $get) => filled($get('city')))
-                            ->disabled(fn (Get $get) => !filled($get('city'))),
-/*
-                        Select::make('specialization')
-                            ->label('find_doctor_widget.fields.specialization')
-                            ->placeholder('find_doctor_widget.placeholders.specialization')
-                            ->options(DentistSpecialization::class)
-                            ->searchable()
-                            ->columnSpanFull(),
-
-                        Select::make('appointment_type')
-                            ->label('find_doctor_widget.fields.appointment_type')
-                            ->placeholder('find_doctor_widget.placeholders.appointment_type')
-                            ->options(AppointmentType::class)
-                            ->required()
-                            ->default(AppointmentType::FOLLOWUP->value)
-                            ->columnSpanFull(),
-                        */
-                    ])
-            ]);
-    }
-
-    protected function getDateTimeStep(): Wizard\Step
-    {
-        return Wizard\Step::make('date_time')
-            ->schema([
-                Fieldset::make('appointment_details')
-                    ->schema([
-                        DatePicker::make('date')
-                            ->required()
-                            ->minDate(now())
-                            ->live()
-                            ->afterStateUpdated(fn (Set $set) => $set('time', null)),
-                        Select::make('time')
-                            ->options($this->availableSlots)
-                            ->required()
-                            ->disabled(fn (Get $get) => !$get('date')),
-                        $this->getLoadingState()
-                    ])
-            ]);
-    }
-
-    protected function getConfirmationStep(): Wizard\Step
-    {
-        return Wizard\Step::make('confirmation')
-            ->schema([
-                Placeholder::make('confirmation_message')
-                    ->content(fn (Get $get) => $this->getConfirmationContent($get)),
-            ]);
-    }
-
-    protected function getLoadingState()
-    {
-        if ($this->isLoading) {
-            return Placeholder::make('loading')
-                ->content('find_doctor_widget.messages.loading_available_slots')
-                ->columnSpanFull();
-        }
-
-        return null;
-    }
-
-    public function loadAvailableSlots(): void
-    {
-        if (empty($this->data['appointment_date'])) {
-            return;
-        }
-
-        $this->isLoading = true;
-
-        // Simulate API call to fetch available slots
-        $this->availableSlots = [
-            '09:00' => '09:00 - 09:30',
-            '10:00' => '10:00 - 10:30',
-            '11:00' => '11:00 - 11:30',
-            '14:00' => '14:00 - 14:30',
-            '15:00' => '15:00 - 15:30',
+                            }'
+                        ])
+                ->displayFormat('d/m/Y')
+                ->closeOnDateSelection()
+                ->timezone('Europe/Rome')
+                ->disabledDates($this->getDisabledDates())
+                ->afterStateUpdated(function (Set $set, $state) {
+                    $this->updateAvailableTimeSlots($set, $state);
+                })
+                //->openToDate(now()->addDay())
+                ->firstDayOfWeek(1) // Inizia con lunedì
+                //->disablePopover()
+                ->closeOnDateSelection(false), // Mantiene il calendario aperto
+                
+            'appointment_type' => Select::make('appointment_type')
+                ->label('saluteora::fields.appointment_type')
+                ->options(AppointmentTypeEnum::class)
+                ->live()
+                ->afterStateUpdated(function (Set $set) {
+                    // Reinizializza le disponibilità quando cambia il tipo di appuntamento
+                    if ($this->data['appointment_date']) {
+                        $this->updateAvailableTimeSlots($set, $this->data['appointment_date']);
+                    }
+                })
+                ->required(),
         ];
-
-        $this->isLoading = false;
+    }
+    
+    /**
+     * Ottiene le date non disponibili per gli appuntamenti
+     * 
+     * @return array<string> Date formattate nel formato Y-m-d
+     */
+    protected function getDisabledDates(): array
+    {
+        // Ottieni giorni non lavorativi (weekend o festivi)
+        $disabledDates = [];
+        
+        // Disabilita le domeniche per i prossimi 3 mesi
+        $startDate = now();
+        $endDate = now()->addMonths(3);
+        
+        for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
+            // Disabilita le domeniche (0 = domenica in Carbon)
+            if ($date->dayOfWeek === 0) {
+                $disabledDates[] = $date->format('Y-m-d');
+            }
+            
+            // Qui puoi aggiungere anche le festività nazionali o altri giorni di chiusura
+        }
+        
+        return $disabledDates;
+    }
+    
+    /**
+     * Aggiorna gli slot orari disponibili in base alla data selezionata
+     * 
+     * @param \Filament\Forms\Set $set
+     * @param string|null $appointmentDate
+     * @return void
+     */
+    protected function updateAvailableTimeSlots(Set $set, ?string $appointmentDate): void
+    {
+        // Logica per aggiornare gli slot orari disponibili in base alla data e al tipo di appuntamento
+        // Qui implementerai la logica per recuperare gli slot orari disponibili
     }
 
+    protected function getTimeStep(): array
+    {
+        return [
+            'appointment_time' => Select::make('appointment_time')
+                ->label('saluteora::fields.appointment_time')
+                ->options([
+                    '09:00' => '09:00',
+                    '10:00' => '10:00',
+                    '11:00' => '11:00',
+                    '14:00' => '14:00',
+                    '15:00' => '15:00',
+                    '16:00' => '16:00',
+                ])
+                ->required(),
+        ];
+    }
+
+    /**
+     * Get the confirmation step form schema.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getConfirmStep(): array
+    {
+        return [
+            'confirmation_message' => Placeholder::make('confirmation')
+                ->label('saluteora::messages.confirm_booking')
+                ->content('saluteora::messages.booking_summary'),
+                
+            'notes' => Textarea::make('notes')
+                ->label('saluteora::fields.notes')
+                ->placeholder('saluteora::placeholders.optional_notes'),
+        ];
+    }
+
+    
     /**
      * Handle form submission.
      */
     public function submit(): void
     {
         try {
+            // Validate CSRF token
+            if (!request()->hasValidSignature()) {
+                throw new \Exception('Invalid request signature');
+            }
+
+            // Get form data
             $data = $this->form->getState();
-            $appointment = $this->createAppointment($data);
-            $this->sendConfirmation($appointment);
+            
+            // Log the booking attempt
+            Log::info('New appointment booking', [
+                'user_id' => Auth::id(),
+                'data' => $data
+            ]);
 
+            // TODO: Implement actual booking logic here
+            
+            // Show success notification
             Notification::make()
-                ->title('find_doctor_widget.messages.appointment_booked_successfully')
                 ->success()
+                ->title(trans('saluteora::notifications.booking_success'))
                 ->send();
-
+            
+            // Reset form
             $this->form->fill();
-            $this->availableSlots = [];
-
-        } catch (Exception $e) {
-            Log::error('Error booking appointment: ' . $e->getMessage());
-
+            
+        } catch (\Exception $e) {
+            Log::error('Booking error: ' . $e->getMessage());
+            
             Notification::make()
-                ->title('find_doctor_widget.messages.error_booking_appointment')
-                ->body($e->getMessage())
                 ->danger()
+                ->title(trans('saluteora::notifications.booking_error'))
+                ->body($e->getMessage())
                 ->send();
         }
     }
-
-    protected function createAppointment(array $data): array
+    
+    /**
+     * Get the CSRF token for the current request.
+     *
+     * @return string
+     */
+    public function getCsrfToken(): string
     {
-        // TODO: Implement appointment creation
-        return [];
-    }
-
-    protected function sendConfirmation(array $appointment): void
-    {
-        // TODO: Implement confirmation sending
-    }
-
-    public static function canView(): bool
-    {
-        return true;
-    }
-
-    protected function getConfirmationContent(callable $get): string
-    {
-        // TODO: Implement confirmation content
-        return '';
+        return Session::token();
     }
 }

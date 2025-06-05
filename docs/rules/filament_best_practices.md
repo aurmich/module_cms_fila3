@@ -446,9 +446,26 @@ ViewEntry::make('preview')
    - ✅ Gestire correttamente i permessi
    - ✅ Mantenere la sicurezza dei dati
 
+## Root element unico nei widget Livewire/Filament
+Ogni widget Livewire/Filament DEVE restituire un solo root element HTML (es. <div> o <section>). Mai markup "sciolto" o più root. Questo per evitare errori MultipleRootElementsDetectedException. Aggiornare sempre la view e la docstring del widget. Vedi anche docs/xot.md.
+
 ## Collegamenti tra versioni di filament_best_practices.md
 * [filament_best_practices.md](../../laravel/Modules/Xot/docs/filament/filament_best_practices.md)
 * [filament_best_practices.md](../../laravel/Modules/Xot/docs/filament_best_practices.md)
 * [filament_best_practices.md](../../laravel/Modules/User/docs/filament_best_practices.md)
 * [filament_best_practices.md](../../laravel/Modules/Job/docs/filament_best_practices.md)
+
+> [2025-05-28] Policy aggiornata: tutte le pagine di form devono includere direttamente solo widget Filament modulari, mai form custom. Motivazione: coerenza architetturale, manutenzione, DRY, troubleshooting semplificato.
+
+## Livewire e Filament: inclusione obbligatoria di @livewireStyles e @livewireScripts
+Per evitare errori 419 Page Expired nei widget Filament/Livewire, il layout DEVE includere @livewireStyles subito dopo @filamentStyles e @livewireScripts subito dopo @filamentScripts. Vedi anche docs/widget-deleting-method-error.md.
+
+## View widget: solo wrapper per $this->form
+Le view dei widget Filament devono essere solo wrapper per $this->form. Niente markup custom, niente logica Livewire/AlpineJS, niente gestione CSRF manuale. Tutta la logica va nel widget PHP o nel tema. Motivazione: coerenza, DRY, KISS, troubleshooting semplificato. Collegamento a docs/xot.md.
+
+## Vietato ->label() e ->placeholder() nei form component
+Tutti i form component devono usare solo chiavi campo, senza label o placeholder inline. Le etichette e i placeholder sono gestiti tramite i file di traduzione del modulo e il LangServiceProvider. Motivazione: coerenza, centralizzazione, override semplice, policy di qualità. Collegamento a docs/xot.md.
+
+## Regola: trait solo se riusabili
+I trait vanno creati solo se riutilizzati in più classi. Vietato creare trait per una sola classe. Se la logica è specifica di un solo modello, va implementata direttamente nella classe. Motivazione: semplicità, KISS, manutenibilità, evitare complessità inutile. Collegamento a docs/xot.md.
 

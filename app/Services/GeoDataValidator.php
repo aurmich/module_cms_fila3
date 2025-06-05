@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Geo\App\Services;
+namespace Modules\Geo\Services;
 
 use Illuminate\Support\Facades\Validator;
 

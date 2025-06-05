@@ -9,8 +9,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueueableAction\QueueableAction;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Enums\UserType;
-use Modules\SaluteOra\Enums\AppointmentType;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 
 class FetchCalendarEventsAction
 {
@@ -54,8 +54,8 @@ class FetchCalendarEventsAction
         // Apply role-based filters
         if ($user) {
             match ($user->type) {
-                UserType::DOCTOR => $query->where('doctor_id', $user->id),
-                UserType::PATIENT => $query->where('patient_id', $user->id),
+                UserTypeEnum::DOCTOR => $query->where('doctor_id', $user->id),
+                UserTypeEnum::PATIENT => $query->where('patient_id', $user->id),
                 default => $query,
             };
         }
@@ -146,14 +146,14 @@ class FetchCalendarEventsAction
         }
         
         return match ($appointment->type) {
-            AppointmentType::CONSULTATION->value => '#fd7e14',
-            AppointmentType::CLEANING->value => '#17a2b8',
-            AppointmentType::TREATMENT->value => '#28a745',
-            AppointmentType::EMERGENCY->value => '#dc3545',
-            AppointmentType::FOLLOWUP->value => '#ffc107',
-            AppointmentType::SURGERY->value => '#6f42c1',
-            AppointmentType::ORTHODONTICS->value => '#6f42c1',
-            AppointmentType::PREVENTION->value => '#17a2b8',
+            AppointmentTypeEnum::CONSULTATION->value => '#fd7e14',
+            AppointmentTypeEnum::CLEANING->value => '#17a2b8',
+            AppointmentTypeEnum::TREATMENT->value => '#28a745',
+            AppointmentTypeEnum::EMERGENCY->value => '#dc3545',
+            AppointmentTypeEnum::FOLLOWUP->value => '#ffc107',
+            AppointmentTypeEnum::SURGERY->value => '#6f42c1',
+            AppointmentTypeEnum::ORTHODONTICS->value => '#6f42c1',
+            AppointmentTypeEnum::PREVENTION->value => '#17a2b8',
             default => '#3490dc',
         };
     }

@@ -11,21 +11,24 @@ La roadmap è organizzata in aree funzionali, ognuna contenente task specifici c
 
 ## Stato Avanzamento Maggio 2025
 
-- **Architettura Base**: 95% (Folio, Volt, Livewire, Alpine, Tailwind completati, ottimizzazione API e lazy loading in corso)
-- **Setup Ambiente**: 100% (completato)
-- **Componenti UI**: 85% (sistema sezioni JSON, homepage, componenti Filament, responsive, traduzioni quasi completati; focus su lazy loading e mobile)
-- **Modelli e Architettura Dati**: 90% (STI, Doctor, workflow, enum, action, best practice completate; documentazione aggiornata)
-- **Registrazione e Autenticazione**: 80% (form multi-step, upload documenti, privacy, conferma; da completare validazione odontoiatra e 2FA)
-- **Ricerca Dentista**: 75% (ricerca, filtri, mappa, preferiti; focus su mappa interattiva e schede dettaglio)
-- **Prenotazione Visite**: 70% (calendario, form, conferma; da completare gestione rifiuti, notifiche, storico)
-- **Area Personale Paziente**: 65% (dashboard, storico, documentazione clinica, profilo, materiale educativo; focus su documentazione clinica e mobile)
-- **Registrazione Odontoiatra**: 80% (upload documenti, validazione, studio, coordinate, disponibilità; focus su completamento flusso e UX)
-- **Gestione Appuntamenti Odontoiatra**: 75% (dashboard, accettazione/rifiuto, calendario, note, referti, storico; focus su referti e storico)
-- **Sistema di Rimborsi**: 65% (generazione richiesta, tracking, notifiche, fattura; focus su tracking e notifiche)
-- **Back Office**: 85% (dashboard, verifica pazienti/odontoiatri, rimborsi, reportistica; focus su segnalazioni, qualità servizio, pagamenti, dashboard integrata)
-- **Ottimizzazioni e Miglioramenti**: 70% (caching, assets, lazy loading, performance API, dark mode, mobile, accessibilità)
-- **Sistema Notifiche**: 70% (email template, SMS, notifiche in-app/push; focus su SMS e push)
-- **Funzionalità Future**: telemedicina, analytics, mobile app, integrazione SSN, API partner (in pianificazione)
+| Macro-area                                 | Stato (%) | Responsabile     | File Dettaglio                                 | Note principali                                 |
+|--------------------------------------------|-----------|------------------|-----------------------------------------------|-------------------------------------------------|
+| Architettura Base                          | 95%       | Team Backend     | 02-architettura-base.md                       | Ottimizzazione API e lazy loading in corso       |
+| Setup Ambiente                             | 100%      | Team DevOps      | 01-setup-ambiente.md                          | Completato                                      |
+| Componenti UI                              | 85%       | Team Frontend    | 03-ui-ux-base.md                              | Focus su mobile e caricamento veloce             |
+| Modelli e Architettura Dati                | 90%       | Team Backend     | 10-modelli-ereditarieta.md                    | Documentazione aggiornata                       |
+| Registrazione/Autenticazione               | 80%       | Team Frontoffice | 04-registrazione-autenticazione.md            | Da completare validazione odontoiatra e 2FA      |
+| Ricerca Dentista                           | 75%       | Team Frontoffice | 07-prenotazione-visite.md                     | Mappa interattiva in sviluppo                    |
+| Prenotazione Visite                        | 70%       | Team Frontoffice | 07-prenotazione-visite.md                     | Da completare gestione rifiuti e notifiche       |
+| Area Personale Paziente                    | 65%       | Team Frontoffice | paziente-registrazione.md                     | Focus su documentazione clinica                  |
+| Registrazione Odontoiatra                  | 80%       | Team Frontoffice | 08-registrazione-odontoiatra.md               | Flusso multi-step e UX in completamento          |
+| Gestione Appuntamenti Odontoiatra          | 75%       | Team Frontoffice | dentista-appuntamenti.md                      | Referti e storico appuntamenti                   |
+| Sistema di Rimborsi                        | 65%       | Team Amministr.  | 26-sistema-rimborsi.md                        | Tracking e notifiche pagamento                   |
+| Back Office                                | 85%       | Team Backoffice  | 09-backoffice.md                              | Dashboard integrata e segnalazioni               |
+| Ottimizzazioni/Miglioramenti               | 70%       | Team Fullstack   |                                              | Performance API, caching, mobile                 |
+| Sistema Notifiche                          | 70%       | Team Frontoffice | 28-sistema-notifiche.md                       | SMS e push in sviluppo                           |
+| Prenotazione Paziente da URL /it/patient/book | 0%        | Team Frontoffice | 30-patient-book.md                            | Analisi e progettazione in corso                 |
+| Funzionalità Future                        | -         | Team Prodotto    |                                              | Telemedicina, mobile app, API partner            |
 
 ## Prossimi Passi Operativi (Priorità Maggio-Giugno 2025)
 
@@ -40,7 +43,7 @@ La roadmap è organizzata in aree funzionali, ognuna contenente task specifici c
 9. **Avviare MVP mobile app** (focus su prenotazione e notifiche) - **Priorità Bassa**
 10. **Avviare API partner esterni** (autenticazione, rate limiting) - **Priorità Bassa**
 
-## Checklist Finale
+## Checklist Finale (aggiornata)
 - [ ] Aggiornamento documentazione neutra e bidirezionale
 - [ ] Nessun riferimento a brand/progetto nei moduli
 - [ ] Nessuna duplicazione trait nei modelli
@@ -49,6 +52,8 @@ La roadmap è organizzata in aree funzionali, ognuna contenente task specifici c
 - [ ] STI e trait secondo best practice
 - [ ] Test e validazione su tutte le nuove feature
 - [ ] Collegamenti bidirezionali aggiornati
+- [ ] Analisi, documentazione e test flusso /it/patient/book
+- Verificare sempre che la pagina sia orchestrata da una blade tematica in Themes/One/resources/views/pages/ e che includa solo widget modulari con un solo root element. Vietato l'uso di Livewire/Patient/Book.php o blade legacy fuori dai moduli/temi.
 
 ## Best Practice e Regole (2025-05)
 - Neutralità documentazione (mai riferimenti a brand/progetto nei moduli)
@@ -201,3 +206,41 @@ This document outlines the current roadmap for the frontoffice development of th
 - [TRANSLATIONS.md](/var/www/html/saluteora/laravel/Modules/Patient/docs/TRANSLATIONS.md)
 
 **Last Updated**: 2025-05-16
+
+## Sezione dedicata: Prenotazione Paziente da URL /it/patient/book
+
+### Descrizione
+Permette al paziente di accedere direttamente al flusso di prenotazione tramite la URL `/it/patient/book`, con percorso semplificato, validazione documenti, selezione servizio/data/orario e conferma in un unico step. Ottimizzato per mobile.
+
+### Stato attuale
+- **Analisi**: in corso
+- **Progettazione**: da avviare
+- **Implementazione**: non iniziata
+
+### User Story
+Come paziente voglio poter prenotare una visita accedendo direttamente a /it/patient/book, scegliendo servizio, data e orario, caricando eventuali documenti richiesti e ricevendo conferma immediata, così da velocizzare il processo senza passaggi intermedi.
+
+#### Acceptance Criteria
+- Accesso diretto a /it/patient/book senza login obbligatorio (se già autenticato)
+- Form unico con selezione servizio, data, orario, upload documenti
+- Validazione dati e documenti in tempo reale
+- Conferma e notifica immediata (email/SMS/push)
+- Visualizzazione stato prenotazione nell'area personale
+
+### Collegamenti
+- [Dettaglio tecnico e flusso completo](./roadmap_frontoffice/30-patient-book.md)
+- [Prenotazione Visite](./roadmap_frontoffice/07-prenotazione-visite.md)
+- [UI/UX Base](./roadmap_frontoffice/03-ui-ux-base.md)
+- [Sistema Notifiche](./roadmap_frontoffice/28-sistema-notifiche.md)
+- [Backoffice](./roadmap_frontoffice/09-backoffice.md)
+- [Torna alla tabella di sintesi](#stato-avanzamento-maggio-2025)
+
+## Checklist Finale (aggiornata)
+- [ ] Aggiornamento documentazione neutra e bidirezionale
+- [ ] Nessun riferimento a brand/progetto nei moduli
+- [ ] Nessuna duplicazione trait nei modelli
+- [ ] Error handling solo con ValidationException::withMessages
+- [ ] STI e trait secondo best practice
+- [ ] Test e validazione su tutte le nuove feature
+- [ ] Collegamenti bidirezionali aggiornati
+- [ ] Analisi, documentazione e test flusso /it/patient/book
