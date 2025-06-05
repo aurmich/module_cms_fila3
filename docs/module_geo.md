@@ -39,6 +39,20 @@ Namespace: `Modules\Geo\Database\Factories`
 ### Seeders
 Namespace: `Modules\Geo\Database\Seeders`
 
+---
+
+## Gestione dati geografici statici (GeoJsonModel readonly)
+
+Per tutti i dati statici (regioni, province, comuni, cap) di dimensioni ridotte, **NON** vengono create tabelle/migration dedicate. Si utilizza invece un modello base readonly, ispirato a [Squire](https://github.com/squirephp/squire), che legge i dati direttamente dal file JSON (`resources/json/comuni.json`).
+
+- Tutti i model specialistici (Region, Province, City, Cap) estendono la base `GeoJsonModel` e forniscono filtri dedicati.
+- Nessuna duplicazione, dati facilmente versionabili.
+- Performance ottimale tramite cache Laravel.
+- Per dettagli implementativi e best practice vedi: [geo-json-model.md](geo-json-model.md)
+- Regola architetturale documentata anche in: [Xot/docs/module-structure.md](../../Xot/docs/module-structure.md) e [SaluteOra/docs/geo-integration.md](../../SaluteOra/docs/geo-integration.md)
+
+---
+
 ## Testing
 Comandi disponibili:
 ```bash
