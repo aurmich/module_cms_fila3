@@ -28,7 +28,7 @@ alwaysApply: false
 - [x] Colori e icone diverse per disponibilità
 
 ## Collegamenti
-- [docs/fullcalendar_widgets.md](mdc:../../Modules/SaluteOra/docs/fullcalendar_widgets.md)
-- [docs/appointment-management.md](mdc:../../Modules/SaluteOra/docs/appointment-management.md)
-- [docs/calendar/doctor-availability-management.md](mdc:../../Modules/SaluteOra/docs/calendar/doctor-availability-management.md)
-- [docs/fullcalendar_parental_widgets.md](mdc:../../Modules/SaluteOra/docs/fullcalendar_parental_widgets.md)
+- [docs/fullcalendar_widgets.md](mdc:../../Modules/<nome progetto>/docs/fullcalendar_widgets.md)
+- [docs/appointment-management.md](mdc:../../Modules/<nome progetto>/docs/appointment-management.md)
+- [docs/calendar/doctor-availability-management.md](mdc:../../Modules/<nome progetto>/docs/calendar/doctor-availability-management.md)
+- [docs/fullcalendar_parental_widgets.md](mdc:../../Modules/<nome progetto>/docs/fullcalendar_parental_widgets.md)

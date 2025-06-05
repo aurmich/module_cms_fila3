@@ -1,10 +1,10 @@
 ---
-description: Regole complete Windsurf per Laraxot PTVX
+description: Regole complete Windsurf per Laraxot <nome progetto>
 globs: ["**/*.php"]
 alwaysApply: true
 ---
 
-# Regole Windsurf per Laraxot PTVX (Giugno 2025)
+# Regole Windsurf per Laraxot <nome progetto> (Giugno 2025)
 
 ## Modelli e ORM
 
@@ -14,7 +14,7 @@ alwaysApply: true
 - **Esempio corretto**:
   ```php
   namespace Modules\IndennitaCondizioniLavoro\Models;
-  
+
   class CondizioniLavoro extends BaseModel
   {
       // Implementazione modello
@@ -23,10 +23,10 @@ alwaysApply: true
 - **Anti-pattern**:
   ```php
   namespace Modules\IndennitaCondizioniLavoro\Models;
-  
+
   use Illuminate\Database\Eloquent\Model;
   // oppure use Modules\Xot\Models\XotBaseModel;
-  
+
   class CondizioniLavoro extends Model // oppure XotBaseModel
   {
       // Implementazione modello
@@ -139,7 +139,7 @@ return new class extends XotBaseMigration {
                 $table->timestamps();
             });
         }
-        
+
         // Aggiunta colonna se non esiste
         if (! $this->hasColumn('performance_organizzativa', 'valutatore_id')) {
             $this->tableUpdate('performance_organizzativa', function (Blueprint $table) {
@@ -147,7 +147,7 @@ return new class extends XotBaseMigration {
             });
         }
     }
-    
+
     // Non implementare mai il metodo down
 };
 ```
@@ -220,7 +220,7 @@ return new class extends XotBaseMigration {
 ## PHPStan
 
 ### Esecuzione
-- **Directory**: Sempre da `/var/www/html/ptvx/laravel`
+- **Directory**: Sempre da `/var/www/html/<nome progetto>/laravel`
 - **Comando**: `./vendor/bin/phpstan analyze [target] --level=[1-9]`
 - **Livello minimo**: 9
 - **Memoria**: `--memory-limit=2G` per moduli grandi
@@ -242,7 +242,7 @@ return new class extends XotBaseMigration {
 
 ### Struttura
 - **Moduli**: Documentazione in `Modules/<NomeModulo>/docs/`
-- **Root**: Documentazione globale in `/var/www/html/ptvx/docs/`
+- **Root**: Documentazione globale in `/var/www/html/<nome progetto>/docs/`
 - **Collegamenti**: Mantenere collegamenti bidirezionali
 
 ### Standard di Qualità

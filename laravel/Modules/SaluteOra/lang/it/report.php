@@ -11,4 +11,8 @@ return array (
     'sort' => 20,
     'tooltip' => 'Visualizza report e statistiche delle attività cliniche',
   ),
+  'model' => 
+  array (
+    'label' => 'report.model',
+  ),
 );

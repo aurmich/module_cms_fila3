@@ -1,10 +1,10 @@
 ---
-description: Pattern e best practice per l'implementazione di Widget Filament in progetti Laraxot/PTVX
+description: Pattern e best practice per l'implementazione di Widget Filament in progetti Laraxot/<nome progetto>
 globs: ["**/Filament/Widgets/*.php"]
 alwaysApply: true
 ---
 
-# Pattern per Widget Filament in Laraxot/PTVX
+# Pattern per Widget Filament in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -174,13 +174,13 @@ class StatsOverviewWidget extends BaseWidget
     protected function getCompletionRate(): float
     {
         $total = \Modules\ModuleName\Models\ModelName::count();
-        
+
         if ($total === 0) {
             return 0;
         }
-        
+
         $completed = \Modules\ModuleName\Models\ModelName::where('is_completed', true)->count();
-        
+
         return $completed / $total;
     }
 
@@ -217,7 +217,7 @@ class ChartDataWidget extends ChartWidget
      * Tipo di grafico.
      */
     protected static ?string $chartId = 'moduleNameChart';
-    
+
     /**
      * Intervallo di aggiornamento.
      */
@@ -269,7 +269,7 @@ class ChartDataWidget extends ChartWidget
     protected function getData(): array
     {
         $data = $this->getChartData();
-        
+
         return [
             'datasets' => [
                 [
@@ -299,7 +299,7 @@ class ChartDataWidget extends ChartWidget
         $dateFormat = $this->getDateFormat();
         $dateColumn = 'created_at';
         $startDate = $this->getStartDate();
-        
+
         return DB::table('model_name_table')
             ->select(
                 DB::raw("DATE_FORMAT({$dateColumn}, '{$dateFormat}') as date"),
@@ -406,7 +406,7 @@ class ModuleCalendarWidget extends BaseCalendarWidget
      * @var \Illuminate\Database\Eloquent\Model|string|null
      */
     public $model = EventModel::class;
-    
+
     /**
      * Configurazione del calendario.
      *
@@ -434,7 +434,7 @@ class ModuleCalendarWidget extends BaseCalendarWidget
             ],
         ]);
     }
-    
+
     /**
      * Unisce la configurazione base con quella personalizzata.
      *
@@ -444,10 +444,10 @@ class ModuleCalendarWidget extends BaseCalendarWidget
     protected function mergeBaseConfig(array $config): array
     {
         $baseConfig = parent::config();
-        
+
         return array_merge($baseConfig, $config);
     }
-    
+
     /**
      * Schema del form per gli eventi.
      *
@@ -461,31 +461,31 @@ class ModuleCalendarWidget extends BaseCalendarWidget
                 ->placeholder(__('modulename::calendar.fields.title.placeholder'))
                 ->required()
                 ->maxLength(255),
-                
+
             Forms\Components\Textarea::make('description')
                 ->label(__('modulename::calendar.fields.description.label'))
                 ->placeholder(__('modulename::calendar.fields.description.placeholder'))
                 ->columnSpanFull(),
-                
+
             Forms\Components\DateTimePicker::make('starts_at')
                 ->label(__('modulename::calendar.fields.starts_at.label'))
                 ->seconds(false)
                 ->required(),
-                
+
             Forms\Components\DateTimePicker::make('ends_at')
                 ->label(__('modulename::calendar.fields.ends_at.label'))
                 ->seconds(false)
                 ->required(),
-                
+
             Forms\Components\ColorPicker::make('color')
                 ->label(__('modulename::calendar.fields.color.label'))
                 ->rgba(),
-                
+
             Forms\Components\Checkbox::make('is_all_day')
                 ->label(__('modulename::calendar.fields.is_all_day.label')),
         ];
     }
-    
+
     /**
      * Azioni nell'header del calendario.
      *
@@ -510,7 +510,7 @@ class ModuleCalendarWidget extends BaseCalendarWidget
                 ->visible(fn () => $this->userCan('createEvents')),
         ];
     }
-    
+
     /**
      * Azioni sugli eventi del calendario.
      *
@@ -526,18 +526,18 @@ class ModuleCalendarWidget extends BaseCalendarWidget
                     return $this->prepareEventData($data);
                 })
                 ->visible(fn (EventModel $record) => $this->userCan('updateEvents', $record)),
-                
+
             Actions\DeleteAction::make()
                 ->label(__('modulename::calendar.actions.delete.label'))
                 ->modalHeading(__('modulename::calendar.actions.delete.modal_heading'))
                 ->visible(fn (EventModel $record) => $this->userCan('deleteEvents', $record)),
-                
+
             Actions\ViewAction::make()
                 ->label(__('modulename::calendar.actions.view.label'))
                 ->modalHeading(__('modulename::calendar.actions.view.modal_heading')),
         ];
     }
-    
+
     /**
      * Prepara i dati dell'evento prima del salvataggio.
      *
@@ -551,13 +551,13 @@ class ModuleCalendarWidget extends BaseCalendarWidget
             $data['starts_at'] = \Carbon\Carbon::parse($data['starts_at'])->startOfDay();
             $data['ends_at'] = \Carbon\Carbon::parse($data['ends_at'])->endOfDay();
         }
-        
+
         // Aggiungi metadati
         $data['user_id'] = auth()->id();
-        
+
         return $data;
     }
-    
+
     /**
      * Controlla se l'utente ha il permesso specificato.
      *
@@ -569,10 +569,10 @@ class ModuleCalendarWidget extends BaseCalendarWidget
         if ($record) {
             return auth()->user()->can($permission, $record);
         }
-        
+
         return auth()->user()->can($permission);
     }
-    
+
     /**
      * Personalizzazione del rendering degli eventi.
      */
@@ -581,20 +581,20 @@ class ModuleCalendarWidget extends BaseCalendarWidget
         return <<<JS
         function(info) {
             const classes = [];
-            
+
             if (info.event.extendedProps.is_all_day) {
                 classes.push('all-day-event');
             }
-            
+
             if (info.event.extendedProps.status === 'cancelled') {
                 classes.push('cancelled-event');
             }
-            
+
             return classes;
         }
         JS;
     }
-    
+
     /**
      * Personalizzazione del rendering del contenuto degli eventi.
      */
@@ -620,7 +620,7 @@ class ModuleCalendarWidget extends BaseCalendarWidget
 
 ## Personalizzazione Icone per Widget e Navigazione (con XotBaseServiceProvider)
 
-L'architettura Laraxot/PTVX prevede che i Service Provider dei moduli estendano `Modules\Xot\Providers\XotBaseServiceProvider`. Questo provider di base gestisce automaticamente la registrazione di molte risorse, incluse le icone SVG personalizzate tramite il pacchetto `blade-ui-kit/blade-icons`.
+L'architettura Laraxot/<nome progetto> prevede che i Service Provider dei moduli estendano `Modules\Xot\Providers\XotBaseServiceProvider`. Questo provider di base gestisce automaticamente la registrazione di molte risorse, incluse le icone SVG personalizzate tramite il pacchetto `blade-ui-kit/blade-icons`.
 
 ### Principi Chiave con XotBaseServiceProvider
 
@@ -759,7 +759,7 @@ protected function getStats(): array
     // Calcoli complessi direttamente nel widget
     $totalAmount = DB::table('orders')->sum('amount');
     $averageAmount = DB::table('orders')->avg('amount');
-    
+
     // ...
 }
 
@@ -770,7 +770,7 @@ protected function getStats(): array
 protected function getStats(): array
 {
     $statistics = app(OrderStatisticsService::class)->getOrderStatistics();
-    
+
     return [
         Stat::make(
             __('modulename::widgets.stats.total_amount.label'),
@@ -872,7 +872,7 @@ protected function getSafeData(): array
             'widget' => static::class,
             'exception' => $e,
         ]);
-        
+
         return [
             'success' => false,
             'error' => __('modulename::widgets.errors.data_fetch_failed'),
@@ -921,7 +921,7 @@ class FilamentServiceProvider extends ServiceProvider
         \Modules\ModuleName\Filament\Widgets\ChartDataWidget::class,
         \Modules\ModuleName\Filament\Widgets\ModuleCalendarWidget::class,
     ];
-    
+
     /**
      * Bootstrap dei servizi dell'applicazione.
      */

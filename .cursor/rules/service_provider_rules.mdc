@@ -1,10 +1,10 @@
 ---
-description: Rules for implementing and extending ServiceProviders in Laraxot PTVX
+description: Rules for implementing and extending ServiceProviders in Laraxot <nome progetto>
 globs: ["**/Providers/*ServiceProvider.php", "**/Providers/Filament/*Provider.php"]
 alwaysApply: true
 ---
 
-# ServiceProvider Implementation Rules in Laraxot PTVX
+# ServiceProvider Implementation Rules in Laraxot <nome progetto>
 
 ## Core Principles
 
@@ -57,7 +57,7 @@ class {ModuleName}ServiceProvider extends XotBaseServiceProvider
     public function boot(): void
     {
         parent::boot();
-        
+
         // ONLY add module-specific customizations here
         // Do NOT duplicate functionality already provided by XotBaseServiceProvider
     }
@@ -74,7 +74,7 @@ class {ModuleName}ServiceProvider extends XotBaseServiceProvider
     public function register(): void
     {
         parent::register();
-        
+
         // ONLY register module-specific services not handled by XotBaseServiceProvider
     }
 }
@@ -181,7 +181,7 @@ ONLY add these module-specific customizations:
 - Always run analysis from Laravel root directory:
 
 ```bash
-cd /var/www/html/ptvx/laravel
+cd /var/www/html/<nome progetto>/laravel
 ./vendor/bin/phpstan analyze Modules/{ModuleName}/Providers --level=9
 ```
 

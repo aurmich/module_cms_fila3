@@ -1,10 +1,10 @@
 ---
-description: Regole dettagliate per le migrazioni in Laraxot/PTVX
+description: Regole dettagliate per le migrazioni in Laraxot/<nome progetto>
 globs: ["**/database/migrations/*.php"]
 alwaysApply: true
 ---
 
-# Regole per le Migrazioni in Laraxot/PTVX
+# Regole per le Migrazioni in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -45,7 +45,7 @@ return new class extends XotBaseMigration
             $table->decimal('importo', 10, 2)->nullable();
             $table->timestamps();
         });
-        
+
         // Aggiunta commento alla tabella
         $this->tableComment('nome_tabella', 'Descrizione della tabella');
     }
@@ -66,7 +66,7 @@ class CreateTableName extends Migration // NON estendere Migration
     {
         // ...
     }
-    
+
     public function down() // MAI implementare down()
     {
         // ...
@@ -107,11 +107,11 @@ return new class extends XotBaseMigration
                 $table->string('nuova_colonna')->nullable();
                 $table->timestamps();
             });
-            
+
             $this->tableComment('nome_tabella', 'Descrizione della tabella');
             return;
         }
-        
+
         // 2. Se la tabella esiste, aggiungi solo la nuova colonna
         if (! $this->hasColumn('nome_tabella', 'nuova_colonna')) {
             Schema::table('nome_tabella', function (Blueprint $table) {
@@ -138,7 +138,7 @@ class AddColumnToTable extends Migration
             $table->string('nuova_colonna');
         });
     }
-    
+
     public function down()
     {
         Schema::table('nome_tabella', function (Blueprint $table) {
@@ -191,8 +191,8 @@ La colonna è stata aggiunta per tracciare l'utente che ha effettuato la valutaz
 - Nullable: true
 
 ## Collegamenti
-- [Performance/Models/PerformanceIndividuale.php](/var/www/html/ptvx/laravel/Modules/Performance/Models/PerformanceIndividuale.php)
-- [Performance/docs/SCHEMA.md](/var/www/html/ptvx/laravel/Modules/Performance/docs/SCHEMA.md)
+- [Performance/Models/PerformanceIndividuale.php](/var/www/html/<nome progetto>/laravel/Modules/Performance/Models/PerformanceIndividuale.php)
+- [Performance/docs/SCHEMA.md](/var/www/html/<nome progetto>/laravel/Modules/Performance/docs/SCHEMA.md)
 ```
 
 ## Gestione delle Foreign Key

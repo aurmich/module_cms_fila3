@@ -1,5 +1,5 @@
 ---
-description: Regole per i componenti Blade UI in Laraxot PTVX
+description: Regole per i componenti Blade UI in Laraxot <nome progetto>
 globs: ["**/views/components/**/*.blade.php"]
 alwaysApply: true
 ---

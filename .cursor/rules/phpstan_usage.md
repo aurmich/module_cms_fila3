@@ -1,4 +1,4 @@
-# Regole per l'Utilizzo di PHPStan in Laraxot PTVX
+# Regole per l'Utilizzo di PHPStan in Laraxot <nome progetto>
 
 ## Comando Corretto
 
@@ -25,21 +25,21 @@ php artisan phpstan:analyse  # ERRATO
 ### Analisi di un Singolo Modulo
 
 ```bash
-cd /var/www/html/_bases/base_ptvx_fila3/laravel
+cd /var/www/html/_bases/base_<nome progetto>_fila3/laravel
 ./vendor/bin/phpstan analyse Modules/Xot --level=9
 ```
 
 ### Analisi di Più Moduli
 
 ```bash
-cd /var/www/html/_bases/base_ptvx_fila3/laravel
+cd /var/www/html/_bases/base_<nome progetto>_fila3/laravel
 ./vendor/bin/phpstan analyse Modules/Xot Modules/User --level=9
 ```
 
 ### Analisi con Livello 10 (Massima Rigidità)
 
 ```bash
-cd /var/www/html/_bases/base_ptvx_fila3/laravel
+cd /var/www/html/_bases/base_<nome progetto>_fila3/laravel
 ./vendor/bin/phpstan analyse Modules/Xot --level=10
 ```
 

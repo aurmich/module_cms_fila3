@@ -1,4 +1,4 @@
-# Regole Windsurf per Laraxot PTVX
+# Regole Windsurf per Laraxot <nome progetto>
 
 ## Architettura e Namespace
 - Ogni modello concreto di un modulo deve estendere **esclusivamente** `BaseModel` del proprio modulo
@@ -13,7 +13,7 @@
   ```php
   /**
    * Get the attributes that should be cast.
-   * 
+   *
    * @return array<string, string>
    */
   protected function casts(): array
@@ -50,7 +50,7 @@
 - Le regole generali vanno in `Modules/Xot/docs/`, i moduli specifici fanno solo riferimento/link
 
 ## PHPStan
-- Eseguire PHPStan sempre dalla directory Laravel root: `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan sempre dalla directory Laravel root: `/var/www/html/<nome progetto>/laravel`
 - Usare `./vendor/bin/phpstan` (mai `php artisan test:phpstan`)
 - Livello minimo: 9
 - Correggere subito errori di tipizzazione:

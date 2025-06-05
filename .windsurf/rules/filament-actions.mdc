@@ -1,5 +1,5 @@
 ---
-description: Regole specifiche per le Action Filament custom in Laraxot/PTVX
+description: Regole specifiche per le Action Filament custom in Laraxot/<nome progetto>
 globs: ["**/*.php", "**/app/Filament/**/*.php", "**/Filament/**/*.php"]
 alwaysApply: true
 ---
@@ -34,7 +34,7 @@ class ApprovaAction extends Action
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this
             ->label(trans('performance::actions.approva.label'))
             ->icon('heroicon-o-check')
@@ -44,7 +44,7 @@ class ApprovaAction extends Action
             ->modalDescription(trans('performance::actions.approva.modal_description'))
             ->successNotificationTitle(trans('performance::actions.approva.success'));
     }
-    
+
     /**
      * @param Model $record
      * @return void
@@ -78,7 +78,7 @@ return [
 protected function setUp(): void
 {
     parent::setUp();
-    
+
     $this->label('Approva')  // NO! Label hardcoded
         ->icon('heroicon-o-check');
 }
@@ -109,7 +109,7 @@ protected function setUp(): void
 protected function setUp(): void
 {
     parent::setUp();
-    
+
     $this->authorize('approve', fn (Model $record) => $record);
 }
 ```

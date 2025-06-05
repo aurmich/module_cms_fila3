@@ -1,5 +1,5 @@
 ---
-description: Regole e pattern per l'utilizzo di Spatie Laravel Data e QueableActions in progetti Laraxot/PTVX
+description: Regole e pattern per l'utilizzo di Spatie Laravel Data e QueableActions in progetti Laraxot/<nome progetto>
 globs: ["**/Data/**/*.php", "**/Actions/**/*.php", "**/Services/**/*.php"]
 alwaysApply: true
 ---
@@ -37,20 +37,20 @@ class UserData extends Data
     public function __construct(
         #[Required, StringType]
         public readonly string $name,
-        
+
         #[Required, Email]
         public readonly string $email,
-        
+
         #[WithCast(DateTimeInterfaceCast::class)]
         public readonly ?\DateTimeInterface $created_at = null,
-        
+
         #[WithCast(DateTimeInterfaceCast::class)]
         public readonly ?\DateTimeInterface $updated_at = null,
-        
+
         public readonly ?int $id = null,
     ) {
     }
-    
+
     /**
      * Crea un nuovo UserData da un modello User.
      *
@@ -67,7 +67,7 @@ class UserData extends Data
             id: $user->id,
         );
     }
-    
+
     /**
      * Crea un'istanza del modello User da questo Data Object.
      *
@@ -78,10 +78,10 @@ class UserData extends Data
         $user = $this->id
             ? \Modules\ModuleName\Models\User::findOrFail($this->id)
             : new \Modules\ModuleName\Models\User();
-            
+
         $user->name = $this->name;
         $user->email = $this->email;
-        
+
         return $user;
     }
 }
@@ -106,7 +106,7 @@ class UserDataCollection extends DataCollection
     ) {
         parent::__construct($items);
     }
-    
+
     /**
      * Crea una collezione da un elenco di modelli.
      *
@@ -119,7 +119,7 @@ class UserDataCollection extends DataCollection
             $users->map(fn ($user) => UserData::fromModel($user))->all()
         );
     }
-    
+
     /**
      * Restituisce il tipo di dato nella collezione.
      *
@@ -163,7 +163,7 @@ final class StatusEnum extends Enum
             'archived' => __('modulename::enums.status.archived'),
         ];
     }
-    
+
     /**
      * Determina se lo stato è considerato attivo.
      */
@@ -201,7 +201,7 @@ class ProcessDataAction implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    
+
     /**
      * Crea una nuova istanza dell'azione.
      */
@@ -209,7 +209,7 @@ class ProcessDataAction implements ShouldQueue
         private readonly \Modules\ModuleName\Repositories\RepositoryInterface $repository
     ) {
     }
-    
+
     /**
      * Esegue l'azione.
      *
@@ -220,7 +220,7 @@ class ProcessDataAction implements ShouldQueue
     {
         // Logica di elaborazione
         $result = $this->repository->process($input);
-        
+
         // Restituisci un oggetto Data
         return new ResultData(
             status: 'success',
@@ -256,7 +256,7 @@ class ProcessUserDataAction implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    
+
     /**
      * Crea una nuova istanza dell'azione.
      */
@@ -264,7 +264,7 @@ class ProcessUserDataAction implements ShouldQueue
         private readonly \Modules\ModuleName\Services\UserService $userService
     ) {
     }
-    
+
     /**
      * Esegue l'azione.
      *
@@ -276,7 +276,7 @@ class ProcessUserDataAction implements ShouldQueue
     {
         // Elabora i dati dell'utente
         $processedUser = $this->userService->process($userData);
-        
+
         // Notifica il completamento se richiesto
         if ($sendNotification && $processedUser->id) {
             $user = \Modules\ModuleName\Models\User::find($processedUser->id);
@@ -284,7 +284,7 @@ class ProcessUserDataAction implements ShouldQueue
                 $user->notify(new ActionCompletedNotification($processedUser));
             }
         }
-        
+
         return $processedUser;
     }
 }
@@ -317,17 +317,17 @@ class UserController extends Controller
     {
         // Validazione e conversione in un oggetto Data
         $userData = UserData::validateAndCreate($request->all());
-        
+
         // Esecuzione immediata dell'action
         $result = $action->execute($userData);
-        
+
         return response()->json([
             'success' => true,
             'data' => $result,
             'message' => __('modulename::messages.process_success'),
         ]);
     }
-    
+
     /**
      * Processa i dati dell'utente in modo asincrono.
      *
@@ -339,10 +339,10 @@ class UserController extends Controller
     {
         // Validazione e conversione in un oggetto Data
         $userData = UserData::validateAndCreate($request->all());
-        
+
         // Accodamento dell'action
         $action->onQueue('users')->execute($userData);
-        
+
         return response()->json([
             'success' => true,
             'message' => __('modulename::messages.process_queued'),
@@ -368,7 +368,7 @@ use Modules\ModuleName\Filament\Resources\UserResource;
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
-    
+
     /**
      * Gestisce la creazione del record.
      *
@@ -379,10 +379,10 @@ class CreateUser extends CreateRecord
     {
         // Converti i dati del form in un oggetto Data
         $userData = UserData::from($data);
-        
+
         // Esegui l'action
         $processedData = app(ProcessUserDataAction::class)->execute($userData);
-        
+
         // Crea e restituisci il modello
         return $processedData->toModel()->save();
     }
@@ -408,10 +408,10 @@ class UserForm extends Component
 {
     /** @var string */
     public string $name = '';
-    
+
     /** @var string */
     public string $email = '';
-    
+
     /**
      * Regole di validazione.
      *
@@ -424,7 +424,7 @@ class UserForm extends Component
             'email' => ['required', 'email', 'max:255'],
         ];
     }
-    
+
     /**
      * Messaggi di validazione.
      *
@@ -438,30 +438,30 @@ class UserForm extends Component
             'email.email' => __('modulename::validation.email.email'),
         ];
     }
-    
+
     /**
      * Processa il form.
      */
     public function submit(): void
     {
         $this->validate();
-        
+
         // Crea un oggetto Data dai dati del form
         $userData = new UserData(
             name: $this->name,
             email: $this->email,
         );
-        
+
         try {
             // Esegui l'action
             app(ProcessUserDataAction::class)->execute($userData);
-            
+
             // Notifica il successo
             $this->dispatchBrowserEvent('notify', [
                 'type' => 'success',
                 'message' => __('modulename::messages.process_success'),
             ]);
-            
+
             // Reset del form
             $this->reset();
         } catch (\Exception $e) {
@@ -470,7 +470,7 @@ class UserForm extends Component
                 'type' => 'error',
                 'message' => __('modulename::messages.process_error'),
             ]);
-            
+
             // Log dell'errore
             \Log::error('Errore nel processare i dati utente', [
                 'exception' => $e->getMessage(),
@@ -478,7 +478,7 @@ class UserForm extends Component
             ]);
         }
     }
-    
+
     /**
      * Renderizza il componente.
      *
@@ -505,7 +505,7 @@ class UserService
     {
         // Logica con array non tipizzati
         $user = \Modules\ModuleName\Models\User::create($data);
-        
+
         return $user;
     }
 }
@@ -523,7 +523,7 @@ class UserData extends Data
 {
     public string $name;
     public string $email;
-    
+
     // Metodi setter mutabili (DA EVITARE)
     public function setName(string $name): self
     {
@@ -547,12 +547,12 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-        
+
         // Logica di business direttamente nel controller (DA EVITARE)
         $user = \Modules\ModuleName\Models\User::create($data);
-        
+
         // Altre operazioni...
-        
+
         return response()->json($user);
     }
 }
@@ -599,7 +599,7 @@ class UserService
     {
         return \Modules\ModuleName\Models\User::create($data);
     }
-    
+
     public function update(int $id, array $data)
     {
         $user = \Modules\ModuleName\Models\User::findOrFail($id);
@@ -623,10 +623,10 @@ class UserData extends Data
     public function __construct(
         #[Required]
         public readonly string $name,
-        
+
         #[Required]
         public readonly string $email,
-        
+
         public readonly ?int $id = null,
     ) {
     }
@@ -645,14 +645,14 @@ use Modules\ModuleName\Data\UserData;
 class CreateUserAction
 {
     use QueueableAction;
-    
+
     public function execute(UserData $data): UserData
     {
         $user = new \Modules\ModuleName\Models\User();
         $user->name = $data->name;
         $user->email = $data->email;
         $user->save();
-        
+
         return UserData::from($user);
     }
 }
@@ -660,14 +660,14 @@ class CreateUserAction
 class UpdateUserAction
 {
     use QueueableAction;
-    
+
     public function execute(UserData $data): UserData
     {
         $user = \Modules\ModuleName\Models\User::findOrFail($data->id);
         $user->name = $data->name;
         $user->email = $data->email;
         $user->save();
-        
+
         return UserData::from($user);
     }
 }
@@ -689,19 +689,19 @@ class UserController extends Controller
     {
         $data = UserData::validateAndCreate($request->all());
         $result = $action->execute($data);
-        
+
         return response()->json($result);
     }
-    
+
     public function update(Request $request, int $id, UpdateUserAction $action)
     {
         $data = UserData::validateAndCreate(array_merge(
             $request->all(),
             ['id' => $id]
         ));
-        
+
         $result = $action->execute($data);
-        
+
         return response()->json($result);
     }
 }
@@ -718,21 +718,21 @@ Ogni modulo che utilizza Spatie Laravel Data e QueableActions dovrebbe includere
 2. **Esempio di Documentazione Data Objects**
    ```markdown
    # Data Objects in ModuleName
-   
+
    Questo modulo utilizza Spatie Laravel Data per implementare il pattern DTO.
-   
+
    ## UserData
    Rappresenta i dati di un utente.
-   
+
    ### Proprietà
    - `name` (string): Nome dell'utente
    - `email` (string): Email dell'utente
    - `id` (int|null): ID dell'utente, null se nuovo
-   
+
    ### Metodi
    - `fromModel(User $user)`: Crea un UserData da un modello User
    - `toModel()`: Converte il DTO in un modello User
-   
+
    ### Esempio d'uso
    ```php
    // Creazione da array
@@ -740,10 +740,10 @@ Ogni modulo che utilizza Spatie Laravel Data e QueableActions dovrebbe includere
        'name' => 'Mario Rossi',
        'email' => 'mario@example.com',
    ]);
-   
+
    // Creazione da modello
    $userData = UserData::fromModel($user);
-   
+
    // Conversione in modello
    $user = $userData->toModel();
    ```
@@ -752,24 +752,24 @@ Ogni modulo che utilizza Spatie Laravel Data e QueableActions dovrebbe includere
 3. **Esempio di Documentazione Actions**
    ```markdown
    # Actions in ModuleName
-   
+
    Questo modulo utilizza Spatie QueableActions per implementare la logica di business.
-   
+
    ## CreateUserAction
    Crea un nuovo utente nel sistema.
-   
+
    ### Parametri
    - `UserData $data`: Dati dell'utente da creare
-   
+
    ### Restituisce
    - `UserData`: Dati dell'utente creato con ID assegnato
-   
+
    ### Esempio d'uso
    ```php
    // Uso diretto
    $userData = new UserData(name: 'Mario', email: 'mario@example.com');
    $result = app(CreateUserAction::class)->execute($userData);
-   
+
    // Uso accodato
    app(CreateUserAction::class)
        ->onQueue('users')

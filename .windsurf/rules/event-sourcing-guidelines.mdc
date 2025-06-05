@@ -1,7 +1,7 @@
-# Event Sourcing Guidelines for Saluteora
+# Event Sourcing Guidelines for <nome progetto>
 
 ## Overview
-When implementing features in the `saluteora` project, consider using event sourcing for modules where auditability and historical tracking are critical, such as patient management, appointments, and billing.
+When implementing features in the `<nome progetto>` project, consider using event sourcing for modules where auditability and historical tracking are critical, such as patient management, appointments, and billing.
 
 ## Implementation Rules
 - **Use Spatie Package**: Always use `spatie/laravel-event-sourcing` for event sourcing implementation.
@@ -45,4 +45,4 @@ class PatientProjector implements Projector {
 - Ensure all events are stored indefinitely for audit purposes.
 - Log every state-changing action as an event to comply with healthcare regulations.
 
-Follow these guidelines to ensure a consistent and compliant event sourcing implementation in `saluteora`.
+Follow these guidelines to ensure a consistent and compliant event sourcing implementation in `<nome progetto>`.

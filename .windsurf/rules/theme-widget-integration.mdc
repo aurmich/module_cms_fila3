@@ -27,12 +27,12 @@ I temi NON devono mai ricreare funzionalità esistenti nei moduli Filament. Devo
 // Fare questo - richiama widget esistente
 @php
     $widgetClass = match (auth()->user()?->type) {
-        \Modules\SaluteOra\Enums\UserTypeEnum::PATIENT =>
-            \Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class,
-        \Modules\SaluteOra\Enums\UserTypeEnum::DOCTOR =>
-            \Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class,
-        \Modules\SaluteOra\Enums\UserTypeEnum::ADMIN =>
-            \Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget::class,
+        \Modules\<nome progetto>\Enums\UserTypeEnum::PATIENT =>
+            \Modules\<nome progetto>\Filament\Widgets\PatientCalendarWidget::class,
+        \Modules\<nome progetto>\Enums\UserTypeEnum::DOCTOR =>
+            \Modules\<nome progetto>\Filament\Widgets\DoctorCalendarWidget::class,
+        \Modules\<nome progetto>\Enums\UserTypeEnum::ADMIN =>
+            \Modules\<nome progetto>\Filament\Widgets\AdminCalendarWidget::class,
         default => null
     };
 @endphp
@@ -140,7 +140,7 @@ private function getWidgetProps(): array
 </script>
 
 // ✅ CORRETTO
-@livewire(\Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class)
+@livewire(\Modules\<nome progetto>\Filament\Widgets\PatientCalendarWidget::class)
 ```
 
 ### Form Widget
@@ -151,7 +151,7 @@ private function getWidgetProps(): array
 </form>
 
 // ✅ CORRETTO
-@livewire(\Modules\SaluteOra\Filament\Widgets\AppointmentFormWidget::class)
+@livewire(\Modules\<nome progetto>\Filament\Widgets\AppointmentFormWidget::class)
 ```
 
 ## Documentazione Richiesta

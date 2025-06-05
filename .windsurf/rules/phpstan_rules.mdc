@@ -1,16 +1,16 @@
 ---
-description: Regole per l'analisi statica con PHPStan in PTVX
+description: Regole per l'analisi statica con PHPStan in <nome progetto>
 globs: ["**/*.php"]
 alwaysApply: true
 ---
 
-# Regole PHPStan per Laraxot PTVX
+# Regole PHPStan per Laraxot <nome progetto>
 
 ## Esecuzione Corretta
 
 - Eseguire sempre dalla directory Laravel root:
   ```bash
-  cd /var/www/html/ptvx/laravel
+  cd /var/www/html/<nome progetto>/laravel
   ./vendor/bin/phpstan analyze [target] --level=9
   ```
 

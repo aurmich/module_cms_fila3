@@ -1,4 +1,4 @@
-# Regole e Best Practices Laraxot/WindSurf - PTVX
+# Regole e Best Practices Laraxot/WindSurf - <nome progetto>
 
 ## Modelli e Ereditarietà
 
@@ -69,7 +69,7 @@
   ```php
   // ✅ CORRETTO
   namespace Modules\Performance\Models;
-  
+
   // ❌ ERRATO
   namespace Modules\Performance\App\Models;
   ```
@@ -129,7 +129,7 @@
 ## PHPStan e Qualità del Codice
 
 ### Esecuzione di PHPStan
-- Eseguire PHPStan sempre da `/var/www/html/ptvx/laravel`
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
 - Utilizzare `./vendor/bin/phpstan analyze` (MAI `php artisan test:phpstan`)
 - Minimo livello 9 per nuovi sviluppi
 - Utilizzare `--memory-limit=2G` per moduli grandi
@@ -144,7 +144,7 @@
 ## Documentazione e Manutenzione
 
 ### Struttura della Documentazione
-- Documentazione globale: `/var/www/html/ptvx/docs/`
+- Documentazione globale: `/var/www/html/<nome progetto>/docs/`
 - Documentazione di modulo: `Modules/<NomeModulo>/docs/`
 - MAI usare `resources/views/docs/`
 - Aggiornare sempre sia la documentazione più vicina che la root docs

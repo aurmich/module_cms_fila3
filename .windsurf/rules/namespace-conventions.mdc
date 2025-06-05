@@ -16,9 +16,9 @@
 
 *Correct*:
 ```php
-namespace Modules\SaluteOra\Models;
+namespace Modules\<nome progetto>\Models;
 
-use Modules\SaluteOra\Models\User;
+use Modules\<nome progetto>\Models\User;
 
 class Doctor extends User
 {
@@ -28,7 +28,7 @@ class Doctor extends User
 
 *Incorrect*:
 ```php
-namespace Modules\SaluteOra\App\Models;
+namespace Modules\<nome progetto>\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines the implementation details for calendar widgets in the SaluteOra module, following the project's architecture and coding standards.
+This document outlines the implementation details for calendar widgets in the <nome progetto> module, following the project's architecture and coding standards.
 
 ## Widget Structure
 
@@ -11,7 +11,7 @@ This document outlines the implementation details for calendar widgets in the Sa
 Location: `app/Filament/Widgets/BaseCalendarWidget.php`
 
 ```php
-namespace Modules\SaluteOra\Filament\Widgets;
+namespace Modules\<nome progetto>\Filament\Widgets;
 
 use Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget;
 

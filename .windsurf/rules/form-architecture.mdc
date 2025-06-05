@@ -24,7 +24,7 @@ All forms in the system must be implemented using Filament widgets. No duplicate
 </div>
 
 # ✅ Correct
-@livewire(\Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget::class)
+@livewire(\Modules\<nome progetto>\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget::class)
 ```
 
 ## Related

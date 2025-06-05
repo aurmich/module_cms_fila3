@@ -1,10 +1,10 @@
 ---
-description: Regole complete per l'implementazione dei modelli in Laraxot/PTVX
+description: Regole complete per l'implementazione dei modelli in Laraxot/<nome progetto>
 globs: ["**/*.php", "**/Models/*.php"]
 alwaysApply: true
 ---
 
-# Regole per i Modelli in Laraxot/PTVX
+# Regole per i Modelli in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -76,7 +76,7 @@ class PerformanceIndividuale extends BaseModel
         'anno',
         'valutatore_id',
     ];
-    
+
     // resto dell'implementazione...
 }
 ```

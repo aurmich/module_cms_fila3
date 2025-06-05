@@ -27,7 +27,7 @@ class Admin extends User {
 - [ ] Documenta la regola in docs e .mdc
 
 ## Collegamenti
-- `Modules/SaluteOra/docs/DRY-model-traits.md`
+- `Modules/<nome progetto>/docs/DRY-model-traits.md`
 - `.windsurf/rules/DRY-model-traits.mdc`
 
 ---

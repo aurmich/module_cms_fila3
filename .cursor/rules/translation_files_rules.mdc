@@ -1,10 +1,10 @@
 ---
-description: Rules for implementing and structuring translation files in Laraxot PTVX
+description: Rules for implementing and structuring translation files in Laraxot <nome progetto>
 globs: ["**/lang/**/*.php", "**/resources/lang/**/*.php"]
 alwaysApply: true
 ---
 
-# Translation Files Implementation Rules in Laraxot PTVX
+# Translation Files Implementation Rules in Laraxot <nome progetto>
 
 ## Core Principles
 
@@ -32,13 +32,13 @@ return [
         'icon' => 'icon-name', // Do not translate icon names
         'sort' => 50,
     ],
-    
+
     'page' => [
         'title' => 'Title in target language',
         'heading' => 'Heading in target language',
         'description' => 'Description in target language',
     ],
-    
+
     'fields' => [
         'field_name' => [
             'label' => 'Field label in target language',
@@ -47,7 +47,7 @@ return [
         ],
         // Other fields...
     ],
-    
+
     'actions' => [
         'action_name' => [
             'label' => 'Action label in target language',
@@ -57,12 +57,12 @@ return [
         ],
         // Other actions...
     ],
-    
+
     'validation' => [
         'error_type' => 'Validation error message in target language',
         // Other validation messages...
     ],
-    
+
     'messages' => [
         'message_key' => 'Message in target language',
         // Other messages...

@@ -4,9 +4,9 @@
 - Usare un modello base che carica i dati da un file JSON e li espone come collection Laravel.
 - I model Region, Province, City, Cap devono essere readonly, estendere la base e fornire metodi di filtro.
 - Documentare la struttura del json e la logica di aggiornamento.
-- Aggiornare sempre le docs di Geo, Xot e SaluteOra e creare collegamenti bidirezionali.
+- Aggiornare sempre le docs di Geo, Xot e <nome progetto> e creare collegamenti bidirezionali.
 
 Riferimenti:
 - Modules/Geo/docs/geo-json-model.md
 - Xot/docs/module-structure.md
-- SaluteOra/docs/geo-integration.md
+- <nome progetto>/docs/geo-integration.md

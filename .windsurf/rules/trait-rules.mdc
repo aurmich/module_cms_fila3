@@ -1,10 +1,10 @@
 ---
-description: Regole dettagliate per l'implementazione e l'utilizzo dei Trait nei moduli Laraxot/PTVX
+description: Regole dettagliate per l'implementazione e l'utilizzo dei Trait nei moduli Laraxot/<nome progetto>
 globs: ["**/*.php", "**/Models/**/*.php", "**/Traits/**/*.php"]
 alwaysApply: true
 ---
 
-# Regole per l'Implementazione e Utilizzo dei Trait in Laraxot/PTVX
+# Regole per l'Implementazione e Utilizzo dei Trait in Laraxot/<nome progetto>
 
 ## Principi Fondamentali
 
@@ -46,13 +46,13 @@ trait HasTeams
         return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id')
             ->withTimestamps();
     }
-    
+
     /**
      * Verifica se l'utente appartiene al team specificato.
      */
     public function belongsToTeam(Team $team): bool
     {
-        return $this->teams->contains($team) || 
+        return $this->teams->contains($team) ||
             ($this->currentTeam !== null && $this->currentTeam->id === $team->id);
     }
 }
@@ -94,13 +94,13 @@ trait HasTenants
         return $this->belongsToMany(Tenant::class, 'tenant_user', 'user_id', 'tenant_id')
             ->withTimestamps();
     }
-    
+
     /**
      * Verifica se l'utente appartiene al tenant specificato.
      */
     public function belongsToTenant(Tenant $tenant): bool
     {
-        return $this->tenants->contains($tenant) || 
+        return $this->tenants->contains($tenant) ||
             ($this->currentTenant !== null && $this->currentTenant->id === $tenant->id);
     }
 }
@@ -140,7 +140,7 @@ trait HasAuthenticationLogTrait
     {
         return $this->hasMany(AuthenticationLog::class);
     }
-    
+
     /**
      * Registra un nuovo accesso per l'utente.
      */
@@ -193,7 +193,7 @@ public function findRelatedModel(?int $id): ?RelatedModel
     if ($id === null) {
         return null;
     }
-    
+
     return RelatedModel::find($id);
 }
 ```
@@ -282,7 +282,7 @@ use Modules\User\Traits\HasTeams;
 class User extends Authenticatable
 {
     use HasTeams;
-    
+
     // Resto dell'implementazione...
 }
 ```

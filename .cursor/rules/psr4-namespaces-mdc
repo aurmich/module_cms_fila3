@@ -22,10 +22,10 @@ alwaysApply: false
 // File: Modules/Patient/app/States/Active.php
 
 // CORRETTO
-namespace Modules\SaluteOra\States;
+namespace Modules\<nome progetto>\States;
 
 // ERRATO
-namespace Modules\SaluteOra\app\States;
+namespace Modules\<nome progetto>\app\States;
 ```
 
 ## Checklist

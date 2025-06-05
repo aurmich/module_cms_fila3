@@ -19,11 +19,11 @@ alwaysApply: false
 ## Esempio pratico
 ```php
 // ERRATO
-use Modules\SaluteOra\Enums\UserState;
+use Modules\<nome progetto>\Enums\UserState;
 protected $casts = [ 'state' => UserState::class ];
 
 // CORRETTO
-use Modules\SaluteOra\States\UserState;
+use Modules\<nome progetto>\States\UserState;
 protected $casts = [ 'state' => UserState::class ];
 
 // State class
@@ -32,7 +32,7 @@ class UserState extends State { ... }
 
 ## Esempio di errore reale
 ```
-Undefined array key "Modules\SaluteOra\States\User\Pending"
+Undefined array key "Modules\<nome progetto>\States\User\Pending"
 ```
 - Stack trace: Spatie\ModelStates\StateCaster::get
 - Tipico durante login o istanziazione User
@@ -63,6 +63,6 @@ Se ricevi questo errore:
 - Controlla i valori nel database
 
 ## Link doc
-- [README SaluteOra](../../laravel/Modules/SaluteOra/docs/README.md)
+- [README <nome progetto>](../../laravel/Modules/<nome progetto>/docs/README.md)
 - [README Xot](../../laravel/Modules/Xot/docs/README.md)
 - [Spatie Model States](https://github.com/spatie/laravel-model-states)

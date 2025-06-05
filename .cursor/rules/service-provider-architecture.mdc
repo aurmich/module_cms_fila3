@@ -2,7 +2,7 @@
 
 ## Regola Fondamentale: "Non Avrai Altri Provider All'Infuori di XotBase"
 
-Tutti i service provider in qualsiasi modulo del progetto SaluteOra DEVONO estendere esclusivamente le classi base con prefisso `XotBase` fornite dal modulo Xot.
+Tutti i service provider in qualsiasi modulo del progetto <nome progetto> DEVONO estendere esclusivamente le classi base con prefisso `XotBase` fornite dal modulo Xot.
 
 ## Gerarchia delle Classi Base
 
@@ -22,7 +22,7 @@ Tutti i service provider in qualsiasi modulo del progetto SaluteOra DEVONO esten
 // ERRATO ❌
 protected string $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
 
-// CORRETTO ✅ 
+// CORRETTO ✅
 protected $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
 ```
 
@@ -50,14 +50,14 @@ class SaluteMoServiceProvider extends XotBaseServiceProvider
      * @var string
      */
     public string $name = 'SaluteMo';
-    
+
     /**
      * Module name in lowercase
      *
      * @var string
      */
     public string $nameLower = 'salutemo';
-    
+
     /**
      * Bootstrap any application services.
      *

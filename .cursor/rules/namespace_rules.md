@@ -1,4 +1,4 @@
-# Regole per i Namespace in Laraxot PTVX
+# Regole per i Namespace in Laraxot <nome progetto>
 
 ## Regola Fondamentale
 
