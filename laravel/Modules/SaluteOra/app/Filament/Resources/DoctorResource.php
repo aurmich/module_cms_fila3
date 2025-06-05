@@ -126,6 +126,7 @@ class DoctorResource extends XotBaseResource
                             ->placeholder(__('saluteora::doctor-resource.certifications')),
                     ]),
             ])
+            
             ->afterValidation(function (Forms\Set $set, Form $form) {
                 // Crea o recupera il workflow
                 $workflow = DoctorRegistrationWorkflow::firstOrCreate(
