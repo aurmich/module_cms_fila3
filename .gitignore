@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🔧  .gitignore
 # Questo file definisce quali file e cartelle devono essere ignorati dal controllo di versione
 # Organizzato secondo la filosofia di sviluppo : chiarezza, organizzazione e manutenibilità
@@ -89,3 +90,47 @@ cache/
 
 !laravel/Themes/One/yarn.lock
 laravel/database/migrations
+=======
+*.jar
+*.log
+*.lock
+package-lock.json
+*.phar
+.git-rewrite
+.php-cs-fixer.cache
+package-lock.json
+vendor/
+node_modules/
+.env
+/.vagrant
+.phpunit.result.cache
+.DS_Store
+error_log
+.phpintel
+/.idea
+
+v8-compile-cache-0
+/resources/views/maps/farmshops/data
+package-lock.json
+
+*.stackdump
+
+*.cache
+/fonts
+.git-blame-ignore-revs
+package-lock.json
+.php-cs-fixer.cache
+package-lock.json
+.git-rewrite/
+.php-cs-fixer.cache
+node_modules
+.git-blame-ignore-revs
+*.old
+node_modules
+vendor
+vendor/
+build/
+-e 
+# PHPStan documentation
+docs/phpstan/
+>>>>>>> 8f11126 (Squashed 'laravel/Modules/Geo/' content from commit 9f987ec)

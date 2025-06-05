@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * text=auto eol=lf
 
 *.blade.php diff=html
@@ -8,6 +9,8 @@
 
 CHANGELOG.md export-ignore
 README.md export-ignore
+=======
+>>>>>>> 8f11126 (Squashed 'laravel/Modules/Geo/' content from commit 9f987ec)
 * text=auto
 *.css linguist-vendored
 *.scss linguist-vendored
