@@ -133,9 +133,54 @@ alwaysApply: true
 - **HasTenants**: solo in modelli che implementano HasTenants di Filament
 - **HasAuthenticationLogTrait**: utilizzabile in qualsiasi modello che necessita logging
 
+## Console Commands (Standard Supremo da ChangeTypeCommand.php)
+
+### Filosofia Fondamentale
+- **Laravel Prompts Only**: `text()`, `select()`, `confirm()` - MAI `ask()` o `choice()`
+- **XotData e Contracts**: Accesso dati sempre tramite `XotData::make()` e Contracts
+- **Error Handling Robusto**: `method_exists()`, controlli preventivi, `$this->error()` + `return;`
+- **Enum Handling Moderno**: `tryFrom()`, `getLabel()`, type safety completa
+- **Array Helpers**: `Arr::mapWithKeys()` per manipolazioni eleganti
+
+### Template Obbligatorio
+```php
+use function Laravel\Prompts\text;
+use function Laravel\Prompts\select;
+
+class CommandNameCommand extends Command
+{
+    protected $name = 'module:action';
+    protected $description = 'Clear description';
+    
+    public function handle(): void
+    {
+        $input = text('Prompt?');
+        $entity = XotData::make()->getMethod($input);
+        
+        if (!$entity) {
+            $this->error("Not found.");
+            return;
+        }
+        
+        if (!method_exists($entity, 'method')) {
+            $this->error('Method missing.');
+            return;
+        }
+        
+        // Implementation with robust error handling
+    }
+}
+```
+
+### Religione e Zen
+- *"Non avrai altro prompting all'infuori di Laravel Prompts"*
+- *"Non avrai altro data access all'infuori di XotData e Contracts"*
+- Serenità interaction design, error handling preventivo, code commentato
+- **Riferimento**: [Modules/User/app/Console/Commands/ChangeTypeCommand.php](../../laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php)
+
 ## Dipendenze tra Moduli
 - Ogni modulo dovrebbe usare modelli dal proprio namespace quando esistono
 - Minimizzare l'uso di modelli cross-module
 - Preferire trait per funzionalità condivise invece di ereditarietà diretta
 
-Ultimo aggiornamento: 2025-06-03
+Ultimo aggiornamento: 2025-06-05

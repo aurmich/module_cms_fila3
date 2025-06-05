@@ -30,6 +30,7 @@ Questa directory contiene tutti i workflow automatizzati per il progetto Laraxot
 | [🔍 code-quality-check.md](code-quality-check.md) | Controlli qualità codice | Prima commit, CI/CD | 3-5 min |
 | [📝 naming-convention-audit.md](naming-convention-audit.md) | Audit convenzioni naming | Settimanale | 2-3 min |
 | [📚 documentation-sync.md](documentation-sync.md) | Sync documentazione | Dopo modifiche docs | 1-2 min |
+| [⚡ console-command-creation.md](console-command-creation.md) | Creazione Console Commands standard | Nuovi comandi | 2-3 min |
 | [📋 laraxot.md](laraxot.md) | Overview completo sistema | Reference, onboarding | - |
 
 ## 🎯 Filosofia dei Workflow
