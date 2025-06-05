@@ -1,5 +1,7 @@
 # Modulo SaluteOra
 
+Modulo specializzato per la gestione di studi medici e appuntamenti sanitari.
+
 ## Descrizione
 Modulo principale per la gestione del sistema sanitario, inclusa la gestione di appuntamenti, pazienti, medici e risorse correlate.
 
@@ -15,6 +17,100 @@ Modulo principale per la gestione del sistema sanitario, inclusa la gestione di 
 - [Calendario Appuntamenti](docs/calendar/README.md) - Gestione completa del calendario
 - [Gestione Pazienti](docs/patient-management.md) - Anagrafica e cartelle cliniche
 - [Gestione Medici](docs/doctor-management.md) - Profili e disponibilità
+
+### Gestione Studi Medici
+- Creazione e gestione degli studi
+- Gestione indirizzi multipli con logica intelligente
+- Specializzazioni mediche
+- Orari di apertura configurabili
+
+### Sistema Appuntamenti
+- Calendario degli appuntamenti
+- Gestione workflow degli appuntamenti  
+- Notifiche automatiche
+- Stati e transizioni configurabili
+
+### Gestione Medici e Pazienti
+- Registrazione medici con specializzazioni
+- Gestione pazienti
+- Disponibilità medici
+- Calendario delle visite
+
+## Implementazioni UX Avanzate
+
+### Campi Condizionali Intelligenti (StudioResource)
+
+Il modulo implementa un pattern UX avanzato per i repeater con campi condizionali e logica di esclusività.
+
+#### Esempio: Indirizzi Studio
+- **1 indirizzo**: UI minimale, `name` nascosto, `is_primary` automaticamente `true`
+- **2+ indirizzi**: UI completa, `name` visibile per distinguere, `is_primary` con esclusività automatica
+
+```php
+// Implementazione in StudioResource
+protected static function getAddressFormSchema(): array
+{
+    $baseSchema = AddressResource::getFormSchema();
+    
+    // Campo name: condizionale
+    $baseSchema['name'] = Forms\Components\TextInput::make('name')
+        ->visible(fn (Get $get) => count($get('../../addresses') ?? []) > 1)
+        ->live();
+
+    // Campo is_primary: esclusività automatica
+    $baseSchema['is_primary'] = Forms\Components\Toggle::make('is_primary')
+        ->visible(fn (Get $get) => count($get('../../addresses') ?? []) > 1)
+        ->default(fn (Get $get) => count($get('../../addresses') ?? []) <= 1)
+        ->afterStateUpdated(/* logica di esclusività */)
+        ->dehydrateStateUsing(/* forza true per singolo elemento */);
+}
+```
+
+#### Benefici UX
+- **Semplicità cognitiva**: UI si adatta al contesto
+- **Prevenzione errori**: impossibile avere stati inconsistenti
+- **Automazione intelligente**: gestione automatica dei default
+
+**Documentazione completa**: [docs/filament/conditional_fields_ux.md](docs/filament/conditional_fields_ux.md)
+
+## Configurazione
+
+### File di Traduzione
+- Struttura espansa obbligatoria per tutti i file di traduzione
+- Supporto multilingua per interfaccia utente
+- Messaggi di validazione localizzati
+
+### Database
+- Migrazioni con pattern XotBaseMigration
+- Relazioni ottimizzate tra entità
+- Soft delete per dati sensibili
+
+## Testing
+
+### Test Coverage
+- Unit test per le logiche di business
+- Feature test per i workflow completi
+- Test UX per campi condizionali
+
+### Validazioni
+- Form validation centralizzata
+- Regole di business implementate
+- Controlli di integrità dei dati
+
+## Pattern Riutilizzabili
+
+Il modulo definisce pattern riutilizzabili per:
+- Campi condizionali in repeater
+- Logica di esclusività automatica
+- UX intelligente basata sul contesto
+- Gestione traduzioni strutturate
+
+## Collegamenti Documentazione
+
+- [Campi Condizionali UX](docs/filament/conditional_fields_ux.md)
+- [Traduzioni Strutturate](docs/translation_structure.md)
+- [Pattern Repeater](docs/repeater_patterns.md)
+- [Regole .mdc](../../.cursor/rules/) e [Windsurf](../../.windsurf/rules/)
 
 ## Struttura del Modulo (PSR-4)
 
@@ -246,3 +342,7 @@ Se il modulo viene installato come package, assicurati che il ServiceProvider si
 **Riferimenti:**
 - [Documentazione Laravel Blade Components](https://laravel.com/docs/12.x/blade#manually-registering-components)
 - [Esempio di registrazione namespace Blade](https://laravel.com/docs/12.x/blade#registering-package-components)
+
+---
+
+*Ultimo aggiornamento: Dicembre 2024*

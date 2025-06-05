@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'navigation' => [
         'label' => 'Calendario Disponibilità',
-        'group' => 'Gestione Medici',
+        'group' => 'Agenda',
         'icon' => 'heroicon-o-calendar',
         'color' => 'primary',
         'sort' => 10,

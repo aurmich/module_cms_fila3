@@ -80,7 +80,7 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
- * @property string $surname
+ * @property string $last_name
  * @property string|null $facebook_id
  * @property Team|null $currentTeam
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFacebookId($value)

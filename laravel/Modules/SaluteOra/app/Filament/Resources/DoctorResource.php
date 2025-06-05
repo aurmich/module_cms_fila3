@@ -64,7 +64,7 @@ class DoctorResource extends XotBaseResource
 
     protected static ?string $model = Doctor::class;
 
-    protected static ?string $translationPrefix = 'doctor-resource';
+
 
     public static function getFormSchema(): array
     {
@@ -124,25 +124,25 @@ class DoctorResource extends XotBaseResource
                             ->required()
                             ->maxLength(255)
                             ->autocomplete('given-name')
-                            ->placeholder(__('saluteora::doctor-resource.first_name')),
+                            ,
                         'last_name' => Forms\Components\TextInput::make('last_name')
                             ->required()
                             ->maxLength(255)
                             ->autocomplete('family-name')
-                            ->placeholder(__('saluteora::doctor-resource.last_name')),
+                            ,
                         'email' => Forms\Components\TextInput::make('email')
                             ->required()
                             ->email()
                             ->maxLength(255)
                             ->autocomplete('email')
-                            ->placeholder(__('saluteora::doctor-resource.email')),
+                            ,
                         'certifications' => Forms\Components\FileUpload::make('certifications')
                             ->required()
                             ->multiple()
                             ->acceptedFileTypes(['application/pdf'])
                             ->maxSize(5120)
                             ->directory('certifications')
-                            ->placeholder(__('saluteora::doctor-resource.certifications')),
+                            ,
                     ]),
             ])
 

@@ -25,7 +25,7 @@ class Dentist extends BaseModel
     protected $fillable = [
         'tenant_id',
         'name',
-        'surname',
+        'last_name',
         'email',
         'phone',
         'specialization',
@@ -62,7 +62,7 @@ class Dentist extends BaseModel
      */
     public function getFullNameAttribute(): string
     {
-        return "{$this->name} {$this->surname}";
+        return "{$this->name} {$this->last_name}";
     }
 
     /**

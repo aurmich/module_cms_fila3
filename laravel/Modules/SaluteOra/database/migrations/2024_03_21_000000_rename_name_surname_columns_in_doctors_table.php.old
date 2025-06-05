@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('doctors', function (Blueprint $table) {
             $table->renameColumn('name', 'first_name');
-            $table->renameColumn('surname', 'last_name');
+            $table->renameColumn('last_name', 'last_name');
         });
     }
 
@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::table('doctors', function (Blueprint $table) {
             $table->renameColumn('first_name', 'name');
-            $table->renameColumn('last_name', 'surname');
+            $table->renameColumn('last_name', 'last_name');
         });
     }
-}; 
+};

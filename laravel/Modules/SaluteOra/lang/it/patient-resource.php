@@ -29,6 +29,7 @@ return [
         'last_name' => [
             'label' => 'Cognome',
             'placeholder' => 'Inserisci il cognome',
+            'help' => 'Inserisci il cognome completo',
         ],
         'address' => [
             'label' => 'Indirizzo',
@@ -91,4 +92,4 @@ return [
             'label' => 'ACCETTA E CONTINUA',
         ],
     ],
-]; 
+];

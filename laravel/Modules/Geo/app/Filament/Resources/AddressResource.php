@@ -46,23 +46,13 @@ class AddressResource extends XotBaseResource
         return [
             'name' => Forms\Components\TextInput::make('name')
                 ->maxLength(255),
-            /*
-            'description' => Forms\Components\Textarea::make('description')
-                ->maxLength(1000)
-                ->columnSpanFull(),
-            */  
-            Forms\Components\Grid::make(4)
+            Forms\Components\Grid::make(2)
                 ->schema([
                     'country' => Forms\Components\TextInput::make('country')//Nazione
                         ->maxLength(255)
                         ->default('Italia')
                         ->visible(false)
                         ->columnSpan(2),
-                    /*    
-                    'administrative_area_level_1' => Forms\Components\TextInput::make('administrative_area_level_1')//Regione
-                        ->maxLength(255)
-                        ->columnSpan(2),
-                    */
                     'administrative_area_level_1'=>Select::make('administrative_area_level_1')
                 ->options(function () {
                     return Comune::select('regione')
@@ -70,7 +60,7 @@ class AddressResource extends XotBaseResource
                     ->orderBy('regione->nome')
                     ->get()
                     ->pluck('regione.nome','regione.codice')
-                    
+
                     ->toArray();
                 })
                 ->searchable()
@@ -121,7 +111,7 @@ class AddressResource extends XotBaseResource
                         ->maxLength(255)
                         ->columnSpan(2),
                     */
-                    
+
                     'locality' => Select::make('locality')
                     ->options(function (Get $get) {
                         $region = $get('administrative_area_level_1');
@@ -132,7 +122,7 @@ class AddressResource extends XotBaseResource
                         if (!$province) {
                             return [];
                         }
-                        
+
                         $res=Comune::query()
                             ->where('regione->codice', $region)
                             ->where('provincia->codice', $province)
@@ -142,14 +132,14 @@ class AddressResource extends XotBaseResource
                             ->get()
                             ->pluck('nome', 'codice')
                             ->toArray();
-                        
+
                         return $res;
                     })
                     ->searchable()
                     ->required()
                     ->live()
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
-                    
+
                     /*
                     'postal_code' => Forms\Components\TextInput::make('postal_code')
                         ->maxLength(20)
@@ -166,7 +156,7 @@ class AddressResource extends XotBaseResource
                             return [];
                         }
                         $city = $get('locality');
-                        
+
                         $res=Comune::query()
                             ->where('regione->codice', $region)
                             ->where('provincia->codice', $province)
@@ -177,69 +167,36 @@ class AddressResource extends XotBaseResource
                             ->get()
                             ->pluck('cap.0', 'cap.0')
                             ->toArray();
-                        
+
                         return $res;
                     })
                     ->searchable()
                     ->required()
                     ->live()
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
-                    
+
                 ]),
-            
+
             Forms\Components\Grid::make(3)
                 ->schema([
                     'route' => Forms\Components\TextInput::make('route')
                         ->required()
                         ->maxLength(255)
                         ->columnSpan(2),
-                    
+
                     'street_number' => Forms\Components\TextInput::make('street_number')
                         ->maxLength(20)
                         ->columnSpan(1),
                 ]),
-                
-            
-                
-                
-            
-            /*    
-            'type' => Forms\Components\Select::make('type')
-                ->enum(AddressTypeEnum::class)
-                ->options([
-                    AddressTypeEnum::BILLING->value => 'Fatturazione',
-                    AddressTypeEnum::SHIPPING->value => 'Spedizione',
-                    AddressTypeEnum::HOME->value => 'Casa',
-                    AddressTypeEnum::WORK->value => 'Lavoro',
-                    AddressTypeEnum::OTHER->value => 'Altro',
-                ]),
-            */    
             'is_primary' => Forms\Components\Toggle::make('is_primary')
                 ->default(false),
-            /*    
-            'latitude' => Forms\Components\TextInput::make('latitude')
-                ->numeric()
-                ->required(),
-                
-            'longitude' => Forms\Components\TextInput::make('longitude')
-                ->numeric()
-                ->required(),
-            'formatted_address' => Forms\Components\TextInput::make('formatted_address')
-                ->maxLength(1024)
-                ->columnSpanFull(),
-                
-            'coordinates_note' => Forms\Components\Placeholder::make('map_note')
-                ->label('Nota sulla mappa')
-                ->content('Per visualizzare la mappa è necessario configurare una chiave API Google Maps valida.')
-                ->columnSpanFull(),
-            */
         ];
     }
 
 
     protected function getSearchStep(): array
     {
-        
+
         return [
             'region' => Select::make('region')
                 ->options(function () {
@@ -248,7 +205,7 @@ class AddressResource extends XotBaseResource
                     ->orderBy('regione->nome')
                     ->get()
                     ->pluck('regione.nome','regione.codice')
-                    
+
                     ->toArray();
                 })
                 ->searchable()
@@ -300,7 +257,7 @@ class AddressResource extends XotBaseResource
                         ->get()
                         ->pluck('cap.0', 'cap.0')
                         ->toArray();
-                    
+
                     return $res;
                 })
                 ->searchable()
@@ -318,10 +275,10 @@ class AddressResource extends XotBaseResource
         return [
             'name' => Tables\Columns\TextColumn::make('name')
                 ->searchable(),
-                
+
             'full_address' => Tables\Columns\TextColumn::make('full_address')
                 ->searchable(),
-                
+
             'type' => Tables\Columns\TextColumn::make('type')
                 ->badge()
                 ->formatStateUsing(fn (string $state): string => match ($state) {
@@ -339,25 +296,25 @@ class AddressResource extends XotBaseResource
                     'warning' => fn (string $state): bool => $state === AddressTypeEnum::WORK->value,
                     'gray' => fn (string $state): bool => $state === AddressTypeEnum::OTHER->value,
                 ]),
-                
+
             'locality' => Tables\Columns\TextColumn::make('locality')
                 ->searchable(),
-                
+
             'is_primary' => Tables\Columns\IconColumn::make('is_primary')
                 ->boolean(),
-                
+
             'model_type' => Tables\Columns\TextColumn::make('model_type')
                 ->formatStateUsing(fn (?string $state): ?string => $state ? class_basename($state) : null)
                 ->toggleable(isToggledHiddenByDefault: true),
-                
+
             'model_id' => Tables\Columns\TextColumn::make('model_id')
                 ->toggleable(isToggledHiddenByDefault: true),
-                
+
             'created_at' => Tables\Columns\TextColumn::make('created_at')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
-                
+
             'updated_at' => Tables\Columns\TextColumn::make('updated_at')
                 ->dateTime()
                 ->sortable()
@@ -379,9 +336,9 @@ class AddressResource extends XotBaseResource
                     AddressTypeEnum::WORK->value => 'Lavoro',
                     AddressTypeEnum::OTHER->value => 'Altro',
                 ]),
-                
+
             'is_primary' => Tables\Filters\TernaryFilter::make('is_primary'),
-                
+
             'locality' => Tables\Filters\SelectFilter::make('locality')
                 ->options(fn (): array => Address::query()
                     ->select('locality')
@@ -389,7 +346,7 @@ class AddressResource extends XotBaseResource
                     ->pluck('locality', 'locality')
                     ->toArray()
                 ),
-                
+
             'administrative_area_level_3' => Tables\Filters\SelectFilter::make('administrative_area_level_3')
                 ->options(fn (): array => Address::query()
                     ->select('administrative_area_level_3')
@@ -399,7 +356,7 @@ class AddressResource extends XotBaseResource
                     ->toArray()
                 )
                 ->label('Provincia'),
-                
+
             'administrative_area_level_2' => Tables\Filters\SelectFilter::make('administrative_area_level_2')
                 ->options(fn (): array => Address::query()
                     ->select('administrative_area_level_2')
@@ -419,11 +376,11 @@ class AddressResource extends XotBaseResource
     {
         return [
             'edit' => Tables\Actions\EditAction::make(),
-                
+
             'view' => Tables\Actions\ViewAction::make(),
-                
+
             'delete' => Tables\Actions\DeleteAction::make(),
-                
+
             'setPrimary' => Tables\Actions\Action::make('setPrimary')
                 ->visible(fn (Address $record): bool => !$record->is_primary)
                 ->icon('heroicon-o-star')
@@ -436,7 +393,7 @@ class AddressResource extends XotBaseResource
                         ->where('model_id', $record->model_id)
                         ->where('id', '!=', $record->id)
                         ->update(['is_primary' => false]);
-                    
+
                     // Imposta questo indirizzo come primario
                     $record->update(['is_primary' => true]);
                 }),
@@ -497,7 +454,7 @@ class AddressResource extends XotBaseResource
                         ->color(fn (bool $state): string => $state ? 'success' : 'gray')
                         ->formatStateUsing(fn (bool $state): string => $state ? 'Principale' : 'Secondario'),
                 ]),
-                
+
             Infolists\Components\Section::make('address.sections.address.label')
                 ->description('address.sections.address.description')
                 ->schema([
@@ -531,7 +488,7 @@ class AddressResource extends XotBaseResource
                                 ->label('address.fields.country.label'),
                         ]),
                 ]),
-                
+
             Infolists\Components\Section::make('address.sections.location.label')
                 ->description('address.sections.location.description')
                 ->schema([
@@ -547,14 +504,14 @@ class AddressResource extends XotBaseResource
                     Infolists\Components\TextEntry::make('formatted_address')
                         ->label('address.fields.formatted_address.label'),
                 ]),
-                
+
             Infolists\Components\Section::make('address.sections.map.label')
                 ->description('address.sections.map.description')
                 ->schema([
                     Infolists\Components\TextEntry::make('map_notice')
                         ->label('Nota sulla mappa')
-                        ->formatStateUsing(fn (Address $record): string => 
-                            "Coordinate: {$record->latitude}, {$record->longitude}\n\n" . 
+                        ->formatStateUsing(fn (Address $record): string =>
+                            "Coordinate: {$record->latitude}, {$record->longitude}\n\n" .
                             "Per visualizzare la mappa è necessario configurare una chiave API Google Maps valida.")
                         ->columnSpanFull(),
                 ]),

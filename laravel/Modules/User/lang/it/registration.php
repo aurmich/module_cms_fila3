@@ -63,8 +63,8 @@ return [
         'name' => [
             'label' => 'name',
         ],
-        'surname' => [
-            'label' => 'surname',
+        'last_name' => [
+            'label' => 'last_name',
         ],
         'email' => [
             'label' => 'Email',

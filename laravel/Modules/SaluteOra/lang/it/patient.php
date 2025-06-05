@@ -24,10 +24,6 @@ return array (
     'last_name' => 
     array (
       'label' => 'Cognome',
-      'placeholder' => 'Inserisci il cognome',
-      'helper_text' => 'Cognome del paziente',
-      'description' => 'Il cognome anagrafico del paziente',
-      'tooltip' => 'Deve corrispondere al cognome sul documento d\'identità',
     ),
     'fiscal_code' => 
     array (
@@ -235,10 +231,6 @@ return array (
     array (
       'label' => 'created_at',
     ),
-    'surname' => 
-    array (
-      'label' => 'surname',
-    ),
     'id' => 
     array (
       'label' => 'id',
@@ -246,6 +238,10 @@ return array (
     'name' => 
     array (
       'label' => 'name',
+    ),
+    'type' => 
+    array (
+      'label' => 'type',
     ),
   ),
   'steps' => 

@@ -11,6 +11,15 @@ return [
                 'max' => 'Il nome non può superare i 255 caratteri'
             ]
         ],
+        'last_name' => [
+            'label' => 'Cognome',
+            'placeholder' => 'Inserisci il cognome',
+            'help' => 'Il cognome dell\'utente',
+            'validation' => [
+                'required' => 'Il cognome è obbligatorio',
+                'max' => 'Il cognome non può superare i 255 caratteri'
+            ]
+        ],
         'email' => [
             'label' => 'Email',
             'placeholder' => 'Inserisci l\'email',
@@ -130,4 +139,4 @@ return [
             ]
         ]
     ]
-]; 
+];

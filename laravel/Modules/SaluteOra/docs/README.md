@@ -178,6 +178,17 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 - [Value Objects](./value-objects/README.md) - Documentazione sui Value Objects utilizzati
 - [Standard](./standards/README.md) - Standard specifici del modulo
 
+## Features UI Avanzate
+
+### Campi Condizionali nei Repeater
+Il modulo implementa un pattern avanzato per campi condizionali nei repeater Filament:
+
+- **StudioResource**: Il campo `name` negli indirizzi appare solo quando ci sono più di 1 indirizzo
+- **UX Intelligente**: L'interfaccia si adatta dinamicamente al contenuto
+- **Pattern Riutilizzabile**: Template standardizzato per altri use case
+
+**Documentazione completa**: [Studio Address Repeater Conditional Name](studio_address_repeater_conditional_name.md)
+
 ## Collegamenti Bidirezionali
 
 ### Moduli Correlati
@@ -308,15 +319,19 @@ Per dettagli e motivazioni vedi:
 
 ## ⚠️ REGOLA CRITICA: getTableColumns() Obbligatorio in ListRecords
 
-**Problema ricorrente:** `BadMethodCallException: Method getTableColumns does not exist`
+**Problema ricorrente (PATTERN SISTEMICO):** `BadMethodCallException: Method getTableColumns does not exist`
+
+**Casi risolti:**
+1. ✅ **ListAppointments** → [Fix dettagliato](list_appointments_gettablecolumns_fix.md)
+2. ✅ **ListAppointmentWorkflows** → [Fix dettagliato](list_appointment_workflows_gettablecolumns_fix.md)
+3. ⚠️ **Prossimi probabili**: ListPatients, ListDoctors, ListStudios, ListTreatments
 
 - Tutte le pagine che estendono `XotBaseListRecords` DEVONO implementare il metodo `getTableColumns()`.
 - Il metodo deve restituire un array associativo con chiavi stringa (nome campo).
 - Le colonne vanno ricavate dal modello e dalla migrazione, senza inventare campi.
 - Le etichette sono gestite solo tramite i file di traduzione del modulo (mai ->label()).
+- Badge colorati semantici per stati e tipi.
 - **Motivazione:** coerenza, automazione, DRY, compatibilità con TableLayoutEnum e HasXotTable.
-
-**Fix implementato:** [ListAppointments getTableColumns](list_appointments_gettablecolumns_fix.md)
 
 **Template obbligatorio:**
 ```php

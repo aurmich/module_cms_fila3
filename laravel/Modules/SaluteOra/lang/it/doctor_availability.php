@@ -3,7 +3,7 @@
 return [
     'navigation' => [
         'label' => 'Disponibilità Medici',
-        'group' => 'Gestione',
+        'group' => 'Agenda',
         'icon' => 'heroicon-o-calendar',
         'sort' => 6,
     ],

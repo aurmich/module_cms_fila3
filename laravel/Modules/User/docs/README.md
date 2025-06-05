@@ -104,6 +104,25 @@ User/
 - [Linee guida Actions](./actions.mdc)
 - [Linee guida Activitylog](./activitylog.mdc)
 
+## Console Commands Philosophy
+
+Il modulo User definisce lo **standard supremo** per i Console Commands in Laraxot attraverso il capolavoro `ChangeTypeCommand.php`.
+
+### Principi Fondamentali
+- **Laravel Prompts Only**: `text()`, `select()`, `confirm()` - mai `ask()` o `choice()`
+- **XotData e Contracts**: Accesso ai dati sempre tramite `XotData::make()` e `UserContract`
+- **Error Handling Robusto**: Controlli preventivi con `method_exists()`, feedback chiari
+- **Enum Handling Moderno**: `tryFrom()`, `getLabel()`, type safety completa
+- **Array Helpers Eleganti**: `Arr::mapWithKeys()` per manipolazioni funzionali
+
+### Religione dei Command
+- *"Non avrai altro prompting all'infuori di Laravel Prompts"*
+- *"Non avrai altro data access all'infuori di XotData e Contracts"*
+
+### Documentazione Completa
+- [Console Commands Philosophy](console_commands_philosophy.md) - Standard completo estratto dal capolavoro
+- [ChangeTypeCommand.php](../app/Console/Commands/ChangeTypeCommand.php) - Il comando di riferimento supremo
+
 ## Collegamenti Bidirezionali
 - [Modulo Xot](../Xot/docs/README.md)
 - [Modulo Patient](../Patient/docs/README.md)

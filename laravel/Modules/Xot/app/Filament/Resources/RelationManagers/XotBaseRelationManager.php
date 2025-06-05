@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Resources\RelationManagers;
 
 use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Resources\RelationManagers\RelationManager as FilamentRelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,7 @@ use Webmozart\Assert\Assert;
 /**
  * @property class-string<Model> $resource
  */
-abstract class XotBaseRelationManager extends RelationManager
+abstract class XotBaseRelationManager extends FilamentRelationManager
 {
     use HasXotTable;
 
@@ -47,7 +47,22 @@ abstract class XotBaseRelationManager extends RelationManager
     {
         return $this->getResource()::getFormSchema();
     }
+/*
+    public function getTableColumns(): array
+    {
+        $index=Arr::get($this->getResource()::getPages(),'index');
+        if(!$index){
+            //throw new \Exception('Index page not found');
+            return [];
+        }
+        if(!method_exists($index,'getTableColumns')){
+            return [];
+        }
+        $res= $index->getTableColumns();
 
+        return $res;
+    }
+*/
     public function getTableActions(): array
     {
         return [

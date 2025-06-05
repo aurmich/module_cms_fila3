@@ -8,8 +8,10 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteOra\Models\Doctor;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\SaluteOra\Filament\Resources\DoctorResource;
+use Modules\SaluteOra\Filament\Resources\DoctorResource\Pages\ListDoctors;
 use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class DoctorsRelationManager extends XotBaseRelationManager
@@ -19,36 +21,14 @@ class DoctorsRelationManager extends XotBaseRelationManager
      */
     protected static string $relationship = 'doctors';
     protected static ?string $inverseRelationship = 'studios';
+    public static string $resourceClass = DoctorResource::class;
 
     /**
      * Get the form schema.
      */
     public function getFormSchema(): array
     {
-        return [
-            'first_name' => Forms\Components\TextInput::make('first_name')
-                ->required()
-                ->maxLength(255),
-
-            'last_name' => Forms\Components\TextInput::make('last_name')
-                ->required()
-                ->maxLength(255),
-
-            'email' => Forms\Components\TextInput::make('email')
-                ->email()
-                ->required()
-                ->maxLength(255),
-
-            'phone' => Forms\Components\TextInput::make('phone')
-                ->tel()
-                ->maxLength(30),
-
-            'specialization' => Forms\Components\TextInput::make('specialization')
-                ->maxLength(255),
-
-            'registration_number' => Forms\Components\TextInput::make('registration_number')
-                ->maxLength(50),
-        ];
+        return static::$resourceClass::getFormSchema();
     }
 
     /**
@@ -58,36 +38,8 @@ class DoctorsRelationManager extends XotBaseRelationManager
      */
     public function getTableColumns(): array
     {
-        return [
-            'first_name' => Tables\Columns\TextColumn::make('first_name')
-                ->searchable()
-                ->sortable(),
 
-            'last_name' => Tables\Columns\TextColumn::make('last_name')
-                ->searchable()
-                ->sortable(),
-
-            'email' => Tables\Columns\TextColumn::make('email')
-                ->searchable(),
-
-            'phone' => Tables\Columns\TextColumn::make('phone'),
-
-            'specialization' => Tables\Columns\TextColumn::make('specialization')
-                ->searchable(),
-
-            'registration_number' => Tables\Columns\TextColumn::make('registration_number'),
-
-            'status' => Tables\Columns\BadgeColumn::make('status')
-                ->colors([
-                    'warning' => 'pending',
-                    'success' => 'active',
-                    'danger' => 'suspended',
-                ]),
-
-            'created_at' => Tables\Columns\TextColumn::make('created_at')
-                ->dateTime()
-                ->sortable(),
-        ];
+        return app(ListDoctors::class)->getTableColumns();
     }
 
     /**
@@ -153,11 +105,11 @@ class DoctorsRelationManager extends XotBaseRelationManager
                             ->toArray();
                         }
                     )
-        
+
                 )
-                
-            
-                
+
+
+
         ];
     }
 }

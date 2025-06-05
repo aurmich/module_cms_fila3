@@ -164,7 +164,7 @@ return array (
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
-      'helper_text' => 'Cognome del medico',
+      'help' => 'Inserisci il cognome completo',
       'description' => 'Cognome come registrato all\'Ordine',
       'tooltip' => 'Cognome del medico',
     ),

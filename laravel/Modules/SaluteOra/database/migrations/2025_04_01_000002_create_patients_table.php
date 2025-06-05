@@ -28,7 +28,7 @@ return new class extends XotBaseMigration
                 $table->foreignIdFor(Tenant::class)->constrained()
                     ->onDelete('cascade')->onUpdate('cascade');
                 $table->string('name');
-                $table->string('surname');
+                $table->string('last_name');
                 $table->string('fiscal_code')->nullable()->unique();
                 $table->date('birth_date')->nullable();
                 $table->string('phone')->nullable();
@@ -53,7 +53,7 @@ return new class extends XotBaseMigration
                 }
             }
         );
-        
+
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {

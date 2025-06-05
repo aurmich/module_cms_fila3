@@ -20,6 +20,10 @@ class AppointmentWorkflowResource extends XotBaseResource
     protected static ?string $pluralLabel = 'Workflow Prenotazioni';
     protected static ?string $slug = 'appointment-workflows';
 
+    //protected static ?string $tenantOwnershipRelationshipName = 'studio';
+    //protected static ?string $tenantRelationshipName = 'studio';
+    protected static bool $isScopedToTenant = false;
+
     /**
      * Ottiene lo schema del form per la resource AppointmentWorkflow.
      *

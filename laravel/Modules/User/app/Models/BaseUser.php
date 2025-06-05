@@ -60,7 +60,7 @@ use Illuminate\Support\Facades\Schema;
  * @property int|null $tenants_count
  * @property Collection<int, OauthAccessToken> $tokens
  * @property int|null $tokens_count
- * @property string $surname
+ * @property string $last_name
  * @property string|null $facebook_id
  * @property Collection<int, SocialiteUser> $socialiteUsers
  * @property int|null $socialite_users_count

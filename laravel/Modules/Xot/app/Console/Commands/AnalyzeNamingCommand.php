@@ -16,7 +16,7 @@ class AnalyzeNamingCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'xot:analyze-naming 
+    protected $signature = 'xot:analyze-naming
                             {--module= : Nome del modulo da analizzare}
                             {--type=all : Tipo di analisi (database, models, controllers, all)}';
 
@@ -34,9 +34,9 @@ class AnalyzeNamingCommand extends Command
      */
     protected $namingConventions = [
         'person_fields' => [
-            'incorrect' => ['name', 'surname'],
+            'incorrect' => ['name', 'last_name'],
             'correct' => ['first_name', 'last_name'],
-            'message' => 'I campi per i nomi delle persone devono essere first_name e last_name (mai name o surname)'
+            'message' => 'I campi per i nomi delle persone devono essere first_name e last_name (mai name o last_name)'
         ],
         'temporal_fields' => [
             'incorrect' => ['creation_date', 'update_date', 'deletion_date', 'date_of_birth', 'birthday'],
@@ -100,9 +100,9 @@ class AnalyzeNamingCommand extends Command
         // Ottieni tutte le tabelle
         $tables = DB::select('SHOW TABLES');
         $tableColumn = 'Tables_in_' . config('database.connections.mysql.database');
-        
+
         $moduleTables = [];
-        
+
         // Filtra le tabelle per modulo se specificato
         if ($module) {
             foreach ($tables as $table) {
@@ -116,19 +116,19 @@ class AnalyzeNamingCommand extends Command
                 $moduleTables[] = $table->$tableColumn;
             }
         }
-        
+
         $this->line(" - Tabelle da analizzare: " . count($moduleTables));
-        
+
         $issuesFound = [];
-        
+
         foreach ($moduleTables as $table) {
             if (!Schema::hasTable($table)) {
                 continue;
             }
-            
+
             $columns = Schema::getColumnListing($table);
             $tableIssues = [];
-            
+
             foreach ($columns as $column) {
                 foreach ($this->namingConventions as $convention => $rules) {
                     // Verifica campi non conformi
@@ -139,7 +139,7 @@ class AnalyzeNamingCommand extends Command
                             'correct' => $this->getCorrectField($column, $rules)
                         ];
                     }
-                    
+
                     // Verifica pattern regex
                     foreach ($rules['incorrect'] as $pattern) {
                         if (Str::startsWith($pattern, '/') && preg_match($pattern, $column)) {
@@ -152,39 +152,39 @@ class AnalyzeNamingCommand extends Command
                     }
                 }
             }
-            
+
             if (count($tableIssues) > 0) {
                 $issuesFound[$table] = $tableIssues;
             }
         }
-        
+
         // Mostra problemi trovati
         if (count($issuesFound) > 0) {
             $this->warn(" - Problemi di naming trovati:");
-            
+
             foreach ($issuesFound as $table => $issues) {
                 $this->line("   Tabella: {$table}");
-                
+
                 foreach ($issues as $issue) {
                     $this->line("     - Colonna: {$issue['column']}");
                     $this->line("       Problema: {$issue['issue']}");
                     $this->line("       Correzione suggerita: {$issue['correct']}");
                 }
             }
-            
+
             // Suggerimenti per la correzione
             $this->info(" - Suggerimento: Creare una migrazione per rinominare le colonne non conformi");
             $this->line("   Esempio:");
             $this->line("   ```php");
             $this->line("   Schema::table('table_name', function (Blueprint \$table) {");
             $this->line("       \$table->renameColumn('name', 'first_name');");
-            $this->line("       \$table->renameColumn('surname', 'last_name');");
+            $this->line("       \$table->renameColumn('last_name', 'last_name');");
             $this->line("   });");
             $this->line("   ```");
         } else {
             $this->info(" - Nessun problema di naming trovato nelle tabelle analizzate");
         }
-        
+
         $this->newLine();
     }
 
@@ -200,13 +200,13 @@ class AnalyzeNamingCommand extends Command
         $this->newLine();
 
         $basePath = base_path('laravel/Modules');
-        
+
         if ($module) {
             $modulePath = $basePath . '/' . $module;
             $this->analyzeModuleModelsNaming($module, $modulePath);
         } else {
             $modules = File::directories($basePath);
-            
+
             foreach ($modules as $modulePath) {
                 $moduleName = basename($modulePath);
                 $this->analyzeModuleModelsNaming($moduleName, $modulePath);
@@ -224,32 +224,32 @@ class AnalyzeNamingCommand extends Command
     protected function analyzeModuleModelsNaming(string $moduleName, string $modulePath): void
     {
         $this->info(" - Modulo: {$moduleName}");
-        
+
         // Cerca tutti i file dei modelli
         $finder = new Finder();
         $modelsPath = $modulePath . '/Models';
-        
+
         if (!File::exists($modelsPath)) {
             $this->line("   - Directory Models non trovata");
             $this->newLine();
             return;
         }
-        
+
         $finder->files()->in($modelsPath)->name('*.php');
-        
+
         if (!$finder->hasResults()) {
             $this->line("   - Nessun modello trovato");
             $this->newLine();
             return;
         }
-        
+
         $issuesFound = [];
-        
+
         foreach ($finder as $file) {
             $content = $file->getContents();
             $modelName = $file->getRelativePathname();
             $modelIssues = [];
-            
+
             // Verifica fillable e casts
             foreach ($this->namingConventions as $convention => $rules) {
                 foreach ($rules['incorrect'] as $incorrect) {
@@ -257,11 +257,11 @@ class AnalyzeNamingCommand extends Command
                     if (Str::startsWith($incorrect, '/')) {
                         continue;
                     }
-                    
+
                     // Cerca nei fillable
                     if (preg_match('/protected\s+\$fillable\s*=\s*\[(.*?)\]/s', $content, $matches)) {
                         $fillable = $matches[1];
-                        
+
                         if (preg_match('/[\'"]' . preg_quote($incorrect, '/') . '[\'"]/', $fillable)) {
                             $modelIssues[] = [
                                 'field' => $incorrect,
@@ -271,11 +271,11 @@ class AnalyzeNamingCommand extends Command
                             ];
                         }
                     }
-                    
+
                     // Cerca nei casts
                     if (preg_match('/protected\s+\$casts\s*=\s*\[(.*?)\]/s', $content, $matches)) {
                         $casts = $matches[1];
-                        
+
                         if (preg_match('/[\'"]' . preg_quote($incorrect, '/') . '[\'"]/', $casts)) {
                             $modelIssues[] = [
                                 'field' => $incorrect,
@@ -285,11 +285,11 @@ class AnalyzeNamingCommand extends Command
                             ];
                         }
                     }
-                    
+
                     // Cerca negli accessors e mutators
                     $accessorPattern = '/function\s+get(' . ucfirst($incorrect) . ')Attribute/';
                     $mutatorPattern = '/function\s+set(' . ucfirst($incorrect) . ')Attribute/';
-                    
+
                     if (preg_match($accessorPattern, $content) || preg_match($mutatorPattern, $content)) {
                         $modelIssues[] = [
                             'field' => $incorrect,
@@ -300,32 +300,32 @@ class AnalyzeNamingCommand extends Command
                     }
                 }
             }
-            
+
             if (count($modelIssues) > 0) {
                 $issuesFound[$modelName] = $modelIssues;
             }
         }
-        
+
         // Mostra problemi trovati
         if (count($issuesFound) > 0) {
             $this->warn("   - Problemi di naming trovati:");
-            
+
             foreach ($issuesFound as $model => $issues) {
                 $this->line("     Modello: {$model}");
-                
+
                 foreach ($issues as $issue) {
                     $this->line("       - Campo: {$issue['field']} ({$issue['location']})");
                     $this->line("         Problema: {$issue['issue']}");
                     $this->line("         Correzione suggerita: {$issue['correct']}");
                 }
             }
-            
+
             // Suggerimenti per la correzione
             $this->info("   - Suggerimento: Aggiornare i modelli per utilizzare i nomi dei campi corretti");
         } else {
             $this->info("   - Nessun problema di naming trovato nei modelli analizzati");
         }
-        
+
         $this->newLine();
     }
 
@@ -341,13 +341,13 @@ class AnalyzeNamingCommand extends Command
         $this->newLine();
 
         $basePath = base_path('laravel/Modules');
-        
+
         if ($module) {
             $modulePath = $basePath . '/' . $module;
             $this->analyzeModuleControllersNaming($module, $modulePath);
         } else {
             $modules = File::directories($basePath);
-            
+
             foreach ($modules as $modulePath) {
                 $moduleName = basename($modulePath);
                 $this->analyzeModuleControllersNaming($moduleName, $modulePath);
@@ -365,32 +365,32 @@ class AnalyzeNamingCommand extends Command
     protected function analyzeModuleControllersNaming(string $moduleName, string $modulePath): void
     {
         $this->info(" - Modulo: {$moduleName}");
-        
+
         // Cerca tutti i file dei controller
         $finder = new Finder();
         $controllersPath = $modulePath . '/Http/Controllers';
-        
+
         if (!File::exists($controllersPath)) {
             $this->line("   - Directory Controllers non trovata");
             $this->newLine();
             return;
         }
-        
+
         $finder->files()->in($controllersPath)->name('*Controller.php');
-        
+
         if (!$finder->hasResults()) {
             $this->line("   - Nessun controller trovato");
             $this->newLine();
             return;
         }
-        
+
         $issuesFound = [];
-        
+
         foreach ($finder as $file) {
             $content = $file->getContents();
             $controllerName = $file->getRelativePathname();
             $controllerIssues = [];
-            
+
             // Verifica utilizzo di campi non conformi
             foreach ($this->namingConventions as $convention => $rules) {
                 foreach ($rules['incorrect'] as $incorrect) {
@@ -398,14 +398,14 @@ class AnalyzeNamingCommand extends Command
                     if (Str::startsWith($incorrect, '/')) {
                         continue;
                     }
-                    
+
                     // Cerca nei parametri dei metodi e nelle variabili
                     $paramPattern = '/function\s+\w+\s*\([^)]*\$' . preg_quote($incorrect, '/') . '[,\s\)]/';
                     $varPattern = '/\$' . preg_quote($incorrect, '/') . '\s*=/';
                     $requestPattern = '/\$request\s*->\s*' . preg_quote($incorrect, '/') . '/';
-                    
-                    if (preg_match($paramPattern, $content) || 
-                        preg_match($varPattern, $content) || 
+
+                    if (preg_match($paramPattern, $content) ||
+                        preg_match($varPattern, $content) ||
                         preg_match($requestPattern, $content)) {
                         $controllerIssues[] = [
                             'field' => $incorrect,
@@ -415,32 +415,32 @@ class AnalyzeNamingCommand extends Command
                     }
                 }
             }
-            
+
             if (count($controllerIssues) > 0) {
                 $issuesFound[$controllerName] = $controllerIssues;
             }
         }
-        
+
         // Mostra problemi trovati
         if (count($issuesFound) > 0) {
             $this->warn("   - Problemi di naming trovati:");
-            
+
             foreach ($issuesFound as $controller => $issues) {
                 $this->line("     Controller: {$controller}");
-                
+
                 foreach ($issues as $issue) {
                     $this->line("       - Campo: {$issue['field']}");
                     $this->line("         Problema: {$issue['issue']}");
                     $this->line("         Correzione suggerita: {$issue['correct']}");
                 }
             }
-            
+
             // Suggerimenti per la correzione
             $this->info("   - Suggerimento: Aggiornare i controller per utilizzare i nomi dei campi corretti");
         } else {
             $this->info("   - Nessun problema di naming trovato nei controller analizzati");
         }
-        
+
         $this->newLine();
     }
 
@@ -454,18 +454,18 @@ class AnalyzeNamingCommand extends Command
     protected function getCorrectField(string $incorrectField, array $rules): string
     {
         $index = array_search($incorrectField, $rules['incorrect']);
-        
+
         if ($index !== false && isset($rules['correct'][$index])) {
             return $rules['correct'][$index];
         }
-        
+
         // Casi specifici
         if ($incorrectField === 'name') {
             return 'first_name';
-        } elseif ($incorrectField === 'surname') {
+        } elseif ($incorrectField === 'last_name') {
             return 'last_name';
         }
-        
+
         return 'campo conforme alle convenzioni';
     }
 
@@ -482,7 +482,7 @@ class AnalyzeNamingCommand extends Command
         if (preg_match('/^id_([a-z]+)$/', $incorrectField, $matches)) {
             return $matches[1] . '_id';
         }
-        
+
         return 'campo conforme alle convenzioni';
     }
 }

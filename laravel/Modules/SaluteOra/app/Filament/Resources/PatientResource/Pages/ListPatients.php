@@ -14,12 +14,16 @@ class ListPatients extends XotBaseListRecords
     public function getTableColumns(): array
     {
         return [
-            'id' => \Filament\Tables\Columns\TextColumn::make('id')
-                ->sortable(),
+            //'id' => \Filament\Tables\Columns\TextColumn::make('id')
+                //->sortable(),
+            'type' => \Filament\Tables\Columns\TextColumn::make('type'),
             'name' => \Filament\Tables\Columns\TextColumn::make('name')
                 ->searchable()
                 ->sortable(),
-            'surname' => \Filament\Tables\Columns\TextColumn::make('surname')
+            'first_name' => \Filament\Tables\Columns\TextColumn::make('first_name')
+                ->searchable()
+                ->sortable(),
+            'last_name' => \Filament\Tables\Columns\TextColumn::make('last_name')
                 ->searchable()
                 ->sortable(),
             'fiscal_code' => \Filament\Tables\Columns\TextColumn::make('fiscal_code')
@@ -30,6 +34,7 @@ class ListPatients extends XotBaseListRecords
             'email' => \Filament\Tables\Columns\TextColumn::make('email')
                 ->searchable(),
             'phone' => \Filament\Tables\Columns\TextColumn::make('phone'),
+            /*
             'created_at' => \Filament\Tables\Columns\TextColumn::make('created_at')
                 ->dateTime()
                 ->sortable()
@@ -38,6 +43,7 @@ class ListPatients extends XotBaseListRecords
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
+            */
         ];
     }
 }

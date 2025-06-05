@@ -14,22 +14,22 @@ class PatientRegistrationWizard extends Component
      * Numero di step totali nel wizard.
      */
     public int $totalSteps = 4;
-    
+
     /**
      * Step corrente del wizard.
      */
     public int $currentStep = 1;
-    
+
     /**
      * Dati temporanei del paziente.
      */
     public array $patientData = [];
-    
+
     /**
      * Indica se il form è stato inviato.
      */
     public bool $isSubmitted = false;
-    
+
     /**
      * Create the component instance.
      */
@@ -48,7 +48,7 @@ class PatientRegistrationWizard extends Component
     {
         return view('saluteora::components.patient-registration-wizard');
     }
-    
+
     /**
      * Restituisce il titolo dello step corrente.
      */
@@ -62,7 +62,7 @@ class PatientRegistrationWizard extends Component
             default => 'Registrazione Paziente',
         };
     }
-    
+
     /**
      * Restituisce la descrizione dello step corrente.
      */
@@ -76,7 +76,7 @@ class PatientRegistrationWizard extends Component
             default => 'Completa tutti i campi richiesti',
         };
     }
-    
+
     /**
      * Verifica se lo step corrente è valido.
      */
@@ -90,24 +90,24 @@ class PatientRegistrationWizard extends Component
             default => false,
         };
     }
-    
+
     /**
      * Verifica se lo step 1 è valido.
      */
     private function isStep1Valid(): bool
     {
-        return isset($this->patientData['name']) && 
-               isset($this->patientData['surname']) && 
-               isset($this->patientData['fiscal_code']) && 
+        return isset($this->patientData['name']) &&
+               isset($this->patientData['last_name']) &&
+               isset($this->patientData['fiscal_code']) &&
                isset($this->patientData['birth_date']);
     }
-    
+
     /**
      * Verifica se lo step 2 è valido.
      */
     private function isStep2Valid(): bool
     {
-        return isset($this->patientData['email']) && 
+        return isset($this->patientData['email']) &&
                isset($this->patientData['phone']);
     }
 

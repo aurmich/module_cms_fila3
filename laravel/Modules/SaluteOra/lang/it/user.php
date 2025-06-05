@@ -125,7 +125,9 @@ return array (
     ),
     'last_name' =>
     array (
-      'label' => 'last_name',
+      'label' => 'Cognome',
+      'placeholder' => 'Inserisci il cognome',
+      'help' => 'Inserisci il cognome completo',
     ),
     'first_name' =>
     array (

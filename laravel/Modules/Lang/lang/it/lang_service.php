@@ -394,6 +394,13 @@ return array (
       'placeholder' => 'recordId',
       'helper_text' => 'recordId',
     ),
+    'session_id' => 
+    array (
+      'description' => 'session_id',
+      'label' => 'session_id',
+      'placeholder' => 'session_id',
+      'helper_text' => 'session_id',
+    ),
   ),
   'actions' => 
   array (

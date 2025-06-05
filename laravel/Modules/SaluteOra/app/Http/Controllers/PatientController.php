@@ -29,7 +29,7 @@ class PatientController extends Controller
         // Recupera i dati del paziente dalla sessione se esistono
         $patientData = Session::get('patient_data', []);
         $currentStep = Session::get('current_step', 1);
-        
+
         return view('saluteora::pages.patient.create', compact('patientData', 'currentStep'));
     }
 
@@ -42,7 +42,7 @@ class PatientController extends Controller
         $patientData = $request->except(['_token', 'current_step']);
         Session::put('patient_data', $patientData);
         Session::put('current_step', $request->input('current_step', 1));
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Dati salvati temporaneamente',
@@ -58,7 +58,7 @@ class PatientController extends Controller
         // Validazione dei dati
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'fiscal_code' => 'required|string|size:16|unique:patients,fiscal_code',
             'birth_date' => 'required|date',
             'gender' => 'required|in:M,F,O',
@@ -76,23 +76,23 @@ class PatientController extends Controller
             'notes' => 'nullable|string|max:65535',
             'privacy_consent' => 'required|accepted',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()
                 ->route('patient.create')
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         // Creazione del paziente
         $patient = new Patient();
         $patient->fill($request->all());
         $patient->tenant_id = auth()->user()?->tenant_id ?? 1; // Assegna il tenant dell'utente autenticato o default
         $patient->save();
-        
+
         // Pulisci i dati della sessione
         Session::forget(['patient_data', 'current_step']);
-        
+
         // Redirect con messaggio di successo
         return redirect()
             ->route('patient.show', $patient->id)
@@ -125,7 +125,7 @@ class PatientController extends Controller
         // Validazione dei dati
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'fiscal_code' => 'required|string|size:16|unique:patients,fiscal_code,' . $id,
             'birth_date' => 'required|date',
             'gender' => 'required|in:M,F,O',
@@ -142,19 +142,19 @@ class PatientController extends Controller
             'isee_expiry_date' => 'nullable|date',
             'notes' => 'nullable|string|max:65535',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()
                 ->route('patient.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         // Aggiornamento del paziente
         $patient = Patient::findOrFail($id);
         $patient->fill($request->all());
         $patient->save();
-        
+
         // Redirect con messaggio di successo
         return redirect()
             ->route('patient.show', $patient->id)
@@ -168,7 +168,7 @@ class PatientController extends Controller
     {
         $patient = Patient::findOrFail($id);
         $patient->delete();
-        
+
         return redirect()
             ->route('patient.index')
             ->with('success', 'Paziente eliminato con successo');
