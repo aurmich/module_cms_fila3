@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-/**
- * Model readonly per le regioni italiane, ispirato a Squire.
- * Legge i dati da json tramite GeoJsonModel.
- * Vedi Geo/docs/geo-json-model.md, module_geo.md, Xot/module-structure.md
- */
-
 use Illuminate\Support\Collection;
 
-class Region extends GeoJsonModel
+/**
+ * @deprecated Usare Modules\Geo\Models\Comune. Questa classe è solo una facciata legacy per compatibilità.
+ * Tutti i metodi delegano a Comune.
+ * Vedi Geo/docs/geo_entities.md
+ */
+class Region
 {
     /**
-     * Restituisce la lista unica delle regioni.
+     * Restituisce tutte le regioni uniche (proxy).
      */
     public static function all(): Collection
     {
-        $res=static::loadData()->pluck('regione')->unique()->values();
-
-        return $res;
+        return Comune::allRegions();
     }
 }

@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-/**
- * Model readonly per le province italiane, ispirato a Squire.
- * Legge i dati da json tramite GeoJsonModel.
- * Vedi Geo/docs/geo-json-model.md, module_geo.md, Xot/module-structure.md
- */
-
 use Illuminate\Support\Collection;
 
-class Province extends GeoJsonModel
+/**
+ * @deprecated Usare Modules\Geo\Models\Comune. Questa classe è solo una facciata legacy per compatibilità.
+ * Tutti i metodi delegano a Comune.
+ * Vedi Geo/docs/geo_entities.md
+ */
+class Province
 {
     /**
-     * Restituisce la lista unica delle province per regione.
+     * Restituisce tutte le province uniche (proxy).
      */
-    public static function byRegion(string $region): Collection
+    public static function all(): Collection
     {
-        return static::loadData()->where('regione.codice', $region)->pluck('provincia')->unique()->values();
+        return Comune::allProvinces();
+    }
+
+    /**
+     * Restituisce le province per regione (proxy).
+     */
+    public static function byRegion(string $regionCode): Collection
+    {
+        return Comune::byRegion($regionCode)->pluck('provincia.nome', 'provincia.codice')->unique();
     }
 }
