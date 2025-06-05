@@ -1,7 +1,7 @@
 {
     "id": "1",
     "title": {
-        "it": "SaluteOra - Promozione della salute orale per le gestanti"
+        "it": "SaluteOra - Promozione della salute orale per le gestant2i"
     },
     "slug": "home",
     "content": null,
@@ -11,7 +11,7 @@
                 "type": "hero",
                 "data": {
                     "view": "ui::components.blocks.hero.simple",
-                    "title": "Promozione della salute orale per le gestanti",
+                    "title": "Promozione della salute orale per le gestant2i",
                     "subtitle": "Un progetto dedicato alla salute orale delle gestanti in condizioni di vulnerabilità socio-economica",
                     "image": "/img/hero-bg.jpg",
                     "cta_text": "Scopri di più",

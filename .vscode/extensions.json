@@ -17,6 +17,7 @@
         "porifa.laravel-intelephense",
         "bmewburn.vscode-intelephense-client",
         "davidanson.vscode-markdownlint",
-        "tomoki1207.pdf"
+        "tomoki1207.pdf",
+        "mehedidracula.php-namespace-resolver"
     ]
 }

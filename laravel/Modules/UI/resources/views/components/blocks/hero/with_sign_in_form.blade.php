@@ -12,6 +12,40 @@
   }
   ```
 -->
+@props([
+    'title' => 'Data to enrich your online business',
+    'description' => 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua ad ad non deserunt sunt.',
+    'logoUrl' => 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500',
+    'logoAlt' => 'Your Company',
+    'navigation' => [
+        ['text' => 'Product', 'url' => '#'],
+        ['text' => 'Features', 'url' => '#'],
+        ['text' => 'Marketplace', 'url' => '#'],
+        ['text' => 'Company', 'url' => '#']
+    ],
+    'loginUrl' => '#',
+    'announcement' => [
+        'text' => "We're hiring",
+        'link' => '#',
+        'linkText' => 'Visit our careers page'
+    ],
+    'usedBy' => [
+        ['name' => 'Tuple', 'logo' => 'https://tailwindui.com/img/logos/tuple-logo-gray-400.svg'],
+        ['name' => 'Workcation', 'logo' => 'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg'],
+        ['name' => 'StaticKit', 'logo' => 'https://tailwindui.com/img/logos/statickit-logo-gray-400.svg']
+    ],
+    'socialProviders' => [
+        ['name' => 'Facebook', 'url' => '#', 'icon' => 'facebook'],
+        ['name' => 'X', 'url' => '#', 'icon' => 'x'],
+        ['name' => 'GitHub', 'url' => '#', 'icon' => 'github']
+    ],
+    'formAction' => '#',
+    'formMethod' => 'POST',
+    'termsUrl' => '#',
+    'dataPolicyUrl' => '#',
+    'cookiesPolicyUrl' => '#'
+])
+
 <div class="relative overflow-hidden bg-gray-800">
     <div class="hidden sm:absolute sm:inset-0 sm:block" aria-hidden="true">
       <svg class="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-gray-700 lg:top-0 lg:mb-0 lg:mt-28 xl:translate-x-0 xl:transform-none" width="364" height="384" viewBox="0 0 364 384" fill="none">
@@ -28,10 +62,12 @@
         <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-6" aria-label="Global">
           <div class="flex flex-1 items-center">
             <div class="flex w-full items-center justify-between md:w-auto">
-              <a href="#">
-                <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="">
-              </a>
+              @if($logoUrl)
+                <a href="#">
+                  <span class="sr-only">{{ $logoAlt }}</span>
+                  <img class="h-8 w-auto sm:h-10" src="{{ $logoUrl }}" alt="{{ $logoAlt }}">
+                </a>
+              @endif
               <div class="-mr-2 flex items-center md:hidden">
                 <button type="button" class="focus-ring-inset relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white" aria-expanded="false">
                   <span class="absolute -inset-0.5"></span>
@@ -43,14 +79,13 @@
               </div>
             </div>
             <div class="hidden space-x-10 md:ml-10 md:flex">
-              <a href="#" class="font-medium text-white hover:text-gray-300">Product</a>
-              <a href="#" class="font-medium text-white hover:text-gray-300">Features</a>
-              <a href="#" class="font-medium text-white hover:text-gray-300">Marketplace</a>
-              <a href="#" class="font-medium text-white hover:text-gray-300">Company</a>
+              @foreach($navigation as $item)
+                <a href="{{ $item['url'] }}" class="font-medium text-white hover:text-gray-300">{{ $item['text'] }}</a>
+              @endforeach
             </div>
           </div>
           <div class="hidden md:flex">
-            <a href="#" class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700">Log in</a>
+            <a href="{{ $loginUrl }}" class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700">Log in</a>
           </div>
         </nav>
 
@@ -96,31 +131,31 @@
           <div class="lg:grid lg:grid-cols-12 lg:gap-8">
             <div class="px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
               <div>
-                <div class="hidden sm:mb-4 sm:flex sm:justify-center lg:justify-start">
-                  <a href="#" class="flex items-center rounded-full bg-gray-900 p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base">
-                    <span class="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">We're hiring</span>
-                    <span class="ml-4 text-sm">Visit our careers page</span>
-                    <svg class="ml-2 h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </div>
-                <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Data to enrich your online business</h1>
-                <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua ad ad non deserunt sunt.</p>
-                <p class="mt-8 text-base font-semibold text-white sm:mt-10">Used by</p>
-                <div class="mt-5 w-full sm:mx-auto sm:max-w-lg lg:ml-0">
-                  <div class="flex flex-wrap items-start justify-between">
-                    <div class="flex justify-center px-1">
-                      <img class="h-9 sm:h-10" src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg" alt="Tuple">
-                    </div>
-                    <div class="flex justify-center px-1">
-                      <img class="h-9 sm:h-10" src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg" alt="Workcation">
-                    </div>
-                    <div class="flex justify-center px-1">
-                      <img class="h-9 sm:h-10" src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg" alt="StaticKit">
+                @if($announcement)
+                  <div class="hidden sm:mb-4 sm:flex sm:justify-center lg:justify-start">
+                    <a href="{{ $announcement['link'] }}" class="flex items-center rounded-full bg-gray-900 p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base">
+                      <span class="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">{{ $announcement['text'] }}</span>
+                      <span class="ml-4 text-sm">{{ $announcement['linkText'] }}</span>
+                      <svg class="ml-2 h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                      </svg>
+                    </a>
+                  </div>
+                @endif
+                <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">{{ $title }}</h1>
+                <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{{ $description }}</p>
+                @if($usedBy)
+                  <p class="mt-8 text-base font-semibold text-white sm:mt-10">Used by</p>
+                  <div class="mt-5 w-full sm:mx-auto sm:max-w-lg lg:ml-0">
+                    <div class="flex flex-wrap items-start justify-between">
+                      @foreach($usedBy as $company)
+                        <div class="flex justify-center px-1">
+                          <img class="h-9 sm:h-10" src="{{ $company['logo'] }}" alt="{{ $company['name'] }}">
+                        </div>
+                      @endforeach
                     </div>
                   </div>
-                </div>
+                @endif
               </div>
             </div>
             <div class="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
@@ -130,32 +165,26 @@
                     <p class="text-sm font-medium text-gray-700">Sign in with</p>
 
                     <div class="mt-1 grid grid-cols-3 gap-3">
-                      <div>
-                        <a href="#" class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
-                          <span class="sr-only">Sign in with Facebook</span>
-                          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
-                          </svg>
-                        </a>
-                      </div>
-
-                      <div>
-                        <a href="#" class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
-                          <span class="sr-only">Sign in with X</span>
-                          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
-                          </svg>
-                        </a>
-                      </div>
-
-                      <div>
-                        <a href="#" class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
-                          <span class="sr-only">Sign in with GitHub</span>
-                          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd" />
-                          </svg>
-                        </a>
-                      </div>
+                      @foreach($socialProviders as $provider)
+                        <div>
+                          <a href="{{ $provider['url'] }}" class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+                            <span class="sr-only">Sign in with {{ $provider['name'] }}</span>
+                            @if($provider['icon'] === 'facebook')
+                              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
+                              </svg>
+                            @elseif($provider['icon'] === 'x')
+                              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
+                              </svg>
+                            @elseif($provider['icon'] === 'github')
+                              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd" />
+                              </svg>
+                            @endif
+                          </a>
+                        </div>
+                      @endforeach
                     </div>
                   </div>
 
@@ -169,7 +198,7 @@
                   </div>
 
                   <div class="mt-6">
-                    <form action="#" method="POST" class="space-y-6">
+                    <form action="{{ $formAction }}" method="{{ $formMethod }}" class="space-y-6">
                       <div>
                         <label for="name" class="sr-only">Full name</label>
                         <input type="text" name="name" id="name" autocomplete="name" placeholder="Full name" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -192,7 +221,11 @@
                   </div>
                 </div>
                 <div class="border-t-2 border-gray-200 bg-gray-50 px-6 py-6 sm:px-10">
-                  <p class="text-xs leading-5 text-gray-500">By signing up, you agree to our <a href="#" class="font-medium text-gray-900 hover:underline">Terms</a>, <a href="#" class="font-medium text-gray-900 hover:underline">Data Policy</a> and <a href="#" class="font-medium text-gray-900 hover:underline">Cookies Policy</a>.</p>
+                  <p class="text-xs leading-5 text-gray-500">By signing up, you agree to our 
+                    <a href="{{ $termsUrl }}" class="font-medium text-gray-900 hover:underline">Terms</a>, 
+                    <a href="{{ $dataPolicyUrl }}" class="font-medium text-gray-900 hover:underline">Data Policy</a> and 
+                    <a href="{{ $cookiesPolicyUrl }}" class="font-medium text-gray-900 hover:underline">Cookies Policy</a>.
+                  </p>
                 </div>
               </div>
             </div>
