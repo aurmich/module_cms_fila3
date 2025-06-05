@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # baseSaluteOra
 
 =======
@@ -15,6 +16,8 @@
 >>>>>>> 5ec0646 (Initial commit)
 # Base il progetto
 =======
+=======
+>>>>>>> e61cbd2 (rebasing)
 # SaluteOra - Sistema di Gestione per la Salute Orale
 >>>>>>> 01fbabc (docs(README.md): update README with initial content and add a placeholder for future development)
 
@@ -338,4 +341,11 @@ Per supporto e informazioni:
 - 💬 [Discussioni](https://github.com/tuoorganizzazione/saluteora/discussions)
 
 Sviluppato con ❤️ per migliorare la salute orale delle future mamme
+<<<<<<< HEAD
 >>>>>>> 01fbabc (docs(README.md): update README with initial content and add a placeholder for future development)
+=======
+=======
+# baseSaluteOra
+
+>>>>>>> 0aa4b60 (Initial commit)
+>>>>>>> e61cbd2 (rebasing)
