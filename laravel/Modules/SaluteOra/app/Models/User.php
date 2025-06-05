@@ -48,8 +48,8 @@ class User extends BaseUser
         //'state' => Pending::class,
         // 'state' => 'pending',
     ];
-    
-    
+
+
     /** @var array<int, string> */
     protected $fillable = [
         'name',
@@ -109,7 +109,7 @@ class User extends BaseUser
     {
         return !empty($this->name) && !empty($this->email);
     }
-    
+
     /**
      * Transizione allo stato attivo.
      *
@@ -120,7 +120,7 @@ class User extends BaseUser
     {
         $this->state->transitionTo(Active::class);
     }
-    
+
     /**
      * Transizione allo stato sospeso.
      *
@@ -131,7 +131,7 @@ class User extends BaseUser
     {
         $this->state->transitionTo(Suspended::class);
     }
-    
+
     /**
      * Transizione allo stato rifiutato.
      *
@@ -142,7 +142,7 @@ class User extends BaseUser
     {
         $this->state->transitionTo(Rejected::class);
     }
-    
+
     /**
      * Transizione allo stato di richiesta integrazione.
      *
@@ -153,7 +153,7 @@ class User extends BaseUser
     {
         $this->state->transitionTo(IntegrationRequested::class);
     }
-    
+
     /**
      * Verifica se l'utente è attivo.
      *
@@ -163,7 +163,7 @@ class User extends BaseUser
     {
         return $this->state->equals(Active::class);
     }
-    
+
     /**
      * Verifica se l'utente è in attesa.
      *
@@ -173,7 +173,7 @@ class User extends BaseUser
     {
         return $this->state->equals(Pending::class);
     }
-    
+
     /**
      * Verifica se l'utente è sospeso.
      *
@@ -183,7 +183,7 @@ class User extends BaseUser
     {
         return $this->state->equals(Suspended::class);
     }
-    
+
     /**
      * Verifica se l'utente è rifiutato.
      *
@@ -193,7 +193,7 @@ class User extends BaseUser
     {
         return $this->state->equals(Rejected::class);
     }
-    
+
     /**
      * Verifica se è richiesta un'integrazione.
      *

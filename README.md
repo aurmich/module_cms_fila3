@@ -1,10 +1,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # baseSaluteOra
 
 =======
 =======
 >>>>>>> 958e596 (📝 Update README.md to resolve merge conflict and improve clarity by adding project name and ensuring documentation guidelines are clear.)
+=======
+>>>>>>> 7440f06 (delete duplicate folder + add .md)
 # Base il progetto
 
 ## Panoramica
@@ -44,6 +47,7 @@ La documentazione è organizzata in modo modulare:
 - Mantenere la documentazione aggiornata con il codice
 - Utilizzare termini generici nella documentazione dei moduli 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 54f4fa1 (.)
 =======
 =======
@@ -51,3 +55,7 @@ La documentazione è organizzata in modo modulare:
 
 >>>>>>> 0aa4b60 (Initial commit)
 >>>>>>> 958e596 (📝 Update README.md to resolve merge conflict and improve clarity by adding project name and ensuring documentation guidelines are clear.)
+=======
+# baseSaluteOra
+
+>>>>>>> 7440f06 (delete duplicate folder + add .md)

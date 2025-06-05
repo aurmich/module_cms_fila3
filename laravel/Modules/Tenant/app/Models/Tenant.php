@@ -16,7 +16,7 @@ class Tenant extends BaseModel
 {
     // use SoftDeletes;
 
-   
+
 
     /**
      * Gli attributi che sono mass assignable.
@@ -69,7 +69,7 @@ class Tenant extends BaseModel
      */
     public function patients(): HasMany
     {
-        return $this->hasMany(\Modules\SaluteOra\Models\Patient::class);
+        return $this->hasMany(\Modules\Patient\Models\Patient::class);
     }
 
     /**
@@ -79,7 +79,7 @@ class Tenant extends BaseModel
      */
     public function appointments(): HasMany
     {
-        return $this->hasMany(\Modules\SaluteOra\Models\Appointment::class);
+        return $this->hasMany(\Modules\Dental\Models\Appointment::class);
     }
 
     /**
@@ -101,7 +101,7 @@ class Tenant extends BaseModel
     public function setNameAttribute(string $value): void
     {
         $this->attributes['name'] = $value;
-        
+
         if (empty($this->attributes['slug'])) {
             $this->attributes['slug'] = \Str::slug($value);
         }

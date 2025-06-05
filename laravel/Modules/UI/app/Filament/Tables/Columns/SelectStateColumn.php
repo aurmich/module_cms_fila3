@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\UI\Filament\Tables\Columns;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Spatie\ModelStates\State;
 use Modules\SaluteOra\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -20,8 +21,10 @@ class SelectStateColumn extends SelectColumn
       //  $this->selectablePlaceholder(false);
         $this->options(function (Model $record ,$state): array {
             $name=$this->getName();
-            
-            
+            if($state==null){
+                $states=Arr::wrap($record->getDefaultStateFor($name));
+                return array_combine($states, $states);
+            }
             try{
                 $states=$record->getAttribute($name)->transitionableStates();
             }catch(Exception $e){
@@ -29,11 +32,11 @@ class SelectStateColumn extends SelectColumn
             }
             $states[]=$state::$name;
 
-            
+
             return array_combine($states, $states);
         });
-       
+
     }
 
-   
+
 }

@@ -507,6 +507,20 @@ Anche se il file Actions si trova fisicamente in `Modules/Xot/app/Actions/`, il 
 Gli errori PHPStan relativi a questo problema sono spesso del tipo:
 ```
 Class 'Modules\Xot\app\Actions\MyAction' not found.
+```
+
+#### Esempio per i Comandi Console
+
+```php
+// CORRETTO
+namespace Modules\Xot\Console\Commands;
+
+// ERRATO
+namespace Modules\Xot\app\Console\Commands;
+```
+
+Errori PHPStan come `Class Modules\Xot\app\Console\Commands\DatabaseSchemaExportCommand not found` indicano che è necessario rimuovere il segmento `app` dal namespace.
+
 Class 'Modules\Xot\Actions\MyAction' not found.
 ```
 
@@ -523,6 +537,16 @@ Class 'Modules\Xot\Actions\MyAction' not found.
 | Filament Resources       | `Modules/Xot/app/Filament/Resources/`  | `Modules\Xot\Filament\Resources`  |
 
 #### Esempio per i Comandi Console
+
+```
+
+## Collegamenti tra versioni di PHPSTAN_LIVELLO10_LINEE_GUIDA.md
+* [PHPSTAN_LIVELLO10_LINEE_GUIDA.md](../../../Xot/docs/phpstan/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
+* [PHPSTAN_LIVELLO10_LINEE_GUIDA.md](../../../Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
+
+
+## Collegamenti tra versioni di phpstan_livello10_linee_guida.md
+* [phpstan_livello10_linee_guida.md](phpstan/phpstan_livello10_linee_guida.md)
 
 ```php
 // CORRETTO

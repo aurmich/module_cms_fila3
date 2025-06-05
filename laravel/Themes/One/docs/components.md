@@ -215,6 +215,14 @@ class ComponentBrowserTest extends DuskTestCase
 
 # Componenti del Tema One
 
+> **NOTA**: La documentazione generale sui componenti UI è centralizzata nel [modulo UI](../../../Modules/UI/docs/components.md). Questa sezione documenta solo i componenti specifici del tema One.
+
+## Collegamenti
+
+- [Documentazione generale componenti UI](../../../Modules/UI/docs/components.md)
+- [Componenti form](../../../Modules/UI/docs/form-components.md)
+- [Componenti layout](../../../Modules/UI/docs/layout-components.md)
+
 ## Logo
 
 Il componente `x-ui.logo` è un SVG che rappresenta il logo dell'applicazione. 
@@ -239,4 +247,11 @@ Il componente `x-ui.logo` è un SVG che rappresenta il logo dell'applicazione.
 - Mantenere le proporzioni usando `w-auto`
 - Per header e navbar, usare dimensioni tra h-8 e h-16
 - Per hero sections e splash screens, considerare dimensioni maggiori
+
+## Collegamenti tra versioni di components.md
+* [components.md](laravel/Modules/UI/docs/components.md)
+* [components.md](laravel/Modules/UI/docs/themes/components.md)
+* [components.md](laravel/Modules/Cms/docs/components.md)
+* [components.md](laravel/Themes/One/docs/components.md)
+
  

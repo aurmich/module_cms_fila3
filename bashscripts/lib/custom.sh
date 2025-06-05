@@ -225,9 +225,9 @@ dummy_push(){
     # 🧹 Pulizia file temporanei
     find . -type f -name "*:Zone.Identifier" -exec rm -f {} \;
     git add -A
-    #git commit -am "$msg"
-    #git push -u "$org" HEAD:"$branch"
-    oco --yes
+    git commit -am "$msg"
+    git push -u "$org" HEAD:"$branch"
+    #oco --yes
 }
 
 declare -A PARSED_KV  # Dizionario globale (o può essere passato per riferimento)

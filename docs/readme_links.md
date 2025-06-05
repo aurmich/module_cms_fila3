@@ -72,3 +72,5 @@
 
 ## Contribuire
 Per contribuire alla documentazione, seguire le [Linee Guida](linee-guida-documentazione.md) e le [Regole dei Collegamenti](regole_collegamenti_documentazione.md). 
+
+- [Documentazione modulo Tenant](../laravel/Modules/Tenant/docs/README.md)

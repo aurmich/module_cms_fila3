@@ -142,3 +142,119 @@ Descrizione dettagliata se necessaria
 ```
 
 Tipi: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+## Regole Fondamentali
+
+### 1. Campi Database
+- Usare snake_case per i nomi delle colonne
+- **Usare sempre `first_name` e `last_name` per i nomi personali, MAI `surname` o `name`** (vedi [documentazione dettagliata](./conventions/personal-name-fields.md))
+- Usare `_id` come suffisso per le chiavi esterne
+- Usare `_at` come suffisso per i timestamp
+- Usare `is_` come prefisso per i booleani
+
+Per dettagli completi sui campi nome/cognome, vedere [Field Naming Conventions](./conventions/field-naming.md)
+
+### 2. Modelli
+- Usare PascalCase al singolare (es. `Patient`, `Doctor`)
+- Estendere sempre le classi base del modulo Xot
+- Definire le relazioni con nomi descrittivi
+
+### 3. Tabelle
+- Usare snake_case al plurale (es. `patients`, `medical_records`)
+- Usare nomi descrittivi e completi
+- Evitare abbreviazioni
+
+### 4. Migrazioni
+- Formato: `YYYY_MM_DD_HHMMSS_create_table_name_table.php`
+- Usare verbi descrittivi (create, add, remove, update)
+- Includere sempre metodi up() e down()
+
+### 5. Controller
+- Suffisso `Controller` (es. `PatientController`)
+- Raggruppare per modulo/funzionalità
+- Estendere controller base appropriato
+
+### 6. Views
+- Usare kebab-case
+- Raggruppare in cartelle per contesto
+- Separare layout da componenti
+
+### 7. Route
+- Usare kebab-case per gli URL
+- Usare snake_case per i nomi delle route
+- Raggruppare per modulo/funzionalità
+
+### 8. File di Configurazione
+- Usare snake_case
+- Nomi descrittivi e completi
+- Raggruppare per contesto
+
+### 9. Eventi
+- Suffisso `Event` (es. `PatientCreatedEvent`)
+- Usare il passato per azioni completate
+- Nomi descrittivi dell'azione
+
+### 10. Jobs
+- Suffisso `Job` (es. `ProcessPatientDataJob`)
+- Verbi che descrivono l'azione
+- Nomi auto-esplicativi
+
+## Esempi
+
+### Database Fields
+```php
+// CORRETTO
+$table->string('first_name');
+$table->string('last_name');
+$table->foreignId('doctor_id');
+$table->timestamp('created_at');
+$table->boolean('is_active');
+
+// ERRATO
+$table->string('surname');  // Usare last_name
+$table->string('name');     // Usare first_name
+$table->integer('doctorid');
+$table->timestamp('creation_date');
+$table->boolean('active');
+```
+
+### Models
+```php
+// CORRETTO
+class Patient extends XotBaseModel
+{
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+    ];
+}
+
+// ERRATO
+class Patients extends Model  // Non usare plurale
+{
+    protected $fillable = [
+        'name',      // Usare first_name
+        'surname',   // Usare last_name
+        'email',
+    ];
+}
+```
+
+## Note Importanti
+1. Mantenere la coerenza in tutto il progetto
+2. Documentare eccezioni alle convenzioni
+3. Seguire gli standard del settore
+4. Considerare l'internazionalizzazione
+5. Rispettare le convenzioni Laravel quando possibile
+
+## Collegamenti
+- [Field Naming Conventions](./conventions/field-naming.md)
+- [Database Schema Guidelines](./database/schema.md)
+- [Coding Standards](./standards/coding.md)
+- [Best Practices](./BEST-PRACTICES.md)
+
+## Collegamenti tra versioni di naming-conventions.md
+* [naming-conventions.md](docs/naming-conventions.md)
+* [naming-conventions.md](../../../Xot/docs/naming-conventions.md)
+

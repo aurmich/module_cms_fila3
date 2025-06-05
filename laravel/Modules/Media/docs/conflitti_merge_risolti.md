@@ -1,3 +1,7 @@
+# Risoluzione Conflitti Merge - Modulo Media
+
+> **Collegamento globale:** Per le strategie generali e le best practices sulla risoluzione dei conflitti git, vedi [docs/git_conflict_resolution.md](../../../../docs/git_conflict_resolution.md).
+
 # Risoluzione dei Conflitti Git nel Modulo Media
 
 ## Panoramica
@@ -365,6 +369,9 @@ Per prevenire o gestire meglio i conflitti Git in futuro:
 - [Documentazione Laravel FFMpeg](https://github.com/protonemedia/laravel-ffmpeg)
 - [PHP 8.x Nullsafe Operator](https://www.php.net/manual/en/migration80.new-features.php#migration80.new-features.nullsafe-operator)
 
+---
+
+> **Collegamento globale:** Questa documentazione locale dettaglia i casi concreti e le decisioni architetturali adottate nel modulo Media. Per le strategie generali e le best practices, consulta sempre anche la documentazione globale in [docs/git_conflict_resolution.md](../../../../docs/git_conflict_resolution.md).
 - [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
 
 ## Conflitti nell'integrazione FFmpeg (15/06/2024)

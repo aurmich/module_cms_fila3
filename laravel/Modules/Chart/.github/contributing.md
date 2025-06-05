@@ -53,8 +53,6 @@ If the project maintainer has any additional requirements, you will find them li
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](https://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
 
 **Happy coding**!
-<<<<<<< HEAD
-=======
 # Contributing
 
 Contributions are **welcome** and will be fully **credited**.
@@ -166,3 +164,4 @@ If the project maintainer has any additional requirements, you will find them li
 
 **Happy coding**!
 >>>>>>> 21462f4 (feat: add initial project structure with configuration files and actions for chart generation)
+>>>>>>> aa3c639 (✨ (initial): add initial project structure with configuration files and actions for chart generation)
