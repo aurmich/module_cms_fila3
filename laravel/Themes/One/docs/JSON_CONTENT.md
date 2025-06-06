@@ -371,3 +371,5 @@ public function getContent(string $pageId): array
    - Mantenere backup dei file JSON
    - Tracciare le modifiche
    - Implementare rollback se necessario 
+
+> **Nota**: Utilizzando il plugin [filament-spatie-translatable](https://github.com/filamentphp/spatie-laravel-translatable-plugin), i blocchi Blade ricevono direttamente le variabili translatabili (`$title`, `$subtitle`, `$cta_link`, etc.), senza bisogno di accedere a `$data['title']` o simili.

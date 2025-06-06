@@ -178,7 +178,7 @@
             {
                 "type": "testimonial_carousel",
                 "data": {
-                    "view": "pub_theme::components.blocks.testimonial_carousel.simple",
+                    "view": "pub_theme::components.blocks.testimonials.carousel.simple",
                     "title": "Cosa dicono i nostri pazienti",
                     "testimonials": [
                         {

@@ -758,3 +758,35 @@ Ogni blocco dovrebbe avere test per:
 * [blocks.md](laravel/Themes/One/docs/blocks.md)
 * [blocks.md](laravel/Themes/One/docs/components/blocks.md)
 
+## Blocco Estetico (Aesthetic Block)
+Per creare componenti di tipo blocco eleganti e armoniosi, segui queste linee guida:
+
+- **Design minimalista**: utilizza spazi bianchi generosi, tipografia pulita e palette colori soft.
+- **Effetti di profondità**: applica ombre delicate e glassmorphism per favorire gerarchia visiva.
+- **Animazioni sottili**: introduce micro-interazioni (fade-in, slide, hover) per un’esperienza dinamica ma non distraente.
+- **Accessibilità**: garantisci contrasto sufficiente, focus visibili e supporto nav da tastiera.
+- **Composizione modulare**: ogni blocco deve essere un componente riutilizzabile, con prop clear e callbacks.
+- **Localizzazione**: estrai testi in file JSON/locale e rispetta le convenzioni di traduzione (nessun `.navigation`).
+
+### Esempio di Aesthetic Hero Block
+```blade
+<x-cms::blocks.aesthetic-hero
+    :title="__('cms::blocks.hero.title')"
+    :subtitle="__('cms::blocks.hero.subtitle')"
+    image="/img/hero-bg.jpg"
+/>
+```
+
+### File di Blade: resources/views/blocks/aesthetic-hero.blade.php
+```blade
+<div class="relative bg-white/70 backdrop-blur-md rounded-lg overflow-hidden p-8 shadow-lg">
+    <img src="{{ $image }}" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" />
+    <div class="relative z-10 text-center">
+        <h2 class="text-3xl font-semibold mb-4">{{ $title }}</h2>
+        <p class="text-lg text-gray-700">{{ $subtitle }}</p>
+    </div>
+</div>
+
+```
+
+> **Nota**: Questo blocco utilizza il plugin [filament-spatie-translatable](https://github.com/filamentphp/spatie-laravel-translatable-plugin) per gestire automaticamente le traduzioni. Di conseguenza, nei template Blade dei blocchi puoi usare direttamente le variabili translatabili come `$title`, `$subtitle` senza accedere manualmente all'array di data.

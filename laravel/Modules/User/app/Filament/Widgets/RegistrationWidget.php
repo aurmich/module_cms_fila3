@@ -49,7 +49,8 @@ class RegistrationWidget extends XotBaseWidget
     {
         $data = $this->form->getState();
         $user=app($this->action)->execute($data);
-        
+        return redirect()->route('pages.view',['slug'=>$this->type.'_register_complete']);
+        //route('pages.view',['slug'=>'patient_register_complete'])
         /*
         // Validazione dei dati
         $this->validate();
