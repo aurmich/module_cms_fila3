@@ -59,5 +59,6 @@ return array (
   'navigation' => 
   array (
     'sort' => 20,
+    'icon' => 'chart.navigation',
   ),
 );

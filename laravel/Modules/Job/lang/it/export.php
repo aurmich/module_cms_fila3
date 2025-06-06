@@ -84,6 +84,10 @@ return array (
     array (
       'label' => 'reorderRecords',
     ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
   ),
   'formats' => 
   array (

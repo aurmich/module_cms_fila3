@@ -1,94 +1,124 @@
 <?php
 
-declare(strict_types=1);
-
-return [
-  'navigation' => [
+return array (
+  'navigation' => 
+  array (
     'name' => 'Team',
     'plural' => 'Teams',
-    'group' => [
+    'group' => 
+    array (
       'name' => 'Gestione Utenti',
       'description' => 'Gestione dei team e delle loro autorizzazioni',
-    ],
+    ),
     'label' => 'team',
     'sort' => 18,
     'icon' => 'user-team',
-  ],
-  'fields' => [
+  ),
+  'fields' => 
+  array (
     'first_name' => 'Nome',
     'last_name' => 'Cognome',
-    'detach' => [
+    'detach' => 
+    array (
       'label' => 'detach',
-    ],
-    'toggleColumns' => [
+    ),
+    'toggleColumns' => 
+    array (
       'label' => 'toggleColumns',
-    ],
-    'reorderRecords' => [
+    ),
+    'reorderRecords' => 
+    array (
       'label' => 'reorderRecords',
-    ],
-    'resetFilters' => [
+    ),
+    'resetFilters' => 
+    array (
       'label' => 'resetFilters',
-    ],
-    'create' => [
+    ),
+    'create' => 
+    array (
       'label' => 'create',
-    ],
-    'attach' => [
+    ),
+    'attach' => 
+    array (
       'label' => 'attach',
-    ],
-    'view' => [
+    ),
+    'view' => 
+    array (
       'label' => 'view',
-    ],
-    'edit' => [
+    ),
+    'edit' => 
+    array (
       'label' => 'edit',
-    ],
-    'openFilters' => [
+    ),
+    'openFilters' => 
+    array (
       'label' => 'openFilters',
-    ],
-    'applyFilters' => [
+    ),
+    'applyFilters' => 
+    array (
       'label' => 'applyFilters',
-    ],
-    'updated_at' => [
+    ),
+    'updated_at' => 
+    array (
       'label' => 'updated_at',
-    ],
-    'created_at' => [
+    ),
+    'created_at' => 
+    array (
       'label' => 'created_at',
-    ],
-    'users_count' => [
+    ),
+    'users_count' => 
+    array (
       'label' => 'users_count',
-    ],
-    'name' => [
+    ),
+    'name' => 
+    array (
       'label' => 'name',
-    ],
-    'recordId' => [
+    ),
+    'recordId' => 
+    array (
       'label' => 'recordId',
-    ],
-    'personal_team' => [
+    ),
+    'personal_team' => 
+    array (
       'label' => 'personal_team',
-    ],
-    'role' => [
+    ),
+    'role' => 
+    array (
       'label' => 'role',
-    ],
-  ],
-  'actions' => [
-    'import' => [
-      'fields' => [
+    ),
+  ),
+  'actions' => 
+  array (
+    'import' => 
+    array (
+      'fields' => 
+      array (
         'import_file' => 'Seleziona un file XLS o CSV da caricare',
-      ],
-    ],
-    'export' => [
+      ),
+    ),
+    'export' => 
+    array (
       'filename_prefix' => 'Aree al',
-      'columns' => [
+      'columns' => 
+      array (
         'name' => 'Nome area',
         'parent_name' => 'Nome area livello superiore',
-      ],
-    ],
-    'create' => [
+      ),
+    ),
+    'create' => 
+    array (
       'label' => 'create',
-    ],
-  ],
-  'plural' => [
-    'model' => [
+    ),
+  ),
+  'plural' => 
+  array (
+    'model' => 
+    array (
       'label' => 'team.plural.model',
-    ],
-  ],
-];
+    ),
+  ),
+  'model' => 
+  array (
+    'label' => 'team.model',
+  ),
+);

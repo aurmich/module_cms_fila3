@@ -17,7 +17,7 @@
     ];
 @endphp
 
-<nav class="hidden md:flex {{ $alignmentClasses[$alignment] }} {{ $orientationClasses[$orientation] }}">
+<nav class="hidden md:flex {{ $alignmentClasses[$alignment] }} {{ $orientationClasses[$orientation] }} m-12">
     @foreach($items as $item)
         @if($item['type'] === 'link')
             <a href="{{ $item['url'] }}" 

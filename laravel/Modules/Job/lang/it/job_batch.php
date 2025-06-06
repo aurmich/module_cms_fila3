@@ -200,4 +200,8 @@ return array (
     'json' => 'JSON',
     'xml' => 'XML',
   ),
+  'model' => 
+  array (
+    'label' => 'job batch.model',
+  ),
 );

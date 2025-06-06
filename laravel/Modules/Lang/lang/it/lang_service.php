@@ -36,6 +36,7 @@ return array (
       'label' => 'Valori',
       'placeholder' => 'Inserisci i valori',
       'tooltip' => 'Lista dei valori associati',
+      'description' => 'values',
     ),
     'value' => 
     array (
@@ -166,6 +167,8 @@ return array (
     'deleted_at' => 
     array (
       'label' => 'Data di eliminazione',
+      'description' => 'deleted_at',
+      'helper_text' => 'deleted_at',
     ),
     'radius' => 
     array (

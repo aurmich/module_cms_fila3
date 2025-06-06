@@ -10,11 +10,11 @@
     'description' => null,
 ])
 
-<div {{ $attributes->merge(['class' => 'p-4 flex items-center space-x-3']) }}>
+<div class="m-12" {{ $attributes->merge(['class' => 'p-4 flex items-center space-x-3']) }}>
     <!-- @if($icon)
         <x-filament::icon :name="$icon" :class="$size" class="text-primary-600 dark:text-primary-400" />
     @elseif($src) -->
-        <img class="lg:h-20 sm:h-12" src="/img/saluteOra-new-logo.png"/>
+        <img class="h-12" src="/img/logo.png"/>
     @endif
 
     <!-- @if($title || $description)
