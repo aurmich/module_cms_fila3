@@ -7,7 +7,8 @@ namespace Modules\SaluteOra\Actions\Patient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Modules\SaluteOra\Models\Patient;
-use Modules\SaluteOra\Models\User;
+use Modules\SaluteOra\States\User\Pending;
+use Illuminate\Support\Str;
 
 class RegisterAction
 {
@@ -20,20 +21,51 @@ class RegisterAction
     public function execute(array $data): Patient
     {
         return DB::transaction(function () use ($data) {
-            $userData = [
-                'name' => $data['name'],
+            // Creazione del paziente usando STI
+            $patient = Patient::create([
+                'name' => $data['first_name'] . ' ' . $data['last_name'],
                 'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ];
+                'password' => Hash::make(Str::random(12)), // Password temporanea
+                'type' => 'patient',
+                'state' => Pending::class,
+                'date_of_birth' => $data['date_of_birth'] ?? null,
+                'gender' => $data['gender'] ?? null,
+                'address' => $data['address'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'last_dental_visit' => $data['last_dental_visit'] ?? null,
+                'dental_problems' => $data['dental_problems'] ?? null,
+            ]);
 
-            $user = User::create($userData);
+            // Gestione dei documenti
+            if (isset($data['health_card'])) {
+                $patient->addMedia($data['health_card'])->toMediaCollection('tessera_sanitaria');
+            }
+            if (isset($data['identity_document'])) {
+                $patient->addMedia($data['identity_document'])->toMediaCollection('documento_identita');
+            }
+            if (isset($data['isee_certificate'])) {
+                $patient->addMedia($data['isee_certificate'])->toMediaCollection('certificazione_isee');
+            }
+            if (isset($data['pregnancy_certificate'])) {
+                $patient->addMedia($data['pregnancy_certificate'])->toMediaCollection('certificato_gravidanza');
+            }
 
-            $patientDataArray = $data;
-            unset($patientDataArray['name'], $patientDataArray['email'], $patientDataArray['password'], $patientDataArray['password_confirmation']);
+            // Gestione delle preferenze
+            if (isset($data['privacy_acceptance'])) {
+                $patient->consents()->create([
+                    'type' => 'privacy',
+                    'accepted' => true,
+                    'accepted_at' => now(),
+                ]);
+            }
 
-            $patientDataArray['user_id'] = $user->id;
-
-            $patient = Patient::create($patientDataArray);
+            if (isset($data['newsletter'])) {
+                $patient->consents()->create([
+                    'type' => 'newsletter',
+                    'accepted' => true,
+                    'accepted_at' => now(),
+                ]);
+            }
 
             return $patient;
         });

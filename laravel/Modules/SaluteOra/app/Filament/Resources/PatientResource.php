@@ -6,26 +6,30 @@ namespace Modules\SaluteOra\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Filament\Tables\Columns\TextColumn;
-use Modules\SaluteOra\Models\Patient;
-use Modules\Xot\Filament\Resources\XotBaseResource;
-use Modules\Xot\Filament\Resources\XotBaseResource\Pages;
+use Livewire\Component;
 use Filament\Widgets\Widget;
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Datas\XotData;
+use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Wizard;
+use Modules\SaluteOra\Models\Patient;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Auth\Events\Registered;
 use Filament\Forms\Components\Checkbox;
+use Filament\Tables\Columns\TextColumn;
 use Modules\Xot\Contracts\UserContract;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Livewire\Component;
+use Modules\Xot\Actions\View\GetViewPathAction;
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Patient\Filament\Components\HealthCardUpload;
+use Modules\Xot\Filament\Resources\XotBaseResource\Pages;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class PatientResource extends XotBaseResource
 {
@@ -33,23 +37,17 @@ class PatientResource extends XotBaseResource
     //protected static ?string $tenantOwnershipRelationshipName = 'tenants';
     //protected static ?string $tenantRelationshipName = 'studios';
 
-    /**
-     * Get the form schema for the registration wizard
-     *
-     * @return array<string, mixed>
-     */
-    protected static function getSubmitButton(): string
-    {
-        return sprintf(
-            '<button type="submit" class="w-full bg-blue-900 text-white text-lg font-medium py-3 px-6 rounded-full hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center">
-                <span>%s</span>
-            </button>',
-            __('saluteora::patient-resource.buttons.submit.label')
-        );
-    }
+    
 
     public static function getFormSchemaWidget(): array
     {
+        $submit_view='pub_theme::filament.wizard.submit-button';
+        if(!view()->exists($submit_view)){
+            dddx([
+                'submit_view'=>$submit_view,
+                'path'=>app(GetViewPathAction::class)->execute($submit_view),
+            ]);
+        }
         return [
             Forms\Components\Wizard::make([
                 self::getPersonalDataStep(),      // Step 1: Dati personali
@@ -57,9 +55,10 @@ class PatientResource extends XotBaseResource
                 self::getPreVisitStep(),          // Step 3: Informazioni preventive
                 self::getPrivacyStep(),           // Step 4: Privacy e consensi
             ])
+            ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')
-            //->submitAction(new HtmlString(self::getSubmitButton()))
+            ->submitAction(view($submit_view))
         ];
     }
 
@@ -112,20 +111,55 @@ class PatientResource extends XotBaseResource
     protected static function getDocumentsStepSchema(): array
     {
         return [
-            Forms\Components\FileUpload::make('health_card')
+            // Tessera Sanitaria
+            Forms\Components\SpatieMediaLibraryFileUpload::make('health_card')
+                ->collection('tessera_sanitaria')
+                //->hint(__('saluteora::patient-resource.fields.health_card.hint'))
+                //->hintIcon('heroicon-o-information-circle')
+                ->downloadable()
+                ->openable()
+                ->preserveFilenames()
+                ->acceptedFileTypes(['application/pdf', 'image/*'])
+                ->maxSize(5120)
                 ->required()
+                ->columnSpanFull(),
+
+            // Documento di Identità
+            Forms\Components\SpatieMediaLibraryFileUpload::make('identity_document')
+                ->collection('documento_identita')
+                //->hint(__('saluteora::patient-resource.fields.identity_document.hint'))
+                //->hintIcon('heroicon-o-information-circle')
+                ->downloadable()
+                ->openable()
+                ->preserveFilenames()
                 ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120),
-            Forms\Components\FileUpload::make('identity_document')
+                ->maxSize(5120)
                 ->required()
+                ->columnSpanFull(),
+
+            // Certificazione ISEE
+            Forms\Components\SpatieMediaLibraryFileUpload::make('isee_certificate')
+                ->collection('certificazione_isee')
+                //->hint(__('saluteora::patient-resource.fields.isee_certificate.hint'))
+                //->hintIcon('heroicon-o-information-circle')
+                ->downloadable()
+                ->openable()
+                ->preserveFilenames()
                 ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120),
-            Forms\Components\FileUpload::make('isee_certificate')
+                ->maxSize(5120)
+                ->columnSpanFull(),
+
+            // Certificato di Gravidanza
+            Forms\Components\SpatieMediaLibraryFileUpload::make('pregnancy_certificate')
+                ->collection('certificato_gravidanza')
+                //->hint(__('saluteora::patient-resource.fields.pregnancy_certificate.hint'))
+                //->hintIcon('heroicon-o-information-circle')
+                ->downloadable()
+                ->openable()
+                ->preserveFilenames()
                 ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120),
-            Forms\Components\FileUpload::make('pregnancy_certificate')
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120),
+                ->maxSize(5120)
+                ->columnSpanFull(),
         ];
     }
 

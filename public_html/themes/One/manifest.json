@@ -1,6 +1,10 @@
 {
   "resources/css/app.css": {
+<<<<<<< HEAD
     "file": "assets/app-Cs86oWFH.css",
+=======
+    "file": "assets/app-DYCARMKa.css",
+>>>>>>> f38a097e (fileupload to spatiefileupload + final button wizard)
     "src": "resources/css/app.css",
     "isEntry": true
   },

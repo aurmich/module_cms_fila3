@@ -113,6 +113,17 @@
     .fi-checkbox {
         @apply h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 dark:border-white/10 dark:bg-white/5 dark:focus:ring-offset-white/10;
     }
+
+    .fi-fo-wizard-header {
+        @apply hidden sm:grid !important;
+        
+    }
+
+
+    .mobile-friendly-wizard {
+        @apply overflow-x-auto;
+    }
+    
 }
 
 

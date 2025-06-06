@@ -38,6 +38,9 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
         
         // Registra gli observer dei modelli
         $this->bootObservers();
+
+        // Registra il namespace pub_theme per le views
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pub_theme');
     }
     
     /**
