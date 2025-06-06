@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Parental\HasParent;
 use Modules\SaluteOra\Models\BasePivot;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -31,78 +32,7 @@ use Modules\SaluteOra\Models\BasePivot;
  * @property-read \Modules\SaluteOra\Models\Doctor $doctor
  * @property-read \Modules\SaluteOra\Models\Studio $studio
  */
-class DoctorStudio extends BasePivot
+class DoctorStudio extends StudioUser
 {
-    /**
-     * In questo caso specifico, dobbiamo dichiarare esplicitamente la tabella e la connection
-     * perché stiamo lavorando con una relazione cross-database.
-     * 
-     * @var string
-     */
-    protected $table = 'doctor_studio';
-    
-    /**
-     * La connection deve essere la stessa di Studio, non quella di Doctor.
-     * Questo è cruciale per relazioni cross-database.
-     *
-     * @var string
-     */
-    protected $connection = 'salute_ora';
-
-    /**
-     * Gli attributi che sono mass assignable.
-     *
-     * @var array<string>
-     */
-    protected $fillable = [
-        //'doctor_id',
-        'user_id',
-        'studio_id',
-        'schedule',
-        'is_primary',
-    ];
-
-    /**
-     * Gli attributi che devono essere convertiti.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return array_merge(parent::casts(), [
-            'schedule' => 'array',
-            'is_primary' => 'boolean',
-        ]);
-    }
-
-    /**
-     * Ottiene il dottore associato a questa relazione.
-     * Specifica esplicitamente la chiave esterna e la chiave primaria
-     * per gestire la relazione cross-database (DB user <-> DB salute_ora).
-     *
-     * @return BelongsTo<Doctor, DoctorStudio>
-     */
-    public function doctor(): BelongsTo
-    {
-        // Specificare esplicitamente la chiave esterna e la connection corretta
-        // perché questa relazione attraversa database differenti
-        return $this->belongsTo(
-            Doctor::class,
-            'doctor_id',
-            'id',
-            'doctor'
-        )->withoutGlobalScopes();
-    }
-
-    /**
-     * Ottiene lo studio associato a questa relazione.
-     * Questa relazione rimane nello stesso database.
-     *
-     * @return BelongsTo<Studio, DoctorStudio>
-     */
-    public function studio(): BelongsTo
-    {
-        // La relazione con Studio è nello stesso database, quindi è più semplice
-        return $this->belongsTo(Studio::class, 'studio_id', 'id', 'studio');
-    }
+    use HasParent;
 }
