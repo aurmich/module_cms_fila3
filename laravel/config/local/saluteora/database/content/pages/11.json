@@ -39,6 +39,37 @@
                 }
             },
             {
+                "type": "calendar",
+                "data": {
+                    "view": "pub_theme::components.blocks.calendar.nuovo",
+                    "title": {
+                        "it": "Registrazione Completata con Successo!",
+                        "en": "Registration Completed Successfully!"
+                    },
+                    "subtitle": {
+                        "it": "Grazie per esserti unito alla nostra community. La tua richiesta è in fase di verifica.",
+                        "en": "Thank you for joining our community. Your request is being processed."
+                    },
+                    "image": "/img/registration-complete.jpg",
+                    "cta": [
+                        {
+                            "it": "Vai alla tua area personale",
+                            "en": "Go to your dashboard"
+                        },
+                        "#"
+                    ],
+                    "secondaryCta": [
+                        {
+                            "it": "Scopri di più",
+                            "en": "Learn more"
+                        },
+                        "#features"
+                    ],
+                    "overlay": "gradient",
+                    "minHeight": "min-h-[70vh] md:min-h-[80vh]"
+                }
+            },
+            {
                 "type": "feature_grid",
                 "data": {
                     "view": "pub_theme::components.blocks.features.feature_grid",

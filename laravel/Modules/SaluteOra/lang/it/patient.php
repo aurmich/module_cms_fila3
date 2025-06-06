@@ -34,6 +34,8 @@ return array (
       'label' => 'Codice fiscale',
       'placeholder' => 'Inserisci il codice fiscale',
       'help' => 'Codice fiscale come da tessera sanitaria',
+      'description' => 'fiscal_code',
+      'helper_text' => 'fiscal_code',
     ),
     'birth_date' => 
     array (
@@ -239,6 +241,10 @@ return array (
     'type' => 
     array (
       'label' => 'type',
+    ),
+    'all_tenants' => 
+    array (
+      'label' => 'all_tenants',
     ),
   ),
   'steps' => 
