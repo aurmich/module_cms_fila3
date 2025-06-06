@@ -1,9 +1,32 @@
 {
-    "require-dev": {
-        "phpstan/phpstan": "^2.1"
+    "name": "exabyte/base_saluteora",
+    "description": "Progetto SaluteOra basato su framework Laraxot",
+    "type": "project",
+    "config": {
+        "vendor-dir": "laravel/vendor",
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     },
-    "require": {
-        "dotswan/filament-grapesjs-v3": "*",
-        "spatie/laravel-queueable-action": "^2.16"
-    }
+    "autoload": {
+        "psr-4": {
+            "": "laravel/app/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cd laravel && composer install --no-dev --optimize-autoloader"
+        ],
+        "post-update-cmd": [
+            "cd laravel && composer update --no-dev --optimize-autoloader"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "laravel"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
