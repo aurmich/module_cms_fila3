@@ -131,7 +131,9 @@ return array (
     ),
     'first_name' =>
     array (
-      'label' => 'first_name',
+      'label' => 'Nome',
+      'placeholder' => 'Inserisci il nome',
+      'help' => 'Inserisci il nome completo',
     ),
     'edit_name' =>
     array (

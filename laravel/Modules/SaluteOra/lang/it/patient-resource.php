@@ -25,6 +25,7 @@ return [
         'first_name' => [
             'label' => 'Nome',
             'placeholder' => 'Inserisci il nome',
+            'help' => 'Inserisci il nome completo',
         ],
         'last_name' => [
             'label' => 'Cognome',
@@ -42,10 +43,12 @@ return [
         'phone' => [
             'label' => 'Telefono',
             'placeholder' => 'Inserisci il numero di telefono',
+            'help' => 'Numero di telefono per contatti',
         ],
         'email' => [
             'label' => 'Email',
-            'placeholder' => 'Inserisci l\'indirizzo email',
+            'placeholder' => 'Inserisci l\'email',
+            'help' => 'Indirizzo email valido',
         ],
         'health_card' => [
             'label' => 'Tessera Sanitaria',
@@ -64,11 +67,14 @@ return [
             'tooltip' => 'Carica il certificato di gravidanza se applicabile',
         ],
         'fiscal_code' => [
-            'label' => 'Codice Fiscale',
-            'placeholder' => 'Inserisci il tuo codice fiscale',
+            'label' => 'Codice fiscale',
+            'placeholder' => 'Inserisci il codice fiscale',
+            'help' => 'Codice fiscale come da tessera sanitaria',
         ],
         'birth_date' => [
-            'label' => 'Data di Nascita',
+            'label' => 'Data di nascita',
+            'placeholder' => 'Seleziona la data di nascita',
+            'help' => 'Inserisci la data di nascita nel formato gg/mm/aaaa',
         ],
         'last_dental_visit' => [
             'label' => 'Ultima Visita Dentistica',
@@ -85,6 +91,11 @@ return [
         'newsletter' => [
             'label' => 'Newsletter',
             'tooltip' => 'Vuoi ricevere aggiornamenti via email?',
+        ],
+        'gender' => [
+            'label' => 'Sesso',
+            'placeholder' => 'Seleziona il sesso',
+            'help' => 'Seleziona il sesso anagrafico',
         ],
     ],
     'buttons' => [

@@ -172,7 +172,7 @@ return array (
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
-      'helper_text' => 'Nome del medico',
+      'help' => 'Inserisci il nome completo',
       'description' => 'Nome come registrato all\'Ordine',
       'tooltip' => 'Nome del medico',
     ),

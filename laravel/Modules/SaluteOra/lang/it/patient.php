@@ -17,6 +17,7 @@ return array (
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
+      'help' => 'Inserisci il nome completo',
       'helper_text' => 'Nome del paziente',
       'description' => 'Il nome anagrafico del paziente',
       'tooltip' => 'Deve corrispondere al nome sul documento d\'identità',
@@ -27,29 +28,22 @@ return array (
     ),
     'fiscal_code' => 
     array (
-      'label' => 'Codice Fiscale',
+      'label' => 'Codice fiscale',
       'placeholder' => 'Inserisci il codice fiscale',
-      'helper_text' => 'Codice fiscale del paziente',
-      'description' => 'Codice fiscale come indicato sulla tessera sanitaria',
+      'help' => 'Codice fiscale come da tessera sanitaria',
     ),
     'birth_date' => 
     array (
-      'label' => 'Data di Nascita',
+      'label' => 'Data di nascita',
       'placeholder' => 'Seleziona la data di nascita',
-      'helper_text' => 'Data di nascita del paziente',
+      'help' => 'Inserisci la data di nascita nel formato gg/mm/aaaa',
       'description' => 'Data di nascita come indicata sul documento d\'identità',
     ),
     'gender' => 
     array (
-      'label' => 'Genere',
-      'placeholder' => 'Seleziona il genere',
-      'helper_text' => 'Genere del paziente',
-      'options' => 
-      array (
-        'M' => 'Maschio',
-        'F' => 'Femmina',
-        'O' => 'Altro',
-      ),
+      'label' => 'Sesso',
+      'placeholder' => 'Seleziona il sesso',
+      'help' => 'Seleziona il sesso anagrafico',
     ),
     'is_pregnant' => 
     array (
@@ -60,18 +54,14 @@ return array (
     'email' => 
     array (
       'label' => 'Email',
-      'placeholder' => 'Inserisci l\'indirizzo email',
-      'helper_text' => 'Indirizzo email valido',
-      'description' => 'Email del paziente',
-      'tooltip' => 'Verrà utilizzata per le comunicazioni importanti',
+      'placeholder' => 'Inserisci l\'email',
+      'help' => 'Indirizzo email valido',
     ),
     'phone' => 
     array (
       'label' => 'Telefono',
       'placeholder' => 'Inserisci il numero di telefono',
-      'helper_text' => 'Numero di telefono principale',
-      'description' => 'Numero di telefono del paziente',
-      'tooltip' => 'Preferibilmente un numero mobile',
+      'help' => 'Numero di telefono per contatti',
     ),
     'address' => 
     array (

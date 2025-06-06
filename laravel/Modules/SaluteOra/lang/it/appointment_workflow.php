@@ -59,6 +59,11 @@ return array (
         'placeholder' => 'Inserisci il cognome',
         'help' => 'Inserisci il cognome completo',
       ],
+      'first_name' => [
+        'label' => 'Nome',
+        'placeholder' => 'Inserisci il nome',
+        'help' => 'Inserisci il nome completo',
+      ],
     ),
     'current_step' =>
     array (

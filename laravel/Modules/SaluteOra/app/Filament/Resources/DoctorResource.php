@@ -136,6 +136,7 @@ class DoctorResource extends XotBaseResource
                             ->maxLength(255)
                             ->autocomplete('email')
                             ,
+                        /*
                         'certifications' => Forms\Components\FileUpload::make('certifications')
                             ->required()
                             ->multiple()
@@ -143,6 +144,7 @@ class DoctorResource extends XotBaseResource
                             ->maxSize(5120)
                             ->directory('certifications')
                             ,
+                        */
                     ]),
             ])
 
