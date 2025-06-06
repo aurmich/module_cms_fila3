@@ -13,7 +13,7 @@
                     "view": "pub_theme::components.blocks.hero.simple2",
                     "title": "Benvenuta su Salute Orale,",
                     "subtitle": "il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odontoiatrici di prevenzione a titolo completamente gratuito.",
-                    "image": "/img/hero-bg.svg",
+                    "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
                     "cta_text": "INIZIA ORA",
                     "cta_link": "{{ route('register') }}",
                     "background_color": "bg-white",

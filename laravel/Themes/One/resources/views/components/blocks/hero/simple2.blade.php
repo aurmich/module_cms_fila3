@@ -46,7 +46,7 @@
                     <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
                         <img
                             class="w-full h-auto rounded-lg"
-                            src="https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg)"
+                            src="{{ $image }}"
                             alt=""
                             aria-hidden="true"
                             loading="lazy"

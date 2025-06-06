@@ -13,7 +13,7 @@
     'class' => 'bg-[#1A467F] text-white' . ($section['attributes']['class'] ?? '') . ' ' . $class,
     'id' => ($section['attributes']['id'] ?? '')
 ]) }}>
-    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8">
         <div class="w-full flex flex-col justify-center">
             <!-- Colonna Logo e Descrizione -->
            
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Copyright e Link Legali -->
-        <div class="mt-12 pt-8 border-t border-neutral-focus">
+        <div class="border-neutral-focus">
             <div class="flex justify-center">
                 <div class="text-center m-6 md:text-right space-x-4">
                     <a href="{{ url('privacy') }}" class="text-[#0D9488] text-sm hover:text-primary-400 transition-colors">Privacy Policy</a>
@@ -37,6 +37,9 @@
                     <a href="{{ url('cookies') }}" class="text-[#0D9488] text-sm hover:text-primary-400 transition-colors">Cookie Policy</a>
                 </div>
             </div>
+        </div>
+        <div>
+            <img src="/img/img-footer.png"/>
         </div>
     </div>
 </footer>

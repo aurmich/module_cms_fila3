@@ -49,4 +49,7 @@
 <div class="mb-8">Marginnn</div>
 <div class="!py-8">Padding zero</div>
 <div class="bg-[#DBE3EE]">Background button azioni</div>
+<div class="py-8">Padding Y</div>
+<div class="m-12">Margin 12</div>
+<div class="mx-0">Margin x</div>
 </x-layouts.app>

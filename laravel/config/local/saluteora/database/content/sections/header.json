@@ -36,11 +36,6 @@
                             "label": "Chi Siamo",
                             "url": "/chi-siamo",
                             "type": "link"
-                        },
-                        {
-                            "label": "Contatti",
-                            "url": "/contatti",
-                            "type": "link"
                         }
                     ],
                     "alignment": "start",
