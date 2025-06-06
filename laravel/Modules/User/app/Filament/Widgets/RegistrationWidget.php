@@ -48,7 +48,8 @@ class RegistrationWidget extends XotBaseWidget
     public function register()
     {
         $data = $this->form->getState();
-        app($this->action)->execute($data);
+        $user=app($this->action)->execute($data);
+        
         /*
         // Validazione dei dati
         $this->validate();

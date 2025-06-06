@@ -197,6 +197,14 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     /** @var \Illuminate\Database\Eloquent\Relations\Pivot|null */
     public $pivot;
 
+    public function __construct(array $attributes = [])
+    {
+        // Concateno i fillable del parent con quelli della classe corrente
+        $this->fillable = array_merge(parent::getFillable(), $this->getFillable());
+        
+        parent::__construct($attributes);
+    }
+
     public function canAccessFilament(?Panel $panel = null): bool
     {
         // return $this->role_id === Role::ROLE_ADMINISTRATOR;

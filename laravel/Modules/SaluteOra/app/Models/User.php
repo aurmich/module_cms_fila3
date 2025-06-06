@@ -3,14 +3,15 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 
-use Spatie\Permission\Traits\HasRoles;
 use Modules\User\Models\BaseUser;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Traits\HasRoles;
 
-use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\Gdpr\Models\Traits\HasGdpr;
 use Illuminate\Notifications\Notifiable;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Pending;
 use Modules\SaluteOra\States\User\Inactive;
@@ -34,6 +35,7 @@ class User extends BaseUser
 {
     use LogsActivity;
     use HasStates;
+    use HasGdpr;
 
     /** @var string  */
     //protected $connection = 'user';
@@ -64,12 +66,26 @@ class User extends BaseUser
 
     /** @var array<int, string> */
     protected $fillable = [
+        //'id',
         'name',
         'email',
         'password',
         'type',
         'state',
+        'first_name',
+        'last_name',
+        'date_of_birth',
+        'gender',
+        'address',
+        'phone',
+        'lang',
+        'current_team_id',
+        'is_active',
+        'is_otp', // is One Time Password
+        'password_expires_at',
     ];
+
+    
 
     /**
      * Cast custom per il campo type:

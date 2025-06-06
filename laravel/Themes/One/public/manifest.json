@@ -1,6 +1,10 @@
 {
   "resources/css/app.css": {
+<<<<<<< HEAD
     "file": "assets/app-Dph1A97d.css",
+=======
+    "file": "assets/app-CEDafcW-.css",
+>>>>>>> 7f5c184c (feat(gdpr): add ConsentType enum to define available consent types and their labels for better consent management)
     "src": "resources/css/app.css",
     "isEntry": true
   },

@@ -47,7 +47,6 @@ class Patient extends User
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
         'date_of_birth',
         'gender',
         'address',

@@ -6,6 +6,7 @@ use Modules\Notify\Datas\SmsData;
 use Modules\Notify\Emails\SpatieEmail;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Notify\Channels\SmsChannel;
+use Modules\Notify\Models\MailTemplate;
 use Illuminate\Notifications\Notification;
 
 class RecordNotification extends Notification
@@ -21,14 +22,34 @@ class RecordNotification extends Notification
 
     public function via($notifiable): array
     {
-        //return ['mail'];
-        return [SmsChannel::class];
+        $channels = [];
+        if (!method_exists($notifiable, 'routeNotificationFor')){
+            return $channels;
+        }
+        if($notifiable->routeNotificationFor('mail')) {
+            $channels[] = 'mail';
+        }
+        if($notifiable->routeNotificationFor('sms')) {
+            $channels[] = SmsChannel::class;
+        }
+        return $channels;
     }
 
     public function toMail($notifiable): SpatieEmail
     {
 
+        if (!MailTemplate::where('slug', $this->slug)->exists()) {
+            MailTemplate::create([
+                'mailable' => SpatieEmail::class,
+                'slug' => $this->slug,
+                'subject' => 'Benvenuto, {{ first_name }}',
+                'html_template' => '<p>Gentile {{ first_name }} {{ last_name }},</p><p>La tua registrazione  è in attesa di approvazione. Ti contatteremo presto.</p>',
+                'text_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione  è in attesa di approvazione. Ti contatteremo presto.'
+            ]);
+        }
+        
         $email = new SpatieEmail($this->record, $this->slug);
+        
 
         // Importante: garantisci che ci sia sempre un destinatario
         if (method_exists($notifiable, 'routeNotificationFor')) {
@@ -45,7 +66,7 @@ class RecordNotification extends Notification
      * @param object $notifiable
      * @return SmsData
      */
-    public function toSms(object $notifiable): SmsData
+    public function toSms(object $notifiable): ?SmsData
     {
         $email = new SpatieEmail($this->record, $this->slug);
         /*
@@ -64,6 +85,9 @@ class RecordNotification extends Notification
         if (method_exists($notifiable, 'routeNotificationFor')) {
             $to = $notifiable->routeNotificationFor('sms');
         }
+        //if($to==null){
+        //    return null;
+        //}
 
         $smsData = SmsData::from(['from'=>'Xot','to'=>$to,'body'=>'test']);
 

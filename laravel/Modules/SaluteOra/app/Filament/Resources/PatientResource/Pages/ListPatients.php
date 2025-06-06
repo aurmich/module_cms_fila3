@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Filament\Resources\PatientResource\Pages;
 
+use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Filament\Resources\PatientResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
@@ -13,6 +14,7 @@ class ListPatients extends XotBaseListRecords
 
     public function getTableColumns(): array
     {
+        dddx(app(Patient::class)->getFillable());
         return [
             //'id' => \Filament\Tables\Columns\TextColumn::make('id')
                 //->sortable(),

@@ -73,6 +73,12 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn('type')) {
                     $table->string('type')->nullable()->after('moderation_data');
                 }
+                if (! $this->hasColumn('date_of_birth')) {
+                    $table->date('date_of_birth')->nullable()->after('type');
+                }
+                if (! $this->hasColumn('gender')) {
+                    $table->string('gender', 1)->nullable()->after('date_of_birth');
+                }
 
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);

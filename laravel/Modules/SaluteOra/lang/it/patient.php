@@ -25,6 +25,9 @@ return array (
     'last_name' => 
     array (
       'label' => 'Cognome',
+      'description' => 'last_name',
+      'helper_text' => 'last_name',
+      'placeholder' => 'last_name',
     ),
     'fiscal_code' => 
     array (
@@ -56,12 +59,16 @@ return array (
       'label' => 'Email',
       'placeholder' => 'Inserisci l\'email',
       'help' => 'Indirizzo email valido',
+      'description' => 'email',
+      'helper_text' => 'email',
     ),
     'phone' => 
     array (
       'label' => 'Telefono',
       'placeholder' => 'Inserisci il numero di telefono',
       'help' => 'Numero di telefono per contatti',
+      'description' => 'phone',
+      'helper_text' => 'phone',
     ),
     'address' => 
     array (

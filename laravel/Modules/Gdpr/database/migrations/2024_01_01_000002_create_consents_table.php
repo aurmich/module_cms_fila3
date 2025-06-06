@@ -29,9 +29,16 @@ return new class extends XotBaseMigration {
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
-                // if (! $this->hasColumn('email')) {
-                //    $table->string('email')->nullable();
-                // }
+                if (! $this->hasColumn('user_id')) {
+                    $table->morphs('user');
+                }
+                if (! $this->hasColumn('type')) {
+                    $table->string('type')->nullable();
+                }
+                
+                if (! $this->hasColumn('accepted_at')) {
+                    $table->timestamp('accepted_at')->nullable();
+                }
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );

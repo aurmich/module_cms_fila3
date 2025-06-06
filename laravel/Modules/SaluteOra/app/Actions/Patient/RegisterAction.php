@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Notification;
+use Modules\Notify\Notifications\RecordNotification;
+
 
 class RegisterAction
 {
@@ -66,6 +69,10 @@ class RegisterAction
                     'accepted_at' => now(),
                 ]);
             }
+
+            Notification::route('mail', $data['email'])
+            //->locale('it')
+            ->notify(new RecordNotification($patient,'patient_registration_pending'));
 
             return $patient;
         });
