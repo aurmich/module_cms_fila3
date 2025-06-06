@@ -11,4 +11,8 @@ return array (
     'sort' => 4,
     'tooltip' => 'Gestisci le cartelle cliniche e la storia medica dei pazienti',
   ),
+  'model' => 
+  array (
+    'label' => 'medical history.model',
+  ),
 );
