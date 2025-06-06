@@ -11,70 +11,11 @@
             {
                 "type": "hero",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.simple2",
+                    "view": "pub_theme::components.blocks.hero.dettaglio-paziente",
                     "title": "Bentornata, [Nome Paziente]",
                     "subtitle": "Ecco la tua dashboard personale per la salute orale in gravidanza",
                     "background_color": "bg-white",
                     "text_color": "text-gray-900"
-                }
-            },
-            {
-                "type": "feature_sections",
-                "data": {
-                    "view": "pub_theme::components.blocks.feature_sections.action-buttons",
-                    "title": "Prossimi Appuntamenti",
-                    "subtitle": "I tuoi prossimi appuntamenti programmati",
-                    "sections": [
-                        {
-                            "title": "Controllo Prenatale",
-                            "description": "Dott. Rossi - 25 Maggio 2024, 10:30",
-                            "icon": "saluteora-clock",
-                            "badge": "Confermato",
-                            "badge_color": "bg-green-100 text-green-800"
-                        },
-                        {
-                            "title": "Igiene Orale",
-                            "description": "Dott.ssa Bianchi - 1 Giugno 2024, 15:00",
-                            "icon": "saluteora-clock",
-                            "badge": "Da confermare",
-                            "badge_color": "bg-yellow-100 text-yellow-800"
-                        }
-                    ]
-                }
-            },
-            {
-                "type": "calendar",
-                "data": {
-                    "view": "pub_theme::components.blocks.calendar",
-                    "title": "Calendario",
-                    "subtitle": "I tuoi appuntamenti programmati",
-                    "type": "patient",
-                    "events": [
-                        {
-                            "title": "Controllo Prenatale",
-                            "start": "2024-05-25T10:30:00",
-                            "end": "2024-05-25T11:30:00",
-                            "backgroundColor": "#3788d8",
-                            "textColor": "#ffffff"
-                        },
-                        {
-                            "title": "Igiene Orale",
-                            "start": "2024-06-01T15:00:00",
-                            "end": "2024-06-01T16:00:00",
-                            "backgroundColor": "#3788d8",
-                            "textColor": "#ffffff"
-                        }
-                    ]
-                }
-            },
-            {
-                "type": "info",
-                "data": {
-                    "view": "pub_theme::components.blocks.info",
-                    "title": "Consigli per la tua gravidanza",
-                    "content": "<ul class='list-disc pl-5 space-y-2'><li>Mantieni una buona igiene orale</li><li>Programma controlli regolari</li><li>Segui una dieta equilibrata</li><li>Segnala eventuali fastidi gengivali</li></ul>",
-                    "icon": "saluteora-shield-check",
-                    "variant": "info"
                 }
             },
             {
@@ -116,30 +57,6 @@
                     "subtitle": "Your personal dashboard for oral health during pregnancy",
                     "background_color": "bg-[#EBF5FF]",
                     "text_color": "text-gray-900"
-                }
-            },
-            {
-                "type": "feature_sections",
-                "data": {
-                    "view": "pub_theme::components.blocks.feature_sections.action-buttons",
-                    "title": "Upcoming Appointments",
-                    "subtitle": "Your scheduled appointments",
-                    "sections": [
-                        {
-                            "title": "Prenatal Check-up",
-                            "description": "Dr. Rossi - May 25, 2024, 10:30 AM",
-                            "icon": "saluteora-clock",
-                            "badge": "Confirmed",
-                            "badge_color": "bg-green-100 text-green-800"
-                        },
-                        {
-                            "title": "Dental Cleaning",
-                            "description": "Dr. Bianchi - June 1, 2024, 3:00 PM",
-                            "icon": "saluteora-clock",
-                            "badge": "To be confirmed",
-                            "badge_color": "bg-yellow-100 text-yellow-800"
-                        }
-                    ]
                 }
             },
             {

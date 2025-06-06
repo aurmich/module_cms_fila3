@@ -53,4 +53,5 @@
 <div class="m-12">Margin 12</div>
 <div class="mx-0">Margin x</div>
 <div class="bg-gradient-to-white from-[#1A467F]">Gradient</div>
+<div class="h-96"></div>
 </x-layouts.app>
