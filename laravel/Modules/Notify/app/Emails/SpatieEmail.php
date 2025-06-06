@@ -25,6 +25,15 @@ class SpatieEmail extends TemplateMailable
 
     public function __construct(Model $record, string $slug)
     {
+        if (!MailTemplate::where('slug', $slug)->exists()) {
+            MailTemplate::create([
+                'mailable' => SpatieEmail::class,
+                'slug' => $slug,
+                'subject' => 'Benvenuto, {{ first_name }}',
+                'html_template' => '<p>Gentile {{ first_name }} {{ last_name }},</p><p>La tua registrazione  è in attesa di approvazione. Ti contatteremo presto.</p>',
+                'text_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione  è in attesa di approvazione. Ti contatteremo presto.'
+            ]);
+        }
         $data=$record->toArray();
         $this->setAdditionalData($data);
         $this->slug = $slug;
