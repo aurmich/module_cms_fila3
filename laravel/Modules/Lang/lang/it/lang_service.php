@@ -401,6 +401,22 @@ return array (
       'placeholder' => 'session_id',
       'helper_text' => 'session_id',
     ),
+    'pregnancy_certificate' => 
+    array (
+      'label' => 'pregnancy_certificate',
+    ),
+    'isee_certificate' => 
+    array (
+      'label' => 'isee_certificate',
+    ),
+    'health_card' => 
+    array (
+      'label' => 'health_card',
+    ),
+    'identity_document' => 
+    array (
+      'label' => 'identity_document',
+    ),
   ),
   'actions' => 
   array (

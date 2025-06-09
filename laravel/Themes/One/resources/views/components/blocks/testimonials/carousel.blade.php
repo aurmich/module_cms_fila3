@@ -56,7 +56,7 @@
 
 <div class="relative {{ $className }}">
     @if(count($testimonials) > 0)
-        <x-carousel.slider 
+        <div 
             :autoplay="$autoplay"
             :autoplaySpeed="$autoplaySpeed"
             :showArrows="$showNavigation"
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             @endforeach
-        </x-carousel.slider>
+        </div>
     @else
         <div class="text-center py-12">
             <p class="text-gray-500">No testimonials available</p>

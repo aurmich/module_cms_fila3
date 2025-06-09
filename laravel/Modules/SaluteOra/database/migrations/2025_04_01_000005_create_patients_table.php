@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends XotBaseMigration
 {
-    /**
-     * Nome della tabella.
-     *
-     * @var string
-     */
-    protected string $table = 'patients';
+
 
     /**
      * Run the migrations.
@@ -83,6 +78,14 @@ return new class extends XotBaseMigration
             if (! $this->hasColumn( 'registration_number')) {
                 $table->string('registration_number')->nullable()->after('city');
             }
+
+            if (! $this->hasColumn( 'last_dental_visit')) {
+                $table->date('last_dental_visit')->nullable()->after('registration_number');
+            }
+            if (! $this->hasColumn( 'dental_problems')) {
+                $table->text('dental_problems')->nullable()->after('registration_number');
+            }
+
 
             if (! $this->hasColumn( 'status')) {
                 $table->string('status')->nullable()->after('registration_number');

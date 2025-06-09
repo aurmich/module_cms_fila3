@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\SaluteOra\Models\User;
 use Parental\HasParent;
+use Spatie\MediaLibrary\HasMedia;
+use Modules\SaluteOra\Models\User;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Enums\Fit;
 
 /**
  * Class Patient
@@ -37,20 +41,37 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUserId($value)
  * @mixin \Eloquent
  */
-class Patient extends User
+class Patient extends User implements HasMedia
 {
     use HasParent;
-
-
+    use InteractsWithMedia;
 
     /**
      * @var array<int, string>
      */
     protected $fillable = [
+        'first_name',
+        'last_name',
         'date_of_birth',
         'gender',
         'address',
         'phone',
+        'last_dental_visit',
+        'dental_problems',
+
+    ];
+    protected $appends = [
+        //'health_card',
+        //'identity_document',
+        //'isee_certificate',
+        //'pregnancy_certificate',
+    ];
+
+    public static array $attachments = [
+        'health_card',
+        'identity_document',
+        'isee_certificate',
+        'pregnancy_certificate',
     ];
 
     /**
@@ -66,5 +87,92 @@ class Patient extends User
         ];
     }
 
+    /**
+     * Registra le conversioni per i media
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        // Conversione per le anteprime dei documenti
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Fit::Contain, 300, 300)
+            ->nonQueued();
 
+        // Conversione per le immagini dei documenti
+        $this
+            ->addMediaConversion('document')
+            ->fit(Fit::Contain, 800, 800)
+            ->nonQueued();
+    }
+
+    /**
+     * Registra le collezioni di media
+     */
+    public function registerMediaCollections(): void
+    {
+        foreach (self::$attachments as $attachment) {
+            $this
+                ->addMediaCollection($attachment)
+                ->singleFile()
+                ->useDisk('local');
+        }
+    }
+
+        /**
+     * Verifica se un allegato specifico esiste
+     */
+    public function hasAttachment(string $type): bool
+    {
+        return $this->getFirstMedia($type) !== null;
+    }
+
+    /**
+     * Ottiene l'URL sicuro per visualizzare un allegato
+     */
+    public function getAttachmentUrl(string $type): ?string
+    {
+        $media = $this->getFirstMedia($type);
+        if (!$media) {
+            return null;
+        }
+
+        return route('patients.view-pdf', [
+            'patient' => $this->id,
+            'type' => $type,
+            'token' => encrypt([
+                'patient_id' => $this->id,
+                'type' => $type,
+                'user_id' => auth()->id(),
+                'expires_at' => now()->addHour()
+            ])
+        ]);
+    }
+
+    /**
+     * Conta il numero di allegati presenti
+     */
+    public function getAttachmentsCount(): int
+    {
+        $count = 0;
+        foreach (self::$attachments as $type) {
+            if ($this->hasAttachment($type)) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+    /**
+     * Verifica se tutti gli allegati obbligatori sono presenti
+     */
+    public function hasRequiredAttachments(): bool
+    {
+        $required = ['health_card', 'identity_document'];
+        foreach ($required as $type) {
+            if (!$this->hasAttachment($type)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

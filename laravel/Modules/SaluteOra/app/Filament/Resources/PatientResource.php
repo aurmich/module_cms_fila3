@@ -6,10 +6,13 @@ namespace Modules\SaluteOra\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Livewire\Component;
 use Filament\Widgets\Widget;
 use Modules\Xot\Datas\XotData;
 use Filament\Resources\Resource;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,16 +31,19 @@ use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\Patient\Filament\Components\HealthCardUpload;
-use Modules\Xot\Filament\Resources\XotBaseResource\Pages;
+
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Modules\Media\Filament\Resources\PatientResource\Pages\PreviewAttachment;
 
 class PatientResource extends XotBaseResource
 {
     protected static ?string $model = Patient::class;
     //protected static ?string $tenantOwnershipRelationshipName = 'tenants';
     //protected static ?string $tenantRelationshipName = 'studios';
+    protected static bool $isScopedToTenant = true;
 
-    
+    public array $data = [];
 
     public static function getFormSchemaWidget(): array
     {
@@ -110,57 +116,24 @@ class PatientResource extends XotBaseResource
 
     protected static function getDocumentsStepSchema(): array
     {
-        return [
-            // Tessera Sanitaria
-            Forms\Components\SpatieMediaLibraryFileUpload::make('health_card')
-                ->collection('tessera_sanitaria')
-                //->hint(__('saluteora::patient-resource.fields.health_card.hint'))
-                //->hintIcon('heroicon-o-information-circle')
+        $attachments = Patient::$attachments;
+        $schema = [];
+        foreach ($attachments as $attachment) {
+            $schema[] = Forms\Components\FileUpload::make($attachment)
+            //$schema[] = Forms\Components\SpatieMediaLibraryFileUpload::make($attachment)
+                ->disk('local')
+                //->collection($attachment)
+                ->directory('documents/'.$attachment)
                 ->downloadable()
                 ->openable()
-                ->preserveFilenames()
                 ->acceptedFileTypes(['application/pdf', 'image/*'])
                 ->maxSize(5120)
                 ->required()
-                ->columnSpanFull(),
-
-            // Documento di Identità
-            Forms\Components\SpatieMediaLibraryFileUpload::make('identity_document')
-                ->collection('documento_identita')
-                //->hint(__('saluteora::patient-resource.fields.identity_document.hint'))
-                //->hintIcon('heroicon-o-information-circle')
-                ->downloadable()
-                ->openable()
-                ->preserveFilenames()
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120)
-                ->required()
-                ->columnSpanFull(),
-
-            // Certificazione ISEE
-            Forms\Components\SpatieMediaLibraryFileUpload::make('isee_certificate')
-                ->collection('certificazione_isee')
-                //->hint(__('saluteora::patient-resource.fields.isee_certificate.hint'))
-                //->hintIcon('heroicon-o-information-circle')
-                ->downloadable()
-                ->openable()
-                ->preserveFilenames()
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120)
-                ->columnSpanFull(),
-
-            // Certificato di Gravidanza
-            Forms\Components\SpatieMediaLibraryFileUpload::make('pregnancy_certificate')
-                ->collection('certificato_gravidanza')
-                //->hint(__('saluteora::patient-resource.fields.pregnancy_certificate.hint'))
-                //->hintIcon('heroicon-o-information-circle')
-                ->downloadable()
-                ->openable()
-                ->preserveFilenames()
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120)
-                ->columnSpanFull(),
-        ];
+                ->reorderable()
+                ->columnSpanFull()
+                ;
+        }
+        return $schema;
     }
 
     /**
@@ -264,4 +237,15 @@ class PatientResource extends XotBaseResource
     // 1. getRelations() restituisce un array vuoto
     // 2. getPages() contiene solo route standard
     // Secondo le regole del progetto questi metodi sono ridondanti quando estendi XotBaseResource
+
+    /**
+     * @return array<string, \Filament\Resources\Pages\PageRegistration>
+     */
+    public static function getPages(): array
+    {
+        return [
+            ...parent::getPages(),
+         //   'preview-attachment' => PreviewAttachment::route('/{record}/preview/{type}'),
+        ];
+    }
 }

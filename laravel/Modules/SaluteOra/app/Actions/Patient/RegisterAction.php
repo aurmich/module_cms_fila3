@@ -24,34 +24,29 @@ class RegisterAction
     public function execute(array $data): Patient
     {
         return DB::transaction(function () use ($data) {
+
             // Creazione del paziente usando STI
             $patient = Patient::create([
-                'name' => $data['first_name'] . ' ' . $data['last_name'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
-                'password' => Hash::make(Str::random(12)), // Password temporanea
-                'type' => 'patient',
-                'state' => Pending::class,
-                'date_of_birth' => $data['date_of_birth'] ?? null,
-                'gender' => $data['gender'] ?? null,
+                //'password' => Hash::make($data['password']),
                 'address' => $data['address'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'last_dental_visit' => $data['last_dental_visit'] ?? null,
                 'dental_problems' => $data['dental_problems'] ?? null,
             ]);
 
-            // Gestione dei documenti
-            if (isset($data['health_card'])) {
-                $patient->addMedia($data['health_card'])->toMediaCollection('tessera_sanitaria');
+            //-------------------------------------------------
+
+            $attachments = Patient::$attachments;
+            foreach ($attachments as $attachment) {
+                    $patient->addMediaFromDisk($data[$attachment],'local')
+                        ->toMediaCollection($attachment);
+
             }
-            if (isset($data['identity_document'])) {
-                $patient->addMedia($data['identity_document'])->toMediaCollection('documento_identita');
-            }
-            if (isset($data['isee_certificate'])) {
-                $patient->addMedia($data['isee_certificate'])->toMediaCollection('certificazione_isee');
-            }
-            if (isset($data['pregnancy_certificate'])) {
-                $patient->addMedia($data['pregnancy_certificate'])->toMediaCollection('certificato_gravidanza');
-            }
+
+            //-------------------------------------------------
 
             // Gestione delle preferenze
             if (isset($data['privacy_acceptance'])) {

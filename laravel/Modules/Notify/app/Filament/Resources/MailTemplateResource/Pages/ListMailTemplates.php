@@ -17,37 +17,28 @@ class ListMailTemplates extends LangBaseListRecords
     public function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('name')
+            Tables\Columns\TextColumn::make('slug')
                 ->searchable()
                 ->sortable()
-                ->label(__('notify::mail.template.fields.name.label')),
+                ,
 
             Tables\Columns\TextColumn::make('mailable')
                 ->searchable()
                 ->sortable()
-                ->label(__('notify::mail.template.fields.mailable.label')),
+                ,
 
             Tables\Columns\TextColumn::make('subject')
                 ->searchable()
                 ->sortable()
-                ->label(__('notify::mail.template.fields.subject.label')),
+                ,
 
             Tables\Columns\TextColumn::make('layout')
                 ->searchable()
                 ->sortable()
-                ->label(__('notify::mail.template.fields.layout.label')),
+                ,
 
-            Tables\Columns\TextColumn::make('created_at')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-
-            Tables\Columns\TextColumn::make('updated_at')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
         ];
     }
 
-    
+
 }

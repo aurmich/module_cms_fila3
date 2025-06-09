@@ -6,6 +6,13 @@ namespace Modules\Notify\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Notify\Enums\NotificationTypeEnum;
+use Modules\Xot\Traits\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class NotificationTemplate.
@@ -34,8 +41,11 @@ use Illuminate\Support\Facades\Blade;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\NotificationLog> $logs
  * @property-read string $channels_label
  */
-class NotificationTemplate extends BaseModel
+class NotificationTemplate extends BaseModel implements HasMedia
 {
+    use HasTranslations;
+    use InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'code',
@@ -53,21 +63,32 @@ class NotificationTemplate extends BaseModel
         'version',
         'tenant_id',
         'grapesjs_data',
+        'type',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'type' => NotificationTypeEnum::class,
+        'preview_data' => 'array',
+        'body_html' => 'string',
+        'body_text' => 'string',
+        'channels' => 'array',
+        'variables' => 'array',
+        'conditions' => 'array',
+        'metadata' => 'array',
+        'is_active' => 'boolean',
+        'grapesjs_data' => 'array',
+    ];
+
+    public array $translatable = [
+        'subject',
+        'body_text',
+        'body_html',
+    ];
+
+    public function registerMediaCollections(): void
     {
-        return array_merge(parent::casts(), [
-            'preview_data' => 'array',
-            'body_html' => 'string',
-            'body_text' => 'string',
-            'channels' => 'array',
-            'variables' => 'array',
-            'conditions' => 'array',
-            'metadata' => 'array',
-            'is_active' => 'boolean',
-            'grapesjs_data' => 'array',
-        ]);
+        $this->addMediaCollection('attachments')
+            ->singleFile();
     }
 
     public function versions(): HasMany
@@ -244,5 +265,25 @@ class NotificationTemplate extends BaseModel
     {
         $this->grapesjs_data = $data;
         return $this;
+    }
+
+    public function getPreviewData(): array
+    {
+        return $this->preview_data ?? [];
+    }
+
+    public function getPreviewSubject(): string
+    {
+        return $this->getTranslation('subject', app()->getLocale());
+    }
+
+    public function getPreviewBodyText(): string
+    {
+        return $this->getTranslation('body_text', app()->getLocale());
+    }
+
+    public function getPreviewBodyHtml(): string
+    {
+        return $this->getTranslation('body_html', app()->getLocale());
     }
 }
