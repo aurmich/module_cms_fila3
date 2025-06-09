@@ -4,11 +4,12 @@ namespace Modules\SaluteOra\Models;
 
 
 use Modules\User\Models\BaseUser;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Log;
-use Spatie\Permission\Traits\HasRoles;
 
+use Spatie\Permission\Traits\HasRoles;
 use Modules\Gdpr\Models\Traits\HasGdpr;
 use Illuminate\Notifications\Notifiable;
 use Modules\SaluteOra\Enums\UserTypeEnum;
@@ -17,6 +18,7 @@ use Modules\SaluteOra\States\User\Pending;
 use Modules\SaluteOra\States\User\Inactive;
 use Modules\SaluteOra\States\User\Rejected;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\SaluteOra\States\User\Suspended;
 use Modules\SaluteOra\States\User\UserState;
 use Modules\SaluteOra\States\User\IntegrationRequested;
@@ -31,11 +33,12 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @see \Modules\SaluteOra\Models\Doctor
  * @see \Modules\SaluteOra\Models\Patient
  */
-class User extends BaseUser
+class User extends BaseUser implements HasMedia
 {
     use LogsActivity;
     use HasStates;
     use HasGdpr;
+    use InteractsWithMedia;
 
     /** @var string  */
     //protected $connection = 'user';
@@ -77,6 +80,7 @@ class User extends BaseUser
         'date_of_birth',
         'gender',
         'address',
+        'city',
         'phone',
         'lang',
         'current_team_id',
@@ -85,7 +89,7 @@ class User extends BaseUser
         'password_expires_at',
     ];
 
-    
+
 
     /**
      * Cast custom per il campo type:

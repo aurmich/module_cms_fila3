@@ -5,7 +5,7 @@ use Modules\SaluteOra\Models\Patient as BasePatient;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patient extends BasePatient
+class Patient extends BaseModel
 {
 
 }

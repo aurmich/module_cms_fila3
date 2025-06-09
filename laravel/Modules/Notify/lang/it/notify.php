@@ -217,5 +217,54 @@ return [
             ],
         ],
     ],
-    'messages' => [],
+    'template' => [
+        'navigation' => [
+            'label' => 'Template Notifiche',
+            'plural' => 'Template Notifiche',
+            'group' => 'Sistema',
+        ],
+        'form' => [
+            'name' => [
+                'label' => 'Nome',
+                'helper' => 'Nome univoco del template',
+            ],
+            'subject' => [
+                'label' => 'Oggetto',
+                'helper' => 'Oggetto della notifica',
+            ],
+            'type' => [
+                'label' => 'Tipo',
+                'helper' => 'Tipo di notifica',
+            ],
+            'body_text' => [
+                'label' => 'Testo',
+                'helper' => 'Versione testuale della notifica',
+            ],
+            'body_html' => [
+                'label' => 'HTML',
+                'helper' => 'Versione HTML della notifica',
+            ],
+            'preview_data' => [
+                'label' => 'Dati Preview',
+                'helper' => 'Dati JSON per il preview',
+            ],
+            'attachments' => [
+                'label' => 'Allegati',
+                'helper' => 'Allegati alla notifica (max 5 file, 5MB ciascuno)',
+            ],
+        ],
+        'preview' => [
+            'title' => 'Anteprima Template',
+            'subheading' => 'Visualizza come apparirà la notifica',
+            'text_version' => 'Versione Testuale',
+            'html_version' => 'Versione HTML',
+        ],
+    ],
+    'enums' => [
+        'notification_type' => [
+            'email' => 'Email',
+            'sms' => 'SMS',
+            'push' => 'Notifica Push',
+        ],
+    ],
 ];

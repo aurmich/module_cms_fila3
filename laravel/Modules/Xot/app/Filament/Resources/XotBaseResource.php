@@ -47,9 +47,9 @@ abstract class XotBaseResource extends FilamentResource
      */
     public static function getModel(): string
     {
-        // if (null != static::$model) {
-        //    return static::$model;
-        // }
+        if (null != static::$model) {
+            return static::$model;
+        }
         $moduleName = static::getModuleName();
         $modelName = Str::before(class_basename(static::class), 'Resource');
         $res = 'Modules\\'.$moduleName.'\Models\\'.$modelName;

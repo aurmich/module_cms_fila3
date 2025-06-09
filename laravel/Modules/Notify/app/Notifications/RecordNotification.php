@@ -13,11 +13,13 @@ class RecordNotification extends Notification
 {
     protected Model $record;
     protected string $slug;
+    public array $data=[];
 
     public function __construct(Model $record, string $slug)
     {
         $this->record = $record;
         $this->slug = $slug;
+
     }
 
     public function via($notifiable): array
@@ -32,29 +34,20 @@ class RecordNotification extends Notification
         if($notifiable->routeNotificationFor('sms')) {
             $channels[] = SmsChannel::class;
         }
+
         return $channels;
     }
 
     public function toMail($notifiable): SpatieEmail
     {
-
-        if (!MailTemplate::where('slug', $this->slug)->exists()) {
-            MailTemplate::create([
-                'mailable' => SpatieEmail::class,
-                'slug' => $this->slug,
-                'subject' => 'Benvenuto, {{ first_name }}',
-                'html_template' => '<p>Gentile {{ first_name }} {{ last_name }},</p><p>La tua registrazione  è in attesa di approvazione. Ti contatteremo presto.</p>',
-                'text_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione  è in attesa di approvazione. Ti contatteremo presto.'
-            ]);
-        }
-        
         $email = new SpatieEmail($this->record, $this->slug);
-        
+        $email=$email->mergeData($this->data);
 
         // Importante: garantisci che ci sia sempre un destinatario
         if (method_exists($notifiable, 'routeNotificationFor')) {
             // Ottieni l'email dal notifiable
-            $email->to($notifiable->routeNotificationFor('mail'));
+            $to=$notifiable->routeNotificationFor('mail');
+            $email->to($to);
         }
 
         return $email;
@@ -93,5 +86,11 @@ class RecordNotification extends Notification
 
 
         return $smsData;
+    }
+
+    public function mergeData(array $data): self
+    {
+        $this->data=array_merge($this->data,$data);
+        return $this;
     }
 }

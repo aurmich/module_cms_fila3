@@ -14,7 +14,6 @@ use Filament\Tables\Columns\IconColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\SelectColumn;
-use Modules\SaluteOra\States\User\UserState;
 use Filament\Tables\Actions\Action;
 
 class IconStateColumn extends IconColumn
