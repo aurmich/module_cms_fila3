@@ -12,11 +12,13 @@
     $componentsBlocks = is_array($blocks) && isset($blocks[$locale]) ? $blocks[$locale] : $blocks;
 @endphp
 
+
+
 <header {{ $attributes->merge([
     'class' => 'bg-[#1A467F] h-24 flex items-center',
     'id' => ($section['attributes']['id'] ?? ''),
     'x-data' => "{ mobileMenuOpen: false }"
-]) }}>
+    ]) }}>
     <div class="max-w-7xl !m-0 !p-0 w-full">
         <div class="flex h-16 items-center justify-between">
             @foreach($componentsBlocks as $block)

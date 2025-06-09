@@ -44,11 +44,13 @@
         {{-- Trigger Button --}}
         <x-slot name="trigger">
             <x-filament::button
-                color="gray"
+                color="white"
+                style="border-radius: 70px"
                 icon="heroicon-o-user"
                 :label="$user?->name"
-                aria-label="{{ __('ui::navigation.user_menu') }}"
-            />
+                aria-label="{{ __('ui::navigation.user_menu') }}">
+                <span class="hidden sm:inline">{{$user?->name}}</span>
+        </x-filament::button>
         </x-slot>
         <x-filament::dropdown.list>
         {{-- Menu Items --}}

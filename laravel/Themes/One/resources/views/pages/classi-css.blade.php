@@ -54,4 +54,17 @@
 <div class="mx-0">Margin x</div>
 <div class="bg-gradient-to-white from-[#1A467F]">Gradient</div>
 <div class="h-96"></div>
+<div class="w-[800px]">Width custom</div>
+<div class="w-[450px]">Width calendario</div>
+<div class="grid-cols-2"></div>
+<div class="grid grid-cols-2 gap-4"></div>
+<div class="h-auto"></div>
+<div class="min-h-screen"></div>
+<div class="m-5">Margin five</div>
+<div class="px-3">Padding 3</div>
+<div class="gap-4">Gap-4</div>
+<div class="p-6"></div>
+<div class="lg:w-[350px]">Logo width large</div>
+<div class="w-[300px]">Width small</div>
+<div class="bg-transparent"></div>
 </x-layouts.app>
