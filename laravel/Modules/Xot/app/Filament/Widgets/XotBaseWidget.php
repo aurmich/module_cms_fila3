@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Widgets;
 
 use Filament\Forms;
-use Filament\Forms\Form as FilamentForm;
-use Illuminate\Support\Facades\Cache;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Widgets\Widget as FilamentWidget;
-use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
+use Modules\SaluteOra\Models\Patient;
+use Filament\Forms\Contracts\HasForms;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Form as FilamentForm;
+use Filament\Widgets\Widget as FilamentWidget;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 
 /**
  * Classe base astratta per tutti i widget Filament.
@@ -88,6 +89,8 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
 
         //if (method_exists($form, 'statePath')) {
             $form->statePath('data');
+            //dddx($this->getModel());//Method Modules\User\Filament\Widgets\RegistrationWidget::getModel does not exist.
+            $form->model(Patient::class);
         //}
 
         return $form;

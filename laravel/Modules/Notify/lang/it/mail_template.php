@@ -123,6 +123,11 @@ return array (
     array (
       'label' => 'layout',
     ),
+    'slug' => 
+    array (
+      'label' => 'slug',
+      'description' => 'slug',
+    ),
   ),
   'actions' => 
   array (

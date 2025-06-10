@@ -48,12 +48,8 @@ class PatientResource extends XotBaseResource
     public static function getFormSchemaWidget(): array
     {
         $submit_view='pub_theme::filament.wizard.submit-button';
-        if(!view()->exists($submit_view)){
-            dddx([
-                'submit_view'=>$submit_view,
-                'path'=>app(GetViewPathAction::class)->execute($submit_view),
-            ]);
-        }
+        //dddx(strlen(session()->getId()));//40
+
         return [
             Forms\Components\Wizard::make([
                 self::getPersonalDataStep(),      // Step 1: Dati personali
@@ -61,6 +57,7 @@ class PatientResource extends XotBaseResource
                 self::getPreVisitStep(),          // Step 3: Informazioni preventive
                 self::getPrivacyStep(),           // Step 4: Privacy e consensi
             ])
+            ->model(Patient::class)
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')
@@ -76,6 +73,10 @@ class PatientResource extends XotBaseResource
     protected static function getPersonalDataStep(): Forms\Components\Wizard\Step
     {
         return Forms\Components\Wizard\Step::make('personal_data_step')
+            //->afterValidation(function ($livewire,$record) {
+                //dddx($livewire->data);
+                //dddx($record);
+            //})
             ->schema(self::getPersonalDataStepSchema());
     }
 
@@ -131,6 +132,13 @@ class PatientResource extends XotBaseResource
                 ->required()
                 ->reorderable()
                 ->columnSpanFull()
+                //->afterStateUpdated(
+                //    function (HasForms $livewire, SpatieMediaLibraryFileUpload $component, TemporaryUploadedFile //$state, Get $get, ?HasMedia $record) {
+                //        dddx(['record'=>$record,'livewire'=>$livewire,'component'=>$component,'state'=>$state,//'get'=>$get,
+                        //'a'=>self::$record,
+                //    ]);
+                //    }
+                //)
                 ;
         }
         return $schema;
