@@ -86,6 +86,10 @@ return array (
     array (
       'label' => 'delete',
     ),
+    'title' => 
+    array (
+      'label' => 'title',
+    ),
   ),
   'actions' => 
   array (

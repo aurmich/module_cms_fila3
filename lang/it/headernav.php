@@ -1,85 +1,63 @@
-<?php return array (
-  'navigation' => 
-  array (
-    'name' => 'Header nav',
-    'plural' => 'Header nav',
-    'group' => 
-    array (
-      'name' => 'Site',
-    ),
-  ),
-  'rating' => 
-  array (
-    'no_import' => 'Nessuna cifra inserita',
-    'import_zero' => 'Nessuna cifra inserita',
-    'import_min' => 'Hai superato la cifra di :credits: crediti',
-    'no_choice' => 'Nessuna opzione scelta',
-  ),
-  'single_expired' => 'Scaduto',
-  'expired' => 'Articolo scaduto, non si possono fare più scommesse',
-  'no_vote' => 'Siamo spiacenti, ma questa votazione è chiusa da :TIME, per favore prova a fare un altra previsione',
-  'your_bet' => 'La tua previsione',
-  'your_amount' => 'Previsione',
-  'if_win' => 'Se vinci',
+<?php
+
+return array (
   'fields' => 
   array (
     'background_color' => 
     array (
       'label' => 'background_color',
+      'placeholder' => 'background_color',
+      'helper_text' => 'background_color',
+      'description' => 'background_color',
     ),
     'background' => 
     array (
       'label' => 'background',
+      'placeholder' => 'background',
+      'helper_text' => 'background',
+      'description' => 'background',
     ),
     'overlay_color' => 
     array (
       'label' => 'overlay_color',
+      'placeholder' => 'overlay_color',
+      'helper_text' => 'overlay_color',
+      'description' => 'overlay_color',
     ),
     'overlay_opacity' => 
     array (
       'label' => 'overlay_opacity',
+      'placeholder' => 'overlay_opacity',
+      'helper_text' => 'overlay_opacity',
+      'description' => 'overlay_opacity',
     ),
     'class' => 
     array (
       'label' => 'class',
+      'placeholder' => 'class',
+      'helper_text' => 'class',
+      'description' => 'class',
     ),
     'style' => 
     array (
       'label' => 'style',
+      'placeholder' => 'style',
+      'helper_text' => 'style',
+      'description' => 'style',
     ),
-    'name' => 'Nome',
-    'guard_name' => 'Guard',
-    'permissions' => 'Permessi',
-    'roles' => 'Ruoli',
-    'updated_at' => 'Aggiornato il',
-    'first_name' => 'Nome',
-    'last_name' => 'Cognome',
     'view' => 
     array (
       'label' => 'view',
+      'placeholder' => 'view',
+      'helper_text' => 'view',
+      'description' => 'view',
     ),
   ),
   'actions' => 
   array (
-    'import' => 
-    array (
-      'fields' => 
-      array (
-        'import_file' => 'Seleziona un file XLS o CSV da caricare',
-      ),
-    ),
-    'export' => 
-    array (
-      'filename_prefix' => 'Aree al',
-      'columns' => 
-      array (
-        'name' => 'Nome area',
-        'parent_name' => 'Nome area livello superiore',
-      ),
-    ),
     'updateAction' => 
     array (
       'label' => 'updateAction',
     ),
   ),
-);
+);

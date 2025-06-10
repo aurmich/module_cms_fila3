@@ -29,11 +29,8 @@ use Webmozart\Assert\Assert;
 class CmsServiceProvider extends XotBaseServiceProvider
 {
     public string $name = 'Cms';
-
     public XotData $xot;
-
     protected string $module_dir = __DIR__;
-
     protected string $module_ns = __NAMESPACE__;
 
     public function boot(): void
@@ -93,15 +90,15 @@ class CmsServiceProvider extends XotBaseServiceProvider
             $middleware = [];
         }
         $base_middleware = Arr::get($middleware, 'base', []);
-        //$base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
-        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class;
-        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;
-        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class;
-        //$base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class;
 
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
+        $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;
+        $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class;
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class;
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class;
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
-
+        /*
         // Ottieni la lingua corrente in modo sicuro
         $currentLocale = app()->getLocale();
         $supportedLocales = config('laravellocalization.supportedLocales', []);
@@ -109,9 +106,11 @@ class CmsServiceProvider extends XotBaseServiceProvider
             $currentLocale = array_key_first($supportedLocales) ?? 'it';
             app()->setLocale($currentLocale);
         }
+        */
+        //$currentLocale = LaravelLocalization::setLocale() ?? app()->getLocale();
 
         Folio::path($theme_path)
-            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+            ->uri( LaravelLocalization::setLocale() ?? app()->getLocale())
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -129,9 +128,9 @@ class CmsServiceProvider extends XotBaseServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
+                ->uri( LaravelLocalization::setLocale() ?? app()->getLocale())
                 ->middleware([
-                    '*' => $base_middleware,
+                    '*' => $base_middleware
                 ]);
         }
 
@@ -168,12 +167,12 @@ class CmsServiceProvider extends XotBaseServiceProvider
         $xot = $this->xot;
 
         Assert::string($theme = $xot->{$theme_type});
-
-        $resource_path = 'Themes/'.$theme.'/resources';
-        $lang_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/lang'));
+        $theme_path='Themes/'.$theme;
+        $resource_path = $theme_path.'/resources';
+        $lang_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($theme_path.'/lang'));
 
         $theme_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/views'));
-
+        
         app('view')->addNamespace($theme_type, $theme_dir);
         $this->loadTranslationsFrom($lang_dir, $theme_type);
     }

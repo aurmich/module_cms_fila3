@@ -1,0 +1,54 @@
+<?php
+
+// [DOCS] Il middleware 'localize' usato in questo file è alias di Modules\UI\Http\Middleware\SetLocale::class, registrato in app/Http/Kernel.php.
+// Per le regole generali di localizzazione e middleware, vedi Xot/docs/localization-guide.md e Xot/docs/namespace-conventions.md
+// Link bidirezionale: vedere anche Predict/docs/namespace-rules.mdc e Predict/docs/filament-best-practices.mdc
+
+declare(strict_types=1);
+use Illuminate\Support\Facades\Route;
+use Modules\Cms\Filament\Front\Pages\Home;
+use Modules\Cms\Filament\Front\Pages\Welcome;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+// use Modules\Cms\Http\Controllers\PageController;
+/*
+Route::get('/{lang?}/{container0?}/{item0?}/{container1?}/{item1?}/{container2?}/{item2?}', '\\'.Welcome::class)->name('test');
+Route::get('/', '\\'.Home::class)->name('home');
+*/
+// Route::get('/{container0}/{item0?}/{container1?}/{item1?}/{container2?}/{item2?}', PageController::class);
+
+// Rotte localizzate
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [
+        'web',
+        'localize',
+        'localizationRedirect',
+        'localeSessionRedirect',
+        'localeCookieRedirect',
+        'localeViewPath',
+    ],
+], function () {
+    // Rotte principali
+    Route::get('/', [Home::class, 'index'])->name('home');
+    Route::get('/welcome', [Welcome::class, 'index'])->name('welcome');
+
+    // Altre rotte del sito
+    Route::get('/{container0}/{item0?}/{container1?}/{item1?}/{container2?}/{item2?}', 'PageController@index')
+        ->name('page');
+});
+
+// Rotte non localizzate (API, admin, ecc.)
+Route::group([
+    'middleware' => ['web'],
+], function () {
+    // Rotte API
+    Route::prefix('api')->group(function () {
+        // API routes here
+    });
+
+    // Rotte Admin
+    Route::prefix('admin')->group(function () {
+        // Admin routes here
+    });
+});

@@ -5,7 +5,7 @@
             "type": "logo",
             "data": {
                 "view": "pub_theme::components.blocks.logo",
-                "src": "patient::images/logo.svg",
+                "src": "saluteora::images/logo.svg",
                 "alt": "{{ config('app.name') }}",
                 "width": 150,
                 "height": 32
