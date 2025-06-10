@@ -28,7 +28,11 @@ class Page extends Component
         }
         $this->slug = $slug;
         $field=$side.'_blocks';
-        Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, $field => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
+        //Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, $field => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
+        $page=PageModel::firstWhere(['slug' => $slug]);
+        if($page===null){
+            abort(404,'page not found: '.$slug);
+        }
         $blocks = $page->$field ;
         if(!is_array($blocks)){
             $primary_lang=XotData::make()->primary_lang;
@@ -37,6 +41,7 @@ class Page extends Component
         if(!is_array($blocks)){
             $blocks = [];
         }
+        
         $this->blocks = BlockData::collect($blocks);
     }
     /**
