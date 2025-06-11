@@ -79,18 +79,7 @@ class DoctorResource extends XotBaseResource
     public static function getFormSchemaWidget(): array
     {
         $submit_view = 'pub_theme::filament.wizard.submit-button';
-        $email='marco1@gmail.com';
-        $token='$2y$12$M9lZbLr8T.2GktlJjl1w6OoKHFX5MXnYV/ZePL7N4Rls0.pgkPczK';
-
-        $doctor = Doctor::firstWhere('email',$email);
-        $remember_token = $doctor->remember_token;
         
-        if($remember_token==$token){
-
-            //$this->form->fill(['first_name'=>'ppippo']);
-        }
-        
-
         return [
             Forms\Components\Wizard::make([
                 self::getPersonalInfoStep(),
@@ -157,7 +146,9 @@ class DoctorResource extends XotBaseResource
                             ,
 
                     ]),
-            ])
+            ])->visible(function ($model,$record) {
+            //dddx([$model,$record]);
+            })
 
             ->afterValidation(function (Forms\Set $set, Form $form) {
                 /*
