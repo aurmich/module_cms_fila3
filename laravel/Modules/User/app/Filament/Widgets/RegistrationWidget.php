@@ -50,6 +50,27 @@ class RegistrationWidget extends XotBaseWidget
         $this->form->fill($fieldsWithNulls);
         $this->form->model($obj);
         $this->record=$obj;
+
+
+        $email='marco1@gmail.com';
+        $token='$2y$12$M9lZbLr8T.2GktlJjl1w6OoKHFX5MXnYV/ZePL7N4Rls0.pgkPczK';
+
+        $user=$this->model::firstWhere('email',$email);
+        if($user==null){
+            return ;
+        }
+        $remember_token = $user->remember_token;
+        if($remember_token==null){
+            $user->remember_token=Str::uuid()->toString();
+            $user->save();
+        }
+        
+        if($remember_token==$token){
+
+            $this->form->fill($user->toArray());
+            $this->form->model($user);
+            $this->record=$user;
+        }
     }
 
 

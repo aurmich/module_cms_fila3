@@ -5,33 +5,37 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
-use Modules\SaluteOra\Models\Doctor;
-use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
-use Modules\Xot\Filament\Resources\XotBaseResource;
-use Modules\SaluteOra\Filament\Resources\DoctorResource\Pages;
-use Modules\SaluteOra\Filament\Resources\DoctorResource\RelationManagers;
 use Filament\Forms\Components\Grid;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Modules\SaluteOra\Models\Doctor;
+use Filament\Forms\Components\Select;
+use Modules\Notify\Emails\SpatieEmail;
+use Spatie\Permission\Traits\HasRoles;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\FileUpload;
-use Illuminate\Support\Facades\Auth;
-use Modules\SaluteOra\Actions\ProcessDoctorModerationAction;
-use Illuminate\Support\Arr;
-use Filament\Resources\Resource;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Mail;
-use Modules\Notify\Emails\SpatieEmail;
+use Filament\Forms\Components\TimePicker;
 use Spatie\MailTemplates\TemplateMailable;
-use Illuminate\Support\Facades\Gate;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
+use Modules\SaluteOra\Actions\ProcessDoctorModerationAction;
+use Modules\SaluteOra\Filament\Resources\DoctorResource\Pages;
+use Modules\SaluteOra\Filament\Resources\DoctorResource\RelationManagers;
 
 /**
  * Class DoctorResource
@@ -74,7 +78,18 @@ class DoctorResource extends XotBaseResource
 
     public static function getFormSchemaWidget(): array
     {
-        $submit_view='pub_theme::filament.wizard.submit-button';
+        $submit_view = 'pub_theme::filament.wizard.submit-button';
+        $email='marco1@gmail.com';
+        $token='$2y$12$M9lZbLr8T.2GktlJjl1w6OoKHFX5MXnYV/ZePL7N4Rls0.pgkPczK';
+
+        $doctor = Doctor::firstWhere('email',$email);
+        $remember_token = $doctor->remember_token;
+        
+        if($remember_token==$token){
+
+            //$this->form->fill(['first_name'=>'ppippo']);
+        }
+        
 
         return [
             Forms\Components\Wizard::make([
@@ -86,16 +101,18 @@ class DoctorResource extends XotBaseResource
             ])
             ->skippable(false)
             ->submitAction(view($submit_view))
-            ->columnSpan('full')
-            ->model(Doctor::class)
-            ->persistStepInQueryString()
-
-            ->startOnStep(
-                fn () => request()->has('token')
-                    ? array_search('contacts', array_keys(DoctorRegistrationWorkflow::getSteps()))
-                    : 0
-            )
-
+            //->persistStepsInQueryString()
+            //->onStepChanged(function ($livewire, $step) {
+                // Gestione del cambio step
+            //})
+            //->beforeStateDehydrated(function ($component, $state) {
+                // Pre-processamento dei dati prima del salvataggio
+            //})
+            //->afterStateHydrated(function ($component, $state) {
+                // Post-processamento dei dati dopo il caricamento
+            //})
+            ->live()
+            ->columnSpanFull(),
         ];
     }
 

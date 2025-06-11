@@ -4,6 +4,40 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Passport Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your Passport settings. The default values are
+    | set for most applications, but you can adjust them as needed.
+    |
+    */
+
+    'private_key' => storage_path('oauth-private.key'),
+    'public_key' => storage_path('oauth-public.key'),
+
+    'token_lifetime' => env('PASSPORT_TOKEN_LIFETIME', 60),
+
+    'refresh_token_lifetime' => env('PASSPORT_REFRESH_TOKEN_LIFETIME', 20160),
+
+    'personal_access_client' => [
+        'id' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
+        'secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),
+    ],
+
+    'password_client' => [
+        'id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
+        'secret' => env('PASSPORT_PASSWORD_CLIENT_SECRET'),
+    ],
+
+    'first_party_clients' => [
+        [
+            'id' => env('PASSPORT_FIRST_PARTY_CLIENT_ID'),
+            'secret' => env('PASSPORT_FIRST_PARTY_CLIENT_SECRET'),
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Passport Guard
     |--------------------------------------------------------------------------
     |
@@ -17,21 +51,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Keys
-    |--------------------------------------------------------------------------
-    |
-    | Passport uses encryption keys while generating secure access tokens for
-    | your application. By default, the keys are stored as local files but
-    | can be set via environment variables when that is more convenient.
-    |
-    */
-
-    'private_key' => env('PASSPORT_PRIVATE_KEY'),
-
-    'public_key' => env('PASSPORT_PUBLIC_KEY'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Passport Database Connection
     |--------------------------------------------------------------------------
     |
@@ -41,7 +60,7 @@ return [
     |
     */
 
-    'connection' => env('PASSPORT_CONNECTION'),
+    'connection' => env('PASSPORT_CONNECTION','user'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,21 +74,5 @@ return [
     */
 
     'client_uuids' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Personal Access Client
-    |--------------------------------------------------------------------------
-    |
-    | If you enable client hashing, you should set the personal access client
-    | ID and unhashed secret within your environment file. The values will
-    | get used while issuing fresh personal access tokens to your users.
-    |
-    */
-
-    'personal_access_client' => [
-        'id' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
-        'secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),
-    ],
 
 ];
