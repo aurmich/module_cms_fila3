@@ -206,7 +206,7 @@
     }
 
     a {
-        @apply text-primary-600 hover:text-primary-900;
+        @apply text-primary-600;
     }
 
     /* Form */
