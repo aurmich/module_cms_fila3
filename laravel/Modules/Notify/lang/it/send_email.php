@@ -51,6 +51,11 @@ return array (
       'placeholder' => 'Inserisci i parametri',
       'label' => 'Parametri',
     ),
+    'body_html' => 
+    array (
+      'description' => 'body_html',
+      'helper_text' => 'body_html',
+    ),
   ),
   'actions' => 
   array (
