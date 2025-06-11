@@ -5,7 +5,7 @@
     'cta' => null,
     'secondaryCta' => null,
     'overlay' => 'gradient', // none, dark, light, gradient
-    'minHeight' => 'min-h-[70vh] md:min-h-[80vh]',
+    'minHeight' => 'min-h-20 md:min-h-20',
     'contentPosition' => 'center', // start, center, end
     'className' => ''
 ])
@@ -49,7 +49,7 @@
     }
 @endphp
 
-<section class="relative {{ $minHeight }} flex items-center overflow-hidden {{ $className }}" 
+<section class="relative min-h-[700px] flex items-center overflow-hidden {{ $className }}" 
          x-data="{ 
             scrolled: false,
             mounted: false,
@@ -59,33 +59,18 @@
                     this.scrolled = window.scrollY > 50;
                 });
             }
-         }"
-         :class="{ 'pt-16': scrolled }"
-         style="transition: padding 0.3s ease-in-out;">
-    
-    <!-- Background Image -->
-    @if($image)
-        <div class="absolute inset-0 -z-10">
-            <img 
-                src="{{ $image }}" 
-                alt="" 
-                class="absolute inset-0 w-full h-full object-cover"
-                :class="{ 'scale-105': !scrolled, 'scale-100': scrolled }"
-                style="transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1);"
-                loading="lazy"
-            >
-        </div>
-    @endif
+         }">
+
 
     <!-- Overlay -->
     @if($overlay !== 'none')
-        <div class="absolute inset-0 -z-10 {{ $overlayClasses }}"></div>
+        <div class="absolute inset-0 -z-10 bg-[#E6EBF7]"></div>
     @endif
 
     <!-- Content -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="max-w-4xl mx-auto {{ $contentPositionClasses }} flex flex-col gap-6">
-            <div class="space-y-6 text-white"
+            <div class="space-y-6 text-[#1A467F]"
                  x-data="{ 
                     show: false,
                     mounted() { 
@@ -97,42 +82,19 @@
                  x-init="mounted()"
                  x-intersect="show = true">
                 
-                @if($subtitle)
-                    <p class="text-lg md:text-xl font-medium tracking-wide uppercase"
-                       x-show="show"
-                       x-transition:enter="transition-all duration-700 ease-out"
-                       x-transition:enter-start="opacity-0 translate-y-4"
-                       x-transition:enter-end="opacity-100 translate-y-0">
-                        {{ $subtitle }}
-                    </p>
-                @endif
+        
 
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-                    x-show="show"
-                    x-transition:enter="transition-all duration-700 ease-out delay-100"
-                    x-transition:enter-start="opacity-0 translate-y-4"
-                    x-transition:enter-end="opacity-100 translate-y-0">
+                <h1 class="text-4xl md:text-5xl lg:text-3xl font-bold leading-tight">
                     {{ $title }}
                 </h1>
 
                 @if(!empty($primaryCta) || !empty($secondaryCtaData))
-                    <div class="flex flex-wrap gap-4 pt-4"
-                         x-show="show"
-                         x-transition:enter="transition-all duration-700 ease-out delay-200"
-                         x-transition:enter-start="opacity-0 translate-y-4"
-                         x-transition:enter-end="opacity-100 translate-y-0">
+                    <div class="flex flex-row justify-center gap-4 pt-4">
                         
                         @if(!empty($primaryCta))
                             <a href="{{ $primaryCta['url'] }}" 
-                               class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105">
+                               class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md !text-white bg-[#0D9488] md:py-4 md:text-lg md:px-10">
                                 {{ $primaryCta['text'] }}
-                            </a>
-                        @endif
-
-                        @if(!empty($secondaryCtaData))
-                            <a href="{{ $secondaryCtaData['url'] }}" 
-                               class="inline-flex items-center justify-center px-8 py-3 border border-white/20 text-base font-medium rounded-md text-white bg-white/10 hover:bg-white/20 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105">
-                                {{ $secondaryCtaData['text'] }}
                             </a>
                         @endif
                     </div>
@@ -142,42 +104,6 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10" 
-         x-show="!scrolled && mounted"
-         x-transition:enter="transition ease-out duration-1000 delay-1000"
-         x-transition:enter-start="opacity-0 translate-y-4"
-         x-transition:enter-end="opacity-100 translate-y-0">
-        <div class="animate-bounce">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </div>
+
 </section>
 
-@push('styles')
-<style>
-    .animate-fadeInDown {
-        animation: fadeInDown 1s ease-out forwards;
-    }
-    .animate-fadeInUp {
-        animation: fadeInUp 1s ease-out 0.2s forwards;
-    }
-    .animate-bounce {
-        animation: bounce 2s infinite;
-    }
-    @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-10px); }
-        60% { transform: translateY(-5px); }
-    }
-</style>
-@endpush

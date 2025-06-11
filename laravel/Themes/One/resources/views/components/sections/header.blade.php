@@ -19,7 +19,7 @@
     'id' => ($section['attributes']['id'] ?? ''),
     'x-data' => "{ mobileMenuOpen: false }"
     ]) }}>
-    <div class="max-w-7xl !m-0 !p-0 w-full">
+    <div class="!m-0 !p-0 w-full">
         <div class="flex h-16 items-center justify-between">
             @foreach($componentsBlocks as $block)
                 @include($block->view,$block->data)

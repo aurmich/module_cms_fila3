@@ -45,7 +45,7 @@
         <x-slot name="trigger">
             <x-filament::button
                 color="white"
-                style="border-radius: 70px"
+                style="border-radius: 70px; background-color: transparent !important; border: 1px solid white"
                 icon="heroicon-o-user"
                 :label="$user?->name"
                 aria-label="{{ __('ui::navigation.user_menu') }}">
@@ -79,3 +79,4 @@
     {{-- Vista per utenti non autenticati --}}
     @include($guest_view)
 @endif
+

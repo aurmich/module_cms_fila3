@@ -67,4 +67,13 @@
 <div class="lg:w-[350px]">Logo width large</div>
 <div class="w-[300px]">Width small</div>
 <div class="bg-transparent"></div>
-</x-layouts.app>
+<div class="bg-gradient-to-r from-cyan-500 to-blue-500">gradiant</div>
+<div class="bg-gradient-to-r from-cyan-500 to-[#1A467F]">gradient</div>
+<div class="min-h-screen">screen height</div>
+<div class="border-[#1A467F]"></div>
+<div class="min-h-[50vh]">min height</div>
+<div class="min-h-20 md:min-h-20">min heightt</div>
+<div class="min-h-[700px]">min height costum</div>
+<div class="w-[350px]">width 350</div>
+<div class="w-[700px]">width 700px</div>
+</x-layouts.app>    
