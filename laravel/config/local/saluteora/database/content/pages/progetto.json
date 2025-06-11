@@ -1,0 +1,387 @@
+{
+    "id": "20",
+    "title": {
+        "it": "Chi Siamo - SaluteOra"
+    },
+    "slug": "progetto",
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.contact",
+                    "title": "La tua salute orale, la nostra missione",
+                    "subtitle": "Unendo tecnologia, competenza medica e cura umana per promuovere la salute orale delle gestanti e delle loro famiglie.",
+                    "image": "/img/hero-team-medical.jpg",
+                    "background_gradient": "from-blue-50 to-teal-50",
+                    "text_color": "text-gray-900",
+                    "cta_text": "Scopri i nostri servizi",
+                    "cta_link": "/servizi",
+                    "cta_color": "bg-teal-600 hover:bg-teal-700 text-white"
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.medical_values",
+                    "title": "I nostri valori fondamentali",
+                    "subtitle": "Ogni decisione e ogni servizio riflette il nostro impegno verso l'eccellenza sanitaria",
+                    "sections": [
+                        {
+                            "title": "Competenza Medica",
+                            "description": "Team di specialisti in odontoiatria e ginecologia con formazione continua e certificazioni internazionali.",
+                            "icon": "medical-certificate",
+                            "color": "text-blue-600"
+                        },
+                        {
+                            "title": "Cura Personalizzata",
+                            "description": "Ogni paziente è unica: piani di trattamento individuali basati su evidenze scientifiche e bisogni specifici.",
+                            "icon": "heart-medical",
+                            "color": "text-rose-600"
+                        },
+                        {
+                            "title": "Tecnologia Avanzata",
+                            "description": "Strumenti diagnostici all'avanguardia e piattaforme digitali per un'esperienza paziente ottimale.",
+                            "icon": "technology-health",
+                            "color": "text-teal-600"
+                        },
+                        {
+                            "title": "Etica e Trasparenza",
+                            "description": "Massima riservatezza, consenso informato e rispetto delle normative sulla privacy sanitaria.",
+                            "icon": "shield-check",
+                            "color": "text-green-600"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "stats",
+                "data": {
+                    "view": "pub_theme::components.blocks.stats.medical_impact",
+                    "title": "Il nostro impatto nella comunità",
+                    "background_color": "bg-gradient-to-br from-teal-50 to-blue-50",
+                    "stats": [
+                        {
+                            "number": "5.000+",
+                            "label": "Gestanti seguite",
+                            "description": "Nel corso della nostra attività"
+                        },
+                        {
+                            "number": "98%",
+                            "label": "Soddisfazione pazienti",
+                            "description": "Secondo le nostre survey interne"
+                        },
+                        {
+                            "number": "24/7",
+                            "label": "Supporto disponibile",
+                            "description": "Assistenza continua per emergenze"
+                        },
+                        {
+                            "number": "10+",
+                            "label": "Anni di esperienza",
+                            "description": "Nel settore della salute orale"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "content": "<div class='prose prose-lg mx-auto'><h2 class='text-3xl font-bold text-gray-900 mb-6'>La nostra storia</h2><p class='text-lg text-gray-700 leading-relaxed mb-6'>SaluteOra nasce dall'incontro tra l'esperienza clinica di specialisti odontoiatrici e ginecologi e la visione innovativa di esperti in tecnologie sanitarie digitali. La nostra missione è semplice ma profonda: <strong>garantire la migliore salute orale possibile durante uno dei momenti più importanti della vita di una donna</strong>.</p><p class='text-lg text-gray-700 leading-relaxed mb-6'>Sappiamo che la gravidanza porta con sé cambiamenti ormonali che possono influire significativamente sulla salute orale. Per questo abbiamo sviluppato protocolli specifici, basati sulle più recente evidenze scientifiche, per prevenire e trattare le problematiche odontoiatriche durante la gestazione.</p><p class='text-lg text-gray-700 leading-relaxed'>Il nostro approccio integrato unisce la competenza medica tradizionale con l'innovazione digitale, creando un percorso di cura completo, personalizzato e accessibile per ogni futura mamma.</p></div>"
+                }
+            },
+            {
+                "type": "team_showcase",
+                "data": {
+                    "view": "pub_theme::components.blocks.team.medical_specialists",
+                    "title": "Il nostro team di specialisti",
+                    "subtitle": "Professionisti qualificati e certificati al servizio della tua salute",
+                    "team_members": [
+                        {
+                            "name": "Dott.ssa Maria Rossi",
+                            "role": "Odontoiatra Specialista",
+                            "specialization": "Odontoiatria in Gravidanza",
+                            "credentials": "Laurea Sapienza Roma, Master UCL London",
+                            "image": "/img/team/dr-maria-rossi.jpg",
+                            "experience_years": "15+"
+                        },
+                        {
+                            "name": "Dott. Giuseppe Bianchi",
+                            "role": "Ginecologo Consulente",
+                            "specialization": "Medicina Materno-Fetale",
+                            "credentials": "Università Bologna, Fellowship Harvard",
+                            "image": "/img/team/dr-giuseppe-bianchi.jpg",
+                            "experience_years": "20+"
+                        },
+                        {
+                            "name": "Dott.ssa Anna Verdi",
+                            "role": "Igienista Dentale",
+                            "specialization": "Prevenzione e Profilassi",
+                            "credentials": "Università Milano, Cert. EFP",
+                            "image": "/img/team/dr-anna-verdi.jpg",
+                            "experience_years": "12+"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "certifications",
+                "data": {
+                    "view": "pub_theme::components.blocks.certifications.medical_credentials",
+                    "title": "Certificazioni e Riconoscimenti",
+                    "subtitle": "La qualità dei nostri servizi è garantita da certificazioni nazionali e internazionali",
+                    "certifications": [
+                        {
+                            "name": "Accreditamento Regionale SSN",
+                            "issuer": "Regione Lazio",
+                            "year": "2023",
+                            "type": "healthcare_accreditation",
+                            "logo": "/img/cert/ssn-lazio.png"
+                        },
+                        {
+                            "name": "Certificazione ISO 9001:2015",
+                            "issuer": "TÜV Italia",
+                            "year": "2023",
+                            "type": "quality_management",
+                            "logo": "/img/cert/iso-9001.png"
+                        },
+                        {
+                            "name": "GDPR Compliance Certificate",
+                            "issuer": "Data Protection Authority",
+                            "year": "2024",
+                            "type": "privacy_compliance",
+                            "logo": "/img/cert/gdpr-cert.png"
+                        },
+                        {
+                            "name": "Membro EFP",
+                            "issuer": "European Federation of Periodontology",
+                            "year": "2022",
+                            "type": "professional_membership",
+                            "logo": "/img/cert/efp-member.png"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "cta",
+                "data": {
+                    "view": "pub_theme::components.blocks.cta.medical_appointment",
+                    "title": "Inizia il tuo percorso di salute orale",
+                    "subtitle": "Prenota una consulenza gratuita con i nostri specialisti",
+                    "background_color": "bg-gradient-to-r from-teal-600 to-blue-600",
+                    "text_color": "text-white",
+                    "primary_button": {
+                        "text": "Prenota consulenza gratuita",
+                        "url": "/prenota"
+                    }
+                }
+            },
+            {
+                "type": "text_with_image",
+                "data": {
+                    "title": "La nostra storia",
+                    "content": "<p>Fondata nel 2005 dal Dr. Marco Bianchi, SaluteOra nasce con l'obiettivo di creare un centro medico all'avanguardia che mettesse il paziente al centro dell'attenzione. Ciò che iniziò come un piccolo ambulatorio è ora diventato una rete di cliniche specializzate presenti in tutto il territorio nazionale, con oltre 150 medici specialisti e uno staff dedicato di 200 professionisti.</p><p>La nostra filosofia è sempre rimasta immutata: offrire cure mediche di altissima qualità in un ambiente accogliente, con un approccio umano e personalizzato. Crediamo fermamente che la medicina debba essere al servizio della persona, considerando non solo la patologia, ma l'individuo nella sua interezza.</p>",
+                    "image": "/storage/images/storia-saluteora.jpg",
+                    "image_position": "right",
+                    "background": "light"
+                }
+            },
+            {
+                "type": "values",
+                "data": {
+                    "title": "I nostri valori",
+                    "subtitle": "Ciò che ci guida ogni giorno",
+                    "background": "gradient",
+                    "items": [
+                        {
+                            "icon": "saluteora-heart",
+                            "title": "Eccellenza",
+                            "description": "Puntiamo all'eccellenza in ogni aspetto della nostra pratica medica, dalla formazione continua all'utilizzo delle tecnologie più avanzate."
+                        },
+                        {
+                            "icon": "saluteora-user-group",
+                            "title": "Rispetto",
+                            "description": "Ogni paziente è unico. Rispettiamo la dignità, la privacy e le scelte individuali di ciascuno."
+                        },
+                        {
+                            "icon": "saluteora-shield-check",
+                            "title": "Responsabilità",
+                            "description": "Ci assumiamo la responsabilità del benessere dei nostri pazienti, garantendo trasparenza e onestà in ogni interazione."
+                        },
+                        {
+                            "icon": "saluteora-sparkles",
+                            "title": "Innovazione",
+                            "description": "Investiamo nella ricerca e nell'innovazione per offrire sempre le migliori soluzioni terapeutiche disponibili."
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "team_members",
+                "data": {
+                    "title": "Il nostro team direttivo",
+                    "subtitle": "Professionisti dedicati alla tua salute",
+                    "members": [
+                        {
+                            "name": "Dott. Marco Bianchi",
+                            "role": "Direttore Sanitario",
+                            "bio": "Specializzato in Medicina Interna, con oltre 30 anni di esperienza nella gestione di strutture sanitarie d'eccellenza.",
+                            "image": "/storage/images/team/marco-bianchi.jpg"
+                        },
+                        {
+                            "name": "Dott.ssa Elena Rossi",
+                            "role": "Direttore Operativo",
+                            "bio": "Specializzata in Management Sanitario, coordina tutte le attività operative garantendo standard qualitativi elevati.",
+                            "image": "/storage/images/team/elena-rossi.jpg"
+                        },
+                        {
+                            "name": "Dott. Paolo Verdi",
+                            "role": "Responsabile Ricerca",
+                            "bio": "Cardiologo e ricercatore, guida il nostro team nella sperimentazione di nuove metodologie diagnostiche e terapeutiche.",
+                            "image": "/storage/images/team/paolo-verdi.jpg"
+                        },
+                        {
+                            "name": "Dott.ssa Laura Neri",
+                            "role": "Responsabile Qualità",
+                            "bio": "Specializzata in sistemi di gestione della qualità in ambito sanitario, garantisce il rispetto degli standard di eccellenza.",
+                            "image": "/storage/images/team/laura-neri.jpg"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "stats",
+                "data": {
+                    "title": "SaluteOra in numeri",
+                    "subtitle": "La nostra crescita negli anni",
+                    "background": "light",
+                    "stats": [
+                        {
+                            "value": "15",
+                            "label": "Anni di esperienza",
+                            "icon": "saluteora-clock"
+                        },
+                        {
+                            "value": "12",
+                            "label": "Sedi in Italia",
+                            "icon": "saluteora-building"
+                        },
+                        {
+                            "value": "150+",
+                            "label": "Medici specialisti",
+                            "icon": "saluteora-user-md"
+                        },
+                        {
+                            "value": "50.000+",
+                            "label": "Pazienti soddisfatti",
+                            "icon": "saluteora-users"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "testimonials",
+                "data": {
+                    "title": "Cosa dicono i nostri pazienti",
+                    "testimonials": [
+                        {
+                            "quote": "Ho trovato in SaluteOra non solo medici eccellenti, ma persone che si sono prese cura di me con umanità ed empatia.",
+                            "author": "Giulia M.",
+                            "role": "Paziente dal 2018"
+                        },
+                        {
+                            "quote": "La professionalità e la disponibilità dello staff hanno fatto la differenza nel mio percorso di cura. Grazie SaluteOra!",
+                            "author": "Roberto F.",
+                            "role": "Paziente dal 2020"
+                        },
+                        {
+                            "quote": "L'attenzione ai dettagli e la qualità delle strutture rendono SaluteOra un'eccellenza nel panorama sanitario italiano.",
+                            "author": "Francesca L.",
+                            "role": "Paziente dal 2019"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "cta",
+                "data": {
+                    "title": "Affida la tua salute a SaluteOra",
+                    "subtitle": "Prenota subito una visita con i nostri specialisti",
+                    "background": "gradient",
+                    "button": {
+                        "text": "Contattaci ora",
+                        "link": "/contatti",
+                        "type": "primary"
+                    },
+                    "secondary_button": {
+                        "text": "Scopri i nostri servizi",
+                        "link": "/servizi",
+                        "type": "secondary"
+                    }
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": [
+        {
+            "type": "contact_info",
+            "data": {
+                "title": "Contattaci",
+                "phone": "+39 02 1234567",
+                "email": "info@saluteora.it",
+                "address": "Via della Salute, 123, 20123 Milano"
+            }
+        },
+        {
+            "type": "quick_links",
+            "data": {
+                "title": "Collegamenti rapidi",
+                "links": [
+                    {
+                        "text": "La nostra missione",
+                        "url": "/chi-siamo#missione"
+                    },
+                    {
+                        "text": "Orari di apertura",
+                        "url": "/orari"
+                    },
+                    {
+                        "text": "Posizioni lavorative",
+                        "url": "/lavora-con-noi"
+                    },
+                    {
+                        "text": "Rassegna stampa",
+                        "url": "/news"
+                    }
+                ]
+            }
+        }
+    ],
+    "footer_blocks": [
+        {
+            "type": "certifications",
+            "data": {
+                "title": "Le nostre certificazioni",
+                "logos": [
+                    {
+                        "image": "/storage/images/certifications/iso9001.png",
+                        "alt": "ISO 9001"
+                    },
+                    {
+                        "image": "/storage/images/certifications/jci.png",
+                        "alt": "Joint Commission International"
+                    }
+                ]
+            }
+        }
+    ],
+    "meta": {
+        "description": "Scopri la nostra missione e i professionisti dietro SaluteOra, dedicati alla tua salute e benessere",
+        "keywords": "chi siamo, saluteora, clinica, medici specialisti, salute"
+    },
+    "created_at": "2025-06-10T13:38:59.000000Z",
+    "updated_at": "2025-06-10T16:10:00.000000Z",
+    "created_by": null,
+    "updated_by": "admin"
+}
