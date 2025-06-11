@@ -40,13 +40,7 @@ enum UserTypeEnum: string implements HasLabel
     public function getColor(): string
     {
         return $this->transClass(self::class,$this->value.'.color');
-        /*
-        return match ($this) {
-            self::ADMIN => 'danger',
-            self::DOCTOR => 'primary',
-            self::PATIENT => 'success',
-        };
-        */
+
     }
 
     /**
@@ -62,6 +56,20 @@ enum UserTypeEnum: string implements HasLabel
             self::PATIENT => 'heroicon-o-user',
         };
         */
+    }
+
+    public function getImage(): string
+    {
+        return $this->transClass(self::class,$this->value.'.image');
+    }
+
+    public function canRegister(): bool
+    {
+        return match ($this) {
+            self::ADMIN => false,
+            self::DOCTOR => true,
+            self::PATIENT => true,
+        };
     }
 
     /**
@@ -95,6 +103,12 @@ enum UserTypeEnum: string implements HasLabel
     public static function default(): static
     {
         return self::PATIENT;
+    }
+
+
+    public function getRoute(string $action): string
+    {
+        return route($action.'.type', ['type' => $this->value]);
     }
 }
 

@@ -105,7 +105,7 @@ class User extends BaseUser implements HasMedia
         return array_merge(parent::casts(), [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            //'type' => UserTypeEnum::class, // Sintassi corretta per Laravel 12
+            'type' => UserTypeEnum::class, // Sintassi corretta per Laravel 12
             'state' => UserState::class,
             'certifications' => 'array',
             'moderation_data' => 'array',
@@ -244,37 +244,7 @@ class User extends BaseUser implements HasMedia
         return $this->state->equals(IntegrationRequested::class);
     }
 
-    /**
-     * Get the user's type as a UserTypeEnum enum.
-     *
-     * Gestione robusta dell'attributo type con nullable safety.
-     *
-     * Importante: Questo override è nel modello User di SaluteOra (modulo specifico),
-     * MAI nel modulo User generico che deve restare puro e riutilizzabile.
-     *
-     * Principio di modularità: ogni modifica specifica rimane nei moduli specifici.
-     */
-    public function getTypeAttribute($value): ?UserTypeEnum
-    {
-        // Se già è un enum, lo restituiamo direttamente
-        if ($value instanceof UserTypeEnum) {
-            return $value;
-        }
-        if(empty($value)){
-            return UserTypeEnum::default();
-        }
-        // Utilizziamo il metodo tryFrom dell'enum che gestisce internamente
-        // i casi null/empty e cattura le eccezioni ValueError
-        return UserTypeEnum::tryFrom($value);
-    }
 
-    /**
-     * Set the user's type using a UserTypeEnum enum.
-     */
-    public function setTypeAttribute($value): void
-    {
-        $this->attributes['type'] = $value instanceof UserTypeEnum ? $value->value : $value;
-    }
 
     /**
      * Determine if the user is an admin.

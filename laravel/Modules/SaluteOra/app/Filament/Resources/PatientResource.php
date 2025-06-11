@@ -61,6 +61,7 @@ class PatientResource extends XotBaseResource
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')
+            ->persistStepInQueryString()
             ->submitAction(view($submit_view))
         ];
     }

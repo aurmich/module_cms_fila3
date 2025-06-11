@@ -71,20 +71,11 @@ class DoctorResource extends XotBaseResource
         return static::getFormSchemaWidget();
     }
 
-    /**
-     * Get the submit button HTML for the wizard
-     *
-     * @return string
-     */
-    protected static function getSubmitButton(): string
-    {
-        return '<button type="submit" class="w-full bg-[#1A467F] text-white text-lg font-medium py-3 px-6 rounded-full shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center">
-            <span>ACCETTA E CONTINUA</span>
-        </button>';
-    }
 
     public static function getFormSchemaWidget(): array
     {
+        $submit_view='pub_theme::filament.wizard.submit-button';
+
         return [
             Forms\Components\Wizard::make([
                 self::getPersonalInfoStep(),
@@ -94,14 +85,17 @@ class DoctorResource extends XotBaseResource
                 self::getAvailabilityStep(),
             ])
             ->skippable(false)
-            ->submitAction(new HtmlString(self::getSubmitButton()))
+            ->submitAction(view($submit_view))
             ->columnSpan('full')
+            ->model(Doctor::class)
             ->persistStepInQueryString()
+
             ->startOnStep(
                 fn () => request()->has('token')
                     ? array_search('contacts', array_keys(DoctorRegistrationWorkflow::getSteps()))
                     : 0
             )
+
         ];
     }
 
@@ -136,19 +130,20 @@ class DoctorResource extends XotBaseResource
                             ->maxLength(255)
                             ->autocomplete('email')
                             ,
-                        /*
+
                         'certifications' => Forms\Components\FileUpload::make('certifications')
                             ->required()
-                            ->multiple()
+                            //->multiple()
                             ->acceptedFileTypes(['application/pdf'])
                             ->maxSize(5120)
                             ->directory('certifications')
                             ,
-                        */
+
                     ]),
             ])
 
             ->afterValidation(function (Forms\Set $set, Form $form) {
+                /*
                 // Crea o recupera il workflow
                 $workflow = DoctorRegistrationWorkflow::firstOrCreate(
                     ['session_id' => session()->getId()],
@@ -180,6 +175,7 @@ class DoctorResource extends XotBaseResource
                     'state' => \Modules\SaluteOra\States\Pending::class,
                 ]);
                 self::sendContinuationLink($doctor);
+                */
             });
     }
 

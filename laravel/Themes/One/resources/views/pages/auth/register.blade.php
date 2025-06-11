@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
-use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Arr;
 use Livewire\Volt\Component;
+use Modules\Xot\Datas\XotData;
 use function Laravel\Folio\{middleware, name};
 
 middleware(['guest']);
@@ -16,7 +17,7 @@ new class extends Component
 
     public function mount(): void
     {
-        $this->types = (new User())->getChildTypes();
+        $this->types=XotData::make()->getUserChildTypes();
     }
 };
 ?>
@@ -36,24 +37,27 @@ new class extends Component
 
             <!-- Card contenente il form di registrazione -->
             <div class="w-full lg:flex justify-around">
-                @foreach($types as $type => $class)
+                @foreach($types as $type )
+                @if($type->canRegister())
                 <div class="flex justify-center">
-                    <a class="w-full flex flex-col items-center mb-7" href="{{ route('register.type', ['type'=>$type]) }}" tag="a">
+                    <a class="w-full flex flex-col items-center mb-7" href="{{ $type->getRoute('register') }}" tag="a">
                         <div class="w-80 h-80 rounded-full bg-white shadow-2xl overflow-hidden">
-                        <img src="/img/{{ $type }}.jpg" class="w-full h-full object-cover"/>
+                        <img src="{{ $type->getImage() }}" class="w-full h-full object-cover"/>
                         </div>
                     <x-filament::button class="text-2xl !text-white transition-colors rounded-lg flex justify-center items-center !bg-[#1A467F] hover:bg-[#0D9488] hover:cursor-pointer shadow-2xl mt-5 text-lg p-5">
-                            {{ ucfirst($type) }}
+                            {{ $type->getLabel() }}
                     </x-filament::button>
                     </a>
                 </div>
+                @endif
                 @endforeach
             </div>
         </div>
 
-        <!-- <div class="bg-[#E6EBF7] text-center text-sm text-gray-500">
+        {{--   <div class="bg-[#E6EBF7] text-center text-sm text-gray-500">
             <p>Hai bisogno di assistenza? <a href="#" class="text-blue-800 hover:underline">Contattaci</a></p>
-        </div> -->
+        </div>
+        --}}
     </div>
     @endvolt
 </x-layouts.app>
