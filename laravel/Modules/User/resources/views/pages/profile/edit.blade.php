@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Locked;
+use Modules\SaluteOra\Models\User;
 
 name('profile.edit');
 middleware(['auth', 'verified']);
@@ -25,10 +26,10 @@ $component = new class extends Component {
     /**
      * The authenticated user (locked property).
      *
-     * @var \Illuminate\Foundation\Auth\User|\Illuminate\Contracts\Auth\Authenticatable
+     * @var User
      */
     #[Locked]
-    public $user;
+    public User $user;
 
     /**
      * User's name.
@@ -80,9 +81,14 @@ $component = new class extends Component {
      */
     public function mount(): void
     {
-        $this->user = auth()->user();
-        $this->name = $this->user->name;
-        $this->email = $this->user->email;
+        $user = auth()->user();
+        if (!$user instanceof User) {
+            abort(401, 'User not authenticated');
+        }
+        
+        $this->user = $user;
+        $this->name = $this->user->name ?? '';
+        $this->email = $this->user->email ?? '';
     }
 
     /**
@@ -94,7 +100,7 @@ $component = new class extends Component {
     {
         $validated = $this->validate([
             'name' => 'required|string|min:3',
-            'email' => 'required|min:3|email|max:255|unique:users,email,' . $this->user->id . ',id',
+            'email' => 'required|min:3|email|max:255|unique:users,email,' . $this->user->getKey() . ',id',
         ]);
 
         // if the user hasn't changed their name or email and we also want to make, don't update and show error
@@ -141,7 +147,7 @@ $component = new class extends Component {
             return Redirect::back();
         }
 
-        $user = auth()->user();
+        $user = $this->user;
 
         Auth::logout();
 

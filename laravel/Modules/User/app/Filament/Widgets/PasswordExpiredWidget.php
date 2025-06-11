@@ -85,16 +85,31 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
     {
         $this->validate();
 
-        if (! Hash::check($this->data['current_password'], auth()->user()->password)) {
+        $user = Auth::user();
+        if (!$user || !($user instanceof \Illuminate\Database\Eloquent\Model)) {
+            $this->addError('current_password', __('user::auth.user_not_found'));
+            return null;
+        }
+
+        // Cast e verifica esistenza dei dati del form
+        $currentPassword = (string) ($this->data['current_password'] ?? '');
+        $newPassword = (string) ($this->data['password'] ?? '');
+        
+        if (empty($currentPassword) || empty($newPassword)) {
+            $this->addError('current_password', __('user::auth.password_fields_required'));
+            return null;
+        }
+
+        $userPassword = $user->getAttribute('password');
+        if (!Hash::check($currentPassword, $userPassword)) {
             $this->addError('current_password', __('user::auth.password_current_incorrect'));
             return null;
         }
 
-        $user = auth()->user();
-        $user->password = Hash::make($this->data['password']);
+        $user->setAttribute('password', Hash::make($newPassword));
         $user->save();
 
-        return new PasswordResetResponse($user);
+        return new PasswordResetResponse();
     }
 
     protected function getCurrentPasswordFormComponent(): Component

@@ -81,7 +81,7 @@ class LogoutListener
             // Log dell'evento
             Log::info('Logout effettuato', [
                 'user_id' => $event->user->getAuthIdentifier(),
-                'device_id' => $device?->id,
+                'device_id' => $device->id,
                 'timestamp' => now()
             ]);
 
@@ -89,7 +89,7 @@ class LogoutListener
             Log::error('Errore durante il logout', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
-                'user_id' => $event->user?->getAuthIdentifier()
+                'user_id' => $event->user->getAuthIdentifier()
             ]);
         }
     }

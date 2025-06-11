@@ -14,7 +14,7 @@ parameters:
         minimumNumberOfJobsPerProcess: 2
 
     paths:
-        - ./Modules
+        - ./Modules/*/app/*
         # - ./Themes
         # - ./app
 
@@ -46,6 +46,8 @@ parameters:
         # - ./Modules/*/database_old/*
         - ./Modules/*/scripts/*
         - ./Modules/*/tests/*
+        - ./Modules/*/vendor/*
+        - ./Modules/*/*.blade.php
 
     bootstrapFiles:
         - ./phpstan_constants.php

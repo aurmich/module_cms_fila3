@@ -53,7 +53,7 @@ class Studio extends BaseTenant
     /** @var string */
     protected $table = 'studios';
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'name',
         'slug',

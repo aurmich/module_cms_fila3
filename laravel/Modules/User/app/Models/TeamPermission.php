@@ -24,7 +24,7 @@ class TeamPermission extends Model
     /** @var string */
     protected $connection = 'user';
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'team_id',
         'user_id',

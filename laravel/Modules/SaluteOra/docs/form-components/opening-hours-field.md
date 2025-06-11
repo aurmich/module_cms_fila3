@@ -477,7 +477,7 @@ class Studio extends BaseModel implements HasName
     /** @var string */
     protected $table = 'studios';
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'name',
         'phone',

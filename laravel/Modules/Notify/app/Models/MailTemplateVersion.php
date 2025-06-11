@@ -29,7 +29,7 @@ class MailTemplateVersion extends BaseModel
     /** @var string */
     protected $connection = 'notify';
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'template_id',
         'mailable',

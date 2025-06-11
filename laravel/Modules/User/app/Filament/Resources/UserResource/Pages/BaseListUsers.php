@@ -22,6 +22,8 @@ abstract class BaseListUsers extends XotBaseListRecords
     protected static string $resource = UserResource::class;
 
     /**
+     * Get table columns for user records.
+     *
      * @return array<string, TextColumn>
      */
     public function getTableColumns(): array
@@ -40,6 +42,8 @@ abstract class BaseListUsers extends XotBaseListRecords
     }
 
     /**
+     * Get table filters for user records.
+     *
      * @return array<Tables\Filters\BaseFilter>
      */
     public function getTableFilters(): array
@@ -53,23 +57,41 @@ abstract class BaseListUsers extends XotBaseListRecords
     }
 
     /**
-     * @return array<Action|Tables\Actions\ActionGroup>
+     * Get table actions for user records.
+     *
+     * @return array<\Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
      */
     public function getTableActions(): array
     {
-        return [
-            'change-password' => ChangePasswordAction::make()
+        $actions = [
+            ChangePasswordAction::make()
                 ->tooltip('Cambio Password')
                 ->iconButton(),
-            ...parent::getTableActions(),
-            'deactivate' => Action::make('deactivate')
-                ->tooltip(__('filament-actions::delete.single.label'))
-                ->color('danger')
-                ->icon('heroicon-o-trash')
-                ->action(static fn (UserContract $user) => $user->delete()),
         ];
+        
+        // Add parent actions - filter to ensure type compatibility
+        $parentActions = parent::getTableActions();
+        foreach ($parentActions as $action) {
+            if ($action instanceof \Filament\Tables\Actions\Action || $action instanceof \Filament\Tables\Actions\ActionGroup) {
+                $actions[] = $action;
+            }
+        }
+        
+        // Add deactivate action
+        $actions[] = Action::make('deactivate')
+            ->tooltip(__('filament-actions::delete.single.label'))
+            ->color('danger')
+            ->icon('heroicon-o-trash')
+            ->action(static fn (UserContract $user) => $user->delete());
+            
+        return $actions;
     }
 
+    /**
+     * Get header widgets for the user list page.
+     *
+     * @return array<class-string>
+     */
     protected function getHeaderWidgets(): array
     {
         return [
@@ -78,13 +100,15 @@ abstract class BaseListUsers extends XotBaseListRecords
     }
 
     /**
-     * @return array<string, Tables\Actions\BulkAction>
+     * Get table bulk actions for user records.
+     *
+     * @return array<Tables\Actions\BulkAction>
      */
     public function getTableBulkActions(): array
     {
         return [
-            'delete' => Tables\Actions\DeleteBulkAction::make(),
-            'export' => ExportBulkAction::make(),
+            Tables\Actions\DeleteBulkAction::make(),
+            ExportBulkAction::make(),
         ];
     }
 }

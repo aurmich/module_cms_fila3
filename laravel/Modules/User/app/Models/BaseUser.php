@@ -203,7 +203,8 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     public function __construct(array $attributes = [])
     {
         // Concateno i fillable del parent con quelli della classe corrente
-        $this->fillable = array_merge(parent::getFillable(), $this->getFillable());
+        // array_values() garantisce che sia un array indicizzato (list<string>)
+        $this->fillable = array_values(array_merge(parent::getFillable(), $this->getFillable()));
 
         parent::__construct($attributes);
     }
@@ -318,10 +319,15 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
             ->belongsToManyX(Device::class);
     }
 
+    /**
+     * @return HasMany<SocialiteUser, static>
+     */
     public function socialiteUsers(): HasMany
     {
-        return $this
-            ->hasMany(SocialiteUser::class);
+        /** @var class-string<SocialiteUser> $socialiteUserClass */
+        $socialiteUserClass = SocialiteUser::class;
+        
+        return $this->hasMany($socialiteUserClass);
     }
 
     public function getProviderField(string $provider, string $field): string

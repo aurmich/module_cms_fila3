@@ -82,7 +82,7 @@ class ChangeTypeCommand extends Command
         $user->type = $newTypeEnum;
         $user->save();
 
-        $this->info("User type changed to '{$user->type?->getLabel()}' for {$email}");
+        $this->info("User type changed to '{$user->type->getLabel()}' for {$email}");
 
         // Log dell'attività se disponibile
         //$this->logActivity($user, $oldType, $newType);

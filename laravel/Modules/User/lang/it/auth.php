@@ -48,55 +48,45 @@ return [
         ],
         'form' => [
             'current_password' => [
-                'label' => 'Current Password',
-                'validation_attribute' => 'current_password',
+                'label' => 'Password Attuale',
+                'placeholder' => 'Inserisci la password attuale',
+                'help' => 'Inserisci la tua password attuale per confermare la tua identità',
             ],
             'password' => [
-                'label' => 'Password',
-                'validation_attribute' => 'password',
+                'label' => 'Nuova Password',
+                'placeholder' => 'Inserisci la nuova password',
+                'help' => 'La password deve contenere almeno 8 caratteri',
             ],
             'password_confirmation' => [
-                'label' => 'Confirm Password',
+                'label' => 'Conferma Nuova Password',
+                'placeholder' => 'Conferma la nuova password',
+                'help' => 'Reinserisci la nuova password per confermarla',
             ],
         ],
         'actions' => [
-            'reset_password' => ['label' => 'Reset Password'],
-            'cancel' => ['label' => 'Cancel'],
-        ],
-        'reset_password' => 'Reset Password',
-        'password_reset' => 'Password Reset',
-        'notifications' => [
-            'wrong_password' => [
-                'title' => 'Wrong Password',
-                'body' => 'The current password you entered is incorrect.',
+            'update' => [
+                'label' => 'Aggiorna Password',
+                'success' => 'Password aggiornata con successo',
+                'error' => 'Errore durante l\'aggiornamento della password',
             ],
-            'column_not_found' => [
-                'title' => 'Column Not Found',
-                'body' => 'Either the column ":column_name" or the password column ":password_column_name" was not found in the :table_name table.',
-            ],
-            'password_reset' => [
-                'success' => 'Password Reset Successful',
-            ],
-            'same_password' => [
-                'title' => 'Same Password',
-                'body' => 'The new password must be different from the current password.',
-            ],
-        ],
-        'exceptions' => [
-            'column_not_found' => 'Either the column ":column_name" or the password column ":password_column_name" was not found in the ":table_name" table. Please publish migrations and run them, if the error still persists, publish the config file and update the table_name, column_name, and password_column_name values.',
         ],
     ],
-    'failed' => 'Le credenziali non corrispondono a quelle registrate.',
-    'general_error' => 'Non hai diritti sufficienti per questa operazione.',
-    'socialite' => [
-        'unacceptable' => ':provider non è supportato.',
-    ],
-    'throttle' => 'Troppi tentativi di login. Si prega di riprovare tra :seconds secondi.',
-    'unknown' => 'Si è verificato un errore sconosciuto',
-    'Reset password' => 'Reimposta la password',
-    'Send password reset link' => 'Invia link per reimpostare la password',
-    'Confirm Password' => 'Conferma Password',
-    'Confirm' => 'Conferma',
+
+    'email' => 'Email',
+    'name' => 'Nome',
+    'confirm_password' => 'Conferma Password',
+
+    // Messaggi di stato
+    'logout_success' => 'Logout effettuato con successo.',
+    'logout_error' => 'Si è verificato un errore durante il logout.',
+
+    // Messaggi per il reset password
+    'reset_password_notification_subject' => 'Reset Password Notification',
+    'reset_password_notification_line_1' => 'You are receiving this email because we received a password reset request for your account.',
+    'reset_password_notification_action' => 'Reset Password',
+    'reset_password_notification_line_2' => 'This password reset link will expire in :count minutes.',
+    'reset_password_notification_line_3' => 'If you did not request a password reset, no further action is required.',
+
     'Resend Verification Email' => 'Rinvia Email di Verifica',
     'Verify Your Email Address' => 'Verifica la tua email',
     'A fresh verification link has been sent to your email address.' => 'Un nuovo link di verifica è stato inviato al tuo indirizzo email.',
@@ -156,13 +146,14 @@ return [
         'password_confirmation' => 'Conferma password',
         'password_confirmation_placeholder' => '••••••••',
         'submit' => 'Registrati',
-        'already_registered' => 'Hai già un account? Accedi',
         'success' => 'Registrazione completata con successo.',
         'failed' => 'Impossibile completare la registrazione.',
+        'already_have_account' => 'Hai già un account?',
+        'login' => 'Accedi',
         // Structured version
         'name_structured' => [
             'label' => 'Nome',
-            'placeholder' => 'Inserisci il tuo nome'
+            'placeholder' => 'Inserisci il tuo nome completo'
         ],
         'email_structured' => [
             'label' => 'Email',
@@ -170,24 +161,24 @@ return [
         ],
         'password_structured' => [
             'label' => 'Password',
-            'placeholder' => 'Inserisci la tua password'
+            'placeholder' => 'Inserisci la password'
         ],
         'password_confirmation_structured' => [
             'label' => 'Conferma Password',
-            'placeholder' => 'Conferma la tua password'
+            'placeholder' => 'Conferma la password'
         ],
     ],
 
-    // Recupero Password
-    'forgot-password' => [
-        'title' => 'Recupera password',
-        'subtitle' => 'Inserisci il tuo indirizzo email per ricevere il link di reset',
+    // Password dimenticata
+    'forgot_password' => [
+        'title' => 'Password dimenticata?',
+        'subtitle' => 'Inserisci la tua email per ricevere le istruzioni',
         'email' => 'Indirizzo email',
         'email_placeholder' => 'esempio@email.com',
-        'submit' => 'Invia link',
-        'back_to_login' => 'Torna al login',
-        'success' => 'Ti abbiamo inviato le istruzioni via email.',
+        'submit' => 'Invia istruzioni',
+        'success' => 'Le istruzioni sono state inviate alla tua email.',
         'failed' => 'Impossibile inviare le istruzioni di reset.',
+        'back_to_login' => 'Torna al login',
         // Structured version
         'email_structured' => [
             'label' => 'Email',
@@ -195,8 +186,8 @@ return [
         ],
     ],
 
-    // Reset Password
-    'reset-password' => [
+    // Reset password
+    'reset_password' => [
         'title' => 'Reimposta password',
         'subtitle' => 'Inserisci la nuova password',
         'email' => 'Indirizzo email',

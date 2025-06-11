@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets;
 
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\View;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
+/**
+ * Logout widget for user logout functionality.
+ */
 class LogoutWidget extends XotBaseWidget
 {
     /**
@@ -19,7 +23,17 @@ class LogoutWidget extends XotBaseWidget
      * IMPORTANTE: quando il widget viene usato con @livewire() direttamente nelle Blade,
      * il path deve essere senza il namespace del modulo.
      */
+    /** @phpstan-ignore-next-line */
     protected static string $view = 'user::widgets.logout';
+
+    /**
+     * Widget data array.
+     * 
+     * CRITICAL: Do not remove or redeclare this property - it's managed by XotBaseWidget.
+     *
+     * @var array<string, mixed>|null
+     */
+    public ?array $data = [];
 
     /**
      * Stato del widget.
@@ -27,8 +41,20 @@ class LogoutWidget extends XotBaseWidget
     public bool $isLoggingOut = false;
 
     /**
+     * Mount the widget and initialize the form.
+     *
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
+
+    /**
      * Implementazione del metodo astratto getFormSchema.
      * NON sovrascrivere il metodo form() che è dichiarato come final.
+     *
+     * @return array<string, Component>
      */
     public function getFormSchema(): array
     {
@@ -40,6 +66,9 @@ class LogoutWidget extends XotBaseWidget
 
     /**
      * Azione di logout.
+     * Gestisce il logout dell'utente con eventi, logging e reindirizzamento localizzato.
+     *
+     * @return void
      */
     public function logout(): void
     {
@@ -85,6 +114,8 @@ class LogoutWidget extends XotBaseWidget
 
     /**
      * Azioni del form.
+     *
+     * @return array<string, Action>
      */
     public function getFormActions(): array
     {
@@ -98,13 +129,18 @@ class LogoutWidget extends XotBaseWidget
                 ->color('gray')
                 ->size('lg')
                 ->extraAttributes(['class' => 'w-full justify-center mt-2'])
-                ->url(function () {
+                ->url(function (): string {
                     $locale = app()->getLocale();
                     return '/' . $locale;
                 }),
         ];
     }
 
+    /**
+     * Get view data for the widget.
+     *
+     * @return array<string, string>
+     */
     protected function getViewData(): array
     {
         return [

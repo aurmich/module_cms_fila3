@@ -22,8 +22,6 @@ use Filament\Forms\Components\Checkbox as FormsCheckbox;
  * - Usa solo componenti Filament importati
  * - Validazione e sicurezza integrate
  * - Facilmente estendibile (2FA, captcha, login social)
- *
- * @property-read static string $view La view del widget segue il pattern {module}::filament.widgets.{type}
  */
 
 class LoginWidget extends XotBaseWidget
@@ -34,6 +32,7 @@ class LoginWidget extends XotBaseWidget
      * il path deve essere senza il namespace del modulo (senza "user::").
      * 
      * @see \Modules\User\docs\WIDGETS_STRUCTURE.md - Sezione B
+     * @var view-string
      */
     protected static string $view = 'user::filament.widgets.login';
     
@@ -77,10 +76,13 @@ class LoginWidget extends XotBaseWidget
         try {
             $data = $this->form->getState();
             
+            // Cast esplicito per type safety PHPStan
+            $remember = (bool) ($data['remember'] ?? false);
+            
             if (!Auth::attempt([
-                'email' => $data['email'],
-                'password' => $data['password']
-            ], $data['remember'] ?? false)) {
+                'email' => (string) $data['email'],
+                'password' => (string) $data['password']
+            ], $remember)) {
                 throw ValidationException::withMessages([
                     'email' => [__('Le credenziali fornite non sono corrette.')],
                 ]);
