@@ -5,16 +5,30 @@ declare(strict_types=1);
 namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
-use Modules\User\Enums\UserTypeEnum;
 use Modules\User\Models\Role;
 
 class RolesSeeder extends Seeder
 {
+    /**
+     * Table headers for output display.
+     *
+     * @var array<int, string>
+     */
     private static array $OUTPUT_TABLE_HEADERS = [
         '#',
         'Name',
         'Guard',
+    ];
+
+    /**
+     * Default roles to be created.
+     *
+     * @var array<int, array<string, string>>
+     */
+    private static array $DEFAULT_ROLES = [
+        ['name' => 'admin', 'guard_name' => 'web'],
+        ['name' => 'user', 'guard_name' => 'web'],
+        ['name' => 'guest', 'guard_name' => 'web'],
     ];
 
     /**
@@ -23,18 +37,10 @@ class RolesSeeder extends Seeder
     public function run(): void
     {
         $roles = [];
-
-        Collection::make(UserType::cases())
-            ->each(
-                static function (UserType $userType) use (&$roles): void {
-                    $roles[] = Role::firstOrCreate(
-                        [
-                            'name' => $userType->value,
-                            'guard_name' => $userType->getDefaultGuard(),
-                        ]
-                    );
-                },
-            );
+        
+        foreach (self::$DEFAULT_ROLES as $roleData) {
+            $roles[] = Role::firstOrCreate($roleData);
+        }
 
         $this->command->getOutput()->comment('<info>Newly created roles</info>');
         $this->command->getOutput()->table(

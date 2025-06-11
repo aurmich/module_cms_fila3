@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use function Laravel\Folio\{middleware, name};
@@ -13,27 +18,79 @@ use Livewire\Attributes\Locked;
 name('profile.edit');
 middleware(['auth', 'verified']);
 
-new class extends Component {
+/**
+ * Profile edit component for managing user profile, password updates, and account deletion.
+ */
+$component = new class extends Component {
+    /**
+     * The authenticated user (locked property).
+     *
+     * @var \Illuminate\Foundation\Auth\User|\Illuminate\Contracts\Auth\Authenticatable
+     */
     #[Locked]
     public $user;
 
-    public $name = '';
-    public $email = '';
-    public $current_password = '';
+    /**
+     * User's name.
+     *
+     * @var string
+     */
+    public string $name = '';
 
+    /**
+     * User's email.
+     *
+     * @var string
+     */
+    public string $email = '';
+
+    /**
+     * Current password for password updates.
+     *
+     * @var string
+     */
+    public string $current_password = '';
+
+    /**
+     * New password for password updates.
+     *
+     * @var string
+     */
     #[Validate('required|confirmed|min:6')]
-    public $new_password = '';
-    public $new_password_confirmation = '';
-    public $delete_confirm_password = '';
+    public string $new_password = '';
 
-    public function mount()
+    /**
+     * New password confirmation.
+     *
+     * @var string
+     */
+    public string $new_password_confirmation = '';
+
+    /**
+     * Password confirmation for account deletion.
+     *
+     * @var string
+     */
+    public string $delete_confirm_password = '';
+
+    /**
+     * Initialize the component with user data.
+     *
+     * @return void
+     */
+    public function mount(): void
     {
         $this->user = auth()->user();
         $this->name = $this->user->name;
         $this->email = $this->user->email;
     }
 
-    public function updateProfile()
+    /**
+     * Update user profile information.
+     *
+     * @return void
+     */
+    public function updateProfile(): void
     {
         $validated = $this->validate([
             'name' => 'required|string|min:3',
@@ -51,7 +108,12 @@ new class extends Component {
         $this->dispatch('toast', message: 'Successfully updated profile.', data: ['position' => 'top-right', 'type' => 'success']);
     }
 
-    public function updatePassword()
+    /**
+     * Update user password.
+     *
+     * @return void
+     */
+    public function updatePassword(): void
     {
         $validated = $this->validate();
 
@@ -66,12 +128,17 @@ new class extends Component {
         $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
     }
 
-    public function destroy()
+    /**
+     * Delete user account after password confirmation.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(): \Illuminate\Http\RedirectResponse
     {
         if (!Hash::check($this->delete_confirm_password, $this->user->password)) {
             $this->dispatch('toast', message: 'The Password you entered is incorrect', data: ['position' => 'top-right', 'type' => 'danger']);
             $this->reset(['delete_confirm_password']);
-            return;
+            return Redirect::back();
         }
 
         $user = auth()->user();

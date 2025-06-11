@@ -58,11 +58,11 @@ abstract class BaseListUsers extends XotBaseListRecords
     public function getTableActions(): array
     {
         return [
-            ChangePasswordAction::make()
+            'change-password' => ChangePasswordAction::make()
                 ->tooltip('Cambio Password')
                 ->iconButton(),
             ...parent::getTableActions(),
-            Action::make('deactivate')
+            'deactivate' => Action::make('deactivate')
                 ->tooltip(__('filament-actions::delete.single.label'))
                 ->color('danger')
                 ->icon('heroicon-o-trash')

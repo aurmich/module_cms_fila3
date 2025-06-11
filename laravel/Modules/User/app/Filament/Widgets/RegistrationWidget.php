@@ -61,7 +61,7 @@ class RegistrationWidget extends XotBaseWidget
     /**
      * @see https://filamentphp.com/docs/3.x/forms/adding-a-form-to-a-livewire-component
      */
-    public function register()
+    public function register():\Illuminate\Http\RedirectResponse
     {
         $data = $this->form->getState();
         $user=app($this->action)->execute($data);

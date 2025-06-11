@@ -6,8 +6,11 @@ namespace Modules\User\Filament\Widgets\Auth;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\ComponentContainer;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-
+/**
+ * @property ComponentContainer $form
+ */
 class LoginWidget extends XotBaseWidget
 {
     public ?array $data = [];

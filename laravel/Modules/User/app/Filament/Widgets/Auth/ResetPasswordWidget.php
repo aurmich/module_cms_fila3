@@ -4,17 +4,47 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets\Auth;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 use Filament\Forms;
+use Filament\Forms\Form;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Filament\Forms\ComponentContainer;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Password;
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
-class ResetPasswordWidget extends BaseAuthWidget
+/**
+ * @property ComponentContainer $form
+ */
+class ResetPasswordWidget extends XotBaseWidget
 {
     protected static string $view = 'user::widgets.auth.reset-password-widget';
+
+    /**
+     * Get the form schema for this widget.
+     *
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
+    public function getFormSchema(): array
+    {
+        return [
+            'email' => TextInput::make('email')
+                ->email()
+                ->required()
+                ->autocomplete('email'),
+            'password' => TextInput::make('password')
+                ->password()
+                ->required()
+                ->minLength(8)
+                ->same('password_confirmation')
+                ->autocomplete('new-password'),
+            'password_confirmation' => TextInput::make('password_confirmation')
+                ->password()
+                ->required()
+                ->autocomplete('new-password'),
+        ];
+    }
 
     public function form(Form $form): Form
     {
@@ -69,26 +99,5 @@ class ResetPasswordWidget extends BaseAuthWidget
         } else {
             $this->addError('email', __($status));
         }
-    }
-
-    protected function getFormSchema(): array
-    {
-        return [
-            Forms\Components\TextInput::make('email')
-                ->email()
-                ->required()
-                ->maxLength(255),
-
-            Forms\Components\TextInput::make('password')
-                ->password()
-                ->required()
-                ->maxLength(255),
-
-            Forms\Components\TextInput::make('password_confirmation')
-                ->password()
-                ->required()
-                ->maxLength(255)
-                ->same('password'),
-        ];
     }
 }

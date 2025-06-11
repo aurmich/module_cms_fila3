@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Modules\SaluteOra\Models\Patient;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Form as FilamentForm;
@@ -25,6 +26,7 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
  * @property string $title Titolo del widget
  * @property string $icon Icona del widget
  * @property array<string, mixed>|null $data Dati del form
+ * @property ComponentContainer $form
  */
 abstract class XotBaseWidget extends FilamentWidget implements HasForms
 {
