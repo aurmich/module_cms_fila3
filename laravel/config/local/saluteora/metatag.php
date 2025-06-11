@@ -15,7 +15,7 @@ return [
     'nome_regione' => '',
     'nome_comune' => '',
     'site_title' => '',
-    'logo_img' => 'saluteora::images/logo.svg',
+    'logo_img' => '/img/logo.svg',
     'logo_square' => 'saluteora::images/logo.svg',
     'logo_footer_img' => 'saluteora::images/logo.svg',
     'logo_alt' => 'Logo',

@@ -10,12 +10,12 @@
             {
                 "type": "hero",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.simple2",
+                    "view": "pub_theme::components.blocks.hero.dettaglio-dottore",
                     "title": "Benvenuto nella tua Area Dottore",
                     "subtitle": "Gestisci le tue pazienti e monitora i loro percorsi di salute orale",
                     "image": "/img/odontoiatra.jpg",
                     "cta-buttons": [],
-                    "cta_text": "Vedi le tue pazienti",
+                    "cta_text": "Continua la registrazione",
                     "cta_link": "/doctor/patients"
                 }
             }

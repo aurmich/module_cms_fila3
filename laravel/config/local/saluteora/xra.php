@@ -15,4 +15,7 @@ return [
     'register_adm_theme' => false,
     'register_pub_theme' => true,
     'tenant_class' => 'Modules\SaluteOra\Models\Studio',
+    'colors' => [
+        'primary' => '#0D9488',
+    ]
 ];

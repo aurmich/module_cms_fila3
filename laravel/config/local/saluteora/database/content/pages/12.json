@@ -350,9 +350,21 @@
                         "Aggiornamento Continuo ECM"
                     ],
                     "coverage_map": {
-                        "nord": ["Milano", "Torino", "Bologna", "Venezia", "Verona"],
+                        "nord": [
+                            "Milano",
+                            "Torino",
+                            "Bologna",
+                            "Venezia",
+                            "Verona"
+                        ],
                         "centro": ["Roma", "Firenze", "Perugia", "Ancona"],
-                        "sud": ["Napoli", "Bari", "Catania", "Palermo", "Cagliari"]
+                        "sud": [
+                            "Napoli",
+                            "Bari",
+                            "Catania",
+                            "Palermo",
+                            "Cagliari"
+                        ]
                     },
                     "availability": "Real-time booking system con disponibilità aggiornata in tempo reale"
                 }

@@ -2,7 +2,13 @@
     'alignment' => 'right',
 ])
 
-<div class="flex items-center space-x-4 m-12">
+@php
+    $userAgent = request()->header('User-Agent');
+    $isMobile = preg_match('/Mobile|Android|iPhone|iPad|Opera Mini|IEMobile|WPDesktop/i', $userAgent);
+@endphp
+
+@if (!$isMobile)
+<div class="flex items-center space-x-4 !m-1">
     <a href="{{ route('login') }}" class="text-sm font-medium text-[#E2E8F0] hover:text-[#E2E8F0]">
         {{ __('auth.login.title') }}
     </a>
@@ -11,3 +17,4 @@
         {{ __('auth.register.title') }}
     </a>
 </div>
+@endif
