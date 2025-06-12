@@ -11,7 +11,7 @@ use Modules\SaluteOra\Models\AppointmentWorkflow;
 use Modules\SaluteOra\Models\Dentist;
 use Modules\Notify\Actions\SendAppointmentNotificationAction;
 use Modules\SaluteOra\Models\Patient;
-use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+use Modules\SaluteOra\Enums\AppointmentStatus;
 use Spatie\QueueableAction\QueueableAction;
 
 class FinalizeAppointmentWorkflowAction
@@ -75,7 +75,7 @@ class FinalizeAppointmentWorkflowAction
                 $appointment->start_time = $dateData['start_time'] ?? null;
                 $appointment->end_time = $dateData['end_time'] ?? null;
                 $appointment->type = $treatmentData['type'] ?? 'check-up';
-                $appointment->status = AppointmentStatusEnum::CONFIRMED;
+                $appointment->status = AppointmentStatus::CONFIRMED;
                 $appointment->notes = $treatmentData['notes'] ?? '';
                 $appointment->treatment_plan = $treatmentData['treatment_plan'] ?? '';
                 $appointment->is_emergency = $treatmentData['is_emergency'] ?? false;
@@ -152,7 +152,7 @@ class FinalizeAppointmentWorkflowAction
                 }
                 
                 // Aggiorna sempre lo stato a confirmed
-                $appointment->status = 'confirmed';
+                $appointment->status = AppointmentStatus::CONFIRMED;
                 $appointment->save();
                 
                 // Invia notifiche se richiesto
