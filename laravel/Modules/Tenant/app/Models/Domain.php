@@ -18,15 +18,9 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|Domain query()
  * @method static \Illuminate\Database\Eloquent\Builder|Domain whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Domain whereName($value)
-<<<<<<< HEAD
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
- * @method static \Modules\Tenant\Database\Factories\DomainFactory factory($count = null, $state = [])
-=======
 * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
   * @method static \Modules\Tenant\Database\Factories\DomainFactory factory($count = null, $state = [])
->>>>>>> 0734d5c9 (.)
  * @mixin \Eloquent
  */
 class Domain extends BaseModel

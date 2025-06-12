@@ -15,7 +15,7 @@ abstract class BaseUser extends Authenticatable
     /**
      * Get the entity's notifications.
      *
-     * @return MorphMany<\Illuminate\Notifications\DatabaseNotification, static>
+     * @return MorphMany<\Illuminate\Notifications\DatabaseNotification, $this>
      */
     public function notifications(): MorphMany
     {

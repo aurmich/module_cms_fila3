@@ -101,7 +101,10 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
         }
 
         $userPassword = $user->getAttribute('password');
-        if (!Hash::check($currentPassword, $userPassword)) {
+        // Cast esplicito di mixed a string per PHPStan
+        $userPasswordString = (string) ($userPassword ?? '');
+        
+        if (!Hash::check($currentPassword, $userPasswordString)) {
             $this->addError('current_password', __('user::auth.password_current_incorrect'));
             return null;
         }

@@ -74,13 +74,13 @@ trait HasTeams
     /**
      * Check if the user belongs to a specific team.
      */
-    public function belongsToTeam(\Modules\User\Contracts\TeamContract $team): bool
+    public function belongsToTeam(TeamContract $team): bool
     {
         $found = $this->teams()->where('teams.id', $team->id)->first();
         if ($found === null) {
             return false;
         }
-        \Webmozart\Assert\Assert::isInstanceOf($found, \Modules\User\Contracts\TeamContract::class, 'Team must implement TeamContract.');
+        Assert::isInstanceOf($found, TeamContract::class, 'Team must implement TeamContract.');
         return true;
     }
 
@@ -195,8 +195,8 @@ trait HasTeams
             return true;
         }
 
-        // Check if user can own this team (assuming BaseUser implements HasTeamsContract)
-        if ($this instanceof TeamContract && method_exists($user, 'ownsTeam')) {
+        // Check if user can own this team (UserContract sempre ha il metodo ownsTeam)
+        if ($this instanceof TeamContract) {
             return $user->ownsTeam($this);
         }
 
@@ -214,7 +214,7 @@ trait HasTeams
     /**
      * Check if the user has a specific permission in a team.
      */
-    public function hasTeamPermission(\Modules\User\Contracts\TeamContract $team, string $permission): bool
+    public function hasTeamPermission(TeamContract $team, string $permission): bool
     {
         return $this->ownsTeam($team) || in_array($permission, $this->teamPermissions($team));
     }
@@ -222,7 +222,7 @@ trait HasTeams
     /**
      * Check if the user has a specific role in a team.
      */
-    public function hasTeamRole(\Modules\User\Contracts\TeamContract $team, string $role): bool
+    public function hasTeamRole(TeamContract $team, string $role): bool
     {
         if ($this->ownsTeam($team)) {
             return true;
@@ -234,20 +234,8 @@ trait HasTeams
 
     /**
      * Get the current team of the user's context.
-     * Commented out as it is less comprehensive and does not use TeamContract.
-     * The preferred method (below) includes logic for default team switching and uses TeamContract for better abstraction.
-     */
-    /*
-    public function currentTeam(): BelongsTo
-    {
-        return $this->belongsTo(Team::class, 'current_team_id');
-    }
-    */
-
-    /**
-     * Get the current team of the user's context.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Illuminate\Database\Eloquent\Model&\Modules\User\Contracts\TeamContract, static>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Modules\User\Contracts\TeamContract, $this>
      */
     public function currentTeam(): BelongsTo
     {
@@ -261,42 +249,31 @@ trait HasTeams
             $this->save();
         }
 
-        /** @var class-string $teamClass */
         $teamClass = $xot->getTeamClass();
 
-        // Cast a Model generico per compatibilità con template types
-        /** @var class-string<\Illuminate\Database\Eloquent\Model> $modelClass */
-        $modelClass = $teamClass;
-
-        return $this->belongsTo($modelClass, 'current_team_id');
+        return $this->belongsTo($teamClass, 'current_team_id');
     }
 
     /**
      * Get the teams owned by the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Illuminate\Database\Eloquent\Model&\Modules\User\Contracts\TeamContract, static>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Modules\User\Contracts\TeamContract, $this>
      */
     public function ownedTeams(): HasMany
     {
         $xot = XotData::make();
-        /** @var class-string $teamClass */
         $teamClass = $xot->getTeamClass();
         
-        // Cast a Model generico per compatibilità con template types
-        /** @var class-string<\Illuminate\Database\Eloquent\Model> $modelClass */
-        $modelClass = $teamClass;
-        
-        return $this->hasMany($modelClass, 'user_id');
+        return $this->hasMany($teamClass, 'user_id');
     }
 
     /**
      * Get all of the pending invitations for the team.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Illuminate\Database\Eloquent\Model>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Illuminate\Database\Eloquent\Model, $this>
      */
     public function teamInvitations(): HasMany
     {
-        /** @var class-string<\Illuminate\Database\Eloquent\Model> $invitationModel */
         $invitationModel = app('team_invitation_model');
         return $this->hasMany($invitationModel, 'team_id');
     }
@@ -314,11 +291,10 @@ trait HasTeams
     /**
      * Get all of the team's users.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Illuminate\Database\Eloquent\Model>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Illuminate\Database\Eloquent\Model, $this>
      */
     public function teamUsers(): HasMany
     {
-        /** @var class-string<\Illuminate\Database\Eloquent\Model> $teamUserModel */
         $teamUserModel = app('team_user_model');
         return $this->hasMany($teamUserModel, 'team_id');
     }
@@ -326,18 +302,25 @@ trait HasTeams
     /**
      * Get the role for a specific team.
      */
-    public function teamRole(\Modules\User\Contracts\TeamContract $team): ?Role
+    public function teamRole(TeamContract $team): ?Role
     {
         /** @var \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\Pivot|null $teamUser */
         $teamUser = $this->teamUsers()->where('team_id', $team->id)->first();
 
-        return $teamUser?->role;
+        if ($teamUser === null) {
+            return null;
+        }
+
+        // Accesso sicuro alla proprietà role usando getAttribute
+        $role = $teamUser->getAttribute('role');
+        
+        return $role instanceof Role ? $role : null;
     }
 
     /**
      * Get permissions for a specific team.
      *
-     * @param \Modules\User\Contracts\TeamContract $team
+     * @param TeamContract $team
      * @return array<int, string>
      */
     public function teamPermissions(TeamContract $team): array
@@ -372,7 +355,7 @@ trait HasTeams
      *
      * @return \Modules\User\Contracts\TeamContract|null
      */
-    public function personalTeam(): ?\Modules\User\Contracts\TeamContract
+    public function personalTeam(): ?TeamContract
     {
         /** @var \Modules\User\Contracts\TeamContract|null */
         $personalTeam = $this->ownedTeams->where('personal_team', true)->first();
@@ -383,9 +366,9 @@ trait HasTeams
     /**
      * Switch the user's context to the given team.
      *
-     * @param \Modules\User\Contracts\TeamContract $team
+     * @param TeamContract $team
      */
-    public function switchTeam(?\Modules\User\Contracts\TeamContract $team): bool
+    public function switchTeam(?TeamContract $team): bool
     {
         if ($team === null) {
             return false;
@@ -416,9 +399,9 @@ trait HasTeams
     /**
      * Determine if the user owns the given team.
      *
-     * @param \Modules\User\Contracts\TeamContract $team
+     * @param TeamContract $team
      */
-    public function ownsTeam(\Modules\User\Contracts\TeamContract $team): bool
+    public function ownsTeam(TeamContract $team): bool
     {
         /** @var ?\Illuminate\Database\Eloquent\Model $found */
         $found = $this->ownedTeams()->where('teams.id', $team->id)->first();
@@ -429,8 +412,7 @@ trait HasTeams
     /**
      * Get all of the teams the user belongs to.
      *
-     * @return BelongsToMany<\Modules\User\Contracts\TeamContract, static>
-     * @phpstan-return BelongsToMany<\Modules\User\Contracts\TeamContract&\Illuminate\Database\Eloquent\Model, static>
+     * @return BelongsToMany<\Modules\User\Contracts\TeamContract, $this>
      */
     public function teams(): BelongsToMany
     {
@@ -524,9 +506,9 @@ trait HasTeams
     /**
      * Determine if the user owns the given team.
      *
-     * @param \Modules\User\Contracts\TeamContract $team
+     * @param TeamContract $team
      */
-    public function checkTeamOwnership(\Modules\User\Contracts\TeamContract $team): bool
+    public function checkTeamOwnership(TeamContract $team): bool
     {
         return $this->ownsTeam($team);
     }

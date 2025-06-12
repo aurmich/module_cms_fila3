@@ -6,6 +6,8 @@ namespace Modules\SaluteOra\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 use Modules\Xot\Filament\Traits\TransTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Defines the different types of users in the system.
@@ -21,11 +23,12 @@ use Modules\Xot\Filament\Traits\TransTrait;
 enum UserTypeEnum: string implements HasLabel
 {
     use TransTrait;
+    
     case ADMIN = 'admin';
     case DOCTOR = 'doctor';
     case PATIENT = 'patient';
-    case MODERATOR = 'moderator';
-    case STAFF = 'staff';
+    //case MODERATOR = 'moderator';
+    //case STAFF = 'staff';
 
     /**
      * Get the translated label for the user type.
@@ -36,8 +39,8 @@ enum UserTypeEnum: string implements HasLabel
             self::PATIENT => 'Paziente',
             self::DOCTOR => 'Dottore',
             self::ADMIN => 'Amministratore',
-            self::MODERATOR => 'Moderatore',
-            self::STAFF => 'Staff',
+            //self::MODERATOR => 'Moderatore',
+            //self::STAFF => 'Staff',
         };
     }
 
@@ -65,8 +68,17 @@ enum UserTypeEnum: string implements HasLabel
         */
     }
 
+    /**
+     * Get the translated description for the user type.
+     */
+    public function getDescription(): string
+    {
+        return $this->transClass(self::class,$this->value.'.description');
+    }
+
     public function getImage(): string
     {
+        //return 'https://placehold.co/600x400';
         return $this->transClass(self::class,$this->value.'.image');
     }
 
@@ -76,25 +88,12 @@ enum UserTypeEnum: string implements HasLabel
             self::ADMIN => false,
             self::DOCTOR => true,
             self::PATIENT => true,
-            self::MODERATOR => false,
-            self::STAFF => false,
+            //self::MODERATOR => false,
+            //self::STAFF => false,
         };
     }
 
-    /**
-     * Convert the enum cases to an array suitable for select inputs.
-     * Implementazione ottimizzata per evitare il collect e l'iterazione.
-     *
-     * @return array<string, string>
-     */
-    public static function toSelectArrayTEST(): array
-    {
-        return [
-            self::ADMIN->value => __('saluteora::enums.user_type.admin'),
-            self::DOCTOR->value => __('saluteora::enums.user_type.doctor'),
-            self::PATIENT->value => __('saluteora::enums.user_type.patient'),
-        ];
-    }
+    
 
     // Nota: tryFrom() è un metodo nativo di PHP 8.1+ per gli enum backed (con valore)
     // Non implementare mai un metodo tryFrom() personalizzato perché entra in conflitto
@@ -120,33 +119,9 @@ enum UserTypeEnum: string implements HasLabel
         return route($action.'.type', ['type' => $this->value]);
     }
 
-    /**
-     * Get the translated description for the user type.
-     */
-    public function getDescription(): string
-    {
-        return match($this) {
-            self::PATIENT => 'Utente paziente del sistema',
-            self::DOCTOR => 'Medico o dentista autorizzato',
-            self::ADMIN => 'Amministratore del sistema',
-            self::MODERATOR => 'Moderatore dei contenuti',
-            self::STAFF => 'Membro dello staff',
-        };
-    }
+    
 
-    /**
-     * Restituisce la traduzione per la tipologia utente.
-     */
-    public function transClass(string $class, string $key): string
-    {
-        return match($this) {
-            self::PATIENT => __('saluteora::usertype.patient'),
-            self::DOCTOR => __('saluteora::usertype.doctor'),
-            self::ADMIN => __('saluteora::usertype.admin'),
-            self::MODERATOR => __('saluteora::usertype.moderator'),
-            self::STAFF => __('saluteora::usertype.staff'),
-        };
-    }
+   
 }
 
 // Alias per retrocompatibilità
