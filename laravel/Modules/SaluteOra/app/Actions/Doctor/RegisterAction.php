@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Actions\Doctor;
 
-use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\DB;
-use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Modules\SaluteOra\Datas\DoctorData;
+use Modules\SaluteOra\Models\Doctor;
 use Modules\Notify\Emails\SpatieEmail;
 use Modules\Notify\Models\MailTemplate;
+use Modules\SaluteOra\Datas\DoctorData;
+use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\Enums\DoctorStatus;
 use Modules\SaluteOra\Enums\UserTypeEnum;
-use Illuminate\Validation\ValidationException;
-use Modules\SaluteOra\Enums\DoctorRegistrationStatusEnum;
-use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Validation\ValidationException;
 use Modules\Notify\Notifications\RecordNotification;
+use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
+use Modules\SaluteOra\Enums\DoctorRegistrationStatusEnum;
 
 
 class RegisterAction
@@ -29,18 +30,21 @@ class RegisterAction
      * @param array<string, mixed> $data
      * @return Doctor
      */
-    public function execute(Doctor $record,array $data): Doctor
+    public function execute(UserContract $record,array $data): Doctor
     {
-        $doctor=$record;
-        //$doctor = Doctor::create($data);
-        $record->save();
-        $record->update($data);
+        //$data['type']=UserTypeEnum::DOCTOR;
+        
+        $doctor = Doctor::create($data);
+        //$record->save();
+        //$record->update($data);
+        /*
         $attachments = Doctor::$attachments;
         foreach ($attachments as $attachment) {
                 $doctor->addMediaFromDisk($data[$attachment],'local')
                     ->toMediaCollection($attachment);
 
         }
+        */
         
 
         Notification::route('mail', $data['email'])

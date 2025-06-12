@@ -99,35 +99,69 @@ class DoctorResource extends XotBaseResource
     protected static function getDocumentsSchema(): array
     {
         $attachments = Doctor::$attachments;
+        $uuid=Str::uuid()->toString();
         $schema = [];
         foreach ($attachments as $attachment) {
             $schema[] = Forms\Components\FileUpload::make($attachment)
             //$schema[] = Forms\Components\SpatieMediaLibraryFileUpload::make($attachment)
                 ->disk('local')
                 //->collection($attachment)
-                ->directory('documents/'.$attachment)
+                ->directory('documents/'.$attachment.'/'.$uuid)
                 ->downloadable()
                 ->openable()
                 ->acceptedFileTypes(['application/pdf', 'image/*'])
                 ->maxSize(5120)
                 ->required()
                 ->reorderable()
+                ->multiple()
+                ->maxParallelUploads(1)
+                ->preserveFilenames() // mantiene il nome file
+                //->temporaryUploadDirectory('tmp')
+                //->saveUploadedFileNames()
                 ->columnSpanFull()
+                //->live(false) // Disabilita la validazione live
+                //->reactive(false); // Disabilita la reattività
+                //->reactive() // <-- Mantiene lo stato tra i reload
+                //->live() // <-- Aggiornamento in tempo reale
+                //->storeFiles(false) // <-- IMPEDISCE la cancellazione automatica dei file
+                ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
+                    if (!$state) return;
+            
+                    $sessionId = session()->getId();
+                    $sessionDir = "session-uploads/{$sessionId}";
+                    $sessionFiles = [];
+                    
+                    foreach ($state as $file) {
+                        if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                            // Salva direttamente nella directory di sessione
+                            $fileName = time() . '_' . $file->getClientOriginalName();
+                            $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
+                            $sessionFiles[] = $sessionPath;
+                        } else {
+                            // È già un percorso salvato
+                            $sessionFiles[] = $file;
+                        }
+                    }
+                    
+                    $set($attachment, $sessionFiles);
+                })
+                /*
                 ->default(function (?Model $record){
                     $res=$record?->getFirstMediaUrl('certifications');
                     return $res;
                 } )
                 ->formatStateUsing(function ($state,$record,$model) {
-                    /*$res=$record?->getFirstMediaUrl('certifications');
+                    $res=$record?->getFirstMediaUrl('certifications');
                     dddx(['state'=>$state,'record'=>$record,'model'=>$model,'request'=>$request]);
                     return $state;
-                    */
+                    
                     //$res= asset('/storage/1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf');
                     $res= TemporaryUploadedFile::createFromLivewire(
                         Storage::disk('public')->path('1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf')
                     );
                     return $res;
                 })
+                    */
                 /*
                 ->state(function ($record) {
                     if ($record->document_url) {

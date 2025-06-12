@@ -20,7 +20,7 @@ use Illuminate\Auth\Events\Registered;
 use Filament\Forms\Components\Checkbox;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
-use Modules\User\Contracts\UserContract;
+use Modules\Xot\Contracts\UserContract;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
@@ -33,7 +33,7 @@ class RegistrationWidget extends XotBaseWidget
     public string $resource;
     public string $model;
     public string $action;
-    public Model $record;
+    public UserContract $record;
     protected static string $view = 'pub_theme::filament.widgets.registration';
 
     public function mount(string $type,Request $request): void
@@ -87,6 +87,7 @@ class RegistrationWidget extends XotBaseWidget
     {
         $data = $this->form->getState();
         $record=$this->record;
+       
         $user=app($this->action)->execute($record,$data);
         //$post = $this->model::create($this->form->getState());
 

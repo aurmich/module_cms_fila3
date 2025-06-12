@@ -162,7 +162,7 @@ class Doctor extends User
         'city',
         'registration_number',
         'specialization',
-        //'certifications',
+        'certifications',
         'availability',
         'status',
     ];
@@ -189,7 +189,7 @@ class Doctor extends User
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            //'certifications' => 'array',
+            'certifications' => 'array',
           //  'availability' => 'array',
         ]);
     }
