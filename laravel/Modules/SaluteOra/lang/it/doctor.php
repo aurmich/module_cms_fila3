@@ -2,7 +2,7 @@
 
 return array (
   'name' => 'Medici',
-  'navigation' =>
+  'navigation' => 
   array (
     'label' => 'Medici',
     'group' => 'Team Medico',
@@ -11,9 +11,9 @@ return array (
     'sort' => 2,
     'tooltip' => 'Gestisci il personale medico e le relative informazioni professionali',
   ),
-  'steps' =>
+  'steps' => 
   array (
-    'personal_info' =>
+    'personal_info' => 
     array (
       'label' => 'Informazioni Personali',
       'description' => 'Inserisci le informazioni personali',
@@ -21,7 +21,7 @@ return array (
       'color' => 'primary',
       'tooltip' => 'Dati anagrafici e personali del medico',
     ),
-    'moderation' =>
+    'moderation' => 
     array (
       'label' => 'Moderazione',
       'description' => 'Verifica delle informazioni',
@@ -29,7 +29,7 @@ return array (
       'color' => 'warning',
       'tooltip' => 'Processo di verifica e approvazione del profilo',
     ),
-    'contacts' =>
+    'contacts' => 
     array (
       'label' => 'Contatti',
       'description' => 'Informazioni di contatto',
@@ -37,7 +37,7 @@ return array (
       'color' => 'info',
       'tooltip' => 'Dati di contatto professionali',
     ),
-    'professional' =>
+    'professional' => 
     array (
       'label' => 'Informazioni Professionali',
       'description' => 'Dati professionali e specializzazioni',
@@ -45,7 +45,7 @@ return array (
       'color' => 'success',
       'tooltip' => 'Qualifiche e specializzazioni mediche',
     ),
-    'availability' =>
+    'availability' => 
     array (
       'label' => 'Disponibilità',
       'description' => 'Orari e giorni di disponibilità',
@@ -54,9 +54,9 @@ return array (
       'tooltip' => 'Calendario e orari di ricevimento',
     ),
   ),
-  'fields' =>
+  'fields' => 
   array (
-    'full_name' =>
+    'full_name' => 
     array (
       'label' => 'Nome e Cognome',
       'placeholder' => 'Inserisci nome e cognome completi',
@@ -64,7 +64,7 @@ return array (
       'description' => 'Nome e cognome come registrati all\'Ordine',
       'tooltip' => 'Nome e cognome completo del medico',
     ),
-    'certification' =>
+    'certification' => 
     array (
       'label' => 'Certificazione',
       'placeholder' => 'Carica la certificazione',
@@ -72,7 +72,7 @@ return array (
       'description' => 'Documento che attesta l\'iscrizione all\'Ordine',
       'tooltip' => 'Documento ufficiale di iscrizione all\'Ordine',
     ),
-    'moderation_notes' =>
+    'moderation_notes' => 
     array (
       'label' => 'Note Moderazione',
       'placeholder' => 'Inserisci eventuali note',
@@ -80,7 +80,7 @@ return array (
       'description' => 'Note interne per la moderazione',
       'tooltip' => 'Note riservate per il processo di moderazione',
     ),
-    'email' =>
+    'email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'Inserisci l\'email',
@@ -88,7 +88,7 @@ return array (
       'description' => 'Email per le comunicazioni professionali',
       'tooltip' => 'Indirizzo email per contatti professionali',
     ),
-    'phone' =>
+    'phone' => 
     array (
       'label' => 'Telefono',
       'placeholder' => 'Inserisci il numero di telefono',
@@ -96,7 +96,7 @@ return array (
       'description' => 'Telefono per le comunicazioni professionali',
       'tooltip' => 'Numero di telefono per contatti professionali',
     ),
-    'address' =>
+    'address' => 
     array (
       'label' => 'Indirizzo',
       'placeholder' => 'Inserisci l\'indirizzo dello studio',
@@ -104,7 +104,7 @@ return array (
       'description' => 'Indirizzo completo dello studio',
       'tooltip' => 'Indirizzo completo dello studio medico',
     ),
-    'city' =>
+    'city' => 
     array (
       'label' => 'Città',
       'placeholder' => 'Inserisci la città',
@@ -112,7 +112,7 @@ return array (
       'description' => 'Città dove si trova lo studio',
       'tooltip' => 'Città di ubicazione dello studio',
     ),
-    'registration_number' =>
+    'registration_number' => 
     array (
       'label' => 'Numero di Iscrizione',
       'placeholder' => 'Inserisci il numero di iscrizione',
@@ -120,7 +120,7 @@ return array (
       'description' => 'Numero di iscrizione all\'Ordine dei Medici',
       'tooltip' => 'Numero di iscrizione all\'Ordine dei Medici',
     ),
-    'certifications' =>
+    'certifications' => 
     array (
       'label' => 'Certificazioni',
       'placeholder' => 'Carica le certificazioni',
@@ -128,7 +128,7 @@ return array (
       'description' => 'Certificazioni e specializzazioni',
       'tooltip' => 'Documenti attestanti le qualifiche professionali',
     ),
-    'availability' =>
+    'availability' => 
     array (
       'label' => 'Disponibilità',
       'placeholder' => 'Imposta la disponibilità',
@@ -136,7 +136,7 @@ return array (
       'description' => 'Giorni e orari di disponibilità',
       'tooltip' => 'Calendario degli orari di ricevimento',
     ),
-    'day' =>
+    'day' => 
     array (
       'label' => 'Giorno',
       'placeholder' => 'Seleziona il giorno',
@@ -144,7 +144,7 @@ return array (
       'description' => 'Giorno di disponibilità',
       'tooltip' => 'Giorno della settimana per il ricevimento',
     ),
-    'start_time' =>
+    'start_time' => 
     array (
       'label' => 'Ora Inizio',
       'placeholder' => 'Seleziona l\'ora di inizio',
@@ -152,7 +152,7 @@ return array (
       'description' => 'Orario di inizio della disponibilità',
       'tooltip' => 'Orario di inizio del ricevimento',
     ),
-    'end_time' =>
+    'end_time' => 
     array (
       'label' => 'Ora Fine',
       'placeholder' => 'Seleziona l\'ora di fine',
@@ -160,79 +160,81 @@ return array (
       'description' => 'Orario di fine della disponibilità',
       'tooltip' => 'Orario di fine del ricevimento',
     ),
-    'last_name' =>
+    'last_name' => 
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
       'help' => 'Inserisci il cognome completo',
       'description' => 'Cognome come registrato all\'Ordine',
       'tooltip' => 'Cognome del medico',
+      'helper_text' => 'last_name',
     ),
-    'first_name' =>
+    'first_name' => 
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'help' => 'Inserisci il nome completo',
       'description' => 'Nome come registrato all\'Ordine',
       'tooltip' => 'Nome del medico',
+      'helper_text' => 'first_name',
     ),
-    'toggleColumns' =>
+    'toggleColumns' => 
     array (
       'label' => 'toggleColumns',
     ),
-    'reorderRecords' =>
+    'reorderRecords' => 
     array (
       'label' => 'reorderRecords',
     ),
-    'resetFilters' =>
+    'resetFilters' => 
     array (
       'label' => 'resetFilters',
     ),
-    'name' =>
+    'name' => 
     array (
       'label' => 'name',
     ),
-    'specialties' =>
+    'specialties' => 
     array (
-      'name' =>
+      'name' => 
       array (
         'label' => 'specialties.name',
       ),
     ),
-    'openFilters' =>
+    'openFilters' => 
     array (
       'label' => 'openFilters',
     ),
-    'applyFilters' =>
+    'applyFilters' => 
     array (
       'label' => 'applyFilters',
     ),
-    'specialization' =>
+    'specialization' => 
     array (
       'label' => 'specialization',
       'description' => 'specialization',
       'helper_text' => 'specialization',
     ),
-    'status' =>
+    'status' => 
     array (
       'label' => 'status',
     ),
-    'created_at' =>
+    'created_at' => 
     array (
       'label' => 'created_at',
     ),
-    'attach' =>
+    'attach' => 
     array (
       'label' => 'attach',
     ),
   ),
-  'filters' =>
+  'filters' => 
   array (
     'search_placeholder' => 'Cerca medici...',
-    'is_active' =>
+    'is_active' => 
     array (
       'label' => 'Stato',
-      'options' =>
+      'options' => 
       array (
         'active' => 'Attivo',
         'inactive' => 'Inattivo',
@@ -240,38 +242,38 @@ return array (
       'tooltip' => 'Filtra per stato del profilo',
     ),
   ),
-  'actions' =>
+  'actions' => 
   array (
-    'create' =>
+    'create' => 
     array (
       'label' => 'Nuovo Medico',
       'icon' => 'heroicon-o-plus',
       'color' => 'primary',
-      'modal' =>
+      'modal' => 
       array (
         'heading' => 'Crea Nuovo Medico',
         'description' => 'Inserisci i dati del nuovo medico',
       ),
       'tooltip' => 'Aggiungi un nuovo medico al sistema',
     ),
-    'edit' =>
+    'edit' => 
     array (
       'label' => 'Modifica',
       'icon' => 'heroicon-o-pencil',
       'color' => 'warning',
-      'modal' =>
+      'modal' => 
       array (
         'heading' => 'Modifica Medico',
         'description' => 'Modifica i dati del medico',
       ),
       'tooltip' => 'Modifica i dati del medico selezionato',
     ),
-    'delete' =>
+    'delete' => 
     array (
       'label' => 'Elimina',
       'icon' => 'heroicon-o-trash',
       'color' => 'danger',
-      'modal' =>
+      'modal' => 
       array (
         'heading' => 'Elimina Medico',
         'description' => 'Sei sicuro di voler eliminare questo medico? Questa azione non può essere annullata.',
@@ -279,13 +281,13 @@ return array (
       'tooltip' => 'Elimina il medico selezionato',
     ),
   ),
-  'messages' =>
+  'messages' => 
   array (
     'created' => 'Medico creato con successo',
     'updated' => 'Medico aggiornato con successo',
     'deleted' => 'Medico eliminato con successo',
   ),
-  'model' =>
+  'model' => 
   array (
     'label' => 'Medico',
   ),

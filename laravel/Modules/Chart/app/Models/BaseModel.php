@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Chart\Models;
 
-// ---------- traits
+use Modules\Xot\Traits\Updater;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Xot\Contracts\ProfileContract;
+use Modules\Xot\Actions\Factory\GetFactoryAction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// //use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Actions\Factory\GetFactoryAction;
-use Modules\Xot\Traits\Updater;
 
 /**
  * Class BaseModel.
+ * 
+ * @property-read ProfileContract|null $creator
+ * @property-read ProfileContract|null $updater
+ *
  */
 abstract class BaseModel extends Model
 {

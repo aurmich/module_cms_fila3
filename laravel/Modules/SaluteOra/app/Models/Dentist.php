@@ -12,15 +12,22 @@ use Modules\Tenant\Traits\BelongsToTenant;
 
 /**
  * Modello Dentist per la gestione dei dentisti.
+ * 
+ * @property int $id
+ * @property string $name
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $title
+ * @property string|null $specialization
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class Dentist extends BaseModel
 {
     use HasFactory, SoftDeletes, BelongsToTenant;
 
     /**
-     * Gli attributi che sono mass assignable.
-     *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',

@@ -10,6 +10,7 @@ return new class extends XotBaseMigration
 {
     public function up(): void
     {
+        // -- CREATE --
         $this->tableCreate(function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->index();
@@ -17,13 +18,16 @@ return new class extends XotBaseMigration
             $table->string('type')->nullable();
             $table->text('description')->nullable();
             $table->json('attachments')->nullable();
-            $this->addTimestamps($table);
-            $table->softDeletes();
+            //$this->addTimestamps($table);
+            //$table->softDeletes();
         });
+         // -- UPDATE --
+         $this->tableUpdate(
+            function (Blueprint $table): void {
+                $this->updateTimestamps($table);
+            }
+        );
     }
 
-    public function down(): void
-    {
-        $this->tableDrop();
-    }
+   
 };

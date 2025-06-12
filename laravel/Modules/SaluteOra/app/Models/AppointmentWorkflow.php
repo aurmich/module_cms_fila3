@@ -8,7 +8,32 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Tenant\Traits\BelongsToTenant;
+use Carbon\Carbon;
 
+/**
+ * AppointmentWorkflow Model
+ * 
+ * @property int $id
+ * @property int $tenant_id
+ * @property int $patient_id
+ * @property int|null $dentist_id
+ * @property int|null $appointment_id
+ * @property string $current_step
+ * @property string $status
+ * @property array|null $step_data
+ * @property Carbon|null $started_at
+ * @property Carbon|null $completed_at
+ * @property Carbon|null $last_interaction_at
+ * @property array|null $meta
+ * @property int|null $created_by
+ * @property string|null $session_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
+ * @property-read \Modules\SaluteOra\Models\Patient $patient
+ * @property-read \Modules\SaluteOra\Models\Dentist|null $dentist
+ */
 class AppointmentWorkflow extends BaseModel
 {
     use HasFactory, SoftDeletes, BelongsToTenant;
@@ -27,12 +52,13 @@ class AppointmentWorkflow extends BaseModel
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',
         'appointment_id',
         'patient_id',
+        'dentist_id',
         'current_step',
         'status',
         'step_data',
@@ -47,18 +73,23 @@ class AppointmentWorkflow extends BaseModel
     /**
      * Gli attributi che dovrebbero essere cast a tipi nativi.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'step_data' => 'array',
-        'meta' => 'array',
-        'started_at' => 'datetime',
-        'completed_at' => 'datetime',
-        'last_interaction_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'step_data' => 'array',
+            'meta' => 'array',
+            'started_at' => 'datetime',
+            'completed_at' => 'datetime',
+            'last_interaction_at' => 'datetime',
+        ]);
+    }
     
     /**
      * Relazione con l'appuntamento.
+     *
+     * @return BelongsTo<\Modules\SaluteOra\Models\Appointment, $this>
      */
     public function appointment(): BelongsTo
     {
@@ -67,10 +98,22 @@ class AppointmentWorkflow extends BaseModel
     
     /**
      * Relazione con il paziente.
+     *
+     * @return BelongsTo<\Modules\SaluteOra\Models\Patient, $this>
      */
     public function patient(): BelongsTo
     {
         return $this->belongsTo(\Modules\SaluteOra\Models\Patient::class);
+    }
+    
+    /**
+     * Relazione con il dentista.
+     *
+     * @return BelongsTo<\Modules\SaluteOra\Models\Dentist, $this>
+     */
+    public function dentist(): BelongsTo
+    {
+        return $this->belongsTo(\Modules\SaluteOra\Models\Dentist::class);
     }
     
     /**
@@ -120,9 +163,8 @@ class AppointmentWorkflow extends BaseModel
     public function getCurrentStepIndex(): int
     {
         $steps = array_keys(self::getSteps());
-        return array_search($this->current_step, $steps) !== false
-            ? array_search($this->current_step, $steps)
-            : 0;
+        $index = array_search($this->current_step, $steps, true);
+        return $index !== false ? $index : 0;
     }
     
     /**
@@ -153,8 +195,8 @@ class AppointmentWorkflow extends BaseModel
             self::STATUS_CONFIRMED,
         ];
         
-        $currentStatusIndex = array_search($this->status, $statuses);
-        $stepStatusIndex = array_search($stepsMap[$step], $statuses);
+        $currentStatusIndex = array_search($this->status, $statuses, true);
+        $stepStatusIndex = array_search($stepsMap[$step], $statuses, true);
         
         return $currentStatusIndex !== false && $stepStatusIndex !== false && $currentStatusIndex >= $stepStatusIndex;
     }

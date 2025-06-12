@@ -10,7 +10,7 @@ class CheckDirectoryStructure extends Command
     protected $signature = 'saluteora:check-structure';
     protected $description = 'Verifica la struttura delle directory del modulo SaluteOra';
 
-    public function handle()
+    public function handle(): int
     {
         $this->info('Verifica struttura directory SaluteOra...');
 
@@ -45,7 +45,7 @@ class CheckDirectoryStructure extends Command
         return 1;
     }
 
-    protected function checkNamespaces($basePath, &$errors)
+    protected function checkNamespaces(string $basePath, array &$errors): void
     {
         $files = File::allFiles($basePath . '/app');
         foreach ($files as $file) {

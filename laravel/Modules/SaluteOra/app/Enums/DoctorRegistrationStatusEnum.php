@@ -3,11 +3,20 @@
 declare(strict_types=1);
 
 namespace Modules\SaluteOra\Enums;
+use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
 
 /**
- * Enum per gli stati del workflow di registrazione del dottore.
+ * Defines the different types of appointments in the system.
+ * 
+ * @method static self fromName(string $name)
+ * @method static self fromValue(string $value)
+ * @method static self tryFromName(string $name)
+ * @method static self tryFromValue(string $value)
+ * @method static self[] cases()
  */
-enum DoctorRegistrationStatusEnum implements FilamentSupportContractsHasLabel: string
+enum DoctorRegistrationStatusEnum: string implements HasLabel, HasIcon, HasColor
 {
     /**
      * Bozza - Il processo di registrazione è stato iniziato ma non completato.
@@ -47,6 +56,38 @@ enum DoctorRegistrationStatusEnum implements FilamentSupportContractsHasLabel: s
             self::MODERATION_APPROVED => 'Approvato',
             self::MODERATION_REJECTED => 'Rifiutato',
             self::COMPLETED => 'Completato',
+        };
+    }
+
+    /**
+     * Restituisce l'icona per lo stato.
+     *
+     * @return string
+     */
+    public function getIcon(): string
+    {
+        return match($this) {
+            self::DRAFT => 'heroicon-o-document',
+            self::PENDING_MODERATION => 'heroicon-o-clock',
+            self::MODERATION_APPROVED => 'heroicon-o-check-circle',
+            self::MODERATION_REJECTED => 'heroicon-o-x-circle',
+            self::COMPLETED => 'heroicon-o-check-badge',
+        };
+    }
+
+    /**
+     * Restituisce il colore per lo stato.
+     *
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return match($this) {
+            self::DRAFT => 'gray',
+            self::PENDING_MODERATION => 'warning',
+            self::MODERATION_APPROVED => 'success',
+            self::MODERATION_REJECTED => 'danger',
+            self::COMPLETED => 'success',
         };
     }
     

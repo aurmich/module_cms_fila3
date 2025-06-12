@@ -10,7 +10,6 @@ return [
         'links' => [
             'label' => 'Footer Links',
             'links' => [
-                'label' => 'Link',
                 'label' => 'Link Label',
                 'url' => 'Link URL',
                 'icon' => 'Link Icon',
@@ -30,7 +29,6 @@ return [
             'label' => 'Footer Quick Links',
             'links' => [
                 'label' => 'Quick Links',
-                'label' => 'Label',
             ],
         ],
     ],

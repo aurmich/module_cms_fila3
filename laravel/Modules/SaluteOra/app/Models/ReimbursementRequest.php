@@ -32,9 +32,9 @@ class ReimbursementRequest extends Model
     protected $table = 'reimbursement_requests';
 
     /**
-     * The attributes that are mass assignable.
+     * Gli attributi che sono mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'patient_id',

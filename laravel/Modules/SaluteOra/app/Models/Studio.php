@@ -18,15 +18,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Modello Studio per il sistema multi-tenant.
- *
- * Rappresenta uno studio medico/dentistico che può avere
- * più dottori e gestire appuntamenti.
- *
+ * Studio model for the SaluteOra module.
+ * 
  * @property int $id
  * @property string $name
+ * @property string|null $address
  * @property string|null $phone
  * @property string|null $email
+ * @property string|null $slug
  * @property string|null $website
  * @property string|null $registration_number
  * @property string|null $vat_number
@@ -34,11 +33,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property array|null $opening_hours
  * @property array|null $services
  * @property bool $active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Doctor> $doctors
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Doctor> $doctors
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Address> $addresses
  */
 class Studio extends BaseTenant
@@ -131,7 +130,7 @@ class Studio extends BaseTenant
     /**
      * Scope per studi attivi.
      */
-    public function scopeActive($query)
+    public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('active', true);
     }

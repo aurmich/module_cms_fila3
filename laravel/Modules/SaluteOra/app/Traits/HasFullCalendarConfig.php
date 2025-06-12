@@ -146,11 +146,23 @@ trait HasFullCalendarConfig
      * @param string $type
      * @return string
      */
+    /**
+     * Ottiene colore per tipo appuntamento.
+     *
+     * @param string $type
+     * @return string
+     */
     protected function getAppointmentTypeColor(string $type): string
     {
-        $colors = config('fullcalendar.colors.appointment_types', []);
-
-        return $colors[$type] ?? match ($type) {
+        /** @var array<string, string> $colors */
+        $colors = (array) config('fullcalendar.colors.appointment_types', []);
+        
+        if (array_key_exists($type, $colors)) {
+            return $colors[$type];
+        }
+        
+        // Default colors for known appointment types
+        $defaultColors = [
             'consultation' => '#3b82f6', // blu
             'cleaning' => '#10b981', // verde
             'treatment' => '#f59e0b', // arancione
@@ -159,8 +171,9 @@ trait HasFullCalendarConfig
             'surgery' => '#6b7280', // grigio
             'orthodontics' => '#ec4899', // rosa
             'prevention' => '#059669', // verde scuro
-            default => '#6b7280',
-        };
+        ];
+        
+        return $defaultColors[$type] ?? '#6b7280';
     }
 
     /**
@@ -169,11 +182,23 @@ trait HasFullCalendarConfig
      * @param string $status
      * @return string
      */
+    /**
+     * Ottiene colore per stato appuntamento.
+     *
+     * @param string $status
+     * @return string
+     */
     protected function getAppointmentStatusColor(string $status): string
     {
-        $colors = config('fullcalendar.colors.appointment_status', []);
-
-        return $colors[$status] ?? match ($status) {
+        /** @var array<string, string> $colors */
+        $colors = (array) config('fullcalendar.colors.appointment_status', []);
+        
+        if (array_key_exists($status, $colors)) {
+            return $colors[$status];
+        }
+        
+        // Default colors for known statuses
+        $defaultColors = [
             'scheduled' => '#3b82f6', // blu
             'confirmed' => '#10b981', // verde
             'in_progress' => '#f59e0b', // arancione
@@ -182,30 +207,41 @@ trait HasFullCalendarConfig
             'no_show' => '#dc2626', // rosso scuro
             'rescheduled' => '#8b5cf6', // viola
             'pending' => '#6b7280', // grigio
-            default => '#6b7280',
-        };
+        ];
+        
+        return $defaultColors[$status] ?? '#6b7280';
     }
 
     /**
-     * Ottiene colore per studio.
+     * Ottiene colore per studio basato sul suo ID.
      *
-     * @param Studio|null $studio
-     * @return string
+     * @param Studio|null $studio L'istanza dello studio o null
+     * @return string Il colore esadecimale per lo studio
      */
     protected function getStudioColor(?Studio $studio): string
     {
-        if (!$studio) {
-            return '#6b7280';
+        if ($studio === null || !isset($studio->id)) {
+            return '#6b7280'; // Default gray color for null or invalid studio
         }
 
-        // Genera colore basato sull'ID dello studio
+        /** @var array<int, string> $colors */
         $colors = [
-            '#3b82f6', '#10b981', '#f59e0b', '#ef4444',
-            '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16',
-            '#f97316', '#14b8a6', '#a855f7', '#e11d48'
+            '#3b82f6', // blue-500
+            '#10b981', // emerald-500
+            '#f59e0b', // amber-500
+            '#ef4444', // red-500
+            '#8b5cf6', // violet-500
+            '#ec4899', // pink-500
+            '#06b6d4', // cyan-500
+            '#84cc16', // lime-500
+            '#f97316', // orange-500
+            '#14b8a6', // teal-400
+            '#a855f7', // purple-500
+            '#e11d48'  // rose-600
         ];
-
-        return $colors[$studio->id % count($colors)];
+        
+        $index = abs($studio->id) % count($colors);
+        return $colors[$index] ?? '#6b7280'; // Fallback to gray
     }
 
     /**
@@ -269,37 +305,55 @@ trait HasFullCalendarConfig
     }
 
     /**
-     * Trasforma un appuntamento in EventData.
+     * Trasforma un appuntamento in EventData per FullCalendar.
      *
-     * @param Appointment $appointment
+     * @param Appointment $appointment L'appuntamento da trasformare
      * @return \Saade\FilamentFullCalendar\Data\EventData
+     * @throws \InvalidArgumentException Se i dati richiesti non sono validi
      */
     protected function transformToEventData(Appointment $appointment): \Saade\FilamentFullCalendar\Data\EventData
     {
+        if ($appointment->start_time === null || $appointment->end_time === null) {
+            throw new \InvalidArgumentException('Appointment must have both start_time and end_time set');
+        }
+
+        // Ensure required enum values are set
+        $type = $appointment->type?->value ?? 'default';
+        $status = $appointment->status?->value ?? 'scheduled';
+
+        // Get colors based on type and status
+        $backgroundColor = $this->getAppointmentTypeColor($type);
+        $borderColor = $this->getAppointmentStatusColor($status);
+        $textColor = '#ffffff'; // White text for better contrast on colored backgrounds
+
+        // Create extended props with null coalescing for optional relationships
+        $extendedProps = [
+            'patient_id' => $appointment->patient_id,
+            'patient_name' => $appointment->patient?->full_name ?? 'Unknown Patient',
+            'doctor_id' => $appointment->doctor_id,
+            'doctor_name' => $appointment->doctor?->full_name ?? 'Unknown Doctor',
+            'studio_id' => $appointment->studio_id,
+            'studio_name' => $appointment->studio?->name ?? 'Unknown Studio',
+            'status' => $status,
+            'type' => $type,
+            'emergency' => (bool) ($appointment->emergency ?? false),
+            'tooltip' => $this->formatTooltip($appointment),
+            'can_edit' => $this->canEditAppointment($appointment),
+            'can_view' => $this->canViewAppointment($appointment),
+            'duration' => (int) ($appointment->duration ?? 0),
+            'notes' => $appointment->notes ? \Illuminate\Support\Str::limit((string) $appointment->notes, 100) : null,
+        ];
+
+        // Build and return the EventData object
         return \Saade\FilamentFullCalendar\Data\EventData::make()
-            ->id($appointment->id)
+            ->id((string) $appointment->id)
             ->title($this->formatEventTitle($appointment))
             ->start($appointment->start_time)
             ->end($appointment->end_time)
-            ->backgroundColor($this->getAppointmentTypeColor($appointment->type->value))
-            ->borderColor($this->getAppointmentStatusColor($appointment->status->value))
-            ->textColor('#ffffff')
-            ->extendedProps([
-                'patient_id' => $appointment->patient_id,
-                'patient_name' => $appointment->patient?->full_name,
-                'doctor_id' => $appointment->doctor_id,
-                'doctor_name' => $appointment->doctor?->full_name,
-                'studio_id' => $appointment->studio_id,
-                'studio_name' => $appointment->studio?->name,
-                'status' => $appointment->status->value,
-                'type' => $appointment->type->value,
-                'emergency' => $appointment->emergency,
-                'tooltip' => $this->formatTooltip($appointment),
-                'can_edit' => $this->canEditAppointment($appointment),
-                'can_view' => $this->canViewAppointment($appointment),
-                'duration' => $appointment->duration,
-                'notes' => $appointment->notes ? \Str::limit($appointment->notes, 100) : null,
-            ]);
+            ->backgroundColor($backgroundColor)
+            ->borderColor($borderColor)
+            ->textColor($textColor)
+            ->extendedProps($extendedProps);
     }
 
     /**

@@ -12,17 +12,17 @@ use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 
 class Calendar extends Component
 {
-    public $config = [];
-    public $events = [];
-    public $filters = [
+    public array $config = [];
+    public array $events = [];
+    public array $filters = [
         'status' => null,
         'type' => null,
         'doctor_id' => null,
         'studio_id' => null,
     ];
-    public $availableSlots = [];
-    public $selectedDate;
-    public $showSlotModal = false;
+    public array $availableSlots = [];
+    public ?string $selectedDate = null;
+    public bool $showSlotModal = false;
 
     protected $listeners = [
         'refreshCalendar' => '$refresh',
@@ -30,14 +30,14 @@ class Calendar extends Component
         'select',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->selectedDate = now()->toDateString();
         $this->loadConfig();
         $this->fetchEvents();
     }
 
-    public function loadConfig()
+    protected function loadConfig(): void
     {
         try {
             $response = Http::get(route('saluteora.calendar.config'));
@@ -49,7 +49,7 @@ class Calendar extends Component
         }
     }
 
-    public function fetchEvents()
+    public function fetchEvents(): void
     {
         try {
             $start = now()->startOfMonth()->startOfDay()->toIso8601String();

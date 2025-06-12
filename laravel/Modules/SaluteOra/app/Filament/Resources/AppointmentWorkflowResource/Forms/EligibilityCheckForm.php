@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\Filament\Resources\AppointmentWorkflowResource\Forms
 
 use Filament\Forms;
 use Filament\Forms\Components\Component;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Modules\SaluteOra\Actions\CheckPatientEligibilityAction;
@@ -73,19 +74,19 @@ class EligibilityCheckForm
             
             Forms\Components\Section::make('Informazioni Paziente')
                 ->schema([
-                    Forms\Components\TextEntry::make('patient_name')
+                    TextEntry::make('patient_name')
                         ->label('Nome completo')
                         ->state($patient->full_name),
                         
-                    Forms\Components\TextEntry::make('patient_email')
+                    TextEntry::make('patient_email')
                         ->label('Email')
                         ->state($patient->user?->email ?? 'N/D'),
                         
-                    Forms\Components\TextEntry::make('patient_birth_date')
+                    TextEntry::make('patient_birth_date')
                         ->label('Data di nascita')
                         ->state($patient->birth_date ? $patient->birth_date->format('d/m/Y') : 'N/D'),
                         
-                    Forms\Components\TextEntry::make('patient_pregnancy_status')
+                    TextEntry::make('patient_pregnancy_status')
                         ->label('Stato di gravidanza')
                         ->state(fn () => $patient->pregnancy_status ? 'Sì' : 'No')
                         ->badge()
@@ -103,20 +104,20 @@ class EligibilityCheckForm
                         ->content(fn () => $isEligible ? 'Idonea' : 'Non Idonea')
                         ->extraAttributes(['class' => $isEligible ? 'text-success-600 font-bold' : 'text-danger-600 font-bold']),
                         
-                    Forms\Components\TextEntry::make('isee_value')
+                    TextEntry::make('isee_value')
                         ->label('Valore ISEE')
                         ->state(fn () => $workflow->step_data['eligibility_check']['isee_value'] ?? 'N/D')
                         ->money('EUR'),
                         
-                    Forms\Components\TextEntry::make('isee_validity')
+                    TextEntry::make('isee_validity')
                         ->label('Validità ISEE')
                         ->state(fn () => $workflow->step_data['eligibility_check']['isee_expiry_date'] ?? 'N/D'),
                         
-                    Forms\Components\TextEntry::make('verification_date')
+                    TextEntry::make('verification_date')
                         ->label('Data Verifica')
                         ->state(fn () => $workflow->step_data['eligibility_check']['verification_date'] ?? now()->format('d/m/Y')),
                         
-                    Forms\Components\TextEntry::make('verification_reason')
+                    TextEntry::make('verification_reason')
                         ->label('Note')
                         ->state(fn () => $workflow->step_data['eligibility_check']['reason'] ?? ($isEligible ? 'Tutte le condizioni soddisfatte' : 'Requisiti non soddisfatti'))
                         ->columnSpan(2),

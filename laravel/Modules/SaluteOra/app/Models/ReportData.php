@@ -8,11 +8,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * ReportData model per i dati dettagliati dei report.
+ * 
+ * @property int $id
+ * @property int $report_id
+ * @property string $key
+ * @property mixed $value
+ * @property string $data_type
+ * @property string|null $description
+ * @property int $order
+ * @property string|null $group
+ * @property array|null $metadata
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read Report $report
  */
 class ReportData extends BaseModel
 {
     /**
-     * @var array<int, string>
+     * Gli attributi che sono mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = [
         'report_id',

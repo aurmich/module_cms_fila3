@@ -4,7 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Enums;
 
+
 use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
+
+/**
+ * Defines the different types of appointments in the system.
+ * 
+ * @method static self fromName(string $name)
+ * @method static self fromValue(string $value)
+ * @method static self tryFromName(string $name)
+ * @method static self tryFromValue(string $value)
+ * @method static self[] cases()
+ */
 
 enum DentistSpecializationEnum: string implements HasLabel
 {
@@ -20,7 +33,7 @@ enum DentistSpecializationEnum: string implements HasLabel
     case GERIATRIC = 'geriatric';
     case FORENSIC = 'forensic';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::GENERAL => __('saluteora::app.general_dentist'),

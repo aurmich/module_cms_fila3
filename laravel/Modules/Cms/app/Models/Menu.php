@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Models;
 
 use Modules\Tenant\Models\Traits\SushiToJsons;
+use Modules\Xot\Contracts\HasRecursiveRelationshipsContract;
 use Modules\Xot\Actions\Tree\GetTreeOptionsByModelClassAction;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
@@ -128,7 +129,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  *
  * @mixin \Eloquent
  */
-class Menu extends BaseModel
+class Menu extends BaseModel implements HasRecursiveRelationshipsContract
 {
     use HasRecursiveRelationships;
     use SushiToJsons;
@@ -152,7 +153,7 @@ class Menu extends BaseModel
     ];
 
     /**
-     * @return array<string, string>
+     * @return array<int|string, string>
      */
     public static function getTreeMenuOptions(): array
     {
@@ -164,6 +165,11 @@ class Menu extends BaseModel
     public function getRows(): array
     {
         return $this->getSushiRows();
+    }
+
+    public function getLabel(): string
+    {
+        return $this->title;
     }
 
     /** @return array<string, string> */

@@ -175,7 +175,7 @@ class PatientRegistrationWizard extends Component
         $this->dispatch('patient-registered', patientId: $patient->id);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View
     {
         return view('saluteora::widgets.patient-registration-wizard');
     }

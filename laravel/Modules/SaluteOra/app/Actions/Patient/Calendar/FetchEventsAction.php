@@ -81,8 +81,8 @@ final class FetchEventsAction
         return [
             'id' => $appointment->id,
             'title' => $title,
-            'start' => $appointment->start_time?->toIso8601String(),
-            'end' => $appointment->end_time?->toIso8601String(),
+            'start' => $appointment->start_time->toIso8601String(),
+            'end' => $appointment->end_time->toIso8601String(),
             'allDay' => false,
             'backgroundColor' => $color,
             'borderColor' => $color,

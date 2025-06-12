@@ -4,7 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Enums;
 
-enum DayOfWeekEnum implements FilamentSupportContractsHasLabel: string
+use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
+
+/**
+ * Defines the different types of appointments in the system.
+ * 
+ * @method static self fromName(string $name)
+ * @method static self fromValue(string $value)
+ * @method static self tryFromName(string $name)
+ * @method static self tryFromValue(string $value)
+ * @method static self[] cases()
+ */
+enum DayOfWeekEnum: string implements HasLabel, HasIcon, HasColor
 {
     case Monday = 'monday';
     case Tuesday = 'tuesday';
@@ -22,6 +35,37 @@ enum DayOfWeekEnum implements FilamentSupportContractsHasLabel: string
         $prefix = 'saluteora::doctor.fields.day.options';
         return trans("$prefix.{$this->value}");
     }
+
+    public function getLabel(): string
+    {
+        return $this->label();
+    }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::Monday => 'heroicon-o-calendar-days',
+            self::Tuesday => 'heroicon-o-calendar-days',
+            self::Wednesday => 'heroicon-o-calendar-days',
+            self::Thursday => 'heroicon-o-calendar-days',
+            self::Friday => 'heroicon-o-calendar-days',
+            self::Saturday => 'heroicon-o-star',
+            self::Sunday => 'heroicon-o-star',
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::Monday => 'primary',
+            self::Tuesday => 'primary',
+            self::Wednesday => 'primary',
+            self::Thursday => 'primary',
+            self::Friday => 'primary',
+            self::Saturday => 'warning',
+            self::Sunday => 'danger',
+        };
+    }
     
     /**
      * Converte tutti i casi dell'enum in un array associativo per l'uso nei componenti select.
@@ -30,9 +74,11 @@ enum DayOfWeekEnum implements FilamentSupportContractsHasLabel: string
      */
     public static function toArray(): array
     {
-        return collect(self::cases())->mapWithKeys(fn ($case) => [
-            $case->value => $case->label()
-        ])->toArray();
+        $result = [];
+        foreach (self::cases() as $case) {
+            $result[$case->value] = $case->label();
+        }
+        return $result;
     }
     
     /**
@@ -77,20 +123,6 @@ enum DayOfWeekEnum implements FilamentSupportContractsHasLabel: string
 }
 
 // Alias per retrocompatibilità
-class_alias(DayOfWeekEnum::class, 'Modules\\SaluteOra\\Enums\\DayOfWeek');
+//class_alias(DayOfWeekEnum::class, 'Modules\\SaluteOra\\Enums\\DayOfWeek');
 
-    /**
-     * Get the translated label for the enum case.
-     */
-    public function getLabel(): ?string
-    {
-        return match ($this) {
-            self::Monday => __('saluteora::enums.dayofweek.monday'),
-            self::Tuesday => __('saluteora::enums.dayofweek.tuesday'),
-            self::Wednesday => __('saluteora::enums.dayofweek.wednesday'),
-            self::Thursday => __('saluteora::enums.dayofweek.thursday'),
-            self::Friday => __('saluteora::enums.dayofweek.friday'),
-            self::Saturday => __('saluteora::enums.dayofweek.saturday'),
-            self::Sunday => __('saluteora::enums.dayofweek.sunday'),
-        };
-    }
+   

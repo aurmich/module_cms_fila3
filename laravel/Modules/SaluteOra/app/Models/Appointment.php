@@ -7,7 +7,6 @@ namespace Modules\SaluteOra\Models;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Modules\SaluteOra\Enums\AppointmentStatus;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,14 +20,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $patient_id
  * @property int $doctor_id
+ * @property int $dentist_id Alias for doctor_id (legacy compatibility)
  * @property int $studio_id
+ * @property int|null $tenant_id
  * @property string $title
  * @property \Carbon\Carbon $start_time
  * @property \Carbon\Carbon $end_time
+ * @property \Carbon\Carbon|null $date Alias for start_time date
  * @property AppointmentTypeEnum $type
  * @property AppointmentStatus $status
  * @property string|null $notes
+ * @property string|null $treatment_plan
  * @property bool $emergency
+ * @property bool $is_emergency Alias for emergency
+ * @property bool $eligibility_confirmed
+ * @property bool $reminder_sent
+ * @property \Carbon\Carbon|null $reminder_sent_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read Patient $patient
@@ -39,23 +46,27 @@ class Appointment extends BaseModel
 {
     use LogsActivity;
 
-    
     /**
-     * The attributes that are mass assignable.
+     * Gli attributi che sono mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'patient_id',
         'doctor_id',
         'studio_id',
+        'tenant_id',
         'title',
         'start_time',
         'end_time',
         'type',
         'status',
         'notes',
+        'treatment_plan',
         'emergency',
+        'eligibility_confirmed',
+        'reminder_sent',
+        'reminder_sent_at',
     ];
 
     /**
@@ -71,6 +82,9 @@ class Appointment extends BaseModel
             'type' => AppointmentTypeEnum::class,
             'status' => AppointmentStatusEnum::class,
             'emergency' => 'boolean',
+            'eligibility_confirmed' => 'boolean',
+            'reminder_sent' => 'boolean',
+            'reminder_sent_at' => 'datetime',
         ]);
     }
 
@@ -149,7 +163,7 @@ class Appointment extends BaseModel
      */
     public function getDurationAttribute(): int
     {
-        return $this->start_time->diffInMinutes($this->end_time);
+        return (int) $this->start_time->diffInMinutes($this->end_time);
     }
 
     /**

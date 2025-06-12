@@ -19,7 +19,7 @@ class Pregnancy extends BaseModel
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',
@@ -102,6 +102,6 @@ class Pregnancy extends BaseModel
      */
     public function daysUntilDelivery(): int
     {
-        return now()->diffInDays($this->expected_delivery_date, false);
+        return (int) now()->diffInDays($this->expected_delivery_date, false);
     }
 }

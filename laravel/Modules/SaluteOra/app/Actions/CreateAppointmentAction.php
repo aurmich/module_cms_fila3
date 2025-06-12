@@ -38,7 +38,9 @@ class CreateAppointmentAction
                 
                 // Se c'è un trattamento, impostiamo una durata predefinita
                 if (!isset($data['end_time']) && isset($treatment->duration_minutes)) {
-                    $startTime = new \DateTime($data['start_time']);
+                    // Ensure start_time is a valid datetime string
+                    $startTimeStr = is_string($data['start_time']) ? $data['start_time'] : '';
+                    $startTime = new \DateTime($startTimeStr);
                     $endTime = (clone $startTime)->modify("+{$treatment->duration_minutes} minutes");
                     $data['end_time'] = $endTime->format('Y-m-d H:i:s');
                 }

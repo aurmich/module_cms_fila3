@@ -19,7 +19,7 @@ class Isee extends BaseModel
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',
@@ -35,16 +35,19 @@ class Isee extends BaseModel
     ];
 
     /**
-     * Gli attributi da castare.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'isee_value' => 'decimal:2',
-        'isee_expiry_date' => 'date',
-        'isee_issue_date' => 'date',
-        'is_valid' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'isee_value' => 'decimal:2',
+            'isee_expiry_date' => 'date',
+            'isee_issue_date' => 'date',
+            'is_valid' => 'boolean',
+        ];
+    }
 
     /**
      * Relazione con la paziente.
@@ -73,7 +76,7 @@ class Isee extends BaseModel
      */
     public function isEligibleForProject(): bool
     {
-        return $this->isee_value <= 20000.00 && !$this->isExpired();
+        return $this->isee_value <= 20000 && !$this->isExpired();
     }
 
     /**
@@ -83,18 +86,18 @@ class Isee extends BaseModel
      */
     public function daysUntilExpiry(): int
     {
-        return now()->diffInDays($this->isee_expiry_date, false);
+        return (int) now()->diffInDays($this->isee_expiry_date, false);
     }
 
     /**
      * Scope per filtrare gli ISEE validi per il progetto (sotto i 20.000 euro).
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder<static> $query
+     * @return \Illuminate\Database\Eloquent\Builder<static>
      */
-    public function scopeEligibleForProject($query)
+    public function scopeEligibleForProject($query): \Illuminate\Database\Eloquent\Builder
     {
-        return $query->where('isee_value', '<=', 20000.00)
+        return $query->where('isee_value', '<=', 20000)
                      ->where('isee_expiry_date', '>', now());
     }
 }

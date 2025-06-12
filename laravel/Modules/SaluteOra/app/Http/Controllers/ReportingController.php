@@ -10,7 +10,7 @@ class ReportingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         return view('reporting::index');
     }
@@ -18,7 +18,7 @@ class ReportingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view('reporting::create');
     }
@@ -26,12 +26,16 @@ class ReportingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(\Illuminate\Http\Request $request): \Illuminate\Http\RedirectResponse
+    {
+        // Implementation of store method
+        return redirect()->back();
+    }
 
     /**
      * Show the specified resource.
      */
-    public function show($id)
+    public function show(int $id): \Illuminate\Contracts\View\View
     {
         return view('reporting::show');
     }
@@ -39,7 +43,7 @@ class ReportingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(int $id): \Illuminate\Contracts\View\View
     {
         return view('reporting::edit');
     }
@@ -47,10 +51,18 @@ class ReportingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id) {}
+    public function update(\Illuminate\Http\Request $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        // Implementation of update method
+        return redirect()->back();
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) {}
+    public function destroy(int $id): \Illuminate\Http\RedirectResponse
+    {
+        // Implementation of destroy method
+        return redirect()->back();
+    }
 }

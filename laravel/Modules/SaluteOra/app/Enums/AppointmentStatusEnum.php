@@ -19,7 +19,7 @@ enum AppointmentStatusEnum: string implements HasLabel, HasIcon, HasColor
     case RESCHEDULED = 'rescheduled';
     case PENDING = 'pending';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::SCHEDULED => 'Programmato',
@@ -33,7 +33,7 @@ enum AppointmentStatusEnum: string implements HasLabel, HasIcon, HasColor
         };
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this) {
             self::SCHEDULED => 'heroicon-o-calendar',
@@ -47,7 +47,7 @@ enum AppointmentStatusEnum: string implements HasLabel, HasIcon, HasColor
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string
     {
         return match ($this) {
             self::SCHEDULED => 'primary',
@@ -99,21 +99,35 @@ enum AppointmentStatusEnum: string implements HasLabel, HasIcon, HasColor
         return in_array($this, [self::COMPLETED, self::CANCELLED, self::NO_SHOW]);
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function toSelectArray(): array
     {
-        return collect(self::cases())
-            ->mapWithKeys(fn (self $status) => [$status->value => $status->getLabel()])
-            ->toArray();
+        $result = [];
+        foreach (self::cases() as $status) {
+            $result[$status->value] = $status->getLabel();
+        }
+        return $result;
     }
 
+    /**
+     * @return array<int, self>
+     */
     public static function getActiveStatuses(): array
     {
-        return collect(self::cases())
-            ->filter(fn (self $status) => $status->isActive())
-            ->values()
-            ->toArray();
+        $result = [];
+        foreach (self::cases() as $status) {
+            if ($status->isActive()) {
+                $result[] = $status;
+            }
+        }
+        return $result;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getFinalStatuses(): array
     {
         return [
@@ -123,6 +137,3 @@ enum AppointmentStatusEnum: string implements HasLabel, HasIcon, HasColor
         ];
     }
 }
-
-// Alias per retrocompatibilità
-class_alias(AppointmentStatusEnum::class, 'Modules\\SaluteOra\\Enums\\AppointmentStatus');

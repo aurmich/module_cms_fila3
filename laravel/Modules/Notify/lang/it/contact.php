@@ -187,5 +187,5 @@ return [
             'message' => 'Impossibile verificare il contatto: :error',
         ],
     ],
-    'messages' => [],
+    
 ];

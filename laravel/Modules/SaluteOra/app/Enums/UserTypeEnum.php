@@ -24,14 +24,21 @@ enum UserTypeEnum: string implements HasLabel
     case ADMIN = 'admin';
     case DOCTOR = 'doctor';
     case PATIENT = 'patient';
+    case MODERATOR = 'moderator';
+    case STAFF = 'staff';
 
     /**
      * Get the translated label for the user type.
      */
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return $this->transClass(self::class,$this->value.'.label');
-
+        return match($this) {
+            self::PATIENT => 'Paziente',
+            self::DOCTOR => 'Dottore',
+            self::ADMIN => 'Amministratore',
+            self::MODERATOR => 'Moderatore',
+            self::STAFF => 'Staff',
+        };
     }
 
     /**
@@ -69,6 +76,8 @@ enum UserTypeEnum: string implements HasLabel
             self::ADMIN => false,
             self::DOCTOR => true,
             self::PATIENT => true,
+            self::MODERATOR => false,
+            self::STAFF => false,
         };
     }
 
@@ -109,6 +118,34 @@ enum UserTypeEnum: string implements HasLabel
     public function getRoute(string $action): string
     {
         return route($action.'.type', ['type' => $this->value]);
+    }
+
+    /**
+     * Get the translated description for the user type.
+     */
+    public function getDescription(): string
+    {
+        return match($this) {
+            self::PATIENT => 'Utente paziente del sistema',
+            self::DOCTOR => 'Medico o dentista autorizzato',
+            self::ADMIN => 'Amministratore del sistema',
+            self::MODERATOR => 'Moderatore dei contenuti',
+            self::STAFF => 'Membro dello staff',
+        };
+    }
+
+    /**
+     * Restituisce la traduzione per la tipologia utente.
+     */
+    public function transClass(string $class, string $key): string
+    {
+        return match($this) {
+            self::PATIENT => __('saluteora::usertype.patient'),
+            self::DOCTOR => __('saluteora::usertype.doctor'),
+            self::ADMIN => __('saluteora::usertype.admin'),
+            self::MODERATOR => __('saluteora::usertype.moderator'),
+            self::STAFF => __('saluteora::usertype.staff'),
+        };
     }
 }
 

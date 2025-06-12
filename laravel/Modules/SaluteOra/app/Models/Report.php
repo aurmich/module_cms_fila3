@@ -11,11 +11,28 @@ use Modules\Tenant\Models\Tenant;
 
 /**
  * Report model per la gestione dei report statistici e analitici.
+ * 
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property string $type
+ * @property \Carbon\Carbon $period_start
+ * @property \Carbon\Carbon $period_end
+ * @property string $status
+ * @property int $created_by
+ * @property int|null $tenant_id
+ * @property array|null $parameters
+ * @property \Carbon\Carbon|null $last_generated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ReportData> $reportData
+ * @property-read User $creator
+ * @property-read Tenant|null $tenant
  */
 class Report extends BaseModel
 {
     /**
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -31,17 +48,24 @@ class Report extends BaseModel
     ];
 
     /**
-     * @var array<string, string>
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'period_start' => 'datetime',
-        'period_end' => 'datetime',
-        'parameters' => 'array',
-        'last_generated_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'period_start' => 'datetime',
+            'period_end' => 'datetime',
+            'parameters' => 'array',
+            'last_generated_at' => 'datetime',
+        ]);
+    }
 
     /**
      * Relazione con i dati dettagliati del report.
+     *
+     * @return HasMany<ReportData>
      */
     public function reportData(): HasMany
     {
@@ -50,6 +74,8 @@ class Report extends BaseModel
 
     /**
      * Relazione con l'utente che ha creato il report.
+     *
+     * @return BelongsTo<User, static>
      */
     public function creator(): BelongsTo
     {
@@ -58,6 +84,8 @@ class Report extends BaseModel
 
     /**
      * Relazione con il tenant.
+     *
+     * @return BelongsTo<Tenant, static>
      */
     public function tenant(): BelongsTo
     {

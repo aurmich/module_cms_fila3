@@ -18,7 +18,7 @@ class StudioUser extends BasePivot
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<string>
+     * @var list<string>
      */
     protected $fillable = [
         //'doctor_id',

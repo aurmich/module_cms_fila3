@@ -51,12 +51,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     /**
      * Get the form schema for the widget.
      *
-     * @return array<string, mixed>
-     */
-    /**
-     * Get the form schema for the widget.
-     *
-     * @return array<string, mixed>
+     * @return array<string, \Filament\Forms\Components\Wizard>
      */
     public function getFormSchema(): array
     {
@@ -89,7 +84,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     /**
      * Get the search step form schema.
      *
-     * @return array<string, mixed>
+     * @return array<string, \Filament\Forms\Components\Select>
      */
     protected function getSearchStep(): array
     {
@@ -255,7 +250,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     /**
      * Get the confirmation step form schema.
      *
-     * @return array<string, mixed>
+     * @return array<string, \Filament\Forms\Components\Component>
      */
     protected function getConfirmStep(): array
     {

@@ -8,10 +8,10 @@ includes:
 
 parameters:
     level: 9
-    parallel:
-        maximumNumberOfProcesses: 32
-        jobSize: 20
-        minimumNumberOfJobsPerProcess: 2
+    #parallel:
+    #    maximumNumberOfProcesses: 4
+    #    jobSize: 1
+    #    minimumNumberOfJobsPerProcess: 1
 
     paths:
         - ./Modules/*/app/*
@@ -51,6 +51,8 @@ parameters:
 
     bootstrapFiles:
         - ./phpstan_constants.php
+        - ./vendor/amenadiel/jpgraph/src/config.inc.php
+
 
     scanFiles:
         - ./Modules/Xot/Helpers/Helper.php

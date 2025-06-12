@@ -6,6 +6,8 @@ namespace Modules\SaluteOra\Filament\Resources\AppointmentWorkflowResource\Forms
 
 use Filament\Forms;
 use Filament\Forms\Components\Component;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteOra\Filament\Components\AppointmentWorkflowProgress;
 use Modules\SaluteOra\Filament\Components\AppointmentWorkflowSummary;
@@ -46,19 +48,19 @@ class WorkflowForms
                 ->schema([
                     Forms\Components\Grid::make()
                         ->schema([
-                            Forms\Components\TextEntry::make('patient_name')
+                            TextEntry::make('patient_name')
                                 ->label('Nome completo')
                                 ->state($patient->full_name),
                                 
-                            Forms\Components\TextEntry::make('patient_email')
+                            TextEntry::make('patient_email')
                                 ->label('Email')
                                 ->state($patient->user?->email ?? 'N/A'),
                                 
-                            Forms\Components\TextEntry::make('patient_fiscal_code')
+                            TextEntry::make('patient_fiscal_code')
                                 ->label('Codice Fiscale')
                                 ->state($patient->fiscal_code),
                                 
-                            Forms\Components\TextEntry::make('patient_birth_date')
+                            TextEntry::make('patient_birth_date')
                                 ->label('Data di nascita')
                                 ->state($patient->birth_date ? $patient->birth_date->format('d/m/Y') : 'N/A'),
                         ])
@@ -132,7 +134,7 @@ class WorkflowForms
                     Forms\Components\Radio::make('dentist_id')
                         ->label('Seleziona il dentista per l\'appuntamento')
                         ->options(function () {
-                            return Dentist::where('tenant_id', tenant()->id)
+                            return Dentist::where('tenant_id', Filament::getTenant()?->getKey())
                                 ->where('is_active', true)
                                 ->get()
                                 ->mapWithKeys(function ($dentist) {

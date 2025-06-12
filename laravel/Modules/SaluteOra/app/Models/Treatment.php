@@ -14,6 +14,28 @@ use Modules\Tenant\Traits\BelongsToTenant;
 
 /**
  * Modello Treatment per la gestione dei trattamenti odontoiatrici.
+ * 
+ * @property int $id
+ * @property int|null $tenant_id
+ * @property int $patient_id
+ * @property int|null $dentist_id
+ * @property int|null $appointment_id
+ * @property string $type
+ * @property string|null $description
+ * @property string|null $notes
+ * @property string $status
+ * @property \Carbon\Carbon|null $start_date
+ * @property \Carbon\Carbon|null $end_date
+ * @property float|null $cost
+ * @property bool $is_covered
+ * @property bool $is_pregnancy_safe
+ * @property array|null $teeth_involved
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon|null $deleted_at
+ * @property-read Patient $patient
+ * @property-read Dentist|null $dentist
+ * @property-read Appointment|null $appointment
  */
 class Treatment extends BaseModel
 {
@@ -22,7 +44,7 @@ class Treatment extends BaseModel
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',

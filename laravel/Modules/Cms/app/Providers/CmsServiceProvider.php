@@ -50,8 +50,8 @@ class CmsServiceProvider extends XotBaseServiceProvider
         date_default_timezone_set($timezone);
 
         // Verifica che la lingua predefinita sia supportata
-        $defaultLocale = config('app.locale');
-        $supportedLocales = config('laravellocalization.supportedLocales');
+        $defaultLocale = Config::string('app.locale');
+        $supportedLocales = Config::array('laravellocalization.supportedLocales');
         if (!isset($supportedLocales[$defaultLocale])) {
             throw new \Exception(sprintf(
                 'La lingua predefinita "%s" non è supportata. Lingue supportate: %s',
@@ -89,7 +89,7 @@ class CmsServiceProvider extends XotBaseServiceProvider
         if (! is_array($middleware)) {
             $middleware = [];
         }
-        $base_middleware = Arr::get($middleware, 'base', []);
+        Assert::isArray($base_middleware = Arr::get($middleware, 'base', []));
 
         //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
         $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;

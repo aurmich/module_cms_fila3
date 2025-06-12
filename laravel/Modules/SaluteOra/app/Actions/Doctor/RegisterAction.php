@@ -88,7 +88,7 @@ class RegisterAction
 
         // Debug sicuro del tipo
         dddx([
-            'type_value' => $doctor->type?->value ?? 'null',
+            'type_value' => $doctor->type->value ?? 'null',
             'type_class' => get_class($doctor->type ?? new \stdClass()),
             'is_doctor' => $doctor->isDoctor(),
         ]);

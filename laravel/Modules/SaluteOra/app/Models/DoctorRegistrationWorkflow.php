@@ -9,6 +9,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Tenant\Traits\BelongsToTenant;
 use Illuminate\Support\Str;
 
+/**
+ * DoctorRegistrationWorkflow model per gestire il processo di registrazione dei dottori.
+ * 
+ * @property int $id
+ * @property int $doctor_id
+ * @property string $current_step
+ * @property string $status
+ * @property array|null $form_data
+ * @property array|null $validation_results
+ * @property string|null $moderation_notes
+ * @property \Carbon\Carbon|null $moderated_at
+ * @property int|null $moderated_by
+ * @property string|null $moderation_token
+ * @property \Carbon\Carbon|null $completed_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read Doctor $doctor
+ */
 class DoctorRegistrationWorkflow extends BaseModel
 {
     use SoftDeletes, BelongsToTenant;
@@ -32,23 +50,19 @@ class DoctorRegistrationWorkflow extends BaseModel
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<string>
+     * @var list<string>
      */
     protected $fillable = [
-        'tenant_id',
         'doctor_id',
         'current_step',
         'status',
-        'step_data',
-        'started_at',
-        'completed_at',
-        'last_interaction_at',
-        'moderation_token',
+        'form_data',
+        'validation_results',
         'moderation_notes',
         'moderated_at',
         'moderated_by',
-        'created_by',
-        'session_id',
+        'moderation_token',
+        'completed_at',
     ];
 
     /**

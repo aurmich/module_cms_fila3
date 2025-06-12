@@ -83,20 +83,20 @@ class FetchCalendarEventsAction
             'id' => $appointment->id,
             'title' => $title,
             'start' => $appointment->start_time->toIso8601String(),
-            'end' => $appointment->end_time?->toIso8601String(),
+            'end' => $appointment->end_time->toIso8601String(),
             'allDay' => false,
             'backgroundColor' => $color,
             'borderColor' => $color,
             'textColor' => $this->getContrastColor($color),
             'extendedProps' => [
-                'type' => $appointment->type?->value,
-                'status' => $appointment->status?->value,
+                'type' => $appointment->type->value,
+                'status' => $appointment->status->value,
                 'patient_id' => $appointment->patient_id,
-                'patient_name' => $appointment->patient?->full_name,
+                'patient_name' => $appointment->patient->full_name,
                 'doctor_id' => $appointment->doctor_id,
-                'doctor_name' => $appointment->doctor?->full_name,
+                'doctor_name' => $appointment->doctor->full_name,
                 'studio_id' => $appointment->studio_id,
-                'studio_name' => $appointment->studio?->name,
+                'studio_name' => $appointment->studio->name,
                 'emergency' => $appointment->emergency,
                 'notes' => $appointment->notes,
             ],
@@ -126,7 +126,7 @@ class FetchCalendarEventsAction
             $parts[] = '🚨 ' . __('saluteora::app.emergency');
         }
         
-        if ($appointment->status !== \Modules\SaluteOra\Enums\AppointmentStatus::CONFIRMED) {
+        if ($appointment->status !== \Modules\SaluteOra\Enums\AppointmentStatusEnum::CONFIRMED) {
             $parts[] = '(' . $appointment->status->getLabel() . ')';
         }
         
@@ -191,7 +191,7 @@ class FetchCalendarEventsAction
         // Only allow editing if the appointment is not in the past
         // and the user is the assigned doctor or has admin rights
         return $appointment->start_time->isFuture() && 
-               ($user->hasRole('admin') || 
+               ($user->type === UserTypeEnum::ADMIN || 
                 $user->id === $appointment->doctor_id);
     }
 }

@@ -9,32 +9,31 @@ use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
 use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Mail\DoctorRegistrationModerated;
 use Spatie\QueueableAction\QueueableAction;
+use Modules\SaluteOra\Enums\DoctorRegistrationStatusEnum;
 
 class ProcessDoctorModerationAction
 {
     use QueueableAction;
 
     /**
-     * Processa la moderazione di un medico.
+     * Elabora la moderazione di un dottore.
      *
      * @param DoctorRegistrationWorkflow $workflow
      * @param bool $approved Se la moderazione è stata approvata
-     * @param string|null $notes Note di moderazione (opzionali)
      * @param int $moderatorId ID dell'utente moderatore
+     * @param string|null $notes Note di moderazione (opzionali)
      * 
      * @return bool
      */
     public function execute(
         DoctorRegistrationWorkflow $workflow,
         bool $approved,
-        ?string $notes = null,
-        int $moderatorId
+        int $moderatorId,
+        ?string $notes = null
     ): bool {
         try {
             // Aggiorna lo stato del workflow
-            $workflow->status = $approved 
-                ? DoctorRegistrationWorkflow::STATUS_MODERATION_APPROVED 
-                : DoctorRegistrationWorkflow::STATUS_MODERATION_REJECTED;
+            $workflow->status = $approved ? DoctorRegistrationStatusEnum::MODERATION_APPROVED : DoctorRegistrationStatusEnum::MODERATION_REJECTED;
             
             $workflow->moderation_notes = $notes;
             $workflow->moderated_at = now();
@@ -60,7 +59,7 @@ class ProcessDoctorModerationAction
                 ->performedOn($workflow)
                 ->causedBy($moderatorId)
                 ->withProperties([
-                    'approved' => $approved,
+                    'status' => $approved ? DoctorRegistrationStatusEnum::MODERATION_APPROVED : DoctorRegistrationStatusEnum::MODERATION_REJECTED,
                     'notes' => $notes,
                 ])
                 ->log('Doctor registration moderated');

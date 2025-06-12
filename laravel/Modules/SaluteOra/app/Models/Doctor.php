@@ -8,58 +8,36 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\SaluteOra\Models\DoctorStudio;
 use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\Enums\UserStateEnum;
 use Parental\HasParent;
 
 /**
- * Class Doctor
+ * Doctor model for the SaluteOra module.
+ * Extends the User model to provide doctor-specific functionality.
  *
- * Questa classe implementa il pattern Single Table Inheritance (STI)
- * estendendo la classe User e utilizzando il trait HasParent.
- *
- * @property string $id
- * @property string $first_name
- * @property string $last_name
+ * @property int $id
+ * @property string $name
  * @property string $email
- * @property string|null $phone
- * @property string|null $address
- * @property string|null $city
- * @property string|null $registration_number
- * @property string|null $specialization
- * @property array|null $certifications
- * @property array|null $availability
- * @property string|null $status
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Modules\SaluteOra\Models\DoctorRegistrationWorkflow|null $workflow
- * @method static \Illuminate\Database\Eloquent\Builder|Doctor newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Doctor newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Doctor query()
- * @mixin \Eloquent
+ * @property UserTypeEnum $type
+ * @property UserStateEnum $state
+ * @property string|null $continuation_token
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Studio> $studios
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
+ * @property-read DoctorRegistrationWorkflow|null $registrationWorkflow
+ *
+ * @see \Modules\SaluteOra\Models\User
  */
 class Doctor extends User
 {
     use HasParent;
 
-    /**
-     * Boot method per impostare automaticamente il type per i Doctor.
-     */
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function ($doctor) {
-            // Imposta automaticamente il type se non è già impostato
-            if (empty($doctor->type)) {
-                $doctor->type = UserTypeEnum::DOCTOR;
-            }
-        });
-    }
-
+   
     /**
      * Gli attributi che sono mass assignable.
      *
-     * @var array<string>
+     * @var list<string>
      */
     protected $fillable = [
         'tenant_id',
@@ -75,6 +53,21 @@ class Doctor extends User
         'availability',
         'status',
     ];
+
+    protected $appends = [
+        //'health_card',
+        //'identity_document',
+        //'isee_certificate',
+        //'pregnancy_certificate',
+    ];
+
+    public static array $attachments = [
+        'health_card',
+        'identity_document',
+        'isee_certificate',
+        'pregnancy_certificate',
+    ];
+
 
     /**
      * Get the attributes that should be cast.

@@ -147,6 +147,7 @@ class DoctorResource extends XotBaseResource
 
                     ]),
             ])->visible(function ($model,$record) {
+                return true;
             //dddx([$model,$record]);
             })
 
@@ -380,7 +381,7 @@ class DoctorResource extends XotBaseResource
     }
 
     // Metodo per riprendere la registrazione
-    public static function resumeRegistration($doctorId, $token)
+    public static function resumeRegistration(int $doctorId, string $token): \Illuminate\Http\RedirectResponse
     {
         $doctor = Doctor::findOrFail($doctorId);
         if (hash_equals($doctor->continuation_token, $token) && $doctor->state->isApproved()) {

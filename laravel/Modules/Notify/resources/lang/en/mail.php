@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
+
 return [
     'welcome' => [
-        'title' => 'Welcome to ' . config('app.name'),
+        'title' => 'Welcome to ' . Config::string('app.name'),
         'greeting' => 'Hello :name,',
         'description' => 'Thank you for joining us. We\'re excited to have you on board!',
         'action' => 'Get Started',

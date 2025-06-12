@@ -47,7 +47,9 @@ class Admin extends User
 
 
     /**
-     * @var array<int, string>
+     * Gli attributi che sono mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = [
         'user_id',

@@ -18,14 +18,20 @@ use Spatie\Image\Enums\Fit;
  * @property string $id
  * @property string $user_id
  * @property string|null $date_of_birth
+ * @property \Carbon\Carbon|null $birth_date Alias for date_of_birth
  * @property string|null $gender
  * @property string|null $address
  * @property string|null $phone
+ * @property string|null $fiscal_code
+ * @property string|null $pregnancy_status
+ * @property int|null $tenant_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $created_by
  * @property string|null $updated_by
  * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read \Modules\SaluteOra\Models\PatientIsee|null $isee
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
@@ -47,7 +53,9 @@ class Patient extends User implements HasMedia
     use InteractsWithMedia;
 
     /**
-     * @var array<int, string>
+     * Gli attributi che sono mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = [
         'first_name',

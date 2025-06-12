@@ -15,7 +15,7 @@ enum UserStateEnum: string implements HasLabel
     case SUSPENDED = 'suspended';
     case INTEGRATION_REQUESTED = 'integration_requested';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match($this) {
             self::PENDING => 'In attesa',

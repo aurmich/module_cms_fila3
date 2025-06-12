@@ -19,11 +19,12 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Modules\Cms\Filament\Resources\PageContentResource;
 
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\Lang\Filament\Resources\Pages\LangBaseListRecords;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
-class ListPageContents extends XotBaseListRecords
+class ListPageContents extends LangBaseListRecords
 {
-    use ListRecords\Concerns\Translatable;
+    //use ListRecords\Concerns\Translatable;
 
     // protected static string $resource = PageContentResource::class;
 
@@ -46,52 +47,8 @@ class ListPageContents extends XotBaseListRecords
         ];
     }
 
-    public function getTableFilters(): array
-    {
-        return [
-        ];
-    }
-
-    public function getTableActions(): array
-    {
-        return [
-            ViewAction::make()
-                ->label(''),
-            EditAction::make()
-                ->label(''),
-            DeleteAction::make()
-                ->label('')
-                ->requiresConfirmation(),
-        ];
-    }
-
-    public function getTableBulkActions(): array
-    {
-        return [
-            DeleteBulkAction::make(),
-        ];
-    }
-
-    public function table(Table $table): Table
-    {
-        return $table
-            // ->columns($this->getTableColumns())
-            ->columns($this->layoutView->getTableColumns())
-            ->contentGrid($this->layoutView->getTableContentGrid())
-            ->headerActions($this->getTableHeaderActions())
-
-            ->filters($this->getTableFilters())
-            ->filtersLayout(FiltersLayout::AboveContent)
-            ->persistFiltersInSession()
-            ->actions($this->getTableActions())
-            ->bulkActions($this->getTableBulkActions())
-            ->actionsPosition(ActionsPosition::BeforeColumns)
-            ->defaultSort(
-                column: 'created_at',
-                direction: 'DESC',
-            );
-    }
-
+    
+    /*
     protected function getHeaderActions(): array
     {
         return [
@@ -99,6 +56,7 @@ class ListPageContents extends XotBaseListRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
+    */
 
     
 }

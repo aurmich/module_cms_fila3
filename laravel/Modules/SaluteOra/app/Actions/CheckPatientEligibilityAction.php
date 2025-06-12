@@ -88,7 +88,8 @@ class CheckPatientEligibilityAction
         }
 
         // Verifica se il valore ISEE è inferiore alla soglia
-        $iseeValue = $latestIsee->value;
+        // Usa isee_value invece di value per compatibilità con il mapping del modello
+        $iseeValue = $latestIsee->isee_value;
         $isValid = $iseeValue <= self::MAX_ISEE_VALUE;
 
         return [
@@ -119,7 +120,7 @@ class CheckPatientEligibilityAction
         }
 
         if (!$iseeVerification['valid']) {
-            return $iseeVerification['reason'] ?? 'ISEE non valido per l\'accesso al programma.';
+            return (string)($iseeVerification['reason'] ?? 'ISEE non valido per l\'accesso al programma.');
         }
 
         return null;
