@@ -10,6 +10,24 @@ namespace Modules\SaluteOra\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Enums\DayOfWeek;
 
+/**
+ * 
+ *
+ * @property DayOfWeek $day
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
+ * @property-read string $day_label
+ * @property-read string $day_short_label
+ * @property-read string $time_range
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\SaluteOra\Database\Factories\DoctorAvailabilityFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability query()
+ * @mixin \Eloquent
+ */
 class DoctorAvailability extends BaseModel
 {
     protected $fillable = [

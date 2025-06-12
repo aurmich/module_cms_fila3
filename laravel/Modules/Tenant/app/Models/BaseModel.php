@@ -14,7 +14,7 @@ use Modules\Xot\Traits\Updater;
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
   */
-abstract class BaseModel extends Model
+abstract class BaseModel extends EloquentModel
 {
     use HasFactory;
     use Updater;

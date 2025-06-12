@@ -11,7 +11,7 @@ use Modules\Tenant\Models\Tenant;
 
 /**
  * Report model per la gestione dei report statistici e analitici.
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string|null $description
@@ -28,6 +28,33 @@ use Modules\Tenant\Models\Tenant;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ReportData> $reportData
  * @property-read User $creator
  * @property-read Tenant|null $tenant
+ * @property string|null $updated_by
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read int|null $report_data_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\SaluteOra\Database\Factories\ReportFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report inPeriod(string $startDate, string $endDate)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report ofType(string $type)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereLastGeneratedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereParameters($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report wherePeriodEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report wherePeriodStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Report withStatus(string $status)
+ * @mixin \Eloquent
  */
 class Report extends BaseModel
 {

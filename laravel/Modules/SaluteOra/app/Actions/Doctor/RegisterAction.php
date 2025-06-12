@@ -29,10 +29,19 @@ class RegisterAction
      * @param array<string, mixed> $data
      * @return Doctor
      */
-    public function execute(array $data): Doctor
+    public function execute(Doctor $record,array $data): Doctor
     {
+        $doctor=$record;
+        //$doctor = Doctor::create($data);
+        $record->save();
+        $record->update($data);
+        $attachments = Doctor::$attachments;
+        foreach ($attachments as $attachment) {
+                $doctor->addMediaFromDisk($data[$attachment],'local')
+                    ->toMediaCollection($attachment);
 
-        $doctor = Doctor::create($data);
+        }
+        
 
         Notification::route('mail', $data['email'])
         //->locale('it')

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Modello per la storia clinica del paziente (MedicalHistory).
+ * 
  * Rappresenta una voce di documentazione clinica associata a un utente/paziente.
  *
  * @property int $id
@@ -20,8 +21,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $type
  * @property string|null $description
  * @property string|null $attachments
- *
  * @see User
+ * @property int $patient_id
+ * @property string $condition
+ * @property string|null $diagnosis_date
+ * @property string|null $treatment
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereCondition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereDiagnosisDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereTreatment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory withoutTrashed()
+ * @mixin \Eloquent
  */
 class MedicalHistory extends Model
 {

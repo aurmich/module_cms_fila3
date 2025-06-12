@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Studio model for the SaluteOra module.
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string|null $address
@@ -39,6 +39,52 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Doctor> $doctors
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Address> $addresses
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read int|null $addresses_count
+ * @property-read int|null $appointments_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\StudioUser|\Modules\SaluteOra\Models\DoctorStudio|null $pivot
+ * @property-read int|null $doctors_count
+ * @property-read string $services_string
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\User> $members
+ * @property-read int|null $members_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio active()
+ * @method static \Modules\SaluteOra\Database\Factories\StudioFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio inCity(string $city)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio inPostalCode(string $postalCode)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio inProvince(string $province)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio inRegion(string $region)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereOpeningHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereRegistrationNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereServices($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereVatNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereWebsite($value)
+ * @mixin \Eloquent
  */
 class Studio extends BaseTenant
 {

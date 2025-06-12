@@ -18,6 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \DateTime|null $updated_at
  * @property Team $team
  * @property User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
+ * @mixin \Eloquent
  */
 class TeamPermission extends Model
 {

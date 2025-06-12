@@ -10,8 +10,39 @@ use Spatie\Activitylog\LogOptions;
 
 /**
  * ReimbursementRequest Model for the Patient Module.
- *
+ * 
  * Represents a request for reimbursement submitted by a patient.
+ *
+ * @property int $id
+ * @property int $patient_id
+ * @property int|null $appointment_id
+ * @property numeric $amount
+ * @property \Illuminate\Support\Carbon $request_date
+ * @property string $status
+ * @property string|null $reason
+ * @property string|null $document_path
+ * @property string|null $response_notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereAppointmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereDocumentPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereRequestDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereResponseNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class ReimbursementRequest extends Model
 {

@@ -17,6 +17,8 @@ use Spatie\MailTemplates\Interfaces\MailTemplateInterface;
 use Spatie\MailTemplates\Models\MailTemplate as SpatieMailTemplate;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $mailable
  * @property string|null $subject
@@ -28,6 +30,35 @@ use Spatie\MailTemplates\Models\MailTemplate as SpatieMailTemplate;
  * @property \Carbon\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\MailTemplateVersion> $versions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\MailTemplateLog> $logs
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
+ * @property string $name
+ * @property string $slug
+ * @property-read array $variables
+ * @property-read mixed $translations
+ * @method static Builder<static>|MailTemplate forMailable(\Illuminate\Contracts\Mail\Mailable $mailable)
+ * @method static Builder<static>|MailTemplate newModelQuery()
+ * @method static Builder<static>|MailTemplate newQuery()
+ * @method static Builder<static>|MailTemplate query()
+ * @method static Builder<static>|MailTemplate whereCreatedAt($value)
+ * @method static Builder<static>|MailTemplate whereCreatedBy($value)
+ * @method static Builder<static>|MailTemplate whereDeletedAt($value)
+ * @method static Builder<static>|MailTemplate whereDeletedBy($value)
+ * @method static Builder<static>|MailTemplate whereHtmlTemplate($value)
+ * @method static Builder<static>|MailTemplate whereId($value)
+ * @method static Builder<static>|MailTemplate whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static Builder<static>|MailTemplate whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static Builder<static>|MailTemplate whereLocale(string $column, string $locale)
+ * @method static Builder<static>|MailTemplate whereLocales(string $column, array $locales)
+ * @method static Builder<static>|MailTemplate whereMailable($value)
+ * @method static Builder<static>|MailTemplate whereName($value)
+ * @method static Builder<static>|MailTemplate whereSlug($value)
+ * @method static Builder<static>|MailTemplate whereSubject($value)
+ * @method static Builder<static>|MailTemplate whereTextTemplate($value)
+ * @method static Builder<static>|MailTemplate whereUpdatedAt($value)
+ * @method static Builder<static>|MailTemplate whereUpdatedBy($value)
+ * @mixin \Eloquent
  */
 class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
 {

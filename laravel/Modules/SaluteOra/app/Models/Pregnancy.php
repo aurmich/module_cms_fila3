@@ -11,6 +11,56 @@ use Modules\Tenant\Traits\BelongsToTenant;
 
 /**
  * Modello Pregnancy per la gestione dei dati relativi alla gravidanza.
+ *
+ * @property string $id
+ * @property string $tenant_id
+ * @property string $user_id
+ * @property \Illuminate\Support\Carbon|null $expected_delivery_date
+ * @property int|null $weeks_pregnant
+ * @property int|null $trimester
+ * @property bool $high_risk
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $last_checkup_date
+ * @property \Illuminate\Support\Carbon|null $next_checkup_date
+ * @property string|null $healthcare_provider
+ * @property string|null $healthcare_facility
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereExpectedDeliveryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHealthcareFacility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHealthcareProvider($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHighRisk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereLastCheckupDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereNextCheckupDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereTrimester($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereWeeksPregnant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withoutTrashed()
+ * @mixin \Eloquent
  */
 class Pregnancy extends BaseModel
 {

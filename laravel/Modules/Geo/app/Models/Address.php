@@ -16,7 +16,7 @@ use Modules\Geo\Enums\AddressTypeEnum;
  * Class Address
  * 
  * Implementazione di Schema.org PostalAddress
- * 
+ *
  * @property int $id
  * @property string|null $model_type
  * @property int|null $model_id
@@ -41,6 +41,49 @@ use Modules\Geo\Enums\AddressTypeEnum;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * // implements HasGeolocation
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent|null $addressable
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read string $full_address
+ * @property-read string $street_address
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent|null $model
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\Geo\Database\Factories\AddressFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address nearby(float $latitude, float $longitude, float $radiusKm = '10')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address ofType($type)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address primary()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereAdministrativeAreaLevel1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereAdministrativeAreaLevel2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereAdministrativeAreaLevel3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereExtraData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereFormattedAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereIsPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereLocality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereModelType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address wherePlaceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereRoute($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereStreetNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedBy($value)
+ * @mixin \Eloquent
  */
 class Address extends BaseModel 
 {

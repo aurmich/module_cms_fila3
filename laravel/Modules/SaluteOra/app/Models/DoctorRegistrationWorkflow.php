@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 /**
  * DoctorRegistrationWorkflow model per gestire il processo di registrazione dei dottori.
- * 
+ *
  * @property int $id
  * @property int $doctor_id
  * @property string $current_step
@@ -26,6 +26,42 @@ use Illuminate\Support\Str;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read Doctor $doctor
+ * @property \Illuminate\Support\Carbon|null $started_at Data e ora di inizio del workflow
+ * @property \Illuminate\Support\Carbon|null $last_interaction_at Data e ora dell'ultima interazione
+ * @property string|null $session_id ID della sessione
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\User\Models\User|null $moderator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\SaluteOra\Database\Factories\DoctorRegistrationWorkflowFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereCompletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereCurrentStep($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereDoctorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereLastInteractionAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereModerationNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereSessionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow withoutTrashed()
+ * @mixin \Eloquent
  */
 class DoctorRegistrationWorkflow extends BaseModel
 {

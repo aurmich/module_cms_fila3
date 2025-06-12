@@ -8,6 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Traits\Updater;
 
 // BaseModel in same namespace provides common behaviors
+/**
+ * 
+ *
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\Notify\Models\NotificationTemplate|null $template
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\Notify\Database\Factories\NotificationTemplateVersionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion query()
+ * @mixin \Eloquent
+ */
 class NotificationTemplateVersion extends BaseModel
 {
     use Updater;

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Appointment Model for the SaluteOra Module.
- *
+ * 
  * Represents an appointment booked by a patient with a doctor in a studio.
  * Supports FullCalendar widgets with multi-tenancy and user type filtering.
  *
@@ -41,6 +41,49 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read Patient $patient
  * @property-read Doctor $doctor
  * @property-read Studio $studio
+ * @property string $user_id
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $start_datetime
+ * @property string|null $end_datetime
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read int $duration
+ * @property-read string $formatted_title
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment emergency()
+ * @method static \Modules\SaluteOra\Database\Factories\AppointmentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment forDoctor(int $doctorId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment forPatient(int $patientId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment forStudio(int $studioId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment inDateRange(string $start, string $end)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDentistId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereEmergency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereEndDatetime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartDatetime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStudioId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUserId($value)
+ * @mixin \Eloquent
  */
 class Appointment extends BaseModel
 {

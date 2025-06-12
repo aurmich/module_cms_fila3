@@ -10,6 +10,60 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Tenant\Traits\BelongsToTenant;
 use Modules\Xot\Models\XotBaseModel;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $tenant_id
+ * @property string $user_id
+ * @property string $type
+ * @property string $title
+ * @property string|null $description
+ * @property string $file_path
+ * @property string $file_name
+ * @property int|null $file_size
+ * @property string|null $mime_type
+ * @property \Illuminate\Support\Carbon|null $expiry_date
+ * @property string $status
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read string $file_size_formatted
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereExpiryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFilePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereMimeType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Document extends XotBaseModel
 {
     use HasFactory, SoftDeletes, BelongsToTenant;

@@ -14,6 +14,26 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam query()
+ * @property string $id
+ * @property int $team_id
+ * @property string|null $user_id
+ * @property string|null $role
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
  * @mixin \Eloquent
  */
 class ProfileTeam extends TeamUser {}

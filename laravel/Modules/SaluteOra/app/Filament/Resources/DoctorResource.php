@@ -10,8 +10,10 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Modules\User\Models\Device;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
+use Modules\SaluteOra\Models\User;
 use Filament\Forms\Components\Grid;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
@@ -22,19 +24,25 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Modules\SaluteOra\Models\Doctor;
 use Filament\Forms\Components\Select;
+use Modules\SaluteOra\Models\Patient;
 use Modules\Notify\Emails\SpatieEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TimePicker;
+use Modules\SaluteOra\Enums\UserStateEnum;
 use Spatie\MailTemplates\TemplateMailable;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\SaluteOra\Actions\ProcessDoctorModerationAction;
 use Modules\SaluteOra\Filament\Resources\DoctorResource\Pages;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Modules\SaluteOra\Filament\Resources\DoctorResource\RelationManagers;
 
 /**
@@ -46,26 +54,8 @@ use Modules\SaluteOra\Filament\Resources\DoctorResource\RelationManagers;
  */
 class DoctorResource extends XotBaseResource
 {
-    /**
-     * Specifica la relazione da utilizzare per il multi-tenancy.
-     *
-     * Poiché la relazione effettiva è 'studios' (plurale) ma Filament cerca
-     * una relazione singolare 'studio', dobbiamo specificarla esplicitamente.
-     *
-     * @var string|null
-     */
     protected static ?string $tenantOwnershipRelationshipName = 'studios';
-
-    /**
-     * Disabilitiamo il tenant filtering automatico di Filament poiché lo implementiamo manualmente.
-     * Questo è necessario per evitare conflitti nelle query cross-database.
-     *
-     * @var bool
-     */
     protected static bool $isTenantFilterable = true;
-
-
-
     protected static ?string $model = Doctor::class;
 
 
@@ -78,6 +68,7 @@ class DoctorResource extends XotBaseResource
 
     public static function getFormSchemaWidget(): array
     {
+
         $submit_view = 'pub_theme::filament.wizard.submit-button';
         
         return [
@@ -105,6 +96,73 @@ class DoctorResource extends XotBaseResource
         ];
     }
 
+    protected static function getDocumentsSchema(): array
+    {
+        $attachments = Doctor::$attachments;
+        $schema = [];
+        foreach ($attachments as $attachment) {
+            $schema[] = Forms\Components\FileUpload::make($attachment)
+            //$schema[] = Forms\Components\SpatieMediaLibraryFileUpload::make($attachment)
+                ->disk('local')
+                //->collection($attachment)
+                ->directory('documents/'.$attachment)
+                ->downloadable()
+                ->openable()
+                ->acceptedFileTypes(['application/pdf', 'image/*'])
+                ->maxSize(5120)
+                ->required()
+                ->reorderable()
+                ->columnSpanFull()
+                ->default(function (?Model $record){
+                    $res=$record?->getFirstMediaUrl('certifications');
+                    return $res;
+                } )
+                ->formatStateUsing(function ($state,$record,$model) {
+                    /*$res=$record?->getFirstMediaUrl('certifications');
+                    dddx(['state'=>$state,'record'=>$record,'model'=>$model,'request'=>$request]);
+                    return $state;
+                    */
+                    //$res= asset('/storage/1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf');
+                    $res= TemporaryUploadedFile::createFromLivewire(
+                        Storage::disk('public')->path('1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf')
+                    );
+                    return $res;
+                })
+                /*
+                ->state(function ($record) {
+                    if ($record->document_url) {
+                        return TemporaryUploadedFile::createFromLivewire(
+                            Storage::disk('public')->path($record->document_url)
+                        );
+                    }
+                    return null;
+                })
+                    */
+                    /*
+                    ->default(function (?Model $record){
+
+                            return TemporaryUploadedFile::createFromLivewire(
+                                Storage::disk('public')->path('1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf')
+                            );
+                        }
+                        
+                    )
+                        */
+                //->afterStateUpdated(
+                //    function (HasForms $livewire, SpatieMediaLibraryFileUpload $component, TemporaryUploadedFile //$state, Get $get, ?HasMedia $record) {
+                //        dddx(['record'=>$record,'livewire'=>$livewire,'component'=>$component,'state'=>$state,//'get'=>$get,
+                        //'a'=>self::$record,
+                //    });
+                //    }
+                //)
+                //->afterStateUpdated(function ($state){
+                //    dddx($state);
+                //})
+                ;
+        }
+        return $schema;
+    }
+
     /**
      * Step UI allineato a /docs/images/13.md, 13.html, 13.blade.php
      * - Campo full_name per Nome e Cognome (come da convenzioni naming)
@@ -130,20 +188,25 @@ class DoctorResource extends XotBaseResource
                             ->maxLength(255)
                             ->autocomplete('family-name')
                             ,
+
                         'email' => Forms\Components\TextInput::make('email')
                             ->required()
                             ->email()
                             ->maxLength(255)
                             ->autocomplete('email')
+                            //->unique(User::class)
+                            //->unique(ignoreRecord: true)
                             ,
-
+                        /*
                         'certifications' => Forms\Components\FileUpload::make('certifications')
                             ->required()
-                            //->multiple()
+                            ->multiple()
                             ->acceptedFileTypes(['application/pdf'])
                             ->maxSize(5120)
                             ->directory('certifications')
                             ,
+                        */
+                        ...self::getDocumentsSchema(),
 
                     ]),
             ])->visible(function ($model,$record) {
@@ -305,6 +368,9 @@ class DoctorResource extends XotBaseResource
                                     ->directory('doctors/certifications')
                                     ->acceptedFileTypes(['application/pdf'])
                                     ->maxSize(10240)
+                                    ->downloadable()
+                                    ->openable()
+                                    ->reorderable()
                                     ->columnSpanFull()
                                     ->placeholder(__('saluteora::doctor-resource.certifications')),
                             ]),
@@ -363,7 +429,7 @@ class DoctorResource extends XotBaseResource
     // Metodo per generare e inviare il link di continuazione dopo la moderazione
     public static function sendContinuationLink(Doctor $doctor): void
     {
-        if ($doctor->state->isApproved()) {
+        if ($doctor->state === UserStateEnum::APPROVED) {
             $token = sha1($doctor->email . now());
             $continuationUrl = URL::temporarySignedRoute(
                 'doctor.registration.continue',
@@ -384,7 +450,7 @@ class DoctorResource extends XotBaseResource
     public static function resumeRegistration(int $doctorId, string $token): \Illuminate\Http\RedirectResponse
     {
         $doctor = Doctor::findOrFail($doctorId);
-        if (hash_equals($doctor->continuation_token, $token) && $doctor->state->isApproved()) {
+        if (hash_equals($doctor->continuation_token, $token) && $doctor->state === UserStateEnum::APPROVED) {
             return redirect()->route('filament.resources.doctors.edit', $doctor);
         }
         abort(403, 'Link non valido o scaduto.');

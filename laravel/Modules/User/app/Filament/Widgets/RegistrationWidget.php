@@ -86,7 +86,8 @@ class RegistrationWidget extends XotBaseWidget
     public function register():\Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
         $data = $this->form->getState();
-        $user=app($this->action)->execute($data);
+        $record=$this->record;
+        $user=app($this->action)->execute($record,$data);
         //$post = $this->model::create($this->form->getState());
 
         // Save the relationships from the form to the post after it is created.

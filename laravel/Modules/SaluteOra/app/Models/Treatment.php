@@ -14,7 +14,7 @@ use Modules\Tenant\Traits\BelongsToTenant;
 
 /**
  * Modello Treatment per la gestione dei trattamenti odontoiatrici.
- * 
+ *
  * @property int $id
  * @property int|null $tenant_id
  * @property int $patient_id
@@ -36,6 +36,47 @@ use Modules\Tenant\Traits\BelongsToTenant;
  * @property-read Patient $patient
  * @property-read Dentist|null $dentist
  * @property-read Appointment|null $appointment
+ * @property string $user_id
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment completed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment covered()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment inProgress()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment safeForPregnancy()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereAppointmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereDentistId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereIsCovered($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereIsPregnancySafe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereTeethInvolved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Treatment withoutTrashed()
+ * @mixin \Eloquent
  */
 class Treatment extends BaseModel
 {

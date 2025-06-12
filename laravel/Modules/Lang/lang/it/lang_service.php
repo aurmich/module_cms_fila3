@@ -417,6 +417,10 @@ return array (
     array (
       'label' => 'identity_document',
     ),
+    'certifications' => 
+    array (
+      'label' => 'certifications',
+    ),
   ),
   'actions' => 
   array (

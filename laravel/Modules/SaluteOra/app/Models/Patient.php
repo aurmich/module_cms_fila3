@@ -45,6 +45,102 @@ use Spatie\Image\Enums\Fit;
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUserId($value)
+ * @property string|null $name
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string $email
+ * @property string|null $city
+ * @property string|null $registration_number
+ * @property string|null $status
+ * @property array<array-key, mixed>|null $certifications
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $password
+ * @property string|null $remember_token
+ * @property int|null $current_team_id
+ * @property string|null $profile_photo_path
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Modules\SaluteOra\States\User\UserState|null $state
+ * @property array<array-key, mixed>|null $moderation_data
+ * @property string|null $lang
+ * @property \Modules\SaluteOra\Enums\UserTypeEnum|null $type
+ * @property bool $is_active
+ * @property bool $is_otp
+ * @property \Illuminate\Support\Carbon|null $password_expires_at
+ * @property string|null $uuid
+ * @property string|null $full_name
+ * @property string|null $deleted_by
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $activeConsents
+ * @property-read int|null $active_consents_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication> $authentications
+ * @property-read int|null $authentications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
+ * @property-read int|null $consents_count
+ * @property-read \Modules\User\Models\Team|null $currentTeam
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Modules\User\Models\Notification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $ownedTeams
+ * @property-read int|null $owned_teams_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $profile
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser> $socialiteUsers
+ * @property-read int|null $socialite_users_count
+ * @property-read \Modules\SaluteOra\Models\PatientStudio|\Modules\SaluteOra\Models\PatientTeam|null $pivot
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $teams
+ * @property-read int|null $teams_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $tenants
+ * @property-read int|null $tenants_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token> $tokens
+ * @property-read int|null $tokens_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment> $treatments
+ * @property-read int|null $treatments_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient admins()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient doctors()
+ * @method static \Modules\User\Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient orWhereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient orWhereState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient patients()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient permission($permissions, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient role($roles, $guard = null, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCurrentTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereFullName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIsOtp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereModerationData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePasswordExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereProfilePhotoPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereRegistrationNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutRole($roles, $guard = null)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
+ * @property-read int|null $devices_count
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia

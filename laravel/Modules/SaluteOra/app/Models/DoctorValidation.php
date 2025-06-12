@@ -10,8 +10,37 @@ use Spatie\Activitylog\LogOptions;
 
 /**
  * DoctorValidation Model for the Patient Module.
- *
+ * 
  * Represents the validation process for a doctor's registration.
+ *
+ * @property int $id
+ * @property int $doctor_id
+ * @property string $validation_status Stato della validazione
+ * @property \Illuminate\Support\Carbon|null $validation_date Data di validazione
+ * @property int|null $validator_id
+ * @property string|null $validation_notes Note aggiuntive sulla validazione
+ * @property string|null $document_path Percorso del documento di validazione
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
+ * @property-read \Modules\SaluteOra\Models\User|null $validator
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDoctorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDocumentPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidatorId($value)
+ * @mixin \Eloquent
  */
 class DoctorValidation extends Model
 {

@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 /**
  * AppointmentWorkflow Model
- * 
+ *
  * @property int $id
  * @property int $tenant_id
  * @property int $patient_id
@@ -33,6 +33,40 @@ use Carbon\Carbon;
  * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
  * @property-read \Modules\SaluteOra\Models\Patient $patient
  * @property-read \Modules\SaluteOra\Models\Dentist|null $dentist
+ * @property string $user_id
+ * @property string|null $updated_by
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereAppointmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCompletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCurrentStep($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDentistId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereLastInteractionAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereSessionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStepData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow withoutTrashed()
+ * @mixin \Eloquent
  */
 class AppointmentWorkflow extends BaseModel
 {

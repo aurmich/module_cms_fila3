@@ -26,16 +26,7 @@ class RegisterAction
         return DB::transaction(function () use ($data) {
 
             // Creazione del paziente usando STI
-            $patient = Patient::create([
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'email' => $data['email'],
-                //'password' => Hash::make($data['password']),
-                'address' => $data['address'] ?? null,
-                'phone' => $data['phone'] ?? null,
-                'last_dental_visit' => $data['last_dental_visit'] ?? null,
-                'dental_problems' => $data['dental_problems'] ?? null,
-            ]);
+            $patient = Patient::create($data);
 
             //-------------------------------------------------
 

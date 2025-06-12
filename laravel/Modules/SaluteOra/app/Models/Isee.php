@@ -11,6 +11,55 @@ use Modules\Tenant\Traits\BelongsToTenant;
 
 /**
  * Modello Isee per la gestione dei dati relativi all'ISEE delle pazienti.
+ *
+ * @property string $id
+ * @property string $tenant_id
+ * @property string $user_id
+ * @property string|null $isee_code
+ * @property numeric|null $isee_value
+ * @property \Illuminate\Support\Carbon|null $isee_expiry_date
+ * @property \Illuminate\Support\Carbon|null $isee_issue_date
+ * @property string|null $isee_type
+ * @property string|null $isee_document_path
+ * @property bool $is_valid
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee eligibleForProject()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee tenant(?int $tenantId = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIsValid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeDocumentPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeExpiryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeIssueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereTenantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withoutTrashed()
+ * @mixin \Eloquent
  */
 class Isee extends BaseModel
 {

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Represents a table in the INFORMATION_SCHEMA.TABLES.
- *
+ * 
  * Provides metadata and statistics about database tables.
  *
  * @property string|null $TABLE_CATALOG
