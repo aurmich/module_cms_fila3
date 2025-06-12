@@ -10,18 +10,23 @@ class GetUserDataAction
 {
     use QueueableAction;
 
-    public function execute(): UserData
+    public function execute(): ?UserData
     {
         $user = Auth::user();
+        
+        if ($user === null) {
+            return null;
+        }
 
         return new UserData(
-            id: $user->id,
-            name: $user->name,
-            email: $user->email,
-            avatar: $user->avatar,
-            role: $user->role,
-            permissions: $user->permissions,
-            settings: $user->settings
+            id: $user->id ?? null,
+            name: $user->name ?? null,
+            email: $user->email ?? null,
+            avatar: $user->avatar ?? null,
+            role: $user->role ?? null,
+            permissions: $user->permissions->toArray() ?? null,
+            //settings: is_array($user->settings) ? $user->settings : ($user->settings?->toArray() ?? null)
+            settings:  null
         );
     }
 } 

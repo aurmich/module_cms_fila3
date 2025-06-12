@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\Carbon $end_time
  * @property \Carbon\Carbon|null $date Alias for start_time date
  * @property AppointmentTypeEnum $type
- * @property AppointmentStatus $status
+ * @property AppointmentStatusEnum $status
  * @property string|null $notes
  * @property string|null $treatment_plan
  * @property bool $emergency
@@ -183,7 +183,7 @@ class Appointment extends BaseModel
      */
     public function isCompleted(): bool
     {
-        return $this->status === AppointmentStatus::COMPLETED;
+        return $this->status === AppointmentStatusEnum::COMPLETED;
     }
 
     /**
@@ -193,7 +193,7 @@ class Appointment extends BaseModel
      */
     public function isCancelled(): bool
     {
-        return $this->status === AppointmentStatus::CANCELLED;
+        return $this->status === AppointmentStatusEnum::CANCELLED;
     }
 
     /**
@@ -263,7 +263,7 @@ class Appointment extends BaseModel
      */
     public function scopeActive($query)
     {
-        return $query->whereIn('status', AppointmentStatus::getActiveStatuses());
+        return $query->whereIn('status', AppointmentStatusEnum::getActiveStatuses());
     }
 
     /**

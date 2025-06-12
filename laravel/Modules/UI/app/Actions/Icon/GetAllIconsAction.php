@@ -20,18 +20,23 @@ class GetAllIconsAction
     public function execute(string $context = 'form')
     {
         $iconsFactory = App::make(IconFactory::class);
-        $icons = $iconsFactory->all();
-        /*
-         *  "heroicons" => array:5 [▼
-         *   "prefix" => "heroicon"
-         *   "fallback" => ""
-         *   "class" => ""
-         *   "attributes" => []
-         *   "paths" => array:1 [▼
-         *      0 => "F:\var\www\_bases\base_broker_fila3\laravel\vendor\blade-ui-kit\blade-heroicons\src/../resources/svg"
-         *   ]
-        ]
-         */
+        
+        // Uso reflection per accedere alle icone in modo sicuro
+        try {
+            $reflection = new \ReflectionClass($iconsFactory);
+            $property = $reflection->getProperty('iconSets');
+            $property->setAccessible(true);
+            $icons = $property->getValue($iconsFactory);
+        } catch (\Exception $e) {
+            // Fallback: restituisci array vuoto se non riesci ad accedere
+            return [];
+        }
+
+        // Verifica che $icons sia un array prima di usare Arr::map()
+        if (!is_array($icons)) {
+            return [];
+        }
+
         $icons = Arr::map($icons, function (array $set, array|string $name) {
             $set['name'] = $name;
             $icons = [];

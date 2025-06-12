@@ -23,8 +23,8 @@ class ApplyCalendarToPanelAction
         $calendarPlugin = FilamentFullCalendarPlugin::make()
         ->selectable(true)
         ->editable(true)
-        ->timezone(config('fullcalendar.localization.timezone', 'Europe/Rome'))
-        ->locale(config('fullcalendar.localization.locale', 'it'))
+        ->timezone((string) config('fullcalendar.localization.timezone', 'Europe/Rome'))
+        ->locale((string) config('fullcalendar.localization.locale', 'it'))
         ->plugins([
             'dayGrid',
             'timeGrid',

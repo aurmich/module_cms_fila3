@@ -21,6 +21,12 @@ class SelectState extends Select
       //  $this->selectablePlaceholder(false);
         $this->options(function (Model $record): array {
             $name=$this->getName();
+            
+            // Verifica se il metodo esiste prima di chiamarlo
+            if (!method_exists($record, 'getStatesFor')) {
+                return [];
+            }
+            
             $states=$record->getStatesFor($name)->toArray();
             /*
             dddx([

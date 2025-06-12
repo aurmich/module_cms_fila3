@@ -12,7 +12,7 @@ use Modules\Xot\Filament\Traits\TransTrait;
 
 class Navigation extends XotBaseBlock
 {
-    
+    use TransTrait;
 
     public static function getBlockSchema(): array
     {
