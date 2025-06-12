@@ -44,7 +44,7 @@ new class extends Component
                         <div class="w-80 h-80 rounded-full bg-white shadow-2xl overflow-hidden">
                         <img src="{{ $type->getImage() }}" class="w-full h-full object-cover"/>
                         </div>
-                    <x-filament::button class="text-2xl !text-white transition-colors rounded-lg flex justify-center items-center !bg-[#1A467F] hover:bg-[#0D9488] hover:cursor-pointer shadow-2xl mt-5 text-lg p-5">
+                    <x-filament::button class="text-2xl !text-white transition-colors rounded-lg flex justify-center items-center !bg-[#272C4D] hover:bg-[#FF5F7E] hover:cursor-pointer shadow-2xl mt-5 text-lg p-5">
                             {{ $type->getLabel() }}
                     </x-filament::button>
                     </a>

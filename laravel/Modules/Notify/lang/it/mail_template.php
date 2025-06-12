@@ -127,6 +127,7 @@ return array (
     array (
       'label' => 'slug',
       'description' => 'slug',
+      'helper_text' => 'slug',
     ),
   ),
   'actions' => 

@@ -1,23 +1,24 @@
 <x-layouts.app>
 <div class="bg-[#0019ff]">Ciao</div>
 <div class="bg-sky-500">Test</div>
-<div class="bg-[#1A467F]">Prova</div>
+<div class="bg-[#272C4D]">Prova</div>
 <div class="bg-[#45465A]">Dark</div>
 <div class="h-20">Altezza</div>
-<div class="bg-[#0D9488]">Registrati Button</div>
+<div class="bg-[#FF5F7E]">Registrati Button</div>
 <div class="text-[#E2E8F0]"></div>
+<div class="bg-[#E7E7E7]">New background</div>
 <div class="bg-[#E6EBF7]">Section</div>
-<div class="text-[#1A467F]">Testo primary</div>
+<div class="text-[#272C4D]">Testo primary</div>
 <div class="text-gray-600">Testo subtitle</div>
-<div class="text-[#0D9488]"></div>
+<div class="text-[#FF5F7E]"></div>
 <div class="hover:text-[#E2E8F0]">Provaaaa</div>
 <div class="hover:underline underline-offset-[14]">Ciaoooooo</div>
 <div class="lg:h-20 sm:h-12">Logo</div>
 <div class="text-center sm:text-center">Testo centrato</div>
 <div class="flex justify-around">Flex</div>
-<div class="w-80 h-80 rounded-md flex justify-center items-center bg-[#1A467F]">Cards</div>
+<div class="w-80 h-80 rounded-md flex justify-center items-center bg-[#272C4D]">Cards</div>
 <div class="border-transparent">Border</div>
-<div class="hover:text-[#0D9488]">Hover card</div>
+<div class="hover:text-[#FF5F7E]">Hover card</div>
 <div class="bg-[#F9F9F9]">Card background</div>
 <div class="hover:cursor-pointer">Cursor card</div>
 <div class="mx-4">Margin left-right</div>
@@ -30,15 +31,15 @@
 <div class="size-7">Size 7</div>
 <div class="w-7 h-7">Width height</div>
 <div class="flex-col">
-    <div class="!bg-[#1A467F]"></div>
+    <div class="!bg-[#272C4D]"></div>
 </div>
 <div class="items-center">
     <div class="!bg-[#1A467F]"></div>
 </div>
 <div class="text-lg">Testo large</div>
 <div class="mb-7">Padding bottom small</div>
-<div class="!border-[#0D9488]">Border</div>
-<div class="!bg-[#0D9488]">Background</div>
+<div class="!border-[#FF5F7E]">Border</div>
+<div class="!bg-[#FF5F7E]">Background</div>
 <div class="border-[#1A467F]">Border</div>
 <div class="!border-black">BorderBlack</div>
 <div class="mb-12">Margin bottom</div>
@@ -76,4 +77,8 @@
 <div class="min-h-[700px]">min height costum</div>
 <div class="w-[350px]">width 350</div>
 <div class="w-[700px]">width 700px</div>
+<div class="bg-[#F5F5F5]">background primary chiaro</div>
+<div class="ring-[#FF5F7E]">ring primary</div>
+<div class="focus:border-[#FF5F7E]">focus primary</div>
+<div class="focus:ring-[#FF5F7E]">focus ring primary</div>
 </x-layouts.app>    

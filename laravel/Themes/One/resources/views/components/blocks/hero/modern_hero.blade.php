@@ -70,7 +70,7 @@
     <!-- Content -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="max-w-4xl mx-auto {{ $contentPositionClasses }} flex flex-col gap-6">
-            <div class="space-y-6 text-[#1A467F]"
+            <div class="space-y-6 text-[#272C4D]"
                  x-data="{ 
                     show: false,
                     mounted() { 
@@ -93,7 +93,7 @@
                         
                         @if(!empty($primaryCta))
                             <a href="{{ $primaryCta['url'] }}" 
-                               class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md !text-white bg-[#0D9488] md:py-4 md:text-lg md:px-10">
+                               class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md !text-white bg-[#FF5F7E] md:py-4 md:text-lg md:px-10">
                                 {{ $primaryCta['text'] }}
                             </a>
                         @endif
