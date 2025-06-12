@@ -17,7 +17,7 @@
             <div class="text-center md:max-w-2xl md:mx-auto lg:col-span-6">
                 <h1 
                     id="hero-heading"
-                    class="text-[#1A467F] text-4xl tracking-tight font-extrabold sm:text-5xl lg:text-5xl text-center">
+                    class="text-[#272C4D] text-4xl tracking-tight font-extrabold sm:text-5xl lg:text-5xl text-center">
                     {{ $title }}
                 </h1>
                 

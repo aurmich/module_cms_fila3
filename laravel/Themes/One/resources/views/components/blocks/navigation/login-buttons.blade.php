@@ -13,7 +13,7 @@
         {{ __('auth.login.title') }}
     </a>
 
-    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md !text-white bg-[#0D9488]">
+    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md !text-white bg-[#FF5F7E]">
         {{ __('auth.register.title') }}
     </a>
 </div>

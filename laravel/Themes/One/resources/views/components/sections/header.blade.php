@@ -15,7 +15,7 @@
 
 
 <header {{ $attributes->merge([
-    'class' => 'bg-[#1A467F] h-24 flex items-center',
+    'class' => 'bg-[#272C4D] h-24 flex items-center',
     'id' => ($section['attributes']['id'] ?? ''),
     'x-data' => "{ mobileMenuOpen: false }"
     ]) }}>

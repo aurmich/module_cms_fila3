@@ -10,7 +10,7 @@
 @endphp
 
 <footer {{ $attributes->merge([
-    'class' => 'bg-[#1A467F] h-36 text-white flex items-center' . ($section['attributes']['class'] ?? '') . ' ' . $class,
+    'class' => 'bg-[#272C4D] h-36 text-white flex items-center' . ($section['attributes']['class'] ?? '') . ' ' . $class,
     'id' => ($section['attributes']['id'] ?? '')
 ]) }}>
     <div class="w-full flex justify-center">
