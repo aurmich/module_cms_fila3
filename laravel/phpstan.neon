@@ -9,12 +9,19 @@ includes:
 parameters:
     level: 9
     #parallel:
+<<<<<<< HEAD
     #    maximumNumberOfProcesses: 4
     #    jobSize: 1
     #    minimumNumberOfJobsPerProcess: 1
+=======
+    #    maximumNumberOfProcesses: 32
+    #    jobSize: 20
+    #    minimumNumberOfJobsPerProcess: 2
+>>>>>>> 1259a8c2 (phpstan)
 
     paths:
-        - ./Modules/*/app/*
+        # - ./Modules/*/app/*
+        - ./Modules/
         # - ./Themes
         # - ./app
 
