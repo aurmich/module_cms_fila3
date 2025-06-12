@@ -8,3 +8,7 @@ php artisan migrate
 lanciamo piu' volte php artinsa migrate finche' non esce
 INFO  Nothing to migrate.
 
+
+per vedere 
+http://ec2-54-194-72-103.eu-west-1.compute.amazonaws.com/it
+
