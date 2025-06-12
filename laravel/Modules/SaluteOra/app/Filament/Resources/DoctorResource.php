@@ -229,7 +229,7 @@ class DoctorResource extends XotBaseResource
                             ->maxLength(255)
                             ->autocomplete('email')
                             //->unique(User::class)
-                            //->unique(ignoreRecord: true)
+                            ->unique(ignoreRecord: true)
                             ,
                         /*
                         'certifications' => Forms\Components\FileUpload::make('certifications')
