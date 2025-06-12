@@ -9,11 +9,17 @@ lanciamo piu' volte php artinsa migrate finche' non esce
 INFO  Nothing to migrate.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 per vedere 
 http://ec2-54-194-72-103.eu-west-1.compute.amazonaws.com/it
 
 =======
+=======
+
+-----
+url:http://ec2-54-194-72-103.eu-west-1.compute.amazonaws.com/
+>>>>>>> 0734d5c9 (.)
 ----
 
 se si vedono dei |--35--
