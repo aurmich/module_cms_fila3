@@ -29,12 +29,9 @@ class AddressField extends Forms\Components\Field
                 'state' => null,
                 'zip' => null,
             ];
-            
-            if ($record !== null) {
-                $address = $record->getRelationValue($this->getRelationship());
-                if (null !== $address && is_object($address) && method_exists($address, 'toArray')) {
-                    $data = $address->toArray();
-                }
+            $address = $record->getRelationValue($this->getRelationship());
+            if (null !== $address && is_object($address) && method_exists($address, 'toArray')) {
+                $data = $address->toArray();
             }
 
             $component->state($data);
@@ -54,11 +51,6 @@ class AddressField extends Forms\Components\Field
     {
         $state = $this->getState();
         $record = $this->getRecord();
-        
-        if ($record === null) {
-            return;
-        }
-        
         $relationship = $record->{$this->getRelationship()}();
 
         if (null === $relationship) {

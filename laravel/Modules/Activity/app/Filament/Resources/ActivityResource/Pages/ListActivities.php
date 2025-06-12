@@ -7,7 +7,6 @@ namespace Modules\Activity\Filament\Resources\ActivityResource\Pages;
 use Filament\Tables\Columns\TextColumn;
 use Modules\Activity\Filament\Resources\ActivityResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-use Filament\Tables\Columns\Tables;
 
 /**
  * @see ActivityResource
