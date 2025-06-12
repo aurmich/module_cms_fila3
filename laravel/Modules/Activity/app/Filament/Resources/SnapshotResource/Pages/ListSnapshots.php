@@ -20,7 +20,7 @@ class ListSnapshots extends XotBaseListRecords
     /**
      * Get the list table columns.
      *
-     * @return array<string, Tables\Columns\Column>
+     * @return array<Tables\Columns\Column>
      */
     public function getTableColumns(): array
     {
@@ -44,12 +44,12 @@ class ListSnapshots extends XotBaseListRecords
     }
 
     /**
-     * @return array<string, Tables\Filters\BaseFilter>
+     * @return array<Tables\Filters\BaseFilter>
      */
     public function getTableFilters(): array
     {
         return [
-            'aggregate_type' => Tables\Filters\SelectFilter::make('aggregate_type')
+            Tables\Filters\SelectFilter::make('aggregate_type')
                 ->options([
                     'user' => 'User',
                     'profile' => 'Profile',
@@ -60,24 +60,24 @@ class ListSnapshots extends XotBaseListRecords
     }
 
     /**
-     * @return array<string, Tables\Actions\Action|Tables\Actions\ActionGroup>
+     * @return array<Tables\Actions\Action|Tables\Actions\ActionGroup>
      */
     public function getTableActions(): array
     {
         return [
-            'view' => Tables\Actions\ViewAction::make(),
-            'edit' => Tables\Actions\EditAction::make(),
-            'delete' => Tables\Actions\DeleteAction::make(),
+            Tables\Actions\ViewAction::make(),
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
         ];
     }
 
     /**
-     * @return array<string, Tables\Actions\BulkAction>
+     * @return array<Tables\Actions\BulkAction>
      */
     public function getTableBulkActions(): array
     {
         return [
-            'delete' => Tables\Actions\DeleteBulkAction::make(),
+            Tables\Actions\DeleteBulkAction::make(),
         ];
     }
 }
