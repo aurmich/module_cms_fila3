@@ -1,16 +1,16 @@
 {
-    "id": "25",
+    "id": "27",
     "title": {
         "it": "SaluteOra - Promozione della salute orale per le gestanti"
     },
-    "slug": "appuntamenti-entrata",
+    "slug": "appuntamenti-rifiutati",
     "content": null,
     "content_blocks": {
         "it": [
             {
                 "type": "hero",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.appuntamenti-entrata",
+                    "view": "pub_theme::components.blocks.hero.appuntamenti-rifiutati",
                     "title": "Benvenuta su Salute Orale,",
                     "subtitle": "il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odontoiatrici di prevenzione a titolo completamente gratuito.",
                     "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
