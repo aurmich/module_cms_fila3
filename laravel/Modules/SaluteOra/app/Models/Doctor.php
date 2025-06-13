@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Modules\SaluteOra\Models\DoctorStudio;
+use Parental\HasParent;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Enums\UserStateEnum;
-use Parental\HasParent;
+use Modules\SaluteOra\Models\DoctorStudio;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Doctor model for the SaluteOra module.
@@ -217,6 +218,13 @@ class Doctor extends User
     public function studios(): BelongsToMany
     {
         return $this->belongsToManyX(Studio::class);
+    }
+
+
+
+    public function studio(): MorphOne
+    {
+        return $this->morphOne(Studio::class, 'model');
     }
     // Implementazione della relazione BelongsToMany con Studio completata
 

@@ -8,19 +8,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
-    /**
-     * Nome della tabella.
-     *
-     * @var string
-     */
-    protected string $table = 'studios';
-
-    /**
-     * Classe del modello associato.
-     *
-     * @var string|null
-     */
-    protected ?string $model_class = Studio::class;
+    
 
     /**
      * Run the migrations.
@@ -52,6 +40,14 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 if(!$this->hasColumn('slug')) {
                     $table->string('slug')->nullable();
+                }
+                if(!$this->hasColumn('model_type')) {
+                    $table->string('model_type')->nullable()->index();
+                    
+                }
+                if(!$this->hasColumn('model_id')) {
+                    $table->string('model_id',36)->nullable()->index();
+                    
                 }
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);

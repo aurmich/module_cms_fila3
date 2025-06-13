@@ -53,6 +53,10 @@ return array (
       'color' => 'danger',
       'tooltip' => 'Calendario e orari di ricevimento',
     ),
+    'studio' => 
+    array (
+      'label' => 'studio',
+    ),
   ),
   'fields' => 
   array (
@@ -230,6 +234,17 @@ return array (
     'certificates' => 
     array (
       'label' => 'certificates',
+    ),
+    'id' => 
+    array (
+      'description' => 'id',
+      'helper_text' => 'id',
+      'placeholder' => 'id',
+      'label' => 'id',
+    ),
+    'vat_number' => 
+    array (
+      'description' => 'vat_number',
     ),
   ),
   'filters' => 

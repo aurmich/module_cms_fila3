@@ -88,14 +88,22 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public function form(FilamentForm $form): FilamentForm
     {
         $form = $form->schema($this->getFormSchema());
-
-        //if (method_exists($form, 'statePath')) {
-            $form->statePath('data');
-            //dddx($this->getModel());//Method Modules\User\Filament\Widgets\RegistrationWidget::getModel does not exist.
-            $form->model(Patient::class);
-        //}
+        $form->statePath('data');
+        $data=$this->getFormFill();
+        
+        $form->model($this->getFormModel());
+        if(!empty($data)){
+           //$form->fill($data);
+           //$this->data=$data;
+        }
+            
+        
 
         return $form;
+    }
+
+    public function getFormFill(): array{
+        return [];
     }
 
     /**
@@ -110,6 +118,17 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
                 ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
                 ->submit('save'),
         ];
+    }
+
+    /**
+     * Ottiene il modello per il form.
+     * Può essere sovrascritto nelle classi figlie per fornire un modello specifico.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|string|null
+     */
+    protected function getFormModel(): Model|string|null
+    {
+        return null;
     }
 
     /**

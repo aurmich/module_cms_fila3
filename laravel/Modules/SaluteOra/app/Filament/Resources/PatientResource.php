@@ -57,7 +57,7 @@ class PatientResource extends XotBaseResource
                 self::getPreVisitStep(),          // Step 3: Informazioni preventive
                 self::getPrivacyStep(),           // Step 4: Privacy e consensi
             ])
-            ->model(Patient::class)
+            //->model(Patient::class)
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')

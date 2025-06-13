@@ -44,6 +44,7 @@ use Modules\SaluteOra\Actions\ProcessDoctorModerationAction;
 use Modules\SaluteOra\Filament\Resources\DoctorResource\Pages;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Modules\SaluteOra\Filament\Resources\DoctorResource\RelationManagers;
+use Illuminate\Validation\Rules\Unique;
 
 /**
  * Class DoctorResource
@@ -74,38 +75,37 @@ class DoctorResource extends XotBaseResource
         return [
             Forms\Components\Wizard::make([
                 self::getPersonalInfoStep(),
-                self::getModerationStep(),
-                self::getContactsStep(),
+                self::getStudioStep(),
                 self::getProfessionalStep(),
                 self::getAvailabilityStep(),
             ])
             ->skippable(false)
             ->submitAction(view($submit_view))
-            //->persistStepsInQueryString()
-            //->onStepChanged(function ($livewire, $step) {
-                // Gestione del cambio step
-            //})
-            //->beforeStateDehydrated(function ($component, $state) {
-                // Pre-processamento dei dati prima del salvataggio
-            //})
-            //->afterStateHydrated(function ($component, $state) {
-                // Post-processamento dei dati dopo il caricamento
-            //})
+            ->persistStepInQueryString()
+            ->startOnStep(function($get){
+
+                if($get('id')!==null){
+                    return 2;
+                }
+                return 1;
+            })
             ->live()
             ->columnSpanFull(),
         ];
     }
 
+                
+
+                
     protected static function getDocumentsSchema(): array
     {
         $attachments = Doctor::$attachments;
-        $uuid=Str::uuid()->toString();
+        $uuid = Str::uuid()->toString();
         $schema = [];
+        
         foreach ($attachments as $attachment) {
             $schema[] = Forms\Components\FileUpload::make($attachment)
-            //$schema[] = Forms\Components\SpatieMediaLibraryFileUpload::make($attachment)
                 ->disk('local')
-                //->collection($attachment)
                 ->directory('documents/'.$attachment.'/'.$uuid)
                 //->downloadable()
                 //->openable()
@@ -114,19 +114,11 @@ class DoctorResource extends XotBaseResource
                 ->required()
                 ->reorderable()
                 ->multiple()
-                //->maxParallelUploads(10)
-                ->preserveFilenames() // mantiene il nome file
-                //->temporaryUploadDirectory('tmp')
-                //->saveUploadedFileNames()
+                ->preserveFilenames()
                 ->columnSpanFull()
-                //->live(false) // Disabilita la validazione live
-                //->reactive(false); // Disabilita la reattività
-                //->reactive() // <-- Mantiene lo stato tra i reload
-                //->live() // <-- Aggiornamento in tempo reale
-                //->storeFiles(false) // <-- IMPEDISCE la cancellazione automatica dei file
                 ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
                     if (!$state) return;
-            
+                    
                     $sessionId = session()->getId();
                     $sessionDir = "session-uploads/{$sessionId}";
                     $sessionFiles = [];
@@ -145,53 +137,6 @@ class DoctorResource extends XotBaseResource
                     
                     $set($attachment, $sessionFiles);
                 })
-                /*
-                ->default(function (?Model $record){
-                    $res=$record?->getFirstMediaUrl('certifications');
-                    return $res;
-                } )
-                ->formatStateUsing(function ($state,$record,$model) {
-                    $res=$record?->getFirstMediaUrl('certifications');
-                    dddx(['state'=>$state,'record'=>$record,'model'=>$model,'request'=>$request]);
-                    return $state;
-                    
-                    //$res= asset('/storage/1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf');
-                    $res= TemporaryUploadedFile::createFromLivewire(
-                        Storage::disk('public')->path('1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf')
-                    );
-                    return $res;
-                })
-                    */
-                /*
-                ->state(function ($record) {
-                    if ($record->document_url) {
-                        return TemporaryUploadedFile::createFromLivewire(
-                            Storage::disk('public')->path($record->document_url)
-                        );
-                    }
-                    return null;
-                })
-                    */
-                    /*
-                    ->default(function (?Model $record){
-
-                            return TemporaryUploadedFile::createFromLivewire(
-                                Storage::disk('public')->path('1/01JXJ9T3NJ22VXZRW98FJQEF6Q.pdf')
-                            );
-                        }
-                        
-                    )
-                        */
-                //->afterStateUpdated(
-                //    function (HasForms $livewire, SpatieMediaLibraryFileUpload $component, TemporaryUploadedFile //$state, Get $get, ?HasMedia $record) {
-                //        dddx(['record'=>$record,'livewire'=>$livewire,'component'=>$component,'state'=>$state,//'get'=>$get,
-                        //'a'=>self::$record,
-                //    });
-                //    }
-                //)
-                //->afterStateUpdated(function ($state){
-                //    dddx($state);
-                //})
                 ;
         }
         return $schema;
@@ -212,6 +157,7 @@ class DoctorResource extends XotBaseResource
             ->schema([
                 'personal_section' => Forms\Components\Section::make()
                     ->schema([
+                        'id' => Forms\Components\Hidden::make('id'),
                         'first_name' => Forms\Components\TextInput::make('first_name')
                             ->required()
                             ->maxLength(255)
@@ -229,156 +175,38 @@ class DoctorResource extends XotBaseResource
                             ->maxLength(255)
                             ->autocomplete('email')
                             //->unique(User::class)
-                            ->unique(ignoreRecord: true)
+                            //->unique(table:User::class,ignoreRecord: true)
+                            //*
+                            ->unique(modifyRuleUsing: function (Unique $rule,$record,$get) {
+                                return $rule->where('id','!=', $get('id'));
+                            })
+                              //  */
                             ,
-                        /*
-                        'certifications' => Forms\Components\FileUpload::make('certifications')
-                            ->required()
-                            ->multiple()
-                            ->acceptedFileTypes(['application/pdf'])
-                            ->maxSize(5120)
-                            ->directory('certifications')
-                            ,
-                        */
                         ...self::getDocumentsSchema(),
 
                     ]),
             ])->visible(function ($model,$record) {
                 return true;
             //dddx([$model,$record]);
-            })
-
-            ->afterValidation(function (Forms\Set $set, Form $form) {
-                /*
-                // Crea o recupera il workflow
-                $workflow = DoctorRegistrationWorkflow::firstOrCreate(
-                    ['session_id' => session()->getId()],
-                    [
-                        'current_step' => 'personal_info',
-                        'status' => DoctorRegistrationWorkflow::STATUS_DRAFT,
-                        'started_at' => now(),
-                        'created_by' => Auth::id(),
-                    ]
-                );
-
-                // Aggiorna lo stato
-                $workflow->status = DoctorRegistrationWorkflow::STATUS_PENDING_MODERATION;
-                $workflow->step_data = array_merge($workflow->step_data ?? [], [
-                    'personal_info' => Arr::only($form->getState(), ['first_name', 'last_name', 'email', 'certification']),
-                ]);
-                $workflow->save();
-
-                // Salva l'ID del workflow in sessione
-                session(['doctor_registration_workflow_id' => $workflow->id]);
-
-                // Invio email con il link di continuazione dopo la moderazione
-                $data = $form->getState();
-                $doctor = Doctor::create([
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'email' => $data['email'] ?? '',
-                    'phone' => $data['phone'] ?? '',
-                    'state' => \Modules\SaluteOra\States\Pending::class,
-                ]);
-                self::sendContinuationLink($doctor);
-                */
             });
     }
 
-    /**
-     * Step di moderazione, visibile solo agli amministratori.
-     */
-    protected static function getModerationStep(): Forms\Components\Wizard\Step
-    {
-        return Forms\Components\Wizard\Step::make('moderation')
-            ->icon('heroicon-o-shield-check')
-            ->schema([
-                Forms\Components\Section::make()
-                    ->schema([
-                        Forms\Components\View::make('saluteora::filament.doctor-moderation-summary')
-                            ->visible(fn () => Auth::check() && Gate::allows('moderate_doctors')),
+    
 
-                        Forms\Components\Placeholder::make('moderation_status')
-                            ->content(fn ($record) => $record->workflow?->status === DoctorRegistrationWorkflow::STATUS_PENDING_MODERATION
-                                ? __('saluteora::doctor-resource.moderation.pending')
-                                : ($record->workflow?->isModerationApproved()
-                                    ? __('saluteora::doctor-resource.moderation.approved')
-                                    : __('saluteora::doctor-resource.moderation.rejected'))),
-
-                        Forms\Components\Textarea::make('moderation_notes')
-                            ->visible(fn () => Auth::check() && Gate::allows('moderate_doctors'))
-                            ->rows(3)
-                            ->placeholder(__('saluteora::doctor-resource.moderation_notes')),
-
-                        Forms\Components\Grid::make(2)
-                            ->schema([
-                                Forms\Components\Actions::make([
-                                    Forms\Components\Actions\Action::make('approve')
-                                        ->icon('heroicon-o-check')
-                                        ->color('success')
-                                        ->action(function ($record, Forms\Get $get) {
-                                            app(ProcessDoctorModerationAction::class)->execute(
-                                                $record->workflow,
-                                                true,
-                                                $get('moderation_notes'),
-                                                Auth::id()
-                                            );
-                                        })
-                                        ->requiresConfirmation()
-                                        ->label(__('saluteora::doctor-resource.moderation.approve')),
-
-                                    Forms\Components\Actions\Action::make('reject')
-                                        ->icon('heroicon-o-x-mark')
-                                        ->color('danger')
-                                        ->action(function ($record, Forms\Get $get) {
-                                            app(ProcessDoctorModerationAction::class)->execute(
-                                                $record->workflow,
-                                                false,
-                                                $get('moderation_notes'),
-                                                Auth::id()
-                                            );
-                                        })
-                                        ->requiresConfirmation()
-                                        ->label(__('saluteora::doctor-resource.moderation.reject')),
-                                ])
-                                ->visible(fn () => Auth::check() && Gate::allows('moderate_doctors')),
-                            ]),
-                    ]),
-            ])
-            ->visible(fn () => (Auth::check() && Gate::allows('moderate_doctors')) ||
-                (session()->has('doctor_registration_workflow_id') &&
-                DoctorRegistrationWorkflow::find(session('doctor_registration_workflow_id'))?->isPendingModeration()));
-    }
-
-    protected static function getContactsStep(): Forms\Components\Wizard\Step
+    protected static function getStudioStep(): Forms\Components\Wizard\Step
     {
         // Non utilizzare $translationPrefix, ma direttamente il namespace di traduzione
 
-        return Forms\Components\Wizard\Step::make('contacts')
+        return Forms\Components\Wizard\Step::make('studio')
             ->icon('heroicon-o-envelope')
+            
             ->schema([
-                'contacts_section' => Forms\Components\Section::make()
-                    ->schema([
-                        'contacts_grid' => Forms\Components\Grid::make(2)
-                            ->schema([
-                                'phone' => Forms\Components\TextInput::make('phone')
-                                    ->tel()
-                                    ->required()
-                                    ->placeholder(__('saluteora::doctor-resource.phone')),
-
-                                'address' => Forms\Components\TextInput::make('address')
-                                    ->required()
-                                    ->placeholder(__('saluteora::doctor-resource.address')),
-
-                                'city' => Forms\Components\TextInput::make('city')
-                                    ->required()
-                                    ->placeholder(__('saluteora::doctor-resource.city')),
-                            ]),
-                    ]),
-            ])
-            ->visible(fn () => request()->has('token') ||
-                (session()->has('doctor_registration_workflow_id') &&
-                DoctorRegistrationWorkflow::find(session('doctor_registration_workflow_id'))?->isModerationApproved()));
+                Forms\Components\Section::make('Dati Studio')
+                ->relationship('studio')  
+                ->schema(StudioResource::getFormSchema())
+                ])
+            ->visible(fn ($get) => $get('id')!==null)
+            ;
     }
 
     protected static function getProfessionalStep(): Forms\Components\Wizard\Step
@@ -388,31 +216,24 @@ class DoctorResource extends XotBaseResource
         return Forms\Components\Wizard\Step::make('professional')
             ->icon('heroicon-o-academic-cap')
             ->schema([
-                'professional_section' => Forms\Components\Section::make()
-                    ->schema([
-                        'professional_grid' => Forms\Components\Grid::make(2)
-                            ->schema([
-                                'registration_number' => Forms\Components\TextInput::make('registration_number')
-                                    ->required()
-                                    ->unique(ignoreRecord: true)
-                                    ->placeholder(__('saluteora::doctor-resource.registration_number')),
+                'registration_number' => Forms\Components\TextInput::make('registration_number')
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->placeholder(__('saluteora::doctor-resource.registration_number')),
 
-                                'certifications' => Forms\Components\FileUpload::make('certifications')
-                                    ->multiple()
-                                    ->directory('doctors/certifications')
-                                    ->acceptedFileTypes(['application/pdf'])
-                                    ->maxSize(10240)
-                                    ->downloadable()
-                                    ->openable()
-                                    ->reorderable()
-                                    ->columnSpanFull()
-                                    ->placeholder(__('saluteora::doctor-resource.certifications')),
-                            ]),
-                    ]),
+                'certifications' => Forms\Components\FileUpload::make('certifications')
+                    ->multiple()
+                    ->directory('doctors/certifications')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(10240)
+                    ->downloadable()
+                    ->openable()
+                    ->reorderable()
+                    ->columnSpanFull()
+                    ->placeholder(__('saluteora::doctor-resource.certifications')),
+
             ])
-            ->visible(fn () => request()->has('token') ||
-                (session()->has('doctor_registration_workflow_id') &&
-                DoctorRegistrationWorkflow::find(session('doctor_registration_workflow_id'))?->isModerationApproved()));
+            ->visible(fn ($get) => $get('id')!==null);
     }
 
     protected static function getAvailabilityStep(): Forms\Components\Wizard\Step
@@ -446,9 +267,7 @@ class DoctorResource extends XotBaseResource
                             ->reorderable(false),
                     ]),
             ])
-            ->visible(fn () => request()->has('token') ||
-                (session()->has('doctor_registration_workflow_id') &&
-                DoctorRegistrationWorkflow::find(session('doctor_registration_workflow_id'))?->isModerationApproved()));
+            ->visible(fn ($get) => $get('id')!==null);
     }
 
     public static function getPages(): array

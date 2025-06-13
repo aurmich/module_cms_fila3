@@ -58,7 +58,7 @@ class StudioResource extends XotBaseResource
 
             'addresses' => Forms\Components\Repeater::make('addresses')
                 ->relationship('addresses')
-                ->schema(static::getAddressFormSchema())
+                ->schema(StudioResource::getAddressFormSchema())
                 ->columnSpanFull()
                 ->defaultItems(1)
                 ->live()
