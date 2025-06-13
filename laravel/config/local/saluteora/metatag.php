@@ -32,4 +32,8 @@ return [
     'color_megamenu' => '#d60021',
     'color_hamburger' => '#000',
     'color_banner' => '#000',
+    'colors' => [
+        'primary' => '#FF5F7E',
+    ]
 ];
+

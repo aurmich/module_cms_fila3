@@ -340,7 +340,9 @@ class MetatagData extends Data implements Wireable
      */
     public function getColors(): array
     {
-        return $this->getThemeColors();
+
+        return ($this->colors);
+        //return $this->getThemeColors();
     }
 
     /**
