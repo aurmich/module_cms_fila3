@@ -69,7 +69,7 @@
 <div class="w-[300px]">Width small</div>
 <div class="bg-transparent"></div>
 <div class="bg-gradient-to-r from-cyan-500 to-blue-500">gradiant</div>
-<div class="bg-gradient-to-r from-cyan-500 to-[#1A467F]">gradient</div>
+<div class="bg-gradient-to-r from-cyan-500 to-[#272C4D]">gradient</div>
 <div class="min-h-screen">screen height</div>
 <div class="border-[#1A467F]"></div>
 <div class="min-h-[50vh]">min height</div>
@@ -81,4 +81,19 @@
 <div class="ring-[#FF5F7E]">ring primary</div>
 <div class="focus:border-[#FF5F7E]">focus primary</div>
 <div class="focus:ring-[#FF5F7E]">focus ring primary</div>
-</x-layouts.app>    
+<div class="fixed top-0 left-0 right-0 z-50">header fixed</div>
+<div class="mt-1.5">margin bottom header</div>
+<div class="fixed top-0 left-0 right-0 z-50 h-24">fixed</div>
+<div class="!fixed">fix</div>
+<div class="w-[750px]">width 1000px</div>
+<div class="w-[400px]">width 400px</div>
+<div class="min-h-[600px]">min h 600px</div>
+<div class="bg-[#B4E1BE]">background success</div>
+<div class="text-[#3E783E]">text success</div>
+<div class="bg-[#F38B8B]">backgroung error</div>
+<div class="text-[#BF0303]">text error</div>
+<div class="w-7/12">width 60%</div>
+<div class="text-[#272C4D]"></div>
+<div class="justify-evenly">justify evenly</div>
+<div class="lg:w-7/12">large width calendar</div>
+</x-layouts.app>

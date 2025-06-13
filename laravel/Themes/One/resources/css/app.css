@@ -129,17 +129,17 @@
 
 @layer base {
     :root {
-        --color-primary-50: 236 253 245;
-        --color-primary-100: 209 250 229;
-        --color-primary-200: 167 243 208;
-        --color-primary-300: 110 231 183;
-        --color-primary-400: 52 211 153;
-        --color-primary-500: 16 185 129;
-        --color-primary-600: 5 150 105;
-        --color-primary-700: 4 120 87;
-        --color-primary-800: 6 95 70;
-        --color-primary-900: 6 78 59;
-        --color-primary-950: 2 44 34;
+        --color-primary-50:  255 95 126;
+        --color-primary-100: 255 95 126;
+        --color-primary-200: 255 95 126;
+        --color-primary-300: 255 95 126;
+        --color-primary-400: 255 95 126;
+        --color-primary-500: 255 95 126;
+        --color-primary-600: 255 95 126;
+        --color-primary-700: 255 95 126;
+        --color-primary-800: 255 95 126;
+        --color-primary-900: 255 95 126;
+        --color-primary-950: 255 95 126;
 
         --color-danger-50: 254 242 242;
         --color-danger-100: 254 226 226;
@@ -269,11 +269,8 @@
     .fi-fo-wizard-header-step-label {
         @apply !text-[#FF5F7E];
     }
-    .fi-fo-wizard-header-step-indicator {
-        @apply !text-[#FF5F7E];
-    }
     .fi-fo-wizard-header-step-icon {
-        @apply !border-[#FF5F7E];
+        @apply !border-[#FF5F7E] !text-[#FF5F7E];
     }
     .fi-input {
         @apply focus:border-[#FF5F7E] focus:ring-[#FF5F7E];
