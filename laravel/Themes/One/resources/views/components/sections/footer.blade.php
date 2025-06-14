@@ -28,9 +28,9 @@
             </div>
             <div class="flex justify-center">
                 <div class="text-center m-6 md:text-right">
-                    <a href="{{ url('privacy') }}" class="text-white text-sm m-1">Home</a>
-                    <a href="{{ url('terms') }}" class="text-white text-sm m-1">Progetto</a>
-                    <a href="{{ url('cookies') }}" class="text-white text-sm m-1">Partners</a>
+                    <a href="/it" class="text-white text-sm m-1">Home</a>
+                    <a href="/it/pages/progetto" class="text-white text-sm m-1">Progetto</a>
+                    <a href="/it/pages/partners" class="text-white text-sm m-1">Partners</a>
                     <a href="{{ url('cookies') }}" class="text-white text-sm">FAQ'S</a>
                 </div>
             </div>          

@@ -99,4 +99,13 @@
 <div class="mt-9">margin top 9</div>
 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-2 py-1 rounded z-10">tooltip</div>
 <div class="my-9">margin-top-bottom</div>
+<div class="lg:w-3/12">large width 3/12</div>
+<div class="lg:w-2/5">large width 2/5</div>
+<div class="text-xs">testo small</div>
+<div class="pr-1">padding right 1</div>
+<div class="pr-5">padding right 5</div>
+<div class="bg-[#D1DDEF]">background appuntamenti in entrata</div>
+<div class="rounded-[15px]">border radius 15</div>
+<div class="w-2/4">width 2/4</div>
+<div class="py-9">padding y 9 </div>
 </x-layouts.app>

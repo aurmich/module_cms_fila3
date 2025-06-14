@@ -1,0 +1,1 @@
+<div class="bg-[#E6EBF7]">Partners page</div>
