@@ -13,7 +13,7 @@
                 "data": {
                     "view": "pub_theme::components.blocks.hero.dettaglio-paziente",
                     "title": "Bentornata, [Nome Paziente]",
-                    "subtitle": "Ecco la tua dashboard personale per la salute orale in gravidanza",
+                    "subtitle": "Procedi con i prossimi step per prenotare una visita",
                     "background_color": "bg-white",
                     "text_color": "text-gray-900"
                 }

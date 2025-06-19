@@ -13,12 +13,12 @@ return [
         'label' => 'Dottore',
         'color' => 'primary',
         'icon' => 'heroicon-o-user-circle',
-        'image' => '/img/doctor.jpg',
+        'image' => '/img/dentist.png',
     ],
     'patient' => [
         'label' => 'Paziente',
         'color' => 'success',
         'icon' => 'heroicon-o-user',
-        'image' => '/img/patient.jpg',
+        'image' => '/img/donna-personaggio.png',
     ],
 ];

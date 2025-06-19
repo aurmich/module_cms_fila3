@@ -64,6 +64,7 @@
                <div class="w-full flex justify-center bg-[#E6EBF7] !py-8 sm:py-32 mx-auto">
                 <div class="w-full mx-auto max-w-7xl lg:px-6 sm:px-3">
                     <div class="flex flex-col items-center mx-auto w-full max-w-2xl px-4 sm:px-6 lg:px-0 gap-4">
+                        <a href="/it/patient/book">
                       <div class="w-[350px] bg-gradient-to-r from-cyan-500 to-[#1A467F] p-6 text-white rounded-lg text-lg items-center flex justify-center cursor-pointer">Prenota una visita
                       <span class="cursor-pointer ml-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -71,6 +72,7 @@
                             </svg>
                         </span>
                       </div>
+                       </a>
                     </div>
                 </div>
                </div>  

@@ -34,7 +34,7 @@
                         },
                         {
                             "label": "Partners",
-                            "url": "it/pages/partners",
+                            "url": "/it/pages/partners",
                             "type": "link"
                         }
                     ],
@@ -51,7 +51,7 @@
                     "menu_items": [
                         {
                             "label": "Profilo",
-                            "url": "/profilo",
+                            "url": "{{ $profiloUrl }}",
                             "icon": "heroicon-o-user"
                         },
                         {

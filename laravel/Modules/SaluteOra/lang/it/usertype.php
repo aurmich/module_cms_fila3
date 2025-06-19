@@ -19,6 +19,6 @@ return [
         'label' => 'Paziente',
         'color' => 'success',
         'icon' => 'heroicon-o-user',
-        'image' => '/img/patient.jpg',
+        'image' => '/img/donna-personaggio.png',
     ],
 ];
