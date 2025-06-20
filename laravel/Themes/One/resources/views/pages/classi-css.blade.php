@@ -138,4 +138,9 @@
 <div class="bg-[#E6EBF7B3]">background card opacity</div>
 <div class="hover:py-5">hover button register</div>
 <div class="hover:py-9">hoverrrrrrrrrrr</div>
+<div class="flex-1">flex 1</div>
+<div class="h-[100px]">height 100px</div>
+<div class="lg:ml-5">large margin left</div>
+<div class="h-52">height 208 px</div>
+<div class=""></div>
 </x-layouts.app>

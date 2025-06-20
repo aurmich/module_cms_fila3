@@ -88,6 +88,10 @@
                     {{ $title }}
                 </h1>
 
+                <div class="text-xl">
+                    {{ $subtitle }}
+                </div>
+
                 @if(!empty($primaryCta) || !empty($secondaryCtaData))
                     <div class="flex flex-row justify-center gap-4 pt-4">
                         

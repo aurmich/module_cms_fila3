@@ -30,7 +30,7 @@
 
 
     </head>
-    <body class="min-h-screen antialiased bg-white dark:bg-gradient-to-b dark:from-gray-950 dark:to-gray-900">
+    <body class="min-h-screen flex flex-col bg-[#E6EBF7]">
         {{ $slot }}
         {{--
         <livewire:toast />

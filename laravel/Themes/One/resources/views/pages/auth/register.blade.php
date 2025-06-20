@@ -24,7 +24,8 @@ new class extends Component
 
 <x-layouts.app>
     @volt('register')
-    <div style="padding: 20px; background-image: url('/img/background-filigrana-chiaro.png'); background-size: cover; background-position: center">
+    <!-- background-image: url('/img/background-filigrana-chiaro.png'); background-size: cover; background-position: center -->
+    <div class="bg-[#E6EBF7] p-5">
     <div class="register-container">
         <div class="mb-16">
             <!-- Logo e intestazione -->

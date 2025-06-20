@@ -23,7 +23,7 @@
     'x-data' => "{ mobileMenuOpen: false }"
     ]) }}>
     <div class="!m-0 !p-0 w-full">
-        <div class="flex h-16 items-center justify-between">
+        <div class="flex h-16 items-center justify-between px-5">
             @foreach($componentsBlocks as $block)
                 @include($block->view,$block->data)
             @endforeach

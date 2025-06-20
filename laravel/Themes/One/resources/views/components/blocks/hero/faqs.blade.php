@@ -1,0 +1,1 @@
+<div class="bg-[#E6EBF7]">FAQ'S</div>
