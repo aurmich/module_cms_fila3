@@ -45,6 +45,7 @@ class ChangeTypeCommand extends Command
      */
     public function handle(): void
     {
+        $xot=XotData::make();
         $email = text('User email?');
 
         /** @var UserContract */
@@ -58,11 +59,11 @@ class ChangeTypeCommand extends Command
             $this->error('User model does not have childTypes method.');
             return;
         }
-        $childTypes = $user->getChildTypes();
-
+        //$childTypes = $user->getChildTypes();
+        $childTypes=$xot->getUserChildTypes();
         $this->info("Current user type: {$user->type?->getLabel()}");
         //$typeClass = get_class($user->type);
-        $typeClass=XotData::make()->getUserChildTypeClass();
+        $typeClass=$xot->getUserChildTypeClass();
         $options=Arr::mapWithKeys($childTypes,
             function ($item, string $key) use($typeClass) {
                 $val=$typeClass::tryFrom($key)?->getLabel();
