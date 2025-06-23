@@ -51,7 +51,7 @@
                 "menu_items": [
                     {
                         "label": "Profilo",
-                        "url": "/profilo",
+                        "url": "/profilo-paziente",
                         "icon": "heroicon-o-user"
                     },
                     {

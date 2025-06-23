@@ -3,24 +3,27 @@
     'blocks' => [],
     'class' => '',
     'componentsBlocks' => [],
-    'x-data' => "{ mobileMenuOpen: false }"
+    'x-data' => "{ mobileMenuOpen: false }",
+    'slug', 'isLanding' => false
 ])
 
 @php
     use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     $locale = LaravelLocalization::getCurrentLocale();
     $componentsBlocks = is_array($blocks) && isset($blocks[$locale]) ? $blocks[$locale] : $blocks;
+    $page = request()->url();
+    $isLanding =Route::currentRouteName()=='home' && !Auth::check();
 @endphp
 
 {{-- !fixed top-0 left-0 right-0 z-50 da inserire dentro alla classe dell' header --}}
-
+@if(!$isLanding)
 <header {{ $attributes->merge([
-    'class' => 'bg-[#272C4D] h-24 flex items-center',
+    'class' => 'bg-[#272C4D]  h-24 flex items-center',
     'id' => ($section['attributes']['id'] ?? ''),
     'x-data' => "{ mobileMenuOpen: false }"
     ]) }}>
     <div class="!m-0 !p-0 w-full">
-        <div class="flex h-16 items-center justify-between">
+        <div class="flex h-16 items-center justify-between px-5">
             @foreach($componentsBlocks as $block)
                 @include($block->view,$block->data)
             @endforeach
@@ -67,3 +70,4 @@
         --}}
     </div>
 </header>
+@endif

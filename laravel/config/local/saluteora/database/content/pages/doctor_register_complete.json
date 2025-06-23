@@ -12,18 +12,18 @@
                 "data": {
                     "view": "pub_theme::components.blocks.hero.modern_hero",
                     "title": {
-                        "it": "Registrazione Completata con Successo!",
-                        "en": "Registration Completed Successfully!"
+                        "it": "Hai completato il primo step della registrazione!",
+                        "en": "You have completed the first step of the registration!"
                     },
                     "subtitle": {
-                        "it": "Grazie per esserti unito alla nostra community. La tua richiesta è in fase di verifica.",
-                        "en": "Thank you for joining our community. Your request is being processed."
+                        "it": "Grazie per esserti unito alla nostra community. La tua richiesta è in fase di verifica. Riceverai una email dal backoffice con tutte le informazioni per completare la registrazione!",
+                        "en": "Thank you for joining our community. Your request is currently being reviewed. You will receive an email from our back office with all the information needed to complete your registration!"
                     },
                     "image": "/img/registration-complete.jpg",
                     "cta": [
                         {
-                            "it": "Vai alla tua area personale",
-                            "en": "Go to your dashboard"
+                            "it": "Torna alla Home",
+                            "en": "Go back to Home"
                         },
                         "#"
                     ],
