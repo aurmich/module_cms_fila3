@@ -9,15 +9,9 @@ includes:
 parameters:
     level: 9
     #parallel:
-<<<<<<< HEAD
     #    maximumNumberOfProcesses: 4
     #    jobSize: 1
     #    minimumNumberOfJobsPerProcess: 1
-=======
-    #    maximumNumberOfProcesses: 32
-    #    jobSize: 20
-    #    minimumNumberOfJobsPerProcess: 2
->>>>>>> 476b0584 (feat: add EditUserWidget with localization and documentation)
 
     paths:
         # - ./Modules/*/app/*
