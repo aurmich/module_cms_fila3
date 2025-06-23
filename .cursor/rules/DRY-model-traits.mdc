@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 # DRY Model Traits: HasFactory e Catena di Ereditarietà
 
 ## Regola

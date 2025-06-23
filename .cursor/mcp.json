@@ -30,7 +30,13 @@
         "-y",
         "mcp-package-docs"
       ]
+    },
+    "playwright-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "playwright-mcp"
+      ]
     }
-  
   }
 }
