@@ -58,6 +58,10 @@ return array (
       'placeholder' => 'body_html',
       'label' => 'body_html',
     ),
+    'subject' => 
+    array (
+      'description' => 'subject',
+    ),
   ),
   'actions' => 
   array (

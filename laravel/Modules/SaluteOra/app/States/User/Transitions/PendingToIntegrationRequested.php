@@ -23,9 +23,10 @@ class PendingToIntegrationRequested extends Transition
 
     public function handle(): User
     {
+        $slug=$this->user->type->value . '-'.Str::of(class_basename(self::class))->kebab()->toString();
         $notify = new RecordNotification(
             $this->user,
-            $this->user->type->value . '_integration_requested'
+            $slug
         );
         if($this->user->remember_token==null){
             $this->user->remember_token = Str::random(40);
