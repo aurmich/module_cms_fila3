@@ -70,9 +70,13 @@ new class extends Component
                     </div>
                 </div>
                 @else
-                <form wire:submit="sendResetPasswordLink" class="space-y-6 flex-col items-center">
-                    <x-ui.input label="Email address" type="email" id="email" name="email" wire:model="email" />
-                    <x-filament::button type="primary" rounded="md" submit="true">Send password reset link</x-filament::button>
+                <form wire:submit="sendResetPasswordLink" class="space-y-6 flex flex-col items-center justify-center">
+                    <div class="w-full">
+                        <x-ui.input class="w-full" label="Email address" type="email" id="email" name="email" wire:model="email" />
+                    </div>
+                    <div>
+                        <button class="w-full py-3 px-3 rounded bg-[#FF5F7E] text-white font-bold transition" submit="true">Send password reset link</button>
+                    </div>
                 </form>
                 @endif
             </div>
