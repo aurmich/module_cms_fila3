@@ -60,8 +60,9 @@ class ChangeTypeCommand extends Command
         }
         $childTypes = $user->getChildTypes();
 
-        $this->info("Current user type: {$user->type->getLabel()}");
-        $typeClass = get_class($user->type);
+        $this->info("Current user type: {$user->type?->getLabel()}");
+        //$typeClass = get_class($user->type);
+        $typeClass=XotData::make()->getUserChildTypeClass();
         $options=Arr::mapWithKeys($childTypes,
             function ($item, string $key) use($typeClass) {
                 $val=$typeClass::tryFrom($key)?->getLabel();

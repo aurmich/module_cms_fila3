@@ -2,6 +2,7 @@ ssh saluteora
 cd /var/www/html/base_saluteora/laravel
 php -d memory_limit=-1 composer.phar selfupdate
 php -d memory_limit=-1 composer.phar update -W
+rm -rf resources/views/vendor
 php artisan vendor:publish --all
 rm -rf database/migrations
 php artisan migrate
@@ -18,3 +19,19 @@ dalla cartella laravel
 php artisan filament:upgrade
 php artisan filament:optimize
 php artisan optimize
+
+
+
+mailtrap.io
+m.sottana@exabytesrl.it
+P_wkhD*Zri_7QU#
+
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=3347c34800fc41
+MAIL_PASSWORD=3b88a5ddd726a5
+
+MAIL_FROM_ADDRESS="hello@saluteora.com"
+MAIL_FROM_NAME="${APP_NAME}"

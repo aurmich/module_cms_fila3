@@ -325,12 +325,20 @@ class XotData extends Data implements Wireable
 
     public function getUserChildTypes(): array
     {
+        $enum_class=$this->getUserChildTypeClass();
+        return $enum_class::cases();
+        //$userInstance = app($user_class);
+        //return $userInstance->getChildTypes();
+    }
+
+    public function getUserChildTypeClass(): string
+    {
         $user_class = $this->getUserClass();
         $enum_class = Arr::get($user_class::casts(),'type',null);
         if($enum_class==null){
             $enum_class=Str::of($user_class)->replace('\\Models\\', '\\Enums\\')->append('TypeEnum')->toString();
         }
-        return $enum_class::cases();
+        return $enum_class;
         //$userInstance = app($user_class);
         //return $userInstance->getChildTypes();
     }
