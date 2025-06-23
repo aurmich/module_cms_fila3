@@ -12,7 +12,14 @@ return array (
       'helper_text' => '',
       'description' => '',
     ),
-    'address' => 'Indirizzo',
+    'address' => 
+    array (
+      'full_address' => 
+      array (
+        'label' => 'address.full_address',
+      ),
+      'label' => 'address',
+    ),
     'city' => 'Città',
     'postal_code' => 'CAP',
     'phone' => 

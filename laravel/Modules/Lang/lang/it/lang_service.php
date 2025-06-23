@@ -421,6 +421,20 @@ return array (
     array (
       'label' => 'certifications',
     ),
+    'schedule' => 
+    array (
+      'description' => 'schedule',
+      'helper_text' => 'schedule',
+      'placeholder' => 'schedule',
+      'label' => 'schedule',
+    ),
+    'addresses' => 
+    array (
+      'description' => 'addresses',
+      'helper_text' => 'addresses',
+      'placeholder' => 'addresses',
+      'label' => 'addresses',
+    ),
   ),
   'actions' => 
   array (

@@ -113,6 +113,11 @@ class Studio extends BaseTenant
         'active',
     ];
 
+     /** @var list<string> */
+     protected $with = [
+        'address',
+     ];
+
     /** @return array<string, string> */
     protected function casts(): array
     {

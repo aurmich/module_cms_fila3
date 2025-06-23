@@ -144,6 +144,43 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 - Farmaci e terapie
 - Note cliniche
 
+### 5. Gestione Disponibilità Dottori
+- **Multi-Tenancy**: Disponibilità specifica per studio-dottore
+- **OpeningHoursField**: Componente UI per gestione orari settimanali
+- **Validazione Avanzata**: Controllo sovrapposizioni e logica business
+- **Integrazione Calendar**: Visualizzazione disponibilità nel FullCalendar
+- **Audit Trail**: Tracciamento modifiche disponibilità
+
+**Documentazione dettagliata**: [Doctor Availability Management](doctor-availability-management.md)
+
+**Componenti utilizzati**:
+- [OpeningHoursField](../UI/docs/components/opening-hours-field.md) - Componente UI per orari
+- [DoctorAvailabilityPage](app/Filament/Pages/DoctorAvailabilityPage.php) - Pagina Filament con tenancy
+
+### 6. Regole Architetturali
+
+**⚠️ CRITICO**: Seguire rigorosamente le regole di ereditarietà delle classi XotBase per evitare errori gravi.
+
+**Documentazione obbligatoria**: [XotBase Inheritance Rules](xotbase-inheritance-rules.md)
+
+**Errori gravi da evitare**:
+- ❌ Non ridichiarare mai `implements HasForms` su classi che estendono `XotBasePage`
+- ❌ Non ridichiarare mai `use InteractsWithForms` su classi che estendono `XotBasePage`
+- ❌ Non duplicare trait già presenti nelle classi base
+
+### 7. Errori Critici Risolti
+
+**📋 Tracciamento Errori**: [Critical Errors Resolved](critical-errors-resolved.md)
+
+**Errori identificati e risolti**:
+1. **Duplicazione Trait**: DoctorAvailabilityPage con trait duplicati (Dicembre 2024)
+2. **Missing $view Property**: OpeningHoursField senza proprietà vista (Dicembre 2024)
+
+**Strumenti di Prevenzione**:
+- Checklist di verifica pre-commit
+- Comandi di debug per identificazione rapida
+- Documentazione dettagliata per ogni risoluzione
+
 ## Integrazioni
 
 ### Con Modulo Dental

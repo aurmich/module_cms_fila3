@@ -20,7 +20,7 @@ Modulo principale per la gestione del sistema sanitario, inclusa la gestione di 
 
 ### Gestione Studi Medici
 - Creazione e gestione degli studi
-- Gestione indirizzi multipli con logica intelligente
+- Gestione indirizzi multipli con componente AddressesField riutilizzabile
 - Specializzazioni mediche
 - Orari di apertura configurabili
 
@@ -36,9 +36,32 @@ Modulo principale per la gestione del sistema sanitario, inclusa la gestione di 
 - Disponibilità medici
 - Calendario delle visite
 
+## Componenti Riutilizzabili
+
+### AddressesField - Gestione DRY degli Indirizzi
+
+Il modulo utilizza il componente riutilizzabile `AddressesField` del modulo Geo per gestire indirizzi multipli, eliminando la duplicazione di codice.
+
+#### Implementazione in StudioResource
+```php
+'addresses' => AddressesField::make('addresses')
+    ->relationship('addresses')
+    ->minItems(1)
+    ->addActionLabel('Aggiungi Indirizzo')
+    ->columnSpanFull(),
+```
+
+#### Benefici
+- **-92.5%** riduzione righe di codice (da 67 a 5 righe)
+- **DRY Compliance**: Zero duplicazione di logica
+- **Riutilizzabilità**: Utilizzabile in PatientResource, DoctorResource, ecc.
+- **Manutenibilità**: Modifiche centralizzate in un solo punto
+
+**Documentazione**: [AddressesField Documentation](../Geo/docs/components/addresses-field.md)
+
 ## Implementazioni UX Avanzate
 
-### Campi Condizionali Intelligenti (StudioResource)
+### Campi Condizionali Intelligenti (OpeningHoursField)
 
 Il modulo implementa un pattern UX avanzato per i repeater con campi condizionali e logica di esclusività.
 

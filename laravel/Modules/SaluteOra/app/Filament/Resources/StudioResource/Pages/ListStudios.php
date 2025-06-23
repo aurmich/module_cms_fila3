@@ -22,6 +22,21 @@ class ListStudios extends XotBaseListRecords
         return [
             'id' => Tables\Columns\TextColumn::make('id')
                 ->sortable(),
+            'active' => Tables\Columns\IconColumn::make('active')
+                ->boolean(),
+            'full_address' => Tables\Columns\TextColumn::make('address')
+                ->searchable()
+                ->default(function($record){
+                    $address = $record?->address()->first();
+                    if($address==null){
+                        return null;
+                    }
+                    $locality=$address->getLocality();
+                    if($locality==null){
+                        return null;
+                    }
+                    return $address->street_address.' '.$address->street_number.' '.implode('',$locality['cap']).' '.$locality['nome'].' ('.$locality['provincia']['nome'].') - '.$locality['regione']['nome'];
+                }),
                 
             'name' => Tables\Columns\TextColumn::make('name')
                 ->searchable()
@@ -39,12 +54,9 @@ class ListStudios extends XotBaseListRecords
                 
             'vat_number' => Tables\Columns\TextColumn::make('vat_number'),
                 
-            'active' => Tables\Columns\IconColumn::make('active')
-                ->boolean(),
-                
-            'created_at' => Tables\Columns\TextColumn::make('created_at')
-                ->dateTime()
-                ->sortable(),
+            
+            
+            
         ];
     }
 }

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Geo\Models\Address;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * Trait HasAddress
@@ -29,6 +30,16 @@ trait HasAddress
     }
     
     /**
+     * Ottiene indirizzo associato al modello.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function address(): MorphOne
+    {
+        return $this->morphOne(Address::class, 'model');
+    }
+    
+    /**
      * Ottiene l'indirizzo principale del modello.
      *
      * @return \Modules\Geo\Models\Address|null
@@ -46,7 +57,7 @@ trait HasAddress
     public function getFullAddress(): ?string
     {
         $address = $this->primaryAddress();
-        return $address ? $address->getFormattedAddress() : null;
+        return $address ? $address->getFullAddress() : null;
     }
     
     /**

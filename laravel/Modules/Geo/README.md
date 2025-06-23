@@ -56,6 +56,7 @@ The Geo module is a central repository for all geographical data and functionali
 
 - **Geographical Hierarchy Management**: Handle regions, provinces, cities, and postal codes (CAPs)
 - **Address Management**: Store and manage complete address information
+- **Reusable Address Components**: AddressesField component for DRY address management
 - **Location Services**: Work with geographical coordinates and points of interest
 - **Data Consistency**: Single source of truth for all geographical data
 - **API Ready**: Easily expose geographical data through APIs
@@ -101,6 +102,38 @@ $cities = $province->cities;
 // Get CAPs for a city
 $city = City::find(1);
 $caps = $city->caps;
+```
+
+### AddressesField Component
+
+The Geo module provides a reusable `AddressesField` component for managing multiple addresses in Filament forms:
+
+```php
+use Modules\Geo\Filament\Forms\Components\AddressesField;
+
+// Basic usage in a Filament Resource
+AddressesField::make('addresses')
+    ->relationship('addresses')
+    ->minItems(1)
+    ->addActionLabel('Add Address')
+    ->columnSpanFull()
+
+// Advanced configuration
+AddressesField::make('addresses')
+    ->relationship('addresses')
+    ->minItems(1)
+    ->maxItems(5)
+    ->reorderable(true)
+    ->managePrimary(true)
+    ->addActionLabel('Add Location')
+```
+
+**Features:**
+- **Multiple Addresses**: Manage collections of addresses with repeater
+- **Conditional Visibility**: Name field appears only with multiple addresses
+- **Primary Address Logic**: Automatic exclusive primary address management
+- **Complete Italian Schema**: Full cascade selection (Region → Province → City → CAP)
+- **Configurable**: Flexible API for different use cases
 ```
 
 ### Relationships

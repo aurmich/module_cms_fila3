@@ -112,6 +112,58 @@ class MyCustomPage extends Page // ⚠️ ERRATO!
 3. **Rispettare il Namespace**: Utilizzare `Modules\<nome modulo>\Filament\Pages` per le classi che estendono XotBasePage
 4. **Utilizzare le Traduzioni**: Sfruttare il sistema di traduzione automatico invece di hardcodare le etichette
 
+## ⚠️ ERRORI GRAVI DA EVITARE
+
+### Duplicazione di Trait e Interfacce
+
+**❌ ERRORE GRAVE**: Non ridichiarare mai trait e interfacce già presenti in `XotBasePage`
+
+```php
+// ❌ ERRORE GRAVE: Ridichiarazione di trait/interfacce
+class MyPage extends XotBasePage implements HasForms  // ⚠️ ERRATO!
+{
+    use InteractsWithForms;  // ⚠️ ERRATO!
+    
+    // ...
+}
+```
+
+**✅ CORRETTO**: Estendere semplicemente `XotBasePage` senza ridichiarazioni
+
+```php
+// ✅ CORRETTO: Estensione pulita
+class MyPage extends XotBasePage
+{
+    // Nessuna ridichiarazione di trait/interfacce già presenti
+    
+    protected function getFormSchema(): array
+    {
+        return [
+            // Schema del form
+        ];
+    }
+}
+```
+
+### Perché È un Errore Grave
+
+1. **Violazione del Principio DRY**: Duplicazione di codice già presente
+2. **Conflitti di Trait**: Può causare errori runtime difficili da debuggare
+3. **Manutenibilità**: Rende il codice più difficile da mantenere
+4. **Performance**: Caricamento doppio degli stessi trait
+5. **Inconsistenza**: Comportamento non prevedibile tra diverse pagine
+
+### Cosa Fornisce Già XotBasePage
+
+`XotBasePage` implementa già:
+- `HasForms` interface
+- `InteractsWithForms` trait
+- `NavigationLabelTrait` trait
+- `TransTrait` trait
+- `InteractsWithFormActions` trait
+
+**NON ridichiarare mai questi elementi nelle classi che estendono XotBasePage.**
+
 ## Compatibilità con Filament
 
 La classe è progettata per essere compatibile con Filament v3+ e garantisce il corretto funzionamento di tutte le funzionalità native di Filament\Pages\Page.
