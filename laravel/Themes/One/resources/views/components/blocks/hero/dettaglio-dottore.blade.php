@@ -26,7 +26,7 @@
                 </div>
              
                 <div class="flex justify-center">
-                    <img class="w-64" src="/img/dottore-avatar-DETTAGLIO.png"/>
+                    <img class="w-44 lg:w-64" src="/img/dentist.png"/>
                 </div>
             </div>
         </div>

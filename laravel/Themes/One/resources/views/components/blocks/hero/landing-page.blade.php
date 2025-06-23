@@ -224,13 +224,13 @@
       </div>
       <div class="flex flex-col lg:flex-row items-center">
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/logo-coi.png" />
+          <img class="h-16 lg:h-[150px]" src="/img/coi-logo-updated.png" />
         </div>
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/andi-fondazione-logo.png" />
+          <img class="h-16 lg:h-[150px]" src="/img/fondazione-andi-logo-updated.png" />
         </div>
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/inmp-logo-piccolo.png" />
+          <img class="h-16 lg:h-[150px]" src="/img/inmp-logo-piccolo-updated.png" />
         </div>
       </div>
     </div>

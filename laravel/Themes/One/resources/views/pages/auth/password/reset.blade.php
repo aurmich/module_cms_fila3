@@ -36,9 +36,9 @@ new class extends Component
 
     <div class="flex flex-col items-stretch justify-center w-screen min-h-screen py-10 sm:items-center">
 
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md flex flex-col items-center">
             <x-ui.link href="{{ route('home') }}">
-                <img src="/img/saluteOra-new-logo.png" class="w-auto h-10 mx-auto text-gray-700 fill-current dark:text-gray-100" />
+            <img class="w-[300px] lg:w-[350px] text-center" src="/img/logo-v2.png">
             </x-ui.link>
 
             <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#272C4D]">

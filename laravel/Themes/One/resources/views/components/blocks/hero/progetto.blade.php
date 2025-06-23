@@ -12,7 +12,7 @@
         </a>
     </div>
     <div class="flex justify-center">
-        <h1 class="text-[#272C4D]">Privacy Policy</h1>
+        <h1 class="text-[#272C4D]">Il Progetto</h1>
     </div>
 
 </div>

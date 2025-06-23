@@ -5,7 +5,7 @@
  <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full lg:w-2/4 grid-cols-1 lg:grid grid-cols-2 gap-4 justify-center items-center p-10">
         <div class="flex justify-center">
-            <img class="h-[100px]" src="/img/logo-coi.png" />
+            <img class="h-[100px]" src="/img/coi-logo-updated.png" />
         </div>
         <span class="ml-0 lg:ml-5">
         Cooperazione Odontoiatrica Internazionale ETS opera da oltre 30 anni per promuovere il diritto alla
@@ -15,7 +15,7 @@
     </div>
     <div class="w-full lg:w-2/4 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center items-center p-10">
     <div class="flex justify-center">
-        <img class="h-48" src="/img/andi-fondazione-logo.png" />
+        <img class="h-48" src="/img/fondazione-andi-logo-updated.png" />
     </div>
         <span class="ml-0 lg:ml-5">
         Fondazione ANDI ETS promuove la salute orale di tutti con particolare

@@ -35,16 +35,35 @@
 
             {{-- Icone azioni --}}
             <div class="cursor-pointer flex flex-row items-center">
-                <div class="pr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 24 24" stroke-width="1.5" stroke="#272C4D"
-                         class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
-                    </svg>
+                <!-- Delete with modal -->
+                <div x-data="{ open: false }">
+                    <div @click="open = true" class="p-2 rounded-full bg-[#F38B8B] text-[#BF0303]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                    </div>
+
+                    <!-- Modal -->
+                    <div x-show="open" x-cloak class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                        <div class="bg-white p-6 rounded-xl max-w-md w-3/4 lg:w-full">
+                            <h2 class="text-[#272C4D] text-lg font-semibold text-gray-800 mb-4">Conferma eliminazione</h2>
+                            <p class="text-sm text-gray-600">Sei sicuro di voler rifiutare l'appuntamento?</p>
+                            <div class="mt-6 flex justify-end gap-2">
+                                <button @click="open = false" class="px-4 py-2 bg-gray-200 rounded-md">
+                                    Annulla
+                                </button>
+                                <button @click="$wire.call('deleteItem')" class="px-4 py-2 bg-[#F38B8B] text-[#BF0303] rounded-md">
+                                    Rifiuta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- /Delete -->
                 <div x-data="{ showInfo: false }" class="relative">
-                <div @click="showInfo = true" class="bg-[#D1DDEF] rounded-full ml-5 p-2">
+                <div @click="showInfo = true" class="bg-[#D1DDEF] rounded-full ml-2 p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 24 24" stroke-width="1.5" stroke="#272C4D"
                          class="size-6">
@@ -58,10 +77,12 @@
                 <div class="bg-white p-6 rounded-xl max-w-md w-3/4 lg:w-full">
                  <h2 class="text-lg font-semibold text-gray-800 mb-4">Dettagli Appuntamento</h2>
                  <div class="text-sm text-gray-700 space-y-2">
-                     <p><strong>Nome:</strong> Mara Rossi</p>
-                     <p><strong>Data:</strong> 19 Giugno 2025</p>
-                     <p><strong>Orario:</strong> 10:00 - 11:00</p>
-                     <p><strong>Note:</strong> Prima visita conoscitiva.</p>
+                    <p><strong>Nome:</strong> Mara Rossi</p>
+                    <p><strong>Data:</strong> 19 Giugno 2025</p>
+                    <p><strong>Orario:</strong> 10:00 - 11:00</p>
+                    <p><strong>Cellulare:</strong> +39 999999999</p>
+                    <p><strong>Email:</strong> mararossi@email.com</p>
+                    <p><strong>Problemi dentali:</strong> Caria su 38</p>
                  </div>
                  <div class="mt-6 flex justify-end">
                      <button @click="showInfo = false" class="px-4 py-2 bg-[#FF5F7E] text-white rounded-md">

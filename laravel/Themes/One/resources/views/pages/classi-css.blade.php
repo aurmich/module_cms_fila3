@@ -142,5 +142,9 @@
 <div class="h-[100px]">height 100px</div>
 <div class="lg:ml-5">large margin left</div>
 <div class="h-52">height 208 px</div>
-<div class=""></div>
+<div class="lg:min-h-36">large footer height</div>
+<div class="left-[15%]">left 15%</div>
+<div class="right-[15%]">right 15%</div>
+<div class="mt-10">margin-top 10</div>
+<div class="lg:py-8">large py-8</div>
 </x-layouts.app>
