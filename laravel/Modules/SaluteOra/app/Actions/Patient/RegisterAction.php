@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Actions\Patient;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Modules\SaluteOra\Models\Patient;
+use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\States\User\Pending;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Notifications\RecordNotification;
 
@@ -21,7 +22,7 @@ class RegisterAction
      * @param array<string, mixed> $data
      * @return Patient
      */
-    public function execute(array $data): Patient
+    public function execute(UserContract $record,array $data): Patient
     {
         return DB::transaction(function () use ($data) {
 
