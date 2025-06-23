@@ -56,6 +56,7 @@ return array (
       'description' => 'body_html',
       'helper_text' => 'body_html',
       'placeholder' => 'body_html',
+      'label' => 'body_html',
     ),
   ),
   'actions' => 

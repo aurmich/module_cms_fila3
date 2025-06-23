@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Notify\Models\MailTemplate;
 use Illuminate\Mail\Mailables\Attachment;
+use Modules\Xot\Datas\XotData;
 use Spatie\MailTemplates\TemplateMailable;
 
 /**
@@ -64,9 +65,12 @@ class SpatieEmail extends TemplateMailable
          */
         //$pathToLayout = module_path('Notify','resources/mail-layouts/base/responsive.html');
         //dddx(MetatagData::make()->toArray());
+        $xot=XotData::make();
+        $pub_theme=$xot->pub_theme;
+        $pubThemePath=base_path('Themes/'.$pub_theme.'');
 
-
-        $pathToLayout = module_path('Notify','resources/mail-layouts/base.html');
+        //$pathToLayout = module_path('Notify','resources/mail-layouts/base.html');
+        $pathToLayout = $pubThemePath.'/resources/mail-layouts/base.html';
         return file_get_contents($pathToLayout);
 
         //return '<header>Site name!</header>{{{ body }}}<footer>Copyright 2018</footer>';

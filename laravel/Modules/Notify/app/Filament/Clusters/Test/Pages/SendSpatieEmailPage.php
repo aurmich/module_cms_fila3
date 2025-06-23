@@ -14,6 +14,7 @@ use Filament\Forms\ComponentContainer;
 use Filament\Forms\Contracts\HasForms;
 use Modules\Notify\Emails\SpatieEmail;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Notify\Models\MailTemplate;
 use Modules\Notify\Emails\EmailDataEmail;
 use Modules\Notify\Filament\Clusters\Test;
 use Modules\Xot\Filament\Pages\XotBasePage;
@@ -70,7 +71,12 @@ class SendSpatieEmailPage extends XotBasePage
             Forms\Components\TextInput::make('to')
                 ->email()
                 ->required(),
+            /*
             Forms\Components\TextInput::make('subject')
+                ->required(),
+            */
+            Forms\Components\Select::make('mail_template_slug')
+                ->options(MailTemplate::all()->pluck('slug', 'slug'))
                 ->required(),
             Forms\Components\RichEditor::make('body_html')
                 ->required(),
@@ -113,10 +119,11 @@ class SendSpatieEmailPage extends XotBasePage
              ->locale('it')
              ->send($email);
         */
+        $notify=(new RecordNotification($user,$data['mail_template_slug']))->mergeData($data);
 
         Notification::route('mail', $data['to'])
             //->locale('it')
-            ->notify(new RecordNotification($user,'due'));
+            ->notify($notify);
 
 
         FilamentNotification::make()
