@@ -37,14 +37,8 @@ Queste Action devono occuparsi di:
 - [RegistrationWidget.php](../../app/Filament/Widgets/RegistrationWidget.php)
 - [EditUserWidget.php](../../app/Filament/Widgets/EditUserWidget.php) - Widget per modifica dati utente
 - [Documentazione EditUserWidget](./edit-user-widget.md) - Documentazione completa dell'EditUserWidget
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [EditUserWidget.php](../../app/Filament/Widgets/EditUserWidget.php) - Widget per modifica dati utente
 - [Documentazione EditUserWidget](./edit-user-widget.md) - Documentazione completa dell'EditUserWidget
->>>>>>> aurmich/dev
-=======
->>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
-=======
 - [EditUserWidget.php](../../app/Filament/Widgets/EditUserWidget.php) - Widget per modifica dati utente
 - [Documentazione EditUserWidget](./edit-user-widget.md) - Documentazione completa dell'EditUserWidget
 >>>>>>> aurmich/dev
