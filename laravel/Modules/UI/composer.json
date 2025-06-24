@@ -1,6 +1,6 @@
 {
     "name": "laraxot/module_ui_fila3",
-    "description": "",
+    "description": "UI Module for Laraxot applications with Filament integration",
     "homepage": "https://github.com/laraxot/module_ui_fila3.git",
     "license": "MIT",
     "authors": [
@@ -26,34 +26,14 @@
         }
     },
     "require": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> cf5bf8d (.)
         "coolsam/flatpickr": "^4.1",
-<<<<<<< HEAD
-=======
-        "owenvoke/blade-fontawesome": "*"
-=======
-=======
-=======
-        "coolsam/flatpickr": "^4.1",
->>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
->>>>>>> 632ecbb (.)
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
         "owenvoke/blade-fontawesome": "*",
         "saade/filament-fullcalendar": "^3.2"
     },
     "require_comment": {
-        "coolsam/flatpickr": "*"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 3b0d55a (.)
-=======
->>>>>>> 632ecbb (.)
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
+        "coolsam/flatpickr": "Date and time picker for forms",
+        "owenvoke/blade-fontawesome": "FontAwesome icons for Blade templates",
+        "saade/filament-fullcalendar": "FullCalendar integration for Filament"
     },
     "repositories": [
         {
