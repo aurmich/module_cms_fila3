@@ -34,12 +34,20 @@ middleware(['auth', 'verified']);
  */
 $component = new class extends Component {
     /**
-     * Current user's name.
+     * Current user's first name.
      * 
      * @var string
      */
-    #[Validate('required|string|max:255')]
-    public string $name = '';
+    #[Validate('required|string|max:100')]
+    public string $first_name = '';
+
+    /**
+     * Current user's last name.
+     * 
+     * @var string
+     */
+    #[Validate('required|string|max:100')]
+    public string $last_name = '';
 
     /**
      * Current user's email address.
@@ -101,11 +109,13 @@ $component = new class extends Component {
             Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
             
             // Type-safe property initialization
-            $this->name = (string) ($user->name ?? '');
+            $this->first_name = (string) ($user->first_name ?? '');
+            $this->last_name = (string) ($user->last_name ?? '');
             $this->email = (string) ($user->email ?? '');
             $this->user_id = (int) ($user->id ?? 0);
             
-            Assert::stringNotEmpty($this->name, 'User name cannot be empty');
+            Assert::stringNotEmpty($this->first_name, 'User first name cannot be empty');
+            Assert::stringNotEmpty($this->last_name, 'User last name cannot be empty');
             Assert::stringNotEmpty($this->email, 'User email cannot be empty');
             Assert::greaterThan($this->user_id, 0, 'User ID must be positive');
             

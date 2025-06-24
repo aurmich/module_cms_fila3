@@ -126,16 +126,40 @@ class RegisterWidget extends XotBaseWidget
                     'password_grid' => Grid::make(2)
                         ->schema([
                             'password' => TextInput::make('password')
+                                ->label(__('user::auth.fields.password'))
                                 ->password()
                                 ->required()
-                                ->rules([Password::default()])
-                                ->minLength(8),
+                                ->string()
+                                ->minLength(12)
+                                ->maxLength(255)
+                                ->rules([
+                                    'required',
+                                    'string',
+                                    'min:12',
+                                    'regex:/[A-Z]/',      // At least one uppercase letter
+                                    'regex:/[a-z]/',      // At least one lowercase letter
+                                    'regex:/[0-9]/',      // At least one number
+                                    'regex:/[^A-Za-z0-9]/' // At least one special character
+                                ])
+                                ->validationMessages([
+                                    'password.regex' => __('user::auth.validation.password.complexity'),
+                                ])
+                                ->autocomplete('new-password')
+                                ->validationAttribute(__('user::auth.fields.password'))
+                                ->helperText(__('user::auth.help.password'))
+                                ->confirmed(),
                             
                             'password_confirmation' => TextInput::make('password_confirmation')
+                                ->label(__('user::auth.fields.password_confirmation'))
                                 ->password()
                                 ->required()
-                                ->same('password')
-                                ->dehydrated(false),
+                                ->string()
+                                ->minLength(12)
+                                ->maxLength(255)
+                                ->autocomplete('new-password')
+                                ->validationAttribute(__('user::auth.fields.password_confirmation'))
+                                ->dehydrated(false)
+                                ->same('password'),
                         ]),
                 ]),
                 
@@ -183,14 +207,81 @@ class RegisterWidget extends XotBaseWidget
     }
 
     /**
-     * Handle user registration with proper validation and security.
-     *
-     * Implements secure registration process with proper data validation,
-     * password hashing, and audit logging.
+     * Handle form submission with comprehensive error handling and validation.
      *
      * @return void
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \RuntimeException
      */
-    public function register(): void
+    public function submit(): void
+    {
+        try {
+            // Validate form data first
+            $validatedData = $this->validateForm();
+            
+            // Log registration attempt with hashed PII for security
+            $this->logRegistrationAttempt($validatedData);
+            
+            // Begin database transaction for data integrity
+            $user = \DB::transaction(function () use ($validatedData) {
+                // Create user with validated data
+                $user = $this->createUser($validatedData);
+                
+                // Trigger any post-registration events
+                $this->afterUserCreated($user);
+                
+                return $user;
+            });
+            
+            // Log successful registration with user ID
+            Log::info('User registered successfully', [
+                'user_id' => $user->id,
+                'email_hash' => hash('sha256', $user->email),
+                'ip' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+            
+            // Send email verification if needed
+            if (config('auth.must_verify_email')) {
+                $user->sendEmailVerificationNotification();
+            }
+            
+            // Log in the user
+            Auth::login($user);
+            
+            // Redirect to intended URL or dashboard
+            $this->redirectAfterRegistration($user);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Re-throw validation exceptions to be handled by Filament
+            throw $e;
+            
+        } catch (\Exception $e) {
+            // Log detailed error information
+            Log::error('Registration failed: ' . $e->getMessage(), [
+                'exception' => $e,
+                'trace' => $e->getTraceAsString(),
+                'ip' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+            
+            // Show user-friendly error message
+            $this->dispatchBrowserEvent('registration-failed', [
+                'message' => __('user::auth.registration.failed')
+            ]);
+            
+            // Re-throw with a generic message for the UI
+            throw new \RuntimeException(__('user::auth.registration.error_occurred'));
+        }
+    }
+
+    /**
+     * Validate form data before registration.
+     *
+     * @return array<string, mixed>
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateForm(): array
     {
         $data = $this->form->getState();
         
@@ -208,28 +299,257 @@ class RegisterWidget extends XotBaseWidget
             'email_verified_at' => null,
         ];
         
-        $user = User::create($userData);
-        
+        return $userData;
+    }
+
+    /**
+     * Log registration attempt with hashed PII for security.
+     *
+     * @param array<string, mixed> $validatedData
+     * @return void
+     */
+    protected function logRegistrationAttempt(array $validatedData): void
+    {
+        Log::info('Registration attempt', [
+            'email_hash' => hash('sha256', $validatedData['email']),
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
+    }
+
+    /**
+     * Create user with validated data.
+     *
+     * @param array<string, mixed> $validatedData
+     * @return User
+     */
+    protected function createUser(array $validatedData): User
+    {
+        return User::create($validatedData);
+    }
+
+    /**
+     * Trigger any post-registration events.
+     *
+     * @param User $user
+     * @return void
+     */
+    protected function afterUserCreated(User $user): void
+    {
         // Activity logging for audit trail
         activity()
             ->causedBy($user)
             ->performedOn($user)
             ->withProperties([
-                'type' => $userData['type'],
+                'type' => $user->type,
                 'ip_address' => request()->ip(),
                 'user_agent' => request()->userAgent(),
             ])
             ->log('User registered via RegisterWidget');
+    }
+
+    /**
+     * Redirect to intended URL or dashboard after registration.
+     *
+     * @param User $user
+     * @return void
+     */
+}
+
+/**
+ * Get user type options for registration.
+ *
+ * @return array<string, string>
+ */
+protected function getUserTypeOptions(): array
+{
+    $userTypes = config('moderation.user_types', []);
+    $options = [];
+    
+    foreach ($userTypes as $key => $config) {
+        $options[$key] = $config['label'] ?? ucfirst($key);
+    }
+    
+    return $options ?: [
+        'standard' => 'Standard User',
+        'professional' => 'Professional',
+    ];
+}
+
+/**
+ * Configure the form for this widget.
+ *
+ * @param \Filament\Forms\Form $form
+ * @return \Filament\Forms\Form
+ */
+public function form(Form $form): Form
+{
+    return $form
+        ->schema($this->getFormSchema())
+        ->statePath('data')
+        ->operation('create');
+}
+
+/**
+ * Handle form submission with comprehensive error handling and validation.
+ *
+ * @return void
+ * @throws \Illuminate\Validation\ValidationException
+ * @throws \RuntimeException
+ */
+public function submit(): void
+{
+    try {
+        // Validate form data first
+        $validatedData = $this->validateForm();
         
-        // Reset form after successful registration
-        $this->form->fill([]);
+        // Log registration attempt with hashed PII for security
+        $this->logRegistrationAttempt($validatedData);
         
+        // Begin database transaction for data integrity
+        $user = \DB::transaction(function () use ($validatedData) {
+            // Create user with validated data
+            $user = $this->createUser($validatedData);
+            
+            // Trigger any post-registration events
+            $this->afterUserCreated($user);
+            
+            return $user;
+        });
+        
+        // Log successful registration with user ID
         Log::info('User registered successfully', [
             'user_id' => $user->id,
-            'email' => $user->email,
-            'type' => $userData['type'],
+            'email_hash' => hash('sha256', $user->email),
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
         ]);
         
-        session()->flash('status', __('Registration completed successfully'));
+        // Send email verification if needed
+        if (config('auth.must_verify_email')) {
+            $user->sendEmailVerificationNotification();
+        }
+        
+        // Log in the user
+        Auth::login($user);
+        
+        // Redirect to intended URL or dashboard
+        $this->redirectAfterRegistration($user);
+        
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Re-throw validation exceptions to be handled by Filament
+        throw $e;
+        
+    } catch (\Exception $e) {
+        // Log detailed error information
+        Log::error('Registration failed: ' . $e->getMessage(), [
+            'exception' => $e,
+            'trace' => $e->getTraceAsString(),
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
+        
+        // Show user-friendly error message
+        $this->dispatchBrowserEvent('registration-failed', [
+            'message' => __('user::auth.registration.failed')
+        ]);
+        
+        // Re-throw with a generic message for the UI
+        throw new \RuntimeException(__('user::auth.registration.error_occurred'));
     }
+}
+
+/**
+ * Validate form data before registration.
+ *
+ * @return array<string, mixed>
+ * @throws \Illuminate\Validation\ValidationException
+ */
+protected function validateForm(): array
+{
+    $data = $this->form->getState();
+    
+    // Hash password securely
+    $data['password'] = Hash::make((string) $data['password']);
+    
+    // Create user with safe data
+    $userData = [
+        'first_name' => (string) $data['first_name'],
+        'last_name' => (string) $data['last_name'],
+        'email' => (string) $data['email'],
+        'password' => $data['password'],
+        'type' => (string) ($data['type'] ?? 'standard'),
+        'state' => 'pending',
+        'email_verified_at' => null,
+    ];
+    
+    return $userData;
+}
+
+/**
+ * Log registration attempt with hashed PII for security.
+ *
+ * @param array<string, mixed> $validatedData
+ * @return void
+ */
+protected function logRegistrationAttempt(array $validatedData): void
+{
+    Log::info('Registration attempt', [
+        'email_hash' => hash('sha256', $validatedData['email']),
+        'ip' => request()->ip(),
+        'user_agent' => request()->userAgent(),
+    ]);
+}
+
+/**
+ * Create user with validated data.
+ *
+ * @param array<string, mixed> $validatedData
+ * @return User
+ */
+protected function createUser(array $validatedData): User
+{
+    return User::create($validatedData);
+}
+
+/**
+ * Trigger any post-registration events.
+ *
+ * @param User $user
+ * @return void
+ */
+protected function afterUserCreated(User $user): void
+{
+    // Activity logging for audit trail
+    activity()
+        ->causedBy($user)
+        ->performedOn($user)
+        ->withProperties([
+            'type' => $user->type,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ])
+        ->log('User registered via RegisterWidget');
+}
+
+/**
+ * Redirect to intended URL or dashboard after registration.
+ *
+ * @param User $user
+ * @return void
+ */
+protected function redirectAfterRegistration(User $user): void
+{
+    // Reset form after successful registration
+    $this->form->fill([]);
+    
+    // Log successful registration
+    Log::info('User registration completed', [
+        'user_id' => $user->id,
+        'type' => $user->type,
+        'ip' => request()->ip()
+    ]);
+    
+    // Redirect to dashboard after successful registration
+    $this->redirect(route('dashboard'));
 }
