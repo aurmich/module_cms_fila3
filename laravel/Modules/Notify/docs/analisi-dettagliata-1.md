@@ -72,7 +72,10 @@ Modules/Notify/
         "mjml/mjml-php": "^1.0",                 // Compilazione MJML
         "mailgun/mailgun-php": "^3.0",           // Integrazione Mailgun
         "filament/filament": "^4.0",             // UI Admin
+<<<<<<< HEAD
         "filament/filament": "^2.0",             // UI Admin
+=======
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
         "spatie/laravel-permission": "^5.0",     // Gestione permessi
         "spatie/laravel-backup": "^6.0"          // Backup automatici
     }

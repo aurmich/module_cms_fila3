@@ -55,7 +55,10 @@ Questo documento descrive le convenzioni di denominazione da seguire all'interno
 ## Convenzioni di Naming
 
 ### Documentazione
+<<<<<<< HEAD
 
+=======
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 - I nomi dei file e delle cartelle nella documentazione devono essere in minuscolo
 - L'unica eccezione è il file `README.md`
 - Utilizzare lo script [fix_docs_case](../../../../../bashscripts/docs/docs/fix_docs_case.md) per correggere automaticamente i nomi
@@ -70,6 +73,16 @@ Questo documento descrive le convenzioni di denominazione da seguire all'interno
 - Documentare eventuali deviazioni da queste convenzioni di denominazione nella cartella di documentazione del modulo pertinente.
 - Aggiornare questo documento se vengono introdotti nuovi schemi di denominazione o convenzioni.
 
+=======
+## Problemi comuni e soluzioni
+- **Denominazione incoerente**: Evitare di mescolare stili di denominazione (ad esempio, snake_case con camelCase) per mantenere la leggibilità.
+- **Nomi vaghi**: Rinominare nomi vaghi come `$data` o `$temp` in qualcosa di più descrittivo come `$userData` o `$temporaryResult`.
+
+## Documentazione e aggiornamenti
+- Documentare eventuali deviazioni da queste convenzioni di denominazione nella cartella di documentazione del modulo pertinente.
+- Aggiornare questo documento se vengono introdotti nuovi schemi di denominazione o convenzioni.
+
+>>>>>>> ebf7989 (.)
 ## Collegamenti alla documentazione correlata
 
 - [Qualità del codice](./CODE_QUALITY.md)

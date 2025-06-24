@@ -25,8 +25,13 @@
         "doctrine/dbal": "*",
         "fidum/laravel-eloquent-morph-to-one": "*",
         "filament/filament": "^3.4",
+<<<<<<< HEAD
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/spatie-laravel-translatable-plugin": "^3.2",
+=======
+        "filament/spatie-laravel-media-library-plugin": "*",
+        "filament/spatie-laravel-translatable-plugin": "*",
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
         "aaronfrancis/fast-paginate":"*",
         "guzzlehttp/guzzle": "*",
         "laravel/folio": "^1.1",

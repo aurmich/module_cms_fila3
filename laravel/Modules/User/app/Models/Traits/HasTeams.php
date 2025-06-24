@@ -349,7 +349,7 @@ trait HasTeams
      *
      * @param TeamContract $team
      */
-    public function switchTeam(?TeamContract $team): bool
+    public function switchTeam(?\Modules\User\Contracts\TeamContract $team): bool
     {
         if ($team === null) {
             return false;

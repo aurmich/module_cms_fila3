@@ -572,6 +572,7 @@ public static function table(Table $table): Table
 - Se compare un errore di override di proprietà statiche, rimuovere la proprietà dal resource e centralizzare nella base
 - Se le traduzioni non vengono applicate, controllare la struttura dei file lang e l'assenza di ->label() hardcoded
 
+<<<<<<< HEAD
 ## Riferimenti
 
 - [Documentazione Filament](https://filamentphp.com/docs)
@@ -610,23 +611,39 @@ TextInput::make('location')->label(__('modulo::campo.label'))
 - Studiare sempre la classe base prima di estendere.
 - Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
 
+=======
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 ## Collegamenti
 - [Filament Docs](https://filamentphp.com/docs)
 - [Best practices moduli riutilizzabili](../module-documentation-neutrality.md)
 - [Ereditarietà modelli](../model-inheritance-best-practices.md)
 
+<<<<<<< HEAD
 ## Problema: Form non visualizzato correttamente
 
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
 
 ## Problema: Label non tradotte
+=======
+
+=======
+### Problema: Form non visualizzato correttamente
+
+**Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
+
+### Problema: Label non tradotte
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 
 **Soluzione:** Verificare che:
 1. Non si stia utilizzando `->label()` direttamente sui componenti
 2. I file di traduzione siano nella posizione corretta e seguano la struttura espansa
 3. Le chiavi dei campi nel form corrispondano esattamente alle chiavi dei campi nel file di traduzione
 
+<<<<<<< HEAD
 ## Problema: Relazioni non caricate correttamente
+=======
+### Problema: Relazioni non caricate correttamente
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 
 **Soluzione:** Verificare che:
 1. I nomi delle relazioni e delle colonne siano corretti
@@ -679,7 +696,81 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
+<<<<<<< HEAD
 >>>>>>> 7ec6ffa (.)
 =======
 >>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
 >>>>>>> 07b734cd (.)
+=======
+
+## Regole per Widget Filament: Path View e Localizzazione
+
+- Tutti i widget Filament devono avere la view in `modulo::filament.widgets.nome-widget`.
+- Non usare mai `modulo::widgets.nome-widget` o altri path non standard.
+- Non usare mai ->label(), ->placeholder(), __() o trans() nei form component (TextInput, Select, ecc).
+- La localizzazione è centralizzata tramite LangServiceProvider e i file di lingua del modulo.
+- Le chiavi dei campi devono corrispondere a quelle dei file di lingua.
+
+### Esempio corretto
+```php
+protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
+TextInput::make('location')->required()
+```
+
+### Esempio errato
+```php
+protected static string $view = 'saluteora::widgets.find-doctor-and-appointment';
+TextInput::make('location')->label(__('modulo::campo.label'))
+```
+
+**Motivazione:** coerenza, manutenzione, override, policy di qualità.
+
+> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
+
+**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
+
+## Regole di Ereditarietà: Trait e Interfacce
+
+- Non replicare mai trait, interfacce o logica già presenti nella classe base che si estende (es. XotBaseWidget).
+- Studiare sempre la classe base prima di estendere.
+- Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
+
+### Esempio errato
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget implements HasForms
+{
+    use InteractsWithForms; // ERRORE: già presente in XotBaseWidget
+}
+```
+
+### Esempio corretto
+```php
+class FindDoctorAndAppointmentWidget extends XotBaseWidget
+{
+    // NIENTE implements HasForms, NIENTE use InteractsWithForms
+}
+```
+
+**Motivazione:** DRY, KISS, manutenzione, coerenza, evitare conflitti e ridondanza.
+
+> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
+
+**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
+
+## Policy DRY su Disponibilità e Prenotazione
+
+La disponibilità e la prenotazione sono sempre rappresentate da record Appointment con type=status specifici (es. type=availability, status=available). Non vanno mai create tabelle custom per la disponibilità. Tutte le logiche di calendario, slot, prenotazione e approvazione sono centralizzate su Appointment.
+
+### Esempio di query DRY
+```php
+Appointment::where('doctor_id', $doctorId)
+    ->where('type', AppointmentTypeEnum::AVAILABILITY)
+    ->where('status', AppointmentStatusEnum::AVAILABLE)
+    ->get();
+```
+
+### Motivazione filosofica, politica, zen
+- Un solo punto di verità: nessuna duplicazione, nessun lock-in
+- DRY, KISS, serenità del codice
+- Refactoring sicuro, massima estendibilità
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)

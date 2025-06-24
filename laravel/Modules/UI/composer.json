@@ -26,12 +26,34 @@
         }
     },
     "require": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf5bf8d (.)
         "coolsam/flatpickr": "^4.1",
+<<<<<<< HEAD
+=======
+        "owenvoke/blade-fontawesome": "*"
+=======
+=======
+=======
+        "coolsam/flatpickr": "^4.1",
+>>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
+>>>>>>> 632ecbb (.)
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
         "owenvoke/blade-fontawesome": "*",
         "saade/filament-fullcalendar": "^3.2"
     },
     "require_comment": {
         "coolsam/flatpickr": "*"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3b0d55a (.)
+=======
+>>>>>>> 632ecbb (.)
+>>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
     },
     "repositories": [
         {
