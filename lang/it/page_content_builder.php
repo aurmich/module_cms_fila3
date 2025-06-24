@@ -10,5 +10,10 @@ return array (
       'helper_text' => 'blocks',
       'description' => 'blocks',
     ),
+    'footer_blocks' => 
+    array (
+      'description' => 'footer_blocks',
+      'helper_text' => 'footer_blocks',
+    ),
   ),
 );
