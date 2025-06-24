@@ -2,63 +2,62 @@
 
 declare(strict_types=1);
 
-namespace Modules\User\Filament\Widgets;
+namespace Modules\User\Filament\Widgets\Auth;
 
-use Exception;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\View;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Throwable;
 
+/**
+ * Logout widget for user session termination.
+ *
+ * Handles secure logout process with proper session management,
+ * event dispatching, and audit logging following Laraxot
+ * architectural patterns and security best practices.
+ */
 class LogoutWidget extends XotBaseWidget
 {
-    protected static string $view = 'user::widgets.logout';
+    /**
+     * The view for this widget.
+     *
+     * @var view-string
+     */
+    protected static string $view = 'user::widgets.auth.logout-widget';
 
-    public ?array $data = [];
-    public bool $isLoggingOut = false;
-
+    /**
+     * Mount the widget and initialize the form.
+     *
+     * @return void
+     */
     public function mount(): void
     {
         $this->form->fill();
     }
 
+    /**
+     * Get the form schema for logout interface.
+     *
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
     public function getFormSchema(): array
     {
         return [
-            View::make('filament.widgets.auth.logout-message')
+            'logout_message' => View::make('filament.widgets.auth.logout-message')
                 ->columnSpanFull(),
         ];
     }
 
-    public function logout(): void
-    {
-        try {
-            $this->isLoggingOut = true;
-            $user = Auth::user();
-
-            if (!$user) {
-                $this->handleNoUserScenario();
-                return;
-            }
-
-            $this->dispatchPreLogoutEvent($user);
-            $this->performLogout();
-            $this->dispatchPostLogoutEvent();
-            $this->logLogoutSuccess($user);
-            $this->redirectAfterLogout();
-        } catch (Throwable $e) {
-            $this->handleLogoutError($e);
-        }
-    }
-
+    /**
+     * Get form actions for logout widget.
+     *
+     * @return array<\Filament\Actions\Action>
+     */
     public function getFormActions(): array
     {
         return [
@@ -67,6 +66,35 @@ class LogoutWidget extends XotBaseWidget
         ];
     }
 
+    /**
+     * Handle user logout with proper security and auditing.
+     *
+     * Implements secure logout process with session invalidation,
+     * event dispatching, and comprehensive audit logging.
+     *
+     * @return void
+     */
+    public function logout(): void
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            Log::warning('Logout attempted with no authenticated user');
+            return;
+        }
+
+        $this->dispatchPreLogoutEvent($user);
+        $this->performLogout();
+        $this->dispatchPostLogoutEvent();
+        $this->logLogoutSuccess($user);
+        $this->redirectAfterLogout();
+    }
+
+    /**
+     * Get logout action button configuration.
+     *
+     * @return \Filament\Actions\Action
+     */
     protected function getLogoutAction(): Action
     {
         return Action::make('logout')
@@ -77,6 +105,11 @@ class LogoutWidget extends XotBaseWidget
             ->action(fn () => $this->logout());
     }
 
+    /**
+     * Get cancel action button configuration.
+     *
+     * @return \Filament\Actions\Action
+     */
     protected function getCancelAction(): Action
     {
         return Action::make('cancel')
@@ -87,22 +120,32 @@ class LogoutWidget extends XotBaseWidget
             ->url($this->getLocalizedHomeUrl());
     }
 
+    /**
+     * Get localized home URL.
+     *
+     * @return string
+     */
     protected function getLocalizedHomeUrl(): string
     {
         return '/' . App::getLocale();
     }
 
-    protected function handleNoUserScenario(): void
-    {
-        $this->isLoggingOut = false;
-        Log::warning('Logout attempted with no authenticated user');
-    }
-
+    /**
+     * Dispatch pre-logout event.
+     *
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @return void
+     */
     protected function dispatchPreLogoutEvent(Authenticatable $user): void
     {
         Event::dispatch('auth.logout.attempting', [$user]);
     }
 
+    /**
+     * Perform secure logout process.
+     *
+     * @return void
+     */
     protected function performLogout(): void
     {
         Auth::logout();
@@ -110,11 +153,22 @@ class LogoutWidget extends XotBaseWidget
         Session::regenerateToken();
     }
 
+    /**
+     * Dispatch post-logout event.
+     *
+     * @return void
+     */
     protected function dispatchPostLogoutEvent(): void
     {
         Event::dispatch('auth.logout.successful');
     }
 
+    /**
+     * Log successful logout for audit trail.
+     *
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @return void
+     */
     protected function logLogoutSuccess(Authenticatable $user): void
     {
         Log::info('User logged out', [
@@ -123,6 +177,11 @@ class LogoutWidget extends XotBaseWidget
         ]);
     }
 
+    /**
+     * Redirect user after successful logout.
+     *
+     * @return void
+     */
     protected function redirectAfterLogout(): void
     {
         redirect($this->getLocalizedHomeUrl())
@@ -131,17 +190,11 @@ class LogoutWidget extends XotBaseWidget
         exit;
     }
 
-    protected function handleLogoutError(Throwable $e): void
-    {
-        Log::error('Logout error: ' . $e->getMessage(), [
-            'exception' => get_class($e),
-            'trace' => $e->getTraceAsString(),
-        ]);
-
-        $this->isLoggingOut = false;
-        Session::flash('error', __('user::auth.logout_error'));
-    }
-
+    /**
+     * Get view data for the widget.
+     *
+     * @return array<string, string>
+     */
     protected function getViewData(): array
     {
         return [

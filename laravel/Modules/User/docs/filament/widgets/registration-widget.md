@@ -178,3 +178,143 @@ Queste Action devono occuparsi di:
 - [RegistrationWidget.php](../../app/Filament/Widgets/RegistrationWidget.php)
 - [Documentazione Xot sulla proprietà $data](../../../Xot/docs/filament/widgets/data-property.md)
 - [Esempio di Action di registrazione (da creare)](../../../../Patient/app/Actions/Doctor/RegisterAction.php)
+
+---
+
+## 🔐 **WIDGET DI AUTENTICAZIONE - BEST PRACTICES**
+
+### **Convenzioni per Widget Auth/**
+
+I widget di autenticazione (`LoginWidget`, `RegisterWidget`, `ResetPasswordWidget`, ecc.) devono seguire pattern specifici per garantire coerenza e sicurezza:
+
+#### **1. Struttura Directory Obbligatoria**
+```
+Modules/User/app/Filament/Widgets/Auth/
+├── LoginWidget.php
+├── RegisterWidget.php  
+├── ResetPasswordWidget.php
+└── ForgotPasswordWidget.php
+```
+
+#### **2. Namespace e Naming Convention**
+```php
+namespace Modules\User\Filament\Widgets\Auth;
+
+class ResetPasswordWidget extends XotBaseWidget
+{
+    // Naming: {Action}Widget (es. ResetPassword + Widget)
+}
+```
+
+#### **3. View Path Convention**
+```php
+// SEMPRE con prefisso 'user::' per widget nel modulo User
+protected static string $view = 'user::widgets.auth.reset-password-widget';
+
+// File Blade corrispondente:
+// Modules/User/resources/views/widgets/auth/reset-password-widget.blade.php
+```
+
+#### **4. Proprietà Obbligatorie per Widget Auth**
+```php
+/**
+ * Widget data array (CRITICAL: eredita da XotBaseWidget, NON ridichiarare!)
+ * @var array<string, mixed>|null  
+ */
+// NON dichiarare: public ?array $data = []; <- GIÀ in XotBaseWidget
+
+/**
+ * Form schema with string keys (Filament requirement)
+ * @return array<string, \Filament\Forms\Components\Component>
+ */
+public function getFormSchema(): array
+{
+    return [
+        'email' => TextInput::make('email')->email()->required(),
+        'password' => TextInput::make('password')->password()->required(),
+        // SEMPRE chiavi stringa, mai numeriche
+    ];
+}
+```
+
+#### **5. Pattern Sicurezza per Widget Auth**
+```php
+/**
+ * Handle authentication action with proper error handling
+ * @return \Illuminate\Http\RedirectResponse|void
+ */
+public function resetPassword()
+{
+    $data = $this->form->getState();
+    
+    // SEMPRE validazione rigorosa
+    $status = Password::reset([
+        'email' => (string) $data['email'],           // Cast espliciti
+        'password' => (string) $data['password'],     // per sicurezza
+        'token' => (string) request()->route('token'),
+    ], function ($user, $password): void {           // Tipo ritorno esplicito
+        $user->forceFill([
+            'password' => Hash::make($password),
+            'remember_token' => Str::random(60),
+        ])->save();
+    });
+    
+    // Gestione response sicura
+    if ($status === Password::PASSWORD_RESET) {
+        session()->flash('status', __((string) $status));
+        return redirect()->route('login');
+    }
+    
+    $this->addError('email', __((string) $status));
+}
+```
+
+#### **6. PHPDoc Rigorosi (Conformità PHPStan)**
+```php
+/**
+ * Reset password widget for user authentication.
+ *
+ * Handles password reset functionality with token validation,
+ * proper security measures, and user feedback.
+ *
+ * @property ComponentContainer $form Form container from XotBaseWidget
+ */
+class ResetPasswordWidget extends XotBaseWidget
+{
+    /**
+     * The view for this widget.
+     * @var view-string
+     */
+    protected static string $view = 'user::widgets.auth.reset-password-widget';
+    
+    /**
+     * Mount the widget and initialize the form.
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
+}
+```
+
+### **Checklist Widget Auth Quality**
+- [ ] Estende `XotBaseWidget` (mai direttamente Widget Filament)
+- [ ] Directory `Auth/` per organizzazione logica  
+- [ ] View path con namespace `user::widgets.auth.*`
+- [ ] NON ridichiarare proprietà `$data` di XotBaseWidget
+- [ ] `getFormSchema()` con chiavi stringa associative
+- [ ] PHPDoc completi con tipo `@var view-string` per `$view`
+- [ ] Metodi tipizzati con `@return` espliciti
+- [ ] Cast espliciti `(string)` per dati critici
+- [ ] Gestione errori e security con Laravel best practices
+- [ ] Traduzioni struttura espansa (mai `->label()` hardcoded)
+
+### **Differenze vs RegistrationWidget**
+- **RegistrationWidget**: Generico, delega azioni esterne
+- **Widget Auth**: Specifici, logica autenticazione interna sicura
+- **Entrambi**: Stesso pattern XotBaseWidget + form schema + view convention
+
+---
+
+## Collegamenti aggiornati
