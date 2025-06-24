@@ -26,18 +26,11 @@
         }
     },
     "require": {
-        "coolsam/flatpickr": "^4.1",
         "owenvoke/blade-fontawesome": "*",
         "saade/filament-fullcalendar": "^3.2"
     },
     "require_comment": {
-<<<<<<< HEAD
-        "coolsam/flatpickr": "Date and time picker for forms",
-        "owenvoke/blade-fontawesome": "FontAwesome icons for Blade templates",
-        "saade/filament-fullcalendar": "FullCalendar integration for Filament"
-=======
         "coolsam/flatpickr": "*"
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
     },
     "repositories": [
         {
