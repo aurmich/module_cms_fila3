@@ -22,11 +22,16 @@ use Webmozart\Assert\Assert;
 class RegisterWidget extends XotBaseWidget
 {
     protected static string $view = 'user::widgets.auth.register-widget';
+<<<<<<< HEAD
 
     public static function canView(): bool
     {
         return !Auth::check();
     }
+=======
+    
+
+>>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
 
     public function mount(): void
     {
