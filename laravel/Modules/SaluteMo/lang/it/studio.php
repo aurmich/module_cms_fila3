@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 return [
@@ -165,3 +166,197 @@ return [
 
     'search_placeholder' => 'Cerca per nome, indirizzo, telefono o email...',
 ];
+=======
+return array (
+  'navigation' => 
+  array (
+    'label' => 'Studi Medici',
+    'group' => 'Gestione Studi',
+    'icon' => 'heroicon-o-building-office',
+    'sort' => 30,
+  ),
+  'model' => 
+  array (
+    'label' => 'Studio Medico',
+    'plural' => 'Studi Medici',
+    'description' => 'Gestione degli studi medici e delle relative informazioni',
+  ),
+  'pages' => 
+  array (
+    'index' => 
+    array (
+      'title' => 'Elenco Studi',
+      'subtitle' => 'Gestisci gli studi registrati',
+      'description' => 'Visualizza e gestisci tutti gli studi medici presenti nella piattaforma',
+    ),
+    'create' => 
+    array (
+      'title' => 'Nuovo Studio',
+      'subtitle' => 'Registra un nuovo studio',
+      'description' => 'Inserisci i dati per registrare un nuovo studio medico',
+    ),
+    'edit' => 
+    array (
+      'title' => 'Modifica Studio',
+      'subtitle' => 'Modifica le informazioni dello studio',
+      'description' => 'Aggiorna i dati dello studio medico',
+    ),
+    'view' => 
+    array (
+      'title' => 'Dettagli Studio',
+      'subtitle' => 'Visualizza le informazioni complete dello studio',
+      'description' => 'Dettagli completi del profilo studio',
+    ),
+  ),
+  'fields' => 
+  array (
+    'id' => 
+    array (
+      'label' => 'ID',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'active' => 
+    array (
+      'label' => 'Attivo',
+      'placeholder' => '',
+      'helper_text' => 'Lo studio è attivo e visibile nella piattaforma',
+    ),
+    'name' => 
+    array (
+      'label' => 'Nome Studio',
+      'placeholder' => 'Inserisci il nome dello studio',
+      'helper_text' => 'Nome identificativo dello studio medico',
+    ),
+    'address' => 
+    array (
+      'label' => 'Indirizzo',
+      'placeholder' => 'Via Roma, 123',
+      'helper_text' => 'Indirizzo completo dello studio',
+    ),
+    'phone' => 
+    array (
+      'label' => 'Telefono',
+      'placeholder' => '+39 051 1234567',
+      'helper_text' => 'Numero di telefono principale dello studio',
+    ),
+    'email' => 
+    array (
+      'label' => 'Email',
+      'placeholder' => 'studio@email.com',
+      'helper_text' => 'Indirizzo email per comunicazioni',
+    ),
+    'website' => 
+    array (
+      'label' => 'Sito Web',
+      'placeholder' => 'https://www.studiomedico.it',
+      'helper_text' => 'Sito web ufficiale dello studio',
+    ),
+    'registration_number' => 
+    array (
+      'label' => 'Numero di Registrazione',
+      'placeholder' => 'Inserisci il numero di registrazione',
+      'helper_text' => 'Numero di registrazione presso l\'Ordine',
+    ),
+    'vat_number' => 
+    array (
+      'label' => 'Partita IVA',
+      'placeholder' => 'IT01234567890',
+      'helper_text' => 'Partita IVA dello studio',
+    ),
+    'open_filters' => 
+    array (
+      'label' => 'Apri Filtri',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'apply_filters' => 
+    array (
+      'label' => 'Applica Filtri',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'reset_filters' => 
+    array (
+      'label' => 'Azzera Filtri',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'reorder_records' => 
+    array (
+      'label' => 'Riordina Record',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'toggle_columns' => 
+    array (
+      'label' => 'Mostra/Nascondi Colonne',
+      'placeholder' => '',
+      'helper_text' => '',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+  ),
+  'actions' => 
+  array (
+    'activate' => 
+    array (
+      'label' => 'Attiva',
+      'icon' => 'heroicon-o-check-circle',
+      'tooltip' => 'Rendi lo studio attivo',
+    ),
+    'deactivate' => 
+    array (
+      'label' => 'Disattiva',
+      'icon' => 'heroicon-o-x-circle',
+      'tooltip' => 'Disattiva temporaneamente lo studio',
+    ),
+    'view_doctors' => 
+    array (
+      'label' => 'Vedi Medici',
+      'icon' => 'heroicon-o-user-plus',
+      'tooltip' => 'Visualizza i medici associati allo studio',
+    ),
+  ),
+  'filters' => 
+  array (
+    'active' => 
+    array (
+      'label' => 'Solo Attivi',
+    ),
+    'city' => 
+    array (
+      'label' => 'Per Città',
+    ),
+  ),
+  'bulk_actions' => 
+  array (
+    'activate_selected' => 
+    array (
+      'label' => 'Attiva Selezionati',
+      'icon' => 'heroicon-o-check-circle',
+    ),
+    'deactivate_selected' => 
+    array (
+      'label' => 'Disattiva Selezionati',
+      'icon' => 'heroicon-o-x-circle',
+    ),
+  ),
+  'messages' => 
+  array (
+    'activated_successfully' => 'Studio attivato con successo',
+    'deactivated_successfully' => 'Studio disattivato con successo',
+  ),
+  'search_placeholder' => 'Cerca per nome, indirizzo, telefono o email...',
+);
+>>>>>>> 631510b4 (fix bashscripts structure + translation of module saluteMo)

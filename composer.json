@@ -54,6 +54,15 @@
             "php laravel/vendor/bin/phpstan analyse --memory-limit=2G --error-format=table --no-progress laravel/Modules"
         ]
     },
+<<<<<<< HEAD
+=======
+    "repositories": [
+        {
+            "type": "path",
+            "url": "laravel"
+        }
+    ],
+>>>>>>> 631510b4 (fix bashscripts structure + translation of module saluteMo)
     "minimum-stability": "dev",
     "prefer-stable": true
 }
