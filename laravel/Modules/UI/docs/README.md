@@ -10,21 +10,15 @@ Il modulo UI fornisce componenti e layout standardizzati per l'interfaccia utent
 - MoneyInput: Input per valori monetari con formattazione automatica
 - DateRangePicker: Selezione intervalli di date
 - FileUpload: Upload file con preview e validazione
-<<<<<<< HEAD
-=======
-- **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
-  - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
-  - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
-<<<<<<< HEAD
 - **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
   - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
   - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
 - **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
   - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
   - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
-=======
->>>>>>> cf5bf8d (.)
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
+- **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
+  - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
+  - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
 
 ### Tables
 - CustomDataTable: Tabella dati avanzata con ordinamento e filtri

@@ -17,10 +17,6 @@
     },
     "require": {
         "filament/filament": "^3.4",
-<<<<<<< HEAD
-        "filament/tables": "^3.4"
-=======
         "filament/tables": "*"
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
     }
 }

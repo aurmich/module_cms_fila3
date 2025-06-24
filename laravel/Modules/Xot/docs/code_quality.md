@@ -51,7 +51,6 @@ This document outlines the best practices for maintaining high code quality with
 
 - Use dependency injection to avoid direct instantiation of dependencies, promoting testability and flexibility.
 
-<<<<<<< HEAD
 ## Code Quality Tools
 
 ### Automation Scripts
@@ -63,11 +62,9 @@ This document outlines the best practices for maintaining high code quality with
 
 ### Scripts di Automazione
 
-=======
 ## Strumenti di Qualità del Codice
 
 ### Scripts di Automazione
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 - [fix_docs_case](../../../../../bashscripts/docs/docs/fix_docs_case.md) - Standardizzazione automatica dei nomi file nella documentazione
 - Eseguire gli script di automazione regolarmente per mantenere la coerenza del codice
 

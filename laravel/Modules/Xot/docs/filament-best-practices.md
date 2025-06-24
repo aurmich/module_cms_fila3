@@ -572,7 +572,6 @@ public static function table(Table $table): Table
 - Se compare un errore di override di proprietà statiche, rimuovere la proprietà dal resource e centralizzare nella base
 - Se le traduzioni non vengono applicate, controllare la struttura dei file lang e l'assenza di ->label() hardcoded
 
-<<<<<<< HEAD
 ## Riferimenti
 
 - [Documentazione Filament](https://filamentphp.com/docs)
@@ -611,20 +610,16 @@ TextInput::make('location')->label(__('modulo::campo.label'))
 - Studiare sempre la classe base prima di estendere.
 - Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
 
-=======
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 ## Collegamenti
 - [Filament Docs](https://filamentphp.com/docs)
 - [Best practices moduli riutilizzabili](../module-documentation-neutrality.md)
 - [Ereditarietà modelli](../model-inheritance-best-practices.md)
 
-<<<<<<< HEAD
 ## Problema: Form non visualizzato correttamente
 
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
 
 ## Problema: Label non tradotte
-=======
 
 =======
 ### Problema: Form non visualizzato correttamente
@@ -632,18 +627,14 @@ TextInput::make('location')->label(__('modulo::campo.label'))
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
 
 ### Problema: Label non tradotte
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 
 **Soluzione:** Verificare che:
 1. Non si stia utilizzando `->label()` direttamente sui componenti
 2. I file di traduzione siano nella posizione corretta e seguano la struttura espansa
 3. Le chiavi dei campi nel form corrispondano esattamente alle chiavi dei campi nel file di traduzione
 
-<<<<<<< HEAD
 ## Problema: Relazioni non caricate correttamente
-=======
 ### Problema: Relazioni non caricate correttamente
->>>>>>> a39073f3 (✨ (phpstan): add multiple PHPStan analysis scripts for systematic error checking)
 
 **Soluzione:** Verificare che:
 1. I nomi delle relazioni e delle colonne siano corretti
@@ -696,12 +687,7 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
-<<<<<<< HEAD
->>>>>>> 7ec6ffa (.)
-=======
->>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
->>>>>>> 07b734cd (.)
-=======
+
 
 ## Regole per Widget Filament: Path View e Localizzazione
 
