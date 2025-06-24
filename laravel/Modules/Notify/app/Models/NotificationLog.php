@@ -8,78 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-//use Modules\Tenant\Models\Traits\HasTenant;
->>>>>>> 86996d7 (.)
-=======
->>>>>>> df9cf7c (.)
 use Modules\Xot\Traits\Updater;
 use Modules\User\Models\Traits\HasTenants;
-=======
-//use Modules\Tenant\Models\Traits\HasTenant;
-use Modules\Xot\Traits\Updater;
-
->>>>>>> 484b1fe (.)
 /**
  * Modello per il logging delle notifiche inviate.
- *
- * @property int $id
- * @property string $notifiable_type
- * @property int $notifiable_id
- * @property string $title
- * @property string $content
- * @property string $channels
- * @property array<array-key, mixed>|null $data
- * @property \Illuminate\Support\Carbon $sent_at
- * @property string $status
- * @property string|null $error
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read string $channel_label
- * @property-read string $status_label
- * @property-read Model|\Eloquent $notifiable
- * @property-read \Modules\Notify\Models\NotificationTemplate|null $template
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog forChannel(string $channel)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog forNotifiable(\Illuminate\Database\Eloquent\Model $notifiable)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereChannels($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereData($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereError($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereNotifiableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereNotifiableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereSentAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog withStatus(string $status)
- * @mixin \Eloquent
  */
 class NotificationLog extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     use HasTenants;
-=======
-    //use HasTenant;
->>>>>>> 86996d7 (.)
-=======
-    use HasTenants;
->>>>>>> df9cf7c (.)
-=======
-    //use HasTenant;
->>>>>>> 484b1fe (.)
     use Updater;
 
     public const STATUS_PENDING = 'pending';

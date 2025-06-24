@@ -16,12 +16,7 @@
         }
     },
     "require": {
-<<<<<<< HEAD
         "filament/filament": "^3.4",
-        "filament/tables": "*"
-=======
-        "filament/filament": "^3.3",
-        "filament/tables": "^3.3"
->>>>>>> a3f7230 (.)
+        "filament/tables": "^3.4"
     }
 }

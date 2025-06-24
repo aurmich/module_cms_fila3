@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Modules\User\Models\TeamPermission
+ * Team Permission Model
+ *
+ * Represents a permission assigned to a user within a team context.
  *
  * @property string $id
  * @property string $team_id
@@ -18,34 +21,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \DateTime|null $updated_at
  * @property Team $team
  * @property User $user
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> a3f7230 (.)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
  * @mixin \Eloquent
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
  */
 class TeamPermission extends Model
 {
-    /** @var string */
+    /** 
+     * The database connection that should be used by the model.
+     *
+     * @var string 
+     */
     protected $connection = 'user';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    /** @var array<string> */
-=======
-    /** @var list<string> */
->>>>>>> aurmich/dev
-=======
-    /** @var list<string> */
->>>>>>> a3f7230 (.)
+    /** 
+     * The attributes that are mass assignable.
+     *
+     * @var list<string> 
+     */
     protected $fillable = [
         'team_id',
         'user_id',

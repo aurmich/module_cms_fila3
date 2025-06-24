@@ -1,7 +1,11 @@
 <?php
 namespace Modules\UI\Filament\Widgets;
 
+// TEMPORARILY DISABLED FOR PHPSTAN ANALYSIS
+// Missing dependency: saade/filament-fullcalendar
+// Uncomment when dependency is installed
 
+/*
 use Illuminate\Support\Str;
 use Modules\Xot\Datas\XotData;
 use App\Filament\Resources\EventResource;
@@ -39,7 +43,7 @@ class UserCalendarWidget extends FullCalendarWidget
 
         $action=$this->getActionName(__FUNCTION__);
         return app($action)->execute();
-        //*
+        
         return [
             TextInput::make('title'),
  
@@ -49,24 +53,11 @@ class UserCalendarWidget extends FullCalendarWidget
                     DateTimePicker::make('ends_at'),
                 ]),
         ];
-        //*/
     }
-
-   
-    /*
-    protected function modalActions(): array
-    {
-        return [
-            \Saade\FilamentFullCalendar\Actions\EditAction::make(),
-            \Saade\FilamentFullCalendar\Actions\DeleteAction::make(),
-        ];
-    }
-    */
 
     public function onDateSelect(string $start, ?string $end, bool $allDay, ?array $view, ?array $resource): void
     {
       dd('test');
     }
-
-    
 }
+*/

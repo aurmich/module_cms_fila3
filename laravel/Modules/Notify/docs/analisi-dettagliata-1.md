@@ -71,11 +71,8 @@ Modules/Notify/
         "spatie/laravel-mail-templates": "^1.0",  // Gestione template email
         "mjml/mjml-php": "^1.0",                 // Compilazione MJML
         "mailgun/mailgun-php": "^3.0",           // Integrazione Mailgun
-<<<<<<< HEAD
         "filament/filament": "^4.0",             // UI Admin
-=======
         "filament/filament": "^2.0",             // UI Admin
->>>>>>> 484b1fe (.)
         "spatie/laravel-permission": "^5.0",     // Gestione permessi
         "spatie/laravel-backup": "^6.0"          // Backup automatici
     }

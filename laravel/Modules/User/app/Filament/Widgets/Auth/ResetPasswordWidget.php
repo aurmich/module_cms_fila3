@@ -4,41 +4,35 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets\Auth;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Filament\Forms;
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
-
-class ResetPasswordWidget extends XotBaseWidget
-{
-    protected static string $view = 'user::widgets.auth.reset-password-widget';
-
-=======
-=======
->>>>>>> a3f7230 (.)
 use Filament\Forms;
 use Filament\Forms\Form;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules\Password as PasswordRule;
+use Illuminate\Validation\ValidationException;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
 /**
  * Reset password widget for user password reset functionality.
+ * 
+ * Handles password reset form with token validation and secure password update.
  *
  * @property ComponentContainer $form
+ * @property array<string, mixed>|null $data
  */
-class ResetPasswordWidget extends XotBaseWidget
+class ResetPasswordWidget extends XotBaseWidget implements HasForms
 {
+    use InteractsWithForms;
+
     /**
      * The view for this widget.
      *
@@ -56,6 +50,20 @@ class ResetPasswordWidget extends XotBaseWidget
     public ?array $data = [];
 
     /**
+     * Column span for the widget layout.
+     *
+     * @var int|string|array<string, mixed>
+     */
+    protected int | string | array $columnSpan = 'full';
+
+    /**
+     * Reset token from the request.
+     *
+     * @var string|null
+     */
+    public ?string $token = null;
+
+    /**
      * Get the form schema for password reset.
      *
      * @return array<string, \Filament\Forms\Components\Component>
@@ -63,31 +71,48 @@ class ResetPasswordWidget extends XotBaseWidget
     public function getFormSchema(): array
     {
         return [
+            'token' => Hidden::make('token')
+                ->default($this->token),
+                
             'email' => TextInput::make('email')
                 ->email()
                 ->required()
-                ->autocomplete('email'),
+                ->maxLength(255)
+                ->autocomplete('email')
+                ->validationAttribute(__('user::auth.fields.email.validation_attribute')),
+                
             'password' => TextInput::make('password')
                 ->password()
                 ->required()
-                ->minLength(8)
+                ->rule(PasswordRule::default())
                 ->same('password_confirmation')
-                ->autocomplete('new-password'),
+                ->autocomplete('new-password')
+                ->validationAttribute(__('user::auth.fields.password.validation_attribute')),
+                
             'password_confirmation' => TextInput::make('password_confirmation')
                 ->password()
                 ->required()
-                ->autocomplete('new-password'),
+                ->dehydrated(false)
+                ->autocomplete('new-password')
+                ->validationAttribute(__('user::auth.fields.password_confirmation.validation_attribute')),
         ];
     }
 
     /**
      * Mount the widget and initialize the form.
      *
+     * @param string|null $token
+     * @param string|null $email
      * @return void
      */
-    public function mount(): void
+    public function mount(?string $token = null, ?string $email = null): void
     {
-        $this->form->fill();
+        $this->token = $token ?? (string) request()->route('token');
+        
+        $this->form->fill([
+            'token' => $this->token,
+            'email' => $email ?? (string) request()->query('email'),
+        ]);
     }
 
     /**
@@ -96,136 +121,102 @@ class ResetPasswordWidget extends XotBaseWidget
      * @param \Filament\Forms\Form $form
      * @return \Filament\Forms\Form
      */
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make()
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    ->schema([
-                        TextInput::make('email')
-                            ->email()
-                            ->required()
-                            ->autocomplete('email'),
-
-                        TextInput::make('password')
-                            ->password()
-                            ->required()
-                            ->minLength(8)
-                            ->same('password_confirmation')
-                            ->autocomplete('new-password'),
-
-                        TextInput::make('password_confirmation')
-                            ->password()
-                            ->required()
-                            ->autocomplete('new-password'),
-                    ])
-=======
+                Section::make(__('user::auth.reset_password.section_title'))
+                    ->description(__('user::auth.reset_password.section_description'))
                     ->schema($this->getFormSchema())
->>>>>>> aurmich/dev
-=======
-                    ->schema($this->getFormSchema())
->>>>>>> a3f7230 (.)
                     ->columns(1),
             ])
             ->statePath('data');
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function resetPassword(): void
-=======
-=======
->>>>>>> a3f7230 (.)
     /**
-     * Handle password reset.
+     * Handle password reset with comprehensive error handling.
      *
-     * @return \Illuminate\Http\RedirectResponse|void
+     * @return \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
      */
-    public function resetPassword()
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
+    public function resetPassword(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
-        $data = $this->form->getState();
+        try {
+            $this->validate();
+            $data = $this->form->getState();
 
-        $status = Password::reset(
-            [
-<<<<<<< HEAD
-<<<<<<< HEAD
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'password_confirmation' => $data['password_confirmation'],
-                'token' => request()->route('token'),
-            ],
-            function ($user, $password) {
-=======
-=======
->>>>>>> a3f7230 (.)
-                'email' => (string) $data['email'],
-                'password' => (string) $data['password'],
-                'password_confirmation' => (string) $data['password_confirmation'],
-                'token' => (string) request()->route('token'),
-            ],
-            function ($user, $password): void {
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
-                $user->forceFill([
-                    'password' => Hash::make($password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+            // Type-safe data extraction
+            $email = (string) ($data['email'] ?? '');
+            $password = (string) ($data['password'] ?? '');
+            $passwordConfirmation = (string) ($data['password_confirmation'] ?? '');
+            $token = (string) ($data['token'] ?? $this->token ?? '');
+
+            if (empty($email) || empty($password) || empty($token)) {
+                throw ValidationException::withMessages([
+                    'email' => [__('user::auth.validation.required_fields')],
+                ]);
             }
-        );
 
-        if ($status === Password::PASSWORD_RESET) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            session()->flash('status', __($status));
-            redirect()->route('login');
-        } else {
-            $this->addError('email', __($status));
+            // Attempt password reset
+            $status = Password::reset(
+                [
+                    'email' => $email,
+                    'password' => $password,
+                    'password_confirmation' => $passwordConfirmation,
+                    'token' => $token,
+                ],
+                function ($user, $password): void {
+                    $user->forceFill([
+                        'password' => Hash::make($password),
+                        'remember_token' => Str::random(60),
+                    ])->save();
+
+                    // Log successful password reset
+                    Log::info('Password reset successfully', [
+                        'user_id' => $user->id,
+                        'email' => $user->email,
+                    ]);
+                }
+            );
+
+            if ($status === Password::PASSWORD_RESET) {
+                // Show success notification
+                Notification::make()
+                    ->title(__('user::auth.reset_password.success'))
+                    ->success()
+                    ->send();
+
+                session()->flash('status', __((string) $status));
+                return redirect()->route('login');
+            } else {
+                // Handle password reset failure
+                $this->addError('email', __((string) $status));
+                
+                Log::warning('Password reset failed', [
+                    'email' => $email,
+                    'status' => $status,
+                ]);
+                
+                return redirect()->back();
+            }
+
+        } catch (ValidationException $e) {
+            // Re-throw validation exceptions to display form errors
+            throw $e;
+        } catch (\Exception $e) {
+            // Log unexpected errors
+            Log::error('Password reset error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            // Show user-friendly error message
+            Notification::make()
+                ->title(__('user::auth.reset_password.error'))
+                ->body(__('user::auth.reset_password.error_message'))
+                ->danger()
+                ->send();
+
+            return redirect()->back();
         }
     }
-
-    public function getFormSchema(): array
-    {
-        return [
-            Forms\Components\TextInput::make('email')
-                ->email()
-                ->required()
-                ->maxLength(255),
-
-            Forms\Components\TextInput::make('password')
-                ->password()
-                ->required()
-                ->maxLength(255),
-
-            Forms\Components\TextInput::make('password_confirmation')
-                ->password()
-                ->required()
-                ->maxLength(255)
-                ->same('password'),
-        ];
-    }
-=======
-=======
->>>>>>> a3f7230 (.)
-            session()->flash('status', __((string) $status));
-            return redirect()->route('login');
-        } else {
-            $this->addError('email', __((string) $status));
-        }
-    }
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
 }

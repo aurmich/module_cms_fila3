@@ -81,44 +81,6 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  * @property string $last_name
- * @property string|null $facebook_id
- * @property Team|null $currentTeam
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFacebookId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIsOtp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePasswordExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereSurname($value)
- * @property \Illuminate\Database\Eloquent\Collection<int, SocialiteUser> $socialiteUsers
- * @property int|null $socialite_users_count
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> a3f7230 (.)
- * @property string|null $phone
- * @property string|null $address
- * @property string|null $city
- * @property string|null $registration_number
- * @property string|null $status
- * @property string|null $state
- * @property string|null $moderation_data
- * @property string|null $certifications
- * @property string|null $type
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereModerationData($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRegistrationNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
  * @mixin \Eloquent
  */
 class User extends BaseUser

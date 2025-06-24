@@ -51,28 +51,19 @@ return array (
       'placeholder' => 'Inserisci i parametri',
       'label' => 'Parametri',
     ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 484b1fe (.)
     'body_html' => 
     array (
-      'description' => 'body_html',
-      'helper_text' => 'body_html',
-      'placeholder' => 'body_html',
-      'label' => 'body_html',
+      'description' => 'Contenuto HTML',
+      'helper_text' => 'Contenuto HTML dell\'email',
+      'placeholder' => 'Inserisci il contenuto HTML',
+      'label' => 'Contenuto HTML',
     ),
     'subject' => 
     array (
-      'description' => 'subject',
-<<<<<<< HEAD
-    ),
->>>>>>> 86996d7 (.)
-=======
-      'helper_text' => 'subject',
-    ),
->>>>>>> 484b1fe (.)
+      'description' => 'Oggetto email',
+      'helper_text' => 'Inserisci l\'oggetto dell\'email',
+      'label' => 'Oggetto',
+    )
   ),
   'actions' => 
   array (

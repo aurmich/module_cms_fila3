@@ -148,9 +148,6 @@ return [
     'attributes' => [
         'data.password' => 'zu',
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
     'email_already_taken' => 'Questa email è già utilizzata da un altro utente.',
     'password_confirmation' => 'La conferma della password non corrisponde.',
@@ -161,7 +158,4 @@ return [
     'email_format' => 'L\'email deve avere un formato valido.',
     'phone_format' => 'Il numero di telefono deve avere un formato valido.',
     'birth_date_before' => 'La data di nascita deve essere precedente ad oggi.',
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
 ];

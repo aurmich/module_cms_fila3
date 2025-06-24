@@ -1,133 +1,193 @@
-# Module User Fila3 🔥 Ultimate User, Roles & Permissions Manager for FilamentPHP 🚀
+# 👤 User Module - Advanced User Management
 
 [![Latest Release](https://img.shields.io/github/v/release/laraxot/module_user_fila3)](https://github.com/laraxot/module_user_fila3/releases)
 [![Build Status](https://img.shields.io/travis/laraxot/module_user_fila3/master)](https://travis-ci.org/laraxot/module_user_fila3)
 [![Code Coverage](https://img.shields.io/codecov/c/github/laraxot/module_user_fila3)](https://codecov.io/gh/laraxot/module_user_fila3)
 [![License](https://img.shields.io/github/license/laraxot/module_user_fila3)](LICENSE)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2+-blue.svg)](https://php.net)
+[![Laravel Version](https://img.shields.io/badge/Laravel-11.x-orange.svg)](https://laravel.com)
+[![Filament Version](https://img.shields.io/badge/Filament-3.x-purple.svg)](https://filamentphp.com)
 
-Manage users, roles, and permissions with lightning speed ⚡ through this Laravel module, fully integrated with FilamentPHP. Designed for developers who want **full control** over their user management systems. **Empower your app** with dynamic user access control and module assignments. 🚀
+Manage users, roles, and permissions with lightning speed ⚡ through this Laravel module, fully integrated with FilamentPHP. Designed for developers who want **full control** over their user management systems.
 
-### Key Features 🌟
-- **Create Super Admin in Seconds**: Instantly make any user a super admin with `php artisan user:super-admin`. 🛡️
-- **Dynamic Module Assignment**: Control user access to specific modules through `php artisan user:assign-module`. 🎯
-- **Complete Team Management**: Manage teams with simple commands like `php artisan team:create` and `php artisan team:assign-user`. 👥
-### Versione HEAD
+## 🌟 Key Features
 
-- **Permissions that Fit**: Set flexible roles and permissions to fit your app's unique needs! 🔑
+- **Complete User Management**: Handle users, roles, and permissions with ease
+- **Multi-language Support**: English, Italian, and Spanish interfaces
+- **Advanced Authentication**: Multi-factor authentication (2FA) and social login
+- **Role-Based Access Control**: Fine-grained permission system
+- **Team Management**: Support for multi-tenant applications
+- **Filament Admin Panel**: Beautiful and intuitive admin interface
+- **RESTful API**: Full API support for user management
+- **Activity Logging**: Track user actions and system events
 
-### Versione Incoming
+## 🚀 Quick Start
 
-- **Permissions that Fit**: Set flexible roles and permissions to fit your app’s unique needs! 🔑
+### Prerequisites
 
----
+- PHP 8.2 or higher
+- Laravel 11.x
+- Filament 3.x
+- Composer
 
-
----
-
-### Installation Guide 💻
+### Installation
 
 1. **Install the package via Composer:**
-    ```bash
-    composer require laraxot/module_user_fila3
-    ```
 
-2. **Run Migrations:**
-    ```bash
-    php artisan module:migrate User
-    ```
+   ```bash
+   composer require laraxot/module-user
+   ```
 
-3. **Publish Config File:**
-    ```bash
-    php artisan vendor:publish --tag="module_user_fila3-config"
-    ```
+2. **Enable the module:**
 
-4. **Create First User:**
-    ```bash
-    php artisan make:filament-user
-    ```
+   ```bash
+   php artisan module:enable User
+   ```
 
----
+3. **Run migrations:**
 
-### Supercharged Console Commands 🚀
+   ```bash
+   php artisan module:migrate User
+   ```
 
-### Versione HEAD
+4. **Publish configuration (optional):**
 
-Leverage powerful artisan commands to boost your app's user management capabilities:
+   ```bash
+   php artisan vendor:publish --tag="module_user_fila3-config"
+   ```
 
-### Versione Incoming
+5. **Create your first admin user:**
 
-Leverage powerful artisan commands to boost your app’s user management capabilities:
+   ```bash
+   php artisan make:filament-user
+   ```
 
----
+6. **Make a user super admin (optional):**
 
+   ```bash
+   php artisan user:super-admin
+   ```
 
-- **Create Super Admin:**
-    ```bash
-    php artisan user:super-admin
-    ```
-    _Transform any user into an all-powerful super admin!_
+7. **Assign modules to users (optional):**
 
-- **Assign Modules:**
-    ```bash
-    php artisan user:assign-module
-    ```
-    _Dynamically assign or restrict modules for specific users._
+   ```bash
+   php artisan user:assign-module
+   ```
 
-- **Manage Teams:**
-    - Create a team:
-        ```bash
-        php artisan team:create
-        ```
-    - Assign a user to a team:
-        ```bash
-        php artisan team:assign-user
-        ```
-
-- **View Available Modules:**
-    ```bash
-    php artisan module:list
-    ```
-    _See all available modules and activate/deactivate them at will._
+8. **Start using the admin panel at `/admin`**
 
 ---
 
-### Configuration 🔧
+## 🛠️ Available Commands
 
-Easily configure the module in the `module_user_fila3.php` config file to suit your app's specific needs.
+### User Management
 
-### FAQ ❓
+- **Create a new admin user**
 
-- **Q: How do I assign roles?**
-  A: Use the Filament interface or `php artisan user:assign-module` command to assign roles and modules.
+  ```bash
+  php artisan make:filament-user
+  ```
 
-- **Q: Can I manage teams?**
-  A: Absolutely! Use `php artisan team:create` to create new teams and `php artisan team:assign-user` to add users.
+- **Promote a user to super admin**
 
-### Contribute 💪
+  ```bash
+  php artisan user:super-admin
+  ```
 
-We 💖 open source! Want to improve this package? Fork the repo and submit a pull request.
+- **Assign modules to a user**
+
+  ```bash
+  php artisan user:assign-module
+  ```
+
+### Team Management
+
+- **Create a new team**
+
+  ```bash
+  php artisan team:create
+  ```
+
+- **Assign user to a team**
+
+  ```bash
+  php artisan team:assign-user
+  ```
+
+### Module Management
+
+- **List all available modules**
+
+  ```bash
+  php artisan module:list
+  ```
+
+- **Enable a module**
+
+  ```bash
+  php artisan module:enable ModuleName
+  ```
+
+- **Disable a module**
+
+  ```bash
+  php artisan module:disable ModuleName
+  ```
+
+## ⚙️ Configuration
+
+Configure the module by publishing its configuration file:
+
+```bash
+php artisan vendor:publish --tag="module_user_fila3-config"
+```
+
+Then modify the configuration in `config/module_user_fila3.php` to suit your needs.
+
+## ❓ Frequently Asked Questions
+
+### How do I assign roles to users?
+
+Use the Filament admin interface or the `user:assign-module` command to manage user roles and permissions.
+
+### Can I manage multiple teams?
+
+Yes! The module supports multi-tenant team management. Use the `team:create` and `team:assign-user` commands to manage teams.
+
+### How do I customize the user interface?
+
+Publish the views and assets using:
+
+```bash
+php artisan vendor:publish --tag="module_user_fila3-views"
+php artisan vendor:publish --tag="module_user_fila3-assets"
+```
+
+## 🤝 Contributing
+
+We welcome contributions from the community! To contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+Please read our [contributing guidelines](.github/CONTRIBUTING.md) for more details.
+
+## 📄 License
+
+This module is open-sourced software licensed under the [MIT License](LICENSE).
+
+## 👤 Author
+
+**Marco Sottana**
+
+- GitHub: [@marco76tv](https://github.com/marco76tv)
+- Email: marco.sottana@gmail.com
 
 ---
 
-### Author 👨‍💻
-
-Developed and maintained by [Marco Sottana](https://github.com/marco76tv)  
-📧 Email: marco.sottana@gmail.com
-
----
-
-### License 📄
-
-This package is open-sourced under the [MIT license](LICENSE).
-
----
-
-Give your Laravel app the **edge** it deserves with **Module User Fila3**. Try it now! 💥
-
-### Versione HEAD
-
-
-### Versione Incoming
+Give your Laravel application the **powerful user management** it deserves with this comprehensive module. Try it today! 🚀
 
 # 👤 User Module - Gestione Utenti Avanzata
 
@@ -337,9 +397,6 @@ php artisan db:seed --class=\\Modules\\User\\Database\\Seeders\\UserDatabaseSeed
 - Social authentication
 - API authentication
 - Multi-tenancy support
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 - Team management with binding resolution
 
 ## Critical Fixes
@@ -353,9 +410,6 @@ Fixed critical `BindingResolutionException` for team models by registering prope
 **Impact**: Restored full team functionality across all modules using the `HasTeams` trait.
 
 **Documentation**: See [Team Bindings Fix](docs/team-bindings-fix.md) for complete details.
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
 
 ## Permissions
 

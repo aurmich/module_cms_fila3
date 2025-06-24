@@ -14,19 +14,13 @@ return array (
     array (
       'label' => 'alt',
       'description' => 'alt',
-<<<<<<< HEAD
       'helper_text' => 'alt',
       'placeholder' => 'alt',
-=======
->>>>>>> df228b6 (.)
     ),
     'ratio' => 
     array (
       'label' => 'ratio',
-<<<<<<< HEAD
       'description' => 'ratio',
-=======
->>>>>>> df228b6 (.)
     ),
     'url' => 
     array (

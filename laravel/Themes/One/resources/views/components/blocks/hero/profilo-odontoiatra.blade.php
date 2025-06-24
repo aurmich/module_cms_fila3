@@ -29,7 +29,6 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                       </svg>
                     </div>
-<<<<<<< HEAD
                     {{-- Widget per la modifica dati utente - 
                           Delegazione dinamica delle azioni di aggiornamento.
                           Documentazione: laravel/Modules/User/docs/filament/widgets/edit-user-widget.md --}}
@@ -38,11 +37,6 @@
                         <!-- Intestazione -->
 
                         <!-- Prima riga: Nome / Cognome -->
-=======
-                        {{-- Intestazione --}}
-
-                        {{-- Prima riga: Nome / Cognome --}}
->>>>>>> bae7c52 (.)
                         <div class="flex flex-col lg:flex-row justify-center items-center">
                             <div class="w-full lg:w-3/6 p-5">
                                 <input class="bg-transparent" placeholder="Nome" type="text" id="name" />
@@ -52,11 +46,7 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         <!-- Seconda riga: Email / Cellulare -->
-=======
-                        {{-- Seconda riga: Email / Cellulare --}}
->>>>>>> bae7c52 (.)
                         <div class="flex flex-col lg:flex-row justify-center items-center">
                             <div class="w-full lg:w-3/6 p-5">
                                 <input class="bg-transparent" placeholder="Email" type="email" id="email" />
@@ -66,11 +56,7 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         <!-- Terza riga: Indirizzo / Partita IVA -->
-=======
-                        {{-- Terza riga: Indirizzo / Partita IVA --}}
->>>>>>> bae7c52 (.)
                         <div class="flex flex-col lg:flex-row justify-center items-center">
                             <div class="w-full lg:w-3/6 p-5">
                                 <input class="bg-transparent" placeholder="Indirizzo" type="text" id="address" />
@@ -79,10 +65,7 @@
                                 <input class="bg-transparent" placeholder="Ragione Sociale" type="text" id="vat" />
                             </div>
                         </div>
-<<<<<<< HEAD
                         --}}
-=======
->>>>>>> bae7c52 (.)
                     </div>
                 </div>
 

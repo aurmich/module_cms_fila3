@@ -33,21 +33,24 @@ use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Illuminate\Auth\Events\PasswordReset as PasswordResetResponseEvent;
 
 /**
+ * Widget for handling expired password reset.
+ * 
  * @property ComponentContainer $form
+ * @property string|null $current_password
+ * @property string|null $password
+ * @property string|null $passwordConfirmation
+ * @property array<string, mixed>|null $data
  */
 class PasswordExpiredWidget extends XotBaseWidget implements HasForms
 {
     use InteractsWithForms;
-
-    // use InteractsWithFormActions;
     use TransTrait;
 
     public ?string $current_password = '';
-
     public ?string $password = '';
-
     public ?string $passwordConfirmation = '';
 
+    /** @var array<string, mixed>|null */
     public ?array $data = [];
 
     /**
@@ -57,10 +60,10 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
-    
-
     /**
-     * @return array<Component>
+     * Get the form schema for password reset.
+     *
+     * @return array<int, Component>
      */
     public function getFormSchema(): array
     {
@@ -70,27 +73,36 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
         ];
     }
 
+    /**
+     * Get the reset password form action.
+     *
+     * @return Action
+     */
     public function getResetPasswordFormAction(): Action
     {
         return Action::make('resetPassword')
             ->submit('resetPassword');
     }
 
+    /**
+     * Check if the widget should display a logo.
+     *
+     * @return bool
+     */
     public function hasLogo(): bool
     {
         return false;
     }
 
+    /**
+     * Reset the user's password.
+     *
+     * @return PasswordResetResponse|null
+     */
     public function resetPassword(): ?PasswordResetResponse
     {
         $this->validate();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if (! Hash::check($this->data['current_password'], auth()->user()->password)) {
-=======
-=======
->>>>>>> a3f7230 (.)
         $user = Auth::user();
         if (!$user || !($user instanceof \Illuminate\Database\Eloquent\Model)) {
             $this->addError('current_password', __('user::auth.user_not_found'));
@@ -111,34 +123,21 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
         $userPasswordString = (string) ($userPassword ?? '');
         
         if (!Hash::check($currentPassword, $userPasswordString)) {
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
             $this->addError('current_password', __('user::auth.password_current_incorrect'));
             return null;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $user = auth()->user();
-        $user->password = Hash::make($this->data['password']);
-        $user->save();
-
-        return new PasswordResetResponse($user);
-=======
-=======
->>>>>>> a3f7230 (.)
         $user->setAttribute('password', Hash::make($newPassword));
         $user->save();
 
         return new PasswordResetResponse();
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
     }
 
+    /**
+     * Get the current password form component.
+     *
+     * @return Component
+     */
     protected function getCurrentPasswordFormComponent(): Component
     {
         $authUser = Filament::auth()->user();
@@ -188,7 +187,9 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
     */
 
     /**
-     * @return array<Action|ActionGroup>
+     * Get the form actions.
+     *
+     * @return array<int, Action|ActionGroup>
      */
     protected function getFormActions(): array
     {

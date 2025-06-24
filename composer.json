@@ -1,32 +1,59 @@
 {
     "name": "exabyte/base_saluteora",
-    "description": "Progetto SaluteOra basato su framework Laraxot",
     "type": "project",
+    "description": "Base project for predict fila3 mono with Laravel modular architecture",
+    "keywords": [
+        "laravel",
+        "filament",
+        "modular",
+        "predict",
+        "monorepo"
+    ],
+    "license": "MIT",
     "config": {
         "vendor-dir": "laravel/vendor",
+        "bin-dir": "laravel/vendor/bin",
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "wikimedia/composer-merge-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
-    "autoload": {
-        "psr-4": {
-            "": "laravel/app/"
+    "require": {
+        "wikimedia/composer-merge-plugin": "^2.1"
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "laravel/composer.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false,
+            "merge-scripts": false
         }
     },
     "scripts": {
         "post-install-cmd": [
-            "cd laravel && composer install --no-dev --optimize-autoloader"
+            "@composer install --working-dir=laravel"
         ],
         "post-update-cmd": [
-            "cd laravel && composer update --no-dev --optimize-autoloader"
+            "@composer update --working-dir=laravel"
+        ],
+        "phpstan": [
+            "php laravel/vendor/bin/phpstan analyse --memory-limit=2G --error-format=table --no-progress"
+        ],
+        "phpstan-modules": [
+            "php laravel/vendor/bin/phpstan analyse --memory-limit=2G --error-format=table --no-progress laravel/Modules"
         ]
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "laravel"
-        }
-    ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

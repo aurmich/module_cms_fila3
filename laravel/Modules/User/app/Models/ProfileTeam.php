@@ -7,18 +7,10 @@ namespace Modules\User\Models;
 use Modules\Xot\Contracts\ProfileContract;
 
 /**
- * 
+ * ProfileTeam Model
  *
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam query()
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> a3f7230 (.)
  * @property string $id
  * @property int $team_id
  * @property string|null $user_id
@@ -29,6 +21,9 @@ use Modules\Xot\Contracts\ProfileContract;
  * @property string|null $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $deleted_by
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereDeletedAt($value)
@@ -39,10 +34,8 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
-<<<<<<< HEAD
->>>>>>> aurmich/dev
-=======
->>>>>>> a3f7230 (.)
  * @mixin \Eloquent
  */
-class ProfileTeam extends TeamUser {}
+class ProfileTeam extends TeamUser
+{
+}

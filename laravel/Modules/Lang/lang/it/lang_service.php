@@ -415,45 +415,38 @@ return array (
     ),
     'identity_document' => 
     array (
-      'label' => 'identity_document',
+      'label' => 'Documento di identità',
+      'placeholder' => 'Inserisci documento di identità',
+      'tooltip' => 'Documento di identità valido',
     ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9b21852 (.)
     'certifications' => 
     array (
-      'label' => 'certifications',
+      'label' => 'Certificazioni',
+      'description' => 'Certificazioni',
+      'helper_text' => 'Elenco delle certificazioni',
+      'placeholder' => 'Inserisci le certificazioni',
     ),
     'schedule' => 
     array (
-      'description' => 'schedule',
-      'helper_text' => 'schedule',
-      'placeholder' => 'schedule',
-      'label' => 'schedule',
+      'label' => 'Orario',
+      'description' => 'Orario',
+      'helper_text' => 'Orario di lavoro o appuntamento',
+      'placeholder' => 'Inserisci l\'orario',
     ),
     'addresses' => 
     array (
-      'description' => 'addresses',
-      'helper_text' => 'addresses',
-      'placeholder' => 'addresses',
-      'label' => 'addresses',
+      'label' => 'Indirizzi',
+      'description' => 'Indirizzi',
+      'helper_text' => 'Elenco degli indirizzi',
+      'placeholder' => 'Inserisci gli indirizzi',
     ),
-<<<<<<< HEAD
->>>>>>> c8ed798 (.)
-=======
     'view' => 
     array (
-      'description' => 'view',
-      'helper_text' => 'view',
-      'label' => 'view',
-      'placeholder' => 'view',
+      'label' => 'Vista',
+      'description' => 'Vista',
+      'helper_text' => 'Modalità di visualizzazione',
+      'placeholder' => 'Seleziona la vista',
     ),
->>>>>>> 90c9008 (.)
-=======
->>>>>>> 9b21852 (.)
   ),
   'actions' => 
   array (
