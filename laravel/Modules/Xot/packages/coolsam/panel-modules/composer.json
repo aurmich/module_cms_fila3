@@ -50,6 +50,10 @@
             }
         }
     },
+<<<<<<< HEAD
+    "minimum-stability": "beta",
+=======
     "minimum-stability": "dev",
+>>>>>>> 4ec8f92 (.)
     "prefer-stable": true
 }

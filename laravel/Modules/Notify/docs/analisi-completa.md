@@ -60,7 +60,11 @@ Modules/Notify/
         "spatie/laravel-mail-templates": "^1.0",
         "mjml/mjml-php": "^1.0",
         "mailgun/mailgun-php": "^3.0",
+<<<<<<< HEAD
+        "filament/filament": "^4.0"
+=======
         "filament/filament": "^2.0"
+>>>>>>> 484b1fe (.)
     }
 }
 ```

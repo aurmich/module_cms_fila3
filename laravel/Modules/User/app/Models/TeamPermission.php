@@ -18,17 +18,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \DateTime|null $updated_at
  * @property Team $team
  * @property User $user
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> a3f7230 (.)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
  * @mixin \Eloquent
+<<<<<<< HEAD
+>>>>>>> aurmich/dev
+=======
+>>>>>>> a3f7230 (.)
  */
 class TeamPermission extends Model
 {
     /** @var string */
     protected $connection = 'user';
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    /** @var array<string> */
+=======
     /** @var list<string> */
+>>>>>>> aurmich/dev
+=======
+    /** @var list<string> */
+>>>>>>> a3f7230 (.)
     protected $fillable = [
         'team_id',
         'user_id',

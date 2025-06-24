@@ -39,6 +39,36 @@ This document outlines the best practices for maintaining high code quality with
 ### 5. Dependency Injection
 - Use dependency injection to avoid direct instantiation of dependencies, promoting testability and flexibility.
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26594b (.)
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 07b734cd (.)
+## Strumenti di Qualità del Codice
+
+### Scripts di Automazione
+- [fix_docs_case](../../../../../bashscripts/docs/docs/fix_docs_case.md) - Standardizzazione automatica dei nomi file nella documentazione
+- Eseguire gli script di automazione regolarmente per mantenere la coerenza del codice
+
+=======
+>>>>>>> 7ec6ffa (.)
+<<<<<<< HEAD
+=======
+>>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
+>>>>>>> 07b734cd (.)
+<<<<<<< HEAD
+=======
+>>>>>>> ebf7989 (.)
+=======
+>>>>>>> b26594b (.)
+=======
+>>>>>>> 4ec8f92 (.)
 ## Common Issues and Fixes
 - **Type Errors**: Ensure all methods and functions have explicit return types and parameter types to avoid type-related bugs.
 - **Static Analysis Failures**: Address PHPStan errors by refining code or updating the baseline for existing code.

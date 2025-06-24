@@ -4,9 +4,28 @@
     Modifica liberamente questa struttura per UX custom
 --}}
 <div class="filament-widget-login space-y-6">
+<<<<<<< HEAD
+<<<<<<< HEAD
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+    <form wire:submit.prevent="save" class="space-y-4">
+        {{ $this->form }}
+        <button type="submit" class="w-full py-3 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 transition">{{ __('Accedi') }}</button>
+=======
     <form wire:submit.prevent="save" class="space-y-4">
         {{ $this->form }}
         <button type="submit" class="w-full py-3 rounded bg-[#FF5F7E] text-white font-bold transition">{{ __('Accedi') }}</button>
+>>>>>>> aurmich/dev
+=======
+    <form wire:submit.prevent="save" class="space-y-4">
+        {{ $this->form }}
+        <button type="submit" class="w-full py-3 rounded bg-[#FF5F7E] text-white font-bold transition">{{ __('Accedi') }}</button>
+>>>>>>> a3f7230 (.)
     </form>
     <div class="text-center text-sm text-gray-500 mt-2">
         @if (Route::has('password.request'))

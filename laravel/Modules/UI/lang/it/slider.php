@@ -8,6 +8,10 @@ return array (
       'label' => 'method',
       'description' => 'method',
       'helper_text' => 'method',
+<<<<<<< HEAD
+      'placeholder' => 'method',
+=======
+>>>>>>> df228b6 (.)
     ),
     '_tpl' => 
     array (

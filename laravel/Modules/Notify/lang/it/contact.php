@@ -187,5 +187,13 @@ return [
             'message' => 'Impossibile verificare il contatto: :error',
         ],
     ],
+<<<<<<< HEAD
+<<<<<<< HEAD
+    'messages' => [],
+=======
     
+>>>>>>> 86996d7 (.)
+=======
+    
+>>>>>>> 484b1fe (.)
 ];

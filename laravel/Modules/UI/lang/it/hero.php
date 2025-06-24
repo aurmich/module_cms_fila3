@@ -14,10 +14,19 @@ return array (
     array (
       'label' => 'class',
       'description' => 'class',
+<<<<<<< HEAD
+      'helper_text' => 'class',
+      'placeholder' => 'class',
+=======
+>>>>>>> df228b6 (.)
     ),
     'label' => 
     array (
       'label' => 'label',
+<<<<<<< HEAD
+      'description' => 'label',
+=======
+>>>>>>> df228b6 (.)
     ),
     'buttons' => 
     array (

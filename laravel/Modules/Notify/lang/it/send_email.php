@@ -51,6 +51,11 @@ return array (
       'placeholder' => 'Inserisci i parametri',
       'label' => 'Parametri',
     ),
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 484b1fe (.)
     'body_html' => 
     array (
       'description' => 'body_html',
@@ -61,8 +66,13 @@ return array (
     'subject' => 
     array (
       'description' => 'subject',
+<<<<<<< HEAD
+    ),
+>>>>>>> 86996d7 (.)
+=======
       'helper_text' => 'subject',
     ),
+>>>>>>> 484b1fe (.)
   ),
   'actions' => 
   array (

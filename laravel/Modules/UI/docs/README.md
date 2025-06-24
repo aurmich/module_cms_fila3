@@ -10,9 +10,18 @@ Il modulo UI fornisce componenti e layout standardizzati per l'interfaccia utent
 - MoneyInput: Input per valori monetari con formattazione automatica
 - DateRangePicker: Selezione intervalli di date
 - FileUpload: Upload file con preview e validazione
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 - **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
   - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
   - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
+>>>>>>> cf5bf8d (.)
+=======
+- **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
+  - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
+  - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
+>>>>>>> df228b6 (.)
 
 ### Tables
 - CustomDataTable: Tabella dati avanzata con ordinamento e filtri

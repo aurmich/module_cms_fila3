@@ -17,8 +17,18 @@ namespace Modules\User\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile query()
  * @mixin \Eloquent
  */
+<<<<<<< HEAD
+<<<<<<< HEAD
+class DeviceProfile extends DeviceUser {}
+=======
+=======
+>>>>>>> a3f7230 (.)
 class DeviceProfile extends DeviceUser {
     /**
      * ---
      */
 }
+<<<<<<< HEAD
+>>>>>>> aurmich/dev
+=======
+>>>>>>> a3f7230 (.)

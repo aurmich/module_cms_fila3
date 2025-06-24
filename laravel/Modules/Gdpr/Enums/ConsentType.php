@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace Modules\Gdpr\Enums;
 
 use Illuminate\Support\Collection;
+<<<<<<< HEAD
+<<<<<<< HEAD
+use Modules\Core\Traits\EnumTrait;
+=======
 //use Modules\Core\Traits\EnumTrait;
+>>>>>>> e6c7d86 (.)
+=======
+//use Modules\Core\Traits\EnumTrait;
+>>>>>>> 378d233 (.)
 
 /**
  * Enum ConsentType
@@ -15,7 +23,15 @@ use Illuminate\Support\Collection;
  */
 enum ConsentType: string
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    use EnumTrait;
+=======
     //use EnumTrait;
+>>>>>>> e6c7d86 (.)
+=======
+    //use EnumTrait;
+>>>>>>> 378d233 (.)
 
     // Marketing communications
     case MARKETING_EMAIL = 'marketing_email';
@@ -166,11 +182,25 @@ enum ConsentType: string
         ];
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    /**
+     * Get consent types as a flattened array for forms.
+     * 
+     * @return array<string, string>
+     */
+=======
+=======
+>>>>>>> 378d233 (.)
     /*
      * Get consent types as a flattened array for forms.
      * 
      * @return array<string, string>
      
+<<<<<<< HEAD
+>>>>>>> e6c7d86 (.)
+=======
+>>>>>>> 378d233 (.)
     public static function forFormSelect(): array
     {
         $result = [];
@@ -181,5 +211,12 @@ enum ConsentType: string
         
         return $result;
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
         */
+>>>>>>> e6c7d86 (.)
+=======
+        */
+>>>>>>> 378d233 (.)
 }

@@ -337,6 +337,25 @@ php artisan db:seed --class=\\Modules\\User\\Database\\Seeders\\UserDatabaseSeed
 - Social authentication
 - API authentication
 - Multi-tenancy support
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- Team management with binding resolution
+
+## Critical Fixes
+
+### Team Binding Resolution (January 2025)
+Fixed critical `BindingResolutionException` for team models by registering proper service container bindings:
+
+- `team_user_model` → `\Modules\User\Models\TeamUser::class`
+- `team_invitation_model` → `\Modules\User\Models\TeamInvitation::class`
+
+**Impact**: Restored full team functionality across all modules using the `HasTeams` trait.
+
+**Documentation**: See [Team Bindings Fix](docs/team-bindings-fix.md) for complete details.
+>>>>>>> aurmich/dev
+=======
+>>>>>>> a3f7230 (.)
 
 ## Permissions
 

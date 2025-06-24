@@ -38,6 +38,15 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
 /**
  * Modules\User\Models\User.
  *
+<<<<<<< HEAD
+<<<<<<< HEAD
+ * @template TModel of \Illuminate\Database\Eloquent\Model
+ * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+ *
+=======
+>>>>>>> aurmich/dev
+=======
+>>>>>>> a3f7230 (.)
  * @property Collection<int, OauthClient> $clients
  * @property int|null $clients_count
  * @property Team|null $currentTeam
@@ -200,8 +209,17 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     public function __construct(array $attributes = [])
     {
         // Concateno i fillable del parent con quelli della classe corrente
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $this->fillable = array_merge(parent::getFillable(), $this->getFillable());
+=======
         // array_values() garantisce che sia un array indicizzato (list<string>)
         $this->fillable = array_values(array_merge(parent::getFillable(), $this->getFillable()));
+>>>>>>> aurmich/dev
+=======
+        // array_values() garantisce che sia un array indicizzato (list<string>)
+        $this->fillable = array_values(array_merge(parent::getFillable(), $this->getFillable()));
+>>>>>>> a3f7230 (.)
 
         parent::__construct($attributes);
     }
@@ -308,7 +326,15 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     }
 
     /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @return BelongsToMany<Device, static|$this>
+=======
      * @return BelongsToMany<Device, static>
+>>>>>>> aurmich/dev
+=======
+     * @return BelongsToMany<Device, static>
+>>>>>>> a3f7230 (.)
      */
     public function devices(): BelongsToMany
     {
@@ -316,12 +342,25 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
             ->belongsToManyX(Device::class);
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public function socialiteUsers(): HasMany
+    {
+        return $this
+            ->hasMany(SocialiteUser::class);
+=======
+=======
+>>>>>>> a3f7230 (.)
     /**
      * @return HasMany<SocialiteUser, static>
      */
     public function socialiteUsers(): HasMany
     {
         return $this->hasMany(SocialiteUser::class);
+<<<<<<< HEAD
+>>>>>>> aurmich/dev
+=======
+>>>>>>> a3f7230 (.)
     }
 
     public function getProviderField(string $provider, string $field): string

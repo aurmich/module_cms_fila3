@@ -26,8 +26,40 @@
         }
     },
     "require": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf5bf8d (.)
         "coolsam/flatpickr": "^4.1",
         "owenvoke/blade-fontawesome": "*"
+=======
+=======
+=======
+        "coolsam/flatpickr": "^4.1",
+>>>>>>> 3fc99caa662508b51bcbc764ddca541111daeb21
+>>>>>>> 632ecbb (.)
+=======
+        "coolsam/flatpickr": "^4.1",
+>>>>>>> 6bc16ad (.)
+        "owenvoke/blade-fontawesome": "*",
+        "saade/filament-fullcalendar": "^3.2"
+    },
+    "require_comment": {
+        "coolsam/flatpickr": "*"
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3b0d55a (.)
+=======
+>>>>>>> 632ecbb (.)
+=======
+>>>>>>> 6bc16ad (.)
+=======
+        "coolsam/flatpickr": "^4.1",
+        "owenvoke/blade-fontawesome": "*"
+>>>>>>> df228b6 (.)
     },
     "repositories": [
         {
