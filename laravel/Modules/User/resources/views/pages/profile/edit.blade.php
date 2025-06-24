@@ -153,12 +153,24 @@ $component = new class extends Component {
      *
      * @return void
      */
+    /**
+     * Update the user's profile information.
+     *
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function updateProfile(): void
     {
         try {
-            $this->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user_id)],
+            $validated = $this->validate([
+                'first_name' => ['required', 'string', 'max:100'],
+                'last_name' => ['required', 'string', 'max:100'],
+                'email' => [
+                    'required', 
+                    'email', 
+                    'max:255', 
+                    Rule::unique('users')->ignore($this->user_id)
+                ],
             ]);
 
             $user = Auth::user();
@@ -166,29 +178,24 @@ $component = new class extends Component {
             Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
             Assert::same($this->user_id, (int) $user->id, 'User ID mismatch detected');
 
-            // Validate input data with type safety
-            Assert::stringNotEmpty($this->name, 'Name cannot be empty');
-            Assert::stringNotEmpty($this->email, 'Email cannot be empty');
-            Assert::true(
-                filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false,
-                'Email format is invalid'
-            );
-
             // Check if email has changed for additional validation
-            $emailChanged = $user->email !== $this->email;
+            $emailChanged = $user->email !== $validated['email'];
             
             if ($emailChanged) {
                 // Additional email validation for changes
                 Assert::false(
-                    User::where('email', $this->email)->where('id', '!=', $this->user_id)->exists(),
+                    User::where('email', $validated['email'])
+                        ->where('id', '!=', $this->user_id)
+                        ->exists(),
                     'Email is already in use by another user'
                 );
             }
 
             // Update user data with type casting
             $user->fill([
-                'name' => trim($this->name),
-                'email' => strtolower(trim($this->email)),
+                'first_name' => trim($validated['first_name']),
+                'last_name' => trim($validated['last_name']),
+                'email' => strtolower(trim($validated['email'])),
             ]);
 
             // Reset email verification if email changed
@@ -196,17 +203,27 @@ $component = new class extends Component {
                 $user->email_verified_at = null;
             }
 
+            // Log before saving to capture original values
+            Log::info('Updating user profile', [
+                'user_id' => $user->id,
+                'old_first_name' => $user->first_name,
+                'new_first_name' => $validated['first_name'],
+                'old_last_name' => $user->last_name,
+                'new_last_name' => $validated['last_name'],
+                'old_email' => $user->email,
+                'new_email' => $validated['email'],
+                'email_changed' => $emailChanged,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+
             $success = $user->save();
             Assert::true($success, 'Failed to save user profile');
 
             // Log successful profile update for audit trail
             Log::info('User profile updated successfully', [
                 'user_id' => $user->id,
-                'old_email' => $user->getOriginal('email'),
-                'new_email' => $user->email,
-                'old_name' => $user->getOriginal('name'),
-                'new_name' => $user->name,
-                'email_changed' => $emailChanged,
+                'changes' => $user->getChanges(),
                 'ip_address' => request()->ip(),
                 'user_agent' => request()->userAgent(),
             ]);
@@ -460,11 +477,22 @@ $component = new class extends Component {
      *
      * @return array<string, array<int, string|\Illuminate\Validation\Rules\Unique>>
      */
+    /**
+     * Get validation rules for profile update.
+     *
+     * @return array<string, array<int, string|\Illuminate\Validation\Rules\Unique>>
+     */
     protected function getProfileValidationRules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user_id)],
+            'first_name' => ['required', 'string', 'min:2', 'max:100'],
+            'last_name' => ['required', 'string', 'min:2', 'max:100'],
+            'email' => [
+                'required', 
+                'email', 
+                'max:255', 
+                Rule::unique('users')->ignore($this->user_id)
+            ],
         ];
     }
 
@@ -521,16 +549,31 @@ $component = new class extends Component {
                         </header>
 
                         <form wire:submit="updateProfile" class="mt-6 space-y-6">
-                            <x-ui.input 
-                                label="Name" 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                wire:model="name" 
-                                required 
-                                minlength="2"
-                                maxlength="255"
-                            />
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <x-ui.input 
+                                    :label="__('First Name')" 
+                                    type="text" 
+                                    id="first_name" 
+                                    name="first_name" 
+                                    wire:model="first_name"
+                                    required 
+                                    autofocus
+                                    minlength="2"
+                                    maxlength="100"
+                                    autocomplete="given-name"
+                                />
+                                <x-ui.input 
+                                    :label="__('Last Name')" 
+                                    type="text" 
+                                    id="last_name" 
+                                    name="last_name" 
+                                    wire:model="last_name"
+                                    required 
+                                    minlength="2"
+                                    maxlength="100"
+                                    autocomplete="family-name"
+                                />
+                            </div>
                             
                             <x-ui.input 
                                 label="Email address" 

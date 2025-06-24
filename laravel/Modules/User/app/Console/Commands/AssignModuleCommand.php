@@ -29,7 +29,7 @@ class AssignModuleCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Assign a module to user';
+    protected $description = 'Assign or revoke modules to/from user';
 
     /**
      * Create a new command instance.
@@ -47,31 +47,42 @@ class AssignModuleCommand extends Command
     public function handle(): void
     {
         $email = text('email ?');
+        
         /**
          * @var UserContract $user
          */
         $user = XotData::make()->getUserByEmail($email);
-        /*
-        $modules = collect(Module::all())->map(function ($module) {
-            return $module->getName();
-        })->toArray();
-        */
+        
+        if (!$user) {
+            $this->error("User with email '{$email}' not found.");
+            return;
+        }
+
+        // Get all available modules
         $modules_opts = array_keys(Module::all());
         $modules_opts = array_combine($modules_opts, $modules_opts);
 
-        $modules = multiselect(
-            label: 'What modules',
+        // Get user's current module roles
+        $userModuleRoles = $this->getUserModuleRoles($user);
+        $currentModules = array_keys($userModuleRoles);
+
+        // Show current modules as default selected
+        $this->info("Current modules for {$email}: " . implode(', ', $currentModules));
+
+        $selectedModules = multiselect(
+            label: 'Select modules (checked = assigned, unchecked = will be revoked)',
             options: $modules_opts,
-            required: true,
+            default: $currentModules, // Show current modules as checked
+            required: false, // Allow empty selection
             scroll: 10,
-            // validate: function (array $values) {
-            //  return ! \in_array(\count($values), [1, 2], false)
-            //    ? 'A maximum of two'
-            //  : null;
-            // }
         );
 
-        foreach ($modules as $module) {
+        // Determine modules to assign and revoke
+        $modulesToAssign = array_diff($selectedModules, $currentModules);
+        $modulesToRevoke = array_diff($currentModules, $selectedModules);
+
+        // Assign new modules
+        foreach ($modulesToAssign as $module) {
             $module_low = Str::lower(is_string($module) ? $module : (string) $module);
             $role_name = $module_low.'::admin';
 
@@ -83,9 +94,47 @@ class AssignModuleCommand extends Command
 
             // Assign the role to the user
             $user->assignRole($role);
+            
+            $this->info("✓ Assigned module: {$module}");
         }
 
-        $this->info(implode(', ', $modules).' assigned to '.$email);
+        // Revoke unchecked modules
+        foreach ($modulesToRevoke as $module) {
+            $module_low = Str::lower(is_string($module) ? $module : (string) $module);
+            $role_name = $module_low.'::admin';
+
+            // Revoke the role from the user
+            $user->removeRole($role_name);
+            
+            $this->warn("✗ Revoked module: {$module}");
+        }
+
+        // Summary
+        if (empty($modulesToAssign) && empty($modulesToRevoke)) {
+            $this->info("No changes made to user modules.");
+        } else {
+            $this->info("Module assignment updated for {$email}");
+        }
+    }
+
+    /**
+     * Get user's current module roles.
+     *
+     * @param UserContract $user
+     * @return array<string, string>
+     */
+    private function getUserModuleRoles(UserContract $user): array
+    {
+        $moduleRoles = [];
+        
+        foreach ($user->roles as $role) {
+            if (Str::endsWith($role->name, '::admin')) {
+                $moduleName = Str::before($role->name, '::admin');
+                $moduleRoles[$moduleName] = $role->name;
+            }
+        }
+        
+        return $moduleRoles;
     }
 
     /**
