@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Widgets;
 
-use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form as FilamentForm;
-use Illuminate\Support\Facades\Cache;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Widgets\Widget as FilamentWidget;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
@@ -16,9 +13,12 @@ use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 <<<<<<< HEAD
+<<<<<<< HEAD
 // use Modules\SaluteOra\Models\Patient;
 =======
 use Filament\Forms\ComponentContainer;
+=======
+>>>>>>> 660eca4b (📝 (laravel/Modules/Activity/docs/MCP_SERVER_RECOMMENDED.md): delete outdated documentation for recommended MCP servers for Activity module to maintain clarity and relevance)
 use Illuminate\Support\Facades\Cache;
 >>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
 use Filament\Forms\ComponentContainer;

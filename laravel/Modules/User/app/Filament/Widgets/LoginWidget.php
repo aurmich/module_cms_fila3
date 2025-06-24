@@ -35,21 +35,7 @@ class LoginWidget extends XotBaseWidget
      */
     protected static string $view = 'user::filament.widgets.login';
     
-    /** @var int|string|array<string, mixed> */
-    protected int | string | array $columnSpan = 'full';
-    
-    /**
-     * Dati del form per il login
-     *
-     * @var array<string, mixed>|null
-     */
-    public ?array $data = [];
-
-    /**
-     * @var \Filament\Forms\Form
-     */
-    public ?\Filament\Forms\Form $form = null;
-
+   
     /**
      * Inizializza il widget quando viene montato.
      *
@@ -57,7 +43,6 @@ class LoginWidget extends XotBaseWidget
      */
     public function mount(): void
     {
-        $this->form = $this->makeForm();
         $this->form->fill();
     }
     
@@ -76,8 +61,7 @@ class LoginWidget extends XotBaseWidget
             TextInput::make('password')
                 ->password()
                 ->required(),
-            Toggle::make('remember')
-                ->label(__('user::auth.remember_me')),
+            Toggle::make('remember'),
         ];
     }
 
@@ -146,7 +130,7 @@ class LoginWidget extends XotBaseWidget
                 
             $this->form->fill();
             $this->form->saveRelationships();
-            $this->form->callAfter();
+            //$this->form->callAfter();
             
             foreach ($e->errors() as $field => $messages) {
                 $this->form->getComponent($field)?->getContainer()->getParentComponent()?->getStatePath()
