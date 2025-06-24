@@ -1,4 +1,6 @@
-<?php return array (
+<?php
+
+return array (
   'navigation' => 
   array (
     'name' => 'Pagina',
@@ -7,12 +9,17 @@
     array (
       'name' => 'Site',
     ),
+    'sort' => 24,
+    'icon' => 'page.navigation',
+    'label' => 'page.navigation',
   ),
   'fields' => 
   array (
     'title' => 
     array (
       'label' => 'title',
+      'description' => 'title',
+      'helper_text' => 'title',
     ),
     'name' => 
     array (
@@ -21,6 +28,9 @@
     'slug' => 
     array (
       'label' => 'slug',
+      'description' => 'slug',
+      'helper_text' => 'slug',
+      'placeholder' => 'slug',
     ),
     'guard_name' => 'Guard',
     'permissions' => 'Permessi',
@@ -40,6 +50,18 @@
     array (
       'label' => 'delete',
     ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
   ),
   'actions' => 
   array (
@@ -52,4 +74,4 @@
       'label' => 'activeLocale',
     ),
   ),
-);
+);

@@ -1,4 +1,6 @@
-<?php return array (
+<?php
+
+return array (
   'navigation' => 
   array (
     'name' => 'Contenuto Pagina',
@@ -7,6 +9,9 @@
     array (
       'name' => 'Site',
     ),
+    'sort' => 78,
+    'label' => 'page content.navigation',
+    'icon' => 'page content.navigation',
   ),
   'fields' => 
   array (
@@ -27,6 +32,10 @@
     'content_blocks' => 
     array (
       'label' => 'content_blocks',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
     ),
   ),
   'rating' => 
@@ -69,4 +78,4 @@
       'label' => 'create',
     ),
   ),
-);
+);

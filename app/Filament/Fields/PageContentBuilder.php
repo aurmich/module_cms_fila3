@@ -26,11 +26,11 @@ class PageContentBuilder
                 try{
                     return $class::make(name: $block->name, context: $context);
                 }catch(\Error $e){
-                    dddx([
-                        'e'=>$e->getMessage(),
-                        'block'=>$block,
-                        'class'=>$class,
-                    ]);
+                    // dddx([
+                    //     'e'=>$e->getMessage(),
+                    //     'block'=>$block,
+                    //     'class'=>$class,
+                    // ]);
                 }
             }
         );
