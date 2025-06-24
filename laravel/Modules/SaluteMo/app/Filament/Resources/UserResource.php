@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\SaluteOra\Filament\Resources;
+namespace Modules\SaluteMo\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -51,7 +51,7 @@ class UserResource extends BaseUserResource
     }
 
 
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,6 +60,5 @@ class UserResource extends BaseUserResource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
-    
+       
 }
-

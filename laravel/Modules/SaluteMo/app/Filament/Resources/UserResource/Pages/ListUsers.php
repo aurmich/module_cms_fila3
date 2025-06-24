@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
+namespace Modules\SaluteMo\Filament\Resources\UserResource\Pages;
 
 use Filament\Actions;
 use Modules\SaluteOra\Enums\UserTypeEnum;
@@ -47,9 +47,9 @@ class ListUsers extends BaseListUsers
     public function getTableActions(): array
     {
         return [
-            ...parent::getTableActions(),
+            //...parent::getTableActions(),
 
-          
+           
         ];
     }
 }

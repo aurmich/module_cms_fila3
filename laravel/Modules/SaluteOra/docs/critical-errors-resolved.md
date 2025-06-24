@@ -345,6 +345,111 @@ Il componente è immediatamente utilizzabile in altri Resources:
 
 ---
 
+## 5. Errore Critico: BindingResolutionException team_user_model
+
+### Data Risoluzione
+**Gennaio 2025**
+
+### Descrizione dell'Errore
+Durante l'utilizzo delle funzionalità di team nel modulo User, si verificava l'errore:
+```
+Illuminate\Contracts\Container\BindingResolutionException
+Target class [team_user_model] does not exist.
+```
+
+### Stack Trace
+L'errore si verificava nel trait `HasTeams` nel metodo `teamUsers()`:
+```php
+public function teamUsers(): HasMany
+{
+    $teamUserModel = app('team_user_model'); // Errore qui
+    return $this->hasMany($teamUserModel, 'team_id');
+}
+```
+
+### Causa Radice
+Il trait `HasTeams` utilizzava il metodo `app('team_user_model')` per risolvere dinamicamente il modello TeamUser dal container di Laravel, ma i binding necessari non erano stati registrati nel `UserServiceProvider`.
+
+Binding mancanti:
+- `team_user_model` → `\Modules\User\Models\TeamUser::class`
+- `team_invitation_model` → `\Modules\User\Models\TeamInvitation::class`
+
+### Soluzione Implementata
+
+#### Registrazione Binding nel UserServiceProvider
+Aggiunto nel metodo `register()` del `UserServiceProvider`:
+
+```php
+public function register(): void
+{
+    parent::register();
+    $this->registerTeamModelBindings();
+}
+
+/**
+ * Register the team model bindings.
+ */
+protected function registerTeamModelBindings(): void
+{
+    $this->app->bind('team_user_model', function () {
+        return \Modules\User\Models\TeamUser::class;
+    });
+
+    $this->app->bind('team_invitation_model', function () {
+        return \Modules\User\Models\TeamInvitation::class;
+    });
+}
+```
+
+### File Modificati
+1. **UserServiceProvider.php**: Aggiunta registrazione binding per modelli team
+   - Metodo `registerTeamModelBindings()` 
+   - Chiamata nel metodo `register()`
+
+### Benefici
+- **Funzionalità Team**: Ripristinate tutte le funzionalità di team del modulo User
+- **Pattern Dinamico**: Mantenuta la flessibilità del pattern con binding dinamici
+- **Compatibilità**: Preservata la compatibilità con trait `HasTeams` esistente
+- **Estendibilità**: Facilmente estendibile per altri modelli team se necessario
+
+### Impatto sui Moduli
+- **SaluteOra**: Ora può utilizzare le funzionalità di team senza errori
+- **User**: Funzionalità team completamente operative
+- **Altri moduli**: Qualsiasi modulo che utilizza il trait `HasTeams` ora funziona correttamente
+
+### Test di Verifica
+Dopo la correzione, tutte le operazioni seguenti dovrebbero funzionare senza errori:
+- [ ] Accesso alle pagine con funzionalità team
+- [ ] Creazione/modifica team
+- [ ] Gestione membri team
+- [ ] Inviti team
+- [ ] Eliminazione team
+
+### Architettura del Fix
+```mermaid
+graph TD
+    A[HasTeams Trait] --> B[app('team_user_model')]
+    B --> C[Laravel Container]
+    C --> D[UserServiceProvider]
+    D --> E[registerTeamModelBindings()]
+    E --> F[TeamUser::class]
+    E --> G[TeamInvitation::class]
+```
+
+### Prevenzione Errori Futuri
+- [ ] ✅ Verificare sempre la registrazione dei binding quando si utilizzano risoluzioni dinamiche
+- [ ] ✅ Documentare tutti i binding custom nei ServiceProvider
+- [ ] ✅ Testare le funzionalità dipendenti da binding after deployment
+- [ ] ✅ Implementare test di integrazione per binding del container
+- [ ] ✅ Controllare la presenza di tutti i modelli necessari prima di registrare binding
+
+### Note Tecniche
+- I binding sono registrati nel metodo `register()` per essere disponibili in tutta l'applicazione
+- Utilizzata closure per lazy loading dei modelli
+- Pattern coerente con altre implementazioni Laravel/Jetstream per team
+
+---
+
 ## Checklist Prevenzione Errori Futuri
 
 ### Per Componenti Filament Custom

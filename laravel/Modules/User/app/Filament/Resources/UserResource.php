@@ -41,6 +41,7 @@ class UserResource extends XotBaseResource
 
     public static function getFormSchema(): array
     {
+        
         return [
             'section01' => Section::make([
                 'name' => TextInput::make('name')
