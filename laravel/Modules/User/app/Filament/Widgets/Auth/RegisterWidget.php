@@ -22,18 +22,6 @@ use Webmozart\Assert\Assert;
 class RegisterWidget extends XotBaseWidget
 {
     protected static string $view = 'user::widgets.auth.register-widget';
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    public static function canView(): bool
-    {
-        return !Auth::check();
-    }
-=======
-    
-
->>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
-=======
     protected static ?int $sort = 2;
     protected static ?string $maxHeight = '600px';
 
@@ -41,7 +29,6 @@ class RegisterWidget extends XotBaseWidget
     {
         return !Auth::check();
     }
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
 
     public function mount(): void
     {

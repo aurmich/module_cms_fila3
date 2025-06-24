@@ -13,14 +13,11 @@ use Modules\User\Filament\Widgets\LoginWidget;
 use Modules\User\Models\User;
 use Tests\TestCase;
 
-<<<<<<< HEAD
-=======
 // Skip this test if the test database is not configured
-if (!env('DB_CONNECTION') || env('DB_CONNECTION') === 'sqlite' && !file_exists(database_path('database.sqlite'))) {
+if (!env('DB_CONNECTION') || (env('DB_CONNECTION') === 'sqlite' && !file_exists(database_path('database.sqlite')))) {
     return;
 }
 
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
 class LoginWidgetTest extends TestCase
 {
     use RefreshDatabase;
@@ -56,15 +53,11 @@ class LoginWidgetTest extends TestCase
     /** @test */
     public function it_can_authenticate_user()
     {
-<<<<<<< HEAD
-=======
         // Skip if we can't use the database
         if (!class_exists('CreateUsersTable')) {
             $this->markTestSkipped('Database not available for testing');
             return;
         }
-
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => Hash::make('password123'),
