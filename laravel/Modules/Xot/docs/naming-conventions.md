@@ -70,16 +70,6 @@ Questo documento descrive le convenzioni di denominazione da seguire all'interno
 - Documentare eventuali deviazioni da queste convenzioni di denominazione nella cartella di documentazione del modulo pertinente.
 - Aggiornare questo documento se vengono introdotti nuovi schemi di denominazione o convenzioni.
 
-=======
-## Problemi comuni e soluzioni
-- **Denominazione incoerente**: Evitare di mescolare stili di denominazione (ad esempio, snake_case con camelCase) per mantenere la leggibilità.
-- **Nomi vaghi**: Rinominare nomi vaghi come `$data` o `$temp` in qualcosa di più descrittivo come `$userData` o `$temporaryResult`.
-
-## Documentazione e aggiornamenti
-- Documentare eventuali deviazioni da queste convenzioni di denominazione nella cartella di documentazione del modulo pertinente.
-- Aggiornare questo documento se vengono introdotti nuovi schemi di denominazione o convenzioni.
-
->>>>>>> ebf7989 (.)
 ## Collegamenti alla documentazione correlata
 
 - [Qualità del codice](./CODE_QUALITY.md)

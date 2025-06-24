@@ -34,6 +34,9 @@ use Illuminate\Support\Facades\Log;
  * 
  * Il widget è completamente generico e riutilizzabile per qualsiasi tipo di utente.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
  *
  * @property-read string $type
  * @property-read string $resource
@@ -41,6 +44,7 @@ use Illuminate\Support\Facades\Log;
  * @property-read string $action
  * @property-read Model $record
  * @property array|null $data
+<<<<<<< HEAD
  */
 class EditUserWidget extends XotBaseWidget
 {
@@ -51,12 +55,21 @@ class EditUserWidget extends XotBaseWidget
     protected int | string | array $columnSpan = 'full';
     
 =======
+=======
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
  */
 class EditUserWidget extends XotBaseWidget
 {
+    /** @var array<string, mixed>|null */
     public ?array $data = [];
+    
+    /** @var int|string|array<string, mixed> */
     protected int | string | array $columnSpan = 'full';
+<<<<<<< HEAD
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+    
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
     public string $type;
     public string $resource;
     public string $model;
@@ -66,6 +79,9 @@ class EditUserWidget extends XotBaseWidget
     protected static string $view = 'pub_theme::filament.widgets.edit-user';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
     /**
      * Initialize the widget with user type and optional user ID.
      *
@@ -73,8 +89,11 @@ class EditUserWidget extends XotBaseWidget
      * @param int|null $userId
      * @return void
      */
+<<<<<<< HEAD
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
     public function mount(string $type, ?int $userId = null): void
     {
         $this->type = $type;
@@ -95,11 +114,17 @@ class EditUserWidget extends XotBaseWidget
      * Ottiene il modello per il form.
      * Se viene fornito un userId, carica quell'utente, altrimenti usa l'utente autenticato.
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
      * @param int|null $userId
      * @return Model
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+     *
+     * @param int|null $userId
+     * @return Model
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
      */
     public function getFormModel(?int $userId = null): Model
     {
@@ -129,10 +154,15 @@ class EditUserWidget extends XotBaseWidget
     /**
      * Ottiene i dati per il riempimento del form.
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
      * @return array<string, mixed>
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+     *
+     * @return array<string, mixed>
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
      */
     public function getFormFill(): array
     {
@@ -167,10 +197,15 @@ class EditUserWidget extends XotBaseWidget
     /**
      * Ottiene lo schema del form dalla resource.
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
      * @return array<string, mixed>
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+     *
+     * @return array<string, mixed>
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
      */
     public function getFormSchema(): array
     {
@@ -182,10 +217,15 @@ class EditUserWidget extends XotBaseWidget
      * 
      * @see https://filamentphp.com/docs/3.x/forms/adding-a-form-to-a-livewire-component
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
      * @return \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
      */
     public function updateUser(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
@@ -207,10 +247,15 @@ class EditUserWidget extends XotBaseWidget
     /**
      * Controlla se l'utente può modificare il record corrente.
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
      * @return bool
 =======
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+     *
+     * @return bool
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
      */
     public function canEdit(): bool
     {
@@ -223,7 +268,11 @@ class EditUserWidget extends XotBaseWidget
         );
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 } 
 >>>>>>> 999c8e14 (✨ (User Module): introduce EditUserWidget for user data modification)
+=======
+}
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)

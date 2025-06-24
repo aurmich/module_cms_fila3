@@ -15,7 +15,12 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
+<<<<<<< HEAD
 // use Modules\SaluteOra\Models\Patient;
+=======
+use Filament\Forms\ComponentContainer;
+use Illuminate\Support\Facades\Cache;
+>>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
 use Filament\Forms\ComponentContainer;
 use Illuminate\Database\Eloquent\Model;
 
