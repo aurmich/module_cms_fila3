@@ -165,6 +165,7 @@ return [
 
     'search_placeholder' => 'Cerca per nome, indirizzo, telefono o email...',
 ];
+<<<<<<< HEAD
 =======
 return array (
   'navigation' => 
@@ -359,3 +360,5 @@ return array (
   'search_placeholder' => 'Cerca per nome, indirizzo, telefono o email...',
 );
 >>>>>>> 631510b4 (fix bashscripts structure + translation of module saluteMo)
+=======
+>>>>>>> 6ef890a7 (.)
