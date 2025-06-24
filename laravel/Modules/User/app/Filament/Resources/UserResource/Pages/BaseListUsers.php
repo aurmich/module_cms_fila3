@@ -44,11 +44,7 @@ abstract class BaseListUsers extends XotBaseListRecords
     public function getTableFilters(): array
     {
         return [
-            // Filters disabled by default, enable if needed
-            Filter::make('verified')
-                ->query(static fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
-            Filter::make('unverified')
-                ->query(static fn (Builder $query): Builder => $query->whereNull('email_verified_at')),
+            // Filtri disabilitati per ora, abilitare se necessario
         ];
     }
 

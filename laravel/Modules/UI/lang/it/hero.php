@@ -21,10 +21,15 @@ return array (
     array (
       'label' => 'label',
       'description' => 'label',
+      'helper_text' => 'label',
+      'placeholder' => 'label',
     ),
     'buttons' => 
     array (
       'label' => 'buttons',
+      'description' => 'buttons',
+      'helper_text' => 'buttons',
+      'placeholder' => 'buttons',
     ),
     '_tpl' => 
     array (
@@ -33,14 +38,22 @@ return array (
     'background' => 
     array (
       'label' => 'background',
+      'description' => 'background',
+      'helper_text' => 'background',
+      'placeholder' => 'background',
     ),
     'text' => 
     array (
       'label' => 'text',
+      'description' => 'text',
+      'helper_text' => 'text',
+      'placeholder' => 'text',
     ),
     'title' => 
     array (
       'label' => 'title',
+      'description' => 'title',
+      'helper_text' => 'title',
     ),
     'view' => 
     array (

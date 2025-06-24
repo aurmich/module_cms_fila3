@@ -9,6 +9,8 @@ use Modules\Xot\Contracts\ProfileContract;
 /**
  * ProfileTeam Model
  *
+ * Represents the relationship between a profile and a team, including the user's role.
+ *
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
  * @property string $id
@@ -38,4 +40,10 @@ use Modules\Xot\Contracts\ProfileContract;
  */
 class ProfileTeam extends TeamUser
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'profile_team';
 }

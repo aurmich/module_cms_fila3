@@ -6,6 +6,9 @@ return array (
     'img_uuid' => 
     array (
       'label' => 'img_uuid',
+      'description' => 'img_uuid',
+      'helper_text' => 'img_uuid',
+      'placeholder' => 'img_uuid',
     ),
     'video' => 
     array (

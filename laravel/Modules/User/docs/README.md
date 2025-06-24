@@ -29,6 +29,8 @@ Il modulo User gestisce l'autenticazione, l'autorizzazione e la gestione degli u
 ### 3. Gestione Utenti
 - CRUD Utenti
 - Profili
+- Impostazioni
+- Notifiche
 - Team Management
 - Tenant Management
 
@@ -612,7 +614,6 @@ class UserServiceProvider extends XotBaseServiceProvider
 - [EditUserWidget](./filament/widgets/edit-user-widget.md) - Widget generico per modifica dati utente
 - [Widget Responsive Layout](./filament/widgets-responsive-layout.md) - Layout responsive per widget
 
-
 ## Riferimenti
 
 ### Documentazione
@@ -816,6 +817,7 @@ Schema::table('users', function ($table) {
 
 ### 2. Model States (spatie/laravel-model-states)
 - **Colonna obbligatoria:** `state` (e NON `moderation_status` o simili)
+- **Motivazione:** Segue la convenzione spatie/laravel-model-states ([vedi doc](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states))
 - **Motivazione:** Segue la convenzione spatie/laravel-model-states ([vedi doc](https://spatie.be/docs/laravel-model-states/v2/working-with-states))
 - **Esempio migrazione:**
 ```php
@@ -848,6 +850,7 @@ abstract class UserState extends State {
 - Queste convenzioni garantiscono compatibilità, manutenibilità e aderenza agli standard delle librerie usate.
 - Riferimenti:
   - [tighten/parental - Accessing Child Models from Parents](https://github.com/tighten/parental)
+  - [spatie/laravel-model-states - Configuring States](https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states)
   - [spatie/laravel-model-states - Configuring States](https://spatie.be/docs/laravel-model-states/v2/working-with-states)
 
 ---

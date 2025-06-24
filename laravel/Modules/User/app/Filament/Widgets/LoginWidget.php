@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets;
 
+use Exception;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
+use Filament\Forms\Form as FilamentForm;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Exception;
-use Illuminate\Http\RedirectResponse;
-use Livewire\Attributes\Layout;
-use Filament\Forms\Components\TextInput as FormsTextInput;
-use Filament\Forms\Components\Checkbox as FormsCheckbox;
 
 /**
  * LoginWidget: Widget di login conforme alle regole Windsurf/Xot.
@@ -49,34 +46,65 @@ class LoginWidget extends XotBaseWidget
     public ?array $data = [];
 
     /**
+     * @var \Filament\Forms\Form
+     */
+    public ?\Filament\Forms\Form $form = null;
+
+    /**
      * Inizializza il widget quando viene montato.
      *
      * @return void
      */
     public function mount(): void
     {
+        $this->form = $this->makeForm();
         $this->form->fill();
     }
-
+    
     /**
-     * Definisce lo schema del form di login.
+     * Get the form schema for the login form.
      *
-     * @return array<string, \Filament\Forms\Components\Component>
+     * @return array<int, \Filament\Forms\Components\Component>
      */
     public function getFormSchema(): array
     {
         return [
-            'email' => TextInput::make('email')
+            TextInput::make('email')
                 ->email()
                 ->required()
                 ->autofocus(),
-            'password' => TextInput::make('password')
+            TextInput::make('password')
                 ->password()
                 ->required(),
-            'remember' => Toggle::make('remember')
-                ->label('Ricordami'),
+            Toggle::make('remember')
+                ->label(__('user::auth.remember_me')),
         ];
     }
+
+    /**
+     * Get the form model.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|string|null
+     */
+    protected function getFormModel(): ?\Illuminate\Database\Eloquent\Model
+    {
+        return null;
+    }
+    
+    /**
+     * Get the form fill data.
+     *
+     * @return array<string, mixed>
+     */
+    public function getFormFill(): array
+    {
+        return [
+            'email' => old('email'),
+            'remember' => true,
+        ];
+    }
+
+
 
     /**
      * Handle login form submission.
@@ -102,12 +130,46 @@ class LoginWidget extends XotBaseWidget
 
             session()->regenerate();
             
-            redirect()->intended(route('home'));
+            Notification::make()
+                ->title('Accesso effettuato con successo')
+                ->success()
+                ->send();
+                
+            $this->redirect(route('home'));
+            
         } catch (ValidationException $e) {
-            $this->addError('email', $e->getMessage());
+            Notification::make()
+                ->title('Errore di validazione')
+                ->body($e->getMessage())
+                ->danger()
+                ->send();
+                
+            $this->form->fill();
+            $this->form->saveRelationships();
+            $this->form->callAfter();
+            
+            foreach ($e->errors() as $field => $messages) {
+                $this->form->getComponent($field)?->getContainer()->getParentComponent()?->getStatePath()
+                    ? $this->addError($field, implode(' ', $messages))
+                    : $this->addError('email', implode(' ', $messages));
+            }
+            
         } catch (Exception $e) {
             report($e);
-            $this->addError('email', __('Si è verificato un errore durante il login. Riprova più tardi.['.$e->getMessage().']'));
+            
+            Notification::make()
+                ->title('Errore durante il login')
+                ->body(__('Si è verificato un errore durante il login. Riprova più tardi.'))
+                ->danger()
+                ->send();
+                
+            $this->form->fill();
+            $this->form->saveRelationships();
+            $this->form->callAfter();
+            
+            $this->addError('email', __('Si è verificato un errore durante il login. Riprova più tardi.'));
         }
     }
+    
+
 }

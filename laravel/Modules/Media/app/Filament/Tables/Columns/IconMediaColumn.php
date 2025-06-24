@@ -25,10 +25,11 @@ class IconMediaColumn extends IconColumn
         parent::setUp();
         $attachment=$this->getName();
 
-        $this->default(fn($record)=>$record->getFirstMedia($attachment))
+        $this->default(
+            fn($record)=>$record->getFirstMedia($attachment))
                 ->icon('heroicon-o-document-text')
                 ->color(fn ($record) => $record->getFirstMedia($attachment) ? 'success' : 'danger')
-                ->tooltip(fn ($record) => $record->getFirstMedia($attachment)?->file_name ?? 'Documento non caricato')
+                ->tooltip(fn ($record) => $record->getFirstMedia($attachment)->file_name ?? 'Documento non caricato')
 
                 ->action(function ($record) use ($attachment) {
                     // @phpstan-ignore-next-line

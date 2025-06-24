@@ -6,16 +6,18 @@ namespace Modules\Xot\Filament\Widgets;
 
 use Filament\Actions\Action;
 use Filament\Forms;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form as FilamentForm;
-use Filament\Widgets\Concerns\InteractsWithPageFilters;
-use Filament\Widgets\Widget as FilamentWidget;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Widgets\Widget as FilamentWidget;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
+use Filament\Actions\Action;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
+// use Modules\SaluteOra\Models\Patient;
+use Filament\Forms\ComponentContainer;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Classe base astratta per tutti i widget Filament.
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\Log;
  * @property string $title Titolo del widget
  * @property string $icon Icona del widget
  * @property array<string, mixed>|null $data Dati del form
- * @property ComponentContainer $form Contenitore del form
+ * @property ComponentContainer $form
  */
 abstract class XotBaseWidget extends FilamentWidget implements HasForms
 {
@@ -36,7 +38,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public string $title = '';
     public string $icon = '';
     protected int|string|array $columnSpan = 'full';
-    
     /**
      * La vista che deve essere renderizzata per il widget.
      * Può essere un namespace (es. 'module-name::view-name') o un percorso Blade.
@@ -96,11 +97,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     {
         $form = $form->schema($this->getFormSchema());
 
-        if (method_exists($form, 'statePath')) {
-            $form->statePath('data');
-            $form->model($this->getFormModel());
-        }
-
         $data = $this->getFormFill();
         if (!empty($data)) {
             // $form->fill($data); // Uncomment if needed
@@ -110,14 +106,7 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         return $form;
     }
 
-    /**
-     * Get the form fill data.
-     * Can be overridden in child classes to provide specific fill data.
-     *
-     * @return array
-     */
-    public function getFormFill(): array
-    {
+    public function getFormFill(): array {
         return [];
     }
 

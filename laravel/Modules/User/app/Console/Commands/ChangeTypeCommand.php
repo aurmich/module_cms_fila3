@@ -63,7 +63,6 @@ class ChangeTypeCommand extends Command
             $this->error("User with email '{$email}' not found.");
             return;
         }
-
         if (!method_exists($user, 'getChildTypes')) {
             $this->error('User model does not have childTypes method.');
             return;

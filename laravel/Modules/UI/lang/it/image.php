@@ -25,10 +25,16 @@ return array (
     'url' => 
     array (
       'label' => 'url',
+      'description' => 'url',
+      'helper_text' => 'url',
+      'placeholder' => 'url',
     ),
     'image' => 
     array (
       'label' => 'image',
+      'description' => 'image',
+      'helper_text' => 'image',
+      'placeholder' => 'image',
     ),
   ),
 );
