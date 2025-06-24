@@ -9,13 +9,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
-    /**
-     * Nome della tabella.
-     *
-     * @var string
-     */
-    protected string $table = 'isees';
-
+    
     /**
      * Run the migrations.
      */
@@ -25,7 +19,7 @@ return new class extends XotBaseMigration
         $this->tableCreate(
             function (Blueprint $table): void {
                 $table->id();
-                $this->foreignIdFor($table,Tenant::class);
+                //$this->foreignIdFor($table,Tenant::class);
                 $this->foreignIdFor($table,Patient::class);
                 $table->string('isee_code')->nullable();
                 $table->decimal('isee_value', 10, 2)->nullable();

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\Dentist;
+use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Models\Patient;
+use Modules\SaluteOra\Models\Studio;
 use Modules\Tenant\Models\Tenant;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
@@ -34,9 +35,10 @@ return new class extends XotBaseMigration
         $this->tableCreate(
             function (Blueprint $table): void {
                 $table->id();
-                $table->foreignIdFor(Tenant::class);
-                $table->foreignIdFor(Patient::class);
-                $table->foreignIdFor(Dentist::class);
+                //$table->foreignIdFor(Tenant::class);
+                $table->foreignIdFor(Patient::class,'patient_id');
+                $table->foreignIdFor(Doctor::class,'doctor_id');
+                $table->foreignIdFor(Studio::class,'studio_id');
                 $table->date('date');
                 $table->time('start_time');
                 $table->time('end_time');

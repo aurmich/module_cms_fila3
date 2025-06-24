@@ -32,7 +32,7 @@ return new class extends XotBaseMigration
                 //     $table->string('created_by',36)->nullable();
                 // }
                 // if ($this->hasTable('tenants')) {
-                    $table->foreignIdFor(Tenant::class)->constrained();
+                //    $table->foreignIdFor(Tenant::class)->constrained();
                 // }
                 // if (!$this->hasTable('tenants')) {
                     // $table->string('tenant_id',36)->nullable();

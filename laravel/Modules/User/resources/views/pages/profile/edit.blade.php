@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
-use function Laravel\Folio\{middleware, name};
 use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
-use Livewire\Attributes\Validate;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Validate;
+use Livewire\Volt\Component;
 use Modules\User\Models\User;
+use function Laravel\Folio\{middleware, name};
+use Webmozart\Assert\Assert;
+use Illuminate\Support\Facades\Log;
 
 name('profile.edit');
 middleware(['auth', 'verified']);
@@ -23,217 +25,463 @@ middleware(['auth', 'verified']);
  * Profile edit component for managing user profile, password updates, and account deletion.
  * 
  * Provides secure functionality for:
- * - Updating profile information (name, email)
- * - Changing password with current password verification
- * - Account deletion with password confirmation
+ * - Updating profile information with validation
+ * - Changing passwords with security checks
+ * - Account deletion with confirmation
+ * - Comprehensive audit logging
+ * 
+ * Follows strict type safety and comprehensive error handling patterns.
  */
 $component = new class extends Component {
     /**
-     * The authenticated user (locked property).
-     *
-     * @var User
-     */
-    #[Locked]
-    public User $user;
-
-    /**
-     * User's name.
-     *
+     * Current user's name.
+     * 
      * @var string
      */
-    #[Validate('required|string|min:2|max:255')]
+    #[Validate('required|string|max:255')]
     public string $name = '';
 
     /**
-     * User's email.
-     *
+     * Current user's email address.
+     * 
      * @var string
      */
     #[Validate('required|email|max:255')]
     public string $email = '';
 
     /**
-     * Current password for password updates.
-     *
+     * User ID (locked to prevent tampering).
+     * 
+     * @var int
+     */
+    #[Locked]
+    public int $user_id = 0;
+
+    /**
+     * Current password for verification.
+     * 
      * @var string
      */
-    #[Validate('required|string')]
+    #[Validate('required|current_password')]
     public string $current_password = '';
 
     /**
      * New password for password updates.
-     *
+     * 
      * @var string
      */
-    #[Validate('required|confirmed|min:8')]
-    public string $new_password = '';
+    #[Validate('required|min:8|confirmed')]
+    public string $password = '';
 
     /**
-     * New password confirmation.
-     *
+     * Password confirmation.
+     * 
      * @var string
      */
-    public string $new_password_confirmation = '';
+    public string $password_confirmation = '';
 
     /**
-     * Password confirmation for account deletion.
-     *
+     * Password for account deletion confirmation.
+     * 
      * @var string
      */
-    #[Validate('required|string')]
-    public string $delete_confirm_password = '';
+    #[Validate('required|current_password')]
+    public string $delete_password = '';
 
     /**
-     * Initialize the component with user data.
+     * Mount the component and initialize user data with type safety.
      *
      * @return void
      */
     public function mount(): void
     {
-        $user = Auth::user();
-        if (!$user instanceof User) {
-            abort(401, 'User not authenticated');
+        try {
+            $user = Auth::user();
+            Assert::notNull($user, 'User must be authenticated');
+            Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
+            
+            // Type-safe property initialization
+            $this->name = (string) ($user->name ?? '');
+            $this->email = (string) ($user->email ?? '');
+            $this->user_id = (int) ($user->id ?? 0);
+            
+            Assert::stringNotEmpty($this->name, 'User name cannot be empty');
+            Assert::stringNotEmpty($this->email, 'User email cannot be empty');
+            Assert::greaterThan($this->user_id, 0, 'User ID must be positive');
+            
+            // Validate email format
+            Assert::true(
+                filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false,
+                'User email must be valid'
+            );
+            
+        } catch (\Webmozart\Assert\InvalidArgumentException $e) {
+            Log::error('Profile mount validation failed', [
+                'error' => $e->getMessage(),
+                'user_id' => Auth::id(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            
+            // Redirect to login if user data is corrupted
+            redirect()->route('login')->with('error', 'Invalid user session. Please log in again.');
+            
+        } catch (\Exception $e) {
+            Log::error('Profile mount failed', [
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'user_id' => Auth::id(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            
+            redirect()->route('dashboard')->with('error', 'Unable to load profile data.');
         }
-        
-        $this->user = $user;
-        $this->name = $this->user->name ?? '';
-        $this->email = $this->user->email ?? '';
     }
 
     /**
-     * Update user profile information with validation and duplicate check.
+     * Update user profile information with comprehensive validation and error handling.
      *
      * @return void
      */
     public function updateProfile(): void
     {
-        $this->validate([
-            'name' => ['required', 'string', 'min:2', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user->getKey())],
-        ]);
-
-        // Check if there are actual changes to prevent unnecessary updates
-        if ($this->user->name === $this->name && $this->user->email === $this->email) {
-            $this->dispatch('toast', message: 'No changes detected.', data: [
-                'position' => 'top-right', 
-                'type' => 'info'
-            ]);
-            return;
-        }
-
         try {
-            // Update user with type-safe data
-            $this->user->fill([
-                'email' => $this->email,
-                'name' => $this->name
-            ])->save();
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user_id)],
+            ]);
 
-            $this->dispatch('toast', message: 'Profile updated successfully.', data: [
-                'position' => 'top-right', 
-                'type' => 'success'
+            $user = Auth::user();
+            Assert::notNull($user, 'User must be authenticated for profile update');
+            Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
+            Assert::same($this->user_id, (int) $user->id, 'User ID mismatch detected');
+
+            // Validate input data with type safety
+            Assert::stringNotEmpty($this->name, 'Name cannot be empty');
+            Assert::stringNotEmpty($this->email, 'Email cannot be empty');
+            Assert::true(
+                filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false,
+                'Email format is invalid'
+            );
+
+            // Check if email has changed for additional validation
+            $emailChanged = $user->email !== $this->email;
+            
+            if ($emailChanged) {
+                // Additional email validation for changes
+                Assert::false(
+                    User::where('email', $this->email)->where('id', '!=', $this->user_id)->exists(),
+                    'Email is already in use by another user'
+                );
+            }
+
+            // Update user data with type casting
+            $user->fill([
+                'name' => trim($this->name),
+                'email' => strtolower(trim($this->email)),
             ]);
+
+            // Reset email verification if email changed
+            if ($emailChanged && $user->hasVerifiedEmail()) {
+                $user->email_verified_at = null;
+            }
+
+            $success = $user->save();
+            Assert::true($success, 'Failed to save user profile');
+
+            // Log successful profile update for audit trail
+            Log::info('User profile updated successfully', [
+                'user_id' => $user->id,
+                'old_email' => $user->getOriginal('email'),
+                'new_email' => $user->email,
+                'old_name' => $user->getOriginal('name'),
+                'new_name' => $user->name,
+                'email_changed' => $emailChanged,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+
+            // Clear password field for security
+            $this->reset('current_password');
+
+            // Show success message
+            $message = $emailChanged 
+                ? 'Profile updated successfully. Please verify your new email address.'
+                : 'Profile updated successfully.';
+                
+            session()->flash('status', $message);
+
+            // Send email verification if email changed
+            if ($emailChanged) {
+                $user->sendEmailVerificationNotification();
+            }
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Re-throw validation exceptions to display form errors
+            Log::warning('Profile update validation failed', [
+                'errors' => $e->errors(),
+                'user_id' => $this->user_id,
+                'email' => $this->email,
+            ]);
+            throw $e;
+            
+        } catch (\Webmozart\Assert\InvalidArgumentException $e) {
+            Log::error('Profile update assertion failed', [
+                'error' => $e->getMessage(),
+                'user_id' => $this->user_id,
+                'name' => $this->name,
+                'email' => $this->email,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            session()->flash('error', 'Profile update failed: ' . $e->getMessage());
+            
         } catch (\Exception $e) {
-            $this->dispatch('toast', message: 'Failed to update profile.', data: [
-                'position' => 'top-right', 
-                'type' => 'error'
+            Log::error('Profile update failed with unexpected error', [
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'user_id' => $this->user_id,
+                'trace' => $e->getTraceAsString(),
             ]);
+
+            session()->flash('error', 'An unexpected error occurred while updating your profile.');
         }
     }
 
     /**
-     * Update user password with current password verification.
+     * Update user password with comprehensive security validation.
      *
      * @return void
      */
     public function updatePassword(): void
     {
-        $this->validate([
-            'current_password' => ['required', 'string'],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        // Verify current password
-        $userPassword = $this->user->getAttribute('password');
-        if (!is_string($userPassword) || !Hash::check($this->current_password, $userPassword)) {
-            $this->dispatch('toast', message: 'Current password is incorrect.', data: [
-                'position' => 'top-right', 
-                'type' => 'error'
-            ]);
-            return;
-        }
-
         try {
-            // Update password with new hash and regenerate remember token
-            $this->user->fill([
-                'password' => Hash::make($this->new_password),
-                'remember_token' => Str::random(60)
-            ])->save();
+            $this->validate([
+                'current_password' => ['required', 'current_password'],
+                'password' => ['required', 'min:8', 'confirmed'],
+                'password_confirmation' => ['required'],
+            ]);
+
+            $user = Auth::user();
+            Assert::notNull($user, 'User must be authenticated for password update');
+            Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
+            Assert::same($this->user_id, (int) $user->id, 'User ID mismatch detected');
+
+            // Validate password strength and format
+            Assert::stringNotEmpty($this->current_password, 'Current password cannot be empty');
+            Assert::stringNotEmpty($this->password, 'New password cannot be empty');
+            Assert::stringNotEmpty($this->password_confirmation, 'Password confirmation cannot be empty');
+            Assert::same($this->password, $this->password_confirmation, 'Password confirmation does not match');
+            Assert::greaterThanEq(strlen($this->password), 8, 'Password must be at least 8 characters long');
+
+            // Verify current password
+            Assert::true(
+                Hash::check($this->current_password, $user->password),
+                'Current password is incorrect'
+            );
+
+            // Ensure new password is different from current
+            Assert::false(
+                Hash::check($this->password, $user->password),
+                'New password must be different from current password'
+            );
+
+            // Update password with secure hash
+            $user->update([
+                'password' => Hash::make($this->password),
+                'remember_token' => Str::random(60), // Invalidate existing sessions
+            ]);
+
+            // Dispatch password reset event for logging
+            event(new PasswordReset($user));
+
+            // Log successful password update for audit trail
+            Log::info('User password updated successfully', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'password_length' => strlen($this->password),
+            ]);
 
             // Clear password fields for security
-            $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
+            $this->reset(['current_password', 'password', 'password_confirmation']);
 
-            // Trigger password reset event
-            event(new PasswordReset($this->user));
+            session()->flash('status', 'Password updated successfully. You have been logged out of other devices for security.');
 
-            $this->dispatch('toast', message: 'Password updated successfully.', data: [
-                'position' => 'top-right', 
-                'type' => 'success'
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Re-throw validation exceptions to display form errors
+            Log::warning('Password update validation failed', [
+                'errors' => $e->errors(),
+                'user_id' => $this->user_id,
             ]);
+            throw $e;
+            
+        } catch (\Webmozart\Assert\InvalidArgumentException $e) {
+            Log::error('Password update assertion failed', [
+                'error' => $e->getMessage(),
+                'user_id' => $this->user_id,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            // Clear password fields for security
+            $this->reset(['current_password', 'password', 'password_confirmation']);
+            session()->flash('error', 'Password update failed: ' . $e->getMessage());
+            
         } catch (\Exception $e) {
-            $this->dispatch('toast', message: 'Failed to update password.', data: [
-                'position' => 'top-right', 
-                'type' => 'error'
+            Log::error('Password update failed with unexpected error', [
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'user_id' => $this->user_id,
+                'trace' => $e->getTraceAsString(),
             ]);
+
+            // Clear password fields for security
+            $this->reset(['current_password', 'password', 'password_confirmation']);
+            session()->flash('error', 'An unexpected error occurred while updating your password.');
         }
     }
 
     /**
-     * Delete user account after password confirmation.
+     * Delete user account with comprehensive security validation and cleanup.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(): \Illuminate\Http\RedirectResponse
+    public function deleteAccount(): \Illuminate\Http\RedirectResponse
     {
-        $this->validate([
-            'delete_confirm_password' => ['required', 'string'],
-        ]);
-
-        // Verify password before deletion
-        $userPassword = $this->user->getAttribute('password');
-        if (!is_string($userPassword) || !Hash::check($this->delete_confirm_password, $userPassword)) {
-            $this->dispatch('toast', message: 'Password is incorrect. Account deletion cancelled.', data: [
-                'position' => 'top-right', 
-                'type' => 'error'
-            ]);
-            $this->reset(['delete_confirm_password']);
-            return Redirect::back();
-        }
-
         try {
-            $user = $this->user;
+            $this->validate([
+                'delete_password' => ['required', 'current_password'],
+            ]);
+
+            $user = Auth::user();
+            Assert::notNull($user, 'User must be authenticated for account deletion');
+            Assert::isInstanceOf($user, User::class, 'User must be an instance of User model');
+            Assert::same($this->user_id, (int) $user->id, 'User ID mismatch detected');
+
+            // Validate deletion password
+            Assert::stringNotEmpty($this->delete_password, 'Password cannot be empty for account deletion');
+            Assert::true(
+                Hash::check($this->delete_password, $user->password),
+                'Password is incorrect for account deletion'
+            );
+
+            // Store user data for logging before deletion
+            $userData = [
+                'id' => $user->id,
+                'email' => $user->email,
+                'name' => $user->name,
+                'created_at' => $user->created_at?->toDateTimeString(),
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'deletion_timestamp' => now()->toDateTimeString(),
+            ];
+
+            // Log account deletion for audit trail (before deletion)
+            Log::info('User account deletion initiated', $userData);
 
             // Logout user before deletion
             Auth::logout();
 
-            // Delete user account
-            $user->delete();
-
-            // Invalidate session for security
+            // Invalidate session
             request()->session()->invalidate();
             request()->session()->regenerateToken();
 
-            return Redirect::to('/')->with('status', 'Account deleted successfully.');
-        } catch (\Exception $e) {
-            // Re-authenticate user if deletion fails
-            Auth::login($this->user);
-            
-            $this->dispatch('toast', message: 'Failed to delete account. Please try again.', data: [
-                'position' => 'top-right', 
-                'type' => 'error'
+            // Delete the user account
+            $deleted = $user->delete();
+            Assert::true($deleted, 'Failed to delete user account');
+
+            // Log successful deletion
+            Log::info('User account deleted successfully', $userData);
+
+            // Redirect to home with success message
+            return Redirect::to('/')->with('status', 'Your account has been deleted successfully.');
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Re-throw validation exceptions to display form errors
+            Log::warning('Account deletion validation failed', [
+                'errors' => $e->errors(),
+                'user_id' => $this->user_id,
             ]);
+            throw $e;
             
+        } catch (\Webmozart\Assert\InvalidArgumentException $e) {
+            Log::error('Account deletion assertion failed', [
+                'error' => $e->getMessage(),
+                'user_id' => $this->user_id,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            // Clear password field for security
+            $this->reset('delete_password');
+            session()->flash('error', 'Account deletion failed: ' . $e->getMessage());
+            return Redirect::back();
+            
+        } catch (\Exception $e) {
+            Log::error('Account deletion failed with unexpected error', [
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'user_id' => $this->user_id,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            // Clear password field for security
+            $this->reset('delete_password');
+            session()->flash('error', 'An unexpected error occurred while deleting your account.');
             return Redirect::back();
         }
+    }
+
+    /**
+     * Clear all password fields for security.
+     *
+     * @return void
+     */
+    public function clearPasswords(): void
+    {
+        $this->reset(['current_password', 'password', 'password_confirmation', 'delete_password']);
+    }
+
+    /**
+     * Get validation rules for profile update.
+     *
+     * @return array<string, array<int, string|\Illuminate\Validation\Rules\Unique>>
+     */
+    protected function getProfileValidationRules(): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->user_id)],
+        ];
+    }
+
+    /**
+     * Get validation rules for password update.
+     *
+     * @return array<string, array<int, string>>
+     */
+    protected function getPasswordValidationRules(): array
+    {
+        return [
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required'],
+        ];
+    }
+
+    /**
+     * Get validation rules for account deletion.
+     *
+     * @return array<string, array<int, string>>
+     */
+    protected function getDeletionValidationRules(): array
+    {
+        return [
+            'delete_password' => ['required', 'current_password'],
+        ];
     }
 };
 
@@ -319,9 +567,9 @@ $component = new class extends Component {
                             <x-ui.input 
                                 label="New Password" 
                                 type="password" 
-                                id="new_password" 
-                                name="new_password"
-                                wire:model="new_password"
+                                id="password" 
+                                name="password"
+                                wire:model="password"
                                 required
                                 minlength="8"
                                 autocomplete="new-password"
@@ -330,9 +578,9 @@ $component = new class extends Component {
                             <x-ui.input 
                                 label="Confirm New Password" 
                                 type="password" 
-                                id="new_password_confirmation"
-                                name="new_password_confirmation" 
-                                wire:model="new_password_confirmation"
+                                id="password_confirmation"
+                                name="password_confirmation" 
+                                wire:model="password_confirmation"
                                 required
                                 minlength="8"
                                 autocomplete="new-password"
@@ -371,7 +619,7 @@ $component = new class extends Component {
 
                         {{-- Delete Account Confirmation Modal --}}
                         <x-ui.modal name="confirm-user-deletion" maxWidth="lg" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                            <form wire:submit="destroy" class="p-6">
+                            <form wire:submit="deleteAccount" class="p-6">
                                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                                     {{ __('Are you sure you want to delete your account?') }}
                                 </h2>
@@ -383,9 +631,9 @@ $component = new class extends Component {
                                 <x-ui.input 
                                     label="Password" 
                                     type="password" 
-                                    id="delete_confirm_password"
-                                    name="delete_confirm_password" 
-                                    wire:model="delete_confirm_password"
+                                    id="delete_password"
+                                    name="delete_password" 
+                                    wire:model="delete_password"
                                     required
                                     autocomplete="current-password"
                                     placeholder="{{ __('Enter your password to confirm deletion') }}"
