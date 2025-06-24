@@ -45,15 +45,12 @@ abstract class BaseListUsers extends XotBaseListRecords
     {
         return [
             // Filtri disabilitati per ora, abilitare se necessario
-<<<<<<< HEAD
             /*
             Filter::make('verified')
                 ->query(static fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
             Filter::make('unverified')
                 ->query(static fn (Builder $query): Builder => $query->whereNull('email_verified_at')),
             */
-=======
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
         ];
     }
 

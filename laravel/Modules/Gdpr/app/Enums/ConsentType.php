@@ -14,10 +14,6 @@ use Illuminate\Support\Collection;
  */
 enum ConsentType: string
 {
-<<<<<<< HEAD
-    // Enum cases follow - no trait needed
-=======
->>>>>>> 4c632a28 (✨ (bashscripts): add new scripts for managing MCP MySQL server and PHPStan analysis)
 
     // Marketing communications
     case MARKETING_EMAIL = 'marketing_email';
