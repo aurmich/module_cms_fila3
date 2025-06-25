@@ -56,6 +56,7 @@ class StudioUser extends BasePivot
      */
     protected $fillable = [
         //'doctor_id',
+        'id',
         'user_id',
         'studio_id',
         'schedule',
