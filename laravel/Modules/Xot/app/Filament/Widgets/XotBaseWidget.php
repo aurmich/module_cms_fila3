@@ -105,9 +105,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public function getFormFill(): array
     {
         $model = $this->getFormModel();
-        if($model==null){
-            return [];
-        }
         
         // Se il modello ha un ID, significa che è stato trovato nel database
         if ($model->exists) {

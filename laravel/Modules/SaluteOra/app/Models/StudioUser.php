@@ -47,6 +47,7 @@ class StudioUser extends BasePivot
 {
     use HasChildren;
 
+
     protected $table = 'studio_user';
     /**
      * Gli attributi che sono mass assignable.
@@ -55,7 +56,6 @@ class StudioUser extends BasePivot
      */
     protected $fillable = [
         //'doctor_id',
-        'id',
         'user_id',
         'studio_id',
         'schedule',
@@ -75,19 +75,5 @@ class StudioUser extends BasePivot
         ]);
     }
 
-    /**
-     * Relazione con lo studio.
-     */
-    public function studio(): BelongsTo
-    {
-        return $this->belongsTo(Studio::class, 'studio_id');
-    }
 
-    /**
-     * Relazione con l'utente (dottore).
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 }

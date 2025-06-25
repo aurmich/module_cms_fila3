@@ -774,16 +774,12 @@ Il modulo implementa diversi widget Filament per le dashboard:
 - [**Widget Improvements Analysis**](widgets/widget-improvements-analysis.md) - **NUOVO**: Audit e piano miglioramenti per tutti i widget esistenti
 - [FindDoctorAndAppointmentWidget](widgets/find-doctor-appointment-widget.md) - Widget wizard per prenotazione appuntamenti pazienti
 
-#### ✅ IMPLEMENTAZIONI COMPLETATE (Gennaio 2025)
+#### ⚠️ PROBLEMI CRITICI IDENTIFICATI
 
-1. **✅ DoctorAvailabilitiesWidget IMPLEMENTATO**: Multi-studio availability overview completo → **Homepage dottore OPERATIVA**
-   - [Implementazione completa](widgets/doctor-availabilities-widget-implementation.md)
-   - [Analisi originale](widgets/doctor-availabilities-widget-analysis.md)
+1. **🔴 DoctorAvailabilitiesWidget MANCANTE**: Referenziato in `doctor-home.json` ma non esiste → **Homepage dottore rotta**
+2. **🔴 StudioOverviewWidget NON-COMPLIANT**: Viola pattern Laraxot (estende `Widget` invece di `XotBaseWidget`)
 
-2. **⚠️ StudioOverviewWidget**: Ancora NON-COMPLIANT (estende `Widget` invece di `XotBaseWidget`)
+#### Pattern di Eccellenza Trovati
 
-#### Pattern di Eccellenza Implementati
-
-- **DoctorAvailabilitiesWidget**: Multi-studio management con quick stats, context switching, responsive design
-- **DoctorCalendarWidget**: Implementazione perfetta con trait `HasFullCalendarConfig`, multi-tenancy, e security robusta  
+- **DoctorCalendarWidget**: Implementazione perfetta con trait `HasFullCalendarConfig`, multi-tenancy, e security robusta
 - **BaseTransition Pattern**: Capolavoro di DRY & KISS per gestione stati

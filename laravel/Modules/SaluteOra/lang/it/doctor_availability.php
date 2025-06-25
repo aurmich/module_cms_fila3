@@ -66,7 +66,51 @@ return array (
       'help' => 'Attiva per aggiungere disponibilità extra in un giorno specifico. Disattiva per bloccare un periodo in cui normalmente saresti disponibile.',
     ),
   ),
-
+  'actions' => 
+  array (
+    'save' => 
+    array (
+      'label' => 'save',
+    ),
+    'add_exception' => 'Aggiungi Eccezione',
+    'approve' => 'Approva',
+    'reject' => 'Rifiuta',
+    'toggle_appointments' => 'Appuntamenti',
+    'toggle_availability' => 'Disponibilità',
+  ),
+  'notifications' => 
+  array (
+    'saved' => 
+    array (
+      'title' => 'Disponibilità salvate',
+      'body' => 'Le tue disponibilità sono state aggiornate con successo.',
+    ),
+    'not_doctor' => 
+    array (
+      'title' => 'Utente non autorizzato',
+      'body' => 'Solo i profili medico possono gestire le disponibilità.',
+    ),
+    'error' => 
+    array (
+      'title' => 'Errore durante il salvataggio',
+      'body' => 'Si è verificato un errore durante il salvataggio delle disponibilità.',
+    ),
+    'not_found' => 
+    array (
+      'title' => 'Appuntamento non trovato',
+      'body' => 'L\'appuntamento selezionato non esiste o non è associato al tuo profilo.',
+    ),
+    'appointment_approved' => 
+    array (
+      'title' => 'Appuntamento approvato',
+      'body' => 'L\'appuntamento è stato confermato con successo.',
+    ),
+    'appointment_rejected' => 
+    array (
+      'title' => 'Appuntamento rifiutato',
+      'body' => 'L\'appuntamento è stato rifiutato con successo.',
+    ),
+  ),
   'calendar' => 
   array (
     'month' => 'Mese',
@@ -96,79 +140,4 @@ return array (
     'no_pending_appointments_description' => 'Non ci sono appuntamenti in attesa di approvazione.',
   ),
   'available' => 'Disponibile',
-  'widget' => 
-  array (
-    'title' => 'I Miei Studi',
-    'description' => 'Gestisci le tue disponibilità in tutti gli studi in cui lavori.',
-    'no_studios' => 'Nessuno studio associato',
-    'no_studios_description' => 'Non sei ancora associato a nessuno studio. Contatta l\'amministratore per essere aggiunto.',
-    'unknown_studio' => 'Studio sconosciuto',
-    'primary_studio' => 'Studio Principale',
-    'address' => 'Indirizzo',
-    'phone' => 'Telefono',
-    'schedule' => 'Orari di Disponibilità',
-    'no_schedule' => 'Nessun orario impostato',
-    'morning' => 'Mattina',
-    'afternoon' => 'Pomeriggio',
-    'closed' => 'Chiuso',
-    'edit_schedule' => 'Modifica Orari',
-    'set_primary' => 'Imposta come Principale',
-  ),
-  'actions' => 
-  array (
-    'save' => 
-    array (
-      'label' => 'save',
-    ),
-    'add_exception' => 'Aggiungi Eccezione',
-    'approve' => 'Approva',
-    'reject' => 'Rifiuta',
-    'toggle_appointments' => 'Appuntamenti',
-    'toggle_availability' => 'Disponibilità',
-    'edit_schedule' => 'Modifica Orari',
-    'set_primary' => 'Imposta come Principale',
-  ),
-  'modals' => 
-  array (
-    'set_primary_description' => 'Sei sicuro di voler impostare questo studio come principale? Tutti gli altri studi verranno automaticamente rimossi come primari.',
-  ),
-  'notifications' => 
-  array (
-    'saved' => 
-    array (
-      'title' => 'Disponibilità salvate',
-      'body' => 'Le tue disponibilità sono state aggiornate con successo.',
-    ),
-    'not_doctor' => 
-    array (
-      'title' => 'Utente non autorizzato',
-      'body' => 'Solo i profili medico possono gestire le disponibilità.',
-    ),
-    'error' => 
-    array (
-      'title' => 'Errore durante il salvataggio',
-      'body' => 'Si è verificato un errore durante il salvataggio delle disponibilità.',
-      'invalid_studio' => 'Studio non valido o non trovato.',
-    ),
-    'not_found' => 
-    array (
-      'title' => 'Appuntamento non trovato',
-      'body' => 'L\'appuntamento selezionato non esiste o non è associato al tuo profilo.',
-    ),
-    'appointment_approved' => 
-    array (
-      'title' => 'Appuntamento approvato',
-      'body' => 'L\'appuntamento è stato confermato con successo.',
-    ),
-    'appointment_rejected' => 
-    array (
-      'title' => 'Appuntamento rifiutato',
-      'body' => 'L\'appuntamento è stato rifiutato con successo.',
-    ),
-    'primary_set' => 
-    array (
-      'title' => 'Studio principale impostato',
-      'body' => 'Lo studio è stato impostato come principale con successo.',
-    ),
-  ),
 );

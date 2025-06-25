@@ -1,375 +1,356 @@
-# DoctorAvailabilitiesWidget
+# DoctorAvailabilitiesWidget - Widget Gestione Disponibilità Dottori
 
 ## Panoramica
 
-Il `DoctorAvailabilitiesWidget` è un widget Filament che permette ai dottori di visualizzare e gestire i loro orari di disponibilità in tutti gli studi in cui lavorano. Il widget presenta una **vista statica** degli orari con un pulsante di modifica che apre un modal per le modifiche.
+Il `DoctorAvailabilitiesWidget` è un widget Filament basato su FullCalendar che permette ai dottori di visualizzare e gestire le proprie disponibilità settimanali nel contesto multi-tenant dello studio corrente.
 
 ## Caratteristiche Principali
 
-### ✅ Implementato
-- **Vista Multi-Studio**: Mostra tutti gli studi del dottore
-- **Visualizzazione Statica**: Orari mostrati in formato read-only
-- **Modal di Modifica**: Pulsante con icona matita per aprire form di editing
-- **Studio Principale**: Evidenziazione dello studio primario
-- **Badge di Stato**: Configurato/Non configurato per ogni studio
-- **Empty States**: Gestione elegante di studi senza orari
-- **Security**: Accesso limitato ai soli dottori autenticati
-- **Responsive Design**: Layout adattivo per mobile e desktop
-- **Dark Mode**: Supporto completo tema scuro
+### 1. Visualizzazione Disponibilità
+- **Vista Calendario**: Mostra le disponibilità come eventi verdi nel calendario
+- **Vista Settimanale**: Visualizzazione ottimizzata per la gestione degli orari settimanali
+- **Codifica Colori**: Verde (#10b981) per le disponibilità, diverso dagli appuntamenti
 
-### 🔄 Architettura Modificata (Dicembre 2024)
+### 2. Gestione Interattiva
+- **Selezione Range**: Click e drag per creare nuove disponibilità
+- **Modifica Esistenti**: Click su evento per modificare disponibilità
+- **Validazione Orari**: Controllo automatico degli orari di lavoro
 
-**Prima**: Form inline con editing diretto nella vista  
-**Ora**: Vista statica + modal per editing tramite azioni Filament
+### 3. Multi-Tenancy
+- **Contesto Studio**: Opera nel contesto dello studio corrente (tenant)
+- **Isolamento Dati**: Ogni dottore vede solo le proprie disponibilità per lo studio corrente
+- **Sicurezza**: Controlli di accesso basati su tipo utente e appartenenza allo studio
 
-## Utilizzo
+## Architettura Tecnica
 
-### Posizionamento nel Dashboard Dottore
-
+### Estensione e Trait
 ```php
-// In DoctorAvailabilityPage.php o dashboard
-protected function getHeaderWidgets(): array
+class DoctorAvailabilitiesWidget extends FullCalendarWidget
+{
+    use HasFullCalendarConfig;
+    
+    public Model|string|null $model = DoctorStudio::class;
+}
+```
+
+### Modello Dati
+Utilizza il modello pivot `DoctorStudio` che contiene:
+- `user_id`: ID del dottore
+- `studio_id`: ID dello studio
+- `schedule`: Array JSON con la struttura degli orari settimanali
+- `is_primary`: Flag per studio principale
+
+### Struttura Schedule
+```php
+[
+    'monday' => [
+        'morning' => '08:00-12:30',
+        'afternoon' => '15:00-19:00',
+        'evening' => null
+    ],
+    'tuesday' => [
+        'morning' => '08:00-12:30',
+        'afternoon' => null,
+        'evening' => '19:00-21:00'
+    ],
+    // ... altri giorni
+]
+```
+
+## Funzionalità Implementate
+
+### 1. Controllo Accessi
+```php
+public static function canView(): bool
+{
+    if (!Auth::check() || Auth::user()?->type !== UserTypeEnum::DOCTOR->value) {
+        return false;
+    }
+    return Filament::getTenant() !== null;
+}
+```
+
+**Requisiti:**
+- Utente autenticato
+- Tipo utente = DOCTOR
+- Tenant (studio) attivo
+
+### 2. Recupero Eventi
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    $cacheKey = $this->getCacheKey($fetchInfo);
+    
+    return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+        $doctorStudio = $this->getDoctorStudioPivot();
+        
+        if (!$doctorStudio || !$doctorStudio->schedule) {
+            return [];
+        }
+        
+        return $this->generateAvailabilitySlots(
+            $doctorStudio->schedule,
+            $fetchInfo
+        );
+    });
+}
+```
+
+**Caratteristiche:**
+- **Caching**: Cache di 5 minuti per le disponibilità
+- **Filtro Utente**: Solo disponibilità del dottore corrente
+- **Filtro Studio**: Solo per lo studio corrente (tenant)
+- **Range Date**: Solo eventi nel range richiesto dal calendario
+
+### 3. Generazione Slot
+```php
+protected function generateAvailabilitySlots(array $schedule, array $fetchInfo): array
+{
+    $events = [];
+    $start = Carbon::parse($fetchInfo['start']);
+    $end = Carbon::parse($fetchInfo['end']);
+    
+    for ($date = $start->copy(); $date <= $end; $date->addDay()) {
+        $dayKey = strtolower($date->format('l'));
+        
+        if (!isset($schedule[$dayKey])) {
+            continue;
+        }
+        
+        $daySchedule = $schedule[$dayKey];
+        
+        foreach ($daySchedule as $period => $timeRange) {
+            if (empty($timeRange)) {
+                continue;
+            }
+            
+            $event = $this->createAvailabilityEvent($date, $period, $timeRange);
+            if ($event) {
+                $events[] = $event;
+            }
+        }
+    }
+    
+    return $events;
+}
+```
+
+### 4. Creazione Disponibilità
+```php
+public function onDateSelect(string $start, ?string $end, bool $allDay, ?array $view, ?array $resource): void
+{
+    if ($allDay) {
+        return; // Non gestiamo eventi di tutta la giornata
+    }
+    
+    $startDate = Carbon::parse($start);
+    $endDate = Carbon::parse($end);
+    
+    // Determina il giorno della settimana e il periodo
+    $dayOfWeek = strtolower($startDate->format('l'));
+    $period = $this->determinePeriod($startDate);
+    
+    $this->createAvailabilitySlot([
+        'day_of_week' => $dayOfWeek,
+        'period' => $period,
+        'start_time' => $startDate->format('H:i'),
+        'end_time' => $endDate->format('H:i'),
+        'effective_date' => $startDate->format('Y-m-d'),
+    ]);
+}
+```
+
+## Configurazione Widget
+
+### Configurazione FullCalendar
+```php
+public function config(): array
+{
+    $baseConfig = parent::config();
+    
+    return array_merge($baseConfig, [
+        'initialView' => 'timeGridWeek',
+        'editable' => true,
+        'selectable' => true,
+        'selectConstraint' => 'businessHours',
+        'eventBackgroundColor' => '#10b981', // Verde per disponibilità
+        'eventBorderColor' => '#059669',
+        'eventTextColor' => '#ffffff',
+        'events' => [],
+    ]);
+}
+```
+
+### Schema Form
+```php
+public function getFormSchema(): array
 {
     return [
-        \Modules\SaluteOra\Filament\Widgets\DoctorAvailabilitiesWidget::class,
+        'availability_details' => Section::make('Dettagli Disponibilità')
+            ->schema([
+                'day_of_week' => Select::make('day_of_week')
+                    ->options([
+                        'monday' => 'Lunedì',
+                        'tuesday' => 'Martedì',
+                        // ... altri giorni
+                    ])
+                    ->required(),
+                'period' => Select::make('period')
+                    ->options([
+                        'morning' => 'Mattina',
+                        'afternoon' => 'Pomeriggio',
+                        'evening' => 'Sera',
+                    ])
+                    ->required(),
+                'start_time' => TimePicker::make('start_time')
+                    ->required()
+                    ->seconds(false),
+                'end_time' => TimePicker::make('end_time')
+                    ->required()
+                    ->seconds(false),
+                'effective_date' => DatePicker::make('effective_date')
+                    ->label('Data di Validità')
+                    ->helperText('Da quando è valida questa disponibilità'),
+            ]),
     ];
 }
 ```
 
-### Sicurezza e Autorizzazioni
+## Utilizzo nell'Interfaccia
 
-Il widget è visibile solo agli utenti con `UserType::DOCTOR`:
-
+### Integrazione in Dashboard Doctor
 ```php
-public static function canView(): bool
+// In DoctorDashboard.php o simile
+protected function getHeaderWidgets(): array
 {
-    $user = auth()->user();
-    return $user instanceof User && $user->type === UserTypeEnum::DOCTOR->value;
+    return [
+        DoctorCalendarWidget::class,
+        DoctorAvailabilitiesWidget::class,
+    ];
 }
 ```
 
-## Struttura Dati
+### Interazioni Utente
 
-### Relazioni Database
+#### 1. Visualizzazione
+- **Verde Chiaro**: Disponibilità esistenti
+- **Tooltip**: Dettagli orario e periodo
+- **Vista Settimanale**: Layout ottimizzato per gestione
 
-```sql
--- Tabella pivot studio_user
-studio_user (
-    id,
-    studio_id,      -- FK verso studios
-    user_id,        -- FK verso users  
-    schedule,       -- JSON con orari
-    is_primary,     -- Boolean studio principale
-    created_at,
-    updated_at
-)
-```
+#### 2. Creazione Nuove Disponibilità
+1. **Click e Drag**: Seleziona range di tempo
+2. **Determinazione Automatica**: Sistema determina giorno e periodo
+3. **Salvataggio**: Aggiornamento automatico del pivot DoctorStudio
+4. **Notifica**: Conferma operazione con dettagli
 
-### Formato Schedule JSON
+#### 3. Modifica Disponibilità
+1. **Click su Evento**: Apre modal di modifica
+2. **Form Strutturato**: Campi per giorno, periodo, orari
+3. **Validazione**: Controllo sovrapposizioni e orari validi
+4. **Aggiornamento**: Modifica della struttura schedule
 
-```json
+## Performance e Caching
+
+### Strategia Caching
+- **Durata**: 5 minuti (300 secondi)
+- **Chiave**: Basata su widget, utente, tenant e parametri fetch
+- **Invalidazione**: Automatica su modifiche disponibilità
+
+### Ottimizzazioni
+- **Lazy Loading**: Widget caricato solo quando necessario
+- **Range Limitato**: Solo eventi nel periodo visualizzato
+- **Indicatori Performance**: Sort order per priorità caricamento
+
+## Security Features
+
+### Controlli Accesso
+1. **Tipo Utente**: Solo dottori possono accedere
+2. **Tenant Verification**: Verifica appartenenza allo studio
+3. **Data Isolation**: Ogni dottore vede solo le proprie disponibilità
+4. **Cross-Database Safety**: Gestione sicura relazioni cross-database
+
+### Validazioni
+- **Orari Business**: Disponibilità solo negli orari di lavoro
+- **Range Temporali**: Validazione start < end
+- **Sovrapposizioni**: Controllo conflitti nello stesso periodo
+
+## Error Handling
+
+### Gestione Errori
+```php
+protected function createAvailabilitySlot(array $data): void
 {
-  "monday": {
-    "morning_from": "08:00",
-    "morning_to": "12:30", 
-    "afternoon_from": "15:00",
-    "afternoon_to": "19:00"
-  },
-  "tuesday": {
-    "morning_from": "08:00",
-    "morning_to": "12:30",
-    "afternoon_from": null,
-    "afternoon_to": null
-  },
-  "wednesday": {
-    "morning_from": null,
-    "morning_to": null,
-    "afternoon_from": null, 
-    "afternoon_to": null
-  },
-  // ... altri giorni
-}
-```
-
-## Implementazione Vista Statica
-
-### Componenti della Vista
-
-1. **Header Studio**
-   - Nome studio
-   - Badge "Principale" (se applicabile)
-   - Badge stato configurazione
-
-2. **Sezione Orari**
-   - Griglia 3 colonne: Giorno | Mattina | Pomeriggio
-   - Orari formattati come badge colorati
-   - Giorni attivi con bordo verde
-   - "Chiuso" per slot vuoti
-
-3. **Pulsante Modifica**
-   - Icona matita (edit)
-   - Apre modal con `OpeningHoursField`
-   - Visibile solo se studio valido
-
-### Esempio Vista Studio
-
-```blade
-{{-- Header con badge --}}
-<div class="studio-header">
-    <h3>Studio XYZ</h3>
-    @if($isPrimary)
-        <span class="badge-primary">Principale</span>
-    @endif
-    <span class="badge-configured">Configurato</span>
-</div>
-
-{{-- Pulsante modifica --}}
-<button wire:click="mountAction('editSchedule', { studioUserId: {{ $studioUserId }} })">
-    <svg class="icon-edit">...</svg>
-    Modifica Orari
-</button>
-
-{{-- Griglia orari statica --}}
-<div class="schedule-grid">
-    <div class="header">Giorno | Mattina | Pomeriggio</div>
+    $doctorStudio = $this->getDoctorStudioPivot();
     
-    @foreach($days as $day)
-        <div class="day-row {{ $isDayActive ? 'active' : 'inactive' }}">
-            <span>{{ $dayLabel }}</span>
-            <span class="time-badge">{{ $morningSlot ?: 'Chiuso' }}</span>
-            <span class="time-badge">{{ $afternoonSlot ?: 'Chiuso' }}</span>
-        </div>
-    @endforeach
-</div>
-```
-
-## Azioni Widget
-
-### editScheduleAction()
-
-**Scopo**: Aprire modal per modificare orari studio
-
-**Parametri**:
-- `studioUserId`: ID record pivot `studio_user`
-
-**Implementazione**:
-```php
-public function editScheduleAction(): Action
-{
-    return Action::make('editSchedule')
-        ->label(__('saluteora::doctor_availability.actions.edit_schedule'))
-        ->icon('heroicon-o-clock')
-        ->form([
-            OpeningHoursField::make('schedule')->columnSpanFull(),
-        ])
-        ->fillForm(function (array $arguments): array {
-            $studioUser = StudioUser::find($arguments['studioUserId']);
-            return ['schedule' => $studioUser?->schedule ?? []];
-        })
-        ->action(function (array $data, array $arguments): void {
-            $studioUser = StudioUser::findOrFail($arguments['studioUserId']);
-            $studioUser->update(['schedule' => $data['schedule']]);
-            
-            // Notifica + refresh widget
-            Notification::make()->title('Orari salvati')->success()->send();
-            $this->dispatch('$refresh');
-        });
+    if (!$doctorStudio) {
+        Notification::make()
+            ->title('Errore')
+            ->body('Impossibile trovare l\'associazione dottore-studio')
+            ->danger()
+            ->send();
+        return;
+    }
+    
+    // ... resto della logica
 }
 ```
 
-### setPrimaryAction()
+### Notifiche Utente
+- **Successo**: Conferma creazione/modifica disponibilità
+- **Errore**: Messaggi specifici per ogni tipo di errore
+- **Warning**: Avvisi per situazioni ambigue
 
-**Scopo**: Impostare studio come principale
+## Testing e Manutenzione
 
-**Funzionalità**:
-- Rimuove flag primario da altri studi
-- Imposta corrente come primario
-- Conferma utente richiesta
+### Test Raccomandati
+1. **Unit Tests**: Logica generazione slot
+2. **Feature Tests**: Integrazione con Filament
+3. **Browser Tests**: Interazioni calendario
+4. **Performance Tests**: Caricamento grandi dataset
 
-## File e Percorsi
+### Manutenzione
+- **Cache Monitoring**: Verifica efficacia caching
+- **Error Logging**: Tracciamento errori produzione
+- **Performance Metrics**: Tempi di caricamento widget
 
-### Widget
-- **Classe**: `Modules\SaluteOra\Filament\Widgets\DoctorAvailabilitiesWidget`
-- **Vista**: `saluteora::filament.widgets.doctor-availabilities`
-- **Percorso**: `Modules/SaluteOra/resources/views/filament/widgets/doctor-availabilities.blade.php`
+## Best Practices Implementate
 
-### Vista Studio Item
-- **Vista**: Inclusa in loop principale
-- **Percorso**: `Modules/SaluteOra/resources/views/filament/widgets/doctor-availabilities/studio/item.blade.php`
+### 1. Architettura
+- ✅ Estensione corretta di FullCalendarWidget
+- ✅ Utilizzo trait HasFullCalendarConfig per riuso codice
+- ✅ Modello specifico per gestione dati (DoctorStudio)
 
-### Traduzioni
-- **Widget**: `saluteora::widgets.doctor_availabilities.*`
-- **Azioni**: `saluteora::doctor_availability.actions.*`
-- **UI**: `ui::opening_hours.*`
-- **Giorni**: `saluteora::days.*`
+### 2. Sicurezza
+- ✅ Controlli accesso multi-livello
+- ✅ Validazione input utente
+- ✅ Isolamento dati tenant
 
-## Traduzioni Richieste
+### 3. Performance
+- ✅ Caching intelligente
+- ✅ Query ottimizzate
+- ✅ Lazy loading
 
-### File `widgets.php`
-```php
-'doctor_availabilities' => [
-    'title' => 'I Miei Orari di Disponibilità',
-    'description' => 'Visualizza e gestisci gli orari di tutti i tuoi studi',
-    'schedule' => [
-        'title' => 'Orari di Disponibilità',
-        'description' => 'Visualizza e modifica gli orari di apertura per questo studio',
-        'no_schedule' => 'Nessun orario configurato',
-        'click_edit_to_configure' => 'Clicca sul pulsante modifica per configurare gli orari',
-        'closed' => 'Chiuso',
-    ],
-    'studio' => [
-        'primary_badge' => 'Principale',
-        'configured_badge' => 'Configurato', 
-        'unconfigured_badge' => 'Da configurare',
-    ],
-]
-```
+### 4. UX
+- ✅ Feedback immediato azioni utente
+- ✅ Interfaccia intuitiva
+- ✅ Gestione errori user-friendly
 
-### File `doctor_availability.php`
-```php
-'actions' => [
-    'edit_schedule' => 'Modifica Orari',
-    'set_primary' => 'Imposta come Principale',
-],
-'notifications' => [
-    'saved' => [
-        'title' => 'Disponibilità salvate',
-        'body' => 'Le tue disponibilità sono state aggiornate con successo.',
-    ],
-    // ... altre notifiche
-]
-```
-
-## Styling e Design
-
-### Palette Colori
-- **Blu**: Orari configurati, pulsanti primari
-- **Verde**: Giorni attivi, stati positivi  
-- **Amber**: Domenica, warnings
-- **Grigio**: Stati inattivi, placeholder
-
-### Layout Responsive
-- **Mobile**: Stack verticale, 1 colonna
-- **Tablet**: Layout ibrido, 2-3 colonne
-- **Desktop**: Griglia completa 3 colonne
-
-### Dark Mode
-- Supporto completo con varianti `dark:`
-- Contrasto adeguato per leggibilità
-- Colori adattati per tema scuro
-
-## Performance
-
-### Ottimizzazioni Implementate
-1. **Eager Loading**: `$doctor->studios()->withPivot(['schedule', 'is_primary'])->get()`
-2. **Single Query**: Una sola query per tutti gli studi
-3. **Conditional Rendering**: Solo se dati presenti
-4. **Lazy Actions**: Azioni caricate on-demand
-
-### Metriche
-- **Query Count**: 1 principale + N actions
-- **Render Time**: <50ms per 5 studi
-- **Memory Usage**: ~2MB per widget instance
-
-## Testing
-
-### Test Cases Necessari
-```php
-// Unit Tests
-test_widget_visible_only_to_doctors()
-test_renders_studios_with_schedules()
-test_edit_action_opens_with_correct_data()
-test_primary_studio_marked_correctly()
-
-// Integration Tests  
-test_edit_schedule_saves_correctly()
-test_set_primary_removes_others()
-test_notifications_sent_on_success()
-
-// Browser Tests
-test_edit_button_opens_modal()
-test_schedule_updates_without_page_refresh()
-test_responsive_layout_mobile_desktop()
-```
-
-## Troubleshooting
-
-### Problemi Comuni
-
-1. **Widget non visibile**
-   - Verificare `UserType::DOCTOR`
-   - Controllare autenticazione utente
-   - Debug `canView()` method
-
-2. **Pulsante modifica non funziona**
-   - Verificare `$studioUserId` non null
-   - Controllare registrazione azione
-   - Debug Livewire console
-
-3. **Orari non mostrati correttamente**
-   - Verificare formato JSON `schedule`
-   - Controllare traduzioni giorni
-   - Debug array structure
-
-4. **Modal non si apre**
-   - Verificare nome azione `editSchedule`
-   - Controllare parametri arguments
-   - Debug Filament Actions registration
-
-### Debug Commands
-```bash
-# Verifica dati pivot
-php artisan tinker
-> $doctor = User::find(1);
-> $doctor->studios()->withPivot(['schedule', 'is_primary'])->get();
-
-# Clear cache traduzioni
-php artisan cache:clear
-php artisan view:clear
-
-# Debug Livewire
-php artisan livewire:publish --config
-```
-
-## Roadmap e Miglioramenti
-
-### Versione 1.1 (Futura)
-- [ ] **Bulk Operations**: Copia orari tra studi
-- [ ] **Templates**: Orari predefiniti salvabili
-- [ ] **Export/Import**: Backup configurazioni
-- [ ] **History**: Storico modifiche orari
-
-### Versione 1.2 (Futura)  
-- [ ] **Real-time Updates**: Broadcasting changes
-- [ ] **Drag & Drop**: Riordinamento studi
-- [ ] **Advanced Filters**: Filtri vista per stato
-- [ ] **Analytics**: Metrics utilizzo orari
-
-### Performance Enhancements
-- [ ] **Caching**: Cache dati studio per performance
-- [ ] **Progressive Loading**: Caricamento incrementale
-- [ ] **Offline Support**: PWA features
-
-## Collegamenti e Riferimenti
+## Collegamenti e Risorse
 
 ### Documentazione Correlata
-- [Widget Implementation Details](doctor-availabilities-widget-implementation.md)
-- [Widget Analysis](doctor-availabilities-widget-analysis.md)  
-- [Widgets Index](index.md)
-- [Main README](../README.md)
+- [Doctor Availability Management](../doctor-availability-management.md)
+- [FullCalendar Implementation Guide](../fullcalendar_implementation_guide.md)
+- [Multi-Tenancy Architecture](../../../Tenant/docs/README.md)
+- [HasFullCalendarConfig Trait](../traits/has-full-calendar-config.md)
 
-### Codice Sorgente
-- [Widget Class](../../app/Filament/Widgets/DoctorAvailabilitiesWidget.php)
-- [Main View](../../resources/views/filament/widgets/doctor-availabilities.blade.php)
-- [Studio Item View](../../resources/views/filament/widgets/doctor-availabilities/studio/item.blade.php)
-
-### Modelli Correlati
-- [User Model](../../app/Models/User.php)
-- [Studio Model](../../app/Models/Studio.php)  
-- [StudioUser Pivot](../../app/Models/StudioUser.php)
+### File Coinvolti
+- **Widget**: `app/Filament/Widgets/DoctorAvailabilitiesWidget.php`
+- **Modello**: `app/Models/DoctorStudio.php`
+- **Trait**: `app/Traits/HasFullCalendarConfig.php`
+- **Migrations**: Database table `studio_user`
 
 ---
 
-**Ultima modifica**: Dicembre 2024  
-**Versione**: 1.0 - Vista statica implementata  
-**Status**: ✅ Implementato e funzionante 
+*Implementato: Gennaio 2025*  
+*Versione Widget: 1.0*  
+*Compatibilità: SaluteOra v2.0+, Filament v3.0+* 
