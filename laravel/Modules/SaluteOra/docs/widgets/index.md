@@ -11,13 +11,14 @@ Il modulo SaluteOra implementa diversi widget Filament specializzati per la gest
 #### 1. DoctorAvailabilitiesWidget
 - **File**: [DoctorAvailabilitiesWidget.php](../../app/Filament/Widgets/DoctorAvailabilitiesWidget.php)
 - **Documentazione**: [doctor-availabilities-widget.md](./doctor-availabilities-widget.md)
-- **Scopo**: Gestione delle disponibilità settimanali dei dottori
+- **Scopo**: Overview studi del dottore con gestione orari inline
 - **Utenti**: Solo dottori
 - **Caratteristiche**:
-  - Visualizzazione disponibilità come eventi verdi
-  - Creazione disponibilità con click e drag
-  - Gestione orari per periodi (mattina, pomeriggio, sera)
-  - Multi-tenancy con isolamento dati per studio
+  - Lista di tutti gli studi del dottore
+  - Form inline OpeningHoursField per ogni studio
+  - Editing diretto degli orari di disponibilità
+  - Studio principale evidenziato
+  - Auto-save con notifiche real-time
 
 #### 2. DoctorCalendarWidget
 - **File**: [DoctorCalendarWidget.php](../../app/Filament/Widgets/DoctorCalendarWidget.php)

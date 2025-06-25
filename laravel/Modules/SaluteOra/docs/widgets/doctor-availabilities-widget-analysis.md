@@ -1,338 +1,228 @@
-# DoctorAvailabilitiesWidget - Analisi e Progettazione
+# DoctorAvailabilitiesWidget - Analisi Completa e Implementazione
 
-## ⚠️ Stato Attuale: WIDGET MANCANTE
+## Analisi Post-Studio (Gennaio 2025)
 
-Il widget `DoctorAvailabilitiesWidget` è **referenziato** in `/config/local/saluteora/database/content/pages/doctor-home.json` ma **non esiste fisicamente**. Deve essere creato seguendo i pattern eccellenti scoperti nel modulo.
+### 🎯 Scopo Corretto del Widget
 
-## 🎯 Scopo del Widget
+**ERRORE INIZIALE**: Avevo frainteso il ruolo del widget pensando fosse un calendario.
 
-Permettere ai dottori di visualizzare e gestire le proprie **disponibilità orarie** per il tenant (studio) corrente, utilizzando l'approccio DRY con il modello `Appointment`.
+**SCOPO REALE**: Il `DoctorAvailabilitiesWidget` deve:
+1. **Mostrare tutti gli studi** in cui lavora il dottore autenticato
+2. **Per ogni studio** visualizzare la colonna `schedule` della tabella pivot `studio_user`
+3. **Rendering readable** degli orari impostati tramite `OpeningHoursField`
 
-## 🧠 Ispirazione dai Pattern Esistenti
+### 🔍 Analisi Architettura Esistente
 
-### Pattern BaseTransition (DRY + KISS)
-Il modulo SaluteOra implementa pattern eccellenti che il widget dovrebbe seguire:
-- **Auto-discovery**: Nomi che si auto-spiegano 
-- **Minimal boilerplate**: Codice essenziale
-- **Centralizzazione**: Una fonte di verità per tutto
+#### DoctorAvailabilityPage (Singolo Studio)
+- **Funzione**: Gestisce gli orari per UN studio specifico (current tenant)
+- **Componente**: Usa `OpeningHoursField` per editing degli orari
+- **Scope**: Multi-tenancy (lavora su studio corrente)
+- **Pattern**: Form → salvataggio → notifica
 
-### Pattern Appointment-Based (DRY Policy)
-Dalla documentazione: **TUTTO** usa il modello `Appointment`:
+#### DoctorAvailabilitiesWidget (Multi-Studio Overview)
+- **Funzione**: Visualizza TUTTI gli studi del dottore
+- **Componente**: Dovrà usare `OpeningHoursField` per ogni studio
+- **Scope**: Global overview con editing inline
+- **Pattern**: Widget → form per studio → salvataggio AJAX
+
+### 🏗️ Architettura Implementata
+
+#### Modello Pivot: StudioUser
 ```php
-// ✅ Slot disponibili = Appointment con type=availability
-Appointment::where('doctor_id', $doctorId)
-    ->where('type', AppointmentTypeEnum::AVAILABILITY) 
-    ->where('status', AppointmentStatusEnum::AVAILABLE)
-    ->get();
-```
-
-**❌ MAI** creare tabelle custom per disponibilità!
-
-## 📋 Analisi dei Problemi Attuali
-
-### 1. Widget Mancante
-- **Problema**: Widget referenziato ma non esiste
-- **Impatto**: Homepage dottore rotta
-- **Soluzione**: Implementazione completa
-
-### 2. Violazione Pattern Module
-Dalla struttura esistente:
-```
-/laravel/Modules/SaluteOra/app/Filament/Widgets/
-├── StudioOverviewWidget.php        ❌ Estende Widget (sbagliato!)
-├── DoctorCalendarWidget.php        ✅ Pattern eccellente!
-├── AdminCalendarWidget.php         ✅ Molto ben fatto
-└── [MANCANTE] DoctorAvailabilitiesWidget.php
-```
-
-### 3. Pattern Inconsistente 
-- `StudioOverviewWidget`: Estende `Widget` (❌ sbagliato secondo regole Laraxot)
-- `DoctorCalendarWidget`: Implementazione eccellente con trait e multi-tenancy
-
-## 🎯 Progettazione Ideale
-
-### Caratteristiche Obbligatorie
-
-1. **Estende XotBaseWidget** (non Widget!)
-2. **Multi-Tenant**: Utilizza `Filament::getTenant()` 
-3. **UserType Control**: Solo `UserTypeEnum::DOCTOR`
-4. **Appointment-Based**: Usa solo modello Appointment
-5. **Tipizzazione Rigorosa**: PHPDoc completi, strict types
-6. **Traduzioni**: Zero stringhe hardcoded
-
-### Funzionalità Target
-
-1. **Visualizzazione Disponibilità**
-   - Mostra slot di disponibilità settimanali
-   - Vista calendario o lista
-   - Filtri per periodo
-
-2. **Gestione Quick**
-   - Toggle rapido disponibilità
-   - Modifica orari inline
-   - Aggiunta/rimozione slot
-
-3. **Integrazione Studio**
-   - Context-aware per studio corrente
-   - Controlli accesso appropriati
-
-## 🏗️ Implementazione Proposta
-
-### Struttura Base
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace Modules\SaluteOra\Filament\Widgets;
-
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Filament\Facades\Filament;
-use Modules\SaluteOra\Enums\UserTypeEnum;
-use Modules\SaluteOra\Enums\AppointmentTypeEnum;
-use Modules\SaluteOra\Enums\AppointmentStatusEnum;
-use Modules\SaluteOra\Models\Appointment;
-
-/**
- * Widget per gestione disponibilità dottore.
- * 
- * Permette ai dottori di visualizzare e gestire le proprie disponibilità
- * per il tenant (studio) corrente utilizzando il modello Appointment.
- * 
- * Pattern utilizzati:
- * - DRY: Riutilizzo modello Appointment 
- * - KISS: Interface semplice e intuitiva
- * - Multi-tenant: Context-aware per studio
- */
-class DoctorAvailabilitiesWidget extends XotBaseWidget
+class StudioUser extends BasePivot
 {
-    protected static string $view = 'saluteora::filament.widgets.doctor-availabilities';
-    protected static ?int $sort = 2;
+    protected $fillable = ['user_id', 'studio_id', 'schedule', 'is_primary'];
     
-    /**
-     * Verifica se l'utente può visualizzare il widget.
-     */
-    public static function canView(): bool
-    {
-        if (!auth()->check() || auth()->user()?->type !== UserTypeEnum::DOCTOR->value) {
-            return false;
-        }
-        return Filament::getTenant() !== null;
-    }
-    
-    /**
-     * Dati per la view.
-     */
-    protected function getViewData(): array
-    {
+    protected function casts(): array {
         return [
-            'availabilities' => $this->getCurrentAvailabilities(),
-            'weeklyStats' => $this->getWeeklyStats(),
-            'quickActions' => $this->getQuickActions(),
+            'schedule' => 'array',      // ← Struttura OpeningHoursField
+            'is_primary' => 'boolean',
         ];
     }
+}
+```
+
+#### Struttura Schedule
+```php
+// Format richiesto da OpeningHoursField
+[
+    'monday' => [
+        'morning_from' => '08:00',
+        'morning_to' => '12:30', 
+        'afternoon_from' => '15:00',
+        'afternoon_to' => '19:00'
+    ],
+    'tuesday' => [...],
+    // ... altri giorni
+]
+```
+
+## 📝 Ragionamento per Studio Item Vista
+
+### Problema da Risolvere
+La vista principale ora usa `@each('saluteora::filament.widgets.doctor-availabilities.studio.item', $doctor->studios, 'studio')` ma la vista item non esiste ancora.
+
+### Requisiti per Studio Item Vista
+1. **Display Info Studio**: Nome, badge principale, status configurazione
+2. **Form Inline**: OpeningHoursField integrato per editing diretto
+3. **Salvataggio AJAX**: Non refresh pagina, update del solo widget
+4. **Feedback Visivo**: Notifiche successo/errore, stato caricamento
+5. **Mobile Responsive**: Layout adattivo per dispositivi touch
+
+### Analisi Tecnica OpeningHoursField
+
+#### Punti di Forza
+- ✅ **Layout 3 Colonne**: Giorno | Mattina | Pomeriggio
+- ✅ **TimePicker Separati**: `morning_from/to`, `afternoon_from/to`
+- ✅ **Zebra Striping**: Alternanza colori per leggibilità
+- ✅ **Validazione Automatica**: Controllo `from < to`
+- ✅ **Mobile-First**: TimePicker nativi per touch
+- ✅ **Nullable Support**: Campi vuoti = "chiuso"
+
+#### Integrazione nel Widget
+**SFIDA**: OpeningHoursField è progettato per Form Filament standard, ma dobbiamo integrarlo in un widget con multiple istanze (una per studio).
+
+**SOLUZIONI VALUTATE**:
+
+1. **🔴 Form Modal**: Una per studio → Troppo click, UX frammentata
+2. **🔴 Form Esterno**: Redirect a pagina → Perde contesto overview  
+3. **🟡 Form Collapsible**: Click espande → Buono ma ancora 2 step
+4. **🟢 Form Inline**: Sempre visibile → UX ottimale, editing diretto
+
+**DECISIONE**: **Form Inline** per ogni studio con OpeningHoursField embedded.
+
+### Architettura Proposta: Studio Item Vista
+
+#### 1. Vista Studio Item Struttura
+```blade
+{{-- saluteora::filament.widgets.doctor-availabilities.studio.item --}}
+<div class="studio-card border rounded-lg {{ $studio->pivot->is_primary ? 'border-blue-500' : 'border-gray-200' }}">
     
-    /**
-     * Recupera disponibilità correnti del dottore.
-     */
-    private function getCurrentAvailabilities(): Collection
-    {
-        return Appointment::where('doctor_id', auth()->id())
-            ->where('studio_id', Filament::getTenant()->id)
-            ->where('type', AppointmentTypeEnum::AVAILABILITY)
-            ->where('status', AppointmentStatusEnum::AVAILABLE)
-            ->whereDate('start_time', '>=', now())
-            ->orderBy('start_time')
-            ->take(20)
-            ->get();
+    {{-- Header Studio --}}
+    <div class="studio-header p-4 border-b">
+        <h3>{{ $studio->name }}</h3>
+        {{-- Badge principale, status configurazione --}}
+    </div>
+    
+    {{-- Form Schedule Inline --}}
+    <div class="studio-schedule-form p-4">
+        {{-- OpeningHoursField embedded --}}
+    </div>
+    
+</div>
+```
+
+#### 2. Challenge: Multiple Form Instance
+**PROBLEMA**: Ogni studio deve avere un form separato con OpeningHoursField indipendente.
+
+**STRATEGIE**:
+- **Wire Model Unique**: `wire:model="schedules.{{ $studio->id }}.monday.morning_from"`
+- **Form State Isolation**: Ogni studio mantiene stato separato
+- **Livewire Actions**: Submit separato per ogni studio
+
+#### 3. Salvataggio e Performance
+**PATTERN**: Salvataggio automatico o button-based per studio
+- **Auto Save**: Su blur dei campi (rischio: troppe calls)
+- **Save Button**: Per studio (migliore controllo utente)
+- **Batch Save**: Tutti in una volta (potenziale data loss)
+
+**SCELTA**: **Save Button per studio** = migliore balance UX/performance.
+
+### UX Flow Proposto
+
+#### User Journey
+1. **Landing**: Widget mostra tutti studi con schedule attuali
+2. **Visual Scan**: Studio principale in cima, badge status per tutti
+3. **Quick Edit**: Modifica orari direttamente senza click extra
+4. **Save Studio**: Button salva solo quello studio specifico
+5. **Feedback**: Toast notification + visual update
+6. **Continue**: Passa al prossimo studio se necessario
+
+#### Vantaggi UX
+- **Overview Completo**: Vede tutto in un colpo d'occhio
+- **Context Switching**: Nessun passaggio modal/pagina
+- **Selective Edit**: Modifica solo quello che serve
+- **Visual Hierarchy**: Studio principale evidente
+- **Progress Tracking**: Badge mostrano cosa è configurato
+
+### Implementazione Tecnica
+
+#### Sfide Livewire
+1. **Multiple Forms**: Gestire più OpeningHoursField simultaneamente
+2. **State Management**: Mantenere stato separato per ogni studio
+3. **Validation**: Validazione indipendente per ogni form
+4. **Performance**: Non refreshare tutto per un singolo salvataggio
+
+#### Soluzioni Tecniche
+```php
+// Nel Widget
+public array $schedules = []; // Stato per ogni studio
+
+public function mount() {
+    foreach($this->doctor->studios as $studio) {
+        $this->schedules[$studio->id] = $studio->pivot->schedule ?? [];
     }
 }
-```
 
-### Azioni Widget
-```php
-/**
- * Azioni rapide per il widget.
- */
-private function getQuickActions(): array
-{
-    return [
-        'add_availability' => [
-            'label' => __('saluteora::doctor_availabilities.actions.add.label'),
-            'icon' => 'heroicon-o-plus',
-            'action' => 'openAvailabilityModal',
-        ],
-        'manage_schedule' => [
-            'label' => __('saluteora::doctor_availabilities.actions.manage.label'), 
-            'icon' => 'heroicon-o-calendar',
-            'url' => route('filament.pages.doctor-availability'),
-        ],
-    ];
+public function saveStudioSchedule($studioId) {
+    // Salva solo lo studio specifico
+    $studioUser = StudioUser::where([
+        'user_id' => $this->doctor->id,
+        'studio_id' => $studioId
+    ])->first();
+    
+    $studioUser->update(['schedule' => $this->schedules[$studioId]]);
+    
+    // Notifica + mini refresh
 }
 ```
 
-## 🎨 Design UX/UI
+### Mobile Considerations
 
-### Layout Proposto
-```
-┌─────────────────────────────────────────┐
-│ 🕐 Le Tue Disponibilità                │
-├─────────────────────────────────────────┤
-│ Questa Settimana:  18 slot disponibili │
-│ Prossimi 7 giorni: 12 appuntamenti     │
-├─────────────────────────────────────────┤
-│ Lun 16/12  ●●●○○  (3/5 slot occupati) │
-│ Mar 17/12  ●●○○○  (2/5 slot occupati) │  
-│ Mer 18/12  ●●●●○  (4/5 slot occupati) │
-├─────────────────────────────────────────┤
-│ [+ Aggiungi]  [⚙️ Gestisci Orari]     │
-└─────────────────────────────────────────┘
-```
+#### Responsive Layout
+- **Desktop**: 3-colonne fianco a fianco per studio
+- **Tablet**: 2-colonne con scroll orizzontale
+- **Mobile**: 1-colonna con stack verticale
 
-### Componenti UI
-- **Progress Indicators**: Visual per occupazione slot
-- **Quick Stats**: Numeri importanti in evidenza  
-- **Action Buttons**: CTA principali in fondo
-- **Status Colors**: Verde=libero, Blu=occupato, Rosso=urgente
+#### Touch Optimizations
+- **TimePicker Nativi**: iOS/Android picker wheel
+- **Button Sizing**: Minimum 44px per touch target
+- **Scroll Areas**: Smooth scrolling per overview
 
-## 🔄 Integrazioni Necessarie
+### Performance Optimization
 
-### 1. Con DoctorCalendarWidget
-- **Sync dati**: Modifiche in uno si riflettono nell'altro
-- **Navigazione**: Link tra widget
-- **Consistent UX**: Stesso design language
+#### Loading Strategy
+- **Eager Load**: Pivot data con `withPivot(['schedule', 'is_primary'])`
+- **Lazy Components**: OpeningHoursField render solo quando visible
+- **Debounced Save**: Previene save troppo frequenti
 
-### 2. Con DoctorAvailabilityPage  
-- **Deep linking**: Widget → Pagina gestione
-- **Shared logic**: Stessa business logic
-- **Validation**: Stesse regole
+#### Caching Strategy
+- **Widget Level**: Cache overview data per 5min
+- **Studio Level**: Cache schedule data per 1min
+- **User Level**: Cache doctor studios per 10min
 
-### 3. Con PatientBookingFlow
-- **Real-time**: Aggiornamenti in tempo reale
-- **Notifications**: Avvisi nuove prenotazioni
+## 📋 Piano Implementazione Studio Item Vista
 
-## ⚡ Performance Considerations
+### Step 1: Analisi Finale Structure
+1. ✅ **DONE**: Analizzato OpeningHoursField structure e capabilities
+2. ✅ **DONE**: Analizzato StudioUser pivot e schedule format
+3. ✅ **DONE**: Ragionato architettura e UX flow
+4. 🔄 **CURRENT**: Implementazione vista blade studio.item
 
-### Caching Strategy
-```php
-/**
- * Cache delle disponibilità con invalidazione intelligente.
- */
-private function getCurrentAvailabilities(): Collection
-{
-    $cacheKey = "doctor_availabilities_{auth()->id()}_{Filament::getTenant()->id}";
-    
-    return cache()->remember($cacheKey, 300, function() {
-        return Appointment::where(/* query */)->get();
-    });
-}
-```
+### Step 2: Implementation Plan
+1. **Creare Vista Blade**: `studio.item.blade.php` con layout responsive
+2. **Embed OpeningHoursField**: Form inline per ogni studio
+3. **Livewire Integration**: State management e save actions
+4. **Mobile Testing**: Verificare UX su dispositivi touch
+5. **Performance Test**: Verificare con multi-studio scenarios
 
-### Optimization Points
-- **Lazy loading**: Carica solo dati visibili
-- **Smart refresh**: Update solo se necessario  
-- **Minimal queries**: Query ottimizzate
-- **Cache invalidation**: Su modifiche rilevanti
-
-## 🛡️ Security & Access Control
-
-### Controlli Implementati
-```php
-public static function canView(): bool
-{
-    // 1. User autenticato
-    if (!auth()->check()) return false;
-    
-    // 2. Tipo dottore
-    if (auth()->user()?->type !== UserTypeEnum::DOCTOR->value) return false;
-    
-    // 3. Tenant attivo
-    if (!Filament::getTenant()) return false;
-    
-    // 4. Dottore appartiene al tenant
-    return auth()->user()->studios()->where('id', Filament::getTenant()->id)->exists();
-}
-```
-
-## 📋 TODO Implementation
-
-### Fase 1: Base Widget
-- [ ] Creare classe DoctorAvailabilitiesWidget
-- [ ] Implementare canView() con security
-- [ ] Creare view template base
-- [ ] Setup traduzioni
-
-### Fase 2: Core Features  
-- [ ] Fetch disponibilità via Appointment
-- [ ] Implementare stats settimanali
-- [ ] Aggiungere quick actions
-- [ ] Testing base
-
-### Fase 3: UX/UI
-- [ ] Design responsive 
-- [ ] Animazioni smooth
-- [ ] Loading states
-- [ ] Error handling
-
-### Fase 4: Integrations
-- [ ] Link con DoctorCalendarWidget
-- [ ] Deep link con DoctorAvailabilityPage  
-- [ ] Real-time updates
-- [ ] Notifications
-
-### Fase 5: Polish
-- [ ] Performance optimization
-- [ ] Advanced caching
-- [ ] Analytics tracking
-- [ ] Documentation completa
-
-## 🧪 Testing Strategy
-
-### Unit Tests
-- [ ] canView() logic
-- [ ] getCurrentAvailabilities() 
-- [ ] getWeeklyStats()
-- [ ] Cache behavior
-
-### Integration Tests  
-- [ ] Multi-tenant isolation
-- [ ] Widget rendering
-- [ ] User interactions
-- [ ] Error scenarios
-
-### E2E Tests
-- [ ] Doctor workflow completo
-- [ ] Cross-widget consistency
-- [ ] Performance benchmarks
-
-## 🎯 Success Metrics
-
-### Performance KPIs
-- **Load time** < 200ms
-- **First paint** < 100ms  
-- **Cache hit ratio** > 90%
-- **Error rate** < 0.1%
-
-### UX KPIs
-- **User engagement** con widget
-- **Task completion** rate
-- **Time to action** from widget
-- **User satisfaction** scores
-
-## 🔗 Collegamenti
-
-- [Doctor Availability Management](../doctor-availability-management.md)
-- [DoctorCalendarWidget Implementation](../../../app/Filament/Widgets/DoctorCalendarWidget.php)
-- [Appointment Model](../../../app/Models/Appointment.php)
-- [Multi-Tenancy Documentation](../../Tenant/docs/README.md)
-- [BaseTransition Pattern](../models/base-transition-pattern.md)
-- [Widget Best Practices](../widgets/find-doctor-appointment-widget.md)
+### Step 3: Final Integration
+1. **Widget Update**: Agggiornare methods per supportare multiple forms
+2. **Translation Updates**: Label e messages per nuovo flow
+3. **Documentation**: Aggiornare analisi con risultati implementazione
 
 ---
 
-**Status**: 📋 Analysis Complete - Ready for Implementation  
-**Priority**: 🔥 High (Homepage dottore rotta)  
-**Effort**: 🏗️ Medium (2-3 giorni con testing)  
-**Risk**: 🟢 Low (pattern consolidati disponibili)
+**NEXT ACTION**: Implementare vista `saluteora::filament.widgets.doctor-availabilities.studio.item` con OpeningHoursField embedded e gestione state per multiple forms.
 
-*Ultimo aggiornamento: Gennaio 2025* 
+*Analisi completata: Gennaio 2025* 
