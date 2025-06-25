@@ -8,6 +8,7 @@
     }
 @endphp
 <x-filament::widget>
+    
     <x-filament::section>
         <div class="space-y-6">
             <div class="mb-6">

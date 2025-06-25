@@ -8,6 +8,7 @@
     - $doctor: Modello User (dottore)
     - $schedule: Array schedule dal pivot
     - $isPrimary: Boolean se studio principale
+    
 --}}
 
 @props(['studio', 'doctor', 'schedule', 'isPrimary'])

@@ -31,7 +31,7 @@ use Modules\UI\Filament\Forms\Components\OpeningHoursField;
  *
  * Widget per visualizzare tutti gli studi in cui lavora il dottore
  * e i relativi orari di disponibilità (schedule) configurati.
- * 
+ * .
  * Caratteristiche:
  * - Multi-studio overview per dottori
  * - Visualizzazione schedule dal pivot studio_user
