@@ -38,6 +38,7 @@ return array (
       'description' => 'Destinatario',
       'placeholder' => 'Inserisci l\'indirizzo email',
       'label' => 'Destinatario',
+      'helper_text' => 'to',
     ),
     'content' => 
     array (
@@ -61,6 +62,9 @@ return array (
     'subject' => 
     array (
       'description' => 'subject',
+      'helper_text' => 'subject',
+      'placeholder' => 'subject',
+      'label' => 'subject',
     ),
   ),
   'actions' => 
