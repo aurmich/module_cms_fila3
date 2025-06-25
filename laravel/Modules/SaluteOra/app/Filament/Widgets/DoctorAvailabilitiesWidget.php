@@ -49,7 +49,7 @@ class DoctorAvailabilitiesWidget extends XotBaseWidget implements HasActions
     /**
      * Vista del widget.
      */
-    protected static string $view = 'saluteora::filament.widgets.doctor-availabilities';
+    protected static string $view = 'pub_theme::filament.widgets.doctor-availabilities';
 
    
 
@@ -253,7 +253,7 @@ class DoctorAvailabilitiesWidget extends XotBaseWidget implements HasActions
     public function editScheduleAction(): Action
     {
         return Action::make('editSchedule')
-            ->label(__('saluteora::doctor_availability.actions.edit_schedule'))
+            
             ->icon('heroicon-o-clock')
             ->color('primary')
             ->form([
