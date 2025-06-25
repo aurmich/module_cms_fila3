@@ -211,7 +211,7 @@ class User extends BaseUser implements HasMedia
         'password_expires_at',
         //'studio_id',
         //'continuation_token',
-        'certificates'
+        'certifications'
     ];
 
 
