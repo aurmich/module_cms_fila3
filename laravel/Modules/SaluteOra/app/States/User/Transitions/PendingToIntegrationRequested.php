@@ -10,24 +10,11 @@ use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationRequested;
 
-class PendingToIntegrationRequested extends Transition
+class PendingToIntegrationRequested extends BaseTransition
 {
-    private User $user;
-    private ?string $message;
+    
 
-    public function __construct(User $user,?string $message='')
-    {
-        $this->user = $user;
-        $this->message = $message;
-    }
-
-    public function handle(): User
-    {
-        $slug=$this->user->type->value . '-'.Str::of(class_basename(self::class))->kebab()->toString();
-        $notify = new RecordNotification(
-            $this->user,
-            $slug
-        );
+    public function getNotificationData(): array{
         if($this->user->remember_token==null){
             $this->user->remember_token = Str::random(40);
             $this->user->save();
@@ -43,15 +30,8 @@ class PendingToIntegrationRequested extends Transition
             'message' => $this->message,
             'register_url' => $register_url,
         ];
-        dddx($data);
-        $notify = $notify->mergeData($data);
-        Notification::route('mail', $this->user->email)
-            //->locale('it')
-            ->notify($notify);
-        dddx('a');
-        $this->user->state = new IntegrationRequested($this->user);
-        $this->user->save();
-
-        return $this->user;
+        return $data;
     }
+
+
 }

@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Widgets;
 
-use Filament\Actions\Action;
 use Filament\Forms;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form as FilamentForm;
-use Filament\Widgets\Concerns\InteractsWithPageFilters;
-use Filament\Widgets\Widget as FilamentWidget;
+use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
+use Modules\SaluteOra\Models\Patient;
+use Filament\Forms\ComponentContainer;
+use Filament\Forms\Contracts\HasForms;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Form as FilamentForm;
+use Filament\Widgets\Widget as FilamentWidget;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 
 /**
  * Classe base astratta per tutti i widget Filament.
@@ -35,13 +37,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public string $title = '';
     public string $icon = '';
     protected int|string|array $columnSpan = 'full';
-    /**
-     * La vista che deve essere renderizzata per il widget.
-     * Può essere un namespace (es. 'module-name::view-name') o un percorso Blade.
-     *
-     * @var view-string
-     */
-    protected static string $view = '';
 
     /**
      * Lista degli eventi ascoltati dal widget.
@@ -93,30 +88,54 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     public function form(FilamentForm $form): FilamentForm
     {
         $form = $form->schema($this->getFormSchema());
-
-        $data = $this->getFormFill();
-        if (!empty($data)) {
-            // $form->fill($data); // Uncomment if needed
-            // $this->data = $data; // Uncomment if needed
+        $form->statePath('data');
+        $data=$this->getFormFill();
+        
+        $form->model($this->getFormModel());
+        if(!empty($data)){
+           //$form->fill($data);
+           //$this->data=$data;
         }
+            
+        
 
         return $form;
     }
 
-    public function getFormFill(): array {
-        return [];
+    public function getFormFill(): array
+    {
+        $model = $this->getFormModel();
+        
+        // Se il modello ha un ID, significa che è stato trovato nel database
+        if ($model->exists) {
+            try {
+                
+                //dddx($model->getArrayableRelations());
+                return $model->toArray();
+                //dddx($model->with('studio')->relationsToArray());
+                
+            } catch (\Exception $e) {
+                // Se toArray() fallisce (problemi con enum), usa getAttributes()
+                //Log::warning("Errore in toArray() per modello {$this->model}: " . $e->getMessage());
+                $attributes = $model->getAttributes();
+                
+                // Gestisci specificamente gli enum se presenti
+                //if (isset($attributes['type']) && $model->type instanceof \BackedEnum) {
+                //    $attributes['type'] = $model->type->value;
+                //}
+                
+                return $attributes;
+            }
+        }
+        
+        // Se è un nuovo modello, restituisci solo i campi fillable con valori null
+        $fillable = $model->getFillable();
+        $appends = $model->getAppends();
+        $fields = array_merge($fillable, $appends);
+        
+        return array_fill_keys($fields, null);
     }
 
-    /**
-     * Gets the form model.
-     * Can be overridden in child classes to provide a specific model.
-     *
-     * @return \Illuminate\Database\Eloquent\Model|string|null
-     */
-    protected function getFormModel(): Model|string|null
-    {
-        return null;
-    }
     /**
      * Ottiene le azioni del form.
      *
@@ -129,6 +148,17 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
                 ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
                 ->submit('save'),
         ];
+    }
+
+    /**
+     * Ottiene il modello per il form.
+     * Può essere sovrascritto nelle classi figlie per fornire un modello specifico.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|string|null
+     */
+    protected function getFormModel(): Model|string|null
+    {
+        return null;
     }
 
     /**

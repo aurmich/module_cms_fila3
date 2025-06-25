@@ -191,6 +191,14 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
 
     ];
 
+    /** @var array<string, mixed>  */
+    protected $attributes = [
+        //'state' => Pending::class,
+        //'state' => 'pending',
+        'is_otp'=>false,
+        'is_active'=>true,
+    ];
+
     /**
      * Guard coerente con Spatie/Permission: deve essere 'web'.
      * @var string

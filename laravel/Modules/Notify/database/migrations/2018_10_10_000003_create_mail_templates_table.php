@@ -38,6 +38,9 @@ return new class () extends XotBaseMigration {
             if (! $this->hasColumn('slug')) {
                 $table->string('slug')->unique();
             }
+            if (! $this->hasColumn('params')) {
+                $table->text('params')->nullable();
+            }
 
             $this->updateTimestamps(table: $table, hasSoftDeletes: true);
         });

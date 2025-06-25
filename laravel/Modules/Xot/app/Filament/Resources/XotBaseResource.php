@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Resources;
 
-use Filament\Forms\Form;
-use Filament\Pages\SubNavigationPosition;
-use Filament\Resources\Resource as FilamentResource;
-use Illuminate\Support\Str;
-use Modules\Xot\Actions\ModelClass\CountAction;
-use Modules\Xot\Filament\Traits\NavigationLabelTrait;
-use Webmozart\Assert\Assert;
-
+use Filament\Forms;
 use function Safe\glob;
+use Filament\Forms\Form;
+use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
+use Filament\Pages\SubNavigationPosition;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Xot\Actions\ModelClass\CountAction;
+
+use Filament\Resources\Resource as FilamentResource;
+use Illuminate\Contracts\View\View;
+use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 
 /**
  * @method static string getUrl(string $name, array<string, mixed> $parameters = [], bool $isAbsolute = true)
@@ -41,6 +44,9 @@ abstract class XotBaseResource extends FilamentResource
     {
         return true;
     }
+
+
+
 
     /**
      * @return class-string<\Illuminate\Database\Eloquent\Model>
@@ -171,5 +177,56 @@ abstract class XotBaseResource extends FilamentResource
         }
 
         return $res;
+    }
+
+    public static function getWizardSubmitAction():View
+    {
+        $submit_view = 'pub_theme::filament.wizard.submit-button';
+        return view($submit_view);
+    }
+
+    public static function getAttachmentsSchema(): array{
+        $model = static::getModel();
+        $attachments = $model::$attachments;
+        $uuid = Str::uuid()->toString();
+        $schema = [];
+        
+        foreach ($attachments as $attachment) {
+            $schema[] = Forms\Components\FileUpload::make($attachment)
+                ->disk('local')
+                ->directory('documents/'.$attachment.'/'.$uuid)
+                //->downloadable()
+                //->openable()
+                ->acceptedFileTypes(['application/pdf', 'image/*'])
+                ->maxSize(5120)
+                ->required()
+                ->reorderable()
+                ->multiple()
+                ->preserveFilenames()
+                ->columnSpanFull()
+                ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
+                    if (!$state) return;
+                    
+                    $sessionId = session()->getId();
+                    $sessionDir = "session-uploads/{$sessionId}";
+                    $sessionFiles = [];
+                    
+                    foreach ($state as $file) {
+                        if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                            // Salva direttamente nella directory di sessione
+                            $fileName = time() . '_' . $file->getClientOriginalName();
+                            $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
+                            $sessionFiles[] = $sessionPath;
+                        } else {
+                            // È già un percorso salvato
+                            $sessionFiles[] = $file;
+                        }
+                    }
+                    
+                    $set($attachment, $sessionFiles);
+                })
+                ;
+        }
+        return $schema;
     }
 }

@@ -139,9 +139,9 @@ class DoctorAvailabilityPage extends XotBasePage
     {
         return $form
             ->schema([
-                OpeningHoursField::make('schedule')
-                    ->label(__('saluteora::doctor_availability.sections.weekly_availability'))
-                    ->helperText(__('saluteora::doctor_availability.fields.is_available.help'))
+                'schedule'=>OpeningHoursField::make('schedule')
+                    //->label(__('saluteora::doctor_availability.sections.weekly_availability'))
+                    //->helperText(__('saluteora::doctor_availability.fields.is_available.help'))
                     ->columnSpanFull(),
             ])
             ->statePath('data');

@@ -131,3 +131,53 @@ L'implementazione corretta dimostra che:
    - Considerare la validazione
    - Implementare logging
    - Aggiungere monitoraggio 
+
+## Visualizzazione Parametri come Badge
+
+### Implementazione
+È stata aggiunta una funzionalità per visualizzare i parametri del template email come badge colorati nell'interfaccia Filament.
+
+#### Caratteristiche
+1. **Campo Params**: Campo di input testuale che accetta parametri separati da virgola
+2. **Visualizzazione Badge**: I parametri vengono mostrati come badge blu sotto il campo HTML template
+3. **Visibilità Condizionale**: I badge appaiono solo quando ci sono parametri definiti
+4. **Design Responsive**: I badge si adattano al layout e supportano la modalità dark
+
+#### Struttura Implementata
+
+```php
+// Nel MailTemplateResource.php
+'params_display' => Forms\Components\View::make('notify::filament.components.params-badges')
+    ->viewData(fn ($record) => ['params' => $record?->params])
+    ->columnSpanFull()
+    ->visible(fn ($record): bool => !empty($record?->params)),
+
+'params' => Forms\Components\TextInput::make('params')
+    ->label('Parametri')
+    ->helperText('Inserisci i parametri separati da virgola (es: name, email, date)')
+    ->placeholder('name, email, date, company')
+    ->columnSpanFull(),
+```
+
+#### View Component
+- **File**: `resources/views/filament/components/params-badges.blade.php`
+- **Logica**: Divide la stringa params per virgola e crea badge per ogni parametro
+- **Stile**: Utilizza classi Tailwind coerenti con il design Filament
+
+#### Benefici
+1. **Visualizzazione Chiara**: I parametri sono immediatamente visibili come badge colorati
+2. **Usabilità**: Gli utenti possono vedere rapidamente quali variabili sono disponibili
+3. **Consistenza**: Design coerente con l'interfaccia Filament
+4. **Accessibilità**: Supporto per modalità dark e screen reader
+
+#### Utilizzo
+1. Modificare un template email esistente
+2. Inserire parametri nel campo "Parametri" separati da virgola
+3. I badge appaiono automaticamente sotto il template HTML
+4. I parametri possono essere utilizzati nel template con la sintassi `{{parameter_name}}`
+
+#### Esempi
+```
+Input: "name, email, company, date"
+Output: [name] [email] [company] [date] (come badge blu)
+``` 

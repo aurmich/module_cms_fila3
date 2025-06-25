@@ -26,6 +26,8 @@
 ## UI/UX e Filament
 - [Miglioramenti UI Filament](./FILAMENT_UI_ENHANCEMENTS.md) - Miglioramenti all'interfaccia utente Filament
 - [Miglioramenti UI/UX](./UI_UX_ENHANCEMENTS.md) - Miglioramenti generali all'esperienza utente
+- [Visualizzazione Parametri Badge](./IMPLEMENTATION_NOTES.md#visualizzazione-parametri-come-badge) - Visualizzazione parametri template come badge colorati
+- [Funzionalità Badge Parametri](./params-badges-feature.md) - Documentazione completa della funzionalità badge parametri
 
 ## Migrazione e Manutenzione
 - [Conversione JSON Migration](./MIGRATION_JSON_CONVERSION.md) - Conversione dati JSON nelle migrazioni

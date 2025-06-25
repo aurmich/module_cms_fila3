@@ -63,7 +63,8 @@ return array (
       'description' => 'Oggetto email',
       'helper_text' => 'Inserisci l\'oggetto dell\'email',
       'label' => 'Oggetto',
-    )
+      'placeholder' => 'subject',
+    ),
   ),
   'actions' => 
   array (

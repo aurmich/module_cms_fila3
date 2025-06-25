@@ -133,10 +133,17 @@ return array (
     ),
     'name' => 
     array (
-      'description' => 'name',
-      'helper_text' => 'name',
-      'placeholder' => 'name',
-      'label' => 'name',
+      'description' => 'Nome del template',
+      'helper_text' => 'Nome descrittivo per identificare il template',
+      'placeholder' => 'Es: Benvenuto, Conferma ordine, Reset password',
+      'label' => 'Nome Template',
+    ),
+    'params' => 
+    array (
+      'label' => 'Parametri',
+      'helper_text' => 'Inserisci i parametri separati da virgola che possono essere utilizzati nel template',
+      'placeholder' => 'name, email, date, company',
+      'description' => 'Parametri disponibili per il template email',
     ),
   ),
   'actions' => 

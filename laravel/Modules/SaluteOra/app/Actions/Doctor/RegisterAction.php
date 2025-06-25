@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Actions\Doctor;
 
+use Illuminate\Support\Str;
+use Modules\Geo\Models\Address;
 use Illuminate\Support\Facades\DB;
 use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\Studio;
 use Modules\Notify\Emails\SpatieEmail;
 use Modules\Notify\Models\MailTemplate;
 use Modules\SaluteOra\Datas\DoctorData;
@@ -18,6 +21,7 @@ use Modules\SaluteOra\Enums\UserTypeEnum;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
 use Modules\Notify\Notifications\RecordNotification;
+use Modules\SaluteOra\States\User\IntegrationCompleted;
 use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
 use Modules\SaluteOra\Enums\DoctorRegistrationStatusEnum;
 
@@ -33,8 +37,20 @@ class RegisterAction
     public function execute(UserContract $record,array $data): Doctor
     {
         //$data['type']=UserTypeEnum::DOCTOR;
-        
-        $doctor = Doctor::create($data);
+        if(isset($data['id'])){
+            $doctor = $record;
+            $doctor->update($data);
+        }else{
+            $doctor = Doctor::create($data);
+        }
+        if(isset($data['schedule'])){
+            $studio = Studio::create($data['studio']);
+            $address = Address::create($data['studio']['address']);
+            $studio->address()->save($address);
+            $doctor->studio()->save($studio);
+            $doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
+        }
+
         //$record->save();
         //$record->update($data);
         /*
@@ -46,10 +62,18 @@ class RegisterAction
         }
         */
         
+        if($data['state']=='integration_requested'){
+            $doctor->state->transitionTo(IntegrationCompleted::class);
+            return $doctor;
+        }
+
+
+        $mail_slug=Str::slug($data['type'].'-'.$data['state']);
+        
 
         Notification::route('mail', $data['email'])
         //->locale('it')
-        ->notify(new RecordNotification($doctor,'doctor_registration_pending'));
+        ->notify(new RecordNotification($doctor,$mail_slug));
 
         return $doctor;
     }

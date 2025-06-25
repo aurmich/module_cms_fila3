@@ -28,24 +28,28 @@ use Illuminate\Support\Facades\Log;
 
 class RegistrationWidget extends XotBaseWidget
 {
-    public ?array $data = [];
-    protected int | string | array $columnSpan = 'full';
+    //public ?array $data = []; //moved to XotBaseWidget
+    //protected int | string | array $columnSpan = 'full'; //moved to XotBaseWidget
     public string $type;
     public string $resource;
     public string $model;
     public string $action;
     public Model $record;
     
+    
+    
     protected static string $view = 'pub_theme::filament.widgets.registration';
 
     public function mount(string $type, Request $request): void
     {
         $this->type = $type;
+        
         $this->resource = XotData::make()->getUserResourceClassByType($type);
         $this->model = $this->resource::getModel();
         $this->action = Str::of($this->model)->replace('\\Models\\', '\\Actions\\')->append('\\RegisterAction')->toString();
         $record = $this->getFormModel();
         $data = $this->getFormFill();
+        
         $this->form->fill($data);
         $this->form->model($record);
         $this->data = $data;
@@ -59,6 +63,7 @@ class RegistrationWidget extends XotBaseWidget
         $token = Arr::get($data, 'token');
 
         $user = $this->model::firstWhere('email', $email);
+        
         if ($user === null) {
             return app($this->model);
         }
@@ -70,46 +75,35 @@ class RegistrationWidget extends XotBaseWidget
         }
         
         if ($remember_token === $token) {
+            
             $this->record = $user;
             return $user;
         }
         
+        
         return app($this->model);
+    }
+    
+    public function getFormSchema(): array
+    {
+        return $this->resource::getFormSchemaWidget();
     }
 
     public function getFormFill(): array
     {
-        $model = $this->getFormModel();
+        $data = parent::getFormFill();
+        $data['type'] = $this->type;
+        $data['studio']=[];
+        $data['studio']['description'] = null;
+        $data['studio']['address']=[];
+        $data['studio']['address']['administrative_area_level_1'] = null;
+        $data['studio']['address']['administrative_area_level_2'] = null;
+        $data['studio']['address']['administrative_area_level_3'] = null;
+        $data['studio']['address']['locality'] = null;
+        $data['studio']['address']['postal_code'] = null;
         
-        // Se il modello ha un ID, significa che è stato trovato nel database
-        if ($model->exists) {
-            try {
-                return $model->toArray();
-            } catch (\Exception $e) {
-                // Se toArray() fallisce (problemi con enum), usa getAttributes()
-                Log::warning("Errore in toArray() per modello {$this->model}: " . $e->getMessage());
-                $attributes = $model->getAttributes();
-                
-                // Gestisci specificamente gli enum se presenti
-                if (isset($attributes['type']) && $model->type instanceof \BackedEnum) {
-                    $attributes['type'] = $model->type->value;
-                }
-                
-                return $attributes;
-            }
-        }
         
-        // Se è un nuovo modello, restituisci solo i campi fillable con valori null
-        $fillable = $model->getFillable();
-        $appends = $model->getAppends();
-        $fields = array_merge($fillable, $appends);
-        
-        return array_fill_keys($fields, null);
-    }
-
-    public function getFormSchema(): array
-    {
-        return $this->resource::getFormSchemaWidget();
+        return $data;
     }
 
     /**
@@ -118,25 +112,17 @@ class RegistrationWidget extends XotBaseWidget
     public function register(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
         $data = $this->form->getState();
-        $record = $this->record;
-       
-        $user = app($this->action)->execute($record, $data);
-
-        return redirect()->route('pages.view', ['slug' => $this->type . '_register_complete']);
-    }
-
-    /**
-     * Invia l'email di conferma della registrazione.
-     */
-    protected function sendConfirmationEmail(\Modules\SaluteOra\Models\Doctor $doctor): void
-    {
-        $email = new \Modules\Notify\Emails\SpatieEmail($doctor, 'registration_pending');
-
-        \Illuminate\Support\Facades\Mail::to($doctor->email)
-            ->locale(app()->getLocale())
-            ->send($email);
         
-        session()->flash('message', 'Registrazione completata con successo. La tua richiesta è in attesa di moderazione.');
-        $this->form->fill();
+        $record = $this->record;
+        $data=array_merge($this->data,$data);
+        if(!isset($data['name']) && isset($data['email'])){
+            $data['name']=Str::of($data['email'])->before('@')->toString();
+        }
+        $user = app($this->action)->execute($record, $data);
+        $slug=$this->type . '_register_'.Str::snake($user->state::$name);
+        $slug=Str::slug($slug);
+        return redirect()->route('pages.view', ['slug' => $slug]);
     }
+
+    
 }

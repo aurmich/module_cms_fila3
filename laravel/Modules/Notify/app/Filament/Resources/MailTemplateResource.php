@@ -58,6 +58,13 @@ class MailTemplateResource extends LangBaseResource
                 ->required()
                 ->columnSpanFull(),
 
+            'params_display' => Forms\Components\View::make('notify::filament.components.params-badges')
+                ->viewData(fn ($record) => ['params' => $record?->params])
+                ->columnSpanFull()
+                ->visible(fn ($record): bool => !empty($record?->params)),
+
+           
+
             'text_template' => Forms\Components\Textarea::make('text_template')
                 ->maxLength(65535)
                 ->columnSpanFull(),

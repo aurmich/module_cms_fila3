@@ -9,14 +9,7 @@ use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Inactive;
 use Modules\SaluteOra\Models\User;
 
-class ActiveToInactive extends Transition
+class ActiveToInactive extends BaseTransition
 {
-    public function __construct(public User $user, public ?string $message='') {}
-
-    public function handle(): User
-    {
-        $this->user->state = new Inactive($this->user);
-        $this->user->save();
-        return $this->user;
-    }
+    //---
 }

@@ -88,7 +88,7 @@ class OpeningHoursField extends Field
                             Group::make([
                                 Grid::make(2)->schema([
                                     TimePicker::make("$dayKey.morning_from")
-                                        ->label(__('ui::opening_hours.labels.from'))
+                                        //->label(__('ui::opening_hours.labels.from'))
                                         ->placeholder('08:00')
                                         ->seconds(false)
                                         ->minutesStep(15)
@@ -98,13 +98,14 @@ class OpeningHoursField extends Field
                                         ,
                                     
                                     TimePicker::make("$dayKey.morning_to")
-                                        ->label(__('ui::opening_hours.labels.to'))
+                                        //->label(__('ui::opening_hours.labels.to'))
                                         ->placeholder('12:30')
                                         ->seconds(false)
                                         ->minutesStep(15)
                                         ->nullable()
                                         ->live()
-                                        ->rules(['after_or_equal:' . $dayKey . '.morning_from']),
+                                        //->rules(['after_or_equal:' . $dayKey . '.morning_from'])
+                                        ,
                                 ])
                             ])
                             ->columnSpan(1),
@@ -113,22 +114,24 @@ class OpeningHoursField extends Field
                             Group::make([
                                 Grid::make(2)->schema([
                                     TimePicker::make("$dayKey.afternoon_from")
-                                        ->label(__('ui::opening_hours.labels.from'))
+                                        //->label(__('ui::opening_hours.labels.from'))
                                         ->placeholder('15:00')
                                         ->seconds(false)
                                         ->minutesStep(15)
                                         ->nullable()
                                         ->live()
-                                        ->rules(['before_or_equal:' . $dayKey . '.afternoon_to']),
+                                        //->rules(['before_or_equal:' . $dayKey . '.afternoon_to'])
+                                        ,
                                     
                                     TimePicker::make("$dayKey.afternoon_to")
-                                        ->label(__('ui::opening_hours.labels.to'))
+                                        //->label(__('ui::opening_hours.labels.to'))
                                         ->placeholder('19:00')
                                         ->seconds(false)
                                         ->minutesStep(15)
                                         ->nullable()
                                         ->live()
-                                        ->rules(['after_or_equal:' . $dayKey . '.afternoon_from']),
+                                        //->rules(['after_or_equal:' . $dayKey . '.afternoon_from'])
+                                        ,
                                 ])
                             ])
                             ->columnSpan(1),

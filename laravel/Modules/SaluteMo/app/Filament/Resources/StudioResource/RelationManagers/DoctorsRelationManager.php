@@ -8,7 +8,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Modules\SaluteMo\Models\Doctor;
+use Modules\SaluteOra\Models\Doctor;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteMo\Filament\Resources\DoctorResource;
 use Modules\SaluteMo\Filament\Resources\DoctorResource\Pages\ListDoctors;

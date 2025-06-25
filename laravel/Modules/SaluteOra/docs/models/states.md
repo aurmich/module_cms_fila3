@@ -3,46 +3,157 @@
 ## Introduzione
 Il modulo SaluteOra utilizza `spatie/laravel-model-states` per gestire gli stati dei modelli. Questo approccio offre una gestione robusta e flessibile degli stati, permettendo transizioni controllate e validazione.
 
+## Stati Disponibili
+
+Gli stati dell'utente nel sistema SaluteOra sono:
+
+1. **Pending** - Stato iniziale dell'utente in attesa di approvazione
+2. **Active** - Utente attivo nel sistema
+3. **Inactive** - Utente inattivo
+4. **Rejected** - Utente respinto
+5. **Suspended** - Utente sospeso
+6. **IntegrationRequested** - Utente per cui è richiesta un'integrazione di dati
+7. **IntegrationCompleted** - Utente che ha completato l'integrazione richiesta (NUOVO)
+
 ## Struttura degli Stati
 
-### UserState
+### UserState (Classe Base)
 ```php
-namespace Modules\SaluteOra\States;
+namespace Modules\SaluteOra\States\User;
 
 use Spatie\ModelStates\State;
+use Spatie\ModelStates\StateConfig;
 
-class UserState extends State
+abstract class UserState extends State
 {
+    abstract public function label(): string;
+    abstract public function color(): string;
+    abstract public function icon(): string;
+
     public static function config(): StateConfig
     {
         return parent::config()
             ->default(Pending::class)
-            ->allowTransition(Pending::class, Approved::class)
-            ->allowTransition(Pending::class, Rejected::class)
-            ->allowTransition(Approved::class, Suspended::class);
+            // Pending transitions
+            ->allowTransition(Pending::class, Active::class, Transitions\PendingToActive::class)
+            ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
+            ->allowTransition(Pending::class, IntegrationRequested::class, Transitions\PendingToIntegrationRequested::class)
+
+            // Active transitions
+            ->allowTransition(Active::class, Suspended::class, Transitions\ActiveToSuspended::class)
+            ->allowTransition(Active::class, Inactive::class, Transitions\ActiveToInactive::class)
+            ->allowTransition(Active::class, IntegrationRequested::class, Transitions\ActiveToIntegrationRequested::class)
+
+            // IntegrationRequested transitions
+            ->allowTransition(IntegrationRequested::class, Active::class, Transitions\IntegrationRequestedToActive::class)
+            ->allowTransition(IntegrationRequested::class, Rejected::class, Transitions\IntegrationRequestedToRejected::class)
+            ->allowTransition(IntegrationRequested::class, IntegrationCompleted::class, Transitions\IntegrationRequestedToIntegrationCompleted::class)
+
+            // IntegrationCompleted transitions
+            ->allowTransition(IntegrationCompleted::class, Active::class, Transitions\IntegrationCompletedToActive::class)
+            ->allowTransition(IntegrationCompleted::class, Rejected::class, Transitions\IntegrationCompletedToRejected::class)
+            ->allowTransition(IntegrationCompleted::class, IntegrationRequested::class, Transitions\IntegrationCompletedToIntegrationRequested::class)
+
+            // Other transitions
+            ->allowTransition(Rejected::class, Pending::class, Transitions\RejectedToPending::class)
+            ->allowTransition(Suspended::class, Active::class, Transitions\SuspendedToActive::class)
+            ->allowTransition(Suspended::class, Inactive::class, Transitions\SuspendedToInactive::class)
+            ->allowTransition(Inactive::class, Active::class, Transitions\InactiveToActive::class)
+
+            // Register all states
+            ->registerState(Pending::class)
+            ->registerState(Active::class)
+            ->registerState(Inactive::class)
+            ->registerState(Rejected::class)
+            ->registerState(Suspended::class)
+            ->registerState(IntegrationRequested::class)
+            ->registerState(IntegrationCompleted::class);
     }
 }
 ```
 
-### Stati Specifici
+### Stato IntegrationCompleted (NUOVO)
 ```php
-namespace Modules\SaluteOra\States;
+namespace Modules\SaluteOra\States\User;
 
-class Pending extends UserState
+/**
+ * Stato che rappresenta un utente che ha completato l'integrazione dei dati richiesti.
+ * 
+ * In questo stato l'utente ha fornito tutte le informazioni richieste
+ * e può essere attivato nel sistema.
+ */
+class IntegrationCompleted extends UserState
 {
-    public function canTransitionTo(State $newState): bool
+    public static $name = 'integration_completed';
+    
+    public function label(): string
     {
-        return $newState instanceof Approved || $newState instanceof Rejected;
+        return 'Integrazione completata';
+    }
+    
+    public function color(): string
+    {
+        return 'success';
+    }
+    
+    public function icon(): string
+    {
+        return 'heroicon-o-check-circle';
     }
 }
+```
 
-class Approved extends UserState
+### Stato IntegrationRequested (Esistente)
+```php
+namespace Modules\SaluteOra\States\User;
+
+/**
+ * Stato che rappresenta un utente per il quale è richiesta un'integrazione.
+ * 
+ * In questo stato l'utente ha completato la registrazione ma sono richieste
+ * ulteriori informazioni prima di poter attivare l'account.
+ */
+class IntegrationRequested extends UserState
 {
-    public function canTransitionTo(State $newState): bool
+    public static $name = 'integration_requested';
+    
+    public function label(): string
     {
-        return $newState instanceof Suspended;
+        return 'Integrazione richiesta';
+    }
+    
+    public function color(): string
+    {
+        return 'info';
+    }
+    
+    public function icon(): string
+    {
+        return 'heroicon-o-document-text';
     }
 }
+```
+
+## Flusso di Integrazione
+
+Il nuovo flusso di integrazione segue questi passaggi:
+
+1. **Pending** → **IntegrationRequested**: Quando servono dati aggiuntivi
+2. **IntegrationRequested** → **IntegrationCompleted**: Quando l'utente fornisce i dati
+3. **IntegrationCompleted** → **Active**: Quando l'amministratore approva
+
+### Diagramma del Flusso
+```
+Pending
+├── → Active (approvazione diretta)
+├── → Rejected (respinto)
+└── → IntegrationRequested (servono dati aggiuntivi)
+    ├── → IntegrationCompleted (dati forniti)
+    │   ├── → Active (approvazione finale)
+    │   ├── → Rejected (respinto dopo verifica)
+    │   └── → IntegrationRequested (servono ulteriori dati)
+    ├── → Active (approvazione diretta)
+    └── → Rejected (respinto)
 ```
 
 ## Implementazione nei Modelli
@@ -52,14 +163,48 @@ class Approved extends UserState
 namespace Modules\SaluteOra\Models;
 
 use Spatie\ModelStates\HasStates;
+use Modules\SaluteOra\States\User\UserState;
 
-class User extends Model
+class User extends BaseModel
 {
     use HasStates;
 
-    protected $casts = [
-        'state' => UserState::class,
-    ];
+    protected function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'state' => UserState::class,
+        ]);
+    }
+}
+```
+
+## Transizioni
+
+### Nuova Transizione: IntegrationRequestedToIntegrationCompleted
+```php
+namespace Modules\SaluteOra\States\User\Transitions;
+
+use Spatie\ModelStates\Transition;
+use Modules\SaluteOra\States\User\IntegrationRequested;
+use Modules\SaluteOra\States\User\IntegrationCompleted;
+use Modules\SaluteOra\Models\User;
+
+class IntegrationRequestedToIntegrationCompleted extends Transition
+{
+    public function __construct(public User $user, public ?string $message = '') {}
+
+    public function handle(): User
+    {
+        // Verifica che tutti i dati richiesti siano stati forniti
+        if (!$this->user->hasCompletedIntegration()) {
+            throw new \Exception('Integrazione non completata');
+        }
+
+        $this->user->state = new IntegrationCompleted($this->user);
+        $this->user->save();
+        
+        return $this->user;
+    }
 }
 ```
 

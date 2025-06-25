@@ -9,20 +9,7 @@ use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Suspended;
 use Modules\SaluteOra\Models\User;
 
-class ActiveToSuspended extends Transition
+class ActiveToSuspended extends BaseTransition
 {
-    public User $user;
-    public ?string $message;
-    public function __construct(User $user, ?string $message='') {
-        $this->user = $user;
-        $this->message = $message;
-    }
-
-    public function handle(): User
-    {
-
-        $this->user->state = new Suspended($this->user);
-        $this->user->save();
-        return $this->user;
-    }
+    //---
 }

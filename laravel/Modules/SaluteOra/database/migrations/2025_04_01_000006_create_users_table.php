@@ -79,6 +79,12 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn('gender')) {
                     $table->string('gender', 1)->nullable()->after('date_of_birth');
                 }
+                if ($this->hasColumn('is_otp')) {
+                    $table->boolean('is_otp')->default(false)->nullable()->change();
+                }
+                if ($this->hasColumn('is_active')) {
+                    $table->boolean('is_active')->default(true)->nullable()->change();
+                }
 
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);

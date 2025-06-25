@@ -185,6 +185,8 @@ class User extends BaseUser implements HasMedia
     protected $attributes = [
         //'state' => Pending::class,
         //'state' => 'pending',
+        'is_otp'=>false,
+        'is_active'=>true,
     ];
 
 
@@ -204,11 +206,11 @@ class User extends BaseUser implements HasMedia
         'phone',
         'lang',
         'current_team_id',
-        'is_active',
+        //'is_active',
         'is_otp',
         'password_expires_at',
-        'studio_id',
-        'continuation_token',
+        //'studio_id',
+        //'continuation_token',
         'certificates'
     ];
 

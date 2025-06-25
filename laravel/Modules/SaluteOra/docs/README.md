@@ -65,6 +65,30 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 - [User](models/user.md) - Documentazione del modello User
 - [DoctorRegistrationWorkflow](models/doctor_registration_workflow.md) - Workflow di registrazione dei medici
 
+#### Stati degli Utenti (Spatie Model States)
+
+Il modulo utilizza il package `spatie/laravel-model-states` per gestire gli stati degli utenti attraverso un workflow strutturato:
+
+- [Stati Utente](models/states.md) - Documentazione completa degli stati e transizioni
+- [Best Practices Stati](models/state-best-practices.md) - Linee guida per l'implementazione degli stati
+- [**Workflow di Integrazione**](models/integration-workflow.md) - **NUOVO**: Flusso di integrazione dati con stato `IntegrationCompleted`
+
+**Stati disponibili:**
+1. **Pending** - Stato iniziale in attesa di approvazione
+2. **Active** - Utente attivo nel sistema
+3. **Inactive** - Utente inattivo
+4. **Rejected** - Utente respinto
+5. **Suspended** - Utente sospeso
+6. **IntegrationRequested** - Richiesta integrazione dati aggiuntivi
+7. **IntegrationCompleted** - ⭐ **NUOVO**: Integrazione dati completata dall'utente
+
+**Flusso di Integrazione:**
+```
+Pending → IntegrationRequested → IntegrationCompleted → Active
+```
+
+Questo nuovo flusso permette di separare il completamento dei dati dall'approvazione amministrativa, migliorando il tracking del processo di onboarding e fornendo una migliore UX con stati chiari e distinti.
+
 > **Nota:** La moderazione utenti è ora gestita direttamente tramite il modello User. Vedi [moderation-architettura.md](./moderation-architettura.md)
 
 ### Processi

@@ -57,9 +57,11 @@ class RegisterAction
                 ]);
             }
 
+            $mail_slug=Str::slug($data['type'].'-'.$data['state']);
+
             Notification::route('mail', $data['email'])
             //->locale('it')
-            ->notify(new RecordNotification($patient,'patient_registration_pending'));
+            ->notify(new RecordNotification($patient,$mail_slug));
 
             return $patient;
         });

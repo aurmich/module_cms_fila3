@@ -161,6 +161,10 @@ return array (
     array (
       'label' => 'toggleColumns',
     ),
+    'description' => 
+    array (
+      'description' => 'description',
+    ),
   ),
   'actions' => 
   array (

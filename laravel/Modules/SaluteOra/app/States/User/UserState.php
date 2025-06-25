@@ -48,6 +48,16 @@ abstract class UserState extends State
             ->allowTransition(Active::class, Inactive::class, Transitions\ActiveToInactive::class)
             ->allowTransition(Active::class, IntegrationRequested::class, Transitions\ActiveToIntegrationRequested::class)
 
+            // IntegrationRequested transitions
+            ->allowTransition(IntegrationRequested::class, Active::class, Transitions\IntegrationRequestedToActive::class)
+            ->allowTransition(IntegrationRequested::class, Rejected::class, Transitions\IntegrationRequestedToRejected::class)
+            ->allowTransition(IntegrationRequested::class, IntegrationCompleted::class, Transitions\IntegrationRequestedToIntegrationCompleted::class)
+
+            // IntegrationCompleted transitions
+            ->allowTransition(IntegrationCompleted::class, Active::class, Transitions\IntegrationCompletedToActive::class)
+            ->allowTransition(IntegrationCompleted::class, Rejected::class, Transitions\IntegrationCompletedToRejected::class)
+            ->allowTransition(IntegrationCompleted::class, IntegrationRequested::class, Transitions\IntegrationCompletedToIntegrationRequested::class)
+
             // Rejected transitions
             ->allowTransition(Rejected::class, Pending::class, Transitions\RejectedToPending::class)
 
@@ -55,12 +65,16 @@ abstract class UserState extends State
             ->allowTransition(Suspended::class, Active::class, Transitions\SuspendedToActive::class)
             ->allowTransition(Suspended::class, Inactive::class, Transitions\SuspendedToInactive::class)
 
+            // Inactive transitions
+            ->allowTransition(Inactive::class, Active::class, Transitions\InactiveToActive::class)
+
             // Register all states
             ->registerState(Pending::class)
             ->registerState(Active::class)
             ->registerState(Inactive::class)
             ->registerState(Rejected::class)
             ->registerState(Suspended::class)
-            ->registerState(IntegrationRequested::class);
+            ->registerState(IntegrationRequested::class)
+            ->registerState(IntegrationCompleted::class);
     }
 }

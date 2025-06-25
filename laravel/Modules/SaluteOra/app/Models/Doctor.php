@@ -148,13 +148,9 @@ class Doctor extends User
     use HasParent;
 
    
-    /**
-     * Gli attributi che sono mass assignable.
-     *
-     * @var list<string>
-     */
+    /** @var list<string>     */
     protected $fillable = [
-        'tenant_id',
+        //'tenant_id',
         'first_name',
         'last_name',
         'email',
@@ -162,23 +158,42 @@ class Doctor extends User
         'address',
         'city',
         'registration_number',
-        'specialization',
+        //'specialization',
         'certifications',
-        'availability',
+        //'availability',
         'status',
     ];
 
+    /** @var list<string>     */
     protected $appends = [
         //'health_card',
         //'identity_document',
         //'isee_certificate',
         //'pregnancy_certificate',
         // 'certifications', // Gestito da getter personalizzato
+        //'studio',
+        //'studio::description',
+        //'studio:address',
     ];
 
+    /** @var list<string>     */
     public static array $attachments = [
         'certifications',
        
+    ];
+
+    /** @var list<string>     */
+    protected $with = [
+        'studio',
+        'studio.address',
+    ];
+
+    /** @var array<string, mixed>  */
+    protected $attributes = [
+        //'state' => Pending::class,
+        //'state' => 'pending',
+        'is_otp'=>false,
+        'is_active'=>true,
     ];
 
 
