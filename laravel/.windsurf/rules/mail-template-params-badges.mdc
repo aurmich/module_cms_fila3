@@ -3,3 +3,86 @@ description:
 globs:
 alwaysApply: false
 ---
+# Regola: Badge Parametri Mail Template
+
+## Ambito
+- Modulo Notify
+- Risorsa Filament MailTemplateResource
+- Visualizzazione parametri email template
+
+## Motivazione
+- Migliorare l'usabilità dell'interfaccia per i template email
+- Visualizzazione immediata dei parametri disponibili
+- Ridurre errori nell'utilizzo dei parametri nei template
+- Mantenere coerenza visiva con Filament
+
+## Regola
+- SEMPRE utilizzare il componente View personalizzato per mostrare i parametri come badge
+- SEMPRE posizionare la visualizzazione badge DOPO il campo html_template
+- SEMPRE utilizzare traduzioni automatiche tramite LangServiceProvider (no hardcoded)
+- SEMPRE includere sia visualizzazione (params_display) che campo editabile (params)
+- SEMPRE applicare visibilità condizionale per i badge
+
+## Esempio pratico
+```php
+'params_display' => Forms\Components\View::make('notify::filament.components.params-badges')
+    ->viewData(fn ($record) => ['params' => $record?->params])
+    ->columnSpanFull()
+    ->visible(fn ($record): bool => !empty($record?->params)),
+
+'params' => Forms\Components\TextInput::make('params')
+    ->columnSpanFull(),
+```
+
+## View Component
+```blade
+@if(!empty($params))
+    <div class="space-y-2">
+        <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+            {{ __('notify::mail_template.sections.variables') }}
+        </div>
+        
+        <div class="flex flex-wrap gap-2">
+            @foreach(array_filter(array_map('trim', explode(',', $params))) as $param)
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                           bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 
+                           border border-blue-200 dark:border-blue-800">
+                    {{ $param }}
+                </span>
+            @endforeach
+        </div>
+    </div>
+@endif
+```
+
+## Anti-pattern
+- Non utilizzare stringhe hardcoded per label/placeholder/helper_text
+- Non posizionare i badge in posizioni diverse da dopo html_template
+- Non omettere la visibilità condizionale
+- Non utilizzare componenti diversi da Forms\Components\View per la visualizzazione
+
+## Traduzioni richieste
+```php
+'fields' => [
+    'params' => [
+        'label' => 'Parametri',
+        'helper_text' => 'Inserisci i parametri separati da virgola che possono essere utilizzati nel template',
+        'placeholder' => 'name, email, date, company',
+        'description' => 'Parametri disponibili per il template email',
+    ],
+],
+'sections' => [
+    'variables' => 'Variabili',
+],
+```
+
+## File di documentazione
+- [laravel/Modules/Notify/docs/mail-templates/params-badges-feature.md]
+- [laravel/Modules/Notify/docs/mail-templates/implementation_notes.md]
+
+## Collegamenti
+- [Modules/Notify/docs/mail-templates/params-badges-feature.md](../Modules/Notify/docs/mail-templates/params-badges-feature.md)
+- [Modules/Notify/docs/mail-templates/implementation_notes.md](../Modules/Notify/docs/mail-templates/implementation_notes.md)
+
+## Ultimo aggiornamento
+2025-01-16

@@ -743,3 +743,43 @@ Tutte le viste, risorse Filament e API devono ora usare la relazione `addresses`
 La pagina ListStudios ora implementa correttamente il metodo getTableColumns() secondo la policy Xot (array associativo, chiavi stringa, colonne ricavate dal modello e dalla migrazione). Vedi:
 - [Xot/docs/filament/listrecords.md](../../Xot/docs/filament/listrecords.md)
 - [SaluteOra/docs/resources/studio-resource.md](./resources/studio-resource.md)
+
+## Widget Filament
+
+### Widget FullCalendar
+- [**DoctorAvailabilitiesWidget**](widgets/doctor-availabilities-widget.md) - Gestione disponibilità settimanali dottori
+- [**DoctorCalendarWidget**](widgets/doctor-calendar-widget.md) - Calendario appuntamenti per dottori  
+- [**PatientCalendarWidget**](widgets/patient-calendar-widget.md) - Calendario sola lettura per pazienti
+- [**AdminCalendarWidget**](widgets/admin-calendar-widget.md) - Vista globale per amministratori
+
+### Widget Form e Wizard  
+- [**FindDoctorAndAppointmentWidget**](widgets/find-doctor-appointment-widget.md) - Ricerca dottori e prenotazione
+- [**PatientRegistrationWizard**](widgets/patient-registration-wizard.md) - Registrazione guidata pazienti
+
+### Widget Overview
+- [**StudioOverviewWidget**](widgets/studio-overview-widget.md) - Statistiche e panoramica studio
+
+### Architettura Widget
+- [**Indice completo Widget**](widgets/index.md) - Documentazione completa di tutti i widget
+- [**HasFullCalendarConfig Trait**](traits/has-full-calendar-config.md) - Configurazioni comuni FullCalendar
+- [**Best Practices Widget**](widgets/best-practices.md) - Linee guida per lo sviluppo widget
+
+### Filament
+
+#### Widget
+
+Il modulo implementa diversi widget Filament per le dashboard:
+
+- [**DoctorAvailabilitiesWidget Analysis**](widgets/doctor-availabilities-widget-analysis.md) - **NUOVO**: Analisi completa del widget mancante per gestione disponibilità dottori
+- [**Widget Improvements Analysis**](widgets/widget-improvements-analysis.md) - **NUOVO**: Audit e piano miglioramenti per tutti i widget esistenti
+- [FindDoctorAndAppointmentWidget](widgets/find-doctor-appointment-widget.md) - Widget wizard per prenotazione appuntamenti pazienti
+
+#### ⚠️ PROBLEMI CRITICI IDENTIFICATI
+
+1. **🔴 DoctorAvailabilitiesWidget MANCANTE**: Referenziato in `doctor-home.json` ma non esiste → **Homepage dottore rotta**
+2. **🔴 StudioOverviewWidget NON-COMPLIANT**: Viola pattern Laraxot (estende `Widget` invece di `XotBaseWidget`)
+
+#### Pattern di Eccellenza Trovati
+
+- **DoctorCalendarWidget**: Implementazione perfetta con trait `HasFullCalendarConfig`, multi-tenancy, e security robusta
+- **BaseTransition Pattern**: Capolavoro di DRY & KISS per gestione stati
