@@ -67,11 +67,14 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 
 #### Stati degli Utenti (Spatie Model States)
 
-Il modulo utilizza il package `spatie/laravel-model-states` per gestire gli stati degli utenti attraverso un workflow strutturato:
+Il modulo utilizza il package `spatie/laravel-model-states` per gestire gli stati degli utenti attraverso un workflow strutturato con un **pattern architetturale eccellente**:
 
 - [Stati Utente](models/states.md) - Documentazione completa degli stati e transizioni
+- [**Pattern BaseTransition**](models/base-transition-pattern.md) - **CAPOLAVORO**: Implementazione DRY & KISS
 - [Best Practices Stati](models/state-best-practices.md) - Linee guida per l'implementazione degli stati
-- [**Workflow di Integrazione**](models/integration-workflow.md) - **NUOVO**: Flusso di integrazione dati con stato `IntegrationCompleted`
+- [**Workflow di Integrazione**](models/integration-workflow.md) - **NUOVO**: Flusso completo `IntegrationRequested` → `IntegrationCompleted` → `Active/Rejected/IntegrationRequested`
+
+Il pattern **BaseTransition** è un esempio eccellente di ingegneria software che dimostra come principi semplici (DRY, KISS) possano produrre soluzioni eleganti dove **18 transizioni** sono implementate con solo **3 linee di codice** ciascuna!
 
 **Stati disponibili:**
 1. **Pending** - Stato iniziale in attesa di approvazione

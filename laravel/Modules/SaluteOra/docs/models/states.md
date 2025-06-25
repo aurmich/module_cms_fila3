@@ -403,3 +403,42 @@ WHERE state = 'Modules\\SaluteOra\\States\\Active';
    - Mantenere aggiornata la documentazione degli stati
    - Documentare le transizioni consentite
    - Registrare le modifiche e le correzioni 
+
+## Pattern BaseTransition (DRY + KISS)
+
+⭐ **IMPORTANTE**: Tutte le transizioni nel modulo SaluteOra seguono il pattern **BaseTransition**, un capolavoro di design che implementa DRY e KISS.
+
+### Filosofia
+- **99% delle transizioni** sono completamente vuote (solo `//---`)
+- **Auto-discovery** dello stato target dal nome della classe
+- **Notifiche automatiche** generate automaticamente
+- **Zero duplicazione** di codice
+
+### Implementazione Tipica
+```php
+class IntegrationCompletedToRejected extends BaseTransition
+{
+    //---  (Funziona automaticamente!)
+}
+```
+
+### Come Funziona l'Auto-Discovery
+```
+IntegrationCompletedToActive → Modules\SaluteOra\States\User\Active
+PendingToIntegrationRequested → Modules\SaluteOra\States\User\IntegrationRequested
+```
+
+### Transizioni con Logica Custom (Rare)
+Solo quando servono dati aggiuntivi per le notifiche:
+```php
+class PendingToActive extends BaseTransition
+{
+    public function getNotificationData(): array {
+        $password = Str::random(10);
+        $this->user->update(['password' => $password]);
+        return ['message' => $this->message, 'password' => $password];
+    }
+}
+```
+
+➡️ **Documentazione completa**: [Pattern BaseTransition](base-transition-pattern.md) 
