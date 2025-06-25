@@ -158,7 +158,7 @@
     <div class="w-full flex justify-center">
       <h1 class="text-[#FF5F7E] text-3xl">Per informazioni aggiuntive</h1>
     </div>
-    <div class="h-96 pt-5 flex flex-col lg:flex-row justify-center items-center">
+    <div class="h-64 pt-5 flex flex-col lg:flex-row justify-center items-center">
       <div class="w-64 h-44 bg-cover bg-[#FCD5D0] rounded-[25px] m-5">
         <div class="grid grid-cols-2">
           <div class="flex justify-center">
@@ -227,7 +227,7 @@
           <img class="h-16 lg:h-[150px]" src="/img/coi-logo-updated.png" />
         </div>
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/fondazione-andi-logo-updated.png" />
+          <img class="h-16 lg:h-[150px]" src="/img/fondazione-andi-white.png" />
         </div>
         <div class="p-5">
           <img class="h-16 lg:h-[150px]" src="/img/inmp-logo-piccolo-updated.png" />

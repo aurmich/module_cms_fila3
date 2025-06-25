@@ -147,4 +147,5 @@
 <div class="right-[15%]">right 15%</div>
 <div class="mt-10">margin-top 10</div>
 <div class="lg:py-8">large py-8</div>
+<div class="text-[#F38B8B]">testo rosa chiaro</div>
 </x-layouts.app>

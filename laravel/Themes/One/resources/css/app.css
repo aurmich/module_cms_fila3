@@ -263,16 +263,8 @@
     .fi-section-content {
         @apply bg-white px-4 py-6 sm:px-6;
     }
-    .fi-icon-btn {
-        @apply !bg-transparent !border-transparent;
-    }
-    .fi-fo-wizard-header-step-label {
-        @apply !text-[#FF5F7E];
-    }
-    .fi-fo-wizard-header-step-icon {
-        @apply !border-[#FF5F7E] !text-[#FF5F7E];
-    }
-    .fi-input {
-        @apply focus:border-[#FF5F7E] focus:ring-[#FF5F7E];
+
+    .filepond--item[data-filepond-item-state="processing-complete"] .filepond--panel {
+        background-color: #FF5F7E !important; 
     }
 }
