@@ -108,12 +108,16 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         if($model==null){
             return [];
         }
+
+       
         // Se il modello ha un ID, significa che è stato trovato nel database
         if ($model->exists) {
             try {
                 
                 //dddx($model->getArrayableRelations());
-                return $model->toArray();
+                $res= $model->toArray();
+                
+                return $res;
                 //dddx($model->with('studio')->relationsToArray());
                 
             } catch (\Exception $e) {

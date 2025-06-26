@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Modules\User\Models\Device;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
@@ -174,14 +175,22 @@ class DoctorResource extends XotBaseResource
                             ->email()
                             ->maxLength(255)
                             ->autocomplete('email')
-                            //->unique(User::class)
-                            //->unique(table:User::class,ignoreRecord: true)
-                            //*
-                            ->unique(modifyRuleUsing: function (Unique $rule,$record,$get) {
-                                return $rule->where('id','!=', $get('id'));
+                            ->readonly(fn($get) => $get('id') !== null)
+                            ->extraAttributes(function ($get) {
+                                return $get('id') !== null
+                                    ? ['class' => 'bg-gray-100 border-gray-300 cursor-not-allowed opacity-90']
+                                    : [];
                             })
-                              //  */
-                            ,
+                            ->rules(function ($get) {
+                                $rules = [];
+                                // Applica unique solo se il record è nuovo (id è null)
+                                //if ($get('id') === null) {
+                                    //$rules[] = Rule::unique(User::class, 'email');
+                                    $rules[] = Rule::unique(User::class,'email')->ignore($get('id'));
+                                //}
+                                
+                                return $rules;
+                            }),
                         ...self::getDocumentsSchema(),
 
                     ]),

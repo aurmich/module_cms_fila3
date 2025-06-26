@@ -1,5 +1,114 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
+# Regola: Widget SaluteOra - IMPLEMENTAZIONE COMPLETATA
+
+## ✅ Status Attuale: RISOLTO (Gennaio 2025)
+
+### 🎯 DoctorAvailabilitiesWidget - IMPLEMENTATO
+
+**PROBLEMA RISOLTO**: Il widget era referenziato ma mancante, causando homepage dottore rotta.
+
+**IMPLEMENTAZIONE COMPLETA**:
+1. **Widget Class**: `DoctorAvailabilitiesWidget` extends `XotBaseWidget` ✅
+2. **Security**: `canView()` con controllo `UserType::DOCTOR` ✅
+3. **Multi-Studio Overview**: Visualizza tutti gli studi del dottore ✅
+4. **Schedule Display**: Mostra orari pivot `studio_user.schedule` ✅
+5. **Vista Blade**: Template responsive con quick stats ✅
+6. **Traduzioni**: Complete in `widgets.php` ✅
+
+### 🎨 Features Implementate
+
+#### Multi-Studio Management
+- **Studio Principale**: Evidenziato con border blu e badge
+- **Status Badges**: Configurato (verde) / Da configurare (amber)
+- **Quick Stats**: Dashboard con totali, configurati, da configurare
+- **Context Switch**: Link diretti a DoctorAvailabilityPage per editing
+
+#### UX Excellence
+- **Zebra Striping**: Tabelle con righe alternate
+- **Responsive Design**: Mobile-first con overflow-x-auto
+- **Dark Mode**: Supporto completo
+- **Empty States**: Gestiti per no studi / no orari
+
+#### Performance & Security
+- **Eager Loading**: `withPivot(['schedule', 'is_primary'])`
+- **Ordinamento**: Studio principale sempre in cima
+- **Data Isolation**: Solo studi associati al dottore autenticato
+- **Access Control**: `UserType::DOCTOR` + auth check
+
+### 📊 Pattern Architetturale
+
+```php
+class DoctorAvailabilitiesWidget extends XotBaseWidget
+{
+    // ✅ Pattern corretto implementato
+    protected static string $view = 'saluteora::filament.widgets.doctor-availabilities';
+    
+    public static function canView(): bool
+    {
+        return auth()->user()?->type === UserTypeEnum::DOCTOR->value;
+    }
+    
+    protected function getViewData(): array
+    {
+        return [
+            'studios_schedules' => auth()->user()->studios()
+                ->withPivot(['schedule', 'is_primary'])
+                ->orderBy('studio_user.is_primary', 'desc')
+                ->get()
+                ->map(fn($studio) => [
+                    'studio' => $studio,
+                    'schedule' => $studio->pivot->schedule ?? [],
+                    'is_primary' => $studio->pivot->is_primary ?? false,
+                ])
+        ];
+    }
+}
+```
+
+### 🔧 StudioOverviewWidget - NEXT
+
+**PROBLEMA IDENTIFICATO**: Estende `Widget` invece di `XotBaseWidget`
+
+**CORREZIONI NECESSARIE**:
+- [ ] Cambiare estensione a `XotBaseWidget`
+- [ ] Migliorare security con multi-tenancy check
+- [ ] Aggiornare `canView()` con logic enum-based
+
+## Regole da Seguire
+
+### Widget Pattern ✅ CONFERMATO
+1. **SEMPRE** estendere `XotBaseWidget` (non `Widget`)
+2. **SEMPRE** implementare `canView()` con security multi-layer
+3. **SEMPRE** considerare multi-tenancy con context awareness
+4. **SEMPRE** usare enum per controlli UserType
+5. **SEMPRE** tipizzazione rigorosa + PHPDoc
+
+### Multi-Studio Management ✅ IMPLEMENTATO
+- **Overview Centralizzato**: Tutti studi in dashboard unico
+- **Studio Principale**: Visualmente prioritario
+- **Context Switching**: Link diretti per modifica per studio
+- **Performance**: Eager loading, ordinamento, cache-ready
+
+## Documentazione Updated ✅
+
+- [DoctorAvailabilitiesWidget Implementation](mdc:../../laravel/Modules/SaluteOra/docs/widgets/doctor-availabilities-widget-implementation.md)
+- [DoctorAvailabilitiesWidget Analysis](mdc:../../laravel/Modules/SaluteOra/docs/widgets/doctor-availabilities-widget-analysis.md)
+- [Widget Improvements Analysis](mdc:../../laravel/Modules/SaluteOra/docs/widgets/widget-improvements-analysis.md)
+
+## Filosofia Confermata
+
+**Multi-Tenancy + DRY + Performance = Eccellenza**
+
+Il modulo SaluteOra dimostra come implementare correttamente:
+- ✅ Pattern Widget con XotBaseWidget
+- ✅ Multi-studio context-aware management
+- ✅ Security a più livelli con enum
+- ✅ Performance con eager loading
+- ✅ UX con visual hierarchy e responsive design
+
+*Ultimo aggiornamento: Gennaio 2025*
+*Status: ✅ PRODUCTION READY - Homepage dottore OPERATIVA*

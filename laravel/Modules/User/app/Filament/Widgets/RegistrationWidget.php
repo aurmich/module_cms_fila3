@@ -91,7 +91,13 @@ class RegistrationWidget extends XotBaseWidget
 
     public function getFormFill(): array
     {
-        $data = parent::getFormFill();
+
+        //$model=$this->getFormModel();
+        //$studio=\Modules\SaluteOra\Models\Studio::inRandomOrder()->first();
+        //$model->studio()->save($studio);
+        
+       
+        $data = [];
         $data['type'] = $this->type;
         $data['studio']=[];
         $data['studio']['description'] = null;
@@ -101,6 +107,8 @@ class RegistrationWidget extends XotBaseWidget
         $data['studio']['address']['administrative_area_level_3'] = null;
         $data['studio']['address']['locality'] = null;
         $data['studio']['address']['postal_code'] = null;
+        
+        $data = array_merge($data,parent::getFormFill() );
         
         
         return $data;
