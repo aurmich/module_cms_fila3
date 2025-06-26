@@ -36,9 +36,7 @@ class RegisterAction
      */
     public function execute(UserContract $record,array $data): Doctor
     {
-        if(isset($data['studio'])){
-            unset($data['studio']);
-        }
+        
         if(isset($data['id'])){
             $doctor = $record;
             $doctor->update($data);

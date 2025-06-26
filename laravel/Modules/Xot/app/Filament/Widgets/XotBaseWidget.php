@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Widgets;
 
 use Filament\Forms;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
@@ -117,6 +118,18 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
                 
                 //dddx($model->getArrayableRelations());
                 $res= $model->toArray();
+                if(method_exists($model,'getDataDefaults')){
+                    $defaults=$model->getDataDefaults();
+                    $merge1=array_merge($defaults,$res);
+                    $merge1=Arr::map($merge1, function ($value, $key) use ($defaults) {
+                        if($value==null){
+                            $value=Arr::get($defaults,$key,null);
+                        }
+                        return $value;
+                    });
+                    $res=$merge1;
+                }
+                
                 return $res;
                 //dddx($model->with('studio')->relationsToArray());
                 
