@@ -37,6 +37,7 @@ return array (
       'placeholder' => 'Inserisci i valori',
       'tooltip' => 'Lista dei valori associati',
       'description' => 'values',
+      'helper_text' => 'values',
     ),
     'value' => 
     array (
