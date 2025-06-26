@@ -2,6 +2,7 @@
 
 namespace Modules\Notify\Notifications;
 
+use Illuminate\Support\Str;
 use Modules\Notify\Datas\SmsData;
 use Modules\Notify\Emails\SpatieEmail;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,8 @@ class RecordNotification extends Notification
     public function __construct(Model $record, string $slug)
     {
         $this->record = $record;
-        $this->slug = $slug;
+        $this->slug = Str::slug($slug);
+        
 
     }
 

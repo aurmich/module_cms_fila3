@@ -54,34 +54,25 @@ class PatientResource extends XotBaseResource
 
         return [
             Forms\Components\Wizard::make([
-                self::getPersonalDataStep(),      // Step 1: Dati personali
-                self::getDocumentsStep(),         // Step 2: Documenti
-                self::getPreVisitStep(),          // Step 3: Informazioni preventive
-                self::getPrivacyStep(),           // Step 4: Privacy e consensi
+                //self::getPersonalDataStep(),      // Step 1: Dati personali
+                self::getStepByName('personal_data_step'),
+                //self::getDocumentsStep(),         // Step 2: Documenti
+                self::getStepByName('documents_step'),
+                //self::getPreVisitStep(),          // Step 3: Informazioni preventive
+                self::getStepByName('previsit_step'),
+                //self::getPrivacyStep(),           // Step 4: Privacy e consensi
+                self::getStepByName('privacy_step'),
             ])
             //->model(Patient::class)
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')
             ->persistStepInQueryString()
-            ->submitAction(view($submit_view))
+            ->submitAction(static::getWizardSubmitAction())
         ];
     }
 
-    /**
-     * Get the personal data step for the wizard
-     *
-     * @return \Filament\Forms\Components\Wizard\Step
-     */
-    protected static function getPersonalDataStep(): Forms\Components\Wizard\Step
-    {
-        return Forms\Components\Wizard\Step::make('personal_data_step')
-            //->afterValidation(function ($livewire,$record) {
-                //dddx($livewire->data);
-                //dddx($record);
-            //})
-            ->schema(self::getPersonalDataStepSchema());
-    }
+    
 
     protected static function getPersonalDataStepSchema(): array
     {
@@ -107,69 +98,13 @@ class PatientResource extends XotBaseResource
         ];
     }
 
-    /**
-     * Get the documents step for the wizard
-     *
-     * @return \Filament\Forms\Components\Wizard\Step
-     */
-    protected static function getDocumentsStep(): Forms\Components\Wizard\Step
-    {
-        return Forms\Components\Wizard\Step::make('documents_step')
-            ->schema(self::getDocumentsStepSchema());
-    }
-
+    
     protected static function getDocumentsStepSchema(): array
     {
-        $attachments = Patient::$attachments;
-        $uuid = Str::uuid()->toString();
-        $schema = [];
-        
-        foreach ($attachments as $attachment) {
-            $schema[] = Forms\Components\FileUpload::make($attachment)
-                ->disk('local')
-                ->directory('documents/'.$attachment.'/'.$uuid)
-                //->downloadable()
-                //->openable()
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120)
-                ->required()
-                ->reorderable()
-                //->multiple()
-                ->preserveFilenames()
-                ->columnSpanFull()
-                ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
-                    if (!$state) return;
-                    $state=Arr::wrap($state);
-                    $sessionId = session()->getId();
-                    $sessionDir = "session-uploads/{$sessionId}";
-                    $sessionFiles = [];
-                    foreach ($state as $file) {
-                        if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
-                            // Salva direttamente nella directory di sessione
-                            $fileName = time() . '_' . $file->getClientOriginalName();
-                            $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
-                            $sessionFiles[] = $sessionPath;
-                        } else {
-                            // È già un percorso salvato
-                            $sessionFiles[] = $file;
-                        }
-                    }
-                    
-                    $set($attachment, $sessionFiles);
-                })
-                ;
-        }
-        return $schema;
+        return self::getAttachmentsSchema(false);
     }
 
-    /**
-     * Get the pre-visit information step for the wizard
-     */
-    protected static function getPreVisitStep(): Forms\Components\Wizard\Step
-    {
-        return Forms\Components\Wizard\Step::make('pre_visit_step')
-            ->schema(self::getPreVisitStepSchema());
-    }
+   
 
     protected static function getPreVisitStepSchema(): array
     {
@@ -181,14 +116,7 @@ class PatientResource extends XotBaseResource
         ];
     }
 
-    /**
-     * Get the privacy step for the wizard
-     */
-    protected static function getPrivacyStep(): Forms\Components\Wizard\Step
-    {
-        return Forms\Components\Wizard\Step::make('privacy_step')
-            ->schema(self::getPrivacyStepSchema());
-    }
+    
 
     /**
      * Get privacy step schema for the wizard

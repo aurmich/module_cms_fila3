@@ -163,12 +163,38 @@ class Patient extends User implements HasMedia
         'last_dental_visit',
         'dental_problems',
 
+        'health_card',
+        'identity_document',
+        'isee_certificate',
+        'pregnancy_certificate',
+
     ];
     protected $appends = [
         //'health_card',
         //'identity_document',
         //'isee_certificate',
         //'pregnancy_certificate',
+    ];
+
+    /** @var array<string, mixed>  */
+    protected $attributes = [
+        //'state' => Pending::class,
+        //'state' => 'pending',
+        'is_otp'=>false,
+        'is_active'=>true,
+        'type'=>'patient',
+        /*
+        'studio'=>[
+            'description' => null,
+            'address'=>[
+                'administrative_area_level_1' => null,
+                'administrative_area_level_2' => null,
+                'administrative_area_level_3' => null,
+                'locality' => null,
+                'postal_code' => null,
+            ],
+        ],
+        */
     ];
 
     public static array $attachments = [

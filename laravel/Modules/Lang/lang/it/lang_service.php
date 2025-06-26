@@ -448,6 +448,20 @@ return array (
       'helper_text' => 'Modalità di visualizzazione',
       'placeholder' => 'Seleziona la vista',
     ),
+    'selected_studio' => 
+    array (
+      'description' => 'selected_studio',
+      'helper_text' => 'selected_studio',
+      'label' => 'selected_studio',
+      'placeholder' => 'selected_studio',
+    ),
+    'studio_selection' => 
+    array (
+      'description' => 'studio_selection',
+      'helper_text' => 'studio_selection',
+      'placeholder' => 'studio_selection',
+      'label' => 'studio_selection',
+    ),
   ),
   'actions' => 
   array (

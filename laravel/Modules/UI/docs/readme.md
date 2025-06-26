@@ -13,12 +13,13 @@ Il modulo UI fornisce componenti e layout standardizzati per l'interfaccia utent
 - **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
   - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
   - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
-- **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
-  - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
-  - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
-- **OpeningHoursField**: Campo per gestione orari settimanali (mattina/pomeriggio) - [Documentazione](components/opening-hours-field.md)
-  - ⚠️ **ERRORE CRITICO RISOLTO** (Dic 2024): Proprietà `$view` mancante causava runtime error
-  - ✅ **CORREZIONE**: Vista Blade personalizzata + traduzioni complete
+- **RadioCardSelector**: Componente riutilizzabile per selezioni con card radio - [Documentazione](components/radio-card-selector-component.md)
+  - ✅ **IMPLEMENTATO** (Gen 2025): Componente clean per selezioni visuali
+  - ✅ **FEATURES**: Card responsive, Alpine.js, auto-populate fields
+  - 🎯 **UTILIZZO**: Widget FindDoctorAndAppointment, selezioni multi-elemento
+  - 🎯 **NUOVO COMPONENTE** (Gen 2025): Riutilizzabile cross-module per healthcare applications
+  - ✅ **FEATURES**: Layout responsive, accessibilità, Alpine.js integration
+  - 🔧 **UTILIZZO**: Widget SaluteOra per studio selection in appointment booking
 
 ### Tables
 - CustomDataTable: Tabella dati avanzata con ordinamento e filtri
@@ -74,6 +75,30 @@ Il modulo UI fornisce componenti e layout standardizzati per l'interfaccia utent
 ### Versione Incoming
 
 - Livewire 
+
+## Componenti View Aggiornati (Gen 2025)
+
+### Studio Selector Component
+- **File**: `resources/views/ui/studio-selector.blade.php`
+- **Namespace**: `ui::ui.studio-selector`  
+- **Utilizzo**: Widget selection con card design conforme a specifiche
+- **Features**: 
+  - Cards responsive cliccabili
+  - Alpine.js per interazioni real-time
+  - Integrazione Livewire per state management
+  - Empty states e loading states
+  - Accessibilità WCAG compliant
+
+**Utilizzo in Widget:**
+```php
+Form\View::make('ui::ui.studio-selector')
+    ->viewData(fn (Get $get) => [
+        'studios' => $this->getStudiosForLocationFull($get),
+        'selectedStudioId' => $get('selected_studio'),
+    ])
+```
+
+**Implementato in:** `Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget`
 
 ---
 

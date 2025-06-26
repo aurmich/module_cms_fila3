@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
 use Modules\Tenant\Models\Tenant;
-use Modules\Xot\Database\Migrations\XotBaseMigration;
+use Modules\SaluteOra\Models\Patient;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
@@ -86,6 +87,13 @@ return new class extends XotBaseMigration
                     $table->boolean('is_active')->default(true)->nullable()->change();
                 }
 
+                
+                foreach(Patient::$attachments as $attachment){
+                    if (! $this->hasColumn($attachment)) {
+                        $table->string($attachment)->nullable()->after('type');
+                    }
+                }
+                
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);
             }

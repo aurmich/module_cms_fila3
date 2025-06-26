@@ -4,6 +4,85 @@
 
 The `FindDoctorAndAppointmentWidget` provides a multi-step wizard interface for patients to find available dentists and book appointments, following Clean Code, DRY, and KISS principles.
 
+## View Implementation (Theme)
+
+### Custom Theme View
+La view del widget è implementata nel tema One per permettere personalizzazione completa dell'interfaccia:
+
+**File**: `laravel/Themes/One/resources/views/filament/widgets/patient/find-doctor-and-appointment-widget.blade.php`
+
+### Pattern Architetturale
+- **Logica**: Widget PHP in `Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget`
+- **Presentazione**: View nel tema (`pub_theme::`) per personalizzazione visiva completa
+- **Separazione**: Logica form wizard nel modulo, styling e layout nel tema
+
+### View Structure
+```blade
+<x-filament-widgets::widget>
+    <x-filament::section>
+        <div class="max-w-4xl mx-auto">
+            {{-- Header Section --}}
+            <div class="mb-8 text-center">
+                <h2>{{ __('saluteora::widgets.find_doctor_and_appointment.title') }}</h2>
+                <p>{{ __('saluteora::widgets.find_doctor_and_appointment.description') }}</p>
+            </div>
+
+            {{-- Form Wizard --}}
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border p-6">
+                <form wire:submit.prevent="submit" class="space-y-6">
+                    @csrf
+                    {{ $this->form }}
+                    
+                    {{-- Loading State --}}
+                    <div wire:loading wire:target="submit" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 flex items-center space-x-3">
+                            <x-filament::loading-indicator class="h-6 w-6 text-primary-600" />
+                            <span>{{ __('saluteora::widgets.find_doctor_and_appointment.processing') }}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{-- Help Text --}}
+            <div class="mt-6 text-center">
+                <p>{{ __('saluteora::widgets.find_doctor_and_appointment.help_text') }}</p>
+            </div>
+        </div>
+    </x-filament::section>
+    
+    <x-filament-actions::modals />
+</x-filament-widgets::widget>
+```
+
+### Features della View
+1. **Responsive Design**: Layout mobile-first con `max-w-4xl mx-auto`
+2. **Dark Mode Support**: Supporto completo per tema scuro
+3. **Loading States**: Overlay fullscreen durante elaborazione
+4. **Typography Hierarchy**: Header centrato con titolo e descrizione
+5. **Form Integration**: Wrapper per `{{ $this->form }}` di Filament
+6. **Modal Support**: Include automaticamente i modali Filament
+7. **CSRF Protection**: Token di sicurezza integrato
+
+### Traduzioni Richieste
+La view utilizza le seguenti chiavi di traduzione:
+```php
+'find_doctor_and_appointment' => [
+    'title' => 'Trova e Prenota Dentista',
+    'description' => 'Trova un dentista nella tua zona e prenota un appuntamento', 
+    'submit' => 'Prenota Appuntamento',
+    'processing' => 'Elaborazione prenotazione in corso...',
+    'help_text' => 'Segui tutti i passaggi per completare la tua prenotazione...',
+],
+```
+
+### Customization Options
+Il tema One permette di personalizzare:
+- **Colori**: Tramite variabili CSS Tailwind
+- **Spacing**: Classi margin/padding modificabili
+- **Typography**: Font e dimensioni tramite config Tailwind
+- **Componenti**: Override di componenti Filament specifici
+- **Layout**: Struttura container e sezioni
+
 ## Architecture Principles
 
 1. **Clean Code**

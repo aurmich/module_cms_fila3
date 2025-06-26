@@ -16,6 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Studio model for the SaluteOra module.
@@ -302,5 +303,13 @@ class Studio extends BaseTenant
     public function getServicesStringAttribute(): string
     {
         return is_array($this->services) ? implode(', ', $this->services) : (string) $this->services;
+    }
+
+
+    public function scopeOfCap(Builder $query,string|int|null $cap): void
+    {
+        $query->whereHas('address', function($q) use ($cap) {
+            $q->where('postal_code', $cap);
+        });
     }
 }

@@ -1,5 +1,118 @@
 # Componenti UI
 
+## Componenti Form Avanzati
+
+### StudioCardSelector
+
+Componente Filament Form per la selezione di studi medici attraverso interfaccia card visuale.
+
+#### Utilizzo Base
+```php
+use Modules\UI\Forms\Components\StudioCardSelector;
+
+StudioCardSelector::make('selected_studio')
+    ->studios(fn (Get $get) => $this->getStudiosForLocation($get))
+    ->required();
+```
+
+#### Caratteristiche
+- **Layout Responsive**: Card stack verticali su mobile, orizzontali su desktop
+- **Accessibilità**: Supporto completo keyboard navigation e screen reader
+- **Personalizzazione**: Varianti compact/default/detailed
+- **Interattività**: Selezione radio con feedback visivo
+- **Alpine.js**: Interazioni fluide senza page reload
+
+#### Varianti Layout
+```php
+// Layout compatto
+StudioCardSelector::make('studio')->compact();
+
+// Layout dettagliato con info extra
+StudioCardSelector::make('studio')
+    ->detailed()
+    ->showDistance()
+    ->showSpecializations()
+    ->showPhone();
+```
+
+#### Features Opzionali
+- `showDistance()`: Badge distanza con icona mappa
+- `showSpecializations()`: Tag specializzazioni mediche  
+- `showPhone()`: Numero telefono con icona
+
+[**📖 Documentazione Completa**](./studio-card-selector-implementation.md)
+
+## Componenti Form Filament
+
+### LocationSelector
+
+Componente per la selezione gerarchica di dati geografici (Regione → Provincia → CAP).
+
+#### Utilizzo
+```php
+use Modules\UI\Filament\Forms\Components\LocationSelector;
+
+LocationSelector::make()
+    ->regionField('region')
+    ->provinceField('province')
+    ->capField('cap')
+    ->required()
+    ->searchable()
+```
+
+#### Caratteristiche
+- Selezione gerarchica con dipendenze automatiche
+- Integrazione con modulo Geo
+- Live updates tra i campi
+- Validazione cascata
+- Gestione errori con logging
+
+## Componenti Blade UI
+
+### StudioSelector
+
+Componente semplificato per la selezione di uno studio odontoiatrico tramite pulsanti radio-style.
+
+#### Utilizzo
+```blade
+<x-ui::ui.studio-selector 
+    :studios="$studios"
+    :selected-studio="$selectedStudioId"
+    target-field="selected_studio"
+/>
+```
+
+#### Caratteristiche
+- Pulsanti radio-style per selezione singola
+- Visual feedback per stato selezionato
+- Informazioni compatte (nome, indirizzo, contatti)
+- Empty states integrati
+- Integrazione Livewire automatica
+- Layout responsive
+
+### StudioCard (Completa)
+
+Componente avanzato per la visualizzazione dettagliata di uno studio (per liste, dashboard, dettagli).
+
+#### Utilizzo
+```blade
+<x-ui::ui.studio-card 
+    :studio="$studio"
+    :show-distance="true"
+    :show-rating="true"
+    :show-services="true"
+    :actions="['book', 'details', 'contact']"
+/>
+```
+
+#### Caratteristiche
+- Layout responsive completo
+- Rating con stelle
+- Informazioni di contatto estese
+- Servizi offerti
+- Azioni personalizzabili
+- Orari di apertura
+
 ## Componenti SVG
 
 ### Bandiere (Flags)

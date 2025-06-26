@@ -7,14 +7,15 @@ namespace Modules\Xot\Filament\Resources;
 use Filament\Forms;
 use function Safe\glob;
 use Filament\Forms\Form;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
+use Illuminate\Contracts\View\View;
 use Filament\Pages\SubNavigationPosition;
+
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Xot\Actions\ModelClass\CountAction;
-
 use Filament\Resources\Resource as FilamentResource;
-use Illuminate\Contracts\View\View;
 use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 
 /**
@@ -185,7 +186,7 @@ abstract class XotBaseResource extends FilamentResource
         return view($submit_view);
     }
 
-    public static function getAttachmentsSchema(): array{
+    public static function getAttachmentsSchema(bool $multiple=true): array{
         $model = static::getModel();
         $attachments = $model::$attachments;
         $uuid = Str::uuid()->toString();
@@ -201,12 +202,12 @@ abstract class XotBaseResource extends FilamentResource
                 ->maxSize(5120)
                 ->required()
                 ->reorderable()
-                ->multiple()
+                ->multiple($multiple)
                 ->preserveFilenames()
                 ->columnSpanFull()
                 ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
                     if (!$state) return;
-                    
+                    $state=Arr::wrap($state);
                     $sessionId = session()->getId();
                     $sessionDir = "session-uploads/{$sessionId}";
                     $sessionFiles = [];
@@ -228,5 +229,13 @@ abstract class XotBaseResource extends FilamentResource
                 ;
         }
         return $schema;
+    }
+
+    protected static function getStepByName(string $name): Forms\Components\Wizard\Step
+    {
+        $schema=Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
+        
+        return Forms\Components\Wizard\Step::make($name)
+            ->schema(static::$schema());
     }
 }

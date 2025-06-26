@@ -33,6 +33,13 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 ### Widgets
 
 - [FindDoctorAndAppointmentWidget Errors](widgets/find-doctor-appointment-widget-errors.md) - Analisi e soluzioni per il widget di prenotazione appuntamenti
+- [📊 FindDoctorAndAppointmentWidget Analysis](widgets/find-doctor-appointment-widget-analysis.md) - **CORE**: Analisi completa e roadmap implementazione Step 2, integrazione componenti UI riutilizzabili
+- [🛠️ FindDoctorWidget Step 2 Implementation](widgets/find-doctor-appointment-widget-step2-implementation.md) - **IMPLEMENTATION**: Guida dettagliata implementazione secondo step con componenti UI creati
+
+### Errori e Troubleshooting
+
+- [🚨 Array to String Conversion User Registration](errori/array-to-string-conversion-user-registration.md) - **CRITICO**: Errore durante registrazione paziente con allegati, conflitto architetturale Media Library vs Database
+- [📧 MissingMailTemplate SpatieEmail](errori/missing-mail-template-spatie-email.md) - **CRITICO**: Template email mancante durante invio notifiche, conflitto timing Spatie MailTemplates
 
 ### Filament
 

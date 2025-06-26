@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Widgets;
 
 use Filament\Forms;
+use Illuminate\Support\Str;
 use Filament\Actions\Action;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
@@ -116,7 +117,6 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
                 
                 //dddx($model->getArrayableRelations());
                 $res= $model->toArray();
-                
                 return $res;
                 //dddx($model->with('studio')->relationsToArray());
                 
@@ -137,9 +137,13 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         // Se è un nuovo modello, restituisci solo i campi fillable con valori null
         $fillable = $model->getFillable();
         $appends = $model->getAppends();
+        $attributes=$model->attributesToArray();
         $fields = array_merge($fillable, $appends);
         
-        return array_fill_keys($fields, null);
+        $fields= array_fill_keys($fields, null);
+        $fields=array_merge($fields,$attributes);
+        
+        return $fields;
     }
 
     /**
@@ -195,5 +199,13 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     {
         return (string) (static::$navigationLabel ?? (string) str(static::getLabel())
             ->headline());
+    }
+
+    protected function getStepByName(string $name): Forms\Components\Wizard\Step
+    {
+        $schema=Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
+        
+        return Forms\Components\Wizard\Step::make($name)
+            ->schema($this->$schema());
     }
 }

@@ -214,7 +214,7 @@ class User extends BaseUser implements HasMedia
         'certifications'
     ];
 
-
+    
 
     /**
      * Cast custom per il campo type:
@@ -235,6 +235,8 @@ class User extends BaseUser implements HasMedia
             'certifications' => 'array',
             'moderation_data' => 'array',
         ]);
+
+        
     }
 
     /**

@@ -27,6 +27,30 @@ return array (
     array (
       'label' => 'date',
     ),
+    'Conferma' => 
+    array (
+      'label' => 'Conferma',
+    ),
+    'confirm_step' => 
+    array (
+      'label' => 'confirm_step',
+    ),
+    'time_step' => 
+    array (
+      'label' => 'time_step',
+    ),
+    'date_step' => 
+    array (
+      'label' => 'date_step',
+    ),
+    'studio_step' => 
+    array (
+      'label' => 'studio_step',
+    ),
+    'search_step' => 
+    array (
+      'label' => 'search_step',
+    ),
   ),
   'fields' => 
   array (
@@ -127,6 +151,48 @@ return array (
       'helper_text' => 'test_field',
       'placeholder' => 'test_field',
       'label' => 'test_field',
+    ),
+    'selected_studio' => 
+    array (
+      'description' => 'selected_studio',
+      'label' => 'selected_studio',
+      'placeholder' => 'selected_studio',
+      'helper_text' => 'selected_studio',
+    ),
+    'selected_studio_name' => 
+    array (
+      'description' => 'selected_studio_name',
+      'helper_text' => 'selected_studio_name',
+      'placeholder' => 'selected_studio_name',
+      'label' => 'selected_studio_name',
+    ),
+    'doctor_id' => 
+    array (
+      'description' => 'doctor_id',
+      'helper_text' => 'doctor_id',
+      'placeholder' => 'doctor_id',
+      'label' => 'doctor_id',
+    ),
+    'studio_id' => 
+    array (
+      'label' => 'studio_id',
+      'placeholder' => 'studio_id',
+      'helper_text' => 'studio_id',
+      'description' => 'studio_id',
+    ),
+    'studio_name' => 
+    array (
+      'description' => 'studio_name',
+      'helper_text' => 'studio_name',
+      'placeholder' => 'studio_name',
+      'label' => 'studio_name',
+    ),
+  ),
+  'actions' => 
+  array (
+    'submit' => 
+    array (
+      'label' => 'submit',
     ),
   ),
 );
