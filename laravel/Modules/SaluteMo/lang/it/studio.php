@@ -165,6 +165,10 @@ return array (
     array (
       'description' => 'description',
     ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
   ),
   'actions' => 
   array (
