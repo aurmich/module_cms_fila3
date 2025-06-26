@@ -194,18 +194,24 @@ class Doctor extends User
         //'state' => 'pending',
         'is_otp'=>false,
         'is_active'=>true,
-        'studio'=>[
-            'description' => null,
-            'address'=>[
-                'administrative_area_level_1' => null,
-                'administrative_area_level_2' => null,
-                'administrative_area_level_3' => null,
-                'locality' => null,
-                'postal_code' => null,
-            ],
-        ],
+        
     ];
 
+    public function getDataDefaults(): array
+    {
+        return [
+            'studio'=>[
+                'description' => null,
+                'address'=>[
+                    'administrative_area_level_1' => null,
+                    'administrative_area_level_2' => null,
+                    'administrative_area_level_3' => null,
+                    'locality' => null,
+                    'postal_code' => null,
+                ],
+            ],
+        ];
+    }
 
     /**
      * Get the attributes that should be cast.

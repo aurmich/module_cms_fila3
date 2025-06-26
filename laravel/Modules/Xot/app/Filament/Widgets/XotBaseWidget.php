@@ -138,10 +138,14 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         $fillable = $model->getFillable();
         $appends = $model->getAppends();
         $attributes=$model->attributesToArray();
-        $fields = array_merge($fillable, $appends);
         
+        $fields = array_merge($fillable, $appends);
         $fields= array_fill_keys($fields, null);
         $fields=array_merge($fields,$attributes);
+        if(method_exists($model,'getDataDefaults')){
+            $defaults=$model->getDataDefaults();
+            $fields=array_merge($fields,$defaults);
+        }
         
         return $fields;
     }

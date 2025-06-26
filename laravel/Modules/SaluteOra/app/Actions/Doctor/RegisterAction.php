@@ -39,12 +39,14 @@ class RegisterAction
         if(isset($data['studio'])){
             unset($data['studio']);
         }
-        //$data['type']=UserTypeEnum::DOCTOR;
         if(isset($data['id'])){
             $doctor = $record;
             $doctor->update($data);
         }else{
-            $doctor = Doctor::create($data);
+            $doctor= new Doctor();
+            $doctor->fill($data);
+            $doctor->save();
+            //$doctor = Doctor::create($data);
         }
         if(isset($data['schedule'])){
             $studio = Studio::create($data['studio']);
