@@ -148,4 +148,9 @@
 <div class="mt-10">margin-top 10</div>
 <div class="lg:py-8">large py-8</div>
 <div class="text-[#F38B8B]">testo rosa chiaro</div>
+<div class="mx-10">mx 10</div>
+<div class="mx-24">mx 24</div>
+<div class="mx-40">mx 40</div>
+<div class="mx-56">mx 56</div>
+<div class="mx-60">mx 60</div>
 </x-layouts.app>

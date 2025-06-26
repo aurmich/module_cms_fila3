@@ -22,7 +22,7 @@
     
 @endphp
 
-<div class="studio-availability-card border rounded-lg transition-all duration-200 hover:shadow-md {{ $isPrimary ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700' }}">
+<div class="studio-availability-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 dark:bg-gray-900">
     {{-- Header Studio --}}
     <div class="studio-header flex items-center justify-between p-4 border-b {{ $isPrimary ? 'border-blue-200 dark:border-blue-700' : 'border-gray-200 dark:border-gray-700' }}">
         <div class="flex items-center space-x-3">
