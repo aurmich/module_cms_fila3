@@ -36,6 +36,9 @@ class RegisterAction
      */
     public function execute(UserContract $record,array $data): Doctor
     {
+        if(isset($data['studio'])){
+            unset($data['studio']);
+        }
         //$data['type']=UserTypeEnum::DOCTOR;
         if(isset($data['id'])){
             $doctor = $record;
