@@ -18,5 +18,9 @@ return array (
     array (
       'label' => 'toggleColumns',
     ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
   ),
 );

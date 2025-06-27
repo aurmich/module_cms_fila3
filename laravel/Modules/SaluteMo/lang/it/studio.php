@@ -60,6 +60,7 @@ return array (
       'label' => 'Nome Studio',
       'placeholder' => 'Studio Medico Dr. Rossi',
       'helper_text' => 'Nome completo e identificativo dello studio medico',
+      'description' => 'name',
     ),
     'address' => 
     array (
@@ -72,30 +73,35 @@ return array (
       'label' => 'Telefono',
       'placeholder' => '+39 059 1234567',
       'helper_text' => 'Numero di telefono principale per contatti',
+      'description' => 'phone',
     ),
     'email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'info@studiorossi.it',
       'helper_text' => 'Indirizzo email per comunicazioni ufficiali',
+      'description' => 'email',
     ),
     'website' => 
     array (
       'label' => 'Sito Web',
       'placeholder' => 'https://www.studiorossi.it',
       'helper_text' => 'URL del sito web ufficiale dello studio',
+      'description' => 'website',
     ),
     'registration_number' => 
     array (
       'label' => 'Numero di Registrazione',
       'placeholder' => 'RM-123456',
       'helper_text' => 'Numero di registrazione presso l\'Ordine dei Medici',
+      'description' => 'registration_number',
     ),
     'vat_number' => 
     array (
       'label' => 'Partita IVA',
       'placeholder' => 'IT01234567890',
       'helper_text' => 'Partita IVA dello studio medico',
+      'description' => 'vat_number',
     ),
     'opening_hours' => 
     array (
@@ -164,10 +170,25 @@ return array (
     'description' => 
     array (
       'description' => 'description',
+      'helper_text' => 'description',
+      'placeholder' => 'description',
+      'label' => 'description',
     ),
     'reorderRecords' => 
     array (
       'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
     ),
   ),
   'actions' => 

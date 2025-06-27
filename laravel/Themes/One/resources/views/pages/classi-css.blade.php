@@ -153,4 +153,5 @@
 <div class="mx-40">mx 40</div>
 <div class="mx-56">mx 56</div>
 <div class="mx-60">mx 60</div>
+<div class="m-auto">mx 60</div>
 </x-layouts.app>
