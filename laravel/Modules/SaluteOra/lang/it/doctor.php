@@ -246,13 +246,6 @@ return array (
     array (
       'description' => 'vat_number',
     ),
-    'test_field' => 
-    array (
-      'description' => 'test_field',
-      'helper_text' => 'test_field',
-      'label' => 'test_field',
-      'placeholder' => 'test_field',
-    ),
   ),
   'filters' => 
   array (

@@ -38,14 +38,7 @@ class RadioCollection extends Field
         
         return $this;
     }
-    /*
-    public function view(string $view): static
-    {
-        $this->view = $view;
-        
-        return $this;
-    }
-    */
+    
     /**
      * Set the key to use as the value for each option.
      */

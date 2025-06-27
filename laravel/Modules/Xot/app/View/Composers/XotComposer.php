@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Xot\View\Composers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -13,6 +11,7 @@ use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
 use Modules\Xot\Datas\MetatagData;
 use Nwidart\Modules\Facades\Module;
+use Illuminate\Support\Facades\Auth;
 use Modules\Xot\Actions\File\AssetPathAction;
 use Nwidart\Modules\Laravel\Module as LaravelModule;
 
@@ -64,57 +63,14 @@ class XotComposer
      */
     public function compose(View $view): void
     {
-        // ✅ Protezione anti-loop infinito
-        static $composing = false;
-        
-        if ($composing) {
-            return; // Evita chiamate ricorsive
-        }
-        
-        $composing = true;
-        
-        try {
-            $lang = app()->getLocale();
-            $view->with('lang', $lang);
-            $view->with('_theme', $this);
+        $lang = app()->getLocale();
+        $view->with('lang', $lang);
+        $view->with('_theme', $this);
 
-            // Safely check authentication without triggering guards
-            if (auth()->check()) {
-                try {
-                    $profile = XotData::make()->getProfileModel();
-                    $view->with('_profile', $profile);
-                    $view->with('_user', auth()->user());
-                } catch (\Throwable $e) {
-                    // Silently fail if we can't load the profile
-                    \Log::warning('Failed to load user profile in XotComposer: ' . $e->getMessage());
-                }
-            }
-        } finally {
-            $composing = false; // Reset flag sempre, anche in caso di eccezione
-        }
-    }
-    
-    /**
-     * Controllo sicuro per verificare se l'auth è pronto.
-     */
-    private function isAuthenticationSafe(): bool
-    {
-        try {
-            // Verifica se l'app è completamente inizializzata
-            if (!app()->bound('auth')) {
-                return false;
-            }
-            
-            // Verifica se c'è una sessione attiva
-            if (!app()->bound('session') || !session()->isStarted()) {
-                return false;
-            }
-            
-            // Verifica Auth senza scatenare risoluzione complessa
-            return Auth::hasUser() || Auth::guest();
-            
-        } catch (\Exception $e) {
-            return false; // In caso di errore, considera auth non sicuro
+        if (Auth::check()) {
+            $profile = XotData::make()->getProfileModel();
+            $view->with('_profile', $profile);
+            $view->with('_user', auth()->user());
         }
     }
 

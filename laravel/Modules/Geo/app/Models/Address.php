@@ -150,16 +150,16 @@ class Address extends BaseModel
         return $this->morphTo('model');
     }
     
-    /**
+    /*
      * Get the city relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+     
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'locality', 'name');
     }
-    
+    */
     /**
      * Get the province relationship.
      *

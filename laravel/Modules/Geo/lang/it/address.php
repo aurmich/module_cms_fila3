@@ -162,6 +162,12 @@ return array (
       'description' => 'map',
       'helper_text' => '',
     ),
+    'aaa' => 
+    array (
+      'description' => 'aaa',
+      'helper_text' => 'aaa',
+      'placeholder' => 'aaa',
+    ),
   ),
   'columns' => 
   array (

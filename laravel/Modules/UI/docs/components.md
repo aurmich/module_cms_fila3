@@ -2,6 +2,54 @@
 
 ## Componenti Form Avanzati
 
+### InlineDatePicker
+
+Componente Filament Form per la selezione di date con calendario inline sempre visibile e controllo granulare delle date selezionabili.
+
+#### Utilizzo Base
+```php
+use Modules\UI\Filament\Forms\Components\InlineDatePicker;
+
+InlineDatePicker::make('appointment_date')
+    ->enabledDates(['2025-06-05', '2025-06-21'])
+    ->highlightColor('bg-indigo-600 text-white')
+    ->compactMode()
+    ->required();
+```
+
+#### Caratteristiche
+- **Design Inline**: Calendario sempre visibile senza popup
+- **Date Selettive**: Solo date specifiche sono cliccabili e evidenziate
+- **Tema Coerente**: Basato sul design One theme con Tailwind CSS
+- **Alpine.js**: Interattività fluida senza page reload
+- **Accessibilità**: Supporto completo keyboard navigation e screen reader
+
+#### Metodi Principali
+```php
+// Date abilitate (array o Closure dinamica)
+->enabledDates(['2025-06-05', '2025-06-21'])
+->enabledDates(fn () => $this->getAvailableDates())
+
+// Personalizzazione colori
+->highlightColor('bg-green-600 text-white')
+
+// Layout compatto
+->compactMode()
+
+// Controlli navigazione
+->showNavigation(false)
+```
+
+#### Integrazione con Wizard
+```php
+InlineDatePicker::make('date')
+    ->enabledDates(fn () => $this->getDoctorAvailableDates())
+    ->live()
+    ->afterStateUpdated(fn ($state) => $this->loadTimeSlots($state))
+```
+
+[**📖 Documentazione Completa**](./components/inline-date-picker.md)
+
 ### StudioCardSelector
 
 Componente Filament Form per la selezione di studi medici attraverso interfaccia card visuale.

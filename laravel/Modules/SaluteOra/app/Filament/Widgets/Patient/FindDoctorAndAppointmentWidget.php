@@ -31,6 +31,7 @@ use Filament\Forms\Components\Wizard\Step;
 use Livewire\Component as LivewireComponent;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\UI\Filament\Forms\Components\RadioCollection;
+use Modules\UI\Filament\Forms\Components\InlineDatePicker;
 
 class FindDoctorAndAppointmentWidget extends XotBaseWidget
 {
@@ -78,8 +79,8 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                         ->icon('heroicon-o-building-office'),
                     $this->getStepByName('date_step')
                         ->icon('heroicon-o-calendar'),
-                    $this->getStepByName('time_step')
-                        ->icon('heroicon-o-clock'),
+                    $this->getStepByName('availability_step')
+                        ->icon('heroicon-o-user-circle'),
                     $this->getStepByName('confirm_step')
                         ->icon('heroicon-o-check-circle')
                 ])
@@ -190,6 +191,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     {
         
         return [
+            /*
             \Modules\SaluteOra\Filament\Forms\Components\StudioSelectorButtons::make('studio_selection')
                 ->sectionTitle(__('saluteora::widgets.find_doctor_and_appointment.studio_list.title'))
                 ->studios(fn($get) => Studio::ofCap($get('cap'))->get()) // Empty Eloquent collection
@@ -202,6 +204,14 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 
             Hidden::make('studio_id')->required(),
             Hidden::make('doctor_id')->required(),
+            */
+            RadioCollection::make('studio_id')
+                ->label('Studio')      
+                ->options(fn($get) => Studio::ofCap($get('cap'))->get()) // La tua collection
+                ->itemView('pub_theme::filament.forms.components.studio-item') // La tua blade personalizzata
+                //->emptyView('pub_theme::filament.forms.components.studio-empty') // La tua blade personalizzata
+                ->valueKey('id') // Campo da usare come valore (default: 'id'),
+                ,
         ];
     }
 
@@ -229,9 +239,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     protected function getDateStepSchema(): array
     {
         return [
-            'appointment_date' => DatePicker::make('appointment_date')
-            ->disabledDates(['2025-06-05','2025-06-21'])
-                ->native(false),
+            'appointment_date' => InlineDatePicker::make('appointment_date')
+                ->enabledDates(['2025-06-05','2025-06-21'])
+            ,
         ];
     }
 
@@ -266,25 +276,15 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             return;
         }
         
-        // Qui implementeremo la vera logica per ottenere gli slot disponibili dal server
-        // Per ora restituiamo degli esempi
+        // Reset appointment time when date changes
+        $set('appointment_time', null);
         
-        // Se è un weekend, meno slot disponibili
-        $isWeekend = in_array(date('w', strtotime($appointmentDate)), [0, 6]);
-        $isMonday = date('w', strtotime($appointmentDate)) == 1;
-        
-        $availableSlots = $this->generateTimeSlots($isWeekend, $isMonday);
-        
-        // Log per debug
-        Log::info('Time slots updated', [
+        // Log the date change for debug
+        Log::info('Appointment date updated', [
             'date' => $appointmentDate,
-            'is_weekend' => $isWeekend,
-            'is_monday' => $isMonday,
-            'slots_count' => count($availableSlots)
+            'is_weekend' => in_array(date('w', strtotime($appointmentDate)), [0, 6]),
+            'is_monday' => date('w', strtotime($appointmentDate)) == 1,
         ]);
-        
-        // Aggiorna il componente con gli slot disponibili
-        $this->availableTimeSlots = $availableSlots;
     }
 
     protected function getTimeStepSchema(): array
@@ -310,6 +310,81 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ])
                 ->required(),
         ];
+    }
+
+    /**
+     * Get the availability step form schema.
+     *
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
+    protected function getAvailabilityStepSchema(): array
+    {
+        return [
+            
+        ];
+    }
+
+    /**
+     * Get available time slots for a specific doctor on a specific date.
+     *
+     * @param int $doctorId
+     * @param string $appointmentDate
+     * @return array<string, string>
+     */
+    protected function getAvailableTimeSlotsForDoctor(int $doctorId, string $appointmentDate): array
+    {
+        try {
+            // TODO: Implement real availability check with database
+            // For now, return example time slots
+            
+            $isWeekend = in_array(date('w', strtotime($appointmentDate)), [0, 6]);
+            $isMonday = date('w', strtotime($appointmentDate)) == 1;
+            
+            if ($isWeekend) {
+                // Limited hours on weekends
+                return [
+                    '09:00' => '09:00',
+                    '10:00' => '10:00',
+                    '11:00' => '11:00',
+                ];
+            }
+            
+            if ($isMonday) {
+                // Different schedule on Mondays
+                return [
+                    '10:00' => '10:00',
+                    '11:00' => '11:00',
+                    '15:00' => '15:00',
+                    '16:00' => '16:00',
+                    '17:00' => '17:00',
+                ];
+            }
+            
+            // Regular weekday schedule
+            return [
+                '09:00' => '09:00',
+                '09:30' => '09:30',
+                '10:00' => '10:00',
+                '10:30' => '10:30',
+                '11:00' => '11:00',
+                '11:30' => '11:30',
+                '15:00' => '15:00',
+                '15:30' => '15:30',
+                '16:00' => '16:00',
+                '16:30' => '16:30',
+                '17:00' => '17:00',
+                '17:30' => '17:30',
+            ];
+            
+        } catch (\Exception $e) {
+            Log::error('Error getting available time slots', [
+                'doctor_id' => $doctorId,
+                'appointment_date' => $appointmentDate,
+                'error' => $e->getMessage()
+            ]);
+            
+            return [];
+        }
     }
 
     /**

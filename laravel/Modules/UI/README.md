@@ -113,6 +113,7 @@ Il modulo UI fornisce un set completo di componenti di interfaccia utente riutil
 - ✅ Componenti Filament
 - ✅ Widgets dashboard
 - ✅ Form personalizzati
+- ✅ InlineDatePicker con date selettive
 - ✅ Stili CSS moderni
 
 ### 🚀 Installazione
@@ -141,6 +142,7 @@ The UI module provides a complete set of reusable user interface components for 
 - ✅ Filament components
 - ✅ Dashboard widgets
 - ✅ Custom forms
+- ✅ InlineDatePicker with selective dates
 - ✅ Modern CSS styles
 
 ### 🚀 Installation
@@ -169,6 +171,7 @@ El módulo UI proporciona un conjunto completo de componentes de interfaz de usu
 - ✅ Componentes Filament
 - ✅ Widgets de dashboard
 - ✅ Formularios personalizados
+- ✅ InlineDatePicker con fechas selectivas
 - ✅ Estilos CSS modernos
 
 ### 🚀 Instalación

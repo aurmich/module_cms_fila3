@@ -474,6 +474,25 @@ return array (
       'description' => 'studio_id',
       'helper_text' => 'studio_id',
       'placeholder' => 'studio_id',
+      'label' => 'studio_id',
+    ),
+    'availability' => 
+    array (
+      'description' => 'availability',
+    ),
+    'schedule1' => 
+    array (
+      'description' => 'schedule1',
+      'helper_text' => 'schedule1',
+      'placeholder' => 'schedule1',
+      'label' => 'schedule1',
+    ),
+    'appointment_date' => 
+    array (
+      'description' => 'appointment_date',
+      'helper_text' => 'appointment_date',
+      'placeholder' => 'appointment_date',
+      'label' => 'appointment_date',
     ),
   ),
   'actions' => 

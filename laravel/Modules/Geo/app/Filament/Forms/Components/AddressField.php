@@ -17,22 +17,72 @@ class AddressField extends Forms\Components\Section
     
     //protected string $view = 'filament-forms::components.group';
 
+    protected bool $disableLiveUpdates = false;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->schema(AddressResource::getFormSchema());
         $this->schema($this->getAddressFormSchema());
+        $this->columns(2);
+    }
+
+    /**
+     * Disabilita gli aggiornamenti live per evitare loop infiniti nei wizard di creazione
+     */
+    public function disableLiveUpdates(bool $disable = true): static
+    {
+        $this->disableLiveUpdates = $disable;
+        return $this;
     }
 
     protected function getAddressFormSchema(): array
     {
         $baseSchema = AddressResource::getFormSchema();
+        
+        // Rimuovi campi non necessari per relazioni semplici
         unset($baseSchema['name']);
         unset($baseSchema['is_primary']);
         
+        // Se i live updates sono disabilitati, rimuovi la reattività
+        if ($this->disableLiveUpdates) {
+            $baseSchema = $this->removeReactivityFromSchema($baseSchema);
+        }
+        
         return $baseSchema;
     }
+
+    /**
+     * Rimuove tutti i pattern reattivi dai campi per prevenire loop infiniti
+     *
+     * @param array<string, mixed> $schema
+     * @return array<string, mixed>
+     */
+    protected function removeReactivityFromSchema(array $schema): array
+    {
+        foreach ($schema as $key => $field) {
+            if (method_exists($field, 'live')) {
+                // Rimuovi reattività live
+                $field->live(false);
+            }
+            
+            if (method_exists($field, 'afterStateUpdated')) {
+                // Rimuovi callback afterStateUpdated
+                $field->afterStateUpdated(null);
+            }
+            
+            if (method_exists($field, 'disabled')) {
+                // Rimuovi condizioni disabled dinamiche
+                $field->disabled(false);
+            }
+            
+            $schema[$key] = $field;
+        }
+        
+        return $schema;
+    }
+
+    
     /*
     public function saveRelationships(): void
     {

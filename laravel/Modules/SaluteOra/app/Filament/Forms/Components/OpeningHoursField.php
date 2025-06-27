@@ -25,7 +25,10 @@ class OpeningHoursField extends XotBaseField
                 $state = $this->getDefaultState();
             }
             
-            $component->state($state);
+            // ⚠️ RIMOZIONE CHIAMATA RICORSIVA - causa loop infinito
+            // $component->state($state); // QUESTO CAUSAVA IL LOOP!
+            
+            // ✅ Lo state è già gestito dal framework, non serve forzarlo
         });
         
         $this->dehydrateStateUsing(function ($state) {

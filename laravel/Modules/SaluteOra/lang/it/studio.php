@@ -119,6 +119,11 @@ return array (
       'placeholder' => 'is_primary',
       'helper_text' => 'is_primary',
     ),
+    'administrative_area_level_1' => 
+    array (
+      'description' => 'administrative_area_level_1',
+      'helper_text' => 'administrative_area_level_1',
+    ),
   ),
   'actions' => 
   array (

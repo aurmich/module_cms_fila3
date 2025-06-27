@@ -6,20 +6,24 @@ namespace Modules\SaluteOra\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Infolists;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Tables\Table;
+use Modules\Geo\Models\Comune;
+use Modules\Geo\Models\Address;
 use Filament\Infolists\Infolist;
 use Modules\SaluteOra\Models\Studio;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Component;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Geo\Filament\Resources\AddressResource;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Geo\Filament\Forms\Components\AddressField;
 use Modules\SaluteOra\Filament\Resources\StudioResource\Pages;
 use Modules\SaluteOra\Filament\Resources\StudioResource\RelationManagers;
-use Modules\Geo\Models\Address;
-use Modules\Geo\Filament\Resources\AddressResource;
-use Filament\Forms\Components\Component;
-use Modules\Geo\Filament\Forms\Components\AddressField;
 
 class StudioResource extends XotBaseResource
 {
@@ -58,12 +62,18 @@ class StudioResource extends XotBaseResource
                 ->columnSpanFull(),
             
             'address' => AddressField::make('address')
-               ->relationship('address'),
-                
-            
-            
+                ->relationship('address'),
         ];
     }
 
-   
+    /**
+     * Schema semplificato per wizard di creazione senza reattività
+     * per prevenire loop infiniti quando il record non esiste ancora
+     */
+    public static function getFormSchemaForWizard(): array
+    {
+        $schema=self::getFormSchema();
+        return $schema;
+        
+    }
 }

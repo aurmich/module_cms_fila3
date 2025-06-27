@@ -38,6 +38,10 @@ return [
                 'label' => 'Orario',
                 'description' => 'Scegli l\'orario più comodo per te',
             ],
+            'availability' => [
+                'label' => 'Disponibilità',
+                'description' => 'Seleziona il dottore e l\'orario disponibile',
+            ],
             'confirm' => [
                 'label' => 'Conferma',
                 'description' => 'Rivedi e conferma la tua prenotazione',
@@ -86,6 +90,31 @@ return [
                 'placeholder' => 'ID del dottore selezionato',
                 'helper_text' => 'Identificativo del dottore per la prenotazione',
             ],
+            'doctor' => [
+                'label' => 'Dottore',
+                'placeholder' => 'Seleziona un dottore',
+                'helper_text' => 'Scegli il dottore con cui vuoi prenotare l\'appuntamento',
+            ],
+            'appointment_time' => [
+                'label' => 'Orario Appuntamento',
+                'placeholder' => 'Seleziona un orario',
+                'helper_text' => 'Scegli l\'orario più comodo per il tuo appuntamento',
+            ],
+            'appointment_date' => [
+                'label' => 'Data Appuntamento',
+                'placeholder' => 'Seleziona una data',
+                'helper_text' => 'Scegli la data per il tuo appuntamento',
+            ],
+            'studio' => [
+                'label' => 'Studio',
+                'placeholder' => 'Nome dello studio selezionato',
+                'helper_text' => 'Studio dentistico per la prenotazione',
+            ],
+            'notes' => [
+                'label' => 'Note Aggiuntive',
+                'placeholder' => 'Inserisci eventuali note o richieste particolari...',
+                'helper_text' => 'Informazioni aggiuntive per il tuo appuntamento (opzionale)',
+            ],
         ],
         
         'messages' => [
@@ -101,6 +130,16 @@ return [
             'studio_required' => 'Devi selezionare uno studio per continuare',
             'doctor_required' => 'Devi selezionare un dottore per continuare',
             'location_required' => 'Completa prima la selezione della posizione',
+        ],
+        
+        'availability_step' => [
+            'title' => 'Seleziona Dottore e Orario',
+            'description' => 'Scegli il dottore con cui vuoi prenotare l\'appuntamento e seleziona l\'orario disponibile.',
+        ],
+        
+        'confirm_step' => [
+            'title' => 'Conferma Prenotazione',
+            'description' => 'Verifica i dettagli della tua prenotazione prima di confermare.',
         ],
         
         'submit' => 'Prenota Appuntamento',
