@@ -3,3 +3,234 @@ description:
 globs:
 alwaysApply: false
 ---
+# InlineDatePicker Component Rules
+
+## Principi Architetturali
+
+### Filosofia del Componente
+- **Fenomenologia**: Esperienza utente immediata senza popup
+- **Zen Design**: Minimalismo che elimina friction cognitivo
+- **Fisica Quantistica**: Date in stato di potenzialità fino alla selezione
+- **Termodinamica**: Minimizzazione entropia informativa
+
+### Governance e Implementazione
+- Estende `DatePicker` di Filament per compatibilità
+- View Blade custom per rendering calendario inline
+- Alpine.js per interattività senza reload
+- Integrazione completa con Livewire state management
+
+## Regole di Utilizzo
+
+### Pattern Corretto
+```php
+use Modules\UI\Filament\Forms\Components\InlineDatePicker;
+
+// ✅ Utilizzo standard
+InlineDatePicker::make('appointment_date')
+    ->enabledDates(['2025-06-05', '2025-06-21'])
+    ->highlightColor('bg-indigo-600 text-white')
+    ->compactMode()
+    ->required();
+
+// ✅ Con closure dinamica
+InlineDatePicker::make('date')
+    ->enabledDates(fn () => $this->getAvailableDates())
+    ->live()
+    ->afterStateUpdated(fn ($state) => $this->handleDateSelection($state));
+```
+
+### Anti-pattern da Evitare
+```php
+// ❌ MAI usare DatePicker standard con popup per date limitate
+DatePicker::make('date')
+    ->minDate(now())
+    ->maxDate(now()->addDays(30));
+
+// ❌ MAI hardcodare date nell'array
+->enabledDates(['2025-01-01', '2025-01-02']) // Date statiche!
+
+// ❌ MAI omettere enabledDates se ci sono restrizioni
+InlineDatePicker::make('date') // Tutte le date selezionabili!
+```
+
+## API Methods - Politica di Utilizzo
+
+### enabledDates() - OBBLIGATORIO per Date Selettive
+```php
+// Principio di Scarsità Controllata
+->enabledDates(['2025-06-05', '2025-06-21'])
+
+// Economia dell'Ecosistema - Closure dinamica 
+->enabledDates(fn () => AvailabilityService::getAvailableDates())
+```
+
+### highlightColor() - Design System Coherence
+```php
+// Semiologia Cromatica Standard
+->highlightColor('bg-indigo-600 text-white')   // Default/Neutral
+->highlightColor('bg-green-600 text-white')    // Success/Available
+->highlightColor('bg-orange-600 text-white')   // Warning/Limited
+->highlightColor('bg-red-600 text-white')      // Error/Unavailable
+```
+
+### compactMode() - Responsive Architecture
+```php
+// Layout Adaptation Strategy
+->compactMode()           // Per sidebar, modal, mobile
+->compactMode(false)      // Per main content areas
+```
+
+## Integrazione con Wizard - Pattern Orchestrale
+
+### Composizione Armonica
+```php
+protected function getDateSelectionStep(): Wizard\Step
+{
+    return Wizard\Step::make('date_selection')
+        ->icon('heroicon-o-calendar')
+        ->schema([
+            InlineDatePicker::make('appointment_date')
+                ->enabledDates(fn () => $this->getAvailableDates())
+                ->live()
+                ->afterStateUpdated(function ($state) {
+                    // Trigger cascade effects
+                    $this->loadTimeSlots($state);
+                    $this->updatePricing($state);
+                    $this->validateBusinessRules($state);
+                }),
+        ]);
+}
+```
+
+## Performance e Scalabilità
+
+### Caching Strategy - Economia delle Risorse
+```php
+// Cache delle date disponibili
+->enabledDates(function () {
+    return cache()->remember('doctor_'.$this->doctorId.'_dates', 300, function () {
+        return AvailabilityService::getDoctorAvailableDates($this->doctorId);
+    });
+})
+```
+
+### Lazy Loading - Termodinamica Computazionale
+```php
+// Caricamento on-demand degli slot temporali
+->afterStateUpdated(function ($state) {
+    if ($state) {
+        $this->dispatch('load-time-slots', $state);
+    }
+})
+```
+
+## Sicurezza e Validazione
+
+### Business Rules Enforcement
+```php
+// Validazione server-side SEMPRE obbligatoria
+->rules([
+    function ($value, Closure $fail) {
+        if (!AvailabilityService::isDateActuallyAvailable($value)) {
+            $fail('Data non più disponibile');
+        }
+    }
+])
+```
+
+### CSRF e Rate Limiting
+```php
+// Protezione automatica via Livewire
+// Rate limiting implementato nel service layer
+```
+
+## Testing Requirements
+
+### Unit Testing Obbligatorio
+```php
+/** @test */
+public function it_only_allows_enabled_dates_selection(): void
+{
+    $component = InlineDatePicker::make('test')
+        ->enabledDates(['2025-06-05']);
+    
+    $this->assertTrue($component->isDateEnabled('2025-06-05'));
+    $this->assertFalse($component->isDateEnabled('2025-06-06'));
+}
+```
+
+### Integration Testing Pattern
+```php
+/** @test */
+public function it_integrates_with_wizard_correctly(): void
+{
+    Livewire::test(AppointmentWizard::class)
+        ->set('appointment_date', '2025-06-05')
+        ->assertHasNoFormErrors()
+        ->assertSet('appointment_date', '2025-06-05');
+}
+```
+
+## Documentation Requirements
+
+### File Obbligatori da Mantenere
+1. `laravel/Modules/UI/docs/components/inline-date-picker.md` - Documentazione completa
+2. `laravel/Modules/UI/docs/components.md` - Overview integrata
+3. `laravel/Modules/{Module}/docs/inline-date-picker-usage.md` - Utilizzo specifico modulo
+
+### Collegamenti Bidirezionali
+- Documentazione UI → Root docs
+- Documentazione modulo → UI docs  
+- Regole .mdc → Documentazione markdown
+
+## Accessibilità - Design Universale
+
+### Screen Reader Support
+```html
+<!-- Aria-labels automatici per ogni data -->
+<button aria-label="Seleziona il 05/06/2025">5</button>
+```
+
+### Keyboard Navigation
+- Tab/Shift+Tab per navigazione tra date
+- Enter/Space per selezione
+- Arrow keys per navigazione calendario (futuro)
+
+## Roadmap Evolutiva
+
+### Prossime Feature (Governance Democratica)
+1. **Multi-Date Selection** - Range di date
+2. **Time Integration** - Selezione data+ora unificata  
+3. **Recurring Patterns** - Pattern ricorrenti
+4. **AI Suggestions** - Suggerimenti intelligenti ML
+
+### Ecosystem Integration (Simbiosì)
+1. **Google Calendar Sync** - Integrazione calendari esterni
+2. **Weather API** - Info meteo per eventi outdoor
+3. **Holiday API** - Festività automatiche
+4. **Timezone Support** - Gestione fusi orari
+
+## Compliance e Standard
+
+### PHPStan Level 9+
+- Tipizzazione rigorosa
+- Generics per collection  
+- Null safety completa
+
+### Laraxot Framework Conventions
+- Namespace: `Modules\UI\Filament\Forms\Components`
+- View path: `ui::filament.forms.components.inline-date-picker`
+- Translations: `ui::components.inline_date_picker.*`
+
+## Backlink e Collegamenti
+
+- [UI Components Documentation](mdc:../../laravel/Modules/UI/docs/components.md)
+- [Form Components Guide](mdc:../../laravel/Modules/UI/docs/form-components.md)
+- [SaluteOra Usage Example](mdc:../../laravel/Modules/SaluteOra/docs/inline-date-picker-usage.md)
+- [DatePicker vs InlineDatePicker](mdc:../../laravel/Modules/UI/docs/components/date-picker-comparison.md)
+
+---
+
+*Ultimo aggiornamento: Gennaio 2025*
+*Versione: 1.0.0*
+*Principi: Fenomenologia, Zen, Fisica Quantistica, Governance Democratica*

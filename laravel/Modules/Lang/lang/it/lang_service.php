@@ -494,6 +494,13 @@ return array (
       'placeholder' => 'appointment_date',
       'label' => 'appointment_date',
     ),
+    'appointment_time' => 
+    array (
+      'description' => 'appointment_time',
+      'helper_text' => 'appointment_time',
+      'placeholder' => 'appointment_time',
+      'label' => 'appointment_time',
+    ),
   ),
   'actions' => 
   array (

@@ -194,6 +194,14 @@ class InlineDatePicker extends Field
     }
     
     /**
+     * Set the current view month from the frontend
+     */
+    public function setDisplayDate(string $date): void
+    {
+        $this->displayDate = Carbon::parse($date);
+    }
+    
+    /**
      * Set the first day of the week
      */
     public function firstDayOfWeek(string $day): static

@@ -47,6 +47,14 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      */
     public ?array $filters = null;
 
+    /**
+     * Mese corrente per la navigazione del calendario.
+     * Proprietà pubblica accessibile dal JavaScript per la navigazione.
+     * 
+     * @var string|null
+     */
+    public ?string $currentCalendarMonth = null;
+
    
 
    
@@ -191,20 +199,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     {
         
         return [
-            /*
-            \Modules\SaluteOra\Filament\Forms\Components\StudioSelectorButtons::make('studio_selection')
-                ->sectionTitle(__('saluteora::widgets.find_doctor_and_appointment.studio_list.title'))
-                ->studios(fn($get) => Studio::ofCap($get('cap'))->get()) // Empty Eloquent collection
-                ->populatesStudioField('studio_id')
-                ->populatesDoctorField('doctor_id')
-                ->emptyStateTitle(__('saluteora::widgets.find_doctor_and_appointment.studio_list.empty_state.title'))
-                ->emptyStateDescription(__('saluteora::widgets.find_doctor_and_appointment.studio_list.empty_state.description'))
-                ->required()
-                ->columnSpanFull(),
-                
-            Hidden::make('studio_id')->required(),
-            Hidden::make('doctor_id')->required(),
-            */
+            
             RadioCollection::make('studio_id')
                 ->label('Studio')      
                 ->options(fn($get) => Studio::ofCap($get('cap'))->get()) // La tua collection
@@ -215,33 +210,30 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         ];
     }
 
-    
-
-    
-
    
-
-    /**
-     * Metodo Livewire per selezionare uno studio.
-     *
-     * @param int $studioId
-     * @return void
-     */
-    public function selectStudio(int $studioId): void
-    {
-        $studio = \Modules\SaluteOra\Models\Studio::find($studioId);
-        if ($studio) {
-            $this->data['selected_studio'] = $studioId;
-            $this->data['selected_studio_name'] = $studio->name;
-        }
-    }
 
     protected function getDateStepSchema(): array
     {
+
+        $times=collect([
+            collect((object)['id'=>'09:00','label'=>'09:00']),
+            collect((object)['id'=>'10:00','label'=>'10:00']),
+            collect((object)['id'=>'11:00','label'=>'11:00']),
+            collect((object)['id'=>'12:00','label'=>'12:00']),
+            
+        ]);
+
+
+
         return [
             'appointment_date' => InlineDatePicker::make('appointment_date')
                 ->enabledDates(['2025-06-05','2025-06-21'])
             ,
+            'appointment_time'=>  RadioCollection::make('appointment_time')
+            ->label('Orario')      
+            ->options(fn() => $times) // La tua collection
+            ->itemView('pub_theme::filament.forms.components.studio-time') // La tua blade personalizzata
+            ->valueKey('id') 
         ];
     }
 

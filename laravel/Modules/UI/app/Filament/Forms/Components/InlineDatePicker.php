@@ -72,6 +72,14 @@ class InlineDatePicker extends DatePicker
     protected Carbon $displayDate;
 
     /**
+     * Mese corrente per la navigazione (formato Y-m).
+     * Proprietà pubblica accessibile dal JavaScript per la navigazione.
+     * 
+     * @var string|null
+     */
+    public ?string $currentViewMonth = null;
+
+    /**
      * Vista Blade personalizzata per il rendering inline.
      * Separazione tra logica (PHP) e presentazione (Blade).
      */
@@ -86,6 +94,7 @@ class InlineDatePicker extends DatePicker
         parent::setUp();
 
         $this->displayDate = now()->startOfMonth();
+        $this->currentViewMonth = now()->format('Y-m');
 
         $this->afterStateHydrated(static function (InlineDatePicker $component, $state): void {
             if (! $state) {
@@ -99,6 +108,7 @@ class InlineDatePicker extends DatePicker
 
             $component->state($state);
             $component->displayDate = $state->copy()->startOfMonth();
+            $component->currentViewMonth = $state->format('Y-m');
         });
 
         $this->dehydrateStateUsing(static function (InlineDatePicker $component, $state) {
@@ -111,23 +121,43 @@ class InlineDatePicker extends DatePicker
     }
 
     /**
-     * Naviga al mese precedente
+     * Naviga al mese precedente.
+     * Implementa la "regressione temporale controllata" secondo i principi:
+     * - Determinismo Causale: Ogni click ha un effetto prevedibile
+     * - Conservazione del Contesto: Lo stato generale rimane coerente
+     * - Principio di Minima Azione: Minimo sforzo per massimo risultato fenomenologico
      * 
      * @return void
      */
     public function previousMonth(): void
     {
-        $this->displayDate = $this->displayDate->subMonth();
+        if ($this->currentViewMonth) {
+            $currentMonth = Carbon::createFromFormat('Y-m', $this->currentViewMonth);
+            $this->currentViewMonth = $currentMonth->subMonth()->format('Y-m');
+        } else {
+            $this->displayDate = $this->displayDate->copy()->subMonth();
+            $this->currentViewMonth = $this->displayDate->format('Y-m');
+        }
     }
 
     /**
-     * Naviga al mese successivo
+     * Naviga al mese successivo.
+     * Implementa la "progressione temporale controllata" secondo i principi di:
+     * - Anticipazione Fenomenologica: Movimento verso il futuro possibile
+     * - Sintesi Temporale: Unificazione di passato e futuro nel presente vissuto
+     * - Intenzionalità Direzionale: Volontà orientata verso l'evoluzione
      * 
      * @return void
      */
     public function nextMonth(): void
     {
-        $this->displayDate = $this->displayDate->addMonth();
+        if ($this->currentViewMonth) {
+            $currentMonth = Carbon::createFromFormat('Y-m', $this->currentViewMonth);
+            $this->currentViewMonth = $currentMonth->addMonth()->format('Y-m');
+        } else {
+            $this->displayDate = $this->displayDate->copy()->addMonth();
+            $this->currentViewMonth = $this->displayDate->format('Y-m');
+        }
     }
     
     /**
@@ -152,6 +182,81 @@ class InlineDatePicker extends DatePicker
     }
 
     /**
+     * Imposta il mese di visualizzazione corrente
+     * Metodo chiamato dal JavaScript per la navigazione temporale
+     * 
+     * Questo metodo rappresenta l'interfaccia quantistica tra
+     * l'interazione umana e la macchina del tempo digitale.
+     * 
+     * @param string $monthString Stringa del mese in formato Y-m o timestamp
+     * @return void
+     */
+    public function setCurrentViewMonth(string $monthString): void
+    {
+        try {
+            // Tentativo di parsing della stringa come data
+            if (preg_match('/^\d{4}-\d{2}$/', $monthString)) {
+                // Formato Y-m
+                $newDate = Carbon::createFromFormat('Y-m', $monthString)->startOfMonth();
+            } elseif (is_numeric($monthString)) {
+                // Timestamp
+                $newDate = Carbon::createFromTimestamp((int) $monthString)->startOfMonth();
+            } else {
+                // Parse generico
+                $newDate = Carbon::parse($monthString)->startOfMonth();
+            }
+            
+            $this->displayDate = $newDate;
+            
+            // Rigenera i dati del calendario per il nuovo mese
+            // Questo è cruciale per aggiornare la vista con il nuovo mese
+            $this->refreshCalendarData();
+            
+            // Registra l'evento di navigazione per debugging
+            if (config('app.debug')) {
+                \Log::info('InlineDatePicker: Navigation to month', [
+                    'input' => $monthString,
+                    'parsed_date' => $newDate->format('Y-m-d'),
+                    'component_id' => $this->getIdSafely(),
+                ]);
+            }
+            
+        } catch (\Exception $e) {
+            // Fallback sicuro in caso di errore di parsing
+            \Log::warning('InlineDatePicker: Failed to parse month string', [
+                'input' => $monthString,
+                'error' => $e->getMessage(),
+                'component_id' => $this->getIdSafely(),
+            ]);
+            
+            // Mantieni la data corrente in caso di errore
+            // Non modificare $this->displayDate
+        }
+    }
+
+    /**
+     * Rigenera i dati del calendario dopo un cambio di mese.
+     * 
+     * Questo metodo è essenziale per sincronizzare il calendario visualizzato
+     * con la nuova data di visualizzazione dopo la navigazione.
+     * 
+     * @return void
+     */
+    protected function refreshCalendarData(): void
+    {
+        // Rigenera i dati del calendario con la nuova data
+        $this->calendar = $this->generateCalendarData();
+        
+        // Aggiorna i metadati di navigazione
+        $this->currentViewMonth = $this->displayDate;
+        $this->previousMonth = $this->displayDate->copy()->subMonth();
+        $this->nextMonth = $this->displayDate->copy()->addMonth();
+        
+        // Forza il refresh del componente Livewire per aggiornare la vista
+        $this->dispatch('$refresh');
+    }
+
+    /**
      * Imposta il mese corrente
      */
     public function setDisplayDate(CarbonInterface $date): static
@@ -171,8 +276,13 @@ class InlineDatePicker extends DatePicker
      */
     public function generateCalendarData(): array
     {
-        $firstDay = $this->displayDate->copy()->startOfMonth()->startOfWeek(Carbon::MONDAY);
-        $lastDay = $this->displayDate->copy()->endOfMonth()->endOfWeek(Carbon::SUNDAY);
+        // Usa currentViewMonth se disponibile, altrimenti displayDate
+        $targetMonth = $this->currentViewMonth 
+            ? Carbon::createFromFormat('Y-m', $this->currentViewMonth)->startOfMonth()
+            : $this->displayDate->copy()->startOfMonth();
+            
+        $firstDay = $targetMonth->copy()->startOfWeek(Carbon::MONDAY);
+        $lastDay = $targetMonth->copy()->endOfMonth()->endOfWeek(Carbon::SUNDAY);
         
         $weeks = collect();
         $currentDay = $firstDay->copy();
@@ -181,7 +291,7 @@ class InlineDatePicker extends DatePicker
             $week = collect();
             
             for ($i = 0; $i < 7; $i++) {
-                $isCurrentMonth = $currentDay->month === $this->displayDate->month;
+                $isCurrentMonth = $currentDay->month === $targetMonth->month;
                 $isToday = $currentDay->isToday();
                 $isSelected = false;
                 
@@ -216,9 +326,9 @@ class InlineDatePicker extends DatePicker
             'weeks' => $weeks->toArray(), // Backward compatibility
             
             // Metadati temporali
-            'month' => $this->displayDate,
-            'monthName' => $this->displayDate->translatedFormat('F'),
-            'year' => $this->displayDate->year,
+            'month' => $targetMonth,
+            'monthName' => $targetMonth->translatedFormat('F'),
+            'year' => $targetMonth->year,
             
             // Controlli navigazione intelligente
             'hasPreviousMonth' => $this->hasPreviousMonth(),
@@ -362,15 +472,20 @@ class InlineDatePicker extends DatePicker
             $currentState = null;
         }
 
+        // Determina il mese target per la visualizzazione
+        $targetMonth = $this->currentViewMonth 
+            ? Carbon::createFromFormat('Y-m', $this->currentViewMonth)->startOfMonth()
+            : $this->displayDate->copy()->startOfMonth();
+
         return array_merge(parent::getViewData(), [
             // Struttura calendario principale  
             'calendar' => $this->generateCalendarData(),
             
             // Controllo temporale per navigazione
-            'currentViewMonth' => $this->displayDate,
+            'currentViewMonth' => $targetMonth,
             'currentValue' => $currentState,
-            'previousMonth' => $this->displayDate->copy()->subMonth(),
-            'nextMonth' => $this->displayDate->copy()->addMonth(),
+            'previousMonth' => $targetMonth->copy()->subMonth(),
+            'nextMonth' => $targetMonth->copy()->addMonth(),
             
             // Configurazione comportamento
             'enabledDates' => $this->getEnabledDates(),
@@ -383,91 +498,15 @@ class InlineDatePicker extends DatePicker
             'statePath' => $this->getStatePathSafely(),
             
             // Localizzazione temporale
-            'monthName' => $this->displayDate->translatedFormat('F'),
-            'year' => $this->displayDate->year,
-            'monthYearLabel' => $this->displayDate->translatedFormat('F Y'),
+            'monthName' => $targetMonth->translatedFormat('F'),
+            'year' => $targetMonth->year,
+            'monthYearLabel' => $targetMonth->translatedFormat('F Y'),
             
             // Metadati per accessibilità e debugging
             'weekdays' => ['L', 'M', 'M', 'G', 'V', 'S', 'D'],
             'locale' => $this->getLocaleSafely(),
             'timezone' => $this->getTimezoneSafely(),
         ]);
-    }
-
-    /**
-     * Imposta il mese di visualizzazione da stringa (metodo Livewire).
-     * 
-     * Implementa il ponte fenomenologico tra interfaccia JavaScript e logica PHP secondo:
-     * - Pattern Bridge: Collegamento tra mondi diversi (JS/PHP)
-     * - Teoria della Comunicazione: Trasferimento di informazione temporale
-     * - Semiotica: Interpretazione di simboli temporali cross-platform
-     * 
-     * @param string $monthString Mese in formato Y-m (es. "2025-06")
-     * @return void
-     */
-    public function setCurrentViewMonth(string $monthString): void
-    {
-        try {
-            // Parsing sicuro della stringa temporale
-            $parsedMonth = Carbon::createFromFormat('Y-m', $monthString)->startOfMonth();
-            $this->displayDate = $parsedMonth;
-            
-        } catch (\Throwable $e) {
-            // Gestione errori di parsing temporale
-            // Fallback al presente fenomenologico
-            $this->displayDate = Carbon::now()->startOfMonth();
-            
-            // Log per debugging temporale
-            if (config('app.debug')) {
-                logger()->warning('InlineDatePicker: Invalid month format', [
-                    'input' => $monthString,
-                    'error' => $e->getMessage(),
-                    'component' => static::class
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Imposta il colore di evidenziazione per le date abilitate.
-     * 
-     * Teoria del colore applicata alla UX: colori comunicano significato.
-     * 
-     * @param string $color Classi Tailwind CSS per lo styling
-     * @return static
-     */
-    public function highlightColor(string $color): static
-    {
-        $this->highlightColor = $color;
-        return $this;
-    }
-
-    /**
-     * Attiva/disattiva la modalità compatta.
-     * 
-     * Responsive Design: adattamento al contenitore disponibile.
-     * 
-     * @param bool $compact
-     * @return static
-     */
-    public function compactMode(bool $compact = true): static
-    {
-        $this->compactMode = $compact;
-        return $this;
-    }
-
-    /**
-     * Mostra/nasconde i controlli di navigazione.
-     * 
-     * Principio di controllo utente: l'utente decide il livello di interazione.
-     * 
-     * @param bool $show
-     * @return static
-     */
-    public function showNavigation(bool $show = true): static
-    {
-        $this->showNavigation = $show;
-        return $this;
     }
 
     /**
@@ -524,5 +563,47 @@ class InlineDatePicker extends DatePicker
         } catch (\Throwable $e) {
             return 'UTC'; // Fallback alla timezone UTC
         }
+    }
+
+    /**
+     * Imposta il colore di evidenziazione per le date abilitate.
+     * 
+     * Teoria del colore applicata alla UX: colori comunicano significato.
+     * 
+     * @param string $color Classi Tailwind CSS per lo styling
+     * @return static
+     */
+    public function highlightColor(string $color): static
+    {
+        $this->highlightColor = $color;
+        return $this;
+    }
+
+    /**
+     * Attiva/disattiva la modalità compatta.
+     * 
+     * Responsive Design: adattamento al contenitore disponibile.
+     * 
+     * @param bool $compact
+     * @return static
+     */
+    public function compactMode(bool $compact = true): static
+    {
+        $this->compactMode = $compact;
+        return $this;
+    }
+
+    /**
+     * Mostra/nasconde i controlli di navigazione.
+     * 
+     * Principio di controllo utente: l'utente decide il livello di interazione.
+     * 
+     * @param bool $show
+     * @return static
+     */
+    public function showNavigation(bool $show = true): static
+    {
+        $this->showNavigation = $show;
+        return $this;
     }
 } 
