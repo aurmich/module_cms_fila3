@@ -54,6 +54,13 @@ return array (
       'helper_text' => 'isee_certificate',
       'description' => 'isee_certificate',
     ),
+    'certifications' => 
+    array (
+      'description' => 'certifications',
+      'helper_text' => 'certifications',
+      'placeholder' => 'certifications',
+      'label' => 'certifications',
+    ),
   ),
   'steps' => 
   array (
@@ -104,6 +111,14 @@ return array (
     'test_step' => 
     array (
       'label' => 'test_step',
+    ),
+    'personal_info_step' => 
+    array (
+      'label' => 'personal_info_step',
+    ),
+    'availability_step' => 
+    array (
+      'label' => 'availability_step',
     ),
   ),
 );

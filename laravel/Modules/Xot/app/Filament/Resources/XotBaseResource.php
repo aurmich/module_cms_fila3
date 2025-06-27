@@ -188,7 +188,7 @@ abstract class XotBaseResource extends FilamentResource
 
     public static function getAttachmentsSchema(bool $multiple=true): array{
         $model = static::getModel();
-        $attachments = $model::$attachments;
+        $attachments = property_exists($model, 'attachments') ? $model::$attachments : [];
         $uuid = Str::uuid()->toString();
         $schema = [];
         
@@ -233,9 +233,9 @@ abstract class XotBaseResource extends FilamentResource
 
     protected static function getStepByName(string $name): Forms\Components\Wizard\Step
     {
-        $schema=Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
+        $schema = Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
         
         return Forms\Components\Wizard\Step::make($name)
-            ->schema(static::$schema());
+            ->schema(static::{$schema}());
     }
 }

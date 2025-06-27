@@ -95,53 +95,7 @@ class DoctorResource extends XotBaseResource
         ];
     }
 
-                
-
-                
-    protected static function getDocumentsSchema(): array
-    {
-        $attachments = Doctor::$attachments;
-        $uuid = Str::uuid()->toString();
-        $schema = [];
         
-        foreach ($attachments as $attachment) {
-            $schema[] = Forms\Components\FileUpload::make($attachment)
-                ->disk('local')
-                ->directory('documents/'.$attachment.'/'.$uuid)
-                //->downloadable()
-                //->openable()
-                ->acceptedFileTypes(['application/pdf', 'image/*'])
-                ->maxSize(5120)
-                ->required()
-                ->reorderable()
-                ->multiple()
-                ->preserveFilenames()
-                ->columnSpanFull()
-                ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
-                    if (!$state) return;
-                    
-                    $sessionId = session()->getId();
-                    $sessionDir = "session-uploads/{$sessionId}";
-                    $sessionFiles = [];
-                    
-                    foreach ($state as $file) {
-                        if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
-                            // Salva direttamente nella directory di sessione
-                            $fileName = time() . '_' . $file->getClientOriginalName();
-                            $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
-                            $sessionFiles[] = $sessionPath;
-                        } else {
-                            // È già un percorso salvato
-                            $sessionFiles[] = $file;
-                        }
-                    }
-                    
-                    $set($attachment, $sessionFiles);
-                })
-                ;
-        }
-        return $schema;
-    }
 
     /**
      * Step UI allineato a /docs/images/13.md, 13.html, 13.blade.php
@@ -156,8 +110,7 @@ class DoctorResource extends XotBaseResource
         return Forms\Components\Wizard\Step::make('personal_info')
             ->icon('heroicon-o-user')
             ->schema([
-                'personal_section' => Forms\Components\Section::make()
-                    ->schema([
+                
                         'id' => Forms\Components\Hidden::make('id'),
                         'first_name' => Forms\Components\TextInput::make('first_name')
                             ->required()
@@ -191,13 +144,9 @@ class DoctorResource extends XotBaseResource
                                 
                                 return $rules;
                             }),
-                        ...self::getDocumentsSchema(),
+                        ...self::getAttachmentsSchema(false),
 
-                    ]),
-            ])->visible(function ($model,$record) {
-                return true;
-            //dddx([$model,$record]);
-            });
+            ]);
     }
 
     
@@ -214,41 +163,14 @@ class DoctorResource extends XotBaseResource
                 ->relationship('studio')  
                 ->schema(StudioResource::getFormSchema())
                 ])
-            ->visible(fn ($get) => $get('id')!==null)
+            //->visible(fn ($get) => $get('id')!==null)
             ;
     }
 
-    protected static function getProfessionalStep(): Forms\Components\Wizard\Step
-    {
-        // Non utilizzare $translationPrefix, ma direttamente il namespace di traduzione
-
-        return Forms\Components\Wizard\Step::make('professional')
-            ->icon('heroicon-o-academic-cap')
-            ->schema([
-                'registration_number' => Forms\Components\TextInput::make('registration_number')
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->placeholder(__('saluteora::doctor-resource.registration_number')),
-
-                'certifications' => Forms\Components\FileUpload::make('certifications')
-                    ->multiple()
-                    ->directory('doctors/certifications')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(10240)
-                    ->downloadable()
-                    ->openable()
-                    ->reorderable()
-                    ->columnSpanFull()
-                    ->placeholder(__('saluteora::doctor-resource.certifications')),
-
-            ])
-            ->visible(fn ($get) => $get('id')!==null);
-    }
+   
 
     protected static function getAvailabilityStep(): Forms\Components\Wizard\Step
     {
-        // Non utilizzare $translationPrefix, ma direttamente il namespace di traduzione
-
         return Forms\Components\Wizard\Step::make('availability')
             ->icon('heroicon-o-calendar')
             ->schema([
@@ -258,7 +180,8 @@ class DoctorResource extends XotBaseResource
                     ->columnSpanFull(),
                     
             ])
-            ->visible(fn ($get) => $get('id')!==null);
+            ->visible(fn ($get) => $get('id')!==null)
+            ;
     }
 
     public static function getPages(): array
@@ -270,35 +193,7 @@ class DoctorResource extends XotBaseResource
         ];
     }
 
-    // Metodo per generare e inviare il link di continuazione dopo la moderazione
-    public static function sendContinuationLink(Doctor $doctor): void
-    {
-        if ($doctor->state === UserStateEnum::APPROVED) {
-            $token = sha1($doctor->email . now());
-            $continuationUrl = URL::temporarySignedRoute(
-                'doctor.registration.continue',
-                now()->addDays(7),
-                ['doctor' => $doctor->id, 'token' => $token]
-            );
-
-            // Invio email con il link di continuazione utilizzando SpatieEmail
-            $email = new SpatieEmail($doctor, 'registration_moderated');
-            Mail::to($doctor->email)->locale('it')->send($email);
-
-            // Salva il token nel database per verifica successiva (opzionale)
-            $doctor->update(['continuation_token' => $token]);
-        }
-    }
-
-    // Metodo per riprendere la registrazione
-    public static function resumeRegistration(int $doctorId, string $token): \Illuminate\Http\RedirectResponse
-    {
-        $doctor = Doctor::findOrFail($doctorId);
-        if (hash_equals($doctor->continuation_token, $token) && $doctor->state === UserStateEnum::APPROVED) {
-            return redirect()->route('filament.resources.doctors.edit', $doctor);
-        }
-        abort(403, 'Link non valido o scaduto.');
-    }
+   
 
     /**
      * @return array<class-string>

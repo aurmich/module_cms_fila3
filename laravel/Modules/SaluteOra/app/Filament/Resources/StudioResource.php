@@ -58,7 +58,7 @@ class StudioResource extends XotBaseResource
                 ->columnSpanFull(),
             
             'address' => AddressField::make('address')
-                ->relationship('address'),
+               ->relationship('address'),
                 
             
             

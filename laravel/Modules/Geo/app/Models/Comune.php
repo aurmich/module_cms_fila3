@@ -102,7 +102,7 @@ class Comune extends BaseModel
 
     public function getJsonFile(): string
     {
-        return module_path('Geo', 'resources/json/comuni.json');
+        return base_path('Modules/Geo/resources/json/comuni.json');
     }
 
     public function getRows(): array
