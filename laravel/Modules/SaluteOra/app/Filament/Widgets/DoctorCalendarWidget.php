@@ -31,6 +31,13 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 class DoctorCalendarWidget extends FullCalendarWidget
 {
     use HasFullCalendarConfig;
+    
+    /**
+     * Riferimento alla data corrente del calendario.
+     *
+     * @var string
+     */
+    public string $currentDate;
 
     /**
      * Modello associato al widget.
@@ -53,6 +60,17 @@ class DoctorCalendarWidget extends FullCalendarWidget
      */
     protected static ?string $maxHeight = '600px';
 
+    /**
+     * Inizializza il widget impostando la data corrente.
+     *
+     * @return void
+     */
+    public function mount(): void
+    {
+        parent::mount();
+        $this->currentDate = now()->format('Y-m-d');
+    }
+    
     /**
      * Verifica se l'utente può visualizzare il widget.
      *

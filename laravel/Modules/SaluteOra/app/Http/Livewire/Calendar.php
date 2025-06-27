@@ -49,6 +49,22 @@ class Calendar extends Component
         }
     }
 
+    public function nextMonth(): void
+    {
+        $this->selectedDate = Carbon::parse($this->selectedDate)
+            ->addMonth()
+            ->toDateString();
+        $this->fetchEvents();
+    }
+
+    public function previousMonth(): void
+    {
+        $this->selectedDate = Carbon::parse($this->selectedDate)
+            ->subMonth()
+            ->toDateString();
+        $this->fetchEvents();
+    }
+
     public function fetchEvents(): void
     {
         try {

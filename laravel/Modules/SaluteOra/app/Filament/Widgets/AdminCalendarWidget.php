@@ -31,6 +31,13 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 class AdminCalendarWidget extends FullCalendarWidget
 {
     use HasFullCalendarConfig;
+    
+    /**
+     * Riferimento alla data corrente del calendario.
+     *
+     * @var string
+     */
+    public string $currentDate;
 
     /**
      * Modello associato al widget.
@@ -52,6 +59,68 @@ class AdminCalendarWidget extends FullCalendarWidget
      * @var string|null
      */
     protected static ?string $maxHeight = '600px';
+    
+    /**
+     * Inizializza il widget impostando la data corrente.
+     *
+     * @return void
+     */
+    public function mount(): void
+    {
+        parent::mount();
+        $this->currentDate = now()->format('Y-m-d');
+    }
+    
+    /**
+     * Naviga al mese successivo.
+     *
+     * @return void
+     */
+    public function nextMonth(): void
+    {
+        // Calcola il primo giorno del mese successivo
+        $this->currentDate = now()
+            ->setDate(
+                (int) date('Y', strtotime($this->currentDate)),
+                (int) date('m', strtotime($this->currentDate)),
+                1
+            )
+            ->addMonth()
+            ->format('Y-m-d');
+            
+        $this->dispatch('refetchEvents');
+    }
+
+    /**
+     * Naviga al mese precedente.
+     *
+     * @return void
+     */
+    public function prevMonth(): void
+    {
+        // Calcola il primo giorno del mese precedente
+        $this->currentDate = now()
+            ->setDate(
+                (int) date('Y', strtotime($this->currentDate)),
+                (int) date('m', strtotime($this->currentDate)),
+                1
+            )
+            ->subMonth()
+            ->format('Y-m-d');
+            
+        $this->dispatch('refetchEvents');
+    }
+
+    /**
+     * Naviga alla data odierna.
+     *
+     * @return void
+     */
+    public function today(): void
+    {
+        $this->currentDate = now()->format('Y-m-d');
+        $this->dispatch('refetchEvents');
+    }
 
     /**
      * Filtri attivi per il widget.

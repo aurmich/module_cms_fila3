@@ -8,6 +8,8 @@ use Filament\Forms\Components\Field;
 use Filament\Forms\Form;
 use Modules\UI\Filament\Forms\Components\InlineDatePicker;
 use Modules\UI\Tests\TestCase;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class InlineDatePickerTest extends TestCase
 {
@@ -146,5 +148,101 @@ class InlineDatePickerTest extends TestCase
             ->enabledDates(['2025-06-15']);
             
         $this->assertTrue($component->isDateEnabled('2025-06-15 14:30:00'));
+    }
+
+    /** @test */
+    public function it_uses_carbon_for_localization(): void
+    {
+        // Arrange
+        App::setLocale('it');
+        $picker = InlineDatePicker::make('test_date');
+        
+        // Act
+        $weekdays = $this->invokeMethod($picker, 'getLocalizedWeekdays');
+        
+        // Assert
+        $this->assertContains('Lun', $weekdays);
+        $this->assertContains('Dom', $weekdays);
+    }
+
+    /** @test */
+    public function it_generates_correct_calendar_data(): void
+    {
+        // Arrange
+        $picker = InlineDatePicker::make('test_date');
+        $picker->currentViewMonth = '2024-01';
+        
+        // Act
+        $calendarData = $picker->generateCalendarData();
+        
+        // Assert
+        $this->assertArrayHasKey('weeks', $calendarData);
+        $this->assertArrayHasKey('monthName', $calendarData);
+        $this->assertArrayHasKey('weekdays', $calendarData);
+        $this->assertCount(6, $calendarData['weeks']); // 6 settimane
+        $this->assertCount(7, $calendarData['weeks'][0]); // 7 giorni per settimana
+    }
+
+    /** @test */
+    public function it_handles_enabled_dates_correctly(): void
+    {
+        // Arrange
+        $picker = InlineDatePicker::make('test_date');
+        $picker->enabledDates(['2024-01-15', '2024-01-16']);
+        
+        // Act & Assert
+        $this->assertTrue($picker->isDateEnabled('2024-01-15'));
+        $this->assertTrue($picker->isDateEnabled('2024-01-16'));
+        $this->assertFalse($picker->isDateEnabled('2024-01-14'));
+    }
+
+    /** @test */
+    public function it_is_dry_no_code_duplication(): void
+    {
+        // Verifica che non ci sia duplicazione di logica tra PHP e JavaScript
+        $viewContent = file_get_contents(
+            base_path('laravel/Modules/UI/resources/views/filament/forms/components/inline-date-picker.blade.php')
+        );
+        
+        // Assert: Nessun JavaScript complesso per navigazione
+        $this->assertStringNotContainsString('navigateToMonth', $viewContent);
+        $this->assertStringNotContainsString('generateCalendarForMonth', $viewContent);
+        
+        // Assert: Solo chiamate wire:click server-side
+        $this->assertStringContainsString('wire:click="previousMonth"', $viewContent);
+        $this->assertStringContainsString('wire:click="nextMonth"', $viewContent);
+    }
+
+    /** @test */
+    public function it_is_kiss_simple_and_clear(): void
+    {
+        $picker = InlineDatePicker::make('test_date');
+        
+        // Assert: API semplice
+        $this->assertInstanceOf(InlineDatePicker::class, $picker->enabledDates(['2024-01-01']));
+        
+        // Assert: Metodi pubblici minimi e chiari
+        $reflection = new \ReflectionClass($picker);
+        $publicMethods = array_filter($reflection->getMethods(), fn($m) => $m->isPublic() && !$m->isStatic());
+        
+        // Dovrebbe avere solo metodi essenziali
+        $essentialMethods = ['enabledDates', 'isDateEnabled', 'generateCalendarData', 'getViewData', 'previousMonth', 'nextMonth'];
+        $actualPublicMethods = array_map(fn($m) => $m->getName(), $publicMethods);
+        
+        foreach ($essentialMethods as $method) {
+            $this->assertContains($method, $actualPublicMethods, "Metodo essenziale mancante: $method");
+        }
+    }
+
+    /**
+     * Invoca un metodo privato/protetto per testing.
+     */
+    private function invokeMethod(object $object, string $methodName, array $parameters = []): mixed
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $parameters);
     }
 }

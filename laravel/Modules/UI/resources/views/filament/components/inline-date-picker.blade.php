@@ -7,36 +7,107 @@
         daysOfWeek: @js($getDaysOfWeek()),
         
         init() {
-            // Initialize with selected date if any
-            if (this.selectedDate) {
-                this.updateDisplayedMonth(this.selectedDate);
-            }
-            
-            // Listen for month navigation updates
-            this.$wire.on('inline-date-picker-updated', (event) => {
-                if (event.detail.id === '{{ $getId() }}') {
-                    this.calendar = @js($getCalendarData());
-                }
-            });
+            // Initialize with selected date if any - no more Livewire listeners needed
+            console.log('InlineDatePicker initialized with frontend-only navigation');
         },
         
         selectDate(date) {
             this.selectedDate = date;
             this.$wire.set('{{ $getStatePath() }}', date, false);
+            
+            // Aggiorna lo stato visuale localmente senza chiamate Livewire
+            this.updateSelectedState();
         },
         
-        updateDisplayedMonth(dateString) {
-            const date = new Date(dateString);
-            this.$wire.set('displayDate', date.toISOString().split('T')[0], false);
-            this.$wire.dispatch('inline-date-picker-updated', { id: '{{ $getId() }}' });
+        updateSelectedState() {
+            // Aggiorna lo stato di selezione in tutto il calendario
+            this.calendar.weeks.forEach(week => {
+                week.forEach(day => {
+                    day.isSelected = this.selectedDate === day.date;
+                });
+            });
         },
         
         navigateToPreviousMonth() {
-            this.$wire.previousMonth();
+            // Navigazione puramente frontend - NESSUNA chiamata Livewire
+            this.navigateToMonth('prev');
         },
         
         navigateToNextMonth() {
-            this.$wire.nextMonth();
+            // Navigazione puramente frontend - NESSUNA chiamata Livewire  
+            this.navigateToMonth('next');
+        },
+        
+        navigateToMonth(direction) {
+            // Calcola il nuovo mese
+            const currentDate = new Date(this.calendar.year, this.calendar.month - 1, 1);
+            
+            if (direction === 'prev') {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+            } else if (direction === 'next') {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+            
+            // Aggiorna il calendario frontend
+            this.updateCalendarForMonth(currentDate);
+        },
+        
+        updateCalendarForMonth(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1; // JavaScript month is 0-based
+            
+            // Genera nuovi dati calendario
+            this.calendar = this.generateCalendarForMonth(year, month);
+        },
+        
+        generateCalendarForMonth(year, month) {
+            const firstDay = new Date(year, month - 1, 1);
+            const lastDay = new Date(year, month, 0);
+            const startDate = new Date(firstDay);
+            
+            // Calcola il primo lunedì da visualizzare
+            const dayOfWeek = firstDay.getDay();
+            const mondayOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+            startDate.setDate(startDate.getDate() - mondayOffset);
+            
+            const weeks = [];
+            const currentDate = new Date(startDate);
+            
+            // Genera 6 settimane (42 giorni)
+            for (let week = 0; week < 6; week++) {
+                const days = [];
+                for (let day = 0; day < 7; day++) {
+                    const dateString = currentDate.toISOString().split('T')[0];
+                    const isCurrentMonth = currentDate.getMonth() === month - 1;
+                    const isToday = this.isToday(currentDate);
+                    const isSelected = this.selectedDate === dateString;
+                    
+                    days.push({
+                        date: dateString,
+                        day: currentDate.getDate(),
+                        isCurrentMonth: isCurrentMonth,
+                        isToday: isToday,
+                        isSelected: isSelected,
+                        isEnabled: isCurrentMonth // Semplificato per ora
+                    });
+                    
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+                weeks.push(days);
+            }
+            
+            return {
+                weeks: weeks,
+                month: firstDay.toLocaleDateString('it-IT', { month: 'long' }),
+                year: year,
+                hasPreviousMonth: true, // Semplificato per ora
+                hasNextMonth: true // Semplificato per ora
+            };
+        },
+        
+        isToday(date) {
+            const today = new Date();
+            return date.toDateString() === today.toDateString();
         },
         
         getDayClasses(day) {
