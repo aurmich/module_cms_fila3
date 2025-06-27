@@ -187,6 +187,10 @@ return array (
       'placeholder' => 'studio_name',
       'label' => 'studio_name',
     ),
+    'test' => 
+    array (
+      'description' => 'test',
+    ),
   ),
   'actions' => 
   array (

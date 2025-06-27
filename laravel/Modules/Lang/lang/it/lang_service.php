@@ -462,6 +462,19 @@ return array (
       'placeholder' => 'studio_selection',
       'label' => 'studio_selection',
     ),
+    'selected_product_id' => 
+    array (
+      'description' => 'selected_product_id',
+      'helper_text' => 'selected_product_id',
+      'placeholder' => 'selected_product_id',
+      'label' => 'selected_product_id',
+    ),
+    'studio_id' => 
+    array (
+      'description' => 'studio_id',
+      'helper_text' => 'studio_id',
+      'placeholder' => 'studio_id',
+    ),
   ),
   'actions' => 
   array (

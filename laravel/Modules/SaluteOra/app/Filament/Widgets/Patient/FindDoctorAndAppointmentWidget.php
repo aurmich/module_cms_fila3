@@ -30,6 +30,7 @@ use Filament\Support\Facade\FilamentView;
 use Filament\Forms\Components\Wizard\Step;
 use Livewire\Component as LivewireComponent;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\UI\Filament\Forms\Components\RadioCollection;
 
 class FindDoctorAndAppointmentWidget extends XotBaseWidget
 {
@@ -68,8 +69,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     {
         return [
             Forms\Components\Wizard::make()
-                ->startOnStep($this->getStartStep())
+                //->startOnStep($this->getStartStep())
                 ->steps([
+                    //$this->getStepByName('test_step'),
                     $this->getStepByName('search_step')
                         ->icon('heroicon-o-map-pin'),
                     $this->getStepByName('studio_step')
@@ -94,9 +96,20 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      *
      * @return int
      */
-    protected function getStartStep(): int
+    protected function getWizardStartOnStep(): int
     {
         return 0; // Prima pagina
+    }
+
+    protected function getTestStepSchema(): array
+    {
+        return [
+            'test' =>  RadioCollection::make('studio_id')
+                ->label('Studio')      
+                ->options(fn() => Studio::all()) // La tua collection
+                ->itemView('pub_theme::filament.forms.components.studio-item') // La tua blade personalizzata
+                ->valueKey('id') // Campo da usare come valore (default: 'id'),
+        ];
     }
 
 
