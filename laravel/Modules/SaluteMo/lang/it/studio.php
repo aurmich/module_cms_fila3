@@ -169,6 +169,10 @@ return array (
     array (
       'label' => 'reorderRecords',
     ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
   ),
   'actions' => 
   array (
