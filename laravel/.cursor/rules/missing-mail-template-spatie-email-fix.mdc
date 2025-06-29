@@ -3,3 +3,187 @@ description:
 globs:
 alwaysApply: false
 ---
+# Regola Cursor – MissingMailTemplate SpatieEmail Fix
+
+## Ambito
+- Globale (Email Templates, Spatie MailTemplates, Notify Module, Actions)
+
+## Motivazione
+- Prevenire errori "MissingMailTemplate" durante l'invio di notifiche email
+- Risolvere conflitti di timing nella risoluzione template di Spatie MailTemplates
+- Garantire disponibilità template per tutti gli stati utente (patient-pending, doctor-pending, etc.)
+- Centralizzare gestione template email con pre-popolazione database
+
+## Regola
+- SEMPRE pre-popolare template email necessari nelle migrazioni database
+- MAI fare affidamento sulla creazione template nel costruttore di SpatieEmail
+- SEMPRE usare pattern {type}-{state} per slug template (es. "patient-pending")
+- Separare template resolution dalla logica business nelle Actions
+- SEMPRE specificare parametri disponibili nei template email
+
+## Esempio pratico
+
+### ✅ CORRETTO: Pre-popolazione Template in Migrazione
+```php
+// database/migrations/YYYY_MM_DD_create_email_templates.php
+return new class extends XotBaseMigration
+{
+    public function up(): void
+    {
+        MailTemplate::firstOrCreate([
+            'mailable' => 'Modules\\Notify\\Emails\\SpatieEmail',
+            'slug' => 'patient-pending',
+        ], [
+            'subject' => '{"it":"Registrazione in attesa - {{ first_name }}"}',
+            'html_template' => '{"it":"<h2>Gentile {{ first_name }} {{ last_name }},</h2><p>La tua registrazione è in attesa di approvazione.</p>"}',
+            'text_template' => '{"it":"Gentile {{ first_name }} {{ last_name }}, la tua registrazione è in attesa di approvazione."}',
+            'params' => 'first_name,last_name,email,type,state'
+        ]);
+    }
+};
+```
+
+### ❌ ERRATO: Creazione Template nel Costruttore
+```php
+// SpatieEmail.php - Logica problematica
+public function __construct(Model $record, string $slug)
+{
+    $this->slug = Str::slug($slug);
+    // ❌ Timing conflict: Spatie cerca template PRIMA di questo
+    MailTemplate::firstOrCreate([
+        'mailable' => SpatieEmail::class,
+        'slug' => $this->slug,
+    ], [...]);
+}
+```
+
+## Template Standard per SaluteOra
+
+### Slug Pattern Obbligatori
+- `patient-pending` - Registrazione paziente in attesa
+- `patient-active` - Account paziente attivato  
+- `doctor-pending` - Registrazione dottore in revisione
+- `doctor-active` - Account dottore approvato
+- `user-rejected` - Account respinto
+
+### Struttura JSON Localizzata
+```php
+'subject' => '{"it":"Titolo in italiano", "en":"English title"}',
+'html_template' => '{"it":"<h2>Template HTML italiano</h2>", "en":"<h2>English HTML</h2>"}',
+'text_template' => '{"it":"Template testo italiano", "en":"English text template"}',
+'params' => 'first_name,last_name,email,type,state,additional_params'
+```
+
+## Pattern Action Sicuro
+
+### Workflow Corretto in RegisterAction
+```php
+class RegisterAction
+{
+    public function execute(UserContract $record, array $data): Patient
+    {
+        return DB::transaction(function () use ($data) {
+            $patient = Patient::create($data);
+            
+            // Gestione allegati...
+            
+            // Gestione consensi...
+            
+            // ✅ Template già esistente dalla migrazione
+            $mail_slug = Str::slug($data['type'].'-'.$data['state']);
+            
+            Notification::route('mail', $data['email'])
+                ->notify(new RecordNotification($patient, $mail_slug));
+                
+            return $patient;
+        });
+    }
+}
+```
+
+## Anti-pattern da Evitare
+
+### ❌ Template Creation in Real-Time
+```php
+// MAI fare questo
+public function execute($record, $data) {
+    // ...
+    
+    // ❌ Creazione template durante workflow utente
+    MailTemplate::firstOrCreate([...], [...]);
+    
+    Notification::route('mail', $data['email'])
+        ->notify(new RecordNotification($patient, $mail_slug));
+}
+```
+
+### ❌ Slug Non Standardizzati  
+```php
+// ❌ Slug inconsistenti o mancanti
+$mail_slug = 'random-slug';
+$mail_slug = '';
+$mail_slug = $user->id . '-notification';
+```
+
+## Checklist Implementazione
+
+- [ ] Migrazione database con template predefiniti
+- [ ] Pattern slug {type}-{state} rispettato
+- [ ] Struttura JSON per localizzazione
+- [ ] Parametri template documentati
+- [ ] Test regressione email workflow
+- [ ] Verifica esistenza template tramite interface Filament
+- [ ] Removal logic dal costruttore SpatieEmail se presente
+
+## Soluzioni Avanzate
+
+### Mailable Specifici (Architettura Migliore)
+```php
+// Invece di SpatieEmail generico, usare:
+class PatientRegistrationMail extends TemplateMailable
+{
+    public function __construct(
+        public string $first_name,
+        public string $last_name,
+        public string $email,
+        public string $state
+    ) {}
+}
+```
+
+## Debugging e Troubleshooting
+
+### Query SQL da Monitorare
+```sql
+-- Verifica esistenza template
+SELECT * FROM mail_templates 
+WHERE mailable = 'Modules\Notify\Emails\SpatieEmail' 
+AND slug = 'patient-pending';
+
+-- Template con slug vuoto (problematico)
+SELECT * FROM mail_templates 
+WHERE mailable = 'Modules\Notify\Emails\SpatieEmail' 
+AND slug = '';
+```
+
+### Errori Comuni
+- `MissingMailTemplate: No mail template exists for mailable 'SpatieEmail'`
+- Template con slug auto-generati (`-1`, `-2`, `-3`)
+- Query con `slug = ''` invece del slug corretto
+
+## Best Practice
+- Pre-popolazione sempre nelle migrazioni
+- Slug pattern standardizzato
+- Template localizzati JSON
+- Parametri documentati
+- Testing automatizzato
+- Monitoring template esistenti
+- Architettura template specifica per contesto
+
+## Collegamenti
+- [missing-mail-template-spatie-email.md](../../Modules/SaluteOra/docs/errori/missing-mail-template-spatie-email.md)
+- [spatie-database-mail-templates.md](../../Modules/Notify/docs/mail-templates/spatie-database-mail-templates.md)
+- [email_templates_best_practices.md](../../Modules/Notify/docs/mail-templates/email_templates_best_practices.md)
+
+## Ultimo aggiornamento
+Giugno 2025 - Risoluzione errore MissingMailTemplate workflow registrazione SaluteOra
