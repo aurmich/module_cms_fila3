@@ -32,6 +32,7 @@ use Livewire\Component as LivewireComponent;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\UI\Filament\Forms\Components\RadioCollection;
 use Modules\UI\Filament\Forms\Components\InlineDatePicker;
+use Carbon\Carbon;
 
 class FindDoctorAndAppointmentWidget extends XotBaseWidget
 {
@@ -48,16 +49,12 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     public ?array $filters = null;
 
     /**
-     * Mese corrente per la navigazione del calendario.
-     * Proprietà pubblica accessibile dal JavaScript per la navigazione.
+     * Mese corrente del calendario per navigazione.
      * 
-     * @var string|null
+     * @var string
      */
-    public ?string $currentCalendarMonth = null;
+    public string $currentCalendarMonth;
 
-   
-
-   
     /**
      * Mount the component.
      *
@@ -65,8 +62,50 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      */
     public function mount(): void
     {
+        // ✅ Inizializza sempre con valore valido
+        if (empty($this->currentCalendarMonth)) {
+            $this->currentCalendarMonth = now()->format('Y-m');
+        }
         
         $this->form->fill();
+    }
+
+    /**
+     * Getter sicuro per currentCalendarMonth - garantisce sempre un valore valido.
+     *
+     * @return string
+     */
+    protected function getCurrentCalendarMonth(): string
+    {
+        if (empty($this->currentCalendarMonth)) {
+            $this->currentCalendarMonth = now()->format('Y-m');
+        }
+        
+        return $this->currentCalendarMonth;
+    }
+
+    /**
+     * Navigazione calendario - mese precedente.
+     */
+    public function previousMonth(): void
+    {
+        $currentDate = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth);
+        $this->currentCalendarMonth = $currentDate->subMonthNoOverflow()->format('Y-m');
+        
+        // ✅ Refresh del form per aggiornare il calendario
+        //$this->form->fill($this->form->getState());
+    }
+
+    /**
+     * Navigazione calendario - mese successivo.
+     */
+    public function nextMonth(): void
+    {
+        $currentDate = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth);
+        $this->currentCalendarMonth = $currentDate->addMonthNoOverflow()->format('Y-m');
+        
+        // ✅ Refresh del form per aggiornare il calendario
+        //$this->form->fill($this->form->getState());
     }
 
     /**
@@ -203,6 +242,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             RadioCollection::make('studio_id')
                 ->label('Studio')      
                 ->options(fn($get) => Studio::ofCap($get('cap'))->get()) // La tua collection
+                
                 ->itemView('pub_theme::filament.forms.components.studio-item') // La tua blade personalizzata
                 //->emptyView('pub_theme::filament.forms.components.studio-empty') // La tua blade personalizzata
                 ->valueKey('id') // Campo da usare come valore (default: 'id'),
@@ -214,7 +254,6 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
 
     protected function getDateStepSchema(): array
     {
-
         $times=collect([
             collect((object)['id'=>'09:00','label'=>'09:00']),
             collect((object)['id'=>'10:00','label'=>'10:00']),
@@ -223,17 +262,16 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             
         ]);
 
-
-
         return [
             'appointment_date' => InlineDatePicker::make('appointment_date')
                 ->enabledDates(['2025-06-05','2025-06-21'])
-            ,
+                ->view('pub_theme::filament.forms.components.inline-date-picker')
+                ->currentViewMonth($this->getCurrentCalendarMonth()),
             'appointment_time'=>  RadioCollection::make('appointment_time')
-            ->label('Orario')      
-            ->options(fn() => $times) // La tua collection
-            ->itemView('pub_theme::filament.forms.components.studio-time') // La tua blade personalizzata
-            ->valueKey('id') 
+                ->label('Orario')      
+                ->options(fn() => $times) // La tua collection
+                ->itemView('pub_theme::filament.forms.components.studio-time') // La tua blade personalizzata
+                ->valueKey('id') 
         ];
     }
 

@@ -123,158 +123,161 @@ InlineDatePicker::make('readonly_date')
     ->showNavigation(false);
 ```
 
-### Navigazione Temporale Avanzata - NUOVO 🚀
+### Navigazione Temporale Avanzata - ARCHITETTURA CORRETTA ✅
 
-#### Implementazione Fenomenologica della Navigazione
+### Architettura Frontend-Only (CORRETTA)
 
-La nuova funzionalità di navigazione tra i mesi implementa una **architettura quantistica** del movimento temporale, ispirata dal design di `/var/www/html/base_saluteora/laravel/Themes/One/docs/html/calendar.html`. 
+**Principio Fondamentale:** L'`InlineDatePicker` è un **componente Filament Form**, non un componente Livewire standalone. Pertanto, la navigazione deve essere gestita puramente frontend.
 
-**Principi Filosofici della Navigazione:**
-- **Cronologia**: Sequenza ordinata degli eventi temporali
-- **Sincronicità**: Coordinazione dell'esperienza temporale
-- **Persistenza**: Mantenimento dello stato durante la navigazione
-- **Democraticità**: Controllo utente completo sul flusso temporale
+#### Approccio Corretto ✅
 
-#### Controlli UI - Design Quantistico
+1. **Frontend JavaScript (Alpine.js)**:
+   ```javascript
+   // ✅ CORRETTO: Navigazione puramente frontend
+   previousMonth() {
+       this.navigateToMonth('prev');
+   },
+   
+   nextMonth() {
+       this.navigateToMonth('next');
+   },
+   
+   navigateToMonth(direction) {
+       const currentDate = new Date(this.currentViewMonth + '-01');
+       
+       if (direction === 'prev') {
+           currentDate.setMonth(currentDate.getMonth() - 1);
+       } else if (direction === 'next') {
+           currentDate.setMonth(currentDate.getMonth() + 1);
+       }
+       
+       this.currentViewMonth = currentDate.getFullYear() + '-' + 
+           String(currentDate.getMonth() + 1).padStart(2, '0');
+       
+       // Rigenera calendario localmente
+       this.regenerateCalendar();
+   }
+   ```
 
-I controlli di navigazione implementano l'**iconografia universale** del movimento temporale:
+2. **Backend PHP (InlineDatePicker)**:
+   ```php
+   // ✅ I metodi PHP esistono per compatibilità API
+   // Ma NON vengono chiamati dal frontend
+   public function previousMonth(): void
+   public function nextMonth(): void
+   ```
 
-```html
-<!-- Pulsante Mese Precedente -->
-<!-- Viaggio verso il passato: accesso alla dimensione temporale precedente -->
-<button 
-    type=\"button\" 
-    @click=\"navigateToMonth('prev')\"
-    class=\"absolute -left-1.5 -top-1 flex items-center justify-center p-1.5 
-           text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 
-           focus:ring-offset-2 focus:ring-indigo-500 rounded-md transition-colors duration-200\"
-    aria-label=\"Mese precedente\"
-    x-tooltip=\"'Vai al mese precedente'\"
->
-    <span class=\"sr-only\">Mese precedente</span>
-    <!-- Iconografia Quantistica: Chevron Left come simbolo del movimento temporale -->
-    <svg class=\"size-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">
-        <path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\" />
-    </svg>
-</button>
+#### Vantaggi dell'Approccio Frontend-Only
+
+1. **Performance**: Zero chiamate HTTP per navigazione
+2. **UX**: Navigazione istantanea senza latenza
+3. **Architettura**: Rispetta il pattern Filament Form Component
+4. **Semplicità**: Nessun accoppiamento con componenti Livewire contenitori
+5. **Riusabilità**: Funziona in qualsiasi form senza dipendenze esterne
+
+### Errore Architetturale Precedente ❌
+
+**Cosa NON fare:**
+```javascript
+// ❌ ERRATO: Chiamate Livewire da componente Form
+previousMonth() {
+    $wire.call('previousMonth'); // Chiamata al widget contenitore
+}
 ```
 
-#### JavaScript Alpine.js - Pattern Observer
+**Problemi:**
+- Accoppiamento tra componente e widget contenitore
+- Ogni widget che usa il componente deve implementare i metodi
+- Violazione del principio di responsabilità singola
+- Performance peggiore
+
+### Pattern Implementativo
+
+1. **InlineDatePicker.php** (Componente Form):
+   - Estende `DatePicker` di Filament
+   - Contiene logica PHP per configurazione iniziale
+   - Metodi `previousMonth/nextMonth` per compatibilità API
+
+2. **inline-date-picker.blade.php** (Vista):
+   - Logica Alpine.js per navigazione frontend
+   - Rigenerazione calendario JavaScript
+   - Nessuna chiamata `$wire.call()` per navigazione
+
+3. **Widget che lo usa**:
+   - Non deve implementare metodi di navigazione
+   - Si limita a configurare `enabledDates` e `currentViewMonth`
+   - Zero dipendenze da logica di navigazione
+
+### Implementazione Rigenerazione Frontend
 
 ```javascript
-x-data=\"{
-    selectedDate: @js($currentValue),
-    enabledDates: @js($enabledDates),
-    currentMonth: @js($currentViewMonth->format('Y-m')),
+// Rigenera calendario per il nuovo mese
+regenerateCalendar() {
+    const [year, month] = this.currentViewMonth.split('-').map(Number);
+    this.calendarData = this.generateCalendarDataForMonth(year, month);
+},
+
+// Genera struttura calendario JavaScript
+generateCalendarDataForMonth(year, month) {
+    const firstDay = new Date(year, month - 1, 1);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay() + 1);
     
-    // Navigazione temporale con easing quantistico
-    navigateToMonth(direction) {
-        const currentDate = new Date(this.currentMonth + '-01');
-        
-        if (direction === 'prev') {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-        } else if (direction === 'next') {
-            currentDate.setMonth(currentDate.getMonth() + 1);
+    const weeks = [];
+    let currentDate = new Date(startDate);
+    
+    for (let week = 0; week < 6; week++) {
+        const weekDays = [];
+        for (let day = 0; day < 7; day++) {
+            const dateString = currentDate.toISOString().split('T')[0];
+            const isCurrentMonth = currentDate.getMonth() === month - 1;
+            
+            weekDays.push({
+                dateString: dateString,
+                datetime: dateString,
+                day: currentDate.getDate(),
+                isCurrentMonth: isCurrentMonth,
+                isToday: this.isToday(currentDate),
+                isSelected: this.selectedDate === dateString,
+                isEnabled: this.isDateEnabled(dateString) && isCurrentMonth,
+            });
+            
+            currentDate.setDate(currentDate.getDate() + 1);
         }
-        
-        const newMonth = currentDate.getFullYear() + '-' + 
-            String(currentDate.getMonth() + 1).padStart(2, '0');
-        
-        this.currentMonth = newMonth;
-        
-        // Bridge Pattern: Comunicazione JavaScript→PHP
-        $wire.call('setCurrentViewMonth', newMonth);
+        weeks.push(weekDays);
     }
-}\"
-```
-
-#### Metodi PHP per Navigazione Temporale
-
-Il componente espone nuovi metodi per il controllo programmatico della navigazione:
-
-```php
-// Metodo Livewire per comunicazione JavaScript→PHP
-public function setCurrentViewMonth(string $monthString): void
-{
-    // Parsing sicuro e gestione errori temporali
-    // Implementa fallback al presente fenomenologico
+    
+    return {
+        weeks: weeks,
+        monthName: firstDay.toLocaleDateString('{{ app()->getLocale() }}', { month: 'long' }),
+        year: year,
+    };
 }
-
-// Navigazione diretta (metodi helper)
-$picker->setDisplayDate(Carbon::parse('2025-07-01'));
-$picker->previousMonth(); // Vai al mese precedente
-$picker->nextMonth();     // Vai al mese successivo
-
-// Controllo stato navigazione
-$currentMonth = $picker->getCurrentViewMonth(); // Carbon instance
-$hasPrev = $picker->hasPreviousMonth();         // bool
-$hasNext = $picker->hasNextMonth();             // bool
 ```
 
-#### Gestione Stato Avanzata
+## Utilizzo nel Widget
 
-La navigazione mantiene lo stato attraverso:
+### Configurazione Corretta ✅
 
 ```php
-/**
- * Dati esposti alla vista per controllo completo
- */
-public function getViewData(): array
+protected function getDateStepSchema(): array
 {
     return [
-        // Controllo temporale per navigazione
-        'currentViewMonth' => $this->displayDate,
-        'previousMonth' => $this->displayDate->copy()->subMonth(),
-        'nextMonth' => $this->displayDate->copy()->addMonth(),
-        
-        // Metadati per sincronizzazione JavaScript
-        'monthYearLabel' => $this->displayDate->translatedFormat('F Y'),
-        'componentId' => $this->getId(),
-        'statePath' => $this->getStatePath(),
-        
-        // ... altri dati
+        'appointment_date' => InlineDatePicker::make('appointment_date')
+            ->enabledDates(['2025-06-05','2025-06-21'])
+            ->currentViewMonth(now()->format('Y-m'))
     ];
 }
 ```
 
-### Integrazione con Form Wizard
+### Note Importanti
 
-#### Pattern Wizard Multi-Step
+1. **Il widget NON deve implementare `previousMonth/nextMonth`**
+2. **La navigazione è completamente self-contained nel componente**
+3. **Le `enabledDates` sono rispettate durante la navigazione frontend**
+4. **Il mese di visualizzazione può essere inizializzato dal widget ma poi è autonomo**
 
-```php
-use Filament\\Forms\\Components\\Wizard;
-use Modules\\UI\\Filament\\Forms\\Components\\InlineDatePicker;
-
-public function getFormSchema(): array
-{
-    return [
-        Wizard::make([
-            Wizard\\Step::make('date_selection')
-                ->label('Selezione Data')
-                ->schema([
-                    InlineDatePicker::make('appointment_date')
-                        ->label('Data Appuntamento')
-                        ->enabledDates(function () {
-                            return $this->getAvailableDates();
-                        })
-                        ->highlightColor('bg-blue-600 text-white')
-                        ->required()
-                        ->live() // Reattività per step successivi
-                        ->afterStateUpdated(function ($state, callable $set) {
-                            // Logica per aggiornare step successivi
-                            $this->updateAvailableTimeSlots($state, $set);
-                        }),
-                ]),
-                
-            Wizard\\Step::make('time_selection')
-                ->label('Selezione Orario')
-                ->schema([
-                    // Campi dipendenti dalla data selezionata
-                ]),
-        ])
-    ];
-}
-```
+Questo approccio rispetta i principi SOLID e il pattern architetturale di Filament, garantendo componenti riusabili e disaccoppiati.
 
 ## Esempi di Utilizzo Avanzato
 

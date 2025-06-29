@@ -95,6 +95,30 @@ class InlineDatePicker extends DatePicker
     }
 
     /**
+     * Imposta il mese corrente di visualizzazione.
+     * 
+     * @param string $month Formato Y-m (es. '2025-06')
+     * @return static
+     */
+    public function currentViewMonth(string $month): static
+    {
+        // ✅ Validazione robusta - fallback se vuoto o invalido
+        if (empty($month) || !preg_match('/^\d{4}-\d{2}$/', $month)) {
+            $this->currentViewMonth = now()->format('Y-m');
+        } else {
+            // Verifica che sia una data valida
+            try {
+                Carbon::createFromFormat('Y-m', $month);
+                $this->currentViewMonth = $month;
+            } catch (\Exception $e) {
+                $this->currentViewMonth = now()->format('Y-m');
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
      * Ottiene le date abilitate risolte.
      * 
      * @return Collection<int, string>
@@ -126,6 +150,11 @@ class InlineDatePicker extends DatePicker
      */
     public function generateCalendarData(): array
     {
+        // ✅ Validazione di sicurezza - assicura che currentViewMonth sia valido
+        if (empty($this->currentViewMonth) || !preg_match('/^\d{4}-\d{2}$/', $this->currentViewMonth)) {
+            $this->currentViewMonth = now()->format('Y-m');
+        }
+        
         $targetMonth = Carbon::createFromFormat('Y-m', $this->currentViewMonth)->startOfMonth();
         $firstDay = $targetMonth->copy()->startOfWeek(Carbon::MONDAY);
         $lastDay = $targetMonth->copy()->endOfMonth()->endOfWeek(Carbon::SUNDAY);
