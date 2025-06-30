@@ -441,4 +441,58 @@ class PendingToActive extends BaseTransition
 }
 ```
 
-➡️ **Documentazione completa**: [Pattern BaseTransition](base-transition-pattern.md) 
+➡️ **Documentazione completa**: [Pattern BaseTransition](base-transition-pattern.md)
+
+## 🏥 **Stati degli Appuntamenti** (NUOVO - Gennaio 2025)
+
+Il modulo SaluteOra ora implementa un sistema completo di gestione degli stati per gli appuntamenti medici, utilizzando lo stesso eccellente **Pattern BaseTransition**.
+
+### Stati Disponibili
+
+1. **Pending** - Appuntamento in attesa di conferma (stato iniziale)
+2. **Confirmed** - Appuntamento confermato e programmato  
+3. **InProgress** - Appuntamento attualmente in corso
+4. **Completed** - Appuntamento completato con successo
+5. **Cancelled** - Appuntamento cancellato
+6. **NoShow** - Paziente non presente all'appuntamento
+7. **Rescheduled** - Appuntamento riprogrammato
+
+### Transizioni Implementate
+
+Tutte le transizioni seguono il **Pattern BaseTransition** con **notifiche automatiche** a paziente e dottore:
+
+```php
+// Esempi di transizioni (tutte automatiche!)
+class PendingToConfirmed extends BaseTransition { //--- }
+class ConfirmedToInProgress extends BaseTransition { //--- }
+class InProgressToCompleted extends BaseTransition { //--- }
+class ConfirmedToCancelled extends BaseTransition { //--- }
+class ConfirmedToNoShow extends BaseTransition { //--- }
+class ConfirmedToRescheduled extends BaseTransition { //--- }
+class RescheduledToConfirmed extends BaseTransition { //--- }
+```
+
+### Utilizzo Appuntamenti
+
+```php
+// Conferma un appuntamento con notifiche automatiche
+$appointment = Appointment::find(1);
+$transition = new PendingToConfirmed($appointment, 'Confermato dal dottore');
+$appointment = $transition->handle();
+
+// ✅ Stato cambiato automaticamente
+// ✅ Email inviate a paziente e dottore  
+// ✅ Log tracciabilità creato
+```
+
+### Notifiche Automatiche per Appuntamenti
+
+Le notifiche includono automaticamente:
+- `appointment_date`: Data (dd/mm/yyyy)
+- `appointment_time`: Ora (HH:mm)  
+- `doctor_name`: Nome completo dottore
+- `patient_name`: Nome completo paziente
+- `studio_name`: Nome dello studio
+- `message`: Messaggio personalizzato
+
+📋 **Documentazione completa**: [Appointment States](appointment-states.md) 

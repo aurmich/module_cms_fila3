@@ -121,4 +121,11 @@ return array (
       'label' => 'availability_step',
     ),
   ),
+  'actions' => 
+  array (
+    'submit' => 
+    array (
+      'label' => 'submit',
+    ),
+  ),
 );

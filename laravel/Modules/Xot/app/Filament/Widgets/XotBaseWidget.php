@@ -225,4 +225,13 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         return Forms\Components\Wizard\Step::make($name)
             ->schema($this->$schema());
     }
+
+
+    public function getWizardSubmitAction(){
+        $submit_view='pub_theme::filament.wizard.submit-button';
+        return Action::make('submit')
+            ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
+            ->submit('save')
+            ->view($submit_view);
+    }
 }

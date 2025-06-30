@@ -56,6 +56,7 @@ class InlineDatePicker extends DatePicker
 
         // Hydration/Dehydration del valore
         $this->afterStateHydrated(static function (self $component, $state): void {
+            
             if ($state) {
                 $date = Carbon::parse($state);
                 $component->currentViewMonth = $date->format('Y-m');
@@ -63,6 +64,7 @@ class InlineDatePicker extends DatePicker
         });
 
         $this->dehydrateStateUsing(static function (self $component, $state) {
+            
             return $state ? Carbon::parse($state)->format('Y-m-d') : null;
         });
     }

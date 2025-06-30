@@ -191,6 +191,10 @@ return array (
     array (
       'description' => 'test',
     ),
+    'appointment_time_display' => 
+    array (
+      'description' => 'appointment_time_display',
+    ),
   ),
   'actions' => 
   array (

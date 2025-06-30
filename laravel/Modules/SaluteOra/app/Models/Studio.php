@@ -326,15 +326,8 @@ class Studio extends BaseTenant
         $dates=[];
         $doctors=$this->doctors()->get();
         foreach($doctors as $doctor){
-            $pivot=DoctorStudio::where('studio_id',$this->id)->where('user_id',$doctor->id)->first();
-            $openingHours=$pivot->getOpeningHours();
-            for($i=1;$i<=31;$i++){
-                $date = Carbon::parse($month.'-'.$i);
-                $date1=$date->format('Y-m-d');
-                if($openingHours->isOpenOn($date1)){
-                    $dates[] = $date1;
-                }
-            }
+            $tmp=$this->getDoctorEnabledDatesByMonth($doctor->id, $month);
+            $dates=array_merge($dates, $tmp);
             
         }
         return $dates;
@@ -367,5 +360,24 @@ class Studio extends BaseTenant
             */
         return $dates;
        
+    }
+
+
+    public function getDoctorEnabledDatesByMonth(int|string|null $doctorId, string $month): array
+    {
+        $dates=[];
+        $pivot=DoctorStudio::where('studio_id',$this->id)->where('user_id',$doctorId)->first();
+        if(!$pivot){
+            return [];
+        }
+        $openingHours=$pivot->getOpeningHours();
+        for($i=1;$i<=31;$i++){
+            $date = Carbon::parse($month.'-'.$i);
+            $date1=$date->format('Y-m-d');
+            if($openingHours->isOpenOn($date1)){
+                $dates[] = $date1;
+            }
+        }
+        return $dates;
     }
 }

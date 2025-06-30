@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\SaluteOra\States\Appointment\AppointmentState;
 
 /**
  * Appointment Model for the SaluteOra Module.
@@ -88,6 +90,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Appointment extends BaseModel
 {
     use LogsActivity;
+    use HasStates;
 
     /**
      * Gli attributi che sono mass assignable.
@@ -98,7 +101,7 @@ class Appointment extends BaseModel
         'patient_id',
         'doctor_id',
         'studio_id',
-        'tenant_id',
+        //'tenant_id',
         'title',
         'start_time',
         'end_time',
@@ -110,6 +113,7 @@ class Appointment extends BaseModel
         'eligibility_confirmed',
         'reminder_sent',
         'reminder_sent_at',
+        'state',
     ];
 
     /**
@@ -124,6 +128,7 @@ class Appointment extends BaseModel
             'end_time' => 'datetime',
             'type' => AppointmentTypeEnum::class,
             'status' => AppointmentStatusEnum::class,
+            'state' => AppointmentState::class,
             'emergency' => 'boolean',
             'eligibility_confirmed' => 'boolean',
             'reminder_sent' => 'boolean',

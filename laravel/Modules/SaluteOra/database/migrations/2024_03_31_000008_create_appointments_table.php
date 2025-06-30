@@ -36,9 +36,9 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 $table->id();
                 //$table->foreignIdFor(Tenant::class);
-                $table->foreignIdFor(Patient::class,'patient_id');
-                $table->foreignIdFor(Doctor::class,'doctor_id');
-                $table->foreignIdFor(Studio::class,'studio_id');
+                $table->foreignIdFor(Patient::class,'patient_id')->nullable();
+                $table->foreignIdFor(Doctor::class,'doctor_id')->nullable();
+                $table->foreignIdFor(Studio::class,'studio_id')->nullable();
                 $table->date('date');
                 $table->time('start_time');
                 $table->time('end_time');
@@ -71,8 +71,20 @@ return new class extends XotBaseMigration
                     $table->dateTime('end_datetime')->nullable();
                 }
 
+                if (!$this->hasColumn('patient_id')) {
+                    $table->foreignIdFor(Patient::class,'patient_id')->nullable();
+                }
+                if (!$this->hasColumn('doctor_id')) {
+                    $table->foreignIdFor(Doctor::class,'doctor_id')->nullable();
+                }
+                
+
                 if (!$this->hasColumn('emergency')) {
                     $table->boolean('emergency')->default(false);
+                }
+
+                if (!$this->hasColumn('state')) {
+                    $table->string('state')->nullable();
                 }
 
                 // Indici per migliorare le prestazioni delle query sul calendario
