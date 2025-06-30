@@ -474,8 +474,8 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'patient_id'=>Auth::id(),
             'doctor_id'=>$data['doctor_id'],
             'studio_id'=>$data['studio_id'],
-            'start_time'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time']),
-            'end_time'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time'])->addMinutes(60),
+            'starts_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time']),
+            'ends_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time'])->addMinutes(60),
             'notes'=>$data['notes'],
             'state'=>'pending',
         ];

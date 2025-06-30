@@ -584,5 +584,9 @@ return array (
     array (
       'label' => 'register',
     ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
   ),
 );

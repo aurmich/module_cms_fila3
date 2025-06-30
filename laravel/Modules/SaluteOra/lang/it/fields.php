@@ -21,21 +21,21 @@ return [
         'label' => 'Data Appuntamento',
         'placeholder' => 'Seleziona una data',
         'helper_text' => 'Scegli la data per il tuo appuntamento',
-        'description' => 'Data selezionata per la prenotazione',
+        'description' => 'Data selezionata per l\'appuntamento medico',
     ],
     
     'appointment_time_display' => [
-        'label' => 'Orario Appuntamento',
+        'label' => 'Orario',
         'placeholder' => 'Seleziona un orario',
-        'helper_text' => 'Scegli l\'orario più comodo per il tuo appuntamento',
-        'description' => 'Fascia oraria selezionata per la visita',
+        'helper_text' => 'Scegli l\'orario per il tuo appuntamento',
+        'description' => 'Orario selezionato per l\'appuntamento',
     ],
     
     'notes' => [
-        'label' => 'Note Aggiuntive',
-        'placeholder' => 'Inserisci eventuali note o richieste particolari...',
-        'helper_text' => 'Informazioni aggiuntive per il tuo appuntamento (opzionale)',
-        'description' => 'Campo per comunicazioni speciali o richieste particolari',
+        'label' => 'Note',
+        'placeholder' => 'Aggiungi eventuali note o richieste speciali',
+        'helper_text' => 'Informazioni aggiuntive per il dottore (opzionale)',
+        'description' => 'Note aggiuntive per l\'appuntamento',
     ],
     
     // Altri campi del widget per completezza
@@ -55,36 +55,58 @@ return [
     
     'cap' => [
         'label' => 'CAP',
-        'placeholder' => 'Seleziona un CAP',
-        'helper_text' => 'Codice di Avviamento Postale della zona',
-        'description' => 'CAP specifico per la ricerca di studi vicini',
+        'placeholder' => 'Inserisci il CAP',
+        'helper_text' => 'Codice postale della tua zona',
+        'description' => 'Codice di avviamento postale per la ricerca degli studi',
     ],
     
     'studio_id' => [
-        'label' => 'Studio Selezionato',
-        'placeholder' => 'ID dello studio selezionato',
-        'helper_text' => 'Identificativo dello studio per la prenotazione',
-        'description' => 'Studio medico scelto per l\'appuntamento',
+        'label' => 'ID Studio',
+        'placeholder' => 'Identificativo dello studio',
+        'helper_text' => 'Identificativo unico dello studio medico',
+        'description' => 'ID univoco dello studio nel sistema',
     ],
     
     'doctor_id' => [
-        'label' => 'Dottore Selezionato',
-        'placeholder' => 'ID del dottore selezionato',
-        'helper_text' => 'Identificativo del dottore per la prenotazione',
-        'description' => 'Medico scelto per la visita',
+        'label' => 'ID Dottore',
+        'placeholder' => 'Identificativo del dottore',
+        'helper_text' => 'Identificativo unico del dottore',
+        'description' => 'ID univoco del dottore nel sistema',
     ],
     
     'appointment_date' => [
         'label' => 'Data Appuntamento',
         'placeholder' => 'Seleziona una data',
-        'helper_text' => 'Scegli la data per il tuo appuntamento',
-        'description' => 'Data della prenotazione medica',
+        'helper_text' => 'Seleziona la data per il tuo appuntamento',
+        'description' => 'Data dell\'appuntamento medico',
     ],
     
     'appointment_time' => [
-        'label' => 'Orario Appuntamento',
+        'label' => 'Orario',
         'placeholder' => 'Seleziona un orario',
-        'helper_text' => 'Scegli l\'orario più comodo per il tuo appuntamento',
-        'description' => 'Orario della visita medica',
+        'helper_text' => 'Seleziona l\'orario per il tuo appuntamento',
+        'description' => 'Orario dell\'appuntamento medico',
+    ],
+
+    // Campi per informazioni studio
+    'studio_address' => [
+        'label' => 'Indirizzo Studio',
+        'placeholder' => 'Indirizzo dello studio',
+        'helper_text' => 'Indirizzo completo dello studio medico',
+        'description' => 'Ubicazione fisica dello studio',
+    ],
+    
+    'studio_phone' => [
+        'label' => 'Telefono Studio',
+        'placeholder' => 'Numero di telefono',
+        'helper_text' => 'Numero di telefono dello studio',
+        'description' => 'Contatto telefonico dello studio medico',
+    ],
+    
+    'studio_email' => [
+        'label' => 'Email Studio',
+        'placeholder' => 'Indirizzo email',
+        'helper_text' => 'Indirizzo email dello studio',
+        'description' => 'Contatto email dello studio medico',
     ],
 ]; 

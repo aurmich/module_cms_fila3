@@ -114,6 +114,8 @@ class Appointment extends BaseModel
         'reminder_sent',
         'reminder_sent_at',
         'state',
+        'starts_at',
+        'ends_at',
     ];
 
     /**
@@ -133,6 +135,8 @@ class Appointment extends BaseModel
             'eligibility_confirmed' => 'boolean',
             'reminder_sent' => 'boolean',
             'reminder_sent_at' => 'datetime',
+            'starts_at' => 'datetime',
+            'ends_at' => 'datetime',
         ]);
     }
 

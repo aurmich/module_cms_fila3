@@ -87,6 +87,13 @@ return new class extends XotBaseMigration
                     $table->string('state')->nullable();
                 }
 
+                if (!$this->hasColumn('starts_at')) {
+                    $table->dateTimeTz('starts_at')->nullable();
+                }
+                if (!$this->hasColumn('ends_at')) {
+                    $table->dateTimeTz('ends_at')->nullable();
+                }
+
                 // Indici per migliorare le prestazioni delle query sul calendario
                 if (!$this->hasIndex('appointments_start_datetime_index')) {
                     $table->index('start_datetime', 'appointments_start_datetime_index');
