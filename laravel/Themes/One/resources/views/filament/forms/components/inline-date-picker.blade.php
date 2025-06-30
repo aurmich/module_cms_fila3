@@ -39,6 +39,7 @@
             },
             // ✅ Metodi per navigazione mese - chiamata diretta al widget parent
             previousMonth() {
+                dddx('a');
                 $wire.call('previousMonth');
             },
             nextMonth() {
@@ -96,7 +97,7 @@
                                     if ($isSelected) {
                                         $classes = 'relative py-2 px-1 text-sm font-semibold bg-blue-600 text-white ring-2 ring-blue-600 ring-offset-2 shadow-lg z-10';
                                     } elseif ($isEnabled && $isCurrentMonth) {
-                                        $classes = 'relative py-2 px-1 text-sm font-semibold bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100 cursor-pointer';
+                                        $classes = 'relative py-2 px-1 text-sm font-semibold bg-green-50 text-green-700 border-2 border-green-200 hover:bg-green-100 cursor-pointer hover:scale-105 transform transition-all duration-200';
                                     } elseif ($isCurrentMonth) {
                                         $classes = 'relative py-2 px-1 text-sm font-medium bg-gray-50 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60';
                                     } else {
@@ -111,18 +112,22 @@
                                 >
                                     {{ $day['day'] }}
                                     
-                                    @if($isEnabled && $isCurrentMonth)
-                                        <span class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    {{-- ✨ INDICATORI ELEGANTI PER DATE DISPONIBILI --}}
+                                    @if($isEnabled && $isCurrentMonth && !$isSelected)
+                                        {{-- Barra sottile verde sotto la data disponibile --}}
+                                        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
                                     @endif
                                     
+                                    {{-- ✨ INDICATORI ELEGANTI PER DATA SELEZIONATA --}}
                                     @if($isSelected)
-                                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full"></span>
+                                        {{-- Barra pulsante blu sotto la data selezionata --}}
+                                        <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-b-md shadow-inner animate-pulse"></div>
                                     @endif
                                 </button>
                             @endforeach
                         @endforeach
                     @else
-                        <div class="col-span-7 p-4 text-center text-gray-500">Caricamento calendario...</div>
+                        <x-filament::loading-indicator class="h-5 w-5" />
                     @endif
                 </div>
 
@@ -132,9 +137,47 @@
     </div>
 </x-dynamic-component>
 
-{{-- CSS minimo --}}
+{{-- ✨ CSS ELEGANTE MIGLIORATO --}}
 <style>
 .inline-date-picker button {
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Effetto hover per date disponibili */
+.inline-date-picker button:hover:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animazione per gli indicatori */
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(100%) translateX(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) translateX(-50%);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        transform: scale(0) translate(-50%, -50%);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+/* Applicazione animazioni */
+.inline-date-picker .absolute.bottom-0 {
+    animation: slideInFromBottom 0.3s ease-out;
+}
+
+.inline-date-picker .absolute.-top-1 {
+    animation: fadeInScale 0.4s ease-out;
 }
 </style> 

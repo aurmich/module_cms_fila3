@@ -264,7 +264,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
 
         return [
             'appointment_date' => InlineDatePicker::make('appointment_date')
-                ->enabledDates(['2025-06-05','2025-06-21'])
+                ->enabledDates(fn(Get $get)=>$this->getEnabledDates($get))
                 ->view('pub_theme::filament.forms.components.inline-date-picker')
                 ->currentViewMonth($this->getCurrentCalendarMonth()),
             'appointment_time'=>  RadioCollection::make('appointment_time')
@@ -273,6 +273,28 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->itemView('pub_theme::filament.forms.components.studio-time') // La tua blade personalizzata
                 ->valueKey('id') 
         ];
+    }
+
+
+    public function getEnabledDates(Get $get): array
+    {   
+        /*
+        dddx([
+            'currentCalendarMonth'=>$this->currentCalendarMonth,
+            'studio_id'=>$get('studio_id'),
+        ]); //2025-07
+        */
+        return [
+            $this->currentCalendarMonth.'-15',
+            $this->currentCalendarMonth.'-20',
+        ];
+        /*
+        $studioId = $get('studio_id');
+        $studio = Studio::find($studioId);
+        $enabledDates = $studio->getEnabledDatesByMonth($this->currentCalendarMonth);
+
+        return $enabledDates;
+        */
     }
 
     /**
