@@ -43,11 +43,15 @@ return new class extends XotBaseMigration
         $cache_key = config('permission.cache.key');
 
         try {
-            app('cache')
-                ->store($cache_store !== 'default' ? $cache_store : null)
-                ->forget($cache_key);
+            // Verifica se l'applicazione è completamente inizializzata
+            if (app()->bound('cache')) {
+                app('cache')
+                    ->store($cache_store !== 'default' ? $cache_store : null)
+                    ->forget($cache_key);
+            }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            // Silently ignore cache errors during package discovery
+            // echo $e->getMessage();
         }
     }
 

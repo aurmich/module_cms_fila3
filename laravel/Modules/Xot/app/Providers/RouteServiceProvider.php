@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
         $router = app('router');
 
-        $this->registerLang();
+        // $this->registerLang(); // ✅ Temporaneamente disabilitato per debug
         $this->registerRoutePattern($router);
         $this->registerMyMiddleware($router);
     }
@@ -95,7 +95,12 @@ class RouteServiceProvider extends ServiceProvider
         if ($user !== null) {
             $lang = $user->lang ?? $lang;
         }
-        $locales = config('laravellocalization.supportedLocales');
+        
+        // ✅ Controllo sicuro della configurazione laravellocalization
+        $locales = config()->has('laravellocalization.supportedLocales') 
+            ? config('laravellocalization.supportedLocales') 
+            : null;
+            
         if (is_array($locales)) {
             $langs = array_keys($locales);
         }
@@ -114,7 +119,11 @@ class RouteServiceProvider extends ServiceProvider
 
     public function registerRoutePattern(Router $router): void
     {
-        $langs = config('laravellocalization.supportedLocales');
+        // ✅ Controllo sicuro della configurazione laravellocalization
+        $langs = config()->has('laravellocalization.supportedLocales') 
+            ? config('laravellocalization.supportedLocales') 
+            : ['it' => 'it', 'en' => 'en'];
+            
         if (! is_array($langs)) {
             $langs = ['it' => 'it', 'en' => 'en'];
         }

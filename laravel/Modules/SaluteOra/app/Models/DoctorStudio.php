@@ -7,6 +7,7 @@ namespace Modules\SaluteOra\Models;
 use Parental\HasParent;
 use Modules\SaluteOra\Models\BasePivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\OpeningHours\OpeningHours;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -55,4 +56,48 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class DoctorStudio extends StudioUser
 {
     use HasParent;
+     /**
+     * Gli attributi che sono mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        //'doctor_id',
+        'id',
+        'user_id',
+        'studio_id',
+        'schedule',
+        'is_primary',
+    ];
+
+    /**
+     * Gli attributi che devono essere convertiti.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'schedule' => 'array',
+            'is_primary' => 'boolean',
+        ]);
+    }
+
+
+    public function getOpeningHours(): OpeningHours
+    {
+        $schedule = $this->schedule;
+        $days=[];
+        foreach($schedule as $day=>$hours){
+            $days[$day]=[];
+            if(isset($hours['morning_from']) && isset($hours['morning_to'])){
+                $days[$day][]=$hours['morning_from'].'-'.$hours['morning_to'];
+            }
+            if(isset($hours['afternoon_from']) && isset($hours['afternoon_to'])){
+                $days[$day][]=$hours['afternoon_from'].'-'.$hours['afternoon_to'];
+            }
+        }
+        
+        return OpeningHours::create($days);
+    }
 }

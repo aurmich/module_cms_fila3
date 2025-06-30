@@ -78,7 +78,11 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
     public function registerRoutePattern(Router $router): void
     {
         // ---------- Lang Route Pattern
-        $langs = config('laravellocalization.supportedLocales');
+        // ✅ Controllo sicuro della configurazione laravellocalization
+        $langs = config()->has('laravellocalization.supportedLocales') 
+            ? config('laravellocalization.supportedLocales') 
+            : ['it' => 'it', 'en' => 'en'];
+            
         if (! \is_array($langs)) {
             // throw new \Exception('[.__LINE__.]['.class_basename(__CLASS__).']');
             $langs = ['it' => 'it', 'en' => 'en'];

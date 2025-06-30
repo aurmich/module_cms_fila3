@@ -17,7 +17,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\UI\Filament\Forms\Components\SelectState;
-use Modules\SaluteMo\Filament\Resources\UserResource\Pages;
+use Modules\SaluteOra\Filament\Resources\UserResource\Pages;
 
 class UserResource extends BaseUserResource
 {

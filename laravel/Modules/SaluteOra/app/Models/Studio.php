@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Carbon\Carbon;
 use Spatie\Activitylog\LogOptions;
 use Modules\User\Models\BaseTenant;
+use Spatie\OpeningHours\OpeningHours;
 use Filament\Models\Contracts\HasName;
 use Modules\SaluteOra\Models\BaseModel;
 use Modules\User\Models\Traits\IsTenant;
 use Modules\Xot\Models\Traits\RelationX;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Geo\Models\Traits\HasAddress;
 use Modules\User\Contracts\TenantContract;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Studio model for the SaluteOra module.
@@ -311,5 +313,59 @@ class Studio extends BaseTenant
         $query->whereHas('address', function($q) use ($cap) {
             $q->where('postal_code', $cap);
         });
+    }
+
+    public function getEnabledDatesByMonth(string $month): array
+    {
+        /*
+        if($this->doctors->count()==0){
+            $doctor = Doctor::inRandomOrder()->first();
+            $this->doctors()->attach($doctor);
+        }
+        */
+        $dates=[];
+        $doctors=$this->doctors()->get();
+        foreach($doctors as $doctor){
+            $pivot=DoctorStudio::where('studio_id',$this->id)->where('user_id',$doctor->id)->first();
+            $openingHours=$pivot->getOpeningHours();
+            for($i=1;$i<=31;$i++){
+                $date = Carbon::parse($month.'-'.$i);
+                $date1=$date->format('Y-m-d');
+                if($openingHours->isOpenOn($date1)){
+                    $dates[] = $date1;
+                }
+            }
+            
+        }
+        return $dates;
+        /*
+        $openingHours = OpeningHours::create([
+            //'monday'     => ['09:00-12:00', '13:00-18:00'],
+            'monday'     => [],
+            'tuesday'    => ['09:00-12:00', '13:00-18:00'],
+            'wednesday'  => ['09:00-12:00'],
+            'thursday'   => ['09:00-12:00', '13:00-18:00'],
+            'friday'     => ['09:00-12:00', '13:00-20:00'],
+            'saturday'   => ['09:00-12:00', '13:00-16:00'],
+            'sunday'     => [],
+            'exceptions' => [
+                //'2016-11-11' => ['09:00-12:00'],
+                //'2016-12-25' => [],
+                '01-01'      => [],                // Recurring on each 1st of January
+                '12-25'      => ['09:00-12:00'],   // Recurring on each 25th of December
+            ],
+        ]);
+
+        $dates=[];
+        for($i=1;$i<=31;$i++){
+            $date = Carbon::parse($month.'-'.$i);
+            $date1=$date->format('Y-m-d');
+            if($openingHours->isOpenOn($date1)){
+                $dates[] = $date1;
+            }
+        }
+            */
+        return $dates;
+       
     }
 }

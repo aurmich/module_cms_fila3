@@ -1,62 +1,61 @@
-# Xot Platform - Piattaforma Modulare
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## Panoramica
-Xot Platform è una piattaforma modulare basata su Laravel, progettata per fornire soluzioni complete e personalizzabili per la gestione di dati e servizi.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Struttura del Progetto
-Il progetto è organizzato in moduli, ciascuno con responsabilità specifiche:
+## About Laravel
 
-### Moduli Principali
-- **Xot**: Modulo base che fornisce funzionalità generiche e linee guida per lo sviluppo
-- **Patient**: Gestione dei dati personali e delle informazioni
-- **Booking**: Sistema di prenotazione e gestione appuntamenti
-- **Service**: Gestione dei servizi e delle prestazioni
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## Configurazione
-- [Configurazione del Sistema](Modules/Xot/docs/CONFIGURATION.md)
-- [Gestione dei Domini](Modules/Xot/docs/DOMAIN_CONFIGURATION.md)
-- [Linee Guida per i Loghi](../../docs/standards/logo_guidelines.md)
-- [Standard di Sviluppo](../../docs/standards/development_standards.md)
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## Documentazione
-La documentazione completa è disponibile nella cartella `docs` di ciascun modulo:
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### Xot Module
-- [Panoramica](Modules/Xot/docs/README.md)
-- [Struttura del Progetto](Modules/Xot/docs/PROJECT_STRUCTURE.md)
-- [Configurazione](Modules/Xot/docs/CONFIGURATION.md)
-- [Gestione Domini](Modules/Xot/docs/DOMAIN_CONFIGURATION.md)
-- [Risoluzione dei Loghi](Modules/Xot/docs/LOGO_RESOLUTION.md)
+## Learning Laravel
 
-### Altri Moduli
-- [Patient Module](Modules/Patient/docs/README.md)
-- [Booking Module](Modules/Booking/docs/README.md)
-- [Service Module](Modules/Service/docs/README.md)
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## Requisiti
-- PHP 8.2+
-- Laravel 12.x
-- MySQL 8.0+
-- Composer
-- Node.js & NPM
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-## Installazione
-1. Clonare il repository
-2. Installare le dipendenze PHP: `composer install`
-3. Installare le dipendenze NPM: `npm install`
-4. Copiare il file .env.example in .env e configurare le variabili
-5. Generare la chiave dell'applicazione: `php artisan key:generate`
-6. Eseguire le migrazioni: `php artisan migrate`
-7. Compilare gli assets: `npm run build`
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Sviluppo
-Per contribuire al progetto, seguire le linee guida di sviluppo documentate nel modulo Xot.
+## Laravel Sponsors
 
-## Collegamenti Utili
-- [Documentazione Principale](../../docs/README.md)
-- [Standard di Codice](../../docs/standards/coding_standards.md)
-- [Guida alla Contribuzione](../../docs/contributing.md)
-- [Architettura del Sistema](../../docs/architecture/README.md)
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-## Licenza
-Questo progetto è sotto licenza MIT. 
+### Premium Partners
+
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

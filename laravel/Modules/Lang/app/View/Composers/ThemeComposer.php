@@ -23,7 +23,10 @@ class ThemeComposer
      */
     public function languages(): DataCollection
     {
-        $langs = config('laravellocalization.supportedLocales');
+        // ✅ Controllo sicuro della configurazione laravellocalization
+        $langs = config()->has('laravellocalization.supportedLocales') 
+            ? config('laravellocalization.supportedLocales') 
+            : ['it' => ['name' => 'Italiano', 'regional' => 'it_IT'], 'en' => ['name' => 'English', 'regional' => 'en_US']];
 
         if (! is_array($langs)) {
             throw new \Exception(sprintf('Invalid config for supportedLocales on line %d in %s', __LINE__, class_basename($this)));
