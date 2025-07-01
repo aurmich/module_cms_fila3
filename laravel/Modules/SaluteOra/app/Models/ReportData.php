@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Safe\DateTime;
 
 /**
  * ReportData model per i dati dettagliati dei report.

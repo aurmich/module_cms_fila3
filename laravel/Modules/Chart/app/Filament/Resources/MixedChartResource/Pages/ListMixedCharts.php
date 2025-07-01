@@ -20,7 +20,7 @@ use Modules\Xot\Filament\Traits\TransTrait;
 /**
  * Pagina di elenco per le risorse MixedChart.
  *
- * @phpstan-import-type MixedChartArray from \Modules\Chart\Models\MixedChart
+ * @phpstan-import-type MixedChart from \Modules\Chart\Models\MixedChart
  */
 class ListMixedCharts extends XotBaseListRecords
 {

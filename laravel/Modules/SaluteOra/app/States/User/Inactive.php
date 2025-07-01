@@ -12,7 +12,6 @@ namespace Modules\SaluteOra\States\User;
  */
 class Inactive extends UserState
 {
-    /** @var string */
     public static $name = 'inactive';
 
     public function label(): string

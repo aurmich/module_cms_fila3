@@ -45,7 +45,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
     /**
      * Get the table filters.
      *
-     * @return array<string, Tables\Filters\SelectFilter>
+     * @return array<string, Tables\Filters\Filter>
      */
     public function getTableFilters(): array
     {
@@ -75,12 +75,12 @@ class DoctorsRelationManager extends XotBaseRelationManager
      * le query per evitare problemi con i database multipli. Per dettagli vedere:
      * docs/filament/cross-database-relations.md
      *
-     * @return array{attach: Tables\Actions\AttachAction}
+     * @return array<string, Tables\Actions\Action>
      */
     public function getTableHeaderActions(): array
     {
         return [
-            'attach' => Tables\Actions\AttachAction::make()
+            Tables\Actions\AttachAction::make()
                 ->preloadRecordSelect(false) // Importante: non precaricare tutti i record
                 // Soluzione per database cross-database compatibile con Filament 3
                 ->recordSelect(
@@ -89,19 +89,12 @@ class DoctorsRelationManager extends XotBaseRelationManager
                     ->getSearchResultsUsing(
                         function (string $search):array {
                         // Query sui dottori con la connessione corretta (user database)
-                        /** @var \Modules\SaluteOra\Models\Studio $ownerRecord */
-                        $ownerRecord = $this->getOwnerRecord();
-                        
                         return Doctor::where(function (Builder $query) use ($search) {
                                 $query->where('name', 'like', "%{$search}%")
                                     ->orWhere('email', 'like', "%{$search}%");
                             })
                             // Escludiamo manualmente i dottori già associati invece di usare JOIN
-                            ->whereNotIn('id', function($query) {
-                                $query->select('doctor_id')
-                                    ->from('doctor_studio')
-                                    ->where('studio_id', $this->getOwnerRecord()->getKey());
-                            })
+                            ->whereNotIn('id', $this->getOwnerRecord()->doctors->modelKeys())
                             ->limit(10)
                             ->get()
                             ->mapWithKeys(

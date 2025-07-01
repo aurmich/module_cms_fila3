@@ -20,7 +20,7 @@ use Modules\Xot\Filament\Traits\TransTrait;
 /**
  * Pagina di elenco per le risorse Chart.
  *
- * @phpstan-import-type ChartArray from \Modules\Chart\Models\Chart
+ * @phpstan-import-type Chart from \Modules\Chart\Models\Chart
  */
 class ListCharts extends XotBaseListRecords
 {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\SaluteOra\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -10,12 +8,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
-use Modules\SaluteOra\Models\Patient;
-use Modules\SaluteOra\Services\PatientAnalysisService;
-use function Safe\preg_match_all;
-use function Safe\file_get_contents;
-use function Safe\preg_match;
-use function Safe\preg_replace;
 
 class AnalyzePatientDataCommand extends Command
 {
@@ -726,6 +718,6 @@ class AnalyzePatientDataCommand extends Command
             $sql = preg_replace('/\?/', $value, $sql, 1);
         }
 
-        return $sql ?? $query;
+        return $sql;
     }
 }

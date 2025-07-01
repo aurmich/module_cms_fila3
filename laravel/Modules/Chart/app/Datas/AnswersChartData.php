@@ -76,10 +76,9 @@ class AnswersChartData extends Data
                 $other = $this->chart->max - $sum;
                 if ($other > 0.01) {
                     $data[] = $other;
-                    $labels = $this->answers->toCollection()->pluck('label')->all();
                     $labels[] = $this->chart->answer_value_no_txt ?? 'answer_value_no_txt';
                     if (\count($labels) === 2 && \strlen($labels[0]) < 3) {
-                        $labels[0] = $this->chart->answer_value_txt ?? $labels[0];
+                        $labels[0] = $this->chart->answer_value_txt;
                     }
                 }
             }
@@ -109,24 +108,18 @@ class AnswersChartData extends Data
                 $other = $this->chart->max - $sum;
                 if ($other > 0.01) {
                     $data[] = $other;
-                    $labels = $this->answers->toCollection()->pluck('label')->all();
                     $labels[] = $this->chart->answer_value_no_txt ?? 'answer_value_no_txt';
                     Assert::notNull($labels[0], '['.__FILE__.']['.__LINE__.']');
                     if (\count($labels) === 2 && \strlen($labels[0]) < 3) {
-                        $labels[0] = $this->chart->answer_value_txt ?? $labels[0];
+                        $labels[0] = $this->chart->answer_value_txt;
                     }
                 }
             }
 
-            // Check if the first element of the avg collection exists and has proper properties
-            $avgCollection = $this->answers->toCollection()->pluck('avg');
-            $firstAvgItem = $avgCollection->first();
-            
-            $label = 'Percentuale'; // Default label
-            if (is_object($firstAvgItem) && property_exists($firstAvgItem, 'avg')) {
+            if (isset($this->answers->toCollection()->pluck('avg')[0]) && ! \is_string($this->answers->toCollection()->pluck('avg')[0])) {
                 $label = 'Media';
-            } elseif (is_array($firstAvgItem) && array_key_exists('avg', $firstAvgItem)) {
-                $label = 'Media';
+            } else {
+                $label = 'Percentuale';
             }
 
             $datasets = [
@@ -406,11 +399,9 @@ class AnswersChartData extends Data
         }
         $first_answer = $this->answers->first();
         $label = '--';
-        if ($first_answer !== null) {
+        if ($first_answer != null) {
             Assert::isInstanceOf($first_answer, AnswerData::class, '['.__LINE__.']['.__FILE__.']');
-            /** @var AnswerData $first_answer */
-            $avgValue = $first_answer->avg;
-            $label = is_numeric($avgValue) ? round((float) $avgValue, 2) : '--';
+            $label = round((float) $this->answers->first()->avg, 2);
         }
         $js = <<<JS
             scales: {
@@ -486,12 +477,9 @@ class AnswersChartData extends Data
         $options['plugins']['datalabels'] = [
             'display' => false,
         ];
-        $firstAnswer = $this->answers->first();
-        Assert::isInstanceOf($firstAnswer, AnswerData::class, '['.__LINE__.']['.__FILE__.']');
-        /** @var AnswerData $firstAnswer */
-        $avgValue = $firstAnswer->avg;
+        Assert::isInstanceOf($this->answers->first(), AnswerData::class, '['.__LINE__.']['.__FILE__.']');
         $options['plugins']['doughnutLabel'] = [
-            'label' => is_numeric($avgValue) ? round((float) $avgValue, 2) : '--',
+            'label' => round((float) $this->answers->first()->avg, 2),
         ];
 
         return $options;

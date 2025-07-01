@@ -24,13 +24,13 @@ use Spatie\ModelStates\State;
 class SaluteOraServiceProvider extends XotBaseServiceProvider
 {
     public string $name = 'SaluteOra';
-    protected string $moduleName = 'SaluteOra';
-    protected string $moduleNameLower = 'saluteora';
+    protected $moduleName = 'SaluteOra';
+    protected $moduleNameLower = 'saluteora';
 
     public function boot(): void
     {
         parent::boot();
-        /*
+
         // Merge auth configuration
         $this->mergeConfigFrom(
             __DIR__.'/../../config/auth.php', 'auth'
@@ -41,7 +41,6 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
 
         // Registra il namespace pub_theme per le views
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pub_theme');
-        */
     }
     
     /**
@@ -49,7 +48,7 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
      */
     protected function bootObservers(): void
     {
-        //\Modules\SaluteOra\Models\Studio::observe(\Modules\SaluteOra\Observers\StudioObserver::class);
+        \Modules\SaluteOra\Models\Studio::observe(\Modules\SaluteOra\Observers\StudioObserver::class);
     }
 
     /*

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 use Spatie\OpeningHours\OpeningHours;
 use Modules\SaluteOra\Models\BasePivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Safe\DateTime as SafeDateTime;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -149,10 +148,10 @@ class DoctorStudio extends StudioUser
             while ($current->lt($end)) {
                 $time = $current->format('H:i');
                 $slots->push(collect(
-                    (object)[
-                        'id' => $time,
-                        'label' => $time,
-                    ]));
+                    (object)['id' => $time,
+                    'label' => $time,
+                
+                ]));
                 $current->addHour();
             }
         }
@@ -167,34 +166,17 @@ class DoctorStudio extends StudioUser
      * Genera slot di tempo per un range specifico
      *
      * @param string $startTime Orario di inizio (es: "08:00")
-     * @param string $endTime Orario di fine (es: "10:00")
-     * @param int $slotDurationMinutes Durata slot in minuti (deve essere maggiore di 0)
-     * @return array<array{id: string, label: string, value: string, time: string}> Array di oggetti slot
-     * @throws \InvalidArgumentException Se gli orari non sono nel formato corretto o la durata non è valida
+     * @param string $endTime Orario di fine (es: "10:00") 
+     * @param int $slotDurationMinutes Durata slot in minuti
+     * @return array Array di oggetti slot
      */
     private function generateSlotsForRange(string $startTime, string $endTime, int $slotDurationMinutes): array
     {
-        if ($slotDurationMinutes <= 0) {
-            throw new \InvalidArgumentException('La durata dello slot deve essere maggiore di 0');
-        }
-        
         $slots = [];
         
         try {
             $start = Carbon::createFromFormat('H:i', $startTime);
             $end = Carbon::createFromFormat('H:i', $endTime);
-            
-            if ($start === false) {
-                throw new \InvalidArgumentException("Formato orario di inizio non valido: {$startTime}");
-            }
-            
-            if ($end === false) {
-                throw new \InvalidArgumentException("Formato orario di fine non valido: {$endTime}");
-            }
-            
-            if ($start->greaterThanOrEqualTo($end)) {
-                throw new \InvalidArgumentException("L'orario di inizio deve essere precedente all'orario di fine");
-            }
             
             $currentTime = $start->copy();
             
@@ -202,8 +184,8 @@ class DoctorStudio extends StudioUser
             while ($currentTime->lt($end)) {
                 $slotTime = $currentTime->format('H:i');
                 
-                // Crea oggetto slot tipizzato
-                $slots[] = [
+                // Crea oggetto slot per RadioCollection
+                $slots[] = (object) [
                     'id' => $slotTime,
                     'label' => $slotTime,
                     'value' => $slotTime,
@@ -218,64 +200,25 @@ class DoctorStudio extends StudioUser
             Log::error('Errore nella generazione slot per range', [
                 'start_time' => $startTime,
                 'end_time' => $endTime,
-                'slot_duration' => $slotDurationMinutes,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'error' => $e->getMessage()
             ]);
-            
-            // Rilancia l'eccezione per gestione a livello superiore
-            throw $e;
         }
         
         return $slots;
     }
 
 
-    /**
-     * Ottieni i giorni del mese in cui lo studio è aperto
-     *
-     * @param string $month Mese nel formato 'YYYY-MM'
-     * @return array<string> Array di date nel formato 'YYYY-MM-DD' in cui lo studio è aperto
-     * @throws \InvalidArgumentException Se il formato del mese non è valido
-     */
     public function getEnabledDatesByMonth(string $month): array
     {
-        if (!preg_match('/^\d{4}-(0[1-9]|1[0-2])$/', $month)) {
-            throw new \InvalidArgumentException("Formato mese non valido. Utilizzare il formato 'YYYY-MM'");
-        }
-        
-        $dates = [];
-        $openingHours = $this->getOpeningHours();
-        
-        // Ottieni il numero di giorni nel mese
-        $daysInMonth = Carbon::parse($month . '-01')->daysInMonth;
-        
-        for ($day = 1; $day <= $daysInMonth; $day++) {
-            try {
-                $date = Carbon::createFromFormat('Y-m-d', sprintf('%s-%02d', $month, $day));
-                
-                if ($date === false) {
-                    Log::warning('Data non valida nel mese specificato', [
-                        'month' => $month,
-                        'day' => $day
-                    ]);
-                    continue;
-                }
-                
-                $dateString = $date->format('Y-m-d');
-                
-                if ($openingHours->isOpenOn($dateString)) {
-                    $dates[] = $dateString;
-                }
-            } catch (\Exception $e) {
-                Log::error('Errore durante il controllo della data', [
-                    'month' => $month,
-                    'day' => $day,
-                    'error' => $e->getMessage()
-                ]);
+        $dates=[];
+        $openingHours=$this->getOpeningHours();
+        for($i=1;$i<=31;$i++){
+            $date = Carbon::parse($month.'-'.$i);
+            $date1=$date->format('Y-m-d');
+            if($openingHours->isOpenOn($date1)){
+                $dates[] = $date1;
             }
         }
-        
         return $dates;
     }
 }

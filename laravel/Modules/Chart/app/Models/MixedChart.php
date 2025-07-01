@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @method static Builder|MixedChart query()
  * @property-read ProfileContract|null $creator
  * @property-read ProfileContract|null $updater
- * @phpstan-type MixedChartArray array{id: int|null, name: string|null, charts: Collection<int, \Modules\Chart\Models\Chart>}
  * @mixin \Eloquent
  */
 class MixedChart extends BaseModel
@@ -40,12 +39,10 @@ class MixedChart extends BaseModel
 
     public function charts(): MorphMany
     {
-        /** @var array<string, class-string<\Illuminate\Database\Eloquent\Model>> $morphMap */
-        $morphMap = [
+        Relation::morphMap([
+            'question_chart' => 'Modules\Quaeris\Models\QuestionChart',
             'mixed_chart' => self::class,
-        ];
-        
-        Relation::morphMap($morphMap);
+        ]);
 
         return $this->morphMany(Chart::class, 'post');
     }

@@ -240,7 +240,16 @@ class User extends BaseUser implements HasMedia
         
     }
 
-    
+    /**
+     * Implement ownsTeam method to satisfy HasTeamsContract by delegating to ownsTeamTrait.
+     *
+     * @param \Modules\User\Contracts\TeamContract $team
+     * @return bool
+     */
+    public function ownsTeam(\Modules\User\Contracts\TeamContract $team): bool
+    {
+        return $this->ownsTeamTrait($team);
+    }
 
     /**
      * Configurazione per il logging delle attività.
