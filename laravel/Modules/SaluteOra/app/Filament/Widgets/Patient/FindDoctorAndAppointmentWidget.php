@@ -288,7 +288,19 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->enabledDates(fn(Get $get)=>$this->getEnabledDates($get))
                 ->view('pub_theme::filament.forms.components.inline-date-picker')
                 ->currentViewMonth($this->getCurrentCalendarMonth())
-                //->afterStateUpdated(fn($state)=>dd($state))
+                ->afterStateUpdated(function($state, $get, $set, $component) {
+                    \Log::info('🎯 InlineDatePicker afterStateUpdated', [
+                        'state' => $state,
+                        'statePath' => $component->getStatePath(),
+                        'componentName' => $component->getName(),
+                        'allFormData' => $get(null) // Tutto lo stato del form
+                    ]);
+                    dd([
+                        'state' => $state,
+                        'statePath' => $component->getStatePath(), 
+                        'allFormData' => $get(null)
+                    ]);
+                })
                 ,
             
             'appointment_time'=>  RadioCollection::make('appointment_time')
