@@ -21,6 +21,8 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Chart query()
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @property array<string, mixed> $attributes
+ * @phpstan-type ChartArray array{id: int|null, type: string|null, width: int|null, height: int|null}
  * @mixin \Eloquent
  */
 class Chart extends BaseModel
@@ -56,9 +58,9 @@ class Chart extends BaseModel
     ];
 
     /**
-     * Undocumented variable.
+     * Default attributes for the model.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $attributes = [
         'list_color' => '#d60021',
@@ -75,10 +77,23 @@ class Chart extends BaseModel
         'plot_value_color' => '#000000',
     ];
 
-    /** @var array<string, string> */
-    protected $casts = [
-        'colors' => 'array',
-    ];
+
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'colors' => 'array',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'show_box' => 'boolean',
+            'plot_value_show' => 'boolean',
+        ];
+    }
 
     // /**
     //  * @return int|string|null
@@ -207,7 +222,13 @@ class Chart extends BaseModel
             return $value;
         }
 
-        return $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
+        $defaultType = $this->attributes['type'] ?? null;
+        if ($defaultType !== null) {
+            return (string) $defaultType;
+        }
+
+        $panelValue = $this->getPanelRow('chart_type', 'type');
+        return $panelValue !== null ? (string) $panelValue : null;
     }
 
     public function getWidthAttribute(?string $value): ?int

@@ -96,6 +96,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     public function previousMonth(): void
     {
         $currentDate = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth);
+        if(!$currentDate){
+            return;
+        }
         $this->currentCalendarMonth = $currentDate->subMonthNoOverflow()->format('Y-m');
         
         // ✅ Refresh del form per aggiornare il calendario
@@ -108,6 +111,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     public function nextMonth(): void
     {
         $currentDate = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth);
+        if(!$currentDate){
+            return;
+        }
         $this->currentCalendarMonth = $currentDate->addMonthNoOverflow()->format('Y-m');
         
         // ✅ Refresh del form per aggiornare il calendario
@@ -131,8 +137,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                         ->icon('heroicon-o-building-office'),
                     $this->getStepByName('date_step')
                         ->icon('heroicon-o-calendar'),
-                    $this->getStepByName('confirm_step')
-                        ->icon('heroicon-o-check-circle')
+                        
+                    //$this->getStepByName('confirm_step')
+                    //    ->icon('heroicon-o-check-circle')
                 ])
                 ->submitAction($this->getWizardSubmitAction())
                     /*Action::make('submit')
@@ -280,7 +287,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'appointment_date' => InlineDatePicker::make('appointment_date')
                 ->enabledDates(fn(Get $get)=>$this->getEnabledDates($get))
                 ->view('pub_theme::filament.forms.components.inline-date-picker')
-                ->currentViewMonth($this->getCurrentCalendarMonth()),
+                ->currentViewMonth($this->getCurrentCalendarMonth())
+                //->afterStateUpdated(fn($state)=>dd($state))
+                ,
             
             'appointment_time'=>  RadioCollection::make('appointment_time')
                 ->options(fn(Get $get) => $this->getAvailableTimeSlots($get)) // La tua collection
