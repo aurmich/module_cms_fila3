@@ -47,22 +47,25 @@ abstract class XotBaseRelationManager extends FilamentRelationManager
     {
         return $this->getResource()::getFormSchema();
     }
-/*
+//*
     public function getTableColumns(): array
     {
         $index=Arr::get($this->getResource()::getPages(),'index');
         if(!$index){
-            //throw new \Exception('Index page not found');
+            throw new \Exception('Index page not found');
             return [];
         }
-        if(!method_exists($index,'getTableColumns')){
+        $index_page=$index->getPage();
+        
+        if(!method_exists($index_page,'getTableColumns')){
+            throw new \Exception('method  getTableColumns on '.print_r($index_page,true).' not found');
             return [];
         }
-        $res= $index->getTableColumns();
+        $res= app($index_page)->getTableColumns();
 
         return $res;
     }
-*/
+//*/
     public function getTableActions(): array
     {
         return [

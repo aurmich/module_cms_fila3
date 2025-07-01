@@ -54,6 +54,7 @@ return array (
       'label' => 'Email',
       'placeholder' => 'email@esempio.com',
       'helper_text' => 'Indirizzo email per le comunicazioni',
+      'description' => 'email',
     ),
     'phone' => 
     array (
@@ -152,6 +153,20 @@ return array (
     'openFilters' => 
     array (
       'label' => 'openFilters',
+    ),
+    'last_name' => 
+    array (
+      'description' => 'last_name',
+      'helper_text' => 'last_name',
+      'placeholder' => 'last_name',
+      'label' => 'last_name',
+    ),
+    'first_name' => 
+    array (
+      'description' => 'first_name',
+      'helper_text' => 'first_name',
+      'placeholder' => 'first_name',
+      'label' => 'first_name',
     ),
   ),
   'actions' => 

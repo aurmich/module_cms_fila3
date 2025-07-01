@@ -190,6 +190,30 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'full_address' => 
+    array (
+      'label' => 'full_address',
+    ),
+    'schedule' => 
+    array (
+      'label' => 'schedule',
+    ),
+    'change-schedule' => 
+    array (
+      'label' => 'change-schedule',
+    ),
   ),
   'actions' => 
   array (

@@ -59,6 +59,23 @@ trait HasAddress
         $address = $this->primaryAddress();
         return $address ? $address->getFullAddress() : null;
     }
+
+
+    public function getFullAddressAttribute(?string $value): ?string
+    {
+        if($value){
+            return $value;
+        }
+        $address = $this->address()->first();
+        if($address==null){
+            return null;
+        }
+        $locality=$address->getLocality();
+        if($locality==null){
+            return null;
+        }
+        return $address->street_address.' '.$address->street_number.' '.implode('',$locality['cap']).' '.$locality['nome'].' ('.$locality['provincia']['nome'].') - '.$locality['regione']['nome'];
+    }
     
     /**
      * Ottiene la località dell'indirizzo principale.

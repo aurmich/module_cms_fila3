@@ -25,6 +25,7 @@ SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispos
 - [Struttura Filament](filament/structure.md)
 - [Convenzioni Dashboard](filament/dashboard-conventions.md)
 - [Widget](filament/widgets.md)
+- [RelationManager](filament/relationmanagers.md) - Gestione relazioni cross-module
 
 ### Service Provider
 - [Service Provider](providers/service-provider.md)
@@ -43,6 +44,24 @@ SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispos
 - [Implementazione Filament Mancante](issues/filament-implementation/missing-dashboard.md)
 - [Convenzioni di Naming Corrette](issues/filament-implementation/correct-naming-conventions.md)
 - [Sintesi e Prossimi Passi](issues/summary-and-next-steps.md)
+
+## Cross-Module Relations
+
+### RelationManager Architecture
+
+Il modulo SaluteMo implementa RelationManager Filament che gestiscono relazioni tra entità di moduli diversi, principalmente tra Doctor e Studio del modulo SaluteOra.
+
+**Caratteristiche chiave:**
+- **Cross-Database**: Gestisce relazioni tra database diversi
+- **Cross-Module**: UI in SaluteMo, modelli in SaluteOra  
+- **XotBase Integration**: Estende `XotBaseRelationManager` per consistenza
+- **Resource Reuse**: Riutilizza configurazioni dalle risorse principali
+
+**Documentazione dettagliata:** [RelationManager](filament/relationmanagers.md)
+
+**Collegamenti esterni:**
+- [Cross-Module Relations](/var/www/html/base_saluteora/docs/cross-module-relations.md) - Architettura generale
+- [SaluteOra RelationManager](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/relationmanagers.md) - Implementazione modelli
 
 ## Problemi Critici Identificati
 
@@ -86,6 +105,7 @@ Punti chiave:
 - Push notification handling
 - Offline data synchronization
 - Mobile-specific configurations
+- Cross-module relation management via Filament
 
 ## Installation
 

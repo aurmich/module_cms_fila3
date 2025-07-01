@@ -4,6 +4,15 @@
 
 I RelationManager sono componenti Filament che permettono di gestire le relazioni tra diverse entità del sistema direttamente dall'interfaccia di amministrazione. Questo documento descrive l'implementazione delle relazioni tra Studio e Doctor nel modulo SaluteOra.
 
+## Architettura Cross-Module
+
+### Implementazioni Multiple
+Le relazioni Doctor-Studio sono implementate in due moduli:
+- **SaluteOra**: Contiene i modelli di dominio e RelationManager base
+- **SaluteMo**: Contiene RelationManager Filament specifici per l'amministrazione
+
+> **Nota**: Per la documentazione completa del RelationManager di amministrazione, vedere [RelationManager SaluteMo](/var/www/html/base_saluteora/laravel/Modules/SaluteMo/docs/filament/relationmanagers.md)
+
 ## Struttura dei Namespace
 
 Tutti i RelationManager devono seguire questa struttura di namespace:
@@ -93,8 +102,22 @@ public static function getRelations(): array
 4. Includere solo le azioni pertinenti nel contesto della relazione
 5. Assicurarsi che le autorizzazioni siano configurate correttamente
 
-## Collegamenti ad Altri Documenti
+## Documentazione Cross-Module
 
-- [Filament Best Practices](/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/filament_best_practices.md)
-- [Studio Model](/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/models/studio.md)
-- [Doctor Model](/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/models/doctor.md)
+### Modulo SaluteMo
+- **[RelationManager SaluteMo](/var/www/html/base_saluteora/laravel/Modules/SaluteMo/docs/filament/relationmanagers.md)** - Implementazione completa per l'interfaccia amministrativa
+
+### Modulo SaluteOra (Corrente)
+- [Studio Model](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/models/studio.md)
+- [Doctor Model](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/models/doctor.md)
+- [DoctorStudio Pivot](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/models/doctor-studio.md)
+
+### Root Documentation  
+- [Cross-Module Relations](/var/www/html/base_saluteora/docs/cross-module-relations.md)
+- [Filament Best Practices](/var/www/html/base_saluteora/docs/filament_best_practices.md)
+
+---
+
+*Ultimo aggiornamento: Gennaio 2025*
+*Versione: 1.1*
+*Compatibilità: Laraxot SaluteOra, Filament 3.x*

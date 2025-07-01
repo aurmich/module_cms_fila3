@@ -69,12 +69,14 @@ class ChangeTypeCommand extends Command
         }
 
         $childTypes = $xot->getUserChildTypes();
-        $this->info("Current user type: {$user->type->getLabel()}");
+        $this->info("Current user type: {$user->type?->getLabel()}");
         
         $typeClass = $xot->getUserChildTypeClass();
         $options = Arr::mapWithKeys($childTypes, function ($item, int|string $key) use ($typeClass) {
-            $val = $typeClass::tryFrom((string) $key)?->getLabel();
-            return [(string) $key => $val];
+            //dddx($item->getLabel());
+            //$val = $typeClass::tryFrom((string) $key)?->getLabel();
+            //return [(string) $key => '['.$key.'] '.$val.''];
+            return[$item->value => $item->getLabel()];
         });
 
         $newType = select('Select new user type:', $options);
