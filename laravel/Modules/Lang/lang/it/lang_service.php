@@ -501,6 +501,10 @@ return array (
       'placeholder' => 'appointment_time',
       'label' => 'appointment_time',
     ),
+    'change-password' => 
+    array (
+      'label' => 'change-password',
+    ),
   ),
   'actions' => 
   array (
@@ -587,6 +591,10 @@ return array (
     'view' => 
     array (
       'label' => 'view',
+    ),
+    'change-password' => 
+    array (
+      'label' => 'change-password',
     ),
   ),
 );

@@ -168,6 +168,14 @@ return array (
       'placeholder' => 'first_name',
       'label' => 'first_name',
     ),
+    'change-schedule' => 
+    array (
+      'label' => 'change-schedule',
+    ),
+    'schedule' => 
+    array (
+      'label' => 'schedule',
+    ),
   ),
   'actions' => 
   array (

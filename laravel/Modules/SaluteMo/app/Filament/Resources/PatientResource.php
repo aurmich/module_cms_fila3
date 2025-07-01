@@ -6,6 +6,7 @@ namespace Modules\SaluteMo\Filament\Resources;
 
 use Modules\SaluteOra\Models\Patient;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\SaluteOra\Filament\Resources\UserResource;
 use Modules\SaluteOra\Filament\Resources\PatientResource as BasePatientResource;
 
 class PatientResource extends XotBaseResource
@@ -15,10 +16,7 @@ class PatientResource extends XotBaseResource
 
     public static function getFormSchema(): array
     {
-        //$schema = parent::getFormSchema();
-
-        // Aggiungi qui eventuali campi specifici per SaluteMo
-        //return $schema;
-        return [];
+        $schema = UserResource::getFormSchema();
+        return $schema;
     }
 }

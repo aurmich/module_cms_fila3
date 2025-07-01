@@ -8,9 +8,12 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Modules\SaluteOra\Models\Doctor;
+use Filament\Tables\Columns\IconColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteMo\Filament\Resources\DoctorResource;
+use Modules\UI\Filament\Forms\Components\OpeningHoursField;
 use Modules\SaluteMo\Filament\Resources\DoctorResource\Pages\ListDoctors;
 use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
@@ -39,7 +42,32 @@ class DoctorsRelationManager extends XotBaseRelationManager
     public function getTableColumns(): array
     {
 
-        return app(ListDoctors::class)->getTableColumns();
+        //return app(ListDoctors::class)->getTableColumns();
+        $columns = parent::getTableColumns();
+        /*
+        $action=Action::make('change-schedule')
+        ->form([
+            OpeningHoursField::make('schedule'),
+        ])
+        ->fillForm(function($record){
+            //dddx($record->state);//Modules\SaluteOra\States\User\Pending
+            
+            return [
+                'schedule' => $record->pivot?->schedule ?? [],
+            ];
+        })
+        ->action(function ($record,$data){
+            $record->pivot->update(['schedule'=>$data['schedule']]);
+            
+        });
+        
+
+        $columns['schedule']=IconColumn::make('schedule')
+        //->icon(fn(\stdClass $rowLoop,$state)=>dddx([$rowLoop->index,$state]))
+        ->icon('heroicon-o-calendar')
+        ->action($action);
+        */
+        return $columns;
     }
 
     /**
@@ -50,12 +78,14 @@ class DoctorsRelationManager extends XotBaseRelationManager
     public function getTableFilters(): array
     {
         return [
+            /*
             'status' => Tables\Filters\SelectFilter::make('status')
                 ->options([
                     'pending' => 'Pending',
                     'active' => 'Active',
                     'suspended' => 'Suspended',
                 ]),
+                */
             /*
             'specialization' => Tables\Filters\SelectFilter::make('specialization')
                 ->options(function () {

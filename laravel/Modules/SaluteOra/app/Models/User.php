@@ -13,8 +13,9 @@ use Spatie\Permission\Traits\HasRoles;
 use Modules\Gdpr\Models\Traits\HasGdpr;
 use Illuminate\Notifications\Notifiable;
 use Modules\SaluteOra\Enums\UserTypeEnum;
-use Modules\SaluteOra\Enums\UserStateEnum;
 use Modules\SaluteOra\States\User\Active;
+use Spatie\ModelStates\HasStatesContract;
+use Modules\SaluteOra\Enums\UserStateEnum;
 use Modules\SaluteOra\States\User\Pending;
 use Modules\SaluteOra\States\User\Inactive;
 use Modules\SaluteOra\States\User\Rejected;
@@ -154,7 +155,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
-class User extends BaseUser implements HasMedia
+class User extends BaseUser implements HasMedia,HasStatesContract 
 {
     use LogsActivity;
     use HasStates;

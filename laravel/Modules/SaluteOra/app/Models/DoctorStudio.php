@@ -91,6 +91,9 @@ class DoctorStudio extends StudioUser
     public function getOpeningHours(): OpeningHours
     {
         $schedule = $this->schedule;
+        if(!$schedule){
+            return OpeningHours::create([]);
+        }
         $days=[];
         foreach($schedule as $day=>$hours){
             $days[$day]=[];

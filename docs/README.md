@@ -211,3 +211,66 @@ Breve descrizione del contenuto
 **Ultimo aggiornamento**: 2025-05-28  
 **Versione**: 2.0.0  
 **Maintainer**: Team SaluteOra
+
+# Documentazione Base SaluteOra
+
+Documentazione centrale per il progetto SaluteOra basato su Laraxot.
+
+## Documentazione Tecnica
+
+### Componenti UI e Performance
+- **[InlineDatePicker: Ottimizzazione con Livewire](./inline-date-picker-optimization.md)** - Analisi comparativa tra approccio payload e Livewire per validazione date, con strategia ibrida consigliata.
+
+### Architettura e Patterns
+- [Laraxot Conventions](./laraxot_conventions.md) - Convenzioni e best practice del framework
+- [Module Structure](./module-structure.md) - Struttura e organizzazione dei moduli
+- [Data Objects Pattern](./data-objects-pattern.md) - Utilizzo di Spatie Laravel Data
+
+### Testing e Quality Assurance
+- [PHPStan Integration](./phpstan-integration.md) - Configurazione e utilizzo di PHPStan
+- [Testing Guidelines](./testing-guidelines.md) - Linee guida per test automatizzati
+
+## Documentazione Moduli
+
+### SaluteMo (Modulo Principale)
+- [Modulo SaluteMo README](../Modules/SaluteMo/docs/README.md)
+- [InlineDatePicker Implementazione Specifica](../Modules/SaluteMo/docs/inline-date-picker-livewire-optimization.md)
+
+### Altri Moduli
+- [Modulo User](../Modules/User/docs/)
+- [Modulo UI](../Modules/UI/docs/)
+- [Modulo Xot](../Modules/Xot/docs/)
+
+## Guide di Sviluppo
+
+### Setup e Configurazione
+- [Configurazione Ambiente](./environment-setup.md)
+- [Database e Migrazioni](./database-migrations.md)
+- [Asset e Build Process](./assets-build.md)
+
+### Best Practices
+- [Coding Standards](./coding-standards.md)
+- [Security Guidelines](./security-guidelines.md)
+- [Performance Optimization](./performance-optimization.md)
+
+## Risoluzione Problemi
+
+### Errori Comuni
+- [Troubleshooting Guide](./troubleshooting.md)
+- [Error Handling](./error-handling.md)
+- [Debug Techniques](./debug-techniques.md)
+
+### Performance Issues
+- [Performance Monitoring](./performance-monitoring.md)
+- [Caching Strategies](./caching-strategies.md)
+- [Database Optimization](./database-optimization.md)
+
+## Aggiornamenti e Maintenance
+
+- [Deployment Guidelines](./deployment.md)
+- [Update Procedures](./update-procedures.md)
+- [Backup and Recovery](./backup-recovery.md)
+
+---
+
+**Nota**: Questa documentazione segue le convenzioni Laraxot e viene aggiornata regolarmente. Per contribuire, seguire le [linee guida di contribuzione](./contributing.md).

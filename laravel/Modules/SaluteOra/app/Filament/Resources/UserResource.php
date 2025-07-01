@@ -29,14 +29,21 @@ class UserResource extends BaseUserResource
     public static function getFormSchema(): array
     {
         return [
-            Forms\Components\TextInput::make('name')
+            Forms\Components\TextInput::make('first_name')
                 ->required()
-                ->maxLength(255),
+                ->maxLength(255)
+                ,
+            Forms\Components\TextInput::make('last_name')
+                ->required()
+                ->maxLength(255)
+                ,
             Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
                 ->maxLength(255)
                 ->unique(ignoreRecord: true),
+
+            Forms\Components\TextInput::make('phone'),
             Forms\Components\Select::make('type')
                 ->options(UserTypeEnum::class)
                 ->enum(UserTypeEnum::class)

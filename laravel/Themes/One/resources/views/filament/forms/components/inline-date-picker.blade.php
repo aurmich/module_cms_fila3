@@ -41,7 +41,6 @@
             },
             // ✅ Metodi per navigazione mese - chiamata diretta al widget parent
             previousMonth() {
-                dddx('a');
                 $wire.call('previousMonth');
             },
             nextMonth() {
