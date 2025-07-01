@@ -13,6 +13,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  */
 class NoShow extends AppointmentState
 {
+    /** @var string */
     public static $name = 'no_show';
 
     public function label(): string

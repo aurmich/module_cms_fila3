@@ -22,9 +22,7 @@ class ListUsers extends BaseListUsers
 {
     protected static string $resource = UserResource::class;
 
-    /**
-     * @return array<string, TextColumn>
-     */
+    
     public function getTableColumns(): array
     {
         return [

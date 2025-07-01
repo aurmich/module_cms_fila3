@@ -13,6 +13,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  */
 class Cancelled extends AppointmentState
 {
+    /** @var string */
     public static $name = 'cancelled';
 
     public function label(): string

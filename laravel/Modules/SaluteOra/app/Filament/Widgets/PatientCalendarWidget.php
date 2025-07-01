@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Traits\HasFullCalendarConfig;
+//use Modules\SaluteOra\Traits\HasFullCalendarConfig;
 use Saade\FilamentFullCalendar\Data\EventData;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
@@ -22,7 +22,7 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
  */
 class PatientCalendarWidget extends FullCalendarWidget
 {
-    use HasFullCalendarConfig;
+    //use HasFullCalendarConfig;
     
     /**
      * Riferimento alla data corrente del calendario.

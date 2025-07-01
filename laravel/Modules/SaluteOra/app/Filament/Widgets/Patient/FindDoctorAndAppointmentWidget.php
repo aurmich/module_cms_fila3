@@ -288,19 +288,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->enabledDates(fn(Get $get)=>$this->getEnabledDates($get))
                 ->view('pub_theme::filament.forms.components.inline-date-picker')
                 ->currentViewMonth($this->getCurrentCalendarMonth())
-                ->afterStateUpdated(function($state, $get, $set, $component) {
-                    \Log::info('🎯 InlineDatePicker afterStateUpdated', [
-                        'state' => $state,
-                        'statePath' => $component->getStatePath(),
-                        'componentName' => $component->getName(),
-                        'allFormData' => $get(null) // Tutto lo stato del form
-                    ]);
-                    dd([
-                        'state' => $state,
-                        'statePath' => $component->getStatePath(), 
-                        'allFormData' => $get(null)
-                    ]);
-                })
+                
                 ,
             
             'appointment_time'=>  RadioCollection::make('appointment_time')
@@ -401,12 +389,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         // Reset appointment time when date changes
         $set('appointment_time', null);
         
-        // Log the date change for debug
-        Log::info('Appointment date updated', [
-            'date' => $appointmentDate,
-            'is_weekend' => in_array(date('w', strtotime($appointmentDate)), [0, 6]),
-            'is_monday' => date('w', strtotime($appointmentDate)) == 1,
-        ]);
+
     }
 
     

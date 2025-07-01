@@ -60,4 +60,6 @@ enum UserStateEnum: string implements HasLabel
 }
 
 // Alias for backward compatibility
-class_alias(UserStateEnum::class, 'Modules\SaluteOra\Enums\UserState');
+use function Safe\class_alias;
+
+class_alias(UserStateEnum::class, 'Modules\\SaluteOra\\Enums\\UserState');

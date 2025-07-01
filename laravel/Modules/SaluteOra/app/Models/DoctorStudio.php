@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Spatie\OpeningHours\OpeningHours;
 use Modules\SaluteOra\Models\BasePivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Safe\DateTime as SafeDateTime;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -148,10 +149,10 @@ class DoctorStudio extends StudioUser
             while ($current->lt($end)) {
                 $time = $current->format('H:i');
                 $slots->push(collect(
-                    (object)['id' => $time,
-                    'label' => $time,
-                
-                ]));
+                    (object)[
+                        'id' => $time,
+                        'label' => $time,
+                    ]));
                 $current->addHour();
             }
         }

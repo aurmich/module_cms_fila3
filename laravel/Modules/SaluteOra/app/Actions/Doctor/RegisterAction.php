@@ -24,6 +24,8 @@ use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationCompleted;
 use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
 use Modules\SaluteOra\Enums\DoctorRegistrationStatusEnum;
+use Webmozart\Assert\Assert;
+use Modules\SaluteOra\Enums\UserStateEnum;
 
 
 class RegisterAction
@@ -32,53 +34,59 @@ class RegisterAction
      * Esegue l'azione di registrazione del dottore.
      *
      * @param array<string, mixed> $data
-     * @return Doctor
+     * @return \Modules\SaluteOra\Models\Doctor
      */
-    public function execute(UserContract $record,array $data): Doctor
+    public function execute(array $data): Doctor
     {
+        // Creazione dello studio con validazione dei dati
+        $studioData = $data['studio'] ?? [];
+        Assert::isArray($studioData, 'Studio data must be an array');
         
-        if(isset($data['id'])){
-            $doctor = $record;
-            $doctor->update($data);
-        }else{
-            $doctor= new Doctor();
-            $doctor->fill($data);
-            $doctor->save();
-            //$doctor = Doctor::create($data);
-        }
-        if(isset($data['schedule'])){
-            $studio = Studio::create($data['studio']);
-            $address = Address::create($data['studio']['address']);
-            $studio->address()->save($address);
-            $doctor->studio()->save($studio);
-            $doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
+        $studio = Studio::create($studioData);
+
+        // Creazione dell'indirizzo se presente
+        if (isset($data['studio']['address']) && is_array($data['studio']['address'])) {
+            $addressData = $data['studio']['address'];
+            $address = Address::create($addressData);
         }
 
-        //$record->save();
-        //$record->update($data);
-        /*
-        $attachments = Doctor::$attachments;
-        foreach ($attachments as $attachment) {
-                $doctor->addMediaFromDisk($data[$attachment],'local')
-                    ->toMediaCollection($attachment);
-
-        }
-        */
+        // Creazione dell'utente dottore
+        $user = app(UserContract::class);
+        Assert::isInstanceOf($user, UserContract::class);
         
-        if($data['state']=='integration_requested'){
-            $doctor->state->transitionTo(IntegrationCompleted::class);
-            return $doctor;
+        // Cast sicuro a Doctor dopo la verifica
+        if (!$user instanceof Doctor) {
+            throw new \InvalidArgumentException('User must be an instance of Doctor');
         }
 
-
-        $mail_slug=Str::slug($data['type'].'-'.$data['state']);
+        // Associazione con lo studio
+        if (method_exists($user, 'studio')) {
+            $user->studio()->associate($studio);
+        }
         
+        if (method_exists($user, 'studios')) {
+            $user->studios()->attach($studio->id);
+        }
 
-        Notification::route('mail', $data['email'])
-        //->locale('it')
-        ->notify(new RecordNotification($doctor,$mail_slug));
+        // Aggiornamento del state
+        if (property_exists($user, 'state')) {
+            $user->state = UserStateEnum::PENDING;
+        }
 
-        return $doctor;
+        $user->save();
+
+        // Gestione sicura della concatenazione per l'email
+        $doctorName = $data['first_name'] ?? '';
+        $doctorLastName = $data['last_name'] ?? '';
+        $fullName = trim($doctorName . ' ' . $doctorLastName);
+
+        // Invio notifica se l'utente è un Model
+        if ($user instanceof \Illuminate\Database\Eloquent\Model) {
+            $mailSlug = 'doctor-registration';
+            $user->notify(new RecordNotification($user, $mailSlug));
+        }
+
+        return $user;
     }
 
 

@@ -8,6 +8,7 @@ namespace Modules\SaluteOra\Enums;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasColor;
+use function Safe\class_alias;
 
 /**
  * Defines the different types of appointments in the system.

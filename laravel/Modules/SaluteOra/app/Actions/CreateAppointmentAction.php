@@ -10,6 +10,8 @@ use Modules\SaluteOra\Models\Dentist;
 use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Models\Treatment;
 use Spatie\QueueableAction\QueueableAction;
+use Safe\DateTime;
+
 
 class CreateAppointmentAction
 {
@@ -40,7 +42,7 @@ class CreateAppointmentAction
                 if (!isset($data['end_time']) && isset($treatment->duration_minutes)) {
                     // Ensure start_time is a valid datetime string
                     $startTimeStr = is_string($data['start_time']) ? $data['start_time'] : '';
-                    $startTime = new \DateTime($startTimeStr);
+                    $startTime = new DateTime($startTimeStr);
                     $endTime = (clone $startTime)->modify("+{$treatment->duration_minutes} minutes");
                     $data['end_time'] = $endTime->format('Y-m-d H:i:s');
                 }

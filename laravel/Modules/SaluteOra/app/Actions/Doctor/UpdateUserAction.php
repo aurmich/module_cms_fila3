@@ -7,6 +7,7 @@ namespace Modules\SaluteOra\Actions\Doctor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\User\Actions\User\UpdateUserAction as BaseUpdateUserAction;
+use Webmozart\Assert\Assert;
 
 /**
  * UpdateUserAction specifica per Doctor nel modulo SaluteOra.
@@ -64,7 +65,7 @@ class UpdateUserAction extends BaseUpdateUserAction
         // Esempio: verifica numero di iscrizione all'albo se presente
         if (isset($data['registration_number']) && !empty($data['registration_number'])) {
             // Validazione numero albo medici
-            $this->validateRegistrationNumber($data['registration_number'], $user);
+            $this->validateRegistrationNumber($data['registration_number']);
         }
     }
     
@@ -72,18 +73,15 @@ class UpdateUserAction extends BaseUpdateUserAction
      * Valida il numero di iscrizione all'albo.
      * 
      * @param string $registrationNumber
-     * @param Model $user
      * @return void
      */
-    private function validateRegistrationNumber(string $registrationNumber, Model $user): void
+    private function validateRegistrationNumber(string $registrationNumber): void
     {
-        // Esempio di validazione numero albo
-        // Implementa qui la logica di validazione se necessario
-        
-        // Per ora solo logging
-        Log::info("Validating doctor registration number", [
-            'doctor_id' => $user->id,
-            'registration_number' => $registrationNumber
-        ]);
+        // Implementazione della validazione
+        if (empty($registrationNumber)) {
+            throw new \InvalidArgumentException('Registration number cannot be empty');
+        }
     }
+
+
 } 

@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  * @property array<string, mixed> $attributes
- * @phpstan-type ChartArray array{id: int|null, type: string|null, width: int|null, height: int|null}
+ * @phpstan-type Chart array{id: int|null, type: string|null, width: int|null, height: int|null}
  * @mixin \Eloquent
  */
 class Chart extends BaseModel

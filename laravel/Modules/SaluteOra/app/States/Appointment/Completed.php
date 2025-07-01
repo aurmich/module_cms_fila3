@@ -14,6 +14,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  */
 class Completed extends AppointmentState
 {
+    /** @var string */
     public static $name = 'completed';
 
     public function label(): string

@@ -27,22 +27,13 @@
             enabledDates: @js($enabledDates->toArray()),
             
             selectDate(dateString) {
-                console.log('🗓️ InlineDatePicker - selectDate called:', {
-                    dateString: dateString,
-                    statePath: '{{ $statePath }}',
-                    enabledDates: this.enabledDates,
-                    isEnabled: this.enabledDates.includes(dateString)
-                });
-                
                 if (this.enabledDates.includes(dateString)) {
                     // Data abilitata: seleziona
                     this.selectedDate = dateString;
-                    console.log('✅ Setting date via $wire.set:', dateString);
                     $wire.set('{{ $statePath }}', dateString);
                 } else {
                     // Data NON abilitata: deseleziona tutto
                     this.selectedDate = null;
-                    console.log('❌ Date not enabled, setting null');
                     $wire.set('{{ $statePath }}', null);
                 }
             },

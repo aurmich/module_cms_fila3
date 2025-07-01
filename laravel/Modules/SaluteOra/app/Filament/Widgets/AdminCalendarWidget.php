@@ -18,8 +18,9 @@ use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Studio;
-use Modules\SaluteOra\Traits\HasFullCalendarConfig;
+//use Modules\SaluteOra\Traits\HasFullCalendarConfig;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use function Safe\strtotime;
 
 /**
  * Widget FullCalendar per amministratori.
@@ -30,7 +31,7 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
  */
 class AdminCalendarWidget extends FullCalendarWidget
 {
-    use HasFullCalendarConfig;
+    //use HasFullCalendarConfig;
     
     /**
      * Riferimento alla data corrente del calendario.
@@ -145,24 +146,27 @@ class AdminCalendarWidget extends FullCalendarWidget
     }
 
     /**
-     * Recupera gli eventi per il calendario.
+     * Recupera gli eventi del calendario.
      *
      * @param array<string, mixed> $fetchInfo
      * @return array<int, array<string, mixed>>
      */
     public function fetchEvents(array $fetchInfo): array
     {
-        $cacheKey = $this->getCacheKey($fetchInfo);
+        $start = date('Y-m-d H:i:s', strtotime($fetchInfo['start']));
+        $end = date('Y-m-d H:i:s', strtotime($fetchInfo['end']));
 
-        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
-            return Appointment::query()
-                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
-                ->with(['patient', 'doctor', 'studio'])
-                ->limit(100) // Limite per performance
-                ->get()
-                ->map(fn($appointment) => $this->transformToEventData($appointment))
-                ->toArray();
-        });
+        // Query base per gli appuntamenti
+        $appointments = $this->getAppointmentsQuery()
+            ->whereBetween('start_time', [$start, $end])
+            ->get();
+
+        $events = [];
+        foreach ($appointments as $appointment) {
+            $events[] = $this->formatAppointmentAsEvent($appointment);
+        }
+
+        return $events;
     }
 
     /**
@@ -367,37 +371,25 @@ class AdminCalendarWidget extends FullCalendarWidget
     }
 
     /**
-     * Trasforma un appuntamento in EventData con colori specifici per admin.
+     * Formatta un appuntamento come evento calendario.
      *
-     * @param Appointment $appointment
-     * @return \Saade\FilamentFullCalendar\Data\EventData
+     * @param \Modules\SaluteOra\Models\Appointment $appointment
+     * @return array<string, mixed>
      */
-    protected function transformToEventData(Appointment $appointment): \Saade\FilamentFullCalendar\Data\EventData
+    protected function formatAppointmentAsEvent($appointment): array
     {
-        return \Saade\FilamentFullCalendar\Data\EventData::make()
-            ->id($appointment->id)
-            ->title($this->formatEventTitle($appointment))
-            ->start($appointment->start_time)
-            ->end($appointment->end_time)
-            ->backgroundColor($this->getStudioColor($appointment->studio))
-            ->borderColor($this->getAppointmentStatusColor($appointment->status->value))
-            ->textColor('#ffffff')
-            ->extendedProps([
-                'patient_id' => $appointment->patient_id,
-                'patient_name' => $appointment->patient?->full_name,
-                'doctor_id' => $appointment->doctor_id,
-                'doctor_name' => $appointment->doctor?->full_name,
-                'studio_id' => $appointment->studio_id,
-                'studio_name' => $appointment->studio?->name,
-                'status' => $appointment->status->value,
-                'type' => $appointment->type->value,
-                'emergency' => $appointment->emergency,
-                'tooltip' => $this->formatTooltip($appointment),
-                'can_edit' => true, // Admin può sempre modificare
-                'can_view' => true,
-                'duration' => $appointment->duration,
-                'notes' => $appointment->notes ? Str::limit($appointment->notes, 100) : null,
-            ]);
+        return [
+            'id' => (string) $appointment->id,
+            'title' => $this->getEventTitle($appointment),
+            'start' => $appointment->start_time->toISOString(),
+            'end' => $appointment->end_time->toISOString(),
+            'extendedProps' => [
+                'patient_name' => $appointment->patient->full_name ?? 'N/A',
+                'doctor_name' => $appointment->doctor->full_name ?? 'N/A', 
+                'studio_name' => $appointment->studio->name ?? 'N/A',
+                'emergency' => $appointment->emergency ?? false,
+            ],
+        ];
     }
 
     /**
