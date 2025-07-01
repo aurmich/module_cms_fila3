@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\UI\Enums;
 
-use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasIcon;
-use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Arr;
 use Webmozart\Assert\Assert;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
 
 enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 {
@@ -72,16 +73,27 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
         return $res;
     }
 
-    /**
+     /**
      * Undocumented function.
      *
-     * @param array<\Filament\Tables\Columns\Column|\Filament\Tables\Columns\ColumnGroup|\Filament\Tables\Columns\Layout\Component> $listColumns
-     * @param array<\Filament\Tables\Columns\Column|\Filament\Tables\Columns\ColumnGroup|\Filament\Tables\Columns\Layout\Component> $gridColumns
      * @return array<\Filament\Tables\Columns\Column|\Filament\Tables\Columns\ColumnGroup|\Filament\Tables\Columns\Layout\Component>
      */
-    public function getTableColumns(array $listColumns, array $gridColumns): array
+    public function getTableColumns(): array
     {
-        $columns = $this->isGridLayout() ? $gridColumns : $listColumns;
+        $trace = debug_backtrace();
+        /** @var ListRecords $caller */
+        $caller = Arr::get($trace, '1.object');
+
+        if (! method_exists($caller, 'getGridTableColumns')) {
+            throw new \Exception('method getGridTableColumns not found in ['.get_class($caller).']');
+        }
+        if (! method_exists($caller, 'getTableColumns')) {
+            throw new \Exception('method getTableColumns not found in ['.get_class($caller).']');
+        }
+
+        $columns = $this->isGridLayout()
+            ? $caller->getGridTableColumns()
+            : $caller->getTableColumns();
 
         Assert::isArray($columns);
 
