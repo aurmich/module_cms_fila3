@@ -13,7 +13,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\SchemalessAttributes\HasSchemalessAttributes;
+use Spatie\SchemalessAttributes\SchemalessAttributesTrait as HasSchemalessAttributes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
@@ -80,192 +80,18 @@ class Profile extends BaseProfile implements HasMedia
     use HasSchemalessAttributes;
 
     /**
+     * The schemaless attributes.
+     *
+     * @var list<string>
+     */
+    protected $schemalessAttributes = [
+        'extra',
+    ];
+
+    /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'profiles';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'user_name',
-        'email',
-        'phone',
-        'bio',
-        'avatar',
-        'timezone',
-        'locale',
-        'status',
-        'extra',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'deleted_at',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'preferences' => 'array',
-        'extra' => 'array',
-    ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var list<string>
-     */
-    protected $appends = [
-        'full_name',
-        'display_name',
-        'initials',
-        'avatar_url',
-    ];
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var list<string>
-     */
-    protected $with = [
-        'media',
-    ];
-
-    /**
-     * Restituisce il nome completo dell'utente.
-     *
-     * @return string
-     */
-    public function getFullNameAttribute(): string
-    {
-        return trim("{$this->first_name} {$this->last_name}");
-    }
-
-    /**
-     * Restituisce il display name dell'utente.
-     *
-     * @return string
-     */
-    public function getDisplayNameAttribute(): string
-    {
-        return $this->user_name ?: $this->full_name;
-    }
-
-    /**
-     * Restituisce le iniziali dell'utente.
-     *
-     * @return string
-     */
-    public function getInitialsAttribute(): string
-    {
-        return strtoupper(
-            substr((string) $this->first_name, 0, 1) .
-            substr((string) $this->last_name, 0, 1)
-        );
-    }
-
-    /**
-     * Restituisce l'URL dell'avatar dell'utente.
-     *
-     * @return string|null
-     */
-    public function getAvatarUrlAttribute(): ?string
-    {
-        return $this->getFirstMediaUrl('avatar') ?: null;
-    }
-
-    /**
-     * Relazione con l'utente proprietario del profilo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(config('auth.providers.users.model'));
-    }
-
-    /**
-     * Relazione con i dispositivi associati al profilo.
-     *
-     * @return HasManyThrough
-     */
-    public function devices(): HasManyThrough
-    {
-        return $this->hasManyThrough(
-            Device::class,
-            DeviceUser::class,
-            'profile_id',
-            'id',
-            'id',
-            'device_id'
-        );
-    }
-
-    /**
-     * Relazione con i device user associati al profilo.
-     *
-     * @return HasMany
-     */
-    public function deviceUsers(): HasMany
-    {
-        return $this->hasMany(DeviceUser::class);
-    }
-
-    /**
-     * Relazione con il creatore del profilo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(static::class, 'created_by');
-    }
-
-    /**
-     * Relazione con l'ultimo utente che ha aggiornato il profilo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function updater(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(static::class, 'updated_by');
-    }
-
-    /**
-     * Relazione con i team associati al profilo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function teams(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Team::class, 'profile_team')
-            ->using(ProfileTeam::class)
-            ->withPivot('role', 'status')
-            ->withTimestamps();
-    }
-
-    /**
-     * Crea una nuova factory per il modello.
-     *
-     * @return ProfileFactory
-     */
-    protected static function newFactory(): ProfileFactory
-    {
-        return ProfileFactory::new();
-    }
 }

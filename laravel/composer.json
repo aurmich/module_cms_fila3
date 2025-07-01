@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.10.1",
         "nwidart/laravel-modules": "*",
         "spatie/laravel-data": "*",
+        "spatie/laravel-schemaless-attributes": "^2.5",
         "wikimedia/composer-merge-plugin": "*"
     },
     "require-dev": {

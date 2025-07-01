@@ -7,6 +7,7 @@ namespace Modules\Xot\Filament\Traits;
 use TypeError;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Modules\Lang\Actions\SaveTransAction;
 use Modules\Xot\Actions\GetTransKeyAction;
 
@@ -78,7 +79,7 @@ trait TransTrait
     public static function getKeyTransClass(string $class): string
     {
         $piece=Str::of($class)->explode('\\')->toArray();
-        $type=$piece[2];
+        Assert::string($type=$piece[2]);
         $module=Str::of($class)->between('Modules\\','\\'.$type.'\\')->toString();
 
         $module_low=Str::of($module)->lower()->toString();

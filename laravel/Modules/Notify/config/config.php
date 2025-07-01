@@ -30,7 +30,7 @@ return [
     'logo_url' => env('MAIL_LOGO_URL', null),
 
     // Footer text for all emails
-    'footer_text' => env('MAIL_FOOTER_TEXT', '© ' . date('Y') . ' ' . config('app.name') . '. All rights reserved.'),
+    //'footer_text' => env('MAIL_FOOTER_TEXT', '© ' . date('Y') . ' ' . config('app.name') . '. All rights reserved.'),
 
     // Social media links
     'social_links' => [

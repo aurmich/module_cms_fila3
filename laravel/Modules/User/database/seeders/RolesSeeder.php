@@ -22,16 +22,7 @@ class RolesSeeder extends Seeder
         'Guard',
     ];
 
-    /**
-     * Default roles to be created.
-     *
-     * @var array<int, array<string, string>>
-     */
-    private static array $DEFAULT_ROLES = [
-        ['name' => 'admin', 'guard_name' => 'web'],
-        ['name' => 'user', 'guard_name' => 'web'],
-        ['name' => 'guest', 'guard_name' => 'web'],
-    ];
+    
 
     /**
      * Run the database seeds.
@@ -40,32 +31,7 @@ class RolesSeeder extends Seeder
     {
         $roles = [];
 
-        Collection::make(UserTypeEnum::cases())
-            ->each(
-                static function (UserTypeEnum $userType) use (&$roles): void {
-                    $roles[] = Role::firstOrCreate(
-                        [
-                            'name' => $userType->value,
-                            'guard_name' => 'web',
-                        ],
-                        [
-                            'name' => $userType->value,
-                            'guard_name' => 'web',
-                        ]
-                    );
-                }
-            );
 
-        // Create additional default roles
-        foreach (self::$DEFAULT_ROLES as $roleData) {
-            $roles[] = Role::firstOrCreate(
-                [
-                    'name' => $roleData['name'],
-                    'guard_name' => $roleData['guard_name'],
-                ],
-                $roleData
-            );
-        }
 
         // Display results in a table format
         $this->displayResults($roles);

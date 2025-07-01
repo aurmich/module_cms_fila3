@@ -24,7 +24,7 @@ use Modules\Xot\Traits\Updater;
  */
 class NotificationTemplateVersion extends BaseModel
 {
-    use Updater;
+    
 
     protected $fillable = [
         'template_id',
@@ -53,6 +53,10 @@ class NotificationTemplateVersion extends BaseModel
     public function restore(): NotificationTemplate
     {
         $template = $this->template;
+        
+        if ($template === null) {
+            throw new \RuntimeException('Template non trovato per questa versione');
+        }
         
         $template->update([
             'subject' => $this->subject,

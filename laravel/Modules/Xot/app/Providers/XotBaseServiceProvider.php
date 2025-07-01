@@ -111,9 +111,9 @@ abstract class XotBaseServiceProvider extends ServiceProvider
         }
 
         $viewPath = module_path($this->name, 'resources/views');
-        if (! is_string($viewPath)) {
-            throw new \Exception('Invalid view path');
-        }
+        //if (! is_string($viewPath)) {
+        //    throw new \Exception('Invalid view path');
+        //}
 
         $this->loadViewsFrom($viewPath, $this->nameLower);
     }

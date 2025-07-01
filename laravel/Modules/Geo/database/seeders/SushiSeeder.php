@@ -7,6 +7,7 @@ namespace Modules\Geo\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use function Safe\json_decode;
 
 class SushiSeeder extends Seeder
 {

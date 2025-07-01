@@ -9,6 +9,7 @@ use Modules\Xot\Datas\XotData;
 use Modules\Xot\Datas\MetatagData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Config;
 use Spatie\QueueableAction\QueueableAction;
 use Modules\User\Filament\Pages\Tenancy\RegisterTenant;
 use Modules\User\Filament\Pages\Tenancy\EditTenantProfile;
@@ -20,11 +21,13 @@ class ApplyCalendarToPanelAction
 
     public function execute(Panel &$panel): Panel
     {
+        $timezone = Config::string('fullcalendar.localization.timezone', 'Europe/Rome');
+        $locale = Config::string('fullcalendar.localization.locale', 'it');
         $calendarPlugin = FilamentFullCalendarPlugin::make()
         ->selectable(true)
         ->editable(true)
-        ->timezone(config('fullcalendar.localization.timezone', 'Europe/Rome'))
-        ->locale(config('fullcalendar.localization.locale', 'it'))
+        ->timezone($timezone)
+        ->locale($locale)
         ->plugins([
             'dayGrid',
             'timeGrid',

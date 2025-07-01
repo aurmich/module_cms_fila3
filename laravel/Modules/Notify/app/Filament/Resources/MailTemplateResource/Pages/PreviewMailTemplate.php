@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Filament\Resources\MailTemplateResource\Pages;
 
-use Modules\Notify\Filament\Resources\MailTemplateResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\Page;
+use Modules\Notify\Models\MailTemplate;
+use Modules\Notify\Filament\Resources\MailTemplateResource;
 
+/**
+ * @property MailTemplate $record
+ */
 class PreviewMailTemplate extends Page
 {
     protected static string $resource = MailTemplateResource::class;

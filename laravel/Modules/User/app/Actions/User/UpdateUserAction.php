@@ -48,17 +48,22 @@ class UpdateUserAction
             DB::commit();
             
             Log::info("Utente aggiornato con successo", [
-                'user_id' => $user->id,
+                'user_id' => $user->getKey(),
                 'updated_fields' => array_keys($updateData)
             ]);
             
-            return $user->fresh();
+            $updatedUser = $user->fresh();
+            if (!$updatedUser instanceof Model) {
+                throw new \Exception('Failed to refresh user model after update');
+            }
+            
+            return $updatedUser;
             
         } catch (\Exception $e) {
             DB::rollBack();
             
             Log::error("Errore nell'aggiornamento utente", [
-                'user_id' => $user->id ?? null,
+                'user_id' => $user->getKey(),
                 'error' => $e->getMessage(),
                 'data' => $updateData ?? []
             ]);
@@ -93,13 +98,13 @@ class UpdateUserAction
                 unset($updateData['password']);
             } else {
                 // Hash della password se presente
-                $updateData['password'] = Hash::make($updateData['password']);
+                $updateData['password'] = Hash::make((string) $updateData['password']);
             }
         }
         
         // Gestione dell'email per evitare duplicati
         if (isset($updateData['email'])) {
-            $updateData['email'] = strtolower($updateData['email']);
+            $updateData['email'] = strtolower((string) $updateData['email']);
         }
         
         return $updateData;
@@ -120,7 +125,7 @@ class UpdateUserAction
         if (isset($data['email'])) {
             $existingUser = $user->newQuery()
                 ->where('email', $data['email'])
-                ->where('id', '!=', $user->id)
+                ->where('id', '!=', $user->getKey())
                 ->first();
                 
             if ($existingUser) {

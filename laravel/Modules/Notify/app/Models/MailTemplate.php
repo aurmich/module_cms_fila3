@@ -110,10 +110,13 @@ class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
 
     public function scopeForMailable(Builder $query, Mailable $mailable): Builder
     {
-
+        if(!method_exists($mailable, 'getSlug')){
+            throw new \Exception('Il metodo getSlug() non è definito nella classe '.$mailable::class);
+        }
+        $slug=$mailable->getSlug();
         return $query
             ->where('mailable', get_class($mailable))
-            ->where('slug', $mailable->getSlug());
+            ->where('slug', $slug);
     }
 
 

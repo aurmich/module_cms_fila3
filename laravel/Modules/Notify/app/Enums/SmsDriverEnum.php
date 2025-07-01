@@ -73,6 +73,6 @@ enum SmsDriverEnum: string
     {
         $default = config('sms.default', self::SMSFACTOR->value);
         
-        return self::from($default);
+        return self::from((string) $default);
     }
 }

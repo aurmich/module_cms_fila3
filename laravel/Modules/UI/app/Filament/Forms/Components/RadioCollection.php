@@ -76,6 +76,9 @@ class RadioCollection extends Field
     
     /**
      * Comparazione type-safe per determinare se un'opzione è selezionata.
+     * 
+     * @param mixed $option
+     * @return bool
      */
     public function isOptionSelected($option): bool
     {

@@ -8,7 +8,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Modules\Notify\Datas\WhatsAppData;
-use Modules\Notify\Notifications\Channels\WhatsAppChannel;
 
 /**
  * Class WhatsAppNotification
@@ -46,16 +45,14 @@ class WhatsAppNotification extends Notification implements ShouldQueue
         if ($content instanceof WhatsAppData) {
             $this->whatsappData = $content;
         } else {
-            $this->whatsappData = new WhatsAppData();
-            $this->whatsappData->body = $content;
+            $to = $config['to'] ?? '';
+            $from = $config['from'] ?? null;
             
-            if (isset($config['to'])) {
-                $this->whatsappData->to = $config['to'];
-            }
-            
-            if (isset($config['from'])) {
-                $this->whatsappData->from = $config['from'];
-            }
+            $this->whatsappData = new WhatsAppData(
+                to: (string) $to,
+                body: $content,
+                from: $from !== null ? (string) $from : null
+            );
         }
         
         $this->config = $config;
@@ -69,7 +66,8 @@ class WhatsAppNotification extends Notification implements ShouldQueue
      */
     public function via(mixed $notifiable): array
     {
-        return [WhatsAppChannel::class];
+        // TODO: Implementare WhatsAppChannel quando disponibile
+        return ['whatsapp'];
     }
 
     /**
@@ -82,8 +80,8 @@ class WhatsAppNotification extends Notification implements ShouldQueue
     {
         // If the notifiable entity has a routeNotificationForWhatsApp method,
         // we'll use that to get the destination phone number
-        if (method_exists($notifiable, 'routeNotificationForWhatsApp')) {
-            $this->whatsappData->to = $notifiable->routeNotificationForWhatsApp($this);
+        if (is_object($notifiable) && method_exists($notifiable, 'routeNotificationForWhatsApp')) {
+            $this->whatsappData->to = (string) $notifiable->routeNotificationForWhatsApp($this);
         }
 
         return $this->whatsappData;
@@ -106,6 +104,7 @@ class WhatsAppNotification extends Notification implements ShouldQueue
      */
     public function getProvider(): ?string
     {
-        return $this->config['provider'] ?? null;
+        $provider = $this->config['provider'] ?? null;
+        return is_string($provider) ? $provider : null;
     }
 }

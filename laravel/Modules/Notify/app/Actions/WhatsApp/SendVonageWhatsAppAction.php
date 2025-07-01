@@ -9,11 +9,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Modules\Notify\Contracts\WhatsAppProviderActionInterface;
 use Modules\Notify\Datas\WhatsAppData;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\json_decode;
 
-final class SendVonageWhatsAppAction implements WhatsAppProviderActionInterface
+final class SendVonageWhatsAppAction
 {
     use QueueableAction;
 
@@ -43,7 +43,9 @@ final class SendVonageWhatsAppAction implements WhatsAppProviderActionInterface
         $this->apiSecret = $apiSecret;
 
         // Parametri a livello di root
-        $this->defaultSender = config('whatsapp.from');
+        /** @var string|null $defaultSender */
+        $defaultSender = config('whatsapp.from');
+        $this->defaultSender = $defaultSender;
         $this->debug = (bool) config('whatsapp.debug', false);
         $this->timeout = (int) config('whatsapp.timeout', 30);
     }
@@ -120,6 +122,7 @@ final class SendVonageWhatsAppAction implements WhatsAppProviderActionInterface
             
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
+            /** @var array $responseData */
             $responseData = json_decode($responseContent, true);
             
             // Salva i dati della risposta nelle variabili dell'azione
@@ -141,6 +144,7 @@ final class SendVonageWhatsAppAction implements WhatsAppProviderActionInterface
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
+            /** @var array $responseBody */
             $responseBody = json_decode($response->getBody()->getContents(), true);
             
             // Salva i dati dell'errore nelle variabili dell'azione

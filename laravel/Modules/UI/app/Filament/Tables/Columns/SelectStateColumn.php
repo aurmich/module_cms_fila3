@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\SelectColumn;
+use Spatie\ModelStates\HasStatesContract;
 use Modules\SaluteOra\States\User\UserState;
 
 class SelectStateColumn extends SelectColumn
@@ -21,7 +22,7 @@ class SelectStateColumn extends SelectColumn
     {
         parent::setUp();
       //  $this->selectablePlaceholder(false);
-        $this->options(function (Model $record ,$state): array {
+        $this->options(function (Model&HasStatesContract $record ,$state): array {
             $name=$this->getName();
             if($state==null){
 
@@ -42,8 +43,9 @@ class SelectStateColumn extends SelectColumn
         });
 
 
-        $this->beforeStateUpdated(function (Model $record, $state) {
+        $this->beforeStateUpdated(function (Model&HasStatesContract $record, $state) {
             $message='';
+            /** @phpstan-ignore-next-line */
             $record->state->transitionTo($state,$message);
         });
 

@@ -56,7 +56,7 @@ class ChangeTypeCommand extends Command
         $xot = XotData::make();
         $email = text('User email?');
         
-        /** @var UserContract|null */
+        /** @var UserContract $user */
         $user = XotData::make()->getUserByEmail($email);
 
         if (!$user) {
@@ -69,12 +69,12 @@ class ChangeTypeCommand extends Command
         }
 
         $childTypes = $xot->getUserChildTypes();
-        $this->info("Current user type: {$user->type?->getLabel()}");
+        $this->info("Current user type: {$user->type->getLabel()}");
         
         $typeClass = $xot->getUserChildTypeClass();
-        $options = Arr::mapWithKeys($childTypes, function ($item, string $key) use ($typeClass) {
-            $val = $typeClass::tryFrom($key)?->getLabel();
-            return [$key => $val];
+        $options = Arr::mapWithKeys($childTypes, function ($item, int|string $key) use ($typeClass) {
+            $val = $typeClass::tryFrom((string) $key)?->getLabel();
+            return [(string) $key => $val];
         });
 
         $newType = select('Select new user type:', $options);

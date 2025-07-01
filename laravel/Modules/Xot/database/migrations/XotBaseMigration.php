@@ -375,10 +375,25 @@ abstract class XotBaseMigration extends Migration
     {
         return DB::connection($this->getConnection())->getDriverName();
     }
-    public function foreignIdFor($table, $class, $column = null) {
-        $table->foreignIdFor($class, $column);
+    /**
+     * Add a foreign ID column to the table based on a related model.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $table
+     * @param  string  $class
+     * @param  string|null  $column
+     * @return \Illuminate\Database\Schema\ColumnDefinition
+     */
+    public function foreignIdFor($table, string $class, ?string $column = null) {
+        return $table->foreignIdFor($class, $column);
     } 
-    public function hasTable($table) {
+    
+    /**
+     * Determine if the given table exists.
+     *
+     * @param  string  $table
+     * @return bool
+     */
+    public function hasTable(string $table): bool {
         return $this->getConn()->hasTable($table);
     } 
 }// end XotBaseMigration

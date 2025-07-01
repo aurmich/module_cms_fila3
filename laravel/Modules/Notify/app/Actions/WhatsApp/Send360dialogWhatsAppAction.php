@@ -9,16 +9,16 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Modules\Notify\Contracts\WhatsAppProviderActionInterface;
+
 use Modules\Notify\Datas\WhatsAppData;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\json_decode;
 
-final class Send360dialogWhatsAppAction implements WhatsAppProviderActionInterface
+final class Send360dialogWhatsAppAction
 {
     use QueueableAction;
 
     private string $apiKey;
-    private string $phoneNumberId;
     private string $baseUrl = 'https://waba.360dialog.io/v1';
     private array $vars = [];
     protected bool $debug;
@@ -34,12 +34,6 @@ final class Send360dialogWhatsAppAction implements WhatsAppProviderActionInterfa
             throw new Exception('put [360DIALOG_API_KEY] variable to your .env and config [services.360dialog.api_key]');
         }
         $this->apiKey = $apiKey;
-
-        $phoneNumberId = config('services.360dialog.phone_number_id');
-        if (!is_string($phoneNumberId)) {
-            throw new Exception('put [360DIALOG_PHONE_NUMBER_ID] variable to your .env and config [services.360dialog.phone_number_id]');
-        }
-        $this->phoneNumberId = $phoneNumberId;
 
         // Parametri a livello di root
         $this->debug = (bool) config('whatsapp.debug', false);
@@ -105,6 +99,7 @@ final class Send360dialogWhatsAppAction implements WhatsAppProviderActionInterfa
             
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
+            /** @var array $responseData */
             $responseData = json_decode($responseContent, true);
             
             // Salva i dati della risposta nelle variabili dell'azione
@@ -126,6 +121,7 @@ final class Send360dialogWhatsAppAction implements WhatsAppProviderActionInterfa
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
+            /** @var array $responseBody */
             $responseBody = json_decode($response->getBody()->getContents(), true);
             
             // Salva i dati dell'errore nelle variabili dell'azione

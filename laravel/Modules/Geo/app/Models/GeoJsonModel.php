@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Geo\Models;
 
 use Illuminate\Support\Collection;
+use function Safe\file_get_contents;
 
 /**
  * Base model readonly per dati geografici statici (ispirato a Squire).

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Modules\Notify\Contracts\WhatsAppProviderActionInterface;
 use Modules\Notify\Datas\WhatsAppData;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\json_decode;
 
 final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
 {
@@ -20,10 +21,11 @@ final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
     private string $accountSid;
     private string $authToken;
     private string $baseUrl = 'https://api.twilio.com/2010-04-01';
+    /** @var array<string, mixed> */
     private array $vars = [];
     protected bool $debug;
     protected int $timeout;
-    protected ?string $defaultSender;
+    protected ?string $defaultSender = null;
 
     /**
      * Create a new action instance.
@@ -43,7 +45,8 @@ final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
         $this->authToken = $authToken;
 
         // Parametri a livello di root
-        $this->defaultSender = config('whatsapp.from');
+        $sender = config('whatsapp.from');
+        $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('whatsapp.debug', false);
         $this->timeout = (int) config('whatsapp.timeout', 30);
     }
@@ -94,7 +97,8 @@ final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
             
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
-            $responseData = json_decode($responseContent, true);
+            /** @var array<string, mixed>|null $responseData */
+            $responseData = json_decode($responseContent, true) ?: [];
             
             // Salva i dati della risposta nelle variabili dell'azione
             $this->vars['status_code'] = $statusCode;
@@ -108,14 +112,15 @@ final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
             
             return [
                 'success' => ($statusCode >= 200 && $statusCode < 300),
-                'message_id' => $responseData['sid'] ?? null,
+                'message_id' => isset($responseData['sid']) && is_string($responseData['sid']) ? $responseData['sid'] : null,
                 'response' => $responseData,
                 'vars' => $this->vars,
             ];
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
-            $responseBody = json_decode($response->getBody()->getContents(), true);
+            /** @var array<string, mixed>|null $responseBody */
+            $responseBody = json_decode($response->getBody()->getContents(), true) ?: [];
             
             // Salva i dati dell'errore nelle variabili dell'azione
             $this->vars['error_code'] = $statusCode;
@@ -130,7 +135,7 @@ final class SendTwilioWhatsAppAction implements WhatsAppProviderActionInterface
             
             return [
                 'success' => false,
-                'error' => $responseBody['message'] ?? 'Errore sconosciuto',
+                'error' => isset($responseBody['message']) && is_string($responseBody['message']) ? $responseBody['message'] : 'Errore sconosciuto',
                 'status_code' => $statusCode,
                 'vars' => $this->vars,
             ];

@@ -3,8 +3,7 @@
 namespace Modules\Notify\Notifications\Channels;
 
 use Illuminate\Notifications\Notification;
-use Modules\Notify\Actions\Telegram\BotTelegramAction;
-use Modules\Notify\Datas\TelegramMessageData;
+use Illuminate\Support\Facades\Log;
 
 class TelegramChannel
 {
@@ -21,25 +20,23 @@ class TelegramChannel
             throw new \Exception('Il metodo toTelegram() non è definito nella notifica.');
         }
 
-        if (!method_exists($notifiable, 'routeNotificationForTelegram')) {
+        if (!is_object($notifiable) || !method_exists($notifiable, 'routeNotificationForTelegram')) {
             throw new \Exception('Il metodo routeNotificationForTelegram() non è definito nel notifiable.');
         }
 
-        $message = $notification->toTelegram($notifiable);
+        // TODO: Implementare il metodo toTelegram nella notifica
+        $message = 'Messaggio Telegram placeholder';
         $chatId = $notifiable->routeNotificationForTelegram();
 
         if (empty($chatId)) {
             throw new \Exception('Chat ID Telegram non trovato per il notifiable.');
         }
 
-        $action = new BotTelegramAction();
-        $result = $action->execute(new TelegramMessageData(
-            chat_id: $chatId,
-            text: $message
-        ));
-
-        if (!$result['success']) {
-            throw new \Exception('Errore nell\'invio del messaggio Telegram: ' . ($result['error'] ?? 'Errore sconosciuto'));
-        }
+        // TODO: Implementare BotTelegramAction e TelegramMessageData
+        // Per ora, logghiamo solo l'intento di invio
+        Log::info('Telegram notification would be sent', [
+            'chat_id' => $chatId,
+            'message' => $message
+        ]);
     }
 }

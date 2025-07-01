@@ -11,17 +11,31 @@ use Modules\Notify\Contracts\SMS\SmsActionContract;
 use Modules\Notify\Datas\SmsData;
 use Spatie\QueueableAction\QueueableAction;
 use Symfony\Component\Process\Process;
+use function Safe\tempnam;
+use function Safe\file_put_contents;
+use function Safe\unlink;
 
 final class SendGammuSMSAction implements SmsActionContract
 {
     use QueueableAction;
 
+    /** @var string */
     private string $path;
+
+    /** @var string */
     private string $config;
+
+    /** @var array<string, mixed> */
     private array $vars = [];
+
+    /** @var bool */
     protected bool $debug;
+
+    /** @var int */
     protected int $timeout;
-    protected ?string $defaultSender;
+
+    /** @var string|null */
+    protected ?string $defaultSender = null;
 
     /**
      * Create a new action instance.
@@ -44,7 +58,8 @@ final class SendGammuSMSAction implements SmsActionContract
         }
 
         // Parametri a livello di root
-        $this->defaultSender = config('sms.from');
+        $sender = config('sms.from');
+        $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('sms.debug', false);
         $this->timeout = (int) config('sms.timeout', 30);
     }
@@ -59,13 +74,13 @@ final class SendGammuSMSAction implements SmsActionContract
     public function execute(SmsData $smsData): array
     {
         // Normalizza il numero di telefono
-        $smsData->to .= '';
-        if (Str::startsWith($smsData->to, '00')) {
-            $smsData->to = '+' . mb_substr($smsData->to, 2);
+        $to = (string) $smsData->to;
+        if (Str::startsWith($to, '00')) {
+            $to = '+' . mb_substr($to, 2);
         }
 
-        if (!Str::startsWith($smsData->to, '+')) {
-            $smsData->to = '+39' . $smsData->to;
+        if (!Str::startsWith($to, '+')) {
+            $to = '+39' . $to;
         }
 
         // Prepara il messaggio per Gammu
@@ -78,7 +93,7 @@ final class SendGammuSMSAction implements SmsActionContract
             '-c', $this->config,
             'sendsms',
             'TEXT',
-            $smsData->to,
+            $to,
             '-text',
             $tempFile
         ]);
@@ -89,7 +104,7 @@ final class SendGammuSMSAction implements SmsActionContract
             $process->run();
 
             // Rimuove il file temporaneo
-            @unlink($tempFile);
+            unlink($tempFile);
 
             if (!$process->isSuccessful()) {
                 throw new Exception('Gammu error: ' . $process->getErrorOutput());
@@ -101,7 +116,7 @@ final class SendGammuSMSAction implements SmsActionContract
             return $this->vars;
         } catch (Exception $exception) {
             // Rimuove il file temporaneo in caso di errore
-            @unlink($tempFile);
+            unlink($tempFile);
 
             throw new Exception(
                 $exception->getMessage() . '[' . __LINE__ . '][' . class_basename($this) . ']',

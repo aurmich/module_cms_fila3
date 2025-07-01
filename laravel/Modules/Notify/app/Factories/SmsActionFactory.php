@@ -63,11 +63,11 @@ final class SmsActionFactory
         $driver = $driver ?? Config::get('sms.default', 'netfun');
 
         // Normalizza il nome del driver e assicura formato camelCase
-        $normalizedDriver = $this->normalizeDriverName($driver);
+        $normalizedDriver = $this->normalizeDriverName((string) $driver);
 
         // Avvisa per driver non standard
         if (!in_array($normalizedDriver, $this->supportedDrivers)) {
-            Log::warning("Attempting to use non-standard SMS driver: {$driver}");
+            Log::warning("Attempting to use non-standard SMS driver: " . (string) $driver);
         }
 
         // Costruisci il nome della classe seguendo la convenzione
@@ -81,7 +81,7 @@ final class SmsActionFactory
                 'className' => $className
             ]);
 
-            throw new Exception("Unsupported SMS driver: {$driver}. Class {$className} not found.");
+            throw new Exception("Unsupported SMS driver: " . (string) $driver . ". Class {$className} not found.");
         }
 
         $instance = app($className);

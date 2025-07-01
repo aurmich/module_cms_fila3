@@ -17,13 +17,26 @@ final class SendPlivoSMSAction implements SmsActionContract
 {
     use QueueableAction;
 
+    /** @var string */
     private string $authId;
+
+    /** @var string */
     private string $authToken;
+
+    /** @var string */
     private string $baseUrl = 'https://api.plivo.com/v1/Account/';
+
+    /** @var array<string, mixed> */
     private array $vars = [];
+
+    /** @var bool */
     protected bool $debug;
+
+    /** @var int */
     protected int $timeout;
-    protected ?string $defaultSender;
+
+    /** @var string|null */
+    protected ?string $defaultSender = null;
 
     /**
      * Create a new action instance.
@@ -46,7 +59,8 @@ final class SendPlivoSMSAction implements SmsActionContract
         }
 
         // Parametri a livello di root
-        $this->defaultSender = config('sms.from');
+        $sender = config('sms.from');
+        $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('sms.debug', false);
         $this->timeout = (int) config('sms.timeout', 30);
     }
@@ -61,13 +75,13 @@ final class SendPlivoSMSAction implements SmsActionContract
     public function execute(SmsData $smsData): array
     {
         // Normalizza il numero di telefono
-        $smsData->to .= '';
-        if (Str::startsWith($smsData->to, '00')) {
-            $smsData->to = '+' . mb_substr($smsData->to, 2);
+        $to = (string) $smsData->to;
+        if (Str::startsWith($to, '00')) {
+            $to = $to !== '' ? ('+' . substr($to, 2)) : $to;
         }
 
-        if (!Str::startsWith($smsData->to, '+')) {
-            $smsData->to = '+39' . $smsData->to;
+        if (!Str::startsWith($to, '+')) {
+            $to = '+39' . $to;
         }
 
         $from = $smsData->from ?? $this->defaultSender;
@@ -87,7 +101,7 @@ final class SendPlivoSMSAction implements SmsActionContract
             $response = $client->post($endpoint, [
                 'json' => [
                     'src' => $from,
-                    'dst' => $smsData->to,
+                    'dst' => $to,
                     'text' => $smsData->body,
                 ]
             ]);

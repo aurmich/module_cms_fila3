@@ -9,6 +9,7 @@ use Laravel\Folio\Folio;
 use Illuminate\Support\Arr;
 use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
+use Illuminate\Support\Collection;
 use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;

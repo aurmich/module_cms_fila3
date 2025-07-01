@@ -89,12 +89,8 @@ class Address extends BaseModel
 {
     use HasFactory;
         
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
-    protected $fillable = [
+    /** @var list<string> */
+   protected $fillable = [
         'model_type',
         'model_id',
         'name',

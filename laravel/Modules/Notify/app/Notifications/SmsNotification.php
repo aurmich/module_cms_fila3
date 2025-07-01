@@ -8,7 +8,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Modules\Notify\Datas\SmsData;
-use Modules\Notify\Notifications\Channels\SmsChannel;
 
 /**
  * Class SmsNotification
@@ -46,16 +45,13 @@ class SmsNotification extends Notification implements ShouldQueue
         if ($content instanceof SmsData) {
             $this->smsData = $content;
         } else {
+            $to = $config['to'] ?? '';
+            $from = $config['from'] ?? '';
+            
             $this->smsData = new SmsData();
             $this->smsData->body = $content;
-            
-            if (isset($config['to'])) {
-                $this->smsData->to = $config['to'];
-            }
-            
-            if (isset($config['from'])) {
-                $this->smsData->from = $config['from'];
-            }
+            $this->smsData->to = (string) $to;
+            $this->smsData->from = (string) $from;
         }
         
         $this->config = $config;
@@ -69,7 +65,8 @@ class SmsNotification extends Notification implements ShouldQueue
      */
     public function via(mixed $notifiable): array
     {
-        return [SmsChannel::class];
+        // TODO: Implementare SmsChannel quando disponibile
+        return ['sms'];
     }
 
     /**
@@ -82,8 +79,8 @@ class SmsNotification extends Notification implements ShouldQueue
     {
         // If the notifiable entity has a routeNotificationForSms method,
         // we'll use that to get the destination phone number
-        if (method_exists($notifiable, 'routeNotificationForSms')) {
-            $this->smsData->to = $notifiable->routeNotificationForSms($this);
+        if (is_object($notifiable) && method_exists($notifiable, 'routeNotificationForSms')) {
+            $this->smsData->to = (string) $notifiable->routeNotificationForSms($this);
         }
 
         return $this->smsData;
@@ -106,6 +103,7 @@ class SmsNotification extends Notification implements ShouldQueue
      */
     public function getProvider(): ?string
     {
-        return $this->config['provider'] ?? null;
+        $provider = $this->config['provider'] ?? null;
+        return is_string($provider) ? $provider : null;
     }
 }

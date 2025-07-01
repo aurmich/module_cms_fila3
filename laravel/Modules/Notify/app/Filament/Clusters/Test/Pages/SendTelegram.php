@@ -103,8 +103,9 @@ class SendTelegram extends Page implements HasForms
             ->content($data['body']);
         */
         // Notification::sendNow($developers, new TelegramNotification());
+        $message = is_string($data['body']) ? $data['body'] : '';
         Notification::route('telegram', $data['to'])
-            ->notify(new TelegramNotification());
+            ->notify(new TelegramNotification($message));
     }
 
     protected function getForms(): array

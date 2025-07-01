@@ -26,6 +26,7 @@ abstract class BaseGeoService
      */
     protected function getApiKey(): string
     {
+        /** @var string|null $apiKey */
         $apiKey = config("geo.api_keys.{$this->getServiceName()}");
 
         if (empty($apiKey)) {
@@ -59,9 +60,11 @@ abstract class BaseGeoService
         }
 
         // Rate limiting
+        /** @var int $maxAttempts */
+        $maxAttempts = config("geo.rate_limits.{$this->getServiceName()}.requests_per_second", 50);
         RateLimiter::attempt(
             $this->getServiceName(),
-            config("geo.rate_limits.{$this->getServiceName()}.requests_per_second", 50),
+            $maxAttempts,
             function () {
                 return true;
             }
@@ -78,7 +81,9 @@ abstract class BaseGeoService
             $data = $response->json();
 
             if ($useCache && config('geo.cache.enabled')) {
-                Cache::put($cacheKey, $data, config('geo.cache.ttl', 86400));
+                /** @var int $ttl */
+                $ttl = config('geo.cache.ttl', 86400);
+                Cache::put($cacheKey, $data, $ttl);
             }
 
             return $data;
@@ -92,13 +97,20 @@ abstract class BaseGeoService
      */
     protected function buildHttpClient(): PendingRequest
     {
-        return Http::timeout(config('geo.http_client.timeout', 5.0))
-            ->retry(
-                config('geo.http_client.retry.times', 3),
-                config('geo.http_client.retry.sleep', 100),
-                function ($exception) {
-                    $whenTypes = config('geo.http_client.retry.when', []);
+        /** @var float $timeout */
+        $timeout = config('geo.http_client.timeout', 5.0);
+        /** @var int $retryTimes */
+        $retryTimes = config('geo.http_client.retry.times', 3);
+        /** @var int $retrySleep */
+        $retrySleep = config('geo.http_client.retry.sleep', 100);
+        /** @var array<string> $whenTypes */
+        $whenTypes = config('geo.http_client.retry.when', []);
 
+        return Http::timeout($timeout)
+            ->retry(
+                $retryTimes,
+                $retrySleep,
+                function ($exception) use ($whenTypes) {
                     foreach ($whenTypes as $type) {
                         if (is_a($exception, "\\GuzzleHttp\\Exception\\{$type}")) {
                             return true;
@@ -119,6 +131,7 @@ abstract class BaseGeoService
      */
     protected function getCacheKey(string $method, string $url, array $params): string
     {
+        /** @var string $prefix */
         $prefix = config('geo.cache.prefix', 'geo_');
         $hash = md5($method.$url.serialize($params));
 

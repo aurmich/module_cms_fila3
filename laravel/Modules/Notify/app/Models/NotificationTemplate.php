@@ -37,8 +37,6 @@ use Spatie\Translatable\HasTranslations;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\NotificationTemplateVersion> $versions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\NotificationLog> $logs
  * @property-read string $channels_label
  * @property NotificationTypeEnum $type
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
@@ -110,7 +108,7 @@ class NotificationTemplate extends BaseModel implements HasMedia
         $this->addMediaCollection('attachments')
             ->singleFile();
     }
-
+/*
     public function versions(): HasMany
     {
         return $this->hasMany(NotificationTemplateVersion::class, 'template_id')
@@ -121,14 +119,14 @@ class NotificationTemplate extends BaseModel implements HasMedia
     {
         return $this->hasMany(NotificationLog::class, 'template_id');
     }
-
-    /**
+*/
+    /*
      * Create a new version of the template.
      *
      * @param string $createdBy The user who created the version
      * @param string|null $notes Optional notes about the changes
      * @return self
-     */
+     
     public function createNewVersion(string $createdBy, ?string $notes = null): self
     {
         $this->versions()->create([
@@ -146,7 +144,7 @@ class NotificationTemplate extends BaseModel implements HasMedia
         $this->increment('version');
         return $this;
     }
-
+*/
     /**
      * Compile the template with the given data.
      *
@@ -160,7 +158,7 @@ class NotificationTemplate extends BaseModel implements HasMedia
         $bodyText = $this->compileString($this->body_text, $data);
 
         return [
-            'subject' => $subject,
+            'subject' => $subject ?? '',
             'body_html' => $bodyHtml,
             'body_text' => $bodyText,
         ];
@@ -294,16 +292,19 @@ class NotificationTemplate extends BaseModel implements HasMedia
 
     public function getPreviewSubject(): string
     {
-        return $this->getTranslation('subject', app()->getLocale());
+        $result = $this->getTranslation('subject', app()->getLocale());
+        return is_string($result) ? $result : '';
     }
 
     public function getPreviewBodyText(): string
     {
-        return $this->getTranslation('body_text', app()->getLocale());
+        $result = $this->getTranslation('body_text', app()->getLocale());
+        return is_string($result) ? $result : '';
     }
 
     public function getPreviewBodyHtml(): string
     {
-        return $this->getTranslation('body_html', app()->getLocale());
+        $result = $this->getTranslation('body_html', app()->getLocale());
+        return is_string($result) ? $result : '';
     }
 }

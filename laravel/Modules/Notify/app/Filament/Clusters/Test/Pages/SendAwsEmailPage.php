@@ -111,36 +111,22 @@ class SendAwsEmailPage extends XotBasePage
         $data = $this->emailForm->getState();
 
         try {
+            $to = is_string($data['to']) ? $data['to'] : '';
+            $subject = is_string($data['subject']) ? $data['subject'] : '';
+            $bodyHtml = is_string($data['body_html']) ? $data['body_html'] : '';
+
             $emailData = new EmailData(
-                to: $data['to'],
-                subject: $data['subject'],
-                bodyHtml: $data['body_html'],
-                templateName: $data['template']
+                $to,
+                $subject,
+                $bodyHtml
             );
 
             // Configurare lo specifico driver AWS SES per questo test
             config(['mail.default' => 'ses']);
 
-            // Aggiungere degli allegati di esempio se richiesto
-            $attachments = [];
-            if ($data['add_attachments'] ?? false) {
-                $attachments = [
-                    [
-                        'path' => public_path('images/logo.png'),
-                        'as' => 'logo.png',
-                        'mime' => 'image/png',
-                    ],
-                    [
-                        'path' => public_path('docs/example.pdf'),
-                        'as' => 'example.pdf',
-                        'mime' => 'application/pdf',
-                    ],
-                ];
-            }
-
             // Invia l'email utilizzando il servizio SES
-            Mail::to($data['to'])
-                ->send(new EmailDataEmail($emailData, $attachments));
+            Mail::to($to)
+                ->send(new EmailDataEmail($emailData));
 
             FilamentNotification::make()
                 ->success()

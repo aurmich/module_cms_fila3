@@ -9,11 +9,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Modules\Notify\Contracts\WhatsAppProviderActionInterface;
+
 use Modules\Notify\Datas\WhatsAppData;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\json_decode;
 
-final class SendFacebookWhatsAppAction implements WhatsAppProviderActionInterface
+final class SendFacebookWhatsAppAction
 {
     use QueueableAction;
 
@@ -104,6 +105,7 @@ final class SendFacebookWhatsAppAction implements WhatsAppProviderActionInterfac
             
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
+            /** @var array $responseData */
             $responseData = json_decode($responseContent, true);
             
             // Salva i dati della risposta nelle variabili dell'azione
@@ -125,6 +127,7 @@ final class SendFacebookWhatsAppAction implements WhatsAppProviderActionInterfac
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
+            /** @var array $responseBody */
             $responseBody = json_decode($response->getBody()->getContents(), true);
             
             // Salva i dati dell'errore nelle variabili dell'azione

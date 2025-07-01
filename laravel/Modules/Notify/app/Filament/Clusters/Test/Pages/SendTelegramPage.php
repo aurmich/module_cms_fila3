@@ -34,7 +34,6 @@ use Modules\Notify\Datas\TelegramData;
 
 /**
  * @property ComponentContainer $telegramForm
- * @extends XotBasePage
  */
 class SendTelegramPage extends XotBasePage implements HasForms
 {
@@ -80,7 +79,7 @@ class SendTelegramPage extends XotBasePage implements HasForms
                 ])
                 ->default('bot')
                 ->required(),
-            Forms\Components\TextInput::make('parse_mode')
+            Forms\Components\Select::make('parse_mode')
                 ->options([
                     'HTML' => 'HTML',
                     'Markdown' => 'Markdown',
@@ -116,8 +115,10 @@ class SendTelegramPage extends XotBasePage implements HasForms
             $data = $this->telegramForm->getState();
             $user = $this->getUser();
 
+            $message = is_string($data['text']) ? $data['text'] : '';
+
             Notification::route('telegram', $data['chat_id'])
-                ->notify(new TelegramNotification($data['text'], [
+                ->notify(new TelegramNotification($message, [
                     'driver' => $data['driver'],
                     'parse_mode' => $data['parse_mode'] ?? null,
                     'disable_web_page_preview' => $data['disable_web_page_preview'] ?? false,
@@ -158,8 +159,6 @@ class SendTelegramPage extends XotBasePage implements HasForms
                 ->submit('telegramFormActions'),
         ];
     }
-
-
 
     protected function fillForms(): void
     {

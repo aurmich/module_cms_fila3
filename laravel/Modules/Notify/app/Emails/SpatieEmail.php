@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Notify\Models\MailTemplate;
 use Illuminate\Mail\Mailables\Attachment;
 use Spatie\MailTemplates\TemplateMailable;
+use Spatie\MailTemplates\Interfaces\MailTemplateInterface;
+
+use function Safe\file_get_contents;
 
 /**
  * @see https://github.com/spatie/laravel-database-mail-templates
@@ -20,7 +23,8 @@ use Spatie\MailTemplates\TemplateMailable;
 class SpatieEmail extends TemplateMailable
 {
     // use our custom mail template model
-    protected static $templateModelClass = MailTemplate::class;
+    /** @var class-string<MailTemplateInterface> */
+    protected static  $templateModelClass = MailTemplate::class;
     public string $slug;
      /** @var array<int, Attachment> */
     protected array $customAttachments = [];

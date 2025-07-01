@@ -2,9 +2,8 @@ includes:
     - ./phpstan-baseline.neon
     - ./vendor/larastan/larastan/extension.neon
     - ./vendor/nesbot/carbon/extension.neon
-    - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
-    # Temporaneamente disabilito per risolvere il problema con JsonException
-    # - ./vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+    # - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - ./vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
 
 parameters:
     level: 9

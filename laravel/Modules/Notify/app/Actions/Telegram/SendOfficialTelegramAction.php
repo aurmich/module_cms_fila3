@@ -8,11 +8,13 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
-use Modules\Notify\Contracts\TelegramProviderActionInterface;
+
 use Modules\Notify\Datas\TelegramData;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\json_encode;
+use function Safe\json_decode;
 
-final class SendOfficialTelegramAction implements TelegramProviderActionInterface
+final class SendOfficialTelegramAction
 {
     use QueueableAction;
 
@@ -33,10 +35,14 @@ final class SendOfficialTelegramAction implements TelegramProviderActionInterfac
             throw new Exception('put [TELEGRAM_BOT_TOKEN] variable to your .env and config [services.telegram.token]');
         }
         $this->token = $token;
-        $this->apiUrl = config('services.telegram.api_url', 'https://api.telegram.org');
+        /** @var string $apiUrl */
+        $apiUrl = config('services.telegram.api_url', 'https://api.telegram.org');
+        $this->apiUrl = $apiUrl;
 
         // Parametri a livello di root
-        $this->parseMode = config('telegram.parse_mode');
+        /** @var string|null $parseMode */
+        $parseMode = config('telegram.parse_mode');
+        $this->parseMode = $parseMode;
         $this->debug = (bool) config('telegram.debug', false);
         $this->timeout = (int) config('telegram.timeout', 30);
     }
@@ -107,6 +113,7 @@ final class SendOfficialTelegramAction implements TelegramProviderActionInterfac
             
             $statusCode = $response->getStatusCode();
             $responseContent = $response->getBody()->getContents();
+            /** @var array $responseData */
             $responseData = json_decode($responseContent, true);
             
             // Salva i dati della risposta nelle variabili dell'azione
@@ -128,6 +135,7 @@ final class SendOfficialTelegramAction implements TelegramProviderActionInterfac
         } catch (ClientException $e) {
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
+            /** @var array $responseBody */
             $responseBody = json_decode($response->getBody()->getContents(), true);
             
             // Salva i dati dell'errore nelle variabili dell'azione

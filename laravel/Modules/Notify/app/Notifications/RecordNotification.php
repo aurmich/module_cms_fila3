@@ -23,7 +23,10 @@ class RecordNotification extends Notification
         
 
     }
-
+    /** 
+     * @param object $notifiable
+     * @return array<string|class-string>
+     */
     public function via($notifiable): array
     {
         $channels = [];
@@ -40,6 +43,10 @@ class RecordNotification extends Notification
         return $channels;
     }
 
+    /**
+     * @param object $notifiable
+     * @return SpatieEmail
+     */
     public function toMail($notifiable): SpatieEmail
     {
         $email = new SpatieEmail($this->record, $this->slug);
@@ -76,13 +83,13 @@ class RecordNotification extends Notification
         // If the notifiable entity has a routeNotificationForSms method,
         // we'll use that to get the destination phone number
         //dddx($notifiable);//Illuminate\Notifications\AnonymousNotifiable
-
+        $to=null;
         if (method_exists($notifiable, 'routeNotificationFor')) {
             $to = $notifiable->routeNotificationFor('sms');
         }
-        //if($to==null){
-        //    return null;
-        //}
+        if($to==null){
+            return null;
+        }
 
         $smsData = SmsData::from(['from'=>'Xot','to'=>$to,'body'=>'test']);
 

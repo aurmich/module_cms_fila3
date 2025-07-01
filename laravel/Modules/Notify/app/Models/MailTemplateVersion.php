@@ -89,8 +89,11 @@ class MailTemplateVersion extends BaseModel
     {
         $template = $this->template;
 
+        if ($template === null) {
+            throw new \RuntimeException('Template non trovato per questa versione');
+        }
+
         $template->update([
-            'mailable' => $this->mailable,
             'subject' => $this->subject,
             'html_template' => $this->html_template,
             'text_template' => $this->text_template,

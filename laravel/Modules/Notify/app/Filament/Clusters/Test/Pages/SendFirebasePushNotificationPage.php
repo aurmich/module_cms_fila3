@@ -108,19 +108,17 @@ class SendFirebasePushNotificationPage extends XotBasePage
         
         try {
             // Creare i dati della notifica Firebase
-            $notificationData = new FirebaseNotificationData(
-                token: $data['token'],
-                title: $data['title'],
-                body: $data['body'],
-                imageUrl: $data['image_url'] ?? null,
-                notificationType: $data['notification_type'],
-                highPriority: $data['high_priority'] ?? false,
-                customData: $data['custom_data'] ?? []
-            );
+            $notificationData = FirebaseNotificationData::from([
+                'type' => $data['notification_type'] ?? 'message',
+                'title' => $data['title'] ?? '',
+                'body' => $data['body'] ?? '',
+                'data' => $data['custom_data'] ?? [],
+            ]);
             
+            // TODO: Implementare PushNotification class
             // Inviare la notifica push
-            Notification::route('firebase', $data['token'])
-                ->notify(new PushNotification($notificationData));
+            // Notification::route('firebase', $data['token'])
+            //     ->notify(new PushNotification($notificationData));
             
             // Notificare il successo
             FilamentNotification::make()

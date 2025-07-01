@@ -7,6 +7,7 @@ namespace Modules\Notify\Filament\Clusters\Test\Pages;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Actions\Action;
+use Webmozart\Assert\Assert;
 use Filament\Facades\Filament;
 use Modules\Notify\Datas\EmailData;
 use Illuminate\Support\Facades\Mail;
@@ -119,7 +120,8 @@ class SendSpatieEmailPage extends XotBasePage
              ->locale('it')
              ->send($email);
         */
-        $notify=(new RecordNotification($user,$data['mail_template_slug']))->mergeData($data);
+        Assert::string($mail_template_slug=$data['mail_template_slug']);
+        $notify=(new RecordNotification($user,$mail_template_slug))->mergeData($data);
 
         Notification::route('mail', $data['to'])
             //->locale('it')

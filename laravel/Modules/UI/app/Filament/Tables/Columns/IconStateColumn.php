@@ -6,15 +6,17 @@ namespace Modules\UI\Filament\Tables\Columns;
 
 use Exception;
 use Illuminate\Support\Arr;
+use Webmozart\Assert\Assert;
 use Spatie\ModelStates\State;
 use Modules\SaluteOra\Models\User;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\IconColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Actions\Action;
+use Spatie\ModelStates\HasStatesContract;
 
 class IconStateColumn extends IconColumn
 {
@@ -32,7 +34,7 @@ class IconStateColumn extends IconColumn
             ->form([
                 Select::make('state')
                     ->options(
-                        function (Model $record ,string $state): array {
+                        function (Model&HasStatesContract $record ,string $state): array {
 
                             $name=$this->getName();
                             $state=$record->getAttribute($name);
@@ -40,12 +42,14 @@ class IconStateColumn extends IconColumn
                                 $states=Arr::wrap($record->getDefaultStateFor($name));
                                 return array_combine($states, $states);
                             }
+                            Assert::isInstanceOf($state, State::class);
                             try{
                                 //$states=$record->getAttribute($name)->transitionableStates();
                                 $states=$state->transitionableStates();
                             }catch(Exception $e){
                                 $states=$record->getStatesFor($name)->toArray();;
                             }
+                            /** @phpstan-ignore-next-line */
                             $states=[$state::$name, ...$states];
                             $states=array_combine($states, $states);
                             //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);

@@ -67,6 +67,6 @@ enum WhatsAppDriverEnum: string
     {
         $default = config('whatsapp.default', self::TWILIO->value);
         
-        return self::from($default);
+        return self::from((string) $default);
     }
 }

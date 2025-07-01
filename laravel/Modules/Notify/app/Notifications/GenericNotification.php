@@ -8,7 +8,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\Twilio\TwilioSmsMessage;
 
 /**
  * Notifica generica configurabile per il sistema il progetto.
@@ -80,7 +79,7 @@ class GenericNotification extends Notification implements ShouldQueue
 
         // Aggiungi eventuali azioni se specificate nei dati
         if (isset($this->data['action_text']) && isset($this->data['action_url'])) {
-            $mail->action($this->data['action_text'], $this->data['action_url']);
+            $mail->action((string) $this->data['action_text'], (string) $this->data['action_url']);
         }
 
         // Aggiungi eventuali linee aggiuntive
@@ -98,9 +97,9 @@ class GenericNotification extends Notification implements ShouldQueue
      * Ottiene la rappresentazione SMS della notifica.
      *
      * @param mixed $notifiable
-     * @return TwilioSmsMessage
+     * @return array<string, mixed>
      */
-    public function toTwilio($notifiable): TwilioSmsMessage
+    public function toTwilio($notifiable): array
     {
         $content = "il progetto: {$this->title}\n{$this->message}";
         
@@ -109,8 +108,16 @@ class GenericNotification extends Notification implements ShouldQueue
             $content = mb_substr($content, 0, 317) . '...';
         }
         
-        return (new TwilioSmsMessage())
-            ->content($content);
+        // TODO: Implementare TwilioSmsMessage quando disponibile
+        $to = '';
+        if (is_object($notifiable) && method_exists($notifiable, 'routeNotificationForTwilio')) {
+            $to = (string) $notifiable->routeNotificationForTwilio($this);
+        }
+        
+        return [
+            'content' => $content,
+            'to' => $to,
+        ];
     }
 
     /**
@@ -138,20 +145,20 @@ class GenericNotification extends Notification implements ShouldQueue
     protected function getRecipientName($notifiable): string
     {
         // Tenta di ottenere il nome dal destinatario in vari modi
-        if (method_exists($notifiable, 'getFullName')) {
+        if (is_object($notifiable) && method_exists($notifiable, 'getFullName')) {
             return $notifiable->getFullName();
         }
         
-        if (property_exists($notifiable, 'full_name') && $notifiable->full_name) {
-            return $notifiable->full_name;
+        if (is_object($notifiable) && property_exists($notifiable, 'full_name') && $notifiable->full_name) {
+            return (string) $notifiable->full_name;
         }
         
-        if (property_exists($notifiable, 'first_name') && $notifiable->first_name) {
-            return $notifiable->first_name;
+        if (is_object($notifiable) && property_exists($notifiable, 'first_name') && $notifiable->first_name) {
+            return (string) $notifiable->first_name;
         }
         
-        if (property_exists($notifiable, 'name') && $notifiable->name) {
-            return $notifiable->name;
+        if (is_object($notifiable) && property_exists($notifiable, 'name') && $notifiable->name) {
+            return (string) $notifiable->name;
         }
         
         return 'Utente';

@@ -17,12 +17,23 @@ final class SendSmsFactorSMSAction implements SmsActionContract
 {
     use QueueableAction;
 
+    /** @var string */
     private string $token;
+
+    /** @var string */
     private string $baseUrl;
+
+    /** @var array<string, mixed> */
     private array $vars = [];
+
+    /** @var bool */
     protected bool $debug;
+
+    /** @var int */
     protected int $timeout;
-    protected ?string $defaultSender;
+
+    /** @var string|null */
+    protected ?string $defaultSender = null;
 
     /**
      * Create a new action instance.
@@ -42,7 +53,8 @@ final class SendSmsFactorSMSAction implements SmsActionContract
         $this->baseUrl = $config['base_url'] ?? 'https://api.smsfactor.com';
 
         // Parametri a livello di root
-        $this->defaultSender = config('sms.from');
+        $sender = config('sms.from');
+        $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('sms.debug', false);
         $this->timeout = (int) config('sms.timeout', 30);
     }
@@ -63,13 +75,13 @@ final class SendSmsFactorSMSAction implements SmsActionContract
         ];
 
         // Normalizza il numero di telefono
-        $smsData->to .= '';
-        if (Str::startsWith($smsData->to, '00')) {
-            $smsData->to = '+' . mb_substr($smsData->to, 2);
+        $to = (string) $smsData->to;
+        if (Str::startsWith($to, '00')) {
+            $to = $to !== '' ? ('+' . substr($to, 2)) : $to;
         }
 
-        if (!Str::startsWith($smsData->to, '+')) {
-            $smsData->to = '+39' . $smsData->to;
+        if (!Str::startsWith($to, '+')) {
+            $to = '+39' . $to;
         }
 
         $body = [
@@ -77,7 +89,7 @@ final class SendSmsFactorSMSAction implements SmsActionContract
             'sender' => $smsData->from ?? $this->defaultSender,
             'recipients' => [
                 [
-                    'phone' => $smsData->to,
+                    'phone' => $to,
                 ],
             ],
             'type' => 'sms',

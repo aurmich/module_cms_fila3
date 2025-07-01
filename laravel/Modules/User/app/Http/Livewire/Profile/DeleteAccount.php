@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\User\Actions\User\DeleteUserAction;
+use Modules\User\Contracts\UserContract;
 
 class DeleteAccount extends Component
 {
@@ -20,10 +21,20 @@ class DeleteAccount extends Component
 
     public function destroy(): void
     {
+        /** @var \Modules\User\Models\User|null $user */
         $user = Auth::user();
         if (!$user) {
             $this->dispatch('toast', [
                 'message' => 'Utente non trovato',
+                'type' => 'error'
+            ]);
+            return;
+        }
+
+        // Assicuriamoci che sia del tipo corretto per l'action
+        if (!$user instanceof UserContract) {
+            $this->dispatch('toast', [
+                'message' => 'Tipo di utente non supportato',
                 'type' => 'error'
             ]);
             return;

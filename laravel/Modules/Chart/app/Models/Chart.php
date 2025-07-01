@@ -19,8 +19,8 @@ use Webmozart\Assert\Assert;
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
  * @method static Builder|Chart query()
- * @property-read \Modules\Blog\Models\Profile|null $creator
- * @property-read \Modules\Blog\Models\Profile|null $updater
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
 class Chart extends BaseModel

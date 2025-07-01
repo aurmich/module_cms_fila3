@@ -61,7 +61,7 @@ class MailTemplateResource extends LangBaseResource
             'params_display' => Forms\Components\View::make('notify::filament.components.params-badges')
                 ->viewData(fn ($record) => ['params' => $record?->params])
                 ->columnSpanFull()
-                ->visible(fn ($record): bool => !empty($record?->params)),
+                ->visible(fn ($record): bool => !empty($record->params)),
 
            
 

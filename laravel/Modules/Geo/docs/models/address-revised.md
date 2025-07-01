@@ -100,12 +100,8 @@ class Address extends Model implements HasGeolocation
     use HasFactory;
     use SoftDeletes;
     
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
-    protected $fillable = [
+    /** list<string> */
+   protected $fillable = [
         'name',
         'description',
         'route',

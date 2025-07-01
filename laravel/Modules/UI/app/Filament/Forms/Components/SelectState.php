@@ -10,6 +10,7 @@ use Modules\SaluteOra\Models\User;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\SelectColumn;
+use Spatie\ModelStates\HasStatesContract;
 use Modules\SaluteOra\States\User\UserState;
 
 class SelectState extends Select
@@ -19,7 +20,7 @@ class SelectState extends Select
     {
         parent::setUp();
       //  $this->selectablePlaceholder(false);
-        $this->options(function (Model $record): array {
+        $this->options(function (Model&HasStatesContract $record): array {
             $name=$this->getName();
             $states=$record->getStatesFor($name)->toArray();
             /*
@@ -36,6 +37,10 @@ class SelectState extends Select
                 //'getStateConfigurations'=>$record->getStateConfigurations(),
             ]);
             */
+            /**
+             * @var array<int|string>
+             * @phpstan-ignore-next-line
+             */
             return array_combine($states, $states);
         });
        

@@ -21,7 +21,7 @@ class EmailData extends Data
 
     public string $body_html;
 
-    public string $body;
+    public string $body='';
 
     public array $attachments = [];
 
@@ -69,7 +69,7 @@ class EmailData extends Data
 
     public function getMimeEmail(): MimeEmail
     {
-        if (!isset($this->body)) {
+        if ( $this->body=='') {
             $this->body = strip_tags($this->body_html);
         }
 

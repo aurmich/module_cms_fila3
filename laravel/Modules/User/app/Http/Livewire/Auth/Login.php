@@ -74,7 +74,7 @@ class Login extends Component implements HasForms
                 ->suffixIcon('heroicon-m-envelope')
                 ->autofocus()
                 ->live()
-                ->afterStateUpdated(fn ($state) => $this->validateEmail($state))
+                ->afterStateUpdated(fn ($state) => $this->validateOnly('email'))
                 ->dehydrated(),
 
             TextInput::make('password')

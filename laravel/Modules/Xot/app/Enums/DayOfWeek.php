@@ -35,16 +35,18 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
      * Restituisce l'etichetta localizzata per questo giorno della settimana.
      * Implementazione dell'interfaccia HasLabel di Filament.
      */
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Carbon::create()->startOfWeek()->addDays($this->value - 1)->locale('it')->isoFormat('dddd');
+        $carbon = Carbon::now()->startOfWeek()->addDays($this->value - 1);
+        $carbon->locale('it');
+        return (string) $carbon->isoFormat('dddd');
     }
 
     /**
      * Restituisce il colore associato a questo giorno della settimana.
      * Implementazione dell'interfaccia HasColor di Filament.
      */
-    public function getColor(): string|array|null
+    public function getColor(): string
     {
         return match($this) {
             self::MONDAY => 'primary',
@@ -61,7 +63,7 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
      * Restituisce l'icona associata a questo giorno della settimana.
      * Implementazione dell'interfaccia HasIcon di Filament.
      */
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match($this) {
             self::MONDAY => 'heroicon-o-calendar',
@@ -78,7 +80,7 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
      * Restituisce la descrizione dettagliata di questo giorno della settimana.
      * Implementazione dell'interfaccia HasDescription di Filament.
      */
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return match($this) {
             self::MONDAY => __('saluteora::common.days.description.monday'),
@@ -96,7 +98,9 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
      */
     public function shortLabel(): string
     {
-        return Carbon::create()->startOfWeek()->addDays($this->value - 1)->locale('it')->isoFormat('ddd');
+        $carbon = Carbon::now()->startOfWeek()->addDays($this->value - 1);
+        $carbon->locale('it');
+        return (string) $carbon->isoFormat('ddd');
     }
 
     /**
@@ -106,29 +110,35 @@ enum DayOfWeek: int implements HasLabel, HasColor, HasIcon, HasDescription
      */
     public static function toArray(): array
     {
-        return collect(self::cases())->mapWithKeys(fn ($case) => [
-            $case->value => $case->getLabel()
-        ])->toArray();
+        $result = [];
+        foreach (self::cases() as $case) {
+            $result[$case->value] = $case->getLabel();
+        }
+        return $result;
     }
 
     /**
      * Restituisce una collezione dei giorni lavorativi (lunedì-venerdì).
      *
-     * @return Collection<self>
+     * @return Collection<int, self>
      */
     public static function workingDays(): Collection
     {
-        return collect(self::cases())->filter(fn ($day) => $day->value <= 5);
+        /** @var Collection<int, self> $filtered */
+        $filtered = collect(self::cases())->filter(fn (self $day): bool => $day->value <= 5);
+        return $filtered;
     }
 
     /**
      * Restituisce una collezione dei giorni del weekend (sabato-domenica).
      *
-     * @return Collection<self>
+     * @return Collection<int, self>
      */
     public static function weekendDays(): Collection
     {
-        return collect(self::cases())->filter(fn ($day) => $day->value > 5);
+        /** @var Collection<int, self> $filtered */
+        $filtered = collect(self::cases())->filter(fn (self $day): bool => $day->value > 5);
+        return $filtered;
     }
 
     /**
