@@ -27,6 +27,8 @@
             enabledDates: @js($enabledDates->toArray()),
             
             selectDate(dateString) {
+                console.log('selectDate', dateString);
+                console.log('enabledDates', this.enabledDates);
                 if (this.enabledDates.includes(dateString)) {
                     // Data abilitata: seleziona
                     this.selectedDate = dateString;
