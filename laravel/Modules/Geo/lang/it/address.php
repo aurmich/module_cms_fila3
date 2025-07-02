@@ -7,6 +7,7 @@ return array (
   array (
     'sort' => 96,
     'icon' => 'address.navigation',
+    'group' => 'address.navigation',
   ),
   'actions' => 
   array (
