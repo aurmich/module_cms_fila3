@@ -14,6 +14,7 @@ use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Modules\Tenant\Services\TenantService;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class FolioVoltServiceProvider extends ServiceProvider
 {
@@ -62,7 +63,7 @@ class FolioVoltServiceProvider extends ServiceProvider
         //$currentLocale = LaravelLocalization::setLocale() ?? app()->getLocale();
 
         Folio::path($theme_path)
-            ->uri( app()->getLocale() )
+            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale() )
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -80,7 +81,7 @@ class FolioVoltServiceProvider extends ServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-                ->uri( app()->getLocale() )
+                ->uri( LaravelLocalization::setLocale() ?? app()->getLocale() )
                 ->middleware([
                     '*' => $base_middleware
                 ]);

@@ -404,6 +404,8 @@ return array (
       'label' => 'Orario Servizio',
       'placeholder' => 'Configura orari apertura',
       'help' => 'Orari di apertura e disponibilità del servizio medico',
+      'description' => 'schedule',
+      'helper_text' => 'schedule',
     ),
     'schedule1' => 
     array (
