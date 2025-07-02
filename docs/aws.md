@@ -12,6 +12,8 @@ INFO  Nothing to migrate.
 
 per vedere 
 http://ec2-54-194-72-103.eu-west-1.compute.amazonaws.com/it
+nuova macchina
+http://ec2-54-217-13-148.eu-west-1.compute.amazonaws.com/it
 
 
 se si vedono dei |--35--
