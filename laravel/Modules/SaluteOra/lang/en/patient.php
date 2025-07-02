@@ -12,14 +12,14 @@ return [
         'first_name' => [
             'label' => 'First Name',
             'placeholder' => 'Enter first name',
-            'helper_text' => 'Enter first name as shown on ID',
+            'helper_text' => '',
             'description' => 'Patient\'s legal first name',
             'tooltip' => 'Must match the name on ID document'
         ],
         'last_name' => [
             'label' => 'Last Name',
             'placeholder' => 'Enter last name',
-            'helper_text' => 'Enter last name as shown on ID',
+            'helper_text' => '',
             'description' => 'Patient\'s legal last name',
             'tooltip' => 'Must match the name on ID document'
         ],

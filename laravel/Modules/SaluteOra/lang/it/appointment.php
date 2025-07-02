@@ -1,355 +1,351 @@
 <?php
 
-return array (
-  'name' => 'Appuntamenti',
-  'navigation' => 
-  array (
-    'label' => 'Calendario Appuntamenti',
-    'group' => 'Agenda',
-    'icon' => 'heroicon-o-calendar-days',
-    'color' => 'sky',
-    'sort' => 1,
-    'tooltip' => 'Visualizza e gestisci tutti gli appuntamenti e le visite',
-  ),
-  'model' => 
-  array (
-    'label' => 'Appuntamento',
-    'plural' => 'Appuntamenti',
-  ),
-  'pages' => 
-  array (
-    'index' => 
-    array (
-      'title' => 'Appuntamenti',
-    ),
-    'create' => 
-    array (
-      'title' => 'Nuovo Appuntamento',
-    ),
-    'edit' => 
-    array (
-      'title' => 'Modifica Appuntamento',
-    ),
-    'availability' => 
-    array (
-      'title' => 'Gestione Disponibilità',
-      'heading' => 'Calendario Disponibilità',
-      'subheading' => 'Gestisci le tue disponibilità e approva gli appuntamenti',
-      'description' => 'Crea slot di disponibilità per permettere ai pazienti di prenotare appuntamenti e gestisci gli appuntamenti esistenti.',
-    ),
-  ),
-  'fields' => 
-  array (
-    'title' => 
-    array (
-      'label' => 'Titolo',
-      'placeholder' => 'Inserisci un titolo per l\'appuntamento',
-      'help' => 'Breve descrizione dell\'appuntamento',
-      'description' => 'Un titolo chiaro aiuta a identificare rapidamente l\'appuntamento',
-    ),
-    'patient_id' => 
-    array (
-      'label' => 'Paziente',
-      'placeholder' => 'Seleziona il paziente',
-      'help' => 'Paziente per cui è fissato l\'appuntamento',
-      'description' => 'La persona che riceverà la prestazione medica',
-      'helper_text' => 'patient_id',
-    ),
-    'doctor_id' => 
-    array (
-      'label' => 'Medico',
-      'placeholder' => 'Seleziona il medico',
-      'help' => 'Medico che terrà l\'appuntamento',
-      'description' => 'Seleziona il professionista per l\'appuntamento',
-      'helper_text' => 'doctor_id',
-    ),
-    'studio_id' => 
-    array (
-      'label' => 'Studio',
-      'placeholder' => 'Seleziona lo studio',
-      'help' => 'Studio dove si terrà l\'appuntamento',
-      'description' => 'Sede dell\'appuntamento',
-    ),
-    'start_time' => 
-    array (
-      'label' => 'Ora di inizio',
-      'placeholder' => 'Seleziona l\'ora di inizio',
-      'help' => 'Quando inizia l\'appuntamento',
-      'description' => 'Orario di inizio programmato',
-      'helper_text' => 'start_time',
-    ),
-    'end_time' => 
-    array (
-      'label' => 'Ora di fine',
-      'placeholder' => 'Seleziona l\'ora di fine',
-      'help' => 'Quando termina l\'appuntamento',
-      'description' => 'Orario di fine previsto',
-      'helper_text' => 'end_time',
-    ),
-    'treatment_id' => 
-    array (
-      'label' => 'Trattamento',
-      'placeholder' => 'Seleziona un trattamento',
-      'help' => 'Il tipo di trattamento previsto',
-      'description' => 'Procedura medica che verrà eseguita',
-      'helper_text' => 'treatment_id',
-    ),
-    'status' => 
-    array (
-      'label' => 'Stato',
-      'placeholder' => 'Seleziona lo stato',
-      'help' => 'Stato attuale dell\'appuntamento',
-      'description' => 'Indica se l\'appuntamento è confermato, in attesa, annullato, etc.',
-      'options' => 
-      array (
-        'scheduled' => 'Programmato',
-        'confirmed' => 'Confermato',
-        'completed' => 'Completato',
-        'cancelled' => 'Annullato',
-        'no_show' => 'Non presentato',
-      ),
-      'helper_text' => 'status',
-    ),
-    'notes' => 
-    array (
-      'label' => 'Note',
-      'placeholder' => 'Inserisci eventuali note',
-      'help' => 'Informazioni aggiuntive',
-      'description' => 'Note importanti relative all\'appuntamento',
-      'helper_text' => '',
-    ),
-    'reason' => 
-    array (
-      'label' => 'Motivo',
-      'placeholder' => 'Inserisci il motivo dell\'appuntamento',
-      'help' => 'Motivo principale della visita',
-      'description' => 'Descrizione sintetica della ragione dell\'appuntamento',
-    ),
-    'patient' => 
-    array (
-      'name' => 
-      array (
-        'label' => 'patient.name',
-      ),
-    ),
-    'doctor' => 
-    array (
-      'name' => 
-      array (
-        'label' => 'doctor.name',
-      ),
-    ),
-    'studio' => 
-    array (
-      'name' => 
-      array (
-        'label' => 'studio.name',
-      ),
-    ),
-    'type' => 
-    array (
-      'label' => 'type',
-    ),
-    'emergency' => 
-    array (
-      'label' => 'emergency',
-    ),
-    'created_at' => 
-    array (
-      'label' => 'created_at',
-    ),
-    'openFilters' => 
-    array (
-      'label' => 'openFilters',
-    ),
-    'applyFilters' => 
-    array (
-      'label' => 'applyFilters',
-    ),
-    'resetFilters' => 
-    array (
-      'label' => 'resetFilters',
-    ),
-    'reorderRecords' => 
-    array (
-      'label' => 'reorderRecords',
-    ),
-    'toggleColumns' => 
-    array (
-      'label' => 'toggleColumns',
-    ),
-    'dentist_id' => 
-    array (
-      'label' => 'dentist_id',
-      'placeholder' => 'dentist_id',
-      'helper_text' => 'dentist_id',
-      'description' => 'dentist_id',
-    ),
-    'eligibility_confirmed' => 
-    array (
-      'label' => 'eligibility_confirmed',
-      'placeholder' => 'eligibility_confirmed',
-      'helper_text' => 'eligibility_confirmed',
-      'description' => 'eligibility_confirmed',
-    ),
-  ),
-  'actions' => 
-  array (
-    'create' => 
-    array (
-      'label' => 'Nuovo appuntamento',
-      'tooltip' => 'Crea un nuovo appuntamento',
-    ),
-    'edit' => 
-    array (
-      'label' => 'Modifica',
-      'tooltip' => 'Modifica i dettagli dell\'appuntamento',
-    ),
-    'delete' => 
-    array (
-      'label' => 'Elimina',
-      'tooltip' => 'Rimuovi questo appuntamento',
-      'confirmation' => 'Sei sicuro di voler eliminare questo appuntamento?',
-    ),
-    'view' => 
-    array (
-      'label' => 'Visualizza',
-      'tooltip' => 'Visualizza i dettagli dell\'appuntamento',
-    ),
-    'confirm' => 
-    array (
-      'label' => 'Conferma',
-      'tooltip' => 'Conferma questo appuntamento',
-    ),
-    'cancel' => 
-    array (
-      'label' => 'Annulla',
-      'tooltip' => 'Annulla questo appuntamento',
-    ),
-    'reschedule' => 
-    array (
-      'label' => 'Riprogramma',
-      'tooltip' => 'Cambia data e ora dell\'appuntamento',
-    ),
-    'mark_completed' => 
-    array (
-      'label' => 'Completa',
-      'tooltip' => 'Segna come completato',
-    ),
-    'mark_no_show' => 
-    array (
-      'label' => 'Non presentato',
-      'tooltip' => 'Segna come non presentato',
-    ),
-    'legend' => 
-    array (
-      'label' => 'Legenda',
-      'modal_heading' => 'Legenda del Calendario',
-    ),
-  ),
-  'filters' => 
-  array (
-    'today' => 
-    array (
-      'label' => 'Oggi',
-    ),
-    'upcoming' => 
-    array (
-      'label' => 'Prossimi',
-    ),
-    'past' => 
-    array (
-      'label' => 'Passati',
-    ),
-    'by_status' => 
-    array (
-      'label' => 'Per stato',
-    ),
-    'by_doctor' => 
-    array (
-      'label' => 'Per medico',
-    ),
-    'by_date_range' => 
-    array (
-      'label' => 'Per intervallo di date',
-    ),
-  ),
-  'calendar' => 
-  array (
-    'title' => 'Calendario Appuntamenti',
-    'today' => 'Oggi',
-    'month' => 'Mese',
-    'week' => 'Settimana',
-    'day' => 'Giorno',
-    'list' => 'Lista',
-    'next' => 'Prossimo',
-    'previous' => 'Precedente',
-    'day_view' => 'Giornaliero',
-    'week_view' => 'Settimanale',
-    'month_view' => 'Mensile',
-  ),
-  'availability' => 
-  array (
-    'title' => 'Disponibilità',
-    'add' => 'Aggiungi disponibilità',
-    'edit' => 'Modifica disponibilità',
-    'delete' => 'Elimina disponibilità',
-  ),
-  'legend' => 
-  array (
-    'description' => 'Legenda dei colori e delle icone utilizzate nel calendario.',
-    'types' => 'Tipi di Evento',
-    'icons' => 'Significato Icone',
-    'availability' => 'Disponibilità',
-    'pending' => 'Appuntamento in attesa',
-    'confirmed' => 'Appuntamento confermato',
-    'completed' => 'Appuntamento completato',
-    'cancelled' => 'Appuntamento annullato',
-    'availability_icon' => 'Slot di disponibilità',
-    'pending_icon' => 'Appuntamento in attesa di conferma',
-    'confirmed_icon' => 'Appuntamento confermato',
-    'completed_icon' => 'Appuntamento completato',
-    'cancelled_icon' => 'Appuntamento annullato',
-    'instructions' => 'Istruzioni',
-    'instruction_add' => 'Clicca su uno slot vuoto o sul pulsante \'+\' per aggiungere una nuova disponibilità.',
-    'instruction_edit' => 'Clicca su un evento esistente per modificarlo o cambiarne lo stato.',
-    'instruction_delete' => 'Nelle opzioni di modifica, clicca \'Elimina\' per rimuovere una disponibilità o un appuntamento non confermato.',
-    'instruction_approve' => 'Per approvare un appuntamento, cambia lo stato da \'In attesa\' a \'Confermato\'.',
-  ),
-  'notifications' => 
-  array (
-    'reminder' => 
-    array (
-      'title' => 'Promemoria Appuntamento',
-      'body' => 'Hai un appuntamento con :doctor tra :time ore',
-    ),
-    'confirmation' => 
-    array (
-      'title' => 'Appuntamento Confermato',
-      'body' => 'Il tuo appuntamento con :doctor per il :date è stato confermato',
-    ),
-    'cancellation' => 
-    array (
-      'title' => 'Appuntamento Annullato',
-      'body' => 'Il tuo appuntamento con :doctor per il :date è stato annullato',
-    ),
-  ),
-  'messages' => 
-  array (
-    'created' => 'Appuntamento creato con successo',
-    'updated' => 'Appuntamento aggiornato con successo',
-    'deleted' => 'Appuntamento eliminato con successo',
-    'confirmed' => 'Appuntamento confermato con successo',
-    'cancelled' => 'Appuntamento annullato con successo',
-    'completed' => 'Appuntamento completato con successo',
-    'rescheduled' => 'Appuntamento riprogrammato con successo',
-    'conflict' => 'È già presente un altro appuntamento in questo orario',
-    'unavailable_slot' => 'Questo orario non è disponibile per il medico selezionato',
-    'past_date' => 'Non è possibile fissare un appuntamento nel passato',
-    'unavailable' => 'Il medico non è disponibile in questo orario',
-    'availability_created' => 'Disponibilità creata con successo',
-    'availability_updated' => 'Disponibilità aggiornata con successo',
-    'availability_deleted' => 'Disponibilità eliminata con successo',
-    'appointment_updated' => 'Appuntamento aggiornato con successo',
-  ),
-);
+declare(strict_types=1);
+
+return [
+    'name' => 'Appuntamenti',
+    
+    'navigation' => [
+        'label' => 'Calendario Appuntamenti',
+        'group' => 'Agenda',
+        'icon' => 'heroicon-o-calendar-days',
+        'color' => 'sky',
+        'sort' => 1,
+        'tooltip' => 'Visualizza e gestisci tutti gli appuntamenti e le visite',
+    ],
+
+    'model' => [
+        'label' => 'Appuntamento',
+        'plural' => 'Appuntamenti',
+        'description' => 'Gestione degli appuntamenti medici e delle visite',
+    ],
+
+    'pages' => [
+        'index' => [
+            'title' => 'Appuntamenti',
+            'subtitle' => 'Gestisci tutti gli appuntamenti',
+            'description' => 'Visualizza e gestisci il calendario degli appuntamenti medici',
+        ],
+        'create' => [
+            'title' => 'Nuovo Appuntamento',
+            'subtitle' => 'Crea un nuovo appuntamento',
+            'description' => 'Prenota un nuovo appuntamento per un paziente',
+        ],
+        'edit' => [
+            'title' => 'Modifica Appuntamento',
+            'subtitle' => 'Aggiorna i dettagli dell\'appuntamento',
+            'description' => 'Modifica le informazioni dell\'appuntamento selezionato',
+        ],
+        'availability' => [
+            'title' => 'Gestione Disponibilità',
+            'heading' => 'Calendario Disponibilità',
+            'subheading' => 'Gestisci le tue disponibilità e approva gli appuntamenti',
+            'description' => 'Crea slot di disponibilità per permettere ai pazienti di prenotare appuntamenti e gestisci gli appuntamenti esistenti.',
+        ],
+    ],
+
+    'fields' => [
+        'title' => [
+            'label' => 'Titolo',
+            'placeholder' => 'Inserisci un titolo per l\'appuntamento',
+            'help' => 'Breve descrizione dell\'appuntamento',
+            'helper_text' => '',
+        ],
+        'patient_id' => [
+            'label' => 'Paziente',
+            'placeholder' => 'Seleziona il paziente',
+            'help' => 'Paziente per cui è fissato l\'appuntamento',
+            'helper_text' => '',
+        ],
+        'doctor_id' => [
+            'label' => 'Medico',
+            'placeholder' => 'Seleziona il medico',
+            'help' => 'Medico che terrà l\'appuntamento',
+            'helper_text' => '',
+        ],
+        'dentist_id' => [
+            'label' => 'Dentista',
+            'placeholder' => 'Seleziona il dentista',
+            'help' => 'Dentista responsabile del trattamento',
+            'helper_text' => '',
+        ],
+        'studio_id' => [
+            'label' => 'Studio',
+            'placeholder' => 'Seleziona lo studio',
+            'help' => 'Studio dove si terrà l\'appuntamento',
+            'helper_text' => '',
+        ],
+        'start_time' => [
+            'label' => 'Ora di Inizio',
+            'placeholder' => 'Seleziona l\'ora di inizio',
+            'help' => 'Quando inizia l\'appuntamento',
+            'helper_text' => '',
+        ],
+        'end_time' => [
+            'label' => 'Ora di Fine',
+            'placeholder' => 'Seleziona l\'ora di fine',
+            'help' => 'Quando termina l\'appuntamento',
+            'helper_text' => '',
+        ],
+        'treatment_id' => [
+            'label' => 'Trattamento',
+            'placeholder' => 'Seleziona un trattamento',
+            'help' => 'Il tipo di trattamento previsto',
+            'helper_text' => '',
+        ],
+        'status' => [
+            'label' => 'Stato',
+            'placeholder' => 'Seleziona lo stato',
+            'help' => 'Stato attuale dell\'appuntamento',
+            'helper_text' => '',
+            'options' => [
+                'scheduled' => 'Programmato',
+                'confirmed' => 'Confermato',
+                'completed' => 'Completato',
+                'cancelled' => 'Annullato',
+                'no_show' => 'Non presentato',
+            ],
+        ],
+        'type' => [
+            'label' => 'Tipo Appuntamento',
+            'placeholder' => 'Seleziona il tipo',
+            'help' => 'Tipologia di appuntamento medico',
+            'helper_text' => '',
+            'options' => [
+                'consultation' => 'Consulenza',
+                'follow_up' => 'Controllo',
+                'treatment' => 'Trattamento',
+                'surgery' => 'Intervento',
+                'emergency' => 'Emergenza',
+            ],
+        ],
+        'notes' => [
+            'label' => 'Note',
+            'placeholder' => 'Inserisci eventuali note',
+            'help' => 'Informazioni aggiuntive sull\'appuntamento',
+            'helper_text' => '',
+        ],
+        'reason' => [
+            'label' => 'Motivo',
+            'placeholder' => 'Inserisci il motivo dell\'appuntamento',
+            'help' => 'Motivo principale della visita',
+            'helper_text' => '',
+        ],
+        'emergency' => [
+            'label' => 'Emergenza',
+            'placeholder' => 'Indica se è un\'emergenza',
+            'help' => 'Contrassegna come appuntamento di emergenza',
+            'helper_text' => '',
+        ],
+        'eligibility_confirmed' => [
+            'label' => 'Eleggibilità Confermata',
+            'placeholder' => 'Conferma dell\'eleggibilità',
+            'help' => 'Conferma che il paziente è eleggibile per il trattamento',
+            'helper_text' => '',
+        ],
+        'created_at' => [
+            'label' => 'Data Creazione',
+            'placeholder' => 'Data di creazione dell\'appuntamento',
+            'help' => 'Quando è stato creato l\'appuntamento',
+            'helper_text' => '',
+        ],
+    ],
+
+    'actions' => [
+        'create' => [
+            'label' => 'Nuovo Appuntamento',
+            'tooltip' => 'Crea un nuovo appuntamento',
+            'modal_heading' => 'Nuovo Appuntamento',
+            'modal_description' => 'Compila i dettagli per creare un nuovo appuntamento',
+            'success' => 'Appuntamento creato con successo',
+            'error' => 'Errore durante la creazione dell\'appuntamento',
+        ],
+        'edit' => [
+            'label' => 'Modifica',
+            'tooltip' => 'Modifica i dettagli dell\'appuntamento',
+            'modal_heading' => 'Modifica Appuntamento',
+            'modal_description' => 'Aggiorna i dettagli dell\'appuntamento',
+            'success' => 'Appuntamento aggiornato con successo',
+            'error' => 'Errore durante l\'aggiornamento dell\'appuntamento',
+        ],
+        'delete' => [
+            'label' => 'Elimina',
+            'tooltip' => 'Rimuovi questo appuntamento',
+            'confirmation' => 'Sei sicuro di voler eliminare questo appuntamento? Questa azione non può essere annullata.',
+            'success' => 'Appuntamento eliminato con successo',
+            'error' => 'Errore durante l\'eliminazione dell\'appuntamento',
+        ],
+        'view' => [
+            'label' => 'Visualizza',
+            'tooltip' => 'Visualizza i dettagli dell\'appuntamento',
+            'modal_heading' => 'Dettagli Appuntamento',
+        ],
+        'confirm' => [
+            'label' => 'Conferma',
+            'tooltip' => 'Conferma questo appuntamento',
+            'success' => 'Appuntamento confermato con successo',
+            'error' => 'Errore durante la conferma dell\'appuntamento',
+        ],
+        'cancel' => [
+            'label' => 'Annulla',
+            'tooltip' => 'Annulla questo appuntamento',
+            'confirmation' => 'Sei sicuro di voler annullare questo appuntamento?',
+            'success' => 'Appuntamento annullato con successo',
+            'error' => 'Errore durante l\'annullamento dell\'appuntamento',
+        ],
+        'reschedule' => [
+            'label' => 'Riprogramma',
+            'tooltip' => 'Cambia data e ora dell\'appuntamento',
+            'modal_heading' => 'Riprogramma Appuntamento',
+            'modal_description' => 'Seleziona una nuova data e ora',
+            'success' => 'Appuntamento riprogrammato con successo',
+            'error' => 'Errore durante la riprogrammazione dell\'appuntamento',
+        ],
+        'mark_completed' => [
+            'label' => 'Completa',
+            'tooltip' => 'Segna come completato',
+            'confirmation' => 'Sei sicuro di voler segnare questo appuntamento come completato?',
+            'success' => 'Appuntamento completato con successo',
+            'error' => 'Errore durante il completamento dell\'appuntamento',
+        ],
+        'mark_no_show' => [
+            'label' => 'Non Presentato',
+            'tooltip' => 'Segna come non presentato',
+            'confirmation' => 'Sei sicuro di voler segnare questo paziente come non presentato?',
+            'success' => 'Paziente segnato come non presentato',
+            'error' => 'Errore durante l\'aggiornamento dello stato',
+        ],
+        'legend' => [
+            'label' => 'Legenda',
+            'modal_heading' => 'Legenda del Calendario',
+            'modal_description' => 'Spiegazione dei colori e simboli utilizzati',
+        ],
+    ],
+
+    'filters' => [
+        'today' => [
+            'label' => 'Oggi',
+            'description' => 'Appuntamenti di oggi',
+        ],
+        'upcoming' => [
+            'label' => 'Prossimi',
+            'description' => 'Appuntamenti futuri',
+        ],
+        'past' => [
+            'label' => 'Passati',
+            'description' => 'Appuntamenti già trascorsi',
+        ],
+        'by_status' => [
+            'label' => 'Per Stato',
+            'placeholder' => 'Filtra per stato',
+            'help' => 'Filtra gli appuntamenti per stato',
+            'helper_text' => '',
+        ],
+        'by_doctor' => [
+            'label' => 'Per Medico',
+            'placeholder' => 'Seleziona un medico',
+            'help' => 'Filtra per medico specifico',
+            'helper_text' => '',
+        ],
+        'by_date_range' => [
+            'label' => 'Per Intervallo di Date',
+            'placeholder' => 'Seleziona l\'intervallo',
+            'help' => 'Filtra per periodo specifico',
+            'helper_text' => '',
+        ],
+    ],
+
+    'calendar' => [
+        'title' => 'Calendario Appuntamenti',
+        'today' => 'Oggi',
+        'month' => 'Mese',
+        'week' => 'Settimana',
+        'day' => 'Giorno',
+        'list' => 'Lista',
+        'next' => 'Prossimo',
+        'previous' => 'Precedente',
+        'day_view' => 'Vista Giornaliera',
+        'week_view' => 'Vista Settimanale',
+        'month_view' => 'Vista Mensile',
+    ],
+
+    'availability' => [
+        'title' => 'Disponibilità',
+        'add' => 'Aggiungi Disponibilità',
+        'edit' => 'Modifica Disponibilità',
+        'delete' => 'Elimina Disponibilità',
+        'create_success' => 'Disponibilità creata con successo',
+        'update_success' => 'Disponibilità aggiornata con successo',
+        'delete_success' => 'Disponibilità eliminata con successo',
+    ],
+
+    'legend' => [
+        'description' => 'Legenda dei colori e delle icone utilizzate nel calendario.',
+        'types' => 'Tipi di Evento',
+        'icons' => 'Significato Icone',
+        'availability' => 'Disponibilità',
+        'pending' => 'Appuntamento in attesa',
+        'confirmed' => 'Appuntamento confermato',
+        'completed' => 'Appuntamento completato',
+        'cancelled' => 'Appuntamento annullato',
+        'availability_icon' => 'Slot di disponibilità',
+        'pending_icon' => 'Appuntamento in attesa di conferma',
+        'confirmed_icon' => 'Appuntamento confermato',
+        'completed_icon' => 'Appuntamento completato',
+        'cancelled_icon' => 'Appuntamento annullato',
+        'instructions' => 'Istruzioni',
+        'instruction_add' => 'Clicca su uno slot vuoto o sul pulsante \'+\' per aggiungere una nuova disponibilità.',
+        'instruction_edit' => 'Clicca su un evento esistente per modificarlo o cambiarne lo stato.',
+        'instruction_delete' => 'Nelle opzioni di modifica, clicca \'Elimina\' per rimuovere una disponibilità o un appuntamento non confermato.',
+        'instruction_approve' => 'Per approvare un appuntamento, cambia lo stato da \'In attesa\' a \'Confermato\'.',
+    ],
+
+    'notifications' => [
+        'reminder' => [
+            'title' => 'Promemoria Appuntamento',
+            'body' => 'Hai un appuntamento con :doctor tra :time ore',
+        ],
+        'confirmation' => [
+            'title' => 'Appuntamento Confermato',
+            'body' => 'Il tuo appuntamento con :doctor per il :date è stato confermato',
+        ],
+        'cancellation' => [
+            'title' => 'Appuntamento Annullato',
+            'body' => 'Il tuo appuntamento con :doctor per il :date è stato annullato',
+        ],
+    ],
+
+    'messages' => [
+        'created' => 'Appuntamento creato con successo',
+        'updated' => 'Appuntamento aggiornato con successo',
+        'deleted' => 'Appuntamento eliminato con successo',
+        'confirmed' => 'Appuntamento confermato con successo',
+        'cancelled' => 'Appuntamento annullato con successo',
+        'completed' => 'Appuntamento completato con successo',
+        'rescheduled' => 'Appuntamento riprogrammato con successo',
+        'conflict' => 'È già presente un altro appuntamento in questo orario',
+        'unavailable_slot' => 'Questo orario non è disponibile per il medico selezionato',
+        'past_date' => 'Non è possibile fissare un appuntamento nel passato',
+        'unavailable' => 'Il medico non è disponibile in questo orario',
+        'availability_created' => 'Disponibilità creata con successo',
+        'availability_updated' => 'Disponibilità aggiornata con successo',
+        'availability_deleted' => 'Disponibilità eliminata con successo',
+        'appointment_updated' => 'Appuntamento aggiornato con successo',
+    ],
+
+    'validation' => [
+        'required' => 'Il campo :attribute è obbligatorio',
+        'date' => 'Il campo :attribute deve essere una data valida',
+        'after' => 'Il campo :attribute deve essere successivo a :date',
+        'before' => 'Il campo :attribute deve essere precedente a :date',
+        'time_conflict' => 'Esiste già un appuntamento in questo orario',
+        'past_appointment' => 'Non è possibile creare appuntamenti nel passato',
+        'doctor_unavailable' => 'Il medico non è disponibile nell\'orario selezionato',
+    ],
+
+    'empty_state' => [
+        'heading' => 'Nessun appuntamento trovato',
+        'description' => 'Non ci sono appuntamenti per i criteri selezionati',
+        'action' => 'Crea il primo appuntamento',
+    ],
+];

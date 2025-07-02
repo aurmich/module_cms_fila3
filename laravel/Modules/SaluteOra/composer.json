@@ -30,7 +30,8 @@
     "require": {
         "saade/filament-fullcalendar": "^3.2",
         "spatie/laravel-permission": "^6.0",
-        "spatie/opening-hours": "^4.2"
+        "spatie/opening-hours": "^4.2",
+        "tapp/filament-country-code-field": "^1.0"
     },
     "repositories": [
         {

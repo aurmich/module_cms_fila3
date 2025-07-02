@@ -610,6 +610,14 @@ return array (
       'label' => 'Scarica',
       'tooltip' => 'Scarica il file',
     ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
+    ),
+    'createAnother' => 
+    array (
+      'label' => 'createAnother',
+    ),
   ),
   'messages' => 
   array (
