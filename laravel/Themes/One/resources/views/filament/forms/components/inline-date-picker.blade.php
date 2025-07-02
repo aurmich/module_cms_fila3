@@ -24,20 +24,16 @@
     <div 
         x-data="{
             selectedDate: @js($currentValue),
-            enabledDates: @js($enabledDates->toArray()),
+            
             
             selectDate(dateString) {
-                console.log('selectDate', dateString);
-                console.log('enabledDates', this.enabledDates);
-                if (this.enabledDates.includes(dateString)) {
-                    // Data abilitata: seleziona
-                    this.selectedDate = dateString;
-                    $wire.set('{{ $statePath }}', dateString);
-                } else {
-                    // Data NON abilitata: deseleziona tutto
-                    this.selectedDate = null;
-                    $wire.set('{{ $statePath }}', null);
-                }
+                this.selectedDate = dateString;
+                $wire.set('{{ $statePath }}', dateString);
+
+            },
+            deSelectDate(){
+                this.selectedDate = null;
+                $wire.set('{{ $statePath }}', null);
             },
             // ✅ Metodi per navigazione mese - chiamata diretta al widget parent
             previousMonth() {
@@ -97,18 +93,22 @@
                                     // ✅ Pre-calcolo classi CSS per performance
                                     if ($isSelected) {
                                         $classes = 'relative py-2 px-1 text-sm font-semibold bg-[#FF5F7E] text-white ring-2 ring-[#FF5F7E] shadow-lg z-10';
+                                        $onclick = "deSelectDate()";
                                     } elseif ($isEnabled && $isCurrentMonth) {
                                         $classes = 'relative py-2 px-1 text-sm font-semibold bg-blue-100 text-[#272C4D] border-2 border-blue-300 cursor-pointer hover:scale-105 transform transition-all duration-200';
+                                        $onclick = "selectDate('".$day['dateString']."')";
                                     } elseif ($isCurrentMonth) {
                                         $classes = 'relative py-2 px-1 text-sm font-medium bg-gray-50 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60';
+                                        $onclick = "deSelectDate()";
                                     } else {
                                         $classes = 'relative py-2 px-1 text-sm font-medium bg-gray-50/30 text-gray-300 cursor-not-allowed opacity-40';
+                                        $onclick = "deSelectDate()";
                                     }
                                 @endphp
                                 
                                 <button 
                                     type="button" 
-                                    x-on:click="selectDate('{{ $day['dateString'] }}')"
+                                    x-on:click="{{ $onclick }}"
                                     class="{{ $classes }}"
                                 >
                                     {{ $day['day'] }}

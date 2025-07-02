@@ -116,7 +116,7 @@ return array (
       'placeholder' => 'Inserisci eventuali note',
       'help' => 'Informazioni aggiuntive',
       'description' => 'Note importanti relative all\'appuntamento',
-      'helper_text' => 'notes',
+      'helper_text' => '',
     ),
     'reason' => 
     array (

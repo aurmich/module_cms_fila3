@@ -324,10 +324,6 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         
         $studioId = $get('studio_id');
         $doctorId = $get('doctor_id');
-        $studio = Studio::find($studioId);
-        if(!$studio){
-            return [];
-        }
         $pivot = DoctorStudio::where('studio_id',$studioId)->where('user_id',$doctorId)->first();
         
         if (!$pivot) {

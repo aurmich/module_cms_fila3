@@ -43,7 +43,7 @@ return array (
     'notes' => 
     array (
       'description' => 'notes',
-      'helper_text' => 'notes',
+      'helper_text' => '',
       'placeholder' => 'notes',
       'label' => 'notes',
     ),
