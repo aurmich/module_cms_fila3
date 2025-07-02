@@ -1,5 +1,5 @@
 <div>
-<div class="w-full flex justify-start p-6">
+<div class="w-full flex justify-start">
         {{-- DA AGGIORNARE URL --}}
         <a href="/it">
             <div class="cursor-pointer">
@@ -34,15 +34,18 @@
             <p class="text-[#272C4D] pt-2 text-lg">
             Il progetto è patrocinato da INMP - Istituto Nazionale per la promozione della salute delle popolazioni Migranti e per il contrasto delle malattie della Povertà  con la collaborazione di Fondazione ANDI ETS e COI - Cooperazione Odontoiatrica Internazionale.
             </p>
-            <p class="pt-4">
-               Vuoi registrarti al progetto? <a href="/it/auth/register"><strong>Accedi alla registrazione</strong></a>
-            </p>
-            <p class="pt-4">
-               Vuoi sapere di più sul progetto? <a><strong>Consulta alle guide</strong></a>
-            </p>
-            <p class="pt-4">
-               Vuoi sapere di più sui nostri partners? <a href="/it/pages/partners"><strong>Visita la pagina dei partners</strong></a>
-            </p>
+            <div class="flex flex-col lg:flex-row items-baseline">
+                <p class="pt-4">Vuoi registrarti al progetto?</p>
+                <a href="/it/auth/register"><strong>Accedi alla registrazione</strong></a>
+            </div>
+            <div class="flex flex-col lg:flex-row items-baseline">
+                <p class="pt-4">Vuoi sapere di più sul progetto?</p>
+                <a><strong>Consulta alle guide</strong></a>
+            </div>
+            <div class="flex flex-col lg:flex-row items-baseline">
+                <p class="pt-4">Vuoi sapere di più sui nostri partners?</p>
+                <a href="/it/pages/partners"><strong>Visita la pagina dei partners</strong></a>
+            </div>
         </div>
     </div>
 </div>

@@ -18,7 +18,7 @@
 {{-- !fixed top-0 left-0 right-0 z-50 da inserire dentro alla classe dell' header --}}
 @if(!$isLanding)
 <header {{ $attributes->merge([
-    'class' => 'bg-[#272C4D]  h-24 flex items-center',
+    'class' => 'bg-[#272C4D]  h-24 flex items-center sticky top-0 z-10',
     'id' => ($section['attributes']['id'] ?? ''),
     'x-data' => "{ mobileMenuOpen: false }"
     ]) }}>

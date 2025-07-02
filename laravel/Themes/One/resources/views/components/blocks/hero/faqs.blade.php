@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center items-center">
 
     <!-- Back Button -->
-    <div class="w-full flex justify-start p-6">
+    <div class="w-full flex justify-start">
         {{-- DA AGGIORNARE URL --}}
         <a href="/it">
             <div class="cursor-pointer">
