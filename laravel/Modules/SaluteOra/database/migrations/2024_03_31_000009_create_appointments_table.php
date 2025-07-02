@@ -114,11 +114,5 @@ return new class extends XotBaseMigration
         );
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        $this->tableDrop();
-    }
+   
 };

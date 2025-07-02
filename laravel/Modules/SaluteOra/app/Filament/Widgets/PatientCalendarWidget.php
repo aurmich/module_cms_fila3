@@ -13,16 +13,16 @@ use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Traits\HasFullCalendarConfig;
 use Saade\FilamentFullCalendar\Data\EventData;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use function Safe\strtotime;
 
 /**
  * Widget FullCalendar per pazienti.
  *
  * Permette ai pazienti di visualizzare i propri appuntamenti in modalità sola lettura.
- * Utilizza il trait HasFullCalendarConfig per configurazioni comuni.
  */
 class PatientCalendarWidget extends FullCalendarWidget
 {
-    use HasFullCalendarConfig;
+   
     
     /**
      * Riferimento alla data corrente del calendario.
@@ -59,7 +59,6 @@ class PatientCalendarWidget extends FullCalendarWidget
      */
     public function mount(): void
     {
-        parent::mount();
         $this->currentDate = now()->format('Y-m-d');
     }
     
@@ -134,16 +133,57 @@ class PatientCalendarWidget extends FullCalendarWidget
     {
         $cacheKey = $this->getCacheKey($fetchInfo);
 
-        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+        /** @var array<int, array<string, mixed>> $events */
+        $events = cache()->remember($cacheKey, 300, function () use ($fetchInfo): array {
             return Appointment::query()
                 ->where('patient_id', Auth::id())
                 ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
                 ->with(['doctor', 'studio'])
                 ->limit(100)
                 ->get()
-                ->map(fn($appointment) => $this->transformToEventData($appointment))
+                ->map(fn(Appointment $appointment): array => $this->transformToEventData($appointment))
                 ->toArray();
         });
+
+        return $events;
+    }
+
+    /**
+     * Generate a cache key for the events query.
+     *
+     * @param array<string, mixed> $fetchInfo
+     * @return string
+     */
+    protected function getCacheKey(array $fetchInfo): string
+    {
+        return sprintf(
+            'patient_calendar_%s_%s_%s',
+            (string) (Auth::id() ?? 0),
+            (string) ($fetchInfo['start'] ?? ''),
+            (string) ($fetchInfo['end'] ?? '')
+        );
+    }
+
+    /**
+     * Transform an appointment to event data.
+     *
+     * @param \Modules\SaluteOra\Models\Appointment $appointment
+     * @return array<string, mixed>
+     */
+    protected function transformToEventData(Appointment $appointment): array
+    {
+        return [
+            'id' => $appointment->id,
+            'title' => $appointment->title ?? 'Appuntamento',
+            'start' => $appointment->start_time,
+            'end' => $appointment->end_time,
+            'allDay' => false,
+            'extendedProps' => [
+                'doctor' => $appointment->doctor->name,
+                'studio' => $appointment->studio->name,
+                'status' => $appointment->status,
+            ],
+        ];
     }
 
     /**
@@ -190,19 +230,30 @@ class PatientCalendarWidget extends FullCalendarWidget
     public function onEventClick(array $info): void
     {
         // I pazienti possono solo visualizzare i dettagli
-        $this->dispatch('open-appointment-details', [
-            'appointmentId' => $info['event']['id'],
-            'readonly' => true,
-        ]);
+        if (!isset($info['event']) || !is_array($info['event'])) {
+            return;
+        }
+
+        $appointmentId = $info['event']['id'] ?? null;
+        
+        if ($appointmentId !== null) {
+            $this->dispatch('open-appointment-details', [
+                'appointmentId' => $appointmentId,
+                'readonly' => true,
+            ]);
+        }
     }
-
-
 
     /**
      * Gestisce il drop di eventi.
      * I pazienti non possono spostare appuntamenti.
      *
-     * @param array<string, mixed> $info
+     * @param array<string, mixed> $event
+     * @param array<string, mixed> $oldEvent
+     * @param array<string, mixed> $relatedEvents
+     * @param array<string, mixed> $delta
+     * @param array<string, mixed>|null $oldResource
+     * @param array<string, mixed>|null $newResource
      * @return bool
      */
     public function onEventDrop(array $event, array $oldEvent, array $relatedEvents, array $delta, ?array $oldResource, ?array $newResource): bool
@@ -215,7 +266,11 @@ class PatientCalendarWidget extends FullCalendarWidget
      * Gestisce il resize di eventi.
      * I pazienti non possono ridimensionare appuntamenti.
      *
-     * @param array<string, mixed> $info
+     * @param array<string, mixed> $event
+     * @param array<string, mixed> $oldEvent
+     * @param array<string, mixed> $relatedEvents
+     * @param array<string, mixed> $startDelta
+     * @param array<string, mixed> $endDelta
      * @return bool
      */
     public function onEventResize(array $event, array $oldEvent, array $relatedEvents, array $startDelta, array $endDelta): bool

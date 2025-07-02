@@ -36,7 +36,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @property string $email
  * @property string $password
  * @property UserTypeEnum $type
- * @property UserStateEnum $state
+ * @property UserState $state
  * @property string|null $first_name
  * @property string|null $last_name
  * @property \Carbon\Carbon|null $date_of_birth
@@ -83,7 +83,6 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @property-read \Modules\SaluteOra\Models\StudioUser|\Modules\SaluteOra\Models\TeamUser|\Modules\User\Models\DeviceUser|null $pivot
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
  * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
@@ -153,6 +152,22 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
 class User extends BaseUser implements HasMedia,HasStatesContract 
@@ -241,16 +256,7 @@ class User extends BaseUser implements HasMedia,HasStatesContract
         
     }
 
-    /**
-     * Implement ownsTeam method to satisfy HasTeamsContract by delegating to ownsTeamTrait.
-     *
-     * @param \Modules\User\Contracts\TeamContract $team
-     * @return bool
-     */
-    public function ownsTeam(\Modules\User\Contracts\TeamContract $team): bool
-    {
-        return $this->ownsTeamTrait($team);
-    }
+   
 
     /**
      * Configurazione per il logging delle attività.

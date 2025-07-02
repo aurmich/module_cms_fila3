@@ -80,7 +80,6 @@ use Spatie\Image\Enums\Fit;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
  * @property-read int|null $consents_count
  * @property-read \Modules\User\Models\Team|null $currentTeam
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
  * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
@@ -141,6 +140,22 @@ use Spatie\Image\Enums\Fit;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutRole($roles, $guard = null)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia
@@ -226,13 +241,15 @@ class Patient extends User implements HasMedia
         $this
             ->addMediaConversion('preview')
             ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+            //->nonQueued()
+            ;
 
         // Conversione per le immagini dei documenti
         $this
             ->addMediaConversion('document')
             ->fit(Fit::Contain, 800, 800)
-            ->nonQueued();
+            //->nonQueued()
+            ;
     }
 
     /**

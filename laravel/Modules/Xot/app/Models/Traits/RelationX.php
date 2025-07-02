@@ -64,7 +64,7 @@ trait RelationX
      * Guess the pivot class for a many-to-many relationship.
      *
      * @param string $related The related model class name
-     * @param string|null $class The class to use for parent class lookup (used internally)
+     * @param string|class-string|null $class The class to use for parent class lookup (used internally)
      * @return \Illuminate\Database\Eloquent\Relations\Pivot
      */
     public function guessPivot(string $related, ?string $class = null)
@@ -90,7 +90,9 @@ trait RelationX
                 'class1' => get_parent_class($class),
             ]);
             */
-            return $this->guessPivot($related, get_parent_class($class));
+            if(get_parent_class($class)!==false){
+                return $this->guessPivot($related, get_parent_class($class));
+            }
         }
         
         $pivot = app($pivot_class);

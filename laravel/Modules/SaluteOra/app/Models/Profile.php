@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Modules\User\Models\BaseProfile;
+use Illuminate\Database\Eloquent\Builder;
 
 
 /**
@@ -75,9 +76,9 @@ use Modules\User\Models\BaseProfile;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereUserId($value)
- * @method static Builder<static>|Profile withExtraAttributes()
- * @method static Builder<static>|Profile withoutPermission($permissions)
- * @method static Builder<static>|Profile withoutRole($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withExtraAttributes()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
 class Profile extends BaseProfile{

@@ -8,7 +8,7 @@ use Modules\Xot\Contracts\ProfileContract;
 
 /**
  * ProfileTeam Model
- *
+ * 
  * Represents the relationship between a profile and a team, including the user's role.
  *
  * @property ProfileContract|null $creator

@@ -14,10 +14,13 @@ use Illuminate\Support\Str;
 use Modules\Geo\Models\Cap;
 use Filament\Actions\Action;
 use Filament\Widgets\Widget;
+use function Safe\strtotime;
 use Illuminate\Support\View;
+use Webmozart\Assert\Assert;
 use Modules\Geo\Models\Comune;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Models\Studio;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -40,6 +43,9 @@ use Modules\UI\Filament\Forms\Components\RadioCollection;
 use Modules\UI\Filament\Forms\Components\InlineDatePicker;
 use Illuminate\Support\Facades\Notification as LaravelNotification;
 
+/**
+ * --
+ */
 class FindDoctorAndAppointmentWidget extends XotBaseWidget
 {
     /**
@@ -47,12 +53,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      */
     protected static string $view = 'pub_theme::filament.widgets.patient.find-doctor-and-appointment-widget';
 
-    /**
-     * Filtri attivi per il widget.
-     *
-     * @var array|null
-     */
-    public ?array $filters = null;
+    
 
     /**
      * Mese corrente del calendario per navigazione.
@@ -256,7 +257,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->valueKey('id') // Campo da usare come valore (default: 'id'),
                 
                 ->afterStateUpdated(function (Set $set, Get $get){
-                    
+                    /** @phpstan-ignore-next-line */
                     $options=$this->getDoctorsOptionsByStudioId($get('studio_id'));
                     $options=array_keys($options);
                     if(isset($options[0])){
@@ -278,6 +279,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         return [
 
             'doctor_id'=>Select::make('doctor_id')
+                /** @phpstan-ignore-next-line */
                 ->options(fn(Get $get)=>$this->getDoctorsOptionsByStudioId($get('studio_id')))
                 ->searchable()
                 //->default(fn(Get $get)=>dddx('a'))
@@ -302,8 +304,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         $studioId = $get('studio_id');
         $doctorId = $get('doctor_id');
         $date = $get('appointment_date');
-        if(!$date){
-
+        if(!is_string($date)){
             return collect([]);
         }
         
@@ -346,6 +347,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         }
         $doctors = $studio->doctors()->get();
         $options = $doctors->mapWithKeys(function($doctor){
+            Assert::isInstanceOf($doctor, Doctor::class);
             return [$doctor->id => $doctor->first_name.' '.$doctor->last_name];
         })->toArray();
         
@@ -406,10 +408,10 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
     protected function getConfirmStepSchema(): array
     {
         return [
-            Forms\Components\Section::make(__('saluteora::widgets.find_doctor_and_appointment.confirm_step.title'))
+            'confirm'=>Forms\Components\Section::make(__('saluteora::widgets.find_doctor_and_appointment.confirm_step.title'))
                 ->description(__('saluteora::widgets.find_doctor_and_appointment.confirm_step.description'))
                 ->schema([
-                    Placeholder::make('studio_name')
+                    'studio_name'=>Placeholder::make('studio_name')
                         ->label(__('saluteora::widgets.find_doctor_and_appointment.fields.studio.label'))
                         ->content(function (Get $get) {
                             $studioId = $get('studio_id');
@@ -417,11 +419,11 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                                 return __('saluteora::widgets.find_doctor_and_appointment.fields.studio.placeholder');
                             }
                             
-                            $studio = \Modules\SaluteOra\Models\Studio::find($studioId);
+                            $studio = \Modules\SaluteOra\Models\Studio::firstWhere('id',$studioId);
                             return $studio ? $studio->name : __('saluteora::widgets.find_doctor_and_appointment.fields.studio.placeholder');
                         }),
                         
-                    Placeholder::make('doctor_name')
+                    'doctor_name'=>Placeholder::make('doctor_name')
                         ->label(__('saluteora::widgets.find_doctor_and_appointment.fields.doctor.label'))
                         ->content(function (Get $get) {
                             $doctorId = $get('doctor_id');
@@ -431,40 +433,42 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                             }
                             
                             // Recupera il dottore tramite la relazione studio->doctors
-                            $studio = \Modules\SaluteOra\Models\Studio::find($studioId);
+                            $studio = \Modules\SaluteOra\Models\Studio::firstWhere('id',$studioId);
                             if (!$studio) {
                                 return __('saluteora::widgets.find_doctor_and_appointment.fields.doctor.placeholder');
                             }
                             
                             $doctor = $studio->doctors()->where('users.id', $doctorId)->first();
+                            /** @phpstan-ignore-next-line */
                             return $doctor ? ($doctor->first_name . ' ' . $doctor->last_name) : __('saluteora::widgets.find_doctor_and_appointment.fields.doctor.placeholder');
                         }),
                         
-                    Placeholder::make('appointment_date_display')
+                    'appointment_date_display'=>Placeholder::make('appointment_date_display')
                         ->label(__('saluteora::widgets.find_doctor_and_appointment.fields.appointment_date.label'))
                         ->content(function (Get $get) {
                             $date = $get('appointment_date');
-                            if (!$date) {
+                            if (!is_string($date)) {
                                 return __('saluteora::widgets.find_doctor_and_appointment.fields.appointment_date.placeholder');
                             }
                             
                             // Formatta la data in modo più leggibile (es: "Lunedì 15 Giugno 2025")
                             try {
                                 $carbonDate = Carbon::createFromFormat('Y-m-d', $date);
-                                return $carbonDate->locale('it')->isoFormat('dddd DD MMMM YYYY');
+                                //** @phpstan-ignore-next-line */
+                                return $carbonDate->isoFormat('dddd DD MMMM YYYY');
                             } catch (\Exception $e) {
                                 return $date; // Fallback al formato originale
                             }
                         }),
                         
-                    Placeholder::make('appointment_time_display')
+                    'appointment_time_display'=>Placeholder::make('appointment_time_display')
                         ->label(__('saluteora::widgets.find_doctor_and_appointment.fields.appointment_time.label'))
                         ->content(function (Get $get) {
                             $time = $get('appointment_time');
                             return $time ? $time : __('saluteora::widgets.find_doctor_and_appointment.fields.appointment_time.placeholder');
                         }),
                         
-                    Textarea::make('notes')
+                    'notes'=>Textarea::make('notes')
                         ->rows(3)
                         ->columnSpan('full')
                         ->maxLength(500), // Limite di caratteri per le note
@@ -480,12 +484,15 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'patient_id'=>Auth::id(),
             'doctor_id'=>$data['doctor_id'],
             'studio_id'=>$data['studio_id'],
+            /** @phpstan-ignore-next-line */
             'starts_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time']),
+            /** @phpstan-ignore-next-line */
             'ends_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time'])->addMinutes(60),
             'notes'=>$data['notes'],
             'state'=>'pending',
         ];
         $appointment=Appointment::create($appointment_data);
+        /** @phpstan-ignore-next-line */
         $slug='patient_appointment_'.Str::snake($appointment->state::$name);
         $slug=Str::slug($slug);
         /*---

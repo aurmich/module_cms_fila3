@@ -126,12 +126,12 @@ class PatientResource extends XotBaseResource
     protected static function getPrivacyStepSchema(): array
     {
         return [
-            Forms\Components\View::make('saluteora::privacy-policy')
+            'privacy_policy' => Forms\Components\View::make('saluteora::privacy-policy')
                 ->columnSpanFull(),
-            Forms\Components\Checkbox::make('privacy_acceptance')
+            'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
                 ->required()
                 ->columnSpanFull(),
-            Forms\Components\Checkbox::make('newsletter')
+            'newsletter' => Forms\Components\Checkbox::make('newsletter')
                 ->columnSpanFull(),
         ];
     }

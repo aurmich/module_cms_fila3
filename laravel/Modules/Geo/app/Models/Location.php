@@ -44,6 +44,19 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static Builder<static>|Location newModelQuery()
  * @method static Builder<static>|Location newQuery()
  * @method static Builder<static>|Location withinDistance(float $latitude, float $longitude, float $distanceInKm)
+ * @method static Builder<static>|Location whereCreatedAt($value)
+ * @method static Builder<static>|Location whereCreatedBy($value)
+ * @method static Builder<static>|Location whereDeletedAt($value)
+ * @method static Builder<static>|Location whereDeletedBy($value)
+ * @method static Builder<static>|Location whereDescription($value)
+ * @method static Builder<static>|Location whereFormattedAddress($value)
+ * @method static Builder<static>|Location whereId($value)
+ * @method static Builder<static>|Location whereModelId($value)
+ * @method static Builder<static>|Location whereModelType($value)
+ * @method static Builder<static>|Location whereName($value)
+ * @method static Builder<static>|Location whereStreet($value)
+ * @method static Builder<static>|Location whereUpdatedAt($value)
+ * @method static Builder<static>|Location whereUpdatedBy($value)
  * @mixin \Eloquent
  */
 class Location extends BaseModel

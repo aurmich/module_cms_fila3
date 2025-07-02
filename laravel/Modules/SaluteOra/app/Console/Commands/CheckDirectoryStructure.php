@@ -4,6 +4,7 @@ namespace Modules\SaluteOra\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use function Safe\preg_match;
 
 class CheckDirectoryStructure extends Command
 {

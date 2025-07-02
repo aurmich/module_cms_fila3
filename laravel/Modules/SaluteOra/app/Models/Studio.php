@@ -87,6 +87,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereVatNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereWebsite($value)
+ * @property string|null $city
+ * @property string|null $postal_code
+ * @property string|null $province
+ * @property string|null $region
+ * @property string $country
+ * @property string|null $tax_code
+ * @property string|null $settings
+ * @property string|null $business_hours
+ * @property string|null $model_type
+ * @property string|null $model_id
+ * @property-read string|null $full_address
+ * @method static Builder<static>|Studio ofCap(string|int|null $cap)
+ * @method static Builder<static>|Studio whereAddress($value)
+ * @method static Builder<static>|Studio whereBusinessHours($value)
+ * @method static Builder<static>|Studio whereCity($value)
+ * @method static Builder<static>|Studio whereCountry($value)
+ * @method static Builder<static>|Studio whereModelId($value)
+ * @method static Builder<static>|Studio whereModelType($value)
+ * @method static Builder<static>|Studio wherePostalCode($value)
+ * @method static Builder<static>|Studio whereProvince($value)
+ * @method static Builder<static>|Studio whereRegion($value)
+ * @method static Builder<static>|Studio whereSettings($value)
+ * @method static Builder<static>|Studio whereTaxCode($value)
  * @mixin \Eloquent
  */
 class Studio extends BaseTenant
@@ -326,6 +349,7 @@ class Studio extends BaseTenant
         $dates=[];
         $doctors=$this->doctors()->get();
         foreach($doctors as $doctor){
+            //** @phpstan-ignore-next-line */
             $tmp=$this->getDoctorEnabledDatesByMonth($doctor->id, $month);
             $dates=array_merge($dates, $tmp);
             
@@ -358,7 +382,7 @@ class Studio extends BaseTenant
             }
         }
             */
-        return $dates;
+        //return $dates;
        
     }
 

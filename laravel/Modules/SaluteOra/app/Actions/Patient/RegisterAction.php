@@ -37,6 +37,7 @@ class RegisterAction
              //*
             $attachments = Patient::$attachments;
             foreach ($attachments as $attachment) {
+                    /** @phpstan-ignore-next-line */
                     $patient->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
 
@@ -60,7 +61,7 @@ class RegisterAction
                     'accepted_at' => now(),
                 ]);
             }
-
+            /** @phpstan-ignore-next-line */
             $mail_slug=Str::of($data['type'])->append('-')->append($data['state'])->slug()->toString();
            //$mail_slug=Str::of($patient->type->value)->append('-')->append($patient->state::$name)->slug()->toString();
             

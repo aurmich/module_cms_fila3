@@ -19,7 +19,10 @@ use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Studio;
 use Modules\SaluteOra\Traits\HasFullCalendarConfig;
+use Illuminate\Support\Facades\Log;
+use Saade\FilamentFullCalendar\Data\EventData;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+use function Safe\strtotime;
 
 /**
  * Widget FullCalendar per amministratori.
@@ -27,10 +30,12 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
  * Permette agli admin di visualizzare tutti gli appuntamenti del sistema
  * con vista globale, filtri avanzati e funzionalità CRUD complete.
  * Utilizza il trait HasFullCalendarConfig per configurazioni comuni.
+ * @property ?array $filters
+ * @property ?string $filter
  */
 class AdminCalendarWidget extends FullCalendarWidget
 {
-    use HasFullCalendarConfig;
+    
     
     /**
      * Riferimento alla data corrente del calendario.
@@ -60,6 +65,7 @@ class AdminCalendarWidget extends FullCalendarWidget
      */
     protected static ?string $maxHeight = '600px';
     
+    
     /**
      * Inizializza il widget impostando la data corrente.
      *
@@ -67,7 +73,6 @@ class AdminCalendarWidget extends FullCalendarWidget
      */
     public function mount(): void
     {
-        parent::mount();
         $this->currentDate = now()->format('Y-m-d');
     }
     
@@ -145,48 +150,138 @@ class AdminCalendarWidget extends FullCalendarWidget
     }
 
     /**
-     * Recupera gli eventi per il calendario.
+     * Generate a cache key for the events query.
+     *
+     * @param array<string, mixed> $fetchInfo
+     * @return string
+     */
+    /**
+     * Get the base query for fetching events.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder<\Modules\SaluteOra\Models\Appointment>
+     */
+    protected function getEventsQuery()
+    {
+        return Appointment::query()
+            ->with(['doctor', 'studio'])
+            ->when(
+                $this->filter !== null,
+                fn($query) => $query->where('status', $this->filter)
+            );
+    }
+
+    /**
+     * Invalidate the cache for the calendar events.
+     *
+     * @return void
+     */
+    protected function invalidateCache(): void
+    {
+        // Clear the cache for all possible date ranges
+        $cache = app('cache');
+        $cache->delete($this->getCacheKey([
+            'start' => now()->subYear()->startOfMonth()->format('Y-m-d'),
+            'end' => now()->addYear()->endOfMonth()->format('Y-m-d'),
+        ]));
+    }
+
+    /**
+     * Generate a cache key for the events query.
+     *
+     * @param array<string, mixed> $fetchInfo
+     * @return string
+     */
+    protected function getCacheKey(array $fetchInfo): string
+    {
+        return sprintf(
+            'admin_calendar_%s_%s_%s_%s',
+            (string) (Auth::id() ?? 0),
+            (string) ($fetchInfo['start'] ?? ''),
+            (string) ($fetchInfo['end'] ?? ''),
+            $this->filter ?? 'all'
+        );
+    }
+
+
+    /**
+     * Transform an appointment to event data.
+     *
+     * @param \Modules\SaluteOra\Models\Appointment $appointment
+     * @return array<string, mixed>
+     */
+    protected function transformToEventData(Appointment $appointment): array
+    {
+        return [
+            'id' => $appointment->id,
+            'title' => $appointment->title ?? 'Appuntamento',
+            'start' => $appointment->start_time,
+            'end' => $appointment->end_time,
+            'allDay' => false,
+            'extendedProps' => [
+                'doctor' => $appointment->doctor->name,
+                'studio' => $appointment->studio->name,
+                'status' => $appointment->status,
+            ],
+        ];
+    }
+
+
+
+    /**
+     * Fetch events for the calendar.
      *
      * @param array<string, mixed> $fetchInfo
      * @return array<int, array<string, mixed>>
      */
     public function fetchEvents(array $fetchInfo): array
     {
-        $cacheKey = $this->getCacheKey($fetchInfo);
+        try {
+            $cacheKey = $this->getCacheKey($fetchInfo);
+            
+            return cache()->remember($cacheKey, 300, function () use ($fetchInfo): array {
+                $query = $this->getEventsQuery()
+                    ->whereBetween('start_time', [
+                        $fetchInfo['start'],
+                        $fetchInfo['end']
+                    ]);
 
-        return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
-            return Appointment::query()
-                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
-                ->with(['patient', 'doctor', 'studio'])
-                ->limit(100) // Limite per performance
-                ->get()
-                ->map(fn($appointment) => $this->transformToEventData($appointment))
-                ->toArray();
-        });
+                $this->applyFilters($query);
+
+                return $query->get()
+                    ->map(fn(Appointment $appointment) => $this->transformToEventData($appointment))
+                    ->values()
+                    ->all();
+            });
+        } catch (\Exception $e) {
+            \Log::error('Error fetching calendar events: ' . $e->getMessage());
+            return [];
+        }
     }
 
     /**
      * Applica i filtri alla query.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder<Appointment> $query
      * @return void
      */
-    protected function applyFilters($query): void
+    protected function applyFilters(\Illuminate\Database\Eloquent\Builder $query): void
     {
-        if ($this->filters['studio_id']) {
-            $query->where('studio_id', $this->filters['studio_id']);
+        $filters = $this->filters ?? [];
+        
+        if (isset($filters['studio_id'])) {
+            $query->where('studio_id', $filters['studio_id']);
         }
 
-        if ($this->filters['status']) {
-            $query->where('status', $this->filters['status']);
+        if (isset($filters['doctor_id'])) {
+            $query->where('doctor_id', $filters['doctor_id']);
         }
 
-        if ($this->filters['type']) {
-            $query->where('type', $this->filters['type']);
+        if (isset($filters['status'])) {
+            $query->where('status', $filters['status']);
         }
 
-        if ($this->filters['emergency_only']) {
-            $query->emergency();
+        if (isset($filters['type'])) {
+            $query->where('type', $filters['type']);
         }
     }
 
@@ -260,7 +355,13 @@ class AdminCalendarWidget extends FullCalendarWidget
      */
     public function onEventClick(array $info): void
     {
-        $appointmentId = $info['event']['id'] ?? null;
+        $event = $info['event'] ?? null;
+        
+        if (!is_array($event)) {
+            return;
+        }
+
+        $appointmentId = $event['id'] ?? null;
 
         if (!$appointmentId) {
             return;
@@ -319,7 +420,7 @@ class AdminCalendarWidget extends FullCalendarWidget
 
         $appointment = Appointment::find($appointmentId);
 
-        if (!$appointment) {
+        if (!$appointment instanceof Appointment) {
             return false;
         }
 
@@ -353,7 +454,7 @@ class AdminCalendarWidget extends FullCalendarWidget
 
         $appointment = Appointment::find($appointmentId);
 
-        if (!$appointment) {
+        if (!$appointment instanceof Appointment) {
             return false;
         }
 
@@ -366,39 +467,9 @@ class AdminCalendarWidget extends FullCalendarWidget
         return true;
     }
 
-    /**
-     * Trasforma un appuntamento in EventData con colori specifici per admin.
-     *
-     * @param Appointment $appointment
-     * @return \Saade\FilamentFullCalendar\Data\EventData
-     */
-    protected function transformToEventData(Appointment $appointment): \Saade\FilamentFullCalendar\Data\EventData
-    {
-        return \Saade\FilamentFullCalendar\Data\EventData::make()
-            ->id($appointment->id)
-            ->title($this->formatEventTitle($appointment))
-            ->start($appointment->start_time)
-            ->end($appointment->end_time)
-            ->backgroundColor($this->getStudioColor($appointment->studio))
-            ->borderColor($this->getAppointmentStatusColor($appointment->status->value))
-            ->textColor('#ffffff')
-            ->extendedProps([
-                'patient_id' => $appointment->patient_id,
-                'patient_name' => $appointment->patient?->full_name,
-                'doctor_id' => $appointment->doctor_id,
-                'doctor_name' => $appointment->doctor?->full_name,
-                'studio_id' => $appointment->studio_id,
-                'studio_name' => $appointment->studio?->name,
-                'status' => $appointment->status->value,
-                'type' => $appointment->type->value,
-                'emergency' => $appointment->emergency,
-                'tooltip' => $this->formatTooltip($appointment),
-                'can_edit' => true, // Admin può sempre modificare
-                'can_view' => true,
-                'duration' => $appointment->duration,
-                'notes' => $appointment->notes ? Str::limit($appointment->notes, 100) : null,
-            ]);
-    }
+
+
+
 
     /**
      * Ottiene le statistiche per il widget.
@@ -414,7 +485,7 @@ class AdminCalendarWidget extends FullCalendarWidget
             'today_appointments' => Appointment::whereDate('start_time', $today)->count(),
             'week_appointments' => Appointment::whereBetween('start_time', [$today, $endOfWeek])->count(),
             'pending_appointments' => Appointment::where('status', AppointmentStatusEnum::PENDING->value)->count(),
-            'emergency_appointments' => Appointment::emergency()->whereDate('start_time', '>=', $today)->count(),
+            'emergency_appointments' => Appointment::where('emergency', true)->whereDate('start_time', '>=', $today)->count(),
             'total_studios' => Studio::where('active', true)->count(),
         ];
     }
@@ -440,9 +511,9 @@ class AdminCalendarWidget extends FullCalendarWidget
 
         return sprintf(
             'Vista globale: %d appuntamenti oggi, %d questa settimana, %d emergenze attive',
-            $stats['today_appointments'],
-            $stats['week_appointments'],
-            $stats['emergency_appointments']
+            (int) $stats['today_appointments'],
+            (int) $stats['week_appointments'],
+            (int) $stats['emergency_appointments']
         );
     }
 
@@ -483,7 +554,9 @@ class AdminCalendarWidget extends FullCalendarWidget
      */
     protected function refreshCalendar(): void
     {
-        $this->invalidateEventsCache();
+        $this->invalidateCache();
         $this->dispatch('refresh-calendar');
     }
+
+
 }

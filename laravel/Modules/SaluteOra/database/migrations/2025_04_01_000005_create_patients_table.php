@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
-use Modules\Tenant\Models\Tenant;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 use Illuminate\Support\Facades\Schema;
 
@@ -20,8 +19,6 @@ return new class extends XotBaseMigration
         $this->tableCreate(
             static function (Blueprint $table): void {
                 $table->id();
-                $table->foreignIdFor(Tenant::class)->constrained()
-                    ->onDelete('cascade')->onUpdate('cascade');
                 $table->string('name');
                 $table->string('last_name');
                 $table->string('fiscal_code')->nullable()->unique();

@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\Filament\Widgets;
 
 use Livewire\Attributes\On;
 use Filament\Facades\Filament;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Modules\SaluteOra\Models\Studio;
 use Modules\SaluteOra\Models\Doctor;
@@ -37,30 +38,28 @@ class StudioFilterWidget extends XotBaseWidget
     /**
      * Dati dello studio corrente.
      *
-     * @var Studio|null
+     * @var \Modules\SaluteOra\Models\Studio|null
      */
     public ?Studio $currentStudio = null;
 
     /**
      * Lista degli studi disponibili per il dottore.
      *
-     * @var \Illuminate\Support\Collection
+     * @var \Illuminate\Support\Collection<int, \Modules\SaluteOra\Models\Studio>|null
      */
-    public $availableStudios;
+    public ?\Illuminate\Support\Collection $availableStudios = null;
 
     /**
      * Mount del widget.
+     *
+     * @return void
      */
     public function mount(): void
     {
         // Imposta lo studio corrente dal tenant di Filament o dal primo studio disponibile
-        $this->currentStudioId = Filament::getTenant()?->id ?? $this->getFirstAvailableStudioId();
+        $tenant = Filament::getTenant();
+        $this->currentStudioId = $tenant->id ?? $this->getFirstAvailableStudioId();
         $this->loadStudioData();
-        
-        // Inizializza il form se necessario
-        if (method_exists($this, 'form')) {
-            $this->form->fill();
-        }
     }
 
     /**
@@ -74,9 +73,8 @@ class StudioFilterWidget extends XotBaseWidget
         $user = Auth::user();
         
         // Solo i dottori possono visualizzare questo widget
-        return $user && 
-               $user->type === UserTypeEnum::DOCTOR &&
-               $user instanceof Doctor;
+        return $user instanceof Doctor && 
+               $user->type === UserTypeEnum::DOCTOR;
     }
 
     /**
@@ -125,7 +123,7 @@ class StudioFilterWidget extends XotBaseWidget
         $studio = $user->studios()->where('studios.id', $studioId)->first();
         
         if (!$studio) {
-            $this->notification()
+            Notification::make()
                 ->title(__('saluteora::widgets.studio_filter.errors.unauthorized'))
                 ->danger()
                 ->send();
@@ -136,35 +134,40 @@ class StudioFilterWidget extends XotBaseWidget
         $this->loadStudioData();
 
         // Dispatcha eventi per notificare altri componenti del cambio studio
-        $this->dispatch('studio-changed', [
-            'studioId' => $studioId,
-            'studio' => $this->currentStudio->toArray(),
-        ]);
+        if ($this->currentStudio) {
+            $this->dispatch('studio-changed', [
+                'studioId' => $studioId,
+                'studio' => $this->currentStudio->toArray(),
+            ]);
+        }
 
         // Aggiorna anche il tenant di Filament se necessario
-        if (Filament::getTenant()?->id !== $studioId) {
+        $tenant = Filament::getTenant();
+        if ($tenant && $tenant->getKey() !== $studioId) {
             session(['tenant_id' => $studioId]);
         }
 
-        $this->notification()
-            ->title(__('saluteora::widgets.studio_filter.messages.studio_changed'))
-            ->body(__('saluteora::widgets.studio_filter.messages.studio_changed_body', [
-                'studio' => $this->currentStudio->name
-            ]))
-            ->success()
-            ->send();
+        if ($this->currentStudio) {
+            Notification::make()
+                ->title(__('saluteora::widgets.studio_filter.messages.studio_changed'))
+                ->body(__('saluteora::widgets.studio_filter.messages.studio_changed_body', [
+                    'studio' => $this->currentStudio->name
+                ]))
+                ->success()
+                ->send();
+        }
     }
 
     /**
      * Listener per eventi esterni di cambio studio.
      *
-     * @param array $data
+     * @param array<string, mixed> $data
      * @return void
      */
     #[On('studio-selected')]
     public function onStudioSelected(array $data): void
     {
-        if (isset($data['studioId'])) {
+        if (isset($data['studioId']) && is_int($data['studioId'])) {
             $this->changeStudio($data['studioId']);
         }
     }
@@ -187,19 +190,29 @@ class StudioFilterWidget extends XotBaseWidget
             ->with(['address'])
             ->where('active', true)
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->filter(fn($studio) => $studio instanceof Studio)
+            ->values();
 
         // Carica lo studio corrente
         if ($this->currentStudioId) {
-            $this->currentStudio = $this->availableStudios
+            $foundStudio = $this->availableStudios
                 ->where('id', $this->currentStudioId)
                 ->first();
+            
+            if ($foundStudio instanceof Studio) {
+                $this->currentStudio = $foundStudio;
+            }
         }
 
         // Se non è stato trovato uno studio corrente, prendi il primo disponibile
-        if (!$this->currentStudio && $this->availableStudios->isNotEmpty()) {
-            $this->currentStudio = $this->availableStudios->first();
-            $this->currentStudioId = $this->currentStudio->id;
+        if (!$this->currentStudio && $this->availableStudios && $this->availableStudios->isNotEmpty()) {
+            $firstStudio = $this->availableStudios->first();
+            //if ($firstStudio instanceof Studio) {
+                $this->currentStudio = $firstStudio;
+                $firstStudioId = $this->currentStudio->getKey();
+                $this->currentStudioId = is_int($firstStudioId) ? $firstStudioId : (int) $firstStudioId;
+            //}
         }
     }
 
@@ -221,7 +234,12 @@ class StudioFilterWidget extends XotBaseWidget
             ->orderBy('name')
             ->first();
 
-        return $firstStudio?->id;
+        if (!$firstStudio instanceof Studio) {
+            return null;
+        }
+
+        $studioId = $firstStudio->getKey();
+        return is_int($studioId) ? $studioId : (is_numeric($studioId) ? (int) $studioId : null);
     }
 
     /**
@@ -259,16 +277,25 @@ class StudioFilterWidget extends XotBaseWidget
      */
     public function getStudioFullAddress(): ?string
     {
-        if (!$this->currentStudio || !$this->currentStudio->address) {
-            return $this->currentStudio?->address ?? null;
+        if (!$this->currentStudio) {
+            return null;
         }
 
+        // Se address è una stringa, restituiscila direttamente
+        if (is_string($this->currentStudio->address)) {
+            return $this->currentStudio->address;
+        }
+
+        // Se address è un oggetto con proprietà, costruisci l'indirizzo
         $address = $this->currentStudio->address;
-        
-        return trim(implode(', ', array_filter([
-            $address->street ?? null,
-            $address->city ?? null,
-            $address->postal_code ?? null,
-        ])));
+        if (is_object($address)) {
+            return trim(implode(', ', array_filter([
+                $address->street ?? null,
+                $address->city ?? null,
+                $address->postal_code ?? null,
+            ])));
+        }
+
+        return null;
     }
 }

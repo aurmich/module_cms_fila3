@@ -39,7 +39,7 @@ class ListUsers extends BaseListUsers
         //'state'=>SelectStateColumn::make('state'),
         //'state'=>SelectColumn::make('state')->options(UserStateEnum::class)
         //'state'=>SelectColumn::make('state')->options(UserState::class)
-        IconStateColumn::make('state'),
+        'state' => IconStateColumn::make('state'),
 
     ];
    }

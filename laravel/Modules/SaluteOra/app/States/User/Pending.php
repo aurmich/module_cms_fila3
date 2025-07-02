@@ -11,6 +11,7 @@ namespace Modules\SaluteOra\States\User;
  */
 class Pending extends UserState
 {
+    /** @var string */
     public static $name = 'pending';
 
     public function label(): string

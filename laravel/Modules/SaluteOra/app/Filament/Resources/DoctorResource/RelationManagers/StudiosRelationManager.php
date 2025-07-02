@@ -91,12 +91,12 @@ class StudiosRelationManager extends XotBaseRelationManager
     /**
      * Get the table filters.
      *
-     * @return array<string, Tables\Filters\Filter>
+     * @return array<string, Tables\Filters\Filter|Tables\Filters\SelectFilter>
      */
     public function getTableFilters(): array
     {
         return [
-            'active' => Tables\Filters\TernaryFilter::make('active'),
+            //'active' => Tables\Filters\TernaryFilter::make('active'),
         ];
     }
 
@@ -112,7 +112,7 @@ class StudiosRelationManager extends XotBaseRelationManager
     public function getTableHeaderActions(): array
     {
         return [
-            Tables\Actions\AttachAction::make()
+            'attach'=>Tables\Actions\AttachAction::make()
                 ->preloadRecordSelect(false)
                 ->recordSelect(
                     fn (Forms\Components\Select $select) => $select
@@ -126,6 +126,7 @@ class StudiosRelationManager extends XotBaseRelationManager
                                             ->orWhere('address', 'like', "%{$search}%");
                                     })
                                     // Escludiamo manualmente gli studi già associati
+                                    /** @phpstan-ignore-next-line */
                                     ->whereNotIn('id', $this->getOwnerRecord()->studios->modelKeys())
                                     ->limit(10)
                                     ->get()

@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Forms\Components;
 
 use Modules\Xot\Filament\Forms\Components\XotBaseField;
+
 use Illuminate\Contracts\View\View;
 use Spatie\OpeningHours\OpeningHours;
+use function Safe\json_decode;
+use function Safe\json_encode;
 
 class OpeningHoursField extends XotBaseField
 {
+    /** @phpstan-ignore-next-line */
     protected string $view = 'saluteora::filament.forms.components.opening-hours-field';
     
     protected function setUp(): void
@@ -47,7 +51,7 @@ class OpeningHoursField extends XotBaseField
         ]);
     }
     
-    protected function getDefaultState(): array
+    public function getDefaultState(): array
     {
         return [
             'monday' => [],
@@ -63,6 +67,7 @@ class OpeningHoursField extends XotBaseField
     
     public function isOpenNow(): bool
     {
+        /** @phpstan-ignore-next-line */
         $openingHours = OpeningHours::create($this->getState());
         return $openingHours->isOpen();
     }

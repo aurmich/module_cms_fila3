@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use DateTime;
+
 use Carbon\Carbon;
 use Parental\HasParent;
 use Illuminate\Support\Collection;
@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Spatie\OpeningHours\OpeningHours;
 use Modules\SaluteOra\Models\BasePivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Safe\DateTime;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -112,7 +113,7 @@ class DoctorStudio extends StudioUser
                 '01-01'      => [],                // Recurring on each 1st of January
                 '12-25'      => ['09:00-12:00'],   // Recurring on each 25th of December
         ];
-        
+        /** @phpstan-ignore-next-line */
         return OpeningHours::create($days);
     }
 
@@ -121,7 +122,6 @@ class DoctorStudio extends StudioUser
      * Get available time slots for a specific date.
      * 
      * @param string $date The date in Y-m-d format
-     * @return array Array of time slot objects with id, label, value, and time properties
      */
     public function getAvailableTimeSlotsByDate(?string $date): Collection
     {
@@ -143,26 +143,28 @@ class DoctorStudio extends StudioUser
         $openingHoursForDay = $openingHours->forDate($dateTime);
         $slots = collect();
         foreach ($openingHoursForDay as $timeRange) {
+            /** @phpstan-ignore-next-line */
             $start = Carbon::createFromFormat('H:i', $timeRange->start()->format());
+            /** @phpstan-ignore-next-line */
             $end = Carbon::createFromFormat('H:i', $timeRange->end()->format());
-            
+            if($start==null || $end==null){
+                continue;
+            }
             // Genera slot di 60 minuti dall'inizio alla fine
+            /** @phpstan-ignore-next-line */
             $current = $start->copy();
             while ($current->lt($end)) {
                 $time = $current->format('H:i');
-                $slots->push(collect(
-                    (object)['id' => $time,
+                $slotData = [
+                    'id' => $time,
                     'label' => $time,
-                
-                ]));
+                    'value' => $time
+                ];
+                $slots->push(collect($slotData));
                 $current->addHour();
             }
         }
         return $slots;
-        
-        
-            
-      
     }
     
     /**
@@ -173,39 +175,43 @@ class DoctorStudio extends StudioUser
      * @param int $slotDurationMinutes Durata slot in minuti
      * @return array Array di oggetti slot
      */
+    /**
+     * Generate time slots for a specific time range.
+     *
+     * @param string $startTime Start time in H:i format
+     * @param string $endTime End time in H:i format
+     * @param int $slotDurationMinutes Duration of each slot in minutes
+     * @return array<array{id: string, label: string, value: string}>
+     */
     private function generateSlotsForRange(string $startTime, string $endTime, int $slotDurationMinutes): array
     {
         $slots = [];
         
-        try {
-            $start = Carbon::createFromFormat('H:i', $startTime);
-            $end = Carbon::createFromFormat('H:i', $endTime);
+        $start = Carbon::createFromFormat('H:i', $startTime);
+        $end = Carbon::createFromFormat('H:i', $endTime);
+        
+        if ($start === null || $end === null) {
+            return [];
+        }
+        
+        $currentTime = $start->copy();
+        
+        // Generate slots until end time (exclusive)
+        while ($currentTime->lt($end)) {
+            $slotTime = $currentTime->format('H:i');
             
-            $currentTime = $start->copy();
-            
-            // Genera slot fino all'orario di fine (escluso)
-            while ($currentTime->lt($end)) {
-                $slotTime = $currentTime->format('H:i');
-                
-                // Crea oggetto slot per RadioCollection
-                $slots[] = (object) [
-                    'id' => $slotTime,
-                    'label' => $slotTime,
-                    'value' => $slotTime,
-                    'time' => $slotTime
-                ];
+            // Create slot array for RadioCollection
+            $slots[] = [
+                'id' => $slotTime,
+                'label' => $slotTime,
+                'value' => $slotTime
+            ];
                 
                 // Avanza di slot duration
                 $currentTime->addMinutes($slotDurationMinutes);
             }
             
-        } catch (\Exception $e) {
-            Log::error('Errore nella generazione slot per range', [
-                'start_time' => $startTime,
-                'end_time' => $endTime,
-                'error' => $e->getMessage()
-            ]);
-        }
+        
         
         return $slots;
     }

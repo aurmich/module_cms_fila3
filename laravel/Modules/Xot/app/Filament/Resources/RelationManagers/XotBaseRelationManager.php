@@ -52,13 +52,13 @@ abstract class XotBaseRelationManager extends FilamentRelationManager
     {
         $index=Arr::get($this->getResource()::getPages(),'index');
         if(!$index){
-            throw new \Exception('Index page not found');
+            //throw new \Exception('Index page not found');
             return [];
         }
         $index_page=$index->getPage();
         
         if(!method_exists($index_page,'getTableColumns')){
-            throw new \Exception('method  getTableColumns on '.print_r($index_page,true).' not found');
+            //throw new \Exception('method  getTableColumns on '.print_r($index_page,true).' not found');
             return [];
         }
         $res= app($index_page)->getTableColumns();

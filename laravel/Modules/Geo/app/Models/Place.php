@@ -28,6 +28,30 @@ use function Safe\json_encode;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place query()
+ * @property int $id
+ * @property string|null $model_type
+ * @property int|null $model_id
+ * @property string|null $nearest_street
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property string|null $deleted_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $post_type
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereFormattedAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereModelType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereNearestStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place wherePostType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedBy($value)
  * @mixin \Eloquent
  */
 class Place extends BaseModel implements HasGeolocation

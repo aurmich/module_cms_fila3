@@ -151,8 +151,8 @@ namespace Modules\Chart\Models{
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
  * @method static Builder|Chart query()
- * @property-read \Modules\Blog\Models\Profile|null $creator
- * @property-read \Modules\Blog\Models\Profile|null $updater
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
 	class Chart extends \Eloquent {}
@@ -395,17 +395,6 @@ namespace Modules\Cms\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property mixed                                       $translations
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @property string                                      $blocks
- * @property string|null                                 $id
- * @property array|null                                  $name
- * @property string|null                                 $slug
- * @property \Illuminate\Support\Carbon|null             $created_at
- * @property \Illuminate\Support\Carbon|null             $updated_at
- * @property string|null                                 $created_by
- * @property string|null                                 $updated_by
- * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property mixed                                       $translations
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Modules\Cms\Database\Factories\PageContentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  newQuery()
@@ -422,7 +411,6 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
- *                                                                                                                                                                  >>>>>>> 49ebea7 (.)
  * @mixin \Eloquent
  */
 	class PageContent extends \Eloquent {}
@@ -1033,6 +1021,19 @@ namespace Modules\Geo\Models{
  * @method static Builder<static>|Location newModelQuery()
  * @method static Builder<static>|Location newQuery()
  * @method static Builder<static>|Location withinDistance(float $latitude, float $longitude, float $distanceInKm)
+ * @method static Builder<static>|Location whereCreatedAt($value)
+ * @method static Builder<static>|Location whereCreatedBy($value)
+ * @method static Builder<static>|Location whereDeletedAt($value)
+ * @method static Builder<static>|Location whereDeletedBy($value)
+ * @method static Builder<static>|Location whereDescription($value)
+ * @method static Builder<static>|Location whereFormattedAddress($value)
+ * @method static Builder<static>|Location whereId($value)
+ * @method static Builder<static>|Location whereModelId($value)
+ * @method static Builder<static>|Location whereModelType($value)
+ * @method static Builder<static>|Location whereName($value)
+ * @method static Builder<static>|Location whereStreet($value)
+ * @method static Builder<static>|Location whereUpdatedAt($value)
+ * @method static Builder<static>|Location whereUpdatedBy($value)
  * @mixin \Eloquent
  */
 	class Location extends \Eloquent {}
@@ -1054,6 +1055,30 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place query()
+ * @property int $id
+ * @property string|null $model_type
+ * @property int|null $model_id
+ * @property string|null $nearest_street
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property string|null $deleted_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $post_type
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereFormattedAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereModelType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereNearestStreet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place wherePostType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedBy($value)
  * @mixin \Eloquent
  */
 	class Place extends \Eloquent implements \Modules\Geo\Contracts\HasGeolocation {}
@@ -2248,6 +2273,8 @@ namespace Modules\Notify\Models{
  * @method static Builder<static>|MailTemplate whereTextTemplate($value)
  * @method static Builder<static>|MailTemplate whereUpdatedAt($value)
  * @method static Builder<static>|MailTemplate whereUpdatedBy($value)
+ * @property string|null $params
+ * @method static Builder<static>|MailTemplate whereParams($value)
  * @mixin \Eloquent
  */
 	class MailTemplate extends \Eloquent {}
@@ -2362,7 +2389,7 @@ namespace Modules\Notify\Models{
 
 namespace Modules\Notify\Models{
 /**
- * Modello per il logging delle notifiche inviate.
+ * 
  *
  * @property int $id
  * @property string $notifiable_type
@@ -2370,20 +2397,13 @@ namespace Modules\Notify\Models{
  * @property string $title
  * @property string $content
  * @property string $channels
- * @property array<array-key, mixed>|null $data
+ * @property string|null $data
  * @property \Illuminate\Support\Carbon $sent_at
  * @property string $status
  * @property string|null $error
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read string $channel_label
- * @property-read string $status_label
  * @property-read Model|\Eloquent $notifiable
- * @property-read \Modules\Notify\Models\NotificationTemplate|null $template
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog forChannel(string $channel)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog forNotifiable(\Illuminate\Database\Eloquent\Model $notifiable)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog query()
@@ -2399,7 +2419,6 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog withStatus(string $status)
  * @mixin \Eloquent
  */
 	class NotificationLog extends \Eloquent {}
@@ -2429,8 +2448,6 @@ namespace Modules\Notify\Models{
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\NotificationTemplateVersion> $versions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Notify\Models\NotificationLog> $logs
  * @property-read string $channels_label
  * @property NotificationTypeEnum $type
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
@@ -2454,24 +2471,6 @@ namespace Modules\Notify\Models{
  * @mixin \Eloquent
  */
 	class NotificationTemplate extends \Eloquent {}
-}
-
-namespace Modules\Notify\Models{
-/**
- * 
- *
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\Notify\Models\NotificationTemplate|null $template
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Modules\Notify\Database\Factories\NotificationTemplateVersionFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion query()
- * @mixin \Eloquent
- */
-	class NotificationTemplateVersion extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2708,9 +2707,25 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withoutRole($roles, $guard = null)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin wherePregnancyCertificate($value)
+ * @mixin \Eloquent
  */
 	class Admin extends \Eloquent {}
 }
@@ -2789,55 +2804,6 @@ namespace Modules\SaluteOra\Models{
 
 namespace Modules\SaluteOra\Models{
 /**
- * 
- *
- * @property int $id
- * @property string $tenant_id
- * @property string $user_id
- * @property array<array-key, mixed>|null $allergies
- * @property array<array-key, mixed>|null $chronic_diseases
- * @property array<array-key, mixed>|null $medications
- * @property array<array-key, mixed>|null $family_history
- * @property array<array-key, mixed>|null $lifestyle
- * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereAllergies($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereChronicDiseases($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereFamilyHistory($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereLifestyle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereMedications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Anamnesis withoutTrashed()
- * @mixin \Eloquent
- */
-	class Anamnesis extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
  * Appointment Model for the SaluteOra Module.
  * 
  * Represents an appointment booked by a patient with a doctor in a studio.
@@ -2845,6 +2811,7 @@ namespace Modules\SaluteOra\Models{
  *
  * @property int $id
  * @property int $patient_id
+ * @property UserStateEnum $state
  * @property int $doctor_id
  * @property int $dentist_id Alias for doctor_id (legacy compatibility)
  * @property int $studio_id
@@ -2909,102 +2876,19 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUserId($value)
+ * @property \Illuminate\Support\Carbon|null $starts_at
+ * @property \Illuminate\Support\Carbon|null $ends_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDoctorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
+ * @mixin \Eloquent
  */
 	class Appointment extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * AppointmentWorkflow Model
- *
- * @property int $id
- * @property int $tenant_id
- * @property int $patient_id
- * @property int|null $dentist_id
- * @property int|null $appointment_id
- * @property string $current_step
- * @property string $status
- * @property array|null $step_data
- * @property Carbon|null $started_at
- * @property Carbon|null $completed_at
- * @property Carbon|null $last_interaction_at
- * @property array|null $meta
- * @property int|null $created_by
- * @property string|null $session_id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
- * @property-read \Modules\SaluteOra\Models\Patient $patient
- * @property-read \Modules\SaluteOra\Models\Dentist|null $dentist
- * @property string $user_id
- * @property string|null $updated_by
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereAppointmentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCompletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereCurrentStep($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereDentistId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereLastInteractionAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereMeta($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereSessionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStartedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereStepData($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentWorkflow withoutTrashed()
- * @mixin \Eloquent
- */
-	class AppointmentWorkflow extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * Modello Dentist per la gestione dei dentisti.
- *
- * @property int $id
- * @property string $name
- * @property string|null $first_name
- * @property string|null $last_name
- * @property string|null $title
- * @property string|null $specialization
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
- * @property-read int|null $appointments_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read string $full_name
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Dentist withoutTrashed()
- * @mixin \Eloquent
- */
-	class Dentist extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3135,32 +3019,28 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Modules\SaluteOra\Models\Studio|null $studio
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor wherePregnancyCertificate($value)
+ * @mixin \Eloquent
  */
 	class Doctor extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * 
- *
- * @property \Modules\Xot\Enums\DayOfWeek $day
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
- * @property-read string $day_label
- * @property-read string $day_short_label
- * @property-read string $time_range
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Modules\SaluteOra\Database\Factories\DoctorAvailabilityFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorAvailability query()
- */
-	class DoctorAvailability extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3216,6 +3096,7 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorRegistrationWorkflow withoutTrashed()
+ * @mixin \Eloquent
  */
 	class DoctorRegistrationWorkflow extends \Eloquent {}
 }
@@ -3338,64 +3219,6 @@ namespace Modules\SaluteOra\Models{
  * @mixin \Eloquent
  */
 	class DoctorValidation extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * 
- *
- * @property int $id
- * @property string $tenant_id
- * @property string $user_id
- * @property string $type
- * @property string $title
- * @property string|null $description
- * @property string $file_path
- * @property string $file_name
- * @property int|null $file_size
- * @property string|null $mime_type
- * @property \Illuminate\Support\Carbon|null $expiry_date
- * @property string $status
- * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read string $file_size_formatted
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereExpiryDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFileName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFilePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFileSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereMimeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document withoutTrashed()
- * @mixin \Eloquent
- */
-	class Document extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3624,9 +3447,25 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutRole($roles, $guard = null)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePregnancyCertificate($value)
+ * @mixin \Eloquent
  */
 	class Patient extends \Eloquent {}
 }
@@ -3874,9 +3713,9 @@ namespace Modules\SaluteOra\Models{
  * @method static \Modules\SaluteOra\Database\Factories\ProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile permission($permissions, $without = false)
+ * @method static Builder<static>|Profile permission($permissions, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile role($roles, $guard = null, $without = false)
+ * @method static Builder<static>|Profile role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereBio($value)
@@ -3898,6 +3737,7 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withExtraAttributes()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
+ * @mixin \Eloquent
  */
 	class Profile extends \Eloquent {}
 }
@@ -3940,102 +3780,6 @@ namespace Modules\SaluteOra\Models{
  * @mixin \Eloquent
  */
 	class ReimbursementRequest extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * Report model per la gestione dei report statistici e analitici.
- *
- * @property int $id
- * @property string $name
- * @property string|null $description
- * @property string $type
- * @property \Carbon\Carbon $period_start
- * @property \Carbon\Carbon $period_end
- * @property string $status
- * @property int $created_by
- * @property int|null $tenant_id
- * @property array|null $parameters
- * @property \Carbon\Carbon|null $last_generated_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, ReportData> $reportData
- * @property-read User $creator
- * @property-read Tenant|null $tenant
- * @property string|null $updated_by
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read int|null $report_data_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Modules\SaluteOra\Database\Factories\ReportFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report inPeriod(string $startDate, string $endDate)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report ofType(string $type)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereLastGeneratedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereParameters($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report wherePeriodEnd($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report wherePeriodStart($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Report withStatus(string $status)
- */
-	class Report extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * ReportData model per i dati dettagliati dei report.
- *
- * @property int $id
- * @property int $report_id
- * @property string $key
- * @property mixed $value
- * @property string $data_type
- * @property string|null $description
- * @property int $order
- * @property string|null $group
- * @property array|null $metadata
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read Report $report
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Modules\SaluteOra\Database\Factories\ReportDataFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData inGroup(string $group)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData ofDataType(string $dataType)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData ordered()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereDataType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereGroup($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereMetadata($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereReportId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReportData whereValue($value)
- */
-	class ReportData extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4106,6 +3850,30 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereVatNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Studio whereWebsite($value)
+ * @property string|null $city
+ * @property string|null $postal_code
+ * @property string|null $province
+ * @property string|null $region
+ * @property string $country
+ * @property string|null $tax_code
+ * @property string|null $settings
+ * @property string|null $business_hours
+ * @property string|null $model_type
+ * @property string|null $model_id
+ * @property-read string|null $full_address
+ * @method static Builder<static>|Studio ofCap(string|int|null $cap)
+ * @method static Builder<static>|Studio whereAddress($value)
+ * @method static Builder<static>|Studio whereBusinessHours($value)
+ * @method static Builder<static>|Studio whereCity($value)
+ * @method static Builder<static>|Studio whereCountry($value)
+ * @method static Builder<static>|Studio whereModelId($value)
+ * @method static Builder<static>|Studio whereModelType($value)
+ * @method static Builder<static>|Studio wherePostalCode($value)
+ * @method static Builder<static>|Studio whereProvince($value)
+ * @method static Builder<static>|Studio whereRegion($value)
+ * @method static Builder<static>|Studio whereSettings($value)
+ * @method static Builder<static>|Studio whereTaxCode($value)
+ * @mixin \Eloquent
  */
 	class Studio extends \Eloquent {}
 }
@@ -4268,7 +4036,7 @@ namespace Modules\SaluteOra\Models{
  * @property string $email
  * @property string $password
  * @property UserTypeEnum $type
- * @property UserStateEnum $state
+ * @property UserState $state
  * @property string|null $first_name
  * @property string|null $last_name
  * @property \Carbon\Carbon|null $date_of_birth
@@ -4385,9 +4153,25 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
 
 namespace Modules\Tenant\Models{
@@ -4411,26 +4195,39 @@ namespace Modules\Tenant\Models{
 
 namespace Modules\User\Models{
 /**
+ * Authentication Model
  * 
+ * Tracks user authentication attempts and sessions.
  *
  * @property int $id
- * @property string $type
- * @property string|null $ip_address
- * @property string|null $user_agent
- * @property string|null $location
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $authenticatable
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereIpAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereLocation($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Authentication whereUserAgent($value)
+ * @property string $type Type of authentication (e.g., 'login', 'logout')
+ * @property string|null $ip_address IP address used for authentication
+ * @property string|null $user_agent User agent string from the request
+ * @property string|null $location Geographic location derived from IP
+ * @property bool $login_successful Whether the login attempt was successful
+ * @property Carbon|null $login_at When the login attempt occurred
+ * @property Carbon|null $logout_at When the logout occurred
+ * @property string $authenticatable_type The class name of the authenticatable model
+ * @property string $authenticatable_id The ID of the authenticatable model
+ * @property Carbon|null $created_at When the record was created
+ * @property Carbon|null $updated_at When the record was last updated
+ * @property-read Model|\Eloquent $authenticatable The authenticatable model instance
+ * @method static Builder<static>|Authentication newModelQuery()
+ * @method static Builder<static>|Authentication newQuery()
+ * @method static Builder<static>|Authentication query()
+ * @method static Builder<static>|Authentication whereCreatedAt($value)
+ * @method static Builder<static>|Authentication whereId($value)
+ * @method static Builder<static>|Authentication whereIpAddress($value)
+ * @method static Builder<static>|Authentication whereLocation($value)
+ * @method static Builder<static>|Authentication whereType($value)
+ * @method static Builder<static>|Authentication whereUpdatedAt($value)
+ * @method static Builder<static>|Authentication whereUserAgent($value)
+ * @method static Builder<static>|Authentication whereLoginAt($value)
+ * @method static Builder<static>|Authentication whereLogoutAt($value)
+ * @method static Builder<static>|Authentication whereLoginSuccessful($value)
+ * @method static Builder<static>|Authentication whereAuthenticatableType($value)
+ * @method static Builder<static>|Authentication whereAuthenticatableId($value)
+ * @mixin \Eloquent
  */
 	class Authentication extends \Eloquent {}
 }
@@ -4535,7 +4332,10 @@ namespace Modules\User\Models{
 
 namespace Modules\User\Models{
 /**
+ * DeviceProfile Model
  * 
+ * Represents the relationship between a device and a user profile.
+ * Extends the base DeviceUser model to add specific functionality.
  *
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property Device|null $device
@@ -5065,8 +4865,22 @@ namespace Modules\User\Models{
 
 namespace Modules\User\Models{
 /**
+ * User Profile Model
  * 
+ * Represents a user profile with relationships to devices, teams, and roles.
  *
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $user_name
+ * @property string $email
+ * @property string|null $phone
+ * @property string|null $bio
+ * @property string|null $avatar
+ * @property string|null $timezone
+ * @property string|null $locale
+ * @property array $preferences
+ * @property string $status
  * @property \Spatie\SchemalessAttributes\SchemalessAttributes $extra
  * @property-read string $avatar
  * @property-read ProfileContract|null $creator
@@ -5111,14 +4925,12 @@ namespace Modules\User\Models{
 
 namespace Modules\User\Models{
 /**
+ * ProfileTeam Model
  * 
+ * Represents the relationship between a profile and a team, including the user's role.
  *
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam query()
- * @mixin \Eloquent
  * @property string $id
  * @property int $team_id
  * @property string|null $user_id
@@ -5129,6 +4941,9 @@ namespace Modules\User\Models{
  * @property string|null $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $deleted_by
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereDeletedAt($value)
@@ -5139,6 +4954,7 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProfileTeam extends \Eloquent {}
 }
@@ -5337,9 +5153,9 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereCode($value)
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereUuid($value)
- * @mixin \Eloquent
  * @property string|null $owner_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereOwnerId($value)
+ * @mixin \Eloquent
  */
 	class Team extends \Eloquent {}
 }
@@ -5385,7 +5201,9 @@ namespace Modules\User\Models{
 
 namespace Modules\User\Models{
 /**
- * Modules\User\Models\TeamPermission
+ * Team Permission Model
+ * 
+ * Represents a permission assigned to a user within a team context.
  *
  * @property string $id
  * @property string $team_id
@@ -5398,6 +5216,7 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
+ * @mixin \Eloquent
  */
 	class TeamPermission extends \Eloquent {}
 }
@@ -5574,36 +5393,15 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  * @property string $last_name
- * @property string|null $facebook_id
- * @property Team|null $currentTeam
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFacebookId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIsOtp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePasswordExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereSurname($value)
- * @property \Illuminate\Database\Eloquent\Collection<int, SocialiteUser> $socialiteUsers
- * @property int|null $socialite_users_count
- * @mixin \Eloquent
- * @property string|null $phone
- * @property string|null $address
- * @property string|null $city
- * @property string|null $registration_number
- * @property string|null $status
- * @property string|null $state
- * @property string|null $moderation_data
- * @property string|null $certifications
- * @property string|null $type
+ * @property-read \Modules\User\Models\Team|null $currentTeam
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereModerationData($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRegistrationNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser> $socialiteUsers
+ * @property-read int|null $socialite_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }

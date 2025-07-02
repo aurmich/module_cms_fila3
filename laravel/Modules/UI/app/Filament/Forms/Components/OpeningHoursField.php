@@ -14,7 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Section;
-
+use function Safe\json_encode;
 // use Squire\Models\Country;
 
 class OpeningHoursField extends Field

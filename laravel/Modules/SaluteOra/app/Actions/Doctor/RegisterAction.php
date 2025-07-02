@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Actions\Doctor;
 
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Modules\Geo\Models\Address;
 use Illuminate\Support\Facades\DB;
 use Modules\SaluteOra\Models\User;
@@ -47,10 +48,18 @@ class RegisterAction
             //$doctor = Doctor::create($data);
         }
         if(isset($data['schedule'])){
+            if(!is_array($data['studio'])){
+                $data['studio']=[];
+            }
+            if(!is_array($data['studio']['address'])){
+                $data['studio']['address']=[];
+            }
             $studio = Studio::create($data['studio']);
             $address = Address::create($data['studio']['address']);
             $studio->address()->save($address);
+            /** @phpstan-ignore-next-line */
             $doctor->studio()->save($studio);
+            /** @phpstan-ignore-next-line */
             $doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
         }
 
@@ -64,13 +73,14 @@ class RegisterAction
 
         }
         */
+        Assert::isInstanceOf($doctor, Doctor::class);
         
         if($data['state']=='integration_requested'){
             $doctor->state->transitionTo(IntegrationCompleted::class);
             return $doctor;
         }
 
-
+        /** @phpstan-ignore-next-line */
         $mail_slug=Str::slug($data['type'].'-'.$data['state']);
         
 

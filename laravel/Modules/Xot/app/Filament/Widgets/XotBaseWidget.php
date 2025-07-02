@@ -8,6 +8,7 @@ use Filament\Forms;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Filament\Actions\Action;
+use Webmozart\Assert\Assert;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +17,7 @@ use Filament\Forms\ComponentContainer;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Form as FilamentForm;
+use Modules\Xot\Filament\Traits\TransTrait;
 use Filament\Widgets\Widget as FilamentWidget;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
@@ -32,6 +34,7 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
  */
 abstract class XotBaseWidget extends FilamentWidget implements HasForms
 {
+    use TransTrait;
     use InteractsWithPageFilters;
     //use InteractsWithPageTable;
     use InteractsWithForms;
@@ -109,6 +112,9 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
         $model = $this->getFormModel();
         if($model==null){
             return [];
+        }
+        if(is_string($model)){
+            Assert::isInstanceOf($model=app($model),Model::class);
         }
 
        
@@ -214,8 +220,11 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
      */
     public static function getNavigationLabel(): string
     {
+        /*
         return (string) (static::$navigationLabel ?? (string) str(static::getLabel())
             ->headline());
+        */
+        return static::transFunc(__FUNCTION__);
     }
 
     protected function getStepByName(string $name): Forms\Components\Wizard\Step
@@ -227,7 +236,7 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
     }
 
 
-    public function getWizardSubmitAction(){
+    public function getWizardSubmitAction(): Action{
         $submit_view='pub_theme::filament.wizard.submit-button';
         return Action::make('submit')
             ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))

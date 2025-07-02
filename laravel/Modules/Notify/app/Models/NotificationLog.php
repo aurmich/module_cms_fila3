@@ -7,6 +7,39 @@ namespace Modules\Notify\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $notifiable_type
+ * @property int $notifiable_id
+ * @property string $title
+ * @property string $content
+ * @property string $channels
+ * @property string|null $data
+ * @property \Illuminate\Support\Carbon $sent_at
+ * @property string $status
+ * @property string|null $error
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read Model|\Eloquent $notifiable
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereChannels($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereError($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereNotifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereNotifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereSentAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationLog whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class NotificationLog extends Model
 {
     /**

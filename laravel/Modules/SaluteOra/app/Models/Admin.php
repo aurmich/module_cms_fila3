@@ -74,7 +74,7 @@ use Parental\HasParent;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
  * @property-read int|null $consents_count
  * @property-read \Modules\User\Models\Team|null $currentTeam
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
@@ -135,6 +135,22 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin withoutRole($roles, $guard = null)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
 class Admin extends User

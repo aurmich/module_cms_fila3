@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Filament\Pages;
 
-use Filament\Actions\Action;
-use Filament\Facades\Filament;
 use Filament\Forms\Form;
-use Filament\Notifications\Notification;
-use Illuminate\Contracts\Support\Htmlable;
-use Modules\SaluteOra\Models\Studio;
-use Modules\SaluteOra\Models\StudioUser;
+use Filament\Actions\Action;
+use Webmozart\Assert\Assert;
+use function Safe\preg_match;
+use Filament\Facades\Filament;
 use Modules\SaluteOra\Models\User;
-use Modules\UI\Filament\Forms\Components\OpeningHoursField;
+use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\Studio;
+use Filament\Forms\ComponentContainer;
+use Filament\Notifications\Notification;
+use Modules\SaluteOra\Models\StudioUser;
+use Illuminate\Contracts\Support\Htmlable;
 use Modules\Xot\Filament\Pages\XotBasePage;
+use Modules\UI\Filament\Forms\Components\OpeningHoursField;
 
 /**
  * DoctorAvailabilityPage
@@ -29,6 +33,7 @@ use Modules\Xot\Filament\Pages\XotBasePage;
  * - Supporto per dottori con più studi
  * 
  * @property array $data
+ * @property ComponentContainer $form
  */
 class DoctorAvailabilityPage extends XotBasePage
 {
@@ -164,7 +169,7 @@ class DoctorAvailabilityPage extends XotBasePage
     /**
      * Ottiene l'utente dottore corrente.
      */
-    protected function getCurrentDoctor(): User
+    protected function getCurrentDoctor(): Doctor
     {
         /** @var User $user */
         $user = auth()->user();
@@ -172,7 +177,7 @@ class DoctorAvailabilityPage extends XotBasePage
         //if (!$user instanceof User || $user->type !== 'doctor') {
         //    abort(403, __('saluteora::doctor_availability.notifications.not_doctor.body'));
         //}
-        
+        Assert::isInstanceOf($user, Doctor::class);
         return $user;
     }
 
@@ -226,7 +231,7 @@ class DoctorAvailabilityPage extends XotBasePage
         $pivot = $this->getDoctorStudioPivot();
         
         $this->data = [
-            'schedule' => $pivot?->schedule ?? $this->getDefaultSchedule(),
+            'schedule' => $pivot->schedule ?? $this->getDefaultSchedule(),
         ];
     }
 

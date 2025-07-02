@@ -21,8 +21,8 @@ abstract class AppointmentState extends State
     public static function config(): StateConfig
     {
         return parent::config()
-            ->default(static::class === self::class ? Pending::class : static::class)
-            
+            //->default(static::class === self::class ? Pending::class : static::class)
+            ->default(Pending::class)
             // Pending transitions
             ->allowTransition(Pending::class, Confirmed::class, Transitions\PendingToConfirmed::class)
             ->allowTransition(Pending::class, Cancelled::class, Transitions\PendingToCancelled::class)
@@ -45,30 +45,5 @@ abstract class AppointmentState extends State
             ->allowTransition(Rescheduled::class, Confirmed::class, Transitions\RescheduledToConfirmed::class);
     }
     
-    /**
-     * Get the available statuses for the appointment.
-     * 
-     * @return array<class-string, string> Array of state classes and their display labels
-     */
-    public static function getStatuses(): array
-    {
-        // Create a mock model to pass to state constructors
-        $model = new class {
-            public function getMorphClass() {
-                return 'appointment';
-            }
-        };
-        
-        return [
-            Pending::class => (new Pending($model))->label(),
-            Confirmed::class => (new Confirmed($model))->label(),
-            Scheduled::class => (new Scheduled($model))->label(),
-            InProgress::class => (new InProgress($model))->label(),
-            Completed::class => (new Completed($model))->label(),
-            Cancelled::class => (new Cancelled($model))->label(),
-            Rejected::class => (new Rejected($model))->label(),
-            NoShow::class => (new NoShow($model))->label(),
-            Rescheduled::class => (new Rescheduled($model))->label(),
-        ];
-    }
+    
 }

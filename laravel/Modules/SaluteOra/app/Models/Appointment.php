@@ -21,6 +21,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  *
  * @property int $id
  * @property int $patient_id
+ * @property AppointmentState $state
  * @property int $doctor_id
  * @property int $dentist_id Alias for doctor_id (legacy compatibility)
  * @property int $studio_id
@@ -85,6 +86,16 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUserId($value)
+ * @property \Illuminate\Support\Carbon|null $starts_at
+ * @property \Illuminate\Support\Carbon|null $ends_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDoctorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereNotState(string $column, $states)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel

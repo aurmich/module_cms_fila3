@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * User Profile Model
- *
+ * 
  * Represents a user profile with relationships to devices, teams, and roles.
  *
  * @property int $id

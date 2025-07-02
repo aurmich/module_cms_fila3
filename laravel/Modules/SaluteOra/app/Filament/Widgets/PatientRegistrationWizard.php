@@ -12,22 +12,47 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Livewire\Component;
 use Illuminate\Support\HtmlString;
 use Modules\SaluteOra\Models\Patient;
 
-class PatientRegistrationWizard extends Component
+/**
+ * Widget wizard per la registrazione di nuovi pazienti.
+ * 
+ * Implementa un processo guidato multi-step per raccogliere
+ * tutte le informazioni necessarie per la registrazione.
+ */
+class PatientRegistrationWizard extends Component implements HasForms
 {
     use InteractsWithForms;
 
+    /**
+     * Dati del form del wizard.
+     *
+     * @var array<string, mixed>
+     */
     public ?array $data = [];
 
+
+
+    /**
+     * Inizializza il componente.
+     *
+     * @return void
+     */
     public function mount(): void
     {
-        $this->form->fill();
+        $this->form(Form::make($this))->fill();
     }
 
+    /**
+     * Configura il form del wizard.
+     *
+     * @param \Filament\Forms\Form $form
+     * @return \Filament\Forms\Form
+     */
     public function form(Form $form): Form
     {
         return $form
@@ -35,6 +60,11 @@ class PatientRegistrationWizard extends Component
             ->statePath('data');
     }
 
+    /**
+     * Schema del form wizard.
+     *
+     * @return array<int, \Filament\Forms\Components\Component>
+     */
     protected function getFormSchema(): array
     {
         return [
@@ -166,15 +196,26 @@ class PatientRegistrationWizard extends Component
         ];
     }
 
+    /**
+     * Gestisce l'invio del form.
+     *
+     * @return void
+     */
     public function submit(): void
     {
-        $data = $this->form->getState();
+        /** @var array<string, mixed> $data */
+        $data = $this->form(Form::make($this))->getState();
 
         $patient = Patient::create($data);
 
         $this->dispatch('patient-registered', patientId: $patient->id);
     }
 
+    /**
+     * Renderizza il componente.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function render(): \Illuminate\Contracts\View\View
     {
         return view('saluteora::widgets.patient-registration-wizard');

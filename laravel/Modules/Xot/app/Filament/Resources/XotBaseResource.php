@@ -10,9 +10,11 @@ use Filament\Forms\Form;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
+use Illuminate\Support\HtmlString;
 use Illuminate\Contracts\View\View;
-use Filament\Pages\SubNavigationPosition;
 
+use Filament\Pages\SubNavigationPosition;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Xot\Actions\ModelClass\CountAction;
 use Filament\Resources\Resource as FilamentResource;
@@ -55,7 +57,9 @@ abstract class XotBaseResource extends FilamentResource
     public static function getModel(): string
     {
         if (null != static::$model) {
-            return static::$model;
+            $res = static::$model;
+            Assert::subclassOf($res, \Illuminate\Database\Eloquent\Model::class, sprintf('Class %s must extend Eloquent Model', $res));
+            return $res;
         }
         $moduleName = static::getModuleName();
         $modelName = Str::before(class_basename(static::class), 'Resource');
@@ -180,10 +184,11 @@ abstract class XotBaseResource extends FilamentResource
         return $res;
     }
 
-    public static function getWizardSubmitAction():View
+    public static function getWizardSubmitAction():Htmlable
     {
         $submit_view = 'pub_theme::filament.wizard.submit-button';
-        return view($submit_view);
+        $render= view($submit_view)->render();
+        return new HtmlString($render);
     }
 
     public static function getAttachmentsSchema(bool $multiple=true): array{

@@ -5,13 +5,27 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Widgets;
 
 use Filament\Widgets\Widget;
+use Illuminate\Support\Facades\Auth;
 use Modules\SaluteOra\Models\Studio;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Widget per la panoramica degli studi.
+ * 
+ * Mostra statistiche generali e informazioni sugli studi presenti nel sistema.
+ */
 class StudioOverviewWidget extends Widget
 {
+    /**
+     * Vista del widget.
+     */
     protected static string $view = 'saluteora::filament.widgets.studio-overview';
 
+    /**
+     * Prepara i dati per la vista.
+     *
+     * @return array<string, mixed>
+     */
     protected function getViewData(): array
     {
         $stats = [
@@ -41,8 +55,15 @@ class StudioOverviewWidget extends Widget
         ];
     }
 
+    /**
+     * Verifica se l'utente può visualizzare il widget.
+     *
+     * @return bool
+     */
     public static function canView(): bool
     {
-        return auth()->user()->can('view_any_studio');
+        $user = Auth::user();
+        
+        return $user !== null && method_exists($user, 'can') && $user->can('view_any_studio');
     }
 }

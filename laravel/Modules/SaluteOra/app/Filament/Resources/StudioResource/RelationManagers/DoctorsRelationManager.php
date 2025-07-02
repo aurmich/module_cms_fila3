@@ -45,17 +45,19 @@ class DoctorsRelationManager extends XotBaseRelationManager
     /**
      * Get the table filters.
      *
-     * @return array<string, Tables\Filters\Filter>
+     * @return array<string, Tables\Filters\Filter|Tables\Filters\SelectFilter>
      */
     public function getTableFilters(): array
     {
         return [
+            /*
             'status' => Tables\Filters\SelectFilter::make('status')
                 ->options([
                     'pending' => 'Pending',
                     'active' => 'Active',
                     'suspended' => 'Suspended',
                 ]),
+                */
             /*
             'specialization' => Tables\Filters\SelectFilter::make('specialization')
                 ->options(function () {
@@ -80,7 +82,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
     public function getTableHeaderActions(): array
     {
         return [
-            Tables\Actions\AttachAction::make()
+            'attach' => Tables\Actions\AttachAction::make()
                 ->preloadRecordSelect(false) // Importante: non precaricare tutti i record
                 // Soluzione per database cross-database compatibile con Filament 3
                 ->recordSelect(
@@ -94,6 +96,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
                                     ->orWhere('email', 'like', "%{$search}%");
                             })
                             // Escludiamo manualmente i dottori già associati invece di usare JOIN
+                            /** @phpstan-ignore-next-line */
                             ->whereNotIn('id', $this->getOwnerRecord()->doctors->modelKeys())
                             ->limit(10)
                             ->get()

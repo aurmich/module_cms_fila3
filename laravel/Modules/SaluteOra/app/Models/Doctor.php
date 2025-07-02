@@ -9,6 +9,7 @@ use Modules\Geo\Models\Address;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Enums\UserStateEnum;
 use Modules\SaluteOra\Models\DoctorStudio;
+use Modules\SaluteOra\States\User\UserState;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property string $name
  * @property string $email
  * @property UserTypeEnum $type
- * @property UserStateEnum $state
+ * @property UserState $state
  * @property string|null $continuation_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -68,7 +69,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
  * @property-read int|null $consents_count
  * @property-read \Modules\User\Models\Team|null $currentTeam
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
@@ -143,6 +144,23 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
+ * @property string|null $dental_problems
+ * @property string|null $last_dental_visit
+ * @property string|null $pregnancy_certificate
+ * @property string|null $isee_certificate
+ * @property string|null $identity_document
+ * @property string|null $health_card
+ * @property string|null $certificates
+ * @property-read \Modules\SaluteOra\Models\Studio|null $studio
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
+ * @property-read int|null $team_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereCertificates($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereDentalProblems($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereHealthCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereIdentityDocument($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereIseeCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereLastDentalVisit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
 class Doctor extends User

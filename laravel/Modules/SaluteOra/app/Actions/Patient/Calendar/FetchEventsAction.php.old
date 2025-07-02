@@ -88,10 +88,10 @@ final class FetchEventsAction
             'borderColor' => $color,
             'textColor' => $this->getContrastColor($color),
             'extendedProps' => [
-                'type' => $appointment->type?->value,
-                'status' => $appointment->status?->value,
-                'doctor_name' => $appointment->doctor?->full_name,
-                'studio_name' => $appointment->studio?->name,
+                'type' => $appointment->type->value,
+                'status' => $appointment->status->value,
+                'doctor_name' => $appointment->doctor->full_name,
+                'studio_name' => $appointment->studio->name,
                 'emergency' => $appointment->emergency,
                 'notes' => $appointment->notes,
             ],
@@ -136,13 +136,11 @@ final class FetchEventsAction
         }
         return match ($appointment->type) {
             AppointmentTypeEnum::CONSULTATION => '#fd7e14',
-            AppointmentTypeEnum::CLEANING => '#17a2b8',
+            AppointmentTypeEnum::CLEANING, AppointmentTypeEnum::PREVENTION => '#17a2b8',
             AppointmentTypeEnum::TREATMENT => '#28a745',
             AppointmentTypeEnum::EMERGENCY => '#dc3545',
             AppointmentTypeEnum::FOLLOWUP => '#ffc107',
-            AppointmentTypeEnum::SURGERY => '#6f42c1',
-            AppointmentTypeEnum::ORTHODONTICS => '#6f42c1',
-            AppointmentTypeEnum::PREVENTION => '#17a2b8',
+            AppointmentTypeEnum::SURGERY, AppointmentTypeEnum::ORTHODONTICS => '#6f42c1',
             default => '#3490dc',
         };
     }
