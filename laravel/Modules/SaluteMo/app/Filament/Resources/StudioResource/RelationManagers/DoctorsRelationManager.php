@@ -73,7 +73,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
     /**
      * Get the table filters.
      *
-     * @return array<string, Tables\Filters\Filter>
+     * @return array<string, Tables\Filters\Filter|Tables\Filters\SelectFilter>
      */
     public function getTableFilters(): array
     {

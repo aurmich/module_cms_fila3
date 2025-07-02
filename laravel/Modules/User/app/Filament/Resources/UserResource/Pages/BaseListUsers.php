@@ -24,7 +24,7 @@ abstract class BaseListUsers extends XotBaseListRecords
     /**
      * Get table columns for user records.
      *
-     * @return array<string, TextColumn>
+     * @return array<string, \Filament\Tables\Columns\Column>
      */
     public function getTableColumns(): array
     {

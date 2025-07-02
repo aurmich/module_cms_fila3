@@ -43,7 +43,8 @@ parameters:
         - ./*/rector.php
         - ./Modules/*/packages/*
         - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
-        # - ./Modules/*/database_old/*
+        - ./Modules/Activity
+        - ./Modules/*/database_old/*
         - ./Modules/*/scripts/*
         - ./Modules/*/tests/*
         - ./Modules/*/vendor/*

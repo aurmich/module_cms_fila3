@@ -22,9 +22,6 @@ class ListUsers extends BaseListUsers
 {
     protected static string $resource = UserResource::class;
 
-    /**
-     * @return array<string, TextColumn>
-     */
     public function getTableColumns(): array
     {
         return [
@@ -46,10 +43,12 @@ class ListUsers extends BaseListUsers
     public function getTableFilters(): array
     {
         return [
+            /*
             Filter::make('verified')
                 ->query(static fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
             Filter::make('unverified')
                 ->query(static fn (Builder $query): Builder => $query->whereNull('email_verified_at')),
+            */
         ];
     }
 
