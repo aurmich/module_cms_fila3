@@ -1,7 +1,7 @@
 <div class="p-5">
     <div>
         <!-- Back button -->
-        <div class="w-full flex justify-start p-6">
+        <div class="w-full flex justify-start">
             <!-- DA AGGIORNARE URL -->
             <a href="/it">
                 <div class="cursor-pointer">
