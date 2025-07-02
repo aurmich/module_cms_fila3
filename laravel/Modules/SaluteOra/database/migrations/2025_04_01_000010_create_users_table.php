@@ -95,6 +95,18 @@ return new class extends XotBaseMigration
                     $table->string('country_code')->nullable()->after('phone');
                 }
 
+                if (! $this->hasColumn('years_in_italy')) {
+                    $table->string('years_in_italy')->nullable()->after('country_code');
+                }
+
+                if (! $this->hasColumn('family_members')) {
+                    $table->string('family_members')->nullable()->after('country_code');
+                }
+
+                if (! $this->hasColumn('children_count')) {
+                    $table->string('children_count')->nullable()->after('country_code');
+                }
+
                 
                 foreach(Patient::$attachments as $attachment){
                     if (! $this->hasColumn($attachment)) {

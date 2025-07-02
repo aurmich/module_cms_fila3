@@ -29,9 +29,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Wizard\Step;
 use Modules\SaluteOra\Enums\NationalityEnum;
+use Modules\SaluteOra\Enums\YearsInItalyEnum;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Modules\Xot\Actions\View\GetViewPathAction;
 
+use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\Patient\Filament\Components\HealthCardUpload;
@@ -78,6 +79,20 @@ class PatientResource extends XotBaseResource
 
     protected static function getPersonalDataStepSchema(): array
     {
+        $family_members_options=[
+            '1' => 'Sola',
+            '2' => '2',
+            '3' => '3',
+            '4+' => '4+',
+        ];
+        $children_count_options=[
+            '0' => '0',
+            '1' => '1',
+            '2' => '2',
+            '3' => '3',
+            '4' => '4',
+            '5' => '5',
+        ];
         return [
             Forms\Components\TextInput::make('first_name')
                 ->required()
@@ -95,13 +110,22 @@ class PatientResource extends XotBaseResource
                 //->live()
                 ,
             CountryCodeSelect::make('country_code')
-                ->label(static::trans('country_code.label'))
+                ->label(static::trans('fields.country_code.label'))
                 ->visible(function (Get $get): bool {
                     if($get('nationality')=='EE'){
                         return true;
                     }
                     return false;
                 }),
+            Forms\Components\Select::make('years_in_italy')
+                ->options(YearsInItalyEnum::class)
+                ->visible(fn (Get $get): bool => $get('nationality')=='EE'),
+            Forms\Components\Select::make('family_members')
+                ->options($family_members_options),
+            Forms\Components\Select::make('children_count')
+            ->options($children_count_options),    
+                
+            
             Forms\Components\TextInput::make('phone')
                 ->tel()
                 ->maxLength(255),
