@@ -157,4 +157,9 @@
 <div class="ring-[#FF5F7E]">ring pink</div>
 <div class="shadow-[0_10px_40px_rgba(0,0,0,0.2)]">shadow</div>
 <div class="p-9">padding 9</div>
+<div class="bg-[url('/img/inmp-logo-trasparenza.svg')]">bg inmp</div>
+<div class="my-5">margin top bottom 5</div>
+<div class="w-10/12">width 83%</div>
+<div class="w-8/12">width 60%</div>
+<div class="w-7/12">width 50%</div>
 </x-layouts.app>

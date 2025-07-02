@@ -1,4 +1,4 @@
-<div class="bg-[#E6EBF7] flex-1">
+<div>
    <div class="w-full flex justify-center p-10">
        <h1>I nostri Partners</h1>
    </div>

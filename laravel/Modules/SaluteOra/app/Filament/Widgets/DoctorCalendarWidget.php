@@ -12,6 +12,7 @@ use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 class DoctorCalendarWidget extends FullCalendarWidget
 {
     public Model | string | null $model = Appointment::class;
+    public string $calendarContainerClass = '';
 
     protected function headerActions(): array
     {

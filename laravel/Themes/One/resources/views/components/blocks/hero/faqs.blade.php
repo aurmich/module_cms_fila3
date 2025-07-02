@@ -1,4 +1,4 @@
-<div class="bg-[#E6EBF7] flex flex-col justify-center items-center">
+<div class="flex flex-col justify-center items-center">
 
     <!-- Back Button -->
     <div class="w-full flex justify-start p-6">
