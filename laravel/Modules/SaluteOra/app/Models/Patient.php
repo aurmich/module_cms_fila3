@@ -182,6 +182,7 @@ class Patient extends User implements HasMedia
         'identity_document',
         'isee_certificate',
         'pregnancy_certificate',
+        'country_code',
 
     ];
     protected $appends = [

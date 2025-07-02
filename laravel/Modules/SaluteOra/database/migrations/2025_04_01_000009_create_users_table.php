@@ -87,6 +87,14 @@ return new class extends XotBaseMigration
                     $table->boolean('is_active')->default(true)->nullable()->change();
                 }
 
+                if(!$this->hasColumn('nationality')){
+                    $table->string('nationality',2)->nullable()->after('phone');
+                }
+                
+                if (! $this->hasColumn('country_code')) {
+                    $table->string('country_code')->nullable()->after('phone');
+                }
+
                 
                 foreach(Patient::$attachments as $attachment){
                     if (! $this->hasColumn($attachment)) {

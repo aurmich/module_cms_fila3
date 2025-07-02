@@ -182,6 +182,7 @@ class Doctor extends User
         'certifications',
         //'availability',
         'status',
+        'country_code',
     ];
 
     /** @var list<string>     */
