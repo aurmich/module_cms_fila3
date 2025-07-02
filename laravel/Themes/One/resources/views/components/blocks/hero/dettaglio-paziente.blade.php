@@ -13,11 +13,11 @@
 
 {{-- STEP PRENOTA VISITA --}}
 
-<div class="bg-[#E6EBF7] lg:grid grid-cols-1 sm:grid grid-cols-1">
+<div class="lg:grid grid-cols-1 sm:grid grid-cols-1">
       {{-- TITOLO E BOTTONI --}}
       <div class="flex flex-col justify-center">
           <section 
-              class="flex flex-col justify-center min-h-[700px] bg-[#E6EBF7] relative overflow-hidden"
+              class="flex flex-col justify-center min-h-[700px] relative overflow-hidden"
               aria-labelledby="hero-heading">
               <div class="m-5">
                   <div>
@@ -64,7 +64,7 @@
                   </div>
               </div>
               {{-- BOTTONI --}}
-               <div class="w-full flex justify-center bg-[#E6EBF7] !py-8 sm:py-32 mx-auto">
+               <div class="w-full flex justify-center !py-8 sm:py-32 mx-auto">
                 <div class="w-full mx-auto max-w-7xl lg:px-6 sm:px-3">
                     <div class="flex flex-col items-center mx-auto w-full max-w-2xl px-4 sm:px-6 lg:px-0 gap-4">
                         <a href="/it/patient/book">

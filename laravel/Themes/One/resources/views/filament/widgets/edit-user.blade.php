@@ -1,4 +1,4 @@
-<x-filament-widgets::widget class="!bg-[#E6EBF7]">
+<x-filament-widgets::widget>
     <x-filament::section>
         <div class="max-w-4xl mx-auto">
             @if($this->canEdit())

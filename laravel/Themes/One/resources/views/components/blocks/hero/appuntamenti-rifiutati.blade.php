@@ -1,4 +1,4 @@
-<div class="bg-[#E6EBF7]">
+<div>
     <div>
         {{-- Freccia di ritorno --}}
         <div class="w-full flex justify-start p-6">

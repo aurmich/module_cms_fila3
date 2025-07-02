@@ -29,7 +29,7 @@ new class extends Component
 
 <x-layouts.app>
     @volt('register.type')
-    <div class="min-h-screen bg-[#E6EBF7] pb-5">
+    <div class="min-h-screen pb-5">
         <!-- Logo e intestazione -->
         <div class="text-center mb-8">
             <div class="flex justify-center mb-4">

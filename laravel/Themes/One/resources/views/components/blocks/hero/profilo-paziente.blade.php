@@ -1,5 +1,5 @@
-<div class="bg-[#E6EBF7] p-5">
-    <div class="bg-[#E6EBF7]">
+<div class="p-5">
+    <div>
         <!-- Back button -->
         <div class="w-full flex justify-start p-6">
             <!-- DA AGGIORNARE URL -->

@@ -9,7 +9,7 @@
 @endphp
 <div>
     <x-filament::widget>
-            <div class="space-y-6 mx-60 mb-5">
+            <div class="w-full space-y-6 my-5">
                 @each('pub_theme::filament.widgets.doctor-availabilities.studio.item', $doctor->studios, 'studio', 'pub_theme::filament.widgets.doctor-availabilities.studio.empty')
             </div>
      

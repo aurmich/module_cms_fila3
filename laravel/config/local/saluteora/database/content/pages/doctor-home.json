@@ -16,14 +16,8 @@
                     "image": "/img/odontoiatra.jpg",
                     "cta-buttons": [],
                     "cta_text": "Continua la registrazione",
-                    "cta_link": "/doctor/patients"
-                }
-            },
-            {
-                "type": "widget",
-                "data": {
-                    "view": "pub_theme::components.blocks.widget.simple",
-                    "widget":  "Modules\\SaluteOra\\Filament\\Widgets\\DoctorCalendarWidget"
+                    "cta_link": "/doctor/patients",
+                    "widget": "Modules\\SaluteOra\\Filament\\Widgets\\DoctorCalendarWidget"
                 }
             },
             {

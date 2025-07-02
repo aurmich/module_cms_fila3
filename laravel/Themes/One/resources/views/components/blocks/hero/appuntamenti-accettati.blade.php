@@ -1,4 +1,4 @@
-<div class="bg-[#E6EBF7] p-5">
+<div class="p-5">
     {{-- Header con freccia per tornare indietro --}}
     <div class="w-full flex justify-start p-6">
         {{-- DA AGGIORNARE URL --}}
