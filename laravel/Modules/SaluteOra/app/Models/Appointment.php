@@ -219,6 +219,11 @@ class Appointment extends BaseModel
         return $this->title ?: $this->type->getLabel();
     }
 
+    public function getTimeRangeAttribute(): string
+    {
+        return $this->starts_at->format('H:i') . ' - ' . $this->ends_at->format('H:i');
+    }
+
     /**
      * Get the duration in minutes.
      *

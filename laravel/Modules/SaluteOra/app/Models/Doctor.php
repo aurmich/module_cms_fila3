@@ -8,11 +8,13 @@ use Parental\HasParent;
 use Modules\Geo\Models\Address;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Enums\UserStateEnum;
 use Modules\SaluteOra\Models\DoctorStudio;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\SaluteOra\States\User\UserState;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -320,4 +322,9 @@ class Doctor extends User implements HasMedia
         }
     }
         */
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
 }

@@ -38,8 +38,8 @@ class DoctorCalendarWidget extends FullCalendarWidget
     protected function modalActions(): array
     {
         return [
-            Actions\EditAction::make(),
-            Actions\DeleteAction::make(),
+            //Actions\EditAction::make(),
+            //Actions\DeleteAction::make(),
         ];
     }
 

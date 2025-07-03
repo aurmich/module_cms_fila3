@@ -181,4 +181,59 @@ return [
             'studio_change_error' => 'Errore durante il cambio di studio',
         ],
     ],
+
+    'doctor_appointments' => [
+        'title' => 'Appuntamenti in Attesa',
+        
+        'empty' => [
+            'title' => 'Nessun appuntamento in attesa',
+            'description' => 'Non hai appuntamenti da confermare al momento.',
+        ],
+        
+        'actions' => [
+            'view_details' => [
+                'label' => 'Visualizza Dettagli',
+                'tooltip' => 'Mostra i dettagli dell\'appuntamento',
+            ],
+            'confirm' => [
+                'label' => 'Conferma',
+                'tooltip' => 'Conferma l\'appuntamento',
+                'modal' => [
+                    'title' => 'Conferma Appuntamento',
+                    'description' => 'Sei sicuro di voler confermare questo appuntamento?',
+                    'confirm_button' => 'Conferma',
+                    'cancel_button' => 'Annulla',
+                ],
+            ],
+            'reject' => [
+                'label' => 'Rifiuta',
+                'tooltip' => 'Rifiuta l\'appuntamento',
+                'modal' => [
+                    'title' => 'Rifiuta Appuntamento',
+                    'description' => 'Sei sicuro di voler rifiutare questo appuntamento?',
+                    'confirm_button' => 'Rifiuta',
+                    'cancel_button' => 'Annulla',
+                ],
+            ],
+        ],
+        
+        'messages' => [
+            'appointment_confirmed' => 'Appuntamento confermato con successo',
+            'appointment_rejected' => 'Appuntamento rifiutato con successo',
+        ],
+        
+        'errors' => [
+            'cannot_confirm' => 'Impossibile confermare questo appuntamento',
+            'cannot_reject' => 'Impossibile rifiutare questo appuntamento',
+            'confirm_failed' => 'Errore durante la conferma dell\'appuntamento',
+            'reject_failed' => 'Errore durante il rifiuto dell\'appuntamento',
+            'appointment_not_found' => 'Appuntamento non trovato',
+        ],
+        
+        'status' => [
+            'pending' => 'In attesa',
+            'confirmed' => 'Confermato',
+            'rejected' => 'Rifiutato',
+        ],
+    ],
 ];
