@@ -10,7 +10,7 @@ return array (
       'tooltip' => 'Usa un indirizzo email valido',
       'icon' => 'heroicon-o-mail',
       'description' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
     ),
     'password' => 
     array (
@@ -19,14 +19,14 @@ return array (
       'tooltip' => 'La password deve contenere almeno 8 caratteri',
       'icon' => 'heroicon-o-lock-closed',
       'description' => 'password',
-      'helper_text' => 'password',
+      'helper_text' => '',
     ),
     'remember' => 
     array (
       'label' => 'Ricordami',
       'tooltip' => 'Mantieni l\'accesso attivo su questo dispositivo',
       'description' => 'remember',
-      'helper_text' => 'remember',
+      'helper_text' => '',
       'placeholder' => 'remember',
     ),
   ),

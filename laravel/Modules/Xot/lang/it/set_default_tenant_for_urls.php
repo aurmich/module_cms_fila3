@@ -22,21 +22,21 @@ return array (
     array (
       'label' => 'email',
       'description' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
       'placeholder' => 'email',
     ),
     'password' => 
     array (
       'label' => 'password',
       'description' => 'password',
-      'helper_text' => 'password',
+      'helper_text' => '',
       'placeholder' => 'password',
     ),
     'remember' => 
     array (
       'label' => 'remember',
       'description' => 'remember',
-      'helper_text' => 'remember',
+      'helper_text' => '',
       'placeholder' => 'remember',
     ),
     'cap' => 

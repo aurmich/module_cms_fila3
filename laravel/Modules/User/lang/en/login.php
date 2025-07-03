@@ -7,14 +7,14 @@ return array (
     array (
       'label' => 'email',
       'placeholder' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
       'description' => 'email',
     ),
     'password' => 
     array (
       'label' => 'password',
       'placeholder' => 'password',
-      'helper_text' => 'password',
+      'helper_text' => '',
       'description' => 'password',
     ),
     'remember' => 
@@ -22,7 +22,7 @@ return array (
       'label' => 'remember',
       'description' => 'remember',
       'placeholder' => 'remember',
-      'helper_text' => 'remember',
+      'helper_text' => '',
     ),
   ),
 );
