@@ -18,9 +18,8 @@
             <!-- Colonna Logo e Descrizione -->
             <div class="flex justify-center">
                 <div class="text-center m-1 lg:m-6 md:text-right space-x-4">
-                    <a href="/it/pages/privacy-policy" class="text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="/it/pages/termini-condizioni" class="text-white text-sm transition-colors">Termini e Condizioni</a>
-                    <a href="/it/pages/cookie-policy-salute-ora" class="text-white text-sm transition-colors">Cookie Policy</a>
+                <a href="/it" class="text-white text-sm m-1">Home</a>
+                <a href="/it/pages/progetto" class="text-white text-sm m-1">Progetto</a>
                 </div>
             </div>
             <a href="/it">
@@ -30,8 +29,6 @@
             </a>
             <div class="flex justify-center">
                 <div class="text-center m-1 lg:m-6 md:text-right">
-                    <a href="/it" class="text-white text-sm m-1">Home</a>
-                    <a href="/it/pages/progetto" class="text-white text-sm m-1">Progetto</a>
                     <a href="/it/pages/partners" class="text-white text-sm m-1">Partners</a>
                     <a href="/it/pages/faqs" class="text-white text-sm">FAQ'S</a>
                 </div>

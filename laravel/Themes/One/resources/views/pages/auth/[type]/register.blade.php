@@ -16,6 +16,13 @@ new class extends Component
 {
     #[Validate('required')]
     public $type;
+    public $isDoctor;
+
+    public function mount()
+    {
+        $this->isDoctor = $this->type === 'doctor';
+    }
+
 
     //public function mount(string $type)
     //{
@@ -35,8 +42,8 @@ new class extends Component
             <div class="flex justify-center mb-4">
                 <x-ui.logo class="h-12 text-blue-900" />
             </div>
-            <h1 class="text-3xl font-light text-blue-900">Benvenuto in <span class="font-bold">il Progetto</span></h1>
-            <p class="text-gray-600 mt-2">Crea il tuo account per accedere a tutti i servizi</p>
+            <h1 class="text-3xl text-blue-900">Registrazione {{ $isDoctor ? 'Odontoiatra' : 'Paziente' }}</h1>
+            <p class="text-gray-600 mt-2">Crea il tuo account</p>
         </div>
 
         <!-- Card contenente il form di registrazione -->
