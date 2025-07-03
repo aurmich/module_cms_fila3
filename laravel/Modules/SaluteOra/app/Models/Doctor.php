@@ -186,6 +186,7 @@ class Doctor extends User implements HasMedia
         //'specialization',
         'certifications', // Mantenuto per retrocompatibilità
         'certification', // 
+        'doctor_certificate',
         //'availability',
         'status',
         'country_code',
@@ -206,7 +207,8 @@ class Doctor extends User implements HasMedia
     /** @var list<string>     */
     public static function getAttachments():array{
         return  [
-            'certification', // Gestito come allegato singolo
+            //'certification', // Gestito come allegato singolo
+            'doctor_certificate',
         ];
     }
 

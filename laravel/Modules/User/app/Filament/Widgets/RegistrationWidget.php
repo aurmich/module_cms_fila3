@@ -13,21 +13,24 @@ use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Auth\Events\Registered;
 use Filament\Forms\Components\Checkbox;
 use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
 use Modules\Xot\Contracts\UserContract;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Illuminate\Support\Facades\Log;
+use Filament\Actions\Concerns\InteractsWithRecord;
+
 
 class RegistrationWidget extends XotBaseWidget
 {
+    
     public ?array $data = [];
     protected int | string | array $columnSpan = 'full';
     public string $type;
@@ -47,9 +50,9 @@ class RegistrationWidget extends XotBaseWidget
         $record = $this->getFormModel();
         $data = $this->getFormFill();
         $this->data = $data; 
-        $this->record = $record;
         $this->form->fill($data);
         $this->form->model($record);
+        $this->record = $record;
         
     }
 
@@ -78,7 +81,14 @@ class RegistrationWidget extends XotBaseWidget
         return app($this->model);
     }
 
-    public function getFormFill(): array
+    public function getFormFill(): array{
+        $data=parent::getFormFill();
+        $data['type']=$this->type;
+        
+        return $data;
+    }
+
+    public function getFormFillOLD(): array
     {
         $model = $this->getFormModel();
         
@@ -165,6 +175,7 @@ class RegistrationWidget extends XotBaseWidget
     public function register(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
         $data = $this->form->getState();
+        $data=array_merge($this->data,$data);
         $record = $this->record;
        
         $user = app($this->action)->execute($record, $data);

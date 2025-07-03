@@ -66,6 +66,7 @@ return array (
       'label' => 'Email',
       'placeholder' => 'email@esempio.com',
       'help' => 'Indirizzo email per le comunicazioni',
+      'description' => 'email',
     ),
     'phone' => 
     array (

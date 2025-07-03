@@ -90,6 +90,13 @@ return array (
       'label' => 'certificato',
       'placeholder' => 'certificato',
     ),
+    'doctor_certificate' => 
+    array (
+      'description' => 'certificato',
+      'helper_text' => 'Tesserino sanitario O certificato di iscrizione all\'Ordine',
+      'placeholder' => 'certificato',
+      'label' => 'certificato',
+    ),
   ),
   'steps' => 
   array (

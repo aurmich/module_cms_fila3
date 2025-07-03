@@ -69,7 +69,27 @@ class DoctorResource extends XotBaseResource
 
     public static function getFormSchema(): array
     {
-        return static::getFormSchemaWidget();
+         //$schema = parent::getFormSchema();
+
+        // Aggiungi qui eventuali campi specifici per SaluteMo
+        //return $schema;
+        return [
+        
+            'first_name' => Forms\Components\TextInput::make('first_name')
+                ->required()
+                ->maxLength(255)
+                ->autocomplete('given-name')
+                ,
+            'last_name' => Forms\Components\TextInput::make('last_name')
+                ->required()
+                ->maxLength(255)
+                ->autocomplete('family-name')
+                ,
+            'email' => Forms\Components\TextInput::make('email')
+                ->required()
+                ,
+                ...self::getAttachmentsSchema(false),
+        ];
     }
 
 

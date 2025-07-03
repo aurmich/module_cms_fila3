@@ -45,12 +45,15 @@ class RegisterAction
             //-------------------------------------------------
              //*
             $attachments = Patient::getAttachments();
+            $data_attachments = [];
             foreach ($attachments as $attachment) {
                     /** @phpstan-ignore-next-line */
-                    $patient->addMediaFromDisk($data[$attachment],'local')
+                    $media=$patient->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
+                    $data_attachments[$attachment]=$media->getPathRelativeToRoot();
 
             }
+            $patient->update($data_attachments);
             //*/
             //-------------------------------------------------
 
