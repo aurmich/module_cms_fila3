@@ -200,19 +200,22 @@ abstract class XotBaseResource extends FilamentResource
         $attachments = $model::getAttachments();
         $uuid = Str::uuid()->toString();
         $schema = [];
+        $sessionId = session()->getId();
+        $sessionDir = "session-uploads/{$sessionId}";
         foreach ($attachments as $attachment) {
             $schema[$attachment]=FileUpload::make($attachment)
             //$schema[$attachment]=SpatieMediaLibraryFileUpload::make($attachment)
+            ->directory($sessionDir)
             ->disk('local')
             ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'])
             ->maxSize(5120*2)
             ->preserveFilenames()
             ->required()
-            ->afterStateUpdated(function ($state, Set $set) use ($attachment) {
+            //->saveUploadedFiles()
+            ->afterStateUpdated(function ($state, Set $set) use ($attachment,$sessionDir) {
                 if (!$state) return;
                 $state=Arr::wrap($state);
-                $sessionId = session()->getId();
-                $sessionDir = "session-uploads/{$sessionId}";
+                
                 $sessionFiles = [];
                 
                 foreach ($state as $file) {
