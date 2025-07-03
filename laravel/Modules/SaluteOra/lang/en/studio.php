@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 return [
@@ -410,3 +411,59 @@ return [
         ],
     ],
 ]; 
+=======
+return array (
+  'fields' => 
+  array (
+    'name' => 
+    array (
+      'label' => 'name',
+      'placeholder' => 'name',
+      'helper_text' => 'name',
+      'description' => 'name',
+    ),
+    'phone' => 
+    array (
+      'label' => 'phone',
+      'placeholder' => 'phone',
+      'helper_text' => 'phone',
+      'description' => 'phone',
+    ),
+    'email' => 
+    array (
+      'label' => 'email',
+      'placeholder' => 'email',
+      'helper_text' => 'email',
+      'description' => 'email',
+    ),
+    'website' => 
+    array (
+      'label' => 'website',
+      'placeholder' => 'website',
+      'helper_text' => 'website',
+      'description' => 'website',
+    ),
+    'registration_number' => 
+    array (
+      'label' => 'registration_number',
+      'placeholder' => 'registration_number',
+      'helper_text' => 'registration_number',
+      'description' => 'registration_number',
+    ),
+    'vat_number' => 
+    array (
+      'label' => 'vat_number',
+      'placeholder' => 'vat_number',
+      'helper_text' => 'vat_number',
+      'description' => 'vat_number',
+    ),
+    'description' => 
+    array (
+      'label' => 'description',
+      'placeholder' => 'description',
+      'helper_text' => 'description',
+      'description' => 'description',
+    ),
+  ),
+);
+>>>>>>> 1c0ba5b2 (translations)
