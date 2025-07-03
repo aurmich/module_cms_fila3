@@ -222,6 +222,7 @@ return array (
         'min' => 'Il nome della città deve contenere almeno 2 caratteri',
         'max' => 'Il nome della città non può superare i 100 caratteri',
       ),
+      'description' => 'city',
     ),
     'postal_code' => 
     array (

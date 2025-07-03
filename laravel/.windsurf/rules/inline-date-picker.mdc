@@ -1,313 +1,51 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description:
+globs:
+alwaysApply: false
 ---
-# InlineDatePicker - SOLUZIONE KISS FINALE ✅
+# InlineDatePicker Component Rules
 
-## 🚨 PROBLEMI RISOLTI
+## Namespace e Importazione
+- **Namespace**: `Modules\UI\Filament\Forms\Components\InlineDatePicker`
+- **Estende**: `Filament\Forms\Components\DatePicker`
+- **Import**: `use Modules\UI\Filament\Forms\Components\InlineDatePicker;`
 
-### 1. Navigazione Funzionante ✅
-**Problema**: I pulsanti previousMonth/nextMonth non funzionavano
-**Causa**: Metodi del widget non potevano accedere al componente nel wizard
-**Soluzione**: Proprietà pubblica `currentCalendarMonth` + refresh form
-
-```php
-class FindDoctorAndAppointmentWidget extends XotBaseWidget
-{
-    public string $currentCalendarMonth;
-    
-    public function previousMonth(): void {
-        $currentDate = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth);
-        $this->currentCalendarMonth = $currentDate->subMonthNoOverflow()->format('Y-m');
-        $this->form->fill($this->form->getState()); // ✅ Refresh
-    }
-}
-```
-
-### 2. UX Date Evidenti ✅
-**Problema**: Non si capiva quali date erano cliccabili
-**Soluzione**: Sistema visuale a tre livelli
-
-#### Stili Implementati:
-- 🟢 **Date Abilitate**: Verde, bordo spesso, hover scale, puntino verde
-- 🔵 **Data Selezionata**: Blu prominente, ring, pallino indicatore
-- ⚪ **Date Disabilitate**: Grigie, opache, cursor not-allowed
-
-#### Legenda Visuale:
-- 📅 Lista date disponibili sotto il calendario
-- ✓ Checkmark per data selezionata
-- • Bullet per date disponibili
-- ⚠️ Warning se nessuna data nel mese
-
-## Correzioni Tecniche Applicate
-
-### Widget Navigation Pattern
-```php
-// ✅ CORRETTO: Stato pubblico + refresh
-public string $currentCalendarMonth;
-
-public function previousMonth(): void {
-    $this->currentCalendarMonth = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth)
-        ->subMonthNoOverflow()->format('Y-m');
-    $this->form->fill($this->form->getState());
-}
-```
-
-### UX Enhancement Pattern
-```css
-/* Date abilitate - Verde con hover */
-.enabled-date {
-    @apply bg-green-50 text-green-700 border-2 border-green-200 
-           hover:bg-green-100 hover:border-green-300 cursor-pointer 
-           transform hover:scale-105 shadow-sm hover:shadow-md;
-}
-
-/* Data selezionata - Blu prominente */
-.selected-date {
-    @apply bg-blue-600 text-white ring-2 ring-blue-600 ring-offset-2 shadow-lg z-10;
-}
-
-/* Date disabilitate - Grigie */
-.disabled-date {
-    @apply bg-gray-50 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60;
-}
-```
-
-## Risultati Ottenuti
-- 🎯 **Navigazione Funzionante**: Pulsanti prev/next operativi
-- 🟢 **Date Evidenti**: Colori chiari per stati diversi
-- 📅 **Legenda Informativa**: Lista date disponibili
-- 🔄 **Stato Sincronizzato**: currentCalendarMonth globale
-- 🎨 **UX Ottimale**: Hover, scale, indicatori visuali
-
-*Implementazione Completa: TESTED ✅*
-
-## Separazione Responsabilità CORRETTA
-
-### 🏗️ Classe PHP InlineDatePicker (LOGICA)
-- ✅ `generateCalendarData()` - Genera calendario completo
-- ✅ `getEnabledDates()` - Gestisce date abilitate  
-- ✅ `getLocalizedWeekdays()` - Localizzazione Carbon
-- ✅ `previousMonth()` / `nextMonth()` - Navigazione
-- ✅ `getViewData()` - Prepara tutti i dati per vista
-
-### 🎛️ Widget (COORDINAMENTO)
-```php
-class FindDoctorAndAppointmentWidget extends XotBaseWidget
-{
-    // ✅ Metodi wrapper che delegano al componente
-    public function previousMonth(): void {
-        $dateComponent = $this->form->getComponent('wizard.date.appointment_date');
-        $dateComponent->previousMonth();
-    }
-    
-    public function nextMonth(): void {
-        $dateComponent = $this->form->getComponent('wizard.date.appointment_date');
-        $dateComponent->nextMonth();
-    }
-}
-```
-
-### 🎨 Vista Blade (RENDERING PURO)
-```html
-<!-- ✅ MINIMALISTA: Zero logica, solo rendering -->
-<div x-data="{ selectedDate: @js($currentValue) }">
-    <!-- Pulsanti: chiamate Livewire dirette -->
-    <button wire:click="previousMonth">←</button>
-    <button wire:click="nextMonth">→</button>
-    
-    <!-- Calendario: dati PHP già pronti -->
-    @foreach($calendarData['weeks'] as $week)
-        @foreach($week as $day)
-            <button @click="selectDate('{{ $day['dateString'] }}')">
-                {{ $day['day'] }}
-            </button>
-        @endforeach
-    @endforeach
-</div>
-```
-
-## Vantaggi DRY + KISS
-
-### ✅ DRY (Don't Repeat Yourself)
-- **Zero duplicazione**: Calendario generato solo in PHP
-- **Unica fonte verità**: Logica centralizzata in classe
-- **Riusabilità**: Componente indipendente dal contesto
-
-### ✅ KISS (Keep It Simple)
-- **Vista stupida**: Solo rendering, zero calcoli
-- **JavaScript minimo**: Solo selezione UI
-- **Flusso lineare**: Clic → Widget → Componente → Refresh
-
-## Flusso Operativo Semplificato
-
-1. **Setup**: InlineDatePicker prepara dati calendario
-2. **Rendering**: Blade mostra dati ricevuti 
-3. **Click navigazione**: wire:click → Widget wrapper → Componente
-4. **Click selezione**: Alpine.js → $wire.set() → Stato aggiornato
-
-## Principi Architetturali
-
-**"Separazione netta delle responsabilità"**
-- **PHP**: Calcola, non presenta
-- **Blade**: Presenta, non calcola  
-- **Widget**: Coordina, non implementa
-- **Alpine**: Interagisce, non logica business
-
-## Errori Evitati ❌
-
-### Vista con Logica
-```javascript
-// ❌ MAI duplicare logica nella vista
-generateCalendarDataForMonth() { /* calcoli JS */ }
-navigateToMonth() { /* business logic */ }
-```
-
-### Duplicazione PHP ↔ JS
-```php
-// ❌ Stesso calcolo in due posti
-// PHP: generateCalendarData()  
-// JS: generateCalendarDataForMonth()
-```
-
-## Pattern Corretto ✅
-
-### Configurazione
+## Utilizzo Base
 ```php
 InlineDatePicker::make('appointment_date')
-    ->enabledDates(['2025-06-05','2025-06-21'])
-    ->currentViewMonth(now()->format('Y-m'))
+    ->enabledDates(['2025-06-05', '2025-06-21'])
+    ->required();
 ```
 
-### Utilizzo
-- Widget espone metodi Livewire semplici
-- Vista chiama widget con wire:click
-- Componente gestisce tutta la logica
-- enabledDates sempre rispettate
+## Filosofia e Architettura
+- **Cronologia Selettiva**: Non tutte le date sono uguali nel continuum temporale
+- **Fenomenologia dell'Attesa**: Solo alcune date hanno il potere ontologico di essere scelte
+- **Democrazia Temporale**: L'utente ha il controllo, ma entro i confini del possibile
+- **Estetica Minimale**: L'interfaccia ridotta all'essenziale del tempo
 
----
-**Filosofia**: Vista stupida, logica intelligente
-**Status**: ✅ PRODUCTION READY - DRY+KISS
-**Aggiornamento**: Gennaio 2025
+## Metodi Principali
+- `enabledDates(array|Closure $dates)`: Definisce le date selezionabili
+- `calendarConfig(array $config)`: Configura i parametri del calendario
+- `setCurrentMonth(int $year, int $month)`: Imposta mese visualizzato
 
-## Architettura Corretta (DRY + KISS)
+## Caratteristiche Tecniche
+- Vista: `ui::filament.forms.components.inline-date-picker`
+- Griglia 7x6 per armonia settimanale
+- Navigazione mesi con validazione (1900-2100)
+- Stati visivi: abilitato/disabilitato/selezionato/oggi
+- Supporto dark mode automatico
+- Responsive design con breakpoint mobile
 
-### 🎯 Separazione Responsabilità
-- **Widget**: Solo mese corrente (`currentCalendarMonth`) + navigazione  
-- **Componente**: Tutta la logica calendario (generazione, validazione, rendering)
-- **Vista**: Solo rendering + `wire:click` semplici
+## Best Practice
+- Utilizzare closure per date dinamiche
+- Localizzazione italiana di default
+- Primo giorno settimana = Lunedì
+- Validazione parametri temporali sempre attiva
+- Debug info solo in sviluppo
 
-### 📋 Implementazione KISS
+## Documentazione
+- [Modulo UI](../laravel/Modules/UI/docs/form-components.md)
+- [Componente Specifico](../laravel/Modules/UI/docs/components/inline-date-picker-component.md)
 
-#### Widget (3 metodi)
-```php
-public string $currentCalendarMonth = '';
-
-public function previousMonth(): void {
-    $this->currentCalendarMonth = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth)
-        ->subMonthNoOverflow()->format('Y-m');
-}
-
-public function nextMonth(): void {
-    $this->currentCalendarMonth = Carbon::createFromFormat('Y-m', $this->currentCalendarMonth)
-        ->addMonthNoOverflow()->format('Y-m');
-}
-```
-
-#### Vista (10 righe JavaScript)
-```blade
-x-data="{ 
-    selectDate(dateString) {
-        $wire.set('{{ $statePath }}', dateString);
-    }
-}"
-
-<button wire:click="previousMonth">←</button>
-<button wire:click="nextMonth">→</button>
-```
-
-## ✅ ERRORI RISOLTI
-
-### "Property must not be accessed before initialization"
-- Valore default `= ''` sulla proprietà
-- Inizializzazione sicura in `mount()`
-
-### Navigazione Non Funzionante
-- Metodi nel widget (non nel componente)  
-- `wire:click` semplici (non Alpine.js complesso)
-
-### UX Date Confuse
-- CSS distintivo: blu (abilitato) vs grigio (disabilitato)
-- Legenda visuale sotto il calendario
-- Estados chiari: enabled/disabled/selected
-
-## 📐 Principi RISPETTATI
-
-- **DRY**: Zero duplicazione logica
-- **KISS**: Minimal JavaScript, max PHP
-- **SRP**: Una responsabilità per classe
-- **Filament Pattern**: Componenti Form nativi
-
-*Ultimo aggiornamento: Gennaio 2025 - Architettura definitiva*
-
-## ERRORE RISOLTO: "Property must not be accessed before initialization"
-
-### Problema Era
-- ❌ Residui chiamate `$wire.call('previousMonth')` nel JavaScript
-- ❌ HTML statico PHP non aggiornabile durante navigazione
-- ❌ Metodi Livewire nel widget (accoppiamento errato)
-
-### Soluzione Implementata
-- ✅ Navigazione puramente Alpine.js (`this.navigateToMonth()`)
-- ✅ HTML dinamico con template Alpine.js
-- ✅ Metodi Livewire minimal per coordinamento
-
-## NUOVO: ERRORE RISOLTO "Carbon InvalidFormatException" ✅
-
-### Problema Era
-- ❌ `currentCalendarMonth` vuoto quando chiamato `getDateStepSchema()`
-- ❌ Carbon falliva con "Not enough data available to satisfy format"
-- ❌ `getDateStepSchema()` chiamato prima di `mount()`
-
-### Soluzione Tripla Protezione
-```php
-// ✅ 1. Getter sicuro nel widget
-protected function getCurrentCalendarMonth(): string {
-    if (empty($this->currentCalendarMonth)) {
-        $this->currentCalendarMonth = now()->format('Y-m');
-    }
-    return $this->currentCalendarMonth;
-}
-
-// ✅ 2. Validazione nel setter componente
-public function currentViewMonth(string $month): static {
-    if (empty($month) || !preg_match('/^\d{4}-\d{2}$/', $month)) {
-        $this->currentViewMonth = now()->format('Y-m');
-    }
-    return $this;
-}
-
-// ✅ 3. Validazione finale Carbon
-public function generateCalendarData(): array {
-    if (empty($this->currentViewMonth)) {
-        $this->currentViewMonth = now()->format('Y-m');
-    }
-    // Safe Carbon call
-}
-```
-
-## NUOVO: ERRORE RISOLTO "Undefined array key 'currentMonth'" ✅
-
-### Problema Era  
-- ❌ **Mismatch chiavi array**: PHP genera `'isCurrentMonth'`, Blade cerca `$day['currentMonth']`
-- ❌ Inconsistenza nomenclature tra PHP component e vista Blade
-
-### Soluzione Implementata
-```php
-// ✅ PHP generateCalendarData() genera:
-'isCurrentMonth' => $isCurrentMonth,
-
-// ✅ Blade view ora usa:
-$isCurrentMonth = $day['isCurrentMonth']; // Corretta chiave
-```
+## Ultimo Aggiornamento
+2025-01-04 - Implementazione iniziale con filosofia temporale quantistica
