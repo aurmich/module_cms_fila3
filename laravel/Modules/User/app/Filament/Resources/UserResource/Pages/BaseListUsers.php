@@ -74,14 +74,14 @@ abstract class BaseListUsers extends XotBaseListRecords
                 $actions[] = $action;
             }
         }
-        
+        /*
         // Add deactivate action
         $actions[] = Action::make('deactivate')
             ->tooltip(__('filament-actions::delete.single.label'))
             ->color('danger')
             ->icon('heroicon-o-trash')
             ->action(static fn (UserContract $user) => $user->delete());
-            
+        */   
         return $actions;
     }
 

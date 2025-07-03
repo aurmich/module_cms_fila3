@@ -207,9 +207,10 @@ abstract class XotBaseResource extends FilamentResource
                 ->maxSize(5120*2)
                 ->required()
                 ->reorderable()
-                ->multiple($multiple)
+                //->multiple($multiple)
                 ->preserveFilenames()
                 ->columnSpanFull()
+                
                 ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
                     if (!$state) return;
                     $state=Arr::wrap($state);
@@ -231,10 +232,26 @@ abstract class XotBaseResource extends FilamentResource
                     
                     $set($attachment, $sessionFiles);
                 })
+                
                 ;
         }
         return $schema;
     }
+
+    /*
+     'certification' => Forms\Components\FileUpload::make('certification')
+                ->label(trans('saluteora::doctor.fields.certification.label'))
+                ->helperText(trans('saluteora::doctor.fields.certification.help'))
+                ->disk('private')  // Usa un disco privato per i documenti sensibili
+                ->directory('doctors/certifications')  // Directory specifica per le certificazioni
+                ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])  // Formati accettati
+                ->maxSize(5120)  // 5MB massimo
+                ->downloadable()  // Permetti il download
+                ->openable()      // Permetti l'anteprima
+                ->previewable()   // Mostra l'anteprima
+                ->preserveFilenames()  // Mantieni il nome originale del file
+                ->rules(['file', 'mimes:pdf,jpg,jpeg,png', 'max:5120']),  // Regole di validazione
+                */
 
     protected static function getStepByName(string $name): Forms\Components\Wizard\Step
     {

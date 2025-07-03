@@ -90,8 +90,11 @@
             "Modules\\Xot\\": "app/",
             "Modules\\Xot\\Database\\Factories\\": "database/factories/",
             "Modules\\Xot\\Database\\Seeders\\": "database/seeders/",
-            "Modules\\Xot\\Database\\Migrations\\": "database/migrations/",
             "Coolsam\\FilamentModules\\": "packages/coolsam/panel-modules/src/"
+            
+        },
+        "psr-4_comment": {
+            "Modules\\Xot\\Database\\Migrations\\": "database/migrations/"
         },
         "files": [
             "Helpers/Helper.php"

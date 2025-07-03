@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
 use Modules\Tenant\Models\Tenant;
-use Modules\Xot\Database\Migrations\XotBaseMigration;
+use Modules\SaluteOra\Models\Doctor;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
@@ -23,20 +24,7 @@ return new class extends XotBaseMigration
             $table->uuid('user_id');
             $table->string('specialization')->nullable();
             $table->json('availability')->nullable();
-            $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-
-            // Controllo se la tabella 'users' esiste prima di aggiungere la chiave esterna
-            if (Schema::hasTable('users')) {
-                $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onDelete('cascade');
-            }
-
-            $table->index('user_id');
+            
         });
         // -- UPDATE --
         $this->tableUpdate(
@@ -68,6 +56,12 @@ return new class extends XotBaseMigration
 
                 if (! $this->hasColumn( 'status')) {
                     $table->string('status')->nullable()->after('registration_number');
+                }
+                
+                foreach(Doctor::$attachments as $attachment){
+                    if (! $this->hasColumn($attachment)) {
+                        $table->string($attachment)->nullable()->after('type');
+                    }
                 }
 
                 

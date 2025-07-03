@@ -50,13 +50,14 @@ class IconStateColumn extends IconColumn
                                 $states=$record->getStatesFor($name)->toArray();;
                             }
                             /** @phpstan-ignore-next-line */
-                            $states=[$state::$name, ...$states];
+                            //$states=[$state::$name, ...$states];
                             $states=array_combine($states, $states);
                             //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);
 
                             return $states;
                         }
-                    ),
+                    )
+                    ->required(),
                 Textarea::make('message'),
             ])
             ->fillForm(function($record){

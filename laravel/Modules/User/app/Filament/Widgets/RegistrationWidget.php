@@ -50,6 +50,8 @@ class RegistrationWidget extends XotBaseWidget
         $record = $this->getFormModel();
         $data = $this->getFormFill();
         
+        //$data['certification'] = [Str::uuid()->toString()=>$data['certification']];
+        
         $this->form->fill($data);
         $this->form->model($record);
         $this->data = $data;

@@ -63,6 +63,18 @@ class RegisterAction
             $doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
         }
 
+         //-------------------------------------------------
+             //*
+             $attachments = Doctor::$attachments;
+             foreach ($attachments as $attachment) {
+                     /** @phpstan-ignore-next-line */
+                     $doctor->addMediaFromDisk($data[$attachment],'local')
+                         ->toMediaCollection($attachment);
+ 
+             }
+             //*/
+             //-------------------------------------------------
+
         //$record->save();
         //$record->update($data);
         /*

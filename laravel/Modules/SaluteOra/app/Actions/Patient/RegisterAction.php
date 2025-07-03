@@ -26,12 +26,21 @@ class RegisterAction
     {
         
         
-        return DB::transaction(function () use ($data) {
+        
             // Creazione del paziente usando STI
             if(isset($data['studio'])){
                 unset($data['studio']);
             }
-            $patient = Patient::create($data);
+            //$patient = Patient::create($data);
+            if(isset($data['id'])){
+                $patient = $record;
+                $patient->update($data);
+            }else{
+                $patient= new Patient();
+                $patient->fill($data);
+                $patient->save();
+                //$doctor = Doctor::create($data);
+            }
 
             //-------------------------------------------------
              //*
@@ -73,6 +82,6 @@ class RegisterAction
             ->notify($notify);
 
             return $patient;
-        });
+        
     }
 }

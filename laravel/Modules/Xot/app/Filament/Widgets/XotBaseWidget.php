@@ -124,6 +124,7 @@ abstract class XotBaseWidget extends FilamentWidget implements HasForms
                 
                 //dddx($model->getArrayableRelations());
                 $res= $model->toArray();
+                
                 if(method_exists($model,'getDataDefaults')){
                     $defaults=$model->getDataDefaults();
                     $merge1=array_merge($defaults,$res);

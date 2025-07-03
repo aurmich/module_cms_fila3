@@ -405,7 +405,7 @@ return array (
       'placeholder' => 'Configura orari apertura',
       'help' => 'Orari di apertura e disponibilità del servizio medico',
       'description' => 'schedule',
-      'helper_text' => 'schedule',
+      'helper_text' => '',
     ),
     'schedule1' => 
     array (
@@ -505,6 +505,10 @@ return array (
         'placeholder' => 'Nome e cognome',
         'help' => 'Nome completo del cliente o paziente',
       ),
+    ),
+    'certification' => 
+    array (
+      'label' => 'certification',
     ),
   ),
   'actions' => 

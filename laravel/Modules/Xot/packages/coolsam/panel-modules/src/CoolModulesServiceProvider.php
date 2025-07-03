@@ -13,6 +13,13 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class CoolModulesServiceProvider extends PackageServiceProvider
 {
+    /**
+     * Traccia i panel che hanno già gli hook registrati.
+     * 
+     * @var array<string, bool>
+     */
+    private static array $processedPanels = [];
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -30,10 +37,17 @@ class CoolModulesServiceProvider extends PackageServiceProvider
         $this->app->register(LaravelModulesServiceProvider::class);
 
         $this->app->afterResolving('filament', function () {
-            $panels=Filament::getPanels();
+            $panels = Filament::getPanels();
            
             foreach ($panels as $panel) {
                 $id = Str::of($panel->getId());
+                $panelId = $panel->getId();
+                
+                // Controlla se questo panel è già stato processato
+                if (isset(self::$processedPanels[$panelId])) {
+                    continue;
+                }
+                
                 if ($id->contains('::')) {
                     $title = $id->replace(['::', '-'], [' ', ' '])->title()->toString();
                     $panel
@@ -54,6 +68,9 @@ class CoolModulesServiceProvider extends PackageServiceProvider
                                       </a>'
                             ),
                         );
+                    
+                    // Marca questo panel come processato
+                    self::$processedPanels[$panelId] = true;
                 }
             }
         });

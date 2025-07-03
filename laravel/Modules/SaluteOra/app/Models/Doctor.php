@@ -6,9 +6,11 @@ namespace Modules\SaluteOra\Models;
 
 use Parental\HasParent;
 use Modules\Geo\Models\Address;
+use Spatie\MediaLibrary\HasMedia;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Enums\UserStateEnum;
 use Modules\SaluteOra\Models\DoctorStudio;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\SaluteOra\States\User\UserState;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -163,9 +165,10 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor wherePregnancyCertificate($value)
  * @mixin \Eloquent
  */
-class Doctor extends User
+class Doctor extends User implements HasMedia
 {
     use HasParent;
+    use InteractsWithMedia;
 
    
     /** @var list<string>     */
@@ -179,7 +182,8 @@ class Doctor extends User
         'city',
         'registration_number',
         //'specialization',
-        'certifications',
+        'certifications', // Mantenuto per retrocompatibilità
+        'certification', // 
         //'availability',
         'status',
         'country_code',
@@ -189,7 +193,7 @@ class Doctor extends User
     protected $appends = [
         //'health_card',
         //'identity_document',
-        //'isee_certificate',
+        
         //'pregnancy_certificate',
         // 'certifications', // Gestito da getter personalizzato
         //'studio',
@@ -199,14 +203,13 @@ class Doctor extends User
 
     /** @var list<string>     */
     public static array $attachments = [
-        'certifications',
-       
+        'certification', // Gestito come allegato singolo
     ];
 
     /** @var list<string>     */
     protected $with = [
-        //'studio',
-        //'studio.address',
+        'studio',
+        'studio.address',
     ];
 
     /** @var array<string, mixed>  */
@@ -231,6 +234,7 @@ class Doctor extends User
     public function getDataDefaults(): array
     {
         return [
+            //'certification'=> null,
             'studio'=>[
                 'description' => null,
                 'address'=>[
@@ -249,11 +253,16 @@ class Doctor extends User
      *
      * @return array<string, string>
      */
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            'certifications' => 'array',
-          //  'availability' => 'array',
+            //'certification' => 'array',  // Gestisce la conversione da JSON a array
+            'certifications' => 'array', // Per retrocompatibilità
         ]);
     }
 

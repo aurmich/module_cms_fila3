@@ -112,47 +112,39 @@ class DoctorResource extends XotBaseResource
      * - FileUpload certification (Certificazione iscrizione Ordine)
      * - Nessun altro campo
      */
-    protected static function getPersonalInfoStepSchema (): array
+    protected static function getPersonalInfoStepSchema(): array
     {
-        // Non utilizzare $translationPrefix, ma direttamente il namespace di traduzione
-
         return [
-                'id' => Forms\Components\Hidden::make('id'),
-                'first_name' => Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255)
-                    ->autocomplete('given-name')
-                    ,
-                'last_name' => Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255)
-                    ->autocomplete('family-name')
-                    ,
+            'id' => Forms\Components\Hidden::make('id'),
+            'first_name' => Forms\Components\TextInput::make('first_name')
+                ->required()
+                ->maxLength(255)
+                ->autocomplete('given-name'),
+                
+            'last_name' => Forms\Components\TextInput::make('last_name')
+                ->required()
+                ->maxLength(255)
+                ->autocomplete('family-name'),
 
-                'email' => Forms\Components\TextInput::make('email')
-                    ->required()
-                    ->email()
-                    ->maxLength(255)
-                    ->autocomplete('email')
-                    ->readonly(fn($get) => $get('id') !== null)
-                    ->extraAttributes(function ($get) {
-                        return $get('id') !== null
-                            ? ['class' => 'bg-gray-100 border-gray-300 cursor-not-allowed opacity-90']
-                            : [];
-                    })
-                    ->rules(function ($get) {
-                        $rules = [];
-                        // Applica unique solo se il record è nuovo (id è null)
-                        //if ($get('id') === null) {
-                            //$rules[] = Rule::unique(User::class, 'email');
-                            $rules[] = Rule::unique(User::class,'email')->ignore($get('id'));
-                        //}
-                        
-                        return $rules;
-                    }),
+            'email' => Forms\Components\TextInput::make('email')
+                ->required()
+                ->email()
+                ->maxLength(255)
+                ->autocomplete('email')
+                ->readonly(fn($get) => $get('id') !== null)
+                ->extraAttributes(function ($get) {
+                    return $get('id') !== null
+                        ? ['class' => 'bg-gray-100 border-gray-300 cursor-not-allowed opacity-90']
+                        : [];
+                })
+                ->rules(function ($get) {
+                    return [
+                        Rule::unique(User::class, 'email')->ignore($get('id'))
+                    ];
+                }),
                 ...self::getAttachmentsSchema(false),
-
-            ];
+            // Aggiungi qui eventuali altri campi
+        ]  ;
     }
 
     

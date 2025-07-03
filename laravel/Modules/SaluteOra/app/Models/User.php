@@ -250,6 +250,7 @@ class User extends BaseUser implements HasMedia,HasStatesContract
             'type' => UserTypeEnum::class, // Sintassi corretta per Laravel 12
             'state' => UserState::class,
             'certifications' => 'array',
+            'certification' => 'array',  // ESSENZIALE: Evita "foreach() argument must be of type array|object, string given"
             'moderation_data' => 'array',
         ]);
 

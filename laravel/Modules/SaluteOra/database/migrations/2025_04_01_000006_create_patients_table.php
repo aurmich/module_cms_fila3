@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use Modules\SaluteOra\Models\Patient;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends XotBaseMigration
 {
@@ -51,42 +52,48 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
 
                 // Aggiungi il campo type se non esiste
-            if (! $this->hasColumn( 'type')) {
-                $table->string('type')->nullable()->after('id');
-            }
+                if (! $this->hasColumn( 'type')) {
+                    $table->string('type')->nullable()->after('id');
+                }
 
-            // Aggiungi i campi specifici per i dottori
-            if (! $this->hasColumn( 'certifications')) {
-                $table->json('certifications')->nullable()->after('email');
-            }
+                // Aggiungi i campi specifici per i dottori
+                if (! $this->hasColumn( 'certifications')) {
+                    $table->json('certifications')->nullable()->after('email');
+                }
 
-            if (! $this->hasColumn( 'phone')) {
-                $table->string('phone')->nullable()->after('email');
-            }
+                if (! $this->hasColumn( 'phone')) {
+                    $table->string('phone')->nullable()->after('email');
+                }
 
-            if (! $this->hasColumn( 'address')) {
-                $table->string('address')->nullable()->after('phone');
-            }
+                if (! $this->hasColumn( 'address')) {
+                    $table->string('address')->nullable()->after('phone');
+                }
 
-            if (! $this->hasColumn( 'city')) {
-                $table->string('city')->nullable()->after('address');
-            }
+                if (! $this->hasColumn( 'city')) {
+                    $table->string('city')->nullable()->after('address');
+                }
 
-            if (! $this->hasColumn( 'registration_number')) {
-                $table->string('registration_number')->nullable()->after('city');
-            }
+                if (! $this->hasColumn( 'registration_number')) {
+                    $table->string('registration_number')->nullable()->after('city');
+                }
 
-            if (! $this->hasColumn( 'last_dental_visit')) {
-                $table->date('last_dental_visit')->nullable()->after('registration_number');
-            }
-            if (! $this->hasColumn( 'dental_problems')) {
-                $table->text('dental_problems')->nullable()->after('registration_number');
-            }
+                if (! $this->hasColumn( 'last_dental_visit')) {
+                    $table->date('last_dental_visit')->nullable()->after('registration_number');
+                }
+                if (! $this->hasColumn( 'dental_problems')) {
+                    $table->text('dental_problems')->nullable()->after('registration_number');
+                }
 
 
-            if (! $this->hasColumn( 'status')) {
-                $table->string('status')->nullable()->after('registration_number');
-            }
+                if (! $this->hasColumn( 'status')) {
+                    $table->string('status')->nullable()->after('registration_number');
+                }
+                
+                foreach(Patient::$attachments as $attachment){
+                    if (! $this->hasColumn($attachment)) {
+                        $table->string($attachment)->nullable()->after('type');
+                    }
+                }
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);
             }

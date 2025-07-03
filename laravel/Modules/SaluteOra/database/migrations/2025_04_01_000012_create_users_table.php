@@ -106,11 +106,7 @@ return new class extends XotBaseMigration
                 }
 
                 
-                foreach(Patient::$attachments as $attachment){
-                    if (! $this->hasColumn($attachment)) {
-                        $table->string($attachment)->nullable()->after('type');
-                    }
-                }
+                
                 
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);
