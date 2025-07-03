@@ -191,15 +191,14 @@ return array (
       'label' => 'Certificazione',
       'placeholder' => 'Carica la certificazione',
       'help' => 'Documento di iscrizione all\'Ordine dei Medici',
-      'helper_text' => 'Tesserino sanitario O certificato di iscrizione all\'Ordine',
-      'description' => 'certification',
+      'helper_text' => '',
     ),
     'certificates' => 
     array (
       'label' => 'Certificati',
       'placeholder' => 'Carica i certificati',
       'help' => 'Certificati e specializzazioni professionali',
-      'helper_text' => 'Tesserino sanitario O certificato di iscrizione all\'Ordine',
+      'helper_text' => '',
     ),
     'certifications' => 
     array (

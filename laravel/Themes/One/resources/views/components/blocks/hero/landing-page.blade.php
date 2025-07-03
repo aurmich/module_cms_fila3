@@ -155,7 +155,8 @@
     </div>
     <!-- FINE SECONDA SECTION -->
     <!-- INIZIO TERZA SECTION -->
-    <div class="bg-[#FCD5D0] bg-cover m-4 lg:m-20 rounded-[35px] p-5 lg:p-0">
+    <div class="relative bg-[#FCD5D0] bg-cover m-4 lg:m-20 rounded-[35px] p-5 lg:p-0">
+      <img src="/img/inmp-trasparenza-5.svg" class="absolute inset-0 w-full h-full object-contain z-0 p-5"/>
       <div
         class="flex flex-col lg:flex-row items-center justify-around lg:justify-center h-[750px] bg-cover bg-inmp-filigrana"
       >
@@ -164,10 +165,8 @@
         </div>
         <div class="flex flex-col items-center">
           <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">Vuoi partecipare al progetto?</h1>
-          <span class="text-[#272C4D] text-center text-xl mt-10"
-            >Unisciti alla rete di professionisti che si prendono cura della
-            salute orale delle gestanti</span
-          >
+          <span class="text-[#272C4D] text-center text-xl mt-10">Unisciti alla rete di professionisti che si prendono cura della
+            salute orale delle gestanti</span>
           <a href="/it/auth/register">
           <button
             class="w-44 text-[#272C4D] text-xl lg:text-2xl mt-10 border-[#272C4D] border-2 py-2 px-5 lg:py-3 lg:px-7 rounded-lg"
