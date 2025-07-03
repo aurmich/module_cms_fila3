@@ -51,13 +51,8 @@
                     "menu_items": [
                         {
                             "label": "Profilo",
-                            "url": "{{ $profiloUrl }}",
+                            "url": "/it/profile",
                             "icon": "heroicon-o-user"
-                        },
-                        {
-                            "label": "Impostazioni",
-                            "url": "/impostazioni",
-                            "icon": "heroicon-o-cog-6-tooth"
                         },
                         {
                             "type": "divider"
