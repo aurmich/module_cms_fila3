@@ -123,26 +123,6 @@
     .mobile-friendly-wizard {
         @apply overflow-x-auto;
     }
-
-
-        /* Cambia colore e dimensione dei bottoni */
-    .fc-button {
-        padding: 0.5em 1em !important; /* Dimensione */
-        background-color: #4f46e5 !important; /* Colore primario (es. indigo-600) */
-        border-color: #4f46e5 !important;
-        font-size: 0.875rem !important; /* Testo più piccolo */
-    }
-
-    /* Bottoni hover/active */
-    .fc-button:hover, .fc-button:active {
-        background-color: #4338ca !important;
-    }
-
-    /* Bottoni specifici */
-    .fc-prev-button, .fc-next-button {
-        background-color: #ef4444 !important; /* Rosso per prev/next */
-    }
-    
 }
 
 
