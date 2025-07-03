@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Actions\Export;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\BinaryFileResponse;
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Xot\Exports\CollectionExport;
 use Spatie\QueueableAction\QueueableAction;
@@ -37,9 +37,10 @@ class ExportXlsByCollection
         array $fields = [],
     ): BinaryFileResponse {
         // Assicuriamo che $fields sia un array di stringhe
-        $stringFields = array_map(function (string|int|float|bool $field): string {
-            return strval($field);
-        }, array_values($fields));
+        $stringFields = array_map(
+            fn (mixed $field): string => (string) $field,
+            array_values($fields)
+        );
 
         $export = new CollectionExport(
             collection: $collection,
@@ -98,20 +99,24 @@ class ExportXlsByCollection
         $row = 2;
         foreach ($rows as $data) {
             foreach ($fields as $col => $field) {
-                $value = '';
-
-                // Verifica che $data supporti il metodo get
-                if (is_object($data) && method_exists($data, 'get')) {
-                    $value = $data->get($field) ?? '';
-                } elseif (is_array($data) || $data instanceof \ArrayAccess) {
-                    $value = $data[$field] ?? '';
-                } elseif (is_object($data) && property_exists($data, $field)) {
-                    $value = $data->{$field} ?? '';
-                }
-
+                $value = $this->extractValue($data, $field);
                 $sheet->setCellValueByColumnAndRow($col + 1, $row, $value);
             }
             $row++;
         }
+    }
+
+    /**
+     * Estrae il valore da un oggetto o array usando il campo specificato.
+     *
+     * @param mixed $data I dati da cui estrarre il valore
+     * @param string $field Il campo da estrarre
+     *
+     * @return mixed Il valore estratto
+     */
+    protected function extractValue(mixed $data, string $field): mixed
+    {
+        // Usa data_get di Laravel per accesso sicuro ai dati nidificati
+        return data_get($data, $field, '');
     }
 }

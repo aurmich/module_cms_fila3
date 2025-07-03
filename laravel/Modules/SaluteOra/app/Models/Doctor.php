@@ -253,15 +253,10 @@ class Doctor extends User implements HasMedia
      *
      * @return array<string, string>
      */
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            //'certification' => 'array',  // Gestisce la conversione da JSON a array
+            'certification' => 'array',  // OBBLIGATORIO: campo in $attachments DEVE essere array per FileUpload
             'certifications' => 'array', // Per retrocompatibilità
         ]);
     }

@@ -92,7 +92,9 @@ abstract class BaseListUsers extends XotBaseListRecords
      */
     protected function getHeaderWidgets(): array
     {
-        return [UserOverview::class];
+        return [
+            //UserOverview::class
+        ];
     }
 
     /**
@@ -104,7 +106,7 @@ abstract class BaseListUsers extends XotBaseListRecords
     {
         return [
             Tables\Actions\DeleteBulkAction::make(),
-            ExportBulkAction::make(),
+            //ExportBulkAction::make(),
         ];
     }
 }

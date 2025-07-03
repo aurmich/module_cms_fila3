@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteMo\Filament\Pages;
 
-use Filament\Pages\Dashboard as FilamentDashboard;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
 use Illuminate\Contracts\View\View;
 use Modules\SaluteMo\Filament\Widgets\StatsOverview;
 
@@ -16,32 +16,14 @@ use Modules\SaluteMo\Filament\Widgets\StatsOverview;
  *
  * @package Modules\SaluteMo\Filament\Pages
  */
-class Dashboard extends FilamentDashboard
+class Dashboard extends XotBaseDashboard
 {
-    protected static ?string $navigationIcon = 'heroicon-o-home';
-    protected static ?string $navigationGroup = 'SaluteMo';
     protected static ?int $navigationSort = 1;
 
-    /**
-     * Restituisce il titolo della dashboard.
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return __('salutemo::dashboard.title');
+   
+    public  function getWidgets(): array{
+        return [];
     }
-
-    /**
-     * Restituisce la descrizione della dashboard.
-     *
-     * @return string|null
-     */
-    public function getDescription(): ?string
-    {
-        return __('salutemo::dashboard.description');
-    }
-
     /**
      * Widget da visualizzare nell'header della dashboard.
      *
@@ -50,7 +32,7 @@ class Dashboard extends FilamentDashboard
     protected function getHeaderWidgets(): array
     {
         return [
-            StatsOverview::class,
+            //StatsOverview::class,
         ];
     }
 
