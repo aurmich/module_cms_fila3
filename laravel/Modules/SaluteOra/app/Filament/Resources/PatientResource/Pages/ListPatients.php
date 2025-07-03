@@ -28,7 +28,7 @@ class ListPatients extends ListUsers
         $columns['years_in_italy'] = Tables\Columns\TextColumn::make('years_in_italy');
         $columns['family_members'] = Tables\Columns\TextColumn::make('family_members');
         $columns['children_count'] = Tables\Columns\TextColumn::make('children_count');
-        $attachments = Patient::$attachments;
+        $attachments = Patient::getAttachments();
 
         foreach ($attachments as $attachment) {
             $columns[$attachment] = IconMediaColumn::make($attachment);

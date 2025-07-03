@@ -28,7 +28,7 @@ class ListDoctors extends ListUsers
         $columns= parent::getTableColumns();   
         $columns=Arr::except($columns,['type']);
         
-        $attachments = Doctor::$attachments;
+        $attachments = Doctor::getAttachments();
 
         
         foreach ($attachments as $attachment) {

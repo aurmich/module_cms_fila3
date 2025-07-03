@@ -58,7 +58,7 @@ return new class extends XotBaseMigration
                     $table->string('status')->nullable()->after('registration_number');
                 }
                 
-                foreach(Doctor::$attachments as $attachment){
+                foreach(Doctor::getAttachments() as $attachment){
                     if (! $this->hasColumn($attachment)) {
                         $table->string($attachment)->nullable()->after('type');
                     }

@@ -28,20 +28,15 @@ use Modules\Xot\Contracts\UserContract;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Wizard\Step;
-use Modules\SaluteOra\Enums\NationalityEnum;
-use Modules\SaluteOra\Enums\YearsInItalyEnum;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Illuminate\Validation\Rule;
 use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+
 use Modules\Xot\Filament\Resources\XotBaseResource;
-use Modules\SaluteOra\Enums\LastDentalVisitPeriodEnum;
 use Modules\Patient\Filament\Components\HealthCardUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Tapp\FilamentCountryCodeField\Forms\Components\CountryCodeSelect;
 use Modules\Media\Filament\Resources\PatientResource\Pages\PreviewAttachment;
-use Modules\SaluteOra\Models\User;
 
 class PatientResource extends XotBaseResource
 {
@@ -59,127 +54,141 @@ class PatientResource extends XotBaseResource
 
         return [
             Forms\Components\Wizard::make([
-                //self::getPersonalDataStep(),      // Step 1: Dati personali
-                self::getStepByName('personal_data_step'),
-                //self::getDocumentsStep(),         // Step 2: Documenti
-                self::getStepByName('documents_step'),
-                //self::getPreVisitStep(),          // Step 3: Informazioni preventive
-                self::getStepByName('previsit_step'),
-                //self::getPrivacyStep(),           // Step 4: Privacy e consensi
-                self::getStepByName('privacy_step'),
+                self::getPersonalDataStep(),      // Step 1: Dati personali
+                self::getDocumentsStep(),         // Step 2: Documenti
+                self::getPreVisitStep(),          // Step 3: Informazioni preventive
+                self::getPrivacyStep(),           // Step 4: Privacy e consensi
             ])
             //->model(Patient::class)
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
             ->skippable(false)
             ->columnSpan('full')
             ->persistStepInQueryString()
-            ->submitAction(static::getWizardSubmitAction())
+            ->submitAction(view($submit_view))
         ];
     }
 
-    
+    /**
+     * Get the personal data step for the wizard
+     *
+     * @return \Filament\Forms\Components\Wizard\Step
+     */
+    protected static function getPersonalDataStep(): Forms\Components\Wizard\Step
+    {
+        return Forms\Components\Wizard\Step::make('personal_data_step')
+            //->afterValidation(function ($livewire,$record) {
+                //dddx($livewire->data);
+                //dddx($record);
+            //})
+            ->schema(self::getPersonalDataStepSchema());
+    }
 
     protected static function getPersonalDataStepSchema(): array
     {
-        $family_members_options=[
-            '1' => 'Sola',
-            '2' => '2',
-            '3' => '3',
-            '4+' => '4+',
-        ];
-        $children_count_options=[
-            '0' => '0',
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4',
-            '5' => '5',
-        ];
         return [
-            'id' => Forms\Components\Hidden::make('id'),
-            'first_name' => Forms\Components\TextInput::make('first_name')
+            Forms\Components\TextInput::make('first_name')
                 ->required()
                 ->maxLength(255),
-            'last_name' => Forms\Components\TextInput::make('last_name')
+            Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(255),
-            'address' => Forms\Components\TextInput::make('address')
+            Forms\Components\TextInput::make('address')
                 ->maxLength(255),
-            'city' => Forms\Components\TextInput::make('city')
+            Forms\Components\TextInput::make('city')
                 ->maxLength(255),
-            'nationality' => Forms\Components\Select::make('nationality')
-                ->options(NationalityEnum::class)
-                ->reactive()
-                //->live()
-                ,
-            'country_code' => CountryCodeSelect::make('country_code')
-                ->label(static::trans('fields.country_code.label'))
-                ->visible(function (Get $get): bool {
-                    if($get('nationality')=='EE'){
-                        return true;
-                    }
-                    return false;
-                }),
-            'years_in_italy' => Forms\Components\Select::make('years_in_italy')
-                ->options(YearsInItalyEnum::class)
-                ->visible(fn (Get $get): bool => $get('nationality')=='EE'),
-            'family_members' => Forms\Components\Select::make('family_members')
-                ->options($family_members_options),
-            'children_count' => Forms\Components\Select::make('children_count')
-                ->options($children_count_options),    
-                
-            
-            'phone' => Forms\Components\TextInput::make('phone')
+            Forms\Components\TextInput::make('phone')
                 ->tel()
-                ->required()
                 ->maxLength(255),
-
-            'email' => Forms\Components\TextInput::make('email')
-                    ->required()
-                    ->email()
-                    ->maxLength(255)
-                    ->autocomplete('email')
-                    ->readonly(fn($get) => $get('id') !== null)
-                    ->extraAttributes(function ($get) {
-                        return $get('id') !== null
-                            ? ['class' => 'bg-gray-100 border-gray-300 cursor-not-allowed opacity-90']
-                            : [];
-                    })
-                    ->rules(function ($get) {
-                        $rules = [];
-                        // Applica unique solo se il record è nuovo (id è null)
-                        if ($get('id') === null) {
-                            //$rules[] = Rule::unique(User::class, 'email');
-                            $rules[] = Rule::unique(User::class,'email')->ignore($get('id'));
-                        }
-                        
-                        return $rules;
-                    }),
-            
+            Forms\Components\TextInput::make('email')
+                ->email()
+                ->required()
+                ->maxLength(255)
+                ->unique(Patient::class),
         ];
     }
 
-    
+    /**
+     * Get the documents step for the wizard
+     *
+     * @return \Filament\Forms\Components\Wizard\Step
+     */
+    protected static function getDocumentsStep(): Forms\Components\Wizard\Step
+    {
+        return Forms\Components\Wizard\Step::make('documents_step')
+            ->schema(self::getDocumentsStepSchema());
+    }
+
     protected static function getDocumentsStepSchema(): array
     {
-        return self::getAttachmentsSchema(false);
+        $attachments = Patient::getAttachments();
+        $uuid = Str::uuid()->toString();
+        $schema = [];
+        
+        foreach ($attachments as $attachment) {
+            $schema[] = Forms\Components\FileUpload::make($attachment)
+                ->disk('local')
+                ->directory('documents/'.$attachment.'/'.$uuid)
+                //->downloadable()
+                //->openable()
+                ->acceptedFileTypes(['application/pdf', 'image/*'])
+                ->maxSize(5120)
+                ->required()
+                ->reorderable()
+                //->multiple()
+                ->preserveFilenames()
+                ->columnSpanFull()
+                ->afterStateUpdated(function ($state, Forms\Set $set) use ($attachment) {
+                    if (!$state) return;
+                    $state=Arr::wrap($state);
+                    $sessionId = session()->getId();
+                    $sessionDir = "session-uploads/{$sessionId}";
+                    $sessionFiles = [];
+                    foreach ($state as $file) {
+                        if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                            // Salva direttamente nella directory di sessione
+                            $fileName = time() . '_' . $file->getClientOriginalName();
+                            $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
+                            $sessionFiles[] = $sessionPath;
+                        } else {
+                            // È già un percorso salvato
+                            $sessionFiles[] = $file;
+                        }
+                    }
+                    
+                    $set($attachment, $sessionFiles);
+                })
+                ;
+        }
+        return $schema;
     }
 
-   
+    /**
+     * Get the pre-visit information step for the wizard
+     */
+    protected static function getPreVisitStep(): Forms\Components\Wizard\Step
+    {
+        return Forms\Components\Wizard\Step::make('pre_visit_step')
+            ->schema(self::getPreVisitStepSchema());
+    }
 
     protected static function getPreVisitStepSchema(): array
     {
         return [
-            //Forms\Components\DatePicker::make('last_dental_visit')
-            //    ->maxDate(now()),
-            Forms\Components\Select::make('last_dental_visit_period')
-                ->options(LastDentalVisitPeriodEnum::class),
+            Forms\Components\DatePicker::make('last_dental_visit')
+                ->maxDate(now()),
             Forms\Components\Textarea::make('dental_problems')
                 ->maxLength(65535),
         ];
     }
 
-    
+    /**
+     * Get the privacy step for the wizard
+     */
+    protected static function getPrivacyStep(): Forms\Components\Wizard\Step
+    {
+        return Forms\Components\Wizard\Step::make('privacy_step')
+            ->schema(self::getPrivacyStepSchema());
+    }
 
     /**
      * Get privacy step schema for the wizard
@@ -189,13 +198,13 @@ class PatientResource extends XotBaseResource
     protected static function getPrivacyStepSchema(): array
     {
         return [
-            'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.privacy-policy')
+            Forms\Components\View::make('saluteora::privacy-policy')
                 ->columnSpanFull(),
-            'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
+            Forms\Components\Checkbox::make('privacy_acceptance')
                 ->required()
                 ->columnSpanFull(),
-            //'newsletter' => Forms\Components\Checkbox::make('newsletter')
-           //     ->columnSpanFull(),
+            Forms\Components\Checkbox::make('newsletter')
+                ->columnSpanFull(),
         ];
     }
 
@@ -217,8 +226,6 @@ class PatientResource extends XotBaseResource
         </div>');
     }
 
-    
-
     /**
      * Get the form schema for standard forms
      *
@@ -226,7 +233,7 @@ class PatientResource extends XotBaseResource
      */
     public static function getFormSchema(): array
     {
-        $schema= [
+        return [
             'first_name' => Forms\Components\TextInput::make('first_name')
                 ->required()
                 ->maxLength(255),
@@ -244,12 +251,7 @@ class PatientResource extends XotBaseResource
                 ->tel()
                 ->required()
                 ->maxLength(20),
-            ...self::getAttachmentsSchema(),
         ];
-
-       
-        
-        return $schema;
     }
 
     public static function getThankYouView(): string

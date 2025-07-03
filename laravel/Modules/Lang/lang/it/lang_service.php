@@ -258,6 +258,8 @@ return array (
       'label' => 'Stato Corrente',
       'placeholder' => 'Stato del workflow',
       'help' => 'Stato attuale dell\'elemento nel flusso di lavoro',
+      'description' => 'state',
+      'helper_text' => 'state',
     ),
     'newstate' => 
     array (
@@ -644,6 +646,10 @@ return array (
       'label' => 'Crea Altro',
       'helper_text' => '',
       'description' => '',
+    ),
+    'change-password' => 
+    array (
+      'label' => 'change-password',
     ),
   ),
   'messages' => 

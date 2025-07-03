@@ -190,6 +190,8 @@ class Patient extends User implements HasMedia
         'children_count',
         'last_dental_visit_period',
 
+        'fiscal_code',
+
     ];
     protected $appends = [
         //'health_card',
@@ -219,12 +221,14 @@ class Patient extends User implements HasMedia
         */
     ];
 
-    public static array $attachments = [
-        'health_card',
-        'identity_document',
-        'isee_certificate',
-        'pregnancy_certificate',
-    ];
+    public static function getAttachments():array{
+        return [
+            'health_card',
+            //'identity_document',
+            'isee_certificate',
+            'pregnancy_certificate',
+        ];
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -264,7 +268,7 @@ class Patient extends User implements HasMedia
      */
     public function registerMediaCollections(): void
     {
-        foreach (self::$attachments as $attachment) {
+        foreach (self::getAttachments() as $attachment) {
             $this
                 ->addMediaCollection($attachment)
                 ->singleFile()
@@ -308,7 +312,7 @@ class Patient extends User implements HasMedia
     public function getAttachmentsCount(): int
     {
         $count = 0;
-        foreach (self::$attachments as $type) {
+        foreach (self::getAttachments() as $type) {
             if ($this->hasAttachment($type)) {
                 $count++;
             }

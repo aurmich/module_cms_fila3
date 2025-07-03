@@ -204,9 +204,11 @@ class Doctor extends User implements HasMedia
     ];
 
     /** @var list<string>     */
-    public static array $attachments = [
-        'certification', // Gestito come allegato singolo
-    ];
+    public static function getAttachments():array{
+        return  [
+            'certification', // Gestito come allegato singolo
+        ];
+    }
 
     /** @var list<string>     */
     protected $with = [
@@ -214,24 +216,7 @@ class Doctor extends User implements HasMedia
         'studio.address',
     ];
 
-    /** @var array<string, mixed>  */
-    protected $attributes_old = [
-        'id'=>null,
-        'first_name'=>null,
-        'last_name'=>null,
-        'email'=>null,
-        'phone'=>null,
-        'address'=>null,
-        'city'=>null,
-        'registration_number'=>null,
-        //'specialization',
-        //'certifications'=>null,
-        //'availability',
-        'status'=>null,
-        'is_otp'=>false,
-        'is_active'=>true,
-        
-    ];
+   
 
     public function getDataDefaults(): array
     {
@@ -258,7 +243,7 @@ class Doctor extends User implements HasMedia
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            'certification' => 'array',  // OBBLIGATORIO: campo in $attachments DEVE essere array per FileUpload
+            //'certification' => 'array',  // OBBLIGATORIO: campo in $attachments DEVE essere array per FileUpload
             'certifications' => 'array', // Per retrocompatibilità
         ]);
     }
