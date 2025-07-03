@@ -17,8 +17,6 @@ $base_middleware=['auth'];
 name('profile');
 middleware($base_middleware);
 
-
-
 new class extends Component
 {
 

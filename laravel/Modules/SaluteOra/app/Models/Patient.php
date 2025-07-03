@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Parental\HasParent;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Modules\SaluteOra\Models\User;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Image\Enums\Fit;
 
 /**
  * Class Patient
@@ -327,5 +328,11 @@ class Patient extends User implements HasMedia
             }
         }
         return true;
+    }
+
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class,'patient_id');
     }
 }

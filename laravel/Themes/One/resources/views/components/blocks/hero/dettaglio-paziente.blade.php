@@ -17,10 +17,12 @@
     $user = $user ?? auth()->user();
     $locale = LaravelLocalization::getCurrentLocale();
     $isLoggedIn = auth()->check();
-
+    $appointments=$user->appointments;
+    //$appointments=collect();  // per testare zero appuntamenti
 @endphp
-
-
+{{--  
+NUMERO APPUNTAMENTI: {{  $appointments?->count() ?? 0}}
+--}}
 {{-- STEP PRENOTA VISITA --}}
 
 
@@ -46,7 +48,7 @@
     </div>
   </div>
 </section>
-
+@each('pub_theme::appointment.item', $appointments, 'appointment','pub_theme::appointment.empty')
 {{-- AREA PERSONALE PAZIENTE --}}
 <!-- <section 
     class="flex items-start bg-[#E6EBF7] relative overflow-hidden">
@@ -72,86 +74,9 @@
     </div>
 </section> -->
 
-{{-- APPUNTAMENTO --}}
-<div class="w-full flex flex-col lg:flex-row items-center justify-center p-5">
-  <div class="flex justify-start py-8 sm:py-32 w-full">
-    <div class="w-full mx-auto">
-      <div class="flex flex-col items-center w-full mx-auto">
-        <a href="/it/patient/book">
-          <div class="bg-gradient-to-r from-cyan-500 to-[#1A467F] py-6 px-10 text-white rounded-lg text-lg flex items-center justify-center cursor-pointer">
-            Prenota una visita
-            <span class="ml-1">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   fill="none"
-                   viewBox="0 0 24 24"
-                   stroke-width="1.5"
-                   stroke="currentColor"
-                   class="size-6">
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
- <!-- <div class="w-full lg:w-2/4 flex items-center p-9">
-                <div class="w-full lg:w-2/4 bg-white rounded-lg shadow-2xl">
-                    <div class="p-5">
-                        <h4 class="mb-5 font-semibold">Appuntamento in programma</h4>
-
-                        <div class="flex flex-row items-center mb-2">
-                            <span class="mr-2 font-medium">Data:</span>
-                            <p>19/06/2025</p>
-                        </div>
-                        <div class="flex flex-row items-center mb-2">
-                            <span class="mr-2 font-medium">Orario:</span>
-                            <p>10:00 - 11:00</p>
-                        </div>
-                        <div class="flex flex-row items-center mb-2">
-                            <span class="mr-2 font-medium">Studio:</span>
-                            <p>OralB</p>
-                        </div>
-                        <div class="flex flex-row items-center mb-2">
-                            <span class="mr-2 font-medium">Indirizzo studio:</span>
-                            <p>Via dei test 79</p>
-                        </div>
-                        <div class="flex flex-row items-center mb-2">
-                            <span class="mr-2 font-medium">Telefono:</span>
-                            <p>0425 57899</p>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <span class="mr-2 font-medium">Email:</span>
-                            <p>studioralb@email.com</p>
-                        </div>
-                    </div>
-                </div>
-</div> -->
 
 
-
-       <!-- <div class="ml-5">
-           <div class="flex flex-col justify-center">
-               <h3 class="text-[#FF5F7E]">
-                   Il tuo referto è pronto!
-               </h3>
-       
-               <div class="relative w-64 h-48 mt-5 rounded-[25px] bg-[#E6EBF7] shadow-2xl overflow-hidden">
-                   <img src="/img/referto.svg" class="w-full h-full" />
-       
-                   <button class="flex items-center justify-between absolute bottom-0 left-0 w-full bg-[#E6EBF7B3] text-[#272C4D] px-3 text-center text-xl font-extrabold py-5 transition-all duration-300 ease-in-out hover:py-9">
-                       Scarica referto!
-                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                       </svg>
-                   </button>
-               </div>
-           </div>
-       </div> -->
+ 
 </div>
 
 

@@ -8,18 +8,24 @@ return array (
       'label' => 'ID',
       'placeholder' => 'Identificativo automatico',
       'help' => 'Identificativo univoco del record, generato automaticamente dal sistema',
+      'helper_text' => '',
+      'description' => '',
     ),
     'created_at' => 
     array (
       'label' => 'Data Creazione',
       'placeholder' => 'Seleziona data e ora',
       'help' => 'Data e ora di creazione del record nel sistema',
+      'helper_text' => '',
+      'description' => '',
     ),
     'updated_at' => 
     array (
       'label' => 'Ultima Modifica',
       'placeholder' => 'Aggiornamento automatico',
       'help' => 'Data e ora dell\'ultima modifica apportata al record',
+      'helper_text' => '',
+      'description' => '',
     ),
     'deleted_at' => 
     array (
@@ -44,6 +50,8 @@ return array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome completo',
       'help' => 'Nome identificativo dell\'elemento o della persona',
+      'helper_text' => '',
+      'description' => '',
     ),
     'description' => 
     array (
@@ -56,6 +64,8 @@ return array (
       'label' => 'Indirizzo Email',
       'placeholder' => 'nome@dominio.it',
       'help' => 'Indirizzo email valido per comunicazioni e accesso al sistema',
+      'helper_text' => '',
+      'description' => '',
     ),
     'password' => 
     array (
@@ -340,6 +350,8 @@ return array (
         'label' => 'Nome Ruolo',
         'placeholder' => 'Inserisci nome del ruolo',
         'help' => 'Nome identificativo del ruolo nel sistema',
+        'helper_text' => '',
+        'description' => '',
       ),
     ),
     'attributes' => 
@@ -404,7 +416,7 @@ return array (
       'label' => 'Orario Servizio',
       'placeholder' => 'Configura orari apertura',
       'help' => 'Orari di apertura e disponibilità del servizio medico',
-      'description' => 'schedule',
+      'description' => '',
       'helper_text' => '',
     ),
     'schedule1' => 
@@ -421,51 +433,54 @@ return array (
     ),
     'studio_selection' => 
     array (
-      'label' => 'Selezione Studio',
+      'label' => 'Studio',
       'placeholder' => 'Modalità selezione',
       'help' => 'Modalità di selezione dello studio medico',
     ),
     'studio_id' => 
     array (
-      'label' => 'ID Studio Medico',
+      'label' => 'Studio Medico',
       'placeholder' => 'Identificativo studio',
       'help' => 'Identificativo univoco dello studio medico',
-      'description' => 'studio_id',
-      'helper_text' => 'studio_id',
+      'description' => '',
+      'helper_text' => '',
     ),
     'selected_product_id' => 
     array (
       'label' => 'Servizio Selezionato',
       'placeholder' => 'ID servizio medico',
       'help' => 'Identificativo del servizio medico selezionato',
+      'helper_text' => '',
     ),
     'availability' => 
     array (
       'label' => 'Disponibilità',
       'placeholder' => 'Verifica disponibilità',
       'help' => 'Stato di disponibilità per appuntamenti e servizi',
+      'helper_text' => '',
     ),
     'appointment_date' => 
     array (
       'label' => 'Data Appuntamento',
       'placeholder' => 'Seleziona data',
       'help' => 'Data prescelta per l\'appuntamento medico',
-      'description' => 'appointment_date',
-      'helper_text' => 'appointment_date',
+      'description' => '',
+      'helper_text' => '',
     ),
     'appointment_time' => 
     array (
       'label' => 'Ora Appuntamento',
       'placeholder' => 'Seleziona orario',
       'help' => 'Orario specifico per l\'appuntamento medico',
-      'description' => 'appointment_time',
-      'helper_text' => 'appointment_time',
+      'description' => '',
+      'helper_text' => '',
     ),
     'polizza_convenzione_pratica_sconto' => 
     array (
       'label' => 'Sconto Convenzione',
       'placeholder' => 'Percentuale sconto applicata',
       'help' => 'Sconto applicato tramite polizza o convenzione attiva',
+      'helper_text' => '',
     ),
     'polizza_convenzione_istanza' => 
     array (
@@ -508,7 +523,11 @@ return array (
     ),
     'certification' => 
     array (
-      'label' => 'certification',
+      'label' => 'Certificazione',
+      'placeholder' => 'Carica certificazione',
+      'help' => 'Documento di certificazione professionale',
+      'helper_text' => '',
+      'description' => '',
     ),
   ),
   'actions' => 
@@ -616,11 +635,15 @@ return array (
     ),
     'export_xls' => 
     array (
-      'label' => 'export_xls',
+      'label' => 'Esporta Excel',
+      'helper_text' => '',
+      'description' => '',
     ),
     'createAnother' => 
     array (
-      'label' => 'createAnother',
+      'label' => 'Crea Altro',
+      'helper_text' => '',
+      'description' => '',
     ),
   ),
   'messages' => 

@@ -158,7 +158,7 @@ return array (
     ),
     'studio_step' => 
     array (
-      'label' => 'Selezione Studio',
+      'label' => 'Studio',
       'description' => 'Scelta dello studio medico',
       'help' => 'Seleziona lo studio medico dove effettuare la visita',
       'icon' => 'heroicon-o-building-office-2',
