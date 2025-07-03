@@ -10,12 +10,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
-    /**
-     * Nome della tabella.
-     *
-     * @var string
-     */
-    protected string $table = 'users';
+    
 
     /**
      * Run the migrations.
@@ -105,6 +100,9 @@ return new class extends XotBaseMigration
 
                 if (! $this->hasColumn('children_count')) {
                     $table->string('children_count')->nullable()->after('country_code');
+                }
+                if (! $this->hasColumn('last_dental_visit_period')) {
+                    $table->string('last_dental_visit_period')->nullable();
                 }
 
                 

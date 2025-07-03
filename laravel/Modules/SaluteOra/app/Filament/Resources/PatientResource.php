@@ -35,6 +35,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\SaluteOra\Enums\LastDentalVisitPeriodEnum;
 use Modules\Patient\Filament\Components\HealthCardUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -128,6 +129,7 @@ class PatientResource extends XotBaseResource
             
             Forms\Components\TextInput::make('phone')
                 ->tel()
+                ->required()
                 ->maxLength(255),
             Forms\Components\TextInput::make('email')
                 ->email()
@@ -149,8 +151,10 @@ class PatientResource extends XotBaseResource
     protected static function getPreVisitStepSchema(): array
     {
         return [
-            Forms\Components\DatePicker::make('last_dental_visit')
-                ->maxDate(now()),
+            //Forms\Components\DatePicker::make('last_dental_visit')
+            //    ->maxDate(now()),
+            Forms\Components\Select::make('last_dental_visit_period')
+                ->options(LastDentalVisitPeriodEnum::class),
             Forms\Components\Textarea::make('dental_problems')
                 ->maxLength(65535),
         ];
@@ -166,13 +170,13 @@ class PatientResource extends XotBaseResource
     protected static function getPrivacyStepSchema(): array
     {
         return [
-            'privacy_policy' => Forms\Components\View::make('saluteora::privacy-policy')
+            'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.privacy-policy')
                 ->columnSpanFull(),
             'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
                 ->required()
                 ->columnSpanFull(),
-            'newsletter' => Forms\Components\Checkbox::make('newsletter')
-                ->columnSpanFull(),
+            //'newsletter' => Forms\Components\Checkbox::make('newsletter')
+           //     ->columnSpanFull(),
         ];
     }
 

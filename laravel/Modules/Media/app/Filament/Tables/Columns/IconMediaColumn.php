@@ -39,11 +39,25 @@ class IconMediaColumn extends IconColumn
                     }
 
                     return Storage::disk($media->disk)->download($media->getPathRelativeToRoot());
+                    //return Storage::disk($media->disk)
+                    //    ->temporaryUploadUrl($media->getPathRelativeToRoot(),now()->addMinutes(5));
 
                     //return response()->streamDownload(function () use ($media) {
                     //    echo $media->get();
                     //}, $media->file_name);
-
+                    /*
+                    $path = Storage::disk($media->disk)->path($media->getPathRelativeToRoot());
+                    return response()->file($path, [
+                        'Content-Type' => $media->mime_type,
+                        'Content-Disposition' => 'inline; filename="' . basename($media->getPathRelativeToRoot()) . '"'
+                    ]);
+                    */
+                    /*
+                    return Storage::disk($media->disk)->response($media->getPathRelativeToRoot(), null, [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'inline; filename="' . basename($media->getPathRelativeToRoot()) . '"'
+                    ]);
+                    */
                 })
                 ;
 

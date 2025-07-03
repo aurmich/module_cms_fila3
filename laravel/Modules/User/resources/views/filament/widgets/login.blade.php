@@ -13,7 +13,10 @@
     @endif
     <form wire:submit.prevent="save" class="space-y-4">
         {{ $this->form }}
-        <button type="submit" class="w-full py-3 rounded bg-[#FF5F7E] text-white font-bold">{{ __('Accedi') }}</button>
+        <button type="submit" class="w-full py-3 rounded bg-[#FF5F7E] text-white font-bold">
+            {{ __('Accedi') }}
+            <x-filament::loading-indicator class="h-5 w-5" wire:loading/>
+        </button>
     </form>
     <div class="text-center text-sm text-gray-500 mt-2">
         @if (Route::has('password.request'))

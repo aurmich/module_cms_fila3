@@ -116,7 +116,6 @@
         "laravel": {
             "providers": [
                 "Modules\\Xot\\Providers\\XotServiceProvider",
-                "Modules\\Xot\\Providers\\Filament\\ModulesServiceProvider",
                 "Modules\\Xot\\Providers\\Filament\\AdminPanelProvider"
             ],
             "aliases": {}

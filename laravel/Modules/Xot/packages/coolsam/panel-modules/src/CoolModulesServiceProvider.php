@@ -30,15 +30,19 @@ class CoolModulesServiceProvider extends PackageServiceProvider
         $this->app->register(LaravelModulesServiceProvider::class);
 
         $this->app->afterResolving('filament', function () {
-            foreach (Filament::getPanels() as $panel) {
+            $panels=Filament::getPanels();
+           
+            foreach ($panels as $panel) {
                 $id = Str::of($panel->getId());
                 if ($id->contains('::')) {
                     $title = $id->replace(['::', '-'], [' ', ' '])->title()->toString();
                     $panel
+                   
                         ->renderHook(
                             'panels::sidebar.nav.start',
                             fn () => new HtmlString("<h2 class='m-2 p-2 font-black text-xl'>$title</h2>"),
                         )
+                            
                         ->renderHook(
                             'panels::sidebar.nav.end',
                             fn () => new HtmlString(

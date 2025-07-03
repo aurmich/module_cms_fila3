@@ -97,11 +97,23 @@ return array (
   ),
   'fields' => 
   array (
+    'id' => 
+    array (
+      'label' => 'ID Identificativo Paziente',
+      'placeholder' => 'Codice numerico univoco generato automaticamente',
+      'helper_text' => '',
+    ),
+    'name' => 
+    array (
+      'label' => 'Nome Completo Paziente',
+      'placeholder' => 'Nome e cognome concatenati per visualizzazione',
+      'helper_text' => '',
+    ),
     'first_name' => 
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome del paziente',
-      'help' => 'Nome come riportato sui documenti di identità ufficiali',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il nome è obbligatorio',
@@ -114,7 +126,7 @@ return array (
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome del paziente',
-      'help' => 'Cognome come riportato sui documenti di identità ufficiali',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il cognome è obbligatorio',
@@ -127,7 +139,7 @@ return array (
     array (
       'label' => 'Codice Fiscale',
       'placeholder' => 'Inserisci 16 caratteri del codice fiscale (es. RSSMRA80A01H501U)',
-      'help' => 'Codice fiscale italiano di 16 caratteri come riportato sulla tessera sanitaria',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il codice fiscale è obbligatorio',
@@ -139,7 +151,7 @@ return array (
     array (
       'label' => 'Data di Nascita',
       'placeholder' => 'Seleziona dal calendario la data di nascita',
-      'help' => 'Data di nascita nel formato gg/mm/aaaa come da documento identità',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'La data di nascita è obbligatoria',
@@ -152,7 +164,7 @@ return array (
     array (
       'label' => 'Genere Anagrafico',
       'placeholder' => 'Seleziona il genere dal menu a tendina',
-      'help' => 'Genere come indicato sui documenti anagrafici ufficiali',
+      'helper_text' => '',
       'options' => 
       array (
         'M' => 'Maschio',
@@ -169,16 +181,19 @@ return array (
     array (
       'label' => 'Nazionalità',
       'placeholder' => 'Seleziona la nazionalità del paziente',
-      'help' => 'Nazionalità come riportata sui documenti di identità',
-      'default' => 'Italiana',
-      'description' => 'nationality',
-      'helper_text' => 'nationality',
+      'helper_text' => '',
+    ),
+    'years_in_italy' => 
+    array (
+      'label' => 'Anni in Italia',
+      'placeholder' => 'Inserisci il numero di anni di residenza in Italia',
+      'helper_text' => '',
     ),
     'email' => 
     array (
       'label' => 'Indirizzo Email',
       'placeholder' => 'Inserisci email valida (es. nome@dominio.it)',
-      'help' => 'Indirizzo email principale per comunicazioni ufficiali e promemoria appuntamenti',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'L\'indirizzo email è obbligatorio',
@@ -191,7 +206,7 @@ return array (
     array (
       'label' => 'Numero di Telefono',
       'placeholder' => 'Inserisci numero completo (es. +39 333 123 4567)',
-      'help' => 'Numero di telefono principale per contatti urgenti e conferma appuntamenti',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il numero di telefono è obbligatorio',
@@ -203,7 +218,7 @@ return array (
     array (
       'label' => 'Indirizzo Residenza',
       'placeholder' => 'Via/Piazza Nome della Strada, 123',
-      'help' => 'Indirizzo completo di residenza con via/piazza e numero civico',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'L\'indirizzo di residenza è obbligatorio',
@@ -215,20 +230,19 @@ return array (
     array (
       'label' => 'Città di Residenza',
       'placeholder' => 'Inserisci nome della città',
-      'help' => 'Città di residenza attuale del paziente',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'La città è obbligatoria',
         'min' => 'Il nome della città deve contenere almeno 2 caratteri',
         'max' => 'Il nome della città non può superare i 100 caratteri',
       ),
-      'description' => 'city',
     ),
     'postal_code' => 
     array (
       'label' => 'Codice Postale (CAP)',
       'placeholder' => 'Inserisci 5 cifre del CAP (es. 00100)',
-      'help' => 'Codice di avviamento postale della città di residenza (5 cifre)',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il CAP è obbligatorio',
@@ -240,7 +254,7 @@ return array (
     array (
       'label' => 'Provincia di Residenza',
       'placeholder' => 'Seleziona la provincia (es. RM, MI, NA)',
-      'help' => 'Provincia di residenza identificata dalla sigla di 2 lettere',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'La provincia è obbligatoria',
@@ -252,18 +266,19 @@ return array (
     array (
       'label' => 'Paese di Residenza',
       'placeholder' => 'Seleziona il paese dal menu',
-      'help' => 'Paese di residenza attuale del paziente',
-      'default' => 'Italia',
-      'validation' => 
-      array (
-        'required' => 'Il paese di residenza è obbligatorio',
-      ),
+      'helper_text' => '',
+    ),
+    'country_code' => 
+    array (
+      'label' => 'Codice Paese',
+      'placeholder' => 'Codice ISO del paese (es. IT, FR, DE)',
+      'helper_text' => '',
     ),
     'isee_code' => 
     array (
       'label' => 'Codice Identificativo ISEE',
       'placeholder' => 'Inserisci codice univoco del certificato ISEE',
-      'help' => 'Codice alfanumerico univoco del certificato ISEE per accedere ad agevolazioni economiche',
+      'helper_text' => '',
       'validation' => 
       array (
         'alpha_num' => 'Il codice ISEE deve contenere solo lettere e numeri',
@@ -274,7 +289,7 @@ return array (
     array (
       'label' => 'Valore Indicatore ISEE',
       'placeholder' => 'Inserisci importo in euro (es. 15000.50)',
-      'help' => 'Valore economico in euro indicato nel certificato ISEE per il calcolo delle agevolazioni',
+      'helper_text' => '',
       'validation' => 
       array (
         'numeric' => 'Il valore ISEE deve essere un numero valido',
@@ -286,7 +301,7 @@ return array (
     array (
       'label' => 'Data Scadenza Certificato ISEE',
       'placeholder' => 'Seleziona data di scadenza dal calendario',
-      'help' => 'Data di scadenza ufficiale del certificato ISEE (solitamente 31 dicembre)',
+      'helper_text' => '',
       'validation' => 
       array (
         'date' => 'Inserisci una data di scadenza valida',
@@ -297,7 +312,7 @@ return array (
     array (
       'label' => 'Scansione Tessera Sanitaria',
       'placeholder' => 'Carica file immagine o PDF della tessera sanitaria',
-      'help' => 'Carica scansione fronte/retro della tessera sanitaria in formato PDF, JPG o PNG',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'La tessera sanitaria è obbligatoria per identificazione paziente',
@@ -310,7 +325,7 @@ return array (
     array (
       'label' => 'Documento di Identità Valido',
       'placeholder' => 'Carica scansione documento identità in corso di validità',
-      'help' => 'Carta d\'identità, patente di guida o passaporto in corso di validità (fronte/retro)',
+      'helper_text' => '',
       'validation' => 
       array (
         'required' => 'Il documento di identità è obbligatorio per verifica anagrafica',
@@ -323,7 +338,7 @@ return array (
     array (
       'label' => 'Certificato ISEE Completo',
       'placeholder' => 'Carica certificato ISEE per agevolazioni economiche',
-      'help' => 'Certificato ISEE ufficiale in corso di validità necessario per agevolazioni tariffarie',
+      'helper_text' => '',
       'validation' => 
       array (
         'file' => 'Carica un certificato ISEE valido',
@@ -335,7 +350,7 @@ return array (
     array (
       'label' => 'Certificato Medico Gravidanza',
       'placeholder' => 'Carica certificato medico attestante stato gravidanza',
-      'help' => 'Certificato medico ufficiale che attesta lo stato di gravidanza (richiesto solo se applicabile)',
+      'helper_text' => '',
       'validation' => 
       array (
         'file' => 'Carica un certificato medico valido',
@@ -347,7 +362,7 @@ return array (
     array (
       'label' => 'Stato di Gravidanza Attuale',
       'placeholder' => 'Indica se la paziente è attualmente in gravidanza',
-      'help' => 'Seleziona se la paziente è in stato di gravidanza (importante per trattamenti medici)',
+      'helper_text' => '',
       'options' => 
       array (
         1 => 'Sì, attualmente in gravidanza',
@@ -358,18 +373,24 @@ return array (
     array (
       'label' => 'Data Ultima Visita Odontoiatrica',
       'placeholder' => 'Seleziona data approssimativa ultima visita dentale',
-      'help' => 'Data approssimativa dell\'ultima visita specialistica odontoiatrica sostenuta',
+      'helper_text' => '',
       'validation' => 
       array (
         'date' => 'Inserisci una data valida',
         'before_or_equal' => 'La data dell\'ultima visita non può essere futura',
       ),
     ),
+    'last_dental_visit_period' => 
+    array (
+      'label' => 'Quando è stata la tua ultima visita dentale?',
+      'placeholder' => 'Seleziona il periodo temporale dell\'ultima visita dentale',
+      'helper_text' => '',
+    ),
     'dental_problems' => 
     array (
       'label' => 'Problemi Odontoiatrici Attuali',
       'placeholder' => 'Descrivi dolori, sensibilità o disturbi dentali attuali',
-      'help' => 'Descrizione dettagliata di problemi dentali attuali: dolori, sensibilità, mobilità denti, ecc.',
+      'helper_text' => '',
       'validation' => 
       array (
         'max' => 'La descrizione non può superare i 500 caratteri',
@@ -379,7 +400,7 @@ return array (
     array (
       'label' => 'Allergie e Intolleranze',
       'placeholder' => 'Elenca farmaci, alimenti o sostanze che causano allergie',
-      'help' => 'Elenco completo di allergie note a farmaci, alimenti, lattice o altre sostanze',
+      'helper_text' => '',
       'validation' => 
       array (
         'max' => 'L\'elenco allergie non può superare i 1000 caratteri',
@@ -389,7 +410,7 @@ return array (
     array (
       'label' => 'Patologie Croniche',
       'placeholder' => 'Indica diabete, ipertensione, cardiopatie o altre patologie croniche',
-      'help' => 'Elenco delle patologie croniche diagnosticate che potrebbero influenzare i trattamenti',
+      'helper_text' => '',
       'validation' => 
       array (
         'max' => 'L\'elenco patologie non può superare i 1000 caratteri',
@@ -399,7 +420,7 @@ return array (
     array (
       'label' => 'Farmaci Attualmente Assunti',
       'placeholder' => 'Elenca tutti i farmaci con dosaggio e frequenza',
-      'help' => 'Elenco completo di farmaci, integratori e prodotti erboristici attualmente assunti',
+      'helper_text' => '',
       'validation' => 
       array (
         'max' => 'L\'elenco farmaci non può superare i 1000 caratteri',
@@ -409,17 +430,23 @@ return array (
     array (
       'label' => 'Note Cliniche Aggiuntive',
       'placeholder' => 'Inserisci altre informazioni mediche rilevanti non specificate sopra',
-      'help' => 'Campo libero per informazioni mediche aggiuntive rilevanti per il trattamento',
+      'helper_text' => '',
       'validation' => 
       array (
         'max' => 'Le note aggiuntive non possono superare i 1500 caratteri',
       ),
     ),
+    'children_count' => 
+    array (
+      'label' => 'Figli',
+      'placeholder' => 'Inserisci il numero di figli',
+      'helper_text' => '',
+    ),
     'privacy_acceptance' => 
     array (
       'label' => 'Consenso Trattamento Dati Personali',
       'placeholder' => 'Devo accettare il trattamento dei dati secondo GDPR',
-      'help' => 'Consenso obbligatorio per legge al trattamento dei dati personali secondo GDPR (Regolamento UE 679/2016)',
+      'helper_text' => '',
       'validation' => 
       array (
         'accepted' => 'È obbligatorio accettare l\'informativa sulla privacy per procedere',
@@ -429,71 +456,31 @@ return array (
     array (
       'label' => 'Iscrizione Newsletter Informativa',
       'placeholder' => 'Desidero ricevere comunicazioni periodiche via email',
-      'help' => 'Consenso facoltativo per ricevere newsletter con aggiornamenti, promozioni e novità dello studio',
+      'helper_text' => '',
     ),
     'marketing_communications' => 
     array (
       'label' => 'Consenso Comunicazioni Marketing',
       'placeholder' => 'Accetto di ricevere offerte commerciali personalizzate',
-      'help' => 'Consenso facoltativo per ricevere comunicazioni commerciali e promozionali personalizzate',
-    ),
-    'id' => 
-    array (
-      'label' => 'ID Identificativo Paziente',
-      'placeholder' => 'Codice numerico univoco generato automaticamente',
-      'help' => 'Numero identificativo univoco del paziente nel sistema (generato automaticamente)',
-    ),
-    'name' => 
-    array (
-      'label' => 'Nome Completo Paziente',
-      'placeholder' => 'Nome e cognome concatenati per visualizzazione',
-      'help' => 'Nome e cognome completi del paziente per visualizzazione rapida nelle liste',
-    ),
-    'type' => 
-    array (
-      'label' => 'Tipologia Account Utente',
-      'placeholder' => 'Classificazione tipo utente nel sistema',
-      'help' => 'Classificazione del tipo di account utente nel sistema (Paziente, Dottore, Admin)',
+      'helper_text' => '',
     ),
     'created_at' => 
     array (
       'label' => 'Data Registrazione Sistema',
       'placeholder' => 'Timestamp creazione record generato automaticamente',
-      'help' => 'Data e ora di prima registrazione del paziente nel sistema',
+      'helper_text' => '',
     ),
     'updated_at' => 
     array (
       'label' => 'Ultimo Aggiornamento Dati',
       'placeholder' => 'Timestamp ultima modifica generato automaticamente',
-      'help' => 'Data e ora dell\'ultima modifica apportata ai dati del paziente',
-    ),
-    'years_in_italy' => 
-    array (
-      'description' => '',
       'helper_text' => '',
-      'placeholder' => '',
-      'label' => 'Anni in italia',
-    ),
-    'country_code' => 
-    array (
-      'description' => '',
-      'helper_text' => '',
-      'placeholder' => '',
-      'label' => 'Paese',
-    ),
-    'children_count' => 
-    array (
-      'description' => '',
-      'helper_text' => '',
-      'label' => 'Figli',
-      'placeholder' => '',
     ),
     'family_members' => 
     array (
       'label' => 'Componenti Nucleo Familiare',
-      'placeholder' => '',
+      'placeholder' => 'Inserisci il numero di componenti del nucleo familiare',
       'helper_text' => '',
-      'description' => '',
     ),
   ),
   'actions' => 
@@ -501,173 +488,59 @@ return array (
     'create' => 
     array (
       'label' => 'Registra Nuovo Paziente',
-      'tooltip' => 'Avvia procedura guidata per registrare un nuovo paziente con tutti i dati necessari',
-      'modal_heading' => 'Registrazione Nuovo Paziente nel Sistema',
-      'modal_description' => 'Compila il modulo guidato con tutti i dati anagrafici, sanitari e documentali richiesti',
-      'success' => 'Paziente registrato con successo nel sistema con ID univoco assegnato',
-      'error' => 'Errore durante la registrazione del paziente. Verifica i dati inseriti e riprova',
-      'confirmation' => 'Confermi di voler registrare questo nuovo paziente con i dati inseriti?',
+      'modal_heading' => 'Registrazione Paziente',
+      'modal_description' => 'Compila tutti i campi obbligatori per registrare un nuovo paziente',
+      'success' => 'Paziente registrato con successo nel sistema',
+      'error' => 'Errore durante la registrazione del paziente',
     ),
     'edit' => 
     array (
-      'label' => 'Modifica Dati Paziente',
-      'tooltip' => 'Aggiorna e modifica le informazioni esistenti del paziente selezionato',
-      'modal_heading' => 'Modifica Informazioni Paziente Esistente',
-      'modal_description' => 'Aggiorna i dati anagrafici, sanitari o documentali del paziente selezionato',
-      'success' => 'Dati del paziente aggiornati con successo nel sistema',
-      'error' => 'Errore durante l\'aggiornamento dei dati paziente. Controlla i campi e riprova',
-      'confirmation' => 'Confermi di voler salvare le modifiche apportate ai dati del paziente?',
-    ),
-    'delete' => 
-    array (
-      'label' => 'Elimina Scheda Paziente',
-      'tooltip' => 'Elimina definitivamente la scheda paziente e tutti i dati associati',
-      'modal_heading' => 'Conferma Eliminazione Definitiva Paziente',
-      'modal_description' => 'ATTENZIONE: Questa azione eliminerà definitivamente tutti i dati del paziente, inclusi appuntamenti e documentazione medica. L\'operazione non può essere annullata.',
-      'success' => 'Scheda paziente eliminata definitivamente dal sistema',
-      'error' => 'Errore durante l\'eliminazione della scheda paziente. Operazione non completata',
-      'confirmation' => 'SEI SICURO di voler eliminare DEFINITIVAMENTE questo paziente? Tutti i suoi dati verranno persi per sempre.',
+      'label' => 'Modifica Dati',
+      'modal_heading' => 'Modifica Informazioni Paziente',
+      'modal_description' => 'Aggiorna le informazioni del paziente selezionato',
+      'success' => 'Dati paziente aggiornati con successo',
+      'error' => 'Errore durante l\'aggiornamento dei dati',
     ),
     'view' => 
     array (
-      'label' => 'Visualizza Dettagli Completi',
-      'tooltip' => 'Consulta tutti i dettagli e documenti del paziente in modalità sola lettura',
-      'modal_heading' => 'Scheda Completa Paziente - Modalità Lettura',
-      'modal_description' => 'Visualizzazione completa di tutti i dati anagrafici, sanitari e documentali del paziente',
+      'label' => 'Visualizza Dettagli',
+      'modal_heading' => 'Scheda Completa Paziente',
+      'modal_description' => 'Visualizza tutti i dati del paziente selezionato',
     ),
-    'duplicate' => 
+    'delete' => 
     array (
-      'label' => 'Duplica Scheda Paziente',
-      'tooltip' => 'Crea una nuova scheda paziente copiando i dati di base da quella esistente',
-      'modal_heading' => 'Duplicazione Scheda Paziente Esistente',
-      'modal_description' => 'Crea una nuova registrazione paziente utilizzando come base i dati della scheda corrente',
-      'success' => 'Nuova scheda paziente creata con successo a partire dai dati esistenti',
-      'error' => 'Errore durante la duplicazione della scheda paziente',
+      'label' => 'Elimina Paziente',
+      'modal_heading' => 'Conferma Eliminazione',
+      'modal_description' => 'Sei sicuro di voler eliminare definitivamente questo paziente?',
+      'success' => 'Paziente eliminato dal sistema',
+      'error' => 'Errore durante l\'eliminazione',
+      'confirmation' => 'Questa operazione non può essere annullata',
     ),
-    'export' => 
+    'approve' => 
     array (
-      'label' => 'Esporta Dati Pazienti',
-      'tooltip' => 'Esporta elenco pazienti in formato Excel o PDF per reportistica',
-      'modal_heading' => 'Esportazione Dati Pazienti Selezionati',
-      'modal_description' => 'Seleziona formato e campi da includere nell\'esportazione dei dati pazienti',
-      'success' => 'Esportazione dati pazienti completata con successo. File pronto per il download',
-      'error' => 'Errore durante l\'esportazione dei dati pazienti. Riprova o contatta l\'assistenza',
+      'label' => 'Approva Registrazione',
+      'modal_heading' => 'Approva Paziente',
+      'modal_description' => 'Conferma l\'approvazione di questa registrazione paziente',
+      'success' => 'Registrazione paziente approvata',
+      'error' => 'Errore durante l\'approvazione',
     ),
-    'import' => 
+    'reject' => 
     array (
-      'label' => 'Importa Pazienti da File',
-      'tooltip' => 'Importa dati pazienti da file Excel o CSV per registrazione massiva',
-      'modal_heading' => 'Importazione Massiva Dati Pazienti',
-      'modal_description' => 'Carica file Excel/CSV con dati pazienti per importazione automatica nel sistema',
-      'success' => 'Importazione completata: :count pazienti registrati con successo nel sistema',
-      'error' => 'Errore durante l\'importazione dati: :error. Verifica formato file e dati',
-    ),
-    'bulk_delete' => 
-    array (
-      'label' => 'Elimina Pazienti Selezionati',
-      'tooltip' => 'Elimina definitivamente tutti i pazienti selezionati dalla lista',
-      'modal_heading' => 'Eliminazione Massiva Pazienti Selezionati',
-      'modal_description' => 'ATTENZIONE: Stai per eliminare definitivamente :count pazienti selezionati e tutti i loro dati associati',
-      'success' => 'Eliminazione massiva completata: :count pazienti rimossi definitivamente dal sistema',
-      'error' => 'Errore durante l\'eliminazione massiva dei pazienti selezionati',
-      'confirmation' => 'CONFERMI di voler eliminare DEFINITIVAMENTE tutti i :count pazienti selezionati? Questa azione è irreversibile.',
-    ),
-    'print' => 
-    array (
-      'label' => 'Stampa Scheda Paziente',
-      'tooltip' => 'Genera e stampa versione cartacea della scheda paziente completa',
-      'success' => 'Documento PDF generato con successo e pronto per la stampa',
-      'error' => 'Errore durante la generazione del documento di stampa',
+      'label' => 'Rifiuta Registrazione',
+      'modal_heading' => 'Rifiuta Paziente',
+      'modal_description' => 'Indica il motivo del rifiuto della registrazione',
+      'success' => 'Registrazione paziente rifiutata',
+      'error' => 'Errore durante il rifiuto',
     ),
   ),
   'messages' => 
   array (
-    'welcome' => 'Benvenuto nel sistema di gestione pazienti dello studio medico',
-    'loading' => 'Caricamento dati pazienti in corso, attendere prego...',
-    'saving' => 'Salvataggio modifiche paziente in corso...',
-    'search_placeholder' => 'Cerca pazienti per nome, cognome, codice fiscale o telefono...',
-    'validation_errors' => 'Controlla i campi evidenziati in rosso e correggi gli errori segnalati',
-    'upload_progress' => 'Caricamento documento in corso... :percentage%',
-    'file_uploaded' => 'Documento caricato con successo e salvato nel sistema',
-    'form_saved_automatically' => 'Bozza salvata automaticamente alle :time',
-    'success' => 
-    array (
-      'created' => 'Nuovo paziente registrato con successo nel sistema con ID #:id',
-      'updated' => 'Dati del paziente aggiornati con successo. Ultima modifica: :date',
-      'deleted' => 'Scheda paziente eliminata definitivamente dal sistema',
-      'imported' => 'Importazione completata con successo: :count pazienti aggiunti, :errors errori riscontrati',
-      'exported' => 'Esportazione dati completata: file contenente :count pazienti pronto per il download',
-      'document_uploaded' => 'Documento :filename caricato e associato al paziente con successo',
-      'bulk_action_completed' => 'Operazione massiva completata su :count pazienti selezionati',
-    ),
-    'errors' => 
-    array (
-      'create' => 'Errore durante la registrazione del nuovo paziente. Verifica i dati inseriti e riprova',
-      'update' => 'Errore durante l\'aggiornamento dei dati paziente. Modifiche non salvate',
-      'delete' => 'Errore durante l\'eliminazione della scheda paziente. Operazione non completata',
-      'import' => 'Errore durante l\'importazione: :error. Verifica formato file e contenuto dati',
-      'export' => 'Errore durante l\'esportazione dei dati pazienti. Riprova o contatta assistenza tecnica',
-      'file_upload' => 'Errore durante il caricamento del documento. Verifica formato e dimensioni file',
-      'file_size' => 'Il documento selezionato è troppo grande. Dimensione massima consentita: 5MB',
-      'file_type' => 'Formato documento non supportato. Utilizzare solo PDF, JPG, JPEG o PNG',
-      'duplicate_fiscal_code' => 'Codice fiscale già presente nel sistema per altro paziente',
-      'duplicate_email' => 'Indirizzo email già utilizzato da altro paziente registrato',
-      'invalid_fiscal_code' => 'Codice fiscale non valido. Verifica che sia nel formato italiano corretto',
-      'connection_timeout' => 'Timeout di connessione. Verifica la connessione internet e riprova',
-    ),
-    'confirmations' => 
-    array (
-      'delete' => 'Sei SICURO di voler eliminare DEFINITIVAMENTE questo paziente? Tutti i suoi dati, appuntamenti e documenti verranno persi per sempre e non potranno essere recuperati.',
-      'bulk_delete' => 'ATTENZIONE: Stai per eliminare DEFINITIVAMENTE :count pazienti selezionati. Tutti i loro dati associati verranno persi per sempre. Confermi l\'operazione?',
-      'leave_form' => 'Ci sono modifiche non salvate nel modulo paziente. Sei sicuro di voler uscire? Le modifiche andranno perse.',
-      'overwrite_document' => 'Esiste già un documento di questo tipo per il paziente. Vuoi sostituirlo con quello nuovo?',
-      'clear_form' => 'Vuoi cancellare tutti i dati inseriti nel modulo e ricominciare da capo?',
-      'import_overwrite' => 'Alcuni pazienti nel file di importazione sono già presenti. Vuoi sovrascrivere i dati esistenti?',
-    ),
-    'empty_states' => 
-    array (
-      'no_patients' => 'Nessun paziente ancora registrato nel sistema',
-      'no_search_results' => 'Nessun paziente trovato per i criteri di ricerca inseriti',
-      'no_filtered_results' => 'Nessun paziente corrisponde ai filtri applicati. Prova a modificare i criteri di filtro',
-      'no_documents' => 'Nessun documento ancora caricato per questo paziente',
-      'no_appointments' => 'Nessun appuntamento programmato per questo paziente',
-      'no_medical_history' => 'Nessuna storia clinica registrata per questo paziente',
-    ),
-    'info' => 
-    array (
-      'required_fields' => 'I campi contrassegnati con asterisco (*) sono obbligatori',
-      'auto_save' => 'Il sistema salva automaticamente una bozza ogni 30 secondi',
-      'file_formats' => 'Formati documenti supportati: PDF, JPG, JPEG, PNG (max 5MB ciascuno)',
-      'privacy_notice' => 'Tutti i dati sono trattati secondo GDPR e conservati su server sicuri',
-      'data_retention' => 'I dati pazienti sono conservati secondo normative sanitarie vigenti',
-    ),
-    'warnings' => 
-    array (
-      'unsaved_changes' => 'Attenzione: ci sono modifiche non salvate nel modulo',
-      'document_expires_soon' => 'Attenzione: il documento ISEE scadrà tra :days giorni',
-      'missing_documents' => 'Attenzione: mancano documenti obbligatori per completare la registrazione',
-      'duplicate_data_detected' => 'Rilevati possibili dati duplicati con pazienti esistenti',
-    ),
-  ),
-  'filters' => 
-  array (
-    'all' => 'Tutti i Pazienti',
-    'recent' => 'Registrati di Recente',
-    'with_appointments' => 'Con Appuntamenti Attivi',
-    'missing_documents' => 'Documenti Mancanti',
-    'pregnant' => 'In Gravidanza',
-    'with_isee' => 'Con Certificato ISEE',
-    'by_gender' => 'Filtra per Genere',
-    'by_age_range' => 'Filtra per Fascia Età',
-    'by_city' => 'Filtra per Città',
-    'by_province' => 'Filtra per Provincia',
-  ),
-  'reports' => 
-  array (
-    'patient_summary' => 'Riepilogo Pazienti Registrati',
-    'demographics' => 'Report Demografico Pazienti',
-    'documents_status' => 'Stato Completamento Documenti',
-    'registrations_by_month' => 'Registrazioni per Mese',
-    'patient_distribution' => 'Distribuzione Geografica Pazienti',
+    'welcome' => 'Benvenuto nella gestione pazienti',
+    'registration_success' => 'Registrazione completata con successo',
+    'validation_errors' => 'Controlla i campi evidenziati e riprova',
+    'document_uploaded' => 'Documento caricato con successo',
+    'document_error' => 'Errore durante il caricamento del documento',
+    'empty_state' => 'Nessun paziente registrato nel sistema',
+    'search_no_results' => 'Nessun paziente trovato con i criteri di ricerca specificati',
   ),
 );

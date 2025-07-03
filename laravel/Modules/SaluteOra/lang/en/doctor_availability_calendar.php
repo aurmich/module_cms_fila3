@@ -1,0 +1,207 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'navigation' => [
+        'label' => 'Availability Calendar',
+        'group' => 'Schedule',
+        'icon' => 'heroicon-o-calendar',
+        'color' => 'primary',
+        'sort' => 10,
+        'tooltip' => 'Manage doctor availability calendar',
+    ],
+    'actions' => [
+        'legend' => [
+            'label' => 'Legend',
+            'tooltip' => 'Show calendar legend',
+            'icon' => 'heroicon-o-question-mark-circle',
+        ],
+        'refresh' => [
+            'label' => 'Refresh',
+            'tooltip' => 'Refresh calendar',
+            'icon' => 'heroicon-o-arrow-path',
+        ],
+        'create' => [
+            'label' => 'New Availability',
+            'tooltip' => 'Create new availability',
+            'icon' => 'heroicon-o-plus-circle',
+        ],
+        'edit' => [
+            'label' => 'Edit',
+            'tooltip' => 'Edit selected availability',
+            'icon' => 'heroicon-o-pencil',
+        ],
+        'delete' => [
+            'label' => 'Delete',
+            'tooltip' => 'Delete selected availability',
+            'icon' => 'heroicon-o-trash',
+        ],
+        'view' => [
+            'label' => 'View',
+            'tooltip' => 'View details',
+            'icon' => 'heroicon-o-eye',
+        ],
+    ],
+    'fields' => [
+        'doctor' => [
+            'label' => 'Doctor',
+            'placeholder' => 'Select doctor',
+            'helper_text' => 'Choose healthcare professional',
+            'tooltip' => 'Select doctor to view/edit their availability',
+            'required' => true,
+        ],
+        'date' => [
+            'label' => 'Date',
+            'placeholder' => 'Select date',
+            'helper_text' => 'Availability date',
+            'tooltip' => 'Date to set availability for',
+            'required' => true,
+        ],
+        'start_time' => [
+            'label' => 'Start Time',
+            'placeholder' => 'Select start time',
+            'helper_text' => 'Start of availability period',
+            'tooltip' => 'Appointment start time',
+            'required' => true,
+        ],
+        'end_time' => [
+            'label' => 'End Time',
+            'placeholder' => 'Select end time',
+            'helper_text' => 'End of availability period',
+            'tooltip' => 'Appointment end time',
+            'required' => true,
+        ],
+        'status' => [
+            'label' => 'Status',
+            'placeholder' => 'Select status',
+            'helper_text' => 'Current availability status',
+            'tooltip' => 'Current availability status',
+            'options' => [
+                'available' => 'Available',
+                'unavailable' => 'Unavailable',
+                'booked' => 'Booked',
+                'cancelled' => 'Cancelled',
+            ],
+        ],
+        'recurring' => [
+            'label' => 'Recurring',
+            'placeholder' => 'Select if recurring',
+            'helper_text' => 'Enable automatic repetition',
+            'tooltip' => 'A recurring availability repeats according to a specified rule',
+        ],
+        'repeat_until' => [
+            'label' => 'Repeat Until',
+            'placeholder' => 'Select end date for repetition',
+            'helper_text' => 'End of recurrence',
+            'tooltip' => 'The recurring availability will end on this date',
+        ],
+        'notes' => [
+            'label' => 'Notes',
+            'placeholder' => 'Enter any notes',
+            'helper_text' => 'Additional information',
+            'tooltip' => 'Additional details about the availability',
+        ],
+    ],
+    'status' => [
+        'available' => 'Available',
+        'unavailable' => 'Unavailable',
+        'booked' => 'Booked',
+        'cancelled' => 'Cancelled',
+        'pending' => 'Pending confirmation',
+        'tentative' => 'Tentative',
+    ],
+    'messages' => [
+        'success' => [
+            'created' => 'Availability created successfully',
+            'updated' => 'Availability updated successfully',
+            'deleted' => 'Availability deleted successfully',
+            'bulk_created' => 'Multiple availabilities created successfully',
+            'recurring_created' => 'Recurring availability created successfully',
+            'saved' => 'Changes saved successfully',
+        ],
+        'error' => [
+            'create' => 'Error creating availability',
+            'update' => 'Error updating availability',
+            'delete' => 'Error deleting availability',
+            'overlap' => 'The availability overlaps with an existing one',
+            'past_date' => 'Cannot create availability for past dates',
+            'invalid_time_range' => 'End time must be after start time',
+            'outside_working_hours' => 'Availability must be within working hours',
+            'not_found' => 'Availability not found',
+        ],
+        'confirm' => [
+            'delete' => 'Are you sure you want to delete this availability?',
+            'delete_recurring' => 'Are you sure you want to delete this recurring availability?',
+            'bulk_delete' => 'Are you sure you want to delete the selected availabilities?',
+            'confirm' => 'Confirm',
+            'cancel' => 'Cancel',
+        ],
+    ],
+    'modals' => [
+        'availability_details' => [
+            'title' => 'Availability Details',
+            'description' => 'View complete availability details',
+        ],
+        'create_availability' => [
+            'title' => 'Create Availability',
+            'description' => 'Fill out the form to create new availability',
+        ],
+        'edit_availability' => [
+            'title' => 'Edit Availability',
+            'description' => 'Edit details of the selected availability',
+        ],
+        'legend' => [
+            'title' => 'Legend',
+            'description' => 'Color and status meanings in the calendar',
+        ],
+    ],
+    'common' => [
+        'calendar' => [
+            'today' => 'Today',
+            'month' => 'Month',
+            'week' => 'Week',
+            'day' => 'Day',
+            'list' => 'List',
+            'agenda' => 'Agenda',
+            'no_events' => 'No events scheduled',
+            'all_day' => 'All day',
+            'time' => 'Time',
+            'event' => 'Event',
+            'date' => 'Date',
+            'time_zone' => 'Time zone',
+            'previous' => 'Previous',
+            'next' => 'Next',
+        ],
+        'time_slots' => [
+            'label' => 'Time Slots',
+            'tooltip' => 'Manage availability time slots',
+            'duration' => 'Duration',
+            'interval' => 'Interval',
+            'add' => 'Add time slot',
+            'remove' => 'Remove time slot',
+        ],
+        'recurring' => [
+            'daily' => 'Daily',
+            'weekly' => 'Weekly',
+            'monthly' => 'Monthly',
+            'custom' => 'Custom',
+        ],
+        'filters' => [
+            'date_range' => 'Date range',
+            'doctor' => 'Filter by doctor',
+            'status' => 'Filter by status',
+            'apply' => 'Apply filters',
+            'reset' => 'Reset filters',
+        ],
+        'legend' => [
+            'title' => 'Legend',
+            'available' => 'Available',
+            'unavailable' => 'Unavailable',
+            'booked' => 'Booked',
+            'cancelled' => 'Cancelled',
+            'pending' => 'Pending',
+            'tentative' => 'Tentative',
+        ],
+    ],
+];

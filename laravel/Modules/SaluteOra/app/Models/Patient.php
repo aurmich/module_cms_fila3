@@ -187,6 +187,7 @@ class Patient extends User implements HasMedia
         'years_in_italy',
         'family_members',
         'children_count',
+        'last_dental_visit_period',
 
     ];
     protected $appends = [
