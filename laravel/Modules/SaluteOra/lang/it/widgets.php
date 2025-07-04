@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 return [
+    'doctor_availabilities' => [
+        'schedule' => [
+            'no_schedule' => 'Nessun orario disponibile',
+            'click_edit_to_configure' => 'Clicca su modifica per configurare la tua disponibilità',
+        ],
+    ],
     'studio_overview' => [
         'title' => 'Panoramica Studi',
         'stats' => [

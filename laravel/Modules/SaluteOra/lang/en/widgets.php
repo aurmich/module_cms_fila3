@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 return [
+    'doctor_availabilities' => [
+        'schedule' => [
+            'no_schedule' => 'No schedule available',
+            'click_edit_to_configure' => 'Click edit to configure your availability',
+        ],
+    ],
     'studio_overview' => [
         'title' => 'Studios Overview',
         'stats' => [
