@@ -85,7 +85,7 @@ class DoctorAvailabilityCalendar extends Component
                 
                 $events[] = [
                     'id' => 'appointment_' . $appointment->id,
-                    'title' => $appointment->patient->full_name,
+                    'title' =>  $appointment->patient?->full_name,
                     'start' => $appointment->start_time->format('Y-m-d\TH:i:s'),
                     'end' => $appointment->end_time->format('Y-m-d\TH:i:s'),
                     'url' => route('filament.saluteora.resources.appointments.edit', ['record' => $appointment->id]),
@@ -95,7 +95,7 @@ class DoctorAvailabilityCalendar extends Component
                     'extendedProps' => [
                         'type' => 'appointment',
                         'status' => $appointment->status->value,
-                        'patientName' => $appointment->patient->full_name,
+                        'patientName' =>  $appointment->patient?->full_name,
                         'studioName' => $appointment->studio->name,
                         'description' => $appointment->title,
                     ],

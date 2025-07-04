@@ -53,7 +53,7 @@ class Confirmed extends AppointmentState
     public function modalDescription(): string
     {
         $appointment = $this->getModel();
-        //return 'Sei sicuro di voler l\' appuntamento con '.$appointment->patient->full_name.' ?';
+        //return 'Sei sicuro di voler l\' appuntamento con '. $appointment->patient?->full_name.' ?';
         return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
     }
 }
