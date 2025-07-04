@@ -395,6 +395,7 @@ return array (
       array (
         'max' => 'Description cannot exceed 500 characters',
       ),
+      'description' => 'dental_problems',
     ),
     'allergies' => 
     array (
