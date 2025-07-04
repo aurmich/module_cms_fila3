@@ -7,7 +7,6 @@
     $locale = LaravelLocalization::getCurrentLocale();
     $isLoggedIn = auth()->check(); 
     $appointments=$user->appointments;
-    $appointments=collect();
 @endphp
 
 <div class="p-5">
