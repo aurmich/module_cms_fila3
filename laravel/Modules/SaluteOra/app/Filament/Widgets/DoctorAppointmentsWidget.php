@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Filament\Widgets;
 
+use Illuminate\Support\Arr;
 use Livewire\Attributes\On;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Cache;
 use Filament\Support\Enums\ActionSize;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
 use Filament\Actions\Contracts\HasActions;
@@ -223,10 +226,16 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         ->requiresConfirmation()
         ->modalHeading($state->modalHeading())
         ->modalDescription($state->modalDescription())
+        ->form([
+            Textarea::make('message')
+                ->required()
+                ->maxLength(255),
+        ])
         ->action(function (array $data,$arguments) use($stateClass){
+            $message=Arr::get($data,'message');
             $appointmentId = $arguments['appointment'];
             $appointment = Appointment::firstWhere('id',$appointmentId);
-            $appointment->state->transitionTo($stateClass);
+            $appointment->state->transitionTo($stateClass,$message);
             // Per ora implementazione di debug
             //$this->dispatch('notify', [
             //    'type' => 'info',

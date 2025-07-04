@@ -48,6 +48,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 
 ### 7. Rejected (Rifiutato)
 - Appuntamento rifiutato dal dottore o sistema
+- **Transizioni possibili**: Confirmed (in caso di revisione della decisione)
 - **Colore**: danger
 - **Icona**: heroicon-o-no-symbol
 
@@ -68,7 +69,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 Pending → Confirmed → Scheduled → InProgress → Completed
    ↓         ↓          ↓
    ↓      Cancelled   NoShow
-Rejected    ↓          
+Rejected ↔ Confirmed   ↑
             ↓          
           Rescheduled ← Scheduled
                         ↓
@@ -107,6 +108,8 @@ Estende il pattern BaseTransition con:
 - `ConfirmedToScheduled`
 - `ConfirmedToCancelled`
 - `ConfirmedToRescheduled`
+- `ConfirmedToRejected`
+- `RejectedToConfirmed`
 - `ScheduledToInProgress`
 - `ScheduledToCancelled`
 - `ScheduledToNoShow`
@@ -184,6 +187,8 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 - `app/States/Appointment/Transitions/ConfirmedToScheduled.php`
 - `app/States/Appointment/Transitions/ConfirmedToCancelled.php`
 - `app/States/Appointment/Transitions/ConfirmedToRescheduled.php`
+- `app/States/Appointment/Transitions/ConfirmedToRejected.php`
+- `app/States/Appointment/Transitions/RejectedToConfirmed.php`
 - `app/States/Appointment/Transitions/ScheduledToInProgress.php`
 - `app/States/Appointment/Transitions/ScheduledToCancelled.php`
 - `app/States/Appointment/Transitions/ScheduledToNoShow.php`
@@ -198,4 +203,4 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 - [User States Pattern](user-states.md)
 - [BaseTransition Pattern](../app/States/User/Transitions/BaseTransition.php)
 
-*Ultimo aggiornamento: Dicembre 2024* 
+*Ultimo aggiornamento: Gennaio 2025 - Aggiunta transizione RejectedToConfirmed* 
