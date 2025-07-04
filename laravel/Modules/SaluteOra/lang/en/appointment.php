@@ -48,46 +48,55 @@ return [
         'title' => [
             'label' => 'Title',
             'placeholder' => 'Enter a title for the appointment',
+            'help' => 'Brief description of the appointment',
             'helper_text' => '',
         ],
         'patient_id' => [
             'label' => 'Patient',
             'placeholder' => 'Select the patient',
+            'help' => 'Patient for whom the appointment is scheduled',
             'helper_text' => '',
         ],
         'doctor_id' => [
             'label' => 'Doctor',
             'placeholder' => 'Select the doctor',
+            'help' => 'Doctor who will hold the appointment',
             'helper_text' => '',
         ],
         'dentist_id' => [
             'label' => 'Dentist',
             'placeholder' => 'Select the dentist',
+            'help' => 'Dentist responsible for the treatment',
             'helper_text' => '',
         ],
         'studio_id' => [
             'label' => 'Studio',
             'placeholder' => 'Select the studio',
+            'help' => 'Studio where the appointment will take place',
             'helper_text' => '',
         ],
         'start_time' => [
             'label' => 'Start Time',
             'placeholder' => 'Select the start time',
+            'help' => 'When the appointment starts',
             'helper_text' => '',
         ],
         'end_time' => [
             'label' => 'End Time',
             'placeholder' => 'Select the end time',
+            'help' => 'When the appointment ends',
             'helper_text' => '',
         ],
         'treatment_id' => [
             'label' => 'Treatment',
             'placeholder' => 'Select a treatment',
+            'help' => 'The type of treatment planned',
             'helper_text' => '',
         ],
         'status' => [
             'label' => 'Status',
             'placeholder' => 'Select the status',
+            'help' => 'Current status of the appointment',
             'helper_text' => '',
             'options' => [
                 'scheduled' => 'Scheduled',
@@ -100,6 +109,7 @@ return [
         'type' => [
             'label' => 'Appointment Type',
             'placeholder' => 'Select the type',
+            'help' => 'Type of medical appointment',
             'helper_text' => '',
             'options' => [
                 'consultation' => 'Consultation',
@@ -112,26 +122,31 @@ return [
         'notes' => [
             'label' => 'Notes',
             'placeholder' => 'Enter any notes',
+            'help' => 'Additional information about the appointment',
             'helper_text' => '',
         ],
         'reason' => [
             'label' => 'Reason',
             'placeholder' => 'Enter the reason for the appointment',
+            'help' => 'Main reason for the visit',
             'helper_text' => '',
         ],
         'emergency' => [
             'label' => 'Emergency',
             'placeholder' => 'Indicate if this is an emergency',
+            'help' => 'Mark as emergency appointment',
             'helper_text' => '',
         ],
         'eligibility_confirmed' => [
             'label' => 'Eligibility Confirmed',
             'placeholder' => 'Confirm eligibility',
+            'help' => 'Confirm that the patient is eligible for treatment',
             'helper_text' => '',
         ],
         'created_at' => [
             'label' => 'Creation Date',
             'placeholder' => 'Appointment creation date',
+            'help' => 'When the appointment was created',
             'helper_text' => '',
         ],
     ],
@@ -223,16 +238,19 @@ return [
         'by_status' => [
             'label' => 'By Status',
             'placeholder' => 'Filter by status',
+            'help' => 'Filter appointments by status',
             'helper_text' => '',
         ],
         'by_doctor' => [
             'label' => 'By Doctor',
             'placeholder' => 'Select a doctor',
+            'help' => 'Filter by specific doctor',
             'helper_text' => '',
         ],
         'by_date_range' => [
             'label' => 'By Date Range',
             'placeholder' => 'Select the range',
+            'help' => 'Filter by specific date period',
             'helper_text' => '',
         ],
     ],
@@ -332,18 +350,18 @@ return [
     ],
     'states' => [
         'confirmed' => [
-            'label' => 'Conferma',
+            'label' => 'Confirm',
             'color' => 'success',
             'icon' => 'heroicon-o-check-circle',
-            'modal_heading' => 'Accetta appuntamento',
-            'modal_description' => 'Sei sicuro di voler accettare questo appuntamento?',
+            'modal_heading' => 'Accept appointment',
+            'modal_description' => 'Are you sure you want to accept this appointment?',
         ],
         'rejected' => [
-            'label' => 'Rifiuta',
+            'label' => 'Reject',
             'color' => 'danger',
             'icon' => 'heroicon-o-x-mark',
-            'modal_heading' => 'Rifiuta appuntamento',
-            'modal_description' => 'Sei sicuro di voler rifiutare questo appuntamento?',
+            'modal_heading' => 'Reject appointment',
+            'modal_description' => 'Are you sure you want to reject this appointment?',
         ],
     ],
 ];
