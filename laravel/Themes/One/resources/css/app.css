@@ -265,7 +265,7 @@
     .filament-fullcalendar {
         --fc-small-font-size: 0.85em;
         --fc-page-bg-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-        --fc-neutral-bg-color: rgba(var(--gray-50), var(--tw-bg-opacity));
+        --fc-neutral-bg-color: transparent;
         --fc-neutral-text-color: grey;
         --fc-border-color: rgba(var(--gray-200));
         --fc-button-text-color: #fff;

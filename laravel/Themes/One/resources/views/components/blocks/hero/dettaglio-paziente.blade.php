@@ -33,7 +33,7 @@ NUMERO APPUNTAMENTI: {{  $appointments?->count() ?? 0}}
     <div class="flex flex-col items-center justify-center gap-8 lg:flex-row lg:justify-evenly">
       <div class="flex flex-col text-center lg:items-start lg:text-left">
         <h1 class="text-[#272C4D] text-4xl tracking-tight font-extrabold sm:text-5xl lg:text-5xl">
-          Bentornata, {{ $user?->name }}
+          Bentornata, {{ $user?->full_name }}
         </h1>
         <!-- <span class="text-lg mt-4">Qui puoi trovare i dettagli del tuo appuntamento</span> -->
       </div>

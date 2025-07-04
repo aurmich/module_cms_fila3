@@ -54,6 +54,10 @@ return new class extends XotBaseMigration
                     $table->string('registration_number')->nullable()->after('city');
                 }
 
+                if (! $this->hasColumn( 'certification')) {
+                    $table->string('certification')->nullable()->after('city');
+                }
+
                 if (! $this->hasColumn( 'status')) {
                     $table->string('status')->nullable()->after('registration_number');
                 }
