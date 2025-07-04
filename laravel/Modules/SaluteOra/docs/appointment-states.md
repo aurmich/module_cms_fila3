@@ -9,9 +9,9 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 ### 1. Pending (In attesa)
 - **Stato di default** per nuovi appuntamenti
 - Il paziente ha prenotato ma deve ancora confermare
-- **Transizioni possibili**: Confirmed, Cancelled, Rejected
-- **Colore**: gray
-- **Icona**: heroicon-o-question-mark-circle
+- **Transizioni possibili**: Confirmed, Rejected (NON Cancelled - da Pending non si può cancellare direttamente)
+- **Colore**: warning
+- **Icona**: heroicon-o-clock
 
 ### 2. Confirmed (Confermato)
 - Paziente ha confermato la richiesta di appuntamento
@@ -66,13 +66,17 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 
 ```
 Pending → Confirmed → Scheduled → InProgress → Completed
-   ↓  ↖      ↓          ↓
-   ↓  Rejected  Cancelled   NoShow
-   ↓            ↓          
-   ↓          Rescheduled ← Scheduled
-   ↓                        ↓
-   └──────────────────→ Cancelled
+   ↓         ↓          ↓
+   ↓      Cancelled   NoShow
+Rejected    ↓          
+            ↓          
+          Rescheduled ← Scheduled
+                        ↓
+                    Cancelled
 ```
+
+**Nota importante**: Da `Pending` si può andare solo a `Confirmed` o `Rejected`. 
+La cancellazione diretta da `Pending` non è permessa - un appuntamento in attesa deve essere prima confermato o rifiutato.
 
 ## Implementazione
 
@@ -99,7 +103,7 @@ Estende il pattern BaseTransition con:
 
 ### Transizioni Implementate
 - `PendingToConfirmed`
-- `PendingToCancelled`
+- `PendingToRejected`
 - `ConfirmedToScheduled`
 - `ConfirmedToCancelled`
 - `ConfirmedToRescheduled`
@@ -108,6 +112,7 @@ Estende il pattern BaseTransition con:
 - `ScheduledToNoShow`
 - `ScheduledToRescheduled`
 - `InProgressToCompleted`
+- `RescheduledToConfirmed`
 
 ## Pattern di Utilizzo
 
@@ -175,7 +180,7 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 ### Transizioni
 - `app/States/Appointment/Transitions/BaseTransition.php`
 - `app/States/Appointment/Transitions/PendingToConfirmed.php`
-- `app/States/Appointment/Transitions/PendingToCancelled.php`
+- `app/States/Appointment/Transitions/PendingToRejected.php`
 - `app/States/Appointment/Transitions/ConfirmedToScheduled.php`
 - `app/States/Appointment/Transitions/ConfirmedToCancelled.php`
 - `app/States/Appointment/Transitions/ConfirmedToRescheduled.php`
@@ -184,6 +189,7 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 - `app/States/Appointment/Transitions/ScheduledToNoShow.php`
 - `app/States/Appointment/Transitions/ScheduledToRescheduled.php`
 - `app/States/Appointment/Transitions/InProgressToCompleted.php`
+- `app/States/Appointment/Transitions/RescheduledToConfirmed.php`
 
 ## Collegamenti
 

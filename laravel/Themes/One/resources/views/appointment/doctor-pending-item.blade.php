@@ -20,6 +20,8 @@
 
             <!-- Actions -->
             <div class="cursor-pointer flex flex-row items-center">
+                
+                {{ ($this->infoAction)(['appointment' => $appointment->id]) }}
                 {{ ($this->confirmAction)(['appointment' => $appointment->id]) }}
                 {{ ($this->rejectAction)(['appointment' => $appointment->id]) }}
                 <!-- Eye icon + Modal -->

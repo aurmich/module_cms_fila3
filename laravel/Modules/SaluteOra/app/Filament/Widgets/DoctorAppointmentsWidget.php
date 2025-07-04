@@ -291,6 +291,13 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
                 //    'type' => 'info',
                 //    'message' => 'Funzionalità eliminazione in sviluppo',
                 //]);
+                $this->invalidateCache();
+                $this->loadAppointments();
+    
+                $this->dispatch('notify', [
+                    'type' => 'success',
+                    'message' => __('saluteora::widgets.doctor_appointments.messages.appointment_confirmed'),
+                ]);
             });
             
    }
@@ -306,5 +313,21 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     {
         return $this->getActionByState(Rejected::class,__FUNCTION__);
        
+    }
+
+    public function infoAction(): Action
+    {
+    return Action::make('info')
+        ->label('Mostra Info')
+        ->icon('heroicon-o-information-circle')
+        ->modalHeading('Dettagli appuntamento')
+        //->modalSubheading('Informazioni utili')
+        ->modalContent(
+            //view('saluteora::modals.info', [
+            //'appointment' => $this->record, // oppure altri dati
+            //])
+        )
+        ->modalSubmitAction(false) // ⛔️ nasconde il bottone di conferma
+        ->modalCancelActionLabel('Chiudi'); // ✅ personalizzi il bottone di chiusura
     }
 }

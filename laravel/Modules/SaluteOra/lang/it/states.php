@@ -32,7 +32,14 @@ return [
         'tooltip' => 'L\'utente ha richiesto l\'integrazione',
     ],
 
-    // Appointment States
+    // Appointment States - Stati degli Appuntamenti
+    'pending' => [
+        'label' => 'In attesa',
+        'color' => 'warning',
+        'icon' => 'heroicon-o-clock',
+        'modal_heading' => 'Appuntamento in Attesa',
+        'modal_description' => 'Questo appuntamento è in attesa di conferma.',
+    ],
     'confirmed' => [
         'label' => 'Confermato',
         'color' => 'success',
@@ -40,18 +47,53 @@ return [
         'modal_heading' => 'Conferma Appuntamento',
         'modal_description' => 'Sei sicuro di voler confermare questo appuntamento?',
     ],
+    'scheduled' => [
+        'label' => 'Programmato',
+        'color' => 'info',
+        'icon' => 'heroicon-o-calendar',
+        'modal_heading' => 'Appuntamento Programmato',
+        'modal_description' => 'Questo appuntamento è stato programmato nel calendario.',
+    ],
+    'in_progress' => [
+        'label' => 'In corso',
+        'color' => 'warning',
+        'icon' => 'heroicon-o-clock',
+        'modal_heading' => 'Visita in Corso',
+        'modal_description' => 'La visita medica è attualmente in corso.',
+    ],
+    'completed' => [
+        'label' => 'Completato',
+        'color' => 'success',
+        'icon' => 'heroicon-o-check-badge',
+        'modal_heading' => 'Visita Completata',
+        'modal_description' => 'La visita è stata completata con successo.',
+    ],
+    'cancelled' => [
+        'label' => 'Annullato',
+        'color' => 'danger',
+        'icon' => 'heroicon-o-x-circle',
+        'modal_heading' => 'Annulla Appuntamento',
+        'modal_description' => 'Sei sicuro di voler annullare questo appuntamento?',
+    ],
     'rejected' => [
-        'label' => 'Respinto',
+        'label' => 'Rifiutato',
         'color' => 'danger', 
         'icon' => 'heroicon-o-x-mark',
         'modal_heading' => 'Rifiuta Appuntamento',
         'modal_description' => 'Sei sicuro di voler rifiutare questo appuntamento?',
     ],
-    'pending' => [
-        'label' => 'In attesa',
-        'color' => 'warning',
-        'icon' => 'heroicon-o-clock',
-        'modal_heading' => 'Appuntamento in Attesa',
-        'modal_description' => 'Questo appuntamento è in attesa di conferma.',
+    'no_show' => [
+        'label' => 'Non presentato',
+        'color' => 'danger',
+        'icon' => 'heroicon-o-exclamation-circle',
+        'modal_heading' => 'Paziente Assente',
+        'modal_description' => 'Il paziente non si è presentato all\'appuntamento.',
+    ],
+    'rescheduled' => [
+        'label' => 'Riprogrammato',
+        'color' => 'info',
+        'icon' => 'heroicon-o-arrow-path',
+        'modal_heading' => 'Riprogramma Appuntamento',
+        'modal_description' => 'Questo appuntamento è stato riprogrammato per una nuova data.',
     ],
 ]; 

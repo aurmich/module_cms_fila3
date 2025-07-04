@@ -26,13 +26,16 @@ alwaysApply: false
 ## Stati Implementati
 ```php
 Pending → Confirmed → Scheduled → InProgress → Completed
-   ↓          ↓          ↓
-Cancelled   Cancelled   NoShow
+   ↓         ↓          ↓
+Rejected   Cancelled   NoShow
             ↓          
           Rescheduled ← Scheduled
                         ↓
                     Cancelled
 ```
+
+**IMPORTANTE**: Da `Pending` si può andare solo a `Confirmed` o `Rejected`. 
+La transizione PendingToCancelled è stata rimossa - un appuntamento in attesa deve essere prima confermato o rifiutato.
 
 ## Pattern Corretto
 
