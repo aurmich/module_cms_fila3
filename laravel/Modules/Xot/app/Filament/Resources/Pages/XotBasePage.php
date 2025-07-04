@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Resources\Pages;
 
-use Filament\Forms\Components\Component;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Page as FilamentPage;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Modules\Xot\Filament\Traits\NavigationLabelTrait;
-use Modules\Xot\Filament\Traits\TransTrait;
 use Webmozart\Assert\Assert;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\View;
+use Filament\Forms\ComponentContainer;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Components\Component;
+use Filament\Pages\Page as FilamentPage;
+use Modules\Xot\Filament\Traits\TransTrait;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Pages\Concerns\InteractsWithFormActions;
+use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 /**
  * Base class for all custom pages in the application.
  *
@@ -24,6 +25,7 @@ use Filament\Pages\Concerns\InteractsWithFormActions;
  *
  * @property ?string $model
  * @property ?array $data
+ * @property ComponentContainer $form
  */
 abstract class XotBasePage extends FilamentPage implements HasForms
 {
