@@ -60,7 +60,8 @@ class LoginWidget extends XotBaseWidget
             TextInput::make('password')
                 ->password()
                 ->required(),
-            Toggle::make('remember'),
+            Toggle::make('remember')
+            ->visible(false),
         ];
     }
 
