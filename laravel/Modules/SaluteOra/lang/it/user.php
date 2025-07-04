@@ -34,16 +34,12 @@ return array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'help' => 'Nome di battesimo dell\'utente',
-      'description' => 'first_name',
-      'helper_text' => 'first_name',
     ),
     'last_name' => 
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
       'help' => 'Cognome di famiglia dell\'utente',
-      'description' => 'last_name',
-      'helper_text' => 'last_name',
     ),
     'email' => 
     array (
@@ -56,8 +52,6 @@ return array (
         'email' => 'Inserisci un indirizzo email valido',
         'unique' => 'Questo indirizzo email è già in uso',
       ),
-      'description' => 'email',
-      'helper_text' => 'email',
     ),
     'password' => 
     array (
@@ -82,8 +76,6 @@ return array (
       'label' => 'Numero di Telefono',
       'placeholder' => 'Inserisci numero telefono (es. +39 333 123 4567)',
       'help' => 'Numero di telefono per contatti diretti e urgenze',
-      'description' => 'phone',
-      'helper_text' => 'phone',
     ),
     'address' => 
     array (
@@ -108,8 +100,6 @@ return array (
         'doctor' => 'Dottore/Medico',
         'admin' => 'Amministratore',
       ),
-      'description' => 'type',
-      'helper_text' => 'type',
     ),
     'state' => 
     array (
@@ -166,6 +156,14 @@ return array (
       'label' => 'Ultimo Aggiornamento',
       'placeholder' => 'Data ultima modifica automatica',
       'help' => 'Data e ora dell\'ultima modifica ai dati dell\'utente',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
     ),
   ),
   'actions' => 
