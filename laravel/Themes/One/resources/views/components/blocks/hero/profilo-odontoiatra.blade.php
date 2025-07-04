@@ -2,7 +2,7 @@
     <div>
         {{-- Pulsante Indietro --}}
         <div class="w-full flex justify-start">
-            <a href="/it">
+            <a href="{{ route('home') }}">
                 <div class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="size-9">

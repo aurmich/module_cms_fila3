@@ -9,7 +9,7 @@ $user=auth()->user();
     <!-- Back button -->
     <div class="w-full flex justify-start">
         {{-- DA AGGIORNARE URL --}}
-        <a href="/it">
+        <a href="{{ route('home') }}">
             <div class="cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" class="size-9">
@@ -23,7 +23,7 @@ $user=auth()->user();
     <!-- Page title -->
     <div class="p-10">
         <div class="w-full flex justify-center">
-            <h1 class="text-center">Appuntamenti Rifiutati</h1>
+            <h1 class="text-center">@lang('pub_theme::appointment.hero.rejected_appointments.title')</h1>
         </div>
     </div>
     

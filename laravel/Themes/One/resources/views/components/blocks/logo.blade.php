@@ -9,7 +9,7 @@
     'title' => null,
     'description' => null,
 ])
-<a href="/it">
+<a href="{{ route('home') }}">
     <div class="my-12" {{ $attributes->merge(['class' => 'p-4 flex items-center space-x-3']) }}>
         <!-- @if($icon)
             <x-filament::icon :name="$icon" :class="$size" class="text-primary-600 dark:text-primary-400" />

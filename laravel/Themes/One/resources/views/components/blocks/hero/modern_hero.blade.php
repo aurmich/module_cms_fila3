@@ -92,7 +92,7 @@
                 @if(!empty($primaryCta) || !empty($secondaryCtaData))
                     <div class="flex flex-row justify-center gap-4 pt-4">
                         @if(!empty($primaryCta))
-                            <a href="/it" 
+                            <a href="{{ route('home') }}" 
                                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md !text-white bg-[#FF5F7E] md:py-4 md:text-lg md:px-10">
                                 {{ $primaryCta['text'] }}
                             </a>

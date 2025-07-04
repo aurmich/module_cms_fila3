@@ -102,14 +102,15 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
      */
     private function loadAppointments(): void
     {
-        $user = auth()->user();
+        
 
         $cacheKey = $this->getCacheKey();
         
-        $this->appointments = Cache::remember($cacheKey, 300, function () use ($user) {
+        
+        $this->appointments = Cache::remember($cacheKey, 300, function ()  {
             return Appointment::query()
                 ->with(['patient', 'doctor', 'studio'])
-                //->where('doctor_id', $user->id)
+                ->where('doctor_id', $this->doctor_id)
                 //->whereState('state', Pending::class)
                 ->where('state', $this->state)
                 ->orderBy('starts_at', 'asc')
@@ -123,12 +124,12 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
      */
     private function getCacheKey(): string
     {
-        $user_id = auth()->id();
+        
        
        
         $key= sprintf(
             'doctor_appointments_%s_%s',
-            $user_id ?? 0,
+            $this->doctor_id ?? 0,
             $this->state,
         );
         return $key;

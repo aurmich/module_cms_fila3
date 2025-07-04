@@ -27,7 +27,7 @@ new class extends Component {
     <!-- Back button -->
     <div class="w-full flex justify-start">
         {{-- DA AGGIORNARE URL --}}
-        <a href="/it">
+        <a href="{{ route('home') }}">
             <div class="cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke-width="1.5" stroke="currentColor" class="size-9">
@@ -41,7 +41,7 @@ new class extends Component {
     <!-- Page title -->
     <div class="p-10">
         <div class="w-full flex justify-center">
-            <h1 class="text-center">Appuntamenti in Entrata</h1>
+            <h1 class="text-center">@lang('pub_theme::appointment.hero.entry_appointments.title')</h1>
         </div>
     </div>
     {{--  

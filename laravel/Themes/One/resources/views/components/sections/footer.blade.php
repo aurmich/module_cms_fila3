@@ -18,11 +18,11 @@
             <!-- Colonna Logo e Descrizione -->
             <div class="flex justify-center">
                 <div class="text-center m-1 lg:m-6 md:text-right space-x-4">
-                <a href="/it" class="text-white text-sm m-1">Home</a>
+                <a href="{{ route('home') }}" class="text-white text-sm m-1">Home</a>
                 <a href="/it/pages/progetto" class="text-white text-sm m-1">Progetto</a>
                 </div>
             </div>
-            <a href="/it">
+            <a href="{{ route('home') }}">
                 <div class="flex justify-center">
                     <img src="/img/saluteOra-new-logo.png" alt="{{ config('app.name') }}" class="h-16 lg:h-24 w-auto">
                 </div>

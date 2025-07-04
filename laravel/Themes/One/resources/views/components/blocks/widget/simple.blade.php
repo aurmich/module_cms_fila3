@@ -3,5 +3,6 @@
     {{--  
     <x-dynamic-component :component="$widget" />
     --}}
-    @livewire($widget)
+    
+    @livewire($widget, $block->data)
 </div>

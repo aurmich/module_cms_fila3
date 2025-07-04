@@ -115,6 +115,7 @@ class DoctorCalendarWidget extends FullCalendarWidget
         return Appointment::query()
             ->where('starts_at', '>=', $fetchInfo['start'])
             ->where('ends_at', '<=', $fetchInfo['end'])
+            ->where('doctor_id',auth()->id())
             ->get()
             ->map(
                 fn (Appointment $event) => EventData::make()
