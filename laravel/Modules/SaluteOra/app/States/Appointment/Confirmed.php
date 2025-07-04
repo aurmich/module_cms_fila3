@@ -18,17 +18,21 @@ class Confirmed extends AppointmentState
 
     public function label(): string
     {
-        return 'Confermato';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return static::transClass(self::class,'label');
+        //return 'Confermato';
     }
 
     public function color(): string
     {
-        return 'success';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'success';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-check-circle';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-check-circle';
     }
 
     public function canBeModified(): bool
@@ -39,5 +43,17 @@ class Confirmed extends AppointmentState
     public function isActive(): bool
     {
         return true;
+    }
+
+    public function modalHeading(): string
+    {
+        //return 'Accetta appuntamento';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+    }
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        //return 'Sei sicuro di voler l\' appuntamento con '.$appointment->patient->full_name.' ?';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
     }
 }

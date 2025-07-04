@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Filament\Widgets;
 
-use Filament\Facades\Filament;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\On;
+use Filament\Actions\Action;
+use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Cache;
+use Filament\Support\Enums\ActionSize;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\States\Appointment\Confirmed;
+use Filament\Actions\Contracts\HasActions;
+use Illuminate\Database\Eloquent\Collection;
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\SaluteOra\States\Appointment\Pending;
 use Modules\SaluteOra\States\Appointment\Rejected;
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Modules\SaluteOra\States\Appointment\Confirmed;
 
 /**
  * Widget per gestire gli appuntamenti del dottore.
@@ -21,12 +25,13 @@ use Modules\Xot\Filament\Widgets\XotBaseWidget;
  * Mostra gli appuntamenti in stato pending per il dottore loggato
  * con azioni per confermare o rifiutare gli appuntamenti.
  */
-class DoctorAppointmentsWidget extends XotBaseWidget
+class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
 {
+    use InteractsWithActions;
     /**
      * Vista del widget.
      */
-    protected static string $view = 'saluteora::filament.widgets.doctor-appointments-widget';
+    protected static string $view = 'pub_theme::filament.widgets.doctor-appointments-widget';
 
     /**
      * Schema del form per il widget.
@@ -80,11 +85,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget
             return false;
         }
 
-        // Verificare tenancy per il dottore
-        $tenant = Filament::getTenant();
-        if (!$tenant) {
-            return false;
-        }
+       
 
         return true;
     }
@@ -95,20 +96,13 @@ class DoctorAppointmentsWidget extends XotBaseWidget
     private function loadAppointments(): void
     {
         $user = auth()->user();
-        $tenant = Filament::getTenant();
-
-        if (!$user || !$tenant) {
-            $this->appointments = collect();
-            return;
-        }
 
         $cacheKey = $this->getCacheKey();
 
-        $this->appointments = Cache::remember($cacheKey, 300, function () use ($user, $tenant) {
+        $this->appointments = Cache::remember($cacheKey, 300, function () use ($user) {
             return Appointment::query()
                 ->with(['patient', 'doctor', 'studio'])
-                ->where('doctor_id', $user->id)
-                ->where('studio_id', $tenant->id)
+                //->where('doctor_id', $user->id)
                 ->whereState('state', Pending::class)
                 ->orderBy('starts_at', 'asc')
                 ->limit(10)
@@ -122,12 +116,12 @@ class DoctorAppointmentsWidget extends XotBaseWidget
     private function getCacheKey(): string
     {
         $user = auth()->user();
-        $tenant = Filament::getTenant();
+        
 
         return sprintf(
-            'doctor_appointments_%d_%d',
+            'doctor_appointments_%d',
             $user?->id ?? 0,
-            $tenant?->id ?? 0
+            
         );
     }
 
@@ -235,5 +229,82 @@ class DoctorAppointmentsWidget extends XotBaseWidget
     {
         $this->invalidateCache();
         $this->loadAppointments();
+    }
+
+
+
+    /**
+     * Azioni disponibili per il widget.
+     * 
+     * @return array<Action>
+     */
+    protected function getActions(): array
+    {
+        return [
+            $this->deleteAction(),
+        ];
+    }
+
+    /**
+     * Azione per eliminare un appuntamento.
+     */
+    public function deleteAction(): Action
+    {
+        return Action::make('delete')
+            ->label('Elimina')
+            ->icon('heroicon-o-trash')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->modalHeading('Elimina Appuntamento')
+            ->modalDescription('Sei sicuro di voler eliminare questo appuntamento?')
+            ->action(function (array $data) {
+                // Per ora implementazione di debug
+                $this->dispatch('notify', [
+                    'type' => 'info',
+                    'message' => 'Funzionalità eliminazione in sviluppo',
+                ]);
+            });
+    }
+
+   public function getActionByState(string $stateClass,string $name): Action
+   {
+    $appointment = new Appointment(); // senza salvarlo nel db
+    $state = new $stateClass($appointment);
+    
+   
+    return Action::make($name)
+        ->iconButton()
+            //->button()
+            ->size(ActionSize::Large)
+            ->tooltip($state->label())
+            ->icon($state->icon())
+            ->color($state->color())
+            ->requiresConfirmation()
+            ->modalHeading($state->modalHeading())
+            ->modalDescription($state->modalDescription())
+            ->action(function (array $data,$arguments) use($stateClass){
+                $appointmentId = $arguments['appointment'];
+                $appointment = Appointment::firstWhere('id',$appointmentId);
+                $appointment->state->transitionTo($stateClass);
+                // Per ora implementazione di debug
+                //$this->dispatch('notify', [
+                //    'type' => 'info',
+                //    'message' => 'Funzionalità eliminazione in sviluppo',
+                //]);
+            });
+            
+   }
+
+
+    public function confirmAction(): Action
+    {
+        return $this->getActionByState(Confirmed::class,__FUNCTION__);
+       
+    }
+
+    public function rejectAction(): Action
+    {
+        return $this->getActionByState(Rejected::class,__FUNCTION__);
+       
     }
 }

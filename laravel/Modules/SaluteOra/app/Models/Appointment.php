@@ -221,7 +221,7 @@ class Appointment extends BaseModel
 
     public function getTimeRangeAttribute(): string
     {
-        return $this->starts_at->format('H:i') . ' - ' . $this->ends_at->format('H:i');
+        return $this->starts_at?->format('H:i') . ' - ' . $this->ends_at?->format('H:i');
     }
 
     /**

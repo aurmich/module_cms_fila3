@@ -31,4 +31,27 @@ return [
         'description' => 'Richiesta di integrazione in corso',
         'tooltip' => 'L\'utente ha richiesto l\'integrazione',
     ],
+
+    // Appointment States
+    'confirmed' => [
+        'label' => 'Confermato',
+        'color' => 'success',
+        'icon' => 'heroicon-o-check-circle',
+        'modal_heading' => 'Conferma Appuntamento',
+        'modal_description' => 'Sei sicuro di voler confermare questo appuntamento?',
+    ],
+    'rejected' => [
+        'label' => 'Respinto',
+        'color' => 'danger', 
+        'icon' => 'heroicon-o-x-mark',
+        'modal_heading' => 'Rifiuta Appuntamento',
+        'modal_description' => 'Sei sicuro di voler rifiutare questo appuntamento?',
+    ],
+    'pending' => [
+        'label' => 'In attesa',
+        'color' => 'warning',
+        'icon' => 'heroicon-o-clock',
+        'modal_heading' => 'Appuntamento in Attesa',
+        'modal_description' => 'Questo appuntamento è in attesa di conferma.',
+    ],
 ]; 

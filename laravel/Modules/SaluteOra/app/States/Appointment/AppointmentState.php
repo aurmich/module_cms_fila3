@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment;
 
+use Modules\Xot\Filament\Traits\TransTrait;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
@@ -15,6 +16,7 @@ use Spatie\ModelStates\StateConfig;
  */
 abstract class AppointmentState extends State
 {
+    use TransTrait;
     /**
      * Configure the allowed state transitions.
      */
@@ -25,7 +27,8 @@ abstract class AppointmentState extends State
             ->default(Pending::class)
             // Pending transitions
             ->allowTransition(Pending::class, Confirmed::class, Transitions\PendingToConfirmed::class)
-            ->allowTransition(Pending::class, Cancelled::class, Transitions\PendingToCancelled::class)
+            //->allowTransition(Pending::class, Cancelled::class, Transitions\PendingToCancelled::class)
+            ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
 
             // Confirmed transitions
             ->allowTransition(Confirmed::class, Scheduled::class, Transitions\ConfirmedToScheduled::class)

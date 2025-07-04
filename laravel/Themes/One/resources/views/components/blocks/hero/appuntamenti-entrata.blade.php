@@ -1,7 +1,7 @@
 <?php
 use Livewire\Volt\Component;
 use Modules\SaluteOra\Models\Appointment;
-//$user=auth()->user();
+$user=auth()->user();
 $appointments = Appointment::all();
 
 new class extends Component {
@@ -44,8 +44,11 @@ new class extends Component {
             <h1 class="text-center">Appuntamenti in Entrata</h1>
         </div>
     </div>
-    @each('pub_theme::appointment.doctor-pending-item', $appointments, 'appointment','pub_theme::appointment.doctor-pending-empty')
     {{--  
-    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'state' => 'pending'])
+    @each('pub_theme::appointment.doctor-pending-item', $appointments, 'appointment','pub_theme::appointment.doctor-pending-empty')
     --}}
+      <div>
+    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'state' => 'pending'])
+    </div>
+    
 </div>

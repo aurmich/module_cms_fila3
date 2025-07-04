@@ -9,7 +9,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 ### 1. Pending (In attesa)
 - **Stato di default** per nuovi appuntamenti
 - Il paziente ha prenotato ma deve ancora confermare
-- **Transizioni possibili**: Confirmed, Cancelled
+- **Transizioni possibili**: Confirmed, Cancelled, Rejected
 - **Colore**: gray
 - **Icona**: heroicon-o-question-mark-circle
 
@@ -66,12 +66,12 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 
 ```
 Pending → Confirmed → Scheduled → InProgress → Completed
-   ↓          ↓          ↓
-Cancelled   Cancelled   NoShow
-            ↓          
-          Rescheduled ← Scheduled
-                        ↓
-                    Cancelled
+   ↓  ↖      ↓          ↓
+   ↓  Rejected  Cancelled   NoShow
+   ↓            ↓          
+   ↓          Rescheduled ← Scheduled
+   ↓                        ↓
+   └──────────────────→ Cancelled
 ```
 
 ## Implementazione

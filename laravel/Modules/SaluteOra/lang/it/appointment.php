@@ -348,4 +348,20 @@ return [
         'description' => 'Non ci sono appuntamenti per i criteri selezionati',
         'action' => 'Crea il primo appuntamento',
     ],
+    'states' => [
+        'confirmed' => [
+            'label' => 'Conferma',
+            'color' => 'success',
+            'icon' => 'heroicon-o-check-circle',
+            'modal_heading' => 'Accetta appuntamento',
+            'modal_description' => 'Sei sicuro di voler accettare questo appuntamento?',
+        ],
+        'rejected' => [
+            'label' => 'Rifiuta',
+            'color' => 'danger',
+            'icon' => 'heroicon-o-x-mark',
+            'modal_heading' => 'Rifiuta appuntamento',
+            'modal_description' => 'Sei sicuro di voler rifiutare questo appuntamento?',
+        ],
+    ],
 ];
