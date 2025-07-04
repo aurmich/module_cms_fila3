@@ -40,8 +40,8 @@ abstract class BaseTransition extends Transition
         $notify = $notify->mergeData($data);
         
         // Notifica al paziente
-        if ($this->appointment->patient && $this->appointment->patient->email) {
-            Notification::route('mail', $this->appointment->patient->email)
+        if ($this->appointment->patient && $this->appointment->patient?->email) {
+            Notification::route('mail', $this->appointment->patient?->email)
                 ->notify($notify);
         }
         
@@ -57,7 +57,7 @@ abstract class BaseTransition extends Transition
         return [
             'message' => $this->message,
             'appointment_date' => $this->appointment->start_time->format('d/m/Y H:i'),
-            'patient_name' => $this->appointment->patient->name ?? 'N/A',
+            'patient_name' => $this->appointment->patient?->name ?? 'N/A',
             'doctor_name' => $this->appointment->doctor->name ?? 'N/A',
         ];
     }
