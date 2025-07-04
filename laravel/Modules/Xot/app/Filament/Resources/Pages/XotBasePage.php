@@ -26,7 +26,7 @@ use Modules\Xot\Filament\Traits\NavigationLabelTrait;
  * @property ?string $model
  * @property ?array $data
  * @property ComponentContainer $form
- */
+*/
 abstract class XotBasePage extends FilamentPage implements HasForms
 {
     use InteractsWithForms;
@@ -86,7 +86,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
      */
     public function getTitle(): string
     {
-        return static::transTitle();
+        return static::transFunc(__FUNCTION__);
     }
 
     /**

@@ -1,14 +1,15 @@
 <?php
 
-return array (
-  'name' => 'Trattamenti',
-  'navigation' => 
-  array (
-    'label' => 'Prestazioni',
-    'group' => 'Servizi',
-    'icon' => 'heroicon-o-beaker',
-    'color' => 'violet',
-    'sort' => 5,
-    'tooltip' => 'Gestisci le prestazioni e i trattamenti disponibili',
-  ),
-);
+declare(strict_types=1);
+
+return [
+    'name' => 'Trattamenti',
+    'navigation' => [
+        'label' => 'Prestazioni',
+        'group' => 'Servizi',
+        'icon' => 'heroicon-o-beaker',
+        'color' => 'violet',
+        'sort' => 5,
+        'tooltip' => 'Gestisci le prestazioni e i trattamenti disponibili',
+    ],
+];

@@ -5,39 +5,39 @@ declare(strict_types=1);
 return [
     'fields' => [
         'name' => [
-            'label' => 'Nome',
-            'placeholder' => 'Inserisci il nome',
-            'tooltip' => 'Nome completo dell\'utente'
+            'label' => 'Name',
+            'placeholder' => 'Enter the name',
+            'tooltip' => 'User\'s full name'
         ],
         'email' => [
             'label' => 'Email',
-            'placeholder' => 'Inserisci l\'email',
-            'tooltip' => 'Indirizzo email dell\'utente'
+            'placeholder' => 'Enter the email',
+            'tooltip' => 'User\'s email address'
         ],
         'password' => [
             'label' => 'Password',
-            'placeholder' => 'Inserisci la password',
-            'tooltip' => 'Password dell\'utente'
+            'placeholder' => 'Enter the password',
+            'tooltip' => 'User\'s password'
         ],
         'state' => [
-            'label' => 'Stato',
-            'placeholder' => 'Seleziona lo stato',
-            'tooltip' => 'Stato dell\'utente'
+            'label' => 'State',
+            'placeholder' => 'Select the state',
+            'tooltip' => 'User\'s state'
         ]
     ],
     'actions' => [
         'create' => [
-            'label' => 'Crea Utente',
+            'label' => 'Create User',
             'icon' => 'heroicon-o-plus',
             'color' => 'primary'
         ],
         'edit' => [
-            'label' => 'Modifica',
+            'label' => 'Edit',
             'icon' => 'heroicon-o-pencil',
             'color' => 'warning'
         ],
         'delete' => [
-            'label' => 'Elimina',
+            'label' => 'Delete',
             'icon' => 'heroicon-o-trash',
             'color' => 'danger'
         ]
