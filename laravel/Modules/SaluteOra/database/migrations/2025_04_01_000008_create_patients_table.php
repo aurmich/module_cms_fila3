@@ -83,6 +83,9 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn( 'dental_problems')) {
                     $table->text('dental_problems')->nullable()->after('registration_number');
                 }
+                if (! $this->hasColumn('last_dental_visit_period')) {
+                    $table->string('last_dental_visit_period')->nullable();
+                }
 
 
                 if (! $this->hasColumn( 'status')) {

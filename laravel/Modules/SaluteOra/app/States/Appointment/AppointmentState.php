@@ -31,9 +31,10 @@ abstract class AppointmentState extends State
             ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
 
             // Confirmed transitions
-            ->allowTransition(Confirmed::class, Scheduled::class, Transitions\ConfirmedToScheduled::class)
-            ->allowTransition(Confirmed::class, Cancelled::class, Transitions\ConfirmedToCancelled::class)
-            ->allowTransition(Confirmed::class, Rescheduled::class, Transitions\ConfirmedToRescheduled::class)
+            //->allowTransition(Confirmed::class, Scheduled::class, Transitions\ConfirmedToScheduled::class)
+            //->allowTransition(Confirmed::class, Cancelled::class, Transitions\ConfirmedToCancelled::class)
+            //->allowTransition(Confirmed::class, Rescheduled::class, Transitions\ConfirmedToRescheduled::class)
+            ->allowTransition(Confirmed::class, Rejected::class, Transitions\ConfirmedToRejected::class)
 
             // Scheduled transitions
             ->allowTransition(Scheduled::class, InProgress::class, Transitions\ScheduledToInProgress::class)
@@ -48,5 +49,9 @@ abstract class AppointmentState extends State
             ->allowTransition(Rescheduled::class, Confirmed::class, Transitions\RescheduledToConfirmed::class);
     }
     
-    
+    abstract public function label(): string;
+    abstract public function color(): string;
+    abstract public function icon(): string;
+    abstract public function modalHeading(): string;
+    abstract public function modalDescription(): string;
 }

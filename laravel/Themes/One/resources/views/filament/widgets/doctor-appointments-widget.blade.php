@@ -1,7 +1,7 @@
 <x-filament::widget>
     <div class="space-y-4 max-h-96 overflow-y-auto">
         @if($this->appointments->isNotEmpty())
-            @each('pub_theme::appointment.doctor-pending-item', $this->appointments, 'appointment')
+            @each('pub_theme::appointment.doctor-item', $this->appointments, 'appointment')
         @else
             <div class="text-center py-12">
                 <div class="mx-auto h-12 w-12 text-gray-400">

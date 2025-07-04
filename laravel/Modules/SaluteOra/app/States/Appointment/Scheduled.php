@@ -18,17 +18,20 @@ class Scheduled extends AppointmentState
 
     public function label(): string
     {
-        return 'Programmato';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return 'Programmato';
     }
 
     public function color(): string
     {
-        return 'info';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'info';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-calendar';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-calendar';
     }
 
     public function canBeModified(): bool
@@ -39,5 +42,18 @@ class Scheduled extends AppointmentState
     public function isActive(): bool
     {
         return true;
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+        //return 'Appuntamento Programmato';
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
+        //return 'Questo appuntamento è stato programmato nel calendario.';
     }
 }

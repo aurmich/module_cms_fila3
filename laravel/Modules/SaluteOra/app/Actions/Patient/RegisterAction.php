@@ -31,6 +31,9 @@ class RegisterAction
             if(isset($data['studio'])){
                 unset($data['studio']);
             }
+            if(!isset($data['name']) && isset($data['email'])){
+                $data['name']=Str::of($data['email'])->before('@')->append('-')->append(Str::random(3))->toString();
+            }
             //$patient = Patient::create($data);
             if(isset($data['id'])){
                 $patient = $record;

@@ -19,21 +19,47 @@ class Completed extends AppointmentState
 
     public function label(): string
     {
-        return 'Completato';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return 'Completato';
     }
 
     public function color(): string
     {
-        return 'success';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'success';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-check-badge';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-check-badge';
+    }
+
+    public function canBeModified(): bool
+    {
+        return false;
+    }
+
+    public function isActive(): bool
+    {
+        return false;
     }
 
     public function isCompleted(): bool
     {
         return true;
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+        //return __('saluteora::states.completed.modal_heading');
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
+        //return __('saluteora::states.completed.modal_description');
     }
 }

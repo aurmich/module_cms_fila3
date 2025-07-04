@@ -18,21 +18,47 @@ class Cancelled extends AppointmentState
 
     public function label(): string
     {
-        return 'Annullato';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return 'Annullato';
     }
 
     public function color(): string
     {
-        return 'danger';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'danger';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-x-circle';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-x-circle';
+    }
+
+    public function canBeModified(): bool
+    {
+        return false;
+    }
+
+    public function isActive(): bool
+    {
+        return false;
     }
 
     public function isCancelled(): bool
     {
         return true;
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+        //return 'Annulla Appuntamento';
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
+        //return 'Sei sicuro di voler annullare questo appuntamento?';
     }
 }

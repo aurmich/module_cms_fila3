@@ -18,17 +18,20 @@ class Pending extends AppointmentState
 
     public function label(): string
     {
-        return 'In attesa';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return 'In attesa';
     }
 
     public function color(): string
     {
-        return 'warning';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'warning';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-clock';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-clock';
     }
 
     public function canBeModified(): bool
@@ -36,8 +39,26 @@ class Pending extends AppointmentState
         return true;
     }
 
+    public function isActive(): bool
+    {
+        return false;
+    }
+
     public function isPending(): bool
     {
         return true;
+    }
+    
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__, 'states.'.static::$name.'.modal_heading');
+        //return 'Appuntamento in Attesa';
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__, 'states.'.static::$name.'.modal_description');
+        //return 'Questo appuntamento è in attesa di conferma.';
     }
 } 

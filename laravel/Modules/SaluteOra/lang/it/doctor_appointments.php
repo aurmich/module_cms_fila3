@@ -31,5 +31,9 @@ return array (
     array (
       'label' => 'rejectAction',
     ),
+    'info' => 
+    array (
+      'label' => 'info',
+    ),
   ),
 );

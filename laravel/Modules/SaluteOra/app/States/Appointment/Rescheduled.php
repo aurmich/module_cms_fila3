@@ -18,21 +18,42 @@ class Rescheduled extends AppointmentState
 
     public function label(): string
     {
-        return 'Riprogrammato';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        //return 'Riprogrammato';
     }
 
     public function color(): string
     {
-        return 'info';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        //return 'info';
     }
 
     public function icon(): string
     {
-        return 'heroicon-o-arrow-path';
+        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        //return 'heroicon-o-arrow-path';
     }
 
     public function canBeModified(): bool
     {
         return true;
+    }
+
+    public function isActive(): bool
+    {
+        return false;
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+        //return __('saluteora::states.rescheduled.modal_heading');
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
+        //return __('saluteora::states.rescheduled.modal_description');
     }
 } 
