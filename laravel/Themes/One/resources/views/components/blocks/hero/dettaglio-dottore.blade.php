@@ -36,9 +36,9 @@
 </section>
 
 {{-- CALENDAR MONTH --}}
-<div class="flex flex-col-reverse lg:flex-row justify-center p-12">
+<div class="flex flex-col-reverse lg:flex-row justify-center items-center p-1 lg:p-12">
 
-<div>
+<div class="w-full lg:w-2/4">
     {{--  
     <x-dynamic-component :component="$widget"/>
     --}}

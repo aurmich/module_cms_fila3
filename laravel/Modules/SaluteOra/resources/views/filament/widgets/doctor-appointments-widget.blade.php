@@ -4,7 +4,7 @@
             {{ __('saluteora::widgets.doctor_appointments.title') }}
         </x-slot>
 
-        <div class="space-y-4 max-h-96 overflow-y-auto">
+        <div>
             @if($this->appointments->isNotEmpty())
                 @each('pub_theme::appointment.doctor-pending-item', $this->appointments, 'appointment')
             @else

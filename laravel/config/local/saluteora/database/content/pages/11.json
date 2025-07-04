@@ -22,8 +22,8 @@
                     "image": "/img/registration-complete.jpg",
                     "cta": [
                         {
-                            "it": "Vai alla tua area personale",
-                            "en": "Go to your dashboard"
+                            "it": "Torna alla home",
+                            "en": "Go back to home"
                         },
                         "#"
                     ],

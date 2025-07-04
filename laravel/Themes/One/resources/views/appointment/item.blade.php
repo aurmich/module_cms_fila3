@@ -1,4 +1,4 @@
-<div class="w-full lg:w-2/4 flex items-center p-9">
+<div class="w-full lg:w-2/4 flex items-center justify-center p-9">
     <div class="w-full lg:w-2/4 bg-white rounded-lg shadow-2xl">
         <div class="p-5">
             <h4 class="mb-5 font-semibold">@lang('pub_theme::txt.appointment.title')</h4>
