@@ -18,6 +18,9 @@
     $locale = LaravelLocalization::getCurrentLocale();
     $isLoggedIn = auth()->check();
     $appointments=$user->appointments;
+    //0197d5d2-7077-7030-83b9-28f2d209fa63
+    //dddx($user->appointments()->ddRawSql());
+    
     //$appointments=collect();  // per testare zero appuntamenti
 @endphp
 {{--  

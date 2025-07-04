@@ -77,7 +77,8 @@ return new class extends XotBaseMigration
                 if (!$this->hasColumn('doctor_id')) {
                     $table->foreignIdFor(Doctor::class,'doctor_id')->nullable();
                 }
-                
+                $table->string('patient_id',36)->nullable()->change();
+                $table->string('doctor_id',36)->nullable()->change();
 
                 if (!$this->hasColumn('emergency')) {
                     $table->boolean('emergency')->default(false);
