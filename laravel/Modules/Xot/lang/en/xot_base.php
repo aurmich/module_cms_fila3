@@ -69,5 +69,9 @@ return array (
       'helper_text' => 'pregnancy_certificate',
       'description' => 'pregnancy_certificate',
     ),
+    'doctor_certificate' => 
+    array (
+      'description' => 'doctor_certificate',
+    ),
   ),
 );
