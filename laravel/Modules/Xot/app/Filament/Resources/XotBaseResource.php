@@ -197,6 +197,9 @@ abstract class XotBaseResource extends FilamentResource
 
     public static function getAttachmentsSchema(bool $multiple=true): array{
         $model = static::getModel();
+        if(!method_exists($model,'getAttachments')){
+            return [];
+        }
         $attachments = $model::getAttachments();
         $uuid = Str::uuid()->toString();
         $schema = [];

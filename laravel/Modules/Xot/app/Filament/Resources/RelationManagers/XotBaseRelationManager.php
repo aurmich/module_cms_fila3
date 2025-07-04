@@ -55,6 +55,7 @@ abstract class XotBaseRelationManager extends FilamentRelationManager
             //throw new \Exception('Index page not found');
             return [];
         }
+        /** @phpstan-ignore-next-line */
         $index_page=$index->getPage();
         
         if(!method_exists($index_page,'getTableColumns')){
