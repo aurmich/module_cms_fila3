@@ -24,7 +24,7 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (! $request->user()->hasRole($role)) {
+        if (! $request->user()?->hasRole($role)) {
             // Redirect...
             return redirect()->route('home');
         }

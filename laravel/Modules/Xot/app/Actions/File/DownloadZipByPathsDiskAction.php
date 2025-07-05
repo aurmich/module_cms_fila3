@@ -7,12 +7,20 @@ namespace Modules\Xot\Actions\File;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueueableAction\QueueableAction;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DownloadZipByPathsDiskAction
 {
     use QueueableAction;
 
-    public function execute(array $attachments,string $disk)
+    /**
+     * Crea un file ZIP dai percorsi forniti e lo restituisce come download.
+     *
+     * @param array<string> $attachments Array di percorsi file
+     * @param string $disk Nome del disco di storage
+     * @return BinaryFileResponse|null Risposta di download o null se fallisce
+     */
+    public function execute(array $attachments, string $disk): ?BinaryFileResponse
     {
         $zipFileName = 'temp_zip_' .uniqid() . '.zip';
         $zipPath = 'temp/' . $zipFileName;
@@ -30,19 +38,23 @@ class DownloadZipByPathsDiskAction
                 
                 if (Storage::disk($disk)->exists($filePath)) {
                     $fileContent = Storage::disk($disk)->get($filePath);
-                    $zip->addFromString($attachment . '.pdf', $fileContent);
-                }else{
-                    dddx(['filePath'=>$filePath]);
+                    if ($fileContent !== null) {
+                        $zip->addFromString($attachment . '.pdf', $fileContent);
+                    }
+                } else {
+                    dddx(['filePath' => $filePath]);
                 }
             }
             $zip->close();
             
             $downloadFileName = 'attachments_' . uniqid() . '.zip';
             
-            // Usa Storage per il download e elimina dopo
-            return Storage::disk('local')->download($zipPath, $downloadFileName, [
+            // Usa response()->download() per il download
+            return response()->download($tempFilePath, $downloadFileName, [
                 'Content-Type' => 'application/zip'
             ]);//->deleteFileAfterSend(true);
         }
+        
+        return null;
     }
 }

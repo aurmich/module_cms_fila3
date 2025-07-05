@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Modules\Geo\Datas\AddressData;
 
 use function Safe\json_decode;
+use function Safe\preg_match;
 
 use Webmozart\Assert\Assert;
 

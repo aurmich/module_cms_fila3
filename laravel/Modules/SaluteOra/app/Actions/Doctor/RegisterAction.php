@@ -37,7 +37,7 @@ class RegisterAction
      */
     public function execute(UserContract $record,array $data): Doctor
     {
-        if(!isset($data['name']) && isset($data['email'])){
+        if(!isset($data['name']) && isset($data['email']) && is_string($data['email'])){
             $data['name']=Str::of($data['email'])->before('@')->append('-')->append(Str::random(3))->toString();
         }
         if(isset($data['id'])){

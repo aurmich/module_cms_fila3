@@ -57,9 +57,9 @@ class RouteData extends Data
         return sprintf('%d min', $minutes);
     }
 
-    /**
+    /*
      * Verifica se il percorso è stato ottimizzato.
-     */
+     
     public function isOptimized(): bool
     {
         return ! $this->waypoints->isEmpty() && ! $this->originalWaypoints->isEmpty()
@@ -68,7 +68,7 @@ class RouteData extends Data
                 fn (array $pair): bool => $pair[0]->equals($pair[1])
             );
     }
-
+    */
     /**
      * Ottiene un riepilogo del percorso.
      *
@@ -76,8 +76,7 @@ class RouteData extends Data
      *     distance: string,
      *     duration: string,
      *     steps: int,
-     *     waypoints: int,
-     *     optimized: bool
+     *     waypoints: int
      * }
      */
     public function getSummary(): array
@@ -87,7 +86,7 @@ class RouteData extends Data
             'duration' => $this->getFormattedDuration(),
             'steps' => count($this->steps),
             'waypoints' => $this->waypoints->count(),
-            'optimized' => $this->isOptimized(),
+            //'optimized' => $this->isOptimized(),
         ];
     }
 

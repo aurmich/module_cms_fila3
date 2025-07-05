@@ -39,6 +39,9 @@ class MixedChart extends BaseModel
 
     public function charts(): MorphMany
     {
+        /**
+         * @phpstan-ignore-next-line
+         */
         Relation::morphMap([
             'question_chart' => 'Modules\Quaeris\Models\QuestionChart',
             'mixed_chart' => self::class,

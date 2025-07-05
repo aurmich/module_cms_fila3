@@ -56,7 +56,9 @@ class IconStateColumn extends IconColumn
                             //$states=array_combine($states, $states);
                             $states=Arr::mapWithKeys($states,function($state) use ($record){
                                 $model=Str::of(class_basename($record))->slug()->toString();
-                               return [$state=>__('pub_theme::'.$model.'_states.'.$state.'.label')];
+                                /** @phpstan-ignore-next-line */
+                                Assert::string($label=__('pub_theme::'.$model.'_states.'.$state.'.label'));
+                                return [$state=>$label];
                             });
                             
                             //dddx(['state'=>$state, 'state1'=>$record->getAttribute($name),'record'=>$record]);

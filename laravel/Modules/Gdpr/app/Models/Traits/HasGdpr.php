@@ -23,7 +23,7 @@ trait HasGdpr
     /**
      * Get all consents for the model (polymorphic).
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<Consent>
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<\Modules\Gdpr\Models\Consent, $this>
      */
     public function consents(): MorphMany
     {
@@ -33,7 +33,7 @@ trait HasGdpr
     /**
      * Get only active (non-revoked) consents.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<Consent>
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<\Modules\Gdpr\Models\Consent, $this>
      */
     public function activeConsents(): MorphMany
     {
@@ -43,7 +43,7 @@ trait HasGdpr
     /**
      * Get the treatments associated with the user through consents.
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<Treatment>
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Modules\Gdpr\Models\Treatment, \Modules\Gdpr\Models\Consent, $this>
      */
     public function treatments()
     {
@@ -67,7 +67,7 @@ trait HasGdpr
     public function hasGivenConsent(ConsentType|string $type, bool $cached = true): bool
     {
         $type = $type instanceof ConsentType ? $type->value : $type;
-        $cacheKey = "user_{$this->getKey()}_consent_{$type}";
+        $cacheKey = 'user_' . (string) $this->getKey() . '_consent_' . $type;
         
         if ($cached && Cache::has($cacheKey)) {
             return (bool) Cache::get($cacheKey);
@@ -87,17 +87,18 @@ trait HasGdpr
      * 
      * @param  ConsentType|string  $type
      * @param  array<string, mixed>  $metadata
-     * @return Consent
+     * @return \Modules\Gdpr\Models\Consent
      */
     public function giveConsent(ConsentType|string $type, array $metadata = []): Consent
     {
         $type = $type instanceof ConsentType ? $type->value : $type;
         
+        /** @var \Modules\Gdpr\Models\Consent $consent */
         $consent = $this->consents()->create([
             'type' => $type,
             'metadata' => $metadata,
-            'ip_address' => request()?->ip(),
-            'user_agent' => request()?->userAgent(),
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
             'accepted_at' => now(),
         ]);
 
@@ -120,7 +121,7 @@ trait HasGdpr
             ->where('type', $type)
             ->update([
                 'revoked_at' => now(),
-                'revoked_ip_address' => request()?->ip(),
+                'revoked_ip_address' => request()->ip(),
             ]);
 
         if ($updated > 0) {
@@ -139,7 +140,7 @@ trait HasGdpr
      */
     protected function clearConsentCache(string $type): void
     {
-        $cacheKey = "user_{$this->getKey()}_consent_{$type}";
+        $cacheKey = 'user_' . (string) $this->getKey() . '_consent_' . $type;
         Cache::forget($cacheKey);
     }
 

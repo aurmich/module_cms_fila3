@@ -77,4 +77,15 @@ class StudioUser extends BasePivot
     }
 
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function studio(): BelongsTo
+    {
+        return $this->belongsTo(Studio::class);
+    }
+
+
 }

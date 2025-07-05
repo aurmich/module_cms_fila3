@@ -8,7 +8,7 @@ use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Modules\Xot\Filament\Traits\TransTrait;
-use Modules\SaluteOra\Enums\YearsInItalyEnum;
+
 
 /**
  * Defines the different types of appointments in the system.

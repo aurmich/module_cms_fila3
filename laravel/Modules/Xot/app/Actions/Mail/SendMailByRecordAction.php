@@ -37,6 +37,20 @@ class SendMailByRecordAction
         //Mail::send($mail);
         //dddx(Mail::to($record)->send(new $mailClass($record)));
         //$res=Mail::to('marco.sottana@gmail.com')->send($mail);
+        
+        // Verifica che il model abbia le proprietà/metodi necessari
+        if (!property_exists($record, 'email') || !isset($record->email)) {
+            throw new \InvalidArgumentException('Model must have email property');
+        }
+        
+        if (!method_exists($record, 'option')) {
+            throw new \InvalidArgumentException('Model must implement option method');
+        }
+        
+        if (!method_exists($record, 'myLogs')) {
+            throw new \InvalidArgumentException('Model must implement myLogs method');
+        }
+        
          $data = [
             'to' => $record->email,
             'subject' => $record->option('mail_oggetto'),

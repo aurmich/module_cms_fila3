@@ -16,5 +16,6 @@
     "User": true,
     "SaluteOra": true,
     "SaluteMo": true,
-    "Geo": true
+    "Geo": true,
+    "DbForge": true
 }

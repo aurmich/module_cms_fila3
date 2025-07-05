@@ -6,7 +6,8 @@ namespace Modules\Geo\Filament\Forms;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Get;
-use Modules\Geo\App\Services\GeoDataService;
+use Illuminate\Support\Collection;
+use Modules\Geo\Models\ComuneJson;
 
 /**
  * Form per la selezione della località.
@@ -19,22 +20,17 @@ use Modules\Geo\App\Services\GeoDataService;
 class LocationForm
 {
     /**
-     * Servizio per i dati geografici.
-     */
-    private GeoDataService $geoDataService;
-
-    /**
      * Costruttore.
      */
     public function __construct()
     {
-        $this->geoDataService = new GeoDataService();
+        // No initialization needed as we're using static methods
     }
 
     /**
      * Ottiene lo schema del form.
      * 
-     * @return array<string, Select>
+     * @return array<int, Select>
      */
     public function getSchema(): array
     {
@@ -42,38 +38,67 @@ class LocationForm
             Select::make('region')
                 ->label('geo::fields.region.label')
                 ->placeholder('geo::fields.region.placeholder')
-                ->options(fn () => $this->geoDataService->getRegions())
+                ->options(fn (): array => ComuneJson::allRegions()->toArray())
                 ->searchable()
                 ->required()
                 ->live()
-                ->afterStateUpdated(fn () => $this->geoDataService->clearCache()),
+                ->afterStateUpdated(fn () => ComuneJson::clearCache(false)),
 
             Select::make('province')
                 ->label('geo::fields.province.label')
                 ->placeholder('geo::fields.province.placeholder')
-                ->options(fn (Get $get) => $this->geoDataService->getProvinces($get('region')))
+                ->options(fn (Get $get): array => 
+                    filled($get('region')) 
+                    /** @phpstan-ignore-next-line */
+                        ? ComuneJson::getProvincesByRegion($get('region'))->toArray()
+                        : []
+                )
                 ->searchable()
                 ->required()
                 ->live()
-                ->afterStateUpdated(fn () => $this->geoDataService->clearCache())
+                ->afterStateUpdated(fn () => ComuneJson::clearCache(false))
                 ->visible(fn (Get $get) => filled($get('region'))),
 
             Select::make('city')
                 ->label('geo::fields.city.label')
                 ->placeholder('geo::fields.city.placeholder')
-                ->options(fn (Get $get) => $this->geoDataService->getCities($get('province')))
+                ->options(function (Get $get): array {
+                    if (!filled($get('province'))) {
+                        return [];
+                    }
+                    
+                    /** @var Collection<int, array{cap: array<int, string>, nome: string}> $cities */
+                    /** @phpstan-ignore-next-line */
+                    $cities = ComuneJson::byProvince($get('province'));
+                    
+                    return $cities->pluck('nome', 'nome')->toArray();
+                })
                 ->searchable()
                 ->required()
                 ->live()
-                ->afterStateUpdated(fn () => $this->geoDataService->clearCache())
+                ->afterStateUpdated(fn () => ComuneJson::clearCache(false))
                 ->visible(fn (Get $get) => filled($get('province'))),
 
             Select::make('cap')
                 ->label('geo::fields.cap.label')
                 ->placeholder('geo::fields.cap.placeholder')
-                ->options(fn (Get $get) => [
-                    $this->geoDataService->getCap($get('province'), $get('city')) => $this->geoDataService->getCap($get('province'), $get('city'))
-                ])
+                ->options(function (Get $get): array {
+                    if (!filled($get('province')) || !filled($get('city'))) {
+                        return [];
+                    }
+                    
+                    /** @var Collection<int, array{cap: array<int, string>, nome: string}> $cities */
+                    /** @phpstan-ignore-next-line */
+                    $cities = ComuneJson::byProvince($get('province'))
+                        ->where('nome', $get('city'));
+                        
+                    if ($cities->isEmpty()) {
+                        return [];
+                    }
+                    
+                    $caps = $cities->first()['cap'] ;
+                    return array_combine($caps, $caps);
+                })
                 ->required()
                 ->visible(fn (Get $get) => filled($get('city'))),
         ];

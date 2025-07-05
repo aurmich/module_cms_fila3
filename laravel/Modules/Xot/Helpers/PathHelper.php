@@ -176,9 +176,10 @@ class PathHelper
             return [];
         }
         
-        return collect(File::directories($modulesPath))
-            ->map(fn($path) => basename($path))
-            ->toArray();
+        /** @var array<string> $directories */
+        $directories = File::directories($modulesPath);
+        
+        return array_map(fn(string $path): string => basename($path), $directories);
     }
 
     /**

@@ -8,6 +8,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Modules\Geo\Models\Comune;
+use function Safe\json_decode;
+use function Safe\json_encode;
 
 class SushiCommand extends Command
 {
@@ -36,8 +38,17 @@ class SushiCommand extends Command
             'refresh' => $this->refresh(),
             'clear' => $this->clear(),
             'status' => $this->status(),
-            default => $this->error('Azione non valida'),
+            default => $this->handleUnknownAction(),
         };
+    }
+
+    /**
+     * Gestisce azioni sconosciute.
+     */
+    protected function handleUnknownAction(): int
+    {
+        $this->error('Azione non valida');
+        return 1;
     }
 
     /**
@@ -55,26 +66,50 @@ class SushiCommand extends Command
                 return 1;
             }
             
-            $data = json_decode(File::get($path), true);
+            // Uso Safe\json_decode per evitare false return
+            /** @var mixed $rawData */
+            $rawData = json_decode(File::get($path), true);
             
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                $this->error('Errore nel parsing del file JSON: ' . json_last_error_msg());
+            // Validazione tipo per evitare foreach su mixed
+            if (!is_array($rawData)) {
+                $this->error('Il file JSON non contiene un array valido');
                 return 1;
             }
+            
+            /** @var array<int, mixed> $data */
+            $data = $rawData;
             
             DB::table('comuni')->truncate();
             
             foreach ($data as $comune) {
+                // Type guard per ogni elemento del foreach
+                if (!is_array($comune)) {
+                    $this->warn('Elemento non valido saltato: ' . gettype($comune));
+                    continue;
+                }
+                
+                /** @var array<mixed, mixed> $arrayComune */
+                $arrayComune = $comune;
+                
+                // Validazione sicura degli offset con type guards
+                if (!$this->isValidComuneData($arrayComune)) {
+                    $this->warn('Dati comune non validi saltati: ' . json_encode($arrayComune));
+                    continue;
+                }
+                
+                /** @var array<string, mixed> $validComune */
+                $validComune = $arrayComune;
+                
                 DB::table('comuni')->insert([
-                    'id' => $comune['id'],
-                    'regione' => $comune['regione'],
-                    'provincia' => $comune['provincia'],
-                    'comune' => $comune['comune'],
-                    'cap' => $comune['cap'],
-                    'lat' => $comune['lat'],
-                    'lng' => $comune['lng'],
-                    'created_at' => $comune['created_at'] ?? now(),
-                    'updated_at' => $comune['updated_at'] ?? now(),
+                    'id' => $validComune['id'],
+                    'regione' => (string) $validComune['regione'],
+                    'provincia' => (string) $validComune['provincia'],
+                    'comune' => (string) $validComune['comune'],
+                    'cap' => (string) $validComune['cap'],
+                    'lat' => (float) $validComune['lat'],
+                    'lng' => (float) $validComune['lng'],
+                    'created_at' => $validComune['created_at'] ?? now(),
+                    'updated_at' => $validComune['updated_at'] ?? now(),
                 ]);
             }
             
@@ -84,6 +119,25 @@ class SushiCommand extends Command
             $this->error('Errore durante l\'aggiornamento del database: ' . $e->getMessage());
             return 1;
         }
+    }
+
+    /**
+     * Valida i dati di un comune.
+     * 
+     * @param array<mixed, mixed> $comune
+     * @return bool
+     */
+    protected function isValidComuneData(array $comune): bool
+    {
+        $requiredFields = ['id', 'regione', 'provincia', 'comune', 'cap', 'lat', 'lng'];
+        
+        foreach ($requiredFields as $field) {
+            if (!array_key_exists($field, $comune)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     /**

@@ -164,15 +164,17 @@ class LocationMapTableWidget extends MapTableWidget
 
         foreach ($locations as $location) {
             if ($location->latitude && $location->longitude) {
+                $iconUrl = $this->getMarkerIcon($location);
+                
                 $data[] = [
                     'location' => [
                         'lat' => (float) $location->latitude,
                         'lng' => (float) $location->longitude,
                     ],
-                    'label' => $location->name,
-                    'id' => $location->id,
+                    'label' => (string) $location->name,
+                    'id' => (int) $location->id,
                     'icon' => [
-                        'url' => $this->getMarkerIcon($location),
+                        'url' => is_string($iconUrl) ? $iconUrl : '',
                         'type' => 'url',
                         'scale' => [32, 32],
                     ],
@@ -204,19 +206,36 @@ class LocationMapTableWidget extends MapTableWidget
             ->modalSubmitAction(false);
     }
 
-    public function getMarkerIcon(Place $place): ?array
+    /**
+     * @return string|null
+     */
+    public function getMarkerIcon(Place $place): ?string
     {
         $type = $place->placeType->slug ?? 'default';
+        /** @var array<string, mixed>|null $markerConfig */
         $markerConfig = config("geo.markers.types.{$type}");
 
-        if (! is_array($markerConfig)) {
-            $markerConfig = config('geo.markers.types.default');
+        if (!is_array($markerConfig)) {
+            /** @var array<string, mixed>|null $defaultConfig */
+            $defaultConfig = config('geo.markers.types.default');
+            $markerConfig = $defaultConfig;
         }
 
-        if (! is_array($markerConfig)) {
+        if (!is_array($markerConfig)) {
             return null;
         }
 
-        return $markerConfig['icon'] ?? null;
+        // Validazione sicura per accesso nested all'icona
+        /** @var mixed $iconConfig */
+        $iconConfig = $markerConfig['icon'] ?? null;
+        
+        if (!is_array($iconConfig)) {
+            return null;
+        }
+
+        /** @var string|null $iconUrl */
+        $iconUrl = $iconConfig['url'] ?? null;
+        
+        return is_string($iconUrl) ? $iconUrl : null;
     }
 }

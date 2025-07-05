@@ -42,16 +42,22 @@ class GetElevationAction
         $this->validateCoordinates($location);
 
         try {
+            /** @var array<string, mixed> $response */
             $response = $this->googleMapsService->getElevation(
                 $location->latitude,
                 $location->longitude
             );
 
-            if (empty($response['results']) || ! isset($response['results'][0]['elevation'])) {
+            if (!isset($response['results']) || !is_array($response['results']) || empty($response['results'])) {
                 throw ElevationException::invalidResponse();
             }
 
-            return (float) $response['results'][0]['elevation'];
+            $firstResult = $response['results'][0] ?? null;
+            if (!is_array($firstResult) || !isset($firstResult['elevation'])) {
+                throw ElevationException::invalidResponse();
+            }
+
+            return (float) $firstResult['elevation'];
         } catch (\Throwable $e) {
             if ($e instanceof ElevationException) {
                 throw $e;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment;
 
-use Modules\Xot\Filament\Traits\TransTrait;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
+use Modules\Xot\Contracts\StateContract;
+use Modules\Xot\Filament\Traits\TransTrait;
 
 /**
  * Abstract base class for appointment state management.
@@ -14,7 +15,7 @@ use Spatie\ModelStates\StateConfig;
  * Defines the state machine configuration and required methods
  * that must be implemented by each concrete state class.
  */
-abstract class AppointmentState extends State
+abstract class AppointmentState extends State implements StateContract
 {
     use TransTrait;
     /**

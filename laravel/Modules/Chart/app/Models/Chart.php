@@ -55,11 +55,7 @@ class Chart extends BaseModel
         'colors',
     ];
 
-    /**
-     * Undocumented variable.
-     *
-     * @var array
-     */
+    /** @var  array<string, mixed>   */
     protected $attributes = [
         'list_color' => '#d60021',
         'color' => '#d60021',
@@ -207,7 +203,9 @@ class Chart extends BaseModel
             return $value;
         }
 
-        return $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
+        $res= $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
+        Assert::string($res);
+        return $res;
     }
 
     public function getWidthAttribute(?string $value): ?int

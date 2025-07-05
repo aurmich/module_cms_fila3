@@ -57,7 +57,6 @@ class LocationWidget extends XotBaseWidget
      */
     public function __construct()
     {
-        parent::__construct();
         $this->locationForm = new \Modules\Geo\Filament\Forms\LocationForm();
     }
 
@@ -74,7 +73,7 @@ class LocationWidget extends XotBaseWidget
     /**
      * Ottiene lo schema del form.
      * 
-     * @return array<string, mixed>
+     * @return array<int, \Filament\Forms\Components\Component>
      */
     public function getFormSchema(): array
     {
@@ -92,7 +91,11 @@ class LocationWidget extends XotBaseWidget
 
         $this->dispatch('location-selected', $data);
 
-        $this->notify('success', __('geo::widgets.location.messages.success'));
+        // Utilizzo metodo Livewire per notifiche
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => __('geo::widgets.location.messages.success')
+        ]);
     }
 
     /**

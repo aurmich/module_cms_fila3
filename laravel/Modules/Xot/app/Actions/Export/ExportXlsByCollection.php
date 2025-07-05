@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Actions\Export;
 
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Xot\Exports\CollectionExport;
@@ -23,7 +24,7 @@ class ExportXlsByCollection
     /**
      * Esporta una collezione in Excel.
      *
-     * @param Collection<int|string, mixed> $collection La collezione da esportare
+     * @param Collection<int|string, mixed>|EloquentCollection<int, \Illuminate\Database\Eloquent\Model> $collection La collezione da esportare
      * @param string $filename Nome del file Excel
      * @param string|null $transKey Chiave di traduzione per i campi
      * @param array<int, string> $fields Campi da includere nell'export
@@ -31,11 +32,16 @@ class ExportXlsByCollection
      * @return BinaryFileResponse
      */
     public function execute(
-        Collection $collection,
+        Collection|EloquentCollection $collection,
         string $filename = 'test.xlsx',
         ?string $transKey = null,
         array $fields = [],
     ): BinaryFileResponse {
+        // Converte EloquentCollection in Support\Collection se necessario
+        if ($collection instanceof EloquentCollection) {
+            $collection = Collection::make($collection->toArray());
+        }
+
         // Assicuriamo che $fields sia un array di stringhe
         $stringFields = array_map(
             fn (mixed $field): string => (string) $field,
@@ -54,14 +60,19 @@ class ExportXlsByCollection
     /**
      * Esporta una collezione in Excel utilizzando PhpSpreadsheet direttamente.
      *
-     * @param Collection<int|string, mixed> $rows La collezione da esportare
+     * @param Collection<int|string, mixed>|EloquentCollection<int, \Illuminate\Database\Eloquent\Model> $rows La collezione da esportare
      * @param array<int, string> $fields Campi da includere nell'export
      * @param string $filename Nome del file Excel
      *
      * @return string Il percorso del file generato
      */
-    public function executeWithSpreadsheet(Collection $rows, array $fields, string $filename): string
+    public function executeWithSpreadsheet(Collection|EloquentCollection $rows, array $fields, string $filename): string
     {
+        // Converte EloquentCollection in Support\Collection se necessario
+        if ($rows instanceof EloquentCollection) {
+            $rows = Collection::make($rows->toArray());
+        }
+
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -118,5 +129,16 @@ class ExportXlsByCollection
     {
         // Usa data_get di Laravel per accesso sicuro ai dati nidificati
         return data_get($data, $field, '');
+    }
+
+    /**
+     * Converte EloquentCollection in Support\Collection mantenendo i dati.
+     *
+     * @param EloquentCollection<int, \Illuminate\Database\Eloquent\Model> $eloquentCollection
+     * @return Collection<int|string, mixed>
+     */
+    protected function convertToSupportCollection(EloquentCollection $eloquentCollection): Collection
+    {
+        return Collection::make($eloquentCollection->toArray());
     }
 }

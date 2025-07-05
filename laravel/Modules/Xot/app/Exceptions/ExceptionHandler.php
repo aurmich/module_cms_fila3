@@ -17,7 +17,13 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ExceptionHandler 
 {
-    public static function handles(Exceptions $exceptions)
+    /**
+     * Configura la gestione delle eccezioni.
+     *
+     * @param Exceptions $exceptions Configuratore eccezioni Laravel
+     * @return void
+     */
+    public static function handles(Exceptions $exceptions): void
     {
         
         $exceptions->render(function (HttpException $e,Request $request) {

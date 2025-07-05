@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models\Traits;
 
+use Webmozart\Assert\Assert;
 use Modules\Geo\Models\Address;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -46,7 +47,12 @@ trait HasAddress
      */
     public function primaryAddress(): ?Address
     {
-        return $this->addresses()->where('is_primary', true)->first();
+        $res= $this->addresses()->where('is_primary', true)->first();
+        if($res==null){
+            return $res;
+        }
+        Assert::isInstanceOf($res, Address::class);
+        return $res;
     }
     
     /**
@@ -70,10 +76,12 @@ trait HasAddress
         if($address==null){
             return null;
         }
+        /** @phpstan-ignore-next-line */
         $locality=$address->getLocality();
         if($locality==null){
             return null;
         }
+        /** @phpstan-ignore-next-line */
         return $address->street_address.' '.$address->street_number.' '.implode('',$locality['cap']).' '.$locality['nome'].' ('.$locality['provincia']['nome'].') - '.$locality['regione']['nome'];
     }
     
@@ -184,7 +192,7 @@ trait HasAddress
                 $this->addresses()->update(['is_primary' => false]);
             }
         }
-        
+        /** @phpstan-ignore-next-line */
         return $this->addresses()->create($data);
     }
     

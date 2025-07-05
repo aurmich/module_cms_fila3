@@ -1,0 +1,11 @@
+{
+    "name": "DbForge",
+    "alias": "dbforge",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\DbForge\\Providers\\DbForgeServiceProvider"
+    ],
+    "files": []
+}

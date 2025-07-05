@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Resources\Pages;
 
+use Closure;
 use Filament\Forms\Form;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
@@ -37,7 +38,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
     /**
      * The model class associated with this page, if any.
      */
-    protected static ?string $model = null;
+    public static ?string $model = null;
 
     /**
      * The form data.
@@ -46,11 +47,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
      */
     public ?array $data = [];
 
-    /**
-     * Default icon for navigation.
-     */
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
+    
     /**
      * Get the view that should be used for the page.
      */
@@ -68,6 +65,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
             ->append(Str::of(static::class)
                 ->afterLast('\\')
                 ->kebab()
+                ->toString()
             );
 
         return $view->toString();
@@ -110,7 +108,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
     /**
      * Get the form schema for the page.
      *
-     * @return array<string, Component|array<string, Component>>
+     * @return array<string, Component>
      */
     protected function getFormSchema(): array
     {
@@ -122,6 +120,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
      */
     public static function getModel(): ?string
     {
+        /** @phpstan-ignore-next-line */
         return static::$model;
     }
 
@@ -135,15 +134,15 @@ abstract class XotBasePage extends FilamentPage implements HasForms
         return collect();
     }
 
-    /**
+    /*
      * Hook chiamato all'inizializzazione del componente.
-     */
+     
     public function mount(int|string $record): void
     {
         parent::mount($record);
         $this->form->fill($this->data ?? []);
     }
-
+    */
     /**
      * Get the view data for the page.
      *

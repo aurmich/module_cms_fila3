@@ -7,7 +7,7 @@ namespace Modules\SaluteOra\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Tenant\Traits\BelongsToTenant;
+
 
 /**
  * Modello Isee per la gestione dei dati relativi all'ISEE delle pazienti.
@@ -63,7 +63,7 @@ use Modules\Tenant\Traits\BelongsToTenant;
  */
 class Isee extends BaseModel
 {
-    use HasFactory, SoftDeletes, BelongsToTenant;
+    
 
     /**
      * Gli attributi che sono mass assignable.

@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/dbforge",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\DbForge\\": "app/",
+            "Modules\\DbForge\\Database\\Factories\\": "database/factories/",
+            "Modules\\DbForge\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\DbForge\\Tests\\": "tests/"
+        }
+    }
+}

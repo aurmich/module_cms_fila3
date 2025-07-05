@@ -92,7 +92,7 @@ class FetchCalendarEventsAction
                 'type' => $appointment->type->value,
                 'status' => $appointment->status->value,
                 'patient_id' => $appointment->patient_id,
-                'patient_name' =>  $appointment->patient?->full_name,
+                'patient_name' =>  $appointment->patient->full_name,
                 'doctor_id' => $appointment->doctor_id,
                 'doctor_name' => $appointment->doctor->full_name,
                 'studio_id' => $appointment->studio_id,
@@ -115,7 +115,7 @@ class FetchCalendarEventsAction
         $parts = [];
         
         if ($appointment->patient) {
-            $parts[] =  $appointment->patient?->full_name;
+            $parts[] =  $appointment->patient->full_name;
         }
         
         if ($appointment->type) {

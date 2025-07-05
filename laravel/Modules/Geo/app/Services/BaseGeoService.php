@@ -53,6 +53,7 @@ abstract class BaseGeoService
         $cacheKey = $this->getCacheKey($method, $url, $params);
 
         if ($useCache && config('geo.cache.enabled')) {
+            /** @var array<string, mixed>|null $cached */
             $cached = Cache::get($cacheKey);
             if (null !== $cached) {
                 return $cached;
@@ -79,14 +80,23 @@ abstract class BaseGeoService
             }
 
             $data = $response->json();
+            
+            // Validazione tipo di ritorno per PHPStan level 9 compliance
+            if (!is_array($data)) {
+                throw new \RuntimeException("Risposta API non valida: atteso array, ricevuto " . gettype($data));
+            }
+            
+            // Assicura che sia array<string, mixed> come richiesto dalla signature
+            /** @var array<string, mixed> $validatedData */
+            $validatedData = $data;
 
             if ($useCache && config('geo.cache.enabled')) {
                 /** @var int $ttl */
                 $ttl = config('geo.cache.ttl', 86400);
-                Cache::put($cacheKey, $data, $ttl);
+                Cache::put($cacheKey, $validatedData, $ttl);
             }
 
-            return $data;
+            return $validatedData;
         } catch (\Throwable $e) {
             throw new \RuntimeException("Errore durante la richiesta a {$this->getServiceName()}: ".$e->getMessage(), 0, $e);
         }

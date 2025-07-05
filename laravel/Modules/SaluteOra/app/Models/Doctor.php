@@ -204,7 +204,7 @@ class Doctor extends User implements HasMedia
         //'studio:address',
     ];
 
-    /** @var list<string>     */
+    /** @return list<string>     */
     public static function getAttachments():array{
         return  [
             //'certification', // Gestito come allegato singolo

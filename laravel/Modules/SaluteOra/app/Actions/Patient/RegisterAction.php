@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Actions\Patient;
 
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Modules\SaluteOra\Models\Patient;
@@ -31,7 +32,7 @@ class RegisterAction
             if(isset($data['studio'])){
                 unset($data['studio']);
             }
-            if(!isset($data['name']) && isset($data['email'])){
+            if(!isset($data['name']) && isset($data['email']) && is_string($data['email'])){
                 $data['name']=Str::of($data['email'])->before('@')->append('-')->append(Str::random(3))->toString();
             }
             //$patient = Patient::create($data);
@@ -59,7 +60,9 @@ class RegisterAction
             $patient->update($data_attachments);
             //*/
             //-------------------------------------------------
-
+            if(!method_exists($patient,'consents')){
+                throw new \Exception('Method consents not found');
+            }
             // Gestione delle preferenze
             if (isset($data['privacy_acceptance'])) {
                 $patient->consents()->create([
@@ -79,14 +82,14 @@ class RegisterAction
             /** @phpstan-ignore-next-line */
             $mail_slug=Str::of($data['type'])->append('-')->append($data['state'])->slug()->toString();
            //$mail_slug=Str::of($patient->type->value)->append('-')->append($patient->state::$name)->slug()->toString();
+            //Assert::isInstanceOf($patient,Patient::class);
             
-            
-            
+            //** @phpstan-ignore-next-line */
             $notify=new RecordNotification($patient,$mail_slug);
             Notification::route('mail', $data['email'])
             //->locale('it')
             ->notify($notify);
-
+            //** @phpstan-ignore-next-line */
             return $patient;
         
     }

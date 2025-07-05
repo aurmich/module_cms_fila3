@@ -293,6 +293,9 @@ class XotData extends Data implements Wireable
         if(is_null($class)){
             throw new \Exception('type '.$type.' not found in class '.$user_class);
         }
+        Assert::classExists($class, '['.__LINE__.']['.class_basename($this).']');
+        Assert::isAOf($class, Model::class, '['.__LINE__.']['.class_basename($this).']['.$class.']');
+        Assert::implementsInterface($class, UserContract::class, '['.__LINE__.']['.class_basename($this).']['.$class.']');
         return $class;
     }
 
@@ -334,7 +337,9 @@ class XotData extends Data implements Wireable
     public function getUserChildTypeClass(): string
     {
         $user_class = $this->getUserClass();
-        $enum_class = Arr::get($user_class::casts(),'type',null);
+        $user_instance=app($user_class);
+        //$enum_class = Arr::get($user_class::casts(),'type',null);
+        $enum_class = Arr::get($user_instance->getCasts(),'type',null);
         if($enum_class==null){
             $enum_class=Str::of($user_class)->replace('\\Models\\', '\\Enums\\')->append('TypeEnum')->toString();
         }

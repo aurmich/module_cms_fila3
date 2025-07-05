@@ -238,13 +238,24 @@ class MetatagData extends Data implements Wireable
      */
     public function getThemeColors(): array
     {
-        $defaults = $this->getFilamentColors();
+        $filamentColors = $this->getFilamentColors();
+        $defaults = [];
+        
+        // Convert Filament color arrays to simple string format
+        foreach ($filamentColors as $key => $colorArray) {
+            if (is_array($colorArray) && !empty($colorArray)) {
+                // Use the first color in the array as the default
+                $defaults[$key] = (string) $colorArray[0];
+            }
+        }
+        
         $custom = [];
         foreach ($this->colors as $key => $value) {
             if (Arr::has($value, 'color')) {
                 $custom[$key] = (string) $value['color'];
             }
         }
+        
         return array_merge($defaults, $custom);
     }
 
@@ -363,13 +374,26 @@ class MetatagData extends Data implements Wireable
     }
 
     /**
-     * Get the colors array with proper type handling.
+     * Get all colors with proper type handling.
+     * Converts custom colors to Filament color format for compatibility.
      *
      * @return array<string, array<int, string>>
      */
     public function getAllColors(): array
     {
-        return array_merge($this->getFilamentColors(), $this->colors);
+        $filamentColors = $this->getFilamentColors();
+        $customColors = [];
+        
+        // Convert custom color format to Filament color format
+        foreach ($this->colors as $key => $value) {
+            if (is_array($value) && Arr::has($value, 'color')) {
+                // Convert single color value to array format for Filament compatibility
+                $colorValue = (string) $value['color'];
+                $customColors[$key] = [$colorValue];
+            }
+        }
+        
+        return array_merge($filamentColors, $customColors);
     }
 
     /**

@@ -88,81 +88,7 @@ class RegistrationWidget extends XotBaseWidget
         return $data;
     }
 
-    public function getFormFillOLD(): array
-    {
-        $model = $this->getFormModel();
-        
-        // Se il modello ha un ID, significa che è stato trovato nel database
-        if ($model->exists) {
-            try {
-                $data = $model->toArray();
-                
-                // CORREZIONE BUG: Converti i campi file upload da stringhe ad array per Filament
-                // Filament si aspetta array per i componenti FileUpload, ma il database salva stringhe (percorsi file)
-                $attachments = [];
-                try {
-                    $reflection = new \ReflectionClass($model);
-                    if ($reflection->hasProperty('attachments')) {
-                        $property = $reflection->getProperty('attachments');
-                        if ($property->isStatic()) {
-                            /** @phpstan-ignore-next-line */
-                            $attachments = $model::getAttachments() ?? [];
-                        }
-                    }
-                } catch (\ReflectionException $e) {
-                    // Se la proprietà non esiste, continua con array vuoto
-                }
-                
-                foreach ($attachments as $attachment) {
-                    if (isset($data[$attachment]) && is_string($data[$attachment])) {
-                        // Converte stringa singola in array per compatibilità Filament
-                        $data[$attachment] = [$data[$attachment]];
-                    }
-                }
-                
-                return $data;
-            } catch (\Exception $e) {
-                // Se toArray() fallisce (problemi con enum), usa getAttributes()
-                Log::warning("Errore in toArray() per modello {$this->model}: " . $e->getMessage());
-                $attributes = $model->getAttributes();
-                
-                // Gestisci specificamente gli enum se presenti
-                if (isset($attributes['type']) && $model->type instanceof \BackedEnum) {
-                    $attributes['type'] = $model->type->value;
-                }
-                
-                // CORREZIONE BUG: Applica la stessa logica per gli attributi
-                $attachments = [];
-                try {
-                    $reflection = new \ReflectionClass($model);
-                    if ($reflection->hasProperty('attachments')) {
-                        $property = $reflection->getProperty('attachments');
-                        if ($property->isStatic()) {
-                            /** @phpstan-ignore-next-line */
-                            $attachments = $model::getAttachments() ?? [];
-                        }
-                    }
-                } catch (\ReflectionException $e) {
-                    // Se la proprietà non esiste, continua con array vuoto
-                }
-                
-                foreach ($attachments as $attachment) {
-                    if (isset($attributes[$attachment]) && is_string($attributes[$attachment])) {
-                        $attributes[$attachment] = [$attributes[$attachment]];
-                    }
-                }
-                
-                return $attributes;
-            }
-        }
-        
-        // Se è un nuovo modello, restituisci solo i campi fillable con valori null
-        $fillable = $model->getFillable();
-        $appends = $model->getAppends();
-        $fields = array_merge($fillable, $appends);
-        
-        return array_fill_keys($fields, null);
-    }
+   
 
     public function getFormSchema(): array
     {
@@ -175,7 +101,8 @@ class RegistrationWidget extends XotBaseWidget
     public function register(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
         $data = $this->form->getState();
-        $data=array_merge($this->data,$data);
+        
+        $data=array_merge($this->data ?? [],$data);
         $record = $this->record;
        
         $user = app($this->action)->execute($record, $data);

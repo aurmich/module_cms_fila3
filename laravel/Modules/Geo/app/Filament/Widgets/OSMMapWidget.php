@@ -15,14 +15,12 @@ use Webbingbrasil\FilamentMaps\Widgets\MapWidget;
  */
 class OSMMapWidget extends MapWidget
 {
-    protected static string $view = 'geo::filament.widgets.osm-map-widget';
-
     protected int|string|array $columnSpan = 'full';
 
     protected function getData(): array
     {
         /** @var Collection<int, Place> $places */
-        $places = Place::with(['address', 'type'])->get();
+        $places = Place::with(['address', 'placeType'])->get();
 
         return [
             'markers' => $this->getMarkers(),
@@ -42,24 +40,27 @@ class OSMMapWidget extends MapWidget
     public function getMarkers(): array
     {
         /** @var Collection<int, Place> $places */
-        $places = Place::with(['address', 'type'])->get();
+        $places = Place::with(['address', 'placeType'])->get();
 
-        return $places->map(function (Place $place): array {
-            $marker = [
-                'position' => [
-                    'lat' => $place->latitude,
-                    'lng' => $place->longitude,
-                ],
-                'title' => $place->name ?? 'Unnamed Place',
-                'content' => $this->getInfoWindowContent($place),
-            ];
+        return $places
+            ->filter(fn(Place $place) => $place->latitude !== null && $place->longitude !== null)
+            ->map(function (Place $place): array {
+                $marker = [
+                    'position' => [
+                        'lat' => (float) $place->latitude,
+                        'lng' => (float) $place->longitude,
+                    ],
+                    'title' => (string) ($place->name ?? 'Unnamed Place'),
+                    'content' => $this->getInfoWindowContent($place),
+                ];
 
-            if ($icon = $this->getMarkerIcon($place)) {
-                $marker['icon'] = $icon;
-            }
+                $icon = $this->getMarkerIcon($place);
+                if ($icon !== null) {
+                    $marker['icon'] = $icon;
+                }
 
-            return $marker;
-        })->all();
+                return $marker;
+            })->all();
     }
 
     /**
@@ -95,7 +96,10 @@ class OSMMapWidget extends MapWidget
 
     protected function getInfoWindowContent(Place $place): string
     {
-        return view('geo::filament.widgets.osm-map-info-window', [
+        /** @var view-string $viewName */
+        $viewName = 'geo::filament.widgets.osm-map-info-window';
+        
+        return view($viewName, [
             'place' => $place,
         ])->render();
     }
@@ -105,7 +109,8 @@ class OSMMapWidget extends MapWidget
      */
     protected function getMarkerIcon(Place $place): ?array
     {
-        $type = $place->type->slug ?? 'default';
+        // Uso placeType invece di type per evitare relazioni mancanti
+        $type = $place->placeType->slug ?? 'default';
 
         $iconPath = resource_path("images/markers/{$type}.png");
         if (! file_exists($iconPath)) {
@@ -123,7 +128,10 @@ class OSMMapWidget extends MapWidget
 
     public function render(): View
     {
-        return view('geo::filament.widgets.osm-map-widget', [
+        /** @var view-string $viewName */
+        $viewName = 'geo::filament.widgets.osm-map-widget';
+        
+        return view($viewName, [
             'data' => $this->getData(),
         ]);
     }

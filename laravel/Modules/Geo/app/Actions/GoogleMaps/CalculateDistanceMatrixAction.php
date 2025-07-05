@@ -19,8 +19,8 @@ class CalculateDistanceMatrixAction
     /**
      * Calcola la matrice delle distanze tra origini e destinazioni.
      *
-     * @param Collection<LocationData> $origins      Punti di origine
-     * @param Collection<LocationData> $destinations Punti di destinazione
+     * @param Collection<int, LocationData> $origins      Punti di origine
+     * @param Collection<int, LocationData> $destinations Punti di destinazione
      *
      * @throws GoogleMapsApiException Se la richiesta fallisce o i dati non sono validi
      *
@@ -35,8 +35,8 @@ class CalculateDistanceMatrixAction
         $apiKey = $this->getApiKey();
 
         $response = Http::get(self::BASE_URL, [
-            'origins' => $origins->map(fn (LocationData $location) => sprintf('%f,%f', $location->latitude, $location->longitude))->join('|'),
-            'destinations' => $destinations->map(fn (LocationData $location) => sprintf('%f,%f', $location->latitude, $location->longitude))->join('|'),
+            'origins' => $origins->map(fn (LocationData $location): string => sprintf('%f,%f', $location->latitude, $location->longitude))->join('|'),
+            'destinations' => $destinations->map(fn (LocationData $location): string => sprintf('%f,%f', $location->latitude, $location->longitude))->join('|'),
             'key' => $apiKey,
         ]);
 
@@ -44,9 +44,10 @@ class CalculateDistanceMatrixAction
             throw GoogleMapsApiException::requestFailed((string) $response->status());
         }
 
+        /** @var array{status?: string, rows?: array<int, array{elements?: array<int, array{distance?: array{text: string, value: int}, duration?: array{text: string, value: int}, status?: string}>}>} $data */
         $data = $response->json();
 
-        if ('OK' !== ($data['status'] ?? null)) {
+        if (!is_array($data) || 'OK' !== ($data['status'] ?? null)) {
             throw GoogleMapsApiException::requestFailed('Stato della risposta non valido: '.($data['status'] ?? 'sconosciuto'));
         }
 
@@ -55,15 +56,15 @@ class CalculateDistanceMatrixAction
         }
 
         return array_map(
-            fn (array $row) => array_map(
-                fn (array $element) => [
+            fn (array $row): array => array_map(
+                fn (array $element): array => [
                     'distance' => $element['distance'] ?? ['text' => '0 km', 'value' => 0],
                     'duration' => $element['duration'] ?? ['text' => '0 min', 'value' => 0],
                     'status' => $element['status'] ?? 'ZERO_RESULTS',
                 ],
                 $row['elements'] ?? []
             ),
-            $data['rows']
+            $data['rows'] ?? []
         );
     }
 
@@ -71,7 +72,7 @@ class CalculateDistanceMatrixAction
     {
         $apiKey = config('services.google.maps_api_key');
 
-        if (empty($apiKey)) {
+        if (empty($apiKey) || !is_string($apiKey)) {
             throw GoogleMapsApiException::missingApiKey();
         }
 

@@ -28,6 +28,8 @@ class GetViewByClassAction
     public function execute(string $class, array $params = [], ?string $viewName = null): View
     {
         $viewName = $viewName ?? $this->getViewNameFromClass($class);
+        
+        /** @var view-string $viewName */
         return view($viewName, $params);
     }
 

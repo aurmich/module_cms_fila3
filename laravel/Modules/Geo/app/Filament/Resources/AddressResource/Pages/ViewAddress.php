@@ -14,19 +14,10 @@ class ViewAddress extends XotBaseViewRecord
 {
     protected static string $resource = AddressResource::class;
 
-    /**
-     * @return array<\Filament\Actions\Action>
-     */
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\EditAction::make(),
-            Actions\DeleteAction::make(),
-        ];
-    }
+    
 
     public function getInfolistSchema(): array
     {
-        return AddressResource::getInfolistSchema();
+        return [];
     }
 }

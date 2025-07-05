@@ -7,8 +7,9 @@ namespace Modules\Xot\Actions\Export;
 // use Modules\Xot\Services\ArrayService;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\BinaryFileResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Xot\Exports\ViewExport;
 use Spatie\QueueableAction\QueueableAction;
@@ -23,7 +24,7 @@ class ExportXlsByView
     /**
      * Esporta una vista in Excel.
      *
-     * @param Collection<int|string, mixed> $rows La collezione da esportare
+     * @param View $view La vista da esportare
      * @param array<int, string> $fields Campi da includere nell'export
      * @param string $filename Nome del file Excel
      * @param string|null $transKey Chiave di traduzione per i campi
@@ -31,7 +32,7 @@ class ExportXlsByView
      * @return BinaryFileResponse
      */
     public function execute(
-        Collection $rows,
+        View $view,
         array $fields,
         string $filename = 'test.xlsx',
         ?string $transKey = null,
@@ -42,9 +43,9 @@ class ExportXlsByView
             }, array_values($fields));
 
         $export = new ViewExport(
-            rows: $rows,
-            fields: $stringFields,
-            transKey: $transKey
+            view: $view,
+            transKey: $transKey,
+            fields: $stringFields
         );
 
         return Excel::download($export, $filename);

@@ -24,13 +24,6 @@ use Webbingbrasil\FilamentMaps\Widgets\MapWidget;
  */
 class LocationMapWidget extends MapWidget
 {
-    protected static string $view = 'geo::filament.widgets.location-map-widget';
-
-    protected function getView(): string
-    {
-        return static::$view;
-    }
-
     protected int|string|array $columnSpan = 'full';
 
     public Htmlable|string|null $heading = 'Mappa';
@@ -62,12 +55,13 @@ class LocationMapWidget extends MapWidget
      */
     protected function getOptions(): array
     {
+        /** @var array<string, mixed> $config */
         $config = Config::get('maps', []);
 
         return [
-            'zoom' => (int) ($config['zoom'] ?? 12),
+            'zoom' => is_numeric($config['zoom'] ?? null) ? (int) $config['zoom'] : 12,
             'center' => $this->getMapCenter(),
-            'mapTypeId' => (string) ($config['type'] ?? 'roadmap'),
+            'mapTypeId' => is_string($config['type'] ?? null) ? $config['type'] : 'roadmap',
             'mapTypeControl' => true,
             'streetViewControl' => true,
             'fullscreenControl' => true,
@@ -88,22 +82,12 @@ class LocationMapWidget extends MapWidget
     public function getPlaces(): Collection
     {
         /* @var Collection<int, Place> */
-        return Place::with(['placeType', 'type'])->get();
+        return Place::with(['placeType'])->get();
     }
 
     /**
      * Restituisce i marker da visualizzare sulla mappa.
      *
-     * @return array<int, array{
-     *     position: array{lat: float, lng: float},
-     *     title?: string,
-     *     icon?: array{
-     *         url: string,
-     *         scaledSize: array{width: int, height: int}
-     *     }
-     * }>
-     */
-    /**
      * @return array<int, array{
      *     position: array{lat: float, lng: float},
      *     title: string,
@@ -112,21 +96,24 @@ class LocationMapWidget extends MapWidget
      */
     public function getMarkers(): array
     {
-        /* @var array<int, array{
-         *     position: array{lat: float, lng: float},
-         *     title: string,
-         *     icon?: array{url: string, scaledSize: array{width: int, height: int}}
-         * }> */
-        return $this->getPlaces()->map(function (Place $place): array {
-            return [
-                'position' => [
-                    'lat' => (float) $place->latitude,
-                    'lng' => (float) $place->longitude,
-                ],
-                'title' => (string) ($place->name ?? 'Unnamed Place'),
-                'icon' => $this->getMarkerIcon($place),
-            ];
-        })->all();
+        return $this->getPlaces()
+            ->filter(fn(Place $place) => $place->latitude !== null && $place->longitude !== null)
+            ->map(function (Place $place): array {
+                $marker = [
+                    'position' => [
+                        'lat' => (float) $place->latitude,
+                        'lng' => (float) $place->longitude,
+                    ],
+                    'title' => (string) ($place->name ?? 'Unnamed Place'),
+                ];
+
+                $icon = $this->getMarkerIcon($place);
+                if ($icon !== null) {
+                    $marker['icon'] = $icon;
+                }
+
+                return $marker;
+            })->all();
     }
 
     /**
@@ -136,22 +123,27 @@ class LocationMapWidget extends MapWidget
      */
     protected function getMapCenter(): array
     {
+        /** @var array<string, mixed> $config */
         $config = Config::get('maps', []);
         $defaultLat = 45.4642;
         $defaultLng = 9.1900;
 
+        /** @var array<string, mixed>|null $centerConfig */
+        $centerConfig = $config['center'] ?? null;
+
         return [
-            'lat' => (float) ($config['center']['lat'] ?? $defaultLat),
-            'lng' => (float) ($config['center']['lng'] ?? $defaultLng),
+            'lat' => is_array($centerConfig) && is_numeric($centerConfig['lat'] ?? null) 
+                ? (float) $centerConfig['lat'] 
+                : $defaultLat,
+            'lng' => is_array($centerConfig) && is_numeric($centerConfig['lng'] ?? null) 
+                ? (float) $centerConfig['lng'] 
+                : $defaultLng,
         ];
     }
 
     /**
      * Restituisce l'icona per un marker.
      *
-     * @return array{url: string, scaledSize: array{width: int, height: int}}|null
-     */
-    /**
      * @return array{url: string, scaledSize: array{width: int, height: int}}|null
      */
     protected function getMarkerIcon(Place $place): ?array
@@ -165,21 +157,26 @@ class LocationMapWidget extends MapWidget
         $config = Config::get('maps.markers', []);
 
         $placeType = $place->placeType;
-        if (! $placeType) {
+        if (!$placeType) {
             return null;
         }
 
-        /** @var string $slug */
+        // Verifico che la proprietà slug esista sul placeType
+        if (!property_exists($placeType, 'slug')) {
+            return null;
+        }
+
+        /** @var string|null $slug */
         $slug = $placeType->slug;
 
-        if (! isset($config['icons'][$slug])) {
+        if (!is_string($slug) || !isset($config['icons'][$slug])) {
             return null;
         }
 
         /** @var array{url: string, size: array{int, int}} $icon */
         $icon = $config['icons'][$slug];
 
-        if (! isset($icon['url']) || ! is_string($icon['url'])) {
+        if (!isset($icon['url']) || !is_string($icon['url'])) {
             return null;
         }
 
@@ -194,6 +191,9 @@ class LocationMapWidget extends MapWidget
 
     public function render(): View
     {
-        return ViewFacade::make($this->getView(), $this->getViewData());
+        /** @var view-string $viewName */
+        $viewName = 'geo::filament.widgets.location-map-widget';
+        
+        return ViewFacade::make($viewName, $this->getViewData());
     }
 }

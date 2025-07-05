@@ -204,6 +204,8 @@ return [
             'label' => 'Lingua Attiva',
             'description' => 'Seleziona la lingua per le traduzioni della sezione',
         ],
+        'add_block' => 'Aggiungi blocco',
+        'remove_block' => 'Rimuovi blocco',
     ],
     
     'sections' => [
@@ -231,6 +233,14 @@ return [
             'label' => 'Social Media',
             'description' => 'Profili e collegamenti social',
         ],
+        'settings' => [
+            'label' => 'Impostazioni',
+            'description' => 'Configurazioni generali della sezione',
+        ],
+        'seo' => [
+            'label' => 'SEO',
+            'description' => 'Ottimizzazione per motori di ricerca',
+        ],
     ],
     
     'messages' => [
@@ -239,16 +249,6 @@ return [
         'validation_errors' => 'Controlla i campi evidenziati in rosso',
         'unsaved_changes' => 'Hai modifiche non salvate in questa sezione',
         'confirm_navigation' => 'Vuoi davvero lasciare questa pagina? Le modifiche non salvate andranno perse.',
-    ],
-    
-    'actions' => [
-        'save' => 'Salva modifiche',
-        'cancel' => 'Annulla',
-        'add_block' => 'Aggiungi blocco',
-        'remove_block' => 'Rimuovi blocco',
-    ],
-    
-    'messages' => [
         'saved' => 'Sezione salvata con successo',
         'error' => 'Si è verificato un errore durante il salvataggio',
         'confirm_delete' => 'Sei sicuro di voler eliminare questa sezione?',
@@ -258,11 +258,5 @@ return [
         'required' => 'Questo campo è obbligatorio',
         'slug_exists' => 'Questo slug è già in uso',
         'min' => 'Il valore deve essere almeno :min',
-    ],
-    
-    'sections' => [
-        'content' => 'Contenuto',
-        'settings' => 'Impostazioni',
-        'seo' => 'SEO',
     ],
 ];
