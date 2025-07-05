@@ -25,7 +25,15 @@ class Confirmed extends AppointmentState
 
     public function color(): string
     {
+    
         return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        
+        //return 'success';
+    }
+
+    public function bgColor(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.bg_color');
         //return 'success';
     }
 

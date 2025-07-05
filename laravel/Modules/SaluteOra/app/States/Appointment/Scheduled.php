@@ -28,6 +28,12 @@ class Scheduled extends AppointmentState
         //return 'info';
     }
 
+    public function bgColor(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::$name.'.bg_color');
+        //return 'info';
+    }
+
     public function icon(): string
     {
         return static::transClass(__CLASS__,'states.'.static::$name.'.icon');

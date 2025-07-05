@@ -55,6 +55,7 @@ abstract class AppointmentState extends State implements StateContract
     
     abstract public function label(): string;
     abstract public function color(): string;
+    abstract public function bgColor(): string;
     abstract public function icon(): string;
     abstract public function modalHeading(): string;
     abstract public function modalDescription(): string;

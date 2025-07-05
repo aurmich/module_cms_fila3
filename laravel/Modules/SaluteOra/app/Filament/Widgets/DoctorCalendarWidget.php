@@ -124,9 +124,13 @@ class DoctorCalendarWidget extends FullCalendarWidget
                     /** @phpstan-ignore-next-line */
                     ->start($event->starts_at)
                     ->end($event->ends_at)
-                    ->backgroundColor('green')
-                    ->borderColor('green')
-                    ->textColor('white')
+                    ->backgroundColor($event->state->bgColor())
+                    //->backgroundColor('#00aa00')
+                    ->borderColor($event->state->bgColor())
+                    //->textColor('blue')
+                    ->textColor($event->state->bgColor())
+                    //->textColor('blue')
+                    //->extraProperties(['class'=>['text-gray-600']])
                     //->url(
                     //    url: EventResource::getUrl(name: 'view', parameters: ['record' => $event]),
                     //    shouldOpenUrlInNewTab: true
