@@ -41,8 +41,10 @@ view('pub_theme::filament.wizard.submit-button')
 
 2. **Traduzioni**
    - Utilizzare il namespace del tema per le traduzioni
-   - Esempio: `{{ __('pub_theme::wizard.submit.label') }}`
-   - Le traduzioni dovrebbero essere in `/laravel/Themes/One/lang/`
+   - Esempio: `{{ __('pub_theme::auth.login.title') }}`
+   - Le traduzioni sono in `/laravel/Themes/One/lang/`
+   - **Traduzioni Autenticazione**: Sistema completo implementato per login, registrazione, reset password
+   - [Documentazione Completa Traduzioni Auth](../../laravel/Themes/One/docs/auth-translations.md)
 
 3. **Componenti Filament**
    - I componenti specifici di Filament dovrebbero essere nella directory `filament/`
@@ -112,9 +114,78 @@ php artisan view:clear
 php artisan cache:clear
 ```
 
+## REGOLA CRITICA: Separazione Namespace Modulo vs Tema
+
+⚠️ **ASSOLUTA SEPARAZIONE** tra namespace di moduli e temi:
+
+### Principio Fondamentale
+- **`pub_theme::`** è ESCLUSIVAMENTE per il tema One
+- **Moduli** usano il proprio namespace (`user::`, `cms::`, `saluteora::`)
+- **MAI** mescolare namespace tra modulo e tema
+
+### Esempi Corretti vs Errati
+
+#### ✅ CORRETTO - Widget Auth usano pub_theme::
+```php
+// File: Modules/User/app/Filament/Widgets/Auth/PasswordResetWidget.php
+namespace Modules\User\Filament\Widgets\Auth;
+
+class PasswordResetWidget extends XotBaseWidget
+{
+    protected static string $view = 'pub_theme::filament.widgets.auth.password.reset';
+    //                               ^^^^^^^^^^^
+    //                               Widget AUTH usa namespace TEMA
+}
+```
+
+#### ✅ CORRETTO - Widget Funzionali usano namespace modulo
+```php
+// File: Modules/User/app/Filament/Widgets/UserStatsWidget.php  
+namespace Modules\User\Filament\Widgets;
+
+class UserStatsWidget extends XotBaseWidget
+{
+    protected static string $view = 'user::filament.widgets.user.stats';
+    //                               ^^^^^^
+    //                               Widget FUNZIONALE usa namespace MODULO
+}
+```
+
+### Mappatura Namespace
+| Contesto | Namespace | Utilizzo |
+|----------|-----------|----------|
+| **Tema One** | `pub_theme::` | Layout globali, override, personalizzazioni tema |
+| **Modulo User** | `user::` | Widget, pagine, componenti del modulo User |
+| **Modulo Cms** | `cms::` | Widget, pagine, componenti del modulo Cms |
+| **Modulo SaluteOra** | `saluteora::` | Widget, pagine, componenti del modulo SaluteOra |
+
+### Override del Tema (Pattern Corretto)
+Il tema può sovrascrivere le view dei moduli mantenendo l'indipendenza:
+
+1. **Widget rimane nel modulo** con namespace modulo:
+   ```php
+   // Modules/User/.../PasswordResetWidget.php
+   protected static string $view = 'user::filament.widgets.auth.password.reset';
+   ```
+
+2. **Tema crea override opzionale**:
+   ```
+   /Themes/One/resources/views/filament/widgets/auth/password/reset.blade.php
+   ```
+
+3. **Laravel risolve automaticamente l'override** se configurato
+
+### Motivazioni Architetturali
+1. **Indipendenza Moduli**: Funzionano senza dipendenze dal tema
+2. **Manutenibilità**: Cambio tema non rompe moduli
+3. **Testabilità**: Moduli testabili senza tema specifico
+4. **Deployment**: Moduli disaccoppiabili dal tema
+5. **Scalabilità**: Facile aggiungere nuovi temi senza toccare moduli
+
 ## Note Importanti
 
 1. Il namespace `pub_theme::` è un alias che punta al tema attivo
 2. Le viste nel tema hanno la precedenza sulle viste del modulo
 3. Le traduzioni nel tema hanno la precedenza sulle traduzioni del modulo
-4. I componenti Filament nel tema possono estendere quelli di base 
+4. I componenti Filament nel tema possono estendere quelli di base
+5. **CRITICO**: I widget dei moduli NON devono mai usare `pub_theme::` 
