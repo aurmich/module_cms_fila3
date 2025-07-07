@@ -1,0 +1,121 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola Windsurf – Array to String Conversion in Models con Media Library
+
+## Ambito
+- Globale (Modelli, Actions, Form Filament, Media Library)
+
+## Motivazione
+- Prevenire errori "Array to string conversion" quando si gestiscono file attachment tramite Spatie Media Library
+- Evitare conflitti architetturali tra database fields e Media Library collections
+- Garantire coerenza nella gestione degli allegati
+
+## Regola
+- Mai definire campi gestiti tramite Media Library come fillable se restituiscono array dai form
+- Processare sempre gli array di allegati separatamente dal create() del modello
+- Rimuovere campi allegati dal $fillable quando gestiti tramite Media Library
+- Separare la logica di creazione modello dalla gestione allegati nelle Actions
+
+## Esempio pratico
+
+### ❌ Errore comune
+```php
+// Modello con campi allegati nel fillable
+protected $fillable = [
+    'name',
+    'health_card',        // ← PROBLEMA: array da FileUpload
+    'identity_document',  // ← PROBLEMA: array da FileUpload
+];
+
+// Action che causa errore
+public function execute(array $data): Patient
+{
+    return Patient::create($data); // ← ERROR: Array to string conversion
+}
+```
+
+### ✅ Implementazione corretta
+```php
+// Modello senza campi allegati nel fillable
+protected $fillable = [
+    'name',
+    'email',
+    // health_card rimosso dal fillable
+];
+
+public static array $attachments = [
+    'health_card',
+    'identity_document',
+];
+
+// Action corretta
+public function execute(array $data): Patient
+{
+    // Separare allegati dal data principale
+    $attachments = Patient::$attachments;
+    $attachmentData = [];
+    
+    foreach ($attachments as $attachment) {
+        if (isset($data[$attachment])) {
+            $attachmentData[$attachment] = $data[$attachment];
+            unset($data[$attachment]);
+        }
+    }
+
+    // Creare modello senza allegati
+    $patient = Patient::create($data);
+
+    // Processare allegati tramite Media Library
+    foreach ($attachmentData as $attachment => $files) {
+        if (!empty($files) && is_array($files)) {
+            foreach ($files as $file) {
+                $patient->addMediaFromDisk($file, 'local')
+                    ->toMediaCollection($attachment);
+            }
+        }
+    }
+
+    return $patient;
+}
+```
+
+## Pattern e Anti-pattern identificati
+
+### Pattern
+- Separazione netta tra campi database e Media Library collections
+- Processamento esplicito degli array di allegati nelle Actions
+- Uso coerente di Media Library per tutti i file attachment
+- Validazione dei tipi di dato prima del database insert
+
+### Anti-pattern
+- Campi allegati sia nel fillable che gestiti tramite Media Library
+- Passaggio diretto di array FileUpload al create() del modello
+- Colonne string nel database per dati che arrivano come array
+- Mancanza di separazione tra logica modello e gestione allegati
+
+## Checklist operativa Windsurf
+- [ ] Verificare che campi gestiti da Media Library non siano nel $fillable
+- [ ] Separare processamento allegati dal create() nelle Actions
+- [ ] Validare che FileUpload multipli non vadano direttamente nel database
+- [ ] Documentare pattern di gestione allegati nel modulo
+- [ ] Testare il flusso completo form → action → database → media
+- [ ] Aggiornare sia .cursor/rules che .windsurf/rules
+- [ ] Validare coerenza tra regole e documentazione moduli
+
+## Best Practice Windsurf
+- Definire chiaramente quali campi sono gestiti via database vs Media Library
+- Usare array $attachments nel modello per definire campi Media Library
+- Implementare logica di separazione dati nelle Actions
+- Documentare architettura allegati per ogni modello
+- Mantenere coerenza tra .windsurf/rules e .cursor/rules
+
+## Collegamenti
+- [Modules/SaluteOra/docs/errori/array-to-string-conversion-user-registration.md](../../Modules/SaluteOra/docs/errori/array-to-string-conversion-user-registration.md)
+- [Modules/SaluteOra/docs/spatie_media_library_implementation.md](../../Modules/SaluteOra/docs/spatie_media_library_implementation.md)
+- [.cursor/rules/array-to-string-conversion-fix.mdc](../.cursor/rules/array-to-string-conversion-fix.mdc)
+
+## Ultimo aggiornamento
+2025-06-26

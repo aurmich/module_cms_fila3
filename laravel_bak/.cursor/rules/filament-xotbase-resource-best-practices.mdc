@@ -1,0 +1,56 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole per l'Estensione di XotBaseResource (Filament)
+
+## Regola Fondamentale
+**Se una classe estende `XotBaseResource`, NON deve mai dichiarare:**
+- `protected static ?string $navigationGroup`
+- `protected static ?string $navigationLabel`
+- `public static function table(Table $table): Table`
+
+## Motivazione
+- La gestione di navigationGroup/navigationLabel è centralizzata nella classe base o nei provider.
+- Il metodo `table()` viene gestito tramite trait, macro o configurazione centralizzata per garantire coerenza e DRY.
+- Dichiarare questi elementi nelle risorse che estendono XotBaseResource causa override indesiderati, perdita di automazione e incoerenza tra moduli.
+
+## Esempio ERRATO
+```php
+class UserModerationResource extends XotBaseResource
+{
+    protected static ?string $navigationGroup = 'User Management'; // ERRORE
+    protected static ?string $navigationLabel = 'User Moderation'; // ERRORE
+    public static function table(Table $table): Table { ... } // ERRORE
+}
+```
+
+## Esempio CORRETTO
+```php
+class UserModerationResource extends XotBaseResource
+{
+    // Solo metodi e proprietà specifiche non già gestite dalla base
+    // NIENTE navigationGroup/navigationLabel/table()
+}
+```
+
+## Checklist
+- [ ] Se estendi XotBaseResource, NON dichiarare navigationGroup
+- [ ] Se estendi XotBaseResource, NON dichiarare navigationLabel
+- [ ] Se estendi XotBaseResource, NON dichiarare il metodo table()
+- [ ] Sposta la configurazione centralizzata nella classe base o provider
+- [ ] Aggiorna la documentazione tecnica e README
+
+## Errori Comuni
+- Override accidentale di navigationGroup/navigationLabel
+- Duplicazione del metodo table() tra risorse
+- Incoerenza tra moduli per la navigazione Filament
+
+## Link e Documentazione
+- [README Filament Best Practices](../filament-best-practices.mdc)
+- [README XotBaseResource](../../Modules/Xot/docs/README.md)
+- [README Patient](../../Modules/Patient/docs/README.md)
+
+---
+**Questa regola è vincolante e va applicata in tutti i moduli che usano XotBaseResource.**

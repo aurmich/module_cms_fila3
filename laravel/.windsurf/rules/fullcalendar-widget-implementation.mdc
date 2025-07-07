@@ -1,0 +1,120 @@
+---
+description: Regole per l'implementazione corretta di FullCalendarWidget in SaluteOra
+globs:
+  - "Modules/SaluteOra/app/Filament/**/*.php"
+alwaysApply: true
+---
+# Implementazione Corretta di FullCalendarWidget
+
+## Regola Fondamentale
+Il widget `FullCalendarWidget` del package `saade/filament-fullcalendar` v3.2.4 deve essere implementato estendendo direttamente la classe base e sovrascrivendo i metodi necessari.
+
+## Implementazione Corretta
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\Filament\Widgets;
+
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+
+class MioCalendarWidget extends FullCalendarWidget
+{
+    protected static string $view = 'saluteora::filament.widgets.mio-calendar-widget';
+    
+    // Sovrascrivere i metodi necessari
+    public function config(): array
+    {
+        return [
+            // Configurazione...
+        ];
+    }
+    
+    public function fetchEvents(array $fetchInfo): array
+    {
+        // Recupero eventi...
+    }
+}
+```
+
+## Utilizzo Nella Pagina
+
+```php
+protected function getHeaderWidgets(): array
+{
+    return [
+        MioCalendarWidget::class,
+        // OPPURE
+        new MioCalendarWidget($parametri),
+    ];
+}
+```
+
+## Errori da Evitare
+
+1. ❌ **Non utilizzare API fluente su FullCalendarWidget::make()**:
+   ```php
+   // ERRORE: Causa "Call to undefined method Filament\Widgets\WidgetConfiguration::config()"
+   FullCalendarWidget::make()->config([...])
+   ```
+
+2. ❌ **Non utilizzare classi anonime**:
+   ```php
+   // ERRORE: Non rispetta le convenzioni del progetto
+   return new class extends FullCalendarWidget {...};
+   ```
+
+3. ❌ **Non creare metodi che restituiscono il widget con API fluente**:
+   ```php
+   // ERRORE: Pattern errato
+   protected function calendarWidget(): WidgetConfiguration
+   {
+       return FullCalendarWidget::make()->config([...]);
+   }
+   ```
+
+## Pattern Corretto
+
+1. ✅ **Creare una classe widget dedicata**:
+   ```php
+   // Modules/SaluteOra/app/Filament/Widgets/DoctorCalendarWidget.php
+   class DoctorCalendarWidget extends FullCalendarWidget {...}
+   ```
+
+2. ✅ **Sovrascrivere il metodo config()**:
+   ```php
+   public function config(): array
+   {
+       return [
+           'initialView' => 'timeGridWeek',
+           // Altre configurazioni...
+       ];
+   }
+   ```
+
+3. ✅ **Implementare fetchEvents() per recuperare gli eventi**:
+   ```php
+   public function fetchEvents(array $fetchInfo): array
+   {
+       // Logica per recuperare gli eventi
+   }
+   ```
+
+4. ✅ **Implementare i metodi CRUD per gli eventi**:
+   ```php
+   protected function createEvent(array $data): Model {...}
+   protected function updateEvent(Model $event, array $data): Model {...}
+   protected function deleteEvent(Model $event): void {...}
+   ```
+
+## Motivazione Tecnica
+
+Il package `saade/filament-fullcalendar` v3.2.4 è implementato in modo che il metodo `FullCalendarWidget::make()` restituisca un oggetto `WidgetConfiguration` che **non supporta** i metodi fluenti come `->config()`, `->options()`, o `->events()`. L'unico approccio corretto è estendere la classe base e sovrascrivere i metodi necessari.
+
+## Riferimenti
+
+- [Documentazione ufficiale del plugin](https://filamentphp.com/plugins/saade-fullcalendar)
+- [Implementazione di riferimento](https://github.com/saade/filament-fullcalendar/blob/v3.2.4/README.md)
+- [Documentazione interna](Modules/SaluteOra/docs/fullcalendar-implementation.md)

@@ -1,0 +1,59 @@
+# Regola: Utilizzo corretto di Spatie Model States
+
+## Contesto
+Per la gestione dello stato nei modelli Eloquent (es. User, Appointment, Report, ecc.) **deve essere utilizzata una State Class conforme a [spatie/laravel-model-states](https://github.com/spatie/laravel-model-states)** e non un semplice enum PHP.
+
+## Motivazione
+- Gli enum PHP non permettono transizioni, validazione, logica custom e side effect.
+- Spatie Model States consente pattern evoluti (transizioni, metodi di stato, polimorfismo, validazione, side effect, ecc.).
+- Fondamentale per domini "stateful" (utenti, workflow, moderazione, ecc.).
+
+## Esempio corretto
+```php
+use Spatie\ModelStates\State;
+use Spatie\ModelStates\StateConfig;
+
+abstract class UserState extends State
+{
+    public static function config(): StateConfig
+    {
+        return parent::config()
+            ->default(Pending::class)
+            ->states([
+                Pending::class,
+                Approved::class,
+                Rejected::class,
+            ])
+            ->allowTransition(Pending::class, Approved::class)
+            ->allowTransition(Pending::class, Rejected::class);
+    }
+}
+
+class Pending extends UserState {}
+class Approved extends UserState {}
+class Rejected extends UserState {}
+```
+
+Nel modello:
+```php
+use Spatie\ModelStates\HasStates;
+
+class User extends Model {
+    use HasStates;
+    protected function states(): array {
+        return [
+            'state' => UserState::class,
+        ];
+    }
+}
+```
+
+## Errori comuni
+- **Undefined array key ...**: Succede se manca la dichiarazione di uno stato o la classe non esiste/è nel namespace errato.
+- **Enum PHP usato come state**: Non supportato, va migrato a State Class Spatie.
+
+## Documentazione collegata
+- [SaluteOra/docs/uso-label-filament.mdc](../../Modules/SaluteOra/docs/uso-label-filament.mdc)
+- [Xot/docs/struttura-path-moduli.mdc](../../Modules/Xot/docs/struttura-path-moduli.mdc)
+- .cursor/rules/model-states.mdc
+- https://github.com/spatie/laravel-model-states

@@ -1,0 +1,84 @@
+# Regole per Relazioni Cross-Database in SaluteOra
+
+## Principio di Separazione e Connessione
+
+### Regole Fondamentali
+
+1. **Specifica Esplicita del Database**: Usa SEMPRE `on('database_name')` invece di `setConnection()`.
+   ```php
+   // ✅ CORRETTO
+   Doctor::on('user')->where('type', 'doctor')->get();
+   
+   // ❌ ERRATO
+   Doctor::query()->setConnection('user')->where('type', 'doctor')->get();
+   ```
+
+2. **Evita JOIN Automatici Cross-Database**: Laravel non gestisce automaticamente JOIN tra database diversi.
+   ```php
+   // ❌ ERRATO: genera errore "Table 'saluteora_user.studios' doesn't exist"
+   Doctor::with('studios')->get();
+   
+   // ✅ CORRETTO: carica relazioni separatamente
+   $doctors = Doctor::on('user')->get();
+   $studioIds = DoctorStudio::on('salute_ora')->whereIn('user_id', $doctors->pluck('id'))->pluck('studio_id');
+   $studios = Studio::on('salute_ora')->whereIn('id', $studioIds)->get();
+   ```
+
+3. **Modello Pivot con Connessione Esplicita**: Specifica sempre la connessione nel modello pivot.
+   ```php
+   class DoctorStudio extends BasePivot
+   {
+       protected $connection = 'salute_ora';
+       // ...
+   }
+   ```
+
+4. **Nomenclatura Coerente dei Campi**: Rispetta l'origine delle entità nei nomi dei campi.
+   ```php
+   // ✅ CORRETTO: user_id perché Doctor estende User
+   protected $fillable = [
+       'user_id',      // non 'doctor_id'
+       'studio_id',
+       // ...
+   ];
+   ```
+
+## Implementazione in Filament
+
+### RelationManagers Cross-Database
+
+1. **AttachAction Personalizzata**:
+   ```php
+   Tables\Actions\AttachAction::make()
+       ->preloadRecordSelect(false)
+       ->recordSelect(fn (Forms\Components\Select $select) => $select
+           ->searchable()
+           ->getSearchResultsUsing(function (string $search): array {
+               // Query con database esplicito
+               return Entity::on('database_name')->whereConditions()->limit(10)->get()->toArray();
+           })
+       )
+   ```
+
+2. **Evita `recordSelectOptionsQuery` con `setConnection`**:
+   ```php
+   // ❌ ERRATO
+   ->recordSelectOptionsQuery(fn (Builder $query) => $query->setConnection('database_name'))
+   
+   // ✅ CORRETTO
+   // Usa on() direttamente sul modello o implementa getSearchResultsUsing personalizzato
+   ```
+
+## Regole di Testing
+
+1. **Testa Sempre Entrambe le Direzioni** della relazione many-to-many cross-database
+2. **Verifica Esplicitamente i Comportamenti** quando accedi alle relazioni in contesti diversi
+3. **Simula Errori di Database** per garantire gestione robusta delle eccezioni
+
+## Analisi Filosofica e Progettuale
+
+1. **Rifletti sulla Necessità** di una relazione cross-database prima di implementarla
+2. **Considera Alternative** come la duplicazione controllata o servizi di sincronizzazione
+3. **Documenta il Ragionamento** dietro le tue scelte in un file MD dedicato
+
+Queste regole non sono solo linee guida tecniche, ma riflettono una comprensione profonda dell'architettura dati di SaluteOra. Rispettare queste regole garantisce coerenza, manutenibilità e robustezza del sistema.

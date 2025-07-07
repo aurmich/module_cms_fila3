@@ -1,0 +1,93 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# RadioCollection Component Rules
+
+## Filosofia del Componente
+- Ogni opzione esiste in **superposizione quantistica** fino alla selezione
+- La selezione rappresenta il **collasso della funzione d'onda** verso una realtà osservabile
+- L'interfaccia segue principi di **fenomenologia dell'interazione**
+
+## Regole di Implementazione
+
+### Type Safety Obbligatoria
+- SEMPRE usare `isOptionSelected($option)` invece di comparazioni dirette
+- Cast espliciti: `(string) $getState() === (string) $optionValue`
+- Evitare type coercion tra string/int/numeric
+
+### Debug Mode
+- Utilizzare `->debug(true)` per troubleshooting
+- Debug info visibile solo in development mode
+- Logging strutturato con context completo
+
+### Accessibilità
+- `aria-describedby` per associare descrizioni
+- Input radio semanticamente corretto ma visivamente nascosto
+- Target area ampia per dispositivi touch
+
+### Alpine.js Integration
+- `x-data="{ selectedValue: @entangle($getStatePath()) }"` per reattività
+- `@click="selectedValue = '{{ $optionValue }}'"` per selezione immediata
+- Transizioni fluide con `transition-all duration-200`
+
+### Template Structure
+```php
+RadioCollection::make('field_name')
+    ->options($collection)
+    ->valueKey('id') // Default, configurabile
+    ->itemView('custom.template') // Opzionale
+    ->debug(config('app.debug')) // Solo in dev
+    ->required();
+```
+
+## Principi di Design
+
+### Minimalismo Spirituale
+- Riduzione all'essenziale: solo elementi necessari
+- Purezza geometrica: forme semplici e pure
+- Transizioni fluide senza interruzioni cognitive
+
+### Gestalt Design
+- **Prossimità**: Elementi correlati raggruppati visualmente
+- **Somiglianza**: Pattern consistente per radio buttons
+- **Chiusura**: Bordi delle card chiudono l'esperienza percettiva
+
+### Performance
+- `wire:model.live` per aggiornamenti immediati
+- Hardware-accelerated transitions
+- Lazy loading per collezioni grandi
+
+## Troubleshooting
+
+### Problema: Selezione non funziona
+- Verificare `wire:model.live="{{ $getStatePath() }}"`
+- Controllare type compatibility con `isOptionSelected()`
+- Abilitare debug mode per diagnostica
+
+### Problema: Performance lente
+- Limitare collezioni a < 50 elementi
+- Usare `wire:key` univoci
+- Ottimizzare Alpine.js reactivity
+
+### Problema: Accessibilità
+- Verificare `aria-describedby` associazioni
+- Testare con screen reader
+- Controllare keyboard navigation
+
+## Best Practices
+
+1. **Collezioni piccole**: < 50 opzioni per performance ottimali
+2. **Value keys semplici**: Preferire int/string semplici
+3. **Templates leggeri**: Evitare logica complessa negli item templates
+4. **Debug in development**: Sempre attivare debug in dev mode
+5. **Test cross-browser**: Verificare su diversi browser/dispositivi
+
+## Collegamenti
+- [Documentazione Completa](mdc:../laravel/Modules/UI/docs/components/radio-collection-component.md)
+- [Debug Guide](mdc:../laravel/Modules/UI/docs/components/radio-collection-debugging.md)
+- [UI Components](mdc:../laravel/Modules/UI/docs/components.md)
+
+---
+*Ultimo aggiornamento: Dicembre 2024 - v2.0.0*

@@ -1,0 +1,177 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola: Prevenzione Doppia Registrazione Service Provider
+
+## Ambito
+- Globale (Service Provider, Composer Configuration, Package Development)
+
+## Motivazione
+- Prevenire doppia registrazione di service provider che causano duplicazione di hook/elementi UI
+- Evitare conflitti tra auto-discovery e merge-plugin di composer
+- Garantire performance ottimali evitando registrazioni multiple inutili
+
+## Regola
+- SEMPRE implementare guard pattern nei service provider che registrano hook UI
+- SEMPRE verificare configurazioni composer.json che potrebbero causare doppia registrazione
+- MAI assumere che un service provider venga registrato una sola volta
+- SEMPRE utilizzare proprietà statiche per prevenire registrazioni multiple
+
+## Esempio pratico
+
+### ✅ CORRETTO: Service Provider con Guard Pattern
+```php
+class MyServiceProvider extends ServiceProvider
+{
+    private static bool $hooksRegistered = false;
+
+    public function register()
+    {
+        // Guard pattern per prevenire doppia registrazione
+        if (!self::$hooksRegistered) {
+            $this->app->afterResolving('filament', function () {
+                // Registrazione hook protetta
+                Filament::registerRenderHook('hook.name', function () {
+                    return 'content';
+                });
+                
+                self::$hooksRegistered = true;
+            });
+        }
+
+        parent::register();
+    }
+}
+```
+
+### ❌ ERRATO: Service Provider senza protezione
+```php
+class MyServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        // ❌ Nessuna protezione contro doppia registrazione
+        $this->app->afterResolving('filament', function () {
+            Filament::registerRenderHook('hook.name', function () {
+                return 'content';
+            });
+        });
+
+        parent::register();
+    }
+}
+```
+
+## Situazioni a Rischio
+
+### Merge Plugin Composer
+```json
+// composer.json principale con merge plugin
+"merge-plugin": {
+    "include": ["Modules/*/composer.json"]
+}
+```
+**Rischio**: Package nei moduli vengono registrati sia da auto-discovery che da merge
+
+### Auto-discovery + Dipendenze Moduli
+```json
+// Package definito in Modules/Xot/composer.json
+{
+    "require": {
+        "vendor/package": "*"
+    }
+}
+
+// Package con auto-discovery nel suo composer.json
+{
+    "extra": {
+        "laravel": {
+            "providers": ["Vendor\\Package\\ServiceProvider"]
+        }
+    }
+}
+```
+**Rischio**: Doppia registrazione tramite auto-discovery e merge-plugin
+
+## Checklist Prevenzione
+
+### Per Service Provider
+- [ ] Implementato guard pattern con proprietà statica
+- [ ] Hook/registrazioni protette da doppia esecuzione
+- [ ] Testato con configurazioni composer complesse
+- [ ] Documentato il motivo del guard pattern
+
+### Per Configurazioni Composer
+- [ ] Verificato se merge-plugin può causare doppie registrazioni
+- [ ] Controllato auto-discovery dei package inclusi
+- [ ] Testato rimozione/aggiunta dipendenze
+- [ ] Documentato configurazioni speciali
+
+### Per Package Development
+- [ ] Service provider robusto contro registrazioni multiple
+- [ ] Test case per doppia registrazione
+- [ ] Documentazione per integratori
+- [ ] Warning su configurazioni a rischio
+
+## Pattern di Test
+
+### Test per Doppia Registrazione
+```php
+public function test_service_provider_prevents_double_registration()
+{
+    // Simula doppia registrazione
+    $this->app->register(MyServiceProvider::class);
+    $this->app->register(MyServiceProvider::class);
+    
+    // Verifica che hook sia registrato una sola volta
+    $hookCount = count(Filament::getRenderHooks('hook.name'));
+    $this->assertEquals(1, $hookCount);
+}
+```
+
+### Test per Merge Plugin
+```php
+public function test_merge_plugin_does_not_cause_double_registration()
+{
+    // Simula comportamento merge-plugin
+    // Verifica nessuna duplicazione elementi UI
+}
+```
+
+## Segnali di Allarme
+
+### Sintomi UI
+- Elementi duplicati in sidebar/navbar Filament
+- Hook chiamati più volte del previsto
+- Performance degradate per registrazioni multiple
+
+### Sintomi Log
+```
+[DEBUG] ServiceProvider registered: MyServiceProvider
+[DEBUG] ServiceProvider registered: MyServiceProvider  // ← DOPPIA REGISTRAZIONE
+```
+
+### Sintomi Composer
+```bash
+# Comando per verificare provider registrati
+php artisan package:discover --ansi
+
+# Se mostra stesso provider più volte = PROBLEMA
+```
+
+## Casi Risolti
+
+### CoolModulesServiceProvider (2025-01)
+**Problema**: Doppia registrazione causava elementi duplicati in sidebar Filament  
+**Causa**: Auto-discovery + merge-plugin includeva stesso package due volte  
+**Soluzione**: Guard pattern con `private static bool $hooksRegistered`
+
+## Collegamenti
+- [CoolModules Double Registration Fix](../../Modules/Xot/docs/coolmodules-double-registration-fix.md)
+- [Composer Merge Plugin Docs](https://github.com/wikimedia/composer-merge-plugin)
+- [Laravel Package Discovery](https://laravel.com/docs/packages#package-discovery)
+
+## Ultimo aggiornamento
+Gennaio 2025 - Risoluzione bug CoolModulesServiceProvider duplicato

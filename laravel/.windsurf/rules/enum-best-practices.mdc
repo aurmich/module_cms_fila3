@@ -1,0 +1,67 @@
+# Best Practices per Enum in Laravel 12+
+
+## Regola Fondamentale
+
+Gli enum devono essere gestiti con accessors e mutators specifici nel modello che li utilizza, **MAI** con cast diretti nella classe base.
+
+## Implementazione Corretta ✅
+
+```php
+// Nel modello specifico (non nella base condivisa)
+namespace Modules\SaluteOra\Models;
+
+use Modules\SaluteOra\Enums\UserTypeEnum;
+use Illuminate\Support\Facades\Log;
+
+class User extends \Modules\User\Models\BaseUser
+{
+    // Mutator robusto con gestione degli errori
+    public function getTypeAttribute($value): ?UserTypeEnum
+    {
+        if ($value instanceof UserTypeEnum) {
+            return $value;
+        }
+        
+        if ($value === null || $value === '') {
+            return null;
+        }
+        
+        try {
+            return UserTypeEnum::from($value);
+        } catch (\ValueError $e) {
+            Log::warning("Valore non valido per UserTypeEnum: {$value}");
+            return null;
+        }
+    }
+}
+```
+
+## Anti-Pattern da Evitare ❌
+
+```php
+// ERRATO: Cast diretto nell'array $casts (sia base che specifico)
+protected $casts = [
+    'type' => UserTypeEnum::class, // Genera "Cannot instantiate enum" in Laravel 12
+];
+
+// ERRATO: Tentativo di "aggiustare" con sintassi alternativa
+protected $casts = [
+    'type' => UserTypeEnum::class.':string', // Approccio fragile e accoppiato
+];
+```
+
+## Motivazioni Tecniche
+
+1. **Compatibilità**: La gestione degli enum è cambiata in Laravel 12
+2. **Robustezza**: Gli accessor personalizzati permettono una gestione completa degli errori
+3. **Type Safety**: La gestione esplicita mantiene un controllo di tipo rigoroso
+4. **Indipendenza**: Evita dipendenze tra moduli che dovrebbero rimanere separati
+
+## Considerazioni Filosofiche
+
+Il cast di un enum è un ponte tra due mondi: il regno puro e immutabile degli enum e il mondo materiale del database. Questo passaggio deve essere consapevole e controllato, non automatico e "magico".
+
+## Documentazione di Riferimento
+
+- [Laravel 12.x Eloquent Mutators](https://laravel.com/docs/12.x/eloquent-mutators#enum-casting)
+- [Approccio completo agli Enum in Laravel](https://medium.com/@zulfikarditya/using-php-enums-in-laravel-12-a-comprehensive-guide-af75689f88e8)

@@ -1,0 +1,176 @@
+{
+    "id": "16",
+    "title": {
+        "it": "Cookie Policy - Gestione Cookie e Tracciamento"
+    },
+    "slug": "16",
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.legal",
+                    "title": "Cookie Policy",
+                    "subtitle": "Trasparenza totale su come utilizziamo i cookie per migliorare la tua esperienza. Il controllo è sempre nelle tue mani.",
+                    "background_color": "bg-gradient-to-br from-orange-50 to-amber-100",
+                    "text_color": "text-gray-900",
+                    "icon": "cookie",
+                    "icon_color": "text-orange-600"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "content": "<div class='prose prose-lg mx-auto'><p class='text-lg text-gray-700 leading-relaxed mb-6'><strong>Ultimo aggiornamento:</strong> 14 gennaio 2025</p><p class='text-lg text-gray-700 leading-relaxed mb-6'>Questa Cookie Policy spiega cosa sono i cookie, come li utilizziamo su SaluteOra e come puoi gestire le tue preferenze in conformità alle Linee Guida del Garante per la protezione dei dati personali.</p></div>"
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.cookie_principles",
+                    "title": "I nostri principi sui cookie",
+                    "subtitle": "Utilizziamo cookie solo quando necessari e sempre con la tua consapevolezza",
+                    "sections": [
+                        {
+                            "title": "Necessità e Proporzionalità",
+                            "description": "Utilizziamo solo cookie strettamente necessari o per migliorare la tua esperienza sanitaria.",
+                            "icon": "balance-scale",
+                            "color": "text-green-600"
+                        },
+                        {
+                            "title": "Consenso Granulare",
+                            "description": "Puoi scegliere specificamente quali categorie di cookie accettare o rifiutare.",
+                            "icon": "toggle-switch",
+                            "color": "text-blue-600"
+                        },
+                        {
+                            "title": "Controllo Totale",
+                            "description": "Puoi modificare le tue preferenze in qualsiasi momento dal pannello cookie.",
+                            "icon": "settings-gear",
+                            "color": "text-purple-600"
+                        },
+                        {
+                            "title": "Trasparenza Completa",
+                            "description": "Descriviamo chiaramente ogni cookie, la sua finalità e la durata di conservazione.",
+                            "icon": "eye-view",
+                            "color": "text-orange-600"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.cookie_definition",
+                    "title": "1. Cosa sono i Cookie",
+                    "content": "<div class='bg-blue-50 p-6 rounded-lg'><h4 class='text-lg font-semibold mb-4 text-blue-800'>Definizione Tecnica</h4><p class='text-blue-700 mb-4'>I cookie sono piccoli file di testo che i siti web memorizzano sul tuo dispositivo per ricordare informazioni sulla tua visita, migliorare la navigazione e personalizzare la tua esperienza.</p><div class='grid md:grid-cols-2 gap-4'><div class='bg-white p-4 rounded border'><h5 class='font-semibold text-blue-800 mb-2'>🍪 Cookie di Prima Parte</h5><p class='text-sm text-blue-700'>Creati direttamente da SaluteOra per il funzionamento della piattaforma sanitaria</p></div><div class='bg-white p-4 rounded border'><h5 class='font-semibold text-blue-800 mb-2'>🌐 Cookie di Terze Parti</h5><p class='text-sm text-blue-700'>Creati da servizi esterni che integriamo (es. Google Analytics, mappe)</p></div></div></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.cookie_categories",
+                    "title": "2. Categorie di Cookie Utilizzati",
+                    "content": "<div class='space-y-6'><div class='border-l-4 border-green-500 pl-6'><h4 class='text-lg font-semibold text-green-700 mb-3'>🔧 Cookie Tecnici Necessari</h4><p class='text-gray-700 mb-3'><strong>Base giuridica:</strong> Art. 122 Codice Privacy - Non richiedono consenso</p><ul class='list-disc list-inside space-y-2 text-gray-700'><li><strong>Autenticazione:</strong> Mantengono il login attivo durante la sessione</li><li><strong>Sicurezza:</strong> Proteggono dalle frodi e attacchi CSRF</li><li><strong>Carrello/Prenotazioni:</strong> Memorizzano appuntamenti in fase di prenotazione</li><li><strong>Accessibilità:</strong> Ricordano preferenze di visualizzazione</li></ul><table class='mt-4 w-full text-sm'><thead class='bg-gray-50'><tr><th class='px-3 py-2 text-left'>Nome Cookie</th><th class='px-3 py-2 text-left'>Durata</th><th class='px-3 py-2 text-left'>Finalità</th></tr></thead><tbody><tr class='border-t'><td class='px-3 py-2'>XSRF-TOKEN</td><td class='px-3 py-2'>Sessione</td><td class='px-3 py-2'>Protezione CSRF</td></tr><tr class='border-t bg-gray-50'><td class='px-3 py-2'>laravel_session</td><td class='px-3 py-2'>2 ore</td><td class='px-3 py-2'>Gestione sessione utente</td></tr><tr class='border-t'><td class='px-3 py-2'>remember_me</td><td class='px-3 py-2'>30 giorni</td><td class='px-3 py-2'>Login automatico</td></tr></tbody></table></div><div class='border-l-4 border-blue-500 pl-6'><h4 class='text-lg font-semibold text-blue-700 mb-3'>📊 Cookie Statistici</h4><p class='text-gray-700 mb-3'><strong>Base giuridica:</strong> Consenso esplicito - Utilizzati in forma anonima</p><ul class='list-disc list-inside space-y-2 text-gray-700'><li><strong>Google Analytics 4:</strong> Statistiche anonime di utilizzo</li><li><strong>Hotjar:</strong> Analisi comportamento utenti (anonimo)</li><li><strong>Performance monitoring:</strong> Ottimizzazione velocità sito</li></ul><table class='mt-4 w-full text-sm'><thead class='bg-gray-50'><tr><th class='px-3 py-2 text-left'>Nome Cookie</th><th class='px-3 py-2 text-left'>Durata</th><th class='px-3 py-2 text-left'>Finalità</th></tr></thead><tbody><tr class='border-t'><td class='px-3 py-2'>_ga</td><td class='px-3 py-2'>2 anni</td><td class='px-3 py-2'>ID univoco visitatore</td></tr><tr class='border-t bg-gray-50'><td class='px-3 py-2'>_ga_*</td><td class='px-3 py-2'>2 anni</td><td class='px-3 py-2'>Statistiche sessione</td></tr><tr class='border-t'><td class='px-3 py-2'>_hjid</td><td class='px-3 py-2'>1 anno</td><td class='px-3 py-2'>Analisi UX anonima</td></tr></tbody></table></div><div class='border-l-4 border-purple-500 pl-6'><h4 class='text-lg font-semibold text-purple-700 mb-3'>🎯 Cookie di Preferenze</h4><p class='text-gray-700 mb-3'><strong>Base giuridica:</strong> Consenso specifico</p><ul class='list-disc list-inside space-y-2 text-gray-700'><li><strong>Lingua preferita:</strong> Memorizza scelta linguistica</li><li><strong>Impostazioni dashboard:</strong> Layout personalizzato area pazienti</li><li><strong>Filtri di ricerca:</strong> Memorizza criteri ricerca specialisti</li></ul></div><div class='border-l-4 border-red-500 pl-6'><h4 class='text-lg font-semibold text-red-700 mb-3'>📢 Cookie di Marketing</h4><p class='text-gray-700 mb-3'><strong>Base giuridica:</strong> Consenso esplicito e specifico</p><ul class='list-disc list-inside space-y-2 text-gray-700'><li><strong>Google Ads:</strong> Remarketing campagne healthcare</li><li><strong>Facebook Pixel:</strong> Campagne social mirate</li><li><strong>LinkedIn Insight:</strong> Targeting professionisti sanitari</li></ul><div class='bg-red-50 border border-red-200 p-4 rounded-lg mt-4'><p class='text-sm text-red-800'><strong>Nota:</strong> I cookie di marketing sono attivati solo con consenso esplicito e puoi revocarli in qualsiasi momento.</p></div></div></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.consent_management",
+                    "title": "3. Gestione del Consenso",
+                    "content": "<div class='bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-lg'><h4 class='text-lg font-semibold mb-4 text-green-800'>Come Gestire le tue Preferenze</h4><div class='grid md:grid-cols-2 gap-6'><div><h5 class='font-semibold text-green-800 mb-3'>🎛️ Pannello Preferenze Cookie</h5><ul class='list-disc list-inside space-y-1 text-sm text-green-700'><li>Accesso dal footer del sito</li><li>Controllo granulare per categoria</li><li>Modifiche immediate ed efficaci</li><li>Storico delle tue scelte</li></ul></div><div><h5 class='font-semibold text-green-800 mb-3'>🌐 Impostazioni Browser</h5><ul class='list-disc list-inside space-y-1 text-sm text-green-700'><li>Blocco completo cookie di terze parti</li><li>Cancellazione automatica alla chiusura</li><li>Modalità navigazione privata</li><li>Estensioni privacy-focused</li></ul></div></div><div class='mt-6 bg-white p-4 rounded-lg border'><h5 class='font-semibold text-gray-800 mb-3'>📱 Gestione su Dispositivi Mobili</h5><div class='grid md:grid-cols-3 gap-4'><div class='text-center'><h6 class='font-semibold text-gray-700 mb-2'>iOS (Safari)</h6><p class='text-xs text-gray-600'>Impostazioni > Safari > Privacy e sicurezza</p></div><div class='text-center'><h6 class='font-semibold text-gray-700 mb-2'>Android (Chrome)</h6><p class='text-xs text-gray-600'>Chrome > Impostazioni > Privacy e sicurezza</p></div><div class='text-center'><h6 class='font-semibold text-gray-700 mb-2'>App Mobile</h6><p class='text-xs text-gray-600'>Impostazioni app > Privacy > Cookie</p></div></div></div></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.third_party_services",
+                    "title": "4. Servizi di Terze Parti",
+                    "content": "<div class='space-y-6'><h4 class='text-lg font-semibold text-gray-800 mb-4'>Servizi Esterni Integrati nella Piattaforma</h4><div class='grid md:grid-cols-2 gap-6'><div class='bg-blue-50 p-4 rounded-lg border'><h5 class='font-semibold text-blue-800 mb-3'>📈 Google Analytics 4</h5><ul class='list-disc list-inside text-sm text-blue-700 space-y-1'><li><strong>Finalità:</strong> Analisi anonima del traffico</li><li><strong>Dati raccolti:</strong> Pagine visitate, durata sessioni</li><li><strong>Anonimizzazione IP:</strong> Attiva</li><li><strong>Policy:</strong> <a href='https://policies.google.com/privacy' class='underline'>Google Privacy Policy</a></li></ul></div><div class='bg-purple-50 p-4 rounded-lg border'><h5 class='font-semibold text-purple-800 mb-3'>🗺️ Google Maps</h5><ul class='list-disc list-inside text-sm text-purple-700 space-y-1'><li><strong>Finalità:</strong> Localizzazione studi medici</li><li><strong>Dati raccolti:</strong> Richieste di geolocalizzazione</li><li><strong>Controllo:</strong> Permessi browser</li><li><strong>Policy:</strong> <a href='https://policies.google.com/privacy' class='underline'>Google Privacy Policy</a></li></ul></div><div class='bg-orange-50 p-4 rounded-lg border'><h5 class='font-semibold text-orange-800 mb-3'>🎥 Hotjar</h5><ul class='list-disc list-inside text-sm text-orange-700 space-y-1'><li><strong>Finalità:</strong> Miglioramento UX</li><li><strong>Dati raccolti:</strong> Interazioni anonime</li><li><strong>Mascheramento:</strong> Dati sensibili nascosti</li><li><strong>Policy:</strong> <a href='https://www.hotjar.com/legal/policies/privacy' class='underline'>Hotjar Privacy Policy</a></li></ul></div><div class='bg-green-50 p-4 rounded-lg border'><h5 class='font-semibold text-green-800 mb-3'>💳 Stripe Payments</h5><ul class='list-disc list-inside text-sm text-green-700 space-y-1'><li><strong>Finalità:</strong> Pagamenti sicuri</li><li><strong>Dati raccolti:</strong> Info transazioni (crittografate)</li><li><strong>Certificazioni:</strong> PCI DSS Level 1</li><li><strong>Policy:</strong> <a href='https://stripe.com/privacy' class='underline'>Stripe Privacy Policy</a></li></ul></div></div></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.cookie_duration",
+                    "title": "5. Durata e Cancellazione Cookie",
+                    "content": "<div class='overflow-x-auto'><table class='min-w-full bg-white border border-gray-300'><thead class='bg-gray-50'><tr><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Tipologia</th><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Durata Massima</th><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Cancellazione Automatica</th><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Controllo Utente</th></tr></thead><tbody class='divide-y divide-gray-200'><tr><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Cookie Sessione</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Chiusura browser</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Automatica</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Chiusura manuale</td></tr><tr class='bg-gray-50'><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Cookie Tecnici</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>30 giorni</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Scadenza automatica</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Impostazioni browser</td></tr><tr><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Cookie Analitici</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>2 anni</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Scadenza/revoca consenso</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Pannello preferenze</td></tr><tr class='bg-gray-50'><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Cookie Marketing</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>1 anno</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Revoca consenso</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Opt-out immediato</td></tr></tbody></table></div><div class='bg-yellow-50 border border-yellow-200 p-4 rounded-lg mt-6'><p class='text-sm text-yellow-800'><strong>Procedura di cancellazione:</strong> Puoi cancellare tutti i cookie in qualsiasi momento dalle impostazioni del browser o utilizzando il nostro pannello di gestione preferenze.</p></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.cookie_rights",
+                    "title": "6. I Tuoi Diritti sui Cookie",
+                    "content": "<div class='grid md:grid-cols-2 gap-6'><div class='space-y-4'><div class='border border-green-200 bg-green-50 p-4 rounded-lg'><h5 class='font-semibold text-green-800 mb-2'>✓ Diritto di Scelta</h5><p class='text-sm text-green-700'>Puoi accettare o rifiutare selettivamente ogni categoria di cookie</p></div><div class='border border-blue-200 bg-blue-50 p-4 rounded-lg'><h5 class='font-semibold text-blue-800 mb-2'>✓ Diritto di Revoca</h5><p class='text-sm text-blue-700'>Puoi revocare il consenso in qualsiasi momento</p></div><div class='border border-purple-200 bg-purple-50 p-4 rounded-lg'><h5 class='font-semibold text-purple-800 mb-2'>✓ Diritto di Informazione</h5><p class='text-sm text-purple-700'>Hai diritto a conoscere tutti i cookie utilizzati</p></div></div><div class='space-y-4'><div class='border border-orange-200 bg-orange-50 p-4 rounded-lg'><h5 class='font-semibold text-orange-800 mb-2'>✓ Diritto di Cancellazione</h5><p class='text-sm text-orange-700'>Puoi richiedere la cancellazione di tutti i tuoi cookie</p></div><div class='border border-red-200 bg-red-50 p-4 rounded-lg'><h5 class='font-semibold text-red-800 mb-2'>✓ Diritto di Portabilità</h5><p class='text-sm text-red-700'>Puoi esportare le tue preferenze cookie</p></div><div class='border border-gray-200 bg-gray-50 p-4 rounded-lg'><h5 class='font-semibold text-gray-800 mb-2'>✓ Diritto di Reclamo</h5><p class='text-sm text-gray-700'>Puoi presentare reclamo al Garante Privacy</p></div></div></div><div class='bg-blue-50 border border-blue-200 p-4 rounded-lg mt-6'><p class='text-sm text-blue-800'><strong>Esercizio dei diritti:</strong> Contatta il nostro DPO a dpo@saluteora.it o utilizza il modulo di contatto dedicato nella sezione Privacy del tuo account.</p></div>"
+                }
+            },
+            {
+                "type": "cookie_management_panel",
+                "data": {
+                    "view": "pub_theme::components.blocks.interactive.cookie_preferences",
+                    "title": "🍪 Gestisci le tue Preferenze Cookie",
+                    "description": "Controlla in tempo reale quali cookie accettare o rifiutare",
+                    "categories": [
+                        {
+                            "id": "necessary",
+                            "name": "Cookie Necessari",
+                            "description": "Indispensabili per il funzionamento del sito",
+                            "required": true,
+                            "count": 5
+                        },
+                        {
+                            "id": "analytics",
+                            "name": "Cookie Analitici",
+                            "description": "Ci aiutano a migliorare l'esperienza utente",
+                            "required": false,
+                            "count": 3
+                        },
+                        {
+                            "id": "preferences",
+                            "name": "Cookie di Preferenze",
+                            "description": "Memorizzano le tue impostazioni personali",
+                            "required": false,
+                            "count": 4
+                        },
+                        {
+                            "id": "marketing",
+                            "name": "Cookie di Marketing",
+                            "description": "Utilizzati per campagne pubblicitarie mirate",
+                            "required": false,
+                            "count": 6
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "cta",
+                "data": {
+                    "view": "pub_theme::components.blocks.cta.cookie_support",
+                    "title": "Hai domande sui cookie?",
+                    "subtitle": "Il nostro team privacy è qui per aiutarti",
+                    "background_color": "bg-gradient-to-r from-orange-600 to-amber-600",
+                    "text_color": "text-white",
+                    "primary_button": {
+                        "text": "Apri pannello cookie",
+                        "link": "#cookie-preferences",
+                        "style": "bg-white text-orange-600 hover:bg-gray-50"
+                    },
+                    "secondary_button": {
+                        "text": "Contatta privacy team",
+                        "link": "mailto:privacy@saluteora.it",
+                        "style": "border-2 border-white text-white hover:bg-white hover:text-orange-600"
+                    }
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": null,
+    "footer_blocks": null,
+    "created_at": "2025-06-10T13:39:47.000000Z",
+    "updated_at": "2025-01-14T11:15:00.000000Z",
+    "created_by": null,
+    "updated_by": "system"
+}

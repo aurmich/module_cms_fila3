@@ -1,0 +1,101 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Wizard Step Implementation Rules
+
+## Filosofia Fondamentale
+- Ogni step del wizard rappresenta un **momento fenomenologico** nell'esperienza utente
+- L'implementazione segue il **Tao della semplicità**: massima funzionalità con minima complessità
+- Pattern **universalizzabile** applicabile a tutti i moduli
+
+## Regole Obbligatorie
+
+### Pattern di Naming
+- Metodi step: `get{StepName}Step(): Forms\Components\Wizard\Step`
+- Schema methods: `get{StepName}StepSchema(): array`
+- Consistenza assoluta nel naming
+
+### Type Safety
+- SEMPRE dichiarare tipi di ritorno espliciti
+- Import completi delle dipendenze
+- PHPStan Level 9+ compliance
+
+### Architettura Wizard
+```php
+// Pattern base obbligatorio
+protected static function getStudioStep(): Forms\Components\Wizard\Step
+{
+    return Forms\Components\Wizard\Step::make('studio')
+        ->label('Label Descrittiva')
+        ->description('Descrizione chiara del processo')
+        ->icon('heroicon-o-icon-name')
+        ->schema(static::getStudioStepSchema())
+        ->visible(fn ($get) => $get('id') !== null);
+}
+```
+
+### Gestione Dipendenze
+- Import esplicito di tutte le Resource referenziate
+- Riuso schema da Resource esistenti: `ResourceClass::getFormSchema()`
+- Zero duplicazione di logica
+
+### Conditional Visibility
+- Step condizionali basati su maturità ontologica (`id !== null`)
+- Logica visibility come closure: `fn ($get) => $get('id') !== null`
+- Nessuna hardcoded logic
+
+## Type System Philosophy
+
+### View → HtmlString Transformation
+```php
+// Trasformazione alchemica
+->submitAction(new \Illuminate\Support\HtmlString(
+    view('pub_theme::filament.wizard.submit-button')->render()
+))
+```
+
+### Eco-Sistema Type Safe
+- `Forms\Components\Wizard\Step` come tipo base
+- Array schema type-safe: `array<string, mixed>`
+- Closure typing per visibility: `fn (callable $get): bool`
+
+## Anti-Pattern da Evitare
+
+### ❌ Metodi Mancanti
+```php
+// MAI referenziare metodi non implementati
+self::getStudioStep() // Senza implementazione
+```
+
+### ❌ Import Mancanti
+```php
+// MAI usare classi senza import
+$schema = StudioResource::getFormSchema(); // Senza use statement
+```
+
+### ❌ Type Mixing
+```php
+// MAI mischiare View e string types
+->submitAction(view('template')) // Restituisce View invece di Htmlable
+```
+
+## Zen del Debug
+- Un bug risolto è un **insegnamento per l'universo**
+- La correzione deve essere **elegante e minimale**
+- Il codice perfetto **non fa rumore**
+
+## Quality Assurance
+- PHPStan compliance prima del commit
+- Test del flusso wizard completo
+- Documentazione filosofica aggiornata
+
+## Collegamenti Cosmici
+- [SaluteOra/docs/wizard-step-implementation.md](mdc:../../laravel/Modules/SaluteOra/docs/wizard-step-implementation.md)
+- [Xot/docs/wizard-patterns.md](mdc:../../laravel/Modules/Xot/docs/wizard-patterns.md)
+
+---
+*"Il metodo che può essere implementato non è il vero metodo. Il metodo che esiste è quello che implementi."* - Tao Te Ching del Programmatore
+
+🕉️ **Code with Compassion** 🕉️

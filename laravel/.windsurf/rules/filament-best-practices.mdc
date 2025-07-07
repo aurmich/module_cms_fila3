@@ -1,0 +1,52 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Best Practices Filament (modulare, neutro, multi-modulo)
+
+## 1. Estensione classi
+- **NON estendere MAI direttamente le classi Filament**
+- Usare sempre le classi base XotBase (es. `XotBaseResource`, `XotBasePage`, `XotBaseWidget`)
+- Rimuovere import inutili di classi Filament
+
+| Classe Filament                  | Classe Base da Usare                        |
+|----------------------------------|---------------------------------------------|
+| `\Filament\Pages\Page`           | `Modules\Xot\Filament\Pages\XotBasePage`  |
+| `\Filament\Resources\Resource`   | `Modules\Xot\Filament\Resources\XotBaseResource` |
+| `\Filament\Resources\Pages\*`   | `Modules\Xot\Filament\Resources\Pages\XotBase*` |
+| `\Filament\Widgets\Widget`       | `Modules\Xot\Filament\Widgets\XotBaseWidget`     |
+
+## 2. Naming
+- Resource: `{Nome}Resource`
+- Widget: `{Nome}Widget`
+- Page: `{Nome}Page`
+- Tutte le classi in `app/Filament/Clusters/*/Pages` DEVONO terminare con "Page"
+
+## 3. Proprietà critiche
+- `public ?array $data = []` in XotBaseWidget: NON rimuovere, NON ridichiarare nelle derivate
+- `protected static string $view` e `public array $listener = []`: NON alterare la firma
+
+## 4. Moderazione centralizzata
+- La moderazione utenti (stato, dati moderazione) va gestita in risorse Filament neutre, riusabili per tutti i tipi utente (`type`, `state`)
+- Evitare logica specifica per ruoli: usare STI e campi generici
+- Usare sempre Spatie Activitylog per audit trail
+
+## 5. Checklist prima del commit
+- [ ] Nessuna classe estende direttamente una classe Filament
+- [ ] Tutte le classi Filament estendono la corrispondente XotBase
+- [ ] Import inutili rimossi
+- [ ] Naming conforme
+- [ ] Proprietà critiche rispettate
+- [ ] Moderazione centralizzata e neutra
+- [ ] Audit trail tramite Spatie Activitylog
+- [ ] Documentazione aggiornata e linkata
+
+## 6. Link documentazione
+- [README Filament Patient](../../Modules/Patient/docs/README.md)
+- [README Filament Xot](../../Modules/Xot/docs/filament/README.md)
+- [Critical Properties](../../Modules/Xot/docs/filament/critical-properties/data-property.md)
+- [Indice Documentazione Centrale](../../../docs/INDEX.md)
+
+---
+**Questa regola va copiata anche in `.cursor/rules/filament-best-practices.mdc`**

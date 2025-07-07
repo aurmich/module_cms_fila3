@@ -1,0 +1,69 @@
+# Convenzioni per Migrazioni con XotBaseMigration
+
+## Regola 1: Non Implementare il Metodo down()
+
+Quando utilizzi `XotBaseMigration`, **MAI** reimplementare il metodo `down()`:
+
+### Corretto ✅
+```php
+return new class() extends XotBaseMigration {
+    public function up(): void {
+        // Implementazione...
+    }
+    // Nessun metodo down()
+};
+```
+
+### Errato ❌
+```php
+return new class() extends XotBaseMigration {
+    public function up(): void {
+        // Implementazione...
+    }
+    
+    public function down(): void { // ERRORE: non reimplementare questo metodo!
+        Schema::dropIfExists($this->getTable());
+    }
+};
+```
+
+## Regola 2: Utilizzare updateTimestamps() invece di timestamps()
+
+### Corretto ✅
+```php
+$this->tableCreate(function (Blueprint $table): void {
+    $table->id();
+    // Altri campi...
+    
+    // Per aggiungere created_at, updated_at, created_by, updated_by
+    $this->updateTimestamps($table, false);
+    
+    // Per includere anche deleted_at e deleted_by:
+    $this->updateTimestamps($table, true);
+});
+```
+
+### Errato ❌
+```php
+$this->tableCreate(function (Blueprint $table): void {
+    $table->id();
+    // Altri campi...
+    
+    $table->timestamps(); // ERRORE: non usare questo metodo direttamente
+});
+```
+
+## Filosofia
+
+La classe `XotBaseMigration` incorpora e automatizza molte best practice. Rispettare le sue astrazioni è un atto di umiltà tecnica e di rispetto per l'architettura del progetto.
+
+## Motivazione
+
+1. **DRY (Don't Repeat Yourself)** - Evita duplicazione di codice già presente nella classe base
+2. **Consistenza** - Garantisce comportamento uniforme in tutto il progetto
+3. **Completezza** - `updateTimestamps()` aggiunge non solo created_at/updated_at ma anche created_by/updated_by
+4. **Evoluzione** - Se la logica delle migrazioni cambia, sarà riflessa automaticamente in tutte le migrazioni figlie
+
+## Documentazione Completa
+
+Vedi `/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/database/xotbase-migration-conventions.md`

@@ -1,0 +1,38 @@
+# Utilizzo di foreignIdFor nelle Migrazioni
+
+## Regola
+
+In tutte le migrazioni, utilizzare **SEMPRE** `foreignIdFor()` per definire chiavi esterne, MAI `uuid()` o `unsignedBigInteger()` manuali.
+
+## Corretto ✅
+
+```php
+$table->foreignIdFor(\Modules\SaluteOra\Models\Doctor::class);
+$table->foreignIdFor(\Modules\SaluteOra\Models\Studio::class);
+```
+
+## Errato ❌
+
+```php
+$table->uuid('doctor_id');
+$table->uuid('studio_id');
+```
+
+## Motivazione
+
+1. **Type safety** - Garantisce la corrispondenza dei tipi tra il modello e la colonna DB
+2. **Convenzioni automatiche** - Genera nomi di colonna standardizzati
+3. **Vincoli di integrità** - Facilita l'aggiunta di vincoli `constrained()`
+4. **Manutenibilità** - Se il tipo di ID del modello cambia, la migrazione resta valida
+
+## Applicazione Pratica
+
+Applicare questa regola in **tutte** le migrazioni, con particolare attenzione alle tabelle pivot come `doctor_studio`.
+
+## Dimensione Filosofica e Zen
+
+Usare `foreignIdFor()` rispetta l'ordine naturale del framework e riflette la semplicità Zen di "fare di più con meno", riducendo il rumore mentale e il potenziale di errore.
+
+## Documentazione Correlata
+
+Vedi `/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/docs/database/foreign-keys-best-practices.md` per dettagli completi.

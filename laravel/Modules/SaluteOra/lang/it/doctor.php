@@ -300,7 +300,6 @@ return array (
       'tooltip' => 'Devi accettare l\'informativa sulla privacy per continuare',
       'description' => 'privacy_acceptance',
       'helper_text' => 'privacy_acceptance',
-      'placeholder' => 'privacy_acceptance',
     ),
   ),
   'filters' => 

@@ -46,12 +46,8 @@ class LogoutWidget extends XotBaseWidget
      */
     public function getFormSchema(): array
     {
-        $view='filament.widgets.auth.logout-message';
-        if(!view()->exists($view)){
-            throw new \Exception('View '.$view.' not found');
-        }
         return [
-            'logout_message' => View::make($view)
+            'logout_message' => View::make('filament.widgets.auth.logout-message')
                 ->columnSpanFull(),
         ];
     }

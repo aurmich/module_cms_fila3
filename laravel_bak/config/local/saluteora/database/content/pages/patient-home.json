@@ -1,0 +1,237 @@
+{
+    "id": "9",
+    "title": {
+        "it": "La Tua Area Personale - SaluteOra",
+        "en": "Your Personal Area - SaluteOra"
+    },
+    "slug": "patient-home",
+    "content": "<div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>\n    <!-- Contenuto dinamico verrà inserito qui -->\n</div>",
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.dettaglio-paziente",
+                    "title": "Bentornata, [Nome Paziente]",
+                    "subtitle": "Procedi con i prossimi step per prenotare una visita",
+                    "background_color": "bg-white",
+                    "text_color": "text-gray-900"
+                }
+            },
+            {
+                "type": "quick_links",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick_links",
+                    "title": "Azioni Rapide",
+                    "links": [
+                        {
+                            "title": "Prenota una visita",
+                            "url": "/prenotazioni/nuova",
+                            "icon": "saluteora-clock"
+                        },
+                        {
+                            "title": "I miei documenti",
+                            "url": "/documenti",
+                            "icon": "saluteora-shield-check"
+                        },
+                        {
+                            "title": "Il mio profilo",
+                            "url": "/profilo",
+                            "icon": "saluteora-patient"
+                        },
+                        {
+                            "title": "Contatta l'assistenza",
+                            "url": "/assistenza",
+                            "icon": "saluteora-phone"
+                        }
+                    ]
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.simple2",
+                    "title": "Welcome Back, [Patient Name]",
+                    "subtitle": "Your personal dashboard for oral health during pregnancy",
+                    "background_color": "bg-[#EBF5FF]",
+                    "text_color": "text-gray-900"
+                }
+            },
+            {
+                "type": "info",
+                "data": {
+                    "view": "pub_theme::components.blocks.info",
+                    "title": "Pregnancy Oral Health Tips",
+                    "content": "<ul class='list-disc pl-5 space-y-2'><li>Maintain good oral hygiene</li><li>Schedule regular check-ups</li><li>Follow a balanced diet</li><li>Report any gum discomfort</li></ul>",
+                    "icon": "saluteora-shield-check",
+                    "variant": "info"
+                }
+            },
+            {
+                "type": "quick_links",
+                "data": {
+                    "view": "pub_theme::components.blocks.quick_links",
+                    "title": "Quick Actions",
+                    "links": [
+                        {
+                            "title": "Book an Appointment",
+                            "url": "/en/appointments/new",
+                            "icon": "saluteora-clock"
+                        },
+                        {
+                            "title": "My Documents",
+                            "url": "/en/documents",
+                            "icon": "saluteora-shield-check"
+                        },
+                        {
+                            "title": "My Profile",
+                            "url": "/en/profile",
+                            "icon": "saluteora-patient"
+                        },
+                        {
+                            "title": "Contact Support",
+                            "url": "/en/contact",
+                            "icon": "saluteora-phone"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "cta",
+                "data": {
+                    "view": "pub_theme::components.blocks.cta.centered",
+                    "title": "Do you have questions about your oral health during pregnancy?",
+                    "description": "Our team of specialists is available for any questions or needs. Contact us for a personalized consultation.",
+                    "cta_text": "Request a Consultation",
+                    "cta_link": "/en/contact",
+                    "background_color": "bg-blue-50"
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": null,
+    "footer_blocks": null,
+    "created_at": "2025-05-23T15:14:19.000000Z",
+    "updated_at": "2025-05-23T15:14:19.000000Z",
+    "created_by": "0196b51f-a511-73f4-a934-0f17fada891e",
+    "updated_by": "0196b51f-a511-73f4-a934-0f17fada891e",
+    "sections": [
+        {
+            "name": "pub_theme::sections.hero",
+            "data": {
+                "title": "La tua salute, sempre a portata di click",
+                "subtitle": "Gestisci i tuoi appuntamenti medici in modo semplice e veloce",
+                "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                "cta": {
+                    "label": "Accedi al tuo account",
+                    "url": "/login"
+                }
+            }
+        },
+        {
+            "name": "pub_theme::sections.calendar",
+            "data": {
+                "title": "I tuoi prossimi appuntamenti",
+                "subtitle": "Visualizza e gestisci le tue visite mediche",
+                "view": "month",
+                "show_legend": true,
+                "show_weekends": true,
+                "events": [
+                    {
+                        "title": "Visita Cardiologica",
+                        "date": "2024-03-20",
+                        "time": "10:00",
+                        "doctor": "Dr. Rossi",
+                        "status": "confirmed"
+                    },
+                    {
+                        "title": "Controllo Glicemia",
+                        "date": "2024-03-25",
+                        "time": "15:30",
+                        "doctor": "Dr. Bianchi",
+                        "status": "pending"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "pub_theme::sections.quick_actions",
+            "data": {
+                "title": "Azioni Rapide",
+                "actions": [
+                    {
+                        "title": "Prenota Visita",
+                        "description": "Trova e prenota una visita con il tuo medico",
+                        "icon": "calendar-plus",
+                        "url": "/prenota"
+                    },
+                    {
+                        "title": "I Miei Documenti",
+                        "description": "Accedi ai tuoi referti e documenti medici",
+                        "icon": "file-medical",
+                        "url": "/documenti"
+                    },
+                    {
+                        "title": "Chat con il Medico",
+                        "description": "Comunica con il tuo medico di fiducia",
+                        "icon": "message",
+                        "url": "/chat"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "pub_theme::sections.health_tips",
+            "data": {
+                "title": "Consigli per la tua salute",
+                "subtitle": "Articoli e suggerimenti per il tuo benessere",
+                "tips": [
+                    {
+                        "title": "Alimentazione Sana",
+                        "description": "Scopri come mantenere una dieta equilibrata",
+                        "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                        "url": "/blog/alimentazione"
+                    },
+                    {
+                        "title": "Esercizio Fisico",
+                        "description": "Consigli per mantenersi in forma",
+                        "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                        "url": "/blog/esercizio"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "pub_theme::sections.emergency_contacts",
+            "data": {
+                "title": "Contatti di Emergenza",
+                "subtitle": "I numeri da chiamare in caso di necessità",
+                "contacts": [
+                    {
+                        "name": "Emergenza Sanitaria",
+                        "number": "118",
+                        "description": "Per emergenze mediche urgenti"
+                    },
+                    {
+                        "name": "Guardia Medica",
+                        "number": "116117",
+                        "description": "Assistenza medica non urgente"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "pub_theme::sections.cta",
+            "data": {
+                "title": "Hai bisogno di aiuto?",
+                "subtitle": "Il nostro team è sempre a tua disposizione",
+                "cta": {
+                    "label": "Contattaci",
+                    "url": "/contatti"
+                }
+            }
+        }
+    ]
+}

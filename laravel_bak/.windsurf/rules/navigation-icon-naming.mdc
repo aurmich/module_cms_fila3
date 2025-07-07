@@ -1,0 +1,23 @@
+# Regola: Identificatore icona navigation
+
+## Convenzione
+Quando si definisce la chiave `'icon'` nei file di traduzione (es. navigation), NON si usa un path file, ma un identificatore composto da `<nome_modulo>-<nome_icona>` (es: `saluteora-doctor`).
+
+L’SVG corrispondente deve trovarsi in `Modules/<NomeModulo>/resources/svg/<nome_modulo>-<nome_icona>.svg`.
+
+## Esempio corretto
+
+```php
+'icon' => 'saluteora-doctor', // NON 'svg/doctor.svg'
+```
+
+## Motivazione
+- Permette override e gestione centralizzata delle icone.
+- Facilita la manutenzione e la modularità.
+- Evita dipendenze hardcoded dai path file.
+
+## Collegamenti
+
+Vedi anche:
+- [SaluteOra/docs/uso-label-filament.mdc](../../Modules/SaluteOra/docs/uso-label-filament.mdc)
+- [Xot/docs/struttura-path-moduli.mdc](../../Modules/Xot/docs/struttura-path-moduli.mdc)

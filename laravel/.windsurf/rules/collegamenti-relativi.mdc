@@ -1,0 +1,47 @@
+# Convenzione per Collegamenti Relativi in Markdown
+
+## Regola Fondamentale
+Tutti i collegamenti nei file Markdown devono utilizzare percorsi relativi, non assoluti.
+
+## Implementazione Corretta
+
+### Percorsi Relativi tra File nella Stessa Directory
+```markdown
+[Nome Link](altro-file.md)
+```
+
+### Percorsi Relativi verso File in Directory Superiore
+```markdown
+[Nome Link](../altro-file.md)
+```
+
+### Percorsi Relativi verso File in Directory Inferiore
+```markdown
+[Nome Link](directory/file.md)
+```
+
+### Percorsi Relativi verso File in Directory Parallela
+```markdown
+[Nome Link](../altra-directory/file.md)
+```
+
+## Anti-pattern
+```markdown
+[Nome Link](/percorso/assoluto/file.md)
+[Nome Link](/var/www/html/percorso/file.md)
+```
+
+## Motivazione
+
+1. **Portabilità**: I link relativi funzionano indipendentemente dall'ambiente di deployment
+2. **Manutenibilità**: Se la struttura di cartelle cambia, solo i file spostati devono essere aggiornati
+3. **Leggibilità**: I percorsi relativi sono più concisi e leggibili
+4. **Compatibilità**: Funzionano sia in ambienti locali che remoti
+
+## Eccezioni
+- Collegamenti a risorse esterne (https://...)
+- Anchor links all'interno dello stesso documento (#sezione)
+
+## Verifica
+- Controllare che tutti i collegamenti funzionino correttamente
+- Utilizzare linter markdown per verificare i collegamenti

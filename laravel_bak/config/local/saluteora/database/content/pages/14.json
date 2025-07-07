@@ -1,0 +1,138 @@
+{
+    "id": "14",
+    "title": {
+        "it": "Privacy Policy - Protezione dei Dati Sanitari"
+    },
+    "slug": "14",
+    "content": null,
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.legal",
+                    "title": "Privacy Policy",
+                    "subtitle": "La tua privacy è sacra. Scopri come proteggiamo i tuoi dati sanitari secondo le normative europee più rigorose.",
+                    "background_color": "bg-gradient-to-br from-blue-50 to-indigo-100",
+                    "text_color": "text-gray-900",
+                    "icon": "shield-check",
+                    "icon_color": "text-blue-600"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "content": "<div class='prose prose-lg mx-auto'><p class='text-lg text-gray-700 leading-relaxed mb-6'><strong>Ultimo aggiornamento:</strong> 14 gennaio 2025</p><p class='text-lg text-gray-700 leading-relaxed mb-6'>Questa Privacy Policy descrive come SaluteOra raccoglie, utilizza e protegge i tuoi dati personali e sanitari in conformità al Regolamento UE 2016/679 (GDPR) e al Codice in materia di protezione dei dati personali (D.Lgs. 196/2003).</p></div>"
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.privacy_principles",
+                    "title": "I nostri principi di protezione dati",
+                    "subtitle": "Ogni processo è progettato per massimizzare la tua privacy e sicurezza",
+                    "sections": [
+                        {
+                            "title": "Minimizzazione dei Dati",
+                            "description": "Raccogliamo solo i dati strettamente necessari per fornire i nostri servizi sanitari.",
+                            "icon": "data-minimize",
+                            "color": "text-green-600"
+                        },
+                        {
+                            "title": "Crittografia Avanzata",
+                            "description": "Tutti i dati sanitari sono protetti con crittografia AES-256 e protocolli SSL/TLS.",
+                            "icon": "lock-shield",
+                            "color": "text-blue-600"
+                        },
+                        {
+                            "title": "Accesso Controllato",
+                            "description": "Solo il personale sanitario autorizzato può accedere ai tuoi dati clinici.",
+                            "icon": "user-shield",
+                            "color": "text-purple-600"
+                        },
+                        {
+                            "title": "Trasparenza Totale",
+                            "description": "Hai sempre il diritto di sapere quali dati abbiamo e come li utilizziamo.",
+                            "icon": "transparency",
+                            "color": "text-teal-600"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.data_controller",
+                    "title": "1. Titolare del Trattamento",
+                    "content": "<div class='bg-gray-50 p-6 rounded-lg'><h3 class='text-xl font-semibold mb-4'>SaluteOra S.r.l.</h3><ul class='space-y-2'><li><strong>Sede legale:</strong> Via della Salute, 123 - 00100 Roma (RM)</li><li><strong>Partita IVA:</strong> 12345678901</li><li><strong>PEC:</strong> privacy@pec.saluteora.it</li><li><strong>Email Privacy:</strong> privacy@saluteora.it</li><li><strong>Telefono:</strong> +39 06 1234567</li><li><strong>DPO (Data Protection Officer):</strong> dpo@saluteora.it</li></ul></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.content",
+                    "title": "2. Tipologie di Dati Trattati",
+                    "content": "<div class='space-y-6'><div class='border-l-4 border-red-500 pl-6'><h4 class='text-lg font-semibold text-red-700 mb-3'>Dati Sanitari (Art. 9 GDPR)</h4><ul class='list-disc list-inside space-y-2 text-gray-700'><li>Anamnesi odontoiatrica e ginecologica</li><li>Diagnosi e piani di trattamento</li><li>Radiografie e immagini diagnostiche</li><li>Prescrizioni farmacologiche</li><li>Note cliniche e referti medici</li></ul></div><div class='border-l-4 border-blue-500 pl-6'><h4 class='text-lg font-semibold text-blue-700 mb-3'>Dati Personali Comuni</h4><ul class='list-disc list-inside space-y-2 text-gray-700'><li>Nome, cognome, codice fiscale</li><li>Data di nascita e residenza</li><li>Numero di telefono ed email</li><li>Dati assicurativi (se applicabile)</li></ul></div><div class='border-l-4 border-green-500 pl-6'><h4 class='text-lg font-semibold text-green-700 mb-3'>Dati Tecnici</h4><ul class='list-disc list-inside space-y-2 text-gray-700'><li>Indirizzo IP e log di navigazione</li><li>Cookie tecnici necessari</li><li>Metadati delle comunicazioni</li></ul></div></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.legal_basis",
+                    "title": "3. Base Giuridica del Trattamento",
+                    "content": "<div class='bg-blue-50 p-6 rounded-lg'><h4 class='text-lg font-semibold mb-4'>I tuoi dati sono trattati per:</h4><ul class='space-y-3'><li class='flex items-start'><span class='bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5'>1</span><div><strong>Prestazioni sanitarie (Art. 9, par. 2, lett. h GDPR)</strong><br><span class='text-gray-600'>Diagnosi, terapia e assistenza sanitaria fornita da professionisti</span></div></li><li class='flex items-start'><span class='bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5'>2</span><div><strong>Consenso esplicito (Art. 6 e 9 GDPR)</strong><br><span class='text-gray-600'>Per comunicazioni promozionali e newsletter</span></div></li><li class='flex items-start'><span class='bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5'>3</span><div><strong>Obblighi legali (Art. 6, par. 1, lett. c GDPR)</strong><br><span class='text-gray-600'>Conservazione documenti sanitari secondo normativa</span></div></li><li class='flex items-start'><span class='bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5'>4</span><div><strong>Legittimo interesse (Art. 6, par. 1, lett. f GDPR)</strong><br><span class='text-gray-600'>Sicurezza IT e prevenzione frodi</span></div></li></ul></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.data_retention",
+                    "title": "4. Conservazione dei Dati",
+                    "content": "<div class='overflow-x-auto'><table class='min-w-full bg-white border border-gray-300'><thead class='bg-gray-50'><tr><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Tipologia Dati</th><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Periodo di Conservazione</th><th class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b'>Base Normativa</th></tr></thead><tbody class='divide-y divide-gray-200'><tr><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Cartella Clinica</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Illimitato</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>D.Lgs. 196/2003</td></tr><tr class='bg-gray-50'><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Radiografie</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>20 anni</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>DPR 445/2000</td></tr><tr><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Dati marketing</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Fino a revoca consenso</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>GDPR Art. 7</td></tr><tr class='bg-gray-50'><td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>Log tecnici</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>6 mesi</td><td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>Garante Privacy</td></tr></tbody></table></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.data_rights",
+                    "title": "5. I Tuoi Diritti",
+                    "content": "<div class='grid md:grid-cols-2 gap-6'><div class='space-y-4'><div class='border border-green-200 bg-green-50 p-4 rounded-lg'><h5 class='font-semibold text-green-800 mb-2'>✓ Diritto di Accesso</h5><p class='text-sm text-green-700'>Puoi chiedere una copia di tutti i tuoi dati personali</p></div><div class='border border-blue-200 bg-blue-50 p-4 rounded-lg'><h5 class='font-semibold text-blue-800 mb-2'>✓ Diritto di Rettifica</h5><p class='text-sm text-blue-700'>Puoi correggere dati inesatti o incompleti</p></div><div class='border border-purple-200 bg-purple-50 p-4 rounded-lg'><h5 class='font-semibold text-purple-800 mb-2'>✓ Diritto di Cancellazione</h5><p class='text-sm text-purple-700'>Puoi chiedere la cancellazione (con limitazioni per dati sanitari)</p></div></div><div class='space-y-4'><div class='border border-orange-200 bg-orange-50 p-4 rounded-lg'><h5 class='font-semibold text-orange-800 mb-2'>✓ Diritto di Portabilità</h5><p class='text-sm text-orange-700'>Puoi ricevere i tuoi dati in formato strutturato</p></div><div class='border border-red-200 bg-red-50 p-4 rounded-lg'><h5 class='font-semibold text-red-800 mb-2'>✓ Diritto di Opposizione</h5><p class='text-sm text-red-700'>Puoi opporti al trattamento per marketing</p></div><div class='border border-gray-200 bg-gray-50 p-4 rounded-lg'><h5 class='font-semibold text-gray-800 mb-2'>✓ Diritto di Limitazione</h5><p class='text-sm text-gray-700'>Puoi limitare il trattamento in determinate circostanze</p></div></div></div><div class='bg-yellow-50 border border-yellow-200 p-4 rounded-lg mt-6'><p class='text-sm text-yellow-800'><strong>Come esercitare i tuoi diritti:</strong> Invia una richiesta a privacy@saluteora.it allegando copia documento identità. Risponderemo entro 30 giorni.</p></div>"
+                }
+            },
+            {
+                "type": "legal_section",
+                "data": {
+                    "view": "pub_theme::components.blocks.legal.security_measures",
+                    "title": "6. Misure di Sicurezza",
+                    "content": "<div class='bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg'><h4 class='text-lg font-semibold mb-4 text-blue-900'>Protocolli di Sicurezza Implementati</h4><div class='grid md:grid-cols-2 gap-6'><div><h5 class='font-semibold text-blue-800 mb-3'>🔐 Sicurezza Tecnica</h5><ul class='list-disc list-inside space-y-1 text-sm text-blue-700'><li>Crittografia AES-256 per dati a riposo</li><li>SSL/TLS per dati in transito</li><li>Autenticazione a due fattori</li><li>Backup crittografati giornalieri</li><li>Firewall e sistemi IDS/IPS</li></ul></div><div><h5 class='font-semibold text-blue-800 mb-3'>👥 Sicurezza Organizzativa</h5><ul class='list-disc list-inside space-y-1 text-sm text-blue-700'><li>Formazione continua del personale</li><li>Controllo accessi role-based</li><li>Audit log delle attività</li><li>Procedure di incident response</li><li>Contratti di riservatezza</li></ul></div></div></div>"
+                }
+            },
+            {
+                "type": "cta",
+                "data": {
+                    "view": "pub_theme::components.blocks.cta.privacy_contact",
+                    "title": "Hai domande sulla privacy?",
+                    "subtitle": "Il nostro Data Protection Officer è a tua disposizione",
+                    "background_color": "bg-gradient-to-r from-blue-600 to-indigo-600",
+                    "text_color": "text-white",
+                    "primary_button": {
+                        "text": "Contatta il DPO",
+                        "link": "mailto:dpo@saluteora.it",
+                        "style": "bg-white text-blue-600 hover:bg-gray-50"
+                    },
+                    "secondary_button": {
+                        "text": "Scarica modulo richiesta dati",
+                        "link": "/downloads/modulo-richiesta-dati.pdf",
+                        "style": "border-2 border-white text-white hover:bg-white hover:text-blue-600"
+                    }
+                }
+            }
+        ]
+    },
+    "sidebar_blocks": null,
+    "footer_blocks": null,
+    "created_at": "2025-06-10T13:39:31.000000Z",
+    "updated_at": "2025-01-14T10:45:00.000000Z",
+    "created_by": null,
+    "updated_by": "system"
+}

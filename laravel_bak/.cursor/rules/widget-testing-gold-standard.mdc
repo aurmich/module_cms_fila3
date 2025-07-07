@@ -1,0 +1,111 @@
+# Widget Testing Gold Standard Rules
+
+## 🏆 Pattern Vincente Confermato
+
+Basato su RegisterTypeWidgetTest.php: **9/9 test passati (100%)** in 4.44s
+
+## ✅ Struttura Obbligatoria
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Livewire\Livewire;
+use Modules\{Module}\Filament\Widgets\{WidgetName};
+
+// ✅ CRITICO: TestCase specifico
+uses(\Modules\Xot\Tests\TestCase::class);
+
+// ✅ CRITICO: Mock XotData
+beforeEach(function (): void {
+    mockXotData();
+});
+
+// ✅ CRITICO: Test diretti (no describe, no dataset)
+test('widget can be rendered', function () {
+    Livewire::test({WidgetName}::class)
+        ->assertStatus(200);
+});
+```
+
+## 🚨 Regole Assolute
+
+### SEMPRE Usare
+- `uses(\Modules\Xot\Tests\TestCase::class);`
+- `beforeEach` con `mockXotData()`
+- Test diretti senza wrapper
+
+### MAI Usare
+- `describe()` functions (causa errori Pest)
+- `dataset()` complessi
+- TestCase sbagliati
+- Mock senza `makePartial()`
+
+## 🔧 XotData Mock Pattern (Obbligatorio)
+
+```php
+function mockXotData(): void
+{
+    $mockXotData = \Mockery::mock(\Modules\Xot\Datas\XotData::class)->makePartial();
+    
+    $mockXotData->shouldReceive('getUserClass')
+        ->andReturn(\Modules\SaluteOra\Models\User::class);
+        
+    $mockXotData->shouldReceive('make')
+        ->andReturn($mockXotData);
+    
+    app()->instance(\Modules\Xot\Datas\XotData::class, $mockXotData);
+}
+```
+
+## 📊 Quality Gates
+
+### Minimum
+- Success Rate > 70%
+- Zero errori fatali
+- Performance < 5s
+
+### Gold Standard
+- Success Rate > 90%
+- Zero warnings
+- Performance < 3s
+
+## 🎯 Test Coverage Obbligatoria
+
+1. **Core Rendering**: widget rendering per ogni tipo
+2. **Form Interaction**: input/output data flow
+3. **Business Logic**: validation e error handling
+4. **Integration**: XotData e resource resolution
+
+## ❌ Anti-Pattern Critici
+
+```php
+// ❌ MAI fare questo
+describe('Widget Tests', function () {
+    // Causa: "Undefined property: $__latestDescription"
+});
+
+dataset('types', ['patient', 'doctor']);
+// Causa: errori inizializzazione Pest
+
+uses(Tests\TestCase::class);
+// Causa: conflict resolution
+```
+
+## 🔄 Enforcement
+
+- **Code Review**: Pattern compliance obbligatorio
+- **CI/CD**: Quality gates automatici
+- **Documentation**: Update con nuovi pattern
+- **Training**: Team onboarding sui pattern
+
+---
+
+**Status**: ✅ Gold Standard Stabilito
+**Compliance**: Obbligatorio per nuovi test
+**Version**: 1.0 - Pattern Definitivo
+description:
+globs:
+alwaysApply: false
+---

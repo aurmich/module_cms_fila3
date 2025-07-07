@@ -1,0 +1,168 @@
+---
+description: Regole per l'implementazione corretta di FullCalendarWidget in SaluteOra
+globs:
+  - "Modules/SaluteOra/app/Filament/**/*.php"
+alwaysApply: true
+---
+# Implementazione Corretta di FullCalendarWidget
+
+## Regola Fondamentale
+Il widget `FullCalendarWidget` del package `saade/filament-fullcalendar` v3.2.4 deve essere implementato estendendo direttamente la classe base e sovrascrivendo i metodi necessari.
+
+## Analisi del Codice Sorgente
+Dall'analisi del codice sorgente del package, è evidente che:
+
+1. `FullCalendarWidget` estende `Filament\Widgets\Widget` e implementa varie interfacce
+2. Utilizza trait come `InteractsWithEvents`, `CanBeConfigured`, ecc.
+3. Ha un metodo `config()` che può essere sovrascritto per personalizzare il calendario
+4. Ha un metodo `fetchEvents()` per recuperare i dati degli eventi
+5. **Non** supporta alcuna API fluente (`->config()`, `->options()`, ecc.)
+
+## Implementazione Corretta
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\Filament\Widgets;
+
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+
+class DoctorCalendarWidget extends FullCalendarWidget
+{
+    protected static string $view = 'saluteora::filament.widgets.doctor-calendar-widget';
+    
+    public function __construct(protected User $doctor, protected $studio)
+    {
+        parent::__construct();
+    }
+    
+    public function config(): array
+    {
+        return [
+            'initialView' => 'timeGridWeek',
+            // Altre configurazioni...
+        ];
+    }
+    
+    public function fetchEvents(array $fetchInfo): array
+    {
+        // Implementazione per recuperare gli eventi
+    }
+    
+    protected function createEvent(array $data): Model
+    {
+        // Implementazione per creare un evento
+    }
+    
+    protected function updateEvent(Model $event, array $data): Model
+    {
+        // Implementazione per aggiornare un evento
+    }
+    
+    protected function deleteEvent(Model $event): void
+    {
+        // Implementazione per eliminare un evento
+    }
+}
+```
+
+## Utilizzo Nella Pagina
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteOra\Filament\Pages;
+
+use Filament\Facades\Filament;
+use Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget;
+use Modules\Xot\Filament\Pages\XotBasePage;
+
+class DoctorCalendarPage extends XotBasePage
+{
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            new DoctorCalendarWidget(
+                $this->getCurrentDoctor(),
+                Filament::getTenant()
+            ),
+        ];
+    }
+}
+```
+
+## Errori da Evitare
+
+1. ❌ **Tentativo di usare API fluente**:
+   ```php
+   // ERRORE: Causa "Call to undefined method Filament\Widgets\WidgetConfiguration::config()"
+   FullCalendarWidget::make()->config([...])
+   ```
+
+2. ❌ **Tentativo di usare `->options()`**:
+   ```php
+   // ERRORE: Causa "Call to undefined method Filament\Widgets\WidgetConfiguration::options()"
+   FullCalendarWidget::make()->options([...])
+   ```
+
+3. ❌ **Tentativo di usare `->events()`**:
+   ```php
+   // ERRORE: Causa "Call to undefined method Filament\Widgets\WidgetConfiguration::events()"
+   FullCalendarWidget::make()->events(function() {...})
+   ```
+
+4. ❌ **Classe anonima non raccomandata**:
+   ```php
+   // NON RACCOMANDATO: Non segue le convenzioni del progetto
+   return new class extends FullCalendarWidget {...};
+   ```
+
+## Corretta Struttura dei File
+
+```
+Modules/
+  SaluteOra/
+    app/
+      Filament/
+        Widgets/
+          DoctorCalendarWidget.php  # Widget dedicato
+        Pages/
+          DoctorCalendarPage.php    # Pagina che usa il widget
+    resources/
+      views/
+        filament/
+          widgets/
+            doctor-calendar-widget.blade.php  # Template Blade
+```
+
+## Template Blade Corretto
+
+```blade
+<x-filament::widget>
+    <x-filament::section>
+        <div
+            wire:ignore
+            x-data="calendarWidget({
+                config: {{ json_encode($this->getConfig()) }},
+                events: {{ json_encode([]) }},
+                locale: @js(app()->getLocale()),
+                timezone: @js(config('app.timezone')),
+            })"
+        >
+            <div x-ref="calendar" wire:ignore></div>
+        </div>
+    </x-filament::section>
+</x-filament::widget>
+```
+
+## Documentazione di Riferimento
+
+Per una guida completa all'implementazione, consultare:
+
+- [Documentazione ufficiale Filament](https://filamentphp.com/docs/3.x/widgets/installation)
+- [Plugin FullCalendar](https://filamentphp.com/plugins/saade-fullcalendar)
+- [Documentazione interna](Modules/SaluteOra/docs/fullcalendar-implementation.md)
