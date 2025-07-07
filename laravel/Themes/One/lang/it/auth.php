@@ -29,7 +29,7 @@ return [
         'register_button' => 'Registrati',
         'already_registered' => 'Sei già registrato?',
         'doctor' => [
-            'title' => 'Registrazione Dottore',
+            'title' => 'Registrazione Odontoiatra',
             'subtitle' => 'Crea il tuo account professionale per accedere alla piattaforma SaluteOra',
             'description' => 'Registrati come dottore per gestire i tuoi pazienti e appuntamenti',
             'welcome_message' => 'Benvenuto in <span class="font-bold">SaluteOra</span>',
