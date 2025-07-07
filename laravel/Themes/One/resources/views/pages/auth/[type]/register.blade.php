@@ -23,7 +23,7 @@ new class extends Component
 
 ?>
 
-<x-layouts.main>
+<x-layouts.app>
     @volt('register.type')
     <div id="wave-container" class="flex flex-col items-stretch justify-center w-full min-h-screen py-10 sm:items-center relative overflow-hidden">
         <!-- Reactive subtle background waves -->
@@ -102,4 +102,4 @@ new class extends Component
             }
         });
     </script>
-</x-layouts.main>
+</x-layouts.app>
