@@ -64,13 +64,6 @@
                         }
                     ]
                 }
-            },
-            {
-                "name": "Selettore Lingua",
-                "type": "language-selector",
-                "data": {
-                    "view": "pub_theme::components.blocks.language-selector"
-                }
             }
         ]
     },
