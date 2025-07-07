@@ -49,14 +49,14 @@
                         <input wire:model="remember" id="remember" type="checkbox" 
                             class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
                         <label for="remember" class="ml-2 block text-sm text-gray-900">
-                            {{ __('auth.login.remember') }}
+                            {{ __('pub_theme::auth.login.remember') }}
                         </label>
                     </div>
 
                     @if (Route::has('password.request'))
                         <div class="text-sm">
                             <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                                {{ __('auth.login.forgot_password') }}
+                                {{ __('pub_theme::auth.login.forgot_password') }}
                             </a>
                         </div>
                     @endif
@@ -70,7 +70,7 @@
                                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
                             </svg>
                         </span>
-                        {{ __('auth.login.submit') }}
+                        {{ __('pub_theme::auth.login.submit') }}
                     </button>
                 </div>
             </form>

@@ -63,8 +63,8 @@ describe('Frontend Login Page Localization', function () {
         $response = get('/it/auth/login');
         $response->assertStatus(200)
                  ->assertSee('Hai dimenticato la password?')
-                 ->assertSee(__('auth.login.title'))
-                 ->assertSee(__('auth.login.or'));
+                 ->assertSee(__('pub_theme::auth.login.title'))
+                 ->assertSee(__('pub_theme::auth.login.or'));
     });
 });
 

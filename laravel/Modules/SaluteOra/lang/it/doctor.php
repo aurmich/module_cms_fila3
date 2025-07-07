@@ -299,7 +299,7 @@ return array (
       'label' => 'Accettazione Privacy',
       'tooltip' => 'Devi accettare l\'informativa sulla privacy per continuare',
       'description' => 'privacy_acceptance',
-      'helper_text' => 'privacy_acceptance',
+      'helper_text' => '',
       'placeholder' => 'privacy_acceptance',
     ),
   ),

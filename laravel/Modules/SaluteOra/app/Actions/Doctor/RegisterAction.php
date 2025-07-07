@@ -62,7 +62,8 @@ class RegisterAction
             /** @phpstan-ignore-next-line */
             $doctor->studio()->save($studio);
             /** @phpstan-ignore-next-line */
-            $doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
+            //$doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
+            $doctor->studios()->sync($studio,['schedule'=>$data['schedule']]);
         }
 
          //-------------------------------------------------
