@@ -53,10 +53,14 @@ public/storage
 public/hot
 public_html/storage
 public_html/hot
+laravel_bak/
 .git-rewrite
 .fuse_hidden*
 .fuse_hidden**.lock
 *.lock
+*.old
+*.old1
+*.old2  
 package-lock.json
 .php-cs-fixer.cache
 *.phar
