@@ -7,13 +7,14 @@ namespace Modules\User\Filament\Widgets\Auth;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Filament\Forms\ComponentContainer;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
-use Filament\Forms\ComponentContainer;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Filament\Notifications\Notification;
 
 /**
  * Password Reset Confirmation Widget for SaluteOra platform.
@@ -59,9 +60,7 @@ class PasswordResetConfirmWidget extends XotBaseWidget
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Section::make()
-                ->schema([
-                    Forms\Components\TextInput::make('email')
+                    'email'=>Forms\Components\TextInput::make('email')
                         ->email()
                         ->required()
                         ->autocomplete('email')
@@ -70,7 +69,7 @@ class PasswordResetConfirmWidget extends XotBaseWidget
                         ->extraInputAttributes(['class' => 'text-center'])
                         ->suffixIcon('heroicon-o-envelope'),
 
-                    Forms\Components\TextInput::make('password')
+                    'password'=>Forms\Components\TextInput::make('password')
                         ->password()
                         ->required()
                         ->revealable()
@@ -78,17 +77,15 @@ class PasswordResetConfirmWidget extends XotBaseWidget
                         ->disabled($this->currentState !== 'form')
                         ->extraInputAttributes(['class' => 'text-center'])
                         ->suffixIcon('heroicon-o-key')
-                        ->helperText(__('user::auth.password_reset.password_requirements')),
+                        ,
 
-                    Forms\Components\TextInput::make('password_confirmation')
+                    'password_confirmation'=>Forms\Components\TextInput::make('password_confirmation')
                         ->password()
                         ->required()
                         ->same('password')
                         ->disabled($this->currentState !== 'form')
                         ->extraInputAttributes(['class' => 'text-center'])
                         ->suffixIcon('heroicon-o-key'),
-                ])
-                ->columns(1),
         ];
     }
 
@@ -134,15 +131,18 @@ class PasswordResetConfirmWidget extends XotBaseWidget
                     ->send();
 
                 // Auto-login the user after successful password reset
-                $user = \Modules\Xot\Datas\XotData::make()->getUserClass()::where('email', $data['email'])->first();
-                if ($user) {
+                //$user = \Modules\Xot\Datas\XotData::make()->getUserClass()::where('email', $data['email'])->first();
+                Assert::string($email = $data['email']);
+                $user = \Modules\Xot\Datas\XotData::make()->getUserByEmail($email);
+                //if ($user) {
                     Auth::guard()->login($user);
-                }
+                //}
 
                 // Redirect after a short delay to show success message
                 $this->js('setTimeout(() => { window.location.href = "' . route('login') . '"; }, 3000);');
 
             } else {
+                /** @phpstan-ignore-next-line */
                 $this->handleResetError($response);
             }
 

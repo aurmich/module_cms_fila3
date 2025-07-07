@@ -29,12 +29,11 @@ class PasswordResetWidget extends XotBaseWidget
     /**
      * Get the form schema for password reset.
      *
-     * @return array<string, mixed>
      */
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\TextInput::make('email')
+            'email'=>Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
                 ->autocomplete('email')

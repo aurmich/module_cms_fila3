@@ -8,15 +8,17 @@ declare(strict_types=1);
 
 namespace Modules\User\Providers;
 
+use Webmozart\Assert\Assert;
 use Laravel\Passport\Passport;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Gate;
 use Modules\User\Datas\PasswordData;
 use Modules\User\Models\OauthClient;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Modules\Notify\Emails\SpatieEmail;
 use Modules\User\Models\OauthAuthCode;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Modules\Xot\Contracts\UserContract;
 use Illuminate\Validation\Rules\Password;
@@ -83,6 +85,7 @@ class UserServiceProvider extends XotBaseServiceProvider
                 ->line(__('user::reset_password.thank_you_for_using_app'))
                 ->salutation(__('user::reset_password.regards'));
             */
+            Assert::isInstanceOf($notifiable, Model::class);
             $email = new SpatieEmail($notifiable, 'reset-password');
             $email->mergeData([
                 'token' => $token,
