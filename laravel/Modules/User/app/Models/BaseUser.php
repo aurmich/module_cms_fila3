@@ -22,6 +22,7 @@ use Filament\Models\Contracts\HasTenants;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\User\Database\Factories\UserFactory;
+use Modules\Xot\Actions\Factory\GetFactoryAction;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -402,7 +403,7 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
      */
     protected static function newFactory()
     {
-        return UserFactory::new();
+        return app(GetFactoryAction::class)->execute(static::class);
     }
 
     /** @return array<string, string> */

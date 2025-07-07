@@ -9,6 +9,10 @@ Il modulo Xot fornisce funzionalità di base per il framework Laraxot, incluse a
 - [Code Quality](code_quality.md) - Standard di qualità del codice
 - [Best Practices](best-practices.md) - Pratiche consigliate
 
+### Testing
+- [Testing Guidelines](testing.md) - ⭐ **IMPORTANTE** - Regole per organizzazione test del modulo Xot
+- Regola fondamentale: **TUTTI i test che verificano codice `Modules\Xot\*` DEVONO essere in `Modules/Xot/tests/`**
+
 ### PHPStan e Qualità del Codice
 - [PHPStan Level 10 Guide](phpstan_livello10_linee_guida.md) - Guida completa per PHPStan livello 10
 - [PHPStan Level 9 Guide](phpstan-level9-guide.md) - Guida per PHPStan livello 9
@@ -36,6 +40,20 @@ Il modulo Xot fornisce funzionalità di base per il framework Laraxot, incluse a
 
 ## Modifiche Recenti
 
+### Gennaio 2025 - Testing Organization ⭐ **NUOVO**
+
+**Stato**: **IMPLEMENTATO** - Sistema di organizzazione test modularizzato
+
+**Regola chiave**: 
+- ✅ Test del modulo Xot SOLO in `Modules/Xot/tests/`
+- ❌ MAI test del modulo Xot in `/tests/` (cartella root)
+
+**Motivazione**: Prevenire sovrascritture durante aggiornamenti Laravel
+
+**Test esistenti nel modulo**:
+- ✅ `MetatagDataTest.php` - Test per `Modules\Xot\Datas\MetatagData`
+- ✅ `HasXotTableTest.php` - Test per trait `HasXotTable`
+
 ### Gennaio 2025 - PHPStan Level 9 Compliance ✅
 
 **Stato**: **COMPLETATO** - Tutti gli errori PHPStan livello 9 del modulo Xot sono stati risolti
@@ -59,7 +77,7 @@ Vedi [phpstan-fixes-gennaio-2025.md](phpstan-fixes-gennaio-2025.md) per dettagli
 
 ### Sviluppo
 - [Coding Standards](coding-standards.md) - Standard di codifica del modulo
-- [Testing Guidelines](testing-guidelines.md) - Linee guida per i test
+- [Testing Guidelines](testing.md) - Linee guida per i test
 - [Deployment](deployment.md) - Procedure di deployment
 
 ### Troubleshooting

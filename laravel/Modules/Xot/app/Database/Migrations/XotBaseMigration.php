@@ -29,6 +29,19 @@ abstract class XotBaseMigration extends Migration
 
     public function __construct()
     {
+        /*
+        // During testing, use a dummy model to prevent errors
+        if (app()->environment('testing')) {
+            // Create a simple Eloquent model instance for testing
+            $this->model = new class extends \Illuminate\Database\Eloquent\Model {
+                protected $table = 'dummy';
+                public function getKeyType() { return 'int'; }
+                public function getConnectionName() { return null; }
+            };
+            return;
+        }
+        */
+        
         $this->model_class = $this->model_class ?? $this->getModelClass();
         Assert::isInstanceOf($model = app($this->model_class), Model::class);
         $this->model = $model;
@@ -75,11 +88,38 @@ abstract class XotBaseMigration extends Migration
 
     public function getTable(): string
     {
+        /*
+        // During testing, use table property or derive from migration name
+        if (app()->environment('testing')) {
+            if (property_exists($this, 'table') && !empty($this->table)) {
+                return $this->table;
+            }
+            
+            // Derive table name from migration file name
+            $reflectionClass = new \ReflectionClass($this);
+            $filename = $reflectionClass->getFilename();
+            if ($filename !== false) {
+                $basename = basename($filename, '.php');
+                // Extract table name from patterns like "2024_01_01_000001_create_users_table"
+                if (preg_match('/\d{4}_\d{2}_\d{2}_\d{6}_create_(.+)_table/', $basename, $matches)) {
+                    return $matches[1];
+                }
+            }
+            
+            return 'unknown_table';
+        }
+        */
         return $this->model->getTable();
     }
 
     public function getConn(): Builder
     {
+        /*
+        // During testing, use default schema connection
+        if (app()->environment('testing') || !isset($this->model)) {
+            return Schema::connection(null);
+        }
+        */
         return Schema::connection($this->model->getConnectionName());
     }
 

@@ -538,6 +538,20 @@ return array (
       'placeholder' => 'certificato',
       'label' => 'certificato',
     ),
+    'test' => 
+    array (
+      'label' => 'test',
+      'placeholder' => 'test',
+      'helper_text' => 'test',
+      'description' => 'test',
+    ),
+    'test_date' => 
+    array (
+      'label' => 'test_date',
+      'placeholder' => 'test_date',
+      'helper_text' => 'test_date',
+      'description' => 'test_date',
+    ),
   ),
   'actions' => 
   array (

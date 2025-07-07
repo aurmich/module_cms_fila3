@@ -11,7 +11,7 @@ use Tests\CreatesApplication;
 
 abstract class TestHelper extends BaseTestCase
 {
-    use CreatesApplication;
+    //use CreatesApplication;
 
     // in User
     public function getSuperAdminUser()
