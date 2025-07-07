@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Notify\Models\MailTemplate;
 use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Envelope;
 use Spatie\MailTemplates\TemplateMailable;
 use Spatie\MailTemplates\Interfaces\MailTemplateInterface;
 
@@ -30,6 +32,11 @@ class SpatieEmail extends TemplateMailable
     protected array $customAttachments = [];
 
     public array $data=[];
+    
+    /**
+     * The email recipient
+     */
+    protected ?string $recipient = null;
 
     
 
@@ -64,6 +71,35 @@ class SpatieEmail extends TemplateMailable
         $params=implode(',',array_keys($this->data));
         MailTemplate::where(['slug'=>$this->slug,'mailable'=>SpatieEmail::class])->update(['params'=>$params]);
         return $this;
+    }
+
+    /**
+     * Set the email recipient.
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setRecipient(string $email): self
+    {
+        $this->recipient = $email;
+        return $this;
+    }
+
+    /**
+     * Get the message envelope.
+     *
+     * @return Envelope
+     */
+    public function envelope(): Envelope
+    {
+        $envelope = new Envelope();
+        
+        // Set the recipient if available
+        if ($this->recipient) {
+            $envelope->to($this->recipient);
+        }
+        
+        return $envelope;
     }
 
     public function getHtmlLayout(): string

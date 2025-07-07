@@ -57,6 +57,9 @@ class RecordNotification extends Notification
             // Ottieni l'email dal notifiable
             $to=$notifiable->routeNotificationFor('mail');
             $email->to($to);
+            if ($to) {
+                $email->setRecipient($to);
+            }
         }
 
         return $email;

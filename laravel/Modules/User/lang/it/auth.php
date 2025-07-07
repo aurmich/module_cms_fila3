@@ -188,7 +188,7 @@ return [
         'title' => 'Reimposta password',
         'subtitle' => 'Inserisci la nuova password',
         'email' => 'Indirizzo email',
-        'email_placeholder' => 'esempio@email.com',
+        'email_placeholder' => 'Inserisci il tuo indirizzo email',
         'password' => 'Nuova password',
         'password_placeholder' => '••••••••',
         'password_confirmation' => 'Conferma password',
@@ -196,6 +196,17 @@ return [
         'submit' => 'Reimposta password',
         'success' => 'Password reimpostata con successo.',
         'failed' => 'Impossibile reimpostare la password.',
+        'send_button' => 'Invia link di reset',
+        'back_to_login' => 'Torna al login',
+        'send_another' => 'Invia un altro link',
+        'email_sent' => [
+            'title' => 'Email inviata!',
+            'message' => 'Ti abbiamo inviato un link per reimpostare la password. Controlla la tua casella di posta elettronica e segui le istruzioni.',
+        ],
+        'email_failed' => [
+            'title' => 'Errore nell\'invio',
+            'generic' => 'Si è verificato un errore durante l\'invio dell\'email. Riprova più tardi.',
+        ],
         // Structured version
         'email_structured' => [
             'label' => 'Email',
@@ -237,6 +248,54 @@ return [
         'account_blocked' => 'Account bloccato. Contatta l\'assistenza.',
         'too_many_attempts' => 'Troppi tentativi. Riprova più tardi.',
         'session_expired' => 'Sessione scaduta. Effettua nuovamente il login.',
+    ],
+
+    // Password Reset Widget - specific translations
+    'password_reset' => [
+        'email_placeholder' => 'Inserisci il tuo indirizzo email',
+        'send_button' => 'Invia link di reset',
+        'back_to_login' => 'Torna al login',
+        'send_another' => 'Invia un altro link',
+        'email_sent' => [
+            'title' => 'Email inviata!',
+            'message' => 'Ti abbiamo inviato un link per reimpostare la password. Controlla la tua casella di posta elettronica e segui le istruzioni.',
+        ],
+        'email_failed' => [
+            'title' => 'Errore nell\'invio',
+            'generic' => 'Si è verificato un errore durante l\'invio dell\'email. Riprova più tardi.',
+        ],
+        'password_requirements' => 'La password deve avere almeno 8 caratteri',
+        'processing' => 'Elaborazione in corso...',
+        'instructions' => [
+            'title' => 'Istruzioni per il reset',
+            'description' => 'Inserisci la tua email e la nuova password per completare il reset.',
+        ],
+        'confirm_button' => 'Conferma nuova password',
+        'request_new_link' => 'Richiedi un nuovo link',
+        'security' => [
+            'title' => 'Sicurezza',
+            'note' => 'Il link di reset è valido per 60 minuti e può essere utilizzato una sola volta.',
+        ],
+        'success' => [
+            'title' => 'Password reimpostata con successo!',
+            'message' => 'La tua password è stata aggiornata. Ora puoi accedere con la nuova password.',
+            'redirect_notice' => 'Reindirizzamento automatico in corso...',
+            'go_to_dashboard' => 'Vai alla dashboard',
+            'go_to_login' => 'Vai al login',
+        ],
+        'errors' => [
+            'title' => 'Errore nel reset della password',
+            'invalid_token' => 'Il link di reset non è più valido o è scaduto.',
+            'invalid_user' => 'Non è stato possibile trovare un utente con questo indirizzo email.',
+            'generic' => 'Si è verificato un errore durante il reset della password. Riprova più tardi.',
+            'possible_causes' => 'Possibili cause:',
+            'causes' => [
+                'expired_token' => 'Il link di reset è scaduto (valido per 60 minuti)',
+                'invalid_email' => 'L\'indirizzo email non corrisponde a nessun account',
+                'already_used' => 'Il link di reset è già stato utilizzato',
+            ],
+            'try_again' => 'Riprova',
+        ],
     ],
     
     // Reset Password

@@ -33,19 +33,19 @@ name('login');
             </a>
 
             <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#272C4D]">
-                {{ __('auth.login.title') }}
+                {{ __('pub_theme::auth.login.title') }}
             </h2>
             <div class="text-sm leading-5 text-center text-gray-600 dark:text-gray-400 space-x-0.5">
-                <span>{{ __('auth.login.or') }}</span>
+                <span>{{ __('pub_theme::auth.login.or') }}</span>
                 <a href="{{ route('register') }}" class="text-[#FF5F7E] font-medium">
-                    {{ __('auth.login.create_account') }}
+                    {{ __('pub_theme::auth.login.create_account') }}
                 </a>
             </div>
         </div>
                 <!-- Livewire Login Form -->
                 <div class="space-y-6 flex flex-col justify-center">
                     @livewire(\Modules\User\Filament\Widgets\LoginWidget::class)
-                    <a href="/it/auth/password/reset" class="text-[#FF5F7E] text-center text-sm !mt-0">Hai dimenticato la password?</a>
+                    <a href="/it/auth/password/reset" class="text-[#FF5F7E] text-center text-sm !mt-0">{{ __('pub_theme::auth.login.forgot_password') }}</a>
                 </div>
             </div>
         </div>

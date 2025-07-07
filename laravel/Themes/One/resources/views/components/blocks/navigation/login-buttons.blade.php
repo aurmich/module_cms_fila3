@@ -14,7 +14,7 @@
     </a>
 
     <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md !text-white bg-[#FF5F7E]">
-        {{ __('auth.register.title') }}
+        {{ __('pub_theme::auth.register.title') }}
     </a>
 </div>
 @endif

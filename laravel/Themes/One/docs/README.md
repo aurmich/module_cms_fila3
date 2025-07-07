@@ -468,6 +468,13 @@ Per supporto tecnico, contattare il team il progetto.
   - `resources/views/filament/`: Componenti e widget Filament personalizzati
   - Tutti i componenti seguono le convenzioni di stile di Filament
 
+### Traduzioni
+- **Sistema Completo I18n**
+  - Supporto per italiano (it) e inglese (en)
+  - Traduzioni complete per autenticazione
+  - Namespace `pub_theme::` per accesso alle traduzioni
+  - [Documentazione Traduzioni Auth](./auth-translations.md)
+
 ### Stili
 - **CSS**
   - Utilizzo dei preset Filament per Tailwind
