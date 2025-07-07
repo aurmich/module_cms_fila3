@@ -31,7 +31,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
         <!-- Email Address -->
         <flux:input
-            wire:model.live="email"
+            wire:model="email"
             :label="__('Email Address')"
             type="email"
             required
@@ -42,8 +42,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
     </form>
 
-    <div class="space-x-1 text-center text-sm text-zinc-400">
-        {{ __('Or, return to') }}
+    <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-400">
+        <span>{{ __('Or, return to') }}</span>
         <flux:link :href="route('login')" wire:navigate>{{ __('log in') }}</flux:link>
     </div>
 </div>

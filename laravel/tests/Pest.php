@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,7 +12,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 */
 
 pest()->extend(Tests\TestCase::class)
-            ->in('Feature');
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
