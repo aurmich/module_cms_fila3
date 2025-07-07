@@ -34,7 +34,7 @@ $email = request()->query('email', '');
             <!-- Header with logo and navigation -->
             <div class="text-center mb-8">
                 <x-ui.link href="{{ route('home') }}" class="inline-block transform hover:scale-105 transition-transform duration-200">
-                    <x-ui.logo class="w-auto h-12 mx-auto text-[#272C4D] fill-current" />
+                    <img src="/img/logo-v2.png" class="h-16"/>
                 </x-ui.link>
                 
                 <!-- Process breadcrumb -->
@@ -118,10 +118,10 @@ $email = request()->query('email', '');
                     <div class="bg-white/70 backdrop-blur-md rounded-xl shadow-xl border border-white/20 overflow-hidden">
                         <!-- Card header -->
                         <div class="bg-gradient-to-r from-[#272C4D] to-[#1e40af] px-8 py-6">
-                            <h2 class="text-2xl font-bold text-white mb-2">
+                            <h2 class="text-2xl font-bold text-[#272C4D] mb-2">
                                 {{ __('pub_theme::auth.password.reset.confirm.title') }}
                             </h2>
-                            <p class="text-blue-100 text-sm">
+                            <p class="text-[#272C4D] text-sm">
                                 {{ __('pub_theme::auth.password.reset.confirm.subtitle') }}
                             </p>
                         </div>

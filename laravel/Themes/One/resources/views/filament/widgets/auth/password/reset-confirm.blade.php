@@ -39,7 +39,7 @@
                             type="submit"
                             wire:loading.attr="disabled"
                             wire:target="confirmPasswordReset"
-                            class="w-full flex justify-center items-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[#272C4D] to-[#1e40af] hover:from-[#1e293b] hover:to-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#272C4D] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                            class="w-full flex justify-center items-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-[#272C4D] bg-gradient-to-r from-[#272C4D] to-[#1e40af] hover:from-[#1e293b] hover:to-[#1d4ed8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#272C4D] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <span wire:loading.remove wire:target="confirmPasswordReset">
                                 {{ __('user::auth.password_reset.confirm_button') }}
