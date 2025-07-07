@@ -33,7 +33,7 @@ class MainDashboard extends Dashboard
                 return Str::endsWith($item->name, '::admin');
             }
         );
-
+        
         if (1 === $modules->count()) {
             Assert::notNull($module_first = $modules->first(), '['.__LINE__.']['.class_basename($this).']');
             $panel_name = $module_first->name;
