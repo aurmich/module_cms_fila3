@@ -122,6 +122,8 @@ class DoctorResource extends XotBaseResource
                 ->icon('heroicon-o-building-office'),
             self::getStepByName('availability_step')
                 ->icon('heroicon-o-calendar'),
+            self::getStepByName('privacy_step')
+                ->icon('heroicon-o-shield-check'),
         ];
     }            
 
@@ -190,6 +192,25 @@ class DoctorResource extends XotBaseResource
                 //    ->columnSpanFull(),
                     
             ];
+    }
+
+
+     /**
+     * Get privacy step schema for the wizard
+     *
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
+    protected static function getPrivacyStepSchema(): array
+    {
+        return [
+            'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.doctor-privacy-policy')
+                ->columnSpanFull(),
+            'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
+                ->required()
+                ->columnSpanFull(),
+            //'newsletter' => Forms\Components\Checkbox::make('newsletter')
+           //     ->columnSpanFull(),
+        ];
     }
 
     public static function getPages(): array

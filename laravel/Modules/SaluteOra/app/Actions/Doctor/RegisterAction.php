@@ -79,6 +79,25 @@ class RegisterAction
             $doctor->update($data_attachments);
              //*/
              //-------------------------------------------------
+             if(!method_exists($doctor,'consents')){
+                throw new \Exception('Method consents not found');
+            }
+            // Gestione delle preferenze
+            if (isset($data['privacy_acceptance'])) {
+                $doctor->consents()->create([
+                    'type' => 'privacy',
+                    'accepted' => true,
+                    'accepted_at' => now(),
+                ]);
+            }
+
+            if (isset($data['newsletter'])) {
+                $doctor->consents()->create([
+                    'type' => 'newsletter',
+                    'accepted' => true,
+                    'accepted_at' => now(),
+                ]);
+            }
 
         //$record->save();
         //$record->update($data);

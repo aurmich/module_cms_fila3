@@ -189,7 +189,7 @@ class PatientResource extends XotBaseResource
     protected static function getPrivacyStepSchema(): array
     {
         return [
-            'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.privacy-policy')
+            'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.patient-privacy-policy')
                 ->columnSpanFull(),
             'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
                 ->required()
