@@ -16,8 +16,8 @@
                         "en": "Registration Completed Successfully!"
                     },
                     "subtitle": {
-                        "it": "Grazie per esserti unito alla nostra community. La tua richiesta è in fase di verifica.",
-                        "en": "Thank you for joining our community. Your request is being processed."
+                        "it": "Grazie per esserti registrata! La tua richiesta é in fase di verifica: riceverai a breve una mail per procedere!",
+                        "en": "Thank you for registering! Your request is being reviewed — you will receive an email shortly to proceed!"
                     },
                     "image": "/img/registration-complete.jpg",
                     "cta": [

@@ -1,3 +1,4 @@
+<div class="w-full flex justify-center">
 <div class="w-full lg:w-2/4 flex items-center justify-center p-9">
     <div class="w-full lg:w-2/4 bg-white rounded-lg shadow-2xl">
         <div class="p-5">
@@ -29,6 +30,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
