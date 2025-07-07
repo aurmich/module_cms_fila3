@@ -16,8 +16,8 @@
                         "en": "You have completed your registration!"
                     },
                     "subtitle": {
-                        "it": "Grazie per esserti unito alla nostra community. La tua richiesta è in fase di verifica. Riceverai una email di conferma dal backoffice!",
-                        "en": "Thank you for joining our community. Your request is currently being reviewed. You will receive a confirmation email from the back office!"
+                        "it": "Grazie per aver effettuato la registrazione. La tua richiesta è in fase di verifica. Riceverai una email di conferma dal backoffice!",
+                        "en": "Thank you for registering. Your request is currently being reviewed. You will receive a confirmation email from the back office!"
                     },
                     "image": "/img/registration-complete.jpg",
                     "cta": [
