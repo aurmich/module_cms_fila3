@@ -25,15 +25,11 @@ return array (
     array (
       'label' => 'Titolo',
       'placeholder' => 'Titolo della pagina',
-      'description' => 'title',
-      'helper_text' => 'title',
     ),
     'slug' => 
     array (
       'label' => 'Slug',
       'placeholder' => 'Slug della pagina',
-      'description' => 'slug',
-      'helper_text' => 'slug',
     ),
     'content' => 
     array (

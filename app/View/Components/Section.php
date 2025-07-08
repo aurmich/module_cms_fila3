@@ -64,7 +64,9 @@ class Section extends Component
             '['.__LINE__.']['.__FILE__.']'
         );
 
-        $this->name = $section->getTranslation('name', app()->getLocale());
+        Assert::string($name = $section->getTranslation('name', app()->getLocale()));
+        $this->name = $name;
+        //$this->name = $section->name;
 
         $blocks = $section->blocks;
 
@@ -86,6 +88,10 @@ class Section extends Component
      */
     public function render(): ViewContract
     {
-        return view('pub_theme::components.sections.'.$this->slug);
+        $view='pub_theme::components.sections.'.$this->slug;
+        if(!view()->exists($view)){
+            throw new \Exception('View '.$view.' not found');
+        }
+        return view($view);
     }
 }
