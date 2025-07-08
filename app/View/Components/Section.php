@@ -64,9 +64,9 @@ class Section extends Component
             '['.__LINE__.']['.__FILE__.']'
         );
 
-        Assert::string($name = $section->getTranslation('name', app()->getLocale()));
-        $this->name = $name;
-        //$this->name = $section->name;
+        //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
+        //$this->name = $name;
+        $this->name = $section->name;
 
         $blocks = $section->blocks;
 
