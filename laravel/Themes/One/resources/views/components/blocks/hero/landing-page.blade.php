@@ -104,25 +104,23 @@
           Perché é importante la salute orale in gravidanza?
         </h2>
       </div>
-      <div class="flex flex-col lg:flex-row justify-around items-center lg:items-start mt-0 lg:mt-10">
-        <div class="w-96 flex flex-col justify-center m-5 text-center">
-          <span class="text-[#FCD5D0] text-xl lg:text-2xl mb-5">Prevenzione</span>
-          <p class="text-[#FCD5D0] text-lg">
-            La prevenzione odontoiatrica in gravidanza é fondamentale per la
-            salute della mamma e del bambino
+      <div class="flex flex-col justify-around items-center mt-0 lg:mt-10">
+        <div class="w-3/4">
+          <p class="text-[#F38B8B] text-center text-lg lg:text-2xl">
+          Numerosi studi scientifici riportano l’importanza di una corretta salute orale sin dai primi mesi della gravidanza. Malattie dentali molto comuni, come la carie, possono causare malformazioni o infezioni nel feto già a partire dal primo trimestre di gravidanza.Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta pulizia dei denti, affidarsi alle cure e all’esame di un odontoiatra a partire dal terzo trimestre di gravidanza.
           </p>
         </div>
-        <div class="w-96 flex flex-col justify-center m-5 text-center">
-          <span class="text-[#FCD5D0] text-xl lg:text-2xl mb-5">Assistenza</span>
-          <p class="text-[#FCD5D0] text-lg">
-            Offriamo assistenza odontoiatrica specialistica per le gestanti
+        <div class="w-3/4">
+          <p class="text-[#F38B8B] text-center text-lg lg:text-2xl">
+          Con questo in mente, il progetto Salute Orale si propone di garantire, a titolo completamente gratuito, una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. 
+          Le Pazienti potranno prenotare a titolo totalmente gratuito una visita di controllo e igiene presso i dentisti aderenti.
+          I Dentisti gestiranno questi appuntamenti da piattaforma e potranno chiedere rimborso per la prestazione al personale Salute Orale.
           </p>
         </div>
-        <div class="w-96 flex flex-col justify-center m-5 text-center">
-          <span class="text-[#FCD5D0] text-xl lg:text-2xl mb-5">Supporto</span>
-          <p class="text-[#FCD5D0] text-lg">
-            Supporto completo per le gestanti in condizioni di vulnerabilità
-          </p>
+        <div class="mt-5">
+          <a href="/it/pages/progetto">
+            <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">Scopri il progetto</button>
+          </a>
         </div>
       </div>
     </div>
