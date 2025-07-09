@@ -20,6 +20,7 @@ Il modulo Notify gestisce tutte le notifiche del sistema, inclusi:
 - [Template](./templates.md)
 - [Migrations](./migrations.md)
 - [Traduzioni](./translations.md)
+- [Translation Files Update 2025](../Lang/docs/translation_files_update_2025.md) - ⭐ **NUOVO** - Aggiornamento file traduzioni
 
 ### Modelli
 - [BaseModel](./base-model.md)
@@ -184,6 +185,28 @@ Notify/
 2. Implementare le traduzioni tramite LangServiceProvider
 3. Documentare ogni modifica importante
 4. Mantenere i collegamenti bidirezionali con la documentazione principale
+
+## Modifiche Recenti
+
+### Gennaio 2025 - Aggiornamento File di Traduzione ⭐ **NUOVO**
+
+**Stato**: **COMPLETATO** - Aggiornamento e sistemazione file di traduzione
+
+**File modificati**:
+- ✅ `lang/it/test_smtp.php` - Sistema test SMTP
+- ✅ `lang/it/send_email.php` - Invio email
+
+**Modifiche principali**:
+- ✅ Conversione da `array()` a sintassi `[]` moderna
+- ✅ Aggiunta `declare(strict_types=1);` per tipizzazione rigorosa
+- ✅ Risoluzione conflitti di merge non risolti
+- ✅ Rimozione duplicazioni e campi `helper_text` vuoti
+- ✅ Miglioramento struttura e coerenza traduzioni
+- ✅ Validazione sintassi PHP con `php -l`
+
+**Impatto**: Miglioramento qualità codice e conformità best practice Laraxot
+
+Vedi [Translation Files Update 2025](../Lang/docs/translation_files_update_2025.md) per dettagli completi.
 
 ## Note di Implementazione
 - Il modulo è in fase di aggiornamento per Laravel 12

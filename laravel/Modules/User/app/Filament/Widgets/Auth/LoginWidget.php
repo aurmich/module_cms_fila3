@@ -10,12 +10,29 @@ use Filament\Forms\ComponentContainer;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
 /**
+ * 
+ * LoginWidget: Widget di login conforme alle regole Windsurf/Xot.
+ * - Estende XotBaseWidget
+ * - Usa solo componenti Filament importati
+ * - Validazione e sicurezza integrate
+ * - Facilmente estendibile (2FA, captcha, login social)
+ *
+ * @property array<string, mixed>|null $data
  * @property ComponentContainer $form
  */
 class LoginWidget extends XotBaseWidget
 {
     public ?array $data = [];
 
+    /**
+     * Blade view del widget nel modulo User.
+     * IMPORTANTE: quando il widget viene usato con @livewire() direttamente nelle Blade,
+     * il path deve essere senza il namespace del modulo (senza "user::").
+     * 
+     * @see \Modules\User\docs\WIDGETS_STRUCTURE.md - Sezione B
+     * @var view-string
+     * @phpstan-ignore-next-line 
+     */
     protected static string $view = 'pub_theme::filament.widgets.auth.login';
 
     public function getFormSchema(): array

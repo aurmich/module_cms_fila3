@@ -103,7 +103,7 @@ trait RelationX
             relation: $relation,
             inverse: $inverse,
         )
-        ->using($pivot)
+        ->using($pivot::class)
         ->withPivot($pivotFields)
         ->withTimestamps();
     }
@@ -115,7 +115,7 @@ trait RelationX
     {
         $class = $this::class;
         $pivot_name = class_basename($related).'Morph';
-
+        /*
         $pivot_class = Str::of($this::class)
             ->beforeLast('\\')
             ->append('\\'.$pivot_name)
@@ -126,6 +126,8 @@ trait RelationX
             ->append('\\'.$pivot_name)
             ->toString();
         }
+        */
+        $pivot_class = $this->guessPivotFullClass($pivot_name, $related, $class);
         $pivot = app($pivot_class);
         Assert::isInstanceOf($pivot,\Illuminate\Database\Eloquent\Relations\MorphPivot::class);
         return $pivot;
@@ -142,45 +144,53 @@ trait RelationX
     {
         $class = $class ?? $this::class;
         $model_names = [
-            class_basename($this::class),
+            class_basename($class),
             class_basename($related),
         ];
         sort($model_names);
         $pivot_name = implode('', $model_names);
+        /*
         $pivot_class = Str::of($this::class)
             ->beforeLast('\\')
             ->append('\\'.$pivot_name)
             ->toString();
         if (! class_exists($pivot_class)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             $pivot_class = Str::of($related)
             ->beforeLast('\\')
             ->append('\\'.$pivot_name)
             ->toString();
         }
         if (! class_exists($pivot_class)) {
->>>>>>> 57838a14 (.)
-=======
->>>>>>> 5929911 (.)
-            /*
-            //$pivot_class = 'Modules\Xot\Models\Pivot\\'.$pivot_name;
-            dddx([
-                'pivot_class' => $pivot_class,
-                'related' => $related,
-                'class' => $class,
-                'class1' => get_parent_class($class),
-            ]);
-            */
             if(get_parent_class($class)!==false){
                 return $this->guessPivot($related, get_parent_class($class));
             }
         }
+        */
+        $pivot_class = $this->guessPivotFullClass($pivot_name, $related, $class);
         
         $pivot = app($pivot_class);
         Assert::isInstanceOf($pivot, \Illuminate\Database\Eloquent\Relations\Pivot::class);
 
         return $pivot;
+    }
+
+    public function guessPivotFullClass(string $pivot_name, string $related, ?string $class = null):string{
+        $class = $class ?? $this::class;
+        $pivot_class = Str::of($class)
+            ->beforeLast('\\')
+            ->append('\\'.$pivot_name)
+            ->toString();
+        if (! class_exists($pivot_class)) {
+            $pivot_class = Str::of($related)
+            ->beforeLast('\\')
+            ->append('\\'.$pivot_name)
+            ->toString();
+        }
+        if (! class_exists($pivot_class)) {
+            if(get_parent_class($class)!==false){
+                return $this->guessPivotFullClass($pivot_name, $related, get_parent_class($class));
+            }
+        }
+        return $pivot_class;
     }
 }

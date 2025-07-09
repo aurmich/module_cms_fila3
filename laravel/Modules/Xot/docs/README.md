@@ -8,6 +8,8 @@ Il modulo Xot fornisce funzionalità di base per il framework Laraxot, incluse a
 - [Development Rules](development-rules.md) - Regole di sviluppo per il modulo
 - [Code Quality](code_quality.md) - Standard di qualità del codice
 - [Best Practices](best-practices.md) - Pratiche consigliate
+- [Translation Rules](translation_rules.md) - Regole per file di traduzione
+- [Xot Base Translation Update](xot_base_translation_update.md) - ⭐ **NUOVO** - Aggiornamento file traduzioni base
 
 ### Testing
 - [Testing Guidelines](testing.md) - ⭐ **IMPORTANTE** - Regole per organizzazione test del modulo Xot
@@ -39,6 +41,22 @@ Il modulo Xot fornisce funzionalità di base per il framework Laraxot, incluse a
 - [Actions](actions.md) - Azioni asincroni con Spatie QueueableAction
 
 ## Modifiche Recenti
+
+### Gennaio 2025 - File di Traduzione Base ⭐ **NUOVO**
+
+**Stato**: **COMPLETATO** - Aggiornamento e sistemazione file `xot_base.php`
+
+**Modifiche principali**:
+- ✅ Conversione da `array()` a sintassi `[]` moderna
+- ✅ Aggiunta `declare(strict_types=1);` per tipizzazione rigorosa
+- ✅ Rimozione duplicazioni e campi `helper_text` vuoti
+- ✅ Risoluzione conflitti di merge non risolti
+- ✅ Miglioramento struttura e coerenza traduzioni
+- ✅ Validazione sintassi PHP con `php -l`
+
+**Impatto**: Miglioramento qualità codice e conformità best practice Laraxot
+
+Vedi [xot_base_translation_update.md](xot_base_translation_update.md) per dettagli completi.
 
 ### Gennaio 2025 - Testing Organization ⭐ **NUOVO**
 

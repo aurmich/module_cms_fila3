@@ -4,35 +4,51 @@ declare(strict_types=1);
 
 namespace Modules\UI\Filament\Forms\Components;
 
+use BackedEnum;
+use Webmozart\Assert\Assert;
 use Filament\Forms\Components\Radio;
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
 
 class RadioBadge extends Radio
 {
     protected string $view = 'ui::filament.forms.components.radio-badge';
     protected string $defaultColor = 'gray-200'; // gray-200
     protected string $selectedColor = 'blue-500';//'#3b82f6'; // blue-500
+
+    /**
+     * Get enum value from string value
+     * 
+     * @param string $value
+     * @return (BackedEnum&HasColor&HasIcon)|null
+     */
+    public function getEnumValue(string $value): ?BackedEnum
+    {
+        if (!is_string($this->options)){
+            return null;
+        }
+        if (! enum_exists($this->options)) {
+            return null;
+        }
+        $enumClass = $this->options;
+        Assert::isInstanceOf($enumClass, BackedEnum::class);
+        Assert::implementsInterface($enumClass,HasColor::class);
+        Assert::implementsInterface($enumClass,HasIcon::class);
+        $res = $enumClass::tryFrom($value);
+        return $res;
+    }
    
     public function getColorForOption(string $value): string
     {
-       
-        if (is_string($this->options) && enum_exists($this->options)) {
-            $enumClass = $this->options;
-            $color = $enumClass::tryFrom($value)?->getColor();
-            return $color ?? $this->selectedColor;
-        }
-        return $this->selectedColor;
+        Assert::nullOrString($color=$this->getEnumValue($value)?->getColor());
+        return $color ?? $this->selectedColor;
+    
     }
 
     
     public function getIconForOption(string $value): ?string
     {
-       
-        if (is_string($this->options) && enum_exists($this->options)) {
-            $enumClass = $this->options;
-            $icon = $enumClass::tryFrom($value)?->getIcon();
-            return $icon;
-        }
-        return null;
+        return $this->getEnumValue($value)?->getIcon();
     }
 
     public function defaultColor(string $color): static
@@ -46,6 +62,4 @@ class RadioBadge extends Radio
         $this->selectedColor = $color;
         return $this;
     }
-
-    
 }

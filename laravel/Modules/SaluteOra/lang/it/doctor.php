@@ -302,6 +302,14 @@ return array (
       'helper_text' => '',
       'placeholder' => 'privacy_acceptance',
     ),
+    'doctor_certificate' => 
+    array (
+      'label' => 'Certificato',
+      'description' => 'Certificato medico o documentazione sanitaria',
+      'placeholder' => 'Carica certificato',
+      'help' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
+      'helper_text' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
+    ),
   ),
   'filters' => 
   array (
