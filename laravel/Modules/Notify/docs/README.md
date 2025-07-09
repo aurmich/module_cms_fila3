@@ -424,3 +424,10 @@ Per una lista completa di tutti i collegamenti tra i README.md, consultare il fi
 ---
 
 > Per dettagli sulla risoluzione dei conflitti e sugli standard architetturali, vedi anche [INDEX.md](./INDEX.md) e la doc globale [../../../../docs/README.md](../../../../docs/README.md)
+
+## Invio Email e Test SMTP
+
+Per problemi relativi all'invio email tramite le pagine Filament (es. SendEmail), consultare la guida aggiornata:
+- [Come far funzionare la pagina SendEmail e test SMTP](./test_smtp.md)
+
+Questa guida spiega le differenze architetturali tra TestSmtpPage e SendEmail, le cause più comuni di errore e le best practice per la configurazione SMTP.

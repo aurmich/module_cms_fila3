@@ -1,5 +1,105 @@
 <?php
 
+<<<<<<< HEAD
+declare(strict_types=1);
+
+return [
+    'fields' => [
+        'id' => [
+            'label' => 'ID',
+            'placeholder' => 'Identificativo automatico',
+            'help' => 'Identificativo univoco del record, generato automaticamente dal sistema',
+        ],
+        'created_at' => [
+            'label' => 'Data Creazione',
+            'placeholder' => 'Seleziona data e ora',
+            'help' => 'Data e ora di creazione del record nel sistema',
+        ],
+        'updated_at' => [
+            'label' => 'Ultima Modifica',
+            'placeholder' => 'Aggiornamento automatico',
+            'help' => 'Data e ora dell\'ultima modifica apportata al record',
+        ],
+        'deleted_at' => [
+            'label' => 'Data Eliminazione',
+            'placeholder' => 'Record attivo',
+            'help' => 'Data di eliminazione logica, null se il record è ancora attivo',
+        ],
+        'created_by' => [
+            'label' => 'Creato da',
+            'placeholder' => 'Utente creatore',
+            'help' => 'Utente che ha creato questo record',
+        ],
+        'updated_by' => [
+            'label' => 'Modificato da',
+            'placeholder' => 'Ultimo editore',
+            'help' => 'Ultimo utente che ha modificato questo record',
+        ],
+        'name' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome completo',
+            'help' => 'Nome identificativo dell\'elemento o della persona',
+        ],
+        'description' => [
+            'label' => 'Descrizione',
+            'placeholder' => 'Fornisci una descrizione dettagliata',
+            'help' => 'Descrizione completa per maggiori informazioni sull\'elemento',
+        ],
+        'email' => [
+            'label' => 'Indirizzo Email',
+            'placeholder' => 'nome@dominio.it',
+            'help' => 'Indirizzo email valido per comunicazioni e accesso al sistema',
+        ],
+        'password' => [
+            'label' => 'Password',
+            'placeholder' => '••••••••',
+            'help' => 'Password di accesso al sistema, minimo 8 caratteri',
+        ],
+        // ... altri campi ...
+    ],
+    'actions' => [
+        'create' => [
+            'label' => 'Crea Nuovo',
+            'success' => 'Elemento creato con successo',
+            'error' => 'Errore durante la creazione',
+        ],
+        'edit' => [
+            'label' => 'Modifica',
+            'success' => 'Elemento modificato con successo',
+            'error' => 'Errore durante la modifica',
+        ],
+        'delete' => [
+            'label' => 'Elimina',
+            'success' => 'Elemento eliminato con successo',
+            'error' => 'Errore durante l\'eliminazione',
+            'confirmation' => 'Sei sicuro di voler eliminare questo elemento?',
+        ],
+        // ... altre azioni ...
+    ],
+    'messages' => [
+        'welcome' => 'Benvenuto nel sistema',
+        'loading' => 'Caricamento in corso...',
+        'saving' => 'Salvataggio in corso...',
+        'saved' => 'Dati salvati correttamente',
+        'error' => 'Si è verificato un errore',
+        'success' => 'Operazione completata con successo',
+        // ... altri messaggi ...
+    ],
+    'navigation' => [
+        'dashboard' => 'Pannello di Controllo',
+        'users' => 'Gestione Utenti',
+        'settings' => 'Impostazioni',
+        'profile' => 'Profilo Utente',
+        'logout' => 'Disconnetti',
+        // ... altre voci ...
+    ],
+    'validation' => [
+        'required' => 'Il campo :attribute è obbligatorio',
+        'email' => 'Il campo :attribute deve essere un indirizzo email valido',
+        // ... altre regole ...
+    ],
+];
+=======
 return array (
   'fields' => 
   array (
@@ -222,6 +322,14 @@ return array (
       'label' => 'Valore Singolo',
       'placeholder' => 'Inserisci un valore',
       'help' => 'Valore specifico per il campo corrente',
+<<<<<<< HEAD
+      'description' => 'value',
+<<<<<<< HEAD
+=======
+      'helper_text' => 'value',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
     'values' => 
     array (
@@ -246,12 +354,28 @@ return array (
       'label' => 'Icona',
       'placeholder' => 'heroicon-o-document',
       'help' => 'Icona identificativa per l\'elemento nell\'interfaccia',
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      'description' => 'icon',
+      'helper_text' => 'icon',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
     'isActive' => 
     array (
       'label' => 'Stato Attivo',
       'placeholder' => 'Elemento attivo',
       'help' => 'Indica se l\'elemento è attualmente attivo e visibile',
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      'description' => 'isActive',
+      'helper_text' => 'isActive',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
     'state' => 
     array (
@@ -266,6 +390,14 @@ return array (
       'label' => 'Nuovo Stato',
       'placeholder' => 'Seleziona nuovo stato',
       'help' => 'Nuovo stato da assegnare all\'elemento',
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      'description' => 'newstate',
+      'helper_text' => 'newstate',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
     'layout' => 
     array (
@@ -278,6 +410,14 @@ return array (
       'label' => 'Modalità Vista',
       'placeholder' => 'Seleziona modalità di visualizzazione',
       'help' => 'Modalità di visualizzazione dei dati nell\'interfaccia',
+<<<<<<< HEAD
+      'description' => 'view',
+<<<<<<< HEAD
+=======
+      'helper_text' => 'view',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
     'data_scadenza' => 
     array (
@@ -551,6 +691,26 @@ return array (
       'placeholder' => 'test_date',
       'helper_text' => 'test_date',
       'description' => 'test_date',
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    ),
+    'outcome' => 
+    array (
+      'description' => 'outcome',
+      'helper_text' => 'outcome',
+      'placeholder' => 'outcome',
+      'label' => 'outcome',
+    ),
+    'action' => 
+    array (
+      'description' => 'action',
+      'helper_text' => 'action',
+      'placeholder' => 'action',
+      'label' => 'action',
+>>>>>>> 15b6cb3 (.)
+=======
+>>>>>>> 82c64db (.)
     ),
   ),
   'actions' => 
@@ -727,3 +887,4 @@ return array (
     'size' => 'Il campo :attribute deve essere di :size MB',
   ),
 );
+>>>>>>> 36dd2a4 (.)

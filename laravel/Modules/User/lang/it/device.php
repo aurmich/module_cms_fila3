@@ -90,6 +90,10 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+    'login_at' => 
+    array (
+      'label' => 'login_at',
+    ),
   ),
   'actions' => 
   array (

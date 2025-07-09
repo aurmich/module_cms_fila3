@@ -77,6 +77,9 @@ return array (
     'recordId' => 
     array (
       'label' => 'recordId',
+      'description' => 'recordId',
+      'helper_text' => 'recordId',
+      'placeholder' => 'recordId',
     ),
     'personal_team' => 
     array (
@@ -85,6 +88,15 @@ return array (
     'role' => 
     array (
       'label' => 'role',
+      'description' => 'role',
+      'helper_text' => 'role',
+      'placeholder' => 'role',
+    ),
+    'description' => 
+    array (
+      'description' => 'description',
+      'helper_text' => 'description',
+      'placeholder' => 'description',
     ),
   ),
   'actions' => 

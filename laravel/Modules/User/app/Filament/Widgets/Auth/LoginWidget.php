@@ -16,23 +16,21 @@ class LoginWidget extends XotBaseWidget
 {
     public ?array $data = [];
 
-    protected static string $view = 'user::filament.widgets.auth.login';
+    protected static string $view = 'pub_theme::filament.widgets.auth.login';
 
     public function getFormSchema(): array
     {
         return [
             Forms\Components\TextInput::make('email')
-                ->label(__('user::auth.email'))
                 ->email()
                 ->required(),
 
             Forms\Components\TextInput::make('password')
-                ->label(__('user::auth.password'))
                 ->password()
                 ->required(),
 
             Forms\Components\Checkbox::make('remember')
-                ->label(__('user::auth.remember_me')),
+                ,
         ];
     }
 

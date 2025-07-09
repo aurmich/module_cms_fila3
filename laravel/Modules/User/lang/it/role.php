@@ -61,6 +61,52 @@ return array (
     array (
       'label' => 'applyFilters',
     ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'team_id' => 
+    array (
+      'description' => 'team_id',
+      'helper_text' => 'team_id',
+      'placeholder' => 'team_id',
+      'label' => 'team_id',
+    ),
+    'detach' => 
+    array (
+      'label' => 'detach',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
+    'attach' => 
+    array (
+      'label' => 'attach',
+    ),
+    'recordId' => 
+    array (
+      'description' => 'recordId',
+      'helper_text' => 'recordId',
+      'placeholder' => 'recordId',
+      'label' => 'recordId',
+    ),
+    'id' => 
+    array (
+      'label' => 'id',
+    ),
   ),
   'roles' => 
   array (

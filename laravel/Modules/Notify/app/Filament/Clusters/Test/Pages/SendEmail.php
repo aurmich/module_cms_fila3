@@ -72,10 +72,12 @@ class SendEmail extends Page implements HasForms
     {
         $data = $this->emailForm->getState();
         $email_data = EmailData::from($data);
+        // $from_address = config('mail.from.address');
 
-        Mail::to($data['to'])->send(
-            new EmailDataEmail($email_data)
-        );
+        Mail::to($data['to'])
+            ->send(
+                new EmailDataEmail($email_data)
+            );
 
         Notification::make()
             ->success()
@@ -95,7 +97,6 @@ class SendEmail extends Page implements HasForms
     {
         return [
             Action::make('emailFormActions')
-                //
 
                 ->submit('emailFormActions'),
         ];
