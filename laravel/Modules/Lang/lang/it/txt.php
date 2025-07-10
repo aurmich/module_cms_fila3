@@ -432,6 +432,7 @@ return array (
     'isActive' => 
     array (
       'description' => 'isActive',
+      'helper_text' => 'isActive',
     ),
   ),
   'actions' => 
@@ -473,6 +474,10 @@ return array (
     'create' => 
     array (
       'label' => 'create',
+    ),
+    'createAnother' => 
+    array (
+      'label' => 'createAnother',
     ),
   ),
 );

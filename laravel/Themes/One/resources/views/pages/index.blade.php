@@ -10,8 +10,6 @@ use Livewire\Volt\Component;
 use Modules\Tenant\Services\TenantService;
 
 /** @var array */
-//$middleware=TenantService::config('middleware');
-//$base_middleware=Arr::get($middleware,'base',[]);
 $base_middleware=[];
 
 name('home');
@@ -27,10 +25,9 @@ new class extends Component
 ?>
 
 <x-layouts.app>
-    @volt('home')
+ @volt('home')
     <div>
-        {{--  route('pages.view',['slug'=>'patient_register_complete'])  --}}
         <x-page side="content" slug="home" :type="auth()->user()?->type?->value"/>
     </div>
-    @endvolt
+ @endvolt
 </x-layouts.app>

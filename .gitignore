@@ -93,3 +93,4 @@ cache/
 
 !laravel/Themes/One/yarn.lock
 laravel/database/migrations
+laravel/storage/framework/views/*
