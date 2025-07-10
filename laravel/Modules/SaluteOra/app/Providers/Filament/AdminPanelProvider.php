@@ -6,19 +6,23 @@ namespace Modules\SaluteOra\Providers\Filament;
 
 use Filament\Panel;
 use Illuminate\Http\Request;
+use LaraZeus\Bolt\BoltPlugin;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
+
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Filament\Http\Middleware\Authenticate;
+
+use Filament\SpatieLaravelTranslatablePlugin;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use Modules\UI\Actions\Panel\ApplyCalendarToPanelAction;
 use Modules\Xot\Actions\Panel\ApplyTenancyToPanelAction;
 use Modules\Xot\Providers\Filament\XotBasePanelProvider;
-use Modules\UI\Actions\Panel\ApplyCalendarToPanelAction;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
@@ -48,9 +52,19 @@ class AdminPanelProvider extends XotBasePanelProvider
     {
         $panel = parent::panel($panel);
        
-        
+        // Applica tenancy e calendar
         $panel = app(ApplyTenancyToPanelAction::class)->execute($panel);
         $panel = app(ApplyCalendarToPanelAction::class)->execute($panel);
+
+        $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()->defaultLocales([config('app.locale')]);
+        $boltPlugin = BoltPlugin::make();
+
+        $plugins = [
+            $spatieLaravelTranslatablePlugin,
+            $boltPlugin
+        ];
+        
+        $panel->plugins($plugins);
 
         return $panel;
     }

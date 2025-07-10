@@ -35,31 +35,6 @@
     "require": {
         "amenadiel/jpgraph": "^4.1"
     },
-    "require_comment": {
-        "laraxot/module_xot_fila3": "*",
-        "thecodingmachine/safe": "^2.5"
-    },
-    "require-dev_comment": {
-        "driftingly/rector-laravel": "^0.26.2",
-        "enlightn/enlightn": "^2.5",
-        "laravel/pint": "^1.13",
-        "nunomaduro/collision": "*",
-        "larastan/larastan": "^2.6",
-        "nunomaduro/phpinsights": "^2.9",
-        "orchestra/testbench": "^9.4",
-        "pestphp/pest": "*",
-        "pestphp/pest-plugin-arch": "*",
-        "pestphp/pest-plugin-laravel": "*",
-        "phpstan/phpstan-deprecation-rules": "*",
-        "phpstan/phpstan-phpunit": "*",
-        "psalm/plugin-laravel": "*",
-        "rector/phpstan-rules": "*",
-        "rector/rector": "*",
-        "spatie/laravel-ray": "*",
-        "thecodingmachine/phpstan-safe-rule": "^1.2",
-        "tightenco/duster": "^2.2",
-        "vimeo/psalm": "^5.15"
-    },
     "repositories": [ {
         "type": "path",
         "url": "../Xot"

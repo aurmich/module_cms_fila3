@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Tenant\Models;
+namespace Modules\UI\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,7 +38,7 @@ abstract class BaseModel extends EloquentModel
     protected $perPage = 30;
 
     /** @var string */
-    protected $connection = 'tenant';
+    protected $connection = 'u_i';
 
     /** @var list<string> */
     protected $appends = [];
