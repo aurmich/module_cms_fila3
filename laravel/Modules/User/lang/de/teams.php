@@ -1,76 +1,78 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'name' => 'Teams',
     'fields' => [
         'name' => [
-            'label' => 'Nome',
-            'placeholder' => 'Inserisci il nome del team',
-            'helper_text' => 'Nome identificativo del team',
-            'description' => 'Il nome che identifica questo team',
+            'label' => 'Name',
+            'placeholder' => 'Teamnamen eingeben',
+            'helper_text' => 'Team-Identifikationsname',
+            'description' => 'Der Name, der dieses Team identifiziert',
         ],
         'personal_team' => [
-            'label' => 'Team Personale',
-            'helper_text' => 'Indica se questo è un team personale',
-            'description' => 'Un team personale è associato a un singolo utente',
+            'label' => 'Persönliches Team',
+            'helper_text' => 'Gibt an, ob es sich um ein persönliches Team handelt',
+            'description' => 'Ein persönliches Team ist einem einzelnen Benutzer zugeordnet',
         ],
         'owner' => [
-            'label' => 'Proprietario',
-            'helper_text' => 'Utente proprietario del team',
-            'description' => 'L\'utente che ha creato e gestisce questo team',
+            'label' => 'Besitzer',
+            'helper_text' => 'Team-Besitzer-Benutzer',
+            'description' => 'Der Benutzer, der dieses Team erstellt und verwaltet',
         ],
         'created_at' => [
-            'label' => 'Data Creazione',
-            'helper_text' => 'Data di creazione del team',
-            'description' => 'Data e ora in cui è stato creato il team',
+            'label' => 'Erstellungsdatum',
+            'helper_text' => 'Team-Erstellungsdatum',
+            'description' => 'Datum und Uhrzeit der Team-Erstellung',
         ],
         'updated_at' => [
-            'label' => 'Ultima Modifica',
-            'helper_text' => 'Data dell\'ultima modifica',
-            'description' => 'Data e ora dell\'ultima modifica al team',
+            'label' => 'Zuletzt geändert',
+            'helper_text' => 'Datum der letzten Änderung',
+            'description' => 'Datum und Uhrzeit der letzten Team-Änderung',
         ],
     ],
     'actions' => [
         'create' => [
-            'label' => 'Nuovo Team',
-            'tooltip' => 'Crea un nuovo team',
+            'label' => 'Neues Team',
+            'tooltip' => 'Ein neues Team erstellen',
         ],
         'edit' => [
-            'label' => 'Modifica',
-            'tooltip' => 'Modifica i dati del team',
+            'label' => 'Bearbeiten',
+            'tooltip' => 'Team-Daten bearbeiten',
         ],
         'delete' => [
-            'label' => 'Elimina',
-            'tooltip' => 'Elimina il team',
+            'label' => 'Löschen',
+            'tooltip' => 'Das Team löschen',
         ],
         'view' => [
-            'label' => 'Visualizza',
-            'tooltip' => 'Visualizza i dettagli del team',
+            'label' => 'Anzeigen',
+            'tooltip' => 'Team-Details anzeigen',
         ],
     ],
     'messages' => [
         'success' => [
-            'created' => 'Team creato con successo',
-            'updated' => 'Team aggiornato con successo',
-            'deleted' => 'Team eliminato con successo',
+            'created' => 'Team erfolgreich erstellt',
+            'updated' => 'Team erfolgreich aktualisiert',
+            'deleted' => 'Team erfolgreich gelöscht',
         ],
         'error' => [
-            'create' => 'Errore durante la creazione del team',
-            'update' => 'Errore durante l\'aggiornamento del team',
-            'delete' => 'Errore durante l\'eliminazione del team',
+            'create' => 'Fehler beim Erstellen des Teams',
+            'update' => 'Fehler beim Aktualisieren des Teams',
+            'delete' => 'Fehler beim Löschen des Teams',
         ],
         'confirm' => [
-            'delete' => 'Sei sicuro di voler eliminare questo team?',
+            'delete' => 'Sind Sie sicher, dass Sie dieses Team löschen möchten?',
         ],
     ],
     'relationships' => [
         'members' => [
-            'label' => 'Membri',
-            'description' => 'Utenti che fanno parte di questo team',
+            'label' => 'Mitglieder',
+            'description' => 'Benutzer, die Teil dieses Teams sind',
         ],
         'owner' => [
-            'label' => 'Proprietario',
-            'description' => 'Utente che ha creato questo team',
+            'label' => 'Besitzer',
+            'description' => 'Benutzer, der dieses Team erstellt hat',
         ],
     ],
 ];
