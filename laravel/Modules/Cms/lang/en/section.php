@@ -5,10 +5,9 @@ return [
         'label' => 'Sections',
         'group' => 'Content Management',
         'icon' => 'heroicon-o-rectangle-stack',
-        'sort' => 85,
+        'sort' => '85',
     ],
     'fields' => [
-        // ... altri campi ...
         'image' => [
             'label' => 'Image',
         ],
@@ -114,6 +113,165 @@ return [
         'children' => [
             'label' => 'Children',
         ],
-        // ... altri campi ...
+        'toggleColumns' => [
+            'label' => 'Mostra/Nascondi Colonne',
+        ],
+        'resetFilters' => [
+            'label' => 'Reimposta Filtri',
+        ],
+        'reorderRecords' => [
+            'label' => 'Riordina Record',
+        ],
+        'applyFilters' => [
+            'label' => 'Applica Filtri',
+        ],
+        'openFilters' => [
+            'label' => 'Apri Filtri',
+        ],
+        'name' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome della sezione',
+        ],
+        'slug' => [
+            'label' => 'Slug',
+            'placeholder' => 'Inserisci lo slug della sezione',
+        ],
+        'blocks' => [
+            'label' => 'Blocchi',
+            'placeholder' => 'Aggiungi blocchi alla sezione',
+        ],
+        'created_at' => [
+            'label' => 'Data di Creazione',
+        ],
+        'updated_at' => [
+            'label' => 'Data di Aggiornamento',
+        ],
+        'copyright' => [
+            'label' => 'Copyright',
+        ],
+        'links' => [
+            'label' => 'Link',
+        ],
+        'text' => [
+            'label' => 'Testo',
+        ],
+        'type' => [
+            'label' => 'Tipo',
+        ],
+        'orientation' => [
+            'label' => 'orientation',
+        ],
+        'placeholder' => [
+            'label' => 'placeholder',
+        ],
+        'success_message' => [
+            'label' => 'success_message',
+        ],
+        'error_message' => [
+            'label' => 'error_message',
+        ],
+        'content' => [
+            'label' => 'content',
+        ],
+        'target' => [
+            'label' => 'target',
+        ],
+        'social_links' => [
+            'label' => 'social_links',
+        ],
+        'platform' => [
+            'label' => 'platform',
+        ],
+        'stats' => [
+            'label' => 'stats',
+        ],
+        'number' => [
+            'label' => 'number',
+        ],
+        'level' => [
+            'label' => 'level',
+        ],
+        'background' => [
+            'label' => 'background',
+        ],
+        'buttons' => [
+            'label' => 'buttons',
+        ],
+        'class' => [
+            'label' => 'class',
+        ],
+        'link' => [
+            'label' => 'link',
+        ],
+        'ratio' => [
+            'label' => 'ratio',
+        ],
+        'img_uuid' => [
+            'label' => 'img_uuid',
+        ],
+        'gallery' => [
+            'label' => 'gallery',
+        ],
+        'version' => [
+            'label' => 'version',
+        ],
+        'method' => [
+            'label' => 'method',
+        ],
+        'video' => [
+            'label' => 'video',
+        ],
+    ],
+    'model' => [
+        'label' => 'Sezione',
+        'plural' => 'Sezioni',
+    ],
+    'actions' => [
+        'create' => [
+            'label' => 'Crea Sezione',
+            'modal' => [
+                'heading' => 'Crea Nuova Sezione',
+                'submit' => 'Crea',
+                'cancel' => 'Annulla',
+            ],
+        ],
+        'edit' => [
+            'label' => 'Modifica Sezione',
+            'modal' => [
+                'heading' => 'Modifica Sezione',
+                'submit' => 'Salva',
+                'cancel' => 'Annulla',
+            ],
+        ],
+        'delete' => [
+            'label' => 'Elimina Sezione',
+            'modal' => [
+                'heading' => 'Elimina Sezione',
+                'description' => 'Sei sicuro di voler eliminare questa sezione?',
+                'submit' => 'Elimina',
+                'cancel' => 'Annulla',
+            ],
+        ],
+        'view' => [
+            'label' => 'Visualizza Sezione',
+        ],
+        'activeLocale' => [
+            'label' => 'Lingua Attiva',
+        ],
+        'cancel' => [
+            'label' => 'cancel',
+        ],
+        'save' => [
+            'label' => 'save',
+        ],
+        'preview' => [
+            'label' => 'preview',
+        ],
+    ],
+    'messages' => [
+        'created' => 'Sezione creata con successo',
+        'updated' => 'Sezione aggiornata con successo',
+        'deleted' => 'Sezione eliminata con successo',
+        'bulk_deleted' => 'Sezioni eliminate con successo',
     ],
 ];

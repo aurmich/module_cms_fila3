@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'label' => 'Availability Calendar',
         'group' => 'Schedule',
         'icon' => 'heroicon-o-calendar',
         'color' => 'primary',
-        'sort' => 10,
+        'sort' => '10',
         'tooltip' => 'Manage doctor availability calendar',
     ],
     'actions' => [
@@ -49,28 +47,28 @@ return [
             'placeholder' => 'Select doctor',
             'helper_text' => 'Choose healthcare professional',
             'tooltip' => 'Select doctor to view/edit their availability',
-            'required' => true,
+            'required' => '1',
         ],
         'date' => [
             'label' => 'Date',
             'placeholder' => 'Select date',
             'helper_text' => 'Availability date',
             'tooltip' => 'Date to set availability for',
-            'required' => true,
+            'required' => '1',
         ],
         'start_time' => [
             'label' => 'Start Time',
             'placeholder' => 'Select start time',
             'helper_text' => 'Start of availability period',
             'tooltip' => 'Appointment start time',
-            'required' => true,
+            'required' => '1',
         ],
         'end_time' => [
             'label' => 'End Time',
             'placeholder' => 'Select end time',
             'helper_text' => 'End of availability period',
             'tooltip' => 'Appointment end time',
-            'required' => true,
+            'required' => '1',
         ],
         'status' => [
             'label' => 'Status',
@@ -202,6 +200,20 @@ return [
             'cancelled' => 'Cancelled',
             'pending' => 'Pending',
             'tentative' => 'Tentative',
+            'break' => 'Pausa',
+            'holiday' => 'Festivo',
         ],
+    ],
+    'validation' => [
+        'required' => 'Questo campo è obbligatorio',
+        'date' => 'Inserisci una data valida',
+        'time' => 'Inserisci un orario valido',
+        'end_time_after' => 'L\'ora di fine deve essere successiva all\'ora di inizio',
+    ],
+    'empty_states' => [
+        'no_availability' => 'Nessuna disponibilità trovata',
+        'no_availability_description' => 'Inizia creando una nuova disponibilità',
+        'no_doctor_selected' => 'Nessun medico selezionato',
+        'no_doctor_selected_description' => 'Seleziona un medico per visualizzare la disponibilità',
     ],
 ];

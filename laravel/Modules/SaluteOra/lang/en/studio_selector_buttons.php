@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'fields' => [
         'studio_selection' => [
@@ -12,4 +10,4 @@ return [
             'description' => 'Medical studio for the service',
         ],
     ],
-]; 
+];

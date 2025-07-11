@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'label' => 'Secretariat',
         'group' => 'User Management',
         'icon' => 'saluteora-admin',
-        'sort' => 95,
+        'sort' => '95',
     ],
     'fields' => [
         'applyFilters' => [

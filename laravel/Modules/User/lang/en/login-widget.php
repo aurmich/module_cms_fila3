@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'name' => 'Login',
     'fields' => [
@@ -44,4 +42,4 @@ return [
             'too_many_attempts' => 'Too many attempts, please try again later',
         ],
     ],
-]; 
+];

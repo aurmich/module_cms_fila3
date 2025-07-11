@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'name' => 'Treatments',
     'navigation' => [
@@ -9,7 +7,7 @@ return [
         'group' => 'Services',
         'icon' => 'heroicon-o-beaker',
         'color' => 'violet',
-        'sort' => 5,
+        'sort' => '5',
         'tooltip' => 'Manage available services and treatments',
     ],
-]; 
+];

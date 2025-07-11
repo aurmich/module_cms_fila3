@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'widget' => [
         'title' => 'Find Doctor and Book Appointment',
         'description' => 'Search for a doctor in your area and book an appointment online',
     ],
-    
     'steps' => [
         'search_step' => [
             'label' => 'Search Doctor',
@@ -35,105 +32,141 @@ return [
             'icon' => 'heroicon-o-check-circle',
         ],
     ],
-    
     'fields' => [
         'specialization' => [
             'label' => 'Specialization',
             'placeholder' => 'Select a medical specialization',
             'helper_text' => '',
+            'help' => 'Scegli la specializzazione medica di cui hai bisogno (es. Cardiologia, Dermatologia)',
+            'description' => 'La specializzazione determina il tipo di visita che puoi prenotare',
         ],
         'location' => [
             'label' => 'Location',
             'placeholder' => 'Enter your city or area',
             'helper_text' => '',
+            'help' => 'Specifica dove preferisci che si trovi lo studio medico',
+            'description' => 'La ricerca mostrerà i dottori disponibili nella zona indicata',
         ],
         'region' => [
             'label' => 'Region',
             'placeholder' => 'Select the region',
             'helper_text' => '',
+            'help' => 'Scegli la regione dove cercare il dottore',
+            'description' => 'Prima seleziona la regione, poi potrai scegliere provincia e città',
         ],
         'province' => [
             'label' => 'Province',
             'placeholder' => 'Select the province',
             'helper_text' => '',
+            'help' => 'Scegli la provincia nella regione selezionata',
+            'description' => 'La provincia restringerà l\'area di ricerca',
         ],
         'city' => [
             'label' => 'City',
             'placeholder' => 'Select the city',
             'helper_text' => '',
+            'help' => 'Scegli la città dove preferisci trovare il dottore',
+            'description' => 'La città determinerà i risultati più vicini a te',
         ],
         'cap' => [
             'label' => 'ZIP Code',
             'placeholder' => 'Enter the postal code',
             'helper_text' => '',
+            'help' => 'Inserisci il CAP per una ricerca più precisa (opzionale)',
+            'description' => 'Il CAP aiuta a trovare studi medici nella tua zona specifica',
         ],
         'appointment_type' => [
             'label' => 'Appointment Type',
             'placeholder' => 'Select the type of visit',
             'helper_text' => '',
+            'help' => 'Scegli se hai bisogno di una prima visita, controllo o consulenza',
+            'description' => 'Il tipo di appuntamento influenza durata e costo della visita',
         ],
         'selected_studio' => [
             'label' => 'Selected Studio',
             'placeholder' => 'No studio selected',
             'helper_text' => '',
+            'help' => 'Studio medico scelto per l\'appuntamento',
+            'description' => 'Conferma lo studio dove si svolgerà la visita',
         ],
         'selected_studio_name' => [
             'label' => 'Studio Name',
             'placeholder' => 'Medical studio name',
             'helper_text' => '',
+            'help' => 'Denominazione completa dello studio medico',
+            'description' => 'Nome ufficiale della struttura sanitaria',
         ],
         'doctor_id' => [
             'label' => 'Doctor',
             'placeholder' => 'Select a doctor',
             'helper_text' => '',
+            'help' => 'Dottore che effettuerà la visita',
+            'description' => 'Medico specialista che ti riceverà',
         ],
         'studio_id' => [
             'label' => 'Studio',
             'placeholder' => 'Select a studio',
             'helper_text' => '',
+            'help' => 'Studio medico dove si svolgerà la visita',
+            'description' => 'Struttura sanitaria di riferimento',
         ],
         'studio_name' => [
             'label' => 'Studio Name',
             'placeholder' => 'Medical studio name',
             'helper_text' => '',
+            'help' => 'Denominazione dello studio medico selezionato',
+            'description' => 'Nome della struttura sanitaria',
         ],
         'appointment_date' => [
             'label' => 'Appointment Date',
             'placeholder' => 'Select a date',
             'helper_text' => '',
+            'help' => 'Scegli il giorno per il tuo appuntamento',
+            'description' => 'Data in cui si svolgerà la visita medica',
         ],
         'appointment_time' => [
             'label' => 'Appointment Time',
             'placeholder' => 'Select a time',
             'helper_text' => '',
+            'help' => 'Scegli l\'orario più comodo per te',
+            'description' => 'Ora di inizio della visita medica',
         ],
         'appointment_time_display' => [
             'label' => 'Selected Time',
             'placeholder' => 'No time selected',
             'helper_text' => '',
+            'help' => 'Orario confermato per l\'appuntamento',
+            'description' => 'Ora in cui inizierà la tua visita',
         ],
         'date' => [
             'label' => 'Date',
             'placeholder' => 'Select a date',
             'helper_text' => '',
+            'help' => 'Scegli la data per il tuo appuntamento',
+            'description' => 'Giorno in cui si svolgerà la visita',
         ],
         'time' => [
             'label' => 'Time',
             'placeholder' => 'Select a time',
             'helper_text' => '',
+            'help' => 'Scegli l\'orario preferito',
+            'description' => 'Ora di inizio della visita',
         ],
         'notes' => [
             'label' => 'Additional Notes',
             'placeholder' => 'Enter any notes or special requests',
             'helper_text' => '',
+            'help' => 'Aggiungi informazioni utili per il dottore (sintomi, allergie, farmaci)',
+            'description' => 'Note che aiuteranno il medico a prepararsi meglio per la visita',
         ],
         'search' => [
             'label' => 'Search',
             'placeholder' => 'Search for doctors in your area',
             'helper_text' => '',
+            'help' => 'Usa i filtri per trovare il dottore più adatto',
+            'description' => 'Sistema di ricerca medici specializzati',
         ],
     ],
-    
     'actions' => [
         'submit' => [
             'label' => 'Confirm Booking',
@@ -178,7 +211,6 @@ return [
             'tooltip' => 'Clear all data and restart the search',
         ],
     ],
-    
     'messages' => [
         'welcome' => 'Welcome to the online booking system',
         'loading' => 'Loading...',
@@ -189,14 +221,12 @@ return [
         'appointment_confirmed' => 'Your appointment has been confirmed',
         'appointment_pending' => 'Your booking is pending confirmation',
     ],
-    
     'empty_states' => [
         'no_doctors' => 'No doctors available',
         'no_appointments' => 'No appointments available',
         'no_results' => 'No results found',
         'search_required' => 'Fill in the search fields to begin',
     ],
-    
     'validation' => [
         'specialization_required' => 'Specialization is required',
         'location_required' => 'Location is required',
@@ -208,4 +238,4 @@ return [
         'past_date' => 'You cannot select a past date',
         'appointment_not_available' => 'The selected time is no longer available',
     ],
-]; 
+];

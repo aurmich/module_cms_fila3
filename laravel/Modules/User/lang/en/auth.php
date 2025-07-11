@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'login' => [
         'title' => 'Sign in to your account',
@@ -15,8 +13,35 @@ return [
         'forgot_password' => 'Forgot your password?',
         'no_account' => 'Don\'t have an account?',
         'register' => 'Sign up',
+        'email_structured' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email',
+        ],
+        'password_structured' => [
+            'label' => 'Password',
+            'placeholder' => 'Inserisci la tua password',
+        ],
+        'remember_structured' => [
+            'label' => 'Ricordami',
+        ],
+        'success' => 'Accesso effettuato con successo.',
+        'failed' => 'Credenziali non valide.',
+        'logout_success' => 'Logout effettuato con successo.',
+        'logout_error' => 'Si è verificato un errore durante il logout.',
+        'login-via' => 'Accedi con',
+        'login-failed' => 'Login fallito, riprova.',
+        'user-not-allowed' => 'La tua email non è autorizzata.',
+        'login-in' => 'Accedi',
+        'Sign in' => 'Accedi',
+        'Sign in to your account' => 'Accedi al tuo account',
+        'Welcome back' => 'Bentornato',
+        'Email address' => 'Indirizzo email',
+        'Email' => 'Email',
+        'Password' => 'Password',
+        'Remember me' => 'Ricordami',
+        'Remember' => 'Ricordami',
+        'Forgot your password?' => 'Password dimenticata?',
     ],
-
     'register' => [
         'title' => 'Create a new account',
         'subtitle' => 'Enter your details to register',
@@ -30,8 +55,27 @@ return [
         'password_confirmation_placeholder' => '••••••••',
         'submit' => 'Sign up',
         'already_registered' => 'Already have an account? Sign in',
+        'success' => 'Registrazione completata con successo.',
+        'failed' => 'Impossibile completare la registrazione.',
+        'already_have_account' => 'Hai già un account?',
+        'login' => 'Accedi',
+        'name_structured' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il tuo nome completo',
+        ],
+        'email_structured' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email',
+        ],
+        'password_structured' => [
+            'label' => 'Password',
+            'placeholder' => 'Inserisci la password',
+        ],
+        'password_confirmation_structured' => [
+            'label' => 'Conferma Password',
+            'placeholder' => 'Conferma la password',
+        ],
     ],
-
     'forgot-password' => [
         'title' => 'Reset your password',
         'subtitle' => 'Enter your email to receive the reset link',
@@ -40,7 +84,6 @@ return [
         'submit' => 'Send reset link',
         'back_to_login' => 'Back to login',
     ],
-
     'reset-password' => [
         'title' => 'Reset password',
         'subtitle' => 'Enter your new password',
@@ -52,7 +95,6 @@ return [
         'password_confirmation_placeholder' => '••••••••',
         'submit' => 'Reset password',
     ],
-
     'password_reset' => [
         'email_placeholder' => 'Enter your email address',
         'send_button' => 'Send reset link',
@@ -99,7 +141,6 @@ return [
             'try_again' => 'Try again',
         ],
     ],
-
     'passwords' => [
         'reset' => 'Your password has been reset!',
         'sent' => 'We have emailed your password reset link!',
@@ -107,27 +148,151 @@ return [
         'token' => 'This password reset token is invalid.',
         'user' => 'We can\'t find a user with that email address.',
     ],
-
     'login-via' => 'Or log in via',
-
     'login-failed' => 'Login failed, please try again.',
-
     'user-not-allowed' => 'Your email is not part of a domain that is allowed.',
-
     'registration-not-enabled' => 'Registration of a new user is not allowed.',
-
     'login-in' => 'Sign in',
     'sign-up' => 'Sign up',
-
-    // Basic fields
     'email' => 'Email',
     'password' => 'Password',
     'name' => 'Name',
     'confirm_password' => 'Confirm Password',
-
-    // General auth messages
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'general_error' => 'An error occurred. Please try again later.',
     'unauthorized' => 'You do not have the necessary permissions for this operation.',
+    'Sign in to your account' => 'Accedi al tuo account',
+    'create a new account' => 'Crea un nuovo account',
+    'Or' => 'O',
+    'Email address' => 'Indirizzo e-mail',
+    'Password' => 'Password',
+    'Remember me' => 'Ricordami',
+    'Remember' => 'Ricordami',
+    'Forgot your password?' => 'Password dimenticata?',
+    'Sign in' => 'Accedi',
+    'password_expired' => [
+        'title' => 'Password Scaduta, Reimposta Password',
+        'heading' => 'Crea una Nuova Password',
+        'sub_heading' => 'La tua password è scaduta, per favore crea una nuova password',
+        'fields' => [
+            'current_password' => [
+                'label' => 'Password Attuale',
+                'validation_attribute' => 'current_password',
+            ],
+            'password' => [
+                'label' => 'Password',
+                'validation_attribute' => 'password',
+            ],
+            'password_confirmation' => [
+                'label' => 'Conferma Password',
+            ],
+        ],
+        'form' => [
+            'current_password' => [
+                'label' => 'Password Attuale',
+                'placeholder' => 'Inserisci la password attuale',
+                'help' => 'Inserisci la tua password attuale per confermare la tua identità',
+            ],
+            'password' => [
+                'label' => 'Nuova Password',
+                'placeholder' => 'Inserisci la nuova password',
+                'help' => 'La password deve contenere almeno 8 caratteri',
+            ],
+            'password_confirmation' => [
+                'label' => 'Conferma Nuova Password',
+                'placeholder' => 'Conferma la nuova password',
+                'help' => 'Reinserisci la nuova password per confermarla',
+            ],
+        ],
+        'actions' => [
+            'update' => [
+                'label' => 'Aggiorna Password',
+                'success' => 'Password aggiornata con successo',
+                'error' => 'Errore durante l\'aggiornamento della password',
+            ],
+        ],
+    ],
+    'logout_success' => 'Logout effettuato con successo.',
+    'logout_error' => 'Si è verificato un errore durante il logout.',
+    'reset_password_notification_subject' => 'Reset Password Notification',
+    'reset_password_notification_line_1' => 'You are receiving this email because we received a password reset request for your account.',
+    'reset_password_notification_action' => 'Reset Password',
+    'reset_password_notification_line_2' => 'This password reset link will expire in :count minutes.',
+    'reset_password_notification_line_3' => 'If you did not request a password reset, no further action is required.',
+    'Resend Verification Email' => 'Rinvia Email di Verifica',
+    'Verify Your Email Address' => 'Verifica la tua email',
+    'A fresh verification link has been sent to your email address.' => 'Un nuovo link di verifica è stato inviato al tuo indirizzo email.',
+    'forgot_password' => [
+        'title' => 'Password dimenticata?',
+        'subtitle' => 'Inserisci la tua email per ricevere le istruzioni',
+        'email' => 'Indirizzo email',
+        'email_placeholder' => 'esempio@email.com',
+        'submit' => 'Invia istruzioni',
+        'success' => 'Le istruzioni sono state inviate alla tua email.',
+        'failed' => 'Impossibile inviare le istruzioni di reset.',
+        'back_to_login' => 'Torna al login',
+        'email_structured' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email',
+        ],
+    ],
+    'reset_password' => [
+        'title' => 'Reimposta password',
+        'subtitle' => 'Inserisci la nuova password',
+        'email' => 'Indirizzo email',
+        'email_placeholder' => 'Inserisci il tuo indirizzo email',
+        'password' => 'Nuova password',
+        'password_placeholder' => '••••••••',
+        'password_confirmation' => 'Conferma password',
+        'password_confirmation_placeholder' => '••••••••',
+        'submit' => 'Reimposta password',
+        'success' => 'Password reimpostata con successo.',
+        'failed' => 'Impossibile reimpostare la password.',
+        'send_button' => 'Invia link di reset',
+        'back_to_login' => 'Torna al login',
+        'send_another' => 'Invia un altro link',
+        'email_sent' => [
+            'title' => 'Email inviata!',
+            'message' => 'Ti abbiamo inviato un link per reimpostare la password. Controlla la tua casella di posta elettronica e segui le istruzioni.',
+        ],
+        'email_failed' => [
+            'title' => 'Errore nell\'invio',
+            'generic' => 'Si è verificato un errore durante l\'invio dell\'email. Riprova più tardi.',
+        ],
+        'email_structured' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email',
+        ],
+        'password_structured' => [
+            'label' => 'Nuova Password',
+            'placeholder' => 'Inserisci la nuova password',
+        ],
+        'password_confirmation_structured' => [
+            'label' => 'Conferma Password',
+            'placeholder' => 'Conferma la nuova password',
+        ],
+    ],
+    'verification' => [
+        'title' => 'Verifica il tuo indirizzo email',
+        'subtitle' => 'Ti abbiamo inviato un link di verifica',
+        'notice' => 'Prima di procedere, controlla la tua email per il link di verifica.',
+        'another' => 'Se non hai ricevuto l\'email',
+        'resend' => 'Clicca qui per richiederne un\'altra',
+        'success' => 'Un nuovo link di verifica è stato inviato al tuo indirizzo email.',
+    ],
+    'social' => [
+        'title' => 'Accedi con',
+        'google' => 'Google',
+        'facebook' => 'Facebook',
+        'github' => 'GitHub',
+        'error' => 'Si è verificato un errore con il login social.',
+    ],
+    'errors' => [
+        'invalid_credentials' => 'Credenziali non valide.',
+        'invalid_token' => 'Token non valido o scaduto.',
+        'account_blocked' => 'Account bloccato. Contatta l\'assistenza.',
+        'too_many_attempts' => 'Troppi tentativi. Riprova più tardi.',
+        'session_expired' => 'Sessione scaduta. Effettua nuovamente il login.',
+    ],
 ];

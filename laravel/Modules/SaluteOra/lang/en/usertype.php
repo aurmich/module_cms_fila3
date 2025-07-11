@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'admin' => [
         'label' => 'Administrator',
@@ -21,4 +19,4 @@ return [
         'icon' => 'heroicon-o-user',
         'image' => '/img/donna-personaggio.png',
     ],
-]; 
+];

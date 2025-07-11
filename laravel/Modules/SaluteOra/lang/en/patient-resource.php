@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'steps' => [
         'personal_data_step' => [

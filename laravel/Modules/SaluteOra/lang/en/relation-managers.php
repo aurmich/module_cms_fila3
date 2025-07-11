@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'doctors' => [
         'title' => 'Doctors',
@@ -42,4 +40,4 @@ return [
             'view' => 'View studio',
         ],
     ],
-]; 
+];

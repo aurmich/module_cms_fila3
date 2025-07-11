@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'resource' => [
         'name' => 'WhatsApp',
@@ -16,7 +14,7 @@ return [
         ],
         'label' => 'Send WhatsApp',
         'icon' => 'heroicon-o-chat-bubble-left-right',
-        'sort' => 20,
+        'sort' => '20',
     ],
     'fields' => [
         'to' => [

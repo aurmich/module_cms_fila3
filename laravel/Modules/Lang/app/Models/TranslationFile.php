@@ -1,0 +1,65 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @see https://github.com/barryvdh/laravel-translation-manager/blob/master/src/Models/Translation.php
+ */
+
+namespace Modules\Lang\Models;
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Modules\Lang\Actions\GetAllTranslationAction;
+use Modules\Lang\Actions\ReadTranslationFileAction;
+use Modules\Lang\Actions\WriteTranslationFileAction;
+
+class TranslationFile extends BaseModel
+{
+    use \Sushi\Sushi;
+
+    protected $fillable = [
+        'id',
+        'name',
+        'path',
+        'content',
+    ];
+
+    protected array $schema = [
+        'key' => "string",
+        'path' => "string",
+        'id' => "string",
+        'name' => "string",
+        'content' => 'json',
+    ];
+
+    protected $casts = [
+        'content' => 'array',
+    ];
+
+    public function getRows(): array
+    {
+        $files = app(GetAllTranslationAction::class)->execute();
+        $rows = Arr::map($files, function($item) {
+            $item['id'] = $item['key'];
+            $item['name'] = basename($item['path'], '.php');
+
+
+            $item['content']=json_encode(File::getRequire($item['path']));
+            /*
+            // Carica il contenuto del file
+            try {
+                $readAction = app(ReadTranslationFileAction::class);
+                $item['content'] = $readAction->execute($item['path']);
+            } catch (\Exception $e) {
+                $item['content'] = [];
+            }
+            */
+            //dddx($item);
+            return $item;
+        });
+        return $rows;
+    }
+
+   
+}

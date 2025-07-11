@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'less_than_1' => 'Less than 1 year',
     '1_to_2' => '1 to 2 years',
@@ -10,7 +8,6 @@ return [
     'more_than_10' => 'More than 10 years',
     'since_birth' => 'Since birth',
     'not_applicable' => 'Not applicable',
-    
     'descriptions' => [
         'less_than_1' => 'Recently arrived in Italy',
         '1_to_2' => 'Short-term resident',
@@ -20,9 +17,44 @@ return [
         'since_birth' => 'Born and raised in Italy',
         'not_applicable' => 'Not applicable or prefer not to say',
     ],
-    
     'labels' => [
         'question' => 'How long have you been living in Italy?',
         'help_text' => 'Select the option that best describes your time in Italy',
     ],
-]; 
+    'YEAR_0_1' => [
+        'label' => '0-1 anno',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '0-1 anno',
+    ],
+    'YEAR_2_3' => [
+        'label' => '2-3 anni',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '2-3 anni',
+    ],
+    'YEAR_3_4' => [
+        'label' => '3-4 anni',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '3-4 anni',
+    ],
+    'YEAR_4_5' => [
+        'label' => '4-5 anni',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '6-10 anni',
+    ],
+    'YEAR_6_10' => [
+        'label' => '6-10 anni',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '6-10 anni',
+    ],
+    'YEAR_10_99' => [
+        'label' => '10-99 anni',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-flag-checkered',
+        'description' => '10-99 anni',
+    ],
+];

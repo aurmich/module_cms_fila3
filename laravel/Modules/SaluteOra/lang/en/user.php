@@ -1,22 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'label' => 'Generic Users',
         'group' => 'User Management',
         'icon' => 'heroicon-o-user',
         'color' => 'primary',
-        'sort' => 44,
+        'sort' => '44',
     ],
-
     'model' => [
         'label' => 'User',
         'plural' => 'Users',
         'description' => 'Healthcare system user management',
     ],
-
     'fields' => [
         'id' => [
             'label' => 'User ID',
@@ -135,8 +131,22 @@ return [
             'placeholder' => 'Automatic last modification date',
             'help' => 'Date and time of last modification to user data',
         ],
+        'toggleColumns' => [
+            'label' => 'toggleColumns',
+        ],
+        'reorderRecords' => [
+            'label' => 'reorderRecords',
+        ],
+        'resetFilters' => [
+            'label' => 'resetFilters',
+        ],
+        'applyFilters' => [
+            'label' => 'applyFilters',
+        ],
+        'openFilters' => [
+            'label' => 'openFilters',
+        ],
     ],
-
     'actions' => [
         'create' => [
             'label' => 'Create New User',
@@ -222,7 +232,6 @@ return [
             'color' => 'success',
         ],
     ],
-
     'messages' => [
         'welcome' => 'Welcome to system user management',
         'loading' => 'Loading user data...',
@@ -232,7 +241,6 @@ return [
         'account_created' => 'User account created and welcome email sent',
         'password_reset_sent' => 'Password reset email sent to user',
     ],
-
     'filters' => [
         'all' => 'All Users',
         'by_type' => 'Filter by Type',
@@ -242,7 +250,6 @@ return [
         'suspended' => 'Suspended Users',
         'recent' => 'Recently Registered',
     ],
-
     'notifications' => [
         'account_approved' => 'Your account has been approved and you can now access the system',
         'account_rejected' => 'Your account has been rejected. Contact support for more information',

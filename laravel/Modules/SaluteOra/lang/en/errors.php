@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'state_transition' => [
         'invalid' => 'Cannot transition from state :from to state :to',

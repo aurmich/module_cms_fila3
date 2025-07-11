@@ -8,7 +8,7 @@ return [
             'plural' => 'Email Templates',
             'singular' => 'Email Template',
             'icon' => 'heroicon-o-envelope',
-            'sort' => 1,
+            'sort' => '1',
         ],
         'sections' => [
             'main' => 'Main Information',

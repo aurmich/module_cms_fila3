@@ -1,25 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'name' => 'Appointments',
-    
     'navigation' => [
         'label' => 'Appointment Calendar',
         'group' => 'Schedule',
         'icon' => 'heroicon-o-calendar-days',
         'color' => 'sky',
-        'sort' => 1,
+        'sort' => '1',
         'tooltip' => 'View and manage all appointments and visits',
     ],
-
     'model' => [
         'label' => 'Appointment',
         'plural' => 'Appointments',
         'description' => 'Management of medical appointments and visits',
     ],
-
     'pages' => [
         'index' => [
             'title' => 'Appointments',
@@ -43,7 +38,6 @@ return [
             'description' => 'Create availability slots to allow patients to book appointments and manage existing appointments.',
         ],
     ],
-
     'fields' => [
         'title' => [
             'label' => 'Title',
@@ -150,7 +144,6 @@ return [
             'helper_text' => '',
         ],
     ],
-
     'actions' => [
         'create' => [
             'label' => 'New Appointment',
@@ -221,7 +214,6 @@ return [
             'modal_description' => 'Explanation of colors and symbols used',
         ],
     ],
-
     'filters' => [
         'today' => [
             'label' => 'Today',
@@ -254,7 +246,6 @@ return [
             'helper_text' => '',
         ],
     ],
-
     'calendar' => [
         'title' => 'Appointment Calendar',
         'today' => 'Today',
@@ -268,7 +259,6 @@ return [
         'week_view' => 'Week View',
         'month_view' => 'Month View',
     ],
-
     'availability' => [
         'title' => 'Availability',
         'add' => 'Add Availability',
@@ -278,7 +268,6 @@ return [
         'update_success' => 'Availability updated successfully',
         'delete_success' => 'Availability deleted successfully',
     ],
-
     'legend' => [
         'description' => 'Legend of colors and icons used in the calendar.',
         'types' => 'Event Types',
@@ -299,7 +288,6 @@ return [
         'instruction_delete' => 'In the edit options, click \'Delete\' to remove an availability or unconfirmed appointment.',
         'instruction_approve' => 'To approve an appointment, change status from \'Pending\' to \'Confirmed\'.',
     ],
-
     'notifications' => [
         'reminder' => [
             'title' => 'Appointment Reminder',
@@ -314,7 +302,6 @@ return [
             'body' => 'Your appointment with :doctor for :date has been cancelled',
         ],
     ],
-
     'messages' => [
         'created' => 'Appointment created successfully',
         'updated' => 'Appointment updated successfully',
@@ -332,7 +319,6 @@ return [
         'availability_deleted' => 'Availability deleted successfully',
         'appointment_updated' => 'Appointment updated successfully',
     ],
-
     'validation' => [
         'required' => 'The :attribute field is required',
         'date' => 'The :attribute field must be a valid date',
@@ -342,7 +328,6 @@ return [
         'past_appointment' => 'Cannot create appointments in the past',
         'doctor_unavailable' => 'The doctor is not available at the selected time',
     ],
-
     'empty_state' => [
         'heading' => 'No appointments found',
         'description' => 'There are no appointments for the selected criteria',
@@ -355,6 +340,7 @@ return [
             'icon' => 'heroicon-o-check-circle',
             'modal_heading' => 'Accept appointment',
             'modal_description' => 'Are you sure you want to accept this appointment?',
+            'bg_color' => '#10b981',
         ],
         'rejected' => [
             'label' => 'Reject',
@@ -362,6 +348,63 @@ return [
             'icon' => 'heroicon-o-x-mark',
             'modal_heading' => 'Reject appointment',
             'modal_description' => 'Are you sure you want to reject this appointment?',
+            'bg_color' => '#ef4444',
+        ],
+        'pending' => [
+            'label' => 'In attesa',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Appuntamento in Attesa',
+            'modal_description' => 'Questo appuntamento è in attesa di conferma.',
+        ],
+        'scheduled' => [
+            'label' => 'Programmato',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-calendar',
+            'modal_heading' => 'Appuntamento Programmato',
+            'modal_description' => 'Questo appuntamento è stato programmato nel calendario.',
+        ],
+        'in_progress' => [
+            'label' => 'In corso',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Visita in Corso',
+            'modal_description' => 'La visita medica è attualmente in corso.',
+        ],
+        'completed' => [
+            'label' => 'Completato',
+            'color' => 'success',
+            'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-badge',
+            'modal_heading' => 'Visita Completata',
+            'modal_description' => 'La visita è stata completata con successo.',
+        ],
+        'cancelled' => [
+            'label' => 'Annullato',
+            'color' => 'danger',
+            'bg_color' => '#ef4444',
+            'icon' => 'heroicon-o-x-circle',
+            'modal_heading' => 'Annulla Appuntamento',
+            'modal_description' => 'Sei sicuro di voler annullare questo appuntamento?',
+        ],
+        'no_show' => [
+            'label' => 'Non presentato',
+            'color' => 'danger',
+            'bg_color' => '#ef4444',
+            'icon' => 'heroicon-o-exclamation-circle',
+            'modal_heading' => 'Paziente Assente',
+            'modal_description' => 'Il paziente non si è presentato all\'appuntamento.',
+        ],
+        'rescheduled' => [
+            'label' => 'Riprogrammato',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Riprogramma Appuntamento',
+            'modal_description' => 'Questo appuntamento è stato riprogrammato per una nuova data.',
         ],
     ],
 ];

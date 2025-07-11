@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'login' => [
         'username_or_email' => 'Benutzername oder E-Mail',
@@ -114,6 +112,7 @@ return [
                 'success_notification' => 'Code verifiziert. Zwei-Faktor-Authentifizierung aktiviert.',
                 'invalid_code' => 'Der von Ihnen eingegebene Code ist ungültig.',
             ],
+            'must_enable' => 'Per utilizzare questa applicazione devi abilitare la 2FA.',
         ],
         'sanctum' => [
             'title' => 'API Tokens',
@@ -123,9 +122,13 @@ return [
                 'submit' => [
                     'label' => 'Erstellen',
                 ],
+                'message' => 'Il tuo token viene mostrato solo una volta. Se perdi il token, dovrai cancellarlo e crearne uno nuovo.',
             ],
             'update' => [
                 'notify' => 'Token erfolgreich aktualisiert!',
+            ],
+            'copied' => [
+                'label' => 'Ho copiato il mio token',
             ],
         ],
     ],
@@ -147,6 +150,9 @@ return [
         '2fa_recovery_code' => 'Wiederherstellungscode',
         'created' => 'Erstellt',
         'expired' => 'Abgelaufen',
+        'avatar' => 'Avatar',
+        'token_expiry' => 'Scadenza del Token',
+        'expires' => 'Scade',
     ],
     'or' => 'Oder',
     'cancel' => 'Abbrechen',

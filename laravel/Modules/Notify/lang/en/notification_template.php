@@ -1,15 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'icon' => 'heroicon-o-document-text',
         'label' => 'Notification Templates',
         'group' => 'System',
-        'sort' => 52,
+        'sort' => '52',
     ],
-    
     'fields' => [
         'name' => [
             'label' => 'Name',
@@ -36,7 +33,6 @@ return [
             'helper' => 'JSON data for preview',
         ],
     ],
-    
     'columns' => [
         'name' => 'Name',
         'subject' => 'Subject',
@@ -44,11 +40,9 @@ return [
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
     ],
-    
     'actions' => [
         'preview' => 'Preview',
     ],
-    
     'enums' => [
         'notification_type' => [
             'email' => 'Email',

@@ -9,7 +9,7 @@ return [
             'description' => 'Manage website menus',
         ],
         'label' => 'Menus',
-        'sort' => 57,
+        'sort' => '57',
         'icon' => 'heroicon-o-bars-3',
     ],
     'fields' => [
@@ -47,6 +47,30 @@ return [
                 'draft' => 'Draft',
             ],
         ],
+        'toggleColumns' => [
+            'label' => 'toggleColumns',
+        ],
+        'message' => [
+            'label' => 'message',
+        ],
+        'openFilters' => [
+            'label' => 'openFilters',
+        ],
+        'applyFilters' => [
+            'label' => 'applyFilters',
+        ],
+        'resetFilters' => [
+            'label' => 'resetFilters',
+        ],
+        'reorderRecords' => [
+            'label' => 'reorderRecords',
+        ],
+        'delete' => [
+            'label' => 'delete',
+        ],
+        'title' => [
+            'label' => 'title',
+        ],
     ],
     'actions' => [
         'create' => 'Create Menu',
@@ -66,5 +90,8 @@ return [
         'name_required' => 'The name is required',
         'slug_unique' => 'The slug must be unique',
         'type_in' => 'The type must be one of: main, footer, sidebar',
+    ],
+    'model' => [
+        'label' => 'menu.model',
     ],
 ];

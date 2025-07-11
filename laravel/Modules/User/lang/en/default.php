@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'password_confirm' => [
         'heading' => 'Confirm password',
@@ -56,11 +54,11 @@ return [
             'must_enable' => 'You must enable Two Factor Authentication to use this application.',
             'not_enabled' => [
                 'title' => 'You have not enabled two factor authentication.',
-                'description' => "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.",
+                'description' => 'When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.',
             ],
             'finish_enabling' => [
                 'title' => 'Finish enabling two factor authentication.',
-                'description' => "To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code.",
+                'description' => 'To finish enabling two factor authentication, scan the following QR code using your phone\'s authenticator application or enter the setup key and provide the generated OTP code.',
             ],
             'enabled' => [
                 'notify' => 'Two factor authentication enabled.',
@@ -120,4 +118,39 @@ return [
     ],
     'or' => 'Or',
     'cancel' => 'Cancel',
+    'login' => [
+        'username_or_email' => 'Username o Email',
+        'forgot_password_link' => 'Password dimenticata?',
+        'create_an_account' => 'crea un account',
+    ],
+    'registration' => [
+        'title' => 'Registrazione',
+        'heading' => 'Crea un nuovo account',
+        'submit' => [
+            'label' => 'Registrazione',
+        ],
+        'notification_unique' => 'Un account con questa email è già esistente. Prova ad accedere.',
+    ],
+    'reset_password' => [
+        'title' => 'Password dimenticata',
+        'heading' => 'Ripristina la tua password',
+        'submit' => [
+            'label' => 'Procedi',
+        ],
+        'notification_error' => 'Errore nel ripristino della password. Effettua di nuovo il ripristino.',
+        'notification_error_link_text' => 'Prova di nuovo',
+        'notification_success' => 'Controlla la tua casella di posta per ulteriori istruzioni!',
+    ],
+    'verification' => [
+        'title' => 'Verifica email',
+        'heading' => 'Necessaria verifica dell\'indirizzo Email',
+        'submit' => [
+            'label' => 'Log out',
+        ],
+        'notification_success' => 'Controlla la tua casella di posta per ulteriori istruzioni!',
+        'notification_resend' => 'È stata inviata una email di verifica.',
+        'before_proceeding' => 'Prima di procedere, controlla la tua casella di posta per verificare la tua email.',
+        'not_receive' => 'Se non hai ricevuto l\'email di verifica,',
+        'request_another' => 'clicca qui per richiederla di nuovo',
+    ],
 ];

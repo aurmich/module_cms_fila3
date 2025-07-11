@@ -1,0 +1,227 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Lang\Actions;
+
+use Illuminate\Support\Facades\File;
+use Spatie\QueueableAction\QueueableAction;
+
+class SyncTranslationsAction
+{
+    use QueueableAction;
+
+    /**
+     * Sincronizza le traduzioni da una lingua sorgente a lingue target.
+     *
+     * @param string $sourceLang Lingua sorgente (default: 'it')
+     * @param array<string> $targetLangs Lingue target (default: ['en', 'de'])
+     * @param string|null $specificModule Modulo specifico (opzionale)
+     * @return array<string, mixed> Risultato della sincronizzazione
+     */
+    public function execute(string $sourceLang = 'it', array $targetLangs = ['en', 'de'], ?string $specificModule = null): array
+    {
+        $modulesPath = base_path('Modules');
+        $modules = $specificModule ? [$specificModule] : $this->getModules($modulesPath);
+
+        $results = [
+            'total_modules' => 0,
+            'total_files' => 0,
+            'total_translations' => 0,
+            'modules' => [],
+        ];
+
+        foreach ($modules as $module) {
+            $moduleResults = $this->syncModule($module, $sourceLang, $targetLangs);
+            $results['modules'][$module] = $moduleResults;
+            $results['total_files'] += $moduleResults['files_processed'];
+            $results['total_translations'] += $moduleResults['translations_added'];
+            $results['total_modules']++;
+        }
+
+        return $results;
+    }
+
+    /**
+     * Sincronizza le traduzioni per un modulo specifico.
+     *
+     * @param string $module Nome del modulo
+     * @param string $sourceLang Lingua sorgente
+     * @param array<string> $targetLangs Lingue target
+     * @return array<string, mixed> Risultato per il modulo
+     */
+    private function syncModule(string $module, string $sourceLang, array $targetLangs): array
+    {
+        $moduleLangPath = base_path("Modules/{$module}/lang");
+        
+        if (!File::exists($moduleLangPath)) {
+            return [
+                'status' => 'skipped',
+                'reason' => 'No lang directory',
+                'files_processed' => 0,
+                'translations_added' => 0,
+            ];
+        }
+
+        $sourcePath = "{$moduleLangPath}/{$sourceLang}";
+        if (!File::exists($sourcePath)) {
+            return [
+                'status' => 'skipped',
+                'reason' => "Source language {$sourceLang} not found",
+                'files_processed' => 0,
+                'translations_added' => 0,
+            ];
+        }
+
+        $sourceFiles = File::glob("{$sourcePath}/*.php");
+        $filesProcessed = 0;
+        $translationsAdded = 0;
+
+        foreach ($sourceFiles as $sourceFile) {
+            $fileName = basename($sourceFile);
+            $sourceTranslations = $this->loadTranslations($sourceFile);
+
+            if (empty($sourceTranslations)) {
+                continue;
+            }
+
+            $filesProcessed++;
+
+            foreach ($targetLangs as $targetLang) {
+                $targetPath = "{$moduleLangPath}/{$targetLang}";
+                $targetFile = "{$targetPath}/{$fileName}";
+
+                // Create target directory if it doesn't exist
+                if (!File::exists($targetPath)) {
+                    File::makeDirectory($targetPath, 0755, true);
+                }
+
+                // Load existing target translations
+                $targetTranslations = File::exists($targetFile) ? $this->loadTranslations($targetFile) : [];
+
+                // Merge translations
+                $mergedTranslations = $this->mergeTranslations($sourceTranslations, $targetTranslations);
+
+                // Save merged translations
+                $this->saveTranslations($targetFile, $mergedTranslations);
+
+                $newKeys = count($mergedTranslations) - count($targetTranslations);
+                $translationsAdded += $newKeys;
+            }
+        }
+
+        return [
+            'status' => 'completed',
+            'files_processed' => $filesProcessed,
+            'translations_added' => $translationsAdded,
+        ];
+    }
+
+    /**
+     * Ottiene la lista dei moduli con cartella lang.
+     *
+     * @param string $modulesPath Percorso dei moduli
+     * @return array<string> Lista dei moduli
+     */
+    private function getModules(string $modulesPath): array
+    {
+        $modules = [];
+        $directories = File::directories($modulesPath);
+        
+        foreach ($directories as $directory) {
+            $moduleName = basename($directory);
+            if (File::exists("{$directory}/lang")) {
+                $modules[] = $moduleName;
+            }
+        }
+
+        return $modules;
+    }
+
+    /**
+     * Carica le traduzioni da un file.
+     *
+     * @param string $filePath Percorso del file
+     * @return array<string, mixed> Traduzioni caricate
+     */
+    private function loadTranslations(string $filePath): array
+    {
+        if (!File::exists($filePath)) {
+            return [];
+        }
+
+        try {
+            $translations = require $filePath;
+            return is_array($translations) ? $translations : [];
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Unisce le traduzioni sorgente con quelle target.
+     *
+     * @param array<string, mixed> $source Traduzioni sorgente
+     * @param array<string, mixed> $target Traduzioni target
+     * @return array<string, mixed> Traduzioni unite
+     */
+    private function mergeTranslations(array $source, array $target): array
+    {
+        $merged = $target;
+
+        foreach ($source as $key => $value) {
+            if (is_array($value)) {
+                $merged[$key] = $this->mergeTranslations($value, $target[$key] ?? []);
+            } else {
+                if (!isset($merged[$key])) {
+                    $merged[$key] = $value;
+                }
+            }
+        }
+
+        return $merged;
+    }
+
+    /**
+     * Salva le traduzioni in un file.
+     *
+     * @param string $filePath Percorso del file
+     * @param array<string, mixed> $translations Traduzioni da salvare
+     * @return void
+     */
+    private function saveTranslations(string $filePath, array $translations): void
+    {
+        $content = "<?php\n\nreturn [\n";
+        $content .= $this->arrayToPhp($translations, 1);
+        $content .= "];\n";
+
+        File::put($filePath, $content);
+    }
+
+    /**
+     * Converte un array in formato PHP.
+     *
+     * @param array<string, mixed> $array Array da convertire
+     * @param int $indent Livello di indentazione
+     * @return string Codice PHP
+     */
+    private function arrayToPhp(array $array, int $indent = 0): string
+    {
+        $content = '';
+        $indentStr = str_repeat('    ', $indent);
+
+        foreach ($array as $key => $value) {
+            $content .= $indentStr . "'" . addslashes($key) . "' => ";
+
+            if (is_array($value)) {
+                $content .= "[\n";
+                $content .= $this->arrayToPhp($value, $indent + 1);
+                $content .= $indentStr . "],\n";
+            } else {
+                $content .= "'" . addslashes((string) $value) . "',\n";
+            }
+        }
+
+        return $content;
+    }
+} 

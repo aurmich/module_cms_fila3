@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'doctor_availabilities' => [
         'schedule' => [
@@ -24,11 +22,9 @@ return [
             'empty' => 'No data available',
         ],
     ],
-    
     'find_doctor_and_appointment' => [
         'title' => 'Find doctor and book appointment',
         'description' => 'Select your area, choose a doctor and book an appointment',
-        
         'steps' => [
             'studio' => [
                 'title' => 'Select Studio',
@@ -43,22 +39,18 @@ return [
                 'description' => 'Check the details and confirm the booking',
             ],
         ],
-
         'studio_step' => [
             'title' => 'Select Studio',
             'description' => 'Choose the medical studio in your area',
         ],
-
         'date_step' => [
             'title' => 'Date and Time',
             'description' => 'Select the date and time for your appointment',
         ],
-
         'confirm_step' => [
             'title' => 'Confirm Appointment',
             'description' => 'Check your appointment details before confirming',
         ],
-
         'fields' => [
             'cap' => [
                 'label' => 'ZIP Code',
@@ -91,7 +83,6 @@ return [
                 'helper_text' => 'Additional information for the doctor (optional)',
             ],
         ],
-
         'actions' => [
             'next' => [
                 'label' => 'Next',
@@ -103,7 +94,6 @@ return [
                 'label' => 'Confirm Booking',
             ],
         ],
-
         'messages' => [
             'success' => 'Appointment booked successfully!',
             'error' => 'An error occurred while booking.',
@@ -111,29 +101,24 @@ return [
             'no_times' => 'No time slots available for the selected date.',
         ],
     ],
-    
     'studio_filter' => [
         'title' => 'Studio Filter',
         'description' => 'Select the studio to filter the displayed data',
-        
         'current_studio' => [
             'label' => 'Current Studio',
             'no_studio' => 'No studio selected',
             'primary_badge' => 'Primary',
         ],
-        
         'doctor_info' => [
             'label' => 'Doctor Information',
             'full_name' => 'Dr. :first_name :last_name',
             'studios_count' => '{0} No studio|{1} 1 studio|[2,*] :count studios',
         ],
-        
         'studio_selector' => [
             'label' => 'Change Studio',
             'placeholder' => 'Select a studio...',
             'help_text' => 'Changing studio will automatically update all filters',
         ],
-        
         'studio_details' => [
             'name' => 'Studio',
             'description' => 'Description',
@@ -155,12 +140,10 @@ return [
                 'description' => 'Studio information is not available.',
             ],
         ],
-        
         'status' => [
             'active' => 'Active',
             'inactive' => 'Inactive',
         ],
-        
         'actions' => [
             'switch_studio' => [
                 'label' => 'Quick Actions',
@@ -174,20 +157,17 @@ return [
                 'tooltip' => 'Edit studio opening hours',
             ],
         ],
-        
         'empty_states' => [
             'no_current_studio' => [
                 'title' => 'No Studio Selected',
                 'description' => 'Select a studio to view details and filter data.',
             ],
         ],
-        
         'messages' => [
             'studio_changed' => 'Studio changed successfully',
             'studio_change_error' => 'Error changing studio',
         ],
     ],
-
     'find_doctor_widget' => [
         'title' => 'Find Dentist and Book Appointment',
         'steps' => [
@@ -210,15 +190,12 @@ return [
             'error_booking_appointment' => 'An error occurred while booking the appointment',
         ],
     ],
-
     'doctor_appointments' => [
         'title' => 'Pending Appointments',
-        
         'empty' => [
             'title' => 'No pending appointments',
             'description' => 'You have no appointments to confirm at this time.',
         ],
-        
         'actions' => [
             'view_details' => [
                 'label' => 'View Details',
@@ -245,12 +222,10 @@ return [
                 ],
             ],
         ],
-        
         'messages' => [
             'appointment_confirmed' => 'Appointment confirmed successfully',
             'appointment_rejected' => 'Appointment rejected successfully',
         ],
-        
         'errors' => [
             'cannot_confirm' => 'Cannot confirm this appointment',
             'cannot_reject' => 'Cannot reject this appointment',
@@ -258,7 +233,6 @@ return [
             'reject_failed' => 'Error rejecting the appointment',
             'appointment_not_found' => 'Appointment not found',
         ],
-        
         'status' => [
             'pending' => 'Pending',
             'confirmed' => 'Confirmed',

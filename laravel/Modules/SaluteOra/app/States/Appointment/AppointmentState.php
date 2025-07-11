@@ -28,13 +28,9 @@ abstract class AppointmentState extends State implements StateContract
             ->default(Pending::class)
             // Pending transitions
             ->allowTransition(Pending::class, Confirmed::class, Transitions\PendingToConfirmed::class)
-            //->allowTransition(Pending::class, Cancelled::class, Transitions\PendingToCancelled::class)
             ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
 
             // Confirmed transitions
-            //->allowTransition(Confirmed::class, Scheduled::class, Transitions\ConfirmedToScheduled::class)
-            //->allowTransition(Confirmed::class, Cancelled::class, Transitions\ConfirmedToCancelled::class)
-            //->allowTransition(Confirmed::class, Rescheduled::class, Transitions\ConfirmedToRescheduled::class)
             ->allowTransition(Confirmed::class, Rejected::class, Transitions\ConfirmedToRejected::class)
 
             // Rejected transitions

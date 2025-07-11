@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'resource' => [
         'name' => 'SMS',
@@ -16,7 +14,7 @@ return [
         ],
         'label' => 'Send SMS',
         'icon' => 'heroicon-o-device-phone-mobile',
-        'sort' => 10,
+        'sort' => '10',
     ],
     'fields' => [
         'to' => [

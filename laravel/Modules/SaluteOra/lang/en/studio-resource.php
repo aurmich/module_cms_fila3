@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'title' => [
         'singular' => 'Medical Studio',
@@ -103,4 +101,4 @@ return [
         'fiscal_info' => 'Fiscal Information',
         'operations' => 'Operations',
     ],
-]; 
+];

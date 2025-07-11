@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'fields' => [
         'region' => 'Region',
@@ -51,4 +49,4 @@ return [
             'prevention' => 'Prevention visit',
         ],
     ],
-]; 
+];

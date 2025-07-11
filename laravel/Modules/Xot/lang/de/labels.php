@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'general' => [
         'all' => 'Alle',
@@ -13,6 +11,8 @@ return [
         'buttons' => [
             'save' => 'Speichern',
             'update' => 'Aktualisieren',
+            'add' => 'Aggiungi',
+            'edit' => 'Cambia',
         ],
         'hide' => 'Verstecken',
         'inactive' => 'Inactive',

@@ -5,19 +5,19 @@ return [
         'fields' => [
             'name' => [
                 'label' => 'Name',
-                'tooltip' => 'Enter the section name'
+                'tooltip' => 'Enter the section name',
             ],
             'slug' => [
                 'label' => 'Slug',
-                'tooltip' => 'Unique section identifier'
+                'tooltip' => 'Unique section identifier',
             ],
             'image' => [
                 'label' => 'Image',
-                'tooltip' => 'Select an image for the section'
+                'tooltip' => 'Select an image for the section',
             ],
             'content' => [
                 'label' => 'Content',
-                'tooltip' => 'Enter the section content'
+                'tooltip' => 'Enter the section content',
             ],
             'status' => [
                 'label' => 'Status',
@@ -25,17 +25,17 @@ return [
                 'options' => [
                     'draft' => 'Draft',
                     'published' => 'Published',
-                    'archived' => 'Archived'
-                ]
-            ]
-        ]
+                    'archived' => 'Archived',
+                ],
+            ],
+        ],
     ],
     'blocks' => [
         'quick_links' => [
             'fields' => [
                 'label' => [
                     'label' => 'Label',
-                    'tooltip' => 'Enter the quick links label'
+                    'tooltip' => 'Enter the quick links label',
                 ],
                 'links' => [
                     'label' => 'Links',
@@ -43,15 +43,15 @@ return [
                     'fields' => [
                         'label' => [
                             'label' => 'Label',
-                            'tooltip' => 'Enter the link label'
+                            'tooltip' => 'Enter the link label',
                         ],
                         'url' => [
                             'label' => 'URL',
-                            'tooltip' => 'Enter the link URL'
-                        ]
-                    ]
-                ]
-            ]
+                            'tooltip' => 'Enter the link URL',
+                        ],
+                    ],
+                ],
+            ],
         ],
         'footer' => [
             'links' => [
@@ -62,17 +62,17 @@ return [
                         'fields' => [
                             'label' => [
                                 'label' => 'Label',
-                                'tooltip' => 'Enter the link label'
+                                'tooltip' => 'Enter the link label',
                             ],
                             'url' => [
                                 'label' => 'URL',
-                                'tooltip' => 'Enter the link URL'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                                'tooltip' => 'Enter the link URL',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'filament' => [
         'blocks' => [
@@ -83,13 +83,13 @@ return [
                             'fields' => [
                                 'label' => [
                                     'label' => 'Label',
-                                    'tooltip' => 'Enter the link label'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ]
-]; 
+                                    'tooltip' => 'Enter the link label',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

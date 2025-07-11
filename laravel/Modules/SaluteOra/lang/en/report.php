@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'name' => 'Reports',
     'navigation' => [
@@ -9,7 +7,7 @@ return [
         'group' => 'Administration',
         'icon' => 'heroicon-o-chart-bar',
         'color' => 'teal',
-        'sort' => 20,
+        'sort' => '20',
         'tooltip' => 'View reports and statistics of clinical activities',
     ],
     'model' => [
@@ -17,4 +15,4 @@ return [
         'plural' => 'Reports',
         'description' => 'System reports and statistics',
     ],
-]; 
+];

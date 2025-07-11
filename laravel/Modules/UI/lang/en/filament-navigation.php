@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'attributes' => [
         'external-link' => 'External link',
@@ -13,12 +11,10 @@ return [
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
     ],
-
     'select-options' => [
         'same-tab' => 'Same tab',
         'new-tab' => 'New tab',
     ],
-
     'items' => [
         'empty' => 'No items.',
         'add-item' => 'Add item',
@@ -28,8 +24,8 @@ return [
         'indent' => 'Indent',
         'dedent' => 'Dedent',
         'remove' => 'Remove',
+        'sorted' => 'Ordinato',
     ],
-
     'items-modal' => [
         'title' => 'Item',
         'label' => 'Label',

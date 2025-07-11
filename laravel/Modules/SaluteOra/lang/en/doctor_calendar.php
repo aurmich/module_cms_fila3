@@ -1,21 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'title' => [
         'label' => 'Doctor Calendar',
         'description' => 'Doctor appointments management',
         'help' => 'View and manage doctor appointments calendar',
     ],
-
     'navigation' => [
         'label' => 'Calendar',
         'group' => 'Medical Management',
         'icon' => 'heroicon-o-calendar-days',
-        'sort' => 20,
+        'sort' => '20',
     ],
-
     'actions' => [
         'create' => [
             'label' => 'New Appointment',
@@ -77,19 +73,20 @@ return [
             'error' => 'Error changing practice',
         ],
     ],
-
     'fields' => [
         'starts_at' => [
             'label' => 'Start',
             'placeholder' => 'Select start date and time',
             'help' => 'Appointment start date and time',
             'helper_text' => '',
+            'description' => 'starts_at',
         ],
         'ends_at' => [
             'label' => 'End',
             'placeholder' => 'Select end date and time',
             'help' => 'Appointment end date and time',
             'helper_text' => '',
+            'description' => 'ends_at',
         ],
         'name' => [
             'label' => 'Title',
@@ -102,6 +99,7 @@ return [
             'placeholder' => 'Enter additional notes',
             'help' => 'Additional notes and observations for the appointment',
             'helper_text' => '',
+            'description' => 'notes',
         ],
         'state' => [
             'label' => 'Status',
@@ -117,6 +115,7 @@ return [
                 'no_show' => 'No Show',
                 'rescheduled' => 'Rescheduled',
             ],
+            'description' => 'state',
         ],
         'priority' => [
             'label' => 'Priority',
@@ -160,30 +159,35 @@ return [
             'placeholder' => 'Patient first name',
             'help' => 'Patient given name',
             'helper_text' => '',
+            'description' => 'first_name',
         ],
         'last_name' => [
             'label' => 'Last Name',
             'placeholder' => 'Patient last name',
             'help' => 'Patient family name',
             'helper_text' => '',
+            'description' => 'last_name',
         ],
         'phone' => [
             'label' => 'Phone',
             'placeholder' => '+1 (555) 123-4567',
             'help' => 'Patient phone number',
             'helper_text' => '',
+            'description' => 'phone',
         ],
         'email' => [
             'label' => 'Email',
             'placeholder' => 'patient@example.com',
             'help' => 'Patient email address',
             'helper_text' => '',
+            'description' => 'email',
         ],
         'fiscal_code' => [
             'label' => 'Fiscal Code',
             'placeholder' => 'ABCDEF00A00A000A',
             'help' => 'Patient tax code',
             'helper_text' => '',
+            'description' => 'fiscal_code',
         ],
         'birth_date' => [
             'label' => 'Date of Birth',
@@ -209,8 +213,19 @@ return [
             'help' => 'Medical practice where the appointment takes place',
             'helper_text' => '',
         ],
+        'doctor_id' => [
+            'label' => 'Medico',
+            'placeholder' => 'Seleziona il medico',
+            'help' => 'Medico responsabile dell\'appuntamento',
+            'helper_text' => '',
+        ],
+        'author_id' => [
+            'label' => 'Creato da',
+            'placeholder' => 'Utente che ha creato l\'appuntamento',
+            'help' => 'Operatore che ha registrato l\'appuntamento',
+            'helper_text' => '',
+        ],
     ],
-
     'patient' => [
         'first_name' => [
             'label' => 'First Name',
@@ -314,8 +329,21 @@ return [
             'help' => 'Any additional information about the patient',
             'helper_text' => '',
         ],
+        'full_name' => [
+            'label' => 'Nome Completo',
+            'placeholder' => 'Nome e cognome del paziente',
+            'help' => 'Nome completo del paziente',
+            'helper_text' => '',
+        ],
+        'contact_info' => [
+            'label' => 'Contatti',
+            'description' => 'Informazioni di contatto del paziente',
+        ],
+        'medical_info' => [
+            'label' => 'Info Mediche',
+            'description' => 'Informazioni mediche del paziente',
+        ],
     ],
-
     'validation' => [
         'required' => 'The :attribute field is required',
         'date' => 'The :attribute must be a valid date',
@@ -330,8 +358,12 @@ return [
         ],
         'unique' => 'The :attribute has already been taken',
         'exists' => 'The selected :attribute is invalid',
+        'phone' => 'Il campo :attribute deve essere un numero di telefono valido',
+        'fiscal_code' => 'Il codice fiscale deve essere valido',
+        'time_slot_available' => 'L\'orario selezionato non è disponibile',
+        'minimum_duration' => 'La durata minima dell\'appuntamento è di :min minuti',
+        'maximum_duration' => 'La durata massima dell\'appuntamento è di :max minuti',
     ],
-
     'attributes' => [
         'starts_at' => 'start time',
         'ends_at' => 'end time',
@@ -344,5 +376,105 @@ return [
         'status' => 'status',
         'type' => 'type',
         'notes' => 'notes',
+    ],
+    'calendar' => [
+        'views' => [
+            'month' => 'Vista Mensile',
+            'week' => 'Vista Settimanale',
+            'day' => 'Vista Giornaliera',
+            'list' => 'Vista Elenco',
+        ],
+        'navigation' => [
+            'today' => 'Oggi',
+            'previous' => 'Precedente',
+            'next' => 'Successivo',
+        ],
+        'time_slots' => [
+            'morning' => 'Mattina (08:00-12:00)',
+            'afternoon' => 'Pomeriggio (14:00-18:00)',
+            'evening' => 'Sera (18:00-20:00)',
+        ],
+    ],
+    'filters' => [
+        'status' => [
+            'label' => 'Per Stato',
+            'placeholder' => 'Filtra per stato',
+            'help' => 'Filtra gli appuntamenti per stato',
+            'helper_text' => '',
+        ],
+        'date_range' => [
+            'label' => 'Periodo',
+            'placeholder' => 'Seleziona periodo',
+            'help' => 'Filtra per intervallo di date',
+            'helper_text' => '',
+        ],
+        'doctor' => [
+            'label' => 'Per Medico',
+            'placeholder' => 'Seleziona medico',
+            'help' => 'Filtra per medico specifico',
+            'helper_text' => '',
+        ],
+        'studio' => [
+            'label' => 'Per Studio',
+            'placeholder' => 'Seleziona studio',
+            'help' => 'Filtra per studio specifico',
+            'helper_text' => '',
+        ],
+        'type' => [
+            'label' => 'Per Tipo',
+            'placeholder' => 'Seleziona tipo visita',
+            'help' => 'Filtra per tipologia di appuntamento',
+            'helper_text' => '',
+        ],
+    ],
+    'messages' => [
+        'appointment_created' => 'Appuntamento creato con successo',
+        'appointment_updated' => 'Appuntamento aggiornato con successo',
+        'appointment_deleted' => 'Appuntamento eliminato con successo',
+        'appointment_confirmed' => 'Appuntamento confermato',
+        'appointment_cancelled' => 'Appuntamento annullato',
+        'appointment_completed' => 'Appuntamento completato',
+        'patient_notified' => 'Paziente notificato via email/SMS',
+        'time_slot_unavailable' => 'Orario non disponibile',
+        'overlapping_appointment' => 'Conflitto con altro appuntamento',
+        'past_date_warning' => 'Attenzione: stai programmando un appuntamento nel passato',
+        'outside_hours_warning' => 'Attenzione: appuntamento fuori dagli orari di lavoro',
+    ],
+    'notifications' => [
+        'reminder_sent' => 'Promemoria inviato al paziente',
+        'confirmation_sent' => 'Conferma inviata al paziente',
+        'cancellation_sent' => 'Notifica di annullamento inviata',
+        'schedule_changed' => 'Modifica programmazione notificata',
+    ],
+    'sections' => [
+        'appointment_details' => [
+            'label' => 'Dettagli Appuntamento',
+            'description' => 'Informazioni principali dell\'appuntamento',
+        ],
+        'patient_info' => [
+            'label' => 'Informazioni Paziente',
+            'description' => 'Dati anagrafici e di contatto del paziente',
+        ],
+        'medical_notes' => [
+            'label' => 'Note Mediche',
+            'description' => 'Osservazioni e note cliniche',
+        ],
+        'scheduling' => [
+            'label' => 'Programmazione',
+            'description' => 'Gestione di data, ora e durata',
+        ],
+    ],
+    'empty_state' => [
+        'heading' => 'Nessun appuntamento programmato',
+        'description' => 'Non ci sono appuntamenti per il periodo selezionato',
+        'action' => 'Programma il primo appuntamento',
+    ],
+    'statistics' => [
+        'total_appointments' => 'Appuntamenti Totali',
+        'confirmed_appointments' => 'Appuntamenti Confermati',
+        'cancelled_appointments' => 'Appuntamenti Annullati',
+        'completed_appointments' => 'Appuntamenti Completati',
+        'no_show_rate' => 'Tasso di Assenza',
+        'average_duration' => 'Durata Media',
     ],
 ];

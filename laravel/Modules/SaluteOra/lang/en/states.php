@@ -1,9 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 return [
-    // User States - Stati Utente
     'user' => [
         'pending' => [
             'label' => 'Pending',
@@ -36,8 +33,6 @@ return [
             'tooltip' => 'The user has requested integration',
         ],
     ],
-
-    // Appointment States - Stati degli Appuntamenti
     'appointment' => [
         'pending' => [
             'label' => 'Pending',
@@ -45,6 +40,7 @@ return [
             'icon' => 'heroicon-o-clock',
             'modal_heading' => 'Pending Appointment',
             'modal_description' => 'This appointment is awaiting confirmation.',
+            'bg_color' => '#f59e0b',
         ],
         'confirmed' => [
             'label' => 'Confirmed',
@@ -52,6 +48,7 @@ return [
             'icon' => 'heroicon-o-check-circle',
             'modal_heading' => 'Confirm Appointment',
             'modal_description' => 'Are you sure you want to confirm this appointment?',
+            'bg_color' => '#10b981',
         ],
         'scheduled' => [
             'label' => 'Scheduled',
@@ -59,6 +56,7 @@ return [
             'icon' => 'heroicon-o-calendar',
             'modal_heading' => 'Scheduled Appointment',
             'modal_description' => 'This appointment has been scheduled in the calendar.',
+            'bg_color' => '#3b82f6',
         ],
         'in_progress' => [
             'label' => 'In Progress',
@@ -66,6 +64,7 @@ return [
             'icon' => 'heroicon-o-clock',
             'modal_heading' => 'Visit in Progress',
             'modal_description' => 'The medical visit is currently in progress.',
+            'bg_color' => '#f59e0b',
         ],
         'completed' => [
             'label' => 'Completed',
@@ -73,6 +72,7 @@ return [
             'icon' => 'heroicon-o-check-badge',
             'modal_heading' => 'Visit Completed',
             'modal_description' => 'The visit has been completed successfully.',
+            'bg_color' => '#10b981',
         ],
         'cancelled' => [
             'label' => 'Cancelled',
@@ -80,13 +80,15 @@ return [
             'icon' => 'heroicon-o-x-circle',
             'modal_heading' => 'Cancel Appointment',
             'modal_description' => 'Are you sure you want to cancel this appointment?',
+            'bg_color' => '#ef4444',
         ],
         'rejected' => [
             'label' => 'Rejected',
-            'color' => 'danger', 
+            'color' => 'danger',
             'icon' => 'heroicon-o-x-mark',
             'modal_heading' => 'Reject Appointment',
             'modal_description' => 'Are you sure you want to reject this appointment?',
+            'bg_color' => '#ef4444',
         ],
         'no_show' => [
             'label' => 'No Show',
@@ -94,6 +96,7 @@ return [
             'icon' => 'heroicon-o-exclamation-circle',
             'modal_heading' => 'Patient Absent',
             'modal_description' => 'The patient did not show up for the appointment.',
+            'bg_color' => '#ef4444',
         ],
         'rescheduled' => [
             'label' => 'Rescheduled',
@@ -101,6 +104,7 @@ return [
             'icon' => 'heroicon-o-arrow-path',
             'modal_heading' => 'Reschedule Appointment',
             'modal_description' => 'This appointment has been rescheduled for a new date.',
+            'bg_color' => '#3b82f6',
         ],
     ],
-]; 
+];

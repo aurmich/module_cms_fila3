@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'backend' => [
         'none' => 'There is no recent history.',

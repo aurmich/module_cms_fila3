@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'attributes' => [
         'external-link' => 'Externer Link',
@@ -13,12 +11,10 @@ return [
         'created_at' => 'Erstellt',
         'updated_at' => 'Geändert',
     ],
-
     'select-options' => [
         'same-tab' => 'Gleicher Tab',
         'new-tab' => 'Neuer Tab',
     ],
-
     'items' => [
         'empty' => 'Keine Einträge.',
         'add-item' => 'Einträge hinzufügen',
@@ -28,8 +24,8 @@ return [
         'indent' => 'Einziehen',
         'dedent' => 'Ausziehen',
         'remove' => 'Entfernen',
+        'sorted' => 'Ordinato',
     ],
-
     'items-modal' => [
         'title' => 'Eintrag',
         'label' => 'Name',

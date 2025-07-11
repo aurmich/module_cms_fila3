@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'actions' => [
         'export_xls' => [
@@ -21,4 +19,4 @@ return [
         'no_data' => 'No data to export',
         'processing' => 'Processing...',
     ],
-]; 
+];

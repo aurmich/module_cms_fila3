@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'label' => 'Availability Management',
         'group' => 'Schedule',
         'icon' => 'heroicon-o-calendar',
-        'sort' => 40,
+        'sort' => '40',
         'tooltip' => 'Manage medical practice availability',
     ],
     'model' => [

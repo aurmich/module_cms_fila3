@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'less_than_6_months' => 'Less than 6 months ago',
     '6_months_to_1_year' => '6 months to 1 year ago',
@@ -10,7 +8,6 @@ return [
     'more_than_5_years' => 'More than 5 years ago',
     'never' => 'Never had a dental visit',
     'dont_remember' => 'I don\'t remember',
-    
     'descriptions' => [
         'less_than_6_months' => 'Recent dental care',
         '6_months_to_1_year' => 'Regular maintenance period',
@@ -20,13 +17,11 @@ return [
         'never' => 'First-time dental patient',
         'dont_remember' => 'Uncertain about timing',
     ],
-    
     'labels' => [
         'question' => 'When was your last dental visit?',
         'help_text' => 'Select the time period that best matches your last professional dental appointment',
         'note' => 'This information helps us understand your dental care history',
     ],
-    
     'recommendations' => [
         'less_than_6_months' => 'Excellent! You\'re maintaining regular dental care.',
         '6_months_to_1_year' => 'Good timing for your next checkup.',
@@ -36,4 +31,40 @@ return [
         'never' => 'Welcome! We\'ll provide a comprehensive first examination.',
         'dont_remember' => 'We\'ll help assess your current dental health needs.',
     ],
-]; 
+    'within_1_year' => [
+        'label' => 'Entro 1 anno',
+        'color' => 'success',
+        'icon' => 'fas fa-check',
+        'description' => 'Entro 1 anno',
+    ],
+    '2_years_ago' => [
+        'label' => '2 anni fa',
+        'color' => 'warning',
+        'icon' => 'fas fa-check',
+        'description' => '2 anni fa',
+    ],
+    '3_years_ago' => [
+        'label' => '3 anni fa',
+        'color' => 'warning',
+        'icon' => 'fas fa-check',
+        'description' => '3 anni fa',
+    ],
+    '4_years_ago' => [
+        'label' => '4 anni fa',
+        'color' => 'warning',
+        'icon' => 'fas fa-check',
+        'description' => '4 anni fa',
+    ],
+    '5_years_or_more' => [
+        'label' => '5 anni fa o più',
+        'color' => 'warning',
+        'icon' => 'fas fa-check',
+        'description' => '5 anni fa o più',
+    ],
+    'first_visit' => [
+        'label' => 'Prima visita',
+        'color' => 'warning',
+        'icon' => 'fas fa-check',
+        'description' => 'Prima visita',
+    ],
+];

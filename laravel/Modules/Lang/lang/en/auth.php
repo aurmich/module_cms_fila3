@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +27,7 @@ return [
         'submit' => 'Sign in',
         'or' => 'or',
         'create_account' => 'create a new account',
-        'link' => 'Login',
+        'link' => 'Sign in',
     ],
 
     'register' => [
@@ -40,20 +42,20 @@ return [
     ],
 
     'verify' => [
-        'title' => 'Verify Your Email Address',
-        'success' => 'A fresh verification link has been sent to your email address.',
+        'title' => 'Verify your email address',
+        'success' => 'A new verification link has been sent to your email address.',
         'notice' => 'Before proceeding, please check your email for a verification link. If you did not receive the email,',
         'another_request' => 'click here to request another',
     ],
 
     'forgot_password' => [
-        'title' => 'Forgot Password',
+        'title' => 'Forgot password',
         'email' => 'Email',
-        'submit' => 'Send Password Reset Link',
+        'submit' => 'Send reset link',
     ],
 
     'reset_password' => [
-        'title' => 'Reset Password',
+        'title' => 'Reset password',
         'email' => 'Email',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
@@ -61,7 +63,7 @@ return [
     ],
 
     'confirm_password' => [
-        'title' => 'Confirm Password',
+        'title' => 'Confirm password',
         'password' => 'Password',
         'submit' => 'Confirm',
     ],
@@ -69,15 +71,15 @@ return [
     'logout' => [
         'submit' => 'Logout',
         'title' => 'Logout',
-        'success_title' => 'Logged Out Successfully',
+        'success_title' => 'Logout successful',
         'success_message' => 'You have been successfully logged out.',
-        'error_title' => 'Logout Error',
+        'error_title' => 'Error during logout',
         'error_message' => 'An error occurred during logout. Please try again.',
-        'confirm_message' => 'Are you sure you want to log out?',
-        'confirm_button' => 'Confirm Logout',
+        'confirm_message' => 'Are you sure you want to logout?',
+        'confirm_button' => 'Confirm logout',
         'cancel_button' => 'Cancel',
-        'back_to_home' => 'Back to Home',
-        'try_again' => 'Try Again',
+        'back_to_home' => 'Back to home',
+        'try_again' => 'Try again',
         'processing' => 'Logging out...',
     ],
     
@@ -85,6 +87,6 @@ return [
         'manage_account' => 'Manage Account',
         'profile' => 'Profile',
         'settings' => 'Settings',
-        'logout' => 'Log Out',
+        'logout' => 'Logout',
     ],
 ];

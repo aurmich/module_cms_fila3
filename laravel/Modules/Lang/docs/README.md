@@ -1,67 +1,85 @@
 # Modulo Lang - Documentazione
 
-## Descrizione
-Il modulo Lang gestisce le traduzioni e la localizzazione dell'applicazione SaluteOra, fornendo un sistema centralizzato per la gestione dei file di traduzione.
+## Panoramica
 
-## Documentazione
+Il modulo Lang gestisce tutte le traduzioni dell'applicazione, fornendo un sistema centralizzato per la localizzazione e un'interfaccia Filament per la gestione dei file di traduzione.
 
-### Standard e Best Practices
-- [Translation Standards](translation-standards.md) - Standard per le traduzioni nel progetto
-- [Translation Files Update 2025](translation_files_update_2025.md) - ⭐ **NUOVO** - Aggiornamento file traduzioni
-- [Docs Naming Convention Fix](docs-naming-convention-fix.md) - ⭐ **NUOVO** - Correzione convenzione naming cartelle docs
+## Documentazione Principale
 
-### Collegamenti Esterni
-- [Laravel Translatable (dimsav)](https://github.com/dimsav/laravel-translatable)
-- [Laravel Translatable (Astrotomic)](https://github.com/Astrotomic/laravel-translatable)
-- [Laravel Translatable (Spatie)](https://github.com/spatie/laravel-translatable)
-- [10 Best Laravel Packages for Multi-language Translations](https://blog.quickadminpanel.com/10-best-laravel-packages-for-multi-language-translations/)
+### Sistema di Traduzioni
+- [Sistema di Traduzione](./translation-system.md) - Architettura e funzionamento del sistema
+- [Standard di Traduzione](./translation-standards.md) - Convenzioni e best practices
+- [Best Practices](./translation-keys-best-practices.md) - Linee guida per le chiavi di traduzione
 
-## Modifiche Recenti
+### Gestione File
+- [Gestione File di Traduzione](./translation-file-management.md) - Architettura del sistema di gestione
+- [Editor File di Traduzione](./translation-file-editor.md) - Guida all'utilizzo dell'interfaccia
 
-### Gennaio 2025 - Correzione Convenzione Naming Docs ⭐ **NUOVO**
+### Implementazione
+- [Implementazione Laravel Localization](./laravel-localization-implementation.md) - Dettagli tecnici
+- [Utilizzo Laravel Localization](./laravel-localization-usage.md) - Esempi pratici
+- [Integrazione Completa](./laravel-localization-complete.md) - Integrazione completa
 
-**Stato**: **COMPLETATO** - Correzione convenzione naming cartelle docs
+### Filament Integration
+- [Integrazione Filament](./filament-translations.md) - Integrazione con Filament
+- [Integrazione Folio](./laravel-localization-folio.md) - Integrazione con Laravel Folio
+- [Integrazione Livewire Volt](./laravel-localization-livewire-volt.md) - Integrazione con Livewire Volt
 
-**Modifiche principali**:
-- ✅ Rimozione caratteri maiuscoli da tutti i file (eccetto README.md)
-- ✅ Rinominazione sottocartelle con caratteri maiuscoli
-- ✅ Standardizzazione convenzione naming in tutti i moduli
-- ✅ Verifica completa di tutte le cartelle docs
+### Funzionalità Avanzate
+- [Cambio Lingua Avanzato](./advanced-language-switching.md) - Gestione avanzata delle lingue
+- [Traduzioni Automatiche](./automatic-translations.md) - Sistema di traduzioni automatiche
+- [Localizzazione Date e Valute](./localizing-dates-and-currencies.md) - Gestione date e valute
 
-**Moduli interessati**: Xot, Geo, UI, User, SaluteOra, Notify, Lang
+### Validazione e Messaggi
+- [Traduzione Messaggi di Validazione](./translating-validation-messages.md) - Gestione messaggi di validazione
+- [Forme Plurali e Singolari](./translating-plural-singular-forms.md) - Gestione plurali
+- [Messaggi di Validazione](./validation-messages.md) - Standard per i messaggi
 
-**Impatto**: Consistenza e standardizzazione convenzione naming
+### Struttura e Organizzazione
+- [Struttura Traduzioni](./struttura-traduzioni.md) - Organizzazione dei file
+- [Sintassi File Traduzione](./translation-file-syntax.md) - Sintassi corretta
+- [Storage Traduzioni](./translations-storage.md) - Archiviazione traduzioni
 
-Vedi [docs-naming-convention-fix.md](docs-naming-convention-fix.md) per dettagli completi.
+### Troubleshooting
+- [Errori Comuni](./errori-comuni-traduzione.md) - Risoluzione problemi comuni
+- [Permessi Filesystem](./permessi-errori-filesystem.md) - Gestione permessi
+- [Permessi Lang](./permessi-lang.md) - Permessi specifici del modulo
 
-### Gennaio 2025 - Aggiornamento File di Traduzione ⭐ **NUOVO**
+### Strumenti e Comandi
+- [Comandi Autoregistrazione](./autoregistration-commands.md) - Comandi automatici
+- [Gestione Pacchetti](./translation-management-packages.md) - Pacchetti di terze parti
+- [FAQ](./translations-faq.md) - Domande frequenti
 
-**Stato**: **COMPLETATO** - Aggiornamento e sistemazione file di traduzione
+## Quick Start
 
-**File modificati**:
-- ✅ `Modules/Notify/lang/it/test_smtp.php` - Sistema test SMTP
-- ✅ `Modules/Notify/lang/it/send_email.php` - Invio email
-- ✅ `Modules/Lang/lang/it/lang_service.php` - Servizio traduzioni base
+### 1. Accesso Editor Traduzioni
+```
+Menu: Sistema → File di Traduzione
+URL: /admin/translation-files
+```
 
-**Modifiche principali**:
-- ✅ Conversione da `array()` a sintassi `[]` moderna
-- ✅ Aggiunta `declare(strict_types=1);` per tipizzazione rigorosa
-- ✅ Risoluzione conflitti di merge non risolti
-- ✅ Rimozione duplicazioni e campi `helper_text` vuoti
-- ✅ Miglioramento struttura e coerenza traduzioni
-- ✅ Validazione sintassi PHP con `php -l`
+### 2. Modifica Traduzioni
+1. Seleziona il file da modificare
+2. Clicca su "Modifica"
+3. Modifica le traduzioni nell'editor Key-Value
+4. Salva le modifiche
 
-**Impatto**: Miglioramento qualità codice e conformità best practice Laraxot
+### 3. Best Practices
+- Usa struttura gerarchica per le chiavi
+- Mantieni coerenza tra moduli
+- Valida sempre la sintassi PHP
+- Crea backup prima di modifiche critiche
 
-Vedi [translation_files_update_2025.md](translation_files_update_2025.md) per dettagli completi.
+## Collegamenti Utili
 
-## Collegamenti tra versioni di readme.md
-* [readme.md](../../../Gdpr/docs/readme.md)
-* [readme.md](../../../UI/docs/readme.md)
-* [readme.md](../../../Lang/docs/readme.md)
-* [readme.md](../../../Activity/docs/readme.md)
-* [readme.md](../../../Cms/docs/readme.md)
+- [Laravel Localization](https://laravel.com/docs/localization)
+- [Filament i18n](https://filamentphp.com/docs/internationalization)
+- [Spatie Laravel Translatable](https://github.com/spatie/laravel-translatable)
 
-## Extra risorse da _docs
+## Note per lo Sviluppo
 
-(Nessun nuovo link da aggiungere: i link di _docs/readme.txt sono già presenti in questo file)
+Il modulo Lang è progettato per essere:
+- **Modulare**: Ogni modulo gestisce le proprie traduzioni
+- **Estendibile**: Facile aggiungere nuove funzionalità
+- **Manutenibile**: Struttura chiara e documentata
+- **Performante**: Caricamento ottimizzato delle traduzioni

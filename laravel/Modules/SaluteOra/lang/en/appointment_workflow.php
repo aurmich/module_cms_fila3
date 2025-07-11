@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'navigation' => [
         'label' => 'Appointment Workflow',
         'group' => 'Schedule',
         'icon' => 'heroicon-o-document-chart-bar',
-        'sort' => 60,
+        'sort' => '60',
         'tooltip' => 'Management of booking and appointment workflows',
     ],
     'model' => [
