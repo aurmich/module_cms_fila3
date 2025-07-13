@@ -1,14 +1,15 @@
 @php
+ /*
     use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     use Modules\SaluteOra\Enums\UserTypeEnum;
-
+    
     // Inizializzazione delle variabili con valori di default
     $user = $user ?? auth()->user();
     $locale = LaravelLocalization::getCurrentLocale();
     $isLoggedIn = auth()->check(); 
+    */
     $appointments=$user->appointments;
 @endphp
-
 <div class="p-5">
     <div>
         <!-- Back button -->
@@ -36,7 +37,8 @@
         <!-- Sezione principale -->
         <div class="w-full flex flex-col-reverse lg:flex-row justify-center">
             <!-- Colonna sinistra: Dati -->
-            <!-- <div class="w-full lg:w-2/4 flex justify-center">
+            {{--  
+            <div class="w-full lg:w-2/4 flex justify-center">
                 <div class="w-full lg:w-5/6 bg-[#E6EBF7] shadow-2xl rounded-[15px] mt-5 lg:mt-0">
                     <div class="flex flex-row items-center justify-between bg-[#E6EBF7] m-5 px-2">
                         <h2>I miei dati</h2>
@@ -67,7 +69,8 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+             --}}
         @each('pub_theme::appointment.item', $appointments, 'appointment','pub_theme::appointment.vodo')
            
         </div>

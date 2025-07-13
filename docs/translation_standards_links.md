@@ -12,34 +12,72 @@ Stiamo standardizzando i file di traduzione nel modulo Notify che presentano pro
 - [Convenzioni di Traduzione nel Modulo Notify](../Modules/Notify/docs/TRANSLATION_CONVENTIONS.md)
 - [Guida alla Correzione dei File di Traduzione](../Modules/Notify/docs/TRANSLATION_FILE_CORRECTION_GUIDE.md)
 
-## Documentazione nel Modulo Lang
+## Documentazione Root
 
-- [Regole Generali per le Traduzioni](../Modules/Lang/docs/TRANSLATION_KEYS_RULES.md)
-- [Best Practices per le Traduzioni](../Modules/Lang/docs/TRANSLATION_KEYS_BEST_PRACTICES.md)
-- [Standardizzazione Traduzioni Modulo Notify](../Modules/Lang/docs/TRANSLATION_NOTIFY_CONVERSION.md)
+### Standard Generali
+- [Standard per Helper Text](translation-helper-text-standards.md) - **CRITICO**: Regola per evitare duplicazione di helper_text
+- [Standard per Modal Heading e Description](translation-modal-heading-standards.md) - **CRITICO**: Stringhe dirette per modal_heading e modal_description
+- [Regole di Traduzione SaluteOra](translation-rules.md)
+- [Best Practice per Traduzioni](translation-best-practices.md)
 
-## Riepilogo dei Problemi
+### Guide Specifiche
+- [Guida alla Struttura Espansa](translation-expanded-structure-guide.md)
+- [Convenzioni di Naming](translation-naming-conventions.md)
+- [Validazione Traduzioni](translation-validation-guide.md)
 
-1. **Naming File Non Standard**
-   - Alcuni file utilizzano convenzioni di naming non conformi
-   - Esempio: `send_whats_app.php` invece di `send_whatsapp.php`
+## Problemi Critici Identificati
 
-2. **Struttura File Incompleta**
-   - Mancanza di `declare(strict_types=1);`
-   - Sezione `resource` assente
-   - Struttura gerarchica incompleta
+### 1. Helper Text Duplicato ⚠️ **CRITICO**
+**Problema**: `helper_text` uguale alla chiave dell'array
+**Soluzione**: Impostare `helper_text = ''` quando uguale alla chiave
+**Documentazione**: [Standard Helper Text](translation-helper-text-standards.md)
 
-## Correzioni Implementate
+### 2. Modal Heading/Description come Array ⚠️ **CRITICO**
+**Problema**: `modal_heading` e `modal_description` come array con `label`
+**Soluzione**: Usare stringhe dirette per coerenza con Filament
+**Documentazione**: [Standard Modal Heading](translation-modal-heading-standards.md)
 
-- ✅ Creazione di documentazione dettagliata sugli standard
-- ✅ Correzione del file `send_whats_app.php` → `send_whatsapp.php`
-- ✅ Correzione della struttura di `send_netfun_sms.php`
-- ✅ Identificazione di tutti i file non conformi da correggere
+### 3. Struttura Non Espansa
+**Problema**: Campi senza `label`, `placeholder`, `help`
+**Soluzione**: Implementare struttura espansa completa
+**Documentazione**: [Guida Struttura Espansa](translation-expanded-structure-guide.md)
 
-## Prossimi Passi
+## Checklist di Conformità
 
-1. Completare la correzione dei file rimanenti
-2. Verificare la coerenza tra le versioni in italiano e inglese
-3. Testare tutte le funzionalità che utilizzano questi file di traduzione
+### Struttura Base
+- [ ] `declare(strict_types=1);` presente
+- [ ] Sintassi breve degli array `[]` (non `array()`)
+- [ ] Struttura espansa per tutti i campi
+- [ ] `helper_text` gestito correttamente (vuoto se uguale alla chiave)
+- [ ] `modal_heading` e `modal_description` come stringhe dirette
 
-**Nota**: Questo lavoro è in corso e verrà continuato nei prossimi giorni per garantire la conformità di tutti i file di traduzione agli standard di SaluteOra.
+### Contenuto
+- [ ] Nessuna stringa hardcoded
+- [ ] Traduzioni naturali e contestuali
+- [ ] Coerenza terminologica tra lingue
+- [ ] Completezza delle traduzioni
+
+### Organizzazione
+- [ ] File posizionati correttamente in `Modules/*/lang/*/`
+- [ ] Naming dei file in minuscolo
+- [ ] Struttura delle cartelle coerente
+
+## Collegamenti Rapidi per Correzione
+
+### Script di Sincronizzazione
+- [Script Sincronizzazione Moduli](../../bashscripts/translations/sync_module_translations.php)
+- [Script Sincronizzazione Temi](../../bashscripts/translations/sync_theme_translations.php)
+
+### Documentazione Moduli
+- [Modulo User](../Modules/User/docs/translations.md)
+- [Modulo UI](../Modules/UI/docs/translations.md)
+- [Modulo SaluteOra](../Modules/SaluteOra/docs/translations.md)
+
+## Note Importanti
+
+1. **Priorità**: Risolvere prima i problemi critici (helper_text, modal_heading)
+2. **Coerenza**: Mantenere uniformità tra tutti i moduli
+3. **Documentazione**: Aggiornare sempre la documentazione dopo le correzioni
+4. **Testing**: Verificare che le traduzioni funzionino correttamente
+
+*Ultimo aggiornamento: 2025-01-06*

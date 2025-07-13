@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication
-    |--------------------------------------------------------------------------
-    */
     'login' => [
         'title' => 'Sign in to your account',
         'or' => 'or',
@@ -19,10 +14,9 @@ return [
         'remember_me' => 'Remember me',
         'login_button' => 'Sign in',
     ],
-
     'register' => [
         'title' => 'Create your account',
-        'welcome_message' => 'Welcome to <span class="font-bold">SaluteOra</span>',
+        'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
         'description' => 'Create your account to access all services',
         'already_have_account' => 'Already have an account?',
         'login_link' => 'sign in here',
@@ -32,7 +26,7 @@ return [
             'title' => 'Doctor Registration',
             'subtitle' => 'Create your professional account to access the SaluteOra platform',
             'description' => 'Register as a doctor to manage your patients and appointments',
-            'welcome_message' => 'Welcome to <span class="font-bold">SaluteOra</span>',
+            'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
             'info' => [
                 'title' => 'Professional Information',
                 'message' => 'Complete your professional information to verify your identity and specialization',
@@ -53,7 +47,7 @@ return [
             'title' => 'Patient Registration',
             'subtitle' => 'Create your account to book appointments and manage your health',
             'description' => 'Register as a patient to access healthcare services',
-            'welcome_message' => 'Welcome to <span class="font-bold">SaluteOra</span>',
+            'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
             'phone_label' => 'Phone number',
             'phone_placeholder' => 'Enter your phone number',
             'date_of_birth_label' => 'Date of birth',
@@ -68,7 +62,7 @@ return [
             'title' => 'Administrator Registration',
             'subtitle' => 'Create your administrative account to manage the platform',
             'description' => 'Register as an administrator to manage users and configurations',
-            'welcome_message' => 'Welcome to <span class="font-bold">SaluteOra</span>',
+            'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
             'role_label' => 'Administrative role',
             'role_placeholder' => 'Select your role',
             'phone_label' => 'Phone number',
@@ -110,7 +104,6 @@ return [
             'invalid_data' => 'Invalid data',
         ],
     ],
-
     'password' => [
         'reset' => [
             'title' => 'Reset password',
@@ -152,52 +145,44 @@ return [
             ],
         ],
     ],
-
     'password-reset' => [
         'submit' => [
             'label' => 'Send password reset link',
         ],
     ],
-
     'confirm' => [
         'title' => 'Confirm password',
         'description' => 'Enter your password to confirm your identity',
     ],
-
     'new' => [
         'title' => 'New password',
         'password_label' => 'New password',
         'confirm_password_label' => 'Confirm new password',
         'update_button' => 'Update password',
     ],
-
     'verify' => [
         'title' => 'Verify your account',
         'description' => 'We\'ve sent you a verification email. Please check your inbox.',
         'resend_button' => 'Resend',
         'change_email' => 'Change email address',
     ],
-
     'logout' => [
         'title' => 'Logout',
         'message' => 'You have been successfully logged out',
         'redirect_message' => 'Redirecting...',
     ],
-
     'thank_you' => [
         'title' => 'Thank you for registering',
         'message' => 'Your account has been created successfully',
         'continue_button' => 'Continue',
     ],
-
     'actions' => [
         'processing' => 'Processing...',
         'sending' => 'Sending...',
         'refresh' => 'Refresh page',
     ],
-
     'errors' => [
         'loading_failed' => 'Loading failed',
         'please_refresh' => 'An error occurred. Please refresh the page and try again.',
     ],
-]; 
+];

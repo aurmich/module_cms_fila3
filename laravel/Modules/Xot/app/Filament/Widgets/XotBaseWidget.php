@@ -21,6 +21,8 @@ use Modules\Xot\Filament\Traits\TransTrait;
 use Filament\Widgets\Widget as FilamentWidget;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
 
 /**
  * Classe base astratta per tutti i widget Filament.
@@ -32,12 +34,13 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
  * @property array<string, mixed>|null $data Dati del form
  * @property ComponentContainer $form
  */
-abstract class XotBaseWidget extends FilamentWidget implements HasForms
+abstract class XotBaseWidget extends FilamentWidget implements HasForms,HasActions
 {
     use TransTrait;
     use InteractsWithPageFilters;
     //use InteractsWithPageTable;
     use InteractsWithForms;
+    use InteractsWithActions;
 
     public string $title = '';
     public string $icon = '';

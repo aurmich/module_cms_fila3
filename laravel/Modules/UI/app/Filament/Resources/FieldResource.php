@@ -8,6 +8,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Modules\UI\Models\Field;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Modules\Lang\Filament\Resources\LangBaseResource;
@@ -18,7 +19,12 @@ class FieldResource extends LangBaseResource
 {
     protected static ?string $model = Field::class;
 
-    
+    public static function getFormSchema(): array
+    {
+        return [
+            TextInput::make('name'),
+        ];
+    }
 
     public static function getPages(): array
     {

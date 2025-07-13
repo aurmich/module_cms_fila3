@@ -40,4 +40,11 @@ return [
         'no_show' => 'No Show',
         'rescheduled' => 'Rescheduled',
     ],
-]; 
+    'accepted_appointments' => [
+        'title' => 'Appuntamenti Accettati',
+        'back_home' => 'Torna alla Home',
+        'redirecting' => 'Reindirizzamento in corso...',
+        'click_here' => 'clicca qui',
+        'if_not_redirected' => 'Se non vieni reindirizzato automaticamente, :link.',
+    ],
+];

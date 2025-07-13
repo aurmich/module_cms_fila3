@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Copia le traduzioni italiane in inglese e tedesco per i temi
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../../laravel/vendor/autoload.php';
 
 use Illuminate\Support\Arr;
 
@@ -19,7 +19,7 @@ class ThemeTranslationSynchronizer
 
     public function __construct()
     {
-        $this->basePath = __DIR__ . '/Themes';
+        $this->basePath = __DIR__ . '/../../laravel/Themes';
     }
 
     /**
