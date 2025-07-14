@@ -21,10 +21,7 @@ name('patient.referto');
 <x-layouts.app>
     @volt('patient.referto')
     <div>
-        <h1>Referto</h1>
-        
-        <livewire:bolt.fill-form slug="prova-1" inline="true" />
-        
+        <livewire:bolt.fill-form slug="referto" inline="true" />
     </div>
     @endvolt
 </x-layouts.app>

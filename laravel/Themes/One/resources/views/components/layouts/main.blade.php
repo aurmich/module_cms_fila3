@@ -36,8 +36,11 @@
             <main class="flex-grow">
                 {{ $slot }}
             </main>
+<<<<<<< HEAD
 
            
+=======
+>>>>>>> e2015210 (✨ (UI Module): add new models for Category, FieldResponse, Form, Response, and Section to enhance modularity)
         </div>
 
         {{--
