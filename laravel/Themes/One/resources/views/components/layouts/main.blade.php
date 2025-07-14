@@ -6,24 +6,9 @@
         <meta name="description" content="SaluteOra - La piattaforma per la gestione della tua salute">
         <meta name="keywords" content="salute, medici, studi, appuntamenti, prenotazioni">
         <meta name="author" content="SaluteOra">
-
-        <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-
-        <!-- Used to add dark mode right away, adding here prevents any flicker -->
-        <script>
-            if (typeof(Storage) !== "undefined") {
-                if(localStorage.getItem('dark_mode') && localStorage.getItem('dark_mode') == 'true'){
-                    document.documentElement.classList.add('dark');
-                }
-            }
-        </script>
-
-        <!-- Styles -->
         @filamentStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'],'themes/One')
-
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -36,11 +21,6 @@
             <main class="flex-grow">
                 {{ $slot }}
             </main>
-<<<<<<< HEAD
-
-           
-=======
->>>>>>> e2015210 (✨ (UI Module): add new models for Category, FieldResponse, Form, Response, and Section to enhance modularity)
         </div>
 
         {{--

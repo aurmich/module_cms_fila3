@@ -6,8 +6,9 @@ Questa documentazione descrive l'implementazione e l'utilizzo del pacchetto `spa
 
 1. [Gestione delle traduzioni mancanti](./gestione-traduzioni-mancanti.md)
 2. [Implementazione nel progetto](./implementazione-nel-progetto.md)
-3. [API e utilizzo comune](#api-e-utilizzo-comune)
-4. [Best Practices](#best-practices)
+3. [Best Practices](./best-practices.md)
+4. [Gestione Traduzioni Contenuti JSON](./json-content-translation.md)
+5. [API e utilizzo comune](#api-e-utilizzo-comune)
 
 ## Introduzione
 
@@ -18,6 +19,14 @@ Il pacchetto `spatie/laravel-translatable` consente di salvare traduzioni di att
 Il pacchetto è già installato nel progetto. La configurazione principale si trova in:
 
 - `Modules/Lang/app/Providers/TranslatableServiceProvider.php`
+
+## Integrazione con Filament
+
+Il progetto utilizza il plugin ufficiale `filament/spatie-laravel-translatable-plugin` per l'integrazione con Filament, configurato in:
+
+- `Modules/SaluteOra/app/Providers/Filament/AdminPanelProvider.php`
+- `Modules/UI/app/Providers/Filament/AdminPanelProvider.php`
+- `Modules/Lang/app/Providers/Filament/AdminPanelProvider.php`
 
 ## API e utilizzo comune
 
@@ -64,6 +73,43 @@ $model->field_name; // Restituisce nella lingua di app()->getLocale()
 $model->forgetTranslation('field_name', 'en');
 ```
 
+## Gestione Contenuti JSON
+
+Il sistema supporta anche la traduzione di contenuti JSON per pagine dinamiche. Vedi [Gestione Traduzioni Contenuti JSON](./json-content-translation.md) per dettagli completi.
+
+### Esempio di Contenuto JSON Traducibile
+
+```json
+{
+    "title": {
+        "it": "Area Dottore - SaluteOra",
+        "en": "Doctor Area - SaluteOra"
+    },
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "title": "Benvenuto nella tua Area Dottore",
+                    "subtitle": "Gestisci le tue pazienti e monitora i loro percorsi di salute orale",
+                    "cta_text": "Continua la registrazione"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "hero",
+                "data": {
+                    "title": "Welcome to your Doctor Area",
+                    "subtitle": "Manage your patients and monitor their oral health pathways",
+                    "cta_text": "Continue registration"
+                }
+            }
+        ]
+    }
+}
+```
+
 ## Best Practices
 
 1. **Traduzione di tutti i campi necessari**:
@@ -81,8 +127,14 @@ $model->forgetTranslation('field_name', 'en');
 5. **Integrazione con l'UI**:
    - Utilizzare componenti UI che supportano la modifica di contenuti multilingua
 
+6. **Contenuti JSON**:
+   - Tradurre solo i campi testuali (title, subtitle, cta_text, description)
+   - Non tradurre percorsi, widget, immagini o link
+   - Mantenere la stessa struttura tra le diverse lingue
+
 ## Risorse
 
 - [Documentazione ufficiale](https://spatie.be/docs/laravel-translatable)
 - [Repository GitHub](https://github.com/spatie/laravel-translatable)
 - [Issues e discussioni](https://github.com/spatie/laravel-translatable/issues)
+- [Plugin Filament](https://filamentphp.com/plugins/filament-spatie-translatable)

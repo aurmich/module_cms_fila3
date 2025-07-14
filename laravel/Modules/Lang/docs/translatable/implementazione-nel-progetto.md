@@ -1,6 +1,76 @@
 # Implementazione di Spatie Laravel Translatable nel Progetto
 
-Questo documento descrive come è implementato e configurato il pacchetto `spatie/laravel-translatable` nel nostro progetto, con particolare attenzione all'integrazione con i moduli esistenti.
+Questo documento descrive come è implementato e configurato il pacchetto `spatie/laravel-translatable` nel nostro progetto, con particolare attenzione all'integrazione con i moduli esistenti e il plugin Filament.
+
+## Integrazione con Filament
+
+### Plugin Filament Spatie Translatable
+
+Il progetto utilizza il plugin ufficiale `filament/spatie-laravel-translatable-plugin` per l'integrazione con Filament:
+
+```php
+// Modules/SaluteOra/app/Providers/Filament/AdminPanelProvider.php
+use Filament\SpatieLaravelTranslatablePlugin;
+
+public function panel(Panel $panel): Panel
+{
+    $panel = parent::panel($panel);
+    
+    $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()
+        ->defaultLocales([config('app.locale')]);
+    
+    $panel->plugins([$spatieLaravelTranslatablePlugin]);
+    
+    return $panel;
+}
+```
+
+### Configurazione Multi-Locale
+
+Il plugin è configurato in diversi moduli con supporto per italiano e inglese:
+
+```php
+// Modules/UI/app/Providers/Filament/AdminPanelProvider.php
+$spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()
+    ->defaultLocales(['it', 'en']);
+
+// Modules/Lang/app/Providers/Filament/AdminPanelProvider.php
+$spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()
+    ->defaultLocales(['en', 'it']);
+```
+
+### Utilizzo nei Form Filament
+
+Il plugin fornisce componenti specifici per la gestione delle traduzioni:
+
+```php
+use Filament\Forms\Components\SpatieTranslatableForms\Components\TranslatableTabs;
+
+public static function getFormSchema(): array
+{
+    return [
+        TranslatableTabs::make('Translations')
+            ->tabs([
+                'it' => Tab::make('Italiano')
+                    ->schema([
+                        TextInput::make('title.it')
+                            ->label('Titolo')
+                            ->required(),
+                        Textarea::make('content.it')
+                            ->label('Contenuto'),
+                    ]),
+                'en' => Tab::make('English')
+                    ->schema([
+                        TextInput::make('title.en')
+                            ->label('Title')
+                            ->required(),
+                        Textarea::make('content.en')
+                            ->label('Content'),
+                    ]),
+            ]),
+    ];
+}
+```
 
 ## Integrazione con i Moduli
 
@@ -152,6 +222,50 @@ trait HasStrictTranslations
 }
 ```
 
+## Gestione Contenuti JSON
+
+### File di Contenuto Traducibili
+
+I contenuti JSON come quelli in `config/local/saluteora/database/content/pages/` supportano traduzioni:
+
+```json
+{
+    "title": {
+        "it": "Area Dottore - SaluteOra",
+        "en": "Doctor Area - SaluteOra"
+    },
+    "content_blocks": {
+        "it": [
+            {
+                "type": "hero",
+                "data": {
+                    "title": "Benvenuto nella tua Area Dottore",
+                    "subtitle": "Gestisci le tue pazienti e monitora i loro percorsi di salute orale",
+                    "cta_text": "Continua la registrazione"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "hero",
+                "data": {
+                    "title": "Welcome to your Doctor Area",
+                    "subtitle": "Manage your patients and monitor their oral health pathways",
+                    "cta_text": "Continue registration"
+                }
+            }
+        ]
+    }
+}
+```
+
+### Regole per la Traduzione dei Contenuti
+
+1. **Traduci solo i testi**: title, subtitle, cta_text, description
+2. **Non tradurre**: view, image, widget, cta_link, type
+3. **Mantieni la struttura**: replicare esattamente la struttura del blocco "it"
+4. **Usa traduzioni appropriate**: adatta il contenuto al contesto culturale
+
 ## Test delle Traduzioni
 
 Per testare correttamente le traduzioni, utilizzare:
@@ -179,5 +293,7 @@ public function testTranslations()
 ## Collegamenti ad Altri Documenti
 
 - [Gestione delle Traduzioni Mancanti](./gestione-traduzioni-mancanti.md)
+- [Best Practices per Laravel Translatable](./best-practices.md)
 - [Configurazione Laravel Localization](../../Cms/docs/localization/localization-setup.md)
-- [Documentazione Ufficiale](https://spatie.be/docs/laravel-translatable/v6/basic-usage/handling-missing-translations)
+- [Documentazione Ufficiale Spatie Translatable](https://spatie.be/docs/laravel-translatable/v6/basic-usage/handling-missing-translations)
+- [Documentazione Plugin Filament](https://filamentphp.com/plugins/filament-spatie-translatable)

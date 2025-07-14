@@ -1,7 +1,8 @@
 {
     "id": "8",
     "title": {
-        "it": "Area Dottore - SaluteOra"
+        "it": "Area Dottore - SaluteOra",
+        "en": "Doctor Area - SaluteOra"
     },
     "slug": "doctor-home",
     "content": null,
@@ -16,6 +17,28 @@
                     "image": "/img/odontoiatra.jpg",
                     "cta-buttons": [],
                     "cta_text": "Continua la registrazione",
+                    "cta_link": "/doctor/patients",
+                    "widget": "Modules\\SaluteOra\\Filament\\Widgets\\DoctorCalendarWidget"
+                }
+            },
+            {
+                "type": "widget",
+                "data": {
+                    "view": "pub_theme::components.blocks.widget.simple",
+                    "widget":  "Modules\\SaluteOra\\Filament\\Widgets\\DoctorAvailabilitiesWidget"
+                }
+            }
+        ],
+        "en": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.dettaglio-dottore",
+                    "title": "Welcome to your Doctor Area",
+                    "subtitle": "Manage your patients and monitor their oral health pathways",
+                    "image": "/img/odontoiatra.jpg",
+                    "cta-buttons": [],
+                    "cta_text": "Continue registration",
                     "cta_link": "/doctor/patients",
                     "widget": "Modules\\SaluteOra\\Filament\\Widgets\\DoctorCalendarWidget"
                 }

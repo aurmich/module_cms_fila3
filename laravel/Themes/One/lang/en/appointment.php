@@ -41,10 +41,10 @@ return [
         'rescheduled' => 'Rescheduled',
     ],
     'accepted_appointments' => [
-        'title' => 'Appuntamenti Accettati',
-        'back_home' => 'Torna alla Home',
-        'redirecting' => 'Reindirizzamento in corso...',
-        'click_here' => 'clicca qui',
-        'if_not_redirected' => 'Se non vieni reindirizzato automaticamente, :link.',
+        'title' => 'Accepted Appointments',
+        'back_home' => 'Back to Home',
+        'redirecting' => 'Redirecting...',
+        'click_here' => 'click here',
+        'if_not_redirected' => 'If you are not redirected automatically, :link.',
     ],
 ];

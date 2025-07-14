@@ -64,6 +64,14 @@
                         }
                     ]
                 }
+            },
+            {
+                "name": "Dropdown Lang",
+                "type": "lang-switcher",
+                "data": {
+                    "view": "pub_theme::components.blocks.navigation.language-switcher"
+                    
+                }
             }
         ]
     },
