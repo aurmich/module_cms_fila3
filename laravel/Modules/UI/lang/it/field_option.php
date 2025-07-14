@@ -51,6 +51,8 @@ return array (
     'name' => 
     array (
       'label' => 'name',
+      'description' => 'name',
+      'helper_text' => 'name',
     ),
   ),
   'navigation' => 
