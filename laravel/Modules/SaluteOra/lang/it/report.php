@@ -81,6 +81,12 @@ return array (
       'description' => 'has_tartar',
       'helper_text' => 'has_tartar',
       'placeholder' => 'has_tartar',
+      'label' => 'has_tartar',
+    ),
+    'more_info_prosthesis' => 
+    array (
+      'description' => 'more_info_prosthesis',
+      'helper_text' => 'more_info_prosthesis',
     ),
   ),
 );

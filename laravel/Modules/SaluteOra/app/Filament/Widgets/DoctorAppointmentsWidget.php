@@ -256,6 +256,11 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
    public function reportAction(): Action
 {
     return Action::make('report')
+        ->iconButton()
+        ->size(ActionSize::ExtraLarge)
+        ->tooltip('Crea Referto')
+        ->icon('heroicon-o-document-text')
+        ->color('warning')
         ->requiresConfirmation()
         ->modalWidth('100%')
         ->form(ReportResource::getFormSchema())
