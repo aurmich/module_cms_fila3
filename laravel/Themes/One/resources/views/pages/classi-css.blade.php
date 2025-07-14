@@ -165,4 +165,5 @@
 <div class="text-[40px]">testo 40px</div>
 <div class="w-60 h-60">width e height 15rem</div>
 <div class="lg:justify-evenly">large justify-evenly</div>
+<div class="h-[125px]">height 125px</div>
 </x-layouts.app>

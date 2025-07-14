@@ -153,6 +153,10 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+    'attach' => 
+    array (
+      'label' => 'attach',
+    ),
   ),
   'actions' => 
   array (

@@ -14,8 +14,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Landing Page SaluteOra</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
 
   <body
@@ -132,7 +130,7 @@
         class="flex flex-col lg:flex-row items-center justify-around lg:justify-center h-[750px] bg-cover bg-inmp-filigrana"
       >
         <div>
-          <img class="h-72 lg:h-[500px]" src="/img/dentist.png" />
+          <img class="h-72 lg:h-[500px]" src="/img/dentist.png"/>
         </div>
         <div class="flex flex-col items-center">
           <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">Vuoi partecipare al progetto?</h1>
@@ -219,15 +217,15 @@
       <div>
         <h1 class="text-[#FF5F7E] text-3xl">Con la partecipazione di</h1>
       </div>
-      <div class="flex flex-col lg:flex-row items-center">
+      <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/coi-logo-updated.png" />
+          <img class="h-32 lg:h-[125px] p-5" src="/img/coi-logo-updated.png" />
         </div>
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/fondazione-andi-white.png" />
+          <img class="h-32 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
         </div>
         <div class="p-5">
-          <img class="h-16 lg:h-[150px]" src="/img/inmp-logo-piccolo-updated.png" />
+          <img class="h-32 lg:h-[150px] p-5" src="/img/inmp-logo-piccolo-updated.png" />
         </div>
       </div>
     </div>
