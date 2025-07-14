@@ -422,6 +422,15 @@ return array (
           'helper_text' => 'content.specialties.empty',
         ),
       ),
+      'delete' => 
+      array (
+        'tooltip' => 
+        array (
+          'description' => 'content.delete.tooltip',
+          'helper_text' => 'content.delete.tooltip',
+          'placeholder' => 'content.delete.tooltip',
+        ),
+      ),
     ),
   ),
   'actions' => 

@@ -46,6 +46,11 @@ return array (
       'label' => 'key',
       'description' => 'key',
       'helper_text' => 'key',
+      'placeholder' => 'key',
+    ),
+    'name' => 
+    array (
+      'label' => 'name',
     ),
   ),
   'navigation' => 

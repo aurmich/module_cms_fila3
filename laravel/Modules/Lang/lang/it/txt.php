@@ -433,6 +433,16 @@ return array (
     array (
       'description' => 'isActive',
       'helper_text' => 'isActive',
+      'placeholder' => 'isActive',
+      'label' => 'isActive',
+    ),
+    'status' => 
+    array (
+      'label' => 'status',
+    ),
+    'notes' => 
+    array (
+      'description' => 'notes',
     ),
   ),
   'actions' => 
