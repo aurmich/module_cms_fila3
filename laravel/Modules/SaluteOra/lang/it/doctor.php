@@ -310,6 +310,10 @@ return array (
       'help' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
       'helper_text' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
     ),
+    'schedule' => 
+    array (
+      'description' => 'schedule',
+    ),
   ),
   'filters' => 
   array (

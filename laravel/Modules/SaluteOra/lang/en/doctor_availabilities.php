@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 return array (
   'actions' => 
   array (
@@ -18,13 +17,3 @@ return array (
     ),
   ),
 );
-=======
-return [
-    'actions' => [
-        'editSchedule' => [
-            'label' => 'Edit Availability',
-            'helper_text' => '',
-        ],
-    ],
-];
->>>>>>> 9305fca7 (.)

@@ -31,6 +31,14 @@ return array (
     array (
       'label' => 'cancel',
     ),
+    'createAnother' => 
+    array (
+      'label' => 'createAnother',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
   ),
   'fields' => 
   array (

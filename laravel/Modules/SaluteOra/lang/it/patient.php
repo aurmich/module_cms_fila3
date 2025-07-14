@@ -94,6 +94,10 @@ return array (
       'color' => 'info',
       'help' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
     ),
+    'previsit_step' => 
+    array (
+      'label' => 'previsit_step',
+    ),
   ),
   'fields' => 
   array (
