@@ -17,7 +17,7 @@ class ListTranslationFiles extends XotBaseListRecords
     {
         return [
             Columns\TextColumn::make('key')
-               ->searchable(),
+               ->searchable(['key','content']),
 
         ];
     }
