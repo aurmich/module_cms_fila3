@@ -24,9 +24,9 @@
                 @endif
 
                 
-                
+                @if ($this->reportAction->isVisible())
                 {{ $this->reportAction }}
-
+                @endif
 
                 @if ($this->rejectAction->isVisible())
                 {{ ($this->rejectAction)(['appointment' => $appointment->id]) }}

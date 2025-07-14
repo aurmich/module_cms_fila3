@@ -25,6 +25,7 @@ use Modules\SaluteOra\States\Appointment\Pending;
 use Modules\SaluteOra\States\Appointment\Rejected;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Modules\SaluteOra\States\Appointment\Confirmed;
+use Modules\SaluteOra\States\Appointment\ReportPending;
 use Modules\SaluteOra\Filament\Resources\ReportResource;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 
@@ -254,20 +255,34 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
    }
 
    public function reportAction(): Action
-{
+    {
+        $appointment = new Appointment(); // senza salvarlo nel db
+        $state = new ReportPending($appointment);
+        //Assert::isInstanceOf($state,StateContract::class);
+        Assert::implementsInterface($state,StateContract::class);
+        $startStateClass=AppointmentState::getStateMapping()->get($this->state);
+        $startState=new $startStateClass($appointment);
+        Assert::isInstanceOf($startState,State::class);
+
     return Action::make('report')
         ->iconButton()
         ->size(ActionSize::ExtraLarge)
-        ->tooltip('Crea Referto')
-        ->icon('heroicon-o-document-text')
-        ->color('warning')
-        ->requiresConfirmation()
+        ->modalHeading(static::trans('actions.report.modal_heading'))
+        ->modalDescription(static::trans('actions.report.modal_description'))
+        //->tooltip('Crea Referto')
+        ->icon(static::trans('actions.report.icon'))
+        ->modalIcon(static::trans('actions.report.modal_icon'))
+        ->color('info')
+        //->requiresConfirmation()
         ->modalWidth('100%')
         ->form(ReportResource::getFormSchema())
         ->action(function (array $arguments) {
             dd('Test action called', $arguments);
-        });
-}
+        })
+        //->visible($startState->canTransitionTo($state::class))
+        ->visible(true)
+        ;
+    }
 
    public function createReportAction(): Action
    {

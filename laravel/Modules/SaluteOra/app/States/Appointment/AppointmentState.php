@@ -32,21 +32,29 @@ abstract class AppointmentState extends State implements StateContract
 
             // Confirmed transitions
             ->allowTransition(Confirmed::class, Rejected::class, Transitions\ConfirmedToRejected::class)
+            ->allowTransition(Confirmed::class, NoShow::class, Transitions\ConfirmedToNoShow::class)
+
+            ->allowTransition(Confirmed::class, Completed::class, Transitions\ConfirmedToCompleted::class)
+
+            ->allowTransition(Completed::class, ReportPending::class, Transitions\CompletedToReportPending::class)
+
+            ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
 
             // Rejected transitions
             //->allowTransition(Rejected::class, Confirmed::class, Transitions\RejectedToConfirmed::class)
 
             // Scheduled transitions
-            ->allowTransition(Scheduled::class, InProgress::class, Transitions\ScheduledToInProgress::class)
-            ->allowTransition(Scheduled::class, Cancelled::class, Transitions\ScheduledToCancelled::class)
-            ->allowTransition(Scheduled::class, NoShow::class, Transitions\ScheduledToNoShow::class)
-            ->allowTransition(Scheduled::class, Rescheduled::class, Transitions\ScheduledToRescheduled::class)
+            //->allowTransition(Scheduled::class, InProgress::class, Transitions\ScheduledToInProgress::class)
+            //->allowTransition(Scheduled::class, Cancelled::class, Transitions\ScheduledToCancelled::class)
+            //->allowTransition(Scheduled::class, NoShow::class, Transitions\ScheduledToNoShow::class)
+            //->allowTransition(Scheduled::class, Rescheduled::class, Transitions\ScheduledToRescheduled::class)
 
             // InProgress transitions
-            ->allowTransition(InProgress::class, Completed::class, Transitions\InProgressToCompleted::class)
+            //->allowTransition(InProgress::class, Completed::class, Transitions\InProgressToCompleted::class)
             
             // Rescheduled transitions
-            ->allowTransition(Rescheduled::class, Confirmed::class, Transitions\RescheduledToConfirmed::class);
+            //->allowTransition(Rescheduled::class, Confirmed::class, Transitions\RescheduledToConfirmed::class)
+            ;
     }
     
     abstract public function label(): string;

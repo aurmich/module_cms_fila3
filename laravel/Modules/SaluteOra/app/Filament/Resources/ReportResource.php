@@ -30,45 +30,117 @@ class ReportResource extends XotBaseResource
     public static  function getFormSchema(): array
     {
         return [
-            Toggle::make('has_mouth_or_teeth_pain')->label('Dolore a bocca o denti (ultimi 12 mesi)')   
+            Toggle::make('has_mouth_or_teeth_pain')
+                                       //       ->label('Dolore a bocca o denti (ultimi 12 mesi)')   
             ->reactive(),
             //mouth_teeth_pain_frequency  //quanto spesso
-            Select::make('mouth_teeth_pain_frequency')->options(OccurrenceFrequencyEnum::class)
+            Select::make('mouth_teeth_pain_frequency')
+                                       ->options(OccurrenceFrequencyEnum::class)
             ->visible(fn(Get $get): bool => (bool)$get('has_mouth_or_teeth_pain')),
-            TextInput::make('pregnancy_month')->label('Mese Gravidanza')->numeric()->minValue(0)->maxValue(9)->nullable(),
-            TextInput::make('pregnancy_week')->label('Settimana Gravidanza')->numeric()->minValue(0)->maxValue(4)->nullable(),
-            Select::make('teeth_brushing_frequency')->options(DayFrequencyEnum::class), //label('N. volte lavaggio denti')
-            Toggle::make('smokes')->label('Fuma'),
-            Toggle::make('visits_dentist_yearly')->label('Va dal dentista almeno 1 volta/anno'),
+            TextInput::make('pregnancy_month')
+                                       //       ->label('Mese Gravidanza')
+                                       ->numeric()
+                                       ->minValue(0)
+                                       ->maxValue(9)
+                                       ->nullable(),
+            TextInput::make('pregnancy_week')
+                                       //       ->label('Settimana Gravidanza')
+                                       ->numeric()
+                                       ->minValue(0)
+                                       ->maxValue(4)
+                                       ->nullable(),
+            Select::make('teeth_brushing_frequency')
+                                       ->options(DayFrequencyEnum::class), //label('N. volte lavaggio denti')
+            Toggle::make('smokes')
+                                       //       ->label('Fuma')
+                                       ,
+            Toggle::make('visits_dentist_yearly')
+                                       //       ->label('Va dal dentista almeno 1 volta/anno')
+                                       ,
             //--------------------------------------------------------------------------------------------
-            Toggle::make('has_diseases')->label('Affetta da malattia')->reactive(),
-            Select::make('specify_diseases')->options(MedicalConditionEnum::class)->multiple()->visible(fn(Get $get): bool => (bool)$get('has_diseases')),
+            Toggle::make('has_diseases')
+                                       //       ->label('Affetta da malattia')
+                                       ->reactive(),
+            Select::make('specify_diseases')
+                                       ->options(MedicalConditionEnum::class)
+                                       ->multiple()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_diseases')),
             //---------------------------------------------------------------------------------------------
-            Toggle::make('follows_diet_rules')->label('Segue regole alimentari'),
-            Toggle::make('uses_asl_clinic_for_dental_care')->label('Si rivolge ad ambulatorio ASL'),
+            Toggle::make('follows_diet_rules')
+                                       //       ->label('Segue regole alimentari')
+                                       ,
+            Toggle::make('uses_asl_clinic_for_dental_care')
+                                       //       ->label('Si rivolge ad ambulatorio ASL')
+                                       ,
             //-----------------------------------------------------------------------------------------
-            Toggle::make('missing_teeth')->label('Denti mancanti')->reactive(),
-            Select::make('specify_missing_teeth')->options(QuadranteEnum::class)->multiple()->visible(fn(Get $get): bool => (bool)$get('missing_teeth')),
-            Textarea::make('more_info_missing_teeth')->label('Ulteriori info (denti mancanti)')->nullable()->visible(fn(Get $get): bool => (bool)$get('missing_teeth')),
+            Toggle::make('missing_teeth')
+                                       //       ->label('Denti mancanti')
+                                       ->reactive(),
+            Select::make('specify_missing_teeth')
+                                       ->options(QuadranteEnum::class)
+                                       ->multiple()
+                                       ->visible(fn(Get $get): bool => (bool)$get('missing_teeth')),
+            Textarea::make('more_info_missing_teeth')
+                                       //       ->label('Ulteriori info (denti mancanti)')
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('missing_teeth')),
             //-------------------------------------------------------------------------------
-            Toggle::make('decayed_teeth')->label('Denti cariati')->reactive(),
-            Select::make('specify_decayed_teeth')->options(QuadranteEnum::class)->multiple()->nullable()->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
-            TextInput::make('more_info_decayed_teeth')->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
+            Toggle::make('decayed_teeth')
+                                       //       ->label('Denti cariati')
+                                       ->reactive(),
+            Select::make('specify_decayed_teeth')
+                                       ->options(QuadranteEnum::class)
+                                       ->multiple()
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
+            TextInput::make('more_info_decayed_teeth')
+                                       ->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
             //---------------------------------------------------------------------------------------------------------
-            Toggle::make('has_fixed_prosthesis_or_implants')->label('Protesi fissa o impianti')->reactive(),
-            Select::make('specify_prosthesis_or_implants')->options(QuadranteEnum::class)->nullable()->visible(fn(Get $get): bool => (bool)$get('has_fixed_prosthesis_or_implants')),
-            Textarea::make('more_info_prosthesis')->label('Ulteriori info (protesi)')->nullable()->visible(fn(Get $get): bool => (bool)$get('has_fixed_prosthesis_or_implants')),
+            Toggle::make('has_fixed_prosthesis_or_implants')
+                                       //       ->label('Protesi fissa o impianti')
+                                       ->reactive(),
+            Select::make('specify_prosthesis_or_implants')
+                                       ->options(QuadranteEnum::class)
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_fixed_prosthesis_or_implants')),
+            Textarea::make('more_info_prosthesis')
+                                       //       ->label('Ulteriori info (protesi)')
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_fixed_prosthesis_or_implants')),
             //-----------------------------------------------------------------------
-            Toggle::make('has_tartar')->label('Tartaro')->reactive(),
-            Select::make('specify_tartar')->options(QuadranteEnum::class)->multiple()->nullable()->visible(fn(Get $get): bool => (bool)$get('has_tartar')),
-            Textarea::make('more_info_tartar')->label('Ulteriori info (tartaro)')->nullable()->visible(fn(Get $get): bool => (bool)$get('has_tartar')),
+            Toggle::make('has_tartar')
+                                       //       ->label('Tartaro')
+                                       ->reactive(),
+            Select::make('specify_tartar')
+                                       ->options(QuadranteEnum::class)
+                                       ->multiple()
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_tartar')),
+            Textarea::make('more_info_tartar')
+                                       //       ->label('Ulteriori info (tartaro)')
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_tartar')),
             //-----------------------------------------------------------------------------
-            Toggle::make('has_plaque')->label('Placca')->reactive(),
-            Select::make('specify_plaque')->options(QuadranteEnum::class)->multiple()->nullable()->visible(fn(Get $get): bool => (bool)$get('has_plaque')),
-            Textarea::make('more_info_plaque')->label('Ulteriori info (placca)')->nullable()->visible(fn(Get $get): bool => (bool)$get('has_plaque')),
+            Toggle::make('has_plaque')
+                                       //       ->label('Placca')
+                                       ->reactive(),
+            Select::make('specify_plaque')
+                                       ->options(QuadranteEnum::class)
+                                       ->multiple()
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_plaque')),
+            Textarea::make('more_info_plaque')
+                                       //       ->label('Ulteriori info (placca)')
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('has_plaque')),
             //-----------------------------------------------------------------------------
-            Toggle::make('needs_more_dental_care')->label('Necessita cure odontoiatriche')->reactive(),
-            Textarea::make('further_notes')->label('Ulteriori specifiche')->nullable()->visible(fn(Get $get): bool => (bool)$get('needs_more_dental_care')),
+            Toggle::make('needs_more_dental_care')
+                                       //       ->label('Necessita cure odontoiatriche')
+                                       ->reactive(),
+            Textarea::make('further_notes')
+                                       //       ->label('Ulteriori specifiche')
+                                       ->nullable()
+                                       ->visible(fn(Get $get): bool => (bool)$get('needs_more_dental_care')),
             //----------------------------------------------------------------------------
         ];
     }

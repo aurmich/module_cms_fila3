@@ -22,6 +22,7 @@ enum DayFrequencyEnum: string implements HasLabel, HasIcon, HasColor
     public function getLabel(): string
     {
         return $this->transClass(self::class,$this->value.'.label');
+        
 
     }
 

@@ -58,7 +58,11 @@ return array (
     ),
     'report' => 
     array (
-      'label' => 'report',
+      'label' => 'Genera Referto',
+      'modal_heading' => 'Generazione Referto',
+      'modal_description' => 'Sei sicuro di voler generare un referto per questo appuntamento?',
+      'modal_icon' => 'heroicon-o-document-text',
+      'icon' => 'heroicon-o-document-text',
     ),
   ),
   'messages' => 

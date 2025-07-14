@@ -22,7 +22,8 @@ enum OccurrenceFrequencyEnum: string implements HasLabel, HasIcon, HasColor
     
     public function getLabel(): string
     {
-        return $this->transClass(self::class,$this->value.'.label');
+        $res= $this->transClass(self::class,$this->value.'.label');
+        return $res;
 
     }
 
