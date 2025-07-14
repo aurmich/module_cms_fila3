@@ -166,6 +166,8 @@ return array (
       'label' => 'Valore Singolo',
       'placeholder' => 'Inserisci un valore',
       'help' => 'Valore specifico per il campo corrente',
+      'description' => 'value',
+      'helper_text' => 'value',
     ),
     'values' => 
     array (

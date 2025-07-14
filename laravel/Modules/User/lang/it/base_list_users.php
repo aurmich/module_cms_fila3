@@ -23,5 +23,9 @@ return array (
     array (
       'label' => 'name',
     ),
+    'changePassword' => 
+    array (
+      'label' => 'changePassword',
+    ),
   ),
 );
