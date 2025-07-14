@@ -29,6 +29,24 @@ return new class extends XotBaseMigration
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
+                if(!$this->hasColumn('form_id')){
+                    $table->integer('form_id')->index()->nullable();
+                }
+                if(!$this->hasColumn('user_id')){
+                    $table->string('user_id',36)->index()->nullable();
+                }
+                if(!$this->hasColumn('status')){
+                    $table->string('status')->nullable();
+                }
+                if(!$this->hasColumn('notes')){
+                    $table->text('notes')->nullable();
+                }
+                if(!$this->hasColumn('extension_item_id')){
+                    $table->integer('extension_item_id')->index()->nullable();
+                }
+                if(!$this->hasColumn('grades')){
+                    $table->integer('grades')->index()->nullable();
+                }
                 
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);
