@@ -18,17 +18,21 @@ return new class extends XotBaseMigration
             static function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
-                $table->longText('description')->nullable();
-                
+                $table->string('type')->nullable();
             }
         );
         
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
-                
+                if(!$this->hasColumn('type')){
+                    $table->string('type')->nullable();
+                }
+                if(!$this->hasColumn('key')){
+                    $table->string('key')->nullable();
+                }
                 // Aggiunta dei timestamp e soft delete
-                $this->updateTimestamps($table, false);
+                $this->updateTimestamps($table, true);
             }
         );
     }

@@ -18,11 +18,10 @@ return new class extends XotBaseMigration
             static function (Blueprint $table): void {
                 $table->id();
                 $table->integer('form_id')->index()->nullable();
-                $table->string('user_id',36)->index()->nullable();
-                $table->string('status')->nullable();
-                $table->text('notes')->nullable();
-                $table->integer('extension_item_id')->index()->nullable();
-                $table->integer('grades')->index()->nullable();
+                $table->integer('field_id')->index()->nullable();
+                $table->integer('response_id')->index()->nullable();
+                $table->longText('response')->nullable();
+                $table->integer('grade')->index()->nullable();
             }
         );
         
@@ -31,7 +30,7 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 
                 // Aggiunta dei timestamp e soft delete
-                $this->updateTimestamps($table, false);
+                $this->updateTimestamps($table, true);
             }
         );
     }

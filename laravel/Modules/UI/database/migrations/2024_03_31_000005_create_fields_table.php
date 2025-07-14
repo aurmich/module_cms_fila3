@@ -31,7 +31,7 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 
                 // Aggiunta dei timestamp e soft delete
-                $this->updateTimestamps($table, false);
+                $this->updateTimestamps($table, true);
             }
         );
     }

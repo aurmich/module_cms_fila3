@@ -26,8 +26,8 @@ return new class extends XotBaseMigration
                 $table->boolean('is_active')->default(true);
                 $table->longText('details')->nullable();
                 $table->longText('options')->nullable();
-                $table->dateTimeTz('start_at')->nullable();
-                $table->dateTimeTz('end_at')->nullable();
+                $table->dateTimeTz('start_date')->nullable();
+                $table->dateTimeTz('end_date')->nullable();
                 $table->text('extensions')->nullable();
             }
         );
@@ -62,11 +62,11 @@ return new class extends XotBaseMigration
                 if(!$this->hasColumn('options')){
                     $table->longText('options')->nullable();
                 }
-                if(!$this->hasColumn('start_at')){
-                    $table->dateTimeTz('start_at')->nullable();
+                if(!$this->hasColumn('start_date')){
+                    $table->dateTimeTz('start_date')->nullable();
                 }
-                if(!$this->hasColumn('end_at')){
-                    $table->dateTimeTz('end_at')->nullable();
+                if(!$this->hasColumn('end_date')){
+                    $table->dateTimeTz('end_date')->nullable();
                 }
                 // Aggiunta dei timestamp e soft delete
                 $this->updateTimestamps($table, true);
