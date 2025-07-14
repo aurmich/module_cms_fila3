@@ -9,17 +9,16 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Modules\Xot\Filament\Traits\TransTrait;
 
-enum OccurrenceFrequencyEnum: string implements HasLabel, HasIcon, HasColor
+    
+
+enum DayFrequencyEnum: string implements HasLabel, HasIcon, HasColor
 {
     use TransTrait;
-    
-    case NEVER = 'never';
-    case ALMOST_NEVER = 'almost_never';
-    case RARELY = 'rarely';
-    case OCCASIONALLY = 'occasionally';
-    case QUITE_OFTEN = 'quite_often';
-    case FREQUENTLY = 'frequently';
-    
+    case TWICE_DAILY = 'twice_daily';        // 2 volte al giorno
+    case DAILY = 'daily';                    // ogni giorno
+    case ALTERNATE_DAYS = 'alternate_days';  // a giorni alterni
+    case OCCASIONALLY = 'occasionally';      // saltuariamente
+
     public function getLabel(): string
     {
         return $this->transClass(self::class,$this->value.'.label');

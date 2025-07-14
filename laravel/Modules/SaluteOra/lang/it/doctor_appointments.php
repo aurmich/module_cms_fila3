@@ -44,6 +44,22 @@ return array (
       'label' => 'Informazioni',
       'tooltip' => 'Visualizza informazioni dettagliate',
     ),
+    'create-report' => 
+    array (
+      'label' => 'create-report',
+    ),
+    'warning' => 
+    array (
+      'label' => 'warning',
+    ),
+    'test' => 
+    array (
+      'label' => 'test',
+    ),
+    'report' => 
+    array (
+      'label' => 'report',
+    ),
   ),
   'messages' => 
   array (

@@ -9,16 +9,14 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Modules\Xot\Filament\Traits\TransTrait;
 
-enum OccurrenceFrequencyEnum: string implements HasLabel, HasIcon, HasColor
+enum QuadranteEnum: string implements HasLabel, HasIcon, HasColor
 {
     use TransTrait;
     
-    case NEVER = 'never';
-    case ALMOST_NEVER = 'almost_never';
-    case RARELY = 'rarely';
-    case OCCASIONALLY = 'occasionally';
-    case QUITE_OFTEN = 'quite_often';
-    case FREQUENTLY = 'frequently';
+    case QUADRANT_1 = 'quadrant_1';
+    case QUADRANT_2 = 'quadrant_2';
+    case QUADRANT_3 = 'quadrant_3';
+    case QUADRANT_4 = 'quadrant_4';
     
     public function getLabel(): string
     {

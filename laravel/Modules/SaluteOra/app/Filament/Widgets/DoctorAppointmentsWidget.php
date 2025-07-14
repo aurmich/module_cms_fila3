@@ -25,6 +25,7 @@ use Modules\SaluteOra\States\Appointment\Pending;
 use Modules\SaluteOra\States\Appointment\Rejected;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Modules\SaluteOra\States\Appointment\Confirmed;
+use Modules\SaluteOra\Filament\Resources\ReportResource;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 
 /**
@@ -250,6 +251,43 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         ;
         
             
+   }
+
+   public function reportAction(): Action
+{
+    return Action::make('report')
+        ->requiresConfirmation()
+        ->modalWidth('100%')
+        ->form(ReportResource::getFormSchema())
+        ->action(function (array $arguments) {
+            dd('Test action called', $arguments);
+        });
+}
+
+   public function createReportAction(): Action
+   {
+    return Action::make('create-report')
+    ->iconButton()
+    //->button()
+    ->size(ActionSize::ExtraLarge)
+    ->tooltip('Crea Referto')
+    ->icon('heroicon-o-document-text')
+    ->color('warning')
+    ->requiresConfirmation()
+    ->modalHeading('sssssssssss')
+    ->modalDescription('sddddddddddddddddd')
+    ->form([
+        Textarea::make('message')
+            ->required()
+            ->maxLength(255),
+    ])->fillForm(function (array $data,$arguments) {
+        dddx(['data'=>$data,'arguments'=>$arguments]);
+    })
+    ->action(function (array $data,$arguments) {
+        dddx(['data'=>$data,'arguments'=>$arguments]);
+    })
+    ->visible(true)
+    ;
    }
 
 
