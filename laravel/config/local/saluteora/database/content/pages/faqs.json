@@ -10,7 +10,7 @@
             {
                 "type": "hero",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.faqs",
+                    "view": "pub_theme::components.blocks.hero.faqs_empty",
                     "title": "Benvenuta su Salute Orale,",
                     "subtitle": "il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odontoiatrici di prevenzione a titolo completamente gratuito.",
                     "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
@@ -20,7 +20,78 @@
                     "text_color": "text-gray-900",
                     "cta_color": "bg-indigo-600 hover:bg-indigo-700"
                 }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.faqs",
+                    "title": "FAQ'S",
+                    "sections": [
+                        {
+                            "title": "A chi é rivolto questo servizio?",
+                            "description": "Il portale Salute Orale nasce per aiutare donne in stato di gravidanza con un ISEE inferiore a 20.000 euro. Ogni paziente ha diritto ad una sola visita per la durata del progetto.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "Cosa offre questo servizio?",
+                            "description": "Il servizio fornisce una prima visita odontoiatrica completa (controllo+igiene) a titolo completamente gratuito per le pazienti in stato di gravidanza.",
+                            "icon": "clock"
+                        },
+                        {
+                            "title": "Da dove posso accedere al servizio?",
+                            "description": "Il servizio è disponibile come webapp mobile first. Questo vuol dire che è disponibile liberamente sul web, non richiede di scaricare nulla, ed è accessibile via pc o smartphone.",
+                            "icon": "check-circle"
+                        },
+                        {
+                            "title": "Come posso chiedere una visita?",
+                            "description": "Registrati e prenota la tua visita da questo portale. Assicurati di avere con te dati personali, autocertificazione ISEE e certificato medico di gravidanza.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "Come prenoto un appuntamento?",
+                            "description": "Una volta registrata potrai cercare tutti gli studi dentistici attivi all’interno di un’area precisa e scegliere quello migliore in base a posizione e disponibilità oraria.",
+                            "icon": "clock"
+                        },
+                        {
+                            "title": "Devo prenotare uno studio vicino a casa mia?",
+                            "description": "Puoi prenotare il tuo appuntamento dove vuoi, a patto di riuscire a raggiungere lo studio in tempo per la tua visita.",
+                            "icon": "check-circle"
+                        },
+                        {
+                            "title": "Cosa succede se l'appuntamento viene rifiutato?",
+                            "description": "Può essere che il dentista rifiuti il tuo appuntamento. Non preoccuparti: potrai prenotare un nuovo appuntamento cambiando orario, dentista o area di ricerca.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "Cosa devo fare se non posso andare ad un appuntamento già accettato?",
+                            "description": "Se non riesci ad andare ad un appuntamento già confermato, contatta il medico appena possibile (almeno 24h prima dell’appuntamento) e informalo della tua assenza! In questo modo potrai prenotare una nuova visita. Troverai i suoi contatti (telefono e mail) all’interno della tua scheda appuntamento. <b>MANCARE UN APPUNTAMENTO SENZA CONTATTARE IL MEDICO IMPEDISCE DI ACCEDERE NUOVAMENTE AL SERVIZIO.</b>",
+                            "icon": "clock"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.faqs_cta",
+                    "title": "Hai altri dubbi? <strong>CONSULTA LA GUIDA!</strong>",
+                    "sections": [
+                        {
+                            "title": "<br /> Vai <br /> alla <br /> guida",
+                            "description": "",
+                            "img": "/img/woman-characterrr.png",
+                            "url": "#"
+                        },
+                        {
+                            "title": "<br /> Vai <br /> alla <br /> guida",
+                            "description": "",
+                            "img": "/img/dentist.png",
+                            "url": "#"
+                        }
+                    ]
+                }
             }
+
         ]
     },
     "sidebar_blocks": {
