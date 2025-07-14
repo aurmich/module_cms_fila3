@@ -16,7 +16,8 @@
                     "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
                     "cta_text": "INIZIA ORA",
                     "cta_link": "{{ route('register') }}",
-                    "background_color": "bg-white",
+                    "background_color": "bg-white",   
+                    
                     "text_color": "text-gray-900",
                     "cta_color": "bg-indigo-600 hover:bg-indigo-700"
                 }
