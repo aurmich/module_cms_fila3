@@ -324,6 +324,14 @@ return array (
             'description' => 'content.fields.created_at.tooltip',
           ),
         ),
+        'reorderRecords' => 
+        array (
+          'label' => 
+          array (
+            'description' => 'content.fields.reorderRecords.label',
+            'helper_text' => 'content.fields.reorderRecords.label',
+          ),
+        ),
       ),
       'actions' => 
       array (
@@ -420,6 +428,7 @@ return array (
         array (
           'description' => 'content.specialties.empty',
           'helper_text' => 'content.specialties.empty',
+          'placeholder' => 'content.specialties.empty',
         ),
       ),
       'delete' => 
@@ -429,6 +438,48 @@ return array (
           'description' => 'content.delete.tooltip',
           'helper_text' => 'content.delete.tooltip',
           'placeholder' => 'content.delete.tooltip',
+          'label' => 'content.delete.tooltip',
+        ),
+        'label' => 
+        array (
+          'description' => 'content.delete.label',
+          'helper_text' => 'content.delete.label',
+          'placeholder' => 'content.delete.label',
+          'label' => 'content.delete.label',
+        ),
+      ),
+      'studio_email' => 
+      array (
+        'description' => 
+        array (
+          'description' => 'content.studio_email.description',
+        ),
+      ),
+      'enums' => 
+      array (
+        'appointment_type_descriptions' => 
+        array (
+          'prevention' => 
+          array (
+            'description' => 'content.enums.appointment_type_descriptions.prevention',
+          ),
+        ),
+      ),
+      'notifications' => 
+      array (
+        'account_reinstated' => 
+        array (
+          'description' => 'content.notifications.account_reinstated',
+        ),
+      ),
+      'studios' => 
+      array (
+        'actions' => 
+        array (
+          'view' => 
+          array (
+            'description' => 'content.studios.actions.view',
+          ),
         ),
       ),
     ),

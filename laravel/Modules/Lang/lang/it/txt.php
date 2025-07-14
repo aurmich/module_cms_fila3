@@ -444,6 +444,11 @@ return array (
     array (
       'description' => 'notes',
     ),
+    'responses_count' => 
+    array (
+      'description' => 'responses_count',
+      'helper_text' => 'responses_count',
+    ),
   ),
   'actions' => 
   array (
