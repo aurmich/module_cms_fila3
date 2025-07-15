@@ -21,7 +21,7 @@
 - **Motivazione**: Tipizzazione rigorosa per PHPStan livello 9+
 
 ### 3. Risoluzione Conflitti di Merge
-- **Risolti**: Tutti i conflitti di merge non risolti (`<<<<<<< HEAD`, `=======`, `>>>>>>>`)
+- **Risolti**: Tutti i conflitti di merge non risolti 
 - **Migliorato**: Struttura coerente e pulita
 
 ### 4. Rimozione Duplicazioni e Campi Vuoti

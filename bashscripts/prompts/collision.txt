@@ -14,7 +14,7 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 ### 1. Identificazione e Prioritizzazione
 ```bash
 # Trova tutti i file con conflitti Git
-find . -type f -exec grep -l "<<<<<<< HEAD\|======\|>>>>>>> " {} \;
+
 ```
 
 **Criteri di priorità:**
@@ -98,17 +98,14 @@ Per ogni file conflittuale:
 ### Conflitto in file PHP:
 ```php
 // PRIMA (conflitto)
-<<<<<<< HEAD
 public function getUserData(): array
 {
     return $this->user->toArray();
 }
-=======
 public function getUserData(): ?UserData
 {
     return $this->user ? UserData::from($this->user) : null;
 }
->>>>>>> feature/user-data
 
 // DOPO (risolto)
 /**
@@ -168,11 +165,9 @@ Al termine del processo, fornire:
 ### Identificazione conflitti
 ```bash
 # Trova file con conflitti Git
-grep -r "<<<<<<< HEAD" . --include="*.php" --include="*.md" --include="*.json"
+
 
 # Lista file con conflitti per tipo
-find . -name "*.php" -exec grep -l "<<<<<<< HEAD\|======\|>>>>>>> " {} \;
-find . -name "*.md" -exec grep -l "<<<<<<< HEAD\|======\|>>>>>>> " {} \;
 ```
 
 ### Verifica PHPStan
@@ -217,11 +212,8 @@ composer dump-autoload
 ### Conflitto in Service Provider:
 ```php
 // PRIMA (conflitto)
-<<<<<<< HEAD
 public string $name = 'predict';
-=======
 public string $name = 'Predict';
->>>>>>> feature/module-name
 
 // DOPO (risolto seguendo convenzioni)
 public string $name = 'Predict'; // PascalCase per nome modulo
@@ -230,13 +222,10 @@ public string $name = 'Predict'; // PascalCase per nome modulo
 ### Conflitto in Resource Filament:
 ```php
 // PRIMA (conflitto)
-<<<<<<< HEAD
 use Filament\Resources\Resource;
 class PredictResource extends Resource
-=======
 use Modules\Xot\Filament\Resources\XotBaseResource;
 class PredictResource extends XotBaseResource
->>>>>>> feature/xot-base
 
 // DOPO (risolto seguendo regole progetto)
 use Modules\Xot\Filament\Resources\XotBaseResource;
@@ -247,14 +236,11 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 ### Conflitto in traduzione:
 ```php
 // PRIMA (conflitto in lang file)
-<<<<<<< HEAD
 'title' => 'Titolo',
-=======
 'title' => [
     'label' => 'Titolo',
     'placeholder' => 'Inserisci titolo'
 ],
->>>>>>> feature/structured-translations
 
 // DOPO (risolto con struttura completa)
 'title' => [

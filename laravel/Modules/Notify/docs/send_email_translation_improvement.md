@@ -5,7 +5,7 @@
 Il file `laravel/Modules/Notify/lang/it/send_email.php` presenta diversi problemi critici:
 
 ### 1. Conflitto di Merge Non Risolto
-- Presenza di marcatori `<<<<<<< HEAD`, `=======`, `>>>>>>> c4df167f (trans)`
+- Presenza di marcatori 
 - Due versioni del file in conflitto
 - Sintassi PHP non valida che impedisce l'esecuzione
 
@@ -26,17 +26,14 @@ Il file `laravel/Modules/Notify/lang/it/send_email.php` presenta diversi problem
 
 **Prima**:
 ```php
-<<<<<<< HEAD
 declare(strict_types=1);
 
 return [
     // Versione HEAD
 ];
-=======
 return array (
     // Versione branch trans
 );
->>>>>>> c4df167f (trans)
 ```
 
 **Dopo**:
