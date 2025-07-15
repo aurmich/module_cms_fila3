@@ -189,17 +189,17 @@
       <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
         <div class="p-5">
           <a href="https://www.inmp.it/">
-            <img class="h-32 lg:h-40 p-5" src="/img/inmp-logo-piccolo-updated.png" />
+            <img class="h-48 lg:h-40 p-5" src="/img/inmp-logo-piccolo-updated.png" />
           </a>
         </div>
         <div class="p-5">
           <a href="https://fondazioneandi.org/">
-            <img class="h-32 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+            <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
           </a>
         </div>
         <div class="p-5">
           <a href="https://www.cooperazioneodontoiatrica.eu/">
-            <img class="h-32 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
+            <img class="h-28 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
           </a>
         </div>
       </div>
