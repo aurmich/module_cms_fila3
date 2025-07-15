@@ -1,83 +1,47 @@
-# Collegamenti alla Documentazione sugli Standard di Traduzione
+# Collegamenti agli Standard di Traduzione
 
-## Problemi Identificati e Correzioni in Corso
+## Documentazione Principale
+- [Regole Generali Traduzioni](translation_standards.md)
+- [Best Practices Filament](filament_translation_best_practices.md)
+- [Struttura File Traduzione](translation_file_structure.md)
 
-Stiamo standardizzando i file di traduzione nel modulo Notify che presentano problemi di conformità con le convenzioni di SaluteOra. Questo documento fornisce collegamenti rapidi a tutta la documentazione pertinente.
+## Moduli Specifici
+- [Modulo User - Traduzioni](laravel/Modules/User/docs/translations.md)
+- [Modulo Performance - Traduzioni](laravel/Modules/Performance/docs/translation_guidelines.md)
+- [Modulo UI - Componenti](laravel/Modules/UI/docs/components.md)
+- [Modulo Xot - Regole Base](laravel/Modules/Xot/docs/translation_rules.md)
 
-## Documentazione nel Modulo Notify
+## Esempi e Fix
+- [Fix Traduzioni Performance](laravel/Modules/Performance/docs/organizzativa-migration-errors.md)
+- [Fix Traduzioni Xot Base](laravel/Modules/Xot/docs/xot_base_translation_update.md)
+- [Fix Traduzioni UI Opening Hours](laravel/Modules/UI/docs/opening_hours_field_translation_fix.md)
+- [Fix Traduzioni SaluteOra Doctor Calendar](laravel/Modules/SaluteOra/docs/doctor_availability_calendar_traduzioni.md)
+- [Fix Traduzioni Notify Send Email](laravel/Modules/Notify/docs/send_email_translation_fix.md) - **REGOLA IMPORTANTE**: tooltip e helper_text per ogni campo
 
-- [Progresso della Standardizzazione](../Modules/Notify/docs/TRANSLATION_STANDARDS_PROGRESS.md)
-- [Regole di Naming per i File di Traduzione](../Modules/Notify/docs/TRANSLATION_FILE_NAMING_RULES.md)
-- [Guida alla Struttura dei File di Traduzione](../Modules/Notify/docs/TRANSLATION_FILE_STRUCTURE_GUIDE.md)
-- [Convenzioni di Traduzione nel Modulo Notify](../Modules/Notify/docs/TRANSLATION_CONVENTIONS.md)
-- [Guida alla Correzione dei File di Traduzione](../Modules/Notify/docs/TRANSLATION_FILE_CORRECTION_GUIDE.md)
+## Regole Critiche
+- [Helper Text Rules](translation-helper-text-standards.md) - **CRITICO**: helper_text diverso da placeholder
+- [Filament Translation Rules](filament_translation_rules.md) - MAI usare ->label()
+- [Translation Management](translation_management_rules.md) - Gestione automatica traduzioni
 
-## Documentazione Root
+## Struttura e Organizzazione
+- [Convenzioni Naming](naming_conventions.md)
+- [Struttura Moduli](module_structure.md)
+- [Best Practices Laravel](laravel_best_practices.md)
 
-### Standard Generali
-- [Standard per Helper Text](translation-helper-text-standards.md) - **CRITICO**: Regola per evitare duplicazione di helper_text
-- [Standard per Modal Heading e Description](translation-modal-heading-standards.md) - **CRITICO**: Stringhe dirette per modal_heading e modal_description
-- [Regole di Traduzione SaluteOra](translation-rules.md)
-- [Best Practice per Traduzioni](translation-best-practices.md)
+## Testing e Validazione
+- [PHPStan Translation Rules](phpstan_translation_rules.md)
+- [Translation Testing](translation_testing.md)
+- [Quality Assurance](translation_qa.md)
 
-### Guide Specifiche
-- [Guida alla Struttura Espansa](translation-expanded-structure-guide.md)
-- [Convenzioni di Naming](translation-naming-conventions.md)
-- [Validazione Traduzioni](translation-validation-guide.md)
-
-## Problemi Critici Identificati
-
-### 1. Helper Text Duplicato ⚠️ **CRITICO**
-**Problema**: `helper_text` uguale alla chiave dell'array
-**Soluzione**: Impostare `helper_text = ''` quando uguale alla chiave
-**Documentazione**: [Standard Helper Text](translation-helper-text-standards.md)
-
-### 2. Modal Heading/Description come Array ⚠️ **CRITICO**
-**Problema**: `modal_heading` e `modal_description` come array con `label`
-**Soluzione**: Usare stringhe dirette per coerenza con Filament
-**Documentazione**: [Standard Modal Heading](translation-modal-heading-standards.md)
-
-### 3. Struttura Non Espansa
-**Problema**: Campi senza `label`, `placeholder`, `help`
-**Soluzione**: Implementare struttura espansa completa
-**Documentazione**: [Guida Struttura Espansa](translation-expanded-structure-guide.md)
-
-## Checklist di Conformità
-
-### Struttura Base
-- [ ] `declare(strict_types=1);` presente
-- [ ] Sintassi breve degli array `[]` (non `array()`)
-- [ ] Struttura espansa per tutti i campi
-- [ ] `helper_text` gestito correttamente (vuoto se uguale alla chiave)
-- [ ] `modal_heading` e `modal_description` come stringhe dirette
-
-### Contenuto
-- [ ] Nessuna stringa hardcoded
-- [ ] Traduzioni naturali e contestuali
-- [ ] Coerenza terminologica tra lingue
-- [ ] Completezza delle traduzioni
-
-### Organizzazione
-- [ ] File posizionati correttamente in `Modules/*/lang/*/`
-- [ ] Naming dei file in minuscolo
-- [ ] Struttura delle cartelle coerente
-
-## Collegamenti Rapidi per Correzione
-
-### Script di Sincronizzazione
-- [Script Sincronizzazione Moduli](../../bashscripts/translations/sync_module_translations.php)
-- [Script Sincronizzazione Temi](../../bashscripts/translations/sync_theme_translations.php)
-
-### Documentazione Moduli
-- [Modulo User](../Modules/User/docs/translations.md)
-- [Modulo UI](../Modules/UI/docs/translations.md)
-- [Modulo SaluteOra](../Modules/SaluteOra/docs/translations.md)
+## Aggiornamenti Recenti
+- **2025-01-06**: Aggiornamento regole helper_text - tooltip obbligatorio per ogni campo
+- **2025-01-06**: Fix completo file send_email.php con tooltip e helper_text
+- **2025-01-05**: Aggiornamento convenzioni naming traduzioni
+- **2025-01-04**: Fix traduzioni modulo Performance
+- **2025-01-03**: Aggiornamento documentazione Xot base
 
 ## Note Importanti
-
-1. **Priorità**: Risolvere prima i problemi critici (helper_text, modal_heading)
-2. **Coerenza**: Mantenere uniformità tra tutti i moduli
-3. **Documentazione**: Aggiornare sempre la documentazione dopo le correzioni
-4. **Testing**: Verificare che le traduzioni funzionino correttamente
-
-*Ultimo aggiornamento: 2025-01-06*
+- **REGOLA CRITICA**: Ogni campo con label e placeholder DEVE avere tooltip e helper_text
+- **REGOLA CRITICA**: helper_text deve essere diverso da placeholder, altrimenti impostare a ''
+- **REGOLA CRITICA**: MAI usare ->label() nei componenti Filament
+- **REGOLA CRITICA**: Struttura espansa obbligatoria per tutti i campi

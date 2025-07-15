@@ -1,5 +1,27 @@
 # 📚 Documentazione SaluteOra
 
+## ⚠️ Regole Fondamentali
+
+### Regola Critica: Naming Convention per Cartelle Docs
+**NEI FILE E NELLE SOTTOCARTELLE DELLE CARTELLE DOCS NON DEVONO ESSERCI CARATTERI MAIUSCOLI, TRANNE PER README.md**
+
+- ✅ `translation-standards.md`
+- ✅ `filament-best-practices.md`
+- ❌ `Translation_Standards.md`
+- ❌ `Filament_Best_Practices.md`
+
+Vedi: [docs_naming_convention.md](./docs_naming_convention.md)
+
+### Regola Critica: Posizione Script
+**GLI SCRIPT NON DEVONO MAI ESSERE POSIZIONATI NELLE CARTELLE DOCS**
+
+- ✅ `bashscripts/fix_docs_naming_convention.sh`
+- ✅ `Modules/NomeModulo/bashscripts/script.sh`
+- ❌ `docs/check_naming.sh`
+- ❌ `docs/utility_script.sh`
+
+Vedi: [scripts_location_convention.md](./scripts_location_convention.md)
+
 ## 🚀 Collegamenti Rapidi
 
 - 📑 **[Indice Completo](INDICE_DOCUMENTAZIONE.md)** - Navigazione completa di tutta la documentazione
