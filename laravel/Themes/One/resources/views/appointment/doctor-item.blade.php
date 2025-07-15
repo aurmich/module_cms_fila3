@@ -9,8 +9,6 @@
                     <div>
                         <p class="text-xs">{{ $appointment->starts_at?->format('d/m/Y') }}</p>
                         <p class="text-xs">{{ $appointment->time_range }}</p>
-                        
-                       
                     </div>
                 </div>
             </div>
@@ -24,6 +22,12 @@
                 @if ($this->confirmAction->isVisible())
                 {{ ($this->confirmAction)(['appointment' => $appointment->id]) }}
                 @endif
+
+                
+                @if ($this->reportAction->isVisible())
+                {{ $this->reportAction }}
+                @endif
+
                 @if ($this->rejectAction->isVisible())
                 {{ ($this->rejectAction)(['appointment' => $appointment->id]) }}
                 @endif

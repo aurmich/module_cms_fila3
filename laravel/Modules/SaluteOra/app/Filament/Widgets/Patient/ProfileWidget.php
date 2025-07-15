@@ -68,7 +68,9 @@ class ProfileWidget extends XotBaseWidget
     public function mount(): void
     {
        // dddx('a');
-        $this->user = auth()->user();
+        $user=auth()->user();
+        Assert::isInstanceOf($user, Patient::class);
+        $this->user = $user;
     }
 
     

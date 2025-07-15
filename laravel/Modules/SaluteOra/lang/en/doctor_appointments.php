@@ -36,6 +36,13 @@ return [
             'label' => 'Information',
             'tooltip' => 'View detailed information',
         ],
+        'report' => [
+            'label' => 'Generate Report',
+            'modal_heading' => 'Report Generation',
+            'modal_description' => 'Are you sure you want to generate a report for this appointment?',
+            'modal_icon' => 'heroicon-o-document-text',
+            'icon' => 'heroicon-o-document-text',
+        ],
     ],
     'messages' => [
         'appointment_accepted' => 'Appointment accepted successfully',
@@ -53,31 +60,31 @@ return [
     ],
     'states' => [
         'pending' => [
-            'label' => 'In attesa',
+            'label' => 'Pending',
             'color' => 'warning',
             'bg_color' => '#FEF3C7',
             'icon' => 'heroicon-o-clock',
         ],
         'confirmed' => [
-            'label' => 'Confermato',
+            'label' => 'Confirmed',
             'color' => 'success',
             'bg_color' => '#D1FAE5',
             'icon' => 'heroicon-o-check-circle',
         ],
         'rejected' => [
-            'label' => 'Rifiutato',
+            'label' => 'Rejected',
             'color' => 'danger',
             'bg_color' => '#FEE2E2',
             'icon' => 'heroicon-o-x-circle',
         ],
         'completed' => [
-            'label' => 'Completato',
+            'label' => 'Completed',
             'color' => 'success',
             'bg_color' => '#ECFDF5',
             'icon' => 'heroicon-o-check-badge',
         ],
         'cancelled' => [
-            'label' => 'Annullato',
+            'label' => 'Cancelled',
             'color' => 'gray',
             'bg_color' => '#F3F4F6',
             'icon' => 'heroicon-o-no-symbol',
@@ -85,10 +92,10 @@ return [
     ],
     'fields' => [
         'message' => [
-            'description' => 'Messaggio',
+            'description' => 'Message',
             'helper_text' => '',
             'placeholder' => '',
-            'label' => 'Messaggio',
+            'label' => 'Message',
         ],
     ],
 ];

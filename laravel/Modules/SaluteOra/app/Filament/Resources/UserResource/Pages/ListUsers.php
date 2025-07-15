@@ -3,12 +3,13 @@
 namespace Modules\SaluteOra\Filament\Resources\UserResource\Pages;
 
 use Filament\Actions;
-use Modules\SaluteOra\Enums\UserTypeEnum;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Enums\UserStateEnum;
 use Filament\Tables\Actions as TableActions;
 use Modules\SaluteOra\States\User\UserState;
@@ -41,6 +42,19 @@ class ListUsers extends BaseListUsers
         //'state'=>SelectColumn::make('state')->options(UserState::class)
         'state' => IconStateColumn::make('state'),
 
+    ];
+   }
+
+
+   public function getTableFilters(): array
+   {
+    return [
+        ...parent::getTableFilters(),
+        SelectFilter::make('state')->options(function(){
+            $res=array_keys(UserState::getStateMapping()->toArray());
+            $res=array_combine($res,$res);
+            return $res;
+        }),//->options(UserTypeEnum::class),
     ];
    }
 

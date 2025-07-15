@@ -53,6 +53,6 @@ return [
 5. Documentazione inline completa
 
 ## Collegamenti
-- [Filament Best Practices](../FILAMENT-BEST-PRACTICES.md)
+- [Filament Best Practices](../filament-best-practices.md)
 - [Form Components](../COMPONENTI_PERSONALIZZATI.md)
 - [PHPStan Level 9 Guide](../PHPSTAN-LEVEL9-GUIDE.md) 

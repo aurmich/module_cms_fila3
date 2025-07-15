@@ -44,6 +44,26 @@ return array (
       'label' => 'Informazioni',
       'tooltip' => 'Visualizza informazioni dettagliate',
     ),
+    'create-report' => 
+    array (
+      'label' => 'create-report',
+    ),
+    'warning' => 
+    array (
+      'label' => 'warning',
+    ),
+    'test' => 
+    array (
+      'label' => 'test',
+    ),
+    'report' => 
+    array (
+      'label' => 'Genera Referto',
+      'modal_heading' => 'Generazione Referto',
+      'modal_description' => 'Sei sicuro di voler generare un referto per questo appuntamento?',
+      'modal_icon' => 'heroicon-o-document-text',
+      'icon' => 'heroicon-o-document-text',
+    ),
   ),
   'messages' => 
   array (

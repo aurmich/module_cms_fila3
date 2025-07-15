@@ -22,31 +22,40 @@ abstract class AppointmentState extends State implements StateContract
      * Configure the allowed state transitions.
      */
     public static function config(): StateConfig
-    {
-        return parent::config()
-            //->default(static::class === self::class ? Pending::class : static::class)
-            ->default(Pending::class)
-            // Pending transitions
-            ->allowTransition(Pending::class, Confirmed::class, Transitions\PendingToConfirmed::class)
-            ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
-
-            // Confirmed transitions
-            ->allowTransition(Confirmed::class, Rejected::class, Transitions\ConfirmedToRejected::class)
-
-            // Rejected transitions
-            //->allowTransition(Rejected::class, Confirmed::class, Transitions\RejectedToConfirmed::class)
-
-            // Scheduled transitions
-            ->allowTransition(Scheduled::class, InProgress::class, Transitions\ScheduledToInProgress::class)
-            ->allowTransition(Scheduled::class, Cancelled::class, Transitions\ScheduledToCancelled::class)
-            ->allowTransition(Scheduled::class, NoShow::class, Transitions\ScheduledToNoShow::class)
-            ->allowTransition(Scheduled::class, Rescheduled::class, Transitions\ScheduledToRescheduled::class)
-
-            // InProgress transitions
-            ->allowTransition(InProgress::class, Completed::class, Transitions\InProgressToCompleted::class)
-            
-            // Rescheduled transitions
-            ->allowTransition(Rescheduled::class, Confirmed::class, Transitions\RescheduledToConfirmed::class);
+        {
+            return parent::config()
+                ->default(Pending::class)
+                
+                // Pending transitions (In entrata)
+                ->allowTransition(Pending::class, Confirmed::class, Transitions\PendingToConfirmed::class)
+                ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
+                
+                // Confirmed transitions (Accettati)
+                ->allowTransition(Confirmed::class, Completed::class, Transitions\ConfirmedToCompleted::class)
+                ->allowTransition(Confirmed::class, Cancelled::class, Transitions\ConfirmedToCancelled::class)
+                ->allowTransition(Confirmed::class, NoShow::class, Transitions\ConfirmedToNoShow::class)
+                
+                // NoShow transitions (gestione interna del conteggio)
+                ->allowTransition(NoShow::class, Banned::class, Transitions\NoShowToBanned::class)
+                
+                // Completed transitions (Conclusi)
+                ->allowTransition(Completed::class, ReportPending::class, Transitions\CompletedToReportPending::class)
+                
+                // Report transitions
+                ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
+                
+                // ReportCompleted transitions
+                ->allowTransition(ReportCompleted::class, RefundPending::class, Transitions\ReportCompletedToRefundPending::class)
+                ->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
+                
+                // Refund transitions
+                ->allowTransition(RefundPending::class, RefundAccepted::class, Transitions\RefundPendingToRefundAccepted::class)
+                ->allowTransition(RefundPending::class, RefundToIntegrate::class, Transitions\RefundPendingToRefundToIntegrate::class)
+                ->allowTransition(RefundPending::class, RefundCompleted::class, Transitions\RefundPendingToRefundCompleted::class)
+                
+                ->allowTransition(RefundAccepted::class, RefundCompleted::class, Transitions\RefundAcceptedToRefundCompleted::class)
+                ->allowTransition(RefundToIntegrate::class, RefundCompleted::class, Transitions\RefundToIntegrateToRefundCompleted::class);
+        
     }
     
     abstract public function label(): string;

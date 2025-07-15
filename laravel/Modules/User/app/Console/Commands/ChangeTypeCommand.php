@@ -32,7 +32,7 @@ class ChangeTypeCommand extends Command
     /**
      * The console command description.
      *
-     * @var string|null
+     * @var string
      */
     protected $description = 'Change user type based on project configuration';
 

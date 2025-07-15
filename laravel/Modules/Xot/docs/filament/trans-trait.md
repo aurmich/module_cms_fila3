@@ -44,6 +44,6 @@ class MyResource
 ```
 
 ## Collegamenti
-- [Filament Best Practices](../FILAMENT-BEST-PRACTICES.md)
+- [Filament Best Practices](../filament-best-practices.md)
 - [Translation Guidelines](../TRANSLATIONS-BEST-PRACTICES.md)
 - [PHPStan Level 9 Guide](../PHPSTAN-LEVEL9-GUIDE.md) 

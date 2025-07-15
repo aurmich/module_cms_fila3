@@ -1,21 +1,17 @@
-# Filament Best Practices (Moduli Riutilizzabili)
+# Best Practices per Filament Resources in Laraxot
 
-## Descrizione
-Best practice generiche per l'utilizzo di Filament in moduli Laravel riutilizzabili. Nessun riferimento a nomi di progetto o brand.
+Questo documento definisce le linee guida ufficiali e le best practices per l'implementazione delle risorse Filament all'interno del framework Laraxot.
 
-## Regole principali
-- NON estendere mai direttamente le classi di Filament: creare sempre wrapper personalizzati
-- Utilizzare traits per funzionalità riutilizzabili
-- Seguire il pattern di composizione invece dell'ereditarietà
-- Mantenere la compatibilità con gli aggiornamenti di Filament
-- Centralizzare le configurazioni comuni nelle classi base
-- Non inserire proprietà statiche custom nei resource (es. $navigationIcon, $navigationGroup, $translationPrefix)
-- Non usare ->label() direttamente nei form: usare sempre i file di traduzione
+## Regole Fondamentali
 
-## Esempi
+### 1. Utilizzo delle Classi Base Corrette
+
+#### ✅ DO - Estendere XotBaseResource
+
+È **obbligatorio** che tutte le risorse Filament estendano `XotBaseResource` invece della classe standard di Filament:
+
 ```php
-// ❌ Anti-pattern
-class MyResource extends \Filament\Resources\Resource {}
+use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class UserResource extends XotBaseResource
 {
@@ -65,59 +61,7 @@ public static function form(Form $form): Form
 }
 ```
 
-### 3. Proprietà e Metodi da NON Definire
-
-#### ✅ DO - Omettere proprietà e metodi gestiti dalla classe base
-
-Quando si estende `XotBaseResource`, NON definire le seguenti proprietà e metodi:
-
-1. **NON definire** `protected static ?string $navigationIcon`
-   - Questa proprietà è gestita automaticamente da `XotBaseResource`
-
-2. **NON definire** `protected static ?string $navigationGroup`
-   - Questa proprietà è gestita automaticamente da `XotBaseResource`
-
-3. **NON definire** `protected static ?int $navigationSort`
-   - Questa proprietà è gestita automaticamente da `XotBaseResource`
-
-4. **NON definire** `public static function getTableColumns()`
-   - Utilizzare invece `getListTableColumns()` definito in `XotBaseResource`
-
-5. **NON definire** `public static function getRelations()`
-   - Se restituisce un array vuoto, non definirlo affatto
-
-6. **NON definire** `public static function getPages()`
-   - Se restituisce solo le route standard (index, create, edit), non definirlo affatto
-
-#### ❌ DON'T - Non ridefinire proprietà e metodi gestiti dalla classe base
-
-```php
-// NON FARE MAI QUESTO
-class DoctorResource extends XotBaseResource
-{
-    protected static ?string $navigationIcon = 'heroicon-o-user'; // ERRORE
-    
-    protected static ?string $navigationGroup = 'Pazienti'; // ERRORE
-    
-    protected static ?int $navigationSort = 3; // ERRORE
-    
-    public static function getRelations(): array
-    {
-        return []; // ERRORE: se vuoto, non definire
-    }
-    
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListDoctors::route('/'),
-            'create' => Pages\CreateDoctor::route('/create'),
-            'edit' => Pages\EditDoctor::route('/{record}/edit'),
-        ]; // ERRORE: se standard, non definire
-    }
-}
-```
-
-### 4. Traduzioni e Label
+### 3. Traduzioni e Label
 
 #### ✅ DO - Utilizzare i file di traduzione
 
@@ -175,8 +119,9 @@ class SocioResource extends XotBaseResource
 {
     protected static ?string $model = Socio::class;
     
-    // NON definire $navigationIcon quando si estende XotBaseResource
-    // NON definire $navigationSort quando si estende XotBaseResource
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    
+    protected static ?int $navigationSort = 1;
     
     // Form Schema - CORRETTO ✅
     public static function getFormSchema(): array
@@ -569,71 +514,18 @@ public static function table(Table $table): Table
 ```
 
 ## Troubleshooting
-- Se compare un errore di override di proprietà statiche, rimuovere la proprietà dal resource e centralizzare nella base
-- Se le traduzioni non vengono applicate, controllare la struttura dei file lang e l'assenza di ->label() hardcoded
-
-## Riferimenti
-
-- [Documentazione Filament](https://filamentphp.com/docs)
-- [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
-- [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
-
-## Regole per Widget Filament: Path View e Localizzazione
-
-- Tutti i widget Filament devono avere la view in `modulo::filament.widgets.nome-widget`.
-- Non usare mai `modulo::widgets.nome-widget` o altri path non standard.
-- Non usare mai ->label(), ->placeholder(), __() o trans() nei form component (TextInput, Select, ecc).
-- La localizzazione è centralizzata tramite LangServiceProvider e i file di lingua del modulo.
-- Le chiavi dei campi devono corrispondere a quelle dei file di lingua.
-
-### Esempio corretto
-```php
-protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
-TextInput::make('location')->required()
-```
-
-### Esempio errato
-```php
-protected static string $view = 'saluteora::widgets.find-doctor-and-appointment';
-TextInput::make('location')->label(__('modulo::campo.label'))
-```
-
-**Motivazione:** coerenza, manutenzione, override, policy di qualità.
-
-> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
-
-**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
-
-## Regole di Ereditarietà: Trait e Interfacce
-
-- Non replicare mai trait, interfacce o logica già presenti nella classe base che si estende (es. XotBaseWidget).
-- Studiare sempre la classe base prima di estendere.
-- Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
-
-## Collegamenti
-- [Filament Docs](https://filamentphp.com/docs)
-- [Best practices moduli riutilizzabili](../module-documentation-neutrality.md)
-- [Ereditarietà modelli](../model-inheritance-best-practices.md)
-
-## Problema: Form non visualizzato correttamente
-
-**Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
-
-## Problema: Label non tradotte
 
 ### Problema: Form non visualizzato correttamente
-=======
 
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
 
-## Problema: Label non tradotte
+### Problema: Label non tradotte
 
 **Soluzione:** Verificare che:
 1. Non si stia utilizzando `->label()` direttamente sui componenti
 2. I file di traduzione siano nella posizione corretta e seguano la struttura espansa
 3. Le chiavi dei campi nel form corrispondano esattamente alle chiavi dei campi nel file di traduzione
 
-## Problema: Relazioni non caricate correttamente
 ### Problema: Relazioni non caricate correttamente
 
 **Soluzione:** Verificare che:
@@ -687,75 +579,3 @@ Consulta l'esempio completo all'inizio di questo documento per una implementazio
 - [Documentazione Filament](https://filamentphp.com/docs)
 - [Documentazione XotBaseResource](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/resource.md)
 - [Best Practices Laraxot](/var/www/html/exa/base_orisbroker_fila3/laravel/Modules/Xot/docs/best-practices.md)
-
-
-## Regole per Widget Filament: Path View e Localizzazione
-
-- Tutti i widget Filament devono avere la view in `modulo::filament.widgets.nome-widget`.
-- Non usare mai `modulo::widgets.nome-widget` o altri path non standard.
-- Non usare mai ->label(), ->placeholder(), __() o trans() nei form component (TextInput, Select, ecc).
-- La localizzazione è centralizzata tramite LangServiceProvider e i file di lingua del modulo.
-- Le chiavi dei campi devono corrispondere a quelle dei file di lingua.
-
-### Esempio corretto
-```php
-protected static string $view = 'saluteora::filament.widgets.find-doctor-and-appointment';
-TextInput::make('location')->required()
-```
-
-### Esempio errato
-```php
-protected static string $view = 'saluteora::widgets.find-doctor-and-appointment';
-TextInput::make('location')->label(__('modulo::campo.label'))
-```
-
-**Motivazione:** coerenza, manutenzione, override, policy di qualità.
-
-> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
-
-**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
-
-## Regole di Ereditarietà: Trait e Interfacce
-
-- Non replicare mai trait, interfacce o logica già presenti nella classe base che si estende (es. XotBaseWidget).
-- Studiare sempre la classe base prima di estendere.
-- Se serve estendere il comportamento, usare override o metodi custom, non duplicare trait/interfacce.
-
-### Esempio errato
-```php
-class FindDoctorAndAppointmentWidget extends XotBaseWidget implements HasForms
-{
-    use InteractsWithForms; // ERRORE: già presente in XotBaseWidget
-}
-```
-
-### Esempio corretto
-```php
-class FindDoctorAndAppointmentWidget extends XotBaseWidget
-{
-    // NIENTE implements HasForms, NIENTE use InteractsWithForms
-}
-```
-
-**Motivazione:** DRY, KISS, manutenzione, coerenza, evitare conflitti e ridondanza.
-
-> Aggiornare sempre anche i file .mdc in .windsurf/rules e .cursor/rules
-
-**Vedi anche:** [filament-best-practices.mdc](../../../.windsurf/rules/filament-best-practices.mdc)
-
-## Policy DRY su Disponibilità e Prenotazione
-
-La disponibilità e la prenotazione sono sempre rappresentate da record Appointment con type=status specifici (es. type=availability, status=available). Non vanno mai create tabelle custom per la disponibilità. Tutte le logiche di calendario, slot, prenotazione e approvazione sono centralizzate su Appointment.
-
-### Esempio di query DRY
-```php
-Appointment::where('doctor_id', $doctorId)
-    ->where('type', AppointmentTypeEnum::AVAILABILITY)
-    ->where('status', AppointmentStatusEnum::AVAILABLE)
-    ->get();
-```
-
-### Motivazione filosofica, politica, zen
-- Un solo punto di verità: nessuna duplicazione, nessun lock-in
-- DRY, KISS, serenità del codice
-- Refactoring sicuro, massima estendibilità

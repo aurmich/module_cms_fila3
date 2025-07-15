@@ -488,6 +488,13 @@ return array (
           ),
         ),
       ),
+      'stats' => 
+      array (
+        'no_show_rate' => 
+        array (
+          'description' => 'content.stats.no_show_rate',
+        ),
+      ),
     ),
   ),
   'actions' => 
