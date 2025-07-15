@@ -15,10 +15,10 @@
 
         <title>{{ $title ?? 'SaluteOra - La tua salute, ora' }}</title>
     </head>
-    <body class="min-h-screen antialiased bg-gray-50 dark:bg-gradient-to-b dark:from-gray-950 dark:to-gray-900 font-sans">
-        <div class="flex flex-col min-h-screen">
+    <body>
+        <div>
             <!-- Contenuto principale -->
-            <main class="flex-grow">
+            <main>
                 {{ $slot }}
             </main>
         </div>

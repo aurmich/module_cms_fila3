@@ -53,6 +53,7 @@ return array (
       'label' => 'name',
       'description' => 'name',
       'helper_text' => 'name',
+      'placeholder' => 'name',
     ),
   ),
   'navigation' => 
