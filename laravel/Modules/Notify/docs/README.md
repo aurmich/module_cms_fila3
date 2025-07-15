@@ -21,6 +21,7 @@ Il modulo Notify gestisce tutte le notifiche del sistema, inclusi:
 - [Migrations](./migrations.md)
 - [Traduzioni](./translations.md)
 - [Translation Files Update 2025](../Lang/docs/translation_files_update_2025.md) - ⭐ **NUOVO** - Aggiornamento file traduzioni
+- [Sistemazione send_email.php](./send_email_translation_fix.md) - ⭐ **NUOVO** - Risoluzione conflitto merge e miglioramenti
 
 ### Modelli
 - [BaseModel](./base-model.md)
