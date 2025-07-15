@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 return [
@@ -225,3 +226,204 @@ return [
         'system' => 'Sistema',
     ],
 ];
+=======
+return array (
+  'navigation' => 
+  array (
+    'label' => 'Invio Email',
+    'group' => 
+    array (
+      'label' => 'Sistema',
+      'description' => 'Funzionalità per l\'invio di email attraverso il sistema di notifiche',
+    ),
+    'icon' => 'heroicon-o-envelope',
+    'sort' => 49,
+  ),
+  'fields' => 
+  array (
+    'subject' => 
+    array (
+      'label' => 'Oggetto',
+      'placeholder' => 'Inserisci l\'oggetto dell\'email',
+      'help' => 'Oggetto che apparirà nell\'intestazione dell\'email',
+      'description' => 'Oggetto dell\'email da inviare',
+    ),
+    'template_id' => 
+    array (
+      'label' => 'Template Email',
+      'placeholder' => 'Seleziona il template email da utilizzare',
+      'help' => 'Template predefinito per l\'email (opzionale)',
+      'description' => 'Template email da utilizzare per il contenuto',
+    ),
+    'to' => 
+    array (
+      'label' => 'Destinatario',
+      'placeholder' => 'destinatario@dominio.com',
+      'help' => 'Indirizzo email del destinatario principale',
+      'description' => 'Indirizzo email del destinatario',
+    ),
+    'cc' => 
+    array (
+      'label' => 'Copia Conoscenza (CC)',
+      'placeholder' => 'cc@dominio.com (opzionale)',
+      'help' => 'Indirizzi email in copia conoscenza, separati da virgole',
+      'description' => 'Indirizzi email in copia conoscenza',
+    ),
+    'bcc' => 
+    array (
+      'label' => 'Copia Nascosta (BCC)',
+      'placeholder' => 'bcc@dominio.com (opzionale)',
+      'help' => 'Indirizzi email in copia nascosta, separati da virgole',
+      'description' => 'Indirizzi email in copia nascosta',
+    ),
+    'content' => 
+    array (
+      'label' => 'Contenuto Testo',
+      'placeholder' => 'Inserisci il contenuto testuale dell\'email',
+      'help' => 'Contenuto testuale dell\'email (versione plain text)',
+      'description' => 'Contenuto testuale dell\'email',
+    ),
+    'body_html' => 
+    array (
+      'label' => 'Contenuto HTML',
+      'placeholder' => '<h1>Titolo</h1><p>Contenuto dell\'email in formato HTML</p>',
+      'help' => 'Contenuto HTML dell\'email da inviare (opzionale)',
+      'description' => 'Contenuto HTML dell\'email',
+      'helper_text' => 'body_html',
+    ),
+    'parameters' => 
+    array (
+      'label' => 'Parametri Template',
+      'placeholder' => '{"nome": "Mario", "cognome": "Rossi"}',
+      'help' => 'Parametri JSON per personalizzare il template selezionato',
+      'description' => 'Parametri per personalizzare il template',
+    ),
+    'attachments' => 
+    array (
+      'label' => 'Allegati',
+      'placeholder' => 'Seleziona i file da allegare',
+      'help' => 'File da allegare all\'email (opzionale)',
+      'description' => 'File da allegare all\'email',
+    ),
+    'priority' => 
+    array (
+      'label' => 'Priorità',
+      'placeholder' => 'Seleziona la priorità dell\'email',
+      'help' => 'Priorità dell\'email (normale, alta, urgente)',
+      'description' => 'Priorità dell\'email',
+      'options' => 
+      array (
+        'normal' => 'Normale',
+        'high' => 'Alta',
+        'urgent' => 'Urgente',
+      ),
+    ),
+  ),
+  'actions' => 
+  array (
+    'send' => 
+    array (
+      'label' => 'Invia Email',
+      'success' => 'Email inviata con successo al destinatario',
+      'error' => 'Errore nell\'invio dell\'email. Verifica la configurazione.',
+      'confirmation' => 'Sei sicuro di voler inviare questa email?',
+      'tooltip' => 'Invia l\'email al destinatario specificato',
+      'modal' => 
+      array (
+        'heading' => 'Conferma Invio Email',
+        'description' => 'Stai per inviare un\'email. Questa azione non può essere annullata.',
+        'confirm' => 'Invia Email',
+        'cancel' => 'Annulla',
+      ),
+    ),
+    'preview' => 
+    array (
+      'label' => 'Anteprima',
+      'success' => 'Anteprima dell\'email generata correttamente',
+      'error' => 'Errore nella generazione dell\'anteprima',
+      'tooltip' => 'Visualizza l\'anteprima dell\'email prima dell\'invio',
+      'modal' => 
+      array (
+        'heading' => 'Anteprima Email',
+        'description' => 'Visualizza come apparirà l\'email al destinatario',
+      ),
+    ),
+    'save_draft' => 
+    array (
+      'label' => 'Salva Bozza',
+      'success' => 'Bozza salvata correttamente',
+      'error' => 'Errore nel salvataggio della bozza',
+      'tooltip' => 'Salva l\'email come bozza per inviarla successivamente',
+      'modal' => 
+      array (
+        'heading' => 'Salva Bozza',
+        'description' => 'Salva l\'email come bozza per inviarla successivamente',
+        'confirm' => 'Salva Bozza',
+        'cancel' => 'Annulla',
+      ),
+    ),
+    'schedule' => 
+    array (
+      'label' => 'Programma Invio',
+      'success' => 'Email programmata per l\'invio',
+      'error' => 'Errore nella programmazione dell\'invio',
+      'tooltip' => 'Programma l\'invio dell\'email per una data e ora specifiche',
+      'modal' => 
+      array (
+        'heading' => 'Programma Invio Email',
+        'description' => 'Seleziona la data e l\'ora per l\'invio programmato',
+        'confirm' => 'Programma Invio',
+        'cancel' => 'Annulla',
+      ),
+    ),
+    'emailFormActions' => 
+    array (
+      'label' => 'emailFormActions',
+    ),
+  ),
+  'messages' => 
+  array (
+    'success' => 'Email inviata con successo! Controlla la casella email del destinatario.',
+    'error' => 'Si è verificato un errore durante l\'invio dell\'email. Verifica la configurazione SMTP.',
+    'draft_saved' => 'Bozza salvata correttamente. Puoi recuperarla dalla sezione Bozze.',
+    'scheduled' => 'Email programmata per l\'invio. Riceverai una notifica quando verrà inviata.',
+    'preview_generated' => 'Anteprima generata correttamente. Controlla l\'aspetto dell\'email.',
+    'invalid_template' => 'Template email non valido o non trovato.',
+    'invalid_parameters' => 'Parametri del template non validi. Verifica il formato JSON.',
+    'no_recipients' => 'Nessun destinatario specificato. Inserisci almeno un indirizzo email.',
+    'smtp_error' => 'Errore di configurazione SMTP. Verifica le impostazioni del server.',
+    'validation_error' => 'Si sono verificati errori di validazione. Controlla i campi evidenziati.',
+    'file_too_large' => 'Il file allegato è troppo grande. Dimensione massima consentita: :max_size',
+    'invalid_file_type' => 'Tipo di file non supportato. Tipi consentiti: :allowed_types',
+  ),
+  'validation' => 
+  array (
+    'subject_required' => 'L\'oggetto dell\'email è obbligatorio',
+    'to_required' => 'Il destinatario è obbligatorio',
+    'to_valid' => 'Il destinatario deve essere un indirizzo email valido',
+    'cc_valid' => 'Gli indirizzi in CC devono essere email valide',
+    'bcc_valid' => 'Gli indirizzi in BCC devono essere email valide',
+    'content_required' => 'Il contenuto dell\'email è obbligatorio',
+    'template_exists' => 'Il template selezionato non esiste',
+    'parameters_json' => 'I parametri devono essere in formato JSON valido',
+    'priority_valid' => 'La priorità deve essere una delle opzioni disponibili',
+    'attachments_max' => 'Numero massimo di allegati consentito: :max',
+    'file_size_max' => 'Dimensione massima del file: :max_size',
+    'file_type_allowed' => 'Tipo di file non consentito. Tipi supportati: :types',
+  ),
+  'status' => 
+  array (
+    'draft' => 'Bozza',
+    'scheduled' => 'Programmata',
+    'sent' => 'Inviata',
+    'failed' => 'Fallita',
+    'cancelled' => 'Annullata',
+  ),
+  'priority_labels' => 
+  array (
+    'normal' => 'Normale',
+    'high' => 'Alta',
+    'urgent' => 'Urgente',
+  ),
+);
+>>>>>>> 6c9424fa (trans)

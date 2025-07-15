@@ -313,6 +313,7 @@ return array (
     'schedule' => 
     array (
       'description' => 'schedule',
+      'helper_text' => 'schedule',
     ),
   ),
   'filters' => 
