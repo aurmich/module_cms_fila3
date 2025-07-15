@@ -45,6 +45,8 @@ class DoctorCalendarWidget extends FullCalendarWidget
 
     public function config(): array
     {
+        $lang=app()->getLocale();
+        
         return [
             'firstDay' => 1,
             'headerToolbar' => [
@@ -59,6 +61,7 @@ class DoctorCalendarWidget extends FullCalendarWidget
                 'year' => 'numeric',
                 'month' => 'long' // Questo dovrebbe capitalizzare automaticamente
             ],
+            'locale' =>  $lang
         ];
     }
 
