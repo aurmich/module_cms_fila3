@@ -136,6 +136,7 @@ return array (
         'label' => 'Friday afternoon to',
         'placeholder' => '18:00',
         'help' => 'Closing time for Friday afternoon',
+        'description' => 'friday.afternoon_to',
       ),
     ),
     'saturday' => 
@@ -145,6 +146,8 @@ return array (
         'label' => 'Saturday morning from',
         'placeholder' => '08:00',
         'help' => 'Opening time for Saturday morning',
+        'description' => 'saturday.morning_from',
+        'helper_text' => 'saturday.morning_from',
       ),
       'morning_to' => 
       array (
