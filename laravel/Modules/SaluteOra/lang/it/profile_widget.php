@@ -35,6 +35,13 @@ return array (
     'last_name' => 
     array (
       'description' => 'last_name',
+      'helper_text' => 'last_name',
+      'placeholder' => 'last_name',
+      'label' => 'last_name',
+    ),
+    'first_name' => 
+    array (
+      'description' => 'first_name',
     ),
   ),
 );

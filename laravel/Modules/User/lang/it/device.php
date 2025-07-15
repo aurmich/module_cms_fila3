@@ -118,4 +118,8 @@ return array (
       'label' => 'create',
     ),
   ),
+  'model' => 
+  array (
+    'label' => 'device.model',
+  ),
 );
