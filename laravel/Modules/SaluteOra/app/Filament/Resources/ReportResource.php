@@ -14,7 +14,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\SaluteOra\Enums\QuadranteEnum;
+use Modules\SaluteOra\Enums\ToothFDIEnum;
 use Modules\SaluteOra\Enums\DayFrequencyEnum;
 use Modules\SaluteOra\Enums\MedicalConditionEnum;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -77,7 +77,7 @@ class ReportResource extends XotBaseResource
                                        //       ->label('Denti mancanti')
                                        ->reactive(),
             Select::make('specify_missing_teeth')
-                                       ->options(QuadranteEnum::class)
+                                       ->options(ToothFDIEnum::class)
                                        ->multiple()
                                        ->visible(fn(Get $get): bool => (bool)$get('missing_teeth')),
             Textarea::make('more_info_missing_teeth')
@@ -89,18 +89,18 @@ class ReportResource extends XotBaseResource
                                        //       ->label('Denti cariati')
                                        ->reactive(),
             Select::make('specify_decayed_teeth')
-                                       ->options(QuadranteEnum::class)
+                                       ->options(ToothFDIEnum::class)
                                        ->multiple()
                                        ->nullable()
                                        ->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
-            TextInput::make('more_info_decayed_teeth')
+            Textarea::make('more_info_decayed_teeth')
                                        ->visible(fn(Get $get): bool => (bool)$get('decayed_teeth')),
             //---------------------------------------------------------------------------------------------------------
             Toggle::make('has_fixed_prosthesis_or_implants')
                                        //       ->label('Protesi fissa o impianti')
                                        ->reactive(),
             Select::make('specify_prosthesis_or_implants')
-                                       ->options(QuadranteEnum::class)
+                                       ->options(ToothFDIEnum::class)
                                        ->nullable()
                                        ->visible(fn(Get $get): bool => (bool)$get('has_fixed_prosthesis_or_implants')),
             Textarea::make('more_info_prosthesis')
@@ -112,7 +112,7 @@ class ReportResource extends XotBaseResource
                                        //       ->label('Tartaro')
                                        ->reactive(),
             Select::make('specify_tartar')
-                                       ->options(QuadranteEnum::class)
+                                       ->options(ToothFDIEnum::class)
                                        ->multiple()
                                        ->nullable()
                                        ->visible(fn(Get $get): bool => (bool)$get('has_tartar')),
@@ -125,7 +125,7 @@ class ReportResource extends XotBaseResource
                                        //       ->label('Placca')
                                        ->reactive(),
             Select::make('specify_plaque')
-                                       ->options(QuadranteEnum::class)
+                                       ->options(ToothFDIEnum::class)
                                        ->multiple()
                                        ->nullable()
                                        ->visible(fn(Get $get): bool => (bool)$get('has_plaque')),
