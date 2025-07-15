@@ -31,7 +31,7 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(Pending::class, Rejected::class, Transitions\PendingToRejected::class)
                 
                 // Confirmed transitions (Accettati)
-                ->allowTransition(Confirmed::class, Completed::class, Transitions\ConfirmedToCompleted::class)
+                ->allowTransition(Confirmed::class, ReportPending::class, Transitions\ConfirmedToReportPending::class)
                 ->allowTransition(Confirmed::class, Cancelled::class, Transitions\ConfirmedToCancelled::class)
                 ->allowTransition(Confirmed::class, NoShow::class, Transitions\ConfirmedToNoShow::class)
                 
@@ -39,14 +39,16 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(NoShow::class, Banned::class, Transitions\NoShowToBanned::class)
                 
                 // Completed transitions (Conclusi)
-                ->allowTransition(Completed::class, ReportPending::class, Transitions\CompletedToReportPending::class)
+                ->allowTransition(Completed::class, RefundPending::class, Transitions\CompletedToRefundPending::class)
+                ->allowTransition(Completed::class, ProBono::class, Transitions\CompletedToProBono::class)
                 
                 // Report transitions
                 ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
                 
                 // ReportCompleted transitions
-                ->allowTransition(ReportCompleted::class, RefundPending::class, Transitions\ReportCompletedToRefundPending::class)
-                ->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
+                ->allowTransition(ReportCompleted::class, Completed::class, Transitions\ReportCompletedToCompleted::class)
+                //->allowTransition(ReportCompleted::class, RefundPending::class, Transitions\ReportCompletedToRefundPending::class)
+                //->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
                 
                 // Refund transitions
                 ->allowTransition(RefundPending::class, RefundAccepted::class, Transitions\RefundPendingToRefundAccepted::class)
