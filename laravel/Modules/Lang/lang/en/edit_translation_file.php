@@ -1714,6 +1714,7 @@ return array (
         array (
           'description' => 'content.specialties.empty',
           'helper_text' => 'content.specialties.empty',
+          'placeholder' => 'content.specialties.empty',
         ),
       ),
       'snapshots' => 

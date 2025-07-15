@@ -429,6 +429,12 @@ return array (
           'description' => 'content.specialties.empty',
           'helper_text' => 'content.specialties.empty',
           'placeholder' => 'content.specialties.empty',
+          'label' => 'content.specialties.empty',
+        ),
+        'description' => 
+        array (
+          'description' => 'content.specialties.description',
+          'helper_text' => 'content.specialties.description',
         ),
       ),
       'delete' => 

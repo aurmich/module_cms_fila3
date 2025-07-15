@@ -167,4 +167,6 @@
 <div class="lg:justify-evenly">large justify-evenly</div>
 <div class="h-[125px]">height 125px</div>
 <div class="leading-7"></div>
+<div class="lg:h-40">large height inmp</div>
+<div class="lg:h-28">large height coi</div>
 </x-layouts.app>

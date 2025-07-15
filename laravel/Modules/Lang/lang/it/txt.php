@@ -420,6 +420,7 @@ return array (
       'description' => 'itemIsDefault',
       'helper_text' => 'itemIsDefault',
       'placeholder' => 'itemIsDefault',
+      'label' => 'itemIsDefault',
     ),
     'delete' => 
     array (
@@ -449,6 +450,24 @@ return array (
       'description' => 'responses_count',
       'helper_text' => 'responses_count',
       'placeholder' => 'responses_count',
+      'label' => 'responses_count',
+    ),
+    'itemKey' => 
+    array (
+      'description' => 'itemKey',
+      'helper_text' => 'itemKey',
+      'placeholder' => 'itemKey',
+      'label' => 'itemKey',
+    ),
+    'forms_count' => 
+    array (
+      'description' => 'forms_count',
+    ),
+    'responses_exists' => 
+    array (
+      'description' => 'responses_exists',
+      'helper_text' => 'responses_exists',
+      'placeholder' => 'responses_exists',
     ),
   ),
   'actions' => 

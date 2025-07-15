@@ -134,8 +134,7 @@
         </div>
         <div class="flex flex-col items-center">
           <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">Vuoi partecipare al progetto?</h1>
-          <span class="text-[#272C4D] text-center text-xl mt-10">Unisciti alla rete di professionisti che si prendono cura della
-            salute orale delle gestanti</span>
+          <span class="text-[#272C4D] text-center text-xl mt-10">Entra a far parte del progetto Salute Orale</span>
           <a href="/it/auth/register">
           <button
             class="w-44 text-[#272C4D] text-xl lg:text-2xl mt-10 border-[#272C4D] border-2 py-2 px-5 lg:py-3 lg:px-7 rounded-lg"
@@ -160,24 +159,9 @@
              </div>
              <div class="flex flex-col items-center justify-center">
                <span class="text-[#FF5F7E] text-xl lg:text-2xl"
-                 >Vai <br />
-                 alla <br />
+                 >Consulta la<br />
                  guida</span
                >
-               <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke-width="1.5"
-                 stroke="#FF5F7E"
-                 class="size-6"
-               >
-                 <path
-                   stroke-linecap="round"
-                   stroke-linejoin="round"
-                   d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                 />
-               </svg>
              </div>
            </div>
          </div>
@@ -188,24 +172,9 @@
              </div>
              <div class="flex flex-col items-center justify-center">
                <span class="text-[#FF5F7E] text-xl lg:text-2xl"
-                 >Vai <br />
-                 alla <br />
+                 >Consulta la <br />
                  guida</span
                >
-               <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke-width="1.5"
-                 stroke="#FF5F7E"
-                 class="size-6"
-               >
-                 <path
-                   stroke-linecap="round"
-                   stroke-linejoin="round"
-                   d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                 />
-               </svg>
              </div>
            </div>
          </div>
@@ -219,13 +188,19 @@
       </div>
       <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
         <div class="p-5">
-          <img class="h-32 lg:h-[125px] p-5" src="/img/coi-logo-updated.png" />
+          <a href="https://www.inmp.it/">
+            <img class="h-32 lg:h-40 p-5" src="/img/inmp-logo-piccolo-updated.png" />
+          </a>
         </div>
         <div class="p-5">
-          <img class="h-32 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+          <a href="https://fondazioneandi.org/">
+            <img class="h-32 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+          </a>
         </div>
         <div class="p-5">
-          <img class="h-32 lg:h-[150px] p-5" src="/img/inmp-logo-piccolo-updated.png" />
+          <a href="https://www.cooperazioneodontoiatrica.eu/">
+            <img class="h-32 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
+          </a>
         </div>
       </div>
     </div>
