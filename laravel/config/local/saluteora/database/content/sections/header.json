@@ -69,7 +69,8 @@
                 "name": "Dropdown Lang",
                 "type": "lang-switcher",
                 "data": {
-                    "view": "pub_theme::components.blocks.navigation.language-switcher"
+                    "view":"pub_theme::components.blocks.language-selector",
+                    "view1": "pub_theme::components.blocks.navigation.language-switcher"
                     
                 }
             }

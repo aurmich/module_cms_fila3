@@ -151,6 +151,8 @@ return array (
         'label' => 'Saturday morning to',
         'placeholder' => '12:00',
         'help' => 'Closing time for Saturday morning',
+        'description' => 'saturday.morning_to',
+        'helper_text' => 'saturday.morning_to',
       ),
       'afternoon_from' => 
       array (
@@ -158,6 +160,7 @@ return array (
         'placeholder' => '14:00',
         'help' => 'Opening time for Saturday afternoon',
         'description' => 'saturday.afternoon_from',
+        'helper_text' => 'saturday.afternoon_from',
       ),
       'afternoon_to' => 
       array (
