@@ -194,19 +194,45 @@ Notify/
 
 **File modificati**:
 - ✅ `lang/it/test_smtp.php` - Sistema test SMTP
-- ✅ `lang/it/send_email.php` - Invio email
+- ✅ `lang/it/send_email.php` - Invio email (RISOLTO CONFLITTO MERGE)
 
 **Modifiche principali**:
 - ✅ Conversione da `array()` a sintassi `[]` moderna
 - ✅ Aggiunta `declare(strict_types=1);` per tipizzazione rigorosa
-- ✅ Risoluzione conflitti di merge non risolti
-- ✅ Rimozione duplicazioni e campi `helper_text` vuoti
-- ✅ Miglioramento struttura e coerenza traduzioni
-- ✅ Validazione sintassi PHP con `php -l`
+- ✅ Risoluzione conflitto di merge con struttura espansa completa
+- ✅ Aggiunta campi mancanti: `scheduled_at`, `from_email`, `from_name`
+- ✅ Aggiunta opzioni per campo `priority` (normal, high, urgent)
+- ✅ Aggiunta azione `test_smtp` per test configurazione
+- ✅ Aggiunta sezioni per organizzazione form (`sections`)
+- ✅ Aggiunta placeholders per esempi di utilizzo
+- ✅ Miglioramento messaggi di validazione e feedback
+- ✅ Rimozione duplicazioni e campi non necessari
+- ✅ Conformità alle best practice Laraxot per traduzioni
 
-**Impatto**: Miglioramento qualità codice e conformità best practice Laraxot
+**Struttura migliorata**:
+```php
+// Struttura espansa completa per tutti i campi
+'fields' => [
+    'field_name' => [
+        'label' => 'Etichetta',
+        'placeholder' => 'Placeholder diverso',
+        'help' => 'Testo di aiuto specifico'
+    ]
+]
 
-Vedi [Translation Files Update 2025](../Lang/docs/translation_files_update_2025.md) per dettagli completi.
+// Sezioni per organizzazione form
+'sections' => [
+    'email_details' => [
+        'label' => 'Dettagli Email',
+        'description' => 'Informazioni principali dell\'email'
+    ]
+]
+
+// Placeholders per esempi
+'placeholders' => [
+    'json_parameters' => '{"nome": "Mario", "cognome": "Rossi"}'
+]
+```
 
 ## Note di Implementazione
 - Il modulo è in fase di aggiornamento per Laravel 12
