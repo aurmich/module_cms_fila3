@@ -11,11 +11,20 @@ class LocaleSwitcherRefresh extends Action
 
     public string $full_url='#';
     public string $lang='';
+    
 
     protected function setUp(): void
     {
+
         parent::setUp();
+        $lang_options= [
+            'en' => '🇬🇧 English',
+            'it' => '🇮🇹 Italiano',
+        ];
         $lang=session()->get('locale');
+        if(!is_string($lang)){
+            $lang='it';
+        }
         app()->setLocale($lang);
         $this->lang=app()->getLocale();
         $this->full_url=request()->fullUrl();
@@ -24,10 +33,7 @@ class LocaleSwitcherRefresh extends Action
             ->form([
                 \Filament\Forms\Components\Select::make('locale')
                     ->label('Seleziona lingua')
-                    ->options(config('app.supported_locales', [
-                        'en' => '🇬🇧 English',
-                        'it' => '🇮🇹 Italiano',
-                    ]))
+                    ->options($lang_options)
                     ->default($this->lang)
                     ->reactive()
                     ->required(),

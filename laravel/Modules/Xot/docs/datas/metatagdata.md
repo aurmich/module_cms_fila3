@@ -104,6 +104,6 @@ Restituisce il percorso del favicon.
    - **Soluzione**: Utilizzare `getFilamentColors()` per i colori formattati per Filament o `getAllColors()` per i colori non formattati
 
 ## Collegamenti
-- [Filament Best Practices](../FILAMENT-BEST-PRACTICES.md)
+- [Filament Best Practices](../filament-best-practices.md)
 - [PHPStan Common Exceptions](../PHPSTAN-COMMON-EXCEPTIONS.md)
 - [Data Queableactions](../DATA-QUEABLEACTIONS.md) 

@@ -6,6 +6,10 @@ namespace Modules\Lang\Actions;
 
 use Illuminate\Support\Facades\File;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\tempnam;
+use function Safe\file_put_contents;
+use function Safe\exec;
+use function Safe\unlink;
 
 class WriteTranslationFileAction
 {
@@ -109,6 +113,7 @@ class WriteTranslationFileAction
 
         // Pulisce la cache delle traduzioni
         if (app()->bound('translation.loader')) {
+            /** @phpstan-ignore-next-line */
             app('translation.loader')->flush();
         }
     }

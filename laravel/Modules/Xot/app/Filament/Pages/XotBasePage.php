@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Pages;
 
+use Filament\Actions\Action;
+use Filament\Facades\Filament;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Support\Str;
-use Filament\Actions\Action;
 use Webmozart\Assert\Assert;
-use Filament\Facades\Filament;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-use Filament\Forms\Contracts\HasForms;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Xot\Filament\Traits\TransTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Actions\View\GetViewByClassAction;
+use Modules\Xot\Filament\Traits\TransTrait;
 
 /**
  * Classe base astratta per tutte le pagine Filament non legate a risorse specifiche.

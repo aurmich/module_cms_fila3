@@ -122,7 +122,7 @@ mv /var/www/html/base_<nome progetto>/laravel/Modules/User/Filament/Widgets /var
 
 - [DIRECTORY-STRUCTURE-GUIDE.md](./DIRECTORY-STRUCTURE-GUIDE.md) - Guida completa alla struttura delle directory
 - [MODULE-STRUCTURE.md](./MODULE-STRUCTURE.md) - Struttura standard dei moduli
-- [NAMING-CONVENTIONS.md](./NAMING-CONVENTIONS.md) - Convenzioni di naming nel progetto
+- [naming-conventions.md](./naming-conventions.md) - Convenzioni di naming nel progetto
 
 ## Conclusione
 

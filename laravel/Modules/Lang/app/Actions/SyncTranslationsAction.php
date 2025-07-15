@@ -34,8 +34,8 @@ class SyncTranslationsAction
         foreach ($modules as $module) {
             $moduleResults = $this->syncModule($module, $sourceLang, $targetLangs);
             $results['modules'][$module] = $moduleResults;
-            $results['total_files'] += $moduleResults['files_processed'];
-            $results['total_translations'] += $moduleResults['translations_added'];
+            $results['total_files'] += (int) ($moduleResults['files_processed'] ?? 0);
+            $results['total_translations'] += (int) ($moduleResults['translations_added'] ?? 0);
             $results['total_modules']++;
         }
 
@@ -100,13 +100,15 @@ class SyncTranslationsAction
                 $targetTranslations = File::exists($targetFile) ? $this->loadTranslations($targetFile) : [];
 
                 // Merge translations
+                /** @var array<string, mixed> $sourceTranslations */
+                /** @var array<string, mixed> $targetTranslations */
                 $mergedTranslations = $this->mergeTranslations($sourceTranslations, $targetTranslations);
 
                 // Save merged translations
                 $this->saveTranslations($targetFile, $mergedTranslations);
 
                 $newKeys = count($mergedTranslations) - count($targetTranslations);
-                $translationsAdded += $newKeys;
+                $translationsAdded += (int) $newKeys;
             }
         }
 
@@ -159,6 +161,23 @@ class SyncTranslationsAction
     }
 
     /**
+     * Filtra un array per avere solo chiavi stringa (aiuta PHPStan).
+     *
+     * @param array<mixed, mixed> $arr
+     * @return array<string, mixed>
+     */
+    private function filterStringKeyArray(array $arr): array
+    {
+        $out = [];
+        foreach ($arr as $k => $v) {
+            if (is_string($k)) {
+                $out[$k] = $v;
+            }
+        }
+        return $out;
+    }
+
+    /**
      * Unisce le traduzioni sorgente con quelle target.
      *
      * @param array<string, mixed> $source Traduzioni sorgente
@@ -171,7 +190,9 @@ class SyncTranslationsAction
 
         foreach ($source as $key => $value) {
             if (is_array($value)) {
-                $merged[$key] = $this->mergeTranslations($value, $target[$key] ?? []);
+                /** @var array<string, mixed> $subTarget */
+                $subTarget = isset($target[$key]) && is_array($target[$key]) ? $this->filterStringKeyArray($target[$key]) : [];
+                $merged[$key] = $this->mergeTranslations($this->filterStringKeyArray($value), $subTarget);
             } else {
                 if (!isset($merged[$key])) {
                     $merged[$key] = $value;
@@ -192,7 +213,7 @@ class SyncTranslationsAction
     private function saveTranslations(string $filePath, array $translations): void
     {
         $content = "<?php\n\nreturn [\n";
-        $content .= $this->arrayToPhp($translations, 1);
+        $content .= $this->arrayToPhp($this->filterStringKeyArray($translations), 1);
         $content .= "];\n";
 
         File::put($filePath, $content);
@@ -215,7 +236,7 @@ class SyncTranslationsAction
 
             if (is_array($value)) {
                 $content .= "[\n";
-                $content .= $this->arrayToPhp($value, $indent + 1);
+                $content .= $this->arrayToPhp($this->filterStringKeyArray($value), $indent + 1);
                 $content .= $indentStr . "],\n";
             } else {
                 $content .= "'" . addslashes((string) $value) . "',\n";

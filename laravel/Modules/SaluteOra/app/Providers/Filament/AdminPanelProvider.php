@@ -10,9 +10,10 @@ use LaraZeus\Bolt\BoltPlugin;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Config;
 use Modules\SaluteOra\Enums\UserTypeEnum;
-use Filament\Http\Middleware\Authenticate;
 
+use Filament\Http\Middleware\Authenticate;
 use Filament\SpatieLaravelTranslatablePlugin;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -55,8 +56,9 @@ class AdminPanelProvider extends XotBasePanelProvider
         // Applica tenancy e calendar
         $panel = app(ApplyTenancyToPanelAction::class)->execute($panel);
         $panel = app(ApplyCalendarToPanelAction::class)->execute($panel);
+        $defaultLocale=Config::string('app.locale');
 
-        $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()->defaultLocales([config('app.locale')]);
+        $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make();//->defaultLocales([config('app.locale')]);
         $boltPlugin = BoltPlugin::make();
 
         $plugins = [

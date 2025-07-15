@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Spatie\QueueableAction\QueueableAction;
 use Modules\Xot\Actions\Module\GetModulePathByGeneratorAction;
+use function Safe\glob;
 
 class GetAllTranslationAction
 {
@@ -20,7 +21,7 @@ class GetAllTranslationAction
     public function execute(): array
     {
         $lang=session()->get('locale');
-        if(in_array($lang,['it','en'])){
+        if(is_string($lang) && in_array($lang,['it','en'])){
             app()->setLocale($lang);
         }
 

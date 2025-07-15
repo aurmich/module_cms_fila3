@@ -270,7 +270,7 @@ php artisan migrate:status --path=vendor/lara-zeus/bolt/database/migrations
 
 ### Conventions
 - [Laraxot Conventions](../../docs/laraxot_conventions.md)
-- [Filament Best Practices](../../docs/FILAMENT-BEST-PRACTICES.md)
+- [Filament Best Practices](../../docs/filament-best-practices.md)
 
 *Ultimo aggiornamento: Gennaio 2025*
 *Maintainer: Sviluppatori SaluteOra* 

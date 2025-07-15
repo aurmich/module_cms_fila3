@@ -28,7 +28,7 @@ L'azione accetta un'istanza di `Panel` come parametro di riferimento e applica l
 4. Documentazione PHPStan per gestire i type hints
 
 ## Collegamenti
-- [Filament Best Practices](../FILAMENT-BEST-PRACTICES.md)
+- [Filament Best Practices](../filament-best-practices.md)
 - [PHPStan Guidelines](../PHPSTAN-LEVEL9-GUIDE.md)
 - [Spatie QueueableAction Documentation](../DATA-QUEABLEACTIONS.md)
 

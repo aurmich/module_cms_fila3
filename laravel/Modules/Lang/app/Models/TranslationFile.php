@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 use Modules\Lang\Actions\GetAllTranslationAction;
 use Modules\Lang\Actions\ReadTranslationFileAction;
 use Modules\Lang\Actions\WriteTranslationFileAction;
+use function Safe\json_encode;
 
 class TranslationFile extends BaseModel
 {

@@ -25,6 +25,9 @@ class TranslationEditor extends Field
     {
         $components = [];
         $state = $this->getState() ?? [];
+        if(!is_iterable($state)){
+            return $components;
+        }
 
         foreach ($state as $key => $value) {
             if (is_array($value)) {

@@ -19,7 +19,7 @@ class FieldOption extends BaseModel
     protected $fillable = ['name', 'key', 'type'];
 
 
-    public static function setType($type)
+    public static function setType(string $type): string
     {
         self::$type = $type;
         return self::class;

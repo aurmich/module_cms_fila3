@@ -18,7 +18,7 @@ Secondo le regole di organizzazione della documentazione:
 ## Convenzioni e Regole
 
 - [Convenzioni Namespace](../../Xot/docs/NAMESPACE-CONVENTIONS.md) - Regole per i namespace
-- [Convenzioni di Nomenclatura](../../Xot/docs/NAMING-CONVENTIONS.md) - Regole per la nomenclatura
+- [Convenzioni di Nomenclatura](../../Xot/docs/naming-conventions.md) - Regole per la nomenclatura
 
 ## Collegamento Bidirezionale
 

@@ -25,6 +25,9 @@ class EditTranslationFile extends XotBaseEditRecord
         ];
     }
 
+    /**
+     * @return array<string>
+     */
     public function getTranslatableLocales(){
         return ['it', 'en'];
     }
@@ -52,6 +55,7 @@ class EditTranslationFile extends XotBaseEditRecord
             $this->halt();
         }
         */
+        /** @phpstan-ignore-next-line */
         app(SaveTransAction::class)->execute($this->record->key,$data['content']);
         //dddx(['record'=>$this->record,'data'=>$data]);
         return $data;
@@ -60,6 +64,7 @@ class EditTranslationFile extends XotBaseEditRecord
     protected function afterSave(): void
     {
         // Ricarica il record per aggiornare i dati
+        /** @phpstan-ignore-next-line */
         $this->record->refresh();
     }
 

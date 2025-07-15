@@ -62,11 +62,6 @@ return [
             'label' => 'Priorità',
             'placeholder' => 'Seleziona la priorità dell\'email',
             'help' => 'Priorità dell\'email (normale, alta, urgente)',
-            'options' => [
-                'normal' => 'Normale',
-                'high' => 'Alta',
-                'urgent' => 'Urgente',
-            ],
         ],
     ],
     'actions' => [
