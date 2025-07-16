@@ -44,11 +44,9 @@ new class extends Component {
             <h1 class="text-center">@lang('pub_theme::appointment.hero.entry_appointments.title')</h1>
         </div>
     </div>
-    {{--  
-    @each('pub_theme::appointment.doctor-pending-item', $appointments, 'appointment','pub_theme::appointment.doctor-pending-empty')
-    --}}
+   
       <div>
-    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'state' => 'pending'])
+    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'states' => ['pending']])
     </div>
     
 </div>

@@ -1,150 +1,151 @@
-# Gestione delle Traduzioni in SaluteOra
+# Traduzioni del Modulo SaluteOra
 
-## Struttura delle Traduzioni
+## Panoramica
 
-Le traduzioni in SaluteOra seguono una struttura standardizzata per garantire consistenza e manutenibilità:
+Il modulo SaluteOra gestisce la traduzione di tutti i componenti relativi alla gestione degli appuntamenti sanitari, inclusi gli appuntamenti dei dottori, stati degli appuntamenti e azioni correlate.
 
-### Struttura Base
+## File di Traduzione
+
+### doctor_appointments.php
+
+Gestisce le traduzioni per la gestione degli appuntamenti dei dottori.
+
+#### Struttura
+
 ```php
-return [
-    'name' => 'Nome Modulo',
-    'navigation' => [
-        'label' => 'Etichetta Navigazione',
-        'sort' => 37, // Ordine nel menu
-        'icon' => 'heroicon-o-user-group',
-        'color' => 'primary'
+'actions' => [
+    'delete' => [
+        'label' => 'Elimina',
+        'tooltip' => 'Elimina questo appuntamento',
+        'confirmation' => 'Sei sicuro di voler eliminare questo appuntamento?',
+        'success' => 'Appuntamento eliminato con successo',
+        'error' => 'Errore durante l\'eliminazione dell\'appuntamento',
     ],
-    'fields' => [
-        'field_name' => [
-            'label' => 'Etichetta Campo',
-            'placeholder' => 'Testo Placeholder',
-            'helper_text' => 'Testo di Aiuto',
-            'description' => 'Descrizione Dettagliata',
-            'tooltip' => 'Tooltip al Passaggio del Mouse'
-        ]
-    ]
-];
-```
-
-### Regole Importanti
-
-1. **Struttura dei Campi**
-   - Ogni campo deve avere almeno una `label`
-   - I campi di input devono avere un `placeholder`
-   - Usare `helper_text` per suggerimenti brevi
-   - Usare `description` per spiegazioni più dettagliate
-   - Usare `tooltip` per informazioni contestuali
-
-2. **Navigazione**
-   - Non usare mai `.navigation` come suffisso
-   - Includere sempre `sort` per l'ordine nel menu
-   - Specificare `icon` e `color` per la coerenza visiva
-
-3. **Steps**
-   - Ogni step deve avere `label` e `description`
-   - Includere `icon` e `color` per la coerenza visiva
-   - Mantenere una struttura gerarchica chiara
-
-4. **Actions**
-   - Ogni azione deve avere una `label`
-   - Includere `tooltip` per spiegazioni contestuali
-   - Per le azioni modali, includere `heading` e `description`
-
-5. **Messages**
-   - Organizzare i messaggi in categorie (success, errors, confirmations)
-   - Mantenere un tono professionale e chiaro
-   - Includere messaggi per tutte le azioni CRUD
-
-### Best Practices
-
-1. **Organizzazione**
-   - Mantenere le traduzioni nella cartella `lang` del modulo
-   - Evitare duplicati tra `resources/lang` e `lang`
-   - Usare namespace coerenti (`saluteora::`)
-
-2. **Naming**
-   - Usare nomi descrittivi e in inglese per le chiavi
-   - Mantenere una struttura gerarchica logica
-   - Evitare chiavi troppo lunghe o complesse
-
-3. **Manutenzione**
-   - Aggiornare le traduzioni quando si aggiungono nuovi campi
-   - Mantenere la coerenza tra le diverse lingue
-   - Documentare eventuali eccezioni o casi speciali
-
-4. **Validazione**
-   - Verificare che tutte le chiavi necessarie siano presenti
-   - Controllare la coerenza tra le diverse lingue
-   - Testare le traduzioni in contesto
-
-### Esempi di Implementazione
-
-#### Campo Base
-```php
-'email' => [
-    'label' => 'Email',
-    'placeholder' => 'Inserisci l\'indirizzo email',
-    'helper_text' => 'Indirizzo email valido',
-    'description' => 'Email per le comunicazioni',
-    'tooltip' => 'Verrà utilizzata per le comunicazioni importanti'
-]
-```
-
-#### Step
-```php
-'personal_data_step' => [
-    'label' => 'Dati Personali',
-    'description' => 'Inserisci i tuoi dati personali',
-    'icon' => 'heroicon-o-user',
-    'color' => 'primary'
-]
-```
-
-#### Action
-```php
-'create' => [
-    'label' => 'Nuovo Paziente',
-    'tooltip' => 'Crea una nuova scheda paziente',
-    'modal' => [
-        'heading' => 'Crea Nuovo Paziente',
-        'description' => 'Inserisci i dati del nuovo paziente'
-    ]
-]
-```
-
-## Regole pratiche per le traduzioni
-
-- Non usare mai chiavi che terminano con `.navigation`.
-- Le label devono essere localizzate e descrittive.
-- Aggiorna sempre i file lang quando aggiungi nuovi campi o azioni.
-- Se una traduzione manca, aggiungila subito e documenta la struttura.
-
-### Esempio di struttura corretta
-```php
-'navigation' => [
-    'label' => 'Gestione Pazienti',
-    'group' => 'Pazienti',
-    'icon' => 'heroicon-o-user-group',
-    'color' => 'primary',
+    // Altre azioni...
+],
+'states' => [
+    'pending' => [
+        'label' => 'In Attesa',
+        'color' => 'warning',
+        'bg_color' => '#FEF3C7',
+        'icon' => 'heroicon-o-clock',
+        'description' => 'Appuntamento in attesa di conferma',
+    ],
+    // Altri stati...
 ],
 'fields' => [
-    'first_name' => [
-        'label' => 'Nome',
-        'placeholder' => 'Inserisci il nome',
-        'helper_text' => 'Nome del paziente',
-        'description' => 'Il nome anagrafico del paziente',
-        'tooltip' => 'Deve corrispondere al nome sul documento d\'identità'
+    'message' => [
+        'label' => 'Messaggio',
+        'placeholder' => 'Inserisci un messaggio per il paziente',
+        'helper_text' => 'Il messaggio verrà inviato al paziente',
+        'description' => 'Messaggio personalizzato per il paziente',
     ],
-    // ...
+    // Altri campi...
 ],
 ```
 
-- Se trovi chiavi `.navigation`, correggile subito e aggiorna la documentazione.
+#### Azioni Supportate
 
-# ⚠️ ATTENZIONE: Mai usare ->label() nei componenti Filament
+- **delete**: Eliminazione appuntamento
+- **accept**: Accettazione appuntamento
+- **confirm**: Conferma appuntamento
+- **reject**: Rifiuto appuntamento
+- **reschedule**: Riprogrammazione appuntamento
+- **complete**: Completamento appuntamento
+- **cancel**: Annullamento appuntamento
+- **view_details**: Visualizzazione dettagli
+- **edit**: Modifica appuntamento
+- **generate_report**: Generazione report
+- **send_reminder**: Invio promemoria
+- **add_note**: Aggiunta note
 
-- Tutte le label, placeholder, help, tooltip, description devono essere gestite tramite i file di traduzione del modulo.
-- La presenza di `->label()` è un errore da correggere ovunque.
-- Consulta anche:
-  - [Regole traduzioni Filament](../../Lang/docs/filament-translations.md)
-  - [Regole generali Xot](../../Xot/docs/README.md)
+#### Stati Supportati
+
+- **pending**: In attesa di conferma
+- **confirmed**: Confermato dal dottore
+- **rejected**: Rifiutato dal dottore
+- **completed**: Completato con successo
+- **cancelled**: Annullato
+- **rescheduled**: Riprogrammato per nuova data
+- **in_progress**: Attualmente in corso
+
+### appointment.php
+
+Gestisce le traduzioni per la gestione generale degli appuntamenti.
+
+### states.php
+
+Gestisce le traduzioni per gli stati degli appuntamenti.
+
+### actions.php
+
+Gestisce le traduzioni per le azioni generali del modulo.
+
+## Lingue Supportate
+
+- **Italiano (it)**: Lingua principale
+- **Inglese (en)**: Traduzioni complete
+- **Tedesco (de)**: Traduzioni complete
+
+## Convenzioni
+
+1. **Struttura Espansa**: Tutti i campi utilizzano la struttura espansa con `label`, `placeholder`, `helper_text` e `description`
+2. **Sintassi Array**: Utilizzo della sintassi breve `[]` invece di `array()`
+3. **Strict Types**: Tutti i file includono `declare(strict_types=1);`
+4. **Naming**: Chiavi in inglese, valori tradotti nella lingua target
+5. **Azioni Complete**: Ogni azione include `label`, `tooltip`, `confirmation`, `success` e `error`
+6. **Stati Completi**: Ogni stato include `label`, `color`, `bg_color`, `icon` e `description`
+
+## Utilizzo
+
+### In Componenti Filament
+
+```php
+Actions\DeleteAction::make()
+    ->label(__('saluteora::doctor_appointments.actions.delete.label'))
+    ->tooltip(__('saluteora::doctor_appointments.actions.delete.tooltip'))
+    ->requiresConfirmation()
+    ->modalHeading(__('saluteora::doctor_appointments.actions.delete.confirmation'))
+    ->successNotificationTitle(__('saluteora::doctor_appointments.actions.delete.success'))
+```
+
+### In Stati degli Appuntamenti
+
+```php
+Tables\Columns\BadgeColumn::make('status')
+    ->label(__('saluteora::doctor_appointments.states.pending.label'))
+    ->color(__('saluteora::doctor_appointments.states.pending.color'))
+    ->icon(__('saluteora::doctor_appointments.states.pending.icon'))
+```
+
+### In Campi del Form
+
+```php
+Forms\Components\Textarea::make('message')
+    ->label(__('saluteora::doctor_appointments.fields.message.label'))
+    ->placeholder(__('saluteora::doctor_appointments.fields.message.placeholder'))
+    ->helperText(__('saluteora::doctor_appointments.fields.message.helper_text'))
+```
+
+### In Messaggi
+
+```php
+Notification::make()
+    ->title(__('saluteora::doctor_appointments.messages.appointment_accepted'))
+    ->success();
+```
+
+## Manutenzione
+
+- Aggiornare le traduzioni quando si aggiungono nuove azioni o stati
+- Mantenere coerenza tra le tre lingue
+- Verificare che tutti i messaggi di errore siano tradotti
+- Testare le traduzioni in tutti i contesti di utilizzo
+- Aggiornare la documentazione quando si modificano le traduzioni
+
+## Collegamenti
+
+- [Documentazione Generale SaluteOra](../structure.md)
+- [Best Practice Traduzioni](../../../docs/translation-standards.md)
+- [Convenzioni Laraxot](../../../docs/laraxot_conventions.md)
+- [Gestione Stati Appuntamenti](../appointment_states.md)

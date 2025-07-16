@@ -42,6 +42,7 @@ class LangServiceProvider extends XotBaseServiceProvider
         // $this->registerTranslator();
         $this->translatableComponents();
         $this->registerFilamentLabel();
+        
     }
 
     public function register(): void
@@ -115,9 +116,11 @@ class LangServiceProvider extends XotBaseServiceProvider
 
             return $component;
         });
+
+        
         Step::configureUsing(function (Step $component) {
             $component = app(AutoLabelAction::class)->execute($component);
-
+            
             // ->translateLabel()
             return $component;
         });

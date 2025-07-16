@@ -46,6 +46,8 @@ class Report extends BaseModel{
         'specify_plaque', // Se sì, specificare
         'more_info_plaque', // Specifica ulteriore
         'needs_more_dental_care', // La Paziente necessita di ulteriori cure odontoiatriche?
-        'further_notes' // Inserisci ulteriori specifiche
+        'further_notes', // Inserisci ulteriori specifiche
+
+        'invoice', //file fattura
     ];
 }

@@ -19,18 +19,29 @@
             <!-- Actions -->
             <div class="cursor-pointer flex flex-row items-center">
                 {{ ($this->infoAction)(['appointment' => $appointment->id]) }}
+                @foreach($this->all_states as $state=>$stateClass)
+                @if($this->canTransitionTo($appointment->id,$stateClass))
+                    @php
+                        $action=Str::camel($state).'Action';
+                    @endphp
+                   {{ ($this->$action)(['appointment' => $appointment->id]) }} 
+                @endif
+                @endforeach
+                
+                {{--  
                 @if ($this->confirmAction->isVisible())
                 {{ ($this->confirmAction)(['appointment' => $appointment->id]) }}
                 @endif
 
                 
                 @if ($this->reportAction->isVisible())
-                {{ $this->reportAction }}
+                {{ ($this->reportAction)(['appointment' => $appointment->id]) }}
                 @endif
 
                 @if ($this->rejectAction->isVisible())
                 {{ ($this->rejectAction)(['appointment' => $appointment->id]) }}
                 @endif
+                --}}
             </div>
         </div>
     </div>

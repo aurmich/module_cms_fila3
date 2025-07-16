@@ -18,6 +18,9 @@ use function Safe\strtotime;
 use Illuminate\Support\View;
 use Webmozart\Assert\Assert;
 use Modules\Geo\Models\Comune;
+use Modules\Geo\Models\Region;
+use Modules\Geo\Models\Locality;
+use Modules\Geo\Models\Province;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Modules\SaluteOra\Models\Doctor;
@@ -184,12 +187,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         return [
             'region' => Select::make('region')
                 ->options(function () {
-                    return Comune::select('regione')
-                    ->distinct()
-                    ->orderBy('regione->nome')
-                    ->get()
-                    ->pluck('regione.nome','regione.codice')
-                    ->toArray();
+                    return Region::orderBy('name')->get()->pluck("name", "id");
                 })
                 ->searchable()
                 ->required()
@@ -204,14 +202,11 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                     if (!$region) {
                         return [];
                     }
-                    return Comune::query()
-                        ->where('regione->codice', $region)
-                        ->select('provincia')
-                        ->distinct()
-                        ->orderBy('provincia->nome')
-                        ->get()
-                        ->pluck('provincia.nome', 'provincia.codice')
-                        ->toArray();
+                    return Province::where('region_id',$region)
+                    ->orderBy('name')
+                    ->get()
+                    ->pluck("name", "id")
+                    ->toArray();
                 })
                 ->searchable()
                 ->required()
@@ -227,14 +222,16 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                     if (!$province) {
                         return [];
                     }
-                    return Comune::query()
-                        ->where('regione->codice', $region)
-                        ->where('provincia->codice', $province)
-                        ->select('cap')
+                   
+                    return Locality::query()
+                        ->where('region_id', $region)
+                        ->where('province_id', $province)
+                        //->when($city, fn($query) => $query->where('id', $city))
+                        ->select('postal_code')
                         ->distinct()
-                        ->orderBy('cap')
+                        ->orderBy('postal_code')
                         ->get()
-                        ->pluck('cap.0', 'cap.0')
+                        ->pluck('postal_code', 'postal_code')
                         ->toArray();
                 })
                 ->searchable()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'title' => 'Arzttermine',
     'description' => 'Terminverwaltung für Ärzte',
@@ -8,40 +10,85 @@ return [
             'label' => 'Löschen',
             'tooltip' => 'Diesen Termin löschen',
             'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin löschen möchten?',
+            'success' => 'Termin erfolgreich gelöscht',
+            'error' => 'Fehler beim Löschen des Termins',
         ],
         'accept' => [
             'label' => 'Akzeptieren',
             'tooltip' => 'Diesen Termin akzeptieren',
             'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin akzeptieren möchten?',
+            'success' => 'Termin erfolgreich akzeptiert',
+            'error' => 'Fehler beim Akzeptieren des Termins',
         ],
         'confirm' => [
             'label' => 'Bestätigen',
             'tooltip' => 'Diesen Termin bestätigen',
             'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin bestätigen möchten?',
+            'success' => 'Termin erfolgreich bestätigt',
+            'error' => 'Fehler beim Bestätigen des Termins',
         ],
-        'confirmed' => [
-            'label' => 'Bestätigt',
-            'tooltip' => 'Termin bestätigt',
-        ],
-        'confirmAction' => [
-            'label' => 'Bestätigungsaktion',
-            'tooltip' => 'Bestätigungsaktion ausführen',
-        ],
-        'rejectAction' => [
+        'reject' => [
             'label' => 'Ablehnen',
             'tooltip' => 'Diesen Termin ablehnen',
             'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin ablehnen möchten?',
+            'success' => 'Termin erfolgreich abgelehnt',
+            'error' => 'Fehler beim Ablehnen des Termins',
         ],
-        'info' => [
-            'label' => 'Informationen',
-            'tooltip' => 'Detaillierte Informationen anzeigen',
+        'reschedule' => [
+            'label' => 'Verschieben',
+            'tooltip' => 'Diesen Termin verschieben',
+            'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin verschieben möchten?',
+            'success' => 'Termin erfolgreich verschoben',
+            'error' => 'Fehler beim Verschieben des Termins',
         ],
-        'report' => [
+        'complete' => [
+            'label' => 'Abschließen',
+            'tooltip' => 'Diesen Termin abschließen',
+            'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin abschließen möchten?',
+            'success' => 'Termin erfolgreich abgeschlossen',
+            'error' => 'Fehler beim Abschließen des Termins',
+        ],
+        'cancel' => [
+            'label' => 'Stornieren',
+            'tooltip' => 'Diesen Termin stornieren',
+            'confirmation' => 'Sind Sie sicher, dass Sie diesen Termin stornieren möchten?',
+            'success' => 'Termin erfolgreich storniert',
+            'error' => 'Fehler beim Stornieren des Termins',
+        ],
+        'view_details' => [
+            'label' => 'Details anzeigen',
+            'tooltip' => 'Vollständige Termindetails anzeigen',
+        ],
+        'edit' => [
+            'label' => 'Bearbeiten',
+            'tooltip' => 'Diesen Termin bearbeiten',
+            'success' => 'Termin erfolgreich aktualisiert',
+            'error' => 'Fehler beim Aktualisieren des Termins',
+        ],
+        'generate_report' => [
             'label' => 'Bericht erstellen',
+            'tooltip' => 'Einen Bericht für diesen Termin erstellen',
             'modal_heading' => 'Berichterstellung',
             'modal_description' => 'Sind Sie sicher, dass Sie einen Bericht für diesen Termin erstellen möchten?',
             'modal_icon' => 'heroicon-o-document-text',
             'icon' => 'heroicon-o-document-text',
+            'success' => 'Bericht erfolgreich erstellt',
+            'error' => 'Fehler beim Erstellen des Berichts',
+        ],
+        'send_reminder' => [
+            'label' => 'Erinnerung senden',
+            'tooltip' => 'Eine Erinnerung an den Patienten senden',
+            'confirmation' => 'Sind Sie sicher, dass Sie eine Erinnerung an den Patienten senden möchten?',
+            'success' => 'Erinnerung erfolgreich gesendet',
+            'error' => 'Fehler beim Senden der Erinnerung',
+        ],
+        'add_note' => [
+            'label' => 'Notiz hinzufügen',
+            'tooltip' => 'Eine Notiz zum Termin hinzufügen',
+            'modal_heading' => 'Notiz hinzufügen',
+            'modal_description' => 'Geben Sie eine Notiz für diesen Termin ein',
+            'success' => 'Notiz erfolgreich hinzugefügt',
+            'error' => 'Fehler beim Hinzufügen der Notiz',
         ],
     ],
     'messages' => [
@@ -49,7 +96,13 @@ return [
         'appointment_confirmed' => 'Termin erfolgreich bestätigt',
         'appointment_rejected' => 'Termin erfolgreich abgelehnt',
         'appointment_deleted' => 'Termin erfolgreich gelöscht',
+        'appointment_rescheduled' => 'Termin erfolgreich verschoben',
+        'appointment_completed' => 'Termin erfolgreich abgeschlossen',
+        'appointment_cancelled' => 'Termin erfolgreich storniert',
+        'appointment_updated' => 'Termin erfolgreich aktualisiert',
         'error_occurred' => 'Ein Fehler ist aufgetreten',
+        'no_appointments_found' => 'Keine Termine gefunden',
+        'appointment_not_found' => 'Termin nicht gefunden',
     ],
     'status' => [
         'pending' => 'Ausstehend',
@@ -57,6 +110,8 @@ return [
         'rejected' => 'Abgelehnt',
         'completed' => 'Abgeschlossen',
         'cancelled' => 'Storniert',
+        'rescheduled' => 'Verschoben',
+        'in_progress' => 'In Bearbeitung',
     ],
     'states' => [
         'pending' => [
@@ -64,38 +119,95 @@ return [
             'color' => 'warning',
             'bg_color' => '#FEF3C7',
             'icon' => 'heroicon-o-clock',
+            'description' => 'Termin wartet auf Bestätigung',
         ],
         'confirmed' => [
             'label' => 'Bestätigt',
             'color' => 'success',
             'bg_color' => '#D1FAE5',
             'icon' => 'heroicon-o-check-circle',
+            'description' => 'Termin vom Arzt bestätigt',
         ],
         'rejected' => [
             'label' => 'Abgelehnt',
             'color' => 'danger',
             'bg_color' => '#FEE2E2',
             'icon' => 'heroicon-o-x-circle',
+            'description' => 'Termin vom Arzt abgelehnt',
         ],
         'completed' => [
             'label' => 'Abgeschlossen',
             'color' => 'success',
             'bg_color' => '#ECFDF5',
             'icon' => 'heroicon-o-check-badge',
+            'description' => 'Termin erfolgreich abgeschlossen',
         ],
         'cancelled' => [
             'label' => 'Storniert',
             'color' => 'gray',
             'bg_color' => '#F3F4F6',
             'icon' => 'heroicon-o-no-symbol',
+            'description' => 'Termin storniert',
+        ],
+        'rescheduled' => [
+            'label' => 'Verschoben',
+            'color' => 'info',
+            'bg_color' => '#DBEAFE',
+            'icon' => 'heroicon-o-arrow-path',
+            'description' => 'Termin für neuen Termin verschoben',
+        ],
+        'in_progress' => [
+            'label' => 'In Bearbeitung',
+            'color' => 'primary',
+            'bg_color' => '#E0E7FF',
+            'icon' => 'heroicon-o-play-circle',
+            'description' => 'Termin läuft derzeit',
         ],
     ],
     'fields' => [
         'message' => [
-            'description' => 'Nachricht',
-            'helper_text' => '',
-            'placeholder' => '',
             'label' => 'Nachricht',
+            'placeholder' => 'Geben Sie eine Nachricht für den Patienten ein',
+            'helper_text' => 'Die Nachricht wird an den Patienten gesendet',
+            'description' => 'Benutzerdefinierte Nachricht für den Patienten',
+        ],
+        'note' => [
+            'label' => 'Notiz',
+            'placeholder' => 'Geben Sie eine private Notiz ein',
+            'helper_text' => 'Diese Notiz ist nur für Ärzte sichtbar',
+            'description' => 'Private Notiz für Ärzte',
+        ],
+        'reason' => [
+            'label' => 'Grund',
+            'placeholder' => 'Geben Sie den Grund für Ablehnung/Stornierung ein',
+            'helper_text' => 'Der Grund wird dem Patienten mitgeteilt',
+            'description' => 'Grund für Ablehnung oder Stornierung',
+        ],
+        'new_date' => [
+            'label' => 'Neues Datum',
+            'placeholder' => 'Wählen Sie das neue Datum',
+            'helper_text' => 'Wählen Sie das neue Datum für den Termin',
+            'description' => 'Neues Datum für den verschobenen Termin',
+        ],
+        'new_time' => [
+            'label' => 'Neue Uhrzeit',
+            'placeholder' => 'Wählen Sie die neue Uhrzeit',
+            'helper_text' => 'Wählen Sie die neue Uhrzeit für den Termin',
+            'description' => 'Neue Uhrzeit für den verschobenen Termin',
+        ],
+    ],
+    'filters' => [
+        'status' => [
+            'label' => 'Status',
+            'placeholder' => 'Nach Status filtern',
+        ],
+        'date_range' => [
+            'label' => 'Datumsbereich',
+            'placeholder' => 'Datumsbereich auswählen',
+        ],
+        'patient' => [
+            'label' => 'Patient',
+            'placeholder' => 'Nach Patient filtern',
         ],
     ],
 ];

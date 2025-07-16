@@ -25,7 +25,13 @@ class Locality extends BaseModel
         $rows=Comune::select("regione->codice as region_id","provincia->codice as province_id","nome as name","codice as id","cap as postal_code")
             ->distinct()
             ->orderBy("nome")
-            ->get();
+            ->get()
+            ->map(function($row){
+                $postal_code=json_decode($row->postal_code)[0];
+                $row->postal_code=$postal_code;
+                return $row;
+            });
+            
        
         return $rows->toArray();
     }

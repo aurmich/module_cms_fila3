@@ -48,6 +48,14 @@ return array (
       'color' => 'primary',
       'tooltip' => 'Dati anagrafici e personali del medico',
     ),
+    'personal_info_step' => 
+    array (
+      'label' => 'Informazioni Personali',
+      'description' => 'Inserisci le informazioni personali',
+      'icon' => 'heroicon-o-user',
+      'color' => 'primary',
+      'tooltip' => 'Dati anagrafici e personali del medico',
+    ),
     'moderation' => 
     array (
       'label' => 'Moderazione',
@@ -88,13 +96,31 @@ return array (
       'color' => 'blue',
       'tooltip' => 'Dati dello studio dove opera',
     ),
+    'studio_step' => 
+    array (
+      'label' => 'Studio',
+      'description' => 'Informazioni dello studio medico',
+      'icon' => 'heroicon-o-building-office-2',
+      'color' => 'blue',
+      'tooltip' => 'Dati dello studio dove opera',
+    ),
     'privacy_step' => 
     array (
       'label' => 'Privacy e Consensi',
       'description' => 'Consenso al trattamento dati e comunicazioni marketing',
       'icon' => 'heroicon-o-shield-check',
       'color' => 'info',
-      'help' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
+      'tooltip' => 'Gestione consensi privacy e marketing',
+      'helper_text' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
+    ),
+    'availability_step' => 
+    array (
+      'label' => 'Disponibilità',
+      'description' => 'Gestione orari e giorni di disponibilità',
+      'icon' => 'heroicon-o-calendar',
+      'color' => 'emerald',
+      'tooltip' => 'Configurazione degli orari e dei giorni di disponibilità',
+      'helper_text' => '',
     ),
   ),
   'fields' => 
@@ -103,89 +129,97 @@ return array (
     array (
       'label' => 'ID',
       'placeholder' => 'Identificativo del medico',
-      'help' => 'Identificativo univoco del medico',
+      'tooltip' => 'Identificativo univoco del medico',
       'helper_text' => '',
-      'description' => 'id',
+      'description' => 'Identificativo univoco del medico',
     ),
     'first_name' => 
     array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
-      'help' => 'Nome come registrato all\'Ordine',
+      'tooltip' => 'Nome come registrato all\'Ordine',
       'helper_text' => '',
-      'description' => 'first_name',
+      'description' => 'Nome anagrafico del medico',
     ),
     'last_name' => 
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
-      'help' => 'Cognome come registrato all\'Ordine',
+      'tooltip' => 'Cognome come registrato all\'Ordine',
       'helper_text' => '',
-      'description' => 'last_name',
+      'description' => 'Cognome anagrafico del medico',
     ),
     'full_name' => 
     array (
       'label' => 'Nome e Cognome',
       'placeholder' => 'Inserisci nome e cognome completi',
-      'help' => 'Nome e cognome come registrati all\'Ordine',
+      'tooltip' => 'Nome e cognome come registrati all\'Ordine',
       'helper_text' => '',
+      'description' => 'Nome e cognome completi del medico',
     ),
     'email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'medico@example.com',
-      'help' => 'Indirizzo email professionale',
+      'tooltip' => 'Indirizzo email professionale',
       'helper_text' => '',
-      'description' => 'email',
+      'description' => 'Indirizzo email per comunicazioni professionali',
     ),
     'phone' => 
     array (
       'label' => 'Telefono',
       'placeholder' => '+39 123 456 7890',
-      'help' => 'Numero di telefono professionale',
+      'tooltip' => 'Numero di telefono professionale',
       'helper_text' => '',
+      'description' => 'Numero di telefono per contatti professionali',
     ),
     'address' => 
     array (
       'label' => 'Indirizzo',
       'placeholder' => 'Via Roma, 123',
-      'help' => 'Indirizzo dello studio medico',
+      'tooltip' => 'Indirizzo dello studio medico',
       'helper_text' => '',
+      'description' => 'Indirizzo completo dello studio',
     ),
     'city' => 
     array (
       'label' => 'Città',
       'placeholder' => 'Inserisci la città',
-      'help' => 'Città dove si trova lo studio',
+      'tooltip' => 'Città dove si trova lo studio',
       'helper_text' => '',
+      'description' => 'Città di ubicazione dello studio',
     ),
     'registration_number' => 
     array (
       'label' => 'Numero di Iscrizione',
       'placeholder' => 'Inserisci il numero di iscrizione',
-      'help' => 'Numero di iscrizione all\'Ordine dei Medici',
+      'tooltip' => 'Numero di iscrizione all\'Ordine dei Medici',
       'helper_text' => '',
+      'description' => 'Numero di iscrizione all\'Ordine Professionale',
     ),
     'vat_number' => 
     array (
       'label' => 'Partita IVA',
       'placeholder' => 'Inserisci la Partita IVA',
-      'help' => 'Partita IVA per fatturazione',
+      'tooltip' => 'Partita IVA per fatturazione',
       'helper_text' => '',
+      'description' => 'Partita IVA per attività professionale',
     ),
     'specialization' => 
     array (
       'label' => 'Specializzazione',
       'placeholder' => 'Seleziona la specializzazione',
-      'help' => 'Specializzazione medica principale',
+      'tooltip' => 'Specializzazione medica principale',
       'helper_text' => '',
+      'description' => 'Specializzazione medica del dottore',
     ),
     'status' => 
     array (
       'label' => 'Stato',
       'placeholder' => 'Seleziona lo stato',
-      'help' => 'Stato del profilo medico',
+      'tooltip' => 'Stato del profilo medico',
       'helper_text' => '',
+      'description' => 'Stato attuale del profilo medico',
       'options' => 
       array (
         'active' => 'Attivo',
@@ -198,43 +232,49 @@ return array (
     array (
       'label' => 'Certificazione',
       'placeholder' => 'Carica la certificazione',
-      'help' => 'Documento di iscrizione all\'Ordine dei Medici',
+      'tooltip' => 'Documento di iscrizione all\'Ordine dei Medici',
       'helper_text' => '',
+      'description' => 'Certificazione di iscrizione all\'Ordine',
     ),
     'certificates' => 
     array (
       'label' => 'Certificati',
       'placeholder' => 'Carica i certificati',
-      'help' => 'Certificati e specializzazioni professionali',
+      'tooltip' => 'Certificati e specializzazioni professionali',
       'helper_text' => '',
+      'description' => 'Certificati professionali e specializzazioni',
     ),
     'certifications' => 
     array (
       'label' => 'Certificazioni',
       'placeholder' => 'Carica le certificazioni',
-      'help' => 'Documenti attestanti le qualifiche professionali',
+      'tooltip' => 'Documenti attestanti le qualifiche professionali',
       'helper_text' => '',
+      'description' => 'Documenti di certificazione professionale',
     ),
     'moderation_notes' => 
     array (
       'label' => 'Note Moderazione',
       'placeholder' => 'Inserisci eventuali note',
-      'help' => 'Note interne per il processo di moderazione',
+      'tooltip' => 'Note interne per il processo di moderazione',
       'helper_text' => '',
+      'description' => 'Note per il processo di moderazione del profilo',
     ),
     'availability' => 
     array (
       'label' => 'Disponibilità',
       'placeholder' => 'Imposta la disponibilità',
-      'help' => 'Giorni e orari di disponibilità per visite',
+      'tooltip' => 'Giorni e orari di disponibilità per visite',
       'helper_text' => '',
+      'description' => 'Calendario di disponibilità per appuntamenti',
     ),
     'day' => 
     array (
       'label' => 'Giorno',
       'placeholder' => 'Seleziona il giorno',
-      'help' => 'Giorno della settimana di disponibilità',
+      'tooltip' => 'Giorno della settimana di disponibilità',
       'helper_text' => '',
+      'description' => 'Giorno della settimana per disponibilità',
       'options' => 
       array (
         'monday' => 'Lunedì',
@@ -250,70 +290,92 @@ return array (
     array (
       'label' => 'Ora Inizio',
       'placeholder' => 'Seleziona l\'ora di inizio',
-      'help' => 'Orario di inizio della disponibilità',
+      'tooltip' => 'Orario di inizio della disponibilità',
       'helper_text' => '',
+      'description' => 'Orario di inizio della disponibilità giornaliera',
     ),
     'end_time' => 
     array (
       'label' => 'Ora Fine',
       'placeholder' => 'Seleziona l\'ora di fine',
-      'help' => 'Orario di fine della disponibilità',
+      'tooltip' => 'Orario di fine della disponibilità',
       'helper_text' => '',
+      'description' => 'Orario di fine della disponibilità giornaliera',
     ),
     'attach' => 
     array (
       'label' => 'Allegati',
       'placeholder' => 'Carica allegati',
-      'help' => 'Documenti allegati al profilo',
+      'tooltip' => 'Documenti allegati al profilo',
       'helper_text' => '',
+      'description' => 'Documenti e allegati del profilo medico',
     ),
     'created_at' => 
     array (
       'label' => 'Data Creazione',
       'placeholder' => 'Data di registrazione',
-      'help' => 'Data di registrazione del medico',
+      'tooltip' => 'Data di registrazione del medico',
       'helper_text' => '',
+      'description' => 'Data di registrazione nel sistema',
     ),
-    'toggleColumns' => 
+    'toggle_columns' => 
     array (
-      'label' => 'toggleColumns',
+      'label' => 'Mostra/Nascondi Colonne',
+      'tooltip' => 'Gestisci la visibilità delle colonne nella tabella',
+      'helper_text' => '',
+      'description' => 'Controllo visibilità colonne tabella',
     ),
-    'reorderRecords' => 
+    'reorder_records' => 
     array (
-      'label' => 'reorderRecords',
+      'label' => 'Riordina Record',
+      'tooltip' => 'Modifica l\'ordine dei record nella tabella',
+      'helper_text' => '',
+      'description' => 'Funzione di riordinamento record',
     ),
-    'resetFilters' => 
+    'reset_filters' => 
     array (
-      'label' => 'resetFilters',
+      'label' => 'Reset Filtri',
+      'tooltip' => 'Ripristina i filtri ai valori predefiniti',
+      'helper_text' => '',
+      'description' => 'Ripristino filtri applicati',
     ),
-    'applyFilters' => 
+    'apply_filters' => 
     array (
-      'label' => 'applyFilters',
+      'label' => 'Applica Filtri',
+      'tooltip' => 'Applica i filtri selezionati',
+      'helper_text' => '',
+      'description' => 'Applicazione filtri di ricerca',
     ),
-    'openFilters' => 
+    'open_filters' => 
     array (
-      'label' => 'openFilters',
+      'label' => 'Apri Filtri',
+      'tooltip' => 'Apri il pannello dei filtri di ricerca',
+      'helper_text' => '',
+      'description' => 'Apertura pannello filtri',
     ),
     'privacy_acceptance' => 
     array (
       'label' => 'Accettazione Privacy',
       'tooltip' => 'Devi accettare l\'informativa sulla privacy per continuare',
-      'description' => 'privacy_acceptance',
+      'description' => 'Consenso al trattamento dei dati personali',
       'helper_text' => '',
-      'placeholder' => 'privacy_acceptance',
+      'placeholder' => 'Accetto l\'informativa sulla privacy',
     ),
     'doctor_certificate' => 
     array (
       'label' => 'Certificato',
       'description' => 'Certificato medico o documentazione sanitaria',
       'placeholder' => 'Carica certificato',
-      'help' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
+      'tooltip' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
       'helper_text' => 'Tesserino sanitario o certificato di iscrizione all\'Ordine',
     ),
     'schedule' => 
     array (
-      'description' => 'schedule',
-      'helper_text' => 'schedule',
+      'label' => 'Programma',
+      'description' => 'Programma e orari di disponibilità',
+      'placeholder' => 'Imposta il programma',
+      'tooltip' => 'Gestisci il programma di disponibilità',
+      'helper_text' => '',
     ),
   ),
   'filters' => 
@@ -323,8 +385,9 @@ return array (
     array (
       'label' => 'Stato',
       'placeholder' => 'Filtra per stato',
-      'help' => 'Filtra i medici per stato del profilo',
+      'tooltip' => 'Filtra i medici per stato del profilo',
       'helper_text' => '',
+      'description' => 'Filtro per stato del profilo medico',
       'options' => 
       array (
         'active' => 'Attivo',
@@ -337,15 +400,17 @@ return array (
     array (
       'label' => 'Specializzazione',
       'placeholder' => 'Filtra per specializzazione',
-      'help' => 'Filtra per specializzazione medica',
+      'tooltip' => 'Filtra per specializzazione medica',
       'helper_text' => '',
+      'description' => 'Filtro per specializzazione medica',
     ),
     'city' => 
     array (
       'label' => 'Città',
       'placeholder' => 'Filtra per città',
-      'help' => 'Filtra per città dello studio',
+      'tooltip' => 'Filtra per città dello studio',
       'helper_text' => '',
+      'description' => 'Filtro per città di ubicazione studio',
     ),
   ),
   'actions' => 
@@ -431,26 +496,36 @@ return array (
     array (
       'label' => 'Informazioni Personali',
       'description' => 'Dati anagrafici del medico',
+      'tooltip' => 'Sezione per i dati personali del medico',
+      'helper_text' => '',
     ),
     'contact_info' => 
     array (
       'label' => 'Informazioni di Contatto',
       'description' => 'Recapiti professionali',
+      'tooltip' => 'Sezione per i contatti professionali',
+      'helper_text' => '',
     ),
     'professional_info' => 
     array (
       'label' => 'Informazioni Professionali',
       'description' => 'Qualifiche e specializzazioni',
+      'tooltip' => 'Sezione per le qualifiche professionali',
+      'helper_text' => '',
     ),
     'availability_settings' => 
     array (
       'label' => 'Impostazioni Disponibilità',
       'description' => 'Orari e giorni di ricevimento',
+      'tooltip' => 'Sezione per la gestione della disponibilità',
+      'helper_text' => '',
     ),
     'documents' => 
     array (
       'label' => 'Documenti',
       'description' => 'Certificazioni e allegati',
+      'tooltip' => 'Sezione per i documenti e certificazioni',
+      'helper_text' => '',
     ),
   ),
   'validation' => 
@@ -474,6 +549,8 @@ return array (
   array (
     'label' => 'Specializzazioni',
     'description' => 'Specializzazioni mediche del dottore',
+    'tooltip' => 'Gestione delle specializzazioni mediche',
+    'helper_text' => '',
     'empty' => 'Nessuna specializzazione registrata',
   ),
 );

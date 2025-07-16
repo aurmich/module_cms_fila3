@@ -43,6 +43,8 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(Completed::class, ProBono::class, Transitions\CompletedToProBono::class)
                 
                 // Report transitions
+                ->allowTransition(ReportPending::class, ReportPending::class/*, Transitions\ReportPendingToReportCompleted::class*/)
+                
                 ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
                 
                 // ReportCompleted transitions

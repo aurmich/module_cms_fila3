@@ -21,6 +21,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Xot\Actions\ModelClass\CountAction;
 use Filament\Resources\Resource as FilamentResource;
+use Modules\Media\Actions\GetAttachmentsSchemaAction;
 use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
@@ -199,51 +200,7 @@ abstract class XotBaseResource extends FilamentResource
             return [];
         }
         $attachments = $model::getAttachments();
-        $uuid = Str::uuid()->toString();
-        $schema = [];
-        $sessionId = session()->getId();
-        $sessionDir = "session-uploads/{$sessionId}";
-        foreach ($attachments as $attachment) {
-            $schema[$attachment]=FileUpload::make($attachment)
-            //$schema[$attachment]=SpatieMediaLibraryFileUpload::make($attachment)
-            ->directory($sessionDir)
-            ->disk('local')
-            ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'])
-            ->maxSize(5120*2)
-            ->preserveFilenames()
-            ->required()
-            //->saveUploadedFiles()
-            ->afterStateUpdated(function ($state, Set $set) use ($attachment,$sessionDir) {
-                if (!$state) return;
-                $state=Arr::wrap($state);
-                
-                $sessionFiles = [];
-                
-                foreach ($state as $file) {
-                    if ($file instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
-                        // Salva direttamente nella directory di sessione
-                        $fileName = time() . '_' . $file->getClientOriginalName();
-                        $sessionPath = $file->storeAs($sessionDir, $fileName, 'local');
-                        $sessionFiles[] = $sessionPath;
-                    } else {
-                        // È già un percorso salvato
-                        $sessionFiles[] = $file;
-                    }
-                }
-                
-                $set($attachment, $sessionFiles);
-            })
-            ;
-            
-            /*
-            ->afterStateUpdated(function (FileUpload $component) use ($attachment) {
-                $component->saveUploadedFiles($component);
-                //$this->updateMedia();
-            });
-            */
-
-            
-        }
+        $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,'local');
         
         return $schema;
     }
