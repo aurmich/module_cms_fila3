@@ -42,6 +42,8 @@ return array (
     'first_name' => 
     array (
       'description' => 'first_name',
+      'helper_text' => 'first_name',
+      'placeholder' => 'first_name',
     ),
   ),
 );

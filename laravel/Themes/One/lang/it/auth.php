@@ -51,7 +51,7 @@ return [
         ],
         'patient' => [
             'title' => 'Registrazione Paziente',
-            'subtitle' => 'Crea il tuo account per prenotare appuntamenti e gestire la tua salute',
+            'subtitle' => 'Crea il tuo account',
             'description' => 'Registrati come paziente per accedere ai servizi sanitari',
             'welcome_message' => 'Benvenuto in <span class="font-bold">SaluteOra</span>',
             'phone_label' => 'Numero di telefono',

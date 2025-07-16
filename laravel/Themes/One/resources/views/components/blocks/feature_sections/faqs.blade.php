@@ -11,7 +11,7 @@
         @foreach ($sections as $section)
         <div class="mt-5">
             <h3 class="text-[#272C4D]">{{ $section['title'] }}</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 {!! $section['description'] !!}
             </p>
         </div>

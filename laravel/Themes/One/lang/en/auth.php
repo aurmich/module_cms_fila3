@@ -45,7 +45,7 @@ return [
         ],
         'patient' => [
             'title' => 'Patient Registration',
-            'subtitle' => 'Create your account to book appointments and manage your health',
+            'subtitle' => 'Create your account',
             'description' => 'Register as a patient to access healthcare services',
             'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
             'phone_label' => 'Phone number',

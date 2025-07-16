@@ -28,7 +28,7 @@
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <a
                     href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
-                    class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ $currentLocale === $localeCode ? 'bg-gray-50' : '' }}"
+                    class="flex items-center px-4 py-2 text-sm {{ $currentLocale === $localeCode ? 'bg-gray-50' : '' }}"
                 >
                     <x-ui-flags.{{ $localeCode }} class="w-6 h-4 mr-2" />
                     {{--

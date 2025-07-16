@@ -1,3 +1,16 @@
+@php
+ /*
+    use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+    use Modules\SaluteOra\Enums\UserTypeEnum;
+    
+    // Inizializzazione delle variabili con valori di default
+    $user = $user ?? auth()->user();
+    $locale = LaravelLocalization::getCurrentLocale();
+    $isLoggedIn = auth()->check(); 
+    */
+@endphp
+
+
 <div class="p-5">
     <div>
         {{-- Pulsante Indietro --}}
@@ -19,7 +32,7 @@
                 <div class="w-48 h-48 !bg-[#E6EBF7] rounded-full flex items-center justify-center overflow-hidden shadow-lg">
                     <img class="h-40 object-contain" src="/img/dentist.png" />
                 </div>
-                <h1 class="text-center mt-5 text-3xl lg:text-4xl">Samuel Tarly</h1>
+                <h1 class="text-center mt-5 text-3xl lg:text-4xl">{{$user?->name}}</h1>
                 {{-- Form Dati Utente --}}
                 <div class="w-full flex flex-col items-center mt-10">
                     <div class="w-full lg:w-3/4 shadow-2xl rounded-[15px] lg:mt-0">

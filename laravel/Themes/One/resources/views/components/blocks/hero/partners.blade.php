@@ -9,7 +9,7 @@
            <img class="h-96" src="/img/inmp-logo-partners.png" />
         </a>
        </div>
-           <span class="ml-0 lg:ml-5">
+           <span class="ml-0 lg:ml-5 text-lg">
            Nato nel 2007 e stabilizzato nel 2012, l’Istituto Nazionale per la promozione della salute delle popolazioni Migranti e per il contrasto delle malattie della Povertà (INMP) è un ente pubblico oggi centro di riferimento della rete nazionale per le problematiche di assistenza in campo socio-sanitario legate alle popolazioni migranti e alla povertà, nonché centro nazionale per la mediazione transculturale in campo sanitario. Dal 2019 l’INMP è anche Centro Collaboratore OMS per l’evidenza scientifica e il capacity building relativamente alla salute dei migranti.
            </span>
        </div>
@@ -19,7 +19,7 @@
             <img class="h-48" src="/img/fondazione-andi-logo-updated.png" />
         </a>
     </div>
-        <span class="ml-0 lg:ml-5">
+        <span class="ml-0 lg:ml-5 text-lg">
         Fondazione ANDI ETS promuove la salute orale di tutti con particolare
         attenzione ai soggetti con fragilità socio-economiche, attraverso iniziative
         sanitarie dedicate alla prevenzione, cooperazione internazionale e progetti
@@ -32,7 +32,7 @@
                 <img class="h-20" src="/img/logo-coi-partners.png" />
             </a>
         </div>
-        <span class="ml-0 lg:ml-5">
+        <span class="ml-0 lg:ml-5 text-lg">
         Cooperazione Odontoiatrica Internazionale ETS opera da oltre 30 anni per promuovere il diritto alla
         salute orale di base e globale mediante interventi di cooperazione internazionale sostenibili nel tempo,
         progetti di odontoiatria sociale e formazione del personale

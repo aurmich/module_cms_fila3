@@ -110,17 +110,19 @@ return array (
       'description' => 'Consenso al trattamento dati e comunicazioni marketing',
       'icon' => 'heroicon-o-shield-check',
       'color' => 'info',
-      'tooltip' => 'Gestione consensi privacy e marketing',
-      'helper_text' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
+      'help' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
     ),
     'availability_step' => 
     array (
-      'label' => 'Disponibilità',
-      'description' => 'Gestione orari e giorni di disponibilità',
-      'icon' => 'heroicon-o-calendar',
-      'color' => 'emerald',
-      'tooltip' => 'Configurazione degli orari e dei giorni di disponibilità',
-      'helper_text' => '',
+      'label' => 'availability_step',
+    ),
+    'studio_step' => 
+    array (
+      'label' => 'studio_step',
+    ),
+    'personal_info_step' => 
+    array (
+      'label' => 'personal_info_step',
     ),
   ),
   'fields' => 
@@ -376,6 +378,10 @@ return array (
       'placeholder' => 'Imposta il programma',
       'tooltip' => 'Gestisci il programma di disponibilità',
       'helper_text' => '',
+      'description' => 'schedule',
+      'helper_text' => 'schedule',
+      'placeholder' => 'schedule',
+      'label' => 'schedule',
     ),
   ),
   'filters' => 
