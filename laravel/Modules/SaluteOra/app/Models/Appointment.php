@@ -166,12 +166,10 @@ class Appointment extends BaseModel implements HasStatesContract
                 'doctor_id',
                 'studio_id',
                 'title',
-                'start_time',
-                'end_time',
-                'type',
-                'status',
+                'starts_at',
+                'ends_at',
                 'notes',
-                'emergency'
+                'state',
             ])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
