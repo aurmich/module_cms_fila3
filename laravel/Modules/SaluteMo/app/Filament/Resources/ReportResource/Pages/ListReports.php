@@ -19,7 +19,7 @@ use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
  * Estende XotBaseListRecords per ereditare le funzionalità di base di Filament
  * e personalizzare la visualizzazione secondo le esigenze specifiche del modulo SaluteMo.
  *
- * @method \Modules\SaluteMo\Models\Report getRecord()
+ * @method \Modules\SaluteOra\Models\Report getRecord()
  * @method \Illuminate\Database\Eloquent\Builder getTableQuery()
  */
 class ListReports extends XotBaseListRecords

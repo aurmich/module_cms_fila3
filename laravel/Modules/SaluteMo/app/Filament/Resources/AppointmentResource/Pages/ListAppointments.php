@@ -68,43 +68,5 @@ class ListAppointments extends XotBaseListRecords
      ];
     }
 
-    /**
-     * Definisce le azioni nell'header della pagina.
-     *
-     * @return array<int, \Filament\Actions\Action>
-     */
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
-
-    /**
-     * Definisce le azioni per ogni riga della tabella.
-     *
-     * @return array<int, \Filament\Tables\Actions\Action>
-     */
-    public function getTableActions(): array
-    {
-        return [
-            ViewAction::make(),
-            EditAction::make(),
-            DeleteAction::make(),
-        ];
-    }
-
-    /**
-     * Definisce le azioni di massa per la tabella.
-     *
-     * @return array<int, \Filament\Tables\Actions\BulkAction>
-     */
-    public function getTableBulkActions(): array
-    {
-        return [
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ];
-    }
+   
 }

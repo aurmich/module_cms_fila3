@@ -26,17 +26,12 @@ use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 /**
- * Verifica l'esistenza di un SVG registrato utilizzando BladeUI Icons.
  *
- * @method bool execute(string $svgName)
  */
 class SaveAttachmentsAction
 {
     /**
-     * Verifica se l'SVG esiste nei set di icone registrati.
      *
-     * @param  string $svgName  Il nome dell'SVG da verificare (es: 'heroicon-o-user')
-     * @return bool True se l'SVG esiste, false altrimenti
      */
     public function execute(HasMedia $record,array $attachments,array $data, string $disk='local'): void
     {

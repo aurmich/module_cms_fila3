@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Geo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use function Safe\json_decode;
 
 class Locality extends BaseModel
 {
@@ -27,7 +28,9 @@ class Locality extends BaseModel
             ->orderBy("nome")
             ->get()
             ->map(function($row){
+                /** @phpstan-ignore-next-line */
                 $postal_code=json_decode($row->postal_code)[0];
+                /** @phpstan-ignore-next-line */
                 $row->postal_code=$postal_code;
                 return $row;
             });

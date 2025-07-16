@@ -215,17 +215,16 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     public function canTransitionTo(int $appointmentId,string $stateClass): bool
     {
         $appointment = Appointment::firstWhere('id',$appointmentId);
+        if(null == $appointment){
+            return false;
+        }
         //$startStateClass=AppointmentState::getStateMapping()->get($this->states[0]);
         //$startState=new $startStateClass($appointment);
         $startState=$appointment->state;
         return $startState->canTransitionTo($stateClass);
     }
 
-    public function transitionAction()
-    {
-        //return $this->getActionByState($stateClass,$stateClass::$name.'1');
-    }
-
+   
     public function processStateAction(string $stateClass,array $arguments,array $data): void
     {
         $message=Arr::get($data,'message');
@@ -251,9 +250,9 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         
     $appointment = new Appointment(); // senza salvarlo nel db
     $state = new $stateClass($appointment);
+    Assert::implementsInterface($state,StateContract::class);
     /*
     //Assert::isInstanceOf($state,StateContract::class);
-    Assert::implementsInterface($state,StateContract::class);
     $startStateClass=AppointmentState::getStateMapping()->get($this->state);
     $startState=new $startStateClass($appointment);
     Assert::isInstanceOf($startState,State::class);
@@ -283,7 +282,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         
             
    }
-
+    /*
    public function reportAction(): Action
     {
         $appointment = new Appointment(); // senza salvarlo nel db
@@ -314,7 +313,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         ;
     }
 
-   
+   */
 
 
     public function confirmAction(): Action
@@ -365,13 +364,15 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
             $appointmentId = $arguments['appointment'];
             $appointment = Appointment::firstWhere('id',$appointmentId);
             $processData['appointment_id']=$appointmentId;
-            $processData['patient_id']=$appointment->patient_id;
-            $processData['doctor_id']=$appointment->doctor_id;
+            $processData['patient_id']=$appointment?->patient_id;
+            $processData['doctor_id']=$appointment?->doctor_id;
             $where=['appointment_id'=>$appointmentId];
             $report=Report::firstOrCreate($where);
             $report->update($processData);
             app(SaveAttachmentsAction::class)->execute($report,$attachments,$data,$disk);
-            app(SaveAttachmentsAction::class)->execute($appointment,$attachments,$data,$disk);
+            if(null != $appointment){
+                app(SaveAttachmentsAction::class)->execute($appointment,$attachments,$data,$disk);
+            }
 
             //$this->processStateAction($stateClass,$arguments,$data);
             
@@ -412,8 +413,8 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
             $appointmentId = $arguments['appointment'];
             $appointment = Appointment::firstWhere('id',$appointmentId);
             $processData['appointment_id']=$appointmentId;
-            $processData['patient_id']=$appointment->patient_id;
-            $processData['doctor_id']=$appointment->doctor_id;
+            $processData['patient_id']=$appointment?->patient_id;
+            $processData['doctor_id']=$appointment?->doctor_id;
             $where=['appointment_id'=>$appointmentId];
             $report=Report::firstOrCreate($where);
             $report->update($processData);

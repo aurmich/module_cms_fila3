@@ -82,7 +82,7 @@ class ReportResource extends BaseReportResource
     /**
      * Restituisce le pagine associate alla risorsa.
      *
-     * @return array<string, string>
+     * @return array<string, \Filament\Resources\Pages\PageRegistration>
      */
     public static function getPages(): array
     {
