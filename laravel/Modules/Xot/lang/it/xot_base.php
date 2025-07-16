@@ -129,5 +129,17 @@ return array (
     array (
       'label' => 'confirm_step',
     ),
+    'date_step' => 
+    array (
+      'label' => 'date_step',
+    ),
+    'studio_step' => 
+    array (
+      'label' => 'studio_step',
+    ),
+    'search_step' => 
+    array (
+      'label' => 'search_step',
+    ),
   ),
 );

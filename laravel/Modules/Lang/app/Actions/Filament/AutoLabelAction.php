@@ -49,13 +49,13 @@ class AutoLabelAction
             }
             return false;
         });
-        
+       
         if (is_array($class)) {
             $object_class = null;
             if(isset($class['object'])){
                 $object_class = $class['object']::class;
             }
-            if(isset($class['class'])){
+            if(isset($class['class']) && $object_class == null){
                 $object_class = $class['class'];
             }
             if(is_null($object_class)){
@@ -66,6 +66,7 @@ class AutoLabelAction
             $trans_key = 'lang::txt';
         }
 
+        
         if ($component instanceof Step) {
             Assert::string($val = $component->getLabel());
             $label_tkey = $trans_key.'.steps.'.$val.'';
