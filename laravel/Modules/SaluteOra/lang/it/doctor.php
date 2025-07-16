@@ -96,6 +96,18 @@ return array (
       'color' => 'info',
       'help' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
     ),
+    'availability_step' => 
+    array (
+      'label' => 'availability_step',
+    ),
+    'studio_step' => 
+    array (
+      'label' => 'studio_step',
+    ),
+    'personal_info_step' => 
+    array (
+      'label' => 'personal_info_step',
+    ),
   ),
   'fields' => 
   array (
@@ -314,6 +326,8 @@ return array (
     array (
       'description' => 'schedule',
       'helper_text' => 'schedule',
+      'placeholder' => 'schedule',
+      'label' => 'schedule',
     ),
   ),
   'filters' => 

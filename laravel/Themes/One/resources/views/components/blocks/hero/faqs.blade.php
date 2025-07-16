@@ -25,7 +25,7 @@
         <!-- FAQ Item -->
         <div>
             <h3 class="text-[#272C4D]">A chi é rivolto questo servizio?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Il portale Salute Orale nasce per aiutare donne in stato di gravidanza con un ISEE inferiore a 20.000 euro.
                 Ogni paziente ha diritto ad una sola visita per la durata del progetto.
             </p>
@@ -33,7 +33,7 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Cosa offre questo servizio?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Il servizio fornisce una prima visita odontoiatrica completa (controllo+igiene) a titolo completamente gratuito
                 per le pazienti in stato di gravidanza.
             </p>
@@ -41,7 +41,7 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Da dove posso accedere al servizio?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Il servizio è disponibile come webapp mobile first. Questo vuol dire che è disponibile liberamente sul web,
                 non richiede di scaricare nulla, ed è accessibile via pc o smartphone.
             </p>
@@ -49,7 +49,7 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Come posso chiedere una visita?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Registrati e prenota la tua visita da questo portale. Assicurati di avere con te dati personali,
                 autocertificazione ISEE e certificato medico di gravidanza.
             </p>
@@ -57,7 +57,7 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Come prenoto un appuntamento?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Una volta registrata potrai cercare tutti gli studi dentistici attivi all’interno di un’area precisa
                 e scegliere quello migliore in base a posizione e disponibilità oraria.
             </p>
@@ -65,14 +65,14 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Devo prenotare uno studio vicino a casa mia?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Puoi prenotare il tuo appuntamento dove vuoi, a patto di riuscire a raggiungere lo studio in tempo per la tua visita.
             </p>
         </div>
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Cosa succede se l'appuntamento viene rifiutato?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Può essere che il dentista rifiuti il tuo appuntamento. Non preoccuparti: potrai prenotare un nuovo appuntamento
                 cambiando orario, dentista o area di ricerca.
             </p>
@@ -80,7 +80,7 @@
 
         <div class="mt-5">
             <h3 class="text-[#272C4D]">Cosa devo fare se non posso andare ad un appuntamento già accettato?</h3>
-            <p class="text-[#272C4D] pt-2">
+            <p class="text-[#272C4D] pt-2 text-lg">
                 Se non riesci ad andare ad un appuntamento già confermato, contatta il medico appena possibile
                 (almeno 24h prima dell’appuntamento) e informalo della tua assenza!
                 In questo modo potrai prenotare una nuova visita. Troverai i suoi contatti (telefono e mail)

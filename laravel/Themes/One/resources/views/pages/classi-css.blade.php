@@ -169,4 +169,5 @@
 <div class="leading-7"></div>
 <div class="lg:h-40">large height inmp</div>
 <div class="lg:h-28">large height coi</div>
+<div class="w-[70%]">width 70%</div>
 </x-layouts.app>

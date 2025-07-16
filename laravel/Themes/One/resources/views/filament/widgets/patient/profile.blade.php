@@ -1,4 +1,4 @@
-<div>
+<div class="w-full flex justify-center">
     <div class="w-full lg:w-2/4 flex justify-center">
         <div class="w-full lg:w-5/6 bg-[#E6EBF7] shadow-2xl rounded-[15px] mt-5 lg:mt-0">
             <div class="flex flex-row items-center justify-between bg-[#E6EBF7] m-5 px-2">

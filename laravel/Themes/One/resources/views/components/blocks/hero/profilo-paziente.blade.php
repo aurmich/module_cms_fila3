@@ -38,8 +38,8 @@
         <div class="w-full flex flex-col-reverse lg:flex-row justify-center">
             <!-- Colonna sinistra: Dati -->
             {{--  
-            <div class="w-full lg:w-2/4 flex justify-center">
-                <div class="w-full lg:w-5/6 bg-[#E6EBF7] shadow-2xl rounded-[15px] mt-5 lg:mt-0">
+            <div class="w-full flex justify-center">
+                <div class="w-full lg:w-4/12 bg-[#E6EBF7] shadow-2xl rounded-[15px] mt-5 lg:mt-0">
                     <div class="flex flex-row items-center justify-between bg-[#E6EBF7] m-5 px-2">
                         <h2>I miei dati</h2>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 cursor-pointer">
@@ -72,7 +72,6 @@
             </div>
              --}}
         @each('pub_theme::appointment.item', $appointments, 'appointment','pub_theme::appointment.vodo')
-           
         </div>
     </div>  
 </div>

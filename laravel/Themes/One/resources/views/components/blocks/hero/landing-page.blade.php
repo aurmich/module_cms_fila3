@@ -4,8 +4,8 @@
     $userAgent = request()->header('User-Agent');
     $isMobile = preg_match('/Mobile|Android|iPhone|iPad|Opera Mini|IEMobile|WPDesktop/i', $userAgent);
     $backgroundImage = $isMobile
-        ? "/img/LANDING-MOBILE.svg"
-        : "/img/landing-salute-ora-updated.svg";
+        ? "/img/landing-mobile-salute-orale.svg"
+        : "/img/landing-desktop-salute-orale.svg";
         $flagCode = $currentLocale === 'en' ? 'gb' : $currentLocale;
 @endphp
 
@@ -22,11 +22,11 @@
   >
     <!-- INIZIO HEADER -->
     <div>
+      @if (!$isMobile)
       <div class="w-full h-18 p-2 lg:p-8 flex flex-row items-center justify-between">
         <div>
           <img src="/img/logo.png" class="h-7 lg:h-14" />
         </div>
-        @if (!$isMobile)
         <div class="flex flex-row items-center">
           <a href="/it/">
             <span class="text-white p-4 text-xl">Home</span>
@@ -49,34 +49,13 @@
               Registrati
             </button>
           </a>
-        </div>
-        @endif
-        @if ($isMobile)
-        <div>
-        <div class="flex md:hidden">
-                <button type="button"
-                    class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
-                    @click="mobileMenuOpen = !mobileMenuOpen"
-                    aria-expanded="false">
-                    <span class="sr-only">Apri menu principale</span>
-                    {{-- Hamburger Icon --}}
-                    <svg x-show="!mobileMenuOpen" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    {{-- Close Icon --}}
-                    <svg x-show="mobileMenuOpen" class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        @endif
-     
+        </div>  
       </div>
+      @endif
     </div>
     <!-- FINE HEADER -->
     <!-- INIZIO PRIMA SECTION -->
-    <div class="w-4/5 p-6 lg:mt-60 lg:ml-32 lg:w-2/5 flex flex-col justify-start">
+    <div class="w-[70%] p-6 lg:mt-60 lg:ml-32 lg:w-2/5 flex flex-col justify-start">
       <h1 class="text-[#FF5F7E] text-[40px] lg:text-8xl leading-tight font-bold mb-2.5">
         Benvenuta su <br />
         Salute Orale
@@ -125,7 +104,7 @@
     <!-- FINE SECONDA SECTION -->
     <!-- INIZIO TERZA SECTION -->
     <div class="relative bg-[#FCD5D0] bg-cover m-4 lg:m-20 rounded-[35px] p-5 lg:p-0">
-      <img src="/img/inmp-trasparenza-5.svg" class="absolute inset-0 w-full h-full object-contain z-0 p-5"/>
+      <img src="/img/inmp-trasparenza-5.svg" class="absolute inset-0 w-full h-full object-contain p-5 pointer-events-none"/>
       <div
         class="flex flex-col lg:flex-row items-center justify-around lg:justify-center h-[750px] bg-cover bg-inmp-filigrana"
       >
@@ -135,7 +114,7 @@
         <div class="flex flex-col items-center">
           <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">Vuoi partecipare al progetto?</h1>
           <span class="text-[#272C4D] text-center text-xl mt-10">Entra a far parte del progetto Salute Orale</span>
-          <a href="/it/auth/register">
+          <a href="{{ route('register') }}">
           <button
             class="w-44 text-[#272C4D] text-xl lg:text-2xl mt-10 border-[#272C4D] border-2 py-2 px-5 lg:py-3 lg:px-7 rounded-lg"
           >
@@ -158,9 +137,8 @@
                <img class="h-44 px-2 pt-2" src="/img/woman-characterrr.png" />
              </div>
              <div class="flex flex-col items-center justify-center">
-               <span class="text-[#FF5F7E] text-xl lg:text-2xl"
-                 >Consulta la<br />
-                 guida</span
+               <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
+                 >Consulta la guida</span
                >
              </div>
            </div>
@@ -171,9 +149,8 @@
                <img class="h-44 p-2" src="/img/dentist.png" />
              </div>
              <div class="flex flex-col items-center justify-center">
-               <span class="text-[#FF5F7E] text-xl lg:text-2xl"
-                 >Consulta la <br />
-                 guida</span
+               <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
+                 >Consulta la guida</span
                >
              </div>
            </div>
