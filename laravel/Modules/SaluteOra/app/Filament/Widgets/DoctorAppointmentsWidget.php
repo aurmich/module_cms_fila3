@@ -371,6 +371,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
             $report=Report::firstOrCreate($where);
             $report->update($processData);
             app(SaveAttachmentsAction::class)->execute($report,$attachments,$data,$disk);
+            app(SaveAttachmentsAction::class)->execute($appointment,$attachments,$data,$disk);
 
             //$this->processStateAction($stateClass,$arguments,$data);
             

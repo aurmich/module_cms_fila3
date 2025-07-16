@@ -15,6 +15,12 @@ return array (
       'placeholder' => 'Elenco lingue',
       'help' => 'Lingue disponibili per la selezione',
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+    ),
   ),
   'actions' => 
   array (

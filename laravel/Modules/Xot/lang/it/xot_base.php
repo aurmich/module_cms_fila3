@@ -123,4 +123,11 @@ return array (
       'label' => 'submit',
     ),
   ),
+  'steps' => 
+  array (
+    'confirm_step' => 
+    array (
+      'label' => 'confirm_step',
+    ),
+  ),
 );

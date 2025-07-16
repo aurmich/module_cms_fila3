@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Spatie\ModelStates\HasStates;
+use Spatie\ModelStates\HasStatesContract;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -98,7 +99,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
  * @mixin \Eloquent
  */
-class Appointment extends BaseModel
+class Appointment extends BaseModel implements HasStatesContract
 {
     use LogsActivity;
     use HasStates;
@@ -127,6 +128,7 @@ class Appointment extends BaseModel
         'state',
         'starts_at',
         'ends_at',
+        'invoice',//fattura
     ];
 
     /**

@@ -75,14 +75,14 @@ return array (
     ),
     'generate_report' => 
     array (
-      'label' => 'Genera Report',
-      'tooltip' => 'Genera un report per questo appuntamento',
-      'modal_heading' => 'Generazione Report',
-      'modal_description' => 'Sei sicuro di voler generare un report per questo appuntamento?',
+      'label' => 'Genera Referto',
+      'tooltip' => 'Genera un referto per questo appuntamento',
+      'modal_heading' => 'Generazione Referto',
+      'modal_description' => 'Sei sicuro di voler generare un referto per questo appuntamento?',
       'modal_icon' => 'heroicon-o-document-text',
       'icon' => 'heroicon-o-document-text',
-      'success' => 'Report generato con successo',
-      'error' => 'Errore durante la generazione del report',
+      'success' => 'Referto generato con successo',
+      'error' => 'Errore durante la generazione del referto',
     ),
     'send_reminder' => 
     array (

@@ -12,20 +12,20 @@
         <div class="text-lg font-medium text-gray-500">
             @if($report->status === 'pending')
                 <x-filament::icon icon="heroicon-o-clock" class="w-8 h-8 mx-auto text-gray-400" />
-                <p class="mt-2">Il report è in attesa di essere generato.</p>
+                <p class="mt-2">Il referto è in attesa di essere generato.</p>
             @elseif($report->status === 'processing')
                 <x-filament::loading-indicator class="w-8 h-8 mx-auto text-primary-500" />
-                <p class="mt-2">Il report è in fase di elaborazione.</p>
+                <p class="mt-2">Il referto è in fase di elaborazione.</p>
             @else
                 <x-filament::icon icon="heroicon-o-exclamation-circle" class="w-8 h-8 mx-auto text-danger-500" />
-                <p class="mt-2">Si è verificato un errore durante la generazione del report.</p>
+                <p class="mt-2">Si è verificato un errore durante la generazione del referto.</p>
             @endif
         </div>
     </div>
 @elseif($groupedData->isEmpty())
     <div class="p-6 text-center">
         <x-filament::icon icon="heroicon-o-document" class="w-8 h-8 mx-auto text-gray-400" />
-        <p class="mt-2 text-lg font-medium text-gray-500">Nessun dato disponibile per questo report.</p>
+        <p class="mt-2 text-lg font-medium text-gray-500">Nessun dato disponibile per questo referto.</p>
     </div>
 @else
     @foreach($groupedData as $group => $data)

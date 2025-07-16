@@ -1,32 +1,86 @@
-# Best Practices per Risorse Filament in Laraxot
+# Regole per Risorse Filament in SaluteMo
 
-Questo documento riassume le migliori pratiche per la creazione e gestione delle risorse Filament all'interno dell'ecosistema Laraxot. Seguire queste linee guida garantirà compatibilità e coerenza in tutto il progetto.
+## Principi Fondamentali
 
-## Estensione delle Classi Base
+- **Estensione Base**: SEMPRE estendere le classi base di Xot invece di Filament direttamente
+- **Traduzioni**: MAI utilizzare metodi di traduzione diretti (->label(), ->placeholder(), etc.)
+- **Form Schema**: Utilizzare sempre getFormSchema() invece di form()
+- **Tipizzazione**: Rigorosa tipizzazione per PHPStan livello 9+
+- **Campi Reali**: MAI inventare campi, usare solo quelli del modello e della migrazione
 
-### Risorse
+## Pattern di Estensione Corretti
 
-1. **SEMPRE** estendere `Modules\Xot\Filament\Resources\XotBaseResource`:
+### 1. Regole per XotBaseResource
+
+**Struttura Base:**
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteMo\Filament\Resources;
+
+use Modules\SaluteMo\Filament\Resources\AppointmentResource\Pages;
+use Modules\SaluteMo\Models\Appointment;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+
+class AppointmentResource extends XotBaseResource
+{
+    protected static ?string $model = Appointment::class;
+
+    public static function getFormSchema(): array
+    {
+        return [
+            // Schema del form
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListAppointments::route('/'),
+            'create' => Pages\CreateAppointment::route('/create'),
+            'edit' => Pages\EditAppointment::route('/{record}/edit'),
+        ];
+    }
+}
+```
+
+**❌ VIOLAZIONI GRAVI DA EVITARE:**
+
+1. **MAI usare ->label() nei form components:**
    ```php
-   // CORRETTO ✅
-   class ClienteResource extends XotBaseResource
+   // ❌ ERRATO
+   TextInput::make('name')->label('Nome')
    
-   // ERRATO ❌
-   class ClienteResource extends Resource
+   // ✅ CORRETTO
+   TextInput::make('name') // Label gestita da LangServiceProvider
    ```
 
-2. **SEMPRE** implementare `getFormSchema()`:
+2. **MAI inventare campi che non esistono nel modello:**
    ```php
-   public static function getFormSchema(): array
-   {
-       return [
-           TextInput::make('nome')->required(),
-           TextInput::make('email')->email()->required(),
-       ];
-   }
+   // ❌ ERRATO - Campi inventati
+   'title' => Tables\Columns\TextColumn::make('title'), // Non esiste nel modello Report
+   'type' => Tables\Columns\TextColumn::make('type'),   // Non esiste nel modello Report
+   'status' => Tables\Columns\TextColumn::make('status'), // Non esiste nel modello Report
+   
+   // ✅ CORRETTO - Campi reali dal modello Report
+   'patient_id' => Tables\Columns\TextColumn::make('patient_id'),
+   'has_mouth_or_teeth_pain' => Tables\Columns\IconColumn::make('has_mouth_or_teeth_pain'),
+   'smokes' => Tables\Columns\IconColumn::make('smokes'),
    ```
 
-3. **MAI** definire `navigationIcon` se si estende `XotBaseResource`:
+3. **MAI estendere classi Filament direttamente:**
+   ```php
+   // ❌ ERRATO
+   class AppointmentResource extends Resource
+   
+   // ✅ CORRETTO
+   class AppointmentResource extends XotBaseResource
+   ```
+
+4. **MAI definire navigationIcon se si estende XotBaseResource:**
    ```php
    // ❌ ERRATO
    class ReportResource extends XotBaseResource
@@ -41,37 +95,9 @@ Questo documento riassume le migliori pratiche per la creazione e gestione delle
    }
    ```
 
-4. **MAI** usare `->label()` nei form components:
-   ```php
-   // ❌ ERRATO
-   TextInput::make('name')->label('Nome')
-   
-   // ✅ CORRETTO
-   TextInput::make('name') // Label gestita da LangServiceProvider
-   ```
+### 2. Regole per XotBaseListRecords
 
-### Pagine
-
-1. **SEMPRE** estendere le classi base di Xot:
-   ```php
-   // CORRETTO ✅
-   class ListClienti extends XotBaseListRecords
-   class CreateCliente extends XotBaseCreateRecord
-   class EditCliente extends XotBaseEditRecord
-   class ViewCliente extends XotBaseViewRecord
-   
-   // ERRATO ❌
-   class ListClienti extends ListRecords
-   class CreateCliente extends CreateRecord
-   class EditCliente extends EditRecord
-   class ViewCliente extends ViewRecord
-   ```
-
-## Regole per XotBaseListRecords
-
-### Metodo Obbligatorio: getTableColumns()
-
-**⚠️ IMPORTANTE**: Tutte le classi che estendono `XotBaseListRecords` DEVONO implementare il metodo `getTableColumns()`:
+**Struttura Corretta:**
 
 ```php
 <?php
@@ -85,24 +111,14 @@ use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Filament\Actions;
 use Filament\Tables;
 
-/**
- * Pagina di elenco per i report.
- * 
- * ✅ IMPLEMENTAZIONE CORRETTA: Estende XotBaseListRecords
- * ✅ SEGUE IL PATTERN LARAXOT: Non estende ListRecords di Filament direttamente
- * ✅ IMPLEMENTA getTableColumns(): Metodo obbligatorio per XotBaseListRecords
- * ✅ DOCUMENTAZIONE AGGIORNATA: PHPDoc completo e chiaro
- * ✅ CAMPI REALI: Solo campi che esistono nel modello Report
- * ✅ NO LABEL: Non uso ->label() perché gestito da LangServiceProvider
- */
 class ListReports extends XotBaseListRecords
 {
     protected static string $resource = ReportResource::class;
 
     /**
-     * Get the table columns.
-     *
-     * @return array<string, \Filament\Tables\Columns\Column>
+     * ✅ CAMPI REALI: Utilizzo solo i campi che esistono nel modello Report
+     * ✅ NO LABEL: Non uso ->label() perché gestito da LangServiceProvider
+     * ✅ DA MIGRAZIONE: Campi presi dalla migrazione create_reports_table
      */
     public function getTableColumns(): array
     {
@@ -129,50 +145,33 @@ class ListReports extends XotBaseListRecords
 }
 ```
 
-### Regole per getTableColumns()
+**❌ VIOLAZIONI GRAVI DA EVITARE:**
 
-1. **Visibilità**: SEMPRE `public`
-2. **Tipo di ritorno**: SEMPRE `array<string, \Filament\Tables\Columns\Column>`
-3. **Struttura**: Array associativo con chiavi stringa
-4. **Campi Reali**: MAI inventare campi, usare solo quelli del modello
-5. **Traduzioni**: MAI usare `->label()`, gestite da LangServiceProvider
-6. **Tipizzazione**: Includere PHPDoc completo
+1. **MAI inventare campi per la tabella:**
+   ```php
+   // ❌ ERRATO - Campi inventati che non esistono
+   'title' => Tables\Columns\TextColumn::make('title'),
+   'type' => Tables\Columns\TextColumn::make('type'),
+   'status' => Tables\Columns\TextColumn::make('status'),
+   
+   // ✅ CORRETTO - Campi reali dal modello
+   'patient_id' => Tables\Columns\TextColumn::make('patient_id'),
+   'appointment_id' => Tables\Columns\TextColumn::make('appointment_id'),
+   'has_mouth_or_teeth_pain' => Tables\Columns\IconColumn::make('has_mouth_or_teeth_pain'),
+   ```
 
-### Esempio di Implementazione Corretta
+2. **MAI usare ->label() nelle azioni:**
+   ```php
+   // ❌ ERRATO
+   Actions\CreateAction::make()->label('Crea nuovo')
+   
+   // ✅ CORRETTO
+   Actions\CreateAction::make() // Label gestita da LangServiceProvider
+   ```
 
-```php
-/**
- * Get the table columns.
- *
- * @return array<string, \Filament\Tables\Columns\Column>
- */
-public function getTableColumns(): array
-{
-    return [
-        'id' => Tables\Columns\TextColumn::make('id')
-            ->searchable()
-            ->sortable(),
-        'name' => Tables\Columns\TextColumn::make('name')
-            ->searchable()
-            ->sortable(),
-        'email' => Tables\Columns\TextColumn::make('email')
-            ->searchable()
-            ->sortable(),
-        'status' => Tables\Columns\BadgeColumn::make('status')
-            ->colors([
-                'primary' => 'active',
-                'danger' => 'inactive',
-            ]),
-        'created_at' => Tables\Columns\TextColumn::make('created_at')
-            ->dateTime('d/m/Y H:i')
-            ->sortable(),
-    ];
-}
-```
+### 3. Regole per XotBaseEditRecord
 
-## Regole per XotBaseEditRecord
-
-### Implementazione Corretta
+**Struttura Corretta:**
 
 ```php
 <?php
@@ -207,9 +206,9 @@ class EditAppointment extends XotBaseEditRecord
 }
 ```
 
-## Regole per XotBaseCreateRecord
+### 4. Regole per XotBaseCreateRecord
 
-### Implementazione Corretta
+**Struttura Corretta:**
 
 ```php
 <?php
@@ -329,14 +328,6 @@ Prima di considerare completa una risorsa Filament, verificare:
 - [ ] Commenti che spiegano le scelte implementative
 - [ ] Documentazione aggiornata nel modulo e nella root
 
-## Violazioni Gravi da Evitare
-
-1. **Estendere classi Filament direttamente**
-2. **Usare `->label()` nei form components**
-3. **Inventare campi che non esistono nel modello**
-4. **Definire `navigationIcon` se si estende `XotBaseResource`**
-5. **Non implementare metodi obbligatori come `getFormSchema()`**
-
 ## File Corretti
 
 ### ✅ ReportResource
@@ -349,6 +340,4 @@ Prima di considerare completa una risorsa Filament, verificare:
 - `AppointmentResource.php` - Estende `XotBaseResource`
 - `ListAppointments.php` - Estende `XotBaseListRecords`
 - `CreateAppointment.php` - Estende `XotBaseCreateRecord`
-- `EditAppointment.php` - Estende `XotBaseEditRecord`
-
-*Ultimo aggiornamento: gennaio 2025 - Correzioni per campi reali e rimozione label hardcoded*
+- `EditAppointment.php` - Estende `XotBaseEditRecord` 

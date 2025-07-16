@@ -100,7 +100,7 @@
     
     <div class="info">
         <div class="info-item">
-            <span class="info-label">Tipo Report:</span>
+            <span class="info-label">Tipo Referto:</span>
             <span>{{ match($report->type) {
                 'paziente_demografico' => 'Analisi Demografica Pazienti',
                 'visite_per_periodo' => 'Statistiche Visite per Periodo',
@@ -163,7 +163,7 @@
     @endforeach
     
     <div class="footer">
-        <p>Report generato da: il progetto | © {{ date('Y') }} il progetto. Tutti i diritti riservati.</p>
+        <p>Referto generato da: il progetto | © {{ date('Y') }} il progetto. Tutti i diritti riservati.</p>
     </div>
 </body>
 </html>
