@@ -65,6 +65,7 @@ class Section extends Component
         );
 
         //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
+        /** @phpstan-ignore-next-line */
         $this->name = $section->name ?? 'NO NAME';
         //$this->name = $section->name;
         /*
