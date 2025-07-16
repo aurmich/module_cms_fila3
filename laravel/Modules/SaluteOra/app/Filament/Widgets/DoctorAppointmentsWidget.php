@@ -350,12 +350,47 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     {
         return $this->getActionByState(StateAppointment\ProBono::class,__FUNCTION__);
     }
-    
+
     public function confirmedAction(): Action
     {
         return $this->getActionByState(StateAppointment\Confirmed::class,__FUNCTION__);
     }
 
+    public function rejectedAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Rejected::class,__FUNCTION__);
+    }
+
+    public function pendingAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Pending::class, __FUNCTION__);
+    }
+
+    public function bannedAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Banned::class, __FUNCTION__);
+    }
+
+    public function inProgressAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\InProgress::class, __FUNCTION__);
+    }
+
+    public function rescheduledAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Rescheduled::class, __FUNCTION__);
+    }
+
+    public function scheduledAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Scheduled::class, __FUNCTION__);
+    }
+
+   
+
+  
+
+  
     public function refundPendingAction(): Action
     {
         $attachments=['invoice'];
