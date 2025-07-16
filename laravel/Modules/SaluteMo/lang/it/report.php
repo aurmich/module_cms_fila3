@@ -378,6 +378,10 @@ return array (
     array (
       'description' => 'allergies_description',
     ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
   ),
   'actions' => 
   array (

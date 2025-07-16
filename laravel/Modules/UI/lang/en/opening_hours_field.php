@@ -137,6 +137,7 @@ return array (
         'placeholder' => '18:00',
         'help' => 'Closing time for Friday afternoon',
         'description' => 'friday.afternoon_to',
+        'helper_text' => 'friday.afternoon_to',
       ),
     ),
     'saturday' => 
