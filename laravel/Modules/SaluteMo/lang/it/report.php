@@ -382,6 +382,10 @@ return array (
     array (
       'label' => 'layout',
     ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
   ),
   'actions' => 
   array (
