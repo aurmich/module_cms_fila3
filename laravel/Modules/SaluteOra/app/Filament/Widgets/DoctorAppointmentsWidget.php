@@ -350,6 +350,11 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     {
         return $this->getActionByState(StateAppointment\ProBono::class,__FUNCTION__);
     }
+    
+    public function confirmedAction(): Action
+    {
+        return $this->getActionByState(StateAppointment\Confirmed::class,__FUNCTION__);
+    }
 
     public function refundPendingAction(): Action
     {

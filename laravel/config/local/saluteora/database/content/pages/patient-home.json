@@ -52,61 +52,40 @@
             {
                 "type": "hero",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.simple2",
-                    "title": "Welcome Back, [Patient Name]",
-                    "subtitle": "Your personal dashboard for oral health during pregnancy",
-                    "background_color": "bg-[#EBF5FF]",
+                    "view": "pub_theme::components.blocks.hero.dettaglio-paziente",
+                    "title": "Bentornata, [Nome Paziente]",
+                    "subtitle": "Procedi con i prossimi step per prenotare una visita",
+                    "background_color": "bg-white",
                     "text_color": "text-gray-900"
-                }
-            },
-            {
-                "type": "info",
-                "data": {
-                    "view": "pub_theme::components.blocks.info",
-                    "title": "Pregnancy Oral Health Tips",
-                    "content": "<ul class='list-disc pl-5 space-y-2'><li>Maintain good oral hygiene</li><li>Schedule regular check-ups</li><li>Follow a balanced diet</li><li>Report any gum discomfort</li></ul>",
-                    "icon": "saluteora-shield-check",
-                    "variant": "info"
                 }
             },
             {
                 "type": "quick_links",
                 "data": {
                     "view": "pub_theme::components.blocks.quick_links",
-                    "title": "Quick Actions",
+                    "title": "Azioni Rapide",
                     "links": [
                         {
-                            "title": "Book an Appointment",
-                            "url": "/en/appointments/new",
+                            "title": "Prenota una visita",
+                            "url": "/prenotazioni/nuova",
                             "icon": "saluteora-clock"
                         },
                         {
-                            "title": "My Documents",
-                            "url": "/en/documents",
+                            "title": "I miei documenti",
+                            "url": "/documenti",
                             "icon": "saluteora-shield-check"
                         },
                         {
-                            "title": "My Profile",
-                            "url": "/en/profile",
+                            "title": "Il mio profilo",
+                            "url": "/profilo",
                             "icon": "saluteora-patient"
                         },
                         {
-                            "title": "Contact Support",
-                            "url": "/en/contact",
+                            "title": "Contatta l'assistenza",
+                            "url": "/assistenza",
                             "icon": "saluteora-phone"
                         }
                     ]
-                }
-            },
-            {
-                "type": "cta",
-                "data": {
-                    "view": "pub_theme::components.blocks.cta.centered",
-                    "title": "Do you have questions about your oral health during pregnancy?",
-                    "description": "Our team of specialists is available for any questions or needs. Contact us for a personalized consultation.",
-                    "cta_text": "Request a Consultation",
-                    "cta_link": "/en/contact",
-                    "background_color": "bg-blue-50"
                 }
             }
         ]

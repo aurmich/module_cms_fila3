@@ -9,5 +9,6 @@ return [
         'studio_address' => 'Indirizzo studio',
         'phone' => 'Telefono',
         'email' => 'Email',
-    ]
+    ],
+    'Project' => 'Progetto',
 ];

@@ -64,10 +64,10 @@ class Section extends Component
             '['.__LINE__.']['.__FILE__.']'
         );
 
-        Assert::string($name = $section->getTranslation('name', app()->getLocale()));
-        $this->name = $name;
+        //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
+        $this->name = $section->name;
         //$this->name = $section->name;
-
+        /*
         $blocks = $section->blocks;
 
         if(!is_array($blocks)){
@@ -80,7 +80,10 @@ class Section extends Component
             $blocks = [];
         }
 
+
         $this->blocks = BlockData::collect($blocks);
+        */
+        $this->blocks = $section->getBlocks();
     }
 
     /**

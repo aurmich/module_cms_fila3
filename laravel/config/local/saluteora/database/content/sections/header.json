@@ -28,13 +28,13 @@
                             "type": "link"
                         },
                         {
-                            "label": "Progetto",
-                            "url": "/it/pages/progetto",
+                            "label": "{{ __('pub_theme::txt.Project') }}",
+                            "url": "{{ route('pages.view',['slug'=>'progetto']) }}",
                             "type": "link"
                         },
                         {
                             "label": "Partners",
-                            "url": "/it/pages/partners",
+                            "url": "{{ route('pages.view',['slug'=>'partners']) }}",
                             "type": "link"
                         }
                     ],

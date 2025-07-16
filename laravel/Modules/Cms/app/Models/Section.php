@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
-use Modules\Tenant\Models\Traits\SushiToJsons;
+
 use Spatie\Translatable\HasTranslations;
+use Modules\Tenant\Models\Traits\SushiToJsons;
 
 /**
  * Modules\Cms\Models\Section
@@ -42,6 +43,7 @@ use Spatie\Translatable\HasTranslations;
 class Section extends BaseModelLang
 {
     use SushiToJsons;
+    use Traits\HasBlocks;
 
     /** @var array<int, string> */
     public $translatable = [
