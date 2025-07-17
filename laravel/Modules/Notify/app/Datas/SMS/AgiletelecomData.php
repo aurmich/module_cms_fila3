@@ -18,12 +18,12 @@ class AgiletelecomData extends Data
     public ?string $password;
     public ?string $sender;
     public ?string $endpoint;
-    public ?string $timeout;
     public ?string $enable_delivery;
     public ?string $simulation;
     public string $auth_type='basic';
     public ?string $api_key;
     public ?string $oauth_token;
+    public int $timeout=30;
 
     private static ?self $instance = null;
 

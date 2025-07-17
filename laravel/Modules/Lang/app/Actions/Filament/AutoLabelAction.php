@@ -35,7 +35,7 @@ class AutoLabelAction
         $backtrace = debug_backtrace();
         $backtrace_slice = array_slice($backtrace, 2);
         $class = Arr::first($backtrace_slice, function ($item) use($component){
-            if(isset($item['function']) && $item['function'] == 'execute'){
+            if($item['function'] == 'execute'){
                 return false;
             }
             

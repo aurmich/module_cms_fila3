@@ -52,6 +52,9 @@ trait HasBlocks
     {
         $model=static::class;
         $record = $model::firstWhere('slug', $slug);
+        if(!$record){
+            return [];
+        }
         return $record->getBlocks();
         
     }

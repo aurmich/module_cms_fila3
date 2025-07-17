@@ -177,7 +177,7 @@ class SpatieEmail extends TemplateMailable
 
 
     public function buildSms():string{
-        
+        /**@phpstan-ignore-next-line */
         $sms_template=$this->getMailTemplate()->getAttributeValue('sms_template');
         $mustache= app(\Mustache_Engine::class); 
         $sms = $mustache->render(

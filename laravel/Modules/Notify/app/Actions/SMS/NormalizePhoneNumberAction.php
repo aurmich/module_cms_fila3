@@ -7,6 +7,8 @@ namespace Modules\Notify\Actions\SMS;
 use Illuminate\Support\Facades\Http;
 use Modules\Notify\Contracts\SMS\SmsActionContract;
 use Modules\Notify\Datas\SmsData;
+use function Safe\preg_replace;
+use function Safe\preg_match;
 
 /**
  * Azione per l'invio di SMS tramite Agile Telecom.

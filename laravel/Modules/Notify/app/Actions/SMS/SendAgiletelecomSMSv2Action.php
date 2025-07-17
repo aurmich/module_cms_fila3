@@ -52,7 +52,7 @@ class SendAgiletelecomSMSv2Action implements SmsActionContract
         // "{"globalId":"5a56f05b-a48c-41db-8fc2-063b53368e89","processedMessages":1,"processedSmsParts":1,"credit":9530.73}
 
         $response = Http::withHeaders($agile->getAuthHeaders())
-        ->timeout($config['timeout'] ?? 30)
+        ->timeout($agile->timeout)
         ->post($url, $payload);
 
         //dddx($response->body());

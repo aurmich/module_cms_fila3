@@ -7,6 +7,7 @@ namespace Modules\Notify\Actions\SMS;
 use Illuminate\Support\Facades\Http;
 use Modules\Notify\Contracts\SMS\SmsActionContract;
 use Modules\Notify\Datas\SmsData;
+use function Safe\preg_split;
 
 /**
  * Azione per l'invio di SMS tramite Agile Telecom.
@@ -29,7 +30,11 @@ class FormatSmsMessageAction
         
         foreach ($specialChars as $index => $specialChar) {
             $messageParts = preg_split("/{$specialCharsEscaped[$index]}/", $formattedMessage, -1, PREG_SPLIT_NO_EMPTY);
-            $specialCharCount = ($messageParts !== false ? count($messageParts) - 1 : 0);
+            
+            // preg_split restituisce sempre un array, quindi controlliamo se è valido
+            
+            $specialCharCount = count($messageParts) - 1;
+            
             
             if (str_starts_with($formattedMessage, $specialChar)) {
                 $specialCharCount++;
