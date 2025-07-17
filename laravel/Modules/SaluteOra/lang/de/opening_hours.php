@@ -2,14 +2,14 @@
 
 return [
     'title' => 'Orari di apertura',
-    'description' => 'Imposta i tuoi orari di lavoro e disponibilità',
+    'description' => 'festlegen i tuoi orari di lavoro e disponibilità',
     'days' => [
-        'monday' => 'Lunedì',
-        'tuesday' => 'Martedì',
-        'wednesday' => 'Mercoledì',
-        'thursday' => 'Giovedì',
-        'friday' => 'Venerdì',
-        'saturday' => 'Sabato',
-        'sunday' => 'Domenica',
+        'monday' => 'Montag',
+        'tuesday' => 'Dienstag',
+        'wednesday' => 'Mittwoch',
+        'thursday' => 'Donnerstag',
+        'friday' => 'Freitag',
+        'saturday' => 'Samstag',
+        'sunday' => 'Sonntag',
     ],
 ];

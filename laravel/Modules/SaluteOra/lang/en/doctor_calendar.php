@@ -214,9 +214,9 @@ return [
             'helper_text' => '',
         ],
         'doctor_id' => [
-            'label' => 'Medico',
-            'placeholder' => 'Seleziona il medico',
-            'help' => 'Medico responsabile dell\'appuntamento',
+            'label' => 'Doctor',
+            'placeholder' => 'Select the doctor',
+            'help' => 'Doctor responsible for the appointment',
             'helper_text' => '',
         ],
         'author_id' => [
@@ -330,14 +330,14 @@ return [
             'helper_text' => '',
         ],
         'full_name' => [
-            'label' => 'Nome Completo',
-            'placeholder' => 'Nome e cognome del paziente',
-            'help' => 'Nome completo del paziente',
+            'label' => 'First Name Completo',
+            'placeholder' => 'First Name e cognome del paziente',
+            'help' => 'First Name completo del paziente',
             'helper_text' => '',
         ],
         'contact_info' => [
-            'label' => 'Contatti',
-            'description' => 'Informazioni di contatto del paziente',
+            'label' => 'Contacts',
+            'description' => 'Contact information del paziente',
         ],
         'medical_info' => [
             'label' => 'Info Mediche',
@@ -397,40 +397,40 @@ return [
     ],
     'filters' => [
         'status' => [
-            'label' => 'Per Stato',
+            'label' => 'Per Status',
             'placeholder' => 'Filtra per stato',
             'help' => 'Filtra gli appuntamenti per stato',
             'helper_text' => '',
         ],
         'date_range' => [
             'label' => 'Periodo',
-            'placeholder' => 'Seleziona periodo',
+            'placeholder' => 'Select periodo',
             'help' => 'Filtra per intervallo di date',
             'helper_text' => '',
         ],
         'doctor' => [
-            'label' => 'Per Medico',
-            'placeholder' => 'Seleziona medico',
-            'help' => 'Filtra per medico specifico',
+            'label' => 'Per Doctor',
+            'placeholder' => 'Select doctor',
+            'help' => 'Filtra per doctor specifico',
             'helper_text' => '',
         ],
         'studio' => [
-            'label' => 'Per Studio',
-            'placeholder' => 'Seleziona studio',
+            'label' => 'Per Practice',
+            'placeholder' => 'Select studio',
             'help' => 'Filtra per studio specifico',
             'helper_text' => '',
         ],
         'type' => [
             'label' => 'Per Tipo',
-            'placeholder' => 'Seleziona tipo visita',
+            'placeholder' => 'Select tipo visita',
             'help' => 'Filtra per tipologia di appuntamento',
             'helper_text' => '',
         ],
     ],
     'messages' => [
-        'appointment_created' => 'Appuntamento creato con successo',
-        'appointment_updated' => 'Appuntamento aggiornato con successo',
-        'appointment_deleted' => 'Appuntamento eliminato con successo',
+        'appointment_created' => 'Appuntamento creato successfully',
+        'appointment_updated' => 'Appuntamento aggiornato successfully',
+        'appointment_deleted' => 'Appuntamento eliminato successfully',
         'appointment_confirmed' => 'Appuntamento confermato',
         'appointment_cancelled' => 'Appuntamento annullato',
         'appointment_completed' => 'Appuntamento completato',
@@ -444,7 +444,7 @@ return [
         'reminder_sent' => 'Promemoria inviato al paziente',
         'confirmation_sent' => 'Conferma inviata al paziente',
         'cancellation_sent' => 'Notifica di annullamento inviata',
-        'schedule_changed' => 'Modifica programmazione notificata',
+        'schedule_changed' => 'Edit programmazione notificata',
     ],
     'sections' => [
         'appointment_details' => [
@@ -465,9 +465,9 @@ return [
         ],
     ],
     'empty_state' => [
-        'heading' => 'Nessun appuntamento programmato',
-        'description' => 'Non ci sono appuntamenti per il periodo selezionato',
-        'action' => 'Programma il primo appuntamento',
+        'heading' => 'No appointments scheduled',
+        'description' => 'There are no appointments for the selected period',
+        'action' => 'Schedule the first appointment',
     ],
     'statistics' => [
         'total_appointments' => 'Appuntamenti Totali',

@@ -35,13 +35,16 @@ class AutoLabelAction
         $backtrace = debug_backtrace();
         $backtrace_slice = array_slice($backtrace, 2);
         $class = Arr::first($backtrace_slice, function ($item) use($component){
+            if(isset($item['function']) && $item['function'] == 'execute'){
+                return false;
+            }
             
-           if(isset($item['object']) && Str::startsWith($item['object']::class, 'Modules\\') && $item['object'] != $component){
+           if(isset($item['object']) && Str::startsWith($item['object']::class, 'Modules\\') && $item['object'] != $component  ){
               return true;
             }
 
-            if(isset($item['class']) && Str::startsWith($item['class'], 'Modules\\')){
-                $reflection_class = new ReflectionClass($item['class']);
+            if(isset($item['class']) && Str::startsWith($item['class'], 'Modules\\') ){
+                $reflection_class = new ReflectionClass($item['class'] );
                 if (!$reflection_class->isAbstract()) {
                     return true;
                 }
@@ -80,6 +83,19 @@ class AutoLabelAction
         }
 
         $label_key = $label_tkey.'.'.Str::snake($type);
+
+        if(Str::startsWith($label_key,'media::attachments_schema')){
+            dddx([
+                'message'=>'preso',
+                'label_key'=>$label_key,
+                'label_tkey'=>$label_tkey,
+                'val'=>$val,
+                'type'=>$type,
+                'component'=>$component,
+                'class'=>$class,
+                'backtrace'=>$backtrace,
+            ]);
+        }
 
         $label = trans($label_key);
         if (is_string($label) && $label_key == $label) { //se non esiste la traduzione, la salvo

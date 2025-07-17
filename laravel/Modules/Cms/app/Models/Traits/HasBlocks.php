@@ -46,4 +46,13 @@ trait HasBlocks
         }
         return $blocks;
     }
+
+
+    public static function getBlocksBySlug(string $slug):array
+    {
+        $model=static::class;
+        $record = $model::firstWhere('slug', $slug);
+        return $record->getBlocks();
+        
+    }
 }

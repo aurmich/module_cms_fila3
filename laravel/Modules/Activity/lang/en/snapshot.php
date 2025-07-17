@@ -5,8 +5,8 @@ return [
         'name' => 'Snapshot',
         'plural' => 'Snapshots',
         'group' => [
-            'name' => 'Monitoraggio',
-            'description' => 'Gestione degli snapshot di sistema',
+            'name' => 'Monitoring',
+            'description' => 'System snapshot management',
         ],
         'label' => 'Snapshot',
         'sort' => '63',

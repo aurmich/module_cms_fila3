@@ -137,7 +137,7 @@ return [
                 ],
             ],
             'fields' => [
-                'name' => 'Nome',
+                'name' => 'Name',
                 'address' => 'Indirizzo',
                 'latitude' => 'Latitudine',
                 'longitude' => 'Longitudine',
@@ -148,16 +148,16 @@ return [
                 'business' => 'Attività',
                 'residence' => 'Residenza',
                 'point_of_interest' => 'Punto di Interesse',
-                'public_service' => 'Servizio Pubblico',
+                'public_service' => 'Servizio Public',
             ],
         ],
     ],
     'common' => [
         'status' => [
-            'active' => 'Attivo',
-            'inactive' => 'Inattivo',
+            'active' => 'Active',
+            'inactive' => 'Inactive',
             'pending' => 'In Attesa',
-            'verified' => 'Verificato',
+            'verified' => 'Verified',
         ],
         'actions' => [
             'locate' => 'Localizza',
@@ -178,7 +178,7 @@ return [
                 'not_found' => 'Posizione non trovata',
                 'invalid_coords' => 'Coordinate non valide',
                 'geocoding_failed' => 'Geocodifica fallita',
-                'network_error' => 'Errore di rete',
+                'network_error' => 'Error di rete',
             ],
         ],
         'filters' => [

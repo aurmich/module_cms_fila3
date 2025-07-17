@@ -35,13 +35,7 @@ enum UserTypeEnum: string implements HasLabel
      */
     public function getLabel(): string
     {
-        return match($this) {
-            self::PATIENT => 'Paziente',
-            self::DOCTOR => 'Dottore',
-            self::ADMIN => 'Amministratore',
-            //self::MODERATOR => 'Moderatore',
-            //self::STAFF => 'Staff',
-        };
+        return $this->transClass(self::class,$this->value.'.label');
     }
 
     /**

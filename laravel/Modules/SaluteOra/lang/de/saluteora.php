@@ -3,7 +3,7 @@
 return [
     'fields' => [
         'region' => 'Regione',
-        'city' => 'Città',
+        'city' => 'Stadt',
         'cap' => 'CAP',
         'appointment_type' => 'Tipo di visita',
         'appointment_date' => 'Data',
@@ -16,16 +16,16 @@ return [
         'booking_summary_title' => 'Riepilogo ricerca',
         'search_completed' => 'Ricerca effettuata',
         'searching_doctors' => 'Stiamo cercando dentisti nella zona selezionata...',
-        'search_error' => 'Errore nella ricerca',
-        'loading_available_slots' => 'Caricamento orari disponibili...',
+        'search_error' => 'Fehler nella ricerca',
+        'loading_available_slots' => 'hochladenmento orari disponibili...',
     ],
     'placeholders' => [
-        'optional_notes' => 'Inserisci eventuali note (opzionale)',
+        'optional_notes' => 'eingeben eventuali note (opzionale)',
     ],
     'enums' => [
         'user_type' => [
             'admin' => 'Amministratore',
-            'doctor' => 'Medico',
+            'doctor' => 'Arzt',
             'patient' => 'Paziente',
         ],
         'appointment_type' => [

@@ -105,6 +105,7 @@ Benvenuti nella documentazione completa di SaluteOra, il sistema integrato per l
 - 📤 [File Upload](filament-file-uploads.md)
 - 🌐 [Traduzioni](translations/README.md)
 - 📊 [Enumerazioni](enums.md)
+- 🇬🇧 [Audit Traduzioni Inglesi](english_translation_audit.md)
 
 ## 🚦 Come Navigare la Documentazione
 

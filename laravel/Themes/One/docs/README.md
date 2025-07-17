@@ -127,6 +127,8 @@ npm install tailwindcss@3 @tailwindcss/forms @tailwindcss/typography postcss pos
 - [Componenti UI](./COMPONENTS.md)
 - [Gestione Asset](./ASSETS.md)
 - [Gestione Contenuti JSON](./JSON_CONTENT.md)
+- [Sistema di Traduzioni](./i18n.md)
+- [Traduzioni Opening Hours](./opening_hours_translations_improvement.md)
 
 ## Installazione
 

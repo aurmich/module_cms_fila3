@@ -56,27 +56,27 @@ return [
         'fields' => [
             'id' => [
                 'label' => 'ID',
-                'help' => 'Identificativo univoco dello snapshot',
+                'help' => 'Unique identifier of the snapshot',
             ],
             'aggregate_uuid' => [
-                'label' => 'UUID Aggregato',
-                'help' => 'UUID dell\'aggregato',
+                'label' => 'Aggregate UUID',
+                'help' => 'UUID of the aggregate',
             ],
             'aggregate_version' => [
-                'label' => 'Versione Aggregato',
-                'help' => 'Versione dell\'aggregato',
+                'label' => 'Aggregate Version',
+                'help' => 'Version of the aggregate',
             ],
             'state' => [
-                'label' => 'Stato',
-                'help' => 'Stato dello snapshot',
+                'label' => 'State',
+                'help' => 'State of the snapshot',
             ],
             'created_at' => [
-                'label' => 'Data Creazione',
-                'help' => 'Data di creazione dello snapshot',
+                'label' => 'Creation Date',
+                'help' => 'Creation date of the snapshot',
             ],
             'updated_at' => [
-                'label' => 'Data Aggiornamento',
-                'help' => 'Data di ultimo aggiornamento dello snapshot',
+                'label' => 'Last Update',
+                'help' => 'Last update date of the snapshot',
             ],
         ],
     ],

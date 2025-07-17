@@ -3,7 +3,7 @@
 return [
     'navigation' => [
         'label' => 'Mappa Webbingbrasil',
-        'group' => 'Gestione Territorio',
+        'group' => 'Management Territorio',
         'icon' => 'heroicon-o-map',
         'sort' => '60',
     ],
@@ -18,7 +18,7 @@ return [
     'markers' => [
         'add' => 'Aggiungi marker',
         'remove' => 'Rimuovi marker',
-        'edit' => 'Modifica marker',
+        'edit' => 'Edit marker',
     ],
     'messages' => [
         'marker_added' => 'Marker aggiunto con successo',

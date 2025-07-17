@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'title' => 'Find a dentist',
     'messages' => [
@@ -10,27 +12,27 @@ return [
     'fields' => [
         'region' => [
             'label' => 'Region',
-            'placeholder' => 'Seleziona una regione',
+            'placeholder' => 'Select a region',
         ],
         'province' => [
             'label' => 'Province',
-            'placeholder' => 'Seleziona una provincia',
+            'placeholder' => 'Select a province',
         ],
         'city' => [
             'label' => 'City',
-            'placeholder' => 'Seleziona una città',
+            'placeholder' => 'Select a city',
         ],
         'cap' => [
             'label' => 'Postal Code',
-            'placeholder' => 'Seleziona un CAP',
+            'placeholder' => 'Select a postal code',
         ],
         'date' => [
             'label' => 'Date',
-            'placeholder' => 'Seleziona una data',
+            'placeholder' => 'Select a date',
         ],
         'time' => [
             'label' => 'Time',
-            'placeholder' => 'Seleziona un orario',
+            'placeholder' => 'Select a time',
         ],
     ],
     'steps' => [

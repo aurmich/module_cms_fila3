@@ -327,39 +327,39 @@ return [
         ],
     ],
     'navigation' => [
-        'name' => 'Attività', // Added missing translation key
-        'plural' => 'Attività', // Added missing translation key
+        'name' => 'Activity',
+        'plural' => 'Activities',
         'group' => [
-            'name' => 'Monitoraggio', // Added missing translation key
-            'description' => 'Monitoraggio delle attività di sistema', // Added missing translation key
+            'name' => 'Monitoring',
+            'description' => 'System activity monitoring',
         ],
-        'label' => 'Attività', // Added missing translation key
+        'label' => 'Activity',
     ],
     'fields' => [
         'user' => [
-            'label' => 'Utente', // Added missing translation key
-            'placeholder' => 'Seleziona un utente', // Added missing translation key
-            'help' => 'L\'utente che ha eseguito l\'azione', // Added missing translation key
+            'label' => 'User',
+            'placeholder' => 'Select a user',
+            'help' => 'The user who performed the action',
             'name' => [
-                'label' => 'Nome', // Added missing translation key
-                'placeholder' => 'Inserisci il nome', // Added missing translation key
-                'help' => 'Nome completo dell\'utente', // Added missing translation key
+                'label' => 'Name',
+                'placeholder' => 'Enter the name',
+                'help' => 'Full name of the user',
             ],
             'email' => [
-                'label' => 'Email', // Added missing translation key
-                'placeholder' => 'Inserisci l\'email', // Added missing translation key
-                'help' => 'Indirizzo email dell\'utente', // Added missing translation key
+                'label' => 'Email',
+                'placeholder' => 'Enter the email',
+                'help' => 'User email address',
             ],
             'role' => [
-                'label' => 'Ruolo', // Added missing translation key
-                'placeholder' => 'Seleziona un ruolo', // Added missing translation key
-                'help' => 'Ruolo dell\'utente nel sistema', // Added missing translation key
+                'label' => 'Role',
+                'placeholder' => 'Select a role',
+                'help' => 'User role in the system',
             ],
         ],
         'action' => [
-            'label' => 'Azione', // Added missing translation key
-            'placeholder' => 'Seleziona un\'azione', // Added missing translation key
-            'help' => 'Azione eseguita dall\'utente', // Added missing translation key
+            'label' => 'Action',
+            'placeholder' => 'Select an action',
+            'help' => 'Action performed by the user',
         ],
     ],
 ];

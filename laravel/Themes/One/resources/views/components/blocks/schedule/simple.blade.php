@@ -6,13 +6,13 @@
         {{-- Header Grid --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
             <div class="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
-                {{ __('ui::opening_hours.headers.day') }}
+                @lang('pub_theme::opening_hours.headers.day.label')
             </div>
             <div class="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide text-center">
-                {{ __('ui::opening_hours.headers.morning') }}
+                @lang('pub_theme::opening_hours.headers.morning.label') 
             </div>
             <div class="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide text-center">
-                {{ __('ui::opening_hours.headers.afternoon') }}
+                @lang('pub_theme::opening_hours.headers.afternoon.label')
             </div>
         </div>
         

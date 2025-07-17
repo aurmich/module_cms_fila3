@@ -1,7 +1,8 @@
 {
     "id": "31",
     "title": {
-        "it": "SaluteOra - Promozione della salute orale per le gestanti"
+        "it": "SaluteOra - Promozione della salute orale per le gestanti",
+        "en": "SaluteOra - Oral Health Promotion for Pregnant Women"
     },
     "slug": "faqs",
     "content": null,
@@ -85,6 +86,94 @@
                         },
                         {
                             "title": "<br /> Vai <br /> alla <br /> guida",
+                            "description": "",
+                            "img": "/img/dentist.png",
+                            "url": "#"
+                        }
+                    ]
+                }
+            }
+
+        ],
+        "en": [
+            {
+                "type": "hero",
+                "data": {
+                    "view": "pub_theme::components.blocks.hero.faqs_empty",
+                    "title": "Welcome to Oral Health,",
+                    "subtitle": "the portal that aims to ensure vulnerable pregnant patients the opportunity to access preventive dental services completely free of charge.",
+                    "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
+                    "cta_text": "START NOW",
+                    "cta_link": "{{ route('register') }}",
+                    "background_color": "bg-white",   
+                    
+                    "text_color": "text-gray-900",
+                    "cta_color": "bg-indigo-600 hover:bg-indigo-700"
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.faqs",
+                    "title": "FAQ'S",
+                    "sections": [
+                        {
+                            "title": "Who is this service for?",
+                            "description": "The Oral Health portal was created to help pregnant women with an ISEE income below 20,000 euros. Each patient is entitled to one visit for the duration of the project.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "What does this service offer?",
+                            "description": "The service provides a complete first dental visit (check-up + hygiene) completely free of charge for pregnant patients.",
+                            "icon": "clock"
+                        },
+                        {
+                            "title": "How can I access the service?",
+                            "description": "The service is available as a mobile-first webapp. This means it's freely available on the web, doesn't require downloading anything, and is accessible via PC or smartphone.",
+                            "icon": "check-circle"
+                        },
+                        {
+                            "title": "How can I request a visit?",
+                            "description": "Register and book your visit from this portal. Make sure you have with you personal data, ISEE self-certification, and medical pregnancy certificate.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "How do I book an appointment?",
+                            "description": "Once registered, you can search for all active dental practices within a specific area and choose the best one based on location and time availability.",
+                            "icon": "clock"
+                        },
+                        {
+                            "title": "Do I have to book a practice near my home?",
+                            "description": "You can book your appointment wherever you want, as long as you can reach the practice in time for your visit.",
+                            "icon": "check-circle"
+                        },
+                        {
+                            "title": "What happens if the appointment is rejected?",
+                            "description": "The dentist may reject your appointment. Don't worry: you can book a new appointment by changing the time, dentist, or search area.",
+                            "icon": "calendar"
+                        },
+                        {
+                            "title": "What should I do if I can't attend an already accepted appointment?",
+                            "description": "If you can't attend an already confirmed appointment, contact the doctor as soon as possible (at least 24h before the appointment) and inform them of your absence! This way you can book a new visit. You will find their contacts (phone and email) within your appointment card. <b>MISSING AN APPOINTMENT WITHOUT CONTACTING THE DOCTOR PREVENTS YOU FROM ACCESSING THE SERVICE AGAIN.</b>",
+                            "icon": "clock"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.faqs_cta",
+                    "title": "Still have questions? <strong>CHECK THE GUIDE!</strong>",
+                    "sections": [
+                        {
+                            "title": "<br /> Go <br /> to <br /> guide",
+                            "description": "",
+                            "img": "/img/woman-characterrr.png",
+                            "url": "#"
+                        },
+                        {
+                            "title": "<br /> Go <br /> to <br /> guide",
                             "description": "",
                             "img": "/img/dentist.png",
                             "url": "#"

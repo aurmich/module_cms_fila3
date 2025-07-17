@@ -2,61 +2,61 @@
 
 return [
     'title' => [
-        'singular' => 'Studio Medico',
-        'plural' => 'Studi Medici',
+        'singular' => 'Praxis Arzt',
+        'plural' => 'Studi Ärzte',
     ],
     'fields' => [
         'name' => [
-            'label' => 'Nome',
-            'placeholder' => 'Inserisci il nome dello studio',
+            'label' => 'Vorname',
+            'placeholder' => 'eingeben il nome dello studio',
         ],
         'address' => [
-            'label' => 'Indirizzo',
-            'placeholder' => 'Inserisci l\'indirizzo',
+            'label' => 'Adresse',
+            'placeholder' => 'eingeben l\'indirizzo',
         ],
         'city' => [
-            'label' => 'Città',
-            'placeholder' => 'Inserisci la città',
+            'label' => 'Stadt',
+            'placeholder' => 'eingeben la città',
         ],
         'postal_code' => [
             'label' => 'CAP',
-            'placeholder' => 'Inserisci il CAP',
+            'placeholder' => 'eingeben il CAP',
         ],
         'phone' => [
-            'label' => 'Telefono',
-            'placeholder' => 'Inserisci il numero di telefono',
+            'label' => 'Telefon',
+            'placeholder' => 'eingeben il numero di telefono',
         ],
         'email' => [
-            'label' => 'Email',
-            'placeholder' => 'Inserisci l\'indirizzo email',
+            'label' => 'E-Mail',
+            'placeholder' => 'eingeben l\'indirizzo email',
         ],
         'website' => [
             'label' => 'Sito Web',
-            'placeholder' => 'Inserisci l\'URL del sito web',
+            'placeholder' => 'eingeben l\'URL del sito web',
         ],
         'registration_number' => [
             'label' => 'Numero di Registrazione',
-            'placeholder' => 'Inserisci il numero di registrazione',
+            'placeholder' => 'eingeben il numero di registrazione',
         ],
         'vat_number' => [
-            'label' => 'Partita IVA',
-            'placeholder' => 'Inserisci la partita IVA',
+            'label' => 'Umsatzsteuernummer',
+            'placeholder' => 'eingeben la partita IVA',
         ],
         'description' => [
             'label' => 'Descrizione',
-            'placeholder' => 'Inserisci una descrizione dello studio',
+            'placeholder' => 'eingeben una descrizione dello studio',
         ],
         'opening_hours' => [
             'label' => 'Orari di Apertura',
             'placeholder' => 'Configura gli orari di apertura',
             'days' => [
-                'monday' => 'Lunedì',
-                'tuesday' => 'Martedì',
-                'wednesday' => 'Mercoledì',
-                'thursday' => 'Giovedì',
-                'friday' => 'Venerdì',
-                'saturday' => 'Sabato',
-                'sunday' => 'Domenica',
+                'monday' => 'Montag',
+                'tuesday' => 'Dienstag',
+                'wednesday' => 'Mittwoch',
+                'thursday' => 'Donnerstag',
+                'friday' => 'Freitag',
+                'saturday' => 'Samstag',
+                'sunday' => 'Sonntag',
             ],
             'open' => 'Apertura',
             'close' => 'Chiusura',
@@ -64,36 +64,36 @@ return [
         ],
         'services' => [
             'label' => 'Servizi',
-            'placeholder' => 'Seleziona i servizi offerti',
+            'placeholder' => 'auswählen i servizi offerti',
         ],
         'active' => [
-            'label' => 'Attivo',
+            'label' => 'Aktiv',
             'true' => 'Sì',
             'false' => 'No',
         ],
     ],
     'filters' => [
         'active' => [
-            'label' => 'Attivo',
+            'label' => 'Aktiv',
             'options' => [
-                'active' => 'Attivo',
-                'inactive' => 'Inattivo',
+                'active' => 'Aktiv',
+                'inactive' => 'Inaktiv',
             ],
         ],
         'city' => [
-            'label' => 'Città',
+            'label' => 'Stadt',
             'placeholder' => 'Filtra per città',
         ],
     ],
     'actions' => [
-        'activate' => 'Attiva',
+        'activate' => 'aktivieren',
         'deactivate' => 'Disattiva',
-        'view_doctors' => 'Visualizza Dottori',
-        'view_appointments' => 'Visualizza Appuntamenti',
+        'view_doctors' => 'anzeigen Dottori',
+        'view_appointments' => 'anzeigen Appuntamenti',
     ],
     'notifications' => [
-        'activated' => 'Studio attivato con successo',
-        'deactivated' => 'Studio disattivato con successo',
+        'activated' => 'Praxis attivato erfolgreich',
+        'deactivated' => 'Praxis disattivato erfolgreich',
     ],
     'sections' => [
         'basic_info' => 'Informazioni di Base',

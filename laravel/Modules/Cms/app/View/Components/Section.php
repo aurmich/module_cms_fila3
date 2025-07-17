@@ -47,7 +47,7 @@ class Section extends Component
         $this->slug = $slug;
         $this->class = $class;
         $this->id = $id;
-
+        /*
         $where = ['slug' => $slug];
         $update = [
             'title' => $slug,
@@ -63,11 +63,13 @@ class Section extends Component
             SectionModel::class,
             '['.__LINE__.']['.__FILE__.']'
         );
+       
 
         //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
-        /** @phpstan-ignore-next-line */
-        $this->name = $section->name ?? 'NO NAME';
+        
+        //$this->name = $section->name ?? 'NO NAME';
         //$this->name = $section->name;
+        */
         /*
         $blocks = $section->blocks;
 
@@ -84,7 +86,7 @@ class Section extends Component
 
         $this->blocks = BlockData::collect($blocks);
         */
-        $this->blocks = $section->getBlocks();
+        $this->blocks = SectionModel::getBlocksBySlug($this->slug);
     }
 
     /**
