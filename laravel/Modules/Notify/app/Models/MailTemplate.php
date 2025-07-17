@@ -72,7 +72,7 @@ class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
     protected $connection = 'notify';
 
     /** @var list<string> */
-    public array $translatable = ['subject', 'html_template', 'text_template'];
+    public array $translatable = ['subject', 'html_template', 'text_template','sms_template'];
 
     /** @var list<string> */
     protected $fillable = [
@@ -82,6 +82,7 @@ class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
         'subject',
         'html_template',
         'text_template',
+        'sms_template',
         //'version',  //under development
         'params',
     ];

@@ -68,6 +68,8 @@ class MailTemplateResource extends LangBaseResource
             'text_template' => Forms\Components\Textarea::make('text_template')
                 ->maxLength(65535)
                 ->columnSpanFull(),
+            'sms_template' => Forms\Components\Textarea::make('sms_template')
+                ->columnSpanFull(),
         ];
     }
 }

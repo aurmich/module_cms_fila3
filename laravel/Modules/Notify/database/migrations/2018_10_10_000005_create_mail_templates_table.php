@@ -35,11 +35,14 @@ return new class () extends XotBaseMigration {
             if (! $this->hasColumn('name')) {
                 $table->string('name');
             }
-            if ($this->hasColumn('name')) {
-                $table->string('name')->nullable()->change();
-            }
             if (! $this->hasColumn('slug')) {
                 $table->string('slug')->unique();
+            }
+            if (! $this->hasColumn('params')) {
+                $table->text('params')->nullable();
+            }
+            if (! $this->hasColumn('sms_template')) {
+                $table->json('sms_template')->nullable();
             }
 
             $this->updateTimestamps(table: $table, hasSoftDeletes: true);
