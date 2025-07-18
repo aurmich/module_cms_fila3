@@ -193,6 +193,7 @@ class PatientResource extends XotBaseResource
                 ->columnSpanFull(),
             'privacy_acceptance' => Forms\Components\Checkbox::make('privacy_acceptance')
                 ->required()
+                ->rules(['accepted'])
                 ->columnSpanFull(),
             //'newsletter' => Forms\Components\Checkbox::make('newsletter')
            //     ->columnSpanFull(),

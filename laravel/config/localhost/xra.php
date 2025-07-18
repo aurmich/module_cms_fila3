@@ -13,4 +13,5 @@ return [
     'disable_frontend_dynamic_route' => false,
     'register_adm_theme' => false, //da eliminare
     'register_pub_theme' => true,
+    'force_ssl' => env('FORCE_SSL', false),
 ];

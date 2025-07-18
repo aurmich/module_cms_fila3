@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Providers;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Field;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TimePicker;
-use Filament\Infolists\Components\Entry;
-use Filament\Support\Components\Component;
-use Filament\Support\Concerns\Configurable;
-use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\BaseFilter;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Events\MigrationsEnded;
+use function Safe\realpath;
+use Webmozart\Assert\Assert;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\File;
+use Modules\Xot\Datas\XotData;
+use Filament\Tables\Columns\Column;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
+use Filament\Forms\Components\Field;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Event;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\BaseFilter;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\Entry;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Placeholder;
+use Filament\Support\Components\Component;
+use Filament\Support\Concerns\Configurable;
+use Modules\Xot\View\Composers\XotComposer;
+use Illuminate\Auth\AuthenticationException;
+use Filament\Forms\Components\DateTimePicker;
+use Illuminate\Database\Events\MigrationsEnded;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Modules\Xot\Exceptions\Handlers\HandlerDecorator;
 use Modules\Xot\Exceptions\Handlers\HandlersRepository;
-use Modules\Xot\Exceptions\Formatters\WebhookErrorFormatter;
-use Modules\Xot\View\Composers\XotComposer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Webmozart\Assert\Assert;
 
-use function Safe\realpath;
+use Modules\Xot\Exceptions\Formatters\WebhookErrorFormatter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class XotServiceProvider.
@@ -172,10 +173,12 @@ class XotServiceProvider extends XotBaseServiceProvider
     */
     private function redirectSSL(): void
     {
+        
         // --- meglio ficcare un controllo anche sull'env
         if (
-            config('xra.forcessl') && (isset($_SERVER['SERVER_NAME']) && 'localhost' !== $_SERVER['SERVER_NAME']
-            && isset($_SERVER['REQUEST_SCHEME']) && 'http' === $_SERVER['REQUEST_SCHEME'])
+            //config('xra.forcessl') && (isset($_SERVER['SERVER_NAME']) && 'localhost' !== $_SERVER['SERVER_NAME']
+            //&& isset($_SERVER['REQUEST_SCHEME']) && 'http' === $_SERVER['REQUEST_SCHEME'])
+            XotData::make()->forceSSL()
         ) {
             URL::forceScheme('https');
             /*
