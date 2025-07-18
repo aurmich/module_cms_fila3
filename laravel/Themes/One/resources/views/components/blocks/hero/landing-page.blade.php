@@ -1,14 +1,9 @@
-@props(['currentLocale' => LaravelLocalization::getCurrentLocale()])
-
-@php
-    $userAgent = request()->header('User-Agent');
-    $isMobile = preg_match('/Mobile|Android|iPhone|iPad|Opera Mini|IEMobile|WPDesktop/i', $userAgent);
+<?php
     $backgroundImage = $isMobile
         ? "/img/landing-mobile-salute-orale.svg"
         : "/img/landing-desktop-salute-orale.svg";
-        $flagCode = $currentLocale === 'en' ? 'gb' : $currentLocale;
-@endphp
-
+        $flagCode = $lang === 'en' ? 'gb' : $lang;
+?>
 <x-layouts.main :isLanding="true">
 <!DOCTYPE html>
   <head>

@@ -67,6 +67,13 @@ class XotComposer
         $view->with('lang', $lang);
         $view->with('_theme', $this);
 
+        if(class_exists('\Jenssegers\Agent\Agent')){
+            $agent = new \Jenssegers\Agent\Agent();
+            $view->with('isMobile', $agent->isMobile());
+            $view->with('isTablet', $agent->isTablet());
+            $view->with('isDesktop', $agent->isDesktop());
+        }
+
         if (Auth::check()) {
             $profile = XotData::make()->getProfileModel();
             $view->with('profile', $profile);
