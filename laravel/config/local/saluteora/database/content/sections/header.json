@@ -28,7 +28,7 @@
                             "type": "link"
                         },
                         {
-                            "label": "{{ __('pub_theme::txt.Project') }}",
+                            "label": "{{ __('pub_theme::header.links.Project.label') }}",
                             "url": "{{ route('pages.view',['slug'=>'progetto']) }}",
                             "type": "link"
                         },
