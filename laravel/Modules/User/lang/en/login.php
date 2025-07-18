@@ -21,6 +21,7 @@ return array (
       'placeholder' => '',
       'help' => 'Keep me logged in on this device',
       'description' => 'remember',
+      'helper_text' => 'remember',
     ),
     'name' => 
     array (

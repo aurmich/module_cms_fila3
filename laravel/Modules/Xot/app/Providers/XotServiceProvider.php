@@ -173,7 +173,9 @@ class XotServiceProvider extends XotBaseServiceProvider
     */
     private function redirectSSL(): void
     {
-        
+        if(app()->runningInConsole()){
+            return;
+        };
         // --- meglio ficcare un controllo anche sull'env
         if (
             //config('xra.forcessl') && (isset($_SERVER['SERVER_NAME']) && 'localhost' !== $_SERVER['SERVER_NAME']
