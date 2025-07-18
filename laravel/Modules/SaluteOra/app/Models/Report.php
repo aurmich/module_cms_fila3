@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\Models;
 
 use Modules\User\Models\BaseProfile;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
 
 
 class Report extends BaseModel{
@@ -50,4 +51,21 @@ class Report extends BaseModel{
 
         'invoice', //file fattura
     ];
+
+    public function casts(): array {
+        return [
+            'has_mouth_or_teeth_pain' => 'boolean',
+            'has_diseases' => 'boolean',
+            'has_fixed_prosthesis_or_implants' => 'boolean',
+            'has_tartar' => 'boolean',
+            'has_plaque' => 'boolean',
+            'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
+            'teeth_brushing_frequency' => OccurrenceFrequencyEnum::class,
+            'uses_asl_clinic_for_dental_care' => 'boolean',
+            'missing_teeth' => 'boolean',
+            'decayed_teeth' => 'boolean',
+            'has_fixed_prosthesis_or_implants' => 'boolean',
+            'has_tartar' => 'boolean',
+        ];
+    }
 }

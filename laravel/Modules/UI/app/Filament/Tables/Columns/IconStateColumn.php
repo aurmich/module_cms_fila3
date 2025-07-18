@@ -26,9 +26,9 @@ class IconStateColumn extends IconColumn
     {
         parent::setUp();
         //$this->getStateUsing(fn() => true); // the column requires a state to be passed to it
-        $this->icon(fn($state): string => $state->icon());
-        $this->color(fn($state): string => $state->color());
-        $this->tooltip(fn($state): string => $state->label());
+        $this->icon(fn($state): ?string => $state?->icon());
+        $this->color(fn($state): ?string => $state?->color());
+        $this->tooltip(fn($state): ?string => $state?->label());
         //$this->label('aaa');
 
         $this->action(Action::make('change-state')

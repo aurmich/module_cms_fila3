@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'appointment' => [
         'title' => 'Appuntamento in programma',
@@ -11,5 +13,15 @@ return [
         'email' => 'Email',
         'state' => 'Stato',
     ],
-    'Project' => 'Progetto',
+    'report' => [
+        'ready_title' => 'Il tuo referto è pronto!',
+        'download_button' => 'Scarica referto!',
+    ],
+    'common' => [
+        'yes' => 'Sì',
+        'no' => 'No',
+        'minutes' => 'minuti',
+        'page' => 'Pagina',
+        'Project' => 'SaluteOra',
+    ],
 ];

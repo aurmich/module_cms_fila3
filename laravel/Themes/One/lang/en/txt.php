@@ -13,5 +13,15 @@ return [
         'email' => 'Email',
         'state' => 'Status',
     ],
-    'Project' => 'Project',
+    'report' => [
+        'ready_title' => 'Your report is ready!',
+        'download_button' => 'Download report!',
+    ],
+    'common' => [
+        'yes' => 'Yes',
+        'no' => 'No',
+        'minutes' => 'minutes',
+        'page' => 'Page',
+        'Project' => 'SaluteOra',
+    ],
 ];

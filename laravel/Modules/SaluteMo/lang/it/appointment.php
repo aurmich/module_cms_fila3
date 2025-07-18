@@ -99,6 +99,7 @@ return array (
       'help' => 'Data e ora di inizio dell\'appuntamento',
       'tooltip' => 'Quando inizia l\'appuntamento',
       'helper_text' => '',
+      'description' => 'start_time',
     ),
     'end_time' => 
     array (
@@ -107,6 +108,7 @@ return array (
       'help' => 'Data e ora di fine dell\'appuntamento',
       'tooltip' => 'Quando termina l\'appuntamento',
       'helper_text' => '',
+      'description' => 'end_time',
     ),
     'status' => 
     array (
@@ -115,6 +117,7 @@ return array (
       'help' => 'Stato attuale dell\'appuntamento',
       'tooltip' => 'Lo stato corrente dell\'appuntamento',
       'helper_text' => '',
+      'description' => 'status',
     ),
     'notes' => 
     array (
@@ -123,6 +126,7 @@ return array (
       'help' => 'Note o commenti aggiuntivi sull\'appuntamento',
       'tooltip' => 'Informazioni aggiuntive sull\'appuntamento',
       'helper_text' => '',
+      'description' => 'notes',
     ),
     'is_emergency' => 
     array (
@@ -130,6 +134,8 @@ return array (
       'help' => 'Indica se si tratta di un appuntamento di emergenza',
       'tooltip' => 'Flag per appuntamenti di emergenza',
       'helper_text' => '',
+      'description' => 'is_emergency',
+      'placeholder' => 'is_emergency',
     ),
     'is_reminder_sent' => 
     array (
@@ -196,6 +202,9 @@ return array (
     'title' => 
     array (
       'label' => 'title',
+      'description' => 'title',
+      'placeholder' => 'title',
+      'helper_text' => 'title',
     ),
     'patient' => 
     array (
@@ -207,6 +216,9 @@ return array (
     'value' => 
     array (
       'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
     ),
   ),
   'statuses' => 

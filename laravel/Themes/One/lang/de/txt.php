@@ -13,5 +13,15 @@ return [
         'email' => 'E-Mail',
         'state' => 'Status',
     ],
-    'Project' => 'Projekt',
+    'report' => [
+        'ready_title' => 'Ihr Bericht ist bereit!',
+        'download_button' => 'Bericht herunterladen!',
+    ],
+    'common' => [
+        'yes' => 'Ja',
+        'no' => 'Nein',
+        'minutes' => 'Minuten',
+        'page' => 'Seite',
+        'Project' => 'SaluteOra',
+    ],
 ];

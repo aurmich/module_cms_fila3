@@ -7,6 +7,8 @@ namespace Modules\SaluteMo\Filament\Resources;
 use Filament\Forms\Components;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Models\Appointment;
+use Filament\Resources\Pages\Page;
+use Modules\SaluteMo\Filament\Resources\AppointmentResource\Pages;
 
 /**
  * Resource per la gestione degli appuntamenti medici.
@@ -65,6 +67,25 @@ class AppointmentResource extends XotBaseResource
                     Components\Toggle::make('is_emergency')
                         ->default(false),
                 ]),
+        ];
+    }
+
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            // ...
+            Pages\EditAppointment::class,
+            Pages\EditAppointmentReport::class,
+        ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            ...parent::getPages(),
+            'edit-report' => Pages\EditAppointmentReport::route('/{record}/edit/report'),
+            
         ];
     }
 }
