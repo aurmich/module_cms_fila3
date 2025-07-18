@@ -377,6 +377,17 @@ return array (
       'tooltip' => 'Gestisci il programma di disponibilità',
       'helper_text' => '',
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
   ),
   'filters' => 
   array (

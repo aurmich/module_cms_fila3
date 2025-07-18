@@ -113,6 +113,30 @@ return array (
     array (
       'label' => 'info',
     ),
+    'rejectedAction' => 
+    array (
+      'label' => 'rejectedAction',
+    ),
+    'confirmedAction' => 
+    array (
+      'label' => 'confirmedAction',
+    ),
+    'reportPendingAction' => 
+    array (
+      'label' => 'reportPendingAction',
+    ),
+    'noShowAction' => 
+    array (
+      'label' => 'noShowAction',
+    ),
+    'cancelledAction' => 
+    array (
+      'label' => 'cancelledAction',
+    ),
+    'reportCompletedAction' => 
+    array (
+      'label' => 'reportCompletedAction',
+    ),
   ),
   'messages' => 
   array (

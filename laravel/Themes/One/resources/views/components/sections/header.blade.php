@@ -72,12 +72,22 @@
         --}}
     </div>
 </header>
-@elseif($isLanding && $isMobile)
-<header {{ $attributes->merge([
-    'class' => 'h-24 flex items-center',
-    'id' => ($section['attributes']['id'] ?? ''),
-    'x-data' => "{ mobileMenuOpen: false }"
-    ]) }}>
+@elseif($isLanding)
+<header 
+    x-data = "{ 
+        mobileMenuOpen: false,
+        isMobile: window.innerWidth < 768,
+        init() {
+            window.addEventListener('resize', () => {
+                this.isMobileScreen = window.innerWidth < 768;
+            });
+        }
+    }"
+    x-show="isMobile"
+    x-cloak
+    class = 'h-24 flex items-center'
+    id = "{{ $section['attributes']['id'] ?? '' }}"
+   >
     <div class="!m-0 !p-0 w-full">
         <div class="flex h-16 items-center justify-between px-5">
             @foreach($componentsBlocks as $block)

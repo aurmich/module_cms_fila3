@@ -34,17 +34,19 @@
             <p class="text-[#272C4D] pt-2 text-lg">
             Il progetto è patrocinato da INMP - Istituto Nazionale per la promozione della salute delle popolazioni Migranti e per il contrasto delle malattie della Povertà  con la collaborazione di Fondazione ANDI ETS e COI - Cooperazione Odontoiatrica Internazionale.
             </p>
-            <div class="flex flex-col lg:flex-row items-baseline">
-                <p class="pt-4">Vuoi registrarti al progetto?</p>
-                <a href="/it/auth/register"><strong>Accedi alla registrazione</strong></a>
+            <div class="w-full flex flex-col lg:flex-row items-center justify-center">
+            <div class="flex flex-row lg:flex-col items-baseline lg:justify-center bg-[#E6EBF7] shadow-xl rounded-lg py-3 px-6 m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
+                <p class="pb-1 text-center">Vuoi registrarti al progetto?</p>
+                <a href="/it/auth/register" class="text-center"><strong>Accedi alla registrazione</strong></a>
             </div>
-            <div class="flex flex-col lg:flex-row items-baseline">
-                <p class="pt-4">Vuoi sapere di più sul progetto?</p>
-                <a><strong>Consulta alle guide</strong></a>
+            <div class="flex flex-row lg:flex-col items-baseline lg:justify-center bg-[#E6EBF7] shadow-xl rounded-lg py-3 px-6 m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
+                <p class="pb-1 text-center">Vuoi sapere di più sul progetto?</p>
+                <a class="text-center"><strong>Consulta alle guide</strong></a>
             </div>
-            <div class="flex flex-col lg:flex-row items-baseline">
-                <p class="pt-4">Vuoi sapere di più sui nostri partners?</p>
-                <a href="/it/pages/partners"><strong>Visita la pagina dei partners</strong></a>
+            <div class="flex flex-row lg:flex-col items-baseline lg:justify-center bg-[#E6EBF7] shadow-xl rounded-lg py-3 px-6 m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
+                <p class="pb-1 text-center">Vuoi sapere di più sui nostri partners?</p>
+                <a href="/it/pages/partners" class="text-center"><strong>Visita la pagina dei partners</strong></a>
+            </div>
             </div>
         </div>
     </div>

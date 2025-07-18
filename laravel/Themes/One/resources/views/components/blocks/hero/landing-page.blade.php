@@ -5,25 +5,24 @@
     $isMobile = preg_match('/Mobile|Android|iPhone|iPad|Opera Mini|IEMobile|WPDesktop/i', $userAgent);
     $backgroundImage = $isMobile
         ? "/img/landing-mobile-salute-orale.svg"
-        : "/img/landing-desktop-salute-orale.svg";
+        : '';
         $flagCode = $currentLocale === 'en' ? 'gb' : $currentLocale;
 @endphp
-
 <x-layouts.main :isLanding="true">
 <!DOCTYPE html>
   <head>
     <meta charset="UTF-8" />
     <title>Landing Page SaluteOra</title>
   </head>
-
+  <!-- style="background-image: url('{{ $backgroundImage }}'); background-repeat: no-repeat; background-position: top; background-size: cover;" -->
   <body
-    style="background-image: url('{{ $backgroundImage }}'); background-repeat: no-repeat; background-position: top; background-size: cover;"
-    class="min-h-screen m-0 p-0"
-  >
+    class="min-h-screen m-0 p-0 bg-[url('/img/landing-mobile-salute-orale.svg')] bg-center lg:bg-[url('/img/landing-desktop-salute-orale.svg')] lg:bg-right-bottom bg-cover bg-no-repeat"
+      >
     <!-- INIZIO HEADER -->
-    <div>
-      @if (!$isMobile)
-      <div class="w-full h-18 p-2 lg:p-8 flex flex-row items-center justify-between">
+     <div>
+      <div>
+    
+      <div class="hidden lg:flex w-full p-2 lg:p-8 flex-row items-center justify-between">
         <div>
           <img src="/img/logo.png" class="h-7 lg:h-14" />
         </div>
@@ -51,32 +50,37 @@
           </a>
         </div>  
       </div>
-      @endif
-    </div>
+    
+       </div>
     <!-- FINE HEADER -->
     <!-- INIZIO PRIMA SECTION -->
-    <div class="w-[70%] p-6 lg:mt-60 lg:ml-32 lg:w-2/5 flex flex-col justify-start">
-      <h1 class="text-[#FF5F7E] text-[40px] lg:text-8xl leading-tight font-bold mb-2.5">
-        Benvenuta su <br />
-        Salute Orale
-      </h1>
-      <span class="w-4/5 lg:w-auto text-[#FCD5D0] text-lg lg:text-2xl leading-slug">
-        Il portale che vuole garantire alle pazienti vulnerabili in stato di
-        gravidanza la possibilità di accedere a servizi odonoiatrici di
-        prevenzione a titolo completamente gratuito
-      </span>
-      <a href="/it/auth/register">
-        <button
-          class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-4"
-        >
-          Inizia Ora
-        </button>
-      </a>
+    <div class="lg:h-dvh w-full flex items-center px-6 lg:p-10">
+      <div class="w-[70%] lg:w-3/6 p-6 flex flex-col justify-start">
+        <h1 class="text-[#FF5F7E] text-[40px] lg:text-8xl leading-tight font-bold mb-2.5">
+          Benvenuta su <br />
+          Salute Orale
+        </h1>
+        <span class="w-4/5 lg:w-auto text-[#FCD5D0] text-lg lg:text-2xl leading-slug">
+          Il portale che vuole garantire alle pazienti vulnerabili in stato di
+          gravidanza la possibilità di accedere a servizi odonoiatrici di
+          prevenzione a titolo completamente gratuito
+        </span>
+        <a href="/it/auth/register">
+          <button
+            class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-4"
+          >
+            Inizia Ora
+          </button>
+        </a>
+      </div>
     </div>
     <!-- FINE PRIMA SECTION -->
+     </div>
+     
+     <div class="bg-[#272C4D]">
     <!-- INIZIO SECONDA SECTION -->
     <div>
-      <div class="md:w-2/4 lg:w-full p-6 mt-12 lg:mt-52 flex justify-center">
+      <div class="md:w-2/4 lg:w-full p-6 flex justify-center">
         <h2 class="text-[#FF5F7E] text-3xl lg:text-4xl text-center">
           Perché é importante la salute orale in gravidanza?
         </h2>
@@ -165,43 +169,23 @@
       </div>
       <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
         <div class="p-5">
-          <a href="https://www.inmp.it/">
+          <a href="https://www.inmp.it/" target="_blank">
             <img class="h-48 lg:h-40 p-5" src="/img/inmp-logo-piccolo-updated.png" />
           </a>
         </div>
         <div class="p-5">
-          <a href="https://fondazioneandi.org/">
+          <a href="https://fondazioneandi.org/" target="_blank">
             <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
           </a>
         </div>
         <div class="p-5">
-          <a href="https://www.cooperazioneodontoiatrica.eu/">
+          <a href="https://www.cooperazioneodontoiatrica.eu/" target="_blank">
             <img class="h-28 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
           </a>
         </div>
       </div>
     </div>
-    <!-- FINE QUINTA SECTION -->
-    <!-- INIZIO FOOTER -->
-    <!-- <div class="mt-20">
-      <hr class="text-[#FCD5D0]" />
-     </div>
-     <div class="h-64 flex flex-row items-center justify-evenly">
-      <div class="flex flex-row items-center">
-        <span class="text-white text-xl m-3">Privacy Policy</span>
-        <span class="text-white text-xl m-3">Termini e Condizioni</span>
-        <span class="text-white text-xl m-3">Cookie Policy</span>
-      </div>
-      <div class="m-5">
-        <img src="/img/logo.png" class="h-14" />
-      </div>
-      <div class="flex flex-row items-center">
-        <span class="text-white text-xl m-3">Home</span>
-        <span class="text-white text-xl m-3">Progetto</span>
-        <span class="text-white text-xl m-3">Partners</span>
-        <span class="text-white text-xl m-3">FAQ'S</span>
-      </div>
-    </div> -->
-    <!-- FINE FOOTER -->
+
+    </div>
 </body>
 </x-layouts.main>
