@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Spatie\ModelStates\HasStates;
-use Spatie\ModelStates\HasStatesContract;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStates\HasStatesContract;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
@@ -203,6 +204,17 @@ class Appointment extends BaseModel implements HasStatesContract
     public function studio(): BelongsTo
     {
         return $this->belongsTo(Studio::class);
+    }
+
+    public function report(): HasOne
+    {
+        return $this->hasOne(Report::class);
+    }
+
+
+    public function hasReport(): bool
+    {
+        return $this->report()->exists();
     }
 
     /**
