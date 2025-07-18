@@ -24,178 +24,224 @@ Aggiunta sezione `fields` completa in tutti i file:
 'fields' => [
     'state' => [
         'label' => 'Stato/State/Status',
-        'placeholder' => 'Seleziona lo stato/Select state/Status auswählen',
-        'help' => 'Stato corrente dell\'appuntamento/Current appointment state/Aktueller Terminstatus',
+        'placeholder' => 'Seleziona lo stato/Select status/Status auswählen',
+        'help' => 'Stato attuale dell\'appuntamento/Current appointment status/Aktueller Terminstatus',
+        'helper_text' => '',
     ],
-    'date' => [
-        'label' => 'Data/Date/Datum',
-        'placeholder' => 'Seleziona la data/Select date/Datum auswählen',
-        'help' => 'Data dell\'appuntamento/Appointment date/Termindatum',
+    'title' => [
+        'label' => 'Titolo/Title/Titel',
+        'placeholder' => 'Inserisci un titolo/Enter a title/Titel eingeben',
+        'help' => 'Breve descrizione dell\'appuntamento/Brief appointment description/Kurze Terminbeschreibung',
+        'helper_text' => '',
     ],
-    'time' => [
-        'label' => 'Ora/Time/Uhrzeit',
-        'placeholder' => 'Seleziona l\'ora/Select time/Uhrzeit auswählen',
-        'help' => 'Orario dell\'appuntamento/Appointment time/Terminuhrzeit',
-    ],
-    'notes' => [
-        'label' => 'Note/Notes/Notizen',
-        'placeholder' => 'Inserisci note aggiuntive/Enter additional notes/Zusätzliche Notizen eingeben',
-        'help' => 'Note opzionali per l\'appuntamento/Optional notes for the appointment/Optionale Notizen für den Termin',
-    ],
-    'patient' => [
-        'label' => 'Paziente/Patient/Patient',
-        'placeholder' => 'Seleziona paziente/Select patient/Patient auswählen',
-        'help' => 'Paziente per cui è programmato l\'appuntamento/Patient for whom the appointment is scheduled/Patient, für den der Termin geplant ist',
-    ],
-    'doctor' => [
-        'label' => 'Dottore/Doctor/Arzt',
-        'placeholder' => 'Seleziona dottore/Select doctor/Arzt auswählen',
-        'help' => 'Dottore che effettuerà la visita/Doctor who will perform the visit/Arzt, der die Untersuchung durchführt',
-    ],
-    'studio' => [
-        'label' => 'Studio/Studio/Praxis',
-        'placeholder' => 'Seleziona studio/Select studio/Praxis auswählen',
-        'help' => 'Studio dove si terrà l\'appuntamento/Studio where the appointment will take place/Praxis, in der der Termin stattfindet',
-    ],
-    'service' => [
-        'label' => 'Servizio/Service/Leistung',
-        'placeholder' => 'Seleziona servizio/Select service/Leistung auswählen',
-        'help' => 'Tipo di servizio richiesto/Type of service requested/Art der angeforderten Leistung',
-    ],
-    'duration' => [
-        'label' => 'Durata/Duration/Dauer',
-        'placeholder' => 'Durata in minuti/Duration in minutes/Dauer in Minuten',
-        'help' => 'Durata stimata dell\'appuntamento/Estimated appointment duration/Geschätzte Termindauer',
-    ],
-    'emergency' => [
-        'label' => 'Emergenza/Emergency/Notfall',
-        'placeholder' => 'Seleziona se è un\'emergenza/Select if it is an emergency/Auswählen, ob es ein Notfall ist',
-        'help' => 'Indica se l\'appuntamento è urgente/Indicates if the appointment is urgent/Gibt an, ob der Termin dringend ist',
-    ],
+    // ... altri campi
 ],
 ```
 
-### 2. File `txt.php` - Correzioni Multilingua
+### 2. File `txt.php` - Aggiunta Traduzioni Report
 
 #### Problema
-I file `txt.php` in inglese e tedesco contenevano ancora traduzioni in italiano.
+Testo hardcoded in italiano per la sezione referti nel template `appointment/item.blade.php`.
 
 #### Soluzione
-Corrette tutte le traduzioni:
+Aggiunta sezione `report` in tutti i file `txt.php`:
+- `laravel/Themes/One/lang/it/txt.php`
+- `laravel/Themes/One/lang/en/txt.php`
+- `laravel/Themes/One/lang/de/txt.php`
 
-**Inglese** (`laravel/Themes/One/lang/en/txt.php`):
+#### Traduzioni Aggiunte
 ```php
-'appointment' => [
-    'title' => 'Scheduled Appointment',
-    'data' => 'Date',
-    'time' => 'Time',
-    'studio' => 'Studio',
-    'studio_address' => 'Studio Address',
-    'phone' => 'Phone',
-    'email' => 'Email',
+'report' => [
+    'ready_title' => 'Il tuo referto è pronto!/Your report is ready!/Ihr Bericht ist bereit!',
+    'download_button' => 'Scarica referto!/Download report!/Bericht herunterladen!',
 ],
 ```
 
-**Tedesco** (`laravel/Themes/One/lang/de/txt.php`):
-```php
-'appointment' => [
-    'title' => 'Geplanter Termin',
-    'data' => 'Datum',
-    'time' => 'Uhrzeit',
-    'studio' => 'Praxis',
-    'studio_address' => 'Praxisadresse',
-    'phone' => 'Telefon',
-    'email' => 'E-Mail',
-],
+### 3. Template Blade - Eliminazione Testo Hardcoded
+
+#### File: `laravel/Themes/One/resources/views/appointment/item.blade.php`
+
+**Prima (hardcoded)**:
+```blade
+<h3 class="text-[#FF5F7E]">
+    Il tuo referto è pronto!
+</h3>
+<button class="...">
+    Scarica referto!
+</button>
 ```
 
-### 3. File `appointment.php` - Correzioni Traduzioni Tedesco
+**Dopo (multilingua)**:
+```blade
+<h3 class="text-[#FF5F7E]">
+    @lang('pub_theme::txt.report.ready_title')
+</h3>
+<button wire:click="downloadReport" class="...">
+    @lang('pub_theme::txt.report.download_button')
+</button>
+```
 
-#### Problema
-Il file tedesco conteneva ancora traduzioni in italiano.
+### 4. Template PDF - Completamento Referto
 
-#### Soluzione
-Corrette tutte le traduzioni per il contesto tedesco:
-- `accepted_appointments` → `Angenommene Termine`
-- `back_home` → `Zurück zur Startseite`
-- `redirecting` → `Weiterleitung läuft...`
-- E tutte le altre traduzioni
+#### File: `laravel/Themes/One/resources/views/appointment/report_pdf.blade.php`
+
+**Problema**: Template PDF incompleto con solo "Ciao"
+
+**Soluzione**: Template PDF completo e professionale con:
+
+**Struttura del PDF**:
+- Header con titolo multilingua
+- Sezione informazioni appuntamento
+- Sezione paziente con dati completi
+- Sezione medico con contatti
+- Sezione studio con indirizzo e contatti
+- Sezione note (se presenti)
+- Footer con copyright
+
+**Caratteristiche**:
+- Design professionale con colori coordinati (#FF5F7E)
+- Layout responsive per PDF
+- Gestione multilingua completa
+- Badge di stato colorati
+- Sezione emergenza evidenziata
+- Controlli null-safe per dati opzionali
+
+**Sezioni Principali**:
+1. **Header**: Titolo referto e ID appuntamento
+2. **Notifica Emergenza**: Se appuntamento di emergenza
+3. **Informazioni Appuntamento**: Data, ora, titolo, tipo, stato
+4. **Dati Paziente**: Nome, email, telefono
+5. **Dati Medico**: Nome, email, telefono
+6. **Dati Studio**: Nome, indirizzo, contatti
+7. **Note**: Eventuali note aggiuntive
+8. **Footer**: Copyright e timestamp
 
 ## Regole Applicate
 
-### 1. Sintassi Standard
-- ✅ `declare(strict_types=1);` in tutti i file
-- ✅ Sintassi array breve `[]` invece di `array()`
-- ✅ Struttura gerarchica coerente
+### 1. Preservazione Traduzioni Esistenti
+- ✅ Nessuna traduzione esistente rimossa
+- ✅ Solo aggiunta di traduzioni mancanti
+- ✅ Mantenimento struttura esistente
 
-### 2. Traduzioni Semantiche
-- ✅ Non traduzioni letterali ma semantiche
-- ✅ Contesto sanitario appropriato
-- ✅ Linguaggio professionale
+### 2. Consistenza Multilingua
+- ✅ Tutte le lingue (IT, EN, DE) aggiornate simultaneamente
+- ✅ Struttura identica in tutti i file
+- ✅ Terminologia appropriata per contesto sanitario
 
-### 3. Coerenza Strutturale
-- ✅ Stessa struttura in tutti i file
-- ✅ Stesse sezioni in tutte le lingue
-- ✅ Ordine delle chiavi identico
+### 3. Struttura Traduzioni
+- ✅ Utilizzo chiavi nidificate (`report.ready_title`)
+- ✅ Separazione logica per sezioni
+- ✅ Helper text vuoto quando uguale alla chiave
 
-### 4. Principio "Solo Aggiungere"
-- ✅ Nessuna traduzione rimossa
-- ✅ Solo aggiunte o miglioramenti
-- ✅ Mantenimento della compatibilità
+### 4. Best Practices PDF
+- ✅ Stili CSS ottimizzati per PDF
+- ✅ Layout responsive e professionale
+- ✅ Gestione multilingua completa
+- ✅ Informazioni complete e ben organizzate
 
 ## File Modificati
 
-### Tema One
-1. `laravel/Themes/One/lang/it/appointment.php` - Aggiunta sezione fields
-2. `laravel/Themes/One/lang/en/appointment.php` - Aggiunta sezione fields
-3. `laravel/Themes/One/lang/de/appointment.php` - Aggiunta sezione fields + correzioni
-4. `laravel/Themes/One/lang/en/txt.php` - Correzioni traduzioni
-5. `laravel/Themes/One/lang/de/txt.php` - Correzioni traduzioni
+### Traduzioni
+- `laravel/Themes/One/lang/it/appointment.php`
+- `laravel/Themes/One/lang/en/appointment.php`
+- `laravel/Themes/One/lang/de/appointment.php`
+- `laravel/Themes/One/lang/it/txt.php`
+- `laravel/Themes/One/lang/en/txt.php`
+- `laravel/Themes/One/lang/de/txt.php`
 
-### Documentazione
-1. `docs/theme-translation-sync.md` - Aggiornato con correzioni
-2. `docs/translation-fixes-summary.md` - Nuovo documento di riepilogo
+### Template
+- `laravel/Themes/One/resources/views/appointment/item.blade.php`
+- `laravel/Themes/One/resources/views/appointment/report_pdf.blade.php`
 
-## Verifiche Effettuate
+## Verifica e Test
 
-### 1. Controllo Errori
-- ✅ Nessun errore di traduzione mancante
-- ✅ Tutti i riferimenti `@lang()` risolti
-- ✅ Coerenza tra file di traduzione
+### Test Multilingua
+1. ✅ Cambio lingua applicazione
+2. ✅ Verifica traduzioni referto
+3. ✅ Controllo PDF in lingua corretta
 
-### 2. Controllo Struttura
-- ✅ Stessa struttura in tutti i file
-- ✅ Sezioni complete in tutte le lingue
-- ✅ Sintassi corretta
+### Test Funzionalità
+1. ✅ Download PDF funzionante
+2. ✅ Informazioni appuntamento complete
+3. ✅ Gestione appuntamenti emergenza
+4. ✅ Visualizzazione note
 
-### 3. Controllo Qualità
-- ✅ Traduzioni semanticamente corrette
-- ✅ Terminologia appropriata
-- ✅ Linguaggio professionale
+### Test UI
+1. ✅ Aspetto grafico preservato
+2. ✅ Stili CSS mantenuti
+3. ✅ Funzionalità intatta
 
-## Impatto
+## Note Tecniche
 
-### Positivo
-- ✅ Risolto errore `pub_theme::appointment.fields.state.label`
-- ✅ Migliorata coerenza multilingua
-- ✅ Standardizzazione struttura traduzioni
-- ✅ Documentazione aggiornata
+### Engine PDF
+- **Engine**: Spipu Html2Pdf
+- **Orientamento**: Portrait (P)
+- **Formato**: A4
+- **Lingua**: Dinamica (`app()->getLocale()`)
 
-### Nessun Impatto Negativo
-- ✅ Nessuna traduzione rimossa
-- ✅ Compatibilità mantenuta
-- ✅ Nessun cambiamento funzionale
+### Gestione Dati
+- Controlli null-safe per campi opzionali
+- Fallback a 'N/A' per dati mancanti
+- Gestione condizionale sezioni opzionali
 
-## Note per il Futuro
+### Stili CSS PDF
+- Font: Helvetica, Arial, sans-serif
+- Colori coordinati tema (#FF5F7E, #E6EBF7, #272C4D)
+- Layout responsive
+- Badge stato colori semantici
 
-1. **Controllo Regolare**: Verificare periodicamente la coerenza delle traduzioni
-2. **Documentazione**: Aggiornare sempre la documentazione quando si modificano traduzioni
-3. **Test Multilingua**: Testare sempre in tutte le lingue dopo modifiche
-4. **Principio Conservativo**: Non rimuovere mai traduzioni esistenti
+## Best Practices Implementate
+
+### 1. Traduzioni Semantiche
+- Non traduzioni letterali ma semantiche
+- Considerazione contesto sanitario
+- Linguaggio professionale appropriato
+
+### 2. Organizzazione File
+- Traduzioni correlate raggruppate
+- Struttura gerarchica logica
+- Naming convenzioni coerenti
+
+### 3. Manutenibilità
+- Chiavi traduzione descrittive
+- Documentazione completa
+- Struttura facilmente estendibile
+
+### 4. PDF Professionali
+- Design moderno e pulito
+- Informazioni complete e organizzate
+- Gestione multilingua nativa
+
+## Collegamenti Documentazione
+
+- [Theme Translation Sync](theme-translation-sync.md)
+- [Translation Helper Text Standards](translation-helper-text-standards.md)
+- [Translation Preservation Rules](translation-preservation-rules.md)
+- [Appointment Report Multilingual Fix](appointment-report-multilingual-fix.md)
+
+## Risultati
+
+### ✅ Problemi Risolti
+1. **Traduzione mancante**: `pub_theme::appointment.fields.state.label` - RISOLTO
+2. **Testo hardcoded**: Sezione referti - RISOLTO
+3. **Template PDF incompleto**: Referto appuntamento - RISOLTO
+4. **Multilingua incompleto**: Sistema - COMPLETATO
+
+### ✅ Funzionalità Aggiunte
+1. **PDF Referti**: Template completo e professionale
+2. **Traduzioni Complete**: Tutte le sezioni multilingua
+3. **Gestione Emergenze**: Evidenziazione appuntamenti urgenti
+4. **Informazioni Complete**: Tutti i dati appuntamento nel PDF
+
+### ✅ Qualità Migliorata
+1. **UX**: Interfaccia completamente multilingua
+2. **Professionalità**: PDF referti di alta qualità
+3. **Manutenibilità**: Codice ben documentato e strutturato
+4. **Consistenza**: Regole applicate uniformemente
 
 ---
 
 **Data**: 2025-01-06
+**Versione**: 2.0 (aggiornato con completamento PDF)
 **Autore**: AI Assistant
-**Versione**: 1.0
-**Stato**: Completato 
+**Tipo**: Fix multilingua + Completamento template PDF 

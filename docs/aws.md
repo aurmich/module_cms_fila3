@@ -22,6 +22,9 @@ quinta
 http://ec2-34-247-221-151.eu-west-1.compute.amazonaws.com/it
 
 
+http://staging.saluteoraleingravidanza.it/
+
+
 se si vedono dei |--35--
 dalla cartella laravel
 php artisan filament:upgrade

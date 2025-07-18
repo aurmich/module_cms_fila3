@@ -27,7 +27,7 @@ Entrambi i temi contengono i seguenti file di traduzione:
 5. `doctor.php` - Gestione dottori
 6. `opening_hours.php` - Orari di apertura
 7. `patient_states.php` - Stati del paziente
-8. `txt.php` - Testi generali (corretto per multilingua)
+8. `txt.php` - Testi generali (corretto per multilingua, aggiornato con sezione report)
 9. `widgets.php` - Widget Filament (nuovo)
 10. `doctor_states.php` - Stati del dottore
 11. `patient.php` - Gestione pazienti
@@ -68,6 +68,34 @@ Entrambi i temi contengono i seguenti file di traduzione:
 - `duration` - Durata
 - `emergency` - Emergenza
 
+### 4. Problema: Testo hardcoded in italiano per i referti (2025-01-06)
+
+**Causa**: Il file `appointment/item.blade.php` conteneva testo hardcoded in italiano per la sezione referti:
+- "Il tuo referto è pronto!"
+- "Scarica referto!"
+
+**Soluzione**: 
+1. Aggiunta sezione `report` in tutti i file `txt.php`:
+   - `laravel/Themes/One/lang/it/txt.php`
+   - `laravel/Themes/One/lang/en/txt.php` 
+   - `laravel/Themes/One/lang/de/txt.php`
+
+2. Aggiornato il template Blade per usare le traduzioni:
+   - Sostituito testo hardcoded con `@lang('pub_theme::txt.report.ready_title')`
+   - Sostituito testo hardcoded con `@lang('pub_theme::txt.report.download_button')`
+
+**Traduzioni aggiunte**:
+```php
+'report' => [
+    'ready_title' => 'Il tuo referto è pronto!', // IT
+    'ready_title' => 'Your report is ready!',     // EN
+    'ready_title' => 'Ihr Bericht ist bereit!',   // DE
+    'download_button' => 'Scarica referto!',      // IT
+    'download_button' => 'Download report!',      // EN
+    'download_button' => 'Bericht herunterladen!', // DE
+],
+```
+
 ## Struttura Standard per File di Traduzione
 
 ### Sintassi Array Breve
@@ -93,6 +121,11 @@ Ogni file che gestisce form deve avere una sezione `fields` con:
 - `placeholder` - Testo placeholder
 - `help` - Testo di aiuto
 
+### Sezione Report (Nuova)
+Per la gestione dei referti, aggiungere sezione `report` in `txt.php`:
+- `ready_title` - Titolo quando il referto è pronto
+- `download_button` - Testo del pulsante di download
+
 ## Regole di Sincronizzazione
 
 ### 1. Coerenza Strutturale
@@ -115,17 +148,24 @@ Ogni file che gestisce form deve avere una sezione `fields` con:
 - Controllare che tutte le lingue abbiano le stesse sezioni
 - Validare la coerenza terminologica
 
+### 5. Multilingua Obbligatorio
+- **MAI** usare testo hardcoded in qualsiasi lingua
+- **SEMPRE** usare `@lang()` o `{{ __('') }}` per tutti i testi
+- **SEMPRE** aggiungere traduzioni per tutte le lingue supportate
+
 ## Processo di Aggiornamento
 
 ### Fase 1: Identificazione
 1. Cercare errori di traduzione nei log
 2. Verificare file Blade per riferimenti `@lang()`
 3. Controllare coerenza tra file di traduzione
+4. Cercare testo hardcoded nelle view
 
 ### Fase 2: Correzione
 1. Aggiungere sezioni mancanti
 2. Correggere traduzioni errate
 3. Mantenere coerenza strutturale
+4. Sostituire testo hardcoded con traduzioni
 
 ### Fase 3: Validazione
 1. Testare tutte le lingue
@@ -159,6 +199,10 @@ return [
     'messages' => [
         'message_key' => 'Message text',
     ],
+    'report' => [
+        'ready_title' => 'Report ready message',
+        'download_button' => 'Download button text',
+    ],
 ];
 ```
 
@@ -168,6 +212,7 @@ return [
 2. **Solo aggiungere**: Aggiungere o migliorare traduzioni
 3. **Coerenza**: Mantenere coerenza tra tutte le lingue
 4. **Documentazione**: Aggiornare sempre la documentazione
+5. **Multilingua**: Mai usare testo hardcoded, sempre traduzioni
 
 ## Collegamenti
 
@@ -178,5 +223,5 @@ return [
 ---
 
 **Ultimo aggiornamento**: 2025-01-06
-**Versione**: 2.1
+**Versione**: 2.2
 **Autore**: AI Assistant 
