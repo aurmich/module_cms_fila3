@@ -37,7 +37,7 @@ class SaveAttachmentsAction
     {
         $data_attachments = [];
         foreach ($attachments as $attachment) {
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore method.notFound */
                 $media=$record->addMediaFromDisk($data[$attachment],$disk)
                     ->toMediaCollection($attachment);
                 $data_attachments[$attachment]=$media->getPathRelativeToRoot();

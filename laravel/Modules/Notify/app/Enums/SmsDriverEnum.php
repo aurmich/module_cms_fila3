@@ -4,64 +4,47 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Enums;
 
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+use Modules\Xot\Filament\Traits\TransTrait;
+
 /**
  * Enum per i driver SMS supportati
  * 
  * Questo enum centralizza la gestione dei driver SMS disponibili
  * e fornisce metodi helper per ottenere le opzioni e le etichette.
  */
-enum SmsDriverEnum: string
+enum SmsDriverEnum: string implements HasLabel, HasIcon, HasColor
 {
+    use TransTrait;
     case SMSFACTOR = 'smsfactor';
     case TWILIO = 'twilio';
     case NEXMO = 'nexmo';
     case PLIVO = 'plivo';
     case GAMMU = 'gammu';
     case NETFUN = 'netfun';
+    case AGILETELECOM = 'agiletelecom'; 
     
-    /**
-     * Restituisce le opzioni per il componente Select di Filament
-     * 
-     * @return array<string, string>
-     */
-    public static function options(): array
+    public function getLabel(): string
     {
-        return [
-            self::SMSFACTOR->value => 'SMSFactor',
-            self::TWILIO->value => 'Twilio',
-            self::NEXMO->value => 'Nexmo',
-            self::PLIVO->value => 'Plivo',
-            self::GAMMU->value => 'Gammu',
-            self::NETFUN->value => 'Netfun',
-        ];
+        return $this->transClass(self::class,$this->value.'.label');
     }
-    
-    /**
-     * Restituisce le etichette localizzate per il componente Select di Filament
-     * 
-     * @return array<string, string>
-     */
-    public static function labels(): array
+
+    public function getColor(): string
     {
-        return [
-            self::SMSFACTOR->value => __('notify::sms.drivers.smsfactor'),
-            self::TWILIO->value => __('notify::sms.drivers.twilio'),
-            self::NEXMO->value => __('notify::sms.drivers.nexmo'),
-            self::PLIVO->value => __('notify::sms.drivers.plivo'),
-            self::GAMMU->value => __('notify::sms.drivers.gammu'),
-            self::NETFUN->value => __('notify::sms.drivers.netfun'),
-        ];
+        return $this->transClass(self::class,$this->value.'.color');
+
     }
-    
-    /**
-     * Verifica se un driver è supportato
-     * 
-     * @param string $driver
-     * @return bool
-     */
-    public static function isSupported(string $driver): bool
+
+    public function getIcon(): string
     {
-        return in_array($driver, array_column(self::cases(), 'value'));
+        return $this->transClass(self::class,$this->value.'.icon');
+    }
+
+    public function getDescription(): string
+    {
+        return $this->transClass(self::class,$this->value.'.description');
     }
     
     /**

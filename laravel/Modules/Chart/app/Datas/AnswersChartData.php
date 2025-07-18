@@ -115,7 +115,7 @@ class AnswersChartData extends Data
                     }
                 }
             }
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore offsetAccess.nonOffsetAccessible */
             if (isset($this->answers->toCollection()->pluck('avg')[0]) && ! \is_string($this->answers->toCollection()->pluck('avg')[0])) {
                 $label = 'Media';
             } else {
@@ -401,7 +401,7 @@ class AnswersChartData extends Data
         $label = '--';
         if ($first_answer != null) {
             Assert::isInstanceOf($first_answer, AnswerData::class, '['.__LINE__.']['.__FILE__.']');
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore property.nonObject */
             $label = round((float) $this->answers->first()->avg, 2);
         }
         $js = <<<JS

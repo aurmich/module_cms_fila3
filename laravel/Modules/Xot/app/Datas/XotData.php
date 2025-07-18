@@ -42,6 +42,7 @@ class XotData extends Data implements Wireable
     public string $register_type = '0';
     public string $verification_type = '';
     public bool $login_verified = false;
+    public bool $force_ssl = false;
     public bool $disable_frontend_dynamic_route = false;
     public bool $disable_admin_dynamic_route = false;
     public bool $disable_database_notifications = true;
@@ -347,6 +348,27 @@ class XotData extends Data implements Wireable
         return $enum_class;
         //$userInstance = app($user_class);
         //return $userInstance->getChildTypes();
+    }
+
+
+    public function forceSSL(): bool
+    {
+        if(!$this->force_ssl){
+            return false;
+        }
+        if(isset($_SERVER['SERVER_NAME']) && 'localhost' == $_SERVER['SERVER_NAME']){
+            return false;
+        }
+        if(isset($_SERVER['SERVER_NAME']) && '127.0.0.1' == $_SERVER['SERVER_NAME']){
+            return false;
+        }
+        //if(isset($_SERVER['SERVER_NAME']) && Str::endsWith($_SERVER['SERVER_NAME'],'.local')){
+        //    return false;
+        //}
+        //if(isset($_SERVER['REQUEST_SCHEME']) && 'https' == $_SERVER['REQUEST_SCHEME']){
+        //    return false;
+        //}
+        return true;
     }
 
 }

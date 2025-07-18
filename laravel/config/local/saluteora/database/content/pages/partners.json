@@ -1,26 +1,77 @@
 {
     "id": "28",
     "title": {
-        "it": "SaluteOra - Promozione della salute orale per le gestanti"
+        "it": "SaluteOra - Promozione della salute orale per le gestanti",
+        "en": "SaluteOra - Oral Health Promotion for Pregnant Women"
     },
     "slug": "partners",
     "content": null,
     "content_blocks": {
         "it": [
             {
-                "type": "hero",
+                "type": "feature_sections",
                 "data": {
-                    "view": "pub_theme::components.blocks.hero.partners",
-                    "title": "Benvenuta su Salute Orale,",
-                    "subtitle": "il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odontoiatrici di prevenzione a titolo completamente gratuito.",
-                    "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
-                    "cta_text": "INIZIA ORA",
-                    "cta_link": "{{ route('register') }}",
-                    "background_color": "bg-white",
-                    "text_color": "text-gray-900",
-                    "cta_color": "bg-indigo-600 hover:bg-indigo-700"
+                    "view": "pub_theme::components.blocks.feature_sections.cta2",
+                    "title": "I Nostri Partners",
+                    "sections": [
+                        {
+                            "title": "",
+                            "description": "Nato nel 2007 e stabilizzato nel 2012, l'Istituto Nazionale per la promozione della salute delle popolazioni Migranti e per il contrasto delle malattie della Povertà (INMP) è un ente pubblico oggi centro di riferimento della rete nazionale per le problematiche di assistenza in campo socio-sanitario legate alle popolazioni migranti e alla povertà, nonché centro nazionale per la mediazione transculturale in campo sanitario. Dal 2019 l'INMP è anche Centro Collaboratore OMS per l'evidenza scientifica e il capacity building relativamente alla salute dei migranti.",
+                            "img": "/img/inmp-logo-partners.png",
+                            "img_class": "h-96",
+                            "url": "https://www.inmp.it/"
+                        },
+                        {
+                            "title": "",
+                            "description": "Fondazione ANDI ETS promuove la salute orale di tutti con particolare attenzione ai soggetti con fragilità socio-economiche, attraverso iniziative sanitarie dedicate alla prevenzione, cooperazione internazionale e progetti di sensibilizzazione",
+                            "img": "/img/fondazione-andi-logo-updated.png",
+                            "img_class": "h-48",
+                            "url": "https://fondazioneandi.org/"
+                        },
+                        {
+                            "title": "",
+                            "description": "Cooperazione Odontoiatrica Internazionale ETS opera da oltre 30 anni per promuovere il diritto alla salute orale di base e globale mediante interventi di cooperazione internazionale sostenibili nel tempo, progetti di odontoiatria sociale e formazione del personale",
+                            "img": "/img/logo-coi-partners.png",
+                            "img_class": "h-20",
+                            "url": "https://www.cooperazioneodontoiatrica.eu/"
+                        }
+                    ]
                 }
             }
+
+        ],
+        "en": [
+            {
+                "type": "feature_sections",
+                "data": {
+                    "view": "pub_theme::components.blocks.feature_sections.cta2",
+                    "title": "Our Partners",
+                    "sections": [
+                        {
+                            "title": "",
+                            "description": "Founded in 2007 and established in 2012, the National Institute for the promotion of health of Migrant populations and for the fight against Poverty diseases (INMP) is a public body that today serves as a reference center for the national network for socio-healthcare assistance issues related to migrant populations and poverty, as well as a national center for transcultural mediation in healthcare. Since 2019, INMP has also been a WHO Collaborating Center for scientific evidence and capacity building related to migrant health.",
+                            "img": "/img/inmp-logo-partners.png",
+                            "img_class": "h-96",
+                            "url": "https://www.inmp.it/"
+                        },
+                        {
+                            "title": "",
+                            "description": "ANDI ETS Foundation promotes oral health for everyone with particular attention to subjects with socio-economic vulnerabilities, through healthcare initiatives dedicated to prevention, international cooperation and awareness projects",
+                            "img": "/img/fondazione-andi-logo-updated.png",
+                            "img_class": "h-48",
+                            "url": "https://fondazioneandi.org/"
+                        },
+                        {
+                            "title": "",
+                            "description": "International Dental Cooperation ETS has been operating for over 30 years to promote the right to basic and global oral health through sustainable international cooperation interventions, social dentistry projects and staff training",
+                            "img": "/img/logo-coi-partners.png",
+                            "img_class": "h-20",
+                            "url": "https://www.cooperazioneodontoiatrica.eu/"
+                        }
+                    ]
+                }
+            }
+
         ]
     },
     "sidebar_blocks": {

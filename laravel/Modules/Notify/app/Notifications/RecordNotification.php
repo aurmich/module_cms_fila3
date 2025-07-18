@@ -74,15 +74,9 @@ class RecordNotification extends Notification
     public function toSms(object $notifiable): ?SmsData
     {
         $email = new SpatieEmail($this->record, $this->slug);
-        /*
-        dddx([
-            'methods' => get_class_methods($email),
-           // 'text' => $email->text(),
-           'getHtmlLayout' => $email->getHtmlLayout(),
-
-
-        ]);
-        */
+        
+        $email=$email->mergeData($this->data);
+       
         // If the notifiable entity has a routeNotificationForSms method,
         // we'll use that to get the destination phone number
         //dddx($notifiable);//Illuminate\Notifications\AnonymousNotifiable
@@ -94,7 +88,11 @@ class RecordNotification extends Notification
             return null;
         }
 
-        $smsData = SmsData::from(['from'=>'Xot','to'=>$to,'body'=>'test']);
+        $smsData = SmsData::from([
+            'from'=>'Xot',
+            'to'=>$to,
+            'body'=>$email->buildSms(),
+        ]);
 
 
         return $smsData;

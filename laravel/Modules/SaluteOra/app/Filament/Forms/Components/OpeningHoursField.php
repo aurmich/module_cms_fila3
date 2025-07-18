@@ -13,7 +13,7 @@ use function Safe\json_encode;
 
 class OpeningHoursField extends XotBaseField
 {
-    /** @phpstan-ignore-next-line */
+    /** @phpstan-ignore property.defaultValue */
     protected string $view = 'saluteora::filament.forms.components.opening-hours-field';
     
     protected function setUp(): void
@@ -67,7 +67,7 @@ class OpeningHoursField extends XotBaseField
     
     public function isOpenNow(): bool
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore argument.type */
         $openingHours = OpeningHours::create($this->getState());
         return $openingHours->isOpen();
     }

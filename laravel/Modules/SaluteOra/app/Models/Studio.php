@@ -349,7 +349,7 @@ class Studio extends BaseTenant
         $dates=[];
         $doctors=$this->doctors()->get();
         foreach($doctors as $doctor){
-            //** @phpstan-ignore-next-line */
+            //** @phpstan-ignore property.notFound */
             $tmp=$this->getDoctorEnabledDatesByMonth($doctor->id, $month);
             $dates=array_merge($dates, $tmp);
             

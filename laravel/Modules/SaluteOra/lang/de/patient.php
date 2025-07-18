@@ -19,7 +19,7 @@ return [
         'index' => [
             'title' => 'Elenco Pazienti Registrati',
             'subtitle' => 'Gestione anagrafica completa',
-            'description' => 'Visualizza, modifica ed elimina le schede pazienti registrate nel sistema',
+            'description' => 'anzeigen, modifica ed elimina le schede pazienti registrate nel sistema',
         ],
         'create' => [
             'title' => 'Registrazione Nuovo Paziente',
@@ -27,34 +27,34 @@ return [
             'description' => 'Compila il modulo guidato per registrare un nuovo paziente con tutti i dati necessari',
         ],
         'edit' => [
-            'title' => 'Modifica Scheda Paziente',
+            'title' => 'bearbeiten Scheda Paziente',
             'subtitle' => 'Aggiornamento dati esistenti',
-            'description' => 'Modifica le informazioni anagrafiche, sanitarie e documentali del paziente selezionato',
+            'description' => 'bearbeiten le informazioni anagrafiche, sanitarie e documentali del paziente selezionato',
         ],
         'view' => [
             'title' => 'Dettagli Completi Paziente',
-            'subtitle' => 'Visualizzazione scheda completa',
+            'subtitle' => 'anzeigenzione scheda completa',
             'description' => 'Consulta tutti i dati anagrafici, sanitari e documentali registrati per questo paziente',
         ],
     ],
     'steps' => [
         'personal_data_step' => [
             'label' => 'Dati Anagrafici',
-            'description' => 'Inserisci nome, cognome, codice fiscale e data di nascita',
+            'description' => 'eingeben nome, cognome, codice fiscale e data di nascita',
             'icon' => 'heroicon-o-identification',
             'color' => 'primary',
             'help' => 'Tutti i campi anagrafici sono obbligatori e devono corrispondere ai documenti ufficiali',
         ],
         'contacts' => [
-            'label' => 'Recapiti e Contatti',
-            'description' => 'Inserisci email, telefono e indirizzo di residenza',
+            'label' => 'Recapiti e Kontakte',
+            'description' => 'eingeben email, telefono e indirizzo di residenza',
             'icon' => 'heroicon-o-phone',
             'color' => 'info',
             'help' => 'I dati di contatto sono essenziali per comunicazioni e appuntamenti',
         ],
         'documents_step' => [
             'label' => 'Documenti Ufficiali',
-            'description' => 'Carica tessera sanitaria, documento identità e certificati',
+            'description' => 'hochladen tessera sanitaria, documento identità e certificati',
             'icon' => 'heroicon-o-document-text',
             'color' => 'success',
             'help' => 'I documenti devono essere in formato PDF, JPG o PNG con dimensione massima 5MB',
@@ -64,21 +64,21 @@ return [
             'description' => 'Storia clinica e problemi dentali attuali',
             'icon' => 'heroicon-o-clipboard-document-list',
             'color' => 'warning',
-            'help' => 'Queste informazioni aiutano il medico a preparare meglio la visita',
+            'help' => 'Queste informazioni aiutano il arzt a preparare meglio la visita',
         ],
         'health' => [
-            'label' => 'Stato Salute Generale',
+            'label' => 'Status Salute Generale',
             'description' => 'Patologie, allergie e informazioni mediche rilevanti',
             'icon' => 'heroicon-o-heart',
             'color' => 'danger',
             'help' => 'Fornisci informazioni complete su allergie, patologie croniche e farmaci assunti',
         ],
         'privacy_step' => [
-            'label' => 'Privacy e Consensi',
-            'description' => 'Consenso al trattamento dati e comunicazioni marketing',
+            'label' => 'Datenschutz und Einwilligungen',
+            'description' => 'Einwilligung zur Datenverarbeitung und Marketing-Kommunikation',
             'icon' => 'heroicon-o-shield-check',
             'color' => 'info',
-            'help' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
+            'help' => 'Die Datenschutz-Einwilligung ist gesetzlich erforderlich, der Newsletter ist optional',
         ],
     ],
     'fields' => [
@@ -89,13 +89,13 @@ return [
             'description' => 'id',
         ],
         'name' => [
-            'label' => 'Nome Completo Paziente',
-            'placeholder' => 'Nome e cognome concatenati per visualizzazione',
+            'label' => 'Vorname Completo Paziente',
+            'placeholder' => 'Vorname e cognome concatenati per visualizzazione',
             'helper_text' => '',
         ],
         'first_name' => [
-            'label' => 'Nome',
-            'placeholder' => 'Inserisci il nome del paziente',
+            'label' => 'Vorname',
+            'placeholder' => 'eingeben il nome del paziente',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il nome è obbligatorio',
@@ -106,8 +106,8 @@ return [
             'description' => 'first_name',
         ],
         'last_name' => [
-            'label' => 'Cognome',
-            'placeholder' => 'Inserisci il cognome del paziente',
+            'label' => 'Nachname',
+            'placeholder' => 'eingeben il cognome del paziente',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il cognome è obbligatorio',
@@ -119,7 +119,7 @@ return [
         ],
         'fiscal_code' => [
             'label' => 'Codice Fiscale',
-            'placeholder' => 'Inserisci 16 caratteri del codice fiscale (es. RSSMRA80A01H501U)',
+            'placeholder' => 'eingeben 16 caratteri del codice fiscale (es. RSSMRA80A01H501U)',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il codice fiscale è obbligatorio',
@@ -130,18 +130,18 @@ return [
         ],
         'birth_date' => [
             'label' => 'Data di Nascita',
-            'placeholder' => 'Seleziona dal calendario la data di nascita',
+            'placeholder' => 'auswählen dal calendario la data di nascita',
             'helper_text' => '',
             'validation' => [
                 'required' => 'La data di nascita è obbligatoria',
-                'date' => 'Inserisci una data valida',
+                'date' => 'eingeben una data valida',
                 'before' => 'La data di nascita deve essere anteriore alla data odierna',
                 'after' => 'La data di nascita non può essere superiore a 120 anni fa',
             ],
         ],
         'gender' => [
             'label' => 'Genere Anagrafico',
-            'placeholder' => 'Seleziona il genere dal menu a tendina',
+            'placeholder' => 'auswählen il genere dal menu a tendina',
             'helper_text' => '',
             'options' => [
                 'M' => 'Maschio',
@@ -150,47 +150,47 @@ return [
             ],
             'validation' => [
                 'required' => 'Il genere è obbligatorio',
-                'in' => 'Seleziona un genere valido tra le opzioni disponibili',
+                'in' => 'auswählen un genere valido tra le opzioni disponibili',
             ],
         ],
         'nationality' => [
             'label' => 'Nazionalità',
-            'placeholder' => 'Seleziona la nazionalità del paziente',
+            'placeholder' => 'auswählen la nazionalità del paziente',
             'helper_text' => '',
             'description' => 'nationality',
         ],
         'years_in_italy' => [
             'label' => 'Anni in Italia',
-            'placeholder' => 'Inserisci il numero di anni di residenza in Italia',
+            'placeholder' => 'eingeben il numero di anni di residenza in Italia',
             'helper_text' => '',
             'description' => 'years_in_italy',
         ],
         'email' => [
-            'label' => 'Indirizzo Email',
-            'placeholder' => 'Inserisci email valida (es. nome@dominio.it)',
+            'label' => 'Adresse E-Mail',
+            'placeholder' => 'eingeben email valida (es. nome@dominio.it)',
             'helper_text' => '',
             'validation' => [
                 'required' => 'L\'indirizzo email è obbligatorio',
-                'email' => 'Inserisci un indirizzo email valido e funzionante',
+                'email' => 'eingeben un indirizzo email valido e funzionante',
                 'unique' => 'Questo indirizzo email è già registrato per un altro paziente',
                 'max' => 'L\'indirizzo email non può superare i 255 caratteri',
             ],
             'description' => 'email',
         ],
         'phone' => [
-            'label' => 'Numero di Telefono',
-            'placeholder' => 'Inserisci numero completo (es. +39 333 123 4567)',
+            'label' => 'Numero di Telefon',
+            'placeholder' => 'eingeben numero completo (es. +39 333 123 4567)',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il numero di telefono è obbligatorio',
-                'regex' => 'Inserisci un numero di telefono italiano valido',
+                'regex' => 'eingeben un numero di telefono italiano valido',
                 'min' => 'Il numero deve contenere almeno 10 cifre',
             ],
             'description' => 'phone',
         ],
         'address' => [
-            'label' => 'Indirizzo Residenza',
-            'placeholder' => 'Via/Piazza Nome della Strada, 123',
+            'label' => 'Adresse Residenza',
+            'placeholder' => 'Via/Piazza Vorname della Strada, 123',
             'helper_text' => '',
             'validation' => [
                 'required' => 'L\'indirizzo di residenza è obbligatorio',
@@ -200,8 +200,8 @@ return [
             'description' => 'address',
         ],
         'city' => [
-            'label' => 'Città di Residenza',
-            'placeholder' => 'Inserisci nome della città',
+            'label' => 'Stadt di Residenza',
+            'placeholder' => 'eingeben nome della città',
             'helper_text' => '',
             'validation' => [
                 'required' => 'La città è obbligatoria',
@@ -212,7 +212,7 @@ return [
         ],
         'postal_code' => [
             'label' => 'Codice Postale (CAP)',
-            'placeholder' => 'Inserisci 5 cifre del CAP (es. 00100)',
+            'placeholder' => 'eingeben 5 cifre del CAP (es. 00100)',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il CAP è obbligatorio',
@@ -222,7 +222,7 @@ return [
         ],
         'province' => [
             'label' => 'Provincia di Residenza',
-            'placeholder' => 'Seleziona la provincia (es. RM, MI, NA)',
+            'placeholder' => 'auswählen la provincia (es. RM, MI, NA)',
             'helper_text' => '',
             'validation' => [
                 'required' => 'La provincia è obbligatoria',
@@ -232,7 +232,7 @@ return [
         ],
         'country' => [
             'label' => 'Paese di Residenza',
-            'placeholder' => 'Seleziona il paese dal menu',
+            'placeholder' => 'auswählen il paese dal menu',
             'helper_text' => '',
         ],
         'country_code' => [
@@ -243,7 +243,7 @@ return [
         ],
         'isee_code' => [
             'label' => 'Codice Identificativo ISEE',
-            'placeholder' => 'Inserisci codice univoco del certificato ISEE',
+            'placeholder' => 'eingeben codice univoco del certificato ISEE',
             'helper_text' => '',
             'validation' => [
                 'alpha_num' => 'Il codice ISEE deve contenere solo lettere e numeri',
@@ -252,7 +252,7 @@ return [
         ],
         'isee_value' => [
             'label' => 'Valore Indicatore ISEE',
-            'placeholder' => 'Inserisci importo in euro (es. 15000.50)',
+            'placeholder' => 'eingeben importo in euro (es. 15000.50)',
             'helper_text' => '',
             'validation' => [
                 'numeric' => 'Il valore ISEE deve essere un numero valido',
@@ -262,20 +262,20 @@ return [
         ],
         'isee_expiry_date' => [
             'label' => 'Data Scadenza Certificato ISEE',
-            'placeholder' => 'Seleziona data di scadenza dal calendario',
+            'placeholder' => 'auswählen data di scadenza dal calendario',
             'helper_text' => '',
             'validation' => [
-                'date' => 'Inserisci una data di scadenza valida',
+                'date' => 'eingeben una data di scadenza valida',
                 'after' => 'La data di scadenza deve essere futura per accedere alle agevolazioni',
             ],
         ],
         'health_card' => [
             'label' => 'Scansione Tessera Sanitaria',
-            'placeholder' => 'Carica file immagine o PDF della tessera sanitaria',
+            'placeholder' => 'hochladen file immagine o PDF della tessera sanitaria',
             'helper_text' => '',
             'validation' => [
                 'required' => 'La tessera sanitaria è obbligatoria per identificazione paziente',
-                'file' => 'Carica un file valido',
+                'file' => 'hochladen un file valido',
                 'mimes' => 'Formati supportati: JPG, JPEG, PNG, PDF',
                 'max' => 'Dimensione massima consentita: 5MB per file',
             ],
@@ -283,11 +283,11 @@ return [
         ],
         'identity_document' => [
             'label' => 'Documento di Identità Valido',
-            'placeholder' => 'Carica scansione documento identità in corso di validità',
+            'placeholder' => 'hochladen scansione documento identità in corso di validità',
             'helper_text' => '',
             'validation' => [
                 'required' => 'Il documento di identità è obbligatorio per verifica anagrafica',
-                'file' => 'Carica un file valido',
+                'file' => 'hochladen un file valido',
                 'mimes' => 'Formati supportati: JPG, JPEG, PNG, PDF',
                 'max' => 'Dimensione massima consentita: 5MB per file',
             ],
@@ -295,28 +295,28 @@ return [
         ],
         'isee_certificate' => [
             'label' => 'Certificato ISEE Completo',
-            'placeholder' => 'Carica certificato ISEE per agevolazioni economiche',
+            'placeholder' => 'hochladen certificato ISEE per agevolazioni economiche',
             'helper_text' => '',
             'validation' => [
-                'file' => 'Carica un certificato ISEE valido',
+                'file' => 'hochladen un certificato ISEE valido',
                 'mimes' => 'Formati supportati: JPG, JPEG, PNG, PDF',
                 'max' => 'Dimensione massima consentita: 5MB per file',
             ],
             'description' => 'isee_certificate',
         ],
         'pregnancy_certificate' => [
-            'label' => 'Certificato Medico Gravidanza',
-            'placeholder' => 'Carica certificato medico attestante stato gravidanza',
+            'label' => 'Certificato Arzt Gravidanza',
+            'placeholder' => 'hochladen certificato arzt attestante stato gravidanza',
             'helper_text' => '',
             'validation' => [
-                'file' => 'Carica un certificato medico valido',
+                'file' => 'hochladen un certificato arzt valido',
                 'mimes' => 'Formati supportati: JPG, JPEG, PNG, PDF',
                 'max' => 'Dimensione massima consentita: 5MB per file',
             ],
             'description' => 'pregnancy_certificate',
         ],
         'is_pregnant' => [
-            'label' => 'Stato di Gravidanza Attuale',
+            'label' => 'Status di Gravidanza Attuale',
             'placeholder' => 'Indica se la paziente è attualmente in gravidanza',
             'helper_text' => '',
             'options' => [
@@ -326,17 +326,17 @@ return [
         ],
         'last_dental_visit' => [
             'label' => 'Data Ultima Visita Odontoiatrica',
-            'placeholder' => 'Seleziona data approssimativa ultima visita dentale',
+            'placeholder' => 'auswählen data approssimativa ultima visita dentale',
             'helper_text' => '',
             'validation' => [
-                'date' => 'Inserisci una data valida',
+                'date' => 'eingeben una data valida',
                 'before_or_equal' => 'La data dell\'ultima visita non può essere futura',
             ],
             'description' => 'last_dental_visit',
         ],
         'last_dental_visit_period' => [
             'label' => 'Quando è stata la tua ultima visita dentale?',
-            'placeholder' => 'Seleziona il periodo temporale dell\'ultima visita dentale',
+            'placeholder' => 'auswählen il periodo temporale dell\'ultima visita dentale',
             'helper_text' => '',
             'description' => 'last_dental_visit_period',
         ],
@@ -375,7 +375,7 @@ return [
         ],
         'notes' => [
             'label' => 'Note Cliniche Aggiuntive',
-            'placeholder' => 'Inserisci altre informazioni mediche rilevanti non specificate sopra',
+            'placeholder' => 'eingeben altre informazioni mediche rilevanti non specificate sopra',
             'helper_text' => '',
             'validation' => [
                 'max' => 'Le note aggiuntive non possono superare i 1500 caratteri',
@@ -383,7 +383,7 @@ return [
         ],
         'children_count' => [
             'label' => 'Figli',
-            'placeholder' => 'Inserisci il numero di figli',
+            'placeholder' => 'eingeben il numero di figli',
             'helper_text' => '',
             'description' => 'children_count',
         ],
@@ -419,7 +419,7 @@ return [
         ],
         'family_members' => [
             'label' => 'Componenti Nucleo Familiare',
-            'placeholder' => 'Inserisci il numero di componenti del nucleo familiare',
+            'placeholder' => 'eingeben il numero di componenti del nucleo familiare',
             'helper_text' => '',
             'description' => 'family_members',
         ],
@@ -429,50 +429,50 @@ return [
             'label' => 'Registra Nuovo Paziente',
             'modal_heading' => 'Registrazione Paziente',
             'modal_description' => 'Compila tutti i campi obbligatori per registrare un nuovo paziente',
-            'success' => 'Paziente registrato con successo nel sistema',
-            'error' => 'Errore durante la registrazione del paziente',
+            'success' => 'Paziente registrato erfolgreich nel sistema',
+            'error' => 'Fehler durante la registrazione del paziente',
         ],
         'edit' => [
-            'label' => 'Modifica Dati',
-            'modal_heading' => 'Modifica Informazioni Paziente',
+            'label' => 'bearbeiten Dati',
+            'modal_heading' => 'bearbeiten Informazioni Paziente',
             'modal_description' => 'Aggiorna le informazioni del paziente selezionato',
-            'success' => 'Dati paziente aggiornati con successo',
-            'error' => 'Errore durante l\'aggiornamento dei dati',
+            'success' => 'Dati paziente aggiornati erfolgreich',
+            'error' => 'Fehler durante l\'aggiornamento dei dati',
         ],
         'view' => [
-            'label' => 'Visualizza Dettagli',
+            'label' => 'anzeigen Dettagli',
             'modal_heading' => 'Scheda Completa Paziente',
-            'modal_description' => 'Visualizza tutti i dati del paziente selezionato',
+            'modal_description' => 'anzeigen tutti i dati del paziente selezionato',
         ],
         'delete' => [
-            'label' => 'Elimina Paziente',
-            'modal_heading' => 'Conferma Eliminazione',
-            'modal_description' => 'Sei sicuro di voler eliminare definitivamente questo paziente?',
+            'label' => 'löschen Paziente',
+            'modal_heading' => 'Conferma löschenzione',
+            'modal_description' => 'Sind Sie sicher di voler eliminare definitivamente questo paziente?',
             'success' => 'Paziente eliminato dal sistema',
-            'error' => 'Errore durante l\'eliminazione',
+            'error' => 'Fehler durante l\'eliminazione',
             'confirmation' => 'Questa operazione non può essere annullata',
         ],
         'approve' => [
-            'label' => 'Approva Registrazione',
-            'modal_heading' => 'Approva Paziente',
+            'label' => 'genehmigen Registrazione',
+            'modal_heading' => 'genehmigen Paziente',
             'modal_description' => 'Conferma l\'approvazione di questa registrazione paziente',
             'success' => 'Registrazione paziente approvata',
-            'error' => 'Errore durante l\'approvazione',
+            'error' => 'Fehler durante l\'approvazione',
         ],
         'reject' => [
             'label' => 'Rifiuta Registrazione',
             'modal_heading' => 'Rifiuta Paziente',
             'modal_description' => 'Indica il motivo del rifiuto della registrazione',
             'success' => 'Registrazione paziente rifiutata',
-            'error' => 'Errore durante il rifiuto',
+            'error' => 'Fehler durante il rifiuto',
         ],
     ],
     'messages' => [
         'welcome' => 'Benvenuto nella gestione pazienti',
-        'registration_success' => 'Registrazione completata con successo',
+        'registration_success' => 'Registrazione completata erfolgreich',
         'validation_errors' => 'Controlla i campi evidenziati e riprova',
-        'document_uploaded' => 'Documento caricato con successo',
-        'document_error' => 'Errore durante il caricamento del documento',
+        'document_uploaded' => 'Documento caricato erfolgreich',
+        'document_error' => 'Fehler durante il caricamento del documento',
         'empty_state' => 'Nessun paziente registrato nel sistema',
         'search_no_results' => 'Nessun paziente trovato con i criteri di ricerca specificati',
     ],

@@ -254,7 +254,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->valueKey('id') // Campo da usare come valore (default: 'id'),
                 
                 ->afterStateUpdated(function (Set $set, Get $get){
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                     $options=$this->getDoctorsOptionsByStudioId($get('studio_id'));
                     $options=array_keys($options);
                     if(isset($options[0])){
@@ -276,7 +276,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         return [
 
             'doctor_id'=>Select::make('doctor_id')
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 ->options(fn(Get $get)=>$this->getDoctorsOptionsByStudioId($get('studio_id')))
                 ->searchable()
                 //->default(fn(Get $get)=>dddx('a'))
@@ -432,7 +432,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                             }
                             
                             $doctor = $studio->doctors()->where('users.id', $doctorId)->first();
-                            /** @phpstan-ignore-next-line */
+                            /** @phpstan-ignore property.notFound, property.notFound */
                             return $doctor ? ($doctor->first_name . ' ' . $doctor->last_name) : __('saluteora::widgets.find_doctor_and_appointment.fields.doctor.placeholder');
                         }),
                         
@@ -447,7 +447,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                             // Formatta la data in modo più leggibile (es: "Lunedì 15 Giugno 2025")
                             try {
                                 $carbonDate = Carbon::createFromFormat('Y-m-d', $date);
-                                //** @phpstan-ignore-next-line */
+                                //** @phpstan-ignore method.nonObject */
                                 return $carbonDate->isoFormat('dddd DD MMMM YYYY');
                             } catch (\Exception $e) {
                                 return $date; // Fallback al formato originale
@@ -477,15 +477,15 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'patient_id'=>Auth::id(),
             'doctor_id'=>$data['doctor_id'],
             'studio_id'=>$data['studio_id'],
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore binaryOp.invalid, binaryOp.invalid */
             'starts_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time']),
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore binaryOp.invalid, binaryOp.invalid */
             'ends_at'=>Carbon::parse($data['appointment_date'].' '.$data['appointment_time'])->addMinutes(60),
             'notes'=>$data['notes'],
             'state'=>'pending',
         ];
         $appointment=Appointment::create($appointment_data);
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore staticProperty.notFound */
         $slug='patient_appointment_'.Str::snake($appointment->state::$name);
         $slug=Str::slug($slug);
         /*---

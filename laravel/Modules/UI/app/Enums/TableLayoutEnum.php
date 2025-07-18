@@ -94,7 +94,7 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 
         $columns = $this->isGridLayout()
             ? $caller->getGridTableColumns()
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore method.protected */
             : $caller->getTableColumns();
 
         Assert::isArray($columns);

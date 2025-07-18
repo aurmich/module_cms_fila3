@@ -41,6 +41,7 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 
 - [🚨 Array to String Conversion User Registration](errori/array-to-string-conversion-user-registration.md) - **CRITICO**: Errore durante registrazione paziente con allegati, conflitto architetturale Media Library vs Database
 - [📧 MissingMailTemplate SpatieEmail](errori/missing-mail-template-spatie-email.md) - **CRITICO**: Template email mancante durante invio notifiche, conflitto timing Spatie MailTemplates
+- [🔄 Sync Pivot Schedule Issue](sync_pivot_schedule_issue.md) - **CRITICO**: Campo schedule non aggiornato nel pivot durante sync, problema con belongsToManyX
 
 ### Filament
 

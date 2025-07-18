@@ -204,6 +204,10 @@ return array (
         'label' => 'patient.full_name',
       ),
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+    ),
   ),
   'statuses' => 
   array (

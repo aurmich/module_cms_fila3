@@ -8,17 +8,17 @@ return [
         'sort' => '6',
     ],
     'model' => [
-        'label' => 'Disponibilità Medico',
-        'plural' => 'Disponibilità Medici',
+        'label' => 'Availability Doctor',
+        'plural' => 'Availability Doctors',
     ],
     'sections' => [
-        'general_settings' => 'Impostazioni Generali',
-        'weekly_availability' => 'Disponibilità Settimanale',
+        'general_settings' => 'Setzioni Generali',
+        'weekly_availability' => 'Availability Settimanale',
         'exceptions' => 'Eccezioni e Giorni Speciali',
-        'pending_appointments' => 'Appuntamenti in Attesa di Approvazione',
+        'pending_appointments' => 'Appuntamenti in Attesa di Approvezione',
         'pending_appointments_description' => 'Qui puoi vedere e gestire tutti gli appuntamenti in attesa della tua approvazione.',
-        'calendar' => 'Calendario Disponibilità',
-        'calendar_description' => 'Visualizza i tuoi appuntamenti e le tue disponibilità in un\'unica vista.',
+        'calendar' => 'Calendario Availability',
+        'calendar_description' => 'View i tuoi appuntamenti e le tue disponibilità in un\'unica vista.',
     ],
     'fields' => [
         'is_accepting_appointments' => [
@@ -50,7 +50,7 @@ return [
             'label' => 'Data',
         ],
         'exception_available' => [
-            'help' => 'Attiva per aggiungere disponibilità extra in un giorno specifico. Disattiva per bloccare un periodo in cui normalmente saresti disponibile.',
+            'help' => 'Activate per aggiungere disponibilità extra in un giorno specifico. Disattiva per bloccare un periodo in cui normalmente saresti disponibile.',
         ],
     ],
     'actions' => [
@@ -58,22 +58,22 @@ return [
             'label' => 'save',
         ],
         'add_exception' => 'Aggiungi Eccezione',
-        'approve' => 'Approva',
+        'approve' => 'Approve',
         'reject' => 'Rifiuta',
         'toggle_appointments' => 'Appuntamenti',
-        'toggle_availability' => 'Disponibilità',
+        'toggle_availability' => 'Availability',
     ],
     'notifications' => [
         'saved' => [
-            'title' => 'Disponibilità salvate',
-            'body' => 'Le tue disponibilità sono state aggiornate con successo.',
+            'title' => 'Availability salvate',
+            'body' => 'Le tue disponibilità sono state aggiornate successfully.',
         ],
         'not_doctor' => [
             'title' => 'Utente non autorizzato',
-            'body' => 'Solo i profili medico possono gestire le disponibilità.',
+            'body' => 'Solo i profili doctor possono gestire le disponibilità.',
         ],
         'error' => [
-            'title' => 'Errore durante il salvataggio',
+            'title' => 'Error durante il salvataggio',
             'body' => 'Si è verificato un errore durante il salvataggio delle disponibilità.',
         ],
         'not_found' => [
@@ -82,11 +82,11 @@ return [
         ],
         'appointment_approved' => [
             'title' => 'Appuntamento approvato',
-            'body' => 'L\'appuntamento è stato confermato con successo.',
+            'body' => 'L\'appuntamento è stato confermato successfully.',
         ],
         'appointment_rejected' => [
             'title' => 'Appuntamento rifiutato',
-            'body' => 'L\'appuntamento è stato rifiutato con successo.',
+            'body' => 'L\'appuntamento è stato rifiutato successfully.',
         ],
     ],
     'calendar' => [

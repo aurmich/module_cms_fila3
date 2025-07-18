@@ -145,6 +145,24 @@ return array (
       'placeholder' => 'name, email, date, company',
       'description' => 'Parametri disponibili per il template email',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'sms_template' => 
+    array (
+      'description' => 'sms_template',
+      'helper_text' => 'sms_template',
+      'placeholder' => 'sms_template',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
   ),
   'actions' => 
   array (

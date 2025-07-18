@@ -124,7 +124,7 @@ class DoctorCalendarWidget extends FullCalendarWidget
                 fn (Appointment $event) => EventData::make()
                     ->id($event->id)
                     ->title($event->patient()->first()->full_name ?? 'N/A')
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                     ->start($event->starts_at)
                     ->end($event->ends_at)
                     ->backgroundColor($event->state->bgColor())

@@ -7,5 +7,17 @@ return array (
     array (
       'label' => 'delete',
     ),
+    'cancel' => 
+    array (
+      'label' => 'cancel',
+    ),
+    'save' => 
+    array (
+      'label' => 'save',
+    ),
+    'activeLocale' => 
+    array (
+      'label' => 'activeLocale',
+    ),
   ),
 );

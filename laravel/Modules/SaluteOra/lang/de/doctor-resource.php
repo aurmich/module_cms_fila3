@@ -2,112 +2,112 @@
 
 return [
     'navigation' => [
-        'label' => 'Medici',
+        'label' => 'Ärzte',
         'icon' => 'heroicon-o-user-group',
         'group' => 'Gestione',
     ],
     'model' => [
-        'label' => 'Medico',
-        'plural' => 'Medici',
+        'label' => 'Arzt',
+        'plural' => 'Ärzte',
     ],
     'pages' => [
         'index' => [
-            'title' => 'Medici',
+            'title' => 'Ärzte',
         ],
         'create' => [
-            'title' => 'Nuovo Medico',
+            'title' => 'Nuovo Arzt',
         ],
         'edit' => [
-            'title' => 'Modifica Medico',
+            'title' => 'bearbeiten Arzt',
         ],
     ],
     'steps' => [
         'personal_info' => [
-            'label' => 'Informazioni Personali',
-            'description' => 'Inserisci le tue informazioni personali',
+            'label' => 'Persönliche Informationen',
+            'description' => 'eingeben le tue informazioni personali',
         ],
         'moderation' => [
             'label' => 'Moderazione',
             'description' => 'Verifica e approvazione del profilo',
         ],
         'contacts' => [
-            'label' => 'Contatti',
-            'description' => 'Inserisci i tuoi contatti',
+            'label' => 'Kontakte',
+            'description' => 'eingeben i tuoi contatti',
         ],
         'professional' => [
             'label' => 'Informazioni Professionali',
-            'description' => 'Inserisci le tue informazioni professionali',
+            'description' => 'eingeben le tue informazioni professionali',
         ],
         'availability' => [
-            'label' => 'Disponibilità',
-            'description' => 'Imposta i tuoi orari di disponibilità',
+            'label' => 'Verfügbarkeit',
+            'description' => 'festlegen i tuoi orari di disponibilità',
         ],
     ],
     'fields' => [
         'full_name' => [
-            'label' => 'Nome e Cognome',
-            'placeholder' => 'Inserisci nome e cognome completi',
+            'label' => 'Vorname e Nachname',
+            'placeholder' => 'eingeben nome e cognome completi',
         ],
         'certification' => [
-            'label' => 'Certificazione Ordine',
-            'tooltip' => 'Carica la certificazione di iscrizione all\'Ordine',
+            'label' => 'Zertifizierung Ärztekammer',
+            'tooltip' => 'hochladen la certificazione di iscrizione all\'Ärztekammer',
         ],
         'moderation_status' => [
-            'label' => 'Stato Moderazione',
+            'label' => 'Status Moderazione',
         ],
         'moderation_notes' => [
             'label' => 'Note Moderazione',
-            'placeholder' => 'Inserisci eventuali note sulla moderazione',
+            'placeholder' => 'eingeben eventuali note sulla moderazione',
         ],
         'fiscal_code' => [
             'label' => 'Codice Fiscale',
-            'placeholder' => 'Inserisci il codice fiscale',
+            'placeholder' => 'eingeben il codice fiscale',
         ],
         'birth_date' => [
             'label' => 'Data di Nascita',
-            'placeholder' => 'Seleziona la data di nascita',
+            'placeholder' => 'auswählen la data di nascita',
         ],
         'email' => [
-            'label' => 'Email',
-            'placeholder' => 'Inserisci l\'indirizzo email',
+            'label' => 'E-Mail',
+            'placeholder' => 'eingeben l\'indirizzo email',
         ],
         'phone' => [
-            'label' => 'Telefono',
-            'placeholder' => 'Inserisci il numero di telefono',
+            'label' => 'Telefon',
+            'placeholder' => 'eingeben il numero di telefono',
         ],
         'address' => [
-            'label' => 'Indirizzo',
-            'placeholder' => 'Inserisci l\'indirizzo dello studio',
+            'label' => 'Adresse',
+            'placeholder' => 'eingeben l\'indirizzo dello studio',
         ],
         'city' => [
-            'label' => 'Città',
-            'placeholder' => 'Inserisci la città',
+            'label' => 'Stadt',
+            'placeholder' => 'eingeben la città',
         ],
         'registration_number' => [
             'label' => 'Numero di Iscrizione',
-            'placeholder' => 'Inserisci il numero di iscrizione all\'Ordine',
+            'placeholder' => 'eingeben il numero di iscrizione all\'Ärztekammer',
         ],
         'specialties' => [
             'label' => 'Specializzazioni',
-            'placeholder' => 'Seleziona le specializzazioni',
+            'placeholder' => 'auswählen le specializzazioni',
         ],
         'certifications' => [
-            'label' => 'Certificazioni',
-            'tooltip' => 'Carica eventuali certificazioni aggiuntive',
+            'label' => 'Zertifizierungen',
+            'tooltip' => 'hochladen eventuali certificazioni aggiuntive',
         ],
         'availability' => [
-            'label' => 'Orari di Disponibilità',
+            'label' => 'Orari di Verfügbarkeit',
         ],
         'day' => [
             'label' => 'Giorno',
             'options' => [
-                'monday' => 'Lunedì',
-                'tuesday' => 'Martedì',
-                'wednesday' => 'Mercoledì',
-                'thursday' => 'Giovedì',
-                'friday' => 'Venerdì',
-                'saturday' => 'Sabato',
-                'sunday' => 'Domenica',
+                'monday' => 'Montag',
+                'tuesday' => 'Dienstag',
+                'wednesday' => 'Mittwoch',
+                'thursday' => 'Donnerstag',
+                'friday' => 'Freitag',
+                'saturday' => 'Samstag',
+                'sunday' => 'Sonntag',
             ],
         ],
         'start_time' => [
@@ -123,19 +123,19 @@ return [
     ],
     'actions' => [
         'approve' => [
-            'label' => 'Approva',
-            'tooltip' => 'Approva la registrazione del medico',
+            'label' => 'genehmigen',
+            'tooltip' => 'genehmigen la registrazione del arzt',
         ],
         'reject' => [
             'label' => 'Rifiuta',
-            'tooltip' => 'Rifiuta la registrazione del medico',
+            'tooltip' => 'Rifiuta la registrazione del arzt',
         ],
     ],
     'moderation' => [
-        'pending' => 'In attesa di moderazione',
-        'approved' => 'Approvata',
+        'pending' => 'Ausstehend di moderazione',
+        'approved' => 'genehmigenta',
         'rejected' => 'Rifiutata',
-        'approve' => 'Approva',
+        'approve' => 'genehmigen',
         'reject' => 'Rifiuta',
     ],
     'search_placeholder' => 'Cerca per nome, email, telefono, codice fiscale...',

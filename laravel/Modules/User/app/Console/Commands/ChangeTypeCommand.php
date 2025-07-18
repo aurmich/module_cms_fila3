@@ -69,7 +69,7 @@ class ChangeTypeCommand extends Command
         }
 
         $childTypes = $xot->getUserChildTypes();
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore nullsafe.neverNull */
         $this->info("Current user type: {$user->type?->getLabel()}");
         
         $typeClass = $xot->getUserChildTypeClass();

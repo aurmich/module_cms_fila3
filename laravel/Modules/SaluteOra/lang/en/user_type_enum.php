@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-    'patient' => [
-        'label' => 'Paziente',
-        'color' => 'success',
-        'icon' => 'heroicon-o-user',
-        'image' => '/img/donna-personaggio.png',
+    'admin' => [
+        'label' => 'Administrator',
+        'color' => 'danger',
+        'icon' => 'heroicon-o-shield-check',
+        'image' => '/img/admin.jpg',
     ],
     'doctor' => [
-        'label' => 'Dottore',
+        'label' => 'Doctor',
         'color' => 'primary',
         'icon' => 'heroicon-o-user-circle',
         'image' => '/img/dentist.png',
     ],
-    'admin' => [
-        'label' => 'Amministratore',
-        'color' => 'danger',
-        'icon' => 'heroicon-o-shield-check',
-        'image' => '/img/admin.jpg',
+    'patient' => [
+        'label' => 'Patient',
+        'color' => 'success',
+        'icon' => 'heroicon-o-user',
+        'image' => '/img/donna-personaggio.png',
     ],
     'descriptions' => [
         'patient' => 'Healthcare service recipient',

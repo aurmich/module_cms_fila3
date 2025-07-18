@@ -9,12 +9,12 @@ Questo documento descrive il processo di sincronizzazione delle traduzioni per i
 ### Tema One
 - **Percorso**: `/laravel/Themes/One/lang/`
 - **Lingue supportate**: `it/`, `en/`, `de/`
-- **File di traduzione**: 8 file per lingua
+- **File di traduzione**: 9 file per lingua (aggiornato)
 
 ### Tema Two
 - **Percorso**: `/laravel/Themes/Two/lang/`
 - **Lingue supportate**: `it/`, `en/`, `de/`
-- **File di traduzione**: 8 file per lingua
+- **File di traduzione**: 9 file per lingua (aggiornato)
 
 ## File di Traduzione
 
@@ -28,6 +28,38 @@ Entrambi i temi contengono i seguenti file di traduzione:
 6. `txt.php` - Testi generici
 7. `wizard.php` - Componenti wizard
 8. `theme.php` - Traduzioni specifiche del tema
+9. `widgets.php` - Traduzioni per i widget Filament (NUOVO)
+
+## Traduzioni Widget
+
+### Struttura del File widgets.php
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'doctor' => [
+        'profile' => [
+            'title' => 'I miei dati', // Italiano
+            // 'title' => 'My Data', // Inglese
+            // 'title' => 'Meine Daten', // Tedesco
+        ],
+    ],
+];
+```
+
+### Utilizzo nelle View
+```blade
+{{-- Sostituisce testo hardcoded con traduzione multilingua --}}
+<h2>{{ __('pub_theme::widgets.doctor.profile.title') }}</h2>
+```
+
+### Caso Studio: Profilo Dottore
+- **File**: `/laravel/Themes/One/resources/views/filament/widgets/doctor/profile.blade.php`
+- **Problema**: Testo hardcoded "I miei dati" non supportava multilingua
+- **Soluzione**: Creazione file `widgets.php` e utilizzo `__('pub_theme::widgets.doctor.profile.title')`
+- **Risultato**: Supporto completo per italiano, inglese e tedesco
 
 ## Script di Sincronizzazione
 
@@ -52,28 +84,28 @@ php bashscripts/translations/sync_theme_translations.php
 🚀 Iniziando sincronizzazione traduzioni temi...
 
 📁 Tema: One
-   📄 File di traduzione italiani trovati: 8
-   ✅ en: 28 chiavi sincronizzate in 8 file
+   📄 File di traduzione italiani trovati: 9
+   ✅ en: 31 chiavi sincronizzate in 9 file
    📁 Creata cartella de per il tema One
-   ✅ de: 58 chiavi sincronizzate in 8 file
-   📊 Totale tema One: 86 chiavi sincronizzate in 16 file
+   ✅ de: 62 chiavi sincronizzate in 9 file
+   📊 Totale tema One: 93 chiavi sincronizzate in 18 file
 
 📁 Tema: Two
-   📄 File di traduzione italiani trovati: 8
-   ✅ en: 28 chiavi sincronizzate in 8 file
+   📄 File di traduzione italiani trovati: 9
+   ✅ en: 31 chiavi sincronizzate in 9 file
    📁 Creata cartella de per il tema Two
-   ✅ de: 58 chiavi sincronizzate in 8 file
-   📊 Totale tema Two: 86 chiavi sincronizzate in 16 file
+   ✅ de: 62 chiavi sincronizzate in 9 file
+   📊 Totale tema Two: 93 chiavi sincronizzate in 18 file
 
 ✅ Sincronizzazione traduzioni temi completata!
 ```
 
 ## Risultati della Sincronizzazione
 
-### Statistiche Finali
-- **Tema One**: 86 chiavi sincronizzate in 16 file
-- **Tema Two**: 86 chiavi sincronizzate in 16 file
-- **Totale**: 172 chiavi sincronizzate in 32 file
+### Statistiche Finali (Aggiornate)
+- **Tema One**: 93 chiavi sincronizzate in 18 file
+- **Tema Two**: 93 chiavi sincronizzate in 18 file
+- **Totale**: 186 chiavi sincronizzate in 36 file
 
 ### Lingue Supportate
 - **Italiano (it)**: Lingua sorgente
@@ -99,6 +131,12 @@ return [
     ],
 ];
 ```
+
+### Namespace del Tema
+Le traduzioni del tema utilizzano il namespace `pub_theme::`:
+- `pub_theme::widgets.doctor.profile.title`
+- `pub_theme::auth.login.title`
+- `pub_theme::theme.footer.copyright`
 
 ### Algoritmo di Merge
 Lo script utilizza un algoritmo ricorsivo per unire le traduzioni:
@@ -151,6 +189,11 @@ Prima di eseguire la sincronizzazione, è consigliabile:
 - Assicurati che le traduzioni siano appropriate per il contesto
 - Testa le traduzioni nell'interfaccia utente
 
+### Widget Filament
+- Crea sempre file `widgets.php` per le traduzioni dei widget
+- Usa il namespace `pub_theme::widgets` per le traduzioni del tema
+- Evita testo hardcoded nelle view Blade
+
 ## Collegamenti
 
 - [Sincronizzazione Moduli](../docs/translation-sync.md)
@@ -160,4 +203,4 @@ Prima di eseguire la sincronizzazione, è consigliabile:
 ---
 
 *Ultimo aggiornamento: Dicembre 2024*
-*Versione: 1.0* 
+*Versione: 1.1* 

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'section_title' => 'My Data',
     'actions' => [
         'delete' => [
             'label' => 'Delete',
@@ -26,6 +27,20 @@ return [
             'placeholder' => 'Enter your phone number',
             'help' => 'Phone number for contact',
             'description' => 'Primary phone number',
+            'helper_text' => '',
+        ],
+        'last_name' => [
+            'label' => 'Last Name',
+            'placeholder' => 'Enter your last name',
+            'help' => 'Your surname as per official documents',
+            'description' => 'User\'s last name',
+            'helper_text' => '',
+        ],
+        'first_name' => [
+            'label' => 'First Name',
+            'placeholder' => 'Enter your first name',
+            'help' => 'Your given name as per official documents',
+            'description' => 'User\'s first name',
             'helper_text' => '',
         ],
     ],

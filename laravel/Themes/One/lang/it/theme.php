@@ -109,4 +109,19 @@ return [
             'message' => 'Non sei connesso a Internet',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Componenti Hero
+    |--------------------------------------------------------------------------
+    */
+    'hero' => [
+        'patient_profile' => [
+            'my_data' => [
+                'label' => 'I miei dati',
+                'tooltip' => 'Visualizza e modifica le tue informazioni personali',
+                'help' => 'Gestisci i tuoi dati personali e anagrafici',
+            ],
+        ],
+    ],
 ];

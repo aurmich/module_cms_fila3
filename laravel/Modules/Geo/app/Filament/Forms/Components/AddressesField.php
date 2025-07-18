@@ -55,7 +55,7 @@ class AddressesField extends Forms\Components\Repeater
             ->maxLength(255)
             ->visible(function (Get $get): bool {
                 $addresses = $get('../../addresses') ?? [];
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 return count($addresses) > 1;
             })
             ->live();
@@ -64,13 +64,13 @@ class AddressesField extends Forms\Components\Repeater
         $baseSchema['is_primary'] = Forms\Components\Toggle::make('is_primary')
             ->visible(function (Get $get): bool {
                 $addresses = $get('../../addresses') ?? [];
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 return count($addresses) > 1;
             })
             ->default(function (Get $get): bool {
                 $addresses = $get('../../addresses') ?? [];
                 // Se è il primo elemento o c'è un solo elemento, default true
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 return count($addresses) <= 1;
             })
             ->afterStateUpdated(function ($state, $set, Get $get, Component $component): void {
@@ -85,10 +85,10 @@ class AddressesField extends Forms\Components\Repeater
 
                     if ($currentIndex !== null) {
                         // Disattiva is_primary negli altri elementi
-                        /** @phpstan-ignore-next-line */
+                        /** @phpstan-ignore foreach.nonIterable */
                         foreach ($addresses as $index => $address) {
                             if ((string)$index !== (string)$currentIndex) {
-                                /** @phpstan-ignore-next-line */
+                                /** @phpstan-ignore encapsedStringPart.nonString */
                                 $set("../../addresses.{$index}.is_primary", false);
                             }
                         }
@@ -99,7 +99,7 @@ class AddressesField extends Forms\Components\Repeater
             ->dehydrateStateUsing(function ($state, Get $get): bool {
                 $addresses = $get('../../addresses') ?? [];
                 // Se c'è un solo elemento, forza sempre true
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 if (count($addresses) <= 1) {
                     return true;
                 }

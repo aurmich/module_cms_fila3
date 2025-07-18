@@ -101,31 +101,12 @@ return array (
         'max' => 'Dimensione massima: 10MB',
       ),
     ),
-    'pregnancy_certificate' => 
-    array (
-      'description' => 'pregnancy_certificate',
-      'helper_text' => 'pregnancy_certificate',
-      'placeholder' => 'pregnancy_certificate',
-      'label' => 'pregnancy_certificate',
-    ),
-    'isee_certificate' => 
-    array (
-      'description' => 'isee_certificate',
-      'helper_text' => 'isee_certificate',
-      'placeholder' => 'isee_certificate',
-      'label' => 'isee_certificate',
-    ),
-    'health_card' => 
-    array (
-      'description' => 'health_card',
-      'helper_text' => 'health_card',
-    ),
     'doctor_certificate' => 
     array (
       'description' => 'doctor_certificate',
-      'helper_text' => 'doctor_certificate',
-      'placeholder' => 'doctor_certificate',
+      'helper_text' => 'doctor_certificate1',
       'label' => 'doctor_certificate',
+      'placeholder' => 'doctor_certificate',
     ),
   ),
   'validation' => 

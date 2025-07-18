@@ -61,24 +61,24 @@ class AddressField extends Forms\Components\Section
     protected function removeReactivityFromSchema(array $schema): array
     {
         foreach ($schema as $key => $field) {
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore argument.type */
             if (method_exists($field, 'live')) {
                 // Rimuovi reattività live
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore method.nonObject */
                 $field->live(false);
             }
             
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore argument.type */
             if (method_exists($field, 'afterStateUpdated')) {
                 // Rimuovi callback afterStateUpdated
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore method.nonObject */
                 $field->afterStateUpdated(null);
             }
             
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore argument.type */
             if (method_exists($field, 'disabled')) {
                 // Rimuovi condizioni disabled dinamiche
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore method.nonObject */
                 $field->disabled(false);
             }
             

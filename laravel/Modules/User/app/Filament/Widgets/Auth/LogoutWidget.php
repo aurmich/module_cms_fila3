@@ -25,7 +25,7 @@ class LogoutWidget extends XotBaseWidget
 {
     /**
      * The view for this widget.
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore property.defaultValue
      */
     protected static string $view = 'user::widgets.auth.logout-widget';
 

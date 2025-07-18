@@ -79,7 +79,22 @@ return [
         ],
         'offline' => [
             'title' => 'Offline',
-            'message' => 'Non sei connesso a Internet',
+            'message' => 'Sie sind nicht mit dem Internet verbunden',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Hero-Komponenten
+    |--------------------------------------------------------------------------
+    */
+    'hero' => [
+        'patient_profile' => [
+            'my_data' => [
+                'label' => 'Meine Daten',
+                'tooltip' => 'Ihre persönlichen Informationen anzeigen und bearbeiten',
+                'help' => 'Verwalten Sie Ihre persönlichen und demografischen Daten',
+            ],
         ],
     ],
 ];

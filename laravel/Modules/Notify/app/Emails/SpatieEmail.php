@@ -174,4 +174,18 @@ class SpatieEmail extends TemplateMailable
     {
         return $this->customAttachments;
     }
+
+
+    public function buildSms():string{
+        /**@phpstan-ignore method.notFound */
+        $sms_template=$this->getMailTemplate()->getAttributeValue('sms_template');
+        $mustache= app(\Mustache_Engine::class); 
+        $sms = $mustache->render(
+            $sms_template,
+            $this->data
+        );
+
+        
+        return $sms;
+    }
 }

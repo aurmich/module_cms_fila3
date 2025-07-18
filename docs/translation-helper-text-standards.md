@@ -9,6 +9,7 @@ Quando `helper_text` è uguale alla chiave dell'array, **DEVE** essere impostato
 - **Evitare duplicazione**: Non mostrare lo stesso testo due volte
 - **Coerenza UX**: Mantenere interfacce pulite e professionali
 - **Best Practice**: Seguire standard di design moderni
+- **Localizzazione**: Evitare valori non tradotti nelle interfacce utente
 
 ## Pattern di Implementazione
 
@@ -28,6 +29,13 @@ Quando `helper_text` è uguale alla chiave dell'array, **DEVE** essere impostato
     'description' => 'Numero di telefono principale',
     'helper_text' => '', // Vuoto perché diverso da 'phone'
 ],
+'first_name' => [
+    'label' => 'Nome',
+    'placeholder' => 'Inserisci il nome',
+    'help' => 'Il tuo nome anagrafico',
+    'description' => 'Nome dell\'utente',
+    'helper_text' => '', // Vuoto perché diverso da 'first_name'
+],
 ```
 
 ### ❌ ERRATO
@@ -41,6 +49,11 @@ Quando `helper_text` è uguale alla chiave dell'array, **DEVE** essere impostato
     'label' => 'Telefono',
     'helper_text' => 'phone', // ERRORE: uguale alla chiave
 ],
+'first_name' => [
+    'label' => 'first_name', // ERRORE: valore non tradotto
+    'placeholder' => 'first_name', // ERRORE: valore non tradotto
+    'helper_text' => 'first_name', // ERRORE: uguale alla chiave
+],
 ```
 
 ## Regole di Applicazione
@@ -48,10 +61,12 @@ Quando `helper_text` è uguale alla chiave dell'array, **DEVE** essere impostato
 ### 1. Controllo Obbligatorio
 - **SE** `helper_text` = chiave dell'array → impostare `helper_text = ''`
 - **SE** ci sono `label` e `placeholder` → **DEVE** esserci `helper_text`
+- **SE** i valori sono uguali alla chiave → **TRADURRE** in italiano appropriato
 
 ### 2. Coerenza Multilingua
 - Applicare la stessa logica in tutte le lingue (it, en, de)
 - Mantenere struttura identica tra le versioni
+- **NON RIMUOVERE** campi esistenti, solo aggiungere o migliorare
 
 ### 3. Struttura Completa
 Ogni campo deve avere:
@@ -74,6 +89,7 @@ Prima di considerare completo un file di traduzione:
 - [ ] Struttura coerente tra tutte le lingue
 - [ ] `helper_text` vuoto (`''`) quando appropriato
 - [ ] Testi di aiuto significativi e diversi da label/placeholder
+- [ ] Nessun valore non tradotto (chiavi come valori)
 
 ## Esempi di Correzione
 
@@ -87,6 +103,12 @@ Prima di considerare completo un file di traduzione:
     'helper_text' => 'last_name',
     'placeholder' => 'last_name',
     'label' => 'last_name',
+],
+'first_name' => [
+    'description' => 'first_name',
+    'helper_text' => 'first_name',
+    'placeholder' => 'first_name',
+    'label' => 'first_name',
 ],
 ```
 
@@ -106,6 +128,13 @@ Prima di considerare completo un file di traduzione:
     'description' => 'Cognome dell\'utente',
     'helper_text' => '',
 ],
+'first_name' => [
+    'label' => 'Nome',
+    'placeholder' => 'Inserisci il nome',
+    'help' => 'Il tuo nome anagrafico',
+    'description' => 'Nome dell\'utente',
+    'helper_text' => '',
+],
 ```
 
 ## Applicazione Globale
@@ -115,10 +144,33 @@ Questa regola si applica a:
 - `Themes/*/lang/*/` - Tutti i temi
 - Qualsiasi file di traduzione del progetto SaluteOra
 
+## Caso Studio: SaluteOra profile_widget.php
+
+### Problema Identificato (Gennaio 2025)
+Il file `Modules/SaluteOra/lang/it/profile_widget.php` conteneva:
+- Sintassi `array()` invece di `[]`
+- Mancanza di `declare(strict_types=1)`
+- Campi `first_name` e `last_name` con valori non tradotti
+- `helper_text` uguali alle chiavi degli array
+
+### Soluzione Applicata
+1. **Sintassi**: Convertito da `array()` a `[]`
+2. **Strict Types**: Aggiunto `declare(strict_types=1)`
+3. **Traduzioni**: Aggiunte traduzioni italiane appropriate per `first_name` e `last_name`
+4. **Helper Text**: Impostato a `''` dove uguale alla chiave
+5. **Coerenza**: Aggiornati anche i file `en/` e `de/` per mantenere struttura identica
+
+### Risultato
+- ✅ Conformità completa agli standard Laraxot
+- ✅ Traduzioni semantiche corrette in italiano
+- ✅ Struttura espansa completa per tutti i campi
+- ✅ Coerenza multilingua mantenuta
+
 ## Collegamenti
 
 - [Regole Generali Traduzioni](translation_standards_links.md)
 - [Documentazione Modulo Lang](../../laravel/Modules/Lang/docs/)
 - [Best Practices Filament](../../laravel/Modules/Xot/docs/filament/)
+- [Standard di Qualità SaluteOra](../../laravel/Modules/SaluteOra/docs/translation_quality_standards.md)
 
-*Ultimo aggiornamento: 2025-01-06* 
+*Ultimo aggiornamento: Gennaio 2025* 

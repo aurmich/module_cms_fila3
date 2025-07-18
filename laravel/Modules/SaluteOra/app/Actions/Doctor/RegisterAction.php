@@ -19,6 +19,7 @@ use Modules\SaluteOra\Datas\DoctorData;
 use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\Enums\DoctorStatus;
 use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\Models\DoctorStudio;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
 use Modules\Notify\Notifications\RecordNotification;
@@ -49,6 +50,7 @@ class RegisterAction
             $doctor->save();
             //$doctor = Doctor::create($data);
         }
+        Assert::isInstanceOf($doctor, Doctor::class);
         if(isset($data['schedule'])){
             if(!is_array($data['studio'])){
                 $data['studio']=[];
@@ -61,10 +63,15 @@ class RegisterAction
             $studio->address()->save($address);
             /** @phpstan-ignore-next-line */
             $doctor->studio()->save($studio);
-            /** @phpstan-ignore-next-line */
-            //$doctor->studios()->attach($studio,['schedule'=>$data['schedule']]);
-            /** @phpstan-ignore-next-line */
-            $doctor->studios()->sync($studio,['schedule'=>$data['schedule']]);
+            
+            $res=$doctor->studios()->sync([$studio->id=>['schedule'=>$data['schedule']]]);
+
+            $pivot=DoctorStudio::firstOrCreate(['user_id'=>$doctor->id,'studio_id'=>$studio->id]);
+            if($pivot->schedule==null){
+                $pivot->update(['schedule'=>$data['schedule']]);
+            }
+
+            
         }
 
          //-------------------------------------------------
@@ -72,7 +79,7 @@ class RegisterAction
             $attachments = Doctor::getAttachments();
             $data_attachments = [];
             foreach ($attachments as $attachment) {
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                     $media=$doctor->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
                     $data_attachments[$attachment]=$media->getPathRelativeToRoot();
@@ -81,9 +88,7 @@ class RegisterAction
             $doctor->update($data_attachments);
              //*/
              //-------------------------------------------------
-             if(!method_exists($doctor,'consents')){
-                throw new \Exception('Method consents not found');
-            }
+             
             // Gestione delle preferenze
             if (isset($data['privacy_acceptance'])) {
                 $doctor->consents()->create([
@@ -118,7 +123,7 @@ class RegisterAction
             return $doctor;
         }
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore binaryOp.invalid, binaryOp.invalid */
         $mail_slug=Str::slug($data['type'].'-'.$data['state']);
         
 

@@ -34,7 +34,7 @@ class ReadTranslationFileAction
         if (!is_array($translations)) {
             throw new \Exception("File di traduzione non valido: {$filePath}");
         }
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return $translations;
     }
 
@@ -70,7 +70,7 @@ class ReadTranslationFileAction
 
             if (is_array($value)) {
                 $content .= "[\n";
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 $content .= $this->arrayToPhp($value, $indent + 1);
                 $content .= $indentStr . "],\n";
             } else {

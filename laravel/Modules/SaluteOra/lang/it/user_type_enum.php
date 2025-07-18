@@ -21,4 +21,14 @@ return [
         'icon' => 'heroicon-o-user',
         'image' => '/img/donna-personaggio.png',
     ],
+    'descriptions' => [
+        'patient' => 'Destinatario di servizi sanitari',
+        'doctor' => 'Professionista sanitario',
+        'admin' => 'Amministratore di sistema',
+    ],
+    'plural' => [
+        'patient' => 'Pazienti',
+        'doctor' => 'Dottori',
+        'admin' => 'Amministratori',
+    ],
 ];

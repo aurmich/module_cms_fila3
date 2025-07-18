@@ -113,7 +113,7 @@ class DoctorStudio extends StudioUser
                 '01-01'      => [],                // Recurring on each 1st of January
                 '12-25'      => ['09:00-12:00'],   // Recurring on each 25th of December
         ];
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore argument.type */
         return OpeningHours::create($days);
     }
 
@@ -143,9 +143,9 @@ class DoctorStudio extends StudioUser
         $openingHoursForDay = $openingHours->forDate($dateTime);
         $slots = collect();
         foreach ($openingHoursForDay as $timeRange) {
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore method.nonObject */
             $start = Carbon::createFromFormat('H:i', $timeRange->start()->format());
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore method.nonObject */
             $end = Carbon::createFromFormat('H:i', $timeRange->end()->format());
             if($start==null || $end==null){
                 continue;

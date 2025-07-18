@@ -157,7 +157,7 @@ class DoctorAvailabilitiesWidget extends XotBaseWidget implements HasActions
     protected function getTotalConfiguredStudios(): int
     {
         $data = $this->getViewData();
-        /** @phpstan-ignore-next-line */        
+        /** @phpstan-ignore method.nonObject */        
         return $data['studios_schedules']->filter(function ($studioData) {
             return !empty($studioData['schedule']);
         })->count();
@@ -172,11 +172,11 @@ class DoctorAvailabilitiesWidget extends XotBaseWidget implements HasActions
     {
         $data = $this->getViewData();
         $studiosSchedules = $data['studios_schedules'];
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.nonObject */
         $totalStudios = $studiosSchedules->count();
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.nonObject */
         $configuredStudios = $studiosSchedules->filter(fn($studio) => !empty($studio['schedule']))->count();
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.nonObject */
         $primaryStudio = $studiosSchedules->firstWhere('is_primary', true);
         
         return [
