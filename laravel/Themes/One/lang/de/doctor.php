@@ -20,4 +20,11 @@ return [
             'label' => 'Abgeschlossene Termine',
         ],
     ],
+    'profile' => [
+        'my_data' => [
+            'label' => 'Meine Daten',
+            'tooltip' => 'Ihre persönlichen Informationen anzeigen und bearbeiten',
+            'help' => 'Verwalten Sie Ihre persönlichen und beruflichen Daten',
+        ],
+    ],
 ]; 

@@ -707,7 +707,7 @@ class UserFactory extends Factory
         $prefixes = ['320', '330', '340', '349', '360', '380', '390', '393', '347', '348'];
         $prefix = $this->faker->randomElement($prefixes);
         $number = (string) $this->faker->numerify('#######');
-        /**@phpstan-ignore-next-line */
+        /**@phpstan-ignore binaryOp.invalid */
         return '+39 ' . $prefix . ' ' . $number;
     }
 
@@ -749,7 +749,7 @@ class UserFactory extends Factory
         
         // Control character (simplified)
         $control = $this->faker->randomElement(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z']);
-        /**@phpstan-ignore-next-line */
+        /**@phpstan-ignore binaryOp.invalid, binaryOp.invalid */
         return $surname . $name . $year . $month . $day . $place . $control;
     }
 

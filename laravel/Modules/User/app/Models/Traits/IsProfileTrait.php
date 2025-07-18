@@ -54,7 +54,7 @@ trait IsProfileTrait
         /** @var class-string<\Illuminate\Database\Eloquent\Model&\Modules\Xot\Contracts\UserContract> $userClass */
         $userClass = XotData::make()->getUserClass();
 
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore return.type
         return $this->belongsTo($userClass);
     }
 
@@ -216,7 +216,7 @@ trait IsProfileTrait
      */
     public function mobileDevices(): BelongsToMany
     {
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore return.type
         return $this->belongsToMany(Device::class, 'mobile_device_users', 'profile_id', 'device_id')
             ->withPivot('token')
             ->withTimestamps();
@@ -239,7 +239,7 @@ trait IsProfileTrait
      */
     public function mobileDeviceUsers(): HasMany
     {
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore return.type
         return $this->hasMany(DeviceUser::class, 'profile_id')->where('type', 'mobile');
     }
 
@@ -250,7 +250,7 @@ trait IsProfileTrait
      */
     public function deviceUsers(): HasMany
     {
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore return.type
         return $this->hasMany(DeviceUser::class, 'profile_id');
     }
 

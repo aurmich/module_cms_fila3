@@ -126,7 +126,7 @@ class Comune extends BaseModel
      */
     public static function getRegioni(): Collection
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return static::all()->pluck('regione')->unique()->sort()->values();
     }
 
@@ -138,7 +138,7 @@ class Comune extends BaseModel
      */
     public static function getProvinceByRegione(string $regione): Collection
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return static::where('regione', $regione)
             ->pluck('provincia')
             ->unique()
@@ -154,7 +154,7 @@ class Comune extends BaseModel
      */
     public static function getComuniByProvincia(string $provincia): Collection
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return static::where('provincia', $provincia)
             ->orderBy('nome')
             ->get();
@@ -168,7 +168,7 @@ class Comune extends BaseModel
      */
     public static function findByNome(string $nome): ?self
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return static::all()->first(function ($comune) use ($nome) {
             return strtolower($comune->nome) === strtolower($nome);
         });
@@ -182,7 +182,7 @@ class Comune extends BaseModel
      */
     public static function findByCap(string $cap): Collection
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return static::where('cap', 'like', "%{$cap}%")->get();
     }
 
@@ -196,7 +196,7 @@ class Comune extends BaseModel
     {
         $comune = static::query()->where('id', $id)->first();
         
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return $comune ? $comune->toArray() : null;
     }
 

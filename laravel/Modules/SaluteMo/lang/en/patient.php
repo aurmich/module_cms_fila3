@@ -151,31 +151,31 @@ return [
             'label' => 'Reset Filters',
         ],
         'apply_filters' => [
-            'label' => 'Applica Filtri',
+            'label' => 'Apply Filters',
         ],
         'open_filters' => [
-            'label' => 'Apri Filtri',
+            'label' => 'Filters',
         ],
         'toggle_columns' => [
-            'label' => 'Mostra/Nascondi Colonne',
+            'label' => 'Show/Hide Columns',
         ],
         'reorder_records' => [
-            'label' => 'Riordina Record',
+            'label' => 'Reorder Records',
         ],
         'toggleColumns' => [
-            'label' => 'toggleColumns',
+            'label' => 'Toggle Columns',
         ],
         'reorderRecords' => [
-            'label' => 'reorderRecords',
+            'label' => 'Reorder Records',
         ],
         'resetFilters' => [
-            'label' => 'resetFilters',
+            'label' => 'Reset Filters',
         ],
         'openFilters' => [
-            'label' => 'openFilters',
+            'label' => 'Open Filters',
         ],
         'applyFilters' => [
-            'label' => 'applyFilters',
+            'label' => 'Apply Filters',
         ],
     ],
     'actions' => [

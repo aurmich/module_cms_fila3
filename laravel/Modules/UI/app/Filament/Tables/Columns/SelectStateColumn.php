@@ -45,7 +45,7 @@ class SelectStateColumn extends SelectColumn
 
         $this->beforeStateUpdated(function (Model&HasStatesContract $record, $state) {
             $message='';
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore property.notFound */
             $record->state->transitionTo($state,$message);
         });
 

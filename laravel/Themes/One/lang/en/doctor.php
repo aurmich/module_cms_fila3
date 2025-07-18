@@ -20,4 +20,11 @@ return [
             'label' => 'Completed Appointments',
         ],
     ],
+    'profile' => [
+        'my_data' => [
+            'label' => 'My Data',
+            'tooltip' => 'View and edit your personal information',
+            'help' => 'Manage your personal and professional data',
+        ],
+    ],
 ]; 

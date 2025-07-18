@@ -21,7 +21,7 @@ abstract class BaseTransition extends Transition
         $this->sendNotification();
         $class=static::class;
         $newStateClass=Str::of($class)->afterLast('To')->prepend('Modules\SaluteOra\States\User\\')->toString();
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore assign.propertyType */
         $this->user->state = new $newStateClass($this->user);
         $this->user->save();
         return $this->user;

@@ -76,12 +76,12 @@ trait HasAddress
         if($address==null){
             return null;
         }
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.notFound */
         $locality=$address->getLocality();
         if($locality==null){
             return null;
         }
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore property.notFound, property.notFound */
         return $address->street_address.' '.$address->street_number.' '.implode('',$locality['cap']).' '.$locality['nome'].' ('.$locality['provincia']['nome'].') - '.$locality['regione']['nome'];
     }
     
@@ -192,7 +192,7 @@ trait HasAddress
                 $this->addresses()->update(['is_primary' => false]);
             }
         }
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return $this->addresses()->create($data);
     }
     

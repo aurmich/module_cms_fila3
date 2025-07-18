@@ -122,7 +122,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         $this->invalidateCache();
         $cacheKey = $this->getCacheKey();
         
-        /** @phpstan-ignore-next-line */        
+        /** @phpstan-ignore assign.propertyType */        
         $this->appointments = Cache::remember($cacheKey, 300, function ()  {
             return Appointment::query()
                 ->with(['patient', 'doctor', 'studio'])

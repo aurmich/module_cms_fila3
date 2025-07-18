@@ -28,7 +28,7 @@ abstract class GeoJsonModel
         $cacheKey = 'geo_comuni_json_' . md5($path);
         $data = cache()->rememberForever($cacheKey, fn() => json_decode(file_get_contents($path), true));
         /**
-         * @phpstan-ignore-next-line
+         * @phpstan-ignore argument.type, argument.templateType, argument.templateType
          */
         return collect($data);
     }
@@ -44,7 +44,7 @@ abstract class GeoJsonModel
     /**
      * Filtra la collection per chiave/valore.
      * 
-     * @phpstan-ignore-next-line
+     * @phpstan-ignore missingType.parameter, missingType.generics
      */
     public static function where(string $key, $value): Collection
     {

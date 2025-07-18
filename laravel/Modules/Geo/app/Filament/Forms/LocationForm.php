@@ -49,7 +49,7 @@ class LocationForm
                 ->placeholder('geo::fields.province.placeholder')
                 ->options(fn (Get $get): array => 
                     filled($get('region')) 
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                         ? ComuneJson::getProvincesByRegion($get('region'))->toArray()
                         : []
                 )
@@ -68,7 +68,7 @@ class LocationForm
                     }
                     
                     /** @var Collection<int, array{cap: array<int, string>, nome: string}> $cities */
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                     $cities = ComuneJson::byProvince($get('province'));
                     
                     return $cities->pluck('nome', 'nome')->toArray();
@@ -88,7 +88,7 @@ class LocationForm
                     }
                     
                     /** @var Collection<int, array{cap: array<int, string>, nome: string}> $cities */
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore argument.type */
                     $cities = ComuneJson::byProvince($get('province'))
                         ->where('nome', $get('city'));
                         

@@ -39,7 +39,7 @@ class SelectState extends Select
             */
             /**
              * @var array<int|string>
-             * @phpstan-ignore-next-line
+             * @phpstan-ignore argument.type
              */
             return array_combine($states, $states);
         });

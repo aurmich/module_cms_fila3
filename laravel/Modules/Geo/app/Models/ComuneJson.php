@@ -166,7 +166,7 @@ class ComuneJson extends GeoJsonModel
          * }> $result */
         $result = Cache::remember($cacheKey, self::CACHE_TTL, function () use ($name, $limit) {
             $results = static::all()
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore nullCoalesce.offset */
                 ->filter(fn($item) => str_contains(mb_strtolower($item['nome'] ?? ''), $name))
                 ->sortBy('nome');
                 
@@ -210,7 +210,7 @@ class ComuneJson extends GeoJsonModel
          *     popolazione: int
          * }> $filtered */
         $filtered = static::all()
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore nullCoalesce.offset */
             ->filter(fn($item) => in_array($cap, $item['cap'] ?? [], true))
             ->sortBy('nome')
             ->values();

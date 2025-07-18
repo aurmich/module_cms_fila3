@@ -123,7 +123,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
                                     ->orWhere('email', 'like', "%{$search}%");
                             })
                             // Escludiamo manualmente i dottori già associati invece di usare JOIN
-                            /** @phpstan-ignore-next-line */
+                            /** @phpstan-ignore property.notFound */
                             ->whereNotIn('id', $this->getOwnerRecord()->doctors->modelKeys())
                             ->limit(10)
                             ->get()

@@ -20,6 +20,13 @@
                     "text_color": "text-gray-900",
                     "cta_color": "bg-indigo-600 hover:bg-indigo-700"
                 }
+            },
+            {
+                "type": "widget",
+                "data": {
+                    "view": "pub_theme::components.blocks.widget.simple",
+                    "widget":  "Modules\\SaluteOra\\Filament\\Widgets\\Doctor\\ProfileWidget"
+                }
             }
         ]
     },

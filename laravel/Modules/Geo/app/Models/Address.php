@@ -177,15 +177,15 @@ class Address extends BaseModel
     }
      */
     public function getRegione():?array{
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.unresolvableReturnType */
         $res= Comune::select('regione')
         ->distinct()
         ->orderBy('regione->nome')
         ->where('regione->codice', $this->administrative_area_level_1)
         ->get()
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore argument.unresolvableType */
         ->map(function($item){
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore offsetAccess.notFound, offsetAccess.notFound */
             return ['codice'=>$item->regione['codice'],'nome'=>$item->regione['nome']];
         })
         ;
@@ -195,19 +195,19 @@ class Address extends BaseModel
     }
 
     public function getProvincia():?array{
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore method.unresolvableReturnType */
         $res= Comune::select('provincia')
         ->distinct()
         ->orderBy('provincia->nome')
         ->where('provincia->codice', $this->administrative_area_level_2)
         ->get()
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore argument.unresolvableType */
         ->map(function($item){
             /** @phpstan-ignore-next-line */
             return [
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore offsetAccess.notFound */
                 'codice'=>$item->provincia['codice'],
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore offsetAccess.notFound */
                 'nome'=>$item->provincia['nome']
             ];
         })

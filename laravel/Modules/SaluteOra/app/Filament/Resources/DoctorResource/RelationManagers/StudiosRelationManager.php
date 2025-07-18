@@ -126,7 +126,7 @@ class StudiosRelationManager extends XotBaseRelationManager
                                             ->orWhere('address', 'like', "%{$search}%");
                                     })
                                     // Escludiamo manualmente gli studi già associati
-                                    /** @phpstan-ignore-next-line */
+                                    /** @phpstan-ignore property.notFound */
                                     ->whereNotIn('id', $this->getOwnerRecord()->studios->modelKeys())
                                     ->limit(10)
                                     ->get()

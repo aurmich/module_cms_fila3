@@ -51,7 +51,7 @@ class RegisterAction
             $attachments = Patient::getAttachments();
             $data_attachments = [];
             foreach ($attachments as $attachment) {
-                    /** @phpstan-ignore-next-line */
+                    /** @phpstan-ignore method.notFound */
                     $media=$patient->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
                     $data_attachments[$attachment]=$media->getPathRelativeToRoot();
@@ -79,17 +79,17 @@ class RegisterAction
                     'accepted_at' => now(),
                 ]);
             }
-            /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore argument.type, argument.type */
             $mail_slug=Str::of($data['type'])->append('-')->append($data['state'])->slug()->toString();
            //$mail_slug=Str::of($patient->type->value)->append('-')->append($patient->state::$name)->slug()->toString();
             //Assert::isInstanceOf($patient,Patient::class);
             
-            //** @phpstan-ignore-next-line */
+            //** @phpstan-ignore argument.type */
             $notify=new RecordNotification($patient,$mail_slug);
             Notification::route('mail', $data['email'])
             //->locale('it')
             ->notify($notify);
-            //** @phpstan-ignore-next-line */
+            //** @phpstan-ignore return.type */
             return $patient;
         
     }

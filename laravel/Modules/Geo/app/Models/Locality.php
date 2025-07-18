@@ -28,9 +28,9 @@ class Locality extends BaseModel
             ->orderBy("nome")
             ->get()
             ->map(function($row){
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore offsetAccess.nonOffsetAccessible, property.notFound */
                 $postal_code=json_decode($row->postal_code)[0];
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore property.notFound */
                 $row->postal_code=$postal_code;
                 return $row;
             });

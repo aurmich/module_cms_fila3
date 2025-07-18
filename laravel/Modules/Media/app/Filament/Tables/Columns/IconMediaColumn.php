@@ -32,7 +32,7 @@ class IconMediaColumn extends IconColumn
                 ->tooltip(fn ($record) => $record->getFirstMedia($attachment)->file_name ?? 'Documento non caricato')
 
                 ->action(function ($record,\Illuminate\Http\Request $request) use ($attachment) {
-                    // @phpstan-ignore-next-line
+                    // @phpstan-ignore method.nonObject
                     $media = $record->getFirstMedia($attachment);
                     if (!$media) {
                         return;

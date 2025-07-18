@@ -2,31 +2,31 @@
 
 return [
     'navigation' => [
-        'label' => 'Studi Medici',
-        'group' => 'Gestione Strutture',
+        'label' => 'Medical Offices',
+        'group' => 'Facility Management',
         'icon' => 'heroicon-o-building-office',
         'sort' => '30',
     ],
     'model' => [
-        'label' => 'Studio Medico',
-        'plural' => 'Studi Medici',
-        'description' => 'Gestione degli studi medici e delle relative informazioni',
+        'label' => 'Medical Office',
+        'plural' => 'Medical Offices',
+        'description' => 'Management of medical offices and related information',
     ],
     'pages' => [
         'index' => [
-            'title' => 'Elenco Studi Medici',
-            'subtitle' => 'Gestisci gli studi registrati nella piattaforma',
-            'description' => 'Visualizza e gestisci tutti gli studi medici presenti nel sistema',
+            'title' => 'Medical Offices List',
+            'subtitle' => 'Manage the offices registered in the platform',
+            'description' => 'View and manage all medical offices in the system',
         ],
         'create' => [
-            'title' => 'Nuovo Studio Medico',
-            'subtitle' => 'Registra un nuovo studio medico',
-            'description' => 'Inserisci i dati per registrare un nuovo studio medico nella piattaforma',
+            'title' => 'New Medical Office',
+            'subtitle' => 'Register a new medical office',
+            'description' => 'Enter data to register a new medical office in the platform',
         ],
         'edit' => [
-            'title' => 'Modifica Studio Medico',
-            'subtitle' => 'Modifica le informazioni dello studio',
-            'description' => 'Aggiorna i dati e le informazioni del studio medico',
+            'title' => 'Edit Medical Office',
+            'subtitle' => 'Edit office information',
+            'description' => 'Update data and information of the medical office',
         ],
         'view' => [
             'title' => 'Dettagli Studio Medico',

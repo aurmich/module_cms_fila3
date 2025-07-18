@@ -120,7 +120,7 @@ abstract class XotBasePage extends FilamentPage implements HasForms
      */
     public static function getModel(): ?string
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore property.staticAccess */
         return static::$model;
     }
 
