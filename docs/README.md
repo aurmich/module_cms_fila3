@@ -106,6 +106,7 @@ Benvenuti nella documentazione completa di SaluteOra, il sistema integrato per l
 - 🌐 [Traduzioni](translations/README.md)
 - 📊 [Enumerazioni](enums.md)
 - 🇬🇧 [Audit Traduzioni Inglesi](english_translation_audit.md)
+- 🔍 [Audit Completezza Traduzioni](translation_completeness_audit.md)
 
 ## 🚦 Come Navigare la Documentazione
 

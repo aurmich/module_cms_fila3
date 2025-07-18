@@ -9,12 +9,12 @@ Questo documento descrive il processo di sincronizzazione delle traduzioni per i
 ### Tema One
 - **Percorso**: `/laravel/Themes/One/lang/`
 - **Lingue supportate**: `it/`, `en/`, `de/`
-- **File di traduzione**: 9 file per lingua (aggiornato)
+- **File di traduzione**: 12 file per lingua (aggiornato)
 
 ### Tema Two
 - **Percorso**: `/laravel/Themes/Two/lang/`
 - **Lingue supportate**: `it/`, `en/`, `de/`
-- **File di traduzione**: 9 file per lingua (aggiornato)
+- **File di traduzione**: 12 file per lingua (aggiornato)
 
 ## File di Traduzione
 
@@ -22,185 +22,161 @@ Entrambi i temi contengono i seguenti file di traduzione:
 
 1. `auth.php` - Autenticazione e registrazione
 2. `password-reset.php` - Reset password
-3. `appointment.php` - Gestione appuntamenti
-4. `patient_states.php` - Stati del paziente
-5. `doctor_states.php` - Stati del dottore
-6. `txt.php` - Testi generici
-7. `wizard.php` - Componenti wizard
-8. `theme.php` - Traduzioni specifiche del tema
-9. `widgets.php` - Traduzioni per i widget Filament (NUOVO)
+3. `appointment.php` - Gestione appuntamenti (aggiornato con sezione fields)
+4. `appointment_states.php` - Stati degli appuntamenti
+5. `doctor.php` - Gestione dottori
+6. `opening_hours.php` - Orari di apertura
+7. `patient_states.php` - Stati del paziente
+8. `txt.php` - Testi generali (corretto per multilingua)
+9. `widgets.php` - Widget Filament (nuovo)
+10. `doctor_states.php` - Stati del dottore
+11. `patient.php` - Gestione pazienti
+12. `studio.php` - Gestione studi
 
-## Traduzioni Widget
+## Correzioni Applicate (2025-01-06)
 
-### Struttura del File widgets.php
+### 1. Problema: Traduzione mancante `pub_theme::appointment.fields.state.label`
+
+**Causa**: Il file `appointment/item.blade.php` cercava una traduzione che non esisteva.
+
+**Soluzione**: Aggiunta sezione `fields` completa in tutti i file `appointment.php`:
+- `laravel/Themes/One/lang/it/appointment.php`
+- `laravel/Themes/One/lang/en/appointment.php`
+- `laravel/Themes/One/lang/de/appointment.php`
+
+### 2. Problema: Traduzioni in italiano nei file inglesi e tedeschi
+
+**Causa**: I file `txt.php` in inglese e tedesco contenevano ancora traduzioni in italiano.
+
+**Soluzione**: Corrette tutte le traduzioni:
+- `laravel/Themes/One/lang/en/txt.php` - Traduzioni in inglese
+- `laravel/Themes/One/lang/de/txt.php` - Traduzioni in tedesco
+
+### 3. Problema: Sezione fields mancante in appointment.php
+
+**Causa**: I file `appointment.php` non avevano la sezione `fields` necessaria per i form.
+
+**Soluzione**: Aggiunta sezione completa con tutti i campi:
+- `state` - Stato appuntamento
+- `date` - Data
+- `time` - Orario
+- `notes` - Note
+- `patient` - Paziente
+- `doctor` - Dottore
+- `studio` - Studio
+- `service` - Servizio
+- `duration` - Durata
+- `emergency` - Emergenza
+
+## Struttura Standard per File di Traduzione
+
+### Sintassi Array Breve
 ```php
 <?php
 
 declare(strict_types=1);
 
 return [
-    'doctor' => [
-        'profile' => [
-            'title' => 'I miei dati', // Italiano
-            // 'title' => 'My Data', // Inglese
-            // 'title' => 'Meine Daten', // Tedesco
+    'section' => [
+        'key' => [
+            'label' => 'Label',
+            'placeholder' => 'Placeholder',
+            'help' => 'Help text',
         ],
     ],
 ];
 ```
 
-### Utilizzo nelle View
-```blade
-{{-- Sostituisce testo hardcoded con traduzione multilingua --}}
-<h2>{{ __('pub_theme::widgets.doctor.profile.title') }}</h2>
-```
+### Sezione Fields Completa
+Ogni file che gestisce form deve avere una sezione `fields` con:
+- `label` - Etichetta del campo
+- `placeholder` - Testo placeholder
+- `help` - Testo di aiuto
 
-### Caso Studio: Profilo Dottore
-- **File**: `/laravel/Themes/One/resources/views/filament/widgets/doctor/profile.blade.php`
-- **Problema**: Testo hardcoded "I miei dati" non supportava multilingua
-- **Soluzione**: Creazione file `widgets.php` e utilizzo `__('pub_theme::widgets.doctor.profile.title')`
-- **Risultato**: Supporto completo per italiano, inglese e tedesco
+## Regole di Sincronizzazione
 
-## Script di Sincronizzazione
+### 1. Coerenza Strutturale
+- Tutti i file devono avere la stessa struttura
+- Se un file ha una sezione, tutti i file nelle altre lingue devono averla
+- Mantenere l'ordine delle chiavi identico
 
-### File: `bashscripts/translations/sync_theme_translations.php`
+### 2. Traduzioni Semantiche
+- Non tradurre letteralmente, ma semanticamente
+- Considerare il contesto sanitario
+- Mantenere la professionalità del linguaggio
 
-Lo script `ThemeTranslationSynchronizer` gestisce la sincronizzazione automatica delle traduzioni:
+### 3. Sintassi Standard
+- Utilizzare sempre `declare(strict_types=1);`
+- Utilizzare sempre sintassi array breve `[]`
+- Organizzare gerarchicamente le traduzioni
 
-#### Funzionalità
-- **Scansione automatica**: Trova tutti i file di traduzione italiani
-- **Creazione cartelle**: Crea automaticamente le cartelle `en/` e `de/` se non esistono
-- **Merge intelligente**: Unisce le traduzioni mantenendo quelle esistenti
-- **Conteggio statistiche**: Fornisce statistiche dettagliate delle operazioni
+### 4. Controlli Qualità
+- Verificare che non ci siano traduzioni hardcoded
+- Controllare che tutte le lingue abbiano le stesse sezioni
+- Validare la coerenza terminologica
 
-#### Utilizzo
-```bash
-cd /var/www/html/_bases/base_saluteora
-php bashscripts/translations/sync_theme_translations.php
-```
+## Processo di Aggiornamento
 
-#### Output di Esempio
-```
-🚀 Iniziando sincronizzazione traduzioni temi...
+### Fase 1: Identificazione
+1. Cercare errori di traduzione nei log
+2. Verificare file Blade per riferimenti `@lang()`
+3. Controllare coerenza tra file di traduzione
 
-📁 Tema: One
-   📄 File di traduzione italiani trovati: 9
-   ✅ en: 31 chiavi sincronizzate in 9 file
-   📁 Creata cartella de per il tema One
-   ✅ de: 62 chiavi sincronizzate in 9 file
-   📊 Totale tema One: 93 chiavi sincronizzate in 18 file
+### Fase 2: Correzione
+1. Aggiungere sezioni mancanti
+2. Correggere traduzioni errate
+3. Mantenere coerenza strutturale
 
-📁 Tema: Two
-   📄 File di traduzione italiani trovati: 9
-   ✅ en: 31 chiavi sincronizzate in 9 file
-   📁 Creata cartella de per il tema Two
-   ✅ de: 62 chiavi sincronizzate in 9 file
-   📊 Totale tema Two: 93 chiavi sincronizzate in 18 file
+### Fase 3: Validazione
+1. Testare tutte le lingue
+2. Verificare che non ci siano errori
+3. Aggiornare documentazione
 
-✅ Sincronizzazione traduzioni temi completata!
-```
+## File di Riferimento
 
-## Risultati della Sincronizzazione
-
-### Statistiche Finali (Aggiornate)
-- **Tema One**: 93 chiavi sincronizzate in 18 file
-- **Tema Two**: 93 chiavi sincronizzate in 18 file
-- **Totale**: 186 chiavi sincronizzate in 36 file
-
-### Lingue Supportate
-- **Italiano (it)**: Lingua sorgente
-- **Inglese (en)**: Lingua target
-- **Tedesco (de)**: Lingua target
-
-## Caratteristiche Tecniche
-
-### Struttura dei File
-Ogni file di traduzione segue la struttura standard Laravel:
-
+### Template Standard
 ```php
 <?php
 
 declare(strict_types=1);
 
 return [
-    'chiave' => 'valore',
-    'gruppo' => [
-        'sottogruppo' => [
-            'chiave' => 'valore',
+    'section' => [
+        'key' => [
+            'label' => 'Label',
+            'placeholder' => 'Placeholder',
+            'help' => 'Help text',
+            'tooltip' => 'Tooltip text',
         ],
+    ],
+    'actions' => [
+        'action_name' => [
+            'label' => 'Action Label',
+            'success' => 'Success message',
+            'error' => 'Error message',
+        ],
+    ],
+    'messages' => [
+        'message_key' => 'Message text',
     ],
 ];
 ```
 
-### Namespace del Tema
-Le traduzioni del tema utilizzano il namespace `pub_theme::`:
-- `pub_theme::widgets.doctor.profile.title`
-- `pub_theme::auth.login.title`
-- `pub_theme::theme.footer.copyright`
+## Note Importanti
 
-### Algoritmo di Merge
-Lo script utilizza un algoritmo ricorsivo per unire le traduzioni:
-
-1. **Preserva esistenti**: Le traduzioni target esistenti non vengono sovrascritte
-2. **Aggiunge mancanti**: Le nuove chiavi italiane vengono aggiunte
-3. **Gestisce array**: Supporta strutture nidificate di qualsiasi profondità
-4. **Mantiene ordine**: Preserva l'ordine delle chiavi esistenti
-
-### Gestione Errori
-- **File mancanti**: Gestisce gracefully i file di traduzione mancanti
-- **Sintassi PHP**: Valida la sintassi dei file di traduzione
-- **Permessi**: Crea automaticamente le cartelle con i permessi corretti
-
-## Manutenzione
-
-### Aggiornamento Traduzioni
-Per aggiornare le traduzioni dopo modifiche:
-
-1. Aggiorna i file italiani in `/lang/it/`
-2. Esegui lo script di sincronizzazione
-3. Verifica che le nuove chiavi siano state aggiunte
-4. Traduci manualmente i valori nelle lingue target
-
-### Backup
-Prima di eseguire la sincronizzazione, è consigliabile:
-- Fare backup delle traduzioni esistenti
-- Testare lo script in ambiente di sviluppo
-- Verificare che non ci siano conflitti
-
-### Monitoraggio
-- Controlla regolarmente la coerenza delle traduzioni
-- Verifica che tutte le chiavi siano presenti in tutte le lingue
-- Monitora l'uso delle traduzioni nell'applicazione
-
-## Best Practices
-
-### Naming Convention
-- Usa chiavi descrittive e gerarchiche
-- Mantieni coerenza nella struttura tra file
-- Evita chiavi duplicate o ambigue
-
-### Organizzazione
-- Raggruppa le traduzioni per funzionalità
-- Usa sottogruppi per organizzare le chiavi
-- Mantieni un ordine logico delle chiavi
-
-### Qualità
-- Verifica la grammatica e la sintassi
-- Assicurati che le traduzioni siano appropriate per il contesto
-- Testa le traduzioni nell'interfaccia utente
-
-### Widget Filament
-- Crea sempre file `widgets.php` per le traduzioni dei widget
-- Usa il namespace `pub_theme::widgets` per le traduzioni del tema
-- Evita testo hardcoded nelle view Blade
+1. **Mai rimuovere**: Non eliminare mai traduzioni esistenti
+2. **Solo aggiungere**: Aggiungere o migliorare traduzioni
+3. **Coerenza**: Mantenere coerenza tra tutte le lingue
+4. **Documentazione**: Aggiornare sempre la documentazione
 
 ## Collegamenti
 
-- [Sincronizzazione Moduli](../docs/translation-sync.md)
-- [Standard Traduzioni](../docs/translation-standards.md)
-- [Best Practice Traduzioni](../docs/translation-best-practices.md)
+- [Theme Widget Translations](theme-widget-translations.md)
+- [Translation Helper Text Standards](translation-helper-text-standards.md)
+- [Modules/SaluteOra/docs/translation_quality_standards.md](../laravel/Modules/SaluteOra/docs/translation_quality_standards.md)
 
 ---
 
-*Ultimo aggiornamento: Dicembre 2024*
-*Versione: 1.1* 
+**Ultimo aggiornamento**: 2025-01-06
+**Versione**: 2.1
+**Autore**: AI Assistant 
