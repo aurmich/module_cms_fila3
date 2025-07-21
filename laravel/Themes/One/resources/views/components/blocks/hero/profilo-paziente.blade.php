@@ -35,7 +35,7 @@
         </div>
 
         <!-- Sezione principale -->
-        <div class="w-full flex flex-col-reverse lg:flex-row justify-center">
+        <div class="w-full flex flex-col-reverse justify-center">
             <!-- Colonna sinistra: Dati -->
             {{--  
             <div class="w-full flex justify-center">
