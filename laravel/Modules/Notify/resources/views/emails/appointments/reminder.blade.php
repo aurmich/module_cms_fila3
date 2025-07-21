@@ -76,8 +76,8 @@
         
         <div class="appointment-details">
             <h3>Dettagli dell'appuntamento:</h3>
-            <p><strong>Data:</strong> {{ $appointment->date->format('d/m/Y') }}</p>
-            <p><strong>Orario:</strong> {{ $appointment->start_time->format('H:i') }} - {{ $appointment->end_time->format('H:i') }}</p>
+            <p><strong>Data:</strong> {{ $appointment->starts_at->format('d/m/Y') }}</p>
+            <p><strong>Orario:</strong> {{ $appointment->starts_at->format('H:i') }} - {{ $appointment->ends_at->format('H:i') }}</p>
             <p><strong>Tipo:</strong> {{ $appointment->getTypeText() }}</p>
             @if ($appointment->dentist)
                 <p><strong>Medico:</strong> {{ $appointment->dentist->title }} {{ $appointment->dentist->first_name }} {{ $appointment->dentist->last_name }}</p>

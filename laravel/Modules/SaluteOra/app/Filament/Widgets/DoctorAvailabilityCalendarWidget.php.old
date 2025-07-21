@@ -73,7 +73,7 @@ class DoctorAvailabilityCalendarWidget extends FullCalendarWidget
         return Appointment::query()
             ->where('doctor_id', $this->doctor->id)
             ->where('studio_id', $this->studio->id)
-            ->whereBetween('start_time', [$start, $end])
+            ->whereBetween('starts_at', [$start, $end])
             ->get()
             ->map(function (Appointment $appointment) {
                 // Colore in base al tipo e stato
@@ -95,8 +95,8 @@ class DoctorAvailabilityCalendarWidget extends FullCalendarWidget
                 return [
                     'id' => $appointment->id,
                     'title' => $title,
-                    'start' => $appointment->start_time->toDateTimeString(),
-                    'end' => $appointment->end_time->toDateTimeString(),
+                    'start' => $appointment->starts_at->toDateTimeString(),
+                    'end' => $appointment->ends_at->toDateTimeString(),
                     'backgroundColor' => $color,
                     'borderColor' => $color,
                     'textColor' => '#ffffff',
@@ -125,8 +125,8 @@ class DoctorAvailabilityCalendarWidget extends FullCalendarWidget
         $event = Appointment::create([
             'doctor_id' => $this->doctor->id,
             'studio_id' => $this->studio->id,
-            'start_time' => $data['start'],
-            'end_time' => $data['end'],
+            'starts_at' => $data['start'],
+            'ends_at' => $data['end'],
             'title' => __('saluteora::appointment.availability.title'),
             'type' => AppointmentTypeEnum::Availability->value,
             'status' => AppointmentStatusEnum::Available->value,
@@ -152,8 +152,8 @@ class DoctorAvailabilityCalendarWidget extends FullCalendarWidget
     {
         /** @var Appointment $event */
         $event->update([
-            'start_time' => $data['start'] ?? $event->start_time,
-            'end_time' => $data['end'] ?? $event->end_time,
+            'starts_at' => $data['start'] ?? $event->starts_at,
+            'ends_at' => $data['end'] ?? $event->ends_at,
         ]);
 
         // Notifica

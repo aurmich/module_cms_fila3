@@ -61,8 +61,8 @@ final class FetchEventsAction
         return Appointment::query()
             ->with(['doctor', 'studio'])
             ->where('patient_id', $userId)
-            ->whereBetween('start_time', [$start, $end])
-            ->orderBy('start_time')
+            ->whereBetween('starts_at', [$start, $end])
+            ->orderBy('starts_at')
             ->limit(500)
             ->get()
             ->map(fn ($appointment) => $this->transformAppointment($appointment));
@@ -81,8 +81,8 @@ final class FetchEventsAction
         return [
             'id' => $appointment->id,
             'title' => $title,
-            'start' => $appointment->start_time->toIso8601String(),
-            'end' => $appointment->end_time->toIso8601String(),
+            'start' => $appointment->starts_at->toIso8601String(),
+            'end' => $appointment->ends_at->toIso8601String(),
             'allDay' => false,
             'backgroundColor' => $color,
             'borderColor' => $color,

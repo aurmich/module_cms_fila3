@@ -56,7 +56,7 @@ abstract class BaseTransition extends Transition
     {
         return [
             'message' => $this->message,
-            'appointment_date' => $this->appointment->start_time->format('d/m/Y H:i') ?? 'N/A',
+            'appointment_date' => $this->appointment->starts_at->format('d/m/Y H:i') ?? 'N/A',
             'patient_name' => $this->appointment->patient->name ?? 'N/A',
             'doctor_name' => $this->appointment->doctor->name ?? 'N/A',
         ];

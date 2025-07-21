@@ -11,6 +11,7 @@ use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Models\Treatment;
 use Spatie\QueueableAction\QueueableAction;
 
+// Correzione giugno 2025: eliminato ogni riferimento a 'date', 'start_time', 'end_time'. Usare solo 'starts_at' e 'ends_at' per Appointment.
 class CreateAppointmentAction
 {
     use QueueableAction;
@@ -25,7 +26,7 @@ class CreateAppointmentAction
     {
         return DB::transaction(function () use ($data) {
             // Validazione dati essenziali
-            if (!isset($data['patient_id'], $data['dentist_id'], $data['start_time'])) {
+            if (!isset($data['patient_id'], $data['dentist_id'], $data['starts_at'])) {
                 throw new \InvalidArgumentException('Dati appuntamento incompleti');
             }
             
@@ -37,12 +38,12 @@ class CreateAppointmentAction
                 $treatment = Treatment::findOrFail($data['treatment_id']);
                 
                 // Se c'è un trattamento, impostiamo una durata predefinita
-                if (!isset($data['end_time']) && isset($treatment->duration_minutes)) {
-                    // Ensure start_time is a valid datetime string
-                    $startTimeStr = is_string($data['start_time']) ? $data['start_time'] : '';
+                if (!isset($data['ends_at']) && isset($treatment->duration_minutes)) {
+                    // Ensure starts_at is a valid datetime string
+                    $startTimeStr = is_string($data['starts_at']) ? $data['starts_at'] : '';
                     $startTime = new \DateTime($startTimeStr);
                     $endTime = (clone $startTime)->modify("+{$treatment->duration_minutes} minutes");
-                    $data['end_time'] = $endTime->format('Y-m-d H:i:s');
+                    $data['ends_at'] = $endTime->format('Y-m-d H:i:s');
                 }
             }
             

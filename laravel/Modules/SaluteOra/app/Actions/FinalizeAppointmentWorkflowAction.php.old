@@ -14,6 +14,7 @@ use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Spatie\QueueableAction\QueueableAction;
 
+// Correzione giugno 2025: eliminato ogni riferimento a 'date', 'start_time', 'end_time'. Usare solo 'starts_at' e 'ends_at' per Appointment.
 class FinalizeAppointmentWorkflowAction
 {
     use QueueableAction;
@@ -71,9 +72,8 @@ class FinalizeAppointmentWorkflowAction
                 $appointment->tenant_id = $workflow->tenant_id;
                 $appointment->patient_id = $patientId;
                 $appointment->dentist_id = $dentistId;
-                $appointment->date = $dateData['date'] ?? now()->toDateString();
-                $appointment->start_time = $dateData['start_time'] ?? null;
-                $appointment->end_time = $dateData['end_time'] ?? null;
+                $appointment->starts_at = $dateData['date'] ?? now()->toDateString();
+                $appointment->ends_at = $dateData['end_time'] ?? null;
                 $appointment->type = $treatmentData['type'] ?? 'check-up';
                 $appointment->status = AppointmentStatusEnum::CONFIRMED;
                 $appointment->notes = $treatmentData['notes'] ?? '';
@@ -138,9 +138,8 @@ class FinalizeAppointmentWorkflowAction
                 
                 if (!empty($stepData['date_selection'])) {
                     $dateData = $stepData['date_selection'];
-                    $appointment->date = $dateData['date'] ?? $appointment->date;
-                    $appointment->start_time = $dateData['start_time'] ?? $appointment->start_time;
-                    $appointment->end_time = $dateData['end_time'] ?? $appointment->end_time;
+                    $appointment->starts_at = $dateData['date'] ?? $appointment->starts_at;
+                    $appointment->ends_at = $dateData['end_time'] ?? $appointment->ends_at;
                 }
                 
                 if (!empty($stepData['treatment_definition'])) {

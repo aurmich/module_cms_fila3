@@ -29,9 +29,8 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @property int $studio_id
  * @property int|null $tenant_id
  * @property string $title
- * @property \Carbon\Carbon $start_time
- * @property \Carbon\Carbon $end_time
- * @property \Carbon\Carbon|null $date Alias for start_time date
+ * @property \Illuminate\Support\Carbon|null $starts_at
+ * @property \Illuminate\Support\Carbon|null $ends_at
  * @property AppointmentTypeEnum $type
  * @property AppointmentStatusEnum $status
  * @property string|null $notes
@@ -40,9 +39,9 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @property bool $is_emergency Alias for emergency
  * @property bool $eligibility_confirmed
  * @property bool $reminder_sent
- * @property \Carbon\Carbon|null $reminder_sent_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $reminder_sent_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  * @property-read Patient $patient
  * @property-read Doctor $doctor
  * @property-read Studio $studio
@@ -116,8 +115,6 @@ class Appointment extends BaseModel implements HasStatesContract
         'studio_id',
         //'tenant_id',
         'title',
-        'start_time',
-        'end_time',
         'type',
         'status',
         'notes',
@@ -140,8 +137,6 @@ class Appointment extends BaseModel implements HasStatesContract
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            'start_time' => 'datetime',
-            'end_time' => 'datetime',
             'type' => AppointmentTypeEnum::class,
             'status' => AppointmentStatusEnum::class,
             'state' => AppointmentState::class,
@@ -243,7 +238,7 @@ class Appointment extends BaseModel implements HasStatesContract
      */
     public function getDurationAttribute(): int
     {
-        return (int) $this->start_time->diffInMinutes($this->end_time);
+        return (int) $this->starts_at?->diffInMinutes($this->ends_at);
     }
 
     /**
@@ -296,7 +291,7 @@ class Appointment extends BaseModel implements HasStatesContract
      */
     public function scopeInDateRange($query, string $start, string $end)
     {
-        return $query->whereBetween('start_time', [$start, $end]);
+        return $query->whereBetween('starts_at', [$start, $end]);
     }
 
     /**

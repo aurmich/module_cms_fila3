@@ -24,34 +24,36 @@ class AppointmentResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
-
-
-            'patient_id' => Forms\Components\Select::make('patient_id')
+            Forms\Components\Select::make('patient_id')
                 ->relationship('patient', 'full_name')
                 ->searchable()
                 ->preload()
-                ->createOptionForm(
-                    fn (Forms\Get $get): array => PatientResource::getFormSchema()
-                )
                 ->required(),
 
-
-            'doctor_id' => Forms\Components\Select::make('doctor_id')
+            Forms\Components\Select::make('doctor_id')
                 ->relationship('doctor', 'full_name')
                 ->searchable()
                 ->preload()
-                ->createOptionForm(
-                    fn (Forms\Get $get): array => DoctorResource::getFormSchema()
-                )
                 ->required(),
 
-            'start_time' => Forms\Components\DateTimePicker::make('start_time')
+            Forms\Components\Select::make('studio_id')
+                ->relationship('studio', 'name')
+                ->searchable()
+                ->preload()
                 ->required(),
 
-            'end_time' => Forms\Components\DateTimePicker::make('end_time')
-                ->after('start_time'),
+            Forms\Components\TextInput::make('title')
+                ->required(),
+
+            Forms\Components\DateTimePicker::make('starts_at')
+                ->required(),
+
+            Forms\Components\DateTimePicker::make('ends_at')
+                ->required()
+                ->after('starts_at'),
+
             /*
-            'treatment_id' => Forms\Components\Select::make('treatment_id')
+            'treatment_id' => Forms\Components\Select::make('treatment', 'name')
                 ->relationship('treatment', 'name')
                 ->searchable()
                 ->preload(),

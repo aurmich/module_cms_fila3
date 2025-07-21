@@ -137,7 +137,7 @@ class PatientCalendarWidget extends FullCalendarWidget
         $events = cache()->remember($cacheKey, 300, function () use ($fetchInfo): array {
             return Appointment::query()
                 ->where('patient_id', Auth::id())
-                ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
+                ->whereBetween('starts_at', [$fetchInfo['start'], $fetchInfo['end']])
                 ->with(['doctor', 'studio'])
                 ->limit(100)
                 ->get()
@@ -175,8 +175,8 @@ class PatientCalendarWidget extends FullCalendarWidget
         return [
             'id' => $appointment->id,
             'title' => $appointment->title ?? 'Appuntamento',
-            'start' => $appointment->start_time,
-            'end' => $appointment->end_time,
+            'start' => $appointment->starts_at,
+            'end' => $appointment->ends_at,
             'allDay' => false,
             'extendedProps' => [
                 'doctor' => $appointment->doctor->name,

@@ -31,41 +31,101 @@ class AppointmentResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
-            Components\Section::make()
+            Components\Grid::make(2)
                 ->schema([
-                    Components\TextInput::make('title')
+                    // Patient Select with create option
+                    Components\Select::make('patient_id')
+                        ->label(__('salutemo::appointments.fields.patient'))
+                        ->relationship('patient', 'full_name')
+                        ->searchable()
+                        ->preload()
                         ->required()
-                        ->maxLength(255),
-
-                    Components\DateTimePicker::make('start_time')
-                        ->required()
-                        ->native(false),
-
-                    Components\DateTimePicker::make('end_time')
-                        ->required()
-                        ->native(false)
-                        ->after('start_time'),
-
-                    Components\Select::make('status')
-                        ->options([
-                            'scheduled' => 'scheduled',
-                            'confirmed' => 'confirmed',
-                            'cancelled' => 'cancelled',
-                            'completed' => 'completed',
-                            'no_show' => 'no_show',
+                        ->createOptionForm([
+                            Components\TextInput::make('first_name')
+                                ->required()
+                                ->maxLength(255),
+                            Components\TextInput::make('last_name')
+                                ->required()
+                                ->maxLength(255),
+                            Components\TextInput::make('email')
+                                ->email()
+                                ->required()
+                                ->maxLength(255),
+                            Components\TextInput::make('phone')
+                                ->tel()
+                                ->maxLength(20),
                         ])
+                        ->createOptionAction(function (Components\Actions\Action $action) {
+                            return $action
+                                ->modalHeading(__('salutemo::appointments.actions.create_patient'))
+                                ->modalButton(__('salutemo::appointments.actions.create_patient_button'));
+                        }),
+
+                    // Doctor Select
+                    Components\Select::make('doctor_id')
+                        ->label(__('salutemo::appointments.fields.doctor'))
+                        ->relationship('doctor', 'full_name')
+                        ->searchable()
+                        ->preload()
+                        ->required(),
+
+                    // Studio Select
+                    Components\Select::make('studio_id')
+                        ->label(__('salutemo::appointments.fields.studio'))
+                        ->relationship('studio', 'name')
+                        ->searchable()
+                        ->preload()
+                        ->required(),
+
+                    // Appointment Type
+                    Components\Select::make('type')
+                        ->label(__('salutemo::appointments.fields.type'))
+                        ->options(\Modules\SaluteOra\Enums\AppointmentTypeEnum::class)
+                        ->required()
+                        ->default('checkup'),
+
+                    // Status
+                    Components\Select::make('status')
+                        ->label(__('salutemo::appointments.fields.status'))
+                        ->options(\Modules\SaluteOra\Enums\AppointmentStatusEnum::class)
                         ->default('scheduled')
                         ->required(),
-                ])
-                ->columns(1),
 
-            Components\Section::make()
-                ->schema([
+                    // Title
+                    Components\TextInput::make('title')
+                        ->label(__('salutemo::appointments.fields.title'))
+                        ->required()
+                        ->maxLength(255)
+                        ->columnSpan(2),
+
+                    // Start Time
+                    Components\DateTimePicker::make('starts_at')
+                        ->label(__('salutemo::appointments.fields.starts_at'))
+                        ->required()
+                        ->native(false)
+                        ->seconds(false)
+                        ->columnSpan(1),
+
+                    // End Time
+                    Components\DateTimePicker::make('ends_at')
+                        ->label(__('salutemo::appointments.fields.ends_at'))
+                        ->required()
+                        ->native(false)
+                        ->seconds(false)
+                        ->after('starts_at')
+                        ->columnSpan(1),
+
+                    // Emergency Toggle
+                    Components\Toggle::make('emergency')
+                        ->label(__('salutemo::appointments.fields.emergency'))
+                        ->default(false)
+                        ->columnSpan(2),
+
+                    // Notes
                     Components\Textarea::make('notes')
+                        ->label(__('salutemo::appointments.fields.notes'))
+                        ->columnSpan(2)
                         ->columnSpanFull(),
-
-                    Components\Toggle::make('is_emergency')
-                        ->default(false),
                 ]),
         ];
     }

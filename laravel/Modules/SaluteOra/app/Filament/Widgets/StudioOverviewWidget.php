@@ -35,8 +35,8 @@ class StudioOverviewWidget extends Widget
             'cities' => Studio::distinct('city')->count('city'),
             'doctors' => Studio::withCount('doctors')->sum('doctors_count'),
             'appointments' => Studio::withCount(['appointments' => function ($query) {
-                $query->whereMonth('start_time', now()->month)
-                    ->whereYear('start_time', now()->year);
+                $query->whereMonth('starts_at', now()->month)
+                    ->whereYear('starts_at', now()->year);
             }])->sum('appointments_count'),
         ];
 

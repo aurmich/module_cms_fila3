@@ -55,7 +55,7 @@
                     <div class="mt-2 space-y-1">
                         <p class="text-sm text-gray-600">
                             <span class="font-medium">Data:</span> 
-                            {{ $appointment->date->format('d/m/Y') }}
+                            {{ $appointment->starts_at->format('d/m/Y') }}
                         </p>
                         <p class="text-sm text-gray-600">
                             <span class="font-medium">Orario:</span> 

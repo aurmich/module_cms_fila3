@@ -38,12 +38,12 @@ class ListAppointments extends XotBaseListRecords
                 ->searchable()
                 ->sortable(),
 
-            'start_time' => TextColumn::make('start_time')
-                ->dateTime()
+            'starts_at' => TextColumn::make('starts_at')
+                ->dateTime('d/m/Y H:i')
                 ->sortable(),
 
-            'end_time' => TextColumn::make('end_time')
-                ->dateTime()
+            'ends_at' => TextColumn::make('ends_at')
+                ->dateTime('d/m/Y H:i')
                 ->sortable(),
 
             'type' => BadgeColumn::make('type')

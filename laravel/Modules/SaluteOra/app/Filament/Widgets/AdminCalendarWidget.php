@@ -214,8 +214,8 @@ class AdminCalendarWidget extends FullCalendarWidget
         return [
             'id' => $appointment->id,
             'title' => $appointment->title ?? 'Appuntamento',
-            'start' => $appointment->start_time,
-            'end' => $appointment->end_time,
+            'start' => $appointment->starts_at,
+            'end' => $appointment->ends_at,
             'allDay' => false,
             'extendedProps' => [
                 'doctor' => $appointment->doctor->name,
@@ -240,7 +240,7 @@ class AdminCalendarWidget extends FullCalendarWidget
             
             return cache()->remember($cacheKey, 300, function () use ($fetchInfo): array {
                 $query = $this->getEventsQuery()
-                    ->whereBetween('start_time', [
+                    ->whereBetween('starts_at', [
                         $fetchInfo['start'],
                         $fetchInfo['end']
                     ]);
@@ -312,9 +312,9 @@ class AdminCalendarWidget extends FullCalendarWidget
                         ->options(AppointmentTypeEnum::class)
                         ->searchable()
                         ->required(),
-                    DateTimePicker::make('start_time')
+                    DateTimePicker::make('starts_at')
                         ->required(),
-                    DateTimePicker::make('end_time')
+                    DateTimePicker::make('ends_at')
                         ->required(),
                     'status' => Select::make('status')
                         ->label('Stato')
@@ -425,8 +425,8 @@ class AdminCalendarWidget extends FullCalendarWidget
         }
 
         $appointment->update([
-            'start_time' => $event['start'],
-            'end_time' => $event['end'],
+            'starts_at' => $event['start'],
+            'ends_at' => $event['end'],
         ]);
 
         $this->invalidateCache();
@@ -459,7 +459,7 @@ class AdminCalendarWidget extends FullCalendarWidget
         }
 
         $appointment->update([
-            'end_time' => $event['end'],
+            'ends_at' => $event['end'],
         ]);
 
         $this->invalidateCache();
@@ -482,10 +482,10 @@ class AdminCalendarWidget extends FullCalendarWidget
         $endOfWeek = now()->endOfWeek();
 
         return [
-            'today_appointments' => Appointment::whereDate('start_time', $today)->count(),
-            'week_appointments' => Appointment::whereBetween('start_time', [$today, $endOfWeek])->count(),
+            'today_appointments' => Appointment::whereDate('starts_at', $today)->count(),
+            'week_appointments' => Appointment::whereBetween('starts_at', [$today, $endOfWeek])->count(),
             'pending_appointments' => Appointment::where('status', AppointmentStatusEnum::PENDING->value)->count(),
-            'emergency_appointments' => Appointment::where('emergency', true)->whereDate('start_time', '>=', $today)->count(),
+            'emergency_appointments' => Appointment::where('emergency', true)->whereDate('starts_at', '>=', $today)->count(),
             'total_studios' => Studio::where('active', true)->count(),
         ];
     }

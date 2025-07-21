@@ -114,7 +114,7 @@ class SendAppointmentNotificationAction
                 'appointment_id' => $appointment->id,
                 'patient_id' => $patient->id,
                 'date' => $appointment->date->format('Y-m-d'),
-                'time' => $appointment->start_time?->format('H:i'),
+                'time' => $appointment->starts_at?->format('H:i'),
             ];
             $notification->sent_at = now();
             $notification->save();

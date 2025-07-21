@@ -39,7 +39,7 @@ return new class extends XotBaseMigration
                 $table->dateTime('starts_at')->nullable();
                 $table->dateTime('ends_at')->nullable();
                 $table->string('type')->default('consultation');
-                $table->string('state')->default('scheduled');
+                $table->string('state')->default('pending');
                 $table->boolean('emergency')->default(false);
                 $table->text('notes')->nullable();
                 

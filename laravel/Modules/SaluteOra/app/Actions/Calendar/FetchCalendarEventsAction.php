@@ -31,7 +31,7 @@ class FetchCalendarEventsAction
     ): Collection {
         $query = Appointment::query()
             ->with(['patient', 'doctor', 'studio'])
-            ->whereBetween('start_time', [$start, $end]);
+            ->whereBetween('starts_at', [$start, $end]);
 
         $this->applyFilters($query, $filters);
 
@@ -82,8 +82,8 @@ class FetchCalendarEventsAction
         return [
             'id' => $appointment->id,
             'title' => $title,
-            'start' => $appointment->start_time->toIso8601String(),
-            'end' => $appointment->end_time->toIso8601String(),
+            'start' => $appointment->starts_at?->toIso8601String(),
+            'end' => $appointment->ends_at?->toIso8601String(),
             'allDay' => false,
             'backgroundColor' => $color,
             'borderColor' => $color,
@@ -190,7 +190,7 @@ class FetchCalendarEventsAction
 
         // Only allow editing if the appointment is not in the past
         // and the user is the assigned doctor or has admin rights
-        return $appointment->start_time->isFuture() && 
+        return $appointment->starts_at->isFuture() && 
                ($user->type === UserTypeEnum::ADMIN || 
                 $user->id === $appointment->doctor_id);
     }

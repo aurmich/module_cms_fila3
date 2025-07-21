@@ -224,3 +224,105 @@ XotBaseResource rileva automaticamente:
 **Ultimo aggiornamento**: 2025-01-06
 **Stato**: ✅ Completato
 **Validazione**: PHPStan livello 9+ compatibile 
+
+---
+
+## Best Practice: Enum e Naming nei Form Filament
+
+### 1. **Usare sempre Enum per i Select**
+
+**Corretto:**
+```php
+use Modules\SaluteOra\Enums\AppointmentStatusEnum;
+
+Components\Select::make('status')
+    ->options(AppointmentStatusEnum::toSelectArray())
+    ->default(AppointmentStatusEnum::SCHEDULED->value)
+    ->required();
+```
+
+**Anti-pattern (da evitare):**
+```php
+Components\Select::make('status')
+    ->options([
+        'scheduled' => 'scheduled',
+        'confirmed' => 'confirmed',
+        'cancelled' => 'cancelled',
+        'completed' => 'completed',
+        'no_show' => 'no_show',
+    ])
+    ->default('scheduled')
+    ->required();
+```
+
+**Motivazione:**
+- DRY: nessuna duplicazione di stringhe
+- KISS: enum centralizzato, facile da aggiornare
+- Type safety: meno errori, più refactoring-safe
+
+### 2. **Naming coerente tra modello, form e database**
+
+**Corretto:**
+- Se il modello usa `starts_at` e `ends_at`, anche il form deve usare questi nomi.
+
+**Anti-pattern:**
+- Usare `start_time`/`end_time` nel form quando il modello/database usa `starts_at`/`ends_at`.
+
+**Motivazione:**
+- Coerenza = meno bug, meno confusione, più manutenzione.
+
+### 3. **Regola interna aggiornata**
+- Vietato array fisso per select di status, ruoli, ecc.: usare sempre enum.
+- Vietato usare nomi di campo incoerenti tra form, modello e database.
+
+---
+
+*Ultimo aggiornamento: giugno 2025* 
+
+## Correzione mapping colonne e uso enum nei Select (giugno 2024)
+
+- I nomi dei campi usati nei form Filament DEVONO sempre corrispondere ai nomi effettivi delle colonne del modello/database (es: starts_at/ends_at, non start_time/end_time).
+- Vietato usare array hardcoded nei Select: usare sempre enum di appoggio (es: AppointmentStatusEnum::toSelectArray()).
+- Se la colonna non esiste in tabella, il campo va rimosso dal form.
+
+**Motivazione:**
+- Coerenza tra form, modello e database
+- Manutenibilità e DRY
+- Prevenzione di bug e comportamenti imprevedibili
+
+**Esempio pratico:**
+
+```php
+Components\DateTimePicker::make('starts_at')
+Components\DateTimePicker::make('ends_at')
+Components\Select::make('state')
+    ->options(AppointmentStatusEnum::toSelectArray())
+    ->default('pending')
+    ->required()
+``` 
+
+## Errori di utilizzo di start_time/end_time invece di starts_at/ends_at (giugno 2024)
+
+### Descrizione errore
+In diversi file del progetto vengono usati i campi `start_time` e `end_time` per il modello Appointment, ma la colonna corretta (come da migrazione e modello aggiornato) è `starts_at`/`ends_at`. Questo causa bug, dati non salvati correttamente, problemi di compatibilità con FullCalendar e Filament, e incoerenza tra moduli.
+
+### File da correggere
+- Modules/SaluteOra/app/Models/Appointment.php (presenza di entrambi i set di colonne)
+- Modules/SaluteOra/app/Filament/Resources/AppointmentResource.php (usa start_time/end_time)
+- Modules/SaluteOra/app/Actions/Calendar/FetchCalendarEventsAction.php (usa start_time/end_time)
+- Modules/SaluteOra/app/Filament/Widgets/AdminCalendarWidget.php (usa start_time/end_time)
+- Modules/SaluteOra/docs/appointment-system.md (esempi con start_time/end_time)
+- Modules/SaluteOra/docs/fullcalendar_widgets.md (esempi con start_time/end_time)
+- Themes/One/resources/views/appointment/card.blade.php (verificare)
+- Themes/One/resources/views/appointment/item.blade.php (verificare)
+- Modules/SaluteMo/app/Filament/Resources/AppointmentResource.php (verificare sezioni legacy)
+- Modules/Notify/app/Actions/SendAppointmentNotificationAction.php.old (usa start_time/end_time)
+
+### Impatto
+- Bug nella visualizzazione e salvataggio appuntamenti
+- Incompatibilità con widget FullCalendar
+- Dati non coerenti tra moduli
+- Refactoring più complesso
+
+### Regola
+Usare SEMPRE `starts_at`/`ends_at` per tutti i riferimenti temporali di Appointment. Aggiornare modello, risorse, azioni, widget, view e documentazione. 

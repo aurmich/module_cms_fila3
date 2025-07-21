@@ -305,8 +305,8 @@ class Studio extends BaseTenant
     public function getCurrentMonthAppointmentsCount(): int
     {
         return $this->appointments()
-            ->whereMonth('start_time', now()->month)
-            ->whereYear('start_time', now()->year)
+            ->whereMonth('starts_at', now()->month)
+            ->whereYear('starts_at', now()->year)
             ->count();
     }
 

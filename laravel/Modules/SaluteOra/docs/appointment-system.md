@@ -412,3 +412,5 @@ use Modules\SaluteOra\App\Enums\AppointmentType;
 
 > **Nota di prevenzione:**
 > L'enum AppointmentType deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php` e importato con il namespace corretto. Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
+
+> **ATTENZIONE:** Tutti i riferimenti a start_time/end_time vanno sostituiti con starts_at/ends_at. Vedi appointment_resource_corrections.md e plan.md per il piano di refactoring.
