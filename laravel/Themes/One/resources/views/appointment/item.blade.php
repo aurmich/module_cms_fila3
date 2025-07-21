@@ -26,7 +26,7 @@ new class extends Component  {
 }
 ?>
 @volt('counter.test')
-<div>
+<div class="flex flex-col-reverse justify-center">
     <div class="w-full flex justify-center">
         <div class="w-full lg:w-2/4 flex items-center justify-center p-9">
             <div class="w-full lg:w-2/4 bg-white rounded-lg shadow-2xl">
@@ -69,7 +69,7 @@ new class extends Component  {
 
 
     @if($appointment->hasReport())
-    <div class="ml-5">
+    <div class="w-full flex justify-center">
         <div class="flex flex-col justify-center">
             <h3 class="text-[#FF5F7E]">
                 @lang('pub_theme::appointment.report.ready_title')

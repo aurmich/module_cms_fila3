@@ -25,6 +25,9 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                'ipad': {'min': '768px', 'max': '1030px'},
+            },
             colors: {
                 danger: {
                     50: "rgb(var(--color-danger-50) / <alpha-value>)",

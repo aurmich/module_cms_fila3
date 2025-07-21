@@ -186,4 +186,17 @@
 <div class="bg-top">bg top</div>
 <div class="bg-[url('/img/mobile-landing-salute-orale.svg')]">bg mobile</div>
 <div class="lg:bg-[url('/img/soluzione-unita-desktop-landing.svg')]">bg desktop</div>
+<div class="w-[60%]">width 60%</div>
+<div class="ipad:bg-right-top">ipad bg position</div>
+<div class="ipad:w-[40%]">width ipad</div>
+<div class="ipad:text-4xl">ipad text</div>
+<div class="ipad:ml-5">ipad margin left</div>
+<div class="ipad:h-[50vh]">ipad height full</div>
+<div class="ipad:w-3/4">ipad width full</div>
+<div class="ipad:m-14">m 14</div>
+<div class="ipad:flex-col">flex-col</div>
+<div class="ipad:text-5xl">ipad text 4</div>
+<div class="p-6">padding-6</div>
+<div class="leading-8">leading</div>
+<div class="lg:w-3/6">width 50%</div>
 </x-layouts.app>
