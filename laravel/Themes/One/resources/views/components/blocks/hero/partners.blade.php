@@ -5,7 +5,7 @@
  <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full lg:w-2/4 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center items-center p-10">
        <div class="flex justify-center">
-        <a href="https://www.inmp.it/">
+        <a href="https://www.inmp.it/" target="_blank">
            <img class="h-96" src="/img/inmp-logo-partners.png" />
         </a>
        </div>
@@ -15,7 +15,7 @@
        </div>
     <div class="w-full lg:w-2/4 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center items-center p-10">
     <div class="flex justify-center">
-        <a href="https://fondazioneandi.org/">
+        <a href="https://fondazioneandi.org/" target="_blank">
             <img class="h-48" src="/img/fondazione-andi-logo-updated.png" />
         </a>
     </div>
@@ -23,12 +23,12 @@
         Fondazione ANDI ETS promuove la salute orale di tutti con particolare
         attenzione ai soggetti con fragilità socio-economiche, attraverso iniziative
         sanitarie dedicate alla prevenzione, cooperazione internazionale e progetti
-        di sensibilizzazione”.
+        di sensibilizzazione.
         </span>
     </div>
     <div class="w-full lg:w-2/4 grid-cols-1 lg:grid grid-cols-2 gap-4 justify-center items-center p-10">
         <div class="flex justify-center">
-            <a href="https://www.cooperazioneodontoiatrica.eu/">
+            <a href="https://www.cooperazioneodontoiatrica.eu/" target="_blank">
                 <img class="h-20" src="/img/logo-coi-partners.png" />
             </a>
         </div>

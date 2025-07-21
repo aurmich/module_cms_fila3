@@ -183,6 +183,57 @@ return array (
     array (
       'label' => 'applyFilters',
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'changePassword' => 
+    array (
+      'label' => 'changePassword',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'state' => 
+    array (
+      'label' => 'state',
+    ),
+    'pregnancy_certificate' => 
+    array (
+      'label' => 'pregnancy_certificate',
+    ),
+    'isee_certificate' => 
+    array (
+      'label' => 'isee_certificate',
+    ),
+    'health_card' => 
+    array (
+      'label' => 'health_card',
+    ),
+    'children_count' => 
+    array (
+      'label' => 'children_count',
+    ),
   ),
   'actions' => 
   array (

@@ -170,4 +170,20 @@
 <div class="lg:h-40">large height inmp</div>
 <div class="lg:h-28">large height coi</div>
 <div class="w-[70%]">width 70%</div>
+<div class="bg-[url('/img/landing-mobile-salute-orale.svg')]">bkg url</div>
+<div class="bg-none">no bkg</div>
+<div class="bg-[url('/img/landing-desktop-salute-orale.svg')]">bg desktop</div>
+<div class="hidden">hidden</div>
+<div class="md:hidden">md hidden</div>
+<div class="h-dvh">height dvh</div>
+<div class="transform origin-center scale-100 hover:scale-110 transition-transform duration-100">scale</div>
+<div class="bg-transparent">transparent bkg</div>
+<div class="bg-right-bottom">bg bot</div>
+<div class="bg-right-top">bg right</div>
+<div class="bg-none">bg none</div>
+<div class="bg-[url('/img/desktop-salute-orale-landing.svg')]">bg nuovo</div>
+<div class="w-dvw">w dvw</div>
+<div class="bg-top">bg top</div>
+<div class="bg-[url('/img/mobile-landing-salute-orale.svg')]">bg mobile</div>
+<div class="lg:bg-[url('/img/soluzione-unita-desktop-landing.svg')]">bg desktop</div>
 </x-layouts.app>

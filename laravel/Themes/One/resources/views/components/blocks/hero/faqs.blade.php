@@ -88,7 +88,7 @@
             <div class="pt-5 flex flex-col lg:flex-row justify-center items-center">
 
                 <!-- Card 1 -->
-                <div class="w-64 h-44 bg-cover bg-[#FCD5D0] rounded-[25px] shadow-2xl m-5">
+                <div class="w-64 h-44 bg-cover bg-[#FCD5D0] rounded-[25px] shadow-2xl m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
                     <div class="grid grid-cols-2">
                         <div class="flex justify-center">
                             <img class="h-44 px-2 pt-2" src="/img/woman-characterrr.png" />
@@ -108,7 +108,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="w-64 h-44 bg-[#FCD5D0] rounded-[25px] shadow-2xl m-5">
+                <div class="w-64 h-44 bg-[#FCD5D0] rounded-[25px] shadow-2xl m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
                     <div class="grid grid-cols-2 gap-2">
                         <div class="flex justify-center">
                             <img class="h-44 p-2" src="/img/dentist.png" />

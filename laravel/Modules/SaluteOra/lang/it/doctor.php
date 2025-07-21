@@ -377,6 +377,69 @@ return array (
       'tooltip' => 'Gestisci il programma di disponibilità',
       'helper_text' => '',
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'name' => 
+    array (
+      'label' => 'name',
+    ),
+    'type' => 
+    array (
+      'label' => 'type',
+    ),
+    'state' => 
+    array (
+      'label' => 'state',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'changePassword' => 
+    array (
+      'label' => 'changePassword',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
   ),
   'filters' => 
   array (
