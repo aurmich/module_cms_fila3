@@ -1,0 +1,258 @@
+# SISTEMA DI DOCUMENTAZIONE SALUTEORA
+
+## 1. STRUTTURA GERARCHICA DELLA DOCUMENTAZIONE
+
+### 1.1 Gerarchia delle Cartelle
+- **Root docs**: `/docs/` - Solo indici e collegamenti bidirezionali
+- **Docs modulo**: `Modules/{ModuleName}/docs/` - Documentazione tecnica specifica
+- **Docs tema**: `Themes/{Theme}/docs/` - Documentazione frontend specifica
+- **Rule files**: `.windsurf/rules/`, `.cursor/rules/` - Regole per IDE
+
+### 1.2 Principio Fondamentale: Modularità
+- Documentare PRIMA nel modulo specifico, POI creare collegamenti bidirezionali
+- Concentrare conoscenza specializzata nei moduli, non nella root
+- Mantenere la root come indice centrale e sistema di navigazione
+
+### 1.3 Regola Critica: Naming Convention
+- **TUTTI i file e sottocartelle in docs/ devono essere in minuscolo**
+- **UNICA ECCEZIONE: README.md può avere maiuscole**
+- Usare sempre trattini (`-`) invece di underscore (`_`)
+- Nomi descrittivi e concisi (es: `filament-best-practices.md`)
+
+## 2. COLLEGAMENTI E RIFERIMENTI
+
+### 2.1 Collegamenti Bidirezionali Obbligatori
+- Ogni documento DEVE avere collegamenti ai documenti correlati
+- Tutti i documenti DEVONO essere referenziati nel file `collegamenti-documentazione.md`
+- Aggiornare SEMPRE entrambe le direzioni dei collegamenti
+
+### 2.2 Percorsi Relativi Obbligatori
+- **MAI utilizzare percorsi assoluti** come `/var/www/html/...`
+- Utilizzare SEMPRE percorsi relativi:
+  - Stesso modulo: `./altro-file.md` o `./sottocartella/altro-file.md`
+  - Modulo a modulo: `../../altro-modulo/docs/file.md`
+  - Modulo a root: `../../../../docs/file.md`
+  - Root a modulo: `./laravel/Modules/nome-modulo/docs/file.md`
+
+### 2.3 Tag e Categorizzazione
+- Usare tag come `#modulo-{nomemodulo}` e `#categoria-{nomecategoria}`
+- Mantenere coerenza nei tag tra i documenti correlati
+
+## 3. REGOLE DI SVILUPPO FRONTEND
+
+### 3.1 Architettura Frontend
+- Frontoffice: Folio + Volt + Livewire + Widget
+- Template in `Themes/{Theme}/resources/views/pages/`
+- **MAI creare rotte in web.php** - Folio gestisce automaticamente
+- Widget devono estendere `XotBaseWidget` con `HasForms`
+- **MAI estendere direttamente classi Filament**
+
+### 3.2 Componenti UI
+- Usare SEMPRE componenti nativi Filament:
+  - `<x-filament::icon>`
+  - `<x-filament::button>`
+  - `<x-filament::dropdown>`
+  - `<x-filament::avatar>`
+- **MAI utilizzare componenti inesistenti**
+- Per separatori nei dropdown: `<div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>`
+
+### 3.3 Volt e Folio
+- La direttiva `@volt` DEVE essere SEMPRE la prima cosa nel file Folio
+- **MAI utilizzare `@volt` all'interno del markup HTML**
+- Utilizzare SEMPRE layout corretti:
+  - `<x-layouts.app>`
+  - `<x-layouts.guest>`
+- **MAI utilizzare layout inesistenti** come `<x-filament::layouts.app>`
+
+## 4. TRADUZIONI E LOCALIZZAZIONE
+
+### 4.1 Sistema di Traduzione
+- File traduzioni in `lang/{locale}/`
+- **MAI usare ->label()** in componenti Filament
+- Convenzione naming chiavi: `modulo::risorsa.fields.campo.label`
+
+### 4.2 Localizzazione URL
+- Usare `mcamara/laravel-localization`
+- Metodi: `LaravelLocalization::getCurrentLocale()` e `getSupportedLocales()`
+- URL DEVONO includere prefisso lingua: `/{locale}/{sezione}/{risorsa}`
+- **MAI generare URL senza prefisso locale**
+
+## 5. ARCHITETTURA BACKEND
+
+### 5.1 Business Logic
+- Usare SEMPRE `spatie/laravel-queueable-action` (MAI Service)
+- Componenti Livewire in `app/Http/Livewire` del modulo
+- **Namespace NON deve MAI includere segmento 'app'**
+- Actions nella directory corretta secondo convenzioni
+
+### 5.2 Struttura Directory
+- Provider in `app/Providers/`
+- Percorso pubblico in `public_html/` (non in `public` di Laravel)
+- Vite config temi: `emptyOutDir: false, manifest: 'manifest.json', build: { outDir: './public' }`
+
+### 5.3 Sezioni e Blocchi
+- Documentazione tecnica in:
+  - `Themes/{Theme}/docs/sections`
+  - `Modules/Cms/docs/sections`
+- Link bidirezionali obbligatori tra le due
+- JSON configurazione sezioni:
+  - Ogni blocco deve avere attributo `"view"`
+  - Blocchi raggruppati per locale
+  - Filtrare con `app()->getLocale()`
+
+## 6. TESTING E QUALITÀ
+
+### 6.1 Regole Generali
+- **MAI usare il trait `RefreshDatabase`**
+  - L'ambiente di test utilizza un database MySQL pre-popolato definito in `.env.testing`
+  - Il refresh del database causerebbe perdita di dati
+  - Se si verificano errori 'no such table', verificare la configurazione del database di test
+
+### 6.2 Test con Enumerazioni
+- Per i campi enum, utilizzare direttamente le classi enum nei test
+- Esempio per `teeth_brushing_frequency`:
+  ```php
+  // Corretto
+  $report->teeth_brushing_frequency = DayFrequencyEnum::DAILY;
+  
+  // Sbagliato
+  $report->teeth_brushing_frequency = 'daily';
+  ```
+
+### 6.3 Test di Integrazione PDF
+- Testare il rendering PDF con dati reali
+- Verificare la formattazione con contenuti di diversa lunghezza
+- Testare il supporto multilingua
+- Verificare la generazione di PDF con molti dati
+
+## 7. HTML2PDF E GENERAZIONE DOCUMENTI
+
+### 7.1 Limitazioni HTML/CSS
+- Supporta solo un sottoinsieme di tag HTML e proprietà CSS
+- Nessun supporto JavaScript nel PDF generato
+- Posizionamento preciso richiede markup specifico
+- Effetti grafici avanzati (gradienti, ombre, trasformazioni) non supportati
+
+### 7.2 Tag Supportati
+- **Struttura**: `<page>`, `<table>`, `<tr>`, `<td>`, `<div>`, `<br>`, `<p>`, `<span>`
+- **Formattazione**: `<b>`, `<i>`, `<u>`, `<strong>`, `<em>`
+- **Immagini**: `<img>` (con limitazioni)
+- **Liste**: `<ul>`, `<ol>`, `<li>`
+
+### 7.3 Best Practice PDF
+1. Usa tabelle per il layout invece di CSS positioning
+2. Evita effetti visivi complessi
+3. Testa sempre il PDF generato
+4. Usa `<page>` per il controllo della pagina
+5. Evita stili inline complessi
+
+### 7.4 Gestione Multilingua PDF
+- Tutte le stringhe devono provenire da file di traduzione
+- Usa sempre `@lang()` per le traduzioni
+- Verifica che tutte le chiavi esistano in tutte le lingue
+- Non inserire logica di traduzione complessa nei template PDF
+
+## 8. GESTIONE ENUMERAZIONI
+
+### 8.1 Campi Enum nel Modello Report
+Tutti i campi booleani devono essere esplicitamente castati a 'boolean' nel metodo `casts()`:
+- has_mouth_or_teeth_pain
+- smokes
+- visits_dentist_yearly
+- has_diseases
+- follows_diet_rules
+- uses_asl_clinic_for_dental_care
+- missing_teeth
+- decayed_teeth
+- has_fixed_prosthesis_or_implants
+- has_tartar
+- has_plaque
+- needs_more_dental_care
+
+### 8.2 Campi Array
+Campi che memorizzano più valori (da input multi-select) devono essere castati a 'array':
+- specify_diseases
+- specify_missing_teeth
+- specify_decayed_teeth
+- specify_tartar
+- specify_plaque
+- specify_prosthesis_or_implants
+
+### 8.3 Implementazione Casting
+```php
+/**
+ * Get the attributes that should be cast.
+ *
+ * @return array<string, string>
+ */
+public function casts(): array
+{
+    return [
+        // Boolean casts
+        'field_name' => 'boolean',
+        
+        // Enum casts (as integers)
+        'enum_field' => 'integer',
+        
+        // Array casts for multiple values
+        'multi_select_field' => 'array',
+        
+        // Integer casts
+        'numeric_field' => 'integer',
+    ];
+}
+```
+
+## 9. BEST PRACTICES
+
+### 6.1 Contratti e Pattern
+- Usare `Modules\Xot\Contracts\UserContract`
+- Ottenere classe User con `XotData::make()->getUserClass()`
+- Centralizzare logica in traits riutilizzabili
+- Usare enums per stati e valori predefiniti
+
+### 6.2 Documentazione e Manutenzione
+- Documentare decisioni architetturali e pattern
+- Enfatizzare il "perché" oltre al "come"
+- Aggiornare documentazione CON ogni modifica di codice
+- Documentare breaking changes con preavviso
+- Ottimizzare per accessibilità, sicurezza e prestazioni
+
+### 6.3 IDE e Validazione
+- Aggiornare prima di implementare correzioni:
+  1. Regole in `.windsurf/rules/*.md` per Windsurf
+  2. Regole in `.cursor/rules/*.md` per Cursor
+  3. Memorie in `.cursor/memories/*.md` per Cursor
+- Implementare pre-commit hooks per validazione
+
+## 10. PROCESSO DI CORREZIONE E AGGIORNAMENTO
+
+### 7.1 Flusso di Correzione
+Ordine obbligatorio per ogni aggiornamento:
+1. Documentazione nel modulo specifico
+2. Collegamenti bidirezionali nella root
+3. Regole configurazione IDE
+4. Codice effettivo
+
+### 7.2 Manutenzione Documentazione
+- File docs root SOLO per collegamenti bidirezionali
+- Spostare documenti generici a Xot
+- Analizzare Modules come insieme coerente
+- Documentare PRIMA nel modulo, POI collegamenti
+- Concentrarsi su "perché" e "cosa" (non "come")
+- Evitare dettagli implementativi troppo specifici
+- Usare cartella bashscripts più vicina al modulo
+
+### 7.3 Filament Resources Conventions
+- Gestire correttamente array con chiavi stringa in:
+  - `getListTableColumns()`
+  - `getTableActions()`
+  - `getTableBulkActions()`
+- Se `getTableActions()` restituisce solo azioni standard, rimuoverlo completamente
+- Se `getTableBulkActions()` restituisce solo DeleteBulkAction, rimuoverlo completamente
+
+> Consulta sempre [docs/collegamenti-documentazione.md] per la mappa aggiornata dei collegamenti e la policy di bidirezionalità.
+
+---
+Nota: Ogni variazione a questa policy va documentata sia nella root che nel modulo coinvolto, con motivazione e collegamenti aggiornati.
+**Nota:** Ogni variazione a questa policy va documentata sia nella root che nel modulo coinvolto, con motivazione e collegamenti aggiornati.
