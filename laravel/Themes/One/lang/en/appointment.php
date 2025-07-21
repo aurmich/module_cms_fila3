@@ -63,6 +63,11 @@ return [
             'tooltip' => 'Additional notes or comments',
             'helper_text' => '',
         ],
+        'state' => [
+            'label' => 'Status',
+            'tooltip' => 'Status',
+            'helper_text' => '',
+        ],
     ],
     'appointment_details' => 'Appointment Details',
     'modals' => [

@@ -23,6 +23,7 @@ return [
     'info' => 'Information',
     'minutes' => 'minutes',
     'page' => 'Page',
+    'welcome' => ['label' => 'Welcome'],
     
     'buttons' => [
         'login' => 'Login',

@@ -23,6 +23,7 @@ return [
     'info' => 'Informazione',
     'minutes' => 'minuti',
     'page' => 'Pagina',
+    'welcome' => ['label' => 'Bentornata'],
     
     'buttons' => [
         'login' => 'Accedi',
