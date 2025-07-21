@@ -2,7 +2,7 @@
 use Livewire\Volt\Component;
 use Modules\SaluteOra\Models\Appointment;
 $user=auth()->user();
-$appointments = Appointment::all();
+
 
 new class extends Component {
     public $count = 0;
@@ -11,7 +11,6 @@ new class extends Component {
     {
         return [
             'user' => auth()->user(),
-            'appointments' => Appointment::paginate(10),
         ];
     }
  

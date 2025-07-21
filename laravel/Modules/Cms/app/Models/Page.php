@@ -70,6 +70,7 @@ class Page extends BaseModelLang
         'content',
         'slug',
         'title',
+        'middleware',
         'content_blocks',
         'sidebar_blocks',
         'footer_blocks',
@@ -79,6 +80,7 @@ class Page extends BaseModelLang
         'id' => 'integer',
         'title' => 'json',
         'slug' => 'string',
+        'middleware' => 'json',
         'content' => 'string',
 
         'content_blocks' => 'json',
@@ -117,6 +119,14 @@ class Page extends BaseModelLang
             'content_blocks' => 'array',
             'sidebar_blocks' => 'array',
             'footer_blocks' => 'array',
+            'middleware' => 'array',
         ];
+    }
+
+
+    public static function getMiddlewareBySlug(string $slug): array
+    {
+        $page = self::where('slug', $slug)->first();
+        return $page->middleware ?? [];
     }
 }

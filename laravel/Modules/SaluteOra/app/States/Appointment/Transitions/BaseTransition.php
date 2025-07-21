@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\States\Appointment\Transitions;
 
 use Illuminate\Support\Str;
 use Spatie\ModelStates\Transition;
+use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\Models\Appointment;
 use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Notifications\RecordNotification;
@@ -17,7 +18,7 @@ abstract class BaseTransition extends Transition
      
     public function handle(): Appointment
     {
-        $this->sendNotification();
+        $this->sendNotifications();
         $class = static::class;
         $newStateClass = Str::of($class)->afterLast('To')->prepend('Modules\SaluteOra\States\Appointment\\')->toString();
         /** @phpstan-ignore assign.propertyType */
@@ -25,10 +26,31 @@ abstract class BaseTransition extends Transition
         $this->appointment->save();
         return $this->appointment;
     }
-        
-    public function sendNotification(): void
+
+
+    public function sendNotifications(): void
+    {   
+
+        $recipients=$this->getNotificationRecipients();
+        foreach($recipients as $recipient){
+            $this->sendRecipientNotification($recipient);
+        }
+    }
+
+
+    public function getNotificationRecipients(): array
     {
-        $slug = 'appointment-' . Str::of(class_basename(static::class))->kebab()->toString();
+        return [
+            'patient' => $this->appointment->patient,
+            //'doctor' => $this->appointment->doctor,
+        ];
+    }
+
+
+    public function sendRecipientNotification(UserContract $recipient): void
+    {
+        $type=$recipient->type->value;
+        $slug = 'appointment-' .$type.'-'. Str::of(class_basename(static::class))->kebab()->toString();
         $slug = Str::slug($slug);
         
         $notify = new RecordNotification(
@@ -38,25 +60,16 @@ abstract class BaseTransition extends Transition
 
         $data = $this->getNotificationData();
         $notify = $notify->mergeData($data);
-        
-        // Notifica al paziente
-        if ($this->appointment->patient && $this->appointment->patient->email) {
-            Notification::route('mail', $this->appointment->patient->email)
-                ->notify($notify);
-        }
-        
-        // Notifica al dottore
-        if ($this->appointment->doctor && $this->appointment->doctor->email) {
-            Notification::route('mail', $this->appointment->doctor->email)
-                ->notify($notify);
-        }
+        Notification::route('mail', $recipient->email)
+            ->notify($notify);
     }
-
+        
+    
     public function getNotificationData(): array
     {
         return [
             'message' => $this->message,
-            'appointment_date' => $this->appointment->starts_at->format('d/m/Y H:i') ?? 'N/A',
+            'appointment_date' => $this->appointment->starts_at?->format('d/m/Y H:i') ?? 'N/A',
             'patient_name' => $this->appointment->patient->name ?? 'N/A',
             'doctor_name' => $this->appointment->doctor->name ?? 'N/A',
         ];

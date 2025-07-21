@@ -478,7 +478,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         ->modalContent(function (array $data,$arguments) {
             $appointmentId = $arguments['appointment'];
             $appointment = Appointment::firstWhere('id',$appointmentId);
-            $view='pub_theme::appointment.card';
+            $view='pub_theme::appointment.modal_content';
             $view_params=[
                 'appointment' => $appointment,
             ];

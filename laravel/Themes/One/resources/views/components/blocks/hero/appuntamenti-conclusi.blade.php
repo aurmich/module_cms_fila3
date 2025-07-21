@@ -1,7 +1,7 @@
 <?php
-use Livewire\Volt\Component;
 
-$user=auth()->user();
+
+
 ?>
 
 <div>

@@ -41,6 +41,7 @@ class Page extends Component
         if(!is_array($blocks)){
             $blocks = [];
         }
+               
         
         $this->blocks = BlockData::collect($blocks);
     }

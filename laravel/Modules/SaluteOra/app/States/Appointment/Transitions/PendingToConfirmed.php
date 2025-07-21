@@ -10,4 +10,14 @@ namespace Modules\SaluteOra\States\Appointment\Transitions;
 class PendingToConfirmed extends BaseTransition
 {
     //--- (Funziona automaticamente grazie al pattern BaseTransition!)
+
+
+    
+    public function getNotificationRecipients(): array
+    {
+        return [
+            'patient' => $this->appointment->patient,
+            'doctor' => $this->appointment->doctor,
+        ];
+    }
 } 

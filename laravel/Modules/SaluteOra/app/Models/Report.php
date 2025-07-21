@@ -6,8 +6,9 @@ namespace Modules\SaluteOra\Models;
 
 use Modules\User\Models\BaseProfile;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
 use Modules\SaluteOra\Enums\DayFrequencyEnum;
+use Modules\SaluteOra\Enums\MedicalConditionEnum;
+use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
 
 
 /**
@@ -83,7 +84,6 @@ class Report extends BaseModel{
             // Enum casts - these use PHP 8.1+ backed enums (string-based)
             'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
             'teeth_brushing_frequency' => DayFrequencyEnum::class,
-            'specify_prosthesis_or_implants' => 'array', // Stored as JSON array of ToothFDIEnum values
             'specify_diseases' => 'array', // Array of MedicalConditionEnum values
             'specify_missing_teeth' => 'array', // Array of ToothFDIEnum values
             'specify_decayed_teeth' => 'array', // Array of ToothFDIEnum values

@@ -8,20 +8,27 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\VerticalAlignment;
 use Livewire\Volt\Component;
 use Modules\Tenant\Services\TenantService;
+use Modules\Cms\Models\Page;
 
 /** @var array */
 //$middleware=TenantService::config('middleware');
 //$base_middleware=Arr::get($middleware,'base',[]);
+
 $base_middleware=[];
 
 name('pages.view');
-middleware($base_middleware);
+if(isset($slug)){
+    $middleware=Page::getMiddlewareBySlug($slug);
+    middleware($middleware);
+}
 
 
 
 new class extends Component
 {
     public string $slug;
+
+   
 };
 
 ?>

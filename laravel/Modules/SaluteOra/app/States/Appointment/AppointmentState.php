@@ -39,8 +39,10 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(NoShow::class, Banned::class, Transitions\NoShowToBanned::class)
                 
                 // Completed transitions (Conclusi)
-                ->allowTransition(Completed::class, RefundPending::class, Transitions\CompletedToRefundPending::class)
-                ->allowTransition(Completed::class, ProBono::class, Transitions\CompletedToProBono::class)
+                //->allowTransition(Completed::class, RefundPending::class, Transitions\CompletedToRefundPending::class)
+                //->allowTransition(Completed::class, ProBono::class, Transitions\CompletedToProBono::class)
+                ->allowTransition(ReportCompleted::class, RefundPending::class, Transitions\ReportCompletedToRefundPending::class)
+                ->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
                 
                 // Report transitions
                 ->allowTransition(ReportPending::class, ReportPending::class/*, Transitions\ReportPendingToReportCompleted::class*/)
@@ -48,7 +50,7 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
                 
                 // ReportCompleted transitions
-                ->allowTransition(ReportCompleted::class, Completed::class, Transitions\ReportCompletedToCompleted::class)
+                //->allowTransition(ReportCompleted::class, Completed::class, Transitions\ReportCompletedToCompleted::class)
                 //->allowTransition(ReportCompleted::class, RefundPending::class, Transitions\ReportCompletedToRefundPending::class)
                 //->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
                 

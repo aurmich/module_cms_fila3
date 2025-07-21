@@ -1,7 +1,41 @@
 <?php
-use Livewire\Volt\Component;
 
-$user=auth()->user();
+declare(strict_types=1);
+use Livewire\Volt\Component;
+use Modules\User\Http\Middleware\EnsureUserHasType;
+use function Laravel\Folio\{middleware, name};
+use function Livewire\Volt\{state, rules};
+use Modules\SaluteOra\Models\Doctor;
+
+//middleware(['auth',EnsureUserHasType::class.':doctor']);
+
+
+new class extends Component {
+    public $count = 0;
+    public $user;
+
+   
+
+    public function mount(){
+       
+        
+        $this->authorize('viewAny',Doctor::class);
+       
+    }
+
+    public function with(): array
+    {
+        return [
+        ];
+    }
+ 
+    public function increment()
+    {
+        $this->count++;
+    }
+}
+
+
 ?>
 
 <div>
@@ -19,15 +53,18 @@ $user=auth()->user();
             </div>
         </a>
     </div>
-
+    
     <!-- Page title -->
     <div class="p-10">
         <div class="w-full flex justify-center">
             <h1 class="text-center">@lang('pub_theme::appointment.hero.accepted_appointments.title')</h1>
         </div>
     </div>
-    
+    @volt('appointment.accepted')
       <div>
-    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'states' => ['confirmed','report_pending']])
+        
+    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user?->id,'states' => ['confirmed','report_pending']])
+    
     </div>
+    @endvolt
 </div>

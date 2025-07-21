@@ -183,15 +183,12 @@ class FetchCalendarEventsAction
     protected function isEditable(Appointment $appointment): bool
     {
         $user = Auth::user();
-        
         if (!$user) {
             return false;
         }
-
         // Only allow editing if the appointment is not in the past
         // and the user is the assigned doctor or has admin rights
-        return $appointment->starts_at->isFuture() && 
-               ($user->type === UserTypeEnum::ADMIN || 
-                $user->id === $appointment->doctor_id);
+        return ($appointment->starts_at instanceof \Carbon\CarbonInterface && $appointment->starts_at->isFuture()) &&
+               ($user->type === UserTypeEnum::ADMIN || $user->id === $appointment->doctor_id);
     }
 }
