@@ -85,7 +85,7 @@
     }"
     x-show="isMobile"
     x-cloak
-    class = 'h-24 flex items-center'
+    class = 'bg-[#272C4D] h-24 flex items-center'
     id = "{{ $section['attributes']['id'] ?? '' }}"
    >
     <div class="!m-0 !p-0 w-full">

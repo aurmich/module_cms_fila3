@@ -137,6 +137,10 @@ return array (
     array (
       'label' => 'reportCompletedAction',
     ),
+    'completedAction' => 
+    array (
+      'label' => 'completedAction',
+    ),
   ),
   'messages' => 
   array (
@@ -257,6 +261,13 @@ return array (
       'placeholder' => 'Seleziona il nuovo orario',
       'helper_text' => 'Seleziona il nuovo orario per l\'appuntamento',
       'description' => 'Nuovo orario per l\'appuntamento riprogrammato',
+    ),
+    'invoice' => 
+    array (
+      'description' => 'invoice',
+      'helper_text' => 'invoice',
+      'placeholder' => 'invoice',
+      'label' => 'invoice',
     ),
   ),
   'filters' => 

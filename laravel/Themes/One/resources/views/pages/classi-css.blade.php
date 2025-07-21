@@ -180,4 +180,10 @@
 <div class="bg-transparent">transparent bkg</div>
 <div class="bg-right-bottom">bg bot</div>
 <div class="bg-right-top">bg right</div>
+<div class="bg-none">bg none</div>
+<div class="bg-[url('/img/desktop-salute-orale-landing.svg')]">bg nuovo</div>
+<div class="w-dvw">w dvw</div>
+<div class="bg-top">bg top</div>
+<div class="bg-[url('/img/mobile-landing-salute-orale.svg')]">bg mobile</div>
+<div class="lg:bg-[url('/img/soluzione-unita-desktop-landing.svg')]">bg desktop</div>
 </x-layouts.app>
