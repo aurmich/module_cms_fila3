@@ -1,7 +1,7 @@
 @props([
     'title' => '',
     'description' => '',
-    'cta_text' => 'Scopri di più',
+    'cta_text' => __('pub_theme::components.cta.simple.text'),
     'cta_link' => '#',
     'background_color' => 'bg-white',
     'text_color' => 'text-gray-900',

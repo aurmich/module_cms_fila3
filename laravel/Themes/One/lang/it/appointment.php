@@ -100,6 +100,18 @@ return [
         'rescheduled' => 'Riprogrammato',
     ],
     'fields' => [
+        'name' => [
+            'label' => 'Nome',
+            'helper_text' => '',
+        ],
+        'phone' => [
+            'label' => 'Cellulare',
+            'helper_text' => '',
+        ],
+        'email' => [
+            'label' => 'Email',
+            'helper_text' => '',
+        ],
         'state' => [
             'label' => 'Stato',
             'placeholder' => 'Seleziona lo stato',
@@ -184,6 +196,64 @@ return [
             'help' => 'Medico che effettuerà la visita',
             'helper_text' => '',
         ],
+    ],
+    'appointment_details' => 'Dettagli Appuntamento',
+    'modals' => [
+        'confirm_appointment' => [
+            'title' => [
+                'label' => 'Accetta Appuntamento',
+                'tooltip' => 'Conferma l\'accettazione dell\'appuntamento',
+                'helper_text' => '',
+            ],
+            'message' => [
+                'label' => 'Sei sicuro di voler accettare l\'appuntamento con',
+                'tooltip' => 'Messaggio di conferma per l\'accettazione',
+                'helper_text' => '',
+            ],
+            'buttons' => [
+                'confirm' => [
+                    'label' => 'Accetta',
+                    'tooltip' => 'Conferma l\'accettazione dell\'appuntamento',
+                    'helper_text' => '',
+                ],
+                'cancel' => [
+                    'label' => 'Annulla',
+                    'tooltip' => 'Annulla l\'operazione',
+                    'helper_text' => '',
+                ],
+            ],
+        ],
+        'reject_appointment' => [
+            'title' => [
+                'label' => 'Rifiuta Appuntamento',
+                'tooltip' => 'Rifiuta l\'appuntamento selezionato',
+                'helper_text' => '',
+            ],
+            'message' => [
+                'label' => 'Sei sicuro di voler rifiutare l\'appuntamento con',
+                'tooltip' => 'Messaggio di conferma per il rifiuto',
+                'helper_text' => '',
+            ],
+            'buttons' => [
+                'confirm' => [
+                    'label' => 'Rifiuta',
+                    'tooltip' => 'Conferma il rifiuto dell\'appuntamento',
+                    'helper_text' => '',
+                ],
+                'cancel' => [
+                    'label' => 'Annulla',
+                    'tooltip' => 'Annulla l\'operazione',
+                    'helper_text' => '',
+                ],
+            ],
+        ],
+    ],
+    'buttons' => [
+        'close' => 'Chiudi',
+        'back' => 'Torna indietro',
+        'save' => 'Salva',
+        'cancel' => 'Annulla',
+        'submit' => 'Invia',
     ],
     'report' => [
         'ready_title' => 'Il tuo referto è pronto!',

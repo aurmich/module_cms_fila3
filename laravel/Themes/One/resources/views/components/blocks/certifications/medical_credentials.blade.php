@@ -27,7 +27,7 @@
 
 @props([
     'title' => 'Certificazioni e Riconoscimenti',
-    'subtitle' => 'La qualità dei nostri servizi è garantita da certificazioni nazionali e internazionali di prestigio',
+    'subtitle' => __('pub_theme::components.certifications.subtitle'),
     'className' => 'bg-gradient-to-br from-gray-50 to-blue-50 py-20',
     'certifications' => [],
     'show_verification' => true,
@@ -70,7 +70,7 @@
                     type: 'quality_management',
                     logo: '/img/cert/iso-9001.png',
                     color: 'from-green-500 to-emerald-600',
-                    description: 'Sistema di gestione qualità conforme agli standard internazionali più rigorosi',
+                    description: '@lang('pub_theme::components.certifications.iso_9001.description')',
                     verification_url: 'https://www.tuv.com/world/en/certificate-validation.html',
                     trust_weight: 20,
                     features: [
@@ -89,7 +89,7 @@
                     type: 'privacy_compliance',
                     logo: '/img/cert/gdpr-cert.png',
                     color: 'from-purple-500 to-violet-600',
-                    description: 'Conformità alle normative europee sulla protezione dei dati personali e sanitari',
+                    description: '@lang('pub_theme::components.certifications.gdpr_compliance.description')',
                     verification_url: 'https://www.garanteprivacy.it/verifica-compliance',
                     trust_weight: 15,
                     features: [
@@ -191,7 +191,7 @@
                             <span x-show="verificationStatus === 'checking'">Verifica certificazioni...</span>
                             <span x-show="verificationStatus === 'verified'">Certificazioni Verificate</span>
                         </div>
-                        <div class="text-xs text-green-600">Trust Score: <span x-text="trustScore + '%'"></span></div>
+                        <p class="text-xs text-gray-600">@lang('pub_theme::components.certifications.certified_quality')</p>
                     </div>
                 </div>
             </div>
@@ -361,7 +361,7 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="text-center">
                                 <div class="text-3xl font-bold text-gray-900" x-text="trustScore + '%'"></div>
-                                <div class="text-xs text-gray-500">Affidabilità</div>
+                                <div class="text-xs text-gray-500">@lang('pub_theme::components.certifications.reliability')</div>
                             </div>
                         </div>
                     </div>
@@ -374,7 +374,7 @@
 
                 {{-- Trust Breakdown --}}
                 <div class="space-y-4">
-                    <h4 class="text-xl font-bold text-gray-900 mb-4">Breakdown Credibilità</h4>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">@lang('pub_theme::components.certifications.credibility_breakdown')</h4>
 
                     <template x-for="cert in certifications" :key="cert.id">
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">

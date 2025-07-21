@@ -14,7 +14,7 @@
 
 @props([
     'title' => 'Hai domande sulla privacy?',
-    'subtitle' => 'Il nostro team è qui per aiutarti con qualsiasi dubbio',
+    'subtitle' => __('pub_theme::components.cta.privacy_contact.subtitle'),
     'type' => 'privacy'
 ])
 

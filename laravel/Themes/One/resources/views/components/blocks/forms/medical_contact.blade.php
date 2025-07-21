@@ -1,6 +1,6 @@
 @props([
-    'title' => 'Inviaci un Messaggio',
-    'subtitle' => 'Compila il form per ricevere supporto personalizzato. Risponderemo entro 2 ore lavorative',
+    'title' => __('pub_theme::contact.title'),
+    'subtitle' => __('pub_theme::contact.subtitle'),
     'form_action' => '/api/contact/submit',
     'fields' => [],
     'background_color' => 'bg-gray-50',
@@ -100,14 +100,14 @@
 
                         {{-- Priority Level Selector --}}
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Livello di Priorità</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">@lang('pub_theme::contact.form.priority.label')</label>
                             <div class="grid grid-cols-3 gap-3">
                                 <button type="button"
                                         @click="formData.priority = 'low'"
                                         :class="formData.priority === 'low' ? 'bg-green-100 border-green-500 text-green-700' : 'bg-gray-50 border-gray-200 text-gray-600'"
                                         class="p-3 border-2 rounded-xl transition-all duration-300 hover:shadow-md">
                                     <div class="text-2xl mb-1">🟢</div>
-                                    <div class="text-xs font-medium">Bassa</div>
+                                    <span class="block text-sm font-medium">@lang('pub_theme::contact.form.priority.low')</span>
                                 </button>
 
                                 <button type="button"
@@ -115,7 +115,7 @@
                                         :class="formData.priority === 'normal' ? 'bg-blue-100 border-blue-500 text-blue-700' : 'bg-gray-50 border-gray-200 text-gray-600'"
                                         class="p-3 border-2 rounded-xl transition-all duration-300 hover:shadow-md">
                                     <div class="text-2xl mb-1">🔵</div>
-                                    <div class="text-xs font-medium">Normale</div>
+                                    <span class="block text-sm font-medium">@lang('pub_theme::contact.form.priority.normal')</span>
                                 </button>
 
                                 <button type="button"
@@ -123,30 +123,30 @@
                                         :class="formData.priority === 'high' ? 'bg-red-100 border-red-500 text-red-700' : 'bg-gray-50 border-gray-200 text-gray-600'"
                                         class="p-3 border-2 rounded-xl transition-all duration-300 hover:shadow-md">
                                     <div class="text-2xl mb-1">🔴</div>
-                                    <div class="text-xs font-medium">Alta</div>
+                                    <span class="block text-sm font-medium">@lang('pub_theme::contact.form.priority.high')</span>
                                 </button>
                             </div>
                         </div>
 
                         {{-- Service Type --}}
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Tipo di Servizio</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">@lang('pub_theme::contact.form.service_type.label')</label>
                             <select x-model="formData.service_type"
                                     class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 bg-white">
                                 <option value="">Seleziona il tipo di richiesta</option>
                                 <option value="consultation">Consulenza Generale</option>
                                 <option value="pregnancy">Odontoiatria in Gravidanza</option>
-                                <option value="emergency">Emergenza Odontoiatrica</option>
-                                <option value="second_opinion">Seconda Opinione</option>
-                                <option value="prevention">Prevenzione e Check-up</option>
-                                <option value="other">Altro</option>
+                                <option value="general">@lang('pub_theme::contact.form.service_type.general')</option>
+                                <option value="appointment">@lang('pub_theme::contact.form.service_type.appointment')</option>
+                                <option value="billing">@lang('pub_theme::contact.form.service_type.billing')</option>
+                                <option value="other">@lang('pub_theme::contact.form.service_type.other')</option>
                             </select>
                         </div>
 
                         {{-- Name and Email Row --}}
                         <div class="grid md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nome e Cognome *</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">@lang('pub_theme::contact.form.fields.full_name') *</label>
                                 <div class="relative">
                                     <input type="text"
                                            x-model="formData.full_name"
@@ -160,7 +160,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">@lang('pub_theme::contact.form.fields.email') *</label>
                                 <div class="relative">
                                     <input type="email"
                                            x-model="formData.email"
@@ -176,7 +176,7 @@
 
                         {{-- Phone Number (Optional) --}}
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Numero di Telefono (Opzionale)</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">@lang('pub_theme::contact.form.fields.phone')</label> (Opzionale)</label>
                             <div class="relative">
                                 <input type="tel"
                                        x-model="formData.phone"
@@ -190,7 +190,7 @@
 
                         {{-- Message --}}
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Messaggio *</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">@lang('pub_theme::contact.form.fields.message') *</label>
                             <div class="relative">
                                 <textarea x-model="formData.message"
                                           @input="charCount = $event.target.value.length"
@@ -210,17 +210,17 @@
                                 :disabled="isSubmitting"
                                 class="w-full py-4 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-bold rounded-xl hover:from-teal-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg">
                             <span x-show="!isSubmitting" class="flex items-center justify-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                @lang('pub_theme::contact.form.submit')
+                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
-                                Invia Messaggio
                             </span>
                             <span x-show="isSubmitting" class="flex items-center justify-center">
-                                <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                                @lang('pub_theme::contact.form.submitting')
+                                <svg class="animate-spin ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                Invio in corso...
                             </span>
                         </button>
                     </form>
@@ -235,7 +235,7 @@
 
                 {{-- Contact Methods --}}
                 <div class="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/20 mb-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Altri Modi per Contattarci</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">@lang('pub_theme::contact.methods.title')</h3>
 
                     <div class="space-y-4">
                         {{-- Phone --}}
@@ -246,9 +246,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-blue-700">Chiamaci</div>
+                                <div class="font-bold text-blue-700">@lang('pub_theme::contact.methods.phone.title')</div>
                                 <div class="text-blue-600">+39 06 1234 567</div>
-                                <div class="text-xs text-blue-500">Lun-Sab 8:00-19:00</div>
+                                <div class="text-xs text-blue-500">@lang('pub_theme::contact.methods.phone.description')</div>
                             </div>
                         </div>
 
@@ -260,9 +260,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-red-700">Emergenze</div>
+                                <div class="font-bold text-red-700">@lang('pub_theme::contact.methods.emergency.title')</div>
                                 <div class="text-red-600">+39 800 123 456</div>
-                                <div class="text-xs text-red-500">24/7 sempre attivo</div>
+                                <div class="text-xs text-red-500">@lang('pub_theme::contact.methods.emergency.description')</div>
                             </div>
                         </div>
 
@@ -274,9 +274,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-bold text-green-700">Email</div>
+                                <div class="font-bold text-green-700">@lang('pub_theme::contact.methods.email.title')</div>
                                 <div class="text-green-600">info@saluteora.it</div>
-                                <div class="text-xs text-green-500">Risposta entro 2 ore</div>
+                                <div class="text-xs text-green-500">@lang('pub_theme::contact.methods.email.description')</div>
                             </div>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
 
                 {{-- Features --}}
                 <div class="bg-white/80 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/20">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Vantaggi del Nostro Supporto</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">@lang('pub_theme::contact.benefits.title')</h3>
 
                     <div class="space-y-4">
                         <div class="flex items-start">
@@ -294,8 +294,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Risposta Rapida</h4>
-                                <p class="text-gray-600 text-sm">Garantiamo una risposta entro 2 ore lavorative</p>
+                                <h4 class="font-semibold text-gray-900">@lang('pub_theme::contact.benefits.items.0.title')</h4>
+                                <p class="text-gray-600 text-sm">@lang('pub_theme::contact.benefits.items.0.description')</p>
                             </div>
                         </div>
 
@@ -306,8 +306,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Privacy Garantita</h4>
-                                <p class="text-gray-600 text-sm">I tuoi dati sono protetti secondo le normative GDPR</p>
+                                <h4 class="font-semibold text-gray-900">@lang('pub_theme::contact.benefits.items.2.title')</h4>
+                                <p class="text-sm text-gray-600">@lang('pub_theme::contact.benefits.items.2.description')</p>
                             </div>
                         </div>
 
@@ -318,8 +318,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Supporto Specializzato</h4>
-                                <p class="text-gray-600 text-sm">Team dedicato di esperti in odontoiatria</p>
+                                <h4 class="font-semibold text-gray-900">@lang('pub_theme::contact.benefits.items.1.title')</h4>
+                                <p class="text-sm text-gray-600">@lang('pub_theme::contact.benefits.items.1.description')</p>
                             </div>
                         </div>
                     </div>

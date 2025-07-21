@@ -19,8 +19,9 @@
 
 ## Traduzioni Temi
 - [Tema One - Opening Hours](laravel/Themes/One/lang/) - Traduzioni multilingue per il tema principale
+- [Tema One - Language Switcher](laravel/Themes/One/docs/language-switcher-implementation.md) - Implementazione completa del selettore lingua
 - **Regola**: Tutti i temi devono avere traduzioni complete in IT/EN/DE
-- **Struttura**: `laravel/Themes/{ThemeName}/lang/{locale}/opening_hours.php`
+- **Struttura**: `laravel/Themes/{ThemeName}/lang/{locale}/navigation.php`
 
 ## Regole Critiche
 - **Struttura Espansa**: Tutti i campi devono avere `label`, `placeholder`, `tooltip`, `helper_text`

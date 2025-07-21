@@ -33,7 +33,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sala d'Attesa Virtuale - SaluteOra</title>
+    <title>@lang('pub_theme::error_429.title')</title>
     <meta name="robots" content="noindex, nofollow">
 
     {{-- Tailwind CSS CDN per sviluppo --}}
@@ -160,42 +160,42 @@
               { emoji: '🧑', position: 6, status: 'waiting' }
           ],
           waitingMessages: [
-              'Il dottore è molto richiesto oggi! 👨‍⚕️✨',
-              'Sala d\'attesa piena: siamo un successo! 🎉',
-              'Troppi pazienti contemporaneamente = troppo amore! ❤️',
-              'Il server ha bisogno di una pausa caffè ☕',
-              'Anche i computer si stancano dopo tante visite! 💻😴',
-              'Quality over quantity: preferiamo curare bene! 🩺',
-              'Stiamo sterilizzando il server... 🧼💻'
+              '@lang('pub_theme::error_429.waiting_messages.doctor_busy')',
+              '@lang('pub_theme::error_429.waiting_messages.waiting_room_full')',
+              '@lang('pub_theme::error_429.waiting_messages.too_much_love')',
+              '@lang('pub_theme::error_429.waiting_messages.server_coffee_break')',
+              '@lang('pub_theme::error_429.waiting_messages.computer_tired')',
+              '@lang('pub_theme::error_429.waiting_messages.quality_over_quantity')',
+              '@lang('pub_theme::error_429.waiting_messages.sterilizing_server')'
           ],
           currentMessage: '',
           messageIndex: 0,
           tips: [
-              '💡 Consiglio: Prenota gli appuntamenti per evitare le code',
-              '⏰ Orari meno affollati: mattino presto o tardo pomeriggio',
-              '📱 Usa la nostra app per controlli più veloci',
-              '🗓️ Pianifica visite di controllo con largo anticipo',
-              '💌 Iscriviti alla newsletter per aggiornamenti prioritari'
+              '@lang('pub_theme::error_429.tips.book_appointments')',
+              '@lang('pub_theme::error_429.tips.best_hours')',
+              '@lang('pub_theme::error_429.tips.use_app')',
+              '@lang('pub_theme::error_429.tips.plan_ahead')',
+              '@lang('pub_theme::error_429.tips.newsletter')'
           ],
           currentTipIndex: 0,
           triviaQuestions: [
               {
-                  question: 'Quante volte al giorno dovresti lavarti i denti?',
-                  options: ['1 volta', '2 volte', '3 volte', '4 volte'],
+                  question: '@lang('pub_theme::error_429.trivia.question_1.question')',
+                  options: [@foreach(__('pub_theme::error_429.trivia.question_1.options') as $option)'{{ $option }}'@if(!$loop->last),@endif @endforeach],
                   correct: 1,
-                  explanation: 'Due volte al giorno è l\'ideale per una buona igiene orale!'
+                  explanation: '@lang('pub_theme::error_429.trivia.question_1.explanation')'
               },
               {
-                  question: 'Durante la gravidanza, le gengive possono essere più:',
-                  options: ['Secche', 'Sensibili', 'Dure', 'Fredde'],
+                  question: '@lang('pub_theme::error_429.trivia.question_2.question')',
+                  options: [@foreach(__('pub_theme::error_429.trivia.question_2.options') as $option)'{{ $option }}'@if(!$loop->last),@endif @endforeach],
                   correct: 1,
-                  explanation: 'Le gengive in gravidanza diventano più sensibili a causa dei cambiamenti ormonali.'
+                  explanation: '@lang('pub_theme::error_429.trivia.question_2.explanation')'
               },
               {
-                  question: 'Qual è il minerale più importante per i denti?',
-                  options: ['Ferro', 'Calcio', 'Magnesio', 'Zinco'],
+                  question: '@lang('pub_theme::error_429.trivia.question_3.question')',
+                  options: [@foreach(__('pub_theme::error_429.trivia.question_3.options') as $option)'{{ $option }}'@if(!$loop->last),@endif @endforeach],
                   correct: 1,
-                  explanation: 'Il calcio è fondamentale per mantenere denti forti e sani!'
+                  explanation: '@lang('pub_theme::error_429.trivia.question_3.explanation')'
               }
           ],
           selectedAnswer: null,
@@ -335,7 +335,7 @@
 
                         {{-- Queue Number Display --}}
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg animate-pulse-glow">
-                            <div class="text-sm">Posizione</div>
+                            <div class="text-sm">@lang('pub_theme::error_429.queue_position')</div>
                             <div class="text-2xl" x-text="queuePosition"></div>
                         </div>
 

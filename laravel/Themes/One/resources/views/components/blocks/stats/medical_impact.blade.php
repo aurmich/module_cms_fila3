@@ -132,8 +132,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium text-gray-900">Patrocinio</p>
-                        <p class="text-sm text-gray-600">Ministero della Salute</p>
+                        <p class="font-medium text-gray-900">@lang('pub_theme::components.stats.medical_impact.patronage')</p>
+                        <p class="text-sm text-gray-600">@lang('pub_theme::components.stats.medical_impact.ministry_of_health')</p>
                     </div>
                 </div>
 
@@ -145,8 +145,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium text-gray-900">Integrato con</p>
-                        <p class="text-sm text-gray-600">Sistema Sanitario Nazionale</p>
+                        <p class="font-medium text-gray-900">@lang('pub_theme::components.stats.medical_impact.integrated_with')</p>
+                        <p class="text-sm text-gray-600">@lang('pub_theme::components.stats.medical_impact.national_health_service')</p>
                     </div>
                 </div>
 
@@ -158,8 +158,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium text-gray-900">Certificazione</p>
-                        <p class="text-sm text-gray-600">ISO 9001:2015</p>
+                        <p class="font-medium text-gray-900">@lang('pub_theme::components.stats.medical_impact.certification')</p>
+                        <p class="text-sm text-gray-600">@lang('pub_theme::components.stats.medical_impact.iso_9001_2015')</p>
                     </div>
                 </div>
             </div>

@@ -102,7 +102,7 @@
 
                 <!-- Immagine centrata sotto il bottone -->
                 <div class="pt-6">
-                    <img class="mx-auto h-64 w-auto" src="/img/sala-attesa-2.svg" alt="Sala d'attesa" />
+                    <img class="mx-auto h-64 w-auto" src="/img/sala-attesa-2.svg" alt="@lang('pub_theme::content.hero.modern.room_image_alt.label')" />
                 </div>
 
             </div>

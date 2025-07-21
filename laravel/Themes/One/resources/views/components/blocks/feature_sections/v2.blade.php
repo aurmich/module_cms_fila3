@@ -38,7 +38,7 @@
                             @if(isset($section['link']))
                                 <p class="mt-6">
                                     <a href="{{ $section['link'] }}" class="text-sm font-semibold leading-6 text-indigo-600">
-                                        {{ $section['link_text'] ?? 'Scopri di più' }} <span aria-hidden="true">→</span>
+                                        {{ $section['link_text'] ?? __('pub_theme::components.feature_sections.discover_more') }} <span aria-hidden="true">→</span>
                                     </a>
                                 </p>
                             @endif

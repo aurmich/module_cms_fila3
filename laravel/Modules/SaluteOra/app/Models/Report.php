@@ -64,8 +64,8 @@ class Report extends BaseModel{
             'uses_asl_clinic_for_dental_care' => 'boolean',
             'missing_teeth' => 'boolean',
             'decayed_teeth' => 'boolean',
-            'has_fixed_prosthesis_or_implants' => 'boolean',
-            'has_tartar' => 'boolean',
+            
+            
         ];
     }
 }

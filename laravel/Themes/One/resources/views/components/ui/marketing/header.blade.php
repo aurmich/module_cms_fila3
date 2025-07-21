@@ -2,7 +2,7 @@
 	<div class="h-12 bg-emerald-900 min-h-12 navbar">
 		<div class="flex justify-between w-full max-w-screen-xl mx-auto">
 			<div class="flex-1 py-1">
-				<a class="text-sm" href="#">Nome della Regione</a>
+				<a class="text-sm" href="#">@lang('pub_theme::common.region_name')</a>
 			</div>
 			<div class="flex-none">
 				<ul class="px-1 menu menu-horizontal">
@@ -11,7 +11,7 @@
 					<li>
 						<a class="flex items-center space-x-1" href="{{ route('login') }}">
 							<x-heroicon-o-user class="size-4" />
-							<div class="hidden md:block">Accedi all'area personale</div>
+							<div class="hidden md:block">@lang('pub_theme::common.login_area')</div>
 						</a>
 					</li>
 				</ul>
@@ -24,14 +24,14 @@
 				<a href="" class="flex items-center py-2 space-x-4">
 					<x-heroicon-o-shield-check class="stroke-1 size-16" />
 					<div class="text-start">
-						<div class="text-2xl font-bold">Il mio Comune</div>
-						<div class="text-sm">Un comune da vivere</div>
+						<div class="text-2xl font-bold">@lang('pub_theme::common.municipality.name')</div>
+						<div class="text-sm">@lang('pub_theme::common.municipality.tagline')</div>
 					</div>
 				</a>
 			</div>
 			<div class="flex-none">
 				<ul class="items-center hidden px-1 menu menu-horizontal md:inline-flex md:me-2">
-					<li> <a>Seguici su</a> </li>
+					<li> <a>@lang('pub_theme::common.follow_us')</a> </li>
 					@foreach(['facebook', 'twitter', 'instagram', 'linkedin'] as $i)
 					<li>
 						<a class="p-2">
@@ -41,7 +41,7 @@
 					@endforeach
 				</ul>
 				<ul class="items-center px-1 menu menu-horizontal">
-					<li class="hidden sm:block">Cerca</li>
+					<li class="hidden sm:block">@lang('pub_theme::common.search')</li>
 					<li class="ms-2">
 						<a class="bg-white border-0 btn btn-circle hover:bg-emerald-50 text-emerald-800">
 							<x-heroicon-o-magnifying-glass class="size-5" />

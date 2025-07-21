@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Actions\Pdf;
 
 use Spipu\Html2Pdf\Html2Pdf;
+use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\PdfData;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueueableAction\QueueableAction;
@@ -21,11 +22,7 @@ class StreamDownloadPdfAction
      *
      * @param string $html Contenuto HTML da convertire
      * @param string $filename Nome del file PDF
-     * @param string $disk Disco di storage
-     * @param string $out Tipo di output (download, path, etc.)
-     * @param string $orientation Orientamento (P=Portrait, L=Landscape)
-     * @param PdfEngineEnum $engine Engine da utilizzare
-     * @return string|BinaryFileResponse
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function execute(
         ?string $html=null,
@@ -36,9 +33,15 @@ class StreamDownloadPdfAction
     ){
 
         if($html==null && $view!=null){
+            if(!view()->exists($view)){
+                throw new \Exception('View '.$view.' not found');
+            }
+            if(!is_array($data)){
+                $data = [];
+            }
             $html = view($view, $data)->render();
         }
-
+        Assert::string($html);
         $html2pdf = new \Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'it', true, 'UTF-8', [10, 10, 10, 10]);
         $html2pdf->writeHTML($html);
         

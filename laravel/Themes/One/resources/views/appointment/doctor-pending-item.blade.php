@@ -37,24 +37,24 @@
                     <!-- Modal info -->
                     <div x-show="showInfo" x-cloak class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                         <div class="bg-white p-6 rounded-xl max-w-md w-3/4 lg:w-full">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Dettagli Appuntamento</h2>
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">@lang('pub_theme::appointment.appointment_details')</h2>
                             <div class="text-sm text-gray-700 space-y-2">
-                                <p><strong>Nome:</strong> {{ $appointment->patient?->full_name }}</p>
-                                <p><strong>Data:</strong> {{ $appointment->starts_at?->format('d F Y') }}</p>
-                                <p><strong>Orario:</strong> {{ $appointment->time_range }}</p>
+                                <p><strong>@lang('pub_theme::appointment.fields.name.label'):</strong> {{ $appointment->patient?->full_name }}</p>
+                                <p><strong>@lang('pub_theme::appointment.fields.date.label'):</strong> {{ $appointment->starts_at?->format('d F Y') }}</p>
+                                <p><strong>@lang('pub_theme::appointment.fields.time.label'):</strong> {{ $appointment->time_range }}</p>
                                 @if($appointment->patient?->phone)
-                                    <p><strong>Cellulare:</strong> {{ $appointment->patient?->phone }}</p>
+                                    <p><strong>@lang('pub_theme::appointment.fields.phone.label'):</strong> {{ $appointment->patient?->phone }}</p>
                                 @endif
                                 @if($appointment->patient?->email)
-                                    <p><strong>Email:</strong> {{ $appointment->patient?->email }}</p>
+                                    <p><strong>@lang('pub_theme::appointment.fields.email.label'):</strong> {{ $appointment->patient?->email }}</p>
                                 @endif
                                 @if($appointment->notes)
-                                    <p><strong>Note:</strong> {{ $appointment->notes }}</p>
+                                    <p><strong>@lang('pub_theme::appointment.fields.notes.label'):</strong> {{ $appointment->notes }}</p>
                                 @endif
                             </div>
                             <div class="mt-6 flex justify-end">
                                 <button @click="showInfo = false" class="px-4 py-2 bg-[#FF5F7E] text-white rounded-md">
-                                    Chiudi
+                                    @lang('pub_theme::appointment.buttons.close')
                                 </button>
                             </div>
                         </div>

@@ -21,24 +21,24 @@ class="min-h-screen m-0 p-0"
     </div>
     <div class="flex flex-row items-center">
       <a href="/it/">
-        <span class="text-white p-4 text-xl">Home</span>
+        <span class="text-white p-4 text-xl">@lang('pub_theme::navigation.main_menu.home.label')</span>
       </a>
       <a href="/it/pages/progetto">
-        <span class="text-white p-4 text-xl">Progetto</span>
+        <span class="text-white p-4 text-xl">@lang('pub_theme::navigation.main_menu.project.label')</span>
       </a>
       <a href="/it/pages/partners">
-        <span class="text-white p-4 text-xl">Partners</span>
+        <span class="text-white p-4 text-xl">@lang('pub_theme::navigation.main_menu.partners.label')</span>
       </a>
     </div>
     <div>
       <a href="/it/auth/login">
-        <span class="text-white text-xl p-4">Accedi</span>
+        <span class="text-white text-xl p-4">@lang('pub_theme::navigation.main_menu.login.label')</span>
       </a>
       <a href="/it/auth/register">
         <button
           class="text-white text-xl bg-transparent border-2 border-white py-4 px-6 rounded-lg"
         >
-          Registrati
+          @lang('pub_theme::navigation.main_menu.register.label')
         </button>
       </a>
     </div>  
@@ -49,19 +49,16 @@ class="min-h-screen m-0 p-0"
 <!-- INIZIO PRIMA SECTION -->
 <div class="w-[70%] p-6 lg:mt-60 lg:ml-32 lg:w-2/5 flex flex-col justify-start">
   <h1 class="text-[#FF5F7E] text-[40px] lg:text-8xl leading-tight font-bold mb-2.5">
-    Benvenuta su <br />
-    Salute Orale
+    @lang('pub_theme::navigation.hero.welcome_title.label')
   </h1>
   <span class="w-4/5 lg:w-auto text-[#FCD5D0] text-lg lg:text-2xl leading-slug">
-    Il portale che vuole garantire alle pazienti vulnerabili in stato di
-    gravidanza la possibilità di accedere a servizi odonoiatrici di
-    prevenzione a titolo completamente gratuito
+    @lang('pub_theme::navigation.hero.welcome_subtitle.label')
   </span>
   <a href="/it/auth/register">
     <button
       class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-4"
     >
-      Inizia Ora
+      @lang('pub_theme::navigation.hero.start_now.label')
     </button>
   </a>
 </div>
@@ -70,25 +67,23 @@ class="min-h-screen m-0 p-0"
 <div>
   <div class="md:w-2/4 lg:w-full p-6 mt-12 lg:mt-52 flex justify-center">
     <h2 class="text-[#FF5F7E] text-3xl lg:text-4xl text-center">
-      Perché é importante la salute orale in gravidanza?
+      @lang('pub_theme::navigation.hero.importance_title.label')
     </h2>
   </div>
   <div class="flex flex-col justify-around items-center mt-0 lg:mt-10">
     <div class="w-3/4">
       <p class="text-[#F38B8B] text-center text-lg lg:text-2xl leading-7">
-      Numerosi studi scientifici riportano l’importanza di una corretta salute orale sin dai primi mesi della gravidanza. Malattie dentali molto comuni, come la carie, possono causare malformazioni o infezioni nel feto già a partire dal primo trimestre di gravidanza.Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta pulizia dei denti, affidarsi alle cure e all’esame di un odontoiatra a partire dal terzo trimestre di gravidanza.
+      @lang('pub_theme::navigation.hero.importance_text_1.label')
       </p>
     </div>
     <div class="w-3/4">
       <p class="text-[#F38B8B] text-center text-lg lg:text-2xl leading-7">
-      Con questo in mente, il progetto Salute Orale si propone di garantire, a titolo completamente gratuito, una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. 
-      Le Pazienti potranno prenotare a titolo totalmente gratuito una visita di controllo e igiene presso i dentisti aderenti.
-      I Dentisti gestiranno questi appuntamenti da piattaforma e potranno chiedere rimborso per la prestazione al personale Salute Orale.
+      @lang('pub_theme::navigation.hero.importance_text_2.label')
       </p>
     </div>
     <div class="mt-5">
       <a href="/it/pages/progetto">
-        <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">Scopri il progetto</button>
+        <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
       </a>
     </div>
   </div>
@@ -104,13 +99,13 @@ class="min-h-screen m-0 p-0"
       <img class="h-72 lg:h-[500px]" src="/img/dentist.png"/>
     </div>
     <div class="flex flex-col items-center">
-      <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">Vuoi partecipare al progetto?</h1>
-      <span class="text-[#272C4D] text-center text-xl mt-10">Entra a far parte del progetto Salute Orale</span>
+      <h1 class="text-[#272C4D] text-center text-4xl lg:text-6xl">@lang('pub_theme::landing.participation.title.label')</h1>
+      <span class="text-[#272C4D] text-center text-xl mt-10">@lang('pub_theme::landing.participation.subtitle.label')</span>
       <a href="{{ route('register') }}">
       <button
         class="w-44 text-[#272C4D] text-xl lg:text-2xl mt-10 border-[#272C4D] border-2 py-2 px-5 lg:py-3 lg:px-7 rounded-lg"
       >
-        Registrati
+        @lang('pub_theme::navigation.main_menu.register.label')
       </button>
     </a>
     </div>
@@ -120,7 +115,7 @@ class="min-h-screen m-0 p-0"
 <!-- INIZIO QUARTA SECTION -->
  <div class="mt-5">
    <div class="w-full flex justify-center">
-     <h1 class="text-[#FF5F7E] text-3xl">Per informazioni aggiuntive</h1>
+     <h1 class="text-[#FF5F7E] text-3xl">@lang('pub_theme::landing.additional_info.title.label')</h1>
    </div>
    <div class="h-auto pt-5 flex flex-col lg:flex-row justify-center items-center">
      <div class="w-3/5 lg:w-1/5 h-auto bg-cover bg-[#FCD5D0] rounded-[25px] m-5">
@@ -130,7 +125,7 @@ class="min-h-screen m-0 p-0"
          </div>
          <div class="flex flex-col items-center justify-center">
            <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
-             >Consulta la guida</span
+             >@lang('pub_theme::landing.additional_info.consult_guide.label')</span
            >
          </div>
        </div>
@@ -142,7 +137,7 @@ class="min-h-screen m-0 p-0"
          </div>
          <div class="flex flex-col items-center justify-center">
            <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
-             >Consulta la guida</span
+             >@lang('pub_theme::landing.additional_info.consult_guide.label')</span
            >
          </div>
        </div>
@@ -153,7 +148,7 @@ class="min-h-screen m-0 p-0"
 <!-- INIZIO QUINTA SECTION -->
 <div class="flex flex-col items-center  pt-7">
   <div>
-    <h1 class="text-[#FF5F7E] text-3xl">Con la partecipazione di</h1>
+    <h1 class="text-[#FF5F7E] text-3xl">@lang('pub_theme::landing.partners.title.label')</h1>
   </div>
   <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
     <div class="p-5">

@@ -27,16 +27,16 @@
 --}}
 
 @props([
-    'title' => 'Prenota la tua Consulenza Specialistica',
-    'subtitle' => 'Accesso prioritario ai nostri specialisti in odontoiatria per gestanti. Consulenza gratuita inclusa.',
+    'title' => __('pub_theme::emergency.medical_appointment.title.label'),
+    'subtitle' => __('pub_theme::emergency.medical_appointment.subtitle.label'),
     'background_color' => 'bg-gradient-to-r from-teal-600 to-blue-600',
     'text_color' => 'text-white',
     'primary_button' => [
-        'text' => 'Prenota consulenza gratuita',
+        'text' => __('pub_theme::emergency.medical_appointment.book_free_consultation.label'),
         'url' => '/prenota'
     ],
     'secondary_button' => [
-        'text' => 'Chiama ora: +39 800 123 456',
+        'text' => __('pub_theme::emergency.medical_appointment.call_now_number.label'),
         'url' => 'tel:+39800123456'
     ],
     'show_emergency' => true,

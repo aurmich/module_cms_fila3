@@ -1,6 +1,6 @@
 <div>
    <div class="w-full flex justify-center p-10">
-       <h1>I nostri Partners</h1>
+       <h1>@lang('pub_theme::content.partners.our_partners.label')</h1>
    </div>
  <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full lg:w-2/4 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center items-center p-10">

@@ -20,7 +20,7 @@
 					<li>
 						<a class="flex items-center space-x-1" href="{{ route('login') }}">
 							<x-heroicon-o-user class="size-4" />
-							<div class="hidden md:block">Accedi all'area personale</div>
+							<div class="hidden md:block">@lang('pub_theme::navigation.main_menu.login.label')</div>
 						</a>
 					</li>
 				</ul>

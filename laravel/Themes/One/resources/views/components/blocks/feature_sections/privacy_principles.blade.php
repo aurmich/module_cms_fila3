@@ -26,7 +26,7 @@ new class extends Component {
 
 @props([
     'title' => 'I nostri principi di protezione dati',
-    'subtitle' => 'Ogni processo è progettato per massimizzare la tua privacy e sicurezza',
+    'subtitle' => __('pub_theme::components.privacy_principles.subtitle'),
     'sections' => []
 ])
 

@@ -1,15 +1,15 @@
 @props([
-    'title' => 'Hai bisogno di aiuto immediato?',
-    'subtitle' => 'Non aspettare: la tua salute orale è la nostra priorità',
+    'title' => __('pub_theme::emergency.urgency_support.title.label'),
+    'subtitle' => __('pub_theme::emergency.urgency_support.subtitle.label'),
     'background_color' => 'bg-gradient-to-r from-teal-600 to-cyan-600',
     'text_color' => 'text-white',
     'primary_button' => [
-        'text' => 'Chiama Emergenze 24/7',
+        'text' => __('pub_theme::emergency.urgency_support.emergency_phone.label'),
         'link' => 'tel:+39800123456',
         'style' => 'bg-red-600 text-white hover:bg-red-700 ring-2 ring-red-300'
     ],
     'secondary_button' => [
-        'text' => 'Prenota visita online',
+        'text' => __('pub_theme::emergency.urgency_support.book_online.label'),
         'link' => '/prenota-visita',
         'style' => 'border-2 border-white text-white hover:bg-white hover:text-teal-600'
     ]

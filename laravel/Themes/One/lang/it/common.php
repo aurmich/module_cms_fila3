@@ -23,4 +23,33 @@ return [
     'info' => 'Informazione',
     'minutes' => 'minuti',
     'page' => 'Pagina',
+    
+    'buttons' => [
+        'login' => 'Accedi',
+        'register' => 'Registrati',
+    ],
+    
+    'contact' => [
+        'email' => 'Email',
+        'phone' => 'Telefono',
+    ],
+    
+    'newsletter' => [
+        'title' => 'Newsletter',
+        'description' => 'Iscriviti per ricevere aggiornamenti e consigli sulla salute orale.',
+        'email_placeholder' => 'La tua email',
+        'subscribe' => 'Iscriviti',
+    ],
+    
+    'copyright' => '© :year :name. Tutti i diritti riservati.',
+    
+    'region_name' => 'Nome della Regione',
+    'login_area' => 'Accedi all\'area personale',
+    'follow_us' => 'Seguici su',
+    'search' => 'Cerca',
+    
+    'municipality' => [
+        'name' => 'Il mio Comune',
+        'tagline' => 'Un comune da vivere',
+    ],
 ];

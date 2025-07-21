@@ -222,12 +222,12 @@
             <div class="flex gap-4">
                 <a href="{{ route('login') }}"
                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Accedi
+                    @lang('pub_theme::navigation.main_menu.login.label')
                 </a>
                 @if(Route::has('register'))
                 <a href="{{ route('register') }}"
                    class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Registrati
+                    @lang('pub_theme::navigation.main_menu.register.label')
                 </a>
                 @endif
             </div>
