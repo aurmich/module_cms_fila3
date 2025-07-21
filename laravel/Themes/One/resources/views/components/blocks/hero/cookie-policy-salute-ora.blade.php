@@ -16,4 +16,4 @@
     </div>
 </div>
 
-<!-- /it/auth/password/reset -->
+<!-- /{{ $lang }}/auth/password/reset -->

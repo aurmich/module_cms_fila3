@@ -19,13 +19,13 @@
 
         <!-- Desktop Navigation - Hidden on Mobile -->
         <div class="hidden lg:flex flex-row items-center space-x-6">
-          <a href="/it/" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.home.label')
           </a>
-          <a href="/it/pages/progetto" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/pages/progetto" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.project.label')
           </a>
-          <a href="/it/pages/partners" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/pages/partners" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.partners.label')
           </a>
         </div>
@@ -39,10 +39,10 @@
           
           <!-- Login/Register Buttons -->
           <div class="flex items-center space-x-4">
-            <a href="/it/auth/login" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+            <a href="/{{ $lang }}/auth/login" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
               @lang('pub_theme::navigation.main_menu.login.label')
             </a>
-            <a href="/it/auth/register">
+            <a href="/{{ $lang }}/auth/register">
               <button class="text-white text-xl bg-transparent border-2 border-white py-3 px-6 rounded-lg hover:bg-white/10 transition-colors duration-200">
                 @lang('pub_theme::navigation.main_menu.register.label')
               </button>
@@ -83,17 +83,17 @@
         <div class="px-6 py-6 space-y-6">
           <!-- Navigation Links -->
           <div class="space-y-4">
-            <a href="/it/" 
+            <a href="/{{ $lang }}/" 
                @click="mobileMenuOpen = false"
                class="block text-white text-lg font-medium py-3 px-4 hover:bg-white/10 rounded-lg transition-colors duration-200">
               @lang('pub_theme::navigation.main_menu.home.label')
             </a>
-            <a href="/it/pages/progetto" 
+            <a href="/{{ $lang }}/pages/progetto" 
                @click="mobileMenuOpen = false"
                class="block text-white text-lg font-medium py-3 px-4 hover:bg-white/10 rounded-lg transition-colors duration-200">
               @lang('pub_theme::navigation.main_menu.project.label')
             </a>
-            <a href="/it/pages/partners" 
+            <a href="/{{ $lang }}/pages/partners" 
                @click="mobileMenuOpen = false"
                class="block text-white text-lg font-medium py-3 px-4 hover:bg-white/10 rounded-lg transition-colors duration-200">
               @lang('pub_theme::navigation.main_menu.partners.label')
@@ -116,12 +116,12 @@
 
           <!-- Login/Register Buttons -->
           <div class="space-y-4 pt-2">
-            <a href="/it/auth/login" 
+            <a href="/{{ $lang }}/auth/login" 
                @click="mobileMenuOpen = false"
                class="block text-white text-lg font-medium py-3 px-4 hover:bg-white/10 rounded-lg transition-colors duration-200">
               @lang('pub_theme::navigation.main_menu.login.label')
             </a>
-            <a href="/it/auth/register" 
+            <a href="/{{ $lang }}/auth/register" 
                @click="mobileMenuOpen = false"
                class="block">
               <button class="w-full text-white text-lg bg-transparent border-2 border-white py-3 px-6 rounded-lg hover:bg-white/10 transition-colors duration-200">
@@ -142,7 +142,7 @@
          <span class="w-4/5 lg:w-auto text-white text-lg lg:text-2xl leading-slug mt-5">
            @lang('pub_theme::navigation.hero.welcome_subtitle.label')
          </span>
-         <a href="/it/auth/register">
+         <a href="/{{ $lang }}/auth/register">
            <button
              class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-5"
            >
@@ -171,7 +171,7 @@
           </p>
         </div>
         <div class="mt-5">
-          <a href="/it/pages/progetto">
+          <a href="/{{ $lang }}/pages/progetto">
             <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
           </a>
         </div>

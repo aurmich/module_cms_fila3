@@ -16,21 +16,21 @@
                       <img src="/img/logo.png" class="h-7 lg:h-14" />
                   </div>
                   <div class="flex flex-row items-center">
-                      <a href="/it/">
+                      <a href="/{{ $lang }}/">
                           <span class="text-white p-4 text-xl">Home</span>
                       </a>
                       <a href="{{ route('pages.view', ['slug' => 'progetto']) }}">
                           <span class="text-white p-4 text-xl">{{ __('pub_theme::txt.Project') }}</span>
                       </a>
-                      <a href="/it/pages/partners">
+                      <a href="/{{ $lang }}/pages/partners">
                           <span class="text-white p-4 text-xl">Partners</span>
                       </a>
                   </div>
                   <div>
-                      <a href="/it/auth/login">
+                      <a href="/{{ $lang }}/auth/login">
                           <span class="text-white text-xl p-4">Accedi</span>
                       </a>
-                      <a href="/it/auth/register">
+                      <a href="/{{ $lang }}/auth/register">
                           <button class="text-white text-xl bg-transparent border-2 border-white py-4 px-6 rounded-lg">
                               Registrati
                           </button>
@@ -51,7 +51,7 @@
                           gravidanza la possibilità di accedere a servizi odonoiatrici di
                           prevenzione a titolo completamente gratuito
                       </span>
-                      <a href="/it/auth/register">
+                      <a href="/{{ $lang }}/auth/register">
                           <button class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-4">
                               Inizia Ora
                           </button>
@@ -81,7 +81,7 @@
                 </p>
             </div>
             <div class="mt-5">
-                <a href="/it/pages/progetto">
+                <a href="/{{ $lang }}/pages/progetto">
                     <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">Scopri il progetto</button>
                 </a>
             </div>

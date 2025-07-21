@@ -51,9 +51,7 @@
      <div class="flex flex-col justify-center p-6 lg:p-12">
       <div class="w-full">
       <div class="overflow-hidden rounded-lg bg-white shadow mt-5 lg:m-5">
-        {{--  
-                    <a href="/it/pages/appuntamenti-entrata">
-                      --}}
+        
                       <a href="{{ route('pages.view', ['slug' => 'appuntamenti-entrata']) }}">
                     <div class="px-4 py-5 sm:p-6 flex flex-row">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#272C4D" class="size-6">
@@ -64,9 +62,7 @@
                     </a>
                     </div>
          <div class="overflow-hidden rounded-lg bg-white shadow mt-5 lg:m-5">
-          {{--  
-          <a href="/it/pages/appuntamenti-accettati">
-            --}}
+          
           <a href="{{ route('pages.view', ['slug' => 'appuntamenti-accettati']) }}">
           <div class="bg-[#272C4D] px-4 py-5 sm:p-6 flex flex-row">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
@@ -77,9 +73,7 @@
           </a>
           </div>
           <div class="overflow-hidden rounded-lg bg-white shadow mt-5 lg:m-5">
-            {{--  
-            <a href="/it/pages/appuntamenti-rifiutati">
-              --}}
+            
               <a href="{{ route('pages.view', ['slug' => 'appuntamenti-rifiutati']) }}">  
             <div class="bg-[#F38B8B] px-4 py-5 sm:p-6 flex flex-row">
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#BF0303" class="size-6">
@@ -90,9 +84,7 @@
             </a>
           </div>
           <div class="overflow-hidden rounded-lg bg-white shadow mt-5 lg:m-5">
-            {{--  
-            <a href="/it/pages/appuntamenti-conclusi">
-              --}}
+            
             <a href="{{ route('pages.view', ['slug' => 'appuntamenti-conclusi']) }}">
             <div class="bg-[#B4E1BE] px-4 py-5 sm:p-6 flex flex-row">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3E783E" class="size-6">

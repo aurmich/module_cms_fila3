@@ -45,7 +45,7 @@ name('login');
                 <!-- Livewire Login Form -->
                 <div class="space-y-6 flex flex-col justify-center">
                     @livewire(\Modules\User\Filament\Widgets\LoginWidget::class)
-                    <a href="/it/auth/password/reset" class="text-[#FF5F7E] text-center text-sm !mt-0">{{ __('pub_theme::auth.login.forgot_password') }}</a>
+                    <a href="/{{ $lang }}/auth/password/reset" class="text-[#FF5F7E] text-center text-sm !mt-0">{{ __('pub_theme::auth.login.forgot_password') }}</a>
                 </div>
             </div>
         </div>

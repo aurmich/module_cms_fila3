@@ -3,7 +3,7 @@
     <div class="flex justify-start py-8 sm:py-32 w-full">
       <div class="w-full mx-auto">
         <div class="flex flex-col items-center w-full mx-auto">
-          <a href="/it/patient/book">
+          <a href="/{{ $lang }}/patient/book">
             <div class="bg-gradient-to-r from-cyan-500 to-[#1A467F] py-6 px-10 text-white rounded-lg text-lg flex items-center justify-center cursor-pointer">
               Prenota una visita
               <span class="ml-1">

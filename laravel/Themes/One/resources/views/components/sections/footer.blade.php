@@ -19,7 +19,7 @@
             <div class="flex justify-center">
                 <div class="text-center m-1 lg:m-6 md:text-right space-x-4">
                 <a href="{{ route('home') }}" class="text-white text-sm m-1">@lang('pub_theme::navigation.main_menu.home.label')</a>
-                <a href="/it/pages/progetto" class="text-white text-sm m-1">@lang('pub_theme::navigation.main_menu.project.label')</a>
+                <a href="/{{ $lang }}/pages/progetto" class="text-white text-sm m-1">@lang('pub_theme::navigation.main_menu.project.label')</a>
                 </div>
             </div>
             <a href="{{ route('home') }}">
@@ -29,8 +29,8 @@
             </a>
             <div class="flex justify-center">
                 <div class="text-center m-1 lg:m-6 md:text-right">
-                    <a href="/it/pages/partners" class="text-white text-sm m-1">@lang('pub_theme::navigation.main_menu.partners.label')</a>
-                    <a href="/it/pages/faqs" class="text-white text-sm">@lang('pub_theme::navigation.main_menu.faqs.label')</a>
+                    <a href="/{{ $lang }}/pages/partners" class="text-white text-sm m-1">@lang('pub_theme::navigation.main_menu.partners.label')</a>
+                    <a href="/{{ $lang }}/pages/faqs" class="text-white text-sm">@lang('pub_theme::navigation.main_menu.faqs.label')</a>
                 </div>
             </div>          
             </div>

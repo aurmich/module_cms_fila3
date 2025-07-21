@@ -34,8 +34,8 @@
 $isDoctor  = $user && $user->type == UserTypeEnum::DOCTOR ? true:false;
 
     $profiloUrl = isset($user) ? $user->type === 'doctor'
-        ? '/it/pages/profilo-odontoiatra'
-        : '/it/pages/profilo-paziente':'';
+        ? '/{{ $lang }}/pages/profilo-odontoiatra'
+        : '/{{ $lang }}/pages/profilo-paziente':'';
 
         
 
