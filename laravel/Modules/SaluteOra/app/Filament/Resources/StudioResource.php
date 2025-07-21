@@ -41,10 +41,12 @@ class StudioResource extends XotBaseResource
 
             'phone' => Forms\Components\TextInput::make('phone')
                 ->tel()
+                ->required()
                 ->maxLength(30),
 
             'email' => Forms\Components\TextInput::make('email')
                 ->email()
+                ->required()
                 ->maxLength(100),
 
             'website' => Forms\Components\TextInput::make('website')

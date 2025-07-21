@@ -98,6 +98,42 @@ Tentare di "istanziare" un enum è come cercare di creare una nuova stagione olt
 2. **API**: Le risposte API beneficiano della consistenza degli enum
 3. **Validazione**: I validatori basati su enum richiedono casting corretto
 
+## Esempio Pratico: Report Model
+
+Il modello `Report` utilizza diversi enum per gestire valori predefiniti e array di valori enum multipli:
+
+```php
+/**
+ * Get the attributes that should be cast.
+ *
+ * @return array<string, string|class-string>
+ */
+public function casts(): array 
+{
+    return [
+        // Enum casts - enum con backing tipo string
+        'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
+        'teeth_brushing_frequency' => DayFrequencyEnum::class,
+        
+        // Array di valori enum (stored as JSON)
+        'specify_diseases' => 'array', // Array di MedicalConditionEnum values
+        'specify_missing_teeth' => 'array', // Array di ToothFDIEnum values
+        'specify_decayed_teeth' => 'array', // Array di ToothFDIEnum values
+        'specify_prosthesis_or_implants' => 'array', // Array di ToothFDIEnum values
+        'specify_tartar' => 'array', // Array di ToothFDIEnum values
+        'specify_plaque' => 'array', // Array di ToothFDIEnum values
+    ];
+}
+```
+
+### Note Importanti
+
+1. **Backed Enum Diretti**: Per gli enum backed type (PHP 8.1+) come `DayFrequencyEnum: string`, è possibile utilizzare direttamente la classe enum come tipo di cast
+
+2. **Array di Enum**: Per i campi che contengono array di valori enum (es. select multipli in Filament), è necessario utilizzare il cast `'array'` e gestire la conversione enum/valore manualmente o tramite `AsEnumCollection`
+
+3. **Documentazione nei Commenti**: È fondamentale specificare nei commenti quale tipo di enum è contenuto negli array per facilitare la comprensione del codice
+
 ## Link alla Documentazione Ufficiale
 
 - [Laravel Eloquent: Mutators & Casting](https://laravel.com/docs/eloquent-mutators#enum-casting)

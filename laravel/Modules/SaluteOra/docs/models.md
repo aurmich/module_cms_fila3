@@ -43,11 +43,39 @@
 ## Best Practices
 
 1. **Casts e Attributes**:
+   - Usare sempre il metodo `casts()` invece della proprietà `$casts`
+   - Documentare tutti i cast nel PHPDoc della classe
+   
+   **Esempio (Report Model)**:
    ```php
-   protected $casts = [
-       'email_verified_at' => 'datetime',
-       'password' => 'hashed',
-       'certifications' => 'array',
+   /**
+    * Get the attributes that should be cast.
+    *
+    * @return array<string, string>
+    */
+   public function casts(): array 
+   {
+       return [
+           // Boolean casts
+           'has_mouth_or_teeth_pain' => 'boolean',
+           'smokes' => 'boolean',
+           'visits_dentist_yearly' => 'boolean',
+           // ... altri campi boolean
+           
+           // Enum casts (come interi)
+           'teeth_brushing_frequency' => 'integer',
+           'specify_prosthesis_or_implants' => 'integer',
+           
+           // Array casts per valori multipli
+           'specify_diseases' => 'array',
+           'specify_missing_teeth' => 'array',
+           // ... altri campi array
+           
+           // Integer casts
+           'pregnancy_month' => 'integer',
+           'pregnancy_week' => 'integer',
+       ];
+   }
    ];
 
    protected $attributes = [

@@ -33,4 +33,9 @@ return [
         'color' => 'red',
         'icon' => 'heroicon-o-exclamation-circle',
     ],
-]; 
+    'daily' => [
+        'label' => 'Täglich',
+        'color' => 'red',
+        'icon' => 'heroicon-o-exclamation-circle',
+    ],
+];

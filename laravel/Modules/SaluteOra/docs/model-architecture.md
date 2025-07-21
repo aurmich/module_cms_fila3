@@ -165,6 +165,89 @@ Quando si migra un modello da `Model` a `BaseModel`, è importante:
 3. Implementare correttamente gli eventi e i mutatori
 4. Adattare i casting specifici per compatibilità con `BaseModel`
 
+## Nota sui campi multipli e cast array (aggiornamento 2024)
+
+Quando si utilizza un campo Select multiplo in Filament (es: Select::make('specify_diseases')->multiple()), il campo corrispondente nel modello deve essere SEMPRE cast a 'array' nella funzione casts().
+
+**Esempio pratico:**
+
+```php
+// In Report.php
+public function casts(): array {
+    return [
+        // ...
+        'specify_diseases' => 'array',
+        'specify_missing_teeth' => 'array',
+        // ...
+    ];
+}
+```
+
+**Motivazione:**
+- Evita errori di serializzazione e salvataggio
+- Garantisce la compatibilità con i componenti Filament
+- Segue le regole Laraxot e le best practice del progetto
+
+**Riferimento:**
+- Regola aggiornata in base a bugfix e refactoring gennaio 2025
+- Vedi anche docs/translation_quality_standards.md e docs/filament-best-practices.mdc
+
+## Nota sulle enum string e cast (aggiornamento giugno 2024)
+
+Quando una colonna è di tipo string e usa un enum string (es: DayFrequencyEnum), il cast corretto nel modello è direttamente la classe enum, non 'string' né 'integer'.
+
+**Esempio pratico:**
+
+```php
+// In Report.php
+public function casts(): array {
+    return [
+        'teeth_brushing_frequency' => DayFrequencyEnum::class,
+        // ...
+    ];
+}
+```
+
+**Motivazione:**
+- Garantisce la corretta serializzazione/deserializzazione
+- Evita errori di tipo e bug in Filament
+- Segue le regole Laraxot e le best practice del progetto
+
+**Riferimento:**
+- Bugfix giugno 2024 su Report.php
+- Vedi anche docs/enum-handling-in-extended-models.md
+
+## Nota sui campi multipli enum e tipizzazione PHPDoc (aggiornamento giugno 2024)
+
+Quando un campo è gestito come Select multiplo con un Enum (es: MedicalConditionEnum) in Filament, il cast nel modello deve essere 'array', ma la documentazione PHPDoc deve specificare il tipo reale:
+
+```php
+/**
+ * @property array<int, MedicalConditionEnum> $specify_diseases
+ */
+```
+
+**Motivazione:**
+- Chiarezza per chi sviluppa e mantiene
+- Supporto a PHPStan e IDE
+- Evita ambiguità e anti-pattern
+
+**Esempio pratico:**
+
+```php
+// In Report.php
+public function casts(): array {
+    return [
+        'specify_diseases' => 'array', // array di MedicalConditionEnum
+        // ...
+    ];
+}
+```
+
+**Riferimento:**
+- Pattern Laraxot per Select multiplo enum
+- Vedi anche docs/enum-handling-in-extended-models.md
+
 ## Conclusione
 
 Seguire l'architettura standardizzata dei modelli in SaluteOra è essenziale per mantenere la coerenza, la manutenibilità e la scalabilità dell'applicazione. Tutti i modelli devono estendere `BaseModel` e seguire le convenzioni documentate in questo documento.

@@ -19,6 +19,7 @@ enum OccurrenceFrequencyEnum: string implements HasLabel, HasIcon, HasColor
     case OCCASIONALLY = 'occasionally';
     case QUITE_OFTEN = 'quite_often';
     case FREQUENTLY = 'frequently';
+    case DAILY = 'daily';
     
     public function getLabel(): string
     {

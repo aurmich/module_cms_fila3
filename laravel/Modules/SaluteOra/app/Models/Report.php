@@ -7,8 +7,14 @@ namespace Modules\SaluteOra\Models;
 use Modules\User\Models\BaseProfile;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
+use Modules\SaluteOra\Enums\DayFrequencyEnum;
 
 
+/**
+ * Modello Report.
+ *
+ * @property array<int, MedicalConditionEnum> $specify_diseases
+ */
 class Report extends BaseModel{
     
      /**
@@ -52,20 +58,42 @@ class Report extends BaseModel{
         'invoice', //file fattura
     ];
 
-    public function casts(): array {
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string|class-string>
+     */
+    public function casts(): array 
+    {
         return [
+            // Boolean casts
             'has_mouth_or_teeth_pain' => 'boolean',
+            'smokes' => 'boolean',
+            'visits_dentist_yearly' => 'boolean',
             'has_diseases' => 'boolean',
-            'has_fixed_prosthesis_or_implants' => 'boolean',
-            'has_tartar' => 'boolean',
-            'has_plaque' => 'boolean',
-            'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
-            'teeth_brushing_frequency' => OccurrenceFrequencyEnum::class,
+            'follows_diet_rules' => 'boolean',
             'uses_asl_clinic_for_dental_care' => 'boolean',
             'missing_teeth' => 'boolean',
             'decayed_teeth' => 'boolean',
+            'has_fixed_prosthesis_or_implants' => 'boolean',
+            'has_tartar' => 'boolean',
+            'has_plaque' => 'boolean',
+            'needs_more_dental_care' => 'boolean',
             
+            // Enum casts - these use PHP 8.1+ backed enums (string-based)
+            'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
+            'teeth_brushing_frequency' => DayFrequencyEnum::class,
+            'specify_prosthesis_or_implants' => 'array', // Stored as JSON array of ToothFDIEnum values
+            'specify_diseases' => 'array', // Array of MedicalConditionEnum values
+            'specify_missing_teeth' => 'array', // Array of ToothFDIEnum values
+            'specify_decayed_teeth' => 'array', // Array of ToothFDIEnum values
+            'specify_prosthesis_or_implants' => 'array', // Array of ToothFDIEnum values
+            'specify_tartar' => 'array', // Array of ToothFDIEnum values
+            'specify_plaque' => 'array', // Array of ToothFDIEnum values
             
+            // Integer casts
+            'pregnancy_month' => 'integer',
+            'pregnancy_week' => 'integer',
         ];
     }
 }
