@@ -100,7 +100,7 @@
                 "type": "hero",
                 "data": {
                     "view": "pub_theme::components.blocks.hero.faqs_empty",
-                    "title": "Welcome to Oral Health,",
+                    "title": "Welcome to Salute Orale,",
                     "subtitle": "the portal that aims to ensure vulnerable pregnant patients the opportunity to access preventive dental services completely free of charge.",
                     "image": "https://www.materdomini.it/wp-content/uploads/2021/04/Sorriso-Denti-bianchi-donna-apparecchio-denti-e-salute-1.jpg",
                     "cta_text": "START NOW",

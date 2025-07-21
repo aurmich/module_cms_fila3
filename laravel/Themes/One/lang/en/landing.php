@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'hero' => [
         'welcome_title' => [
-            'label' => 'Welcome to Oral Health',
+            'label' => 'Welcome to Salute Orale',
             'tooltip' => 'Portal dedicated to oral health for pregnant women',
             'helper_text' => '',
         ],
