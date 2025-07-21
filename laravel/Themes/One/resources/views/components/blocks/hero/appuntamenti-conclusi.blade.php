@@ -28,7 +28,10 @@ $user=auth()->user();
     </div>
     
       <div>
-    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'states' => ['completed','report_completed']])
+    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,
+    'states' => ['completed','report_completed',
+    'refund_pending','refund_accepted','refund_to_integrate','refund_completed',
+    'pro_bono',]])
     </div>
     
 </div>
