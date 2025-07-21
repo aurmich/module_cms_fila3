@@ -52,7 +52,7 @@ return [
     ],
     'hero' => [
         'welcome_title' => [
-            'label' => 'Welcome to<br />Oral Health',
+            'label' => 'Welcome to<br />Salute Orale',
             'tooltip' => 'Portal dedicated to oral health for pregnant women',
             'helper_text' => '',
         ],
