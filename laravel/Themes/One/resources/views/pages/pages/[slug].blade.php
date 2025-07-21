@@ -9,6 +9,7 @@ use Filament\Support\Enums\VerticalAlignment;
 use Livewire\Volt\Component;
 use Modules\Tenant\Services\TenantService;
 use Modules\Cms\Models\Page;
+use Modules\Cms\Http\Middleware\PageSlugMiddleware;
 
 /** @var array */
 //$middleware=TenantService::config('middleware');
@@ -17,10 +18,13 @@ use Modules\Cms\Models\Page;
 $base_middleware=[];
 
 name('pages.view');
+/*
 if(isset($slug)){
     $middleware=Page::getMiddlewareBySlug($slug);
     middleware($middleware);
 }
+*/
+middleware(PageSlugMiddleware::class);
 
 
 
