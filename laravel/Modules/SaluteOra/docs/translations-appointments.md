@@ -1,145 +1,175 @@
-# Traduzioni Appuntamenti - Modulo SaluteOra
+# Traduzioni Appuntamenti - Correzione Errori PHPStan
 
 ## Panoramica
+Questo documento descrive le correzioni apportate ai file di traduzione per gli appuntamenti e le policy per risolvere gli errori PHPStan.
 
-Questo documento descrive le traduzioni implementate per i campi degli appuntamenti nel modulo SaluteOra, seguendo le regole di traduzione stabilite.
+## Errori Corretti
 
-## Traduzioni Implementate
+### 1. **AppointmentPolicy: Accesso a proprietà non definite**
 
-### ✅ Campi Principali
-
-Tutte le traduzioni richieste sono state implementate nei file di lingua:
-
-- **Italiano**: `laravel/Modules/SaluteOra/lang/it/appointment.php`
-- **Inglese**: `laravel/Modules/SaluteOra/lang/en/appointment.php`
-- **Tedesco**: `laravel/Modules/SaluteOra/lang/de/appointment.php`
-
-### 📋 Campi Aggiunti/Verificati
-
-| Campo | Italiano | Inglese | Tedesco |
-|-------|----------|---------|---------|
-| `patient` | Paziente | Patient | Patient |
-| `doctor` | Medico | Doctor | Arzt |
-| `studio` | Studio | Studio | Praxis |
-| `type` | Tipo Appuntamento | Appointment Type | Termintyp |
-| `status` | Stato | Status | Status |
-| `title` | Titolo | Title | Titel |
-| `starts_at` | Data e Ora di Inizio | Start Date and Time | Startdatum und -zeit |
-| `ends_at` | Data e Ora di Fine | End Date and Time | Enddatum und -zeit |
-| `emergency` | Emergenza | Emergency | Notfall |
-| `notes` | Note | Notes | Notizen |
-
-## Struttura delle Traduzioni
-
-### Pattern Standard
-
-Ogni campo segue questo pattern:
-
+#### **Problema**
 ```php
-'field_name' => [
-    'label' => 'Etichetta del campo',
-    'placeholder' => 'Testo placeholder',
-    'help' => 'Testo di aiuto',
-    'helper_text' => '',
-],
+// ERRATO - Causava errore PHPStan
+$appointment->state->value === 'confirmed'
 ```
 
-### Esempio Completo
-
+#### **Soluzione**
 ```php
-'starts_at' => [
-    'label' => 'Data e Ora di Inizio',
-    'placeholder' => 'Seleziona data e ora di inizio',
-    'help' => 'Quando inizia l\'appuntamento',
-    'helper_text' => '',
-],
+// CORRETTO - Usa il metodo getValue() di Spatie Model States
+$appointment->state->getValue() === 'confirmed'
 ```
 
-## Regole Applicate
+#### **File Corretti**
+- `laravel/Modules/SaluteOra/app/Models/Policies/AppointmentPolicy.php`
+  - Linee 237, 259, 264, 286, 291, 313
 
-### 1. Short Array Syntax
-- ✅ Utilizzato `[]` invece di `array()`
-- ✅ Coerenza in tutti i file di traduzione
+#### **Motivazione**
+Con Spatie Model States, per accedere al valore dello stato si deve usare il metodo `getValue()` invece della proprietà `$value` che non è definita nella classe base `State`.
 
-### 2. Helper Text Rule
-- ✅ `helper_text` impostato a `''` quando non necessario
-- ✅ Evitato duplicazione con il campo `help`
+### 2. **StudioPolicy: Proprietà non definite**
 
-### 3. Chiavi Consistenti
-- ✅ Stesse chiavi in tutte le lingue
-- ✅ Nomi dei campi corrispondenti al modello
-
-### 4. Traduzioni Corrette
-- ✅ Nessun inglese nei file italiani o tedeschi
-- ✅ Traduzioni appropriate per il contesto medico
-
-## Utilizzo nelle Risorse Filament
-
-### Accesso alle Traduzioni
-
+#### **Problema**
 ```php
-// In una risorsa Filament
-TextInput::make('starts_at')
-    ->label(__('saluteora::appointment.fields.starts_at.label'))
-    ->placeholder(__('saluteora::appointment.fields.starts_at.placeholder'))
-    ->helperText(__('saluteora::appointment.fields.starts_at.help'));
+// ERRATO - Proprietà non esistente
+$studio->is_active
 ```
 
-### Con LangServiceProvider
-
+#### **Soluzione**
 ```php
-// Automatico con LangServiceProvider
-TextInput::make('starts_at')
-    // Le traduzioni vengono applicate automaticamente
+// CORRETTO - Proprietà corretta del modello Studio
+$studio->active
 ```
 
-## Verifica e Testing
+#### **File Corretti**
+- `laravel/Modules/SaluteOra/app/Models/Policies/StudioPolicy.php`
+  - Linea 56: `$studio->is_active` → `$studio->active`
 
-### Comandi di Verifica
+#### **Motivazione**
+Il modello `Studio` ha la proprietà `active` (non `is_active`) come definito nel PHPDoc del modello.
 
+### 3. **Chiavi Duplicate nei File di Traduzione**
+
+#### **Problema**
+Nei file di traduzione erano presenti chiavi duplicate che causavano errori PHPStan:
+- `patient` (2 occorrenze)
+- `doctor` (2 occorrenze) 
+- `studio` (2 occorrenze)
+- `starts_at` (2 occorrenze)
+- `ends_at` (2 occorrenze)
+
+#### **Soluzione**
+Rimosse le chiavi duplicate mantenendo solo una versione per ogni campo.
+
+#### **File Corretti**
+- `laravel/Modules/SaluteOra/lang/en/appointment.php`
+- `laravel/Modules/SaluteOra/lang/it/appointment.php`
+
+#### **Chiavi Rimosse**
+```php
+// RIMOSSE - Chiavi duplicate
+'patient' => [...],     // Seconda occorrenza
+'doctor' => [...],      // Seconda occorrenza  
+'studio' => [...],      // Seconda occorrenza
+'starts_at' => [...],   // Seconda occorrenza
+'ends_at' => [...],     // Seconda occorrenza
+```
+
+## Struttura Finale dei File di Traduzione
+
+### **Chiavi Mantenute**
+```php
+'fields' => [
+    'patient' => [
+        'label' => 'Paziente',
+        'placeholder' => 'Seleziona il paziente',
+        'help' => 'Paziente per cui è fissato l\'appuntamento',
+        'helper_text' => '',
+    ],
+    'doctor' => [
+        'label' => 'Medico', 
+        'placeholder' => 'Seleziona il medico',
+        'help' => 'Medico che terrà l\'appuntamento',
+        'helper_text' => '',
+    ],
+    'studio' => [
+        'label' => 'Studio',
+        'placeholder' => 'Seleziona lo studio', 
+        'help' => 'Studio dove si terrà l\'appuntamento',
+        'helper_text' => '',
+    ],
+    'starts_at' => [
+        'label' => 'Data e Ora Inizio',
+        'placeholder' => 'Seleziona data e ora di inizio',
+        'help' => 'Quando inizia l\'appuntamento',
+        'helper_text' => '',
+    ],
+    'ends_at' => [
+        'label' => 'Data e Ora Fine',
+        'placeholder' => 'Seleziona data e ora di fine',
+        'help' => 'Quando termina l\'appuntamento',
+        'helper_text' => '',
+    ],
+    // ... altre chiavi
+]
+```
+
+## Best Practices Applicate
+
+### **1. Spatie Model States**
+- ✅ Usa sempre `getValue()` per accedere al valore dello stato
+- ✅ Non accedere direttamente alla proprietà `$value`
+- ✅ Verifica la documentazione della classe `State` per i metodi disponibili
+
+### **2. Proprietà dei Modelli**
+- ✅ Verifica sempre il PHPDoc del modello per le proprietà corrette
+- ✅ Usa `grep_search` per trovare le proprietà effettivamente definite
+- ✅ Controlla i `$fillable` e `$casts` del modello
+
+### **3. File di Traduzione**
+- ✅ **Nessuna chiave duplicata** - ogni chiave deve essere unica
+- ✅ **Struttura coerente** tra tutte le lingue
+- ✅ **Short array syntax** `[]` invece di `array()`
+- ✅ **helper_text** vuoto se coincide con la chiave padre
+
+## Verifica delle Correzioni
+
+### **PHPStan**
 ```bash
-# Verifica sintassi PHP
-php -l laravel/Modules/SaluteOra/lang/it/appointment.php
-php -l laravel/Modules/SaluteOra/lang/en/appointment.php
-php -l laravel/Modules/SaluteOra/lang/de/appointment.php
-
-# Verifica traduzioni mancanti
-php artisan tinker
->>> __('saluteora::appointment.fields.starts_at.label')
+# Esegui PHPStan per verificare che non ci siano più errori
+./vendor/bin/phpstan analyse laravel/Modules/SaluteOra/app/Models/Policies/
+./vendor/bin/phpstan analyse laravel/Modules/SaluteOra/lang/
 ```
 
-### Checklist di Qualità
+### **Test delle Policy**
+```php
+// Verifica che le policy funzionino correttamente
+$appointment = Appointment::factory()->create();
+$user = User::factory()->create(['type' => UserTypeEnum::DOCTOR]);
 
-- [ ] Sintassi PHP corretta
-- [ ] Short array syntax utilizzato
-- [ ] Helper text rule rispettata
-- [ ] Chiavi consistenti tra lingue
-- [ ] Traduzioni appropriate per il contesto
-- [ ] Nessun inglese nei file non-inglesi
-
-## Collegamenti
-
-- [Regole Traduzioni](translations.md)
-- [File Traduzioni IT](../lang/it/appointment.php)
-- [File Traduzioni EN](../lang/en/appointment.php)
-- [File Traduzioni DE](../lang/de/appointment.php)
-- [LangServiceProvider](../../../Xot/docs/lang-service-provider.md)
-
-## Note Tecniche
-
-### Namespace Traduzioni
-
-Le traduzioni sono accessibili tramite il namespace `saluteora::appointment.fields.{field_name}`.
-
-### Cache Traduzioni
-
-Dopo modifiche alle traduzioni, pulire la cache:
-
-```bash
-php artisan config:clear
-php artisan cache:clear
+// Dovrebbe funzionare senza errori
+$policy = new AppointmentPolicy();
+$canComplete = $policy->complete($user, $appointment);
 ```
 
-### Integrazione Filament
+## Documentazione Aggiornata
 
-Le traduzioni sono integrate automaticamente con il sistema Filament tramite il LangServiceProvider del modulo Xot. 
+### **Policy Documentation**
+- ✅ `laravel/Modules/SaluteOra/docs/policies.md` - Documentazione completa delle policy
+- ✅ `laravel/Modules/SaluteOra/docs/policies-summary.md` - Riassunto esecutivo
+
+### **Translation Documentation**  
+- ✅ `laravel/Modules/SaluteOra/docs/translations-appointments.md` - Questo documento
+
+## Prossimi Passi
+
+1. **Eseguire PHPStan** per verificare che tutti gli errori siano risolti
+2. **Test delle policy** per assicurarsi che funzionino correttamente
+3. **Continuare con il piano di validazione traduzioni** per tutti i moduli
+4. **Aggiornare la documentazione** se necessario
+
+## Note Importanti
+
+- **Spatie Model States**: Sempre usare `getValue()` per accedere al valore dello stato
+- **Proprietà dei modelli**: Verificare sempre il PHPDoc e i `$fillable`
+- **Chiavi duplicate**: Mai avere chiavi duplicate nei file di traduzione
+- **Documentazione**: Aggiornare sempre la documentazione dopo le correzioni 

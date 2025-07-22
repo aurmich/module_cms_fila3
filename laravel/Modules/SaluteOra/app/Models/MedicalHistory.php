@@ -9,6 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\SaluteOra\Models\Patient;
 
 /**
  * Modello per la storia clinica del paziente (MedicalHistory).
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory onlyTrashed()
@@ -73,6 +75,7 @@ class MedicalHistory extends Model
      */
     protected $fillable = [
         'user_id',
+        'patient_id',
         'date',
         'type',
         'description',
@@ -110,5 +113,15 @@ class MedicalHistory extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the patient that owns the medical history.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class);
     }
 }

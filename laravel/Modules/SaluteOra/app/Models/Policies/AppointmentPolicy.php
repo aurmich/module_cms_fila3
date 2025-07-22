@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models\Policies;
 
+use Modules\SaluteOra\States\Appointment\Completed;
+use Modules\SaluteOra\States\Appointment\Confirmed;
+use Modules\SaluteOra\States\Appointment\Pending;
+use Modules\SaluteOra\States\Appointment\Rescheduled;
+
 use Modules\Xot\Models\Policies\XotBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\Models\Appointment;
@@ -65,7 +70,7 @@ class AppointmentPolicy extends XotBasePolicy
         }
 
         // Pazienti possono vedere i propri appuntamenti
-        if ($user->type === UserTypeEnum::PATIENT && $appointment->patient_id === $user->id) {
+        if ($user->type === UserTypeEnum::PATIENT && $appointment->state->equals(Pending::class) || $appointment->state->equals(Confirmed::class)) {
             return true;
         }
 
@@ -107,23 +112,7 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function update(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono aggiornare qualsiasi appuntamento
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Dottori possono aggiornare i propri appuntamenti
-        if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return true;
-        }
-
-        // Pazienti possono aggiornare i propri appuntamenti (con limitazioni)
-        if ($user->type === UserTypeEnum::PATIENT && $appointment->patient_id === $user->id) {
-            // I pazienti possono aggiornare solo appuntamenti non confermati
-            return in_array($appointment->state->getValue(), ['pending', 'rescheduled']);
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -135,17 +124,7 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function delete(UserContract $user, Appointment $appointment): bool
     {
-        // Solo admin può eliminare appuntamenti
-        if ($user->hasRole(['super-admin', 'admin'])) {
-            return true;
-        }
-
-        // Dottori possono eliminare i propri appuntamenti non confermati
-        if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return in_array($appointment->state->getValue(), ['pending', 'rescheduled']);
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -171,7 +150,7 @@ class AppointmentPolicy extends XotBasePolicy
     public function forceDelete(UserContract $user, Appointment $appointment): bool
     {
         // Solo super-admin può eliminare definitivamente gli appuntamenti
-        return $user->hasRole('super-admin');
+        return $user->hasRole('super-admin') && $appointment->state->equals(Pending::class);
     }
 
     /**
@@ -183,17 +162,7 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function confirm(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono confermare qualsiasi appuntamento
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Dottori possono confermare i propri appuntamenti
-        if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return $appointment->state->getValue() === 'pending';
-        }
-
-        return false;
+       return true;
     }
 
     /**
@@ -205,17 +174,7 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function reject(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono rifiutare qualsiasi appuntamento
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Dottori possono rifiutare i propri appuntamenti
-        if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return in_array($appointment->state->getValue(), ['pending', 'confirmed']);
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -225,16 +184,23 @@ class AppointmentPolicy extends XotBasePolicy
      * @param  \Modules\SaluteOra\Models\Appointment  $appointment
      * @return bool
      */
+    /**
+     * Determine whether the user can complete the appointment.
+     *
+     * @param  \Modules\Xot\Contracts\UserContract  $user
+     * @param  \Modules\SaluteOra\Models\Appointment  $appointment
+     * @return bool
+     */
     public function complete(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono completare qualsiasi appuntamento
+        // Admin and staff can complete any appointment
         if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
             return true;
         }
 
-        // Dottori possono completare i propri appuntamenti confermati
+        // Doctors can complete their own confirmed appointments
         if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return $appointment->state->value === 'confirmed';
+            return $appointment->state->equals(Confirmed::class);
         }
 
         return false;
@@ -247,21 +213,29 @@ class AppointmentPolicy extends XotBasePolicy
      * @param  \Modules\SaluteOra\Models\Appointment  $appointment
      * @return bool
      */
+    /**
+     * Determine whether the user can reschedule the appointment.
+     *
+     * @param  \Modules\Xot\Contracts\UserContract  $user
+     * @param  \Modules\SaluteOra\Models\Appointment  $appointment
+     * @return bool
+     */
     public function reschedule(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono riprogrammare qualsiasi appuntamento
+        // Admin and staff can reschedule any appointment
         if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
             return true;
         }
 
-        // Dottori possono riprogrammare i propri appuntamenti
+        // Doctors can reschedule their own pending or confirmed appointments
         if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return in_array($appointment->state->value, ['pending', 'confirmed']);
+            return $appointment->state->equals(Pending::class) || 
+                   $appointment->state->equals(Confirmed::class);
         }
 
-        // Pazienti possono riprogrammare i propri appuntamenti non confermati
+        // Patients can reschedule their own pending appointments
         if ($user->type === UserTypeEnum::PATIENT && $appointment->patient_id === $user->id) {
-            return $appointment->state->value === 'pending';
+            return $appointment->state->equals(Pending::class);
         }
 
         return false;
@@ -274,21 +248,30 @@ class AppointmentPolicy extends XotBasePolicy
      * @param  \Modules\SaluteOra\Models\Appointment  $appointment
      * @return bool
      */
+    /**
+     * Determine whether the user can cancel the appointment.
+     *
+     * @param  \Modules\Xot\Contracts\UserContract  $user
+     * @param  \Modules\SaluteOra\Models\Appointment  $appointment
+     * @return bool
+     */
     public function cancel(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono cancellare qualsiasi appuntamento
+        // Admin and staff can cancel any appointment
         if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
             return true;
         }
 
-        // Dottori possono cancellare i propri appuntamenti
+        // Doctors can cancel their own pending or confirmed appointments
         if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return in_array($appointment->state->value, ['pending', 'confirmed']);
+            return $appointment->state->equals(Pending::class) || 
+                   $appointment->state->equals(Confirmed::class);
         }
 
-        // Pazienti possono cancellare i propri appuntamenti
+        // Patients can cancel their own pending or confirmed appointments
         if ($user->type === UserTypeEnum::PATIENT && $appointment->patient_id === $user->id) {
-            return in_array($appointment->state->value, ['pending', 'confirmed']);
+            return $appointment->state->equals(Pending::class) || 
+                   $appointment->state->equals(Confirmed::class);
         }
 
         return false;
@@ -303,16 +286,142 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function generateReport(UserContract $user, Appointment $appointment): bool
     {
-        // Admin e staff possono generare report per qualsiasi appuntamento
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
+       return true;
+    }
 
-        // Dottori possono generare report per i propri appuntamenti completati
-        if ($user->type === UserTypeEnum::DOCTOR && $appointment->doctor_id === $user->id) {
-            return $appointment->state->value === 'completed';
-        }
+    /**
+     * Policy per stato Banned.
+     */
+    public function banned(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
 
-        return false;
+    /**
+     * Policy per stato ProBono.
+     */
+    public function proBono(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato RefundAccepted.
+     */
+    public function refundAccepted(UserContract $user, Appointment $appointment): bool
+    {
+        return $appointment->state->equals(Completed::class) && $user->hasRole(['salutemo::admin']);
+    }
+
+    /**
+     * Policy per stato RefundCompleted.
+     */
+    public function refundCompleted(UserContract $user, Appointment $appointment): bool
+    {
+        return $appointment->state->equals(Completed::class) && $user->hasRole(['salutemo::admin']);
+    }
+
+    /**
+     * Policy per stato RefundPending.
+     */
+    public function refundPending(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato RefundToIntegrate.
+     */
+    public function refundToIntegrate(UserContract $user, Appointment $appointment): bool
+    {
+        return $appointment->state->equals(Completed::class) && $user->hasRole(['salutemo::admin']);
+    }
+
+    /**
+     * Policy per stato ReportPending.
+     */
+    public function reportPending(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato ReportCompleted.
+     */
+    public function reportCompleted(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Cancelled.
+     */
+    public function cancelled(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Completed.
+     */
+    public function completed(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Confirmed.
+     */
+    public function confirmed(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato InProgress.
+     */
+    public function inProgress(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato NoShow.
+     */
+    public function noShow(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Pending.
+     */
+    public function pending(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Rejected.
+     */
+    public function rejected(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
+    }
+
+    /**
+     * Policy per stato Scheduled.
+     */
+    public function scheduled(UserContract $user, Appointment $appointment): bool
+    {
+        return $appointment->state->equals(Pending::class) || $appointment->state->equals(Rescheduled::class);
+    }
+
+    /**
+     * Policy per stato Rescheduled.
+     */
+    public function rescheduled(UserContract $user, Appointment $appointment): bool
+    {
+        return true;
     }
 } 

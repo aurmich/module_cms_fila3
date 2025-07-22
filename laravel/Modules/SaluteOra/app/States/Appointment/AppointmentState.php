@@ -14,6 +14,8 @@ use Modules\Xot\Filament\Traits\TransTrait;
  *
  * Defines the state machine configuration and required methods
  * that must be implemented by each concrete state class.
+ * 
+ * @property string $value Il valore dello stato nel database
  */
 abstract class AppointmentState extends State implements StateContract
 {

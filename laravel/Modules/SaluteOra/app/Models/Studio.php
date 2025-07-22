@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property array|null $opening_hours
  * @property array|null $services
  * @property bool $active
+ * @property bool $is_active
+ * @property int $owner_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at

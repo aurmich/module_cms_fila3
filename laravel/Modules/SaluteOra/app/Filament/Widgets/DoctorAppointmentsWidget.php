@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Filament\Widgets;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Filament\Actions\Action;
 use Webmozart\Assert\Assert;
@@ -33,6 +34,7 @@ use Modules\SaluteOra\Filament\Resources\ReportResource;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\SaluteOra\States\Appointment as StateAppointment;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Widget per gestire gli appuntamenti del dottore.
@@ -218,10 +220,17 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         if(null == $appointment){
             return false;
         }
-        //$startStateClass=AppointmentState::getStateMapping()->get($this->states[0]);
-        //$startState=new $startStateClass($appointment);
         $startState=$appointment->state;
-        return $startState->canTransitionTo($stateClass);
+        if(!$startState->canTransitionTo($stateClass)){
+            return false;
+        }
+        $policy=Str::of(class_basename($stateClass))->camel()->toString();
+        if(!Gate::allows($policy, $appointment)){
+            return false;
+        }
+        
+
+        return true;
     }
 
    

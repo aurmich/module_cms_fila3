@@ -14,7 +14,45 @@ use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
 /**
  * Modello Report.
  *
+ * @property int $id
+ * @property int $patient_id
+ * @property int $appointment_id
+ * @property int $doctor_id
+ * @property string $status
+ * @property bool $has_mouth_or_teeth_pain
+ * @property string $mouth_teeth_pain_frequency
+ * @property int $pregnancy_month
+ * @property int $pregnancy_week
+ * @property string $teeth_brushing_frequency
+ * @property bool $smokes
+ * @property bool $visits_dentist_yearly
+ * @property bool $has_diseases
  * @property array<int, MedicalConditionEnum> $specify_diseases
+ * @property bool $follows_diet_rules
+ * @property bool $uses_asl_clinic_for_dental_care
+ * @property bool $missing_teeth
+ * @property array $specify_missing_teeth
+ * @property string|null $more_info_missing_teeth
+ * @property bool $decayed_teeth
+ * @property array $specify_decayed_teeth
+ * @property string|null $more_info_decayed_teeth
+ * @property bool $has_fixed_prosthesis_or_implants
+ * @property array $specify_prosthesis_or_implants
+ * @property string|null $more_info_prosthesis
+ * @property bool $has_tartar
+ * @property array $specify_tartar
+ * @property string|null $more_info_tartar
+ * @property bool $has_plaque
+ * @property array $specify_plaque
+ * @property string|null $more_info_plaque
+ * @property bool $needs_more_dental_care
+ * @property string|null $further_notes
+ * @property string|null $invoice
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Modules\SaluteOra\Models\Patient|null $patient
+ * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
+ * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
  */
 class Report extends BaseModel{
     

@@ -53,7 +53,7 @@ class StudioPolicy extends XotBasePolicy
 
         // Pazienti possono vedere tutti gli studi pubblici
         if ($user->type === UserTypeEnum::PATIENT) {
-            return $studio->is_active;
+            return $studio->active;
         }
 
         return false;

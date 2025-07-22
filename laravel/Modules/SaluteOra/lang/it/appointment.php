@@ -57,12 +57,6 @@ return [
             'help' => 'Medico che terrà l\'appuntamento',
             'helper_text' => '',
         ],
-        'studio' => [
-            'label' => 'Studio',
-            'placeholder' => 'Seleziona lo studio',
-            'help' => 'Studio dove si terrà l\'appuntamento',
-            'helper_text' => '',
-        ],
         'title' => [
             'label' => 'Titolo',
             'placeholder' => 'Inserisci un titolo per l\'appuntamento',
@@ -105,33 +99,15 @@ return [
             'help' => 'Studio dove si terrà l\'appuntamento',
             'helper_text' => '',
         ],
-        'studio' => [
-            'label' => 'Studio',
-            'placeholder' => 'Seleziona lo studio',
-            'help' => 'Studio dove si terrà l\'appuntamento',
-            'helper_text' => '',
-        ],
         'start_time' => [
             'label' => 'Ora di Inizio',
             'placeholder' => 'Seleziona l\'ora di inizio',
             'help' => 'Quando inizia l\'appuntamento',
             'helper_text' => '',
         ],
-        'starts_at' => [
-            'label' => 'Data e Ora di Inizio',
-            'placeholder' => 'Seleziona data e ora di inizio',
-            'help' => 'Quando inizia l\'appuntamento',
-            'helper_text' => '',
-        ],
         'end_time' => [
             'label' => 'Ora di Fine',
             'placeholder' => 'Seleziona l\'ora di fine',
-            'help' => 'Quando termina l\'appuntamento',
-            'helper_text' => '',
-        ],
-        'ends_at' => [
-            'label' => 'Data e Ora di Fine',
-            'placeholder' => 'Seleziona data e ora di fine',
             'help' => 'Quando termina l\'appuntamento',
             'helper_text' => '',
         ],
