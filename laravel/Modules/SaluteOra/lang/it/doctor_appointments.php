@@ -141,6 +141,18 @@ return array (
     array (
       'label' => 'completedAction',
     ),
+    'refundToIntegrateAction' => 
+    array (
+      'label' => 'refundToIntegrateAction',
+    ),
+    'refundAcceptedAction' => 
+    array (
+      'label' => 'refundAcceptedAction',
+    ),
+    'refundCompletedAction' => 
+    array (
+      'label' => 'refundCompletedAction',
+    ),
   ),
   'messages' => 
   array (
@@ -264,10 +276,10 @@ return array (
     ),
     'invoice' => 
     array (
-      'description' => 'invoice',
-      'helper_text' => 'invoice',
-      'placeholder' => 'invoice',
-      'label' => 'invoice',
+      'label' => 'Fattura',
+      'placeholder' => 'Carica la fattura',
+      'helper_text' => '',
+      'description' => 'Documento fiscale per la prestazione sanitaria',
     ),
   ),
   'filters' => 

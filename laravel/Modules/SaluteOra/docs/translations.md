@@ -1,5 +1,43 @@
 # Traduzioni del Modulo SaluteOra
 
+## Regole fondamentali (aggiornamento 2024-06)
+- Non togliere mai chiavi esistenti, solo aggiungere o migliorare.
+- Se il valore di 'helper_text' coincide con la chiave padre, va impostato a stringa vuota ('').
+- label, placeholder, description devono essere sempre tradotti e contestuali.
+- Tutte le lingue devono avere le stesse chiavi.
+- Gli array vanno sempre scritti in short syntax.
+
+## Esempio campo 'invoice' corretto
+
+```php
+// Italiano
+'invoice' => [
+    'label' => 'Fattura',
+    'placeholder' => 'Numero o riferimento fattura',
+    'helper_text' => '',
+    'description' => 'Dati relativi alla fattura dell\'appuntamento',
+],
+// Inglese
+'invoice' => [
+    'label' => 'Invoice',
+    'placeholder' => 'Invoice number or reference',
+    'helper_text' => '',
+    'description' => 'Invoice details for the appointment',
+],
+// Tedesco
+'invoice' => [
+    'label' => 'Rechnung',
+    'placeholder' => 'Rechnungsnummer oder Referenz',
+    'helper_text' => '',
+    'description' => 'Rechnungsdetails für den Termin',
+],
+```
+
+## Best practice
+- Aggiornare sempre tutte le lingue.
+- Validare la presenza di tutte le chiavi.
+- Aggiornare la documentazione e i backlink dopo ogni fix.
+
 ## Panoramica
 
 Il modulo SaluteOra gestisce la traduzione di tutti i componenti relativi alla gestione degli appuntamenti sanitari, inclusi gli appuntamenti dei dottori, stati degli appuntamenti e azioni correlate.

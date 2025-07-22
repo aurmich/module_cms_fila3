@@ -195,6 +195,12 @@ return [
             'helper_text' => 'Wählen Sie die neue Uhrzeit für den Termin',
             'description' => 'Neue Uhrzeit für den verschobenen Termin',
         ],
+        'invoice' => [
+            'label' => 'Rechnung',
+            'placeholder' => 'Rechnungsnummer oder Referenz',
+            'helper_text' => '',
+            'description' => 'Rechnungsdetails für den Termin',
+        ],
     ],
     'filters' => [
         'status' => [

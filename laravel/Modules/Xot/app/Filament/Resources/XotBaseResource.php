@@ -200,7 +200,8 @@ abstract class XotBaseResource extends FilamentResource
             return [];
         }
         $attachments = $model::getAttachments();
-        $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,'local');
+        $disk='attachments';
+        $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,$disk);
         
         return $schema;
     }

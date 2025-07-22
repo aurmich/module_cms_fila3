@@ -22,6 +22,7 @@ use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\DoctorStudio;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
+use Modules\Media\Actions\SaveAttachmentsAction;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationCompleted;
 use Modules\SaluteOra\Models\DoctorRegistrationWorkflow;
@@ -77,15 +78,18 @@ class RegisterAction
          //-------------------------------------------------
              //*
             $attachments = Doctor::getAttachments();
+            /*
             $data_attachments = [];
             foreach ($attachments as $attachment) {
-                    /** @phpstan-ignore argument.type */
+                    
                     $media=$doctor->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
                     $data_attachments[$attachment]=$media->getPathRelativeToRoot();
 
             }
             $doctor->update($data_attachments);
+            */
+            app(SaveAttachmentsAction::class)->execute($doctor,$attachments,$data);
              //*/
              //-------------------------------------------------
              

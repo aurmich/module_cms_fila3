@@ -195,6 +195,12 @@ return [
             'helper_text' => 'Select the new time for the appointment',
             'description' => 'New time for the rescheduled appointment',
         ],
+        'invoice' => [
+            'label' => 'Invoice',
+            'placeholder' => 'Upload invoice',
+            'helper_text' => 'Upload your invoice in PDF or image format',
+            'description' => 'Billing document',
+        ],
     ],
     'filters' => [
         'status' => [

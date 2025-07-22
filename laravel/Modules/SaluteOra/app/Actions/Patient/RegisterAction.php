@@ -12,6 +12,7 @@ use Modules\SaluteOra\Models\Patient;
 use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
+use Modules\Media\Actions\SaveAttachmentsAction;
 use Modules\Notify\Notifications\RecordNotification;
 
 
@@ -49,15 +50,17 @@ class RegisterAction
             //-------------------------------------------------
              //*
             $attachments = Patient::getAttachments();
+            /*
             $data_attachments = [];
             foreach ($attachments as $attachment) {
-                    /** @phpstan-ignore method.notFound */
                     $media=$patient->addMediaFromDisk($data[$attachment],'local')
                         ->toMediaCollection($attachment);
                     $data_attachments[$attachment]=$media->getPathRelativeToRoot();
 
             }
             $patient->update($data_attachments);
+            */
+            app(SaveAttachmentsAction::class)->execute($patient,$attachments,$data);
             //*/
             //-------------------------------------------------
             if(!method_exists($patient,'consents')){

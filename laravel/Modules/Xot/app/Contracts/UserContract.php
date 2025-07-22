@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Xot\Contracts;
 
 use Laravel\Passport\Token;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Permission\Contracts\Role;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Models\Contracts\FilamentUser;
@@ -14,6 +15,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\MediaCollections\FileAdder;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -36,13 +38,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role>   $roles
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Tenant> $tenants
  *
+ * @method  FileAdder addMediaFromDisk(string $key, ?string $disk = null)
  * @method bool canAccessSocialite()
  *
  * @phpstan-require-extends Model
  *
  * @mixin \Eloquent
  */
-interface UserContract extends Authenticatable, Authorizable, CanResetPassword, FilamentUser, HasTeamsContract, ModelContract, MustVerifyEmail, PassportHasApiTokensContract
+interface UserContract extends Authenticatable, Authorizable, CanResetPassword, FilamentUser, HasTeamsContract, ModelContract, MustVerifyEmail, PassportHasApiTokensContract,HasMedia
 {
     /*
     public function isSuperAdmin();

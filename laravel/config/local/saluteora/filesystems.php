@@ -51,6 +51,12 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
+        'attachments' => [
+            'driver' => 'local',
+            'root' => storage_path('attachments'),
+            'visibility' => 'private',
+            'throw' => true,
+        ],
 
         'public' => [
             'driver' => 'local',

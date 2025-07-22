@@ -394,12 +394,13 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     public function refundPendingAction(): Action
     {
         $attachments=['invoice'];
-        $disk='local';
-        return $this->getActionByState(StateAppointment\RefundPending::class,__FUNCTION__)
+        $disk='attachments';
+        $stateClass=StateAppointment\RefundPending::class;
+        return $this->getActionByState($stateClass,__FUNCTION__)
         ->form(function() use($attachments,$disk){
             $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,$disk);
             return $schema;
-        })->action(function (array $data,array $arguments) use($attachments,$disk) {
+        })->action(function (array $data,array $arguments) use($attachments,$disk,$stateClass) {
             $processData=$data;
             $appointmentId = $arguments['appointment'];
             $appointment = Appointment::firstWhere('id',$appointmentId);
@@ -414,7 +415,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
                 app(SaveAttachmentsAction::class)->execute($appointment,$attachments,$data,$disk);
             }
 
-            //$this->processStateAction($stateClass,$arguments,$data);
+            $this->processStateAction($stateClass,$arguments,$data);
             
         });
     }
