@@ -39,10 +39,40 @@ return [
         ],
     ],
     'fields' => [
+        'patient' => [
+            'label' => 'Patient',
+            'placeholder' => 'Select the patient',
+            'help' => 'Patient for whom the appointment is scheduled',
+            'helper_text' => '',
+        ],
+        'doctor' => [
+            'label' => 'Doctor',
+            'placeholder' => 'Select the doctor',
+            'help' => 'Doctor who will hold the appointment',
+            'helper_text' => '',
+        ],
+        'studio' => [
+            'label' => 'Studio',
+            'placeholder' => 'Select the studio',
+            'help' => 'Studio where the appointment will take place',
+            'helper_text' => '',
+        ],
         'title' => [
             'label' => 'Title',
             'placeholder' => 'Enter a title for the appointment',
             'help' => 'Brief description of the appointment',
+            'helper_text' => '',
+        ],
+        'starts_at' => [
+            'label' => 'Start Date and Time',
+            'placeholder' => 'Select start date and time',
+            'help' => 'When the appointment starts',
+            'helper_text' => '',
+        ],
+        'ends_at' => [
+            'label' => 'End Date and Time',
+            'placeholder' => 'Select end date and time',
+            'help' => 'When the appointment ends',
             'helper_text' => '',
         ],
         'patient_id' => [
@@ -51,7 +81,19 @@ return [
             'help' => 'Patient for whom the appointment is scheduled',
             'helper_text' => '',
         ],
+        'patient' => [
+            'label' => 'Patient',
+            'placeholder' => 'Select the patient',
+            'help' => 'Patient for whom the appointment is scheduled',
+            'helper_text' => '',
+        ],
         'doctor_id' => [
+            'label' => 'Doctor',
+            'placeholder' => 'Select the doctor',
+            'help' => 'Doctor who will hold the appointment',
+            'helper_text' => '',
+        ],
+        'doctor' => [
             'label' => 'Doctor',
             'placeholder' => 'Select the doctor',
             'help' => 'Doctor who will hold the appointment',
@@ -69,15 +111,33 @@ return [
             'help' => 'Studio where the appointment will take place',
             'helper_text' => '',
         ],
+        'studio' => [
+            'label' => 'Studio',
+            'placeholder' => 'Select the studio',
+            'help' => 'Studio where the appointment will take place',
+            'helper_text' => '',
+        ],
         'start_time' => [
             'label' => 'Start Time',
             'placeholder' => 'Select the start time',
             'help' => 'When the appointment starts',
             'helper_text' => '',
         ],
+        'starts_at' => [
+            'label' => 'Start Date and Time',
+            'placeholder' => 'Select start date and time',
+            'help' => 'When the appointment starts',
+            'helper_text' => '',
+        ],
         'end_time' => [
             'label' => 'End Time',
             'placeholder' => 'Select the end time',
+            'help' => 'When the appointment ends',
+            'helper_text' => '',
+        ],
+        'ends_at' => [
+            'label' => 'End Date and Time',
+            'placeholder' => 'Select end date and time',
             'help' => 'When the appointment ends',
             'helper_text' => '',
         ],

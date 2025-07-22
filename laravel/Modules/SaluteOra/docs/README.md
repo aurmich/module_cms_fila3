@@ -21,6 +21,7 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 - [Single Table Inheritance](single_table_inheritance.md) - Pattern STI per i modelli utente
 - [Best Practices per l'Ereditarietà](inheritance_best_practices.md) - Linee guida per l'ereditarietà delle classi
 - [Model Inheritance Pattern](model_inheritance_pattern.md) - Pattern di ereditarietà per i modelli
+- [Policies di Autorizzazione](policies.md) - Sistema completo di autorizzazioni e permessi
 
 ### Best Practices
 
@@ -792,3 +793,54 @@ Il modulo implementa diversi widget Filament per le dashboard:
 
 - **DoctorCalendarWidget**: Implementazione perfetta con trait `HasFullCalendarConfig`, multi-tenancy, e security robusta
 - **BaseTransition Pattern**: Capolavoro di DRY & KISS per gestione stati
+
+### Policy e Autorizzazioni
+
+Il modulo SaluteOra implementa un sistema completo di autorizzazioni basato su policy che estendono `XotBasePolicy`. Ogni modello ha la sua policy dedicata che gestisce l'accesso e le operazioni CRUD.
+
+#### Policy Implementate
+
+- **[DoctorPolicy](app/Models/Policies/DoctorPolicy.php)** - Gestione autorizzazioni per i medici
+- **[AppointmentPolicy](app/Models/Policies/AppointmentPolicy.php)** - Gestione autorizzazioni per gli appuntamenti
+- **[StudioPolicy](app/Models/Policies/StudioPolicy.php)** - Gestione autorizzazioni per gli studi medici
+- **[PatientPolicy](app/Models/Policies/PatientPolicy.php)** - Gestione autorizzazioni per i pazienti
+- **[UserPolicy](app/Models/Policies/UserPolicy.php)** - Gestione autorizzazioni per gli utenti
+- **[DoctorStudioPolicy](app/Models/Policies/DoctorStudioPolicy.php)** - Gestione autorizzazioni per le associazioni dottore-studio
+- **[ReportPolicy](app/Models/Policies/ReportPolicy.php)** - Gestione autorizzazioni per i report medici
+
+#### Pattern delle Policy
+
+Tutte le policy seguono il pattern standard:
+
+```php
+class ModelPolicy extends XotBasePolicy
+{
+    // Metodi CRUD standard
+    public function viewAny(UserContract $user): bool
+    public function view(UserContract $user, Model $model): bool
+    public function create(UserContract $user): bool
+    public function update(UserContract $user, Model $model): bool
+    public function delete(UserContract $user, Model $model): bool
+    public function restore(UserContract $user, Model $model): bool
+    public function forceDelete(UserContract $user, Model $model): bool
+    
+    // Metodi specifici del dominio
+    public function specificAction(UserContract $user, Model $model): bool
+}
+```
+
+#### Regole di Autorizzazione
+
+1. **Super-Admin**: Accesso completo a tutte le funzionalità
+2. **Admin**: Gestione completa dei dati e configurazioni
+3. **Staff**: Accesso operativo limitato
+4. **Doctor**: Accesso ai propri dati e pazienti
+5. **Patient**: Accesso solo ai propri dati
+
+#### Best Practices
+
+- Ogni policy estende `XotBasePolicy` per ereditare il controllo super-admin
+- Utilizzo di `UserContract` invece di `User` per type safety
+- Controlli basati su ruoli e relazioni tra modelli
+- Metodi specifici per azioni di dominio (es. `confirm`, `cancel`, `finalize`)
+- Documentazione completa con PHPDoc

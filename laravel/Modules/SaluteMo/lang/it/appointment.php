@@ -194,6 +194,7 @@ return array (
     'ends_at' => 
     array (
       'label' => 'ends_at',
+      'description' => 'ends_at',
     ),
     'starts_at' => 
     array (
@@ -219,6 +220,21 @@ return array (
       'helper_text' => 'value',
       'placeholder' => 'value',
       'label' => 'value',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'emergency' => 
+    array (
+      'description' => 'emergency',
+      'helper_text' => 'emergency',
+      'placeholder' => 'emergency',
+      'label' => 'emergency',
     ),
   ),
   'statuses' => 

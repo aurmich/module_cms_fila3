@@ -30,22 +30,8 @@ class DoctorPolicy extends XotBasePolicy
      */
     public function viewAny(UserContract $user): bool
     {
-        // Admin può vedere tutti i dottori
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
+        return true;
         
-        // Dottori possono vedere altri dottori (es. colleghi nello stesso studio)
-        if ($user->type === UserTypeEnum::DOCTOR) {
-            return true;
-        }
-        
-        // Pazienti possono vedere l'elenco dei dottori per prenotazioni
-        if ($user->type === UserTypeEnum::PATIENT) {
-            return true;
-        }
-        
-        return false;
     }
 
     /**
