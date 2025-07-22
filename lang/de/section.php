@@ -2,117 +2,12 @@
 
 return [
     'navigation' => [
-        'label' => 'Sections',
-        'group' => 'Content Management',
+        'label' => 'Sezioni',
+        'group' => 'Gestione Contenuti',
         'icon' => 'heroicon-o-rectangle-stack',
         'sort' => '85',
     ],
     'fields' => [
-        'image' => [
-            'label' => 'Image',
-        ],
-        'logo' => [
-            'label' => 'Logo',
-        ],
-        'alt' => [
-            'label' => 'Alt text',
-        ],
-        'width' => [
-            'label' => 'Width',
-        ],
-        'height' => [
-            'label' => 'Height',
-        ],
-        'icon' => [
-            'label' => 'Icon',
-        ],
-        'size' => [
-            'label' => 'Size',
-        ],
-        'url' => [
-            'label' => 'URL',
-        ],
-        'title' => [
-            'label' => 'Title',
-        ],
-        'description' => [
-            'label' => 'Description',
-        ],
-        'delete' => [
-            'label' => 'Delete',
-        ],
-        'edit' => [
-            'label' => 'Edit',
-        ],
-        'view' => [
-            'label' => 'View',
-        ],
-        'message' => [
-            'label' => 'Message',
-        ],
-        'create' => [
-            'label' => 'Create',
-        ],
-        'caption' => [
-            'label' => 'Caption',
-        ],
-        'items' => [
-            'label' => 'Items',
-        ],
-        'label' => [
-            'label' => 'Label',
-        ],
-        'style' => [
-            'label' => 'Style',
-        ],
-        'alignment' => [
-            'label' => 'Alignment',
-        ],
-        'gap' => [
-            'label' => 'Gap',
-        ],
-        'email' => [
-            'label' => 'Email',
-        ],
-        'phone' => [
-            'label' => 'Phone',
-        ],
-        'address' => [
-            'label' => 'Address',
-        ],
-        'map_url' => [
-            'label' => 'Map URL',
-        ],
-        'button_text' => [
-            'label' => 'Button Text',
-        ],
-        'button_link' => [
-            'label' => 'Button Link',
-        ],
-        'sections' => [
-            'label' => 'Sections',
-        ],
-        'subtitle' => [
-            'label' => 'Subtitle',
-        ],
-        'cta_text' => [
-            'label' => 'CTA Text',
-        ],
-        'cta_link' => [
-            'label' => 'CTA Link',
-        ],
-        'background_color' => [
-            'label' => 'Background Color',
-        ],
-        'text_color' => [
-            'label' => 'Text Color',
-        ],
-        'cta_color' => [
-            'label' => 'CTA Color',
-        ],
-        'children' => [
-            'label' => 'Children',
-        ],
         'toggleColumns' => [
             'label' => 'Mostra/Nascondi Colonne',
         ],
@@ -146,17 +41,122 @@ return [
         'updated_at' => [
             'label' => 'Data di Aggiornamento',
         ],
+        'delete' => [
+            'label' => 'Elimina',
+        ],
+        'edit' => [
+            'label' => 'Modifica',
+        ],
+        'view' => [
+            'label' => 'Visualizza',
+        ],
+        'message' => [
+            'label' => 'Messaggio',
+        ],
+        'create' => [
+            'label' => 'Crea',
+        ],
+        'caption' => [
+            'label' => 'Didascalia',
+        ],
+        'items' => [
+            'label' => 'Elementi',
+        ],
+        'label' => [
+            'label' => 'Etichetta',
+        ],
+        'url' => [
+            'label' => 'URL',
+        ],
+        'style' => [
+            'label' => 'Stile',
+        ],
+        'icon' => [
+            'label' => 'Icona',
+        ],
+        'size' => [
+            'label' => 'Dimensione',
+        ],
+        'alignment' => [
+            'label' => 'Allineamento',
+        ],
+        'gap' => [
+            'label' => 'Spaziatura',
+        ],
+        'title' => [
+            'label' => 'Titolo',
+        ],
+        'description' => [
+            'label' => 'Descrizione',
+        ],
+        'email' => [
+            'label' => 'Email',
+        ],
+        'phone' => [
+            'label' => 'Telefono',
+        ],
+        'address' => [
+            'label' => 'Indirizzo',
+        ],
+        'map_url' => [
+            'label' => 'URL Mappa',
+        ],
+        'button_text' => [
+            'label' => 'Testo Bottone',
+        ],
+        'button_link' => [
+            'label' => 'Link Bottone',
+        ],
+        'sections' => [
+            'label' => 'Sezioni',
+        ],
+        'subtitle' => [
+            'label' => 'Sottotitolo',
+        ],
+        'image' => [
+            'label' => 'Immagine',
+        ],
+        'cta_text' => [
+            'label' => 'Testo CTA',
+        ],
+        'cta_link' => [
+            'label' => 'Link CTA',
+        ],
+        'background_color' => [
+            'label' => 'Colore Sfondo',
+        ],
+        'text_color' => [
+            'label' => 'Colore Testo',
+        ],
+        'cta_color' => [
+            'label' => 'Colore CTA',
+        ],
+        'logo' => [
+            'label' => 'Logo',
+        ],
         'copyright' => [
             'label' => 'Copyright',
         ],
         'links' => [
             'label' => 'Link',
         ],
+        'alt' => [
+            'label' => 'Testo alternativo',
+        ],
         'text' => [
             'label' => 'Testo',
         ],
         'type' => [
             'label' => 'Tipo',
+        ],
+        'width' => [
+            'label' => 'Larghezza',
+        ],
+        'height' => [
+            'label' => 'Altezza',
+        ],
+        'children' => [
+            'label' => 'children',
         ],
         'orientation' => [
             'label' => 'orientation',

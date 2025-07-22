@@ -9,7 +9,7 @@ return [
             'description' => 'Manage website pages',
         ],
         'label' => 'Pages',
-        'sort' => 5,
+        'sort' => '5',
         'icon' => 'heroicon-o-document',
     ],
     'fields' => [
@@ -75,9 +75,44 @@ return [
         'toggleColumns' => [
             'label' => 'Toggle Columns',
         ],
+        'reorderRecords' => [
+            'label' => 'reorderRecords',
+        ],
+        'resetFilters' => [
+            'label' => 'resetFilters',
+        ],
+        'applyFilters' => [
+            'label' => 'applyFilters',
+        ],
+        'openFilters' => [
+            'label' => 'openFilters',
+        ],
+        'delete' => [
+            'label' => 'delete',
+        ],
+        'edit' => [
+            'label' => 'edit',
+        ],
+        'view' => [
+            'label' => 'view',
+        ],
+        'create' => [
+            'label' => 'create',
+        ],
+        'message' => [
+            'label' => 'message',
+        ],
+        'footer_blocks' => [
+            'label' => 'footer_blocks',
+        ],
+        'caption' => [
+            'label' => 'caption',
+        ],
     ],
     'actions' => [
-        'create' => 'Create Page',
+        'create' => [
+            'label' => 'Crea Pagina',
+        ],
         'edit' => 'Edit Page',
         'delete' => 'Delete Page',
         'publish' => 'Publish',
@@ -85,6 +120,9 @@ return [
         'archive' => 'Archive',
         'restore' => 'Restore',
         'preview' => 'Preview',
+        'activeLocale' => [
+            'label' => 'activeLocale',
+        ],
     ],
     'messages' => [
         'created' => 'Page created successfully',
@@ -99,5 +137,8 @@ return [
         'title_required' => 'The title is required',
         'slug_unique' => 'The slug must be unique',
         'content_required' => 'The content is required',
+    ],
+    'model' => [
+        'label' => 'page.model',
     ],
 ];

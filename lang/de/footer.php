@@ -3,14 +3,14 @@
 return [
     'fields' => [
         'view' => [
-            'label' => 'View',
-            'tooltip' => 'Select the view to display',
+            'label' => 'Visualizzazione',
+            'tooltip' => 'Seleziona la visualizzazione da mostrare',
         ],
     ],
     'actions' => [
         'updateAction' => [
-            'label' => 'Update Footer',
-            'tooltip' => 'Update footer settings',
+            'label' => 'Aggiorna Footer',
+            'tooltip' => 'Aggiorna le impostazioni del footer',
             'icon' => 'heroicon-o-pencil',
             'color' => 'primary',
         ],

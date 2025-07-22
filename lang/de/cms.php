@@ -4,28 +4,28 @@ return [
     'sections' => [
         'fields' => [
             'name' => [
-                'label' => 'Name',
-                'tooltip' => 'Enter the section name',
+                'label' => 'Nome',
+                'tooltip' => 'Inserisci il nome della sezione',
             ],
             'slug' => [
                 'label' => 'Slug',
-                'tooltip' => 'Unique section identifier',
+                'tooltip' => 'Identificatore univoco della sezione',
             ],
             'image' => [
-                'label' => 'Image',
-                'tooltip' => 'Select an image for the section',
+                'label' => 'Immagine',
+                'tooltip' => 'Seleziona un\'immagine per la sezione',
             ],
             'content' => [
-                'label' => 'Content',
-                'tooltip' => 'Enter the section content',
+                'label' => 'Contenuto',
+                'tooltip' => 'Inserisci il contenuto della sezione',
             ],
             'status' => [
-                'label' => 'Status',
-                'tooltip' => 'Select the section status',
+                'label' => 'Stato',
+                'tooltip' => 'Seleziona lo stato della sezione',
                 'options' => [
-                    'draft' => 'Draft',
-                    'published' => 'Published',
-                    'archived' => 'Archived',
+                    'draft' => 'Bozza',
+                    'published' => 'Pubblicato',
+                    'archived' => 'Archiviato',
                 ],
             ],
         ],
@@ -34,20 +34,20 @@ return [
         'quick_links' => [
             'fields' => [
                 'label' => [
-                    'label' => 'Label',
-                    'tooltip' => 'Enter the quick links label',
+                    'label' => 'Etichetta',
+                    'tooltip' => 'Inserisci l\'etichetta per i link rapidi',
                 ],
                 'links' => [
-                    'label' => 'Links',
-                    'tooltip' => 'Add quick links',
+                    'label' => 'Link',
+                    'tooltip' => 'Aggiungi i link rapidi',
                     'fields' => [
                         'label' => [
-                            'label' => 'Label',
-                            'tooltip' => 'Enter the link label',
+                            'label' => 'Etichetta',
+                            'tooltip' => 'Inserisci l\'etichetta del link',
                         ],
                         'url' => [
                             'label' => 'URL',
-                            'tooltip' => 'Enter the link URL',
+                            'tooltip' => 'Inserisci l\'URL del link',
                         ],
                     ],
                 ],
@@ -57,16 +57,16 @@ return [
             'links' => [
                 'fields' => [
                     'links' => [
-                        'label' => 'Links',
-                        'tooltip' => 'Add footer links',
+                        'label' => 'Link',
+                        'tooltip' => 'Aggiungi i link del footer',
                         'fields' => [
                             'label' => [
-                                'label' => 'Label',
-                                'tooltip' => 'Enter the link label',
+                                'label' => 'Etichetta',
+                                'tooltip' => 'Inserisci l\'etichetta del link',
                             ],
                             'url' => [
                                 'label' => 'URL',
-                                'tooltip' => 'Enter the link URL',
+                                'tooltip' => 'Inserisci l\'URL del link',
                             ],
                         ],
                     ],
@@ -82,8 +82,8 @@ return [
                         'links' => [
                             'fields' => [
                                 'label' => [
-                                    'label' => 'Label',
-                                    'tooltip' => 'Enter the link label',
+                                    'label' => 'Etichetta',
+                                    'tooltip' => 'Inserisci l\'etichetta del link',
                                 ],
                             ],
                         ],
