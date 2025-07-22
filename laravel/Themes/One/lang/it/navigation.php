@@ -71,13 +71,33 @@ return [
             'tooltip' => 'Importanza della prevenzione dentale',
             'helper_text' => '',
         ],
+        'importance_title_1' => [
+            'label' => 'L\'importanza della Prevenzione',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_2' => [
+            'label' => 'Dieta e Controllo',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_3' => [
+            'label' => 'Come possiamo aiutarti',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
         'importance_text_1' => [
-            'label' => 'Numerosi studi scientifici riportano l\'importanza di una corretta salute orale sin dai primi mesi della gravidanza. Malattie dentali molto comuni, come la carie, possono causare malformazioni o infezioni nel feto già a partire dal primo trimestre di gravidanza.Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta pulizia dei denti, affidarsi alle cure e all\'esame di un odontoiatra a partire dal terzo trimestre di gravidanza.',
-            'tooltip' => 'Evidenze scientifiche sulla salute orale in gravidanza',
+            'label' => 'Numerosi studi scientifici riportano l\'importanza di una corretta salute orale sin dai primi mesi della gravidanza. Malattie dentali molto comuni, come la carie, possono causare malformazioni o infezioni nel feto già a partire dal primo trimestre di gravidanza.',
+            'tooltip' => '',
             'helper_text' => '',
         ],
         'importance_text_2' => [
-            'label' => 'Con questo in mente, il progetto Salute Orale si propone di garantire, a titolo completamente gratuito, una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. Le Pazienti potranno prenotare a titolo totalmente gratuito una visita di controllo e igiene presso i dentisti aderenti. I Dentisti gestiranno questi appuntamenti da piattaforma e potranno chiedere rimborso per la prestazione al personale Salute Orale.',
+            'label' => 'Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta pulizia dei denti, affidarsi alle cure e all\'esame di un odontoiatra a partire dal terzo trimestre di gravidanza.',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_text_3' => [
+            'label' => 'Il progetto Salute Orale si propone di garantire, a titolo completamente gratuito, una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. Le Pazienti potranno prenotare a titolo totalmente gratuito una visita di controllo e igiene presso i dentisti aderenti.',
             'tooltip' => 'Descrizione del progetto e modalità di accesso',
             'helper_text' => '',
         ],

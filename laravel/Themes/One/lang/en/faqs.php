@@ -11,7 +11,7 @@ return [
                 'helper_text' => '',
             ],
             'answer' => [
-                'label' => 'The Oral Health portal was created to help pregnant women with an ISEE income below 20,000 euros. Each patient is entitled to only one visit for the duration of the project.',
+                'label' => 'The Salute Orale portal was created to help pregnant women with an ISEE income below 20,000 euros. Each patient is entitled to only one visit for the duration of the project.',
                 'tooltip' => 'Details about access requirements',
                 'helper_text' => '',
             ],
