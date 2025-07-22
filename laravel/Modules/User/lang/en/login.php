@@ -14,6 +14,7 @@ return array (
       'label' => 'Password',
       'placeholder' => 'Enter your password',
       'help' => 'Enter your account password',
+      'description' => 'password',
     ),
     'remember' => 
     array (

@@ -7,7 +7,7 @@
 
 <div 
     style="background-repeat: no-repeat; background-position: top; background-size: cover;"
-    class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-desktop-landing.svg')] min-h-screen m-0 p-0 bg-top ipad:bg-right-top">
+    class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-per-desktop.svg')] min-h-screen m-0 p-0 bg-top ipad:bg-right-top">
     <!-- INIZIO HEADER -->
     <div x-data="{ mobileMenuOpen: false }" class="relative">
       <!-- Header Bar -->
@@ -77,7 +77,7 @@
         x-transition:leave-start="opacity-100 transform translate-y-0"
         x-transition:leave-end="opacity-0 transform -translate-y-4"
         @click.away="mobileMenuOpen = false"
-        class="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
+        class="lg:hidden absolute top-full left-0 right-0 bg-[#ff5f7e75] backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
         style="display: none;"
       >
         <div class="px-6 py-6 space-y-6">
@@ -153,28 +153,42 @@
      </div>
     <!-- FINE PRIMA SECTION -->
     <!-- INIZIO SECONDA SECTION -->
-    <div>
+    <div class="w-full flex flex-col justify-start items-center">
       <div class="flex justify-center lg:w-full p-6 mt-12 ipad:mt-5 lg:mt-24">
-        <h2 class="md:w-2/4  ipad:w-3/4 text-[#FF5F7E] text-3xl lg:text-4xl text-center">
+        <h1 class="md:w-3/4  ipad:w-3/4 text-[#FF5F7E] text-center">
           @lang('pub_theme::navigation.hero.importance_title.label')
-        </h2>
+        </h1>
       </div>
-      <div class="flex flex-col justify-around items-center mt-0 lg:mt-10">
-        <div class="w-3/4">
+      <div class="w-5/6 flex flex-col lg:flex-row justify-around items-center lg:items-start mt-0 lg:mt-10">
+        <div class="w-full lg:w-2/4 p-4 flex flex-col items-center">
+          <h2 class="text-[#FF5F7E] text-center mb-3">
+          @lang('pub_theme::navigation.hero.importance_title_1.label')
+          </h2>
           <p class="text-white text-center text-lg lg:text-2xl leading-8">
           @lang('pub_theme::navigation.hero.importance_text_1.label')
           </p>
         </div>
-        <div class="w-3/4">
+        <div class="w-full lg:w-2/4 p-4 flex flex-col items-center">
+          <h2 class="text-[#FF5F7E] text-center mb-3">
+          @lang('pub_theme::navigation.hero.importance_title_2.label')
+          </h2>
           <p class="text-white text-center text-lg lg:text-2xl leading-8">
           @lang('pub_theme::navigation.hero.importance_text_2.label')
           </p>
         </div>
-        <div class="mt-5">
-          <a href="/{{ $lang }}/pages/progetto">
-            <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
-          </a>
+        <div class="w-full lg:w-2/4 p-4 flex flex-col items-center">
+          <h2 class="text-[#FF5F7E] text-center mb-3">
+          @lang('pub_theme::navigation.hero.importance_title_3.label')
+          </h2>
+          <p class="text-white text-center text-lg lg:text-2xl leading-8">
+          @lang('pub_theme::navigation.hero.importance_text_3.label')
+          </p>
         </div>
+      </div>
+      <div class="w-full flex justify-center mt-5">
+        <a href="/{{ $lang }}/pages/progetto">
+          <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
+        </a>
       </div>
     </div>
     <!-- FINE SECONDA SECTION -->

@@ -71,13 +71,33 @@ return [
             'tooltip' => 'Importance of dental prevention',
             'helper_text' => '',
         ],
+        'importance_title_1' => [
+            'label' => 'The importance of Prevention',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_2' => [
+            'label' => 'Take care and check',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_3' => [
+            'label' => 'How we can help you',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
         'importance_text_1' => [
-            'label' => 'Numerous scientific studies report the importance of proper oral health from the first months of pregnancy. Very common dental diseases, such as caries, can cause malformations or infections in the fetus starting from the first trimester of pregnancy. To maintain the health of mother and baby, it is essential, in addition to a healthy diet and proper dental cleaning, to rely on the care and examination of a dentist starting from the third trimester of pregnancy.',
+            'label' => 'Numerous scientific studies report the importance of proper oral health from the first months of pregnancy. Very common dental diseases, such as caries, can cause malformations or infections in the fetus starting from the first trimester of pregnancy.',
             'tooltip' => 'Scientific evidence on oral health during pregnancy',
             'helper_text' => '',
         ],
         'importance_text_2' => [
-            'label' => 'With this in mind, the Oral Health project proposes to guarantee, completely free of charge, a complete first dental visit to patients in pregnancy with ISEE equal to or below 20,000 euros. Patients will be able to book a check-up and hygiene visit completely free of charge with participating dentists. Dentists will manage these appointments from the platform and can request reimbursement for the service from Oral Health staff.',
+            'label' => ' To maintain the health of mother and baby, it is essential, in addition to a healthy diet and proper dental cleaning, to rely on the care and examination of a dentist starting from the third trimester of pregnancy.',
+            'tooltip' => 'Project description and access methods',
+            'helper_text' => '',
+        ],
+        'importance_text_3' => [
+            'label' => 'The Salute Orale project proposes to guarantee, completely free of charge, a complete first dental visit to patients in pregnancy with ISEE equal to or below 20,000 euros. Patients will be able to book a check-up and hygiene visit completely free of charge with participating dentists.',
             'tooltip' => 'Project description and access methods',
             'helper_text' => '',
         ],

@@ -32,13 +32,33 @@ return [
             'helper_text' => '',
         ],
         'importance_text_1' => [
-            'label' => 'Numerous scientific studies report the importance of proper oral health from the first months of pregnancy. Very common dental diseases, such as cavities, can cause malformations or infections in the fetus starting from the first trimester of pregnancy. To maintain the health of mother and baby, it is essential, in addition to a healthy diet and proper teeth cleaning, to rely on the care and examination of a dentist starting from the third trimester of pregnancy.',
-            'tooltip' => 'Scientific information on oral health during pregnancy',
+            'label' => 'Very common dental diseases, such as cavities, can cause malformations or infections in the fetus starting from the first trimester of pregnancy. ',
+            'tooltip' => '',
             'helper_text' => '',
         ],
         'importance_text_2' => [
-            'label' => 'With this in mind, the Oral Health project aims to guarantee, completely free of charge, a first complete dental visit to patients who are pregnant with an ISEE equal to or less than 20,000 euros. Patients will be able to book a completely free check-up and hygiene visit with participating dentists. Dentists will manage these appointments from the platform and will be able to request reimbursement for the service from Oral Health staff.',
-            'tooltip' => 'Project details and access methods',
+            'label' => 'To maintain the health of mother and baby, it is essential, in addition to a healthy diet and proper teeth cleaning, to rely on the care and examination of a dentist starting from the third trimester of pregnancy.',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_text_3' => [
+            'label' => 'The Salute Orale project aims to guarantee, completely free of charge, a first complete dental visit to patients who are pregnant with an ISEE equal to or less than 20,000 euros. Patients will be able to book a completely free check-up and hygiene visit with participating dentists. Dentists will manage these appointments from the platform and will be able to request reimbursement for the service from Oral Health staff.',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_1' => [
+            'label' => 'Title 1',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_2' => [
+            'label' => 'Title 2',
+            'tooltip' => '',
+            'helper_text' => '',
+        ],
+        'importance_title_3' => [
+            'label' => 'Title 3',
+            'tooltip' => '',
             'helper_text' => '',
         ],
     ],
