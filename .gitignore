@@ -97,3 +97,5 @@ cache/
 laravel/database/migrations
 laravel/storage/framework/views/*
 laravel/storage/attachments/*
+laravel/_ide_helper.php
+laravel/_ide_helper_models.php
