@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Filament\Actions\Action;
+use Filament\Forms\Components;
 use Webmozart\Assert\Assert;
 use Spatie\ModelStates\State;
 use Filament\Facades\Filament;
@@ -132,7 +133,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
                 //->whereState('state', Pending::class)
                 ->whereIn('state', $this->states)
                 ->orderBy('starts_at', 'asc')
-                ->limit(10)
+                ->limit(100)
                 ->get();
         });
     }
@@ -193,26 +194,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
         ];
     }
 
-    /**
-     * Azione per eliminare un appuntamento.
-     */
-    public function deleteAction(): Action
-    {
-        return Action::make('delete')
-            ->label('Elimina')
-            ->icon('heroicon-o-trash')
-            ->color('danger')
-            ->requiresConfirmation()
-            ->modalHeading('Elimina Appuntamento')
-            ->modalDescription('Sei sicuro di voler eliminare questo appuntamento?')
-            ->action(function (array $data) {
-                // Per ora implementazione di debug
-                $this->dispatch('notify', [
-                    'type' => 'info',
-                    'message' => 'Funzionalità eliminazione in sviluppo',
-                ]);
-            });
-    }
+    
 
     public function canTransitionTo(int $appointmentId,string $stateClass): bool
     {
@@ -234,245 +216,50 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     }
 
    
-    public function processStateAction(string $stateClass,array $arguments,array $data): void
-    {
-        $message=Arr::get($data,'message');
-        $appointmentId = $arguments['appointment'];
-        $appointment = Appointment::firstWhere('id',$appointmentId);
-        $appointment?->state->transitionTo($stateClass,$message);
-        // Per ora implementazione di debug
-        //$this->dispatch('notify', [
-        //    'type' => 'info',
-        //    'message' => 'Funzionalità eliminazione in sviluppo',
-        //]);
-        $this->invalidateCache();
-        $this->loadAppointments();
 
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => __('saluteora::widgets.doctor_appointments.messages.appointment_confirmed'),
-        ]);
-    }
+   public function transitionAction(): Action
+   {
+        return Action::make('transition')
+            ->iconButton()
+            //->button()
+            ->size(ActionSize::ExtraLarge)
+            ->tooltip(fn($arguments,$data)=>$this->getState(arguments:$arguments)->label())
+            ->icon(fn($arguments,$data)=>$this->getState(arguments:$arguments)->icon())
+            ->color(fn($arguments,$data)=>$this->getState(arguments:$arguments)->color())
+            ->requiresConfirmation()
+            ->modalHeading(fn($arguments,$data)=>$this->getState(arguments:$arguments)->modalHeading())
+            ->modalDescription(fn($arguments,$data)=>$this->getState(arguments:$arguments)->modalDescription())
+            ->form(fn($arguments,$data)=>$this->getState(arguments:$arguments)->modalFormSchema())
+            ->fillForm(fn($arguments,$data)=>$this->getState(arguments:$arguments)->modalFillForm($arguments,$data))
+            ->action(function($arguments,$data){
+                $this->getState(arguments:$arguments)->modalAction($arguments,$data);
+                $this->invalidateCache();
+                $this->loadAppointments();
+                $this->dispatch('notify', [
+                    'type' => 'success',
+                    'message' => __('saluteora::widgets.doctor_appointments.messages.appointment_confirmed'),
+                ]);
+            })
+            //->visible(fn($arguments,$data)=>$this->getState(arguments:$arguments)->canTransitionTo($arguments['stateClass']))
+            ;
+   }
 
-    public function getActionByState(string $stateClass,string $name): Action
-    {
-        
-    $appointment = new Appointment(); // senza salvarlo nel db
-    $state = new $stateClass($appointment);
-    Assert::implementsInterface($state,StateContract::class);
-    /*
-    //Assert::isInstanceOf($state,StateContract::class);
-    $startStateClass=AppointmentState::getStateMapping()->get($this->state);
-    $startState=new $startStateClass($appointment);
-    Assert::isInstanceOf($startState,State::class);
-    */
+   public function getState(array $arguments): AppointmentState
+   {
+        $cacheKey=sprintf('state_%s',implode('_',$arguments));
+        $cacheKey=(Str::of($cacheKey)->slug()->toString());
+            $state=Cache::remember($cacheKey, 300, function () use($arguments)  {
+            $stateClass=Arr::get($arguments,'stateClass');
+            $appointmentId=Arr::get($arguments,'appointment');
+            $appointment=Appointment::firstWhere('id',$appointmentId);
+            $state=new $stateClass($appointment);
+
+            return $state;
+        });
+        return $state;
+   }
     
    
-    return Action::make($name)
-        ->iconButton()
-        //->button()
-        ->size(ActionSize::ExtraLarge)
-        ->tooltip($state->label())
-        ->icon($state->icon())
-        ->color($state->color())
-        ->requiresConfirmation()
-        ->modalHeading($state->modalHeading())
-        ->modalDescription($state->modalDescription())
-        ->form([
-            Textarea::make('message')
-                ->required()
-                ->maxLength(255),
-        ])
-        ->action(function (array $data,$arguments) use($stateClass){
-            $this->processStateAction($stateClass,$arguments,$data);
-        })
-        //->visible($startState->canTransitionTo($stateClass))
-        ;
-        
-            
-   }
-    /*
-   public function reportAction(): Action
-    {
-        $appointment = new Appointment(); // senza salvarlo nel db
-        $state = new ReportPending($appointment);
-        //Assert::isInstanceOf($state,StateContract::class);
-        Assert::implementsInterface($state,StateContract::class);
-        $startStateClass=AppointmentState::getStateMapping()->get($this->state);
-        $startState=new $startStateClass($appointment);
-        Assert::isInstanceOf($startState,State::class);
-
-        return Action::make('report')
-            ->iconButton()
-            ->size(ActionSize::ExtraLarge)
-            ->modalHeading(static::trans('actions.report.modal_heading'))
-            ->modalDescription(static::trans('actions.report.modal_description'))
-            //->tooltip('Crea Referto')
-            ->icon(static::trans('actions.report.icon'))
-            ->modalIcon(static::trans('actions.report.modal_icon'))
-            ->color('info')
-            //->requiresConfirmation()
-            ->modalWidth('100%')
-            ->form(ReportResource::getFormSchema())
-            ->action(function (array $arguments,array $data) {
-                dd(['arguments'=>$arguments,'data'=>$data]);
-            })
-            //->visible($startState->canTransitionTo($state::class))
-            ->visible(true)
-        ;
-    }
-
-   */
-
-
-    public function confirmAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Confirmed::class,__FUNCTION__);
-    }
-
-    public function rejectAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Rejected::class,__FUNCTION__);
-    }
-
-    public function cancelledAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Cancelled::class,__FUNCTION__);
-    }
-
-    public function noShowAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\NoShow::class,__FUNCTION__);
-    }
-
-    public function reportCompletedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\ReportCompleted::class,__FUNCTION__);
-    }
-
-    public function completedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Completed::class,__FUNCTION__);
-    }
-
-    public function proBonoAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\ProBono::class,__FUNCTION__);
-    }
-
-    public function confirmedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Confirmed::class,__FUNCTION__);
-    }
-
-    public function rejectedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Rejected::class,__FUNCTION__);
-    }
-
-    public function pendingAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Pending::class, __FUNCTION__);
-    }
-
-    public function bannedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Banned::class, __FUNCTION__);
-    }
-
-    public function inProgressAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\InProgress::class, __FUNCTION__);
-    }
-
-    public function rescheduledAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Rescheduled::class, __FUNCTION__);
-    }
-
-    public function scheduledAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\Scheduled::class, __FUNCTION__);
-    }
-
-   
-
-  
-
-  
-    public function refundPendingAction(): Action
-    {
-        $attachments=['invoice'];
-        $disk='attachments';
-        $stateClass=StateAppointment\RefundPending::class;
-        return $this->getActionByState($stateClass,__FUNCTION__)
-        ->form(function() use($attachments,$disk){
-            $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,$disk);
-            return $schema;
-        })->action(function (array $data,array $arguments) use($attachments,$disk,$stateClass) {
-            $processData=$data;
-            $appointmentId = $arguments['appointment'];
-            $appointment = Appointment::firstWhere('id',$appointmentId);
-            $processData['appointment_id']=$appointmentId;
-            $processData['patient_id']=$appointment?->patient_id;
-            $processData['doctor_id']=$appointment?->doctor_id;
-            $where=['appointment_id'=>$appointmentId];
-            $report=Report::firstOrCreate($where);
-            $report->update($processData);
-            app(SaveAttachmentsAction::class)->execute($report,$attachments,$data,$disk);
-            if(null != $appointment){
-                app(SaveAttachmentsAction::class)->execute($appointment,$attachments,$data,$disk);
-            }
-
-            $this->processStateAction($stateClass,$arguments,$data);
-            
-        });
-    }
-
-    public function refundAcceptedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\RefundAccepted::class,__FUNCTION__);
-    }
-
-    public function refundToIntegrateAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\RefundToIntegrate::class,__FUNCTION__);
-    }
-
-    public function refundCompletedAction(): Action
-    {
-        return $this->getActionByState(StateAppointment\RefundCompleted::class,__FUNCTION__);
-    }
-
-
-    public function reportPendingAction(): Action
-    {
-        $stateClass=StateAppointment\ReportPending::class;
-        return $this->getActionByState($stateClass,__FUNCTION__)
-        ->modalWidth('100%')
-        ->form(ReportResource::getFormSchema())
-        ->fillForm(function (array $data,$arguments) {
-            $appointmentId = $arguments['appointment'];
-            $where=['appointment_id'=>$appointmentId];
-            $report=Report::firstOrCreate($where);
-            return $report->attributesToArray();
-            
-        })
-        ->action(function (array $data,$arguments) use($stateClass){
-            $processData=$data;
-            $appointmentId = $arguments['appointment'];
-            $appointment = Appointment::firstWhere('id',$appointmentId);
-            $processData['appointment_id']=$appointmentId;
-            $processData['patient_id']=$appointment?->patient_id;
-            $processData['doctor_id']=$appointment?->doctor_id;
-            $where=['appointment_id'=>$appointmentId];
-            $report=Report::firstOrCreate($where);
-            $report->update($processData);
-
-
-            $this->processStateAction($stateClass,$arguments,$data);
-        });
-    }
 
    
 

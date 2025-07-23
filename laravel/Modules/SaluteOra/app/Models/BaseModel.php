@@ -86,4 +86,22 @@ abstract class BaseModel extends Model implements HasMedia
             'deleted_by' => 'string',
         ];
     }
+
+    public function toArrayForce(): array
+    {
+        try{
+            return $this->attributesToArray(); //"" is not a valid backing value for enum Modules\SaluteOra\Enums\OccurrenceFrequencyEnum
+        }catch(\ValueError $e){
+            $data=[];
+            foreach($this->getAttributes() as $key=>$value){
+                try{
+                    $data[$key]=$this->$key;
+                }catch(\ValueError $e){
+                    
+                }
+            }
+           
+            return $data;
+        }
+    }
 }

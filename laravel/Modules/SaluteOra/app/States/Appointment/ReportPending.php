@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment;
 
+use Modules\SaluteOra\Models\Report;
+use Modules\SaluteOra\Models\Appointment;
+use Modules\SaluteOra\Filament\Resources\ReportResource;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 
 /**
@@ -17,55 +20,32 @@ class ReportPending extends AppointmentState
     /** @var string */
     public static $name = 'report_pending';
 
-    public function label(): string
+    public function modalFormSchema(): array
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
-        //return 'Completato';
+        return ReportResource::getFormSchema();
     }
 
-    public function color(): string
+    public function modalFillForm(array $arguments,array $data): array
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
-        //return 'success';
+        $appointmentId = $arguments['appointment'];
+        $where=['appointment_id'=>$appointmentId];
+        $report=Report::firstOrCreate($where);
+        return $report->toArrayForce();
     }
 
-    public function bgColor(): string
+    public function modalAction(array $arguments,array $data): void
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.bg_color');
-        //return 'info';
-    }
+        $processData=$data;
+        $appointmentId = $arguments['appointment'];
+        $appointment = Appointment::firstWhere('id',$appointmentId);
+        $processData['appointment_id']=$appointmentId;
+        $processData['patient_id']=$appointment?->patient_id;
+        $processData['doctor_id']=$appointment?->doctor_id;
+        $where=['appointment_id'=>$appointmentId];
+        $report=Report::firstOrCreate($where);
+        $report->update($processData);
 
-    public function icon(): string
-    {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
-        //return 'heroicon-o-check-badge';
+        $this->processStateAction($arguments,$data);
     }
-
-    public function canBeModified(): bool
-    {
-        return false;
-    }
-
-    public function isActive(): bool
-    {
-        return false;
-    }
-
-    public function isCompleted(): bool
-    {
-        return true;
-    }
-
-    public function modalHeading(): string
-    {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
-        //return __('saluteora::states.completed.modal_heading');
-    }
-
-    public function modalDescription(): string
-    {
-        $appointment = $this->getModel();
-        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
-        //return __('saluteora::states.completed.modal_description');
-    }
+    
 }

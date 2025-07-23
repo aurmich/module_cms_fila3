@@ -24,24 +24,12 @@
                     @php
                         $action=Str::camel($state).'Action';
                     @endphp
-                   {{ ($this->$action)(['appointment' => $appointment->id]) }} 
+                   {{-- ($this->$action)(['appointment' => $appointment->id]) --}} 
+                   {{ ($this->transitionAction)(['appointment' => $appointment->id,'stateClass'=>$stateClass]) }}
                 @endif
                 @endforeach
                 
-                {{--  
-                @if ($this->confirmAction->isVisible())
-                {{ ($this->confirmAction)(['appointment' => $appointment->id]) }}
-                @endif
-
                 
-                @if ($this->reportAction->isVisible())
-                {{ ($this->reportAction)(['appointment' => $appointment->id]) }}
-                @endif
-
-                @if ($this->rejectAction->isVisible())
-                {{ ($this->rejectAction)(['appointment' => $appointment->id]) }}
-                @endif
-                --}}
             </div>
         </div>
     </div>
