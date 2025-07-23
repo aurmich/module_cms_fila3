@@ -14,7 +14,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class RefundToIntegrate extends AppointmentState
 {
     /** @var string */
-    public static $name = 'refund_to_integrate';
+    public static string $name = 'refund_to_integrate';
 
 
 }

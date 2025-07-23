@@ -190,7 +190,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     protected function getActions(): array
     {
         return [
-            $this->deleteAction(),
+            //
         ];
     }
 
@@ -256,6 +256,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
 
             return $state;
         });
+        Assert::isInstanceOf($state,AppointmentState::class);
         return $state;
    }
     

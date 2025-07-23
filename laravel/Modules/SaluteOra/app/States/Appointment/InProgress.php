@@ -14,6 +14,6 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class InProgress extends AppointmentState
 {
     /** @var string */
-    public static $name = 'in_progress';
+    public static string $name = 'in_progress';
 
 }

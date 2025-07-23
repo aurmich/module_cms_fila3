@@ -15,6 +15,6 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class Completed extends AppointmentState
 {
     /** @var string */
-    public static $name = 'completed';
+    public static string $name = 'completed';
 
 }

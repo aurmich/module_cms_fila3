@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\States\Appointment;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Spatie\ModelStates\State;
 use Filament\Forms\Components;
 use Spatie\ModelStates\StateConfig;
@@ -17,12 +18,13 @@ use Modules\Xot\Filament\Traits\TransTrait;
  *
  * Defines the state machine configuration and required methods
  * that must be implemented by each concrete state class.
- * 
+ * @property string $name Il nome dello stato
  * @property string $value Il valore dello stato nel database
  */
 abstract class AppointmentState extends State implements StateContract
 {
     use TransTrait;
+    public static string $name;
     /**
      * Configure the allowed state transitions.
      */
@@ -68,51 +70,48 @@ abstract class AppointmentState extends State implements StateContract
                 ->allowTransition(RefundToIntegrate::class, RefundCompleted::class, Transitions\RefundToIntegrateToRefundCompleted::class);
         
     }
-    /*
-    abstract public function label(): string;
-    abstract public function color(): string;
-    abstract public function bgColor(): string;
     
-    abstract public function icon(): string;
-    abstract public function modalHeading(): string;
-    abstract public function modalDescription(): string;
-    */
+    public static function getName(): string
+    {
+        /** @phpstan-ignore-next-line */
+        return static::$name ?? Str::of(class_basename(static::class))->snake()->toString();
+    }
 
     public function label(): string
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.label');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.label');
         //return 'Annullato';
     }
 
     public function color(): string
     {
         
-        return static::transClass(__CLASS__,'states.'.static::$name.'.color');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.color');
         
     }
 
     public function bgColor(): string
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.bg_color');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.bg_color');
         //return 'info';
     }
 
     public function icon(): string
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.icon');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.icon');
         //return 'heroicon-o-x-circle';
     }
 
     public function modalHeading(): string
     {
-        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_heading');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.modal_heading');
         //return 'Annulla Appuntamento';
     }
 
     public function modalDescription(): string
     {
         $appointment = $this->getModel();
-        return static::transClass(__CLASS__,'states.'.static::$name.'.modal_description');
+        return static::transClass(__CLASS__,'states.'.static::getName().'.modal_description');
         //return 'Sei sicuro di voler annullare questo appuntamento?';
     }
 
@@ -131,7 +130,7 @@ abstract class AppointmentState extends State implements StateContract
         return $data;
     }
 
-    public function modalAction(array $arguments, array $data)
+    public function modalAction(array $arguments, array $data):void
     {
         $this->processStateAction($arguments,$data);
     }

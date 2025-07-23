@@ -96,6 +96,7 @@ abstract class BaseModel extends Model implements HasMedia
             foreach($this->getAttributes() as $key=>$value){
                 try{
                     $data[$key]=$this->$key;
+                    /** @phpstan-ignore-next-line */
                 }catch(\ValueError $e){
                     
                 }

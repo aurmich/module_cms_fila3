@@ -18,7 +18,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class ReportPending extends AppointmentState
 {
     /** @var string */
-    public static $name = 'report_pending';
+    public static string $name = 'report_pending';
 
     public function modalFormSchema(): array
     {

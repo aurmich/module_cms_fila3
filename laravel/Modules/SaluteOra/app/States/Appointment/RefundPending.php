@@ -20,7 +20,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class RefundPending extends AppointmentState
 {
     /** @var string */
-    public static $name = 'refund_pending';
+    public static string $name = 'refund_pending';
 
     
     public function modalFormSchema(): array
@@ -35,7 +35,7 @@ class RefundPending extends AppointmentState
         return $schema;
     }
 
-    public function modalAction(array $arguments, array $data)
+    public function modalAction(array $arguments, array $data):void 
     {
         $attachments=['invoice'];
         $disk='attachments';

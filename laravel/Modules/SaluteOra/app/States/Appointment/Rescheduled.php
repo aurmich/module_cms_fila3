@@ -14,7 +14,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class Rescheduled extends AppointmentState
 {
     /** @var string */
-    public static $name = 'rescheduled';
+    public static string $name = 'rescheduled';
 
     
 } 

@@ -485,7 +485,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'state'=>'pending',
         ];
         $appointment=Appointment::create($appointment_data);
-        /** @phpstan-ignore staticProperty.notFound */
+        /** @phpstan-ignore-next-line */
         $slug='patient_appointment_'.Str::snake($appointment->state::$name);
         $slug=Str::slug($slug);
         /*---

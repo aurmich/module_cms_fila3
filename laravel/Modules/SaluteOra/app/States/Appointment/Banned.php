@@ -14,6 +14,6 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class Banned extends AppointmentState
 {
     /** @var string */
-    public static $name = 'banned';
+    public static string $name = 'banned';
 
 }

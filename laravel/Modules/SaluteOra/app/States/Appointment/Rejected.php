@@ -14,6 +14,6 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class Rejected extends AppointmentState
 {
     /** @var string */
-    public static $name = 'rejected';
+    public static string $name = 'rejected';
 
 }

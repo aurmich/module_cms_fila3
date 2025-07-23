@@ -14,6 +14,6 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class Pending extends AppointmentState
 {
     /** @var string */
-    public static $name = 'pending';
+    public static string $name = 'pending';
 
 } 

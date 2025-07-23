@@ -15,7 +15,7 @@ use Filament\Forms\Components;
 class ProBono extends AppointmentState
 {
     /** @var string */
-    public static $name = 'pro_bono';
+    public static string $name = 'pro_bono';
 
 
     public function modalFormSchema(): array

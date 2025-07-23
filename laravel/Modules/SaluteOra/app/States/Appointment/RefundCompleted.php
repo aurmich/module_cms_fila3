@@ -14,7 +14,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
 class RefundCompleted extends AppointmentState
 {
     /** @var string */
-    public static $name = 'refund_completed';
+    public static string $name = 'refund_completed';
 
     
 }
