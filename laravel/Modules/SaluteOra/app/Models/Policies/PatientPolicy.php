@@ -27,22 +27,7 @@ class PatientPolicy extends XotBasePolicy
      */
     public function viewAny(UserContract $user): bool
     {
-        // Admin e staff possono vedere tutti i pazienti
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Dottori possono vedere i propri pazienti
-        if ($user->type === UserTypeEnum::DOCTOR) {
-            return true;
-        }
-
-        // Pazienti possono vedere solo se stessi
-        if ($user->type === UserTypeEnum::PATIENT) {
-            return true;
-        }
-
-        return false;
+       return true;
     }
 
     /**

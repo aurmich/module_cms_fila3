@@ -32,22 +32,7 @@ class AppointmentPolicy extends XotBasePolicy
      */
     public function viewAny(UserContract $user): bool
     {
-        // Admin e staff possono vedere tutti gli appuntamenti
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Dottori possono vedere i propri appuntamenti
-        if ($user->type === UserTypeEnum::DOCTOR) {
-            return true;
-        }
-
-        // Pazienti possono vedere i propri appuntamenti
-        if ($user->type === UserTypeEnum::PATIENT) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
