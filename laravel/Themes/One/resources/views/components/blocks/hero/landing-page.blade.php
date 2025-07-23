@@ -79,7 +79,7 @@
         @click.away="mobileMenuOpen = false"
         class="lg:hidden absolute top-full left-0 right-0 bg-[#ff5f7e75] backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
         style="display: none;"
-      >
+       >
         <div class="px-6 py-6 space-y-6">
           <!-- Navigation Links -->
           <div class="space-y-4">

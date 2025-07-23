@@ -33,7 +33,7 @@ class LoginWidget extends XotBaseWidget
      * @var view-string
      */
     /** @phpstan-ignore-next-line property.defaultValue */
-    protected static string $view = 'user::filament.widgets.login';
+    protected static string $view = 'pub_theme::filament.widgets.auth.login';
     
    
     /**
