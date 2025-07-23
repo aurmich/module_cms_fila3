@@ -31,7 +31,7 @@ class Section extends Component
     public ?string $name = null;
     public ?string $class = null;
     public ?string $id = null;
-
+    public ?string $tpl = null;
     /**
      * Create a new component instance.
      *
@@ -42,50 +42,13 @@ class Section extends Component
     public function __construct(
         string $slug,
         ?string $class = null,
-        ?string $id = null
+        ?string $id = null,
+        ?string $tpl = null
     ) {
         $this->slug = $slug;
         $this->class = $class;
         $this->id = $id;
-        /*
-        $where = ['slug' => $slug];
-        $update = [
-            'title' => $slug,
-            'blocks' => [],
-            'attributes' => [
-                'class' => $class,
-                'id' => $id
-            ]
-        ];
-
-        Assert::isInstanceOf(
-            $section = SectionModel::firstOrCreate($where, $update),
-            SectionModel::class,
-            '['.__LINE__.']['.__FILE__.']'
-        );
-       
-
-        //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
-        
-        //$this->name = $section->name ?? 'NO NAME';
-        //$this->name = $section->name;
-        */
-        /*
-        $blocks = $section->blocks;
-
-        if(!is_array($blocks)){
-            $primary_lang=XotData::make()->primary_lang;
-            $blocks = $section->getTranslation('blocks',$primary_lang);
-        }
-        
-        
-        if(!is_array($blocks)){
-            $blocks = [];
-        }
-
-
-        $this->blocks = BlockData::collect($blocks);
-        */
+        $this->tpl = $tpl;
         $this->blocks = SectionModel::getBlocksBySlug($this->slug);
     }
 
@@ -95,6 +58,9 @@ class Section extends Component
     public function render(): ViewContract
     {
         $view='pub_theme::components.sections.'.$this->slug;
+        if($this->tpl){
+            $view.='.'.$this->tpl;
+        }
         if(!view()->exists($view)){
             throw new \Exception('View '.$view.' not found');
         }
