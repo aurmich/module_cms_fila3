@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'login' => [
-        'title' => 'Sign in to your account',
+        'title' => 'Log in',
         'or' => 'or',
         'create_account' => 'create a new account',
         'forgot_password' => 'Forgot your password?',
@@ -15,7 +15,7 @@ return [
         'login_button' => 'Sign in',
     ],
     'register' => [
-        'title' => 'Create your account',
+        'title' => 'Sign up',
         'welcome_message' => 'Welcome to <span class=\\\"font-bold\\\">SaluteOra</span>',
         'description' => 'Create your account to access all services',
         'already_have_account' => 'Already have an account?',

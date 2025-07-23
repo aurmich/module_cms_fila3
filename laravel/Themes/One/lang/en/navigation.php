@@ -30,8 +30,8 @@ return [
             'helper_text' => '',
         ],
         'partners' => [
-            'label' => 'Partners',
-            'tooltip' => 'Our project partners',
+            'label' => 'Participants',
+            'tooltip' => '',
             'helper_text' => '',
         ],
         'login' => [

@@ -74,8 +74,8 @@ return [
             'helper_text' => '',
         ],
         'partners' => [
-            'label' => 'Partners',
-            'tooltip' => 'I nostri partner',
+            'label' => 'Partecipanti',
+            'tooltip' => '',
             'helper_text' => '',
         ],
         'login' => [

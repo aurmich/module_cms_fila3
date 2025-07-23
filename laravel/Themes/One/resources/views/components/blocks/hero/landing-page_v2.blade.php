@@ -23,7 +23,7 @@
                           <span class="text-white p-4 text-xl">{{ __('pub_theme::txt.Project') }}</span>
                       </a>
                       <a href="/{{ $lang }}/pages/partners">
-                          <span class="text-white p-4 text-xl">Partners</span>
+                          <span class="text-white p-4 text-xl">Partecipanti</span>
                       </a>
                   </div>
                   <div>

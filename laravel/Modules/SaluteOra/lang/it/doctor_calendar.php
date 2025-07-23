@@ -83,6 +83,10 @@ return array (
       'success' => 'Studio cambiato con successo',
       'error' => 'Errore durante il cambio studio',
     ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
   ),
   'fields' => 
   array (

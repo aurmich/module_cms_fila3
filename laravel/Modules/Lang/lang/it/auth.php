@@ -17,7 +17,7 @@ return [
     'throttle' => 'Troppi tentativi di accesso. Riprova tra :seconds secondi.',
 
     'login' => [
-        'title' => 'Accedi al tuo account',
+        'title' => 'Accedi',
         'email' => 'Email',
         'password' => 'Password',
         'remember_me' => 'Ricordami',
@@ -29,7 +29,7 @@ return [
     ],
 
     'register' => [
-        'title' => 'Crea un nuovo account',
+        'title' => 'Registati',
         'name' => 'Nome',
         'email' => 'Email',
         'password' => 'Password',

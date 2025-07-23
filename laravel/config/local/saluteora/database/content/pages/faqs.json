@@ -79,13 +79,13 @@
                     "title": "Hai altri dubbi? <strong>CONSULTA LA GUIDA!</strong>",
                     "sections": [
                         {
-                            "title": "<br /> Vai <br /> alla <br /> guida",
+                            "title": "Vai alla guida",
                             "description": "",
                             "img": "/img/woman-characterrr.png",
                             "url": "#"
                         },
                         {
-                            "title": "<br /> Vai <br /> alla <br /> guida",
+                            "title": "Vai alla  guida",
                             "description": "",
                             "img": "/img/dentist.png",
                             "url": "#"
@@ -167,13 +167,13 @@
                     "title": "Still have questions? <strong>CHECK THE GUIDE!</strong>",
                     "sections": [
                         {
-                            "title": "<br /> Go <br /> to <br /> guide",
+                            "title": "Go to guide",
                             "description": "",
                             "img": "/img/woman-characterrr.png",
                             "url": "#"
                         },
                         {
-                            "title": "<br /> Go <br /> to <br /> guide",
+                            "title": "Go to guide",
                             "description": "",
                             "img": "/img/dentist.png",
                             "url": "#"
