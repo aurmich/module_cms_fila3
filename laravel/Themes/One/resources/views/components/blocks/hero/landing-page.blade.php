@@ -8,6 +8,7 @@
 <div 
     style="background-repeat: no-repeat; background-position: top; background-size: cover;"
     class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-per-desktop.svg')] min-h-screen m-0 p-0 bg-top ipad:bg-right-top">
+      
     <!-- INIZIO HEADER -->
     <div x-data="{ mobileMenuOpen: false }" class="relative">
       <!-- Header Bar -->
@@ -133,6 +134,7 @@
       </div>
     </div>
     <!-- FINE HEADER -->
+  
     <!-- INIZIO PRIMA SECTION -->
      <div class="w-full p-8 ipad:h-[50vh] lg:h-dvh flex items-center">
        <div class="w-[60%] ipad:w-[40%] lg:text-4xl ipad:ml-5 lg:ml-32 lg:w-2/5 flex flex-col justify-start">

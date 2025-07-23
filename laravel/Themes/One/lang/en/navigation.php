@@ -50,6 +50,23 @@ return [
             'helper_text' => '',
         ],
     ],
+    'user' => [
+        'profile' => [
+            'label' => 'Profile',
+            'tooltip' => 'Manage your user profile',
+            'helper_text' => '',
+        ],
+        'dashboard' => [
+            'label' => 'Dashboard',
+            'tooltip' => 'Access your personal area',
+            'helper_text' => '',
+        ],
+        'logout' => [
+            'label' => 'Logout',
+            'tooltip' => 'Sign out from your account',
+            'helper_text' => '',
+        ],
+    ],
     'hero' => [
         'welcome_title' => [
             'label' => 'Welcome to<br />Salute Orale',

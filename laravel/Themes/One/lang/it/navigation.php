@@ -50,6 +50,23 @@ return [
             'helper_text' => '',
         ],
     ],
+    'user' => [
+        'profile' => [
+            'label' => 'Profilo',
+            'tooltip' => 'Gestisci il tuo profilo utente',
+            'helper_text' => '',
+        ],
+        'dashboard' => [
+            'label' => 'Dashboard',
+            'tooltip' => 'Accedi alla tua area personale',
+            'helper_text' => '',
+        ],
+        'logout' => [
+            'label' => 'Esci',
+            'tooltip' => 'Disconnetti dal tuo account',
+            'helper_text' => '',
+        ],
+    ],
     'hero' => [
         'welcome_title' => [
             'label' => 'Benvenuta su<br />Salute Orale',

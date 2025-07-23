@@ -50,6 +50,23 @@ return [
             'helper_text' => '',
         ],
     ],
+    'user' => [
+        'profile' => [
+            'label' => 'Profil',
+            'tooltip' => 'Verwalten Sie Ihr Benutzerprofil',
+            'helper_text' => '',
+        ],
+        'dashboard' => [
+            'label' => 'Dashboard',
+            'tooltip' => 'Zugriff auf Ihren persönlichen Bereich',
+            'helper_text' => '',
+        ],
+        'logout' => [
+            'label' => 'Abmelden',
+            'tooltip' => 'Von Ihrem Konto abmelden',
+            'helper_text' => '',
+        ],
+    ],
     'hero' => [
         'welcome_title' => [
             'label' => 'Willkommen bei<br />Mundgesundheit',

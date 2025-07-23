@@ -5,7 +5,7 @@
 
 @if($isLanding)
 <x-layouts.main :is-landing="$isLanding ?? false">
-    <x-section slug="header" />
+    
     <div class="flex flex-col min-h-screen">
     <div class="flex-1 {{ $margin }}">
         {{ $slot }}
