@@ -190,6 +190,7 @@ class Doctor extends User implements HasMedia
         //'availability',
         'status',
         'country_code',
+        'data_privacy_form',
     ];
 
     /** @var list<string>     */
@@ -209,6 +210,7 @@ class Doctor extends User implements HasMedia
         return  [
             //'certification', // Gestito come allegato singolo
             'doctor_certificate',
+            'data_privacy_form',
         ];
     }
 

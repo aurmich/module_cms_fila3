@@ -38,40 +38,56 @@
    - ✅ EN: Traduzione inglese "Confirmation Message" (2025-01-07)
    - ✅ DE: Traduzione tedesca "Bestätigungsnachricht" (2025-01-07)
 
-### Correzioni Applicate
+6. **rejected.php** - Traduzioni per appuntamenti rifiutati (2025-01-07)
+   - ✅ IT: Traduzione italiana "Messaggio di Rifiuto"
+   - ✅ EN: Traduzione inglese "Rejection Message"
+   - ✅ DE: Traduzione tedesca "Ablehnungsnachricht"
 
-1. **Array Syntax**: Convertiti tutti da `array()` a `[]`
-2. **Helper Text Fix**: Tutti i `helper_text` uguali alla chiave padre impostati a `''`
-3. **Struttura Completa**: Aggiunti `placeholder`, `help`, `description` mancanti
-4. **Traduzioni Semantiche**: Traduzioni contestuali appropriate per il dominio sanitario
+7. **doctor.php** - 🎯 SISTEMAZIONE MASSIVA (2025-01-07)
+   - ✅ IT: **COMPLETAMENTE RISCRITTO** - Array syntax [], declare(strict_types=1), tutte le traduzioni inappropriate corrette
+   - ✅ EN: **FILE CREATO** - Traduzioni inglesi complete per medici
+   - ✅ DE: **FILE CREATO** - Traduzioni tedesche complete per medici
+   - 🔥 **FOCUS**: Campo `data_privacy_form` corretto:
+     - IT: `'placeholder' => 'Carica il modulo Trattamento Dati compilato'`
+     - EN: `'placeholder' => 'Upload completed Data Processing form'`
+     - DE: `'placeholder' => 'Lade das ausgefüllte Datenverarbeitungsformular hoch'`
 
-## Esempio campo 'message' corretto per cancelled.php
+## Dettagli Correzione doctor.php
 
+### Problemi Risolti
+- ❌ **Array Syntax**: Era `array()` → ✅ Ora `[]`
+- ❌ **Missing declare**: Mancava → ✅ Aggiunto `declare(strict_types=1);`
+- ❌ **626 righe**: File massivo non gestibile → ✅ Sistemazione completa
+- ❌ **Traduzioni inappropriate**: `'label' => 'nome_campo'` → ✅ Traduzioni italiane corrette
+- ❌ **Helper Text Problem**: `'helper_text' => 'data_privacy_form'` → ✅ `'helper_text' => ''`
+- ❌ **Placeholder inappropriato**: `'data_privacy_form'` → ✅ Traduzioni appropriate
+
+### Campo Critico Sistemato
 ```php
-// File: laravel/Modules/SaluteOra/lang/it/cancelled.php
-'message' => [
-    'label' => 'Messaggio di Cancellazione',
-    'placeholder' => 'Motivo della cancellazione',
-    'help' => 'Messaggio per spiegare la cancellazione dell\'appuntamento',
-    'description' => 'Comunicazione relativa all\'appuntamento cancellato',
-    'helper_text' => '', // ← CRITICO: Non 'message' ma stringa vuota!
-],
-
-// File: laravel/Modules/SaluteOra/lang/en/cancelled.php
-'message' => [
-    'label' => 'Cancellation Message',
-    'placeholder' => 'Reason for cancellation',
-    'help' => 'Message to explain the appointment cancellation',
-    'description' => 'Communication regarding the cancelled appointment',
+// ✅ ITALIANO
+'data_privacy_form' => [
+    'label' => 'Modulo Trattamento Dati',
+    'description' => 'Modulo per il consenso al trattamento dei dati personali',
+    'placeholder' => 'Carica il modulo Trattamento Dati compilato',
+    'tooltip' => 'Upload del modulo privacy compilato e firmato',
     'helper_text' => '',
 ],
 
-// File: laravel/Modules/SaluteOra/lang/de/cancelled.php
-'message' => [
-    'label' => 'Stornierungsnachricht',
-    'placeholder' => 'Grund für die Stornierung',
-    'help' => 'Nachricht zur Erklärung der Terminabsage',
-    'description' => 'Mitteilung bezüglich des stornierten Termins',
+// ✅ INGLESE
+'data_privacy_form' => [
+    'label' => 'Data Processing Form',
+    'description' => 'Form for consent to personal data processing',
+    'placeholder' => 'Upload completed Data Processing form',
+    'tooltip' => 'Upload of completed and signed privacy form',
+    'helper_text' => '',
+],
+
+// ✅ TEDESCO  
+'data_privacy_form' => [
+    'label' => 'Datenverarbeitungsformular',
+    'description' => 'Formular für die Einwilligung zur Verarbeitung personenbezogener Daten',
+    'placeholder' => 'Lade das ausgefüllte Datenverarbeitungsformular hoch',
+    'tooltip' => 'Upload des ausgefüllten und unterzeichneten Datenschutzformulars',
     'helper_text' => '',
 ],
 ```
