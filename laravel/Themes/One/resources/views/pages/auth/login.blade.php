@@ -12,7 +12,7 @@ name('login');
 
 ?>
 
-<x-layouts.main>
+<x-layouts.app>
     @volt('login')
     <div id="wave-container" class="flex flex-col items-stretch justify-center w-full min-h-screen py-10 sm:items-center relative overflow-hidden">
         <!-- Reactive subtle background waves -->
@@ -61,4 +61,4 @@ name('login');
             svg.style.transform = `translate(${dx}px, ${dy}px)`;
         });
     </script>
-</x-layouts.main>
+</x-layouts.app>
