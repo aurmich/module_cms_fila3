@@ -9,7 +9,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'login' => [
-        'title' => 'Accedi al tuo account',
+        'title' => 'Accedi',
         'or' => 'oppure',
         'create_account' => 'crea un nuovo account',
         'forgot_password' => 'Hai dimenticato la password?',
@@ -21,7 +21,7 @@ return [
     ],
 
     'register' => [
-        'title' => 'Crea il tuo account',
+        'title' => 'Registrati',
         'welcome_message' => 'Benvenuto in <span class="font-bold">SaluteOra</span>',
         'description' => 'Crea il tuo account per accedere a tutti i servizi',
         'already_have_account' => 'Hai già un account?',

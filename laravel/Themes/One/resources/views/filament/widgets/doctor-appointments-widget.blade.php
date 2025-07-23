@@ -1,5 +1,5 @@
 <x-filament::widget>
-    <div class="space-y-4 max-h-96 overflow-y-auto">
+    <div class="space-y-4 overflow-y-auto">
         @if($this->appointments->isNotEmpty())
             @each('pub_theme::appointment.doctor-item', $this->appointments, 'appointment')
         @else

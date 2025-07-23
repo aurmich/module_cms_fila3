@@ -16,8 +16,7 @@
     </div>
     <div class="w-full flex flex-col justify-center items-center p-5">
     <div class="w-full lg:w-3/4 flex flex-col items-start">
-            {!! $description !!}
-            
+            {!! $description !!}  
         </div>
     </div>
 </div>

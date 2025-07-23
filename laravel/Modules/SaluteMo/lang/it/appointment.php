@@ -220,6 +220,14 @@ return array (
       'placeholder' => 'value',
       'label' => 'value',
     ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
   ),
   'statuses' => 
   array (

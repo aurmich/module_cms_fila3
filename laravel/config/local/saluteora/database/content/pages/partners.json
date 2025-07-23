@@ -12,12 +12,12 @@
                 "type": "feature_sections",
                 "data": {
                     "view": "pub_theme::components.blocks.feature_sections.cta2",
-                    "title": "I Nostri Partners",
+                    "title": "Partecipano al progetto",
                     "sections": [
                         {
                             "title": "",
                             "description": "Nato nel 2007 e stabilizzato nel 2012, l'Istituto Nazionale per la promozione della salute delle popolazioni Migranti e per il contrasto delle malattie della Povertà (INMP) è un ente pubblico oggi centro di riferimento della rete nazionale per le problematiche di assistenza in campo socio-sanitario legate alle popolazioni migranti e alla povertà, nonché centro nazionale per la mediazione transculturale in campo sanitario. Dal 2019 l'INMP è anche Centro Collaboratore OMS per l'evidenza scientifica e il capacity building relativamente alla salute dei migranti.",
-                            "img": "/img/inmp-logo-partners.png",
+                            "img": "/img/logo-INMP-ita.svg",
                             "img_class": "h-96",
                             "url": "https://www.inmp.it/"
                         },
@@ -45,12 +45,12 @@
                 "type": "feature_sections",
                 "data": {
                     "view": "pub_theme::components.blocks.feature_sections.cta2",
-                    "title": "Our Partners",
+                    "title": "Partecipate in the project",
                     "sections": [
                         {
                             "title": "",
                             "description": "Founded in 2007 and established in 2012, the National Institute for the promotion of health of Migrant populations and for the fight against Poverty diseases (INMP) is a public body that today serves as a reference center for the national network for socio-healthcare assistance issues related to migrant populations and poverty, as well as a national center for transcultural mediation in healthcare. Since 2019, INMP has also been a WHO Collaborating Center for scientific evidence and capacity building related to migrant health.",
-                            "img": "/img/inmp-logo-partners.png",
+                            "img": "/img/logo-INMP-en.svg",
                             "img_class": "h-96",
                             "url": "https://www.inmp.it/"
                         },

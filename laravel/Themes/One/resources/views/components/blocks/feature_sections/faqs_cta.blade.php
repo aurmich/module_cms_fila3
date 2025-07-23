@@ -14,16 +14,10 @@
                             <img class="h-44 px-2 pt-2" src="{{ $section['img'] }}" />
                         </div>
                         <a href="{{ $section['url'] }}">
-                        <div class="flex flex-col items-center justify-center">
-                            <span class="text-[#FF5F7E] text-xl lg:text-2xl">
+                        <div class="w-full h-full flex flex-col items-center justify-center">
+                            <span class="text-[#FF5F7E] text-xl text-center lg:text-2xl">
                                {!! $section['title'] !!}
                             </span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                 stroke="#FF5F7E" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
-                            </svg>
                         </div>
                         </a>
                     </div>
@@ -38,14 +32,8 @@
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <span class="text-[#FF5F7E] text-xl lg:text-2xl">
-                                Vai <br /> alla <br /> guida
+                                Vai alla guida
                             </span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 24 24" stroke-width="1.5"
-                                 stroke="#FF5F7E" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
-                            </svg>
                         </div>
                     </div>
                 </div>

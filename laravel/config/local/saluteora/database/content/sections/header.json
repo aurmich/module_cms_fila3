@@ -33,7 +33,7 @@
                             "type": "link"
                         },
                         {
-                            "label": "Partners",
+                            "label": "Partecipanti",
                             "url": "{{ route('pages.view',['slug'=>'partners']) }}",
                             "type": "link"
                         }

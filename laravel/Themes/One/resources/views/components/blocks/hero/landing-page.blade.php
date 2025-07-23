@@ -185,7 +185,7 @@
           </p>
         </div>
       </div>
-      <div class="w-full flex justify-center mt-5">
+      <div class="w-full flex justify-center my-5">
         <a href="/{{ $lang }}/pages/progetto">
           <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
         </a>
@@ -221,27 +221,26 @@
          <h1 class="text-[#FF5F7E] text-3xl">@lang('pub_theme::navigation.landing.additional_info.label')</h1>
        </div>
        <div class="h-auto pt-5 flex flex-col lg:flex-row justify-center items-center">
-         <div class="w-3/5 lg:w-1/5 h-auto bg-cover bg-[#FCD5D0] rounded-[25px] m-5">
+         <div class="w-3/5 lg:w-1/5 h-auto bg-cover bg-[#FCD5D0] rounded-[25px] m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
            <div class="grid grid-cols-2">
              <div class="flex justify-center">
                <img class="h-44 px-2 pt-2" src="/img/woman-characterrr.png" />
              </div>
-             <div class="flex flex-col items-center justify-center">
+             <div class="flex flex-col items-center justify-center m-5">
                <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
                  >@lang('pub_theme::navigation.landing.consult_guide.label')</span
                >
              </div>
            </div>
          </div>
-         <div class="w-3/5 lg:w-1/5 h-auto bg-[#FCD5D0] rounded-[25px] m-5">
+         <div class="w-3/5 lg:w-1/5 h-auto bg-[#FCD5D0] rounded-[25px] m-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100">
            <div class="grid grid-cols-2 gap-2">
              <div class="flex justify-center">
                <img class="h-44 p-2" src="/img/dentist.png" />
              </div>
-             <div class="flex flex-col items-center justify-center">
+             <div class="flex flex-col items-center justify-center m-5">
                <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
-                 >@lang('pub_theme::navigation.landing.consult_guide.label')</span
-               >
+                 >@lang('pub_theme::navigation.landing.consult_guide.label')</span>
              </div>
            </div>
          </div>
@@ -255,17 +254,17 @@
       </div>
       <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
         <div class="p-5">
-          <a href="https://www.inmp.it/">
-            <img class="h-48 lg:h-40 p-5" src="/img/inmp-logo-piccolo-updated.png" />
+          <a href="https://www.inmp.it/" target="_blank">
+            <img class="h-48 lg:h-40 p-5" src="/img/logo-INMP-per-landing.svg" />
           </a>
         </div>
         <div class="p-5">
-          <a href="https://fondazioneandi.org/">
+          <a href="https://fondazioneandi.org/" target="_blank">
             <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
           </a>
         </div>
         <div class="p-5">
-          <a href="https://www.cooperazioneodontoiatrica.eu/">
+          <a href="https://www.cooperazioneodontoiatrica.eu/" target="_blank">
             <img class="h-28 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
           </a>
         </div>

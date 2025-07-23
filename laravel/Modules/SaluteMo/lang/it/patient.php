@@ -234,6 +234,38 @@ return array (
     array (
       'label' => 'children_count',
     ),
+    'family_members' => 
+    array (
+      'label' => 'family_members',
+    ),
+    'years_in_italy' => 
+    array (
+      'label' => 'years_in_italy',
+    ),
+    'country_code' => 
+    array (
+      'label' => 'country_code',
+    ),
+    'nationality' => 
+    array (
+      'label' => 'nationality',
+    ),
+    'type' => 
+    array (
+      'label' => 'type',
+    ),
+    'last_name' => 
+    array (
+      'label' => 'last_name',
+    ),
+    'first_name' => 
+    array (
+      'label' => 'first_name',
+    ),
+    'name' => 
+    array (
+      'label' => 'name',
+    ),
   ),
   'actions' => 
   array (

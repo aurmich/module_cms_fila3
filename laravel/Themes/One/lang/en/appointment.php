@@ -31,6 +31,10 @@ return [
             'title' => 'Rejected Appointments',
             'description' => 'View all appointments that have been rejected',
         ],
+        'entry_appointments' => [
+            'title' => 'Incoming Appointments',
+            'description' => 'Visualizza tutti i nuovi appuntamenti richiesti',
+        ],
     ],
     'fields' => [
         'name' => [
