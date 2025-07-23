@@ -44,6 +44,125 @@ $darkLogo = $metatag->getLogoHeaderDark();
 
 // Ottiene l'altezza del logo
 $height = $metatag->getLogoHeight();
+
+// 🆕 Ottiene il logo come data URI base64 per embedding inline
+$base64Logo = $metatag->getBrandLogoBase64();
+```
+
+### Utilizzo del Logo Base64
+Il metodo `getBrandLogoBase64()` è utile per:
+- **Email HTML**: Incorporare il logo direttamente nelle email senza dipendenze esterne
+- **PDF Generation**: Includere il logo nei PDF senza percorsi di file
+- **Performance**: Ridurre richieste HTTP incorporando il logo nel HTML
+- **Offline Usage**: Logo disponibile anche senza connessione internet
+
+```php
+// Esempio utilizzo in template Blade
+<img src="{{ $metatag->getBrandLogoBase64() }}" alt="{{ $metatag->getBrandName() }}">
+
+// Esempio utilizzo in PDF
+$html = '<img src="' . $metatag->getBrandLogoBase64() . '" alt="Logo">';
+
+// Esempio utilizzo in email
+$emailHtml = '<img src="' . $metatag->getBrandLogoBase64() . '" alt="Company Logo" style="max-width: 200px;">';
+```
+
+**Formati supportati**: PNG, JPG, JPEG, GIF, SVG, WebP, BMP, ICO
+
+**Gestione errori**: Il metodo restituisce stringa vuota se il file non esiste o ci sono errori, senza bloccare l'applicazione.
+
+## Esempi Pratici
+
+### Esempio 1: Logo in Email HTML
+```php
+use Modules\Xot\Datas\MetatagData;
+
+$metatag = MetatagData::make();
+$logoBase64 = $metatag->getBrandLogoBase64();
+
+$emailHtml = "
+<html>
+<body>
+    <div style='text-align: center;'>
+        <img src='{$logoBase64}' alt='Logo Azienda' style='max-width: 200px; height: auto;'>
+        <h1>Benvenuto!</h1>
+        <p>Grazie per aver scelto i nostri servizi.</p>
+    </div>
+</body>
+</html>
+";
+
+// Invia email con logo incorporato
+Mail::html($emailHtml, function($message) {
+    $message->to('utente@example.com')->subject('Benvenuto');
+});
+```
+
+### Esempio 2: Logo in PDF 
+```php
+use Modules\Xot\Datas\MetatagData;
+
+$metatag = MetatagData::make();
+$logoBase64 = $metatag->getBrandLogoBase64();
+
+$pdfHtml = "
+<style>
+    .header { text-align: center; margin-bottom: 30px; }
+    .logo { max-width: 150px; height: auto; }
+</style>
+<div class='header'>
+    <img src='{$logoBase64}' alt='Logo' class='logo'>
+    <h2>Referto Medico</h2>
+</div>
+<div class='content'>
+    <!-- Contenuto del PDF -->
+</div>
+";
+
+$pdf = PDF::loadHTML($pdfHtml);
+return $pdf->download('referto.pdf');
+```
+
+### Esempio 3: Logo in Blade Template
+```blade
+{{-- resources/views/components/header.blade.php --}}
+@php
+    $metatag = \Modules\Xot\Datas\MetatagData::make();
+    $logoBase64 = $metatag->getBrandLogoBase64();
+@endphp
+
+<header class="company-header">
+    @if($logoBase64)
+        <img src="{{ $logoBase64 }}" 
+             alt="{{ $metatag->getBrandName() }}" 
+             class="company-logo"
+             style="max-height: 60px; width: auto;">
+    @else
+        <h1>{{ $metatag->getBrandName() }}</h1>
+    @endif
+</header>
+```
+
+### Esempio 4: Verifica e Fallback
+```php
+use Modules\Xot\Datas\MetatagData;
+
+function getCompanyLogo(): string 
+{
+    $metatag = MetatagData::make();
+    $logoBase64 = $metatag->getBrandLogoBase64();
+    
+    if (empty($logoBase64)) {
+        // Fallback: usa URL normale del logo
+        return $metatag->getBrandLogo();
+    }
+    
+    return $logoBase64;
+}
+
+// Utilizzo
+$logoSrc = getCompanyLogo();
+echo "<img src='{$logoSrc}' alt='Logo'>";
 ```
 
 ### Gestione Colori

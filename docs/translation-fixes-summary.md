@@ -1,5 +1,63 @@
 # Riepilogo Correzioni Traduzioni - 2025-01-07
 
+## AGGIORNAMENTO 2025-01-07: Correzione 'label' => 'message' e Traduzioni Inappropriate
+
+### PROBLEMA SISTEMICO IDENTIFICATO
+**Traduzioni inappropriate** in molti file con:
+1. `'label' => 'message'` invece di traduzioni italiane
+2. **Struttura incompleta**: mancava `tooltip` nei campi
+3. **Array Syntax**: Uso di `array()` invece di `[]`
+4. **Traduzioni mancanti**: File EN e DE non esistenti
+
+### FILES AGGIUNTIVI SISTEMATI (2025-01-07)
+
+#### Modulo User
+- ✅ `tenant.php` (IT) - Corretto 'label' => 'message', struttura completa con tooltip
+
+#### Modulo SaluteOra  
+- ✅ `rejected.php` (IT) - Sistematizzato completamente (2025-01-07)
+- ✅ `rejected.php` (EN) - File creato con traduzioni inglesi complete (NUOVO - 2025-01-07)
+- ✅ `rejected.php` (DE) - File creato con traduzioni tedesche complete (NUOVO - 2025-01-07)
+
+#### Modulo Xot
+- ✅ `xot_base_list_records.php` (IT) - Corrette tutte le traduzioni inappropriate
+
+#### Modulo Cms
+- ✅ `menu.php` (IT) - Sistematizzazione completa con tooltip e traduzioni corrette
+
+### STANDARD COMPLETO APPLICATO
+
+**Struttura Obbligatoria per ogni campo:**
+```php
+'nome_campo' => [
+    'label' => 'Traduzione Italiana Appropriata',        // ✅ Mai 'message'
+    'placeholder' => 'Placeholder specifico',            // ✅ Sempre diverso da label
+    'tooltip' => 'Spiegazione breve',                   // ✅ AGGIUNTO in tutti i file
+    'description' => 'Descrizione dettagliata',         // ✅ Sempre presente
+    'helper_text' => '',                                // ✅ Vuoto se uguale alla chiave
+],
+```
+
+**Correzioni Effettuate:**
+- ✅ **Label Fix**: Tutti i `'label' => 'message'` → traduzioni italiane appropriate
+- ✅ **Tooltip Added**: Aggiunto `tooltip` in TUTTI i campi (era mancante)
+- ✅ **Array Syntax**: `array()` → `[]` in tutti i file
+- ✅ **Strict Types**: Aggiunto `declare(strict_types=1);`
+- ✅ **Helper Text Rule**: Applicata regola helper_text vuoto quando uguale alla chiave
+- ✅ **Completeness**: File EN e DE creati per SaluteOra/rejected.php
+
+### TOTALE FILES SISTEMATI AGGIORNATO: 28 files** 📊
+
+**Distribuzione:**
+- **Modulo Media**: 3 files (IT, EN, DE)
+- **Modulo SaluteOra**: 18 files (6 file × 3 lingue)
+- **Modulo UI**: 5 files  
+- **Modulo User**: 1 file (tenant.php IT)
+- **Modulo Xot**: 1 file (xot_base_list_records.php IT)
+- **Modulo Cms**: 1 file (menu.php IT)
+
+---
+
 ## Aggiornamento Sistematico: Correzione Files di Traduzione
 
 ### PROBLEMA SISTEMICO IDENTIFICATO
@@ -23,7 +81,17 @@
 - ✅ `no_show.php` (IT) - Array syntax, helper_text fix, traduzioni semantiche
 - ✅ `pro_bono.php` (IT) - Array syntax, helper_text fix, traduzioni semantiche
 - ✅ `report_completed.php` (IT) - Array syntax, helper_text fix, traduzioni semantiche
-- ✅ **CREATI** tutti i files EN e DE mancanti con traduzioni complete
+- ✅ `confirmed.php` (IT) - Array syntax, helper_text fix, traduzioni corrette (2025-01-07)
+- ✅ `cancelled.php` (EN) - File creato con traduzioni inglesi complete (NUOVO)
+- ✅ `no_show.php` (EN) - File creato con traduzioni inglesi complete (NUOVO)
+- ✅ `pro_bono.php` (EN) - File creato con traduzioni inglesi complete (NUOVO)
+- ✅ `report_completed.php` (EN) - File creato con traduzioni inglesi complete (NUOVO)
+- ✅ `confirmed.php` (EN) - File creato con traduzioni inglesi complete (NUOVO - 2025-01-07)
+- ✅ `cancelled.php` (DE) - File creato con traduzioni tedesche complete (NUOVO)
+- ✅ `no_show.php` (DE) - File creato con traduzioni tedesche complete (NUOVO)
+- ✅ `pro_bono.php` (DE) - File creato con traduzioni tedesche complete (NUOVO)
+- ✅ `report_completed.php` (DE) - File creato con traduzioni tedesche complete (NUOVO)
+- ✅ `confirmed.php` (DE) - File creato con traduzioni tedesche complete (NUOVO - 2025-01-07)
 
 #### Modulo UI
 - ✅ `icon_state.php` (IT) - Array syntax, helper_text fix, ordine chiavi, struttura completa
@@ -86,12 +154,14 @@
 - ✅ `Modules/SaluteOra/lang/en/no_show.php`
 - ✅ `Modules/SaluteOra/lang/en/pro_bono.php`
 - ✅ `Modules/SaluteOra/lang/en/report_completed.php`
+- ✅ `Modules/SaluteOra/lang/en/confirmed.php`
 
 #### SaluteOra - Traduzioni Tedesche
 - ✅ `Modules/SaluteOra/lang/de/cancelled.php`
 - ✅ `Modules/SaluteOra/lang/de/no_show.php`
 - ✅ `Modules/SaluteOra/lang/de/pro_bono.php`
 - ✅ `Modules/SaluteOra/lang/de/report_completed.php`
+- ✅ `Modules/SaluteOra/lang/de/confirmed.php`
 
 ### STANDARD APPLICATI
 
@@ -293,14 +363,17 @@ Aggiunta sezione `report` in tutti i file `txt.php`:
   - `laravel/Modules/SaluteOra/lang/it/no_show.php`
   - `laravel/Modules/SaluteOra/lang/it/pro_bono.php`
   - `laravel/Modules/SaluteOra/lang/it/report_completed.php`
+  - `laravel/Modules/SaluteOra/lang/it/confirmed.php`
   - `laravel/Modules/SaluteOra/lang/en/cancelled.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/en/no_show.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/en/pro_bono.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/en/report_completed.php` (CREATO)
+  - `laravel/Modules/SaluteOra/lang/en/confirmed.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/de/cancelled.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/de/no_show.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/de/pro_bono.php` (CREATO)
   - `laravel/Modules/SaluteOra/lang/de/report_completed.php` (CREATO)
+  - `laravel/Modules/SaluteOra/lang/de/confirmed.php` (CREATO)
 - **UI**:
   - `laravel/Modules/UI/lang/it/icon_state.php`
   - `laravel/Modules/UI/lang/en/icon_state.php`

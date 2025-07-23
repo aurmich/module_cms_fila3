@@ -59,6 +59,8 @@ class SpatieEmail extends TemplateMailable
         $this->data['site_url']=url('/');
 
         $this->data['logo_header']=MetatagData::make()->getBrandLogo();
+        $this->data['logo_header_base64']=MetatagData::make()->getBrandLogoBase64();
+        
         $this->data=array_merge($this->data,$data);
         $this->setAdditionalData($this->data);
         

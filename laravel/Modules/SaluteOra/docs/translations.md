@@ -14,24 +14,29 @@
 ### File Sistematizzati
 
 1. **cancelled.php** - Traduzioni per appuntamenti cancellati
-   - ✅ IT: Traduzione italiana completa
-   - ✅ EN: Traduzione inglese creata
-   - ✅ DE: Traduzione tedesca creata
+   - ✅ IT: Traduzione italiana con messaggi di cancellazione
+   - ✅ EN: Traduzione inglese "Cancellation Message"
+   - ✅ DE: Traduzione tedesca "Stornierungsnachricht"
 
-2. **no_show.php** - Traduzioni per mancate presentazioni
-   - ✅ IT: Traduzione italiana completa
-   - ✅ EN: Traduzione inglese creata
-   - ✅ DE: Traduzione tedesca creata
+2. **no_show.php** - Traduzioni per appuntamenti mancati
+   - ✅ IT: Traduzione italiana "Messaggio No-Show"
+   - ✅ EN: Traduzione inglese "No-Show Message"
+   - ✅ DE: Traduzione tedesca "No-Show Nachricht"
 
-3. **pro_bono.php** - Traduzioni per servizi pro bono
-   - ✅ IT: Traduzione italiana completa
-   - ✅ EN: Traduzione inglese creata
-   - ✅ DE: Traduzione tedesca creata
+3. **pro_bono.php** - Traduzioni per servizi gratuiti
+   - ✅ IT: Traduzione italiana con acceptance per servizi pro bono
+   - ✅ EN: Traduzione inglese "Pro Bono Acceptance"
+   - ✅ DE: Traduzione tedesca "Pro-Bono Annahme"
 
 4. **report_completed.php** - Traduzioni per referti completati
-   - ✅ IT: Traduzione italiana completa
-   - ✅ EN: Traduzione inglese creata
-   - ✅ DE: Traduzione tedesca creata
+   - ✅ IT: Traduzione italiana "Messaggio Referto Completato"
+   - ✅ EN: Traduzione inglese "Report Completed Message"
+   - ✅ DE: Traduzione tedesca "Bericht Abgeschlossen Nachricht"
+
+5. **confirmed.php** - Traduzioni per appuntamenti confermati
+   - ✅ IT: Traduzione italiana "Messaggio di Conferma" (2025-01-07)
+   - ✅ EN: Traduzione inglese "Confirmation Message" (2025-01-07)
+   - ✅ DE: Traduzione tedesca "Bestätigungsnachricht" (2025-01-07)
 
 ### Correzioni Applicate
 

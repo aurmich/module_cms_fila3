@@ -49,6 +49,8 @@ use Modules\Xot\Datas\Transformers\AssetTransformer;
  * @property string $color_banner
  * @property string $favicon
  * @property array<string, array{key?: string, color: string, hex?: string}> $colors
+ * 
+ * @method string getBrandLogoBase64() Get the brand logo as base64 data URI for inline embedding
  */
 class MetatagData extends Data implements Wireable
 {
@@ -227,6 +229,86 @@ class MetatagData extends Data implements Wireable
     public function getBrandLogoHeight(): string
     {
         return $this->logo_height;
+    }
+
+    /**
+     * Get the brand logo as base64 data URI for inline embedding.
+     * This method reflects the semantic purpose of getting the brand logo
+     * as a base64 data URI that can be embedded directly in HTML img tags.
+     *
+     * @return string The base64 data URI (e.g., "data:image/png;base64,iVBORw0KGgoAAAA...")
+     */
+    public function getBrandLogoBase64(): string
+    {
+        try {
+            // Get the asset path using AssetAction (same as getBrandLogo)
+            /** @var string $assetPath */
+            $assetPath = app(AssetAction::class)->execute($this->logo_header);
+            
+            // Get the physical file path
+            $physicalPath = public_path($assetPath);
+            
+            // Check if file exists
+            if (!\Illuminate\Support\Facades\File::exists($physicalPath)) {
+                return '';
+            }
+            
+            // Read file content
+            $fileContent = \Illuminate\Support\Facades\File::get($physicalPath);
+            
+            // Get MIME type
+            $mimeType = $this->getMimeTypeFromPath($physicalPath);
+            
+            // Convert to base64
+            $base64Content = base64_encode($fileContent);
+            
+            // Return as data URI
+            return "data:{$mimeType};base64,{$base64Content}";
+            
+        } catch (\Throwable $e) {
+            // Fallback: try with the raw logo_header path
+            try {
+                $fallbackPath = public_path($this->logo_header);
+                if (\Illuminate\Support\Facades\File::exists($fallbackPath)) {
+                    $fileContent = \Illuminate\Support\Facades\File::get($fallbackPath);
+                    $mimeType = $this->getMimeTypeFromPath($fallbackPath);
+                    $base64Content = base64_encode($fileContent);
+                    return "data:{$mimeType};base64,{$base64Content}";
+                }
+            } catch (\Throwable $fallbackException) {
+                // Log the error but don't break the application
+                \Illuminate\Support\Facades\Log::warning('Could not generate base64 logo', [
+                    'original_error' => $e->getMessage(),
+                    'fallback_error' => $fallbackException->getMessage(),
+                    'logo_header' => $this->logo_header,
+                ]);
+            }
+            
+            return '';
+        }
+    }
+
+    /**
+     * Get MIME type from file path extension.
+     * Helper method for getBrandLogoBase64().
+     *
+     * @param string $filePath
+     * @return string
+     */
+    private function getMimeTypeFromPath(string $filePath): string
+    {
+        $extension = \strtolower(\pathinfo($filePath, PATHINFO_EXTENSION));
+        
+        return match ($extension) {
+            'png' => 'image/png',
+            'jpg', 'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'webp' => 'image/webp',
+            'bmp' => 'image/bmp',
+            'ico' => 'image/x-icon',
+            default => 'image/png', // Fallback default
+        };
     }
 
     /**
