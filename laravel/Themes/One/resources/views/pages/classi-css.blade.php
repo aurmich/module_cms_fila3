@@ -202,4 +202,6 @@
 <div class="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10">menu mobile blur</div>
 <div class="bg-[#ff5f7e75]">bg transparent</div>
 <div class="bg-[url('/img/soluzione-unita-per-desktop.svg')]">bg soluzione unita</div>
+<div class="bg-[#272c4dd6]">bg</div>
+<div class="p-4">p 4</div>
 </x-layouts.app>
