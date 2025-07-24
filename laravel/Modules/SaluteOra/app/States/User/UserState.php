@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\States\User;
 
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
+use Modules\Xot\Filament\Traits\TransTrait;
 //use Filament\Support\Contracts\HasLabel;
 
 /**
@@ -16,20 +17,8 @@ use Spatie\ModelStates\StateConfig;
  */
 abstract class UserState extends State
 {
-    /**
-     * Restituisce l'etichetta leggibile dello stato.
-     */
-    abstract public function label(): string;
-
-    /**
-     * Restituisce il colore associato allo stato.
-     */
-    abstract public function color(): string;
-
-    /**
-     * Restituisce l'icona associata allo stato.
-     */
-    abstract public function icon(): string;
+    use TransTrait;
+    
 
     /**
      * Configura le transizioni di stato consentite.
@@ -76,5 +65,93 @@ abstract class UserState extends State
             ->registerState(Suspended::class)
             ->registerState(IntegrationRequested::class)
             ->registerState(IntegrationCompleted::class);
+    }
+
+
+    public static function getName(): string
+    {
+        /** @phpstan-ignore-next-line */
+        return static::$name ?? Str::of(class_basename(static::class))->snake()->toString();
+    }
+
+    public function label(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::getName().'.label');
+        //return 'Annullato';
+    }
+
+    public function color(): string
+    {
+        
+        return static::transClass(__CLASS__,'states.'.static::getName().'.color');
+        
+    }
+
+    public function bgColor(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::getName().'.bg_color');
+        //return 'info';
+    }
+
+    public function icon(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::getName().'.icon');
+        //return 'heroicon-o-x-circle';
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(__CLASS__,'states.'.static::getName().'.modal_heading');
+        //return 'Annulla Appuntamento';
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(__CLASS__,'states.'.static::getName().'.modal_description');
+        //return 'Sei sicuro di voler annullare questo appuntamento?';
+    }
+
+    public function modalFormSchema(): array
+    {
+        return [
+            'message'=>Components\Textarea::make('message')
+                ->required()
+                ->maxLength(255),
+     
+        ];
+    }
+
+    public function modalFillForm(array $arguments,array $data): array
+    {
+        return $data;
+    }
+
+    public function modalAction(array $arguments, array $data):void
+    {
+        $this->processStateAction($arguments,$data);
+    }
+
+    public function processStateAction(array $arguments,array $data): void
+    {
+        $message=Arr::get($data,'message');
+        $appointmentId = $arguments['appointment'];
+        $appointment = Appointment::firstWhere('id',$appointmentId);
+        $stateClass=static::class;
+        $appointment?->state->transitionTo($stateClass,$message);
+        // Per ora implementazione di debug
+        //$this->dispatch('notify', [
+        //    'type' => 'info',
+        //    'message' => 'Funzionalità eliminazione in sviluppo',
+        //]);
+        /*
+        $this->invalidateCache();
+        $this->loadAppointments();
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => __('saluteora::widgets.doctor_appointments.messages.appointment_confirmed'),
+        ]);
+        */
     }
 }

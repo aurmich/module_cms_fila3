@@ -12,11 +12,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
+use Modules\SaluteOra\Models\Appointment;
+use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\UI\Filament\Tables\Columns\IconStateColumn;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\SaluteMo\Filament\Resources\AppointmentResource\Widgets;
 
 class ListAppointments extends XotBaseListRecords
 {
@@ -66,6 +69,14 @@ class ListAppointments extends XotBaseListRecords
              return $res;
          }),//->options(UserTypeEnum::class),
      ];
+    }
+
+    public function getHeaderWidgets(): array
+    {
+        return [
+            //Widgets\AppointmentOverviewWidget::make(['paperino'=>'pluto']),
+            StateOverviewWidget::make(['stateClass'=>AppointmentState::class,'model'=>Appointment::class]),
+        ];
     }
 
    

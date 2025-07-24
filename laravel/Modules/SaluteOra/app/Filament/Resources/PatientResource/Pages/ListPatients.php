@@ -10,6 +10,8 @@ use Illuminate\Support\Arr;
 use Modules\SaluteOra\Models\Patient;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\SaluteOra\States\User\UserState;
+use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\SaluteOra\Filament\Resources\PatientResource;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
@@ -37,6 +39,12 @@ class ListPatients extends ListUsers
         return $columns;
     }
 
-
+    public function getHeaderWidgets(): array
+    {
+        return [
+            
+            StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Patient::class]),
+        ];
+    }
 
 }

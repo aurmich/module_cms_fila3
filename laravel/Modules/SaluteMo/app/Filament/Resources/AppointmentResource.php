@@ -9,6 +9,7 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Models\Appointment;
 use Filament\Resources\Pages\Page;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource\Pages;
+use Modules\SaluteMo\Filament\Resources\AppointmentResource\Widgets;
 
 /**
  * Resource per la gestione degli appuntamenti medici.
@@ -148,4 +149,7 @@ class AppointmentResource extends XotBaseResource
             
         ];
     }
+
+
+    
 }

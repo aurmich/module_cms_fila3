@@ -1,3 +1,0 @@
-<div>
-    <h1>Register {{ $type }}</h1>
-</div>

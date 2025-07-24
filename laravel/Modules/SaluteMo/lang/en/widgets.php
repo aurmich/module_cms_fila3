@@ -10,4 +10,12 @@ return [
         'increase' => ':percent% increase',
         'decrease' => ':percent% decrease',
     ],
+    'appointment_overview' => [
+        'title' => 'Appointments Overview',
+        'description' => 'Compact overview of appointments by status',
+        'empty_state' => 'No appointment states available',
+        'last_updated' => 'Last updated',
+        'total_states' => 'Total states',
+        'helper_text' => '',
+    ],
 ];

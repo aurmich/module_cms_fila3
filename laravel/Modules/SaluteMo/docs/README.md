@@ -27,6 +27,11 @@ SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispos
 - [Widget](filament/widgets.md)
 - [RelationManager](filament/relationmanagers.md) - Gestione relazioni cross-module
 
+### Widget e Componenti UI
+- [Regole Consolidate Widget](./widget-rules-consolidated.md) - Regole complete per widget custom
+- [AppointmentOverviewWidget Design](./appointment-overview-widget-design.md) - Design e implementazione widget appuntamenti
+- [Struttura Traduzioni Widget](./widget-translations-structure.md) - Traduzioni specifiche per widget
+
 ### Service Provider
 - [Service Provider](providers/service-provider.md)
 - [Estensioni XotBase](providers/xotbase-extensions.md)
@@ -62,6 +67,25 @@ Il modulo SaluteMo implementa RelationManager Filament che gestiscono relazioni 
 **Collegamenti esterni:**
 - [Cross-Module Relations](/var/www/html/base_saluteora/docs/cross-module-relations.md) - Architettura generale
 - [SaluteOra RelationManager](/var/www/html/base_saluteora/laravel/Modules/SaluteOra/docs/relationmanagers.md) - Implementazione modelli
+
+## Widget Architecture
+
+### AppointmentOverviewWidget
+
+Il modulo SaluteMo implementa un widget personalizzato per la visualizzazione delle statistiche degli appuntamenti, progettato per essere più compatto ed elegante rispetto al `StatsOverviewWidget` standard di Filament.
+
+**Caratteristiche chiave:**
+- **Layout Responsive**: 9 elementi per riga su desktop
+- **Design Compatto**: Occupazione minima di spazio verticale
+- **XotBaseWidget Integration**: Estende `XotBaseWidget` per consistenza
+- **Caching Intelligente**: Performance ottimizzate per grandi dataset
+
+**Documentazione dettagliata:** [AppointmentOverviewWidget Design](./appointment-overview-widget-design.md)
+
+**Collegamenti correlati:**
+- [Widget Rules Consolidated](./widget-rules-consolidated.md) - Regole complete per widget
+- [Struttura Traduzioni Widget](./widget-translations-structure.md) - Traduzioni specifiche
+- [XotBaseWidget](../../Xot/docs/filament/widgets/xot-base-widget.md) - Classe base widget
 
 ## Problemi Critici Identificati
 
@@ -106,6 +130,7 @@ Punti chiave:
 - Offline data synchronization
 - Mobile-specific configurations
 - Cross-module relation management via Filament
+- Custom widgets for appointment statistics
 
 ## Installation
 

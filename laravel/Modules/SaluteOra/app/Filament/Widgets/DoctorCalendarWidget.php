@@ -14,6 +14,9 @@ class DoctorCalendarWidget extends FullCalendarWidget
     public Model | string | null $model = Appointment::class;
     public string $calendarContainerClass = '';
 
+    protected  ?string $modelLabel = 'Appuntamento'; // Singolare
+    protected ?string $pluralModelLabel = 'Appuntamenti'; // Plurale
+
     protected function headerActions(): array
     {
         return [
@@ -61,7 +64,8 @@ class DoctorCalendarWidget extends FullCalendarWidget
                 'year' => 'numeric',
                 'month' => 'long' // Questo dovrebbe capitalizzare automaticamente
             ],
-            'locale' =>  $lang
+            'locale' =>  $lang,
+            'modal_title' => 'Zibibbo',
         ];
     }
 
@@ -85,9 +89,11 @@ class DoctorCalendarWidget extends FullCalendarWidget
             'last_name' => Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(255),
+                /*
             'fiscal_code' => Forms\Components\TextInput::make('fiscal_code')
                 ->required()
                 ->maxLength(16),
+                */
             'email' => Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
@@ -141,4 +147,12 @@ class DoctorCalendarWidget extends FullCalendarWidget
             )
             ->toArray();
     }
+
+
+    protected function getViewEventModalTitle(): string
+    {
+        return __('Vedi :label', ['label' => __('Appuntamento')]);
+    }
+
+    
 }

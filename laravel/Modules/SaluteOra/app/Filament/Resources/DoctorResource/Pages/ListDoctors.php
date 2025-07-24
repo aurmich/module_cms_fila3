@@ -13,6 +13,8 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Support\Facades\FilamentView;
+use Modules\SaluteOra\States\User\UserState;
+use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\SaluteOra\Filament\Resources\DoctorResource;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\Xot\Actions\File\DownloadZipByPathsDiskAction;
@@ -44,6 +46,14 @@ class ListDoctors extends ListUsers
         });
         */
         return $columns;
+    }
+
+    public function getHeaderWidgets(): array
+    {
+        return [
+            //Widgets\AppointmentOverviewWidget::make(['paperino'=>'pluto']),
+            StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Doctor::class]),
+        ];
     }
 
    

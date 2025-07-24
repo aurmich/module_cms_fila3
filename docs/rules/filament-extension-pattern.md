@@ -54,12 +54,65 @@ class TestSmtpPage extends XotBasePage
 
 ## Errori Comuni da Evitare
 
-1. Non importare classi Filament originali se si estendono le classi XotBase
-2. Non definire proprietà di navigazione (`$navigationIcon`, `$navigationGroup`, ecc.) se la classe estende `XotBaseResource`
-3. Non implementare metodi standard che sono già forniti dalle classi base
+### ❌ ERRORE GRAVE: Documentazione in Posizione Sbagliata
+```php
+// ❌ ERRORE GRAVE - Documentazione widget specifico in cartella generica
+/var/www/html/_bases/base_saluteora/docs/widgets/appointment-widget.md
 
-## Documentazione Correlata
+// ✅ CORRETTO - Documentazione widget specifico nella cartella del modulo
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/docs/appointment-widget.md
+```
 
-- [Architettura Filament in SaluteOra](../filament/architecture.md)
-- [XotBase Classes Analysis](../../laravel/Modules/Xot/docs/XOT_BASE_CLASSES_ANALYSIS.md)
-- [Filament Form Schema Conventions](../rules/filament-form-schema.md)
+### ❌ ERRORE GRAVE: Estensione Diretta Filament
+```php
+// ❌ ERRORE GRAVE
+class MyWidget extends Widget
+{
+    // Implementazione...
+}
+
+// ✅ CORRETTO
+class MyWidget extends XotBaseWidget
+{
+    // Implementazione...
+}
+```
+
+## Regole Critiche per Documentazione
+
+### ⚠️ REGOLA CRITICA: POSIZIONAMENTO DOCUMENTAZIONE
+
+**ERRORE GRAVE**: Posizionare documentazione specifica di un modulo nella cartella docs generica.
+
+### Struttura Corretta:
+- **Documentazione Generica**: `/var/www/html/_bases/base_saluteora/docs/`
+- **Documentazione Modulo**: `/var/www/html/_bases/base_saluteora/laravel/Modules/{ModuleName}/docs/`
+
+### Quando Usare Quale:
+- **Widget/Resource specifici** → **OBBLIGATORIO** cartella docs del modulo
+- **Regole generali** → cartella docs generica
+
+## Checklist di Verifica
+
+Prima di implementare qualsiasi componente Filament:
+
+1. **Estende XotBase?** ✅
+2. **Documentazione nella cartella corretta?** ✅
+3. **Namespace corretto?** ✅
+4. **Strict types dichiarato?** ✅
+5. **PHPDoc completo?** ✅
+
+## Penalità per Violazioni
+
+- **Prima violazione**: Correzione immediata
+- **Violazioni ripetute**: Rischio di perdita di fiducia
+- **Violazioni gravi**: Possibile interruzione del lavoro
+
+## Processo di Correzione
+
+Se viene rilevato un errore:
+
+1. **Eliminare immediatamente** il file dalla posizione errata
+2. **Ricreare il file** nella posizione corretta
+3. **Aggiornare le regole** per evitare ripetizioni
+4. **Documentare l'errore** per apprendimento futuro
