@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'user' => [
         'pending' => [
@@ -33,6 +35,45 @@ return [
             'tooltip' => 'The user has requested integration',
         ],
     ],
+
+    // Patient States - Patient States
+    'patient' => [
+        'active' => [
+            'label' => 'Active',
+            'description' => 'Patient active in the system',
+            'tooltip' => 'The patient is active and can book appointments',
+        ],
+        'integration_requested' => [
+            'label' => 'Integration Requested',
+            'description' => 'Integration request in progress',
+            'tooltip' => 'The patient has requested integration',
+        ],
+        'integration_completed' => [
+            'label' => 'Integration Completed',
+            'description' => 'Integration completed successfully',
+            'tooltip' => 'The patient has completed the integration',
+        ],
+    ],
+
+    // Doctor States - Doctor States
+    'doctor' => [
+        'active' => [
+            'label' => 'Active',
+            'description' => 'Doctor active in the system',
+            'tooltip' => 'The doctor is active and can receive appointments',
+        ],
+        'integration_requested' => [
+            'label' => 'Integration Requested',
+            'description' => 'Integration request in progress',
+            'tooltip' => 'The doctor has requested integration',
+        ],
+        'integration_completed' => [
+            'label' => 'Integration Completed',
+            'description' => 'Integration completed successfully',
+            'tooltip' => 'The doctor has completed the integration',
+        ],
+    ],
+
     'appointment' => [
         'pending' => [
             'label' => 'Pending',

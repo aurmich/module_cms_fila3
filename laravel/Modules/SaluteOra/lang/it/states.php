@@ -37,6 +37,44 @@ return [
         ],
     ],
 
+    // Patient States - Stati Paziente
+    'patient' => [
+        'active' => [
+            'label' => 'Attivo',
+            'description' => 'Paziente attivo nel sistema',
+            'tooltip' => 'Il paziente è attivo e può prenotare appuntamenti',
+        ],
+        'integration_requested' => [
+            'label' => 'Integrazione richiesta',
+            'description' => 'Richiesta di integrazione in corso',
+            'tooltip' => 'Il paziente ha richiesto l\'integrazione',
+        ],
+        'integration_completed' => [
+            'label' => 'Integrazione completata',
+            'description' => 'Integrazione completata con successo',
+            'tooltip' => 'Il paziente ha completato l\'integrazione',
+        ],
+    ],
+
+    // Doctor States - Stati Dottore
+    'doctor' => [
+        'active' => [
+            'label' => 'Attivo',
+            'description' => 'Dottore attivo nel sistema',
+            'tooltip' => 'Il dottore è attivo e può ricevere appuntamenti',
+        ],
+        'integration_requested' => [
+            'label' => 'Integrazione richiesta',
+            'description' => 'Richiesta di integrazione in corso',
+            'tooltip' => 'Il dottore ha richiesto l\'integrazione',
+        ],
+        'integration_completed' => [
+            'label' => 'Integrazione completata',
+            'description' => 'Integrazione completata con successo',
+            'tooltip' => 'Il dottore ha completato l\'integrazione',
+        ],
+    ],
+
     // Appointment States - Stati degli Appuntamenti
     'appointment' => [
         'pending' => [

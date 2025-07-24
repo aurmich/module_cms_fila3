@@ -242,4 +242,31 @@ return [
             'rejected' => 'Rifiutato',
         ],
     ],
+
+    // Traduzioni per i widget di registrazione e stati
+    'user_type_registrations_chart' => [
+        'heading' => 'Registrazioni Pazienti',
+        'title' => 'Trend Registrazioni',
+        'label' => 'Pazienti Registrati',
+        'description' => 'Andamento delle registrazioni pazienti negli ultimi 30 giorni',
+    ],
+
+    'states_chart' => [
+        'heading' => 'Stati Pazienti',
+        'title' => 'Distribuzione Stati',
+        'label' => 'Numero Pazienti',
+        'description' => 'Distribuzione degli stati dei pazienti nel sistema',
+    ],
+
+    // Traduzioni per i widget degli appuntamenti
+    'appointment' => [
+        'widgets' => [
+            'states_chart' => [
+                'heading' => 'Stati Appuntamenti',
+                'title' => 'Distribuzione Stati Appuntamenti',
+                'label' => 'Numero Appuntamenti',
+                'description' => 'Distribuzione degli stati degli appuntamenti nel sistema',
+            ],
+        ],
+    ],
 ];

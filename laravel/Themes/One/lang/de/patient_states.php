@@ -4,43 +4,43 @@ declare(strict_types=1);
 
 return [
     'active' => [
-        'label' => 'Attivo',
+        'label' => 'Aktiv',
         'color' => 'success',
     ],
     'inactive' => [
-        'label' => 'Inattivo',
+        'label' => 'Inaktiv',
         'color' => 'danger',
     ],
     'pending' => [
-        'label' => 'In attesa',
+        'label' => 'Ausstehend',
         'color' => 'warning',
     ],
     'rejected' => [
-        'label' => 'Rifiutato',
+        'label' => 'Abgelehnt',
         'color' => 'danger',
     ],
     'integration_requested' => [
-        'label' => 'Richiesta di integrazione',
+        'label' => 'Integration angefordert',
         'color' => 'warning',
     ],
     'integration_approved' => [
-        'label' => 'Integrazione approvata',
+        'label' => 'Integration genehmigt',
         'color' => 'success',
     ],
     'integration_rejected' => [
-        'label' => 'Integrazione rifiutata',
+        'label' => 'Integration abgelehnt',
         'color' => 'danger',
     ],
     'integration_pending' => [
-        'label' => 'Integrazione in attesa',
+        'label' => 'Integration ausstehend',
         'color' => 'warning',
     ],
     'integration_completed' => [
-        'label' => 'Integrazione completata',
+        'label' => 'Integration abgeschlossen',
         'color' => 'success',
     ],
     'integration_cancelled' => [
-        'label' => 'Integrazione annullata',
+        'label' => 'Integration storniert',
         'color' => 'danger',
     ],
 ];

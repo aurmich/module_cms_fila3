@@ -217,4 +217,31 @@ return [
             'rejected' => 'Rifiutato',
         ],
     ],
+
+    // Widget-Übersetzungen für Registrierungen und Zustände
+    'user_type_registrations_chart' => [
+        'heading' => 'Patientenregistrierungen',
+        'title' => 'Registrierungstrend',
+        'label' => 'Registrierte Patienten',
+        'description' => 'Patientenregistrierungstrend in den letzten 30 Tagen',
+    ],
+
+    'states_chart' => [
+        'heading' => 'Patientenzustände',
+        'title' => 'Zustandsverteilung',
+        'label' => 'Anzahl der Patienten',
+        'description' => 'Verteilung der Patientenzustände im System',
+    ],
+
+    // Widget-Übersetzungen für Termine
+    'appointment' => [
+        'widgets' => [
+            'states_chart' => [
+                'heading' => 'Terminzustände',
+                'title' => 'Termin-Zustandsverteilung',
+                'label' => 'Anzahl der Termine',
+                'description' => 'Verteilung der Terminzustände im System',
+            ],
+        ],
+    ],
 ];

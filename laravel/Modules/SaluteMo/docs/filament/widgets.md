@@ -13,16 +13,42 @@ Modules/SaluteMo/app/Filament/Widgets/
 namespace Modules\SaluteMo\Filament\Widgets;
 ```
 
-### Estensione Base
-**IMPORTANTE**: Non estendere mai direttamente le classi Filament. Utilizzare sempre le classi base XotBase:
+### Estensione Base - REGOLA CRITICA
+**CRITICO**: NON estendere MAI direttamente le classi Filament. Utilizzare SEMPRE le classi XotBase:
 
 ```php
-use Modules\Xot\Filament\Widgets\XotBaseWidget;
+// ✅ CORRETTO - SEMPRE USARE
+use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
 
-class MobileActivityWidget extends XotBaseWidget
+class ChartWidgetExample extends XotBaseChartWidget
 {
-    // Implementazione...
+    // CRITICO: getHeading() deve essere public
+    public function getHeading(): ?string
+    {
+        return __('salutemo::widgets.widget_name.title');
+    }
 }
+```
+
+**REGOLA FONDAMENTALE**: 
+- Se prima estendevi `\Filament\Widgets\ChartWidget`
+- Ora estendi `\Modules\Xot\Filament\Widgets\XotBaseChartWidget`
+- Preserva sempre la struttura e il nome della classe originale
+- Aggiungi sempre il prefisso `XotBase`
+
+### Esempi di Estensione Corretta
+```php
+// ChartWidget
+use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
+class WidgetName extends XotBaseChartWidget
+
+// Widget generico
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
+class WidgetName extends XotBaseWidget
+
+// StatsOverviewWidget
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
+class WidgetName extends XotBaseStatsOverviewWidget
 ```
 
 ## Convenzione Percorso delle Viste
@@ -58,6 +84,87 @@ Modules/SaluteMo/resources/views/filament/widgets/
 - Convertire il nome della classe in kebab-case
 - Rimuovere il suffisso 'Widget' se presente
 - Esempio: `MobileActivityWidget` → `mobile-activity`
+
+## ChartWidget - Regole Critiche
+
+### Metodo getHeading() - PUBBLICO OBBLIGATORIO
+**CRITICO**: Il metodo `getHeading()` nei ChartWidget deve essere `public`, non `protected`:
+
+```php
+// ✅ CORRETTO
+public function getHeading(): ?string
+{
+    return __('salutemo::widgets.widget_name.title');
+}
+
+// ❌ ERRATO - Causa errore di access level
+protected function getHeading(): ?string
+{
+    return __('salutemo::widgets.widget_name.title');
+}
+```
+
+### Proprietà $isLazy - BOOL OBBLIGATORIO
+**CRITICO**: La proprietà `$isLazy` deve essere `bool`, non `?bool`:
+
+```php
+// ✅ CORRETTO
+protected static bool $isLazy = true;
+
+// ❌ ERRATO - Causa errore di tipo
+protected static ?bool $isLazy = true;
+```
+
+### Struttura Standard ChartWidget
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteMo\Filament\Widgets;
+
+use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
+use Illuminate\Support\Facades\Cache;
+
+class ExampleChartWidget extends XotBaseChartWidget
+{
+    protected static ?string $heading = null;
+    protected static ?int $sort = 1;
+    protected static bool $isLazy = true;  // CRITICO: bool, non ?bool
+    protected static ?string $pollingInterval = '5m';
+
+    // CRITICO: public, non protected
+    public function getHeading(): ?string
+    {
+        return __('salutemo::widgets.example_chart.title');
+    }
+
+    protected function getData(): array
+    {
+        // Implementazione dati
+    }
+
+    protected function getType(): string
+    {
+        return 'line'; // o 'bar', 'doughnut', etc.
+    }
+
+    protected function getOptions(): array
+    {
+        // Configurazione grafico
+    }
+
+    protected function getHeight(): ?string
+    {
+        return '300px';
+    }
+
+    public static function canView(): bool
+    {
+        return true;
+    }
+}
+```
 
 ## Traduzione nei Widget
 
@@ -170,6 +277,39 @@ class MobileAppointmentWidget extends FullCalendarWidget
         // Implementazione per il recupero degli appuntamenti mobile
     }
 }
+```
+
+## Checklist Prevenzione Errori
+
+### Prima di Salvare un Widget
+**CRITICO**: Verificare sempre questi punti per evitare errori di tipo e access level:
+
+- [ ] `getHeading()` è `public`, non `protected`
+- [ ] `$isLazy` è `bool`, non `?bool`
+- [ ] `$sort` è `?int`, non `int`
+- [ ] `$heading` è `?string`, non `string`
+- [ ] `$pollingInterval` è `?string`, non `string`
+- [ ] Tutti gli import sono corretti
+- [ ] Namespace è corretto
+- [ ] Estensione è `ChartWidget` per grafici
+- [ ] Metodi `getData()`, `getType()`, `getOptions()` sono `protected`
+- [ ] Metodo `canView()` è `public static`
+
+### Errori Comuni da Evitare
+```php
+// ❌ ERRORE: Access level
+protected function getHeading(): ?string
+
+// ❌ ERRORE: Type mismatch
+protected static ?bool $isLazy = true;
+
+// ❌ ERRORE: Type mismatch
+protected static int $sort = 1;
+
+// ✅ CORRETTO
+public function getHeading(): ?string
+protected static bool $isLazy = true;
+protected static ?int $sort = 1;
 ```
 
 ## Collegamenti Correlati

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'user' => [
         'pending' => [
@@ -33,6 +35,45 @@ return [
             'tooltip' => 'Der Benutzer hat eine Integration angefordert',
         ],
     ],
+
+    // Patient States - Patientenzustände
+    'patient' => [
+        'active' => [
+            'label' => 'Aktiv',
+            'description' => 'Aktiver Patient im System',
+            'tooltip' => 'Der Patient ist aktiv und kann Termine buchen',
+        ],
+        'integration_requested' => [
+            'label' => 'Integration angefordert',
+            'description' => 'Integrationsanfrage läuft',
+            'tooltip' => 'Der Patient hat eine Integration angefordert',
+        ],
+        'integration_completed' => [
+            'label' => 'Integration abgeschlossen',
+            'description' => 'Integration erfolgreich abgeschlossen',
+            'tooltip' => 'Der Patient hat die Integration abgeschlossen',
+        ],
+    ],
+
+    // Doctor States - Arztzustände
+    'doctor' => [
+        'active' => [
+            'label' => 'Aktiv',
+            'description' => 'Aktiver Arzt im System',
+            'tooltip' => 'Der Arzt ist aktiv und kann Termine erhalten',
+        ],
+        'integration_requested' => [
+            'label' => 'Integration angefordert',
+            'description' => 'Integrationsanfrage läuft',
+            'tooltip' => 'Der Arzt hat eine Integration angefordert',
+        ],
+        'integration_completed' => [
+            'label' => 'Integration abgeschlossen',
+            'description' => 'Integration erfolgreich abgeschlossen',
+            'tooltip' => 'Der Arzt hat die Integration abgeschlossen',
+        ],
+    ],
+
     'appointment' => [
         'pending' => [
             'label' => 'Ausstehend',

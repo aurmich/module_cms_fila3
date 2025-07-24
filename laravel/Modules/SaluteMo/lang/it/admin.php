@@ -1,0 +1,480 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'navigation' => [
+        'label' => 'Backoffice',
+        'group' => 'Gestione Utenti',
+        'icon' => 'heroicon-o-users',
+        'sort' => 10,
+    ],
+
+    'fields' => [
+        'first_name' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci il nome',
+            'help' => 'Il nome dell\'utente backoffice',
+            'description' => 'Nome personale dell\'amministratore',
+            'tooltip' => 'Nome dell\'utente backoffice',
+            'helper_text' => '',
+        ],
+        'last_name' => [
+            'label' => 'Cognome',
+            'placeholder' => 'Inserisci il cognome',
+            'help' => 'Il cognome dell\'utente backoffice',
+            'description' => 'Cognome personale dell\'amministratore',
+            'tooltip' => 'Cognome dell\'utente backoffice',
+            'helper_text' => '',
+        ],
+        'email' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci l\'indirizzo email',
+            'help' => 'L\'email verrà utilizzata per l\'accesso al sistema',
+            'description' => 'Indirizzo email univoco per l\'accesso',
+            'tooltip' => 'Email per l\'autenticazione',
+            'helper_text' => '',
+        ],
+        'date_of_birth' => [
+            'label' => 'Data di nascita',
+            'placeholder' => 'Seleziona la data di nascita',
+            'help' => 'Data di nascita dell\'utente backoffice',
+            'description' => 'Data di nascita per documentazione',
+            'tooltip' => 'Data di nascita',
+            'helper_text' => '',
+        ],
+        'gender' => [
+            'label' => 'Genere',
+            'placeholder' => 'Seleziona il genere',
+            'help' => 'Genere dell\'utente backoffice',
+            'description' => 'Identificazione del genere',
+            'tooltip' => 'Genere dell\'utente',
+            'helper_text' => '',
+            'options' => [
+                'male' => 'Maschio',
+                'female' => 'Femmina',
+                'other' => 'Altro',
+            ],
+        ],
+        'phone' => [
+            'label' => 'Telefono',
+            'placeholder' => 'Inserisci il numero di telefono',
+            'help' => 'Numero di telefono per contatti',
+            'description' => 'Numero di telefono dell\'utente',
+            'tooltip' => 'Telefono per contatti',
+            'helper_text' => '',
+        ],
+        'admin_level' => [
+            'label' => 'Livello Amministrativo',
+            'placeholder' => 'Seleziona il livello amministrativo',
+            'help' => 'Il livello determina le responsabilità e i permessi',
+            'description' => 'Livello gerarchico nell\'amministrazione',
+            'tooltip' => 'Livello amministrativo',
+            'helper_text' => '',
+            'options' => [
+                'junior' => 'Junior',
+                'senior' => 'Senior',
+                'manager' => 'Manager',
+                'director' => 'Direttore',
+            ],
+        ],
+        'admin_role' => [
+            'label' => 'Ruolo Amministrativo',
+            'placeholder' => 'Seleziona il ruolo amministrativo',
+            'help' => 'Il ruolo definisce le funzioni specifiche',
+            'description' => 'Ruolo specifico nell\'amministrazione',
+            'tooltip' => 'Ruolo amministrativo',
+            'helper_text' => '',
+            'options' => [
+                'system_admin' => 'Amministratore di Sistema',
+                'studio_manager' => 'Manager di Studio',
+                'support_admin' => 'Amministratore Supporto',
+                'data_analyst' => 'Analista Dati',
+            ],
+        ],
+        'department' => [
+            'label' => 'Dipartimento',
+            'placeholder' => 'Inserisci il dipartimento',
+            'help' => 'Dipartimento di appartenenza',
+            'description' => 'Dipartimento organizzativo',
+            'tooltip' => 'Dipartimento',
+            'helper_text' => '',
+        ],
+        'can_access_all_studios' => [
+            'label' => 'Accesso a Tutti gli Studi',
+            'help' => 'Consente l\'accesso a tutti gli studi del sistema',
+            'description' => 'Permesso di accesso globale',
+            'tooltip' => 'Accesso globale agli studi',
+            'helper_text' => '',
+        ],
+        'security_clearance' => [
+            'label' => 'Livello di Sicurezza',
+            'placeholder' => 'Seleziona il livello di sicurezza',
+            'help' => 'Il livello di sicurezza determina l\'accesso ai dati sensibili',
+            'description' => 'Livello di autorizzazione per dati sensibili',
+            'tooltip' => 'Livello di sicurezza',
+            'helper_text' => '',
+            'options' => [
+                'basic' => 'Base',
+                'intermediate' => 'Intermedio',
+                'high' => 'Alto',
+                'top_secret' => 'Top Secret',
+            ],
+        ],
+        'two_factor_enabled' => [
+            'label' => 'Autenticazione a Due Fattori',
+            'help' => 'Abilita l\'autenticazione a due fattori per maggiore sicurezza',
+            'description' => 'Sicurezza aggiuntiva per l\'accesso',
+            'tooltip' => '2FA abilitato',
+            'helper_text' => '',
+        ],
+        'permissions' => [
+            'label' => 'Permessi',
+            'help' => 'Seleziona i permessi specifici per questo utente',
+            'description' => 'Permessi dettagliati dell\'utente',
+            'tooltip' => 'Permessi specifici',
+            'helper_text' => '',
+            'options' => [
+                'user_management' => 'Gestione Utenti',
+                'studio_management' => 'Gestione Studi',
+                'appointment_management' => 'Gestione Appuntamenti',
+                'reporting' => 'Reporting',
+                'system_configuration' => 'Configurazione Sistema',
+            ],
+        ],
+        'module_access' => [
+            'label' => 'Accesso ai Moduli',
+            'help' => 'Seleziona i moduli a cui l\'utente può accedere',
+            'description' => 'Moduli disponibili per l\'utente',
+            'tooltip' => 'Moduli accessibili',
+            'helper_text' => '',
+            'options' => [
+                'salutemo' => 'SaluteMo',
+                'user' => 'User',
+                'geo' => 'Geo',
+                'ui' => 'UI',
+                'job' => 'Job',
+            ],
+        ],
+        'state' => [
+            'label' => 'Stato',
+            'placeholder' => 'Seleziona lo stato',
+            'help' => 'Stato corrente dell\'utente backoffice',
+            'description' => 'Stato dell\'account utente',
+            'tooltip' => 'Stato utente',
+            'helper_text' => '',
+            'options' => [
+                'active' => 'Attivo',
+                'pending' => 'In Attesa',
+                'integration_requested' => 'Integrazione Richiesta',
+            ],
+        ],
+        'lang' => [
+            'label' => 'Lingua',
+            'placeholder' => 'Seleziona la lingua',
+            'help' => 'Lingua preferita per l\'interfaccia',
+            'description' => 'Lingua dell\'interfaccia utente',
+            'tooltip' => 'Lingua preferita',
+            'helper_text' => '',
+            'options' => [
+                'it' => 'Italiano',
+                'en' => 'Inglese',
+                'de' => 'Tedesco',
+            ],
+        ],
+        'gdpr_consent' => [
+            'label' => 'Consenso GDPR',
+            'help' => 'Consenso al trattamento dei dati personali',
+            'description' => 'Autorizzazione al trattamento dati',
+            'tooltip' => 'Consenso GDPR',
+            'helper_text' => '',
+        ],
+        'name' => [
+            'label' => 'Nome Completo',
+            'placeholder' => 'Nome e cognome',
+            'help' => 'Nome completo dell\'utente backoffice',
+            'description' => 'Nome completo per identificazione',
+            'tooltip' => 'Nome completo',
+            'helper_text' => '',
+        ],
+        'created_at' => [
+            'label' => 'Data di Creazione',
+            'help' => 'Data di creazione dell\'account',
+            'description' => 'Quando è stato creato l\'account',
+            'tooltip' => 'Data creazione',
+            'helper_text' => '',
+        ],
+        'updated_at' => [
+            'label' => 'Ultima Modifica',
+            'help' => 'Data dell\'ultima modifica',
+            'description' => 'Quando è stata fatta l\'ultima modifica',
+            'tooltip' => 'Ultima modifica',
+            'helper_text' => '',
+        ],
+    ],
+
+    'actions' => [
+        'create' => [
+            'label' => 'Nuovo Backoffice',
+            'icon' => 'heroicon-o-plus',
+            'color' => 'primary',
+            'tooltip' => 'Crea un nuovo utente backoffice',
+            'modal_heading' => 'Crea nuovo utente backoffice',
+            'modal_description' => 'Inserisci i dati per creare un nuovo utente backoffice',
+            'success' => 'Utente backoffice creato con successo',
+            'error' => 'Errore durante la creazione dell\'utente backoffice',
+        ],
+        'view' => [
+            'label' => 'Visualizza',
+            'icon' => 'heroicon-o-eye',
+            'color' => 'info',
+            'tooltip' => 'Visualizza i dettagli dell\'utente backoffice',
+            'modal_heading' => 'Dettagli utente backoffice',
+        ],
+        'edit' => [
+            'label' => 'Modifica',
+            'icon' => 'heroicon-o-pencil',
+            'color' => 'warning',
+            'tooltip' => 'Modifica l\'utente backoffice',
+            'modal_heading' => 'Modifica utente backoffice',
+            'modal_description' => 'Modifica i dati dell\'utente backoffice',
+            'success' => 'Utente backoffice modificato con successo',
+            'error' => 'Errore durante la modifica dell\'utente backoffice',
+        ],
+        'delete' => [
+            'label' => 'Elimina',
+            'icon' => 'heroicon-o-trash',
+            'color' => 'danger',
+            'tooltip' => 'Elimina l\'utente backoffice',
+            'modal_heading' => 'Elimina utente backoffice',
+            'modal_description' => 'Sei sicuro di voler eliminare questo utente backoffice? Questa azione è irreversibile.',
+            'success' => 'Utente backoffice eliminato con successo',
+            'error' => 'Errore durante l\'eliminazione dell\'utente backoffice',
+            'confirmation' => 'Sei sicuro di voler eliminare questo utente backoffice?',
+        ],
+        'activate' => [
+            'label' => 'Attiva',
+            'icon' => 'heroicon-o-check-circle',
+            'color' => 'success',
+            'tooltip' => 'Attiva l\'utente backoffice',
+            'modal_heading' => 'Attiva utente backoffice',
+            'modal_description' => 'Attiva l\'account dell\'utente backoffice',
+            'success' => 'Utente backoffice attivato con successo',
+            'error' => 'Errore durante l\'attivazione dell\'utente backoffice',
+        ],
+        'deactivate' => [
+            'label' => 'Disattiva',
+            'icon' => 'heroicon-o-x-circle',
+            'color' => 'danger',
+            'tooltip' => 'Disattiva l\'utente backoffice',
+            'modal_heading' => 'Disattiva utente backoffice',
+            'modal_description' => 'Disattiva l\'account dell\'utente backoffice',
+            'success' => 'Utente backoffice disattivato con successo',
+            'error' => 'Errore durante la disattivazione dell\'utente backoffice',
+        ],
+        'reset_password' => [
+            'label' => 'Reset Password',
+            'icon' => 'heroicon-o-key',
+            'color' => 'warning',
+            'tooltip' => 'Reimposta la password dell\'utente backoffice',
+            'modal_heading' => 'Reset password utente backoffice',
+            'modal_description' => 'Invia un link per reimpostare la password',
+            'success' => 'Link di reset password inviato con successo',
+            'error' => 'Errore durante l\'invio del link di reset',
+        ],
+        'export' => [
+            'label' => 'Esporta',
+            'icon' => 'heroicon-o-document-download',
+            'color' => 'info',
+            'tooltip' => 'Esporta la lista degli utenti backoffice',
+            'success' => 'Esportazione completata con successo',
+            'error' => 'Errore durante l\'esportazione',
+        ],
+    ],
+
+    'filters' => [
+        'admin_role' => [
+            'label' => 'Ruolo Amministrativo',
+            'placeholder' => 'Filtra per ruolo',
+        ],
+        'state' => [
+            'label' => 'Stato',
+            'placeholder' => 'Filtra per stato',
+        ],
+        'security_clearance' => [
+            'label' => 'Livello di Sicurezza',
+            'placeholder' => 'Filtra per livello di sicurezza',
+        ],
+        'admin_level' => [
+            'label' => 'Livello Amministrativo',
+            'placeholder' => 'Filtra per livello',
+        ],
+        'department' => [
+            'label' => 'Dipartimento',
+            'placeholder' => 'Filtra per dipartimento',
+        ],
+        'date_range' => [
+            'label' => 'Intervallo Date',
+            'placeholder' => 'Seleziona intervallo date',
+        ],
+    ],
+
+    'bulk_actions' => [
+        'activate_selected' => [
+            'label' => 'Attiva Selezionati',
+            'modal_heading' => 'Attiva utenti backoffice selezionati',
+            'modal_description' => 'Attiva tutti gli utenti backoffice selezionati',
+            'success' => 'Utenti backoffice attivati con successo',
+            'error' => 'Errore durante l\'attivazione degli utenti backoffice',
+        ],
+        'deactivate_selected' => [
+            'label' => 'Disattiva Selezionati',
+            'modal_heading' => 'Disattiva utenti backoffice selezionati',
+            'modal_description' => 'Disattiva tutti gli utenti backoffice selezionati',
+            'success' => 'Utenti backoffice disattivati con successo',
+            'error' => 'Errore durante la disattivazione degli utenti backoffice',
+        ],
+        'delete_selected' => [
+            'label' => 'Elimina Selezionati',
+            'modal_heading' => 'Elimina utenti backoffice selezionati',
+            'modal_description' => 'Sei sicuro di voler eliminare tutti gli utenti backoffice selezionati? Questa azione è irreversibile.',
+            'success' => 'Utenti backoffice eliminati con successo',
+            'error' => 'Errore durante l\'eliminazione degli utenti backoffice',
+            'confirmation' => 'Sei sicuro di voler eliminare gli utenti backoffice selezionati?',
+        ],
+        'export_selected' => [
+            'label' => 'Esporta Selezionati',
+            'modal_heading' => 'Esporta utenti backoffice selezionati',
+            'modal_description' => 'Esporta i dati degli utenti backoffice selezionati',
+            'success' => 'Esportazione completata con successo',
+            'error' => 'Errore durante l\'esportazione',
+        ],
+    ],
+
+    'messages' => [
+        'created' => 'Utente backoffice creato con successo',
+        'updated' => 'Utente backoffice aggiornato con successo',
+        'deleted' => 'Utente backoffice eliminato con successo',
+        'activated' => 'Utente backoffice attivato con successo',
+        'deactivated' => 'Utente backoffice disattivato con successo',
+        'password_reset_sent' => 'Link di reset password inviato con successo',
+        'no_permission' => 'Non hai i permessi per eseguire questa azione',
+        'user_not_found' => 'Utente backoffice non trovato',
+        'invalid_data' => 'Dati non validi',
+        'email_already_exists' => 'Email già esistente nel sistema',
+        'security_level_too_high' => 'Livello di sicurezza troppo alto per le tue autorizzazioni',
+    ],
+
+    'notifications' => [
+        'created' => [
+            'title' => 'Nuovo utente backoffice creato',
+            'body' => 'Un nuovo utente backoffice è stato creato con successo',
+        ],
+        'updated' => [
+            'title' => 'Utente backoffice aggiornato',
+            'body' => 'L\'utente backoffice è stato aggiornato con successo',
+        ],
+        'deleted' => [
+            'title' => 'Utente backoffice eliminato',
+            'body' => 'L\'utente backoffice è stato eliminato con successo',
+        ],
+        'activated' => [
+            'title' => 'Utente backoffice attivato',
+            'body' => 'L\'utente backoffice è stato attivato con successo',
+        ],
+        'deactivated' => [
+            'title' => 'Utente backoffice disattivato',
+            'body' => 'L\'utente backoffice è stato disattivato con successo',
+        ],
+        'password_reset' => [
+            'title' => 'Reset password richiesto',
+            'body' => 'Un link di reset password è stato inviato all\'email dell\'utente',
+        ],
+        'error' => [
+            'title' => 'Errore',
+            'body' => 'Si è verificato un errore durante l\'operazione',
+        ],
+    ],
+
+    'validation' => [
+        'first_name' => [
+            'required' => 'Il nome è obbligatorio',
+            'string' => 'Il nome deve essere una stringa',
+            'max' => 'Il nome non può superare i 255 caratteri',
+        ],
+        'last_name' => [
+            'required' => 'Il cognome è obbligatorio',
+            'string' => 'Il cognome deve essere una stringa',
+            'max' => 'Il cognome non può superare i 255 caratteri',
+        ],
+        'email' => [
+            'required' => 'L\'email è obbligatoria',
+            'email' => 'L\'email deve essere valida',
+            'unique' => 'Questa email è già in uso',
+            'max' => 'L\'email non può superare i 255 caratteri',
+        ],
+        'admin_level' => [
+            'required' => 'Il livello amministrativo è obbligatorio',
+            'in' => 'Il livello amministrativo non è valido',
+        ],
+        'admin_role' => [
+            'required' => 'Il ruolo amministrativo è obbligatorio',
+            'in' => 'Il ruolo amministrativo non è valido',
+        ],
+        'security_clearance' => [
+            'required' => 'Il livello di sicurezza è obbligatorio',
+            'in' => 'Il livello di sicurezza non è valido',
+        ],
+        'state' => [
+            'required' => 'Lo stato è obbligatorio',
+            'in' => 'Lo stato non è valido',
+        ],
+        'lang' => [
+            'required' => 'La lingua è obbligatoria',
+            'in' => 'La lingua non è valida',
+        ],
+        'date_of_birth' => [
+            'date' => 'La data di nascita deve essere una data valida',
+            'before' => 'La data di nascita deve essere nel passato',
+        ],
+        'phone' => [
+            'string' => 'Il telefono deve essere una stringa',
+            'max' => 'Il telefono non può superare i 255 caratteri',
+        ],
+    ],
+
+    'search_placeholder' => 'Cerca utenti backoffice...',
+
+    'empty_state' => [
+        'title' => 'Nessun utente backoffice trovato',
+        'description' => 'Non ci sono ancora utenti backoffice nel sistema',
+        'action' => 'Crea il primo utente backoffice',
+    ],
+
+    'stats' => [
+        'total_admins' => 'Totale Backoffice',
+        'active_admins' => 'Backoffice Attivi',
+        'pending_admins' => 'Backoffice in Attesa',
+        'admins_by_role' => 'Backoffice per Ruolo',
+        'admins_by_level' => 'Backoffice per Livello',
+    ],
+
+    'wizard' => [
+        'personal_info_step' => [
+            'title' => 'Informazioni Personali',
+            'description' => 'Inserisci le informazioni personali dell\'utente backoffice',
+        ],
+        'admin_details_step' => [
+            'title' => 'Dettagli Amministrativi',
+            'description' => 'Configura i dettagli amministrativi e il ruolo',
+        ],
+        'security_step' => [
+            'title' => 'Sicurezza e Permessi',
+            'description' => 'Imposta i livelli di sicurezza e i permessi',
+        ],
+        'privacy_step' => [
+            'title' => 'Privacy e GDPR',
+            'description' => 'Configura le impostazioni di privacy e consenso GDPR',
+        ],
+    ],
+]; 

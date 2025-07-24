@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Widgets;
 
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
+use Webmozart\Assert\Assert;
 
+use Illuminate\Support\Facades\Cache;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
@@ -83,11 +84,14 @@ class StateOverviewWidget extends XotBaseWidget
     {
        
         
-        return Cache::remember(
+        $res= Cache::remember(
             $this->getCacheKey(),
             now()->addMinutes(5),
             fn () => $this->calculateStates()
         );
+
+        Assert::isArray($res);
+        return $res;
         
     }
     

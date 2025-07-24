@@ -2,7 +2,7 @@
 
 return [
     'navigation' => [
-        'label' => 'Segreteria',
+        'label' => 'BackOffice',
         'group' => 'Gestione Utenti',
         'icon' => 'saluteora-admin',
         'sort' => '95',

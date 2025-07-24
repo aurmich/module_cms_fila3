@@ -26,6 +26,8 @@ SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispos
 - [Convenzioni Dashboard](filament/dashboard-conventions.md)
 - [Widget](filament/widgets.md)
 - [RelationManager](filament/relationmanagers.md) - Gestione relazioni cross-module
+- [Admin Resource](filament/admin-resource.md) - Gestione utenti backoffice
+- [Dashboard Charts Implementation](dashboard-charts-implementation.md) - Widget grafici per dashboard
 
 ### Widget e Componenti UI
 - [Regole Consolidate Widget](./widget-rules-consolidated.md) - Regole complete per widget custom

@@ -6,11 +6,12 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\SaluteOra\Models\User;
+use Modules\SaluteOra\Models\Admin;
 use Filament\Forms\Components\Select;
-use Modules\SaluteOra\Enums\UserTypeEnum;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Enums\UserStateEnum;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -20,7 +21,7 @@ use Modules\SaluteOra\Filament\Resources\AdminResource\Pages;
 
 class AdminResource extends XotBaseResource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Admin::class;
 
     public static function getFormSchema(): array
     {

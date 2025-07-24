@@ -509,5 +509,26 @@ return [
             'modal_heading' => 'Servizio Pro Bono',
             'modal_description' => 'Questo appuntamento è stato erogato come servizio gratuito.',
         ]
+    ],
+
+    'widgets' => [
+        'states_chart' => [
+            'heading' => 'Distribuzione Stati Appuntamenti',
+            'description' => 'Grafico che mostra la distribuzione degli stati degli appuntamenti',
+            'label' => 'Stati appuntamenti',
+            'tooltip' => 'Distribuzione degli appuntamenti per stato',
+        ],
+        'creation_chart' => [
+            'heading' => 'Creazione Appuntamenti nel Tempo',
+            'description' => 'Grafico che mostra l\'andamento della creazione degli appuntamenti',
+            'label' => 'Nuovi appuntamenti',
+            'tooltip' => 'Numero di appuntamenti creati per periodo',
+        ],
+        'trend_chart' => [
+            'heading' => 'Trend Appuntamenti',
+            'description' => 'Grafico che mostra il trend degli appuntamenti nel tempo',
+            'label' => 'Trend appuntamenti',
+            'tooltip' => 'Andamento degli appuntamenti per periodo',
+        ],
     ]
 ];

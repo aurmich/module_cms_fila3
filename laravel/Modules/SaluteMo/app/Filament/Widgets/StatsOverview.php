@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\SaluteMo\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class StatsOverview extends BaseWidget
+class StatsOverview extends XotBaseStatsOverviewWidget
 {
     protected static ?string $pollingInterval = '30s';
     protected static bool $isLazy = true;

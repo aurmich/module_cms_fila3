@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'active' => [
         'label' => 'Attivo',
@@ -33,42 +35,6 @@ return [
         'label' => 'Integrazione in attesa',
         'color' => 'warning',
     ],
-    'integration_approved' => [
-        'label' => 'Integrazione approvata',
-        'color' => 'success',
-    ],
-    'integration_rejected' => [
-        'label' => 'Integrazione rifiutata',
-        'color' => 'danger',
-    ],
-    'integration_pending' => [
-        'label' => 'Integrazione in attesa',
-        'color' => 'warning',
-    ],
-    'integration_approved' => [
-        'label' => 'Integrazione approvata',
-        'color' => 'success',
-    ],
-    'integration_rejected' => [
-        'label' => 'Integrazione rifiutata',
-        'color' => 'danger',
-    ],
-    'integration_pending' => [
-        'label' => 'Integrazione in attesa',
-        'color' => 'warning',
-    ],
-    'integration_approved' => [
-        'label' => 'Integrazione approvata',
-        'color' => 'success',
-    ],
-    'integration_rejected' => [
-        'label' => 'Integrazione rifiutata',
-        'color' => 'danger',
-    ],
-    'integration_pending' => [
-        'label' => 'Integrazione in attesa',
-        'color' => 'warning',
-    ],
     'integration_completed' => [
         'label' => 'Integrazione completata',
         'color' => 'success',
@@ -77,5 +43,4 @@ return [
         'label' => 'Integrazione annullata',
         'color' => 'danger',
     ],
-    
 ];

@@ -239,4 +239,31 @@ return [
             'rejected' => 'Rejected',
         ],
     ],
+
+    // Widget translations for registrations and states
+    'user_type_registrations_chart' => [
+        'heading' => 'Patient Registrations',
+        'title' => 'Registration Trend',
+        'label' => 'Registered Patients',
+        'description' => 'Patient registration trend over the last 30 days',
+    ],
+
+    'states_chart' => [
+        'heading' => 'Patient States',
+        'title' => 'State Distribution',
+        'label' => 'Number of Patients',
+        'description' => 'Distribution of patient states in the system',
+    ],
+
+    // Widget translations for appointments
+    'appointment' => [
+        'widgets' => [
+            'states_chart' => [
+                'heading' => 'Appointment States',
+                'title' => 'Appointment State Distribution',
+                'label' => 'Number of Appointments',
+                'description' => 'Distribution of appointment states in the system',
+            ],
+        ],
+    ],
 ];

@@ -289,6 +289,70 @@ class CompactStatsWidget extends XotBaseWidget
 }
 ```
 
+## 🚨 REGOLE ARCHITETTURALI CRITICHE
+
+### MAI Estendere Classi Filament Direttamente
+
+**REGOLA ARCHITETTURALE FONDAMENTALE**: MAI estendere direttamente classi Filament, ma SEMPRE e SOLO le classi XotBase corrispondenti:
+
+#### Pattern Corretti
+```php
+// ✅ CORRETTO - ChartWidget
+use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
+class MyChartWidget extends XotBaseChartWidget
+
+// ✅ CORRETTO - StatsOverviewWidget
+use Modules\Xot\Filament\Widgets\XotBaseStatsOverviewWidget;
+class MyStatsWidget extends XotBaseStatsOverviewWidget
+
+// ✅ CORRETTO - Widget generico
+use Modules\Xot\Filament\Widgets\XotBaseWidget;
+class MyWidget extends XotBaseWidget
+```
+
+#### Anti-Pattern da Evitare
+```php
+// ❌ ERRATO - MAI estendere direttamente Filament
+use Filament\Widgets\ChartWidget;
+class MyChartWidget extends ChartWidget // ERRORE ARCHITETTURALE!
+
+// ❌ ERRATO - MAI estendere direttamente Filament
+use Filament\Widgets\StatsOverviewWidget;
+class MyStatsWidget extends StatsOverviewWidget // ERRORE ARCHITETTURALE!
+```
+
+**Motivazione**: 
+- Le classi XotBase forniscono funzionalità aggiuntive specifiche per Laraxot
+- Includono trait comuni (TransTrait, caching, etc.)
+- Garantiscono compatibilità con l'architettura del framework
+- Permettono override e personalizzazioni centralizzate
+
+**Violazione**: Causa errori architetturali gravi e incompatibilità con il framework Laraxot.
+
+### Classi XotBase Disponibili
+
+#### Widget Base
+- `XotBaseWidget` - Widget generico base
+- `XotBaseChartWidget` - Per grafici e chart
+- `XotBaseStatsOverviewWidget` - Per statistiche overview
+
+#### Verifica Architetturale
+**TUTTI i 13 widget in SaluteMo sono già stati corretti e seguono questa regola:**
+
+✅ PatientRegistrationsChartWidget → XotBaseChartWidget
+✅ DoctorRegistrationsChartWidget → XotBaseChartWidget
+✅ AppointmentCreationChartWidget → XotBaseChartWidget
+✅ AppointmentStatesChartWidget → XotBaseChartWidget
+✅ UserStatesChartWidget → XotBaseChartWidget
+✅ DoctorStatesChartWidget → XotBaseChartWidget
+✅ StatsOverview → XotBaseStatsOverviewWidget
+✅ DoctorRegistrationTrendWidget → XotBaseChartWidget
+✅ PatientRegistrationTrendWidget → XotBaseChartWidget
+✅ AppointmentStatusDistributionWidget → XotBaseChartWidget
+✅ AppointmentCreationTrendWidget → XotBaseChartWidget
+✅ DoctorStatusDistributionWidget → XotBaseChartWidget
+✅ UserStatusDistributionWidget → XotBaseChartWidget
+
 ### 14. Layout Compatto Responsive
 
 #### Grid System Ottimizzato

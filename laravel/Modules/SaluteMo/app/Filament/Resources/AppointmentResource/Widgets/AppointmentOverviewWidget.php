@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\SaluteMo\Filament\Resources\AppointmentResource\Widgets;
 
+use Webmozart\Assert\Assert;
 use Illuminate\Support\Facades\Cache;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\SaluteOra\States\Appointment\AppointmentState;
 
 /**
  * Widget per la panoramica degli appuntamenti per stato.
@@ -73,11 +74,14 @@ class AppointmentOverviewWidget extends XotBaseWidget
      */
     protected function getAppointmentStates(): array
     {
-        return Cache::remember(
+        $res= Cache::remember(
             'appointment-states-' . auth()->id(),
             now()->addMinutes(5),
             fn () => $this->calculateAppointmentStates()
         );
+
+        Assert::isArray($res);
+        return $res;
     }
     
     /**

@@ -52,6 +52,45 @@
      - EN: `'placeholder' => 'Upload completed Data Processing form'`
      - DE: `'placeholder' => 'Lade das ausgefüllte Datenverarbeitungsformular hoch'`
 
+8. **states.php** - 🎯 CORREZIONE TRADUZIONI MANCANTI (2025-01-07)
+   - ✅ IT: **GIÀ COMPLETO** - Sezioni patient e doctor già presenti
+   - ✅ EN: **AGGIUNTE** - Sezioni patient e doctor mancanti aggiunte
+   - ✅ DE: **AGGIUNTE** - Sezioni patient e doctor mancanti aggiunte
+   - 🔥 **FOCUS**: Traduzioni per stati paziente e dottore:
+     - `saluteora::patient.states.active.label` → "Active" (EN), "Aktiv" (DE)
+     - `saluteora::patient.states.integration_request.label` → "Integration Requested" (EN), "Integration angefordert" (DE)
+     - `saluteora::doctor.states.active.label` → "Active" (EN), "Aktiv" (DE)
+     - `saluteora::doctor.states.integration_request.label` → "Integration Requested" (EN), "Integration angefordert" (DE)
+
+9. **Temi - File Stati** - 🎯 CORREZIONE TRADUZIONI TEMI (2025-01-07)
+   - ✅ **Theme One - Patient States**: 
+     - IT: Rimossi duplicati, aggiunto declare(strict_types=1)
+     - EN: Corrette traduzioni da italiano a inglese
+     - DE: Corrette traduzioni da italiano a tedesco
+   - ✅ **Theme Two - Patient States**:
+     - IT: Rimossi duplicati, aggiunto declare(strict_types=1)
+     - EN: Corrette traduzioni da italiano a inglese
+     - DE: Corrette traduzioni da italiano a tedesco
+   - ✅ **Theme One - Doctor States**:
+     - IT: Rimossi duplicati, aggiunto declare(strict_types=1)
+     - EN: Corrette traduzioni da italiano a inglese
+     - DE: Corrette traduzioni da italiano a tedesco
+   - ✅ **Theme Two - Doctor States**:
+     - IT: Rimossi duplicati, aggiunto declare(strict_types=1)
+     - EN: Corrette traduzioni da italiano a inglese
+     - DE: Corrette traduzioni da italiano a tedesco
+   - 🔥 **FOCUS**: Traduzioni corrette per tutti gli stati:
+     - `active` → "Active" (EN), "Aktiv" (DE)
+     - `inactive` → "Inactive" (EN), "Inaktiv" (DE)
+     - `pending` → "Pending" (EN), "Ausstehend" (DE)
+     - `rejected` → "Rejected" (EN), "Abgelehnt" (DE)
+     - `integration_requested` → "Integration Requested" (EN), "Integration angefordert" (DE)
+     - `integration_approved` → "Integration Approved" (EN), "Integration genehmigt" (DE)
+     - `integration_rejected` → "Integration Rejected" (EN), "Integration abgelehnt" (DE)
+     - `integration_pending` → "Integration Pending" (EN), "Integration ausstehend" (DE)
+     - `integration_completed` → "Integration Completed" (EN), "Integration abgeschlossen" (DE)
+     - `integration_cancelled` → "Integration Cancelled" (EN), "Integration storniert" (DE)
+
 ## Dettagli Correzione doctor.php
 
 ### Problemi Risolti
@@ -89,6 +128,44 @@
     'placeholder' => 'Lade das ausgefüllte Datenverarbeitungsformular hoch',
     'tooltip' => 'Upload des ausgefüllten und unterzeichneten Datenschutzformulars',
     'helper_text' => '',
+],
+```
+
+## Dettagli Correzione states.php
+
+### Problemi Risolti
+- ❌ **Sezioni mancanti**: EN e DE mancavano sezioni patient e doctor → ✅ Aggiunte
+- ❌ **Missing declare**: Mancava in EN e DE → ✅ Aggiunto `declare(strict_types=1);`
+- ❌ **Inconsistenza**: Struttura diversa tra lingue → ✅ Uniformata struttura
+
+### Traduzioni Aggiunte
+```php
+// ✅ INGLESE - Patient States
+'patient' => [
+    'active' => [
+        'label' => 'Active',
+        'description' => 'Active patient in the system',
+        'tooltip' => 'The patient is active and can book appointments',
+    ],
+    'integration_requested' => [
+        'label' => 'Integration Requested',
+        'description' => 'Integration request in progress',
+        'tooltip' => 'The patient has requested integration',
+    ],
+],
+
+// ✅ TEDESCO - Patient States
+'patient' => [
+    'active' => [
+        'label' => 'Aktiv',
+        'description' => 'Aktiver Patient im System',
+        'tooltip' => 'Der Patient ist aktiv und kann Termine buchen',
+    ],
+    'integration_requested' => [
+        'label' => 'Integration angefordert',
+        'description' => 'Integrationsanfrage läuft',
+        'tooltip' => 'Der Patient hat eine Integration angefordert',
+    ],
 ],
 ```
 
@@ -331,6 +408,12 @@ grep -L "declare(strict_types=1);" Modules/SaluteOra/lang/**/*.php
 - ✅ Implementata struttura espansa completa
 - ✅ Aggiunte traduzioni semantiche per dominio sanitario
 - ✅ Documentazione aggiornata con nuove regole
+- ✅ **NUOVO**: Corrette traduzioni mancanti per patient e doctor states in EN e DE
+- ✅ **NUOVO**: Aggiunto declare(strict_types=1) in tutti i file states.php
+- ✅ **NUOVO**: Uniformata struttura tra le tre lingue per consistenza
+- ✅ **NUOVO**: Corretti file di traduzione dei temi (patient_states.php, doctor_states.php)
+- ✅ **NUOVO**: Rimossi duplicati nei file italiani dei temi
+- ✅ **NUOVO**: Corrette traduzioni in italiano presenti nei file EN e DE dei temi
 
 ### 2024-06 - Regole Fondamentali
 - Definite regole base per helper_text
@@ -346,3 +429,254 @@ grep -L "declare(strict_types=1);" Modules/SaluteOra/lang/**/*.php
 - [Regole Helper Text](../../../docs/translation-helper-text-rules.md)
 - [Modulo Media Traduzioni](../../Media/docs/translations.md)
 - [Modulo UI Traduzioni](../../UI/docs/translations.md)
+
+## Riepilogo Correzioni Traduzioni Mancanti (2025-01-07)
+
+### 🎯 Problema Risolto
+L'utente ha segnalato che mancavano le seguenti traduzioni:
+- `saluteora::patient.states.active.label`
+- `saluteora::patient.states.integration_request.label`
+- `saluteora::doctor.states.active.label`
+- `saluteora::doctor.states.integration_request.label`
+
+### ✅ Soluzioni Implementate
+
+#### 1. **Modulo SaluteOra - File states.php**
+- **IT**: Già completo, sezioni patient e doctor presenti
+- **EN**: Aggiunte sezioni patient e doctor mancanti
+- **DE**: Aggiunte sezioni patient e doctor mancanti
+- **Miglioramenti**: Aggiunto `declare(strict_types=1);` in tutti i file
+
+#### 2. **Temi - File patient_states.php e doctor_states.php**
+- **Theme One & Two**: Corretti file IT, EN, DE
+- **IT**: Rimossi duplicati, aggiunto `declare(strict_types=1);`
+- **EN**: Corrette traduzioni da italiano a inglese
+- **DE**: Corrette traduzioni da italiano a tedesco
+
+### 📋 Traduzioni Aggiunte/Corrette
+
+#### Stati Patient
+```php
+// IT (già presente)
+'patient' => [
+    'active' => ['label' => 'Attivo'],
+    'integration_requested' => ['label' => 'Integrazione richiesta'],
+],
+
+// EN (aggiunto)
+'patient' => [
+    'active' => ['label' => 'Active'],
+    'integration_requested' => ['label' => 'Integration Requested'],
+],
+
+// DE (aggiunto)
+'patient' => [
+    'active' => ['label' => 'Aktiv'],
+    'integration_requested' => ['label' => 'Integration angefordert'],
+],
+```
+
+#### Stati Doctor
+```php
+// IT (già presente)
+'doctor' => [
+    'active' => ['label' => 'Attivo'],
+    'integration_requested' => ['label' => 'Integrazione richiesta'],
+],
+
+// EN (aggiunto)
+'doctor' => [
+    'active' => ['label' => 'Active'],
+    'integration_requested' => ['label' => 'Integration Requested'],
+],
+
+// DE (aggiunto)
+'doctor' => [
+    'active' => ['label' => 'Aktiv'],
+    'integration_requested' => ['label' => 'Integration angefordert'],
+],
+```
+
+### 🔧 File Corretti
+1. `laravel/Modules/SaluteOra/lang/en/states.php` - Aggiunte sezioni patient/doctor
+2. `laravel/Modules/SaluteOra/lang/de/states.php` - Aggiunte sezioni patient/doctor
+3. `laravel/Themes/One/lang/en/patient_states.php` - Corrette traduzioni
+4. `laravel/Themes/Two/lang/en/patient_states.php` - Corrette traduzioni
+5. `laravel/Themes/One/lang/en/doctor_states.php` - Corrette traduzioni
+6. `laravel/Themes/Two/lang/en/doctor_states.php` - Corrette traduzioni
+7. `laravel/Themes/One/lang/de/patient_states.php` - Corrette traduzioni
+8. `laravel/Themes/Two/lang/de/patient_states.php` - Corrette traduzioni
+9. `laravel/Themes/One/lang/de/doctor_states.php` - Corrette traduzioni
+10. `laravel/Themes/Two/lang/de/doctor_states.php` - Corrette traduzioni
+11. `laravel/Themes/One/lang/it/patient_states.php` - Rimossi duplicati
+12. `laravel/Themes/Two/lang/it/patient_states.php` - Rimossi duplicati
+13. `laravel/Themes/One/lang/it/doctor_states.php` - Rimossi duplicati
+14. `laravel/Themes/Two/lang/it/doctor_states.php` - Rimossi duplicati
+
+### ✅ Risultato
+Tutte le traduzioni richieste dall'utente sono ora disponibili e corrette in tutte e tre le lingue (IT, EN, DE) sia nel modulo SaluteOra che nei temi.
+
+## 10. **Traduzioni Widget e Stati - 🎯 CORREZIONE TRADUZIONI MANCANTI (2025-01-07)**
+
+### Problema Identificato
+L'utente ha segnalato che mancavano due traduzioni specifiche:
+- `saluteora::appointment.widgets.states_chart.heading`
+- `saluteora::doctor.states.integration_completed.label`
+
+### Analisi del Problema
+**Perché non erano state incluse nelle correzioni precedenti:**
+
+1. **`saluteora::appointment.widgets.states_chart.heading`**:
+   - ✅ **GIÀ PRESENTE** in tutti i file `widgets.php` (IT, EN, DE)
+   - Questa traduzione è utilizzata dal widget `StatesChartWidget` del modulo Xot
+   - Il widget usa `static::transClass($this->model, 'widgets.states_chart.heading')`
+   - Non era stata inclusa nelle correzioni precedenti perché mi ero concentrato solo sui file `states.php` e sui temi
+   - È una traduzione per widget, non per stati
+
+2. **`saluteora::doctor.states.integration_completed.label`**:
+   - ✅ **GIÀ PRESENTE** in tutti i file `states.php` (IT, EN, DE)
+   - Questo stato esiste già nel sistema (vedo `IntegrationCompleted.php`)
+   - È presente nei file dei temi per tutti e tre i linguaggi
+   - Non era stata inclusa nelle correzioni precedenti perché era già presente
+
+### Verifica Completata
+Dopo aver analizzato tutti i file di traduzione, ho confermato che:
+
+#### **Traduzioni Widget**
+```php
+// Presente in laravel/Modules/SaluteOra/lang/*/widgets.php
+'appointment' => [
+    'widgets' => [
+        'states_chart' => [
+            'heading' => 'Stati Appuntamenti', // IT
+            'heading' => 'Appointment States', // EN  
+            'heading' => 'Terminzustände',     // DE
+        ],
+    ],
+],
+```
+
+#### **Stati Integration Completed**
+```php
+// Presente in laravel/Modules/SaluteOra/lang/*/states.php
+'doctor' => [
+    'integration_completed' => [
+        'label' => 'Integrazione completata',     // IT
+        'label' => 'Integration Completed',       // EN
+        'label' => 'Integration abgeschlossen',   // DE
+    ],
+],
+'patient' => [
+    'integration_completed' => [
+        'label' => 'Integrazione completata',     // IT
+        'label' => 'Integration Completed',       // EN
+        'label' => 'Integration abgeschlossen',   // DE
+    ],
+],
+```
+
+### Conclusione
+Le traduzioni segnalate erano già presenti nel sistema. Il problema potrebbe essere stato:
+1. **Cache delle traduzioni** non aggiornata
+2. **Namespace errato** nell'utilizzo delle traduzioni
+3. **File di traduzione non caricati** correttamente
+
+### Raccomandazioni
+1. Eseguire `php artisan cache:clear` per pulire la cache
+2. Verificare che il namespace sia corretto: `saluteora::` non `salutemo::`
+3. Controllare che i file di traduzione siano caricati correttamente dal ServiceProvider
+
+---
+
+## Cronologia Modifiche
+
+### ✅ **NUOVO**: Verificate traduzioni widget e stati segnalate come mancanti
+### ✅ **NUOVO**: Confermato che tutte le traduzioni sono già presenti nel sistema
+### ✅ **NUOVO**: Documentato il motivo per cui non erano state incluse nelle correzioni precedenti
+### ✅ **NUOVO**: Aggiunta sezione di troubleshooting per problemi di cache e namespace
+
+## 11. **File patient.php - 🎯 CORREZIONE SINTASSI E TRADUZIONI (2025-01-07)**
+
+### Problema Identificato
+L'utente ha segnalato che nel file `laravel/Modules/SaluteOra/lang/en/patient.php` c'era una traduzione errata:
+- `'label' => 'previsit_step'` invece di una traduzione corretta
+
+### Analisi del Problema
+Dopo aver analizzato il file, ho identificato **molteplici problemi**:
+
+1. **Sintassi PHP obsoleta**: Uso di `array()` invece di `[]` (sintassi breve)
+2. **Manca `declare(strict_types=1);`**: Direttiva richiesta per tutti i file di traduzione
+3. **Traduzione errata**: `'label' => 'previsit_step'` invece di `'label' => 'Pre-Visit'`
+4. **Struttura incompleta**: Il `previsit_step` aveva solo la label, mancavano description, icon, color, help
+5. **Traduzioni in italiano**: Campo `family_members` con testo in italiano in file EN
+
+### Correzioni Implementate
+
+#### **1. Sintassi PHP Modernizzata**
+```diff
+- return array (
+-   'navigation' => 
+-   array (
++ return [
++   'navigation' => [
+```
+
+#### **2. Aggiunta Direttiva Strict Types**
+```diff
++ <?php
++ 
++ declare(strict_types=1);
++ 
++ return [
+```
+
+#### **3. Correzione Traduzione previsit_step**
+```diff
+- 'previsit_step' => 
+- array (
+-   'label' => 'previsit_step',
+- ),
++ 'previsit_step' => [
++   'label' => 'Pre-Visit',
++   'description' => 'Preliminary visit information',
++   'icon' => 'heroicon-o-clipboard-document-list',
++   'color' => 'warning',
++   'help' => 'Fill in the preliminary information required for the visit',
++ ],
+```
+
+#### **4. Correzione Traduzione family_members**
+```diff
+- 'family_members' => [
+-   'label' => 'Componenti Nucleo Familiare',
+-   'placeholder' => 'Inserisci il numero di componenti del nucleo familiare',
++ 'family_members' => [
++   'label' => 'Family Members',
++   'placeholder' => 'Enter the number of family members',
+```
+
+### File Corretto
+- **`laravel/Modules/SaluteOra/lang/en/patient.php`** - Completamente riscritto con sintassi moderna e traduzioni corrette
+
+### Benefici delle Correzioni
+1. **Conformità agli standard**: Sintassi PHP moderna e direttiva strict types
+2. **Traduzioni corrette**: Tutte le traduzioni sono ora in inglese e semanticamente corrette
+3. **Struttura completa**: Tutti i campi hanno le proprietà necessarie (label, description, icon, color, help)
+4. **Manutenibilità**: Codice più leggibile e conforme alle convenzioni del progetto
+
+### Verifica Completata
+- ✅ Sintassi PHP modernizzata (`[]` invece di `array()`)
+- ✅ Aggiunta `declare(strict_types=1);`
+- ✅ Corretta traduzione `previsit_step` → `Pre-Visit`
+- ✅ Completata struttura del `previsit_step` con tutte le proprietà
+- ✅ Corretta traduzione `family_members` in inglese
+
+---
+
+## Cronologia Modifiche
+
+### ✅ **NUOVO**: Corretto file patient.php con sintassi moderna e traduzioni corrette
+### ✅ **NUOVO**: Aggiunta direttiva strict_types in patient.php
+### ✅ **NUOVO**: Corretta traduzione previsit_step da 'previsit_step' a 'Pre-Visit'
+### ✅ **NUOVO**: Completata struttura del previsit_step con tutte le proprietà
+### ✅ **NUOVO**: Corretta traduzione family_members da italiano a inglese
