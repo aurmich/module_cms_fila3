@@ -28,7 +28,7 @@ $user=auth()->user();
     </div>
     
       <div>
-    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'states' => ['rejected']])
+    @livewire(\Modules\SaluteOra\Filament\Widgets\DoctorAppointmentsWidget::class, ['doctor_id' => $user->id,'states' => ['rejected', 'annulled','cancelled','banned']])
     </div>
     
 </div>

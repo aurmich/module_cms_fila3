@@ -1,6 +1,5 @@
 <div 
-    style="background-repeat: no-repeat; background-position: top; background-size: cover;"
-    class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-per-desktop.svg')] h-auto min-h-[400px] lg:min-h-[500px] m-0 p-0 bg-top ipad:bg-right-top">
+    class="bg-[#272C4D]">
 <!-- INIZIO HEADER -->
     <div x-data="{ mobileMenuOpen: false }" class="relative">
       <!-- Header Bar -->

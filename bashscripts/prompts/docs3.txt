@@ -46,6 +46,10 @@
 - **MAI creare rotte in web.php** - Folio gestisce automaticamente
 - Widget devono estendere `XotBaseWidget` con `HasForms`
 - **MAI estendere direttamente classi Filament**
+- Per i widget di autenticazione, utilizzare i percorsi corretti:
+  - Login: `pub_theme::filament.widgets.auth.login`
+  - Logout: `pub_theme::filament.widgets.auth.logout`
+  - Password Reset: `pub_theme::filament.widgets.auth.password.reset-confirm`
 
 ### 3.2 Componenti UI
 - Usare SEMPRE componenti nativi Filament:
@@ -55,6 +59,8 @@
   - `<x-filament::avatar>`
 - **MAI utilizzare componenti inesistenti**
 - Per separatori nei dropdown: `<div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>`
+- Per i widget di autenticazione, utilizzare i componenti standard di Filament
+- Per i form, implementare sempre `getFormSchema()` con tipi di ritorno espliciti
 
 ### 3.3 Volt e Folio
 - La direttiva `@volt` DEVE essere SEMPRE la prima cosa nel file Folio
@@ -70,6 +76,21 @@
 - File traduzioni in `lang/{locale}/`
 - **MAI usare ->label()** in componenti Filament
 - Convenzione naming chiavi: `modulo::risorsa.fields.campo.label`
+- Struttura standard per le traduzioni:
+  ```php
+  return [
+      'fields' => [
+          'field_name' => [
+              'label' => 'Etichetta Campo',
+              'placeholder' => 'Testo segnaposto',
+              'help' => 'Testo di aiuto',
+              'validation' => [
+                  'required' => 'Messaggio di validazione'
+              ]
+          ]
+      ]
+  ];
+  ```
 
 ### 4.2 Localizzazione URL
 - Usare `mcamara/laravel-localization`

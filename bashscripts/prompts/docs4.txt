@@ -1,19 +1,68 @@
-# SISTEMA DI DOCUMENTAZIONE SALUTEORA – GUIDA COMPLETA
+# SISTEMA DI DOCUMENTAZIONE LARAXOT – GUIDA COMPLETA
 
-## 1. STRUTTURA GERARCHICA E MODULARITÀ
+## 📋 INDICE GENERALE
+
+### 1. ARCHITETTURA E STACK TECNOLOGICO
+### 2. STRUTTURA GERARCHICA E MODULARITÀ
+### 3. NAMING, PERCORSI E COLLEGAMENTI
+### 4. FILAMENT E COMPONENTI UI
+### 5. FRONTEND E TEMI
+### 6. TRADUZIONI E LOCALIZZAZIONE
+### 7. DATABASE E MIGRAZIONI
+### 8. TESTING E QUALITY ASSURANCE
+### 9. DATA OBJECTS E ARCHITETTURA MODERNA
+### 10. AUTOMAZIONE E TOOLING
+### 11. WORKFLOW E BEST PRACTICES
+### 12. CHECKLIST OPERATIVE
+
+---
+
+## 1. ARCHITETTURA E STACK TECNOLOGICO
+### Stack Principale Identificato
+- **Laravel Framework**: 12.0+ con PHP 8.2+ (composer.json analysis)
+- **Filament**: 3.4+ per admin panels e form components
+- **Frontend Stack**: Folio + Volt + Livewire + Flux 2.1+
+- **Moduli**: Nwidart Laravel Modules 12.0+
+- **CMS**: Lara-Zeus Bolt per content management
+- **Testing**: Pest 3.8+ con Laravel plugin
+- **Static Analysis**: PHPStan livello 9+ obbligatorio
+
+### Moduli Core Standard
+- **{ProjectModule}**: Modulo principale del progetto
+- **User**: Sistema utenti e autenticazione
+- **UI**: Componenti interfaccia condivisi
+- **Xot**: Framework base e utilities
+- **Cms**: Content management system
+- **Tenant**: Multi-tenancy support (opzionale)
+- **Geo**: Dati geografici e località (opzionale)
+- **Lang**: Sistema localizzazione
+- **Notify**: Sistema notifiche (opzionale)
+
+## 2. STRUTTURA GERARCHICA E MODULARITÀ
 - **Root docs** (`/docs/`): solo indici e collegamenti bidirezionali, MAI documentazione tecnica.
 - **Docs modulo** (`Modules/{ModuleName}/docs/`): documentazione tecnica, regole, motivazioni, esempi.
 - **Docs tema** (`Themes/{Theme}/docs/`): documentazione frontend specifica.
 - **Rule files**: `.windsurf/rules/`, `.cursor/rules/` – regole IDE e policy.
 - **Documentazione generica**: sempre in Xot, MAI in root.
+- **Bashscripts**: `/bashscripts/` per automazione e tooling
 
-## 2. NAMING, PERCORSI E COLLEGAMENTI
+## 3. NAMING, PERCORSI E COLLEGAMENTI
 - **TUTTI i file e cartelle in docs/** devono essere in minuscolo, tranne `README.md`.
 - Usare SEMPRE trattini (`-`), MAI underscore (`_`).
 - **Mai usare percorsi assoluti** o riferimenti al nome progetto nei link.
 - **Sempre percorsi relativi**: calcola i livelli da file sorgente a destinazione.
 - **Collegamenti bidirezionali obbligatori**: ogni documento deve essere referenziato in `docs/collegamenti-documentazione.md`.
 - Usa tag come `#modulo-{nomemodulo}` e `#categoria-{nomecategoria}` per categorizzare.
+
+### Namespace Patterns Identificati (CORREZIONE CRITICA)
+- **ERRORE COMUNE**: `Modules\{ModuleName}\Filament\` è SBAGLIATO
+- **CORRETTO**: `Modules\{ModuleName}\app\Filament\` (analisi memory ba7622a1)
+- **Filament Resources**: `Modules\{ModuleName}\app\Filament\Resources\`
+- **Filament Pages**: `Modules\{ModuleName}\app\Filament\Pages\`
+- **Filament Widgets**: `Modules\{ModuleName}\app\Filament\Widgets\`
+- **Enums**: `Modules\{ModuleName}\app\Enums\`
+- **Data Objects**: `Modules\{ModuleName}\app\Datas\`
+- **Actions**: `Modules\{ModuleName}\app\Actions\`
 
 ## 3. POLICY DI AGGIORNAMENTO E MANUTENZIONE
 - **Ordine di aggiornamento**:
@@ -26,8 +75,31 @@
 - **Checklist operativa**: ogni nuova regola deve includere una checklist.
 - **Esempio pratico e anti-pattern**: ogni regola deve avere esempi e anti-pattern.
 
-## 4. FRONTEND E COMPONENTI UI
-- **Stack**: Folio + Volt + Livewire + Widget
+## 4. FILAMENT 3.4+ E ARCHITETTURA MODERNA
+### Principi Architetturali Filament (Analisi Codebase)
+- **XotBase* Extension**: SEMPRE estendere XotBaseResource, XotBaseWidget, XotBaseListRecords
+- **Namespace Pattern**: `Modules\{ModuleName}\app\Filament\` (CRITICO: NON `\Filament\`)
+- **Translation System**: MAI usare `->label()`, sempre file di traduzione con struttura espansa
+- **Form Schema**: Restituire array associativo con chiavi stringa in `getFormSchema()`
+- **Table Columns**: Array associativo in `getTableColumns()` con chiavi campo
+- **Actions**: Override `setUp()` per configurazione completa
+- **Widgets**: Estendere `XotBaseWidget` con trait `HasForms` quando necessario
+
+### Pattern Architetturali Comuni
+- **Calendar Integration**: FullCalendar con multi-tenancy e parental STI
+- **Wizard Forms**: Multi-step forms con state management
+- **Entity Management**: Gestione entità con enum states
+- **Media Library**: Spatie Media Library per file uploads (collection pattern)
+- **Geographic Data**: Integrazione modulo Geo per località (se presente)
+- **Multi-tenant**: Filament tenancy per isolamento dati
+- **Single Table Inheritance**: Tighten Parental per tipi entità
+
+## 5. FRONTEND E COMPONENTI UI
+### Stack Frontend Moderno
+- **Folio + Volt**: Routing e templating (analisi Themes/)
+- **Livewire + Flux 2.1+**: Componenti interattivi
+- **Themes Structure**: `Themes/{Theme}/resources/views/`
+- **UI Components**: Solo in `Modules/UI/resources/views/components/ui/`
 - **Template**: `Themes/{Theme}/resources/views/pages/`
 - **Widget**: Estendere `XotBaseWidget` con `HasForms`
   - ❌ Non estendere direttamente Filament
@@ -41,13 +113,21 @@
 - La direttiva `@volt` DEVE essere SEMPRE la prima cosa nel file Folio.
 - **MAI utilizzare `@volt` all'interno del markup HTML**.
 
-## 5. TRADUZIONI E LOCALIZZAZIONE
+## 6. TRADUZIONI E LOCALIZZAZIONE
+### Regole Critiche
 - **Mai usare ->label()** in componenti Filament
-- **Struttura espansa per campi**:
+- **Struttura espansa obbligatoria** per tutti i campi
+- **Helper Text Rules**: Se `helper_text` uguale alla chiave, impostare a `''`
+- **Navigation Keys**: MAI usare chiavi che terminano con `.navigation`
+- **Location**: `Modules/{ModuleName}/lang/{locale}/`
+
+### Struttura Espansa per Campi
   ```php
   'fields' => [
       'nome_campo' => [
           'label' => 'Etichetta Campo',
+          'placeholder' => 'Placeholder campo',
+          'helper_text' => '', // Se uguale a chiave, altrimenti testo descrittivo
           'placeholder' => 'Placeholder campo',
           'help' => 'Testo di aiuto'
       ]
@@ -56,7 +136,75 @@
 - **URL con prefisso lingua**: `/{locale}/{sezione}/{risorsa}`
 - **MAI generare URL senza prefisso locale**
 
-## 6. ENUM E FILAMENT SELECT COMPONENTS
+## 7. DATABASE E MIGRAZIONI
+### Regole Fondamentali per Migrazioni
+- **Usare SOLO classi anonime** che estendono `XotBaseMigration`
+- **MAI implementare metodo `down()`** in migrazioni che estendono XotBaseMigration
+- **Verifica esistenza obbligatoria** prima di creare/modificare
+
+### Pattern Migrazione Corretta
+```php
+<?php
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+return new class extends XotBaseMigration
+{
+    protected string $table_name = 'example_table';
+    
+    public function up(): void
+    {
+        if ($this->hasTable($this->table_name)) {
+            return;
+        }
+        
+        Schema::create($this->table_name, function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+    }
+};
+```
+
+### Aggiunta Colonne (Pattern Corretto)
+- **NON creare nuove migrazioni** per aggiungere colonne
+- **Copiare migrazione originale** con timestamp aggiornato
+- **Aggiungere controllo esistenza colonna**
+
+```php
+// Aggiunta colonna in migrazione esistente
+if (!$this->hasColumn($this->table_name, 'new_column')) {
+    Schema::table($this->table_name, function (Blueprint $table) {
+        $table->string('new_column')->nullable();
+    });
+}
+```
+
+### Casting Modelli
+- **Usare sempre metodo `casts()`** invece della proprietà `$casts`
+- **Enum casting** per stati e valori predefiniti
+- **Tipizzazione rigorosa** per PHPDoc
+
+```php
+/**
+ * @return array<string, string>
+ */
+protected function casts(): array
+{
+    return [
+        'created_at' => 'datetime',
+        'is_active' => 'boolean',
+        'status' => StatusEnum::class,
+        'options' => 'array',
+    ];
+}
+```
+
+## 8. ENUM E FILAMENT SELECT COMPONENTS
 - **Usare SEMPRE classi Enum con Select**:
   ```php
   // ✅ CORRETTO
@@ -112,11 +260,24 @@
 - **Per aggiungere colonne**: copiare migrazione originale, aggiornare timestamp, aggiungere colonna solo se non esiste
 - **MAI creare nuove migrazioni separate** per aggiungere colonne
 
-## 9. TESTING E AMBIENTE
+## 9. TESTING E QUALITY ASSURANCE
+### Framework di Testing
+- **Pest 3.8+**: Framework di testing moderno per Laravel
 - **MAI usare `RefreshDatabase`** nei test
 - **Database di test**: pre-popolato in `.env.testing`
-- **Errori "no such table"**: verificare configurazione test o migrazioni mancanti
+- **Coverage minimo**: 80% per nuove feature
 - **Lavorare con dati esistenti**: tutti i test devono funzionare con dati preesistenti
+
+### PHPStan Integration
+- **Livello minimo**: 9+ per tutto il codice nuovo
+- **Esecuzione**: sempre da directory `/laravel`
+- **Memory limit**: `--memory-limit=2G` per moduli grandi
+- **MAI usare**: `php artisan test:phpstan`
+
+### Laravel Pint
+- **Standard**: PSR-12 obbligatorio
+- **Configurazione**: `pint.json` nella root Laravel
+- **Esecuzione**: `./vendor/bin/pint`
 
 ## 10. HTML2PDF LIMITAZIONI
 - **Tag supportati**: `<page>`, `<table>`, `<div>`, `<p>`, `<span>`, `<b>`, `<i>`, `<img>`
@@ -126,6 +287,38 @@
   - Evitare effetti visivi complessi
   - Usare tag `<page>` per controllo pagina
 - **Multilingua**: tutte le stringhe da file traduzione, mai hardcoded
+
+## 10. AUTOMAZIONE E TOOLING
+### Script di Automazione
+- **Posizione**: `/bashscripts/` (mai in `docs/`)
+- **Naming**: minuscolo, descrittivo, estensione `.sh`
+- **Documentazione**: `bashscripts/docs/README.md`
+
+### Script Standard Disponibili
+```bash
+# Controlli di qualità
+bashscripts/phpstan-check.sh          # PHPStan analysis
+bashscripts/translation-check.sh      # Validazione traduzioni
+bashscripts/naming-convention-audit.sh # Audit naming
+bashscripts/documentation-sync.sh     # Sync documentazione
+
+# Manutenzione
+bashscripts/fix-docs-case.sh          # Fix naming docs
+bashscripts/check-docs-naming.sh      # Verifica naming
+bashscripts/update-doc-links.sh       # Aggiorna collegamenti
+```
+
+### Pre-commit Hooks
+- **Validazione naming**: file e cartelle docs in minuscolo
+- **Controllo percorsi**: solo percorsi relativi
+- **Collegamenti bidirezionali**: verifica coerenza
+- **PHPStan**: analisi statica obbligatoria
+- **Laravel Pint**: formatting automatico
+
+### Workflow Automatizzati
+- **`.windsurf/workflows/`**: workflow Windsurf
+- **Comandi slash**: `/phpstan-check`, `/translation-check`, `/full-check`
+- **CI/CD Integration**: GitHub Actions per controlli automatici
 
 ## 11. FILAMENT RESOURCES E ARRAY ASSOCIATIVI
 - **getTableColumns**, **getTableActions**, **getTableBulkActions** devono restituire array con chiavi stringa
