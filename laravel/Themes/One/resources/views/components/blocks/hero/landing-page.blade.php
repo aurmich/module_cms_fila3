@@ -78,7 +78,7 @@
         x-transition:leave-start="opacity-100 transform translate-y-0"
         x-transition:leave-end="opacity-0 transform -translate-y-4"
         @click.away="mobileMenuOpen = false"
-        class="lg:hidden absolute top-full left-0 right-0 bg-[#ff5f7e75] backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
+        class="lg:hidden absolute top-full left-0 right-0 bg-black backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
         style="display: none;"
        >
         <div class="px-6 py-6 space-y-6">
@@ -146,7 +146,7 @@
          </span>
          <a href="/{{ $lang }}/auth/register">
            <button
-             class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-5"
+             class="w-40 lg:w-44 bg-[#FF5F7E] text-white py-3 px-7 rounded-lg text-xl lg:text-2xl mt-5 transform origin-center scale-100 hover:scale-110 transition-transform duration-100"
            >
              @lang('pub_theme::navigation.hero.start_now.label')
            </button>
@@ -189,7 +189,7 @@
       </div>
       <div class="w-full flex justify-center my-5">
         <a href="/{{ $lang }}/pages/progetto">
-          <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl">@lang('pub_theme::navigation.hero.discover_project.label')</button>
+          <button class="bg-[#FF5F7E] text-white rounded-md py-3 px-6 text-xl transform origin-center scale-100 hover:scale-110 transition-transform duration-100">@lang('pub_theme::navigation.hero.discover_project.label')</button>
         </a>
       </div>
     </div>

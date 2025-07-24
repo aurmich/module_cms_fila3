@@ -3,7 +3,7 @@
 <!-- INIZIO HEADER -->
     <div x-data="{ mobileMenuOpen: false }" class="relative">
       <!-- Header Bar -->
-      <div class="w-full h-18 p-2 lg:p-8 flex items-center justify-between">
+      <div class="w-full h-18 p-4 lg:p-8 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex-shrink-0">
           <img src="/img/logo.png" class="h-7 lg:h-14" alt="Logo" />
@@ -11,13 +11,13 @@
 
         <!-- Desktop Navigation - Hidden on Mobile -->
         <div class="hidden lg:flex flex-row items-center space-x-6">
-          <a href="/{{ $lang }}/" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/" class="text-white hover:text-gray-200 text-lg transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.home.label')
           </a>
-          <a href="/{{ $lang }}/pages/progetto" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/pages/progetto" class="text-white hover:text-gray-200 text-lg transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.project.label')
           </a>
-          <a href="/{{ $lang }}/pages/partners" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+          <a href="/{{ $lang }}/pages/partners" class="text-white hover:text-gray-200 text-lg transition-colors duration-200">
             @lang('pub_theme::navigation.main_menu.partners.label')
           </a>
         </div>
@@ -120,11 +120,11 @@
           @else
             <!-- Login/Register Buttons for Guest Users -->
             <div class="flex items-center space-x-4">
-              <a href="/{{ $lang }}/auth/login" class="text-white hover:text-gray-200 text-xl transition-colors duration-200">
+              <a href="/{{ $lang }}/auth/login" class="text-white hover:text-gray-200 text-lg transition-colors duration-200">
                 @lang('pub_theme::navigation.main_menu.login.label')
               </a>
               <a href="/{{ $lang }}/auth/register">
-                <button class="text-white text-xl bg-transparent border-2 border-white py-3 px-6 rounded-lg hover:bg-white/10 transition-colors duration-200">
+                <button class="text-white text-lg bg-[#FF5F7E] py-3 px-6 rounded-lg">
                   @lang('pub_theme::navigation.main_menu.register.label')
                 </button>
               </a>
@@ -159,7 +159,7 @@
         x-transition:leave-start="opacity-100 transform translate-y-0"
         x-transition:leave-end="opacity-0 transform -translate-y-4"
         @click.away="mobileMenuOpen = false"
-        class="lg:hidden absolute top-full left-0 right-0 bg-[#ff5f7e75] backdrop-blur-md z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
+        class="lg:hidden absolute top-full left-0 right-0 bg-black z-50 mx-2 mt-2 rounded-xl shadow-2xl border border-white/10"
         style="display: none;"
        >
         <div class="px-6 py-6 space-y-6">
