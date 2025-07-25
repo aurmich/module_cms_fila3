@@ -428,6 +428,10 @@ return array (
       'placeholder' => 'value',
       'label' => 'value',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
   ),
   'actions' => 
   array (

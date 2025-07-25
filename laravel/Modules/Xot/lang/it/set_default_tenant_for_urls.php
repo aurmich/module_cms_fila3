@@ -486,4 +486,11 @@ return array (
       'description' => 'itemValue',
     ),
   ),
+  'steps' => 
+  array (
+    'Credenziali' => 
+    array (
+      'label' => 'Credenziali',
+    ),
+  ),
 );
