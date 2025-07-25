@@ -92,22 +92,7 @@ class PatientPolicy extends XotBasePolicy
      */
     public function update(UserContract $user, Patient $patient): bool
     {
-        // Admin e staff possono aggiornare qualsiasi paziente
-        if ($user->hasRole(['super-admin', 'admin', 'staff'])) {
-            return true;
-        }
-
-        // Pazienti possono aggiornare il proprio profilo
-        if ($user->type === UserTypeEnum::PATIENT && $user->id === $patient->id) {
-            return true;
-        }
-
-        // Dottori possono aggiornare i pazienti con cui hanno appuntamenti
-        if ($user->type === UserTypeEnum::DOCTOR) {
-            return $patient->appointments()->where('doctor_id', $user->id)->exists();
-        }
-
-        return false;
+       return true;
     }
 
     /**

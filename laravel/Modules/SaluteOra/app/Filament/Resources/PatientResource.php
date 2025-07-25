@@ -13,9 +13,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Filament\Widgets\Widget;
 use Modules\Xot\Datas\XotData;
+use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Support\HtmlString;
+use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Wizard;
@@ -31,17 +33,16 @@ use Filament\Forms\Components\Wizard\Step;
 use Modules\SaluteOra\Enums\NationalityEnum;
 use Modules\SaluteOra\Enums\YearsInItalyEnum;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Illuminate\Validation\Rule;
 use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Enums\LastDentalVisitPeriodEnum;
 use Modules\Patient\Filament\Components\HealthCardUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Modules\Lang\Filament\Forms\Components\NationalFlagSelect;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Tapp\FilamentCountryCodeField\Forms\Components\CountryCodeSelect;
 use Modules\Media\Filament\Resources\PatientResource\Pages\PreviewAttachment;
-use Modules\SaluteOra\Models\User;
 
 class PatientResource extends XotBaseResource
 {
@@ -112,7 +113,17 @@ class PatientResource extends XotBaseResource
                 ->reactive()
                 //->live()
                 ,
+            /*
             'country_code' => CountryCodeSelect::make('country_code')
+                ->label(static::trans('fields.country_code.label'))
+                ->visible(function (Get $get): bool {
+                    if($get('nationality')=='EE'){
+                        return true;
+                    }
+                    return false;
+                }),
+            */
+            'country_code' => NationalFlagSelect::make('country_code')
                 ->label(static::trans('fields.country_code.label'))
                 ->visible(function (Get $get): bool {
                     if($get('nationality')=='EE'){
@@ -227,6 +238,8 @@ class PatientResource extends XotBaseResource
      */
     public static function getFormSchema(): array
     {
+        return self::getPersonalDataStepSchema();
+        /*
         $schema= [
             'first_name' => Forms\Components\TextInput::make('first_name')
                 ->required()
@@ -234,9 +247,7 @@ class PatientResource extends XotBaseResource
             'last_name' => Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(255),
-            'fiscal_code' => Forms\Components\TextInput::make('fiscal_code')
-                ->required()
-                ->maxLength(16),
+            
             'email' => Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
@@ -245,12 +256,14 @@ class PatientResource extends XotBaseResource
                 ->tel()
                 ->required()
                 ->maxLength(20),
+            'nationality' => NationalFlagSelect::make('nationality'),
             ...self::getAttachmentsSchema(),
         ];
 
        
         
         return $schema;
+        */
     }
 
     public static function getThankYouView(): string

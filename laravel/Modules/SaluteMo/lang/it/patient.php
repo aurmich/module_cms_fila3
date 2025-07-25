@@ -421,6 +421,13 @@ return array (
     array (
       'label' => 'toggleColumns',
     ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
+    ),
   ),
   'actions' => 
   array (
