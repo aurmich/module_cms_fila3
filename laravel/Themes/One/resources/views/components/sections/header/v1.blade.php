@@ -6,7 +6,9 @@
       <div class="w-full h-18 p-4 lg:p-8 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex-shrink-0">
-          <img src="/img/logo.png" class="h-7 lg:h-14" alt="Logo" />
+          <a href="/{{ $lang }}/">
+            <img src="/img/logo.png" class="h-7 lg:h-14" alt="Logo" />
+          </a>
         </div>
 
         <!-- Desktop Navigation - Hidden on Mobile -->
