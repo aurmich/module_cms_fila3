@@ -204,4 +204,5 @@
 <div class="bg-[url('/img/soluzione-unita-per-desktop.svg')]">bg soluzione unita</div>
 <div class="bg-[#272c4dd6]">bg</div>
 <div class="p-4">p 4</div>
+<div class="ipad:mt-60">mt 28 ipad</div>
 </x-layouts.app>
