@@ -17,4 +17,10 @@ namespace Modules\SaluteOra\States\Appointment\Transitions;
 class ReportCompletedToRefundPending extends BaseTransition
 {
     //--- (Funziona automaticamente grazie al pattern BaseTransition!)
+    public function getNotificationRecipients(): array
+    {
+        return [
+            'doctor' => $this->appointment->doctor,
+        ];
+    }
 }
