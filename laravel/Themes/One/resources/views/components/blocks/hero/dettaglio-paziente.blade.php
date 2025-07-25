@@ -12,13 +12,6 @@
 @php
     $appointments=$user->appointments;
 @endphp
-{{--  
-NUMERO APPUNTAMENTI: {{  $appointments?->count() ?? 0}}
---}}
-{{-- STEP PRENOTA VISITA --}}
-
-
-      {{-- TITOLO E BOTTONI --}}
       
 <section class="flex items-start relative overflow-hidden">
   <div class="w-full px-4 sm:px-6 lg:px-8 pt-12">
@@ -41,6 +34,9 @@ NUMERO APPUNTAMENTI: {{  $appointments?->count() ?? 0}}
   </div>
 </section>
 @each('pub_theme::appointment.item', $appointments, 'appointment','pub_theme::appointment.empty')
+@if($user->canBook())
+@include('pub_theme::appointment.book')
+@endif
 {{-- AREA PERSONALE PAZIENTE --}}
 <!-- <section 
     class="flex items-start bg-[#E6EBF7] relative overflow-hidden">

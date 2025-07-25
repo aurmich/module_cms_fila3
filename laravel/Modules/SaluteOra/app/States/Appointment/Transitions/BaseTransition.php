@@ -52,8 +52,11 @@ abstract class BaseTransition extends Transition
         
 
 
-    public function sendRecipientNotification(UserContract $recipient): void
+    public function sendRecipientNotification(?UserContract $recipient): void
     {
+        if($recipient==null){
+            return;
+        }
         $type=$recipient->type->value;
         $slug = 'appointment-' .$type.'-'. Str::of(class_basename(static::class))->kebab()->toString();
         $slug = Str::slug($slug);

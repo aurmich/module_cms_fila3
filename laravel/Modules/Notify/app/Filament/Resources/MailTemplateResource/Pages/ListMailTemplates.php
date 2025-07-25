@@ -32,11 +32,11 @@ class ListMailTemplates extends LangBaseListRecords
                 ->sortable()
                 ,
 
-            Tables\Columns\TextColumn::make('layout')
+            Tables\Columns\TextColumn::make('counter')
                 ->searchable()
                 ->sortable()
                 ,
-
+            
         ];
     }
 

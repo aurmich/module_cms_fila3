@@ -85,6 +85,7 @@ class MailTemplate extends SpatieMailTemplate implements MailTemplateInterface
         'sms_template',
         //'version',  //under development
         'params',
+        'counter',
     ];
 
     /**

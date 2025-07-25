@@ -45,7 +45,7 @@ class SpatieEmail extends TemplateMailable
     {
         $this->slug = Str::slug($slug);
         
-        MailTemplate::firstOrCreate([
+        $tpl=MailTemplate::firstOrCreate([
             'mailable' => SpatieEmail::class,
             'slug' => $this->slug,
         ],[
@@ -54,6 +54,8 @@ class SpatieEmail extends TemplateMailable
             'text_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione  è in attesa di approvazione. Ti contatteremo presto.['.$this->slug.']',
             'sms_template' => 'Gentile {{ first_name }} {{ last_name }}, la tua registrazione  è in attesa di approvazione. Ti contatteremo presto.['.$this->slug.']'
         ]);
+
+        $tpl->increment('counter');
         
         $data=$record->toArray();
         $this->data['login_url']=route('login');

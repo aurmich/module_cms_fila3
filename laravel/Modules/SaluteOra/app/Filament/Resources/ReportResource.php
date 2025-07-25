@@ -35,8 +35,8 @@ class ReportResource extends XotBaseResource
             ->reactive(),
             //mouth_teeth_pain_frequency  //quanto spesso
             Select::make('mouth_teeth_pain_frequency')
-                                       ->options(OccurrenceFrequencyEnum::class)
-            ->visible(fn(Get $get): bool => (bool)$get('has_mouth_or_teeth_pain')),
+                ->options(OccurrenceFrequencyEnum::class)
+                ->visible(fn(Get $get): bool => (bool)$get('has_mouth_or_teeth_pain')),
             TextInput::make('pregnancy_month')
                                        //       ->label('Mese Gravidanza')
                                        ->numeric()

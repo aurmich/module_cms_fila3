@@ -389,7 +389,7 @@
             </span>
             @if($appointment->report->has_diseases && $appointment->report->specify_diseases)
                 <div class="detail-box">
-                    <span class="detail-label">@lang('pub_theme::appointment.report.labels.details'):</span> {{ $appointment->report->specify_diseases }}
+                    <span class="detail-label">@lang('pub_theme::appointment.report.labels.details'):</span> {{ print_r($appointment->report->specify_diseases,true) }}
                 </div>
             @endif
         </div>

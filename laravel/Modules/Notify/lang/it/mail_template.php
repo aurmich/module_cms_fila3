@@ -163,6 +163,14 @@ return array (
     array (
       'label' => 'view',
     ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'counter' => 
+    array (
+      'label' => 'counter',
+    ),
   ),
   'actions' => 
   array (
@@ -200,6 +208,10 @@ return array (
       'tooltip' => 'Importa un template da un file JSON',
       'success_message' => 'Template importato con successo',
       'error_message' => 'Errore nell\'importazione del template',
+    ),
+    'activeLocale' => 
+    array (
+      'label' => 'activeLocale',
     ),
   ),
   'messages' => 

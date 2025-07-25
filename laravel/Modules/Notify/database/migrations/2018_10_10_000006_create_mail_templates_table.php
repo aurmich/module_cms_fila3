@@ -45,6 +45,10 @@ return new class () extends XotBaseMigration {
                 $table->json('sms_template')->nullable();
             }
 
+            if (! $this->hasColumn('counter')) {
+                $table->integer('counter')->default(0);
+            }
+
             $this->updateTimestamps(table: $table, hasSoftDeletes: true);
         });
     }

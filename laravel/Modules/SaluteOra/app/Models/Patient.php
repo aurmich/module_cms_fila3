@@ -339,4 +339,35 @@ class Patient extends User implements HasMedia
     {
         return $this->hasMany(Appointment::class,'patient_id');
     }
+
+
+    public function canBook(): bool
+    {
+        if($this->appointments->count()==0){
+            return true;
+        };
+        $res=true;
+        foreach($this->appointments as $appointment){
+            if(in_array($appointment->state->getName(),[
+                'pending',
+                'report_pending',
+                'report_completed',
+                'banned',
+                'pro_bono',
+                'completed',
+                'confirmed',
+                'in_progress',
+                'refund_pending',
+                'refund_completed',
+                'refund_to_integrate',
+                'refund_accepted',
+                'scheduled',
+                'rescheduled',
+                ])){
+                return false;
+
+            }
+        }
+        return $res;
+    }
 }
