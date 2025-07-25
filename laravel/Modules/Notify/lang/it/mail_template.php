@@ -154,6 +154,7 @@ return array (
       'description' => 'sms_template',
       'helper_text' => 'sms_template',
       'placeholder' => 'sms_template',
+      'label' => 'sms_template',
     ),
     'edit' => 
     array (
