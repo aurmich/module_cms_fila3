@@ -11,26 +11,21 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Modules\Notify\Contracts\SMS\SmsActionContract;
 use Modules\Notify\Datas\SmsData;
+use Modules\Notify\Datas\SMS\SmsFactorData;
 use Spatie\QueueableAction\QueueableAction;
 
 final class SendSmsFactorSMSAction implements SmsActionContract
 {
     use QueueableAction;
 
-    /** @var string */
-    private string $token;
-
-    /** @var string */
-    private string $baseUrl;
+    /** @var SmsFactorData */
+    private SmsFactorData $smsFactorData;
 
     /** @var array<string, mixed> */
     private array $vars = [];
 
     /** @var bool */
     protected bool $debug;
-
-    /** @var int */
-    protected int $timeout;
 
     /** @var string|null */
     protected ?string $defaultSender = null;
@@ -40,23 +35,16 @@ final class SendSmsFactorSMSAction implements SmsActionContract
      */
     public function __construct()
     {
-        $config = config('sms.drivers.smsfactor');
-        if (!is_array($config)) {
-            throw new Exception('Configurazione SMSFactor non trovata in sms.php');
-        }
-
-        $this->token = $config['token'] ?? null;
-        if (!is_string($this->token)) {
+        $this->smsFactorData = SmsFactorData::make();
+        
+        if (!$this->smsFactorData->token) {
             throw new Exception('Token SMSFactor non configurato in sms.php');
         }
-
-        $this->baseUrl = $config['base_url'] ?? 'https://api.smsfactor.com';
 
         // Parametri a livello di root
         $sender = config('sms.from');
         $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('sms.debug', false);
-        $this->timeout = (int) config('sms.timeout', 30);
     }
 
     /**
@@ -68,11 +56,7 @@ final class SendSmsFactorSMSAction implements SmsActionContract
      */
     public function execute(SmsData $smsData): array
     {
-        $headers = [
-            'Cache-Control' => 'no-cache',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token,
-        ];
+        $headers = $this->smsFactorData->getAuthHeaders();
 
         // Normalizza il numero di telefono
         $to = (string) $smsData->to;
@@ -96,12 +80,12 @@ final class SendSmsFactorSMSAction implements SmsActionContract
         ];
 
         $client = new Client([
-            'timeout' => $this->timeout,
+            'timeout' => $this->smsFactorData->getTimeout(),
             'headers' => $headers
         ]);
 
         try {
-            $response = $client->post($this->baseUrl . '/messages', ['json' => $body]);
+            $response = $client->post($this->smsFactorData->getBaseUrl() . '/messages', ['json' => $body]);
             $this->vars['status_code'] = $response->getStatusCode();
             $this->vars['status_txt'] = $response->getBody()->getContents();
 

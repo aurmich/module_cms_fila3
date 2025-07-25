@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment\Transitions;
 
+use Modules\Xot\Actions\Pdf\ContentPdfAction;
+use Modules\Xot\Actions\Pdf\StreamDownloadPdfAction;
+
 /**
  * Transition from Rejected to Confirmed state.
  *
@@ -17,4 +20,23 @@ namespace Modules\SaluteOra\States\Appointment\Transitions;
 class ReportPendingToReportCompleted extends BaseTransition
 {
     //--- (Funziona automaticamente grazie al pattern BaseTransition!)
+
+    public function getNotificationAttachments(): array{
+        
+
+        $view='pub_theme::appointment.report_pdf';
+        $data=['appointment'=>$this->appointment];
+        $filename='report-' . $this->appointment->id . '.pdf';
+        $data=app(ContentPdfAction::class)->execute(view:$view, data:$data, filename:$filename);
+
+        $attachments = [
+            [
+                
+                'data' => $data,
+                'as'=>$filename,
+                'mime'=>'application/pdf',
+            ]
+        ];
+        return $attachments;
+    }
 }

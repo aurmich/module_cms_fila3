@@ -3,6 +3,15 @@
 ## Panoramica
 Questo documento descrive l'implementazione del sistema di invio SMS nel modulo Notify, utilizzando il pacchetto `gr8shivam/laravel-sms-api` come driver principale **e** il pacchetto [`spatie/laravel-queueable-action`](https://github.com/spatie/laravel-queueable-action) per la gestione delle azioni asincrone e sincrone.
 
+## Architettura Data-Driven
+
+Il sistema SMS utilizza classi Data di Spatie per gestire la configurazione dei provider in modo centralizzato e tipizzato:
+
+- **SmsFactorData**: Gestisce configurazione e autenticazione per SMSFactor
+- **AgiletelecomData**: Gestisce configurazione e autenticazione per Agiletelecom
+
+Queste classi implementano il pattern singleton e forniscono metodi helper per l'autenticazione e la configurazione.
+
 ## Architettura
 
 ### 1. Driver Supportati
@@ -20,8 +29,15 @@ return [
     
     'drivers' => [
         'smsfactor' => [
-            'api_key' => env('SMSFACTOR_API_KEY'),
-            'sender' => env('SMSFACTOR_SENDER'),
+            'token' => env('SMSFACTOR_TOKEN'),
+            'base_url' => env('SMSFACTOR_BASE_URL', 'https://api.smsfactor.com'),
+        ],
+        'agiletelecom' => [
+            'username' => env('AGILETELECOM_USERNAME'),
+            'password' => env('AGILETELECOM_PASSWORD'),
+            'sender' => env('AGILETELECOM_SENDER'),
+            'endpoint' => env('AGILETELECOM_ENDPOINT'),
+            'auth_type' => env('AGILETELECOM_AUTH_TYPE', 'basic'),
         ],
         'twilio' => [
             'account_sid' => env('TWILIO_ACCOUNT_SID'),
@@ -31,6 +47,32 @@ return [
         // Altri driver...
     ]
 ];
+```
+
+### 3. Classi Data per Provider
+
+#### SmsFactorData
+```php
+use Modules\Notify\Datas\SMS\SmsFactorData;
+
+// Utilizzo singleton
+$smsFactorData = SmsFactorData::make();
+
+// Metodi helper
+$headers = $smsFactorData->getAuthHeaders();
+$baseUrl = $smsFactorData->getBaseUrl();
+$timeout = $smsFactorData->getTimeout();
+```
+
+#### AgiletelecomData
+```php
+use Modules\Notify\Datas\SMS\AgiletelecomData;
+
+// Utilizzo singleton
+$agiletelecomData = AgiletelecomData::make();
+
+// Metodi helper
+$headers = $agiletelecomData->getAuthHeaders();
 ```
 
 ### 3. Struttura del Database

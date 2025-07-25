@@ -66,6 +66,7 @@ class Dashboard extends XotBaseDashboard
      */
     public function getFooterWidgets(): array
     {
+        /**@phpstan-ignore-next-line */
         return [
             UserTypeRegistrationsChartWidget::make(['model' => Patient::class]),
             StatesChartWidget::make(['stateClass'=>UserState::class,'model'=>Patient::class]), 

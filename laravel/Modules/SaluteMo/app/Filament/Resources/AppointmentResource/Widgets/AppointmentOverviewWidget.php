@@ -98,7 +98,7 @@ class AppointmentOverviewWidget extends XotBaseWidget
             try {
                 $appointment = new Appointment();
                 $state = new $stateClass($appointment);
-                
+                Assert::isInstanceOf($state, AppointmentState::class);                
                 $states[] = [
                     'name' => $name,
                     'label' => $state->label(),

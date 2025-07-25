@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\User\Transitions;
 
-use Spatie\ModelStates\Transition;
-use Modules\SaluteOra\States\User\Suspended;
-use Modules\SaluteOra\States\User\Active;
+use Illuminate\Support\Str;
 use Modules\SaluteOra\Models\User;
+use Spatie\ModelStates\Transition;
+use Modules\SaluteOra\States\User\Active;
+use Modules\SaluteOra\States\User\Suspended;
 
 class SuspendedToActive extends BaseTransition
 {
     //---
+
+    public function getNotificationData(): array{
+        $password=Str::random(10);
+        $this->user->update(['password'=>$password]);
+        return [
+            'message' => $this->message,
+            'password' => $password,
+        ];
+    }
 }

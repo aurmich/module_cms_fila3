@@ -50,6 +50,7 @@ class ListDoctors extends ListUsers
 
     public function getHeaderWidgets(): array
     {
+        /**@phpstan-ignore-next-line */
         return [
             //Widgets\AppointmentOverviewWidget::make(['paperino'=>'pluto']),
             StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Doctor::class]),

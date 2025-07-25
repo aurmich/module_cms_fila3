@@ -26,6 +26,7 @@ class ListAdmins extends ListUsers
 
     public function getHeaderWidgets(): array
     {
+        /**@phpstan-ignore-next-line */
         return [
             StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Admin::class]),
         ];

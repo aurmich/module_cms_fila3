@@ -11,29 +11,21 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Modules\Notify\Contracts\SMS\SmsActionContract;
 use Modules\Notify\Datas\SmsData;
+use Modules\Notify\Datas\SMS\NexmoData;
 use Spatie\QueueableAction\QueueableAction;
 
 final class SendNexmoSMSAction implements SmsActionContract
 {
     use QueueableAction;
 
-    /** @var string */
-    private string $key;
-
-    /** @var string */
-    private string $secret;
-
-    /** @var string */
-    private string $baseUrl = 'https://rest.nexmo.com/sms/json';
+    /** @var NexmoData */
+    private NexmoData $nexmoData;
 
     /** @var array<string, mixed> */
     private array $vars = [];
 
     /** @var bool */
     protected bool $debug;
-
-    /** @var int */
-    protected int $timeout;
 
     /** @var string|null */
     protected ?string $defaultSender = null;
@@ -43,18 +35,13 @@ final class SendNexmoSMSAction implements SmsActionContract
      */
     public function __construct()
     {
-        $config = config('sms.drivers.nexmo');
-        if (!is_array($config)) {
-            throw new Exception('Configurazione Nexmo non trovata in sms.php');
-        }
-
-        $this->key = $config['key'] ?? null;
-        if (!is_string($this->key)) {
+        $this->nexmoData = NexmoData::make();
+        
+        if (!$this->nexmoData->key) {
             throw new Exception('Key Nexmo non configurata in sms.php');
         }
 
-        $this->secret = $config['secret'] ?? null;
-        if (!is_string($this->secret)) {
+        if (!$this->nexmoData->secret) {
             throw new Exception('Secret Nexmo non configurato in sms.php');
         }
 
@@ -62,7 +49,6 @@ final class SendNexmoSMSAction implements SmsActionContract
         $sender = config('sms.from');
         $this->defaultSender = is_string($sender) ? $sender : null;
         $this->debug = (bool) config('sms.debug', false);
-        $this->timeout = (int) config('sms.timeout', 30);
     }
 
     /**
@@ -91,15 +77,15 @@ final class SendNexmoSMSAction implements SmsActionContract
         $from = $smsData->from ?? $this->defaultSender;
 
         $client = new Client([
-            'timeout' => $this->timeout,
+            'timeout' => $this->nexmoData->getTimeout(),
             'headers' => $headers
         ]);
 
         try {
-            $response = $client->post($this->baseUrl, [
+            $response = $client->post($this->nexmoData->getBaseUrl() . '/sms/json', [
                 'form_params' => [
-                    'api_key' => $this->key,
-                    'api_secret' => $this->secret,
+                    'api_key' => $this->nexmoData->key,
+                    'api_secret' => $this->nexmoData->secret,
                     'to' => $to,
                     'from' => $from,
                     'text' => $smsData->body,

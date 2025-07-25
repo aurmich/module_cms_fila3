@@ -220,18 +220,9 @@
             <td class="label">@lang('pub_theme::appointment.report.labels.date')</td>
             <td class="value">{{ $appointment->starts_at->format('d/m/Y') }}</td>
             <td class="label">@lang('pub_theme::appointment.report.labels.time')</td>
-            <td class="value">{{ $appointment->starts_at->format('H:i') }} - {{ $appointment->ends_at->format('H:i') }}</td>
+            <td class="value">{{ $appointment->starts_at->format('H:i') }} </td>
         </tr>
-        <tr>
-            <td class="label">@lang('pub_theme::appointment.report.labels.state')</td>
-            <td class="value">
-                <span class="status status-{{ strtolower(class_basename($appointment->state)) }}">
-                    {{ $appointment->state->label() }}
-                </span>
-            </td>
-            <td class="label">@lang('pub_theme::appointment.report.labels.duration')</td>
-            <td class="value">{{ $appointment->starts_at->diffInMinutes($appointment->ends_at) }} @lang('pub_theme::common.minutes')</td>
-        </tr>
+        
     </table>
 
     <!-- Informazioni paziente -->
@@ -287,7 +278,7 @@
         </tr>
         @endif
     </table>
-
+    @if($appointment->studio)
     <!-- Informazioni studio -->
     <div class="studio-box">
         <h3>@lang('pub_theme::appointment.report.sections.studio_info')</h3>
@@ -316,7 +307,7 @@
             @endif
         </table>
     </div>
-
+    @endif
     <!-- Note appuntamento -->
     @if($appointment->notes)
     <div class="notes-box">
@@ -326,7 +317,7 @@
     @endif
 
     <!-- Referto medico -->
-    @if($appointment->hasReport() && $appointment->report)
+    @if($appointment->report)
     
     
     <h1>@lang('pub_theme::appointment.report.sections.medical_report')</h1>

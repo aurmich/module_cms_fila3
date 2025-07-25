@@ -41,6 +41,7 @@ new class extends Component  {
                         <span class="mr-2 font-medium">@lang('pub_theme::txt.appointment.time')</span>
                         <p>10:00 - 11:00</p>
                     </div>
+                    @if($appointment->studio)
                     <div class="flex flex-row items-center mb-2">
                         <span class="mr-2 font-medium">@lang('pub_theme::txt.appointment.studio')</span>
                         <p>{{ $appointment->studio->name }}</p>
@@ -57,7 +58,7 @@ new class extends Component  {
                         <span class="mr-2 font-medium">@lang('pub_theme::txt.appointment.email')</span>
                         <p>{{ $appointment->studio->email }}</p>
                     </div>
-
+                    @endif
                     <div class="flex flex-row items-center">
                         <span class="mr-2 font-medium">@lang('pub_theme::appointment.fields.state.label')</span>
                         <x-filament::badge color="{{ $appointment->state->color() }}">{{ $appointment->state->label() }}</x-filament::badge>

@@ -46,6 +46,11 @@ abstract class BaseTransition extends Transition
         ];
     }
 
+    public function getNotificationAttachments(): array{
+        return [];
+    }
+        
+
 
     public function sendRecipientNotification(UserContract $recipient): void
     {
@@ -60,6 +65,7 @@ abstract class BaseTransition extends Transition
 
         $data = $this->getNotificationData();
         $notify = $notify->mergeData($data);
+        $notify = $notify->addAttachments($this->getNotificationAttachments());
         Notification::route('mail', $recipient->email)
             ->notify($notify);
     }

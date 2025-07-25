@@ -209,6 +209,11 @@ class Appointment extends BaseModel implements HasStatesContract
 
     public function hasReport(): bool
     {
+        $state_name=$this->state->getName();
+        if(in_array($state_name,['pending','report_pending','refund_pending','no_show','banned','cancelled','confirmed','annulled'])){
+            return false;
+        }
+        
         return $this->report()->exists();
     }
 

@@ -6,18 +6,19 @@ namespace Modules\Notify\Emails;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Modules\Xot\Datas\XotData;
 use Modules\Xot\Datas\MetatagData;
+use function Safe\file_get_contents;
 use Illuminate\Support\Facades\File;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Mailables\Envelope;
 use Modules\Notify\Models\MailTemplate;
 use Illuminate\Mail\Mailables\Attachment;
-use Illuminate\Mail\Mailables\Address;
-use Illuminate\Mail\Mailables\Envelope;
+
 use Spatie\MailTemplates\TemplateMailable;
 use Spatie\MailTemplates\Interfaces\MailTemplateInterface;
-
-use function Safe\file_get_contents;
 
 /**
  * @see https://github.com/spatie/laravel-database-mail-templates
@@ -135,6 +136,42 @@ class SpatieEmail extends TemplateMailable
         return $this->slug;
     }
 
+
+    public function getAttachmentFromPath(array $attachment): Attachment
+    {
+        $res = Attachment::fromPath($attachment['path']);
+        $info = pathinfo($attachment['path']);
+        $filename = $attachment['as'] ?? $info['basename'];
+        $mime = $attachment['mime'] ?? File::mimeType($attachment['path']);
+
+        $res = $res
+            ->as($filename)
+            ->withMime($mime);
+        return $res;
+    }
+
+    public function getAttachmentFromData(array $attachment): Attachment
+    {
+        $res = Attachment::fromData(fn () => $attachment['data']);
+        $as = $attachment['as'];
+        
+
+        $mime = Arr::get($attachment,'mime',null); //?? File::mimeType($as);   file vuole un file esistente
+        $info = pathinfo($attachment['as']);
+        if($mime==null && isset($info['extension'])){
+            $mime = Arr::first(\Symfony\Component\Mime\MimeTypes::getDefault()->getMimeTypes($info['extension']));
+        }
+        if($mime==null){
+            $mime='application/octet-stream';
+        }
+        Assert::string($mime);            
+
+        $res = $res
+            ->as($as)
+            ->withMime($mime);
+        return $res;
+    }
+
     /**
      * Add attachments to the email
      *
@@ -143,27 +180,26 @@ class SpatieEmail extends TemplateMailable
      */
     public function addAttachments(array $attachments): self
     {
+        
         $attachmentObjects = [];
 
         foreach ($attachments as $item) {
-            if (!isset($item['path']) || !file_exists($item['path'])) {
-                continue;
+            $attachment=null;
+            if (isset($item['path']) && file_exists($item['path'])) {
+                $attachment=$this->getAttachmentFromPath($item);
             }
 
-            $attachment = Attachment::fromPath($item['path']);
-
-            if (isset($item['as'])) {
-                $attachment = $attachment->as($item['as']);
+            if($attachment==null && isset($item['data'])){
+                $attachment=$this->getAttachmentFromData($item);
             }
-
-            if (isset($item['mime'])) {
-                $attachment = $attachment->withMime($item['mime']);
+            
+            if ($attachment) {
+                $attachmentObjects[] = $attachment;
             }
-
-            $attachmentObjects[] = $attachment;
         }
 
         $this->customAttachments = $attachmentObjects;
+        
 
         return $this;
     }
@@ -175,6 +211,7 @@ class SpatieEmail extends TemplateMailable
      */
     public function attachments(): array
     {
+        
         return $this->customAttachments;
     }
 

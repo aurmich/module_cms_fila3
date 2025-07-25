@@ -15,6 +15,7 @@ class RecordNotification extends Notification
     protected Model $record;
     protected string $slug;
     public array $data=[];
+    public array $attachments=[];
 
     public function __construct(Model $record, string $slug)
     {
@@ -51,6 +52,8 @@ class RecordNotification extends Notification
     {
         $email = new SpatieEmail($this->record, $this->slug);
         $email=$email->mergeData($this->data);
+        
+        $email=$email->addAttachments($this->attachments);
 
         // Importante: garantisci che ci sia sempre un destinatario
         if (method_exists($notifiable, 'routeNotificationFor')) {
@@ -101,6 +104,12 @@ class RecordNotification extends Notification
     public function mergeData(array $data): self
     {
         $this->data=array_merge($this->data,$data);
+        return $this;
+    }
+
+    public function addAttachments(array $attachments): self
+    {
+        $this->attachments=array_merge($this->attachments,$attachments);
         return $this;
     }
 }
