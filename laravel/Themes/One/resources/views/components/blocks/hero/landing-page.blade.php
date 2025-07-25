@@ -156,7 +156,7 @@
     <!-- FINE PRIMA SECTION -->
     <!-- INIZIO SECONDA SECTION -->
     <div class="w-full flex flex-col justify-start items-center">
-      <div class="flex justify-center lg:w-full p-6 mt-12 ipad:mt-5 lg:mt-24">
+      <div class="flex justify-center lg:w-full p-6 mt-12 ipad:mt-28 lg:mt-24">
         <h1 class="md:w-3/4  ipad:w-3/4 text-[#FF5F7E] text-center">
           @lang('pub_theme::navigation.hero.importance_title.label')
         </h1>

@@ -26,7 +26,7 @@ export default {
     theme: {
         extend: {
             screens: {
-                'ipad': {'min': '768px', 'max': '1030px'},
+                'ipad': {'min': '677px', 'max': '1030px'},
             },
             colors: {
                 danger: {

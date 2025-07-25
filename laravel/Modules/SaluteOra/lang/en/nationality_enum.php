@@ -12,13 +12,13 @@ return [
         'other' => 'Other nationality',
     ],
     'IT' => [
-        'label' => 'Italiana',
+        'label' => 'Italian',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag-checkered',
         'description' => 'Italiano',
     ],
     'EE' => [
-        'label' => 'Estera',
+        'label' => 'Foreign',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag-checkered',
         'description' => 'Estera',
