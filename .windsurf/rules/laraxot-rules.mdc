@@ -177,7 +177,6 @@ class CommandNameCommand extends Command
 - *"Non avrai altro data access all'infuori di XotData e Contracts"*
 - Serenità interaction design, error handling preventivo, code commentato
 - **Riferimento**: [Modules/User/app/Console/Commands/ChangeTypeCommand.php](../../laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php)
-
 ## Dipendenze tra Moduli
 - Ogni modulo dovrebbe usare modelli dal proprio namespace quando esistono
 - Minimizzare l'uso di modelli cross-module

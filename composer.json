@@ -53,6 +53,14 @@
         "phpstan-modules": [
             "php laravel/vendor/bin/phpstan analyse --memory-limit=2G --error-format=table --no-progress laravel/Modules"
         ]
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
+    },
+    "require": {
+        "dotswan/filament-grapesjs-v3": "*",
+        "spatie/laravel-queueable-action": "^2.16"
+    }
+}
     },
     "minimum-stability": "dev",
     "prefer-stable": true

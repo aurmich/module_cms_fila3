@@ -50,6 +50,9 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @property string|null $created_by
  * @property string|null $start_datetime
  * @property string|null $end_datetime
+ * @property \Illuminate\Support\Carbon|null $date
+ * @property \Illuminate\Support\Carbon|null $start_time
+ * @property \Illuminate\Support\Carbon|null $end_time
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
