@@ -50,11 +50,12 @@ class RecordNotification extends Notification
      */
     public function toMail($notifiable): SpatieEmail
     {
+        
         $email = new SpatieEmail($this->record, $this->slug);
         $email=$email->mergeData($this->data);
         
         $email=$email->addAttachments($this->attachments);
-
+        
         // Importante: garantisci che ci sia sempre un destinatario
         if (method_exists($notifiable, 'routeNotificationFor')) {
             // Ottieni l'email dal notifiable
@@ -64,7 +65,7 @@ class RecordNotification extends Notification
                 $email->setRecipient($to);
             }
         }
-
+        
         return $email;
     }
 

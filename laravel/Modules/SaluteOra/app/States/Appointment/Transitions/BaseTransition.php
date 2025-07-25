@@ -69,8 +69,13 @@ abstract class BaseTransition extends Transition
         $data = $this->getNotificationData();
         $notify = $notify->mergeData($data);
         $notify = $notify->addAttachments($this->getNotificationAttachments());
-        Notification::route('mail', $recipient->email)
+        //appointment-patient-pending-to-confirmed
+        try{
+            Notification::route('mail', $recipient->email)
             ->notify($notify);
+        }catch(\TypeError $e){
+            dddx($e);
+        }
     }
         
     
