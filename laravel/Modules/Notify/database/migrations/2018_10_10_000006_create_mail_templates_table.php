@@ -44,7 +44,6 @@ return new class () extends XotBaseMigration {
             if (! $this->hasColumn('sms_template')) {
                 $table->json('sms_template')->nullable();
             }
-
             if (! $this->hasColumn('counter')) {
                 $table->integer('counter')->default(0);
             }
