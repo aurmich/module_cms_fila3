@@ -425,7 +425,7 @@
             @if($appointment->report->missing_teeth)
                 @if($appointment->report->specify_missing_teeth)
                     <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ $appointment->report->specify_missing_teeth }}
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_missing_teeth,true) }}
                     </div>
                 @endif
                 @if($appointment->report->more_info_missing_teeth)
@@ -447,7 +447,7 @@
             @if($appointment->report->decayed_teeth)
                 @if($appointment->report->specify_decayed_teeth)
                     <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ $appointment->report->specify_decayed_teeth }}
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_decayed_teeth,true) }}
                     </div>
                 @endif
                 @if($appointment->report->more_info_decayed_teeth)
@@ -469,7 +469,7 @@
             @if($appointment->report->has_fixed_prosthesis_or_implants)
                 @if($appointment->report->specify_prosthesis_or_implants)
                     <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ $appointment->report->specify_prosthesis_or_implants }}
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_prosthesis_or_implants,true) }}
                     </div>
                 @endif
                 @if($appointment->report->more_info_prosthesis)
@@ -491,7 +491,7 @@
             @if($appointment->report->has_tartar)
                 @if($appointment->report->specify_tartar)
                     <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ $appointment->report->specify_tartar }}
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_tartar,true) }}
                     </div>
                 @endif
                 @if($appointment->report->more_info_tartar)
@@ -513,7 +513,7 @@
             @if($appointment->report->has_plaque)
                 @if($appointment->report->specify_plaque)
                     <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ $appointment->report->specify_plaque }}
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_plaque,true) }}
                     </div>
                 @endif
                 @if($appointment->report->more_info_plaque)
