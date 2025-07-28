@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Modules\SaluteOra\States\Appointment;
+namespace Modules\Xot\States;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Spatie\ModelStates\State;
 use Filament\Forms\Components;
 use Spatie\ModelStates\StateConfig;
-use Modules\Xot\States\XotBaseState;
+use Illuminate\Database\Eloquent\Model;
+
 use Modules\Xot\Contracts\StateContract;
-use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Filament\Traits\TransTrait;
 
 /**
@@ -22,12 +22,11 @@ use Modules\Xot\Filament\Traits\TransTrait;
  * @property string $name Il nome dello stato
  * @property string $value Il valore dello stato nel database
  */
-abstract class AppointmentState extends XotBaseState 
+abstract class XotBaseState extends State implements StateContract
 {
-    
-    /**
-     * Configure the allowed state transitions.
-     */
+    use TransTrait;
+    public static string $name;
+    /*
     public static function config(): StateConfig
         {
             return parent::config()
@@ -52,7 +51,7 @@ abstract class AppointmentState extends XotBaseState
                 ->allowTransition(ReportCompleted::class, ProBono::class, Transitions\ReportCompletedToProBono::class)
                 
                 // Report transitions
-                ->allowTransition(ReportPending::class, ReportPending::class/*, Transitions\ReportPendingToReportCompleted::class*/)
+                ->allowTransition(ReportPending::class, ReportPending::class)
                 
                 ->allowTransition(ReportPending::class, ReportCompleted::class, Transitions\ReportPendingToReportCompleted::class)
                 
@@ -70,6 +69,110 @@ abstract class AppointmentState extends XotBaseState
                 ->allowTransition(RefundToIntegrate::class, RefundCompleted::class, Transitions\RefundToIntegrateToRefundCompleted::class);
         
     }
-    
-   
+    */
+    public static function getName(): string
+    {
+        /** @phpstan-ignore-next-line */
+        return static::$name ?? Str::of(class_basename(static::class))->snake()->toString();
+    }
+
+    public function label(): string
+    {
+        
+        return static::transClass(static::class,'states.'.static::getName().'.label');
+        //return 'Annullato';
+    }
+
+    public function color(): string
+    {
+        
+        return static::transClass(static::class,'states.'.static::getName().'.color');
+        
+    }
+
+    public function bgColor(): string
+    {
+        return static::transClass(static::class,'states.'.static::getName().'.bg_color');
+        //return 'info';
+    }
+
+    public function icon(): string
+    {
+        return static::transClass(static::class,'states.'.static::getName().'.icon');
+        //return 'heroicon-o-x-circle';
+    }
+
+    public function modalHeading(): string
+    {
+        return static::transClass(static::class,'states.'.static::getName().'.modal_heading');
+        //return 'Annulla Appuntamento';
+    }
+
+    public function modalDescription(): string
+    {
+        $appointment = $this->getModel();
+        return static::transClass(static::class,'states.'.static::getName().'.modal_description');
+        //return 'Sei sicuro di voler annullare questo appuntamento?';
+    }
+
+    public function modalFormSchema(): array
+    {
+        return [
+            'message'=>Components\Textarea::make('message')
+                ->required()
+                ->maxLength(255),
+     
+        ];
+    }
+
+    public function modalFillForm(array $arguments,array $data): array
+    {
+        return $data;
+    }
+
+    public function modalFillFormByRecord(Model $record): array
+    {
+        return [];
+    }
+
+    public function modalAction(array $arguments, array $data):void
+    {
+        $this->processStateAction($arguments,$data);
+    }
+
+    public function processStateAction(array $arguments,array $data): void
+    {
+        $message=Arr::get($data,'message');
+        $stateClass=static::class;
+        /*
+        
+        $appointmentId = $arguments['appointment'];
+        $appointment = Appointment::firstWhere('id',$appointmentId);
+        
+        $appointment?->state->transitionTo($stateClass,$message);
+        */
+        $record=$this->getModel();
+        $record->state->transitionTo($stateClass,$message);
+    }
+
+
+    public function modalActionByRecord(Model $record, array $data): void
+    {
+        $this->processStateActionByRecord($record,$data);
+    }
+
+    public function processStateActionByRecord(Model $record,array $data): void
+    {
+        $message=Arr::get($data,'message');
+        $stateClass=static::class;
+        /*
+        
+        $appointmentId = $arguments['appointment'];
+        $appointment = Appointment::firstWhere('id',$appointmentId);
+        
+        $appointment?->state->transitionTo($stateClass,$message);
+        */
+        
+        $record->state->transitionTo($stateClass,$message);
+    }
 }

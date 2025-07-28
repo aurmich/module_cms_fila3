@@ -13,7 +13,7 @@ namespace Modules\SaluteOra\States\User;
 class Suspended extends UserState
 {
     /** @var string */
-    public static $name = 'suspended';
+    public static string $name = 'suspended';
     public function label(): string
     {
         return 'Sospeso';

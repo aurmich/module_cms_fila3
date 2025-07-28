@@ -25,8 +25,9 @@ class IntegrationCompletedToActive extends BaseTransition
    
 
     public function getNotificationData(): array{
+        $user=$this->record;
         $password=Str::random(10);
-        $this->user->update(['password'=>$password]);
+        $user->update(['password'=>$password]);
         return [
             'message' => $this->message,
             'password' => $password,

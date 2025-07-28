@@ -25,8 +25,8 @@ class ReportPendingToReportCompleted extends BaseTransition
         
 
         $view='pub_theme::appointment.report_pdf';
-        $data=['appointment'=>$this->appointment];
-        $filename='report-' . $this->appointment->id . '.pdf';
+        $data=['appointment'=>$this->record];
+        $filename='report-' . $this->record->id . '.pdf';
         $data=app(ContentPdfAction::class)->execute(view:$view, data:$data, filename:$filename);
 
         $attachments = [

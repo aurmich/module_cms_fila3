@@ -83,6 +83,7 @@ return array (
       'help' => 'Scegli il medico che effettuerà la visita',
       'tooltip' => 'Il medico responsabile dell\'appuntamento',
       'helper_text' => '',
+      'description' => 'doctor_id',
     ),
     'studio_id' => 
     array (
@@ -91,6 +92,7 @@ return array (
       'help' => 'Scegli lo studio dove si terrà l\'appuntamento',
       'tooltip' => 'Lo studio medico dove si terrà l\'appuntamento',
       'helper_text' => '',
+      'description' => 'studio_id',
     ),
     'title' => 
     array (
@@ -99,6 +101,7 @@ return array (
       'help' => 'Titolo o descrizione breve dell\'appuntamento',
       'tooltip' => 'Titolo dell\'appuntamento',
       'helper_text' => '',
+      'description' => 'title',
     ),
     'starts_at' => 
     array (
@@ -107,6 +110,7 @@ return array (
       'help' => 'Data e ora di inizio dell\'appuntamento',
       'tooltip' => 'Quando inizia l\'appuntamento',
       'helper_text' => '',
+      'description' => 'starts_at',
     ),
     'ends_at' => 
     array (
@@ -115,6 +119,7 @@ return array (
       'help' => 'Data e ora di fine dell\'appuntamento',
       'tooltip' => 'Quando termina l\'appuntamento',
       'helper_text' => '',
+      'description' => 'ends_at',
     ),
     'type' => 
     array (
@@ -131,6 +136,7 @@ return array (
         'follow_up' => 'Controllo di Follow-up',
         'emergency' => 'Emergenza',
       ),
+      'description' => 'type',
     ),
     'state' => 
     array (
@@ -154,6 +160,8 @@ return array (
       'help' => 'Indica se si tratta di un appuntamento di emergenza',
       'tooltip' => 'Flag per appuntamenti di emergenza',
       'helper_text' => '',
+      'description' => 'emergency',
+      'placeholder' => 'emergency',
     ),
     'notes' => 
     array (
@@ -162,6 +170,7 @@ return array (
       'help' => 'Note o commenti aggiuntivi sull\'appuntamento',
       'tooltip' => 'Informazioni aggiuntive sull\'appuntamento',
       'helper_text' => '',
+      'description' => 'notes',
     ),
     'treatment_plan' => 
     array (
@@ -222,6 +231,86 @@ return array (
     'toggleColumns' => 
     array (
       'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
+    'patient' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'patient.full_name',
+      ),
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'value' => 
+    array (
+      'label' => 'value',
+      'placeholder' => 'value',
+      'helper_text' => 'value',
+      'description' => 'value',
+    ),
+    'states' => 
+    array (
+      'label' => 'states',
+    ),
+    'status' => 
+    array (
+      'description' => 'status',
+    ),
+    'phone' => 
+    array (
+      'description' => 'phone',
+      'helper_text' => 'phone',
+      'placeholder' => 'phone',
+      'label' => 'phone',
+    ),
+    'email' => 
+    array (
+      'description' => 'email',
+      'helper_text' => 'email',
+      'placeholder' => 'email',
+      'label' => 'email',
+    ),
+    'last_name' => 
+    array (
+      'description' => 'last_name',
+      'helper_text' => 'last_name',
+      'placeholder' => 'last_name',
+      'label' => 'last_name',
+    ),
+    'first_name' => 
+    array (
+      'description' => 'first_name',
+      'helper_text' => 'first_name',
     ),
   ),
   'statuses' => 

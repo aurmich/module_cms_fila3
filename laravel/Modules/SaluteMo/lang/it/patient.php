@@ -432,6 +432,30 @@ return array (
     array (
       'label' => 'delete',
     ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'changePassword' => 
+    array (
+      'label' => 'changePassword',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'state' => 
+    array (
+      'label' => 'state',
+    ),
   ),
   'actions' => 
   array (

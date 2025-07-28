@@ -16,8 +16,8 @@ class PendingToConfirmed extends BaseTransition
     public function getNotificationRecipients(): array
     {
         return [
-            'patient' => $this->appointment->patient,
-            'doctor' => $this->appointment->doctor,
+            'patient' => $this->record->patient,
+            'doctor' => $this->record->doctor,
         ];
     }
 } 

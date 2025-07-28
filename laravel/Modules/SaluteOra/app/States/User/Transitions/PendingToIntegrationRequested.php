@@ -15,15 +15,16 @@ class PendingToIntegrationRequested extends BaseTransition
     
 
     public function getNotificationData(): array{
-        if($this->user->remember_token==null){
-            $this->user->remember_token = Str::random(40);
-            $this->user->save();
+        $user=$this->record;
+        if($user->remember_token==null){
+            $user->remember_token = Str::random(40);
+            $user->save();
         }
 
         $register_url = route('register.type',[
-            'type'=>$this->user->type->value,
-            'email'=>$this->user->email,
-            'token'=>$this->user->remember_token,
+            'type'=>$user->type->value,
+            'email'=>$user->email,
+            'token'=>$user->remember_token,
         ]);
 
         $data = [

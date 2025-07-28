@@ -18,6 +18,8 @@ use Modules\UI\Filament\Tables\Columns\IconStateColumn;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource;
+use Modules\UI\Filament\Tables\Columns\IconStateGroupColumn;
+use Modules\UI\Filament\Tables\Columns\IconStateSplitColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource\Widgets;
 
@@ -40,6 +42,10 @@ class ListAppointments extends XotBaseListRecords
             */
             'invoice'=> IconMediaColumn::make('invoice'),
             'state' => IconStateColumn::make('state'),
+            'states' => IconStateGroupColumn::make('states')->stateClass(AppointmentState::class,Appointment::class),
+            //'states' => IconStateSplitColumn::make('states')->stateClass(AppointmentState::class, Appointment::class),
+
+
             'patient.full_name' => TextColumn::make('patient.full_name'),
             'title' => TextColumn::make('title')
                 ->sortable()
@@ -79,5 +85,15 @@ class ListAppointments extends XotBaseListRecords
         ];
     }
 
-   
+    /**
+     * Metodo di test per IconStateSplitColumn
+     */
+    public function prova($recordId): void
+    {
+        \Filament\Notifications\Notification::make()
+            ->title('Prova funziona!')
+            ->body('Record ID: ' . $recordId)
+            ->success()
+            ->send();
+    }
 }

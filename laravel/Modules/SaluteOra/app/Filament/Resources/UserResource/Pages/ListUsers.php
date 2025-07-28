@@ -16,6 +16,7 @@ use Modules\SaluteOra\States\User\UserState;
 use Modules\SaluteOra\Filament\Resources\UserResource;
 use Modules\UI\Filament\Tables\Columns\IconStateColumn;
 use Modules\UI\Filament\Tables\Columns\SelectStateColumn;
+use Modules\UI\Filament\Tables\Columns\IconStateGroupColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\User\Filament\Resources\UserResource\Pages\BaseListUsers;
 use Modules\User\Filament\Resources\UserResource\Pages\ListUsers as UserListUsers;
@@ -41,6 +42,7 @@ class ListUsers extends BaseListUsers
         //'state'=>SelectColumn::make('state')->options(UserStateEnum::class)
         //'state'=>SelectColumn::make('state')->options(UserState::class)
         'state' => IconStateColumn::make('state'),
+        'states'=>IconStateGroupColumn::make('states')->stateClass(UserState::class),
 
     ];
    }

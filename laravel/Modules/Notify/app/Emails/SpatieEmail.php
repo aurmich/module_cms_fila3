@@ -57,7 +57,7 @@ class SpatieEmail extends TemplateMailable
 
         $tpl->increment('counter');
         
-        $data=$record->toArray();
+        $data=$record->toArrayForce();
         $this->data['login_url']=route('login');
         $this->data['site_url']=url('/');
 
