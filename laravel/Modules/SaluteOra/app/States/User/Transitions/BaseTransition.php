@@ -10,38 +10,20 @@ use Spatie\ModelStates\Transition;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Inactive;
 use Modules\Notify\Notifications\RecordNotification;
+use Modules\Xot\States\Transitions\XotBaseTransition;
+use Modules\Xot\Contracts\UserContract;
 
-abstract class BaseTransition extends Transition
+abstract class BaseTransition extends XotBaseTransition
 {
     
-    public function __construct(public User $user, public ?string $message='') {}
-     
-    public function handle(): User
+    
+
+    public function getNotificationSlug(UserContract $recipient): string
     {
-        $this->sendNotification();
-        $class=static::class;
-        $newStateClass=Str::of($class)->afterLast('To')->prepend('Modules\SaluteOra\States\User\\')->toString();
-        /** @phpstan-ignore assign.propertyType */
-        $this->user->state = new $newStateClass($this->user);
-        $this->user->save();
-        return $this->user;
-    }
-        
-    public function sendNotification(): void{
-        $slug=$this->user->type->value . '-'.Str::of(class_basename(static::class))->kebab()->toString();
+        $slug=$this->record->type->value . '-'.Str::of(class_basename(static::class))->kebab()->toString();
         $slug=\Illuminate\Support\Str::slug($slug);
         
-        $notify = new RecordNotification(
-            $this->user,
-            $slug
-        );
-
-        $data = $this->getNotificationData();
-        $notify = $notify->mergeData($data);
-        
-        \Illuminate\Support\Facades\Notification::route('mail', $this->user->email)
-            //->locale('it')
-            ->notify($notify);
+        return $slug;
     }
 
     public function getNotificationData(): array{

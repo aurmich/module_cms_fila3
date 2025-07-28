@@ -13,7 +13,7 @@ namespace Modules\SaluteOra\States\User;
 class IntegrationRequested extends UserState
 {
     /** @var string */
-    public static $name = 'integration_requested';
+    public static string $name = 'integration_requested';
     public function label(): string
     {
         return 'Integrazione richiesta';

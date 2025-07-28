@@ -13,7 +13,7 @@ namespace Modules\SaluteOra\States\User;
 class Active extends UserState
 {
     /** @var string */
-    public static $name = 'active';
+    public static string $name = 'active';
 
     public function label(): string
     {

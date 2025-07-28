@@ -10,82 +10,32 @@ use Modules\Xot\Contracts\UserContract;
 use Modules\SaluteOra\Models\Appointment;
 use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Notifications\RecordNotification;
+use Modules\Xot\States\Transitions\XotBaseTransition;
 
-abstract class BaseTransition extends Transition
+abstract class BaseTransition extends XotBaseTransition
 {
     
-    public function __construct(public Appointment $appointment, public ?string $message='') {}
-     
-    public function handle(): Appointment
-    {
-        $this->sendNotifications();
-        $class = static::class;
-        $newStateClass = Str::of($class)->afterLast('To')->prepend('Modules\SaluteOra\States\Appointment\\')->toString();
-        /** @phpstan-ignore assign.propertyType */
-        $this->appointment->state = new $newStateClass($this->appointment);
-        $this->appointment->save();
-        return $this->appointment;
-    }
-
-
-    public function sendNotifications(): void
-    {   
-
-        $recipients=$this->getNotificationRecipients();
-        foreach($recipients as $recipient){
-            $this->sendRecipientNotification($recipient);
-        }
-    }
+    
 
 
     public function getNotificationRecipients(): array
     {
         return [
-            'patient' => $this->appointment->patient,
-            //'doctor' => $this->appointment->doctor,
+            'patient' => $this->record->patient,
+            //'doctor' => $this->record->doctor,
         ];
     }
 
-    public function getNotificationAttachments(): array{
-        return [];
-    }
-        
-
-
-    public function sendRecipientNotification(?UserContract $recipient): void
-    {
-        if($recipient==null){
-            return;
-        }
-        $type=$recipient->type->value;
-        $slug = 'appointment-' .$type.'-'. Str::of(class_basename(static::class))->kebab()->toString();
-        $slug = Str::slug($slug);
-        
-        $notify = new RecordNotification(
-            $this->appointment,
-            $slug
-        );
-
-        $data = $this->getNotificationData();
-        $notify = $notify->mergeData($data);
-        $notify = $notify->addAttachments($this->getNotificationAttachments());
-        //appointment-patient-pending-to-confirmed
-        try{
-            Notification::route('mail', $recipient->email)
-            ->notify($notify);
-        }catch(\TypeError $e){
-            dddx($e);
-        }
-    }
+    
         
     
     public function getNotificationData(): array
     {
         return [
             'message' => $this->message,
-            'appointment_date' => $this->appointment->starts_at?->format('d/m/Y H:i') ?? 'N/A',
-            'patient_name' => $this->appointment->patient->name ?? 'N/A',
-            'doctor_name' => $this->appointment->doctor->name ?? 'N/A',
+            'appointment_date' => $this->record->starts_at?->format('d/m/Y H:i') ?? 'N/A',
+            'patient_name' => $this->record->patient->name ?? 'N/A',
+            'doctor_name' => $this->record->doctor->name ?? 'N/A',
         ];
     }
 } 
