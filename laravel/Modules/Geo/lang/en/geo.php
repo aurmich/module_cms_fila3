@@ -137,7 +137,11 @@ return [
                 ],
             ],
             'fields' => [
+<<<<<<< HEAD
+                'name' => 'Nome',
+=======
                 'name' => 'Name',
+>>>>>>> 0d1465e6e (.)
                 'address' => 'Indirizzo',
                 'latitude' => 'Latitudine',
                 'longitude' => 'Longitudine',
@@ -148,16 +152,27 @@ return [
                 'business' => 'Attività',
                 'residence' => 'Residenza',
                 'point_of_interest' => 'Punto di Interesse',
+<<<<<<< HEAD
+                'public_service' => 'Servizio Pubblico',
+=======
                 'public_service' => 'Servizio Public',
+>>>>>>> 0d1465e6e (.)
             ],
         ],
     ],
     'common' => [
         'status' => [
+<<<<<<< HEAD
+            'active' => 'Attivo',
+            'inactive' => 'Inattivo',
+            'pending' => 'In Attesa',
+            'verified' => 'Verificato',
+=======
             'active' => 'Active',
             'inactive' => 'Inactive',
             'pending' => 'In Attesa',
             'verified' => 'Verified',
+>>>>>>> 0d1465e6e (.)
         ],
         'actions' => [
             'locate' => 'Localizza',
@@ -178,7 +193,11 @@ return [
                 'not_found' => 'Posizione non trovata',
                 'invalid_coords' => 'Coordinate non valide',
                 'geocoding_failed' => 'Geocodifica fallita',
+<<<<<<< HEAD
+                'network_error' => 'Errore di rete',
+=======
                 'network_error' => 'Error di rete',
+>>>>>>> 0d1465e6e (.)
             ],
         ],
         'filters' => [

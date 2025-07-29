@@ -1,7 +1,10 @@
 <?php
 
+<<<<<<< HEAD
+=======
 declare(strict_types=1);
 
+>>>>>>> 509b5b1 (.)
 return [
     'active' => [
         'label' => 'Attivo',
@@ -35,6 +38,45 @@ return [
         'label' => 'Integrazione in attesa',
         'color' => 'warning',
     ],
+<<<<<<< HEAD
+    'integration_approved' => [
+        'label' => 'Integrazione approvata',
+        'color' => 'success',
+    ],
+    'integration_rejected' => [
+        'label' => 'Integrazione rifiutata',
+        'color' => 'danger',
+    ],
+    'integration_pending' => [
+        'label' => 'Integrazione in attesa',
+        'color' => 'warning',
+    ],
+    'integration_approved' => [
+        'label' => 'Integrazione approvata',
+        'color' => 'success',
+    ],
+    'integration_rejected' => [
+        'label' => 'Integrazione rifiutata',
+        'color' => 'danger',
+    ],
+    'integration_pending' => [
+        'label' => 'Integrazione in attesa',
+        'color' => 'warning',
+    ],
+    'integration_approved' => [
+        'label' => 'Integrazione approvata',
+        'color' => 'success',
+    ],
+    'integration_rejected' => [
+        'label' => 'Integrazione rifiutata',
+        'color' => 'danger',
+    ],
+    'integration_pending' => [
+        'label' => 'Integrazione in attesa',
+        'color' => 'warning',
+    ],
+=======
+>>>>>>> 509b5b1 (.)
     'integration_completed' => [
         'label' => 'Integrazione completata',
         'color' => 'success',
@@ -43,4 +85,8 @@ return [
         'label' => 'Integrazione annullata',
         'color' => 'danger',
     ],
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 509b5b1 (.)
 ];
