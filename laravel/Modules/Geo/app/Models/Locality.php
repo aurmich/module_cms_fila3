@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Modules\Geo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
+=======
 use function Safe\json_decode;
+>>>>>>> 0d1465e6e (.)
 
 class Locality extends BaseModel
 {
@@ -26,6 +29,9 @@ class Locality extends BaseModel
         $rows=Comune::select("regione->codice as region_id","provincia->codice as province_id","nome as name","codice as id","cap as postal_code")
             ->distinct()
             ->orderBy("nome")
+<<<<<<< HEAD
+            ->get();
+=======
             ->get()
             ->map(function($row){
                 /** @phpstan-ignore offsetAccess.nonOffsetAccessible, property.notFound */
@@ -35,6 +41,7 @@ class Locality extends BaseModel
                 return $row;
             });
             
+>>>>>>> 0d1465e6e (.)
        
         return $rows->toArray();
     }

@@ -27,7 +27,7 @@
     },
     "require": {
         "owenvoke/blade-fontawesome": "*",
-        "saade/filament-fullcalendar": "^3.2"
+        "saade/filament-fullcalendar": "*"
     },
     "require_comment": {
         "coolsam/flatpickr": "*"
