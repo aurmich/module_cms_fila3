@@ -20,7 +20,7 @@ return [
     'fields' => [
         'title' => [
             'label' => 'Titolo Contatto',
-            'placeholder' => 'Es. Studio Dentistico Dr. Rossi',
+            'placeholder' => 'Inserisci il titolo (es. Studio Dentistico)',
             'help' => 'Nome o titolo principale per identificare il contatto',
         ],
         'description' => [
@@ -30,7 +30,7 @@ return [
         ],
         'email' => [
             'label' => 'Email di Contatto',
-            'placeholder' => 'studio@dentista.it',
+            'placeholder' => 'inserisci@email.it',
             'help' => 'Indirizzo email principale per le comunicazioni',
         ],
         'phone' => [

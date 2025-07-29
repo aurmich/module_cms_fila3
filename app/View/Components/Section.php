@@ -31,7 +31,7 @@ class Section extends Component
     public ?string $name = null;
     public ?string $class = null;
     public ?string $id = null;
-
+    public ?string $tpl = null;
     /**
      * Create a new component instance.
      *
@@ -42,11 +42,13 @@ class Section extends Component
     public function __construct(
         string $slug,
         ?string $class = null,
-        ?string $id = null
+        ?string $id = null,
+        ?string $tpl = null
     ) {
         $this->slug = $slug;
         $this->class = $class;
         $this->id = $id;
+<<<<<<< HEAD
         /*
         $where = ['slug' => $slug];
         $update = [
@@ -86,6 +88,9 @@ class Section extends Component
 
         $this->blocks = BlockData::collect($blocks);
         */
+=======
+        $this->tpl = $tpl;
+>>>>>>> ab93b92 (.)
         $this->blocks = SectionModel::getBlocksBySlug($this->slug);
     }
 
@@ -95,6 +100,9 @@ class Section extends Component
     public function render(): ViewContract
     {
         $view='pub_theme::components.sections.'.$this->slug;
+        if($this->tpl){
+            $view.='.'.$this->tpl;
+        }
         if(!view()->exists($view)){
             throw new \Exception('View '.$view.' not found');
         }
