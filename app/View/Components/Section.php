@@ -48,49 +48,7 @@ class Section extends Component
         $this->slug = $slug;
         $this->class = $class;
         $this->id = $id;
-<<<<<<< HEAD
-        /*
-        $where = ['slug' => $slug];
-        $update = [
-            'title' => $slug,
-            'blocks' => [],
-            'attributes' => [
-                'class' => $class,
-                'id' => $id
-            ]
-        ];
-
-        Assert::isInstanceOf(
-            $section = SectionModel::firstOrCreate($where, $update),
-            SectionModel::class,
-            '['.__LINE__.']['.__FILE__.']'
-        );
-       
-
-        //Assert::string($name = $section->getTranslation('name', app()->getLocale()));
-        
-        //$this->name = $section->name ?? 'NO NAME';
-        //$this->name = $section->name;
-        */
-        /*
-        $blocks = $section->blocks;
-
-        if(!is_array($blocks)){
-            $primary_lang=XotData::make()->primary_lang;
-            $blocks = $section->getTranslation('blocks',$primary_lang);
-        }
-        
-        
-        if(!is_array($blocks)){
-            $blocks = [];
-        }
-
-
-        $this->blocks = BlockData::collect($blocks);
-        */
-=======
         $this->tpl = $tpl;
->>>>>>> ab93b92 (.)
         $this->blocks = SectionModel::getBlocksBySlug($this->slug);
     }
 
