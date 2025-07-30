@@ -34,6 +34,7 @@ class ListAppointments extends XotBaseListRecords
      */
     public function getTableColumns(): array
     {
+        /** @phpstan-ignore-next-line */
         return [
             /*
             'id' => TextColumn::make('id')
@@ -85,15 +86,5 @@ class ListAppointments extends XotBaseListRecords
         ];
     }
 
-    /**
-     * Metodo di test per IconStateSplitColumn
-     */
-    public function prova($recordId): void
-    {
-        \Filament\Notifications\Notification::make()
-            ->title('Prova funziona!')
-            ->body('Record ID: ' . $recordId)
-            ->success()
-            ->send();
-    }
+    
 }

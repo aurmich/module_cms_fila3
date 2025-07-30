@@ -1,0 +1,16 @@
+{
+    "name": "FormBuilder",
+    "alias": "formbuilder",
+    "description": "Modulo per la gestione dinamica di form personalizzabili con integrazione Filament",
+    "keywords": ["forms", "form-builder", "dynamic-forms", "filament", "validation"],
+    "priority": 0,
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\FormBuilder\\Providers\\FormBuilderServiceProvider",
+        "Modules\\FormBuilder\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

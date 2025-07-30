@@ -14,5 +14,6 @@
     "Tenant": true,
     "UI": true,
     "User": true,
-    "Xot": true
+    "Xot": true,
+    "FormBuilder": true
 }
