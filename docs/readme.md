@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CMS Module
 
 Content Management System for handling pages, menus, and frontend presentation.
@@ -80,7 +79,6 @@ Please see [CONTRIBUTING.md](contributing.md) for details.
 
 ## License
 This module is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
 # Jigsaw Docs Starter Template
 
 This is a starter template for creating a beautiful, customizable documentation site for your project with minimal effort. You’ll only have to change a few settings and you’re ready to go.
@@ -132,7 +130,6 @@ return [
 > Tip: This configuration file is also where you’ll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official [Jigsaw documentation](https://jigsaw.tighten.co/docs/collections/) to learn more.
 
 ---
->>>>>>> 3072411 (.)
 
 ### Adding Content
 
