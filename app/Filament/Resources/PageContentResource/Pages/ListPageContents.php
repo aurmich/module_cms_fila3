@@ -38,10 +38,10 @@ class ListPageContents extends LangBaseListRecords
     public function getTableColumns(): array
     {
         return [
-            TextColumn::make('name')
+            'name' => TextColumn::make('name')
                 ->sortable()
                 ->searchable(),
-            TextColumn::make('slug')
+            'slug' => TextColumn::make('slug')
                 ->sortable()
                 ->searchable(),
         ];
