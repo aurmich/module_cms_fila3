@@ -26,5 +26,6 @@
     "Ticket": true,
     "Rating": true,
     "Comment": true,
+    "FormBuilder": true,
     "Doctor": true
 }
