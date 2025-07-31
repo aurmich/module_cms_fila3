@@ -15,7 +15,7 @@ I seguenti file devono passare PHPStan livello 9 senza errori:
 - `app/Models/Form.php` - Modello principale form
 - `app/Models/FormField.php` - Modello campi form
 - `app/Models/FormTemplate.php` - Modello template
-- `app/Models/FormSubmission.php` - Modello submission
+- `app/Models/FormSubmission.php` - Modello submission ✅ **Corretto**
 
 #### Services
 - `app/Services/FormBuilderService.php` - Service principale

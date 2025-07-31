@@ -70,10 +70,13 @@ class ListPermissions extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<string, \Filament\Actions\Action>
+     */
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            'create' => CreateAction::make(),
         ];
     }
 

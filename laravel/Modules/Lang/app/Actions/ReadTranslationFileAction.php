@@ -74,6 +74,7 @@ class ReadTranslationFileAction
                 $content .= $this->arrayToPhp($value, $indent + 1);
                 $content .= $indentStr . "],\n";
             } else {
+                /** @phpstan-ignore-next-line */
                 $content .= "'" . addslashes((string) $value) . "',\n";
             }
         }

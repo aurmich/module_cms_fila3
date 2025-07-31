@@ -15,6 +15,30 @@ use Webmozart\Assert\Assert;
  * @property int|null $height
  * @property string|null $type
  * @property int|null $width
+ * @property string|null $color
+ * @property string|null $bg_color
+ * @property int|null $font_family
+ * @property int|null $font_size
+ * @property int|null $font_style
+ * @property int|null $y_grace
+ * @property bool|null $yaxis_hide
+ * @property string|null $list_color
+ * @property int|null $grace
+ * @property int|null $x_label_angle
+ * @property bool|null $show_box
+ * @property int|null $x_label_margin
+ * @property int|null $plot_perc_width
+ * @property int|null $plot_value_show
+ * @property string|null $plot_value_format
+ * @property int|null $plot_value_pos
+ * @property string|null $plot_value_color
+ * @property string|null $group_by
+ * @property string|null $sort_by
+ * @property int|null $transparency
+ * @property array|null $colors
+ * @property string|null $post_id
+ * @property string|null $post_type
+ * @property string|null $chart_type
  * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
@@ -76,46 +100,8 @@ class Chart extends BaseModel
         'colors' => 'array',
     ];
 
-    // /**
-    //  * @return int|string|null
-    //  */
-    // public function getParentStyle(string $name)
-    // {
-    //     $panel = PanelService::make()->getRequestPanel();
-
-    //     if (null === $panel) {
-    //         return $this->attributes[$name] ?? null;
-    //     }
-    //     $parent = $panel->getParent();
-
-    //     if (null === $parent) {
-    //         return $this->attributes[$name] ?? null;
-    //     }
-    //     $parent = $parent->getRow();
-    //     if (! method_exists($parent, 'chart')) {
-    //         return $this->attributes[$name] ?? null;
-    //     }
-    //     // dddx([$name, $panel->row, $parent->{$name}]);
-    //     // $value = $parent->chart->{$name};
-
-    //     $value = $parent->chart->attributes[$name] ?? null;
-
-    //     $this->{$name} = $value;
-    //     $this->save();
-    //     if (! \is_string($value) && ! \is_int($value)) {
-    //         return null;
-    //     }
-
-    //     return $value;
-    // }
-
     public function getPanelRow(string $parent_field, string $my_field): int|string|null
     {
-        // $panel = PanelService::make()->getRequestPanel();
-        // if (! \is_object($panel)) {
-        //     return null;
-        // }
-        // $panel_row = $panel->row;
         $panel_row = $this;
 
         try {
@@ -129,73 +115,11 @@ class Chart extends BaseModel
                 'file' => $errorException->getFile(),
                 'panel_row_class' => $panel_row::class,
             ];
-            // echo '<pre>'.print_r($msg,true).'</pre>';
             $value = null;
         }
 
         return $value;
     }
-
-    // ---------- Getter
-    // public function getColorAttribute(?string $value): ?string
-    // {
-    //     if (null !== $value) {
-    //         // return $value;
-    //     }
-
-    //     return (string) $this->getParentStyle('color');
-    // }
-
-    // public function getListColorAttribute(?string $value): ?string
-    // {
-    //     if (null !== $value) {
-    //         return $value;
-    //     }
-
-    //     return (string) $this->getParentStyle('list_color');
-    // }
-
-    //     public function getXLabelAngleAttribute(?string $value): ?string
-    //     {
-    //         if (null !== $value) {
-    //             return $value;
-    //         }
-    //         /*
-    //         $this->x_label_angle = 0;
-    //         $this->save();
-    //         $value = $this->x_label_angle;
-
-    //         return $value;
-    // */
-    //         return (string) $this->getParentStyle('x_label_angle');
-    //     }
-
-    // public function getFontFamilyAttribute(?int $value): int
-    // {
-    //     if (null !== $value && 0 !== $value) {
-    //         return (int) $value;
-    //     }
-
-    //     return (int) $this->getParentStyle('font_family');
-    // }
-
-    // public function getFontStyleAttribute(?int $value): int
-    // {
-    //     if (null !== $value && 0 !== $value) {
-    //         return (int) $value;
-    //     }
-
-    //     return (int) $this->getParentStyle('font_style');
-    // }
-
-    // public function getFontSizeAttribute(?int $value): int
-    // {
-    //     if (null !== $value && 0 !== $value) {
-    //         return (int) $value;
-    //     }
-
-    //     return (int) $this->getParentStyle('font_size');
-    // }
 
     public function getTypeAttribute(?string $value): ?string
     {
@@ -203,7 +127,7 @@ class Chart extends BaseModel
             return $value;
         }
 
-        $res= $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
+        $res = $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
         Assert::string($res);
         return $res;
     }
@@ -248,4 +172,4 @@ class Chart extends BaseModel
 
         return [$this->toArray()];
     }
-}
+} 

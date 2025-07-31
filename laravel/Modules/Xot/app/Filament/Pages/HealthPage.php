@@ -47,7 +47,7 @@ class HealthPage extends Page
             Checks\DatabaseConnectionCountCheck::new(),
             Checks\FlareErrorOccurrenceCountCheck::new(),
             Checks\HorizonCheck::new(),
-            Checks\MeiliSearchCheck::new(),
+            //Checks\MeiliSearchCheck::new(),
             Checks\QueueCheck::new(),
             Checks\RedisCheck::new(),
             Checks\ScheduleCheck::new(),

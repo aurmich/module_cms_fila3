@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment;
 
+use Webmozart\Assert\Assert;
 use Modules\SaluteOra\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Modules\SaluteOra\Models\Appointment;
@@ -37,7 +38,7 @@ class ReportPending extends AppointmentState
 
     public function modalFillFormByRecord(Model $record): array
     {
-        $where=['appointment_id'=>$record->id];
+        $where=['appointment_id'=>$record->getKey()];
         $report=Report::firstOrCreate($where);
         return $report->toArrayForce();
     }
@@ -45,7 +46,9 @@ class ReportPending extends AppointmentState
     public function modalAction(array $arguments,array $data): void
     {
         $appointmentId = $arguments['appointment'];
+        
         $appointment = Appointment::firstWhere('id',$appointmentId);
+        Assert::isInstanceOf($appointment, Appointment::class);
         $this->modalActionByRecord($appointment,$data);
         /*
         $processData['appointment_id']=$appointmentId;
@@ -63,9 +66,10 @@ class ReportPending extends AppointmentState
     {
         $processData=$data;
         
+        Assert::isInstanceOf($record, Appointment::class);
         $processData['appointment_id']=$record->id;
-        $processData['patient_id']=$record?->patient_id;
-        $processData['doctor_id']=$record?->doctor_id;
+        $processData['patient_id']=$record->patient_id;
+        $processData['doctor_id']=$record->doctor_id;
         $where=['appointment_id'=>$record->id];
         $report=Report::firstOrCreate($where);
         //dddx($report);

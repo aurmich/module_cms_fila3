@@ -8,7 +8,6 @@
 
 @php
     use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-    use Modules\SaluteOra\Enums\UserTypeEnum;
 
     // Inizializzazione delle variabili con valori di default
     $user = $user ?? auth()->user();
@@ -31,14 +30,12 @@
         }
         return '';
     };
-$isDoctor  = $user && $user->type == UserTypeEnum::DOCTOR ? true:false;
+
+    $isDoctor = $user && $user->type == UserTypeEnum::DOCTOR ? true : false;
 
     $profiloUrl = isset($user) ? $user->type === 'doctor'
         ? '/{{ $lang }}/pages/profilo-odontoiatra'
-        : '/{{ $lang }}/pages/profilo-paziente':'';
-
-        
-
+        : '/{{ $lang }}/pages/profilo-paziente' : '';
 @endphp
 
 @if($isLoggedIn)
@@ -53,13 +50,11 @@ $isDoctor  = $user && $user->type == UserTypeEnum::DOCTOR ? true:false;
         {{-- Trigger Button --}}
         <x-slot name="trigger">
             <x-filament::button
-                color="white"
-                style="border-radius: 70px; background-color: transparent !important; border: 1px solid white"
+                color="gray"
                 icon="heroicon-o-user"
                 :label="$user?->name"
-                aria-label="{{ __('ui::navigation.user_menu') }}">
-                <span class="hidden sm:inline">{{$user?->name}}</span>
-        </x-filament::button>
+                aria-label="{{ __('ui::navigation.user_menu') }}"
+            />
         </x-slot>
         <x-filament::dropdown.list>
         {{-- Menu Items --}}
@@ -88,4 +83,3 @@ $isDoctor  = $user && $user->type == UserTypeEnum::DOCTOR ? true:false;
     {{-- Vista per utenti non autenticati --}}
     @include($guest_view)
 @endif
-

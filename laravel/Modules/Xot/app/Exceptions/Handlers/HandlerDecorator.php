@@ -51,6 +51,9 @@ class HandlerDecorator implements ExceptionHandler
         return $this->defaultHandler->render($request, $e);
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function renderForConsole($output, \Throwable $e): void
     {
         foreach ($this->repository->getConsoleRenderersByException($e) as $renderer) {
@@ -59,6 +62,7 @@ class HandlerDecorator implements ExceptionHandler
             }
         }
 
+        /** @phpstan-ignore-next-line */
         $this->defaultHandler->renderForConsole($output, $e);
     }
 

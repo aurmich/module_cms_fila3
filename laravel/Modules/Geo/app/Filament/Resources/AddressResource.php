@@ -100,38 +100,11 @@ class AddressResource extends XotBaseResource
                             return [];
                         }
 
-                         
-                            $res=Locality::where('region_id',$region)
-                            ->where('province_id',$province)
-                            ->orderBy('name')
-                            ->get()
-                            ->pluck("name", "id")
-                            ->toArray();
-
-                        return $res;
-                    })
-                    ->searchable()
-                    ->required()
-                    ->live()
-                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
-
-                   
-                    'postal_code' => Select::make('postal_code')
-                    ->options(function (Get $get) {
-                        $region = $get('administrative_area_level_1');
-                        if (!$region) {
-                            return [];
-                        }
-                        $province = $get('administrative_area_level_2');
-                        if (!$province) {
-                            return [];
-                        }
                         $city = $get('locality');
-
                         $res=Locality::query()
                         ->where('region_id', $region)
                         ->where('province_id', $province)
-                        ->when($city, fn($query) => $query->where('id', $city))
+                        ->when($city !== null, fn($query) => $query->where('id', $city))
                         ->select('postal_code')
                         ->distinct()
                         ->orderBy('postal_code')

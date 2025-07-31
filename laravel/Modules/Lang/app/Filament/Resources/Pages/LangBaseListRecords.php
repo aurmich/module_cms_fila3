@@ -17,11 +17,23 @@ abstract class LangBaseListRecords extends XotBaseListRecords
     protected static string $resource;// = SectionResource::class;
 
 
+    /**
+     * @return array<string, \Filament\Actions\Action>
+     */
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\LocaleSwitcher::make(),
-            ...parent::getHeaderActions(),
+        $parentActions = parent::getHeaderActions();
+        
+        // Assicurarsi che tutte le azioni abbiano chiavi stringa
+        $actions = [
+            'locale_switcher' => Actions\LocaleSwitcher::make(),
         ];
+        
+        // Aggiungere le azioni parent con chiavi stringa
+        foreach ($parentActions as $key => $action) {
+            $actions['parent_' . (is_string($key) ? $key : (string) $key)] = $action;
+        }
+        
+        return $actions;
     }
 }

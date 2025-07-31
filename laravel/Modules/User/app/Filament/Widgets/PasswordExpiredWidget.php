@@ -6,31 +6,33 @@ namespace Modules\User\Filament\Widgets;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Actions\Action;
-use Filament\Actions\ActionGroup;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Component;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form as FilamentForm;
-use Filament\Notifications\Notification;
-use Filament\Pages\Concerns\InteractsWithFormActions;
-use Filament\Widgets\Widget;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Validation\Rules\Password as PasswordRule;
-use Modules\User\Datas\PasswordData;
-use Modules\User\Events\NewPasswordSet;
-use Modules\User\Http\Response\PasswordResetResponse;
-use Modules\User\Rules\CheckOtpExpiredRule;
-use Modules\Xot\Filament\Traits\TransTrait;
+use Filament\Actions\Action;
+use Filament\Widgets\Widget;
 use Webmozart\Assert\Assert;
 use Filament\Facades\Filament;
+use Filament\Actions\ActionGroup;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Modules\User\Datas\PasswordData;
+use Filament\Forms\ComponentContainer;
+use Filament\Forms\Contracts\HasForms;
+use Illuminate\Support\Facades\Schema;
+use Modules\User\Events\NewPasswordSet;
+use Filament\Forms\Components\Component;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form as FilamentForm;
+use Filament\Notifications\Notification;
+use Modules\User\Rules\CheckOtpExpiredRule;
+use Modules\Xot\Filament\Traits\TransTrait;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
-use Illuminate\Auth\Events\PasswordReset as PasswordResetResponseEvent;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Filament\Pages\Concerns\InteractsWithFormActions;
+use Modules\User\Http\Response\PasswordResetResponse;
+use Illuminate\Validation\Rules\Password as PasswordRule;
+use Illuminate\Auth\Events\PasswordReset as PasswordResetResponseEvent; 
+
 
 /**
  * Widget for handling expired password reset.
@@ -110,17 +112,18 @@ class PasswordExpiredWidget extends XotBaseWidget implements HasForms
         }
 
         // Cast e verifica esistenza dei dati del form
-        $currentPassword = (string) ($this->data['current_password'] ?? '');
-        $newPassword = (string) ($this->data['password'] ?? '');
+        $data = $this->data ?? [];
+        $currentPassword = SafeStringCastAction::cast($data['current_password'] ?? '');
+        $newPassword = SafeStringCastAction::cast($data['password'] ?? '');
         
         if (empty($currentPassword) || empty($newPassword)) {
             $this->addError('current_password', __('user::auth.password_fields_required'));
             return null;
         }
 
-        $userPassword = $user->getAttribute('password');
+        $userPassword = SafeStringCastAction::cast($user->getAttribute('password'));
         // Cast esplicito di mixed a string per PHPStan
-        $userPasswordString = (string) ($userPassword ?? '');
+        $userPasswordString = $userPassword;
         
         if (!Hash::check($currentPassword, $userPasswordString)) {
             $this->addError('current_password', __('user::auth.password_current_incorrect'));

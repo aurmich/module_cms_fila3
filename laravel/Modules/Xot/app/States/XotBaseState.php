@@ -152,6 +152,7 @@ abstract class XotBaseState extends State implements StateContract
         $appointment?->state->transitionTo($stateClass,$message);
         */
         $record=$this->getModel();
+        /** @phpstan-ignore-next-line */
         $record->state->transitionTo($stateClass,$message);
     }
 
@@ -172,7 +173,7 @@ abstract class XotBaseState extends State implements StateContract
         
         $appointment?->state->transitionTo($stateClass,$message);
         */
-        
+        /** @phpstan-ignore-next-line */
         $record->state->transitionTo($stateClass,$message);
     }
 }

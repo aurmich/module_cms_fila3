@@ -60,7 +60,7 @@ Questo documento descrive il sistema di gestione delle dipendenze del tema "One"
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
 ```

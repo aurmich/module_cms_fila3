@@ -50,10 +50,13 @@ class ListFailedJobs extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<string, \Filament\Actions\Action>
+     */
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('retry_all')
+            'retry_all' => Action::make('retry_all')
                 ->requiresConfirmation()
                 ->action(
                     static function (): void {
@@ -65,7 +68,7 @@ class ListFailedJobs extends XotBaseListRecords
                     }
                 ),
 
-            Action::make('delete_all')
+            'delete_all' => Action::make('delete_all')
                 ->requiresConfirmation()
                 ->color('danger')
                 ->action(

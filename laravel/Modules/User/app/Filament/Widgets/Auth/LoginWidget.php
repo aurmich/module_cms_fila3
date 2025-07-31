@@ -55,7 +55,12 @@ class LoginWidget extends XotBaseWidget
     {
         $data = $this->form->getState();
 
-        if (Auth::attempt($data)) {
+        $credentials = [
+            'email' => is_string($data['email'] ?? null) ? $data['email'] : '',
+            'password' => is_string($data['password'] ?? null) ? $data['password'] : '',
+        ];
+        
+        if (Auth::attempt($credentials)) {
             session()->regenerate();
             redirect()->intended(route('filament.admin.pages.dashboard'));
         }

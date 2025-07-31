@@ -49,7 +49,7 @@ class ListExtras extends XotBaseListRecords
     }
 
     /**
-     * @return array<Tables\Actions\Action|Tables\Actions\ActionGroup>
+     * @return array<string, Tables\Actions\Action|Tables\Actions\ActionGroup>
      */
     public function getTableActions(): array
     {

@@ -41,14 +41,14 @@ final class WhatsAppActionFactory
         $driver = $driver ?? Config::get('whatsapp.default', 'twilio');
         
         // Gestione speciale per driver con caratteri non alfanumerici (es. 360dialog)
-        $normalizedDriver = preg_replace('/[^a-zA-Z0-9]/', '', ucfirst(strtolower((string) $driver)));
+        $normalizedDriver = preg_replace('/[^a-zA-Z0-9]/', '', ucfirst(strtolower(is_string($driver) ? $driver : '')));
         
         // Costruisci il nome completo della classe
         $className = "\\Modules\\Notify\\Actions\\WhatsApp\\Send{$normalizedDriver}WhatsAppAction";
         
         // Verifica se la classe esiste
         if (!class_exists($className)) {
-            throw new Exception("Unsupported WhatsApp driver: " . (string) $driver . ". Class {$className} not found.");
+            throw new Exception("Unsupported WhatsApp driver: " . (is_string($driver) ? $driver : '') . ". Class {$className} not found.");
         }
         
         // Verifica se la classe implementa l'interfaccia richiesta

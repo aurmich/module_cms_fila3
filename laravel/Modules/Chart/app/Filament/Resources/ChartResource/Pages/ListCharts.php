@@ -40,35 +40,35 @@ class ListCharts extends XotBaseListRecords
     /**
      * Definisce le colonne della tabella.
      *
-     * @return array<int, TextColumn>
+     * @return array<string, TextColumn>
      */
     public function getTableColumns(): array
     {
         return [
-            TextColumn::make('id')
+            'id' => TextColumn::make('id')
                 ->sortable()
                 ->searchable(),
-            TextColumn::make('type')
+            'type' => TextColumn::make('type')
                 ->sortable()
                 ->searchable(),
-            TextColumn::make('group_by')
+            'group_by' => TextColumn::make('group_by')
                 ->sortable()
                 ->searchable(),
-            TextColumn::make('sort_by')
+            'sort_by' => TextColumn::make('sort_by')
                 ->sortable(),
-            TextColumn::make('width')
+            'width' => TextColumn::make('width')
                 ->numeric()
                 ->sortable(),
-            TextColumn::make('height')
+            'height' => TextColumn::make('height')
                 ->numeric()
                 ->sortable(),
-            TextColumn::make('font_family')
+            'font_family' => TextColumn::make('font_family')
                 ->searchable(),
-            TextColumn::make('font_style')
+            'font_style' => TextColumn::make('font_style')
                 ->searchable(),
-            TextColumn::make('font_size')
+            'font_size' => TextColumn::make('font_size')
                 ->numeric()
                 ->sortable(),
         ];
     }
-}
+} 

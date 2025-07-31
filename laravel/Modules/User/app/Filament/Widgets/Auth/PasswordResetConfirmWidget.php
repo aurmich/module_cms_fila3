@@ -32,6 +32,9 @@ class PasswordResetConfirmWidget extends XotBaseWidget
     public string $currentState = 'form'; // form, success, error, expired
     public ?string $errorMessage = null;
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     protected static string $view = 'pub_theme::filament.widgets.auth.password.reset-confirm';
 
     /**

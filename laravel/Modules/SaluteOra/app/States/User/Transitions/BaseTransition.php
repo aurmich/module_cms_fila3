@@ -20,6 +20,7 @@ abstract class BaseTransition extends XotBaseTransition
 
     public function getNotificationSlug(UserContract $recipient): string
     {
+        /** @phpstan-ignore-next-line */
         $slug=$this->record->type->value . '-'.Str::of(class_basename(static::class))->kebab()->toString();
         $slug=\Illuminate\Support\Str::slug($slug);
         

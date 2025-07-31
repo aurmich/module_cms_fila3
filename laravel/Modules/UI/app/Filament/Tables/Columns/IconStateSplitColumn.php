@@ -7,6 +7,7 @@ namespace Modules\UI\Filament\Tables\Columns;
 
 use Closure;
 use Livewire\Attributes\On;
+use Webmozart\Assert\Assert;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Column;
 use Filament\Support\Enums\ActionSize;
@@ -15,6 +16,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
+use Modules\Xot\Contracts\StateContract;
 use Filament\Tables\Columns\Layout\Split;
 
 /**
@@ -62,6 +64,7 @@ class IconStateSplitColumn extends Column
         foreach ($states as $stateKey => $stateClass) {
             try {
                 $stateInstance = new $stateClass($record);
+                Assert::isInstanceOf($stateInstance, StateContract::class);
                 $result[$stateKey] = [
                     'class' => $stateInstance,
                     'icon' => $stateInstance->icon(),
@@ -78,12 +81,15 @@ class IconStateSplitColumn extends Column
         return $result;
     }
 
-    public function canTransitionTo($recordId, $stateClass): bool
+    public function canTransitionTo(int|string $recordId, string $stateClass): bool
     {  
-        return true;
         $record = $this->modelClass::find($recordId);
         
-        if (!$record || !$record->state) {
+        if (!$record) {
+            return false;
+        }
+        
+        if (!$record->state) {
             return false;
         }
         
@@ -93,7 +99,7 @@ class IconStateSplitColumn extends Column
     /**
      * Metodo per testare le azioni
      */
-    public function prova($recordId): void
+    public function prova(int|string $recordId): void
     {
         // Logica per testare l'azione
         \Filament\Notifications\Notification::make()
@@ -105,6 +111,8 @@ class IconStateSplitColumn extends Column
 
     /**
      * Restituisce le azioni per gli stati
+     * 
+     * @return array<string, \Filament\Tables\Actions\Action>
      */
     public function getStateActions(): array
     {
@@ -114,26 +122,28 @@ class IconStateSplitColumn extends Column
         $actions = [];
         
         // Aggiungi azione di test
-        $actions[] = \Filament\Tables\Actions\Action::make('prova')
+        $actions['prova'] = \Filament\Tables\Actions\Action::make('prova')
             ->icon('heroicon-m-plus')
             ->color('primary')
             ->tooltip('Test Prova')
             ->action(function () use ($record) {
+                $recordId = $record && property_exists($record, 'id') ? (string) $record->id : 'N/A';
                 \Filament\Notifications\Notification::make()
                     ->title('Prova funziona!')
-                    ->body('Record ID: ' . $record->id)
+                    ->body('Record ID: ' . $recordId)
                     ->success()
                     ->send();
             });
         
         // Aggiungi azioni per gli stati
         foreach ($states as $stateKey => $state) {
-            if ($this->canTransitionTo($record->id, $state['class']::class)) {
-                $actions[] = \Filament\Tables\Actions\Action::make("transition_to_{$stateKey}")
+            $recordId = $record && property_exists($record, 'id') ? $record->id : null;
+            if ($recordId !== null && $this->canTransitionTo($recordId, $state['class']::class)) {
+                $actions["transition_to_{$stateKey}"] = \Filament\Tables\Actions\Action::make("transition_to_{$stateKey}")
                     ->icon($state['icon'])
                     ->color($state['color'])
                     ->label($state['label'])
-                    ->action(fn() => $this->transitionState($record->id, $state['class']::class));
+                    ->action(fn() => $this->transitionState($recordId, $state['class']::class));
             }
         }
         
@@ -144,7 +154,7 @@ class IconStateSplitColumn extends Column
      * Listener per l'evento table-action
      */
     #[On('table-action')]
-    public function handleTableAction($action, $recordId): void
+    public function handleTableAction(string $action, int|string $recordId): void
     {
         if ($action === 'prova') {
             $this->prova($recordId);
@@ -154,7 +164,7 @@ class IconStateSplitColumn extends Column
     /**
      * Metodo per eseguire la transizione di stato
      */
-    public function transitionState($recordId, $stateClass): void
+    public function transitionState(int|string $recordId, string $stateClass): void
     {
         try {
             $record = $this->modelClass::find($recordId);

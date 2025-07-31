@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Modules\User\Filament\Widgets;
 
 use Exception;
-use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form as FilamentForm;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
@@ -103,11 +104,9 @@ class LoginWidget extends XotBaseWidget
             
             // Cast esplicito per type safety PHPStan
             $remember = (bool) ($data['remember'] ?? false);
+            $attempt_data =Arr::only($data,['email','password']);
             
-            if (!Auth::attempt([
-                'email' => (string) $data['email'],
-                'password' => (string) $data['password']
-            ], $remember)) {
+            if (!Auth::attempt($attempt_data, $remember)) {
                 throw ValidationException::withMessages([
                     'email' => [__('Le credenziali fornite non sono corrette.')],
                 ]);
