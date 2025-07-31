@@ -2,36 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use function Laravel\Folio\{middleware, name};
 use function Livewire\Volt\{state, rules};
 
 middleware(['guest']);
 name('login');
 
-state([
-    'email' => '',
-    'password' => '',
-    'remember' => false,
-]);
 
-rules([
-    'email' => ['required', 'email'],
-    'password' => ['required'],
-]);
-
-$authenticate = function() {
-    $this->validate();
-
-    if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-        $this->addError('email', __('auth.failed'));
-        return;
-    }
-
-    // Laravel gestirà automaticamente l'evento Login
-    return redirect()->intended(route('home'));
-};
 
 ?>
 
@@ -50,21 +27,21 @@ $authenticate = function() {
         <div class="mt-8 mx-auto w-full max-w-md relative">
             <!-- Glassmorphism login card -->
             <div class="relative bg-white m-6 z-10 backdrop-blur-md rounded-2xl p-8 shadow-lg ring-1 ring-white/20">
-                <div class="mx-auto w-full max-w-md">
-                    <a href="{{ route('home') }}" class="block text-center">
-                        <x-filament::icon name="heroicon-o-home" class="w-auto h-10 mx-auto text-primary-600" />
-                    </a>
+            <div class="mx-auto w-full max-w-md">
+            <a href="{{ route('home') }}" class="block text-center">
+                <x-filament::icon name="heroicon-o-home" class="w-auto h-10 mx-auto text-primary-600" />
+            </a>
 
-                    <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#272C4D]">
-                        {{ __('pub_theme::auth.login.title') }}
-                    </h2>
-                    <div class="text-sm leading-5 text-center text-gray-600 dark:text-gray-400 space-x-0.5">
-                        <span>{{ __('pub_theme::auth.login.or') }}</span>
-                        <a href="{{ route('register') }}" class="text-[#FF5F7E] font-medium">
-                            {{ __('pub_theme::auth.login.create_account') }}
-                        </a>
-                    </div>
-                </div>
+            <h2 class="mt-5 text-2xl font-extrabold leading-9 text-center text-[#272C4D]">
+                {{ __('pub_theme::auth.login.title') }}
+            </h2>
+            <div class="text-sm leading-5 text-center text-gray-600 dark:text-gray-400 space-x-0.5">
+                <span>{{ __('pub_theme::auth.login.or') }}</span>
+                <a href="{{ route('register') }}" class="text-[#FF5F7E] font-medium">
+                    {{ __('pub_theme::auth.login.create_account') }}
+                </a>
+            </div>
+        </div>
                 <!-- Livewire Login Form -->
                 <div class="space-y-6 flex flex-col justify-center">
                     @livewire(\Modules\User\Filament\Widgets\LoginWidget::class)
@@ -73,4 +50,15 @@ $authenticate = function() {
             </div>
         </div>
     </div>
+    @endvolt
+    <!-- Mousemove handler for wave effect -->
+    <script>
+        document.getElementById('wave-container').addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const dx = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+            const dy = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+            const svg = document.getElementById('wave-svg');
+            svg.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+    </script>
 </x-layouts.main>
