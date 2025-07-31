@@ -5,21 +5,15 @@
 - [README CMS](../README.md)
 - [Sezioni](../sections.md)
 - [Gestione Sezioni](../section-management.md)
-<<<<<<< HEAD
 - [Documentazione Generale](../../../../../docs/README.md)
-=======
 - [Documentazione Generale SaluteOra](../../../../../docs/README.md)
->>>>>>> 522541a (.)
 - [Collegamenti Documentazione](../../../../../docs/collegamenti-documentazione.md)
 - [Implementazione nell'UI](../../../UI/docs/sections/INDEX.md)
 - [Implementazione nel Tema One](../../../../Themes/One/docs/sections/INDEX.md)
 
 ## Panoramica
-<<<<<<< HEAD
 Le sezioni sono componenti strutturali che compongono le pagine del sito. Ogni sezione può contenere diversi blocchi e viene definita tramite file JSON di configurazione.
-=======
 Le sezioni sono componenti strutturali che compongono le pagine del sito SaluteOra. Ogni sezione può contenere diversi blocchi e viene definita tramite file JSON di configurazione.
->>>>>>> 522541a (.)
 
 ## Sezioni Principali
 
@@ -37,11 +31,8 @@ Le sezioni sono componenti strutturali che compongono le pagine del sito SaluteO
 
 Ogni sezione segue una struttura standardizzata:
 
-<<<<<<< HEAD
 1. **File di Configurazione**: `config/local/<directory progetto>/database/content/sections/[id].json`
-=======
 1. **File di Configurazione**: `config/local/saluteora/database/content/sections/[id].json`
->>>>>>> 522541a (.)
 2. **Blocchi**: Componenti riutilizzabili che compongono la sezione
 3. **Stili**: Definiti nei file CSS del tema
 
