@@ -47,7 +47,7 @@
 ## Aggiornamenti Necessari
 
 ### 1. Conflitti Git da Risolvere
-- Identificati 30+ file con conflitti `<<< HEAD`
+- Identificati 30+ file con conflitti
 - Priorità: file di sistema e configurazione
 - Documentare le risoluzioni
 
@@ -63,7 +63,7 @@
 
 ## Prossimi Passi
 
-1. **Risoluzione Conflitti**: Sistemare tutti i file con `<<< HEAD`
+1. **Risoluzione Conflitti**: Sistemare tutti i file con marcatori git
 2. **Aggiornamento Docs**: Completare documentazione mancante
 3. **Validazione**: Verificare coerenza documentazione
 4. **Test**: Validare implementazioni documentate

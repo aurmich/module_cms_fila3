@@ -1,7 +1,6 @@
 {
     "name": "DbForge",
     "alias": "dbforge",
-<<<<<<< HEAD
     "description": "Modulo per la gestione e manipolazione del database con strumenti avanzati di database management",
     "keywords": ["database", "dbforge", "database management", "database tools", "migration", "schema"],
     "priority": 0,
@@ -16,13 +15,4 @@
     "requires": ["Xot", "User"],
     "minimumCoreVersion": "10.0",
     "phpVersion": "^8.1"
-=======
-    "description": "",
-    "keywords": [],
-    "priority": 0,
-    "providers": [
-        "Modules\\DbForge\\Providers\\DbForgeServiceProvider"
-    ],
-    "files": []
->>>>>>> 224ec15 (.)
 }
