@@ -27,5 +27,6 @@
     "Rating": true,
     "Comment": true,
     "FormBuilder": true,
+    "DbForge": true,
     "Doctor": true
 }

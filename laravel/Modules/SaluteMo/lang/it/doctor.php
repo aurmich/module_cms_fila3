@@ -157,6 +157,10 @@ return array (
     array (
       'label' => 'attach',
     ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
   ),
   'actions' => 
   array (
