@@ -214,6 +214,10 @@ return array (
     array (
       'label' => 'change-schedule',
     ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
   ),
   'actions' => 
   array (

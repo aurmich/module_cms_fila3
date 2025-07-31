@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Get;
 use function Safe\json_decode;
+use Illuminate\Database\Eloquent\Model;
 
 class Locality extends BaseModel
 {
@@ -37,5 +38,68 @@ class Locality extends BaseModel
             
        
         return $rows->toArray();
+    }
+
+    public static function getOptions(Get $get): array
+    {
+
+        $region = $get('administrative_area_level_1');
+        if (!$region) {
+            return [];
+        }
+        $province = $get('administrative_area_level_2');
+        if (!$province) {
+            return [];
+        }
+
+        $city = $get('locality');
+        $res=self::where('region_id', $region)
+        ->where('province_id', $province)
+        ->pluck("name", "id")
+        ->toArray();
+
+        /*
+        ->when($city !== null, fn($query) => $query->where('id', $city))
+        ->select('postal_code')
+        ->distinct()
+        ->orderBy('postal_code')
+        ->get()
+        ->pluck('postal_code', 'postal_code')
+        ->toArray();
+
+                        
+                        
+                        return $res ?? [];
+        */
+        return $res;
+        
+    }
+
+    public static function getPostalCodeOptions(Get $get): array
+    {
+        $region = $get('administrative_area_level_1');
+        if (!$region) {
+            return [];
+        }
+        $province = $get('administrative_area_level_2');
+        if (!$province) {
+            return [];
+        }
+
+        $city = $get('locality');
+        $res=self::where('region_id', $region)
+        ->where('province_id', $province)
+        
+        ->when($city !== null, fn($query) => $query->where('id', $city))
+        ->select('postal_code')
+        ->distinct()
+        ->orderBy('postal_code')
+        ->get()
+        ->pluck('postal_code', 'postal_code')
+        ->toArray();
+
+                        
+                        
+        return $res ?? [];
     }
 }

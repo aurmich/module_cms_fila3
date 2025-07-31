@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
+use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -36,5 +37,13 @@ class Region extends BaseModel
     public function provinces(): HasMany
     {
         return $this->hasMany(Province::class);
+    }
+
+    public static function getOptions(Get $get): array
+    {
+        return self::orderBy('name')
+            ->get()
+            ->pluck("name", "id")
+            ->toArray();
     }
 }

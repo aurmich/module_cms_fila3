@@ -10,7 +10,7 @@ return array (
     'label' => 'collection lang.navigation',
     'group' => 'collection lang.navigation',
     'icon' => 'collection lang.navigation',
-    'sort' => 68,
+    'sort' => 73,
   ),
   'fields' => 
   array (

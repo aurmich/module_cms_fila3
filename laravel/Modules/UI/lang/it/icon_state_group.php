@@ -280,5 +280,45 @@ return array (
     array (
       'label' => 'rescheduled-visible',
     ),
+    'suspended-action' => 
+    array (
+      'label' => 'suspended-action',
+    ),
+    'suspended-icon' => 
+    array (
+      'label' => 'suspended-icon',
+    ),
+    'integration_requested-action' => 
+    array (
+      'label' => 'integration_requested-action',
+    ),
+    'integration_requested-icon' => 
+    array (
+      'label' => 'integration_requested-icon',
+    ),
+    'integration_completed-action' => 
+    array (
+      'label' => 'integration_completed-action',
+    ),
+    'integration_completed-icon' => 
+    array (
+      'label' => 'integration_completed-icon',
+    ),
+    'inactive-action' => 
+    array (
+      'label' => 'inactive-action',
+    ),
+    'inactive-icon' => 
+    array (
+      'label' => 'inactive-icon',
+    ),
+    'active-action' => 
+    array (
+      'label' => 'active-action',
+    ),
+    'active-icon' => 
+    array (
+      'label' => 'active-icon',
+    ),
   ),
 );
