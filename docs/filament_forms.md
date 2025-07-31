@@ -1,372 +1,373 @@
-# Filament Forms nel CMS di il progetto
-
-Questo documento descrive come utilizzare i forms di Filament nel modulo CMS di il progetto, concentrandosi sulle best practices, le convenzioni di codice e le funzionalità avanzate.
+# Utilizzo dei Widget Filament per i Form
 
 ## Indice
-1. [Introduzione](#introduzione)
-2. [Struttura dei Form](#struttura-dei-form)
-3. [Componenti Personalizzati](#componenti-personalizzati)
-4. [Validazione](#validazione)
-5. [Integrazione con il Frontend](#integrazione-con-il-frontend)
-6. [Casi d'uso comuni](#casi-duso-comuni)
-7. [Troubleshooting](#troubleshooting)
+- [Introduzione](#introduzione)
+- [Architettura dei Form](#architettura-dei-form)
+- [Vantaggi dei Widget Filament](#vantaggi-dei-widget-filament)
+- [Implementazione](#implementazione)
+- [Best Practices](#best-practices)
+- [Esempi Pratici](#esempi-pratici)
+- [Estensione e Personalizzazione](#estensione-e-personalizzazione)
 
 ## Introduzione
 
-Filament è il framework di amministrazione principale utilizzato in il progetto per la gestione dei contenuti. I form di Filament permettono di creare interfacce di gestione dati potenti e flessibili con pochissimo codice.
+Questo modulo utilizza esclusivamente i widget Filament per la creazione e gestione dei form. Questa scelta architetturale offre numerosi vantaggi in termini di consistenza, manutenibilità e velocità di sviluppo. Questo documento spiega in dettaglio perché è stata adottata questa strategia e come implementarla correttamente.
 
-### Vantaggi dei Form Filament
+## Architettura dei Form
 
-- **Sintassi Dichiarativa**: Definizione rapida e intuitiva dei form
-- **Componenti Ricchi**: Set completo di campi per qualsiasi esigenza
-- **Validazione Integrata**: Regole di validazione Laravel integrate
-- **Layout Flessibile**: Grid, card, tabs e accordion per strutturare i form
-- **Reattività**: Aggiornamenti in tempo reale con Livewire
-- **Estensibilità**: Facile creazione di componenti personalizzati
+L'architettura dei form nel sistema è basata su Filament, un framework di amministrazione per Laravel che fornisce un insieme completo di componenti per la creazione di interfacce utente. I form sono definiti utilizzando un approccio dichiarativo attraverso il metodo `getFormSchema()` nei Resource di Filament.
 
-## Struttura dei Form
+### Struttura Base
 
-### Definizione Base di un Form
+La struttura base di un form Filament è definita nella classe astratta `XotBaseResource`, che tutti i Resource del sistema estendono:
 
 ```php
-public function form(Form $form): Form
+abstract class XotBaseResource extends FilamentResource
 {
-    return $form->schema([
-        TextInput::make('title')
-            ->label('Titolo')
-            ->required()
-            ->maxLength(255),
-        
-        RichEditor::make('content')
-            ->label('Contenuto')
-            ->required(),
-            
-        Toggle::make('is_published')
-            ->label('Pubblicato')
-            ->default(false),
-    ]);
-}
-```
+    // ...
+    
+    /**
+     * @return array<string|int,\Filament\Forms\Components\Component>
+     */
+    abstract public static function getFormSchema(): array;
 
-### Layout con Sezioni e Tab
-
-```php
-public function form(Form $form): Form
-{
-    return $form->schema([
-        Tabs::make('Principale')
-            ->tabs([
-                Tab::make('Informazioni Base')
-                    ->schema([
-                        TextInput::make('title')->required(),
-                        TextInput::make('slug')->required(),
-                    ]),
-                    
-                Tab::make('Contenuto')
-                    ->schema([
-                        RichEditor::make('content')->required(),
-                    ]),
-                    
-                Tab::make('SEO')
-                    ->schema([
-                        TextInput::make('meta_title'),
-                        Textarea::make('meta_description'),
-                    ]),
-            ]),
-    ]);
-}
-```
-
-### Responsività con Grid
-
-```php
-Grid::make([
-    'default' => 1,
-    'sm' => 2,
-    'md' => 3,
-    'lg' => 4,
-])
-->schema([
-    TextInput::make('campo1'),
-    TextInput::make('campo2'),
-    TextInput::make('campo3'),
-    TextInput::make('campo4'),
-])
-```
-
-## Componenti Personalizzati
-
-### Creazione di un Componente Personalizzato
-
-Nel modulo CMS di il progetto, puoi creare componenti personalizzati per estendere le funzionalità base di Filament.
-
-```php
-namespace Modules\Cms\Filament\Forms\Components;
-
-use Filament\Forms\Components\Field;
-
-class CodiceFiscaleInput extends Field
-{
-    protected string $view = 'cms::filament.forms.components.codice-fiscale-input';
-
-    public function validateCodiceFiscale(bool | callable $condition = true): static
+    final public static function form(Form $form): Form
     {
-        $this->rule(function () use ($condition) {
-            return function (string $attribute, $value, \Closure $fail) use ($condition) {
-                $isCallable = is_callable($condition);
-                $isActive = $isCallable ? $condition() : $condition;
-
-                if (!$isActive) {
-                    return;
-                }
-
-                if (!$this->validateItalianFiscalCode($value)) {
-                    $fail('Il codice fiscale non è valido.');
-                }
-            };
-        });
-
-        return $this;
+        return $form
+            ->schema(static::getFormSchema());
     }
-
-    protected function validateItalianFiscalCode($cf) {
-        // Logica di validazione del codice fiscale
-        // ...
-        return true;
-    }
+    
+    // ...
 }
 ```
 
-Vista corrispondente:
+Ogni Resource deve implementare il metodo `getFormSchema()` che restituisce un array di componenti Filament che definiscono la struttura del form.
 
-```blade
-{{-- /Modules/Cms/resources/views/filament/forms/components/codice-fiscale-input.blade.php --}}
-<x-dynamic-component
-    :component="$getFieldWrapperView()"
-    :id="$getId()"
-    :label="$getLabel()"
-    :helper-text="$getHelperText()"
-    :hint="$getHint()"
-    :hint-icon="$getHintIcon()"
-    :required="$isRequired()"
-    :state-path="$getStatePath()"
->
-    <div x-data="{ value: $wire.entangle('{{ $getStatePath() }}') }">
-        <input
-            type="text"
-            class="block w-full transition duration-75 rounded-lg shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-inset focus:ring-primary-500 disabled:opacity-70 border-gray-300"
-            x-model="value"
-            x-mask="AAAAAA99A99A999A"
-            placeholder="RSSMRA80A01H501U"
-        />
-    </div>
-</x-dynamic-component>
-```
+## Vantaggi dei Widget Filament
 
-### Registrazione del Componente
+L'utilizzo esclusivo dei widget Filament per i form offre numerosi vantaggi:
 
-Nel service provider del modulo:
+### 1. Consistenza dell'Interfaccia Utente
+
+Utilizzando lo stesso sistema di componenti per tutti i form, si garantisce una consistenza visiva e funzionale in tutta l'applicazione. Questo migliora l'esperienza utente e riduce la curva di apprendimento.
+
+### 2. Validazione Integrata
+
+I widget Filament integrano meccanismi di validazione avanzati che seguono le convenzioni di Laravel, permettendo di definire regole di validazione direttamente nella definizione del campo:
 
 ```php
-use Filament\Forms\Forms;
-use Modules\Cms\Filament\Forms\Components\CodiceFiscaleInput;
-
-public function boot()
-{
-    Forms::registerComponents([
-        CodiceFiscaleInput::class,
-    ]);
-}
+Forms\Components\TextInput::make('title')
+    ->required()
+    ->maxLength(255)
+    ->unique(ignorable: fn ($record) => $record)
 ```
 
-## Validazione
+### 3. Tipizzazione Forte
 
-### Regole di Validazione Comuni
+I componenti Filament supportano la tipizzazione forte, migliorando la robustezza del codice e facilitando il refactoring:
 
 ```php
-TextInput::make('email')
+Forms\Components\TextInput::make('email')
     ->email()
     ->required()
-    ->unique(table: 'users', column: 'email', ignorable: fn ($record) => $record),
-
-TextInput::make('password')
-    ->password()
-    ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
-    ->dehydrated(fn (?string $state): bool => filled($state))
-    ->required(fn (string $operation): bool => $operation === 'create'),
-
-TextInput::make('website')
-    ->url()
-    ->prefixIcon('heroicon-m-globe-alt'),
-
-TextInput::make('price')
-    ->numeric()
-    ->minValue(1)
-    ->maxValue(1000)
-    ->prefix('€'),
 ```
 
-### Validazione Condizionale
+### 4. Riutilizzabilità dei Componenti
+
+I componenti Filament possono essere facilmente riutilizzati in diversi contesti, riducendo la duplicazione del codice:
 
 ```php
-Toggle::make('has_delivery_address')
-    ->reactive(),
-
-TextInput::make('delivery_address')
-    ->required()
-    ->hidden(fn (callable $get) => !$get('has_delivery_address')),
-```
-
-## Integrazione con il Frontend
-
-### Come Esporre i Form al Frontend
-
-In il progetto, spesso è necessario esporre i form Filament al frontend attraverso API:
-
-```php
-// Modules/Cms/Http/Controllers/Api/FormController.php
-public function getFormSchema($formType)
-{
-    switch($formType) {
-        case 'contact':
-            return $this->getContactFormSchema();
-        case 'registration':
-            return $this->getRegistrationFormSchema();
-        default:
-            return response()->json(['error' => 'Form non trovato'], 404);
-    }
-}
-
-protected function getContactFormSchema()
-{
-    $form = new Form([
-        TextInput::make('name')->required(),
-        TextInput::make('email')->email()->required(),
-        Textarea::make('message')->required(),
-    ]);
-    
-    // Converti lo schema in JSON per il frontend
-    return response()->json([
-        'schema' => $form->getSchema()->toArray(),
-        'endpoint' => route('api.forms.submit', ['type' => 'contact']),
-    ]);
-}
-```
-
-## Casi d'uso comuni
-
-### Form di Ricerca Avanzata
-
-```php
-public function getFormSchema(): array
+// Definizione di un componente riutilizzabile
+public static function addressFields(): array
 {
     return [
-        Card::make()
-            ->schema([
-                Grid::make()
-                    ->schema([
-                        TextInput::make('search')
-                            ->placeholder('Cerca...')
-                            ->hint('Ricerca per nome o codice')
-                            ->prefixIcon('heroicon-o-search'),
-                        
-                        Select::make('category_id')
-                            ->label('Categoria')
-                            ->options(Category::pluck('name', 'id'))
-                            ->searchable(),
-                        
-                        DatePicker::make('from_date')
-                            ->label('Da data'),
-                            
-                        DatePicker::make('to_date')
-                            ->label('A data'),
-                    ]),
-                
-                Button::make('Cerca')
-                    ->submit()
-                    ->icon('heroicon-o-search')
-                    ->color('primary'),
-            ])
-            ->columns(2)
+        Forms\Components\TextInput::make('address_line_1')->required(),
+        Forms\Components\TextInput::make('address_line_2'),
+        Forms\Components\TextInput::make('city')->required(),
+        Forms\Components\TextInput::make('postal_code')->required(),
+    ];
+}
+
+// Utilizzo in un form
+public static function getFormSchema(): array
+{
+    return [
+        // ... altri campi
+        Forms\Components\Section::make('Indirizzo')->schema(self::addressFields()),
+        // ... altri campi
     ];
 }
 ```
 
-### Form con Relazioni
+### 5. Integrazione con il Sistema di Autorizzazioni
+
+I widget Filament si integrano perfettamente con il sistema di autorizzazioni di Laravel, permettendo di controllare l'accesso ai campi in base ai permessi dell'utente:
 
 ```php
-public function form(Form $form): Form
+Forms\Components\TextInput::make('salary')
+    ->visible(fn () => auth()->user()->can('view_salaries'))
+```
+
+### 6. Supporto per Relazioni Complesse
+
+I widget Filament offrono un supporto avanzato per la gestione delle relazioni tra modelli, semplificando la creazione di form con relazioni one-to-many, many-to-many, ecc.:
+
+```php
+Forms\Components\Select::make('categories')
+    ->multiple()
+    ->relationship('categories', 'name')
+```
+
+### 7. Estensibilità
+
+Il sistema di componenti Filament è facilmente estensibile, permettendo di creare componenti personalizzati per esigenze specifiche.
+
+## Implementazione
+
+Per implementare un form utilizzando i widget Filament, è necessario seguire questi passaggi:
+
+### 1. Creare un Resource
+
+```php
+namespace Modules\Cms\Filament\Resources;
+
+use Filament\Forms;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Cms\Models\Page;
+
+class PageResource extends XotBaseResource
 {
-    return $form->schema([
-        Select::make('doctor_id')
-            ->label('Medico')
-            ->relationship('doctor', 'name')
-            ->searchable()
-            ->preload()
-            ->createOptionForm([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->email()
-                    ->required(),
-            ]),
-        
-        Select::make('specialties')
-            ->label('Specialità')
-            ->multiple()
-            ->relationship('specialties', 'name')
-            ->preload(),
-    ]);
+    protected static ?string $model = Page::class;
+    
+    // ...
 }
 ```
 
-## Troubleshooting
-
-### Problemi Comuni e Soluzioni
-
-1. **Problema**: Form non aggiorna i dati nel database
-   **Soluzione**: Verificare che i campi siano correttamente definiti con i nomi delle colonne del database
-
-2. **Problema**: Validazione non funziona correttamente
-   **Soluzione**: Assicurarsi che le regole di validazione siano corrette e che i messaggi di errore siano configurati
-
-3. **Problema**: Form lento nel caricamento
-   **Soluzione**: Ottimizzare le query utilizzate nei form, evitare di caricare relazioni non necessarie
-
-4. **Problema**: Campi relazionali non mostrano i dati corretti
-   **Soluzione**: Utilizzare il metodo preload() per le select e verificare che le relazioni siano definite correttamente nel modello
-
-### Log e Debug
-
-Per il debug dei form Filament in il progetto, è possibile utilizzare:
+### 2. Definire lo Schema del Form
 
 ```php
-// Nei form, stampare lo stato
-$state = $this->form->getState();
-logger()->debug('Form state', $state);
+public static function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('title')
+            ->required()
+            ->maxLength(255),
+            
+        Forms\Components\TextInput::make('slug')
+            ->required()
+            ->unique(ignorable: fn ($record) => $record),
+            
+        Forms\Components\RichEditor::make('content')
+            ->columnSpanFull(),
+    ];
+}
+```
 
-// In alternativa, usare il metodo fill per vedere cosa sta arrivando
-$this->form->fill($data);
-logger()->debug('Form data filled', $data);
+### 3. Personalizzare il Comportamento dei Campi
+
+```php
+Forms\Components\TextInput::make('title')
+    ->required()
+    ->lazy()
+    ->afterStateUpdated(static function ($set, $get, $state): void {
+        if ($get('slug')) {
+            return;
+        }
+        $set('slug', Str::slug($state));
+    })
+```
+
+## Best Practices
+
+Per utilizzare al meglio i widget Filament per i form, è consigliabile seguire queste best practices:
+
+### 1. Organizzare i Campi in Sezioni
+
+```php
+public static function getFormSchema(): array
+{
+    return [
+        Forms\Components\Section::make('Informazioni Base')
+            ->schema([
+                // Campi per le informazioni base
+            ]),
+            
+        Forms\Components\Section::make('Contenuto')
+            ->schema([
+                // Campi per il contenuto
+            ]),
+    ];
+}
+```
+
+### 2. Utilizzare Grid per Layout Responsivi
+
+```php
+Forms\Components\Grid::make()
+    ->columns(12)
+    ->schema([
+        Forms\Components\TextInput::make('first_name')
+            ->columnSpan(6),
+            
+        Forms\Components\TextInput::make('last_name')
+            ->columnSpan(6),
+            
+        Forms\Components\Textarea::make('bio')
+            ->columnSpan(12),
+    ])
+```
+
+### 3. Creare Componenti Personalizzati per Logiche Ripetitive
+
+```php
+class AddressFields
+{
+    public static function make(): array
+    {
+        return [
+            // ... campi per l'indirizzo
+        ];
+    }
+}
+
+// Utilizzo
+public static function getFormSchema(): array
+{
+    return [
+        // ...
+        Forms\Components\Section::make('Indirizzo')
+            ->schema(AddressFields::make()),
+        // ...
+    ];
+}
+```
+
+### 4. Utilizzare Tabs per Form Complessi
+
+```php
+Forms\Components\Tabs::make('Tabs')
+    ->tabs([
+        Forms\Components\Tabs\Tab::make('Informazioni Generali')
+            ->schema([
+                // ...
+            ]),
+            
+        Forms\Components\Tabs\Tab::make('Contenuto')
+            ->schema([
+                // ...
+            ]),
+            
+        Forms\Components\Tabs\Tab::make('SEO')
+            ->schema([
+                // ...
+            ]),
+    ])
+```
+
+## Esempi Pratici
+
+### Esempio: Form per una Pagina
+
+```php
+public static function getFormSchema(): array
+{
+    return [
+        Forms\Components\Grid::make()->columns(2)->schema([
+            Forms\Components\TextInput::make('title')
+                ->columnSpan(1)
+                ->required()
+                ->lazy()
+                ->afterStateUpdated(static function ($set, $get, $state): void {
+                    if ($get('slug')) {
+                        return;
+                    }
+                    $set('slug', Str::slug($state));
+                }),
+
+            Forms\Components\TextInput::make('slug')
+                ->required()
+                ->columnSpan(1)
+                ->afterStateUpdated(static fn ($set, $state) => $set('slug', Str::slug($state))),
+        ]),
+        
+        Forms\Components\Section::make('Contenuto della Pagina')->schema([
+            PageContent::make('content_blocks')
+                ->label('Blocchi Contenuto')
+                ->required()
+                ->columnSpanFull(),
+        ]),
+
+        Forms\Components\Section::make('Contenuto Sidebar')->schema([
+            LeftSidebarContent::make('sidebar_blocks')
+                ->label('Blocchi Sidebar')
+                ->columnSpanFull(),
+        ]),
+    ];
+}
+```
+
+## Estensione e Personalizzazione
+
+Il sistema di widget Filament può essere esteso e personalizzato in vari modi:
+
+### 1. Creare Componenti Personalizzati
+
+```php
+namespace Modules\Cms\Filament\Fields;
+
+use Filament\Forms\Components\Field;
+
+class PageContent extends Field
+{
+    // Implementazione del componente personalizzato
+}
+```
+
+### 2. Estendere Componenti Esistenti
+
+```php
+namespace Modules\Cms\Filament\Fields;
+
+use Filament\Forms\Components\RichEditor;
+
+class EnhancedRichEditor extends RichEditor
+{
+    // Estensione del componente RichEditor
+}
+```
+
+### 3. Utilizzare Traits per Funzionalità Comuni
+
+```php
+namespace Modules\Cms\Filament\Traits;
+
+trait HasSeoFields
+{
+    public static function getSeoFields(): array
+    {
+        return [
+            // Campi SEO
+        ];
+    }
+}
+
+// Utilizzo
+class PageResource extends XotBaseResource
+{
+    use HasSeoFields;
+    
+    public static function getFormSchema(): array
+    {
+        return [
+            // ...
+            Forms\Components\Section::make('SEO')
+                ->schema(self::getSeoFields()),
+            // ...
+        ];
+    }
+}
 ```
 
 ## Conclusione
 
-I form Filament sono uno strumento potente nel CMS di il progetto che permettono di costruire rapidamente interfacce di amministrazione robuste e flessibili. Seguendo le best practices e le convenzioni di questo documento, potrai sfruttare al massimo le potenzialità di questo framework. 
-
-## Collegamenti Bidirezionali
-- [README](README.md) - Documentazione principale del modulo
-- [Integrazione Filament](filament-integration.md) - Integrazione con Filament
-- [Componenti](filament-components.md) - Componenti Filament
-- [Resources](filament-resources.md) - Gestione risorse
-- [Widget](filament-widgets-in-blade.md) - Widget in Blade
-- [Personalizzazioni](filament-personalizzazioni-avanzate.md) - Personalizzazioni avanzate
-- [Form Sopra Tabella](filament-form-sopra-tabella.md) - Form sopra tabella
-
-## Vedi Anche
-- [Modulo UI](../UI/docs/README.md) - Componenti di interfaccia
-- [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
-- [Modulo Theme](../Theme/docs/README.md) - Gestione temi
-- [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
-- [Form Components](https://filamentphp.com/docs/3.x/forms/fields) - Componenti form
-- [Best Practices](https://filamentphp.com/docs/3.x/forms/best-practices) - Best practices form 
+L'utilizzo esclusivo dei widget Filament per i form rappresenta una scelta architetturale che offre numerosi vantaggi in termini di consistenza, manutenibilità e velocità di sviluppo. Seguendo le best practices e sfruttando le funzionalità avanzate di Filament, è possibile creare form robusti, tipizzati e facilmente manutenibili.

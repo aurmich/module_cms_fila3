@@ -1,83 +1,81 @@
-# Gestione Homepage
+# Gestione della Homepage
 
-## Introduzione
+## Indice
+- [Struttura dei File](#struttura-dei-file)
+- [Configurazione dei Contenuti](#configurazione-dei-contenuti)
+- [Tipi di Blocchi Disponibili](#tipi-di-blocchi-disponibili)
+- [Personalizzazione](#personalizzazione)
 
-La homepage è la pagina principale del sito e richiede una gestione speciale per garantire prestazioni ottimali e un'esperienza utente eccellente.
+## Struttura dei File
 
-## Struttura
+La homepage è gestita attraverso due componenti principali:
 
-### Sezioni Principali
-1. **Header**
-   - Logo
-   - Menu principale
-   - CTA primario
+1. **File di Configurazione JSON**:
+   ```
+   config/local/{locale}/database/content/pages/1.json
+   ```
+2. **Template Blade**:
+   ```
+   Themes/One/resources/views/pages/index.blade.php
+   ```
 
-2. **Hero**
-   - Immagine/Slider
-   - Titolo
-   - Sottotitolo
-   - CTA
+## Configurazione dei Contenuti
 
-3. **Features**
-   - Card informative
-   - Icone
-   - Descrizioni brevi
+Il file `1.json` contiene la definizione completa dei contenuti della homepage:
 
-4. **Content**
-   - Blocchi dinamici
-   - News/Eventi
-   - Testimonial
+```json
+{
+    "id": "1",
+    "title": {"it": "Promozione della salute orale per le gestanti"},
+    "slug": "home",
+    "content_blocks": {"it": [ /* Blocchi di contenuto */ ]}
+}
+```
 
-5. **Footer**
-   - Link utili
-   - Contatti
-   - Social
-   - Newsletter
+## Tipi di Blocchi Disponibili
 
-## Gestione
+1. **Hero** (`type: "hero"`):
+   - Sezione principale con immagine di sfondo
+   - Titolo e sottotitolo
+   - Call-to-action personalizzabile
 
-### Contenuti Dinamici
-- **Slider**: Gestione immagini
-- **News**: Ultime notizie
-- **Eventi**: Prossimi eventi
-- **Statistiche**: Dati in tempo reale
+2. **Paragraph** (`type: "paragraph"`):
+   - Blocchi di testo semplice
+   - Supporto per contenuti formattati
 
-### Performance
-- **Cache**: Aggressiva
-- **Lazy Loading**: Immagini
-- **Preload**: Risorse critiche
-- **CDN**: Distribuzione
+3. **Feature Sections** (`type: "feature_sections"`):
+   - Sezioni con icone
+   - Titoli e descrizioni
+   - Layout personalizzabile
 
-## Ottimizzazione
+4. **Stats** (`type: "stats"`):
+   - Visualizzazione di statistiche
+   - Numeri e label personalizzabili
 
-### SEO
-- **Meta Tags**: Ottimizzati
-- **Schema.org**: Markup
-- **Sitemap**: Priorità
-- **Canonical**: URL
+5. **CTA** (`type: "cta"`):
+   - Call-to-action standalone
+   - Pulsanti e link personalizzabili
 
-### Mobile
-- **Responsive**: Design
-- **Touch**: Interazioni
-- **Performance**: Ottimizzata
-- **PWA**: Supporto
+## Personalizzazione
 
-## Monitoraggio
+### Modificare i Contenuti
 
-### Analytics
-- **Traffico**: Visite
-- **Comportamento**: User flow
-- **Conversioni**: Goal
-- **Performance**: Core Web Vitals
+Per modificare i contenuti della homepage:
 
-### Errori
-- **Console**: JavaScript
-- **Server**: Log
-- **404**: Pagine non trovate
-- **Performance**: Lags
+1. Aprire il file `1.json`
+2. Modificare i blocchi esistenti o aggiungerne di nuovi
+3. Rispettare la struttura JSON e i tipi di blocchi supportati
 
-## Collegamenti
-- [Content Management](./content-management.md)
-- [Page Management](./page-management.md)
-- [Frontend Architecture](./frontend-architecture.md)
-- [Documentazione Core](../Xot/docs/documentation.md)
+### Aggiungere Nuovi Tipi di Blocchi
+
+Per aggiungere un nuovo tipo di blocco:
+
+1. Creare il componente Blade corrispondente
+2. Aggiungere la logica di rendering nel ThemeComposer o nel componente `Blocks`
+3. Aggiungere il nuovo blocco nel file JSON
+
+---
+
+**Documentazione Correlata**
+
+- [Documentazione principale della homepage](../../../../docs/gestione-homepage.md)

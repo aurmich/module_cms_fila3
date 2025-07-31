@@ -29,8 +29,7 @@ class Page extends Component
         $this->slug = $slug;
         $field=$side.'_blocks';
         //Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, $field => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
-        $page=PageModel::firstOrCreate(['slug' => $slug]);
-        //$page=PageModel::firstWhere(['slug' => $slug]);
+        $page=PageModel::firstWhere(['slug' => $slug]);
         if($page===null){
             abort(404,'page not found: '.$slug);
         }
