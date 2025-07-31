@@ -122,6 +122,8 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> all($columns = ['*'])
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, static> get($columns = ['*'])
  * @method static \Modules\Cms\Database\Factories\MenuFactory factory($count = null, $state = [])
+ * @property-read int $depth
+ * @property-read string $path
  * @mixin \Eloquent
  */
 class Menu extends BaseModel implements HasRecursiveRelationshipsContract
