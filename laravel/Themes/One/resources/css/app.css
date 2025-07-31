@@ -10,10 +10,9 @@
 
 /* Custom Filament button styles */
 @layer components {
-
     /* Bottoni Filament */
     .fi-btn {
-        @apply inline-flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-sm font-medium shadow-sm ring-1 ring-inset transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-70;
+        @apply !text-white !bg-[#FF5F7E] inline-flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-sm font-medium shadow-sm ring-1 ring-inset transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-70;
     }
 
     .fi-btn-primary {
@@ -42,16 +41,16 @@
     }
 
     .login-button {
-        @apply w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+        @apply w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white !bg-[#0D9488] hover:bg-[#0D9488];
     }
 
     /* Bottoni generici */
     .btn {
-        @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow-sm !bg-[#0D9488] focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
     .btn-primary {
-        @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+        @apply bg-[#FF5F7E] text-white px-4 py-2 rounded-lg;
     }
 
     .btn-secondary {
@@ -76,7 +75,7 @@
     }
 
     .input-primary {
-        @apply border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm;
+        @apply border-gray-300 focus:!border-[#FF5F7E] rounded-lg shadow-sm;
     }
 
     .card {
@@ -117,7 +116,9 @@
 
     .fi-fo-wizard-header {
         @apply hidden sm:grid !important;
+        
     }
+
 
     .mobile-friendly-wizard {
         @apply overflow-x-auto;
@@ -127,17 +128,17 @@
 
 @layer base {
     :root {
-        --color-primary-50: 236 253 245;
-        --color-primary-100: 209 250 229;
-        --color-primary-200: 167 243 208;
-        --color-primary-300: 110 231 183;
-        --color-primary-400: 52 211 153;
-        --color-primary-500: 16 185 129;
-        --color-primary-600: 5 150 105;
-        --color-primary-700: 4 120 87;
-        --color-primary-800: 6 95 70;
-        --color-primary-900: 6 78 59;
-        --color-primary-950: 2 44 34;
+        --color-primary-50:  255 95 126;
+        --color-primary-100: 255 95 126;
+        --color-primary-200: 255 95 126;
+        --color-primary-300: 255 95 126;
+        --color-primary-400: 255 95 126;
+        --color-primary-500: 255 95 126;
+        --color-primary-600: 255 95 126;
+        --color-primary-700: 255 95 126;
+        --color-primary-800: 255 95 126;
+        --color-primary-900: 255 95 126;
+        --color-primary-950: 255 95 126;
 
         --color-danger-50: 254 242 242;
         --color-danger-100: 254 226 226;
@@ -204,7 +205,7 @@
     }
 
     a {
-        @apply text-primary-600 hover:text-primary-900;
+        @apply text-primary-600;
     }
 
     /* Form */
@@ -215,11 +216,11 @@
     input[type="tel"],
     input[type="url"],
     textarea {
-        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FF5F7E] focus:ring-[#FF5F7E] sm:text-sm;
     }
 
     select {
-        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FF5F7E] focus:ring-[#FF5F7E] sm:text-sm;
     }
 
     label {
@@ -251,7 +252,9 @@
     .fi-section {
         @apply rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10;
     }
-
+    .fi-btn {
+        @apply !text-white;
+    }
     .fi-section-header {
         @apply border-b border-gray-200 px-4 py-2.5 dark:border-white/10 sm:px-6;
     }
@@ -259,7 +262,6 @@
     .fi-section-content {
         @apply bg-white px-4 py-6 sm:px-6;
     }
-
     .filament-fullcalendar {
         --fc-small-font-size: 0.85em;
         --fc-page-bg-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -289,5 +291,4 @@
         --fc-today-bg-color: rgba(var(--primary-500), 0.2);
         --fc-now-indicator-color: red;
     }
-}
 }
