@@ -139,12 +139,27 @@ return [
 
 ## Regole Laraxot da Rispettare
 
+### ⚠️ REGOLA CRITICA - MAI RIMUOVERE CONTENUTO
+**PRINCIPIO FONDAMENTALE**: Non rimuovere MAI nessuna chiave, proprietà o valore esistente dai file di traduzione, anche se sembra inutilizzata o ridondante.
+
+**Esempi di proprietà da NON rimuovere mai:**
+- `bg_color` - anche se sembra duplicare `color`
+- `modal_heading` - anche se sembra duplicare `label`  
+- `helper_text` - anche se uguale alla chiave padre
+- Qualsiasi altra proprietà esistente
+
+**Motivazione**: Le proprietà possono essere utilizzate da componenti Filament specifici, JavaScript frontend, logica di theming, sistemi di override, o funzionalità future.
+
+### Altre Regole Fondamentali
 1. **Mai rimuovere contenuto esistente** - solo aggiungere o migliorare
 2. **Helper text vuoto** quando coincide con chiave padre
 3. **Sintassi array breve** `[]` sempre
 4. **Completezza** - tutte le chiavi in tutte le lingue
 5. **Coerenza** - terminologia uniforme tra moduli
 6. **Struttura espansa** - label, placeholder, helper_text, description
+
+### Regola d'Oro
+**"Quando in dubbio, NON rimuovere. Solo aggiungere."**
 
 ## Collegamenti
 

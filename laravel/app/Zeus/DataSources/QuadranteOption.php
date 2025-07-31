@@ -25,7 +25,7 @@ class QuadranteOption extends DataSourceContract
     public function getModel(): string
     {
         $slug=Str::of($this->title())->before('Option')->slug()->toString();
-        return \Modules\UI\Models\FieldOption::class::setType($slug);
+        return \Modules\FormBuilder\Models\FieldOption::class::setType($slug);
     }
 }
 

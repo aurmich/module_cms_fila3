@@ -7,7 +7,10 @@ return [
     'description' => 'Elemento temporaneamente sospeso',
     'tooltip' => 'L\'elemento è stato sospeso temporaneamente',
     'color' => 'danger',
+    'bg_color' => '#dc2626',
     'icon' => 'heroicon-o-pause-circle',
+    'modal_heading' => 'Elemento Sospeso',
+    'modal_description' => 'Questo elemento è stato temporaneamente sospeso. Contatta l\'amministratore per maggiori informazioni o per richiedere la riattivazione.',
     
     'actions' => [
         'reactivate' => [

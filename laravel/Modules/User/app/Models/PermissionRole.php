@@ -7,8 +7,6 @@ namespace Modules\User\Models;
 use Webmozart\Assert\Assert;
 
 /**
- * 
- *
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole newModelQuery()

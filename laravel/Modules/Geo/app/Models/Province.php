@@ -9,6 +9,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int|null $region_id
+ * @property int $id
+ * @property string|null $name
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Locality> $localities
+ * @property-read int|null $localities_count
+ * @property-read \Modules\Geo\Models\Region|null $region
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereRegionId($value)
+ * @mixin \Eloquent
+ */
 class Province extends BaseModel
 {
     use \Sushi\Sushi;

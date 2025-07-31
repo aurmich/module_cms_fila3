@@ -51,6 +51,8 @@ use Spatie\Translatable\HasTranslations;
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
  * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
+ * @property array<array-key, mixed>|null $middleware
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
  * @mixin \Eloquent
  */
 class Page extends BaseModelLang

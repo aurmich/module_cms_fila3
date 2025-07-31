@@ -56,6 +56,7 @@ use Safe\DateTime;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUserId($value)
+ * @property-read \Modules\SaluteOra\Models\User|null $user
  * @mixin \Eloquent
  */
 class DoctorStudio extends StudioUser

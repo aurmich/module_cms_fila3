@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Modules\Xot\Models;
 
 /**
- * 
- *
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Modules\Xot\Database\Factories\PulseValueFactory factory($count = null, $state = [])

@@ -11,8 +11,6 @@ namespace Modules\User\Models;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
- *
  * @property int $id
  * @property string $authenticatable_type
  * @property int $authenticatable_id

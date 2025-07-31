@@ -7,7 +7,10 @@ return [
     'description' => 'Elemento programmato per una data specifica',
     'tooltip' => 'L\'elemento è stato programmato e è in attesa di esecuzione',
     'color' => 'info',
+    'bg_color' => '#3b82f6',
     'icon' => 'heroicon-o-calendar',
+    'modal_heading' => 'Elemento Programmato',
+    'modal_description' => 'Questo elemento è stato programmato nel calendario e sarà disponibile alla data indicata.',
     
     'fields' => [
         'message' => [

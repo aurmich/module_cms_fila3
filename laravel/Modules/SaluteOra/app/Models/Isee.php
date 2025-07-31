@@ -59,6 +59,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withoutTrashed()
+ * @method static \Modules\SaluteOra\Database\Factories\IseeFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Isee extends BaseModel

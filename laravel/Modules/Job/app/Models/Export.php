@@ -12,8 +12,6 @@ use Eloquent;
 use Filament\Actions\Exports\Models\Export as BaseExport;
 
 /**
- * 
- *
  * @method static \Modules\Job\Database\Factories\ExportFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Export newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Export newQuery()

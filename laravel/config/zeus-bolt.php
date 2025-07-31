@@ -28,16 +28,16 @@ return [
      * ->skyModels([ ... ])
      */
     'models' => [
-        'Category' => \LaraZeus\Bolt\Models\Category::class,
-        //'Collection' => \LaraZeus\Bolt\Models\Collection::class,
-        'Collection' => \Modules\UI\Models\Collection::class,
-        //'Field' => \LaraZeus\Bolt\Models\Field::class,
-        'Field' => \Modules\UI\Models\Field::class,
-        'FieldResponse' => \LaraZeus\Bolt\Models\FieldResponse::class,
-        'Form' => \LaraZeus\Bolt\Models\Form::class,
-        'FormsStatus' => \LaraZeus\Bolt\Models\FormsStatus::class,
-        'Response' => \LaraZeus\Bolt\Models\Response::class,
-        'Section' => \LaraZeus\Bolt\Models\Section::class,
+        'Category' => \Modules\FormBuilder\Models\Category::class,
+        //'Collection' => \Modules\FormBuilder\Models\Collection::class,
+        'Collection' => \Modules\FormBuilder\Models\Collection::class,
+        //'Field' => \Modules\FormBuilder\Models\Field::class,
+        'Field' => \Modules\FormBuilder\Models\Field::class,
+        'FieldResponse' => \Modules\FormBuilder\Models\FieldResponse::class,
+        'Form' => \Modules\FormBuilder\Models\Form::class,
+        'FormsStatus' => \Modules\FormBuilder\Models\FormsStatus::class,
+        'Response' => \Modules\FormBuilder\Models\Response::class,
+        'Section' => \Modules\FormBuilder\Models\Section::class,
         'User' => config('auth.providers.users.model'),
     ],
 

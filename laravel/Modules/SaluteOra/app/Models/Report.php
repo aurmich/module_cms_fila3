@@ -53,6 +53,74 @@ use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
  * @property-read \Modules\SaluteOra\Models\Patient|null $patient
  * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
  * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
+ * @property string $name
+ * @property string|null $description
+ * @property string $type
+ * @property string|null $period_start
+ * @property string|null $period_end
+ * @property string|null $parameters
+ * @property string|null $last_generated_at
+ * @property string|null $created_by
+ * @property string|null $tenant_id
+ * @property string|null $updated_by
+ * @property string|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\SaluteOra\Database\Factories\ReportFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Report newModelQuery()
+ * @method static Builder<static>|Report newQuery()
+ * @method static Builder<static>|Report query()
+ * @method static Builder<static>|Report whereAppointmentId($value)
+ * @method static Builder<static>|Report whereCreatedAt($value)
+ * @method static Builder<static>|Report whereCreatedBy($value)
+ * @method static Builder<static>|Report whereDecayedTeeth($value)
+ * @method static Builder<static>|Report whereDeletedAt($value)
+ * @method static Builder<static>|Report whereDeletedBy($value)
+ * @method static Builder<static>|Report whereDescription($value)
+ * @method static Builder<static>|Report whereFollowsDietRules($value)
+ * @method static Builder<static>|Report whereFurtherNotes($value)
+ * @method static Builder<static>|Report whereHasDiseases($value)
+ * @method static Builder<static>|Report whereHasFixedProsthesisOrImplants($value)
+ * @method static Builder<static>|Report whereHasMouthOrTeethPain($value)
+ * @method static Builder<static>|Report whereHasPlaque($value)
+ * @method static Builder<static>|Report whereHasTartar($value)
+ * @method static Builder<static>|Report whereId($value)
+ * @method static Builder<static>|Report whereInvoice($value)
+ * @method static Builder<static>|Report whereLastGeneratedAt($value)
+ * @method static Builder<static>|Report whereMissingTeeth($value)
+ * @method static Builder<static>|Report whereMoreInfoDecayedTeeth($value)
+ * @method static Builder<static>|Report whereMoreInfoMissingTeeth($value)
+ * @method static Builder<static>|Report whereMoreInfoPlaque($value)
+ * @method static Builder<static>|Report whereMoreInfoProsthesis($value)
+ * @method static Builder<static>|Report whereMoreInfoTartar($value)
+ * @method static Builder<static>|Report whereMouthTeethPainFrequency($value)
+ * @method static Builder<static>|Report whereName($value)
+ * @method static Builder<static>|Report whereNeedsMoreDentalCare($value)
+ * @method static Builder<static>|Report whereParameters($value)
+ * @method static Builder<static>|Report wherePatientId($value)
+ * @method static Builder<static>|Report wherePeriodEnd($value)
+ * @method static Builder<static>|Report wherePeriodStart($value)
+ * @method static Builder<static>|Report wherePregnancyMonth($value)
+ * @method static Builder<static>|Report wherePregnancyWeek($value)
+ * @method static Builder<static>|Report whereSmokes($value)
+ * @method static Builder<static>|Report whereSpecifyDecayedTeeth($value)
+ * @method static Builder<static>|Report whereSpecifyDiseases($value)
+ * @method static Builder<static>|Report whereSpecifyMissingTeeth($value)
+ * @method static Builder<static>|Report whereSpecifyPlaque($value)
+ * @method static Builder<static>|Report whereSpecifyProsthesisOrImplants($value)
+ * @method static Builder<static>|Report whereSpecifyTartar($value)
+ * @method static Builder<static>|Report whereStatus($value)
+ * @method static Builder<static>|Report whereTeethBrushingFrequency($value)
+ * @method static Builder<static>|Report whereTenantId($value)
+ * @method static Builder<static>|Report whereType($value)
+ * @method static Builder<static>|Report whereUpdatedAt($value)
+ * @method static Builder<static>|Report whereUpdatedBy($value)
+ * @method static Builder<static>|Report whereUsesAslClinicForDentalCare($value)
+ * @method static Builder<static>|Report whereVisitsDentistYearly($value)
+ * @mixin \Eloquent
  */
 class Report extends BaseModel{
     

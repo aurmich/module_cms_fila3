@@ -23,7 +23,7 @@ class YNOption extends DataSourceContract
 
     public function getModel(): string
     {
-        return \Modules\UI\Models\FieldOption::class::setType('yn');
+        return \Modules\FormBuilder\Models\FieldOption::class::setType('yn');
     }
 }
 

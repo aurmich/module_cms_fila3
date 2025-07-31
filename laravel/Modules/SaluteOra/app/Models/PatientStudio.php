@@ -11,8 +11,6 @@ use Parental\HasParent;
 
 
 /**
- * 
- *
  * @property string $id
  * @property string|null $type
  * @property string $user_id
@@ -42,6 +40,8 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientStudio whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientStudio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientStudio whereUserId($value)
+ * @property-read \Modules\SaluteOra\Models\Studio|null $studio
+ * @property-read User|null $user
  * @mixin \Eloquent
  */
 class PatientStudio extends StudioUser

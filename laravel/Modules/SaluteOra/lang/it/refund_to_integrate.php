@@ -7,7 +7,10 @@ return [
     'description' => 'Rimborso in attesa di integrazione nel sistema',
     'tooltip' => 'Il rimborso richiede integrazione con dati aggiuntivi',
     'color' => 'warning',
+    'bg_color' => '#f59e0b',
     'icon' => 'heroicon-o-exclamation-triangle',
+    'modal_heading' => 'Rimborso da Integrare',
+    'modal_description' => 'Questo rimborso richiede integrazione con documenti o informazioni aggiuntive prima di poter essere elaborato.',
     
     'actions' => [
         'start_integration' => [

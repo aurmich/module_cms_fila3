@@ -7,7 +7,10 @@ return [
     'description' => 'User active in the system',
     'tooltip' => 'The user is active and can use the system',
     'color' => 'success',
+    'bg_color' => '#10b981',
     'icon' => 'heroicon-o-check-circle',
+    'modal_heading' => 'Active User Management',
+    'modal_description' => 'This user is currently active in the system and can access all functionalities.',
     
     'actions' => [
         'deactivate' => [

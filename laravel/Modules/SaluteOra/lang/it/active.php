@@ -7,7 +7,10 @@ return [
     'description' => 'Utente attivo nel sistema',
     'tooltip' => 'L\'utente è attivo e può utilizzare il sistema',
     'color' => 'success',
+    'bg_color' => '#10b981',
     'icon' => 'heroicon-o-check-circle',
+    'modal_heading' => 'Gestione Utente Attivo',
+    'modal_description' => 'Questo utente è attualmente attivo nel sistema e può accedere a tutte le funzionalità.',
     
     'actions' => [
         'deactivate' => [

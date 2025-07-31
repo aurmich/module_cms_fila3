@@ -100,6 +100,14 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePatientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property string|null $invoice File fattura
+ * @property-read string $time_range
+ * @property-read \Modules\SaluteOra\Models\Report|null $report
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel implements HasStatesContract

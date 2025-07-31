@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Xot\Traits\Updater;
 
 /**
- * 
- *
  * @property int $id
  * @property int $mail_template_id
  * @property int $version
