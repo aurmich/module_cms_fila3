@@ -18,7 +18,7 @@ name('password.request');
 
         <!-- Logo -->
         <div class="flex justify-center">
-            <img class="w-[300px] lg:w-[350px]" src="/img/logo-v2.png"/>
+            <img class="w-[300px] lg:w-[350px]" src="/img/logo-v2.png"/> (.)
         </div>
 
         <div class="mt-8 mx-auto w-full max-w-md relative">
@@ -46,7 +46,7 @@ name('password.request');
                     </div>
                 </div>
             </div>
-        </div>
+        </div> (.)
     </div>
 
     <!-- Mousemove handler for wave effect -->

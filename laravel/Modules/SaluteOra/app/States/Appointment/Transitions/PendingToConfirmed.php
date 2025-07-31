@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment\Transitions;
 
+use Webmozart\Assert\Assert;
+use Modules\SaluteOra\Models\Appointment;
+
 /**
  * Transition from Pending to Confirmed state.
  */
@@ -15,9 +18,11 @@ class PendingToConfirmed extends BaseTransition
     
     public function getNotificationRecipients(): array
     {
+        $record=$this->record;
+        Assert::isInstanceOf($record, Appointment::class);
         return [
-            'patient' => $this->record->patient,
-            'doctor' => $this->record->doctor,
+            'patient' => $record->patient,
+            'doctor' => $record->doctor,
         ];
     }
 } 

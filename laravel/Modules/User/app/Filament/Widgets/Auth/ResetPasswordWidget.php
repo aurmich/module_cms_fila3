@@ -6,6 +6,7 @@ namespace Modules\User\Filament\Widgets\Auth;
 
 use Filament\Forms;
 use Filament\Forms\Form;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\ComponentContainer;
@@ -99,13 +100,8 @@ class ResetPasswordWidget extends XotBaseWidget
     {
         $data = $this->form->getState();
 
-        $status = Password::reset(
-            [
-                'email' => (string) $data['email'],
-                'password' => (string) $data['password'],
-                'password_confirmation' => (string) $data['password_confirmation'],
-                'token' => (string) request()->route('token'),
-            ],
+        $reset_data =Arr::only($data,['email','password','password_confirmation','token']);
+        $status = Password::reset( $reset_data,
             function ($user, $password): void {
                 $user->forceFill([
                     'password' => Hash::make($password),
@@ -115,10 +111,11 @@ class ResetPasswordWidget extends XotBaseWidget
         );
 
         if ($status === Password::PASSWORD_RESET) {
-            session()->flash('status', __((string) $status));
+            session()->flash('status', __($status));
             return redirect()->route('login');
         } else {
-            $this->addError('email', __((string) $status));
+            /** @phpstan-ignore-next-line */
+            $this->addError('email', __($status));
         }
     }
 }

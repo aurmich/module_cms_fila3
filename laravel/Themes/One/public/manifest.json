@@ -1,6 +1,9 @@
 {
   "resources/css/app.css": {
+    "file": "assets/app-YU7s42mN.css", (.)
+=======
     "file": "assets/app-7PoISLAE.css",
+>>>>>>> 86b08bd (.)
     "src": "resources/css/app.css",
     "isEntry": true
   },

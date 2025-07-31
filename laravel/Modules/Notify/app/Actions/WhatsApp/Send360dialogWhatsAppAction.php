@@ -37,7 +37,7 @@ final class Send360dialogWhatsAppAction
 
         // Parametri a livello di root
         $this->debug = (bool) config('whatsapp.debug', false);
-        $this->timeout = (int) config('whatsapp.timeout', 30);
+        $this->timeout = app(\Modules\Xot\Actions\Cast\SafeIntCastAction::class)->execute(config('whatsapp.timeout'), 30);
     }
 
     /**

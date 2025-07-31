@@ -7,10 +7,32 @@ namespace Modules\Chart\Actions\JpGraph\V1;
 use Amenadiel\JpGraph\Graph\Graph;
 use Amenadiel\JpGraph\Plot\LinePlot;
 use Modules\Chart\Actions\JpGraph\GetGraphAction;
-use Modules\Chart\Datas\AnswerData;
 use Modules\Chart\Datas\AnswersChartData;
+use Modules\Chart\Datas\AnswerData;
+use Modules\Xot\Actions\XotBaseAction;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
+use function Safe\define;
+
+
+// JpGraph mark constants - these are global constants defined by JpGraph
+// We'll use them directly without namespace imports since they're global
+
+// Fallback constant definitions for PHPStan compatibility
+if (!defined('Amenadiel\\JpGraph\\MARK_FILLEDCIRCLE')) {
+    \Safe\define('Amenadiel\\JpGraph\\MARK_FILLEDCIRCLE', 1);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_UTRIANGLE', 2);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_SQUARE', 3);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_DTRIANGLE', 4);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_DIAMOND', 5);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_CIRCLE', 6);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_CROSS', 7);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_STAR', 8);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_X', 9);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_LEFTTRIANGLE', 10);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_RIGHTTRIANGLE', 11);
+    \Safe\define('Amenadiel\\JpGraph\\MARK_FLASH', 12);
+}
 
 class LineSubQuestionAction
 {

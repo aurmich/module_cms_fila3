@@ -15,19 +15,16 @@ $base_middleware=[];
 name('home');
 middleware($base_middleware);
 
-
-
 new class extends Component
 {
-
 };
 
 ?>
 
 <x-layouts.app>
- @volt('home')
+    @volt('home')
     <div>
         <x-page side="content" slug="home" :type="auth()->user()?->type?->value"/>
     </div>
- @endvolt
+    @endvolt
 </x-layouts.app>

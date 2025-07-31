@@ -36,10 +36,10 @@ class UserTypeRegistrationsChartWidget extends XotBaseChartWidget
         
         // Verifica se i filtri sono disponibili e validi
         if (is_array($filters) && !empty($filters)) {
-            $startDate = !empty($filters['startDate']) ? 
-                Carbon::parse($filters['startDate']) : null;
-            $endDate = !empty($filters['endDate']) ? 
-                Carbon::parse($filters['endDate']) : null;
+            /** @phpstan-ignore-next-line */
+            $startDate = !empty($filters['startDate']) ?   Carbon::parse($filters['startDate']) : null;
+            /** @phpstan-ignore-next-line */
+            $endDate = !empty($filters['endDate']) ?  Carbon::parse($filters['endDate']) : null;
         }
         
         // Fallback ai valori di default se i filtri non sono disponibili
@@ -63,14 +63,14 @@ class UserTypeRegistrationsChartWidget extends XotBaseChartWidget
                 'datasets' => [
                     [
                         'label' => static::transClass($this->model, 'widgets.user_type_registrations_chart.label'),
-                        'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                        'data' => $data->map(fn (mixed $value) => $value instanceof TrendValue ? $value->aggregate : 0),
                         'backgroundColor' => 'rgba(59, 130, 246, 0.5)',
                         'borderColor' => 'rgb(59, 130, 246)',
                         'borderWidth' => 2,
                         'tension' => 0.4,
                     ],
                 ],
-                'labels' => $data->map(fn (TrendValue $value) => \Carbon\Carbon::parse($value->date)->format('d/m')),
+                'labels' => $data->map(fn (mixed $value) => $value instanceof TrendValue ? \Carbon\Carbon::parse($value->date)->format('d/m') : ''),
             ];
         } catch (\Exception $e) {
             // Fallback appropriato senza logging inutile

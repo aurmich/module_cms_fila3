@@ -45,7 +45,7 @@ trait HasXotTable
     /**
      * Get table header actions.
      *
-     * @return array<string, Action|ActionGroup>
+     * @return array<string, \Filament\Tables\Actions\Action|\Filament\Tables\Actions\ActionGroup>
      */
     public function getTableHeaderActions(): array
     {

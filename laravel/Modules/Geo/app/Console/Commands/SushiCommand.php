@@ -101,13 +101,13 @@ class SushiCommand extends Command
                 $validComune = $arrayComune;
                 
                 DB::table('comuni')->insert([
-                    'id' => $validComune['id'],
-                    'regione' => (string) $validComune['regione'],
-                    'provincia' => (string) $validComune['provincia'],
-                    'comune' => (string) $validComune['comune'],
-                    'cap' => (string) $validComune['cap'],
-                    'lat' => (float) $validComune['lat'],
-                    'lng' => (float) $validComune['lng'],
+                    'id' => is_string($validComune['id'] ?? null) ? $validComune['id'] : '',
+                    'regione' => is_string($validComune['regione'] ?? null) ? $validComune['regione'] : '',
+                    'provincia' => is_string($validComune['provincia'] ?? null) ? $validComune['provincia'] : '',
+                    'comune' => is_string($validComune['comune'] ?? null) ? $validComune['comune'] : '',
+                    'cap' => is_string($validComune['cap'] ?? null) ? $validComune['cap'] : '',
+                    'lat' => is_numeric($validComune['lat'] ?? null) ? (float) $validComune['lat'] : 0.0,
+                    'lng' => is_numeric($validComune['lng'] ?? null) ? (float) $validComune['lng'] : 0.0,
                     'created_at' => $validComune['created_at'] ?? now(),
                     'updated_at' => $validComune['updated_at'] ?? now(),
                 ]);

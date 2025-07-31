@@ -6,10 +6,10 @@ namespace Modules\Xot\Actions\Collection;
 
 // use Modules\Xot\Services\ArrayService;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
+use Illuminate\Support\Collection;
+use Spatie\QueueableAction\QueueableAction;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Action per la traduzione di elementi di una collezione.
@@ -33,7 +33,7 @@ class TransCollectionAction
         ?string $transKey,
     ): Collection {
         if (null === $transKey) {
-            return $collection->map(fn (mixed $item): string => (string) $item);
+            return $collection->map(fn (mixed $item): string => SafeStringCastAction::cast($item));
         }
 
         $this->transKey = $transKey;
@@ -52,7 +52,7 @@ class TransCollectionAction
     {
         // Converte l'item in stringa se non lo è già
         if (!\is_string($item)) {
-            $item = (string) $item;
+            $item = SafeStringCastAction::cast($item);
         }
 
         if (empty($item) || null === $this->transKey) {
@@ -69,7 +69,7 @@ class TransCollectionAction
         }
 
         // Seconda prova: sostituisce i punti con underscore
-        $itemWithUnderscore = Str::replace('.', '_', $item);
+        $itemWithUnderscore = str_replace('.', '_', $item);
         $keyWithUnderscore = $this->transKey.'.'.$itemWithUnderscore;
         $transWithUnderscore = trans($keyWithUnderscore);
 

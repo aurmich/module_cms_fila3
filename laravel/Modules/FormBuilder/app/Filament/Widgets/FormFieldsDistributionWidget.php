@@ -25,12 +25,12 @@ class FormFieldsDistributionWidget extends ChartWidget
 
     protected function getData(): array
     {
-        $fieldTypes = collect(FieldTypeEnum::cases())->map(function ($type) {
+        $fieldTypes = collect(FieldTypeEnum::cases())->map(function (FieldTypeEnum $type) {
             return [
                 'type' => $type->getLabel(),
-                'count' => FormField::where('type', $type->value)->count(),
+                'count' => FormField::where('type', '=', $type->value)->count(),
             ];
-        })->filter(fn ($item) => $item['count'] > 0);
+        })->filter(fn (array $item) => $item['count'] > 0);
 
         return [
             'datasets' => [

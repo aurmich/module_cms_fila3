@@ -8,12 +8,14 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Filament\Tables\Actions\Action;
 use Modules\SaluteOra\Models\Patient;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ColumnGroup;
+use Modules\Xot\Contracts\StateContract;
 
 class IconStateGroupColumn extends ColumnGroup
 {
@@ -42,6 +44,7 @@ class IconStateGroupColumn extends ColumnGroup
         
         foreach($states as $state=>$stateClass){
             $stateInstance=new $stateClass($this->modelClass);
+            Assert::isInstanceOf($stateInstance,StateContract::class);
             $this->data[$state.'-visible']=true;
                 
             $column = IconColumn::make($state.'-icon')

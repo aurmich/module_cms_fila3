@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Webmozart\Assert\Assert;
+use Modules\Xot\Actions\Cast\SafeFloatCastAction;
 
 class AnswersChartData extends Data
 {
@@ -99,7 +100,7 @@ class AnswersChartData extends Data
         } else {
             $data = $this->answers->toCollection()->pluck('avg')->all();
             foreach ($data as $key => $item) {
-                $data[$key] = number_format((float) $item, 2, '.', '');
+                $data[$key] = number_format(\Modules\Xot\Actions\Cast\SafeFloatCastAction::cast($item, 0.0), 2, '.', '');
             }
 
             if (isset($this->chart->max)) {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment\Transitions;
 
+use Webmozart\Assert\Assert;
+use Modules\SaluteOra\Models\Appointment;
+
 /**
  * Transition from Rejected to Confirmed state.
  *
@@ -19,8 +22,10 @@ class ReportCompletedToRefundPending extends BaseTransition
     //--- (Funziona automaticamente grazie al pattern BaseTransition!)
     public function getNotificationRecipients(): array
     {
+        $record=$this->record;
+        Assert::isInstanceOf($record, Appointment::class);
         return [
-            'doctor' => $this->appointment->doctor,
+            'doctor' => $record->doctor,
         ];
     }
 }

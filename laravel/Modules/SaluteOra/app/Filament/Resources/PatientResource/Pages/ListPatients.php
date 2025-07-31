@@ -39,11 +39,13 @@ class ListPatients extends ListUsers
         return $columns;
     }
 
+    /**
+     * @return array<class-string>
+     */
     public function getHeaderWidgets(): array
     {
         return [
-            
-            StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Patient::class]),
+            StateOverviewWidget::class,
         ];
     }
 

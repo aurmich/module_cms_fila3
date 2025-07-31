@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * 
  *
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\User\Models\Profile|null $creator
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $mailable
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read \Modules\Notify\Models\MailTemplate|null $template
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Modules\User\Models\Profile|null $updater
  * @method static \Modules\Notify\Database\Factories\MailTemplateLogFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog newQuery()

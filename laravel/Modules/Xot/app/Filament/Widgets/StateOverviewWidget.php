@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 
 use Illuminate\Support\Facades\Cache;
+use Modules\Xot\Contracts\StateContract;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 
@@ -113,7 +114,7 @@ class StateOverviewWidget extends XotBaseWidget
            
                 
                 $state = new $stateClass($modelInstance);
-                
+                Assert::isInstanceOf($state, StateContract::class);                
                 $states[] = [
                     'name' => $name,
                     'label' => $state->label(),

@@ -16,5 +16,5 @@
 * [LINKS.md](laravel/Modules/User/docs/LINKS.md)
 * [LINKS.md](laravel/Modules/UI/docs/LINKS.md)
 * [LINKS.md](laravel/Modules/Cms/docs/LINKS.md)
-* [LINKS.md](laravel/Themes/One/docs/LINKS.md)
+* [LINKS.md](laravel/Themes/One/docs/LINKS.md) (.)
 

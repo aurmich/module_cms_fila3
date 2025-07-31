@@ -4,26 +4,14 @@ declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\Dentist;
+use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Models\Patient;
 use Modules\Tenant\Models\Tenant;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
 {
-    /**
-     * Nome della tabella.
-     *
-     * @var string
-     */
-    protected string $table = 'appointments';
     
-    /**
-     * Classe del modello associato.
-     *
-     * @var string|null
-     */
-    protected ?string $model_class = Appointment::class;
 
     /**
      * Run the migrations.
@@ -34,9 +22,8 @@ return new class extends XotBaseMigration
         $this->tableCreate(
             function (Blueprint $table): void {
                 $table->id();
-                $table->foreignIdFor(Tenant::class);
                 $table->foreignIdFor(Patient::class);
-                $table->foreignIdFor(Dentist::class);
+                $table->foreignIdFor(Doctor::class);
                 $table->date('date');
                 $table->time('start_time');
                 $table->time('end_time');
@@ -93,11 +80,5 @@ return new class extends XotBaseMigration
         );
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        $this->tableDrop();
-    }
+   
 };

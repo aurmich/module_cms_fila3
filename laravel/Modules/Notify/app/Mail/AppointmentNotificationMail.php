@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Modules\SaluteOra\Models\Appointment;
+// use Modules\SaluteOra\Models\Appointment;
 
 class AppointmentNotificationMail extends Mailable implements ShouldQueue
 {
@@ -49,7 +49,7 @@ class AppointmentNotificationMail extends Mailable implements ShouldQueue
             default => 'Notifica Appuntamento',
         };
         
-        if ($appointment instanceof Appointment && $appointment->id) {
+        if (is_object($appointment) && property_exists($appointment, 'id') && $appointment->id) {
             $subject .= ' #' . $appointment->id;
         }
         
@@ -57,7 +57,7 @@ class AppointmentNotificationMail extends Mailable implements ShouldQueue
             subject: $subject,
             tags: ['appointment', $type],
             metadata: [
-                'appointment_id' => $appointment instanceof Appointment ? $appointment->id : null,
+                'appointment_id' => is_object($appointment) && property_exists($appointment, 'id') ? $appointment->id : null,
                 'type' => $type,
             ],
         );

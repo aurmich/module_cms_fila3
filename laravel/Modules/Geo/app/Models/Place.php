@@ -17,13 +17,13 @@ use function Safe\json_encode;
  * 
  *
  * @property-read \Modules\Geo\Models\Address|null $address
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\User\Models\Profile|null $creator
  * @property-read string $formatted_address
  * @property-read float|null $latitude
  * @property-read float|null $longitude
  * @property-read \Illuminate\Database\Eloquent\Model $linked
  * @property-read \Modules\Geo\Models\PlaceType|null $placeType
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Modules\User\Models\Profile|null $updater
  * @method static \Modules\Geo\Database\Factories\PlaceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newQuery()

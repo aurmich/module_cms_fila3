@@ -44,6 +44,9 @@ class ListUsers extends BaseListUsers
     ];
    }
 
+    /**
+     * @return array<\Filament\Tables\Actions\Action>
+     */
     public function getTableActions(): array
     {
         return [

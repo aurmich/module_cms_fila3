@@ -23,7 +23,12 @@ interface StateContract
 {
     public function label(): string;
     public function color(): string;
+    public function bgColor(): string;
     public function icon(): string;
     public function modalHeading(): string;
     public function modalDescription(): string;
+    public function modalFormSchema(): array;
+    public function modalFillFormByRecord(Model $record): array;
+    public function modalActionByRecord(Model $record,array $data): void;
+
 }

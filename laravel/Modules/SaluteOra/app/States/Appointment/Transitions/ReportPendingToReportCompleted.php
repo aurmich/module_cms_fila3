@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment\Transitions;
 
+use Webmozart\Assert\Assert;
+use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Actions\Pdf\ContentPdfAction;
 use Modules\Xot\Actions\Pdf\StreamDownloadPdfAction;
 
@@ -24,9 +26,11 @@ class ReportPendingToReportCompleted extends BaseTransition
     public function getNotificationAttachments(): array{
         
 
+        $record=$this->record;
+        Assert::isInstanceOf($record, Appointment::class);
         $view='pub_theme::appointment.report_pdf';
-        $data=['appointment'=>$this->record];
-        $filename='report-' . $this->record->id . '.pdf';
+        $data=['appointment'=>$record];
+        $filename='report-' . $record->id . '.pdf';
         $data=app(ContentPdfAction::class)->execute(view:$view, data:$data, filename:$filename);
 
         $attachments = [

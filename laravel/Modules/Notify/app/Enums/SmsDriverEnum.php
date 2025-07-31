@@ -56,6 +56,6 @@ enum SmsDriverEnum: string implements HasLabel, HasIcon, HasColor
     {
         $default = config('sms.default', self::SMSFACTOR->value);
         
-        return self::from((string) $default);
+        return self::from(is_string($default) ? $default : self::SMSFACTOR->value);
     }
 }

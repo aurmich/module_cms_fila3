@@ -30,7 +30,7 @@ class FormSubmissionsChartWidget extends ChartWidget
             
             return [
                 'date' => $date->format('M d'),
-                'submissions' => FormSubmission::whereDate('submitted_at', $date)->count(),
+                'submissions' => FormSubmission::where('submitted_at', '>=', $date->startOfDay())->where('submitted_at', '<=', $date->endOfDay())->count(),
             ];
         });
 

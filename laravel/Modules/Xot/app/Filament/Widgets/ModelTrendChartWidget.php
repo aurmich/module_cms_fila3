@@ -38,14 +38,14 @@ class ModelTrendChartWidget extends XotBaseChartWidget
                 'datasets' => [
                     [
                         'label' => __('salutemo::widgets.appointment_creation_chart.label'),
-                        'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                        'data' => $data->map(fn (mixed $value) => $value instanceof TrendValue ? $value->aggregate : 0),
                         'backgroundColor' => 'rgba(139, 92, 246, 0.5)',
                         'borderColor' => 'rgb(139, 92, 246)',
                         'borderWidth' => 2,
                         'tension' => 0.4,
                     ],
                 ],
-                'labels' => $data->map(fn (TrendValue $value) => \Carbon\Carbon::parse($value->date)->format('d/m')),
+                'labels' => $data->map(fn (mixed $value) => $value instanceof TrendValue ? \Carbon\Carbon::parse($value->date)->format('d/m') : ''),
             ];
         } catch (\Exception $e) {
             // Fallback appropriato senza logging inutile

@@ -39,24 +39,6 @@ This document outlines the best practices for maintaining high code quality with
 ### 5. Dependency Injection
 - Use dependency injection to avoid direct instantiation of dependencies, promoting testability and flexibility.
 
-## Code Quality Tools
-
-### Automation Scripts
-
-- [fix_docs_case](../../../../../bashscripts/docs/docs/fix_docs_case.md) - Automatic standardization of documentation filenames
-- Run automation scripts regularly to maintain code consistency
-
-## Strumenti di Qualità del Codice
-
-### Scripts di Automazione
-
-## Strumenti di Qualità del Codice
-
-### Scripts di Automazione
-
-- [fix_docs_case](../../../../../bashscripts/docs/docs/fix_docs_case.md) - Standardizzazione automatica dei nomi file nella documentazione
-- Eseguire gli script di automazione regolarmente per mantenere la coerenza del codice
-
 ## Common Issues and Fixes
 - **Type Errors**: Ensure all methods and functions have explicit return types and parameter types to avoid type-related bugs.
 - **Static Analysis Failures**: Address PHPStan errors by refining code or updating the baseline for existing code.
@@ -76,8 +58,8 @@ This document outlines the best practices for maintaining high code quality with
 - [Filament Extension Pattern Analysis](../../Notify/docs/FILAMENT_EXTENSION_PATTERN_ANALYSIS.md)
 - [Patient Module - Namespace Conventions](../../Patient/docs/NAMESPACE_CONVENTIONS.md)
 - [Patient Module - Validation Errors](../../Patient/docs/VALIDATION_ERRORS.md)
-- [PHP Strict Types](./php-strict-types.md)
+- [PHP Strict Types](./PHP-STRICT-TYPES.md)
 - [PHPStan Implementation Guide](./PHPSTAN-IMPLEMENTATION-GUIDE.md)
-- [Naming Conventions](./naming-conventions.md)
+- [Naming Conventions](./NAMING-CONVENTIONS.md)
 - [Service Provider Best Practices](./SERVICE-PROVIDER-BEST-PRACTICES.md)
-- [Filament Best Practices](./filament-best-practices.md)
+- [Filament Best Practices](./FILAMENT-BEST-PRACTICES.md)

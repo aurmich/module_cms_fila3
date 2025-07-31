@@ -11,6 +11,17 @@ use Modules\Chart\Actions\JpGraph\ApplyGraphStyleAction;
 use Modules\Chart\Datas\AnswersChartData;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
+use function Safe\define;
+
+// JpGraph font constants - these are global constants defined by JpGraph
+// We'll use them directly without namespace imports since they're global
+
+// Fallback constant definitions for PHPStan compatibility
+if (!defined('Amenadiel\\JpGraph\\FF_ARIAL')) {
+    \Safe\define('Amenadiel\\JpGraph\\FF_ARIAL', 1);
+    \Safe\define('Amenadiel\\JpGraph\\FS_BOLD', 1);
+    \Safe\define('Amenadiel\\JpGraph\\FS_NORMAL', 0);
+}
 
 class Pie1Action
 {

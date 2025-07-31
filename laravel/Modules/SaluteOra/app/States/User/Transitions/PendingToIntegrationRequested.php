@@ -3,6 +3,7 @@
 namespace Modules\SaluteOra\States\User\Transitions;
 
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 use Modules\SaluteOra\Models\User;
 use Spatie\ModelStates\Transition;
 use Modules\SaluteOra\States\User\Pending;
@@ -16,6 +17,7 @@ class PendingToIntegrationRequested extends BaseTransition
 
     public function getNotificationData(): array{
         $user=$this->record;
+        Assert::isInstanceOf($user, User::class);
         if($user->remember_token==null){
             $user->remember_token = Str::random(40);
             $user->save();

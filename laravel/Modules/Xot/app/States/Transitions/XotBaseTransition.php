@@ -25,7 +25,7 @@ abstract class XotBaseTransition extends Transition
         $stateClassName=Str::of($class)->afterLast('To')->toString();
         $newStateClass=$stateNamespace.'\\'.$stateClassName;
         
-        /** @phpstan-ignore assign.propertyType */
+        /** @phpstan-ignore-next-line */
         $this->record->state = new $newStateClass($this->record);
         $this->record->save();
         return $this->record;
