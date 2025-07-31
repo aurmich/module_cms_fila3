@@ -41,11 +41,11 @@ class Show extends Component
     public bool $debug = false;
 
     /**
-     * I contenuti della pagina.
+     * Contenuti della pagina caricati.
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    protected array $pageContent = [];
+    public array $pageContent = [];
 
     /**
      * Regole di validazione per i parametri.
@@ -80,20 +80,22 @@ class Show extends Component
 
         // Se la cache è abilitata, tenta di recuperare dalla cache
         if ($this->cache) {
-            $this->pageContent = Cache::remember(
+            $content = Cache::remember(
                 $cacheKey,
                 now()->addHours(24),
                 fn () => $this->fetchPageContent()
             );
+            $this->pageContent = is_array($content) ? $content : [];
         } else {
-            $this->pageContent = $this->fetchPageContent();
+            $content = $this->fetchPageContent();
+            $this->pageContent = $content;
         }
     }
 
     /**
      * Recupera i contenuti della pagina dal database.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function fetchPageContent(): array
     {
@@ -110,11 +112,11 @@ class Show extends Component
             // Recupera e processa i contenuti della pagina
             return [
                 'title' => $page->title,
-                'subtitle' => $page->subtitle,
+                'subtitle' => $page->subtitle ?? null,
                 'content' => $page->content,
                 'meta' => [
-                    'description' => $page->meta_description,
-                    'keywords' => $page->meta_keywords,
+                    'description' => $page->meta_description ?? null,
+                    'keywords' => $page->meta_keywords ?? null,
                 ],
                 'blocks' => $page->blocks ?? [],
                 'layout' => $page->layout ?? 'default',
