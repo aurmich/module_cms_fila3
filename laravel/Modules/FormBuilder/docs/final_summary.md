@@ -120,7 +120,7 @@ Tutti i conflitti di merge sono stati risolti con successo e la documentazione Ã
 ### 1. Gestione Conflitti
 ```bash
 # Processo sistematico
-1. Identificare file con <<< HEAD
+1. Identificare file con marcatori git
 2. Spostare in cartelle docs
 3. Analizzare differenze
 4. Proporre soluzioni

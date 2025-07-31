@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "name": "laraxot/module_dbforge_fila3",
     "description": "Modulo per la gestione e manipolazione del database con strumenti avanzati",
     "keywords": [
@@ -20,30 +19,15 @@
         {
             "name": "Marco Sottana",
             "email": "marco.sottana@gmail.com"
-=======
-    "name": "nwidart/dbforge",
-    "description": "",
-    "authors": [
-        {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
->>>>>>> 224ec15 (.)
         }
     ],
     "extra": {
         "laravel": {
-<<<<<<< HEAD
             "providers": [
                 "Modules\\DbForge\\Providers\\DbForgeServiceProvider",
                 "Modules\\DbForge\\Providers\\Filament\\AdminPanelProvider"
             ],
             "aliases": {}
-=======
-            "providers": [],
-            "aliases": {
-
-            }
->>>>>>> 224ec15 (.)
         }
     },
     "autoload": {
@@ -57,7 +41,6 @@
         "psr-4": {
             "Modules\\DbForge\\Tests\\": "tests/"
         }
-<<<<<<< HEAD
     },
     "require": {},
     "require-dev": {},
@@ -97,7 +80,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-=======
-    }
->>>>>>> 224ec15 (.)
 }
