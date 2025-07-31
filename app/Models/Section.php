@@ -24,8 +24,13 @@ use Modules\Tenant\Models\Traits\SushiToJsons;
  * @method static \Illuminate\Database\Eloquent\Builder|Section  newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Section  newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Section  query()
+<<<<<<< HEAD
  * @property-read \Modules\User\Models\Profile|null $creator
  * @property-read \Modules\User\Models\Profile|null $updater
+=======
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+>>>>>>> 522541a (.)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereBlocks($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedBy($value)
