@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace Modules\Job\Models;
 
 /**
- * 
- *
  * @method static \Modules\Job\Database\Factories\ImportFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Import newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Import newQuery()

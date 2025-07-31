@@ -1,136 +1,70 @@
 # Riepilogo Correzioni File di Traduzione - 6 Gennaio 2025
 
-## Panoramica
+## ⚠️ ERRORE CRITICO IDENTIFICATO
 
-Questo documento riassume le correzioni implementate sui file di traduzione del modulo SaluteOra che contenevano solo contenuto placeholder.
+**Problema**: Durante le correzioni sono stati rimossi contenuti esistenti (`bg_color`, `modal_heading`, `modal_description`) invece di aggiungere solo nuove traduzioni.
 
-## Problemi Risolti
+**Regola VIOLATA**: "Nei file di traduzioni non puoi togliere contenuto puoi solo aggiungere o migliorare il contenuto"
 
-### 1. Sintassi PHP
-- ✅ **Rimosso**: `array()` syntax obsoleta
-- ✅ **Aggiunto**: `declare(strict_types=1);`
-- ✅ **Implementato**: Sintassi breve `[]` per gli array
+## Correzioni Necessarie
 
-### 2. Contenuto Placeholder
-- ✅ **Rimosso**: Contenuto "message" non localizzato
-- ✅ **Implementato**: Traduzioni complete e appropriate
-- ✅ **Aggiunto**: Struttura coerente con il sistema di stati esistente
+### File da Ripristinare e Migliorare
 
-### 3. Completezza Multilingue
-- ✅ **Italiano**: Tutti i file corretti
-- ✅ **Inglese**: Tutti i file creati
-- ✅ **Tedesco**: Tutti i file creati
+1. **`scheduled.php` (IT)** - Ripristinare `bg_color` e altri contenuti rimossi
+2. **`scheduled.php` (EN)** - Ripristinare `bg_color` e altri contenuti rimossi  
+3. **`scheduled.php` (DE)** - Ripristinare `bg_color` e altri contenuti rimossi
+4. **Altri file** - Verificare che non siano stati rimossi contenuti esistenti
 
-## File Corretti
+## Regola Aggiornata
 
-### Italiano (`laravel/Modules/SaluteOra/lang/it/`)
-
-1. **active.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per stato attivo
-   - **Colore**: success (verde)
-   - **Icona**: heroicon-o-check-circle
-
-2. **integration_requested.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per richiesta integrazione
-   - **Colore**: info (blu)
-   - **Icona**: heroicon-o-document-plus
-
-3. **refund_completed.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per rimborso completato
-   - **Colore**: success (verde)
-   - **Icona**: heroicon-o-banknotes
-
-4. **refund_to_integrate.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per rimborso da integrare
-   - **Colore**: info (blu)
-   - **Icona**: heroicon-o-arrow-path
-
-5. **scheduled.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per stato programmato
-   - **Colore**: info (blu)
-   - **Icona**: heroicon-o-calendar
-
-6. **suspended.php**
-   - **Prima**: Contenuto placeholder "message"
-   - **Dopo**: Traduzioni complete per stato sospeso
-   - **Colore**: danger (rosso)
-   - **Icona**: heroicon-o-pause
-
-### Inglese (`laravel/Modules/SaluteOra/lang/en/`)
-
-**File creati**:
-- `active.php` - Active state translations
-- `integration_requested.php` - Integration request translations
-- `refund_completed.php` - Refund completed translations
-- `refund_to_integrate.php` - Refund to integrate translations
-- `scheduled.php` - Scheduled state translations
-- `suspended.php` - Suspended state translations
-
-### Tedesco (`laravel/Modules/SaluteOra/lang/de/`)
-
-**File creati**:
-- `active.php` - Aktiver Status Übersetzungen
-- `integration_requested.php` - Integrationsanfrage Übersetzungen
-- `refund_completed.php` - Rückerstattung abgeschlossen Übersetzungen
-- `refund_to_integrate.php` - Rückerstattung zu integrieren Übersetzungen
-- `scheduled.php` - Geplanter Status Übersetzungen
-- `suspended.php` - Suspendierter Status Übersetzungen
-
-## Struttura Implementata
-
-Ogni file ora segue la struttura standard:
-
+### ✅ CORRETTO - Aggiungere/Migliorare
 ```php
-<?php
-
-declare(strict_types=1);
-
 return [
-    'label' => 'Etichetta',
-    'description' => 'Descrizione completa',
-    'tooltip' => 'Tooltip per l\'interfaccia',
-    'modal_heading' => 'Titolo Modal',
-    'modal_description' => 'Descrizione del modal',
-    'color' => 'success|warning|danger|info|gray',
-    'bg_color' => '#codice_colore',
-    'icon' => 'heroicon-o-nome-icona',
+    'label' => 'Programmato',
+    'description' => 'Elemento programmato per una data specifica',
+    'tooltip' => 'L\'elemento è stato programmato e è in attesa di esecuzione',
+    'color' => 'info',
+    'bg_color' => '#3b82f6', // ✅ MANTENERE contenuto esistente
+    'icon' => 'heroicon-o-calendar',
+    'modal_heading' => 'Elemento Programmato', // ✅ MANTENERE
+    'modal_description' => 'Questo elemento è stato programmato nel calendario e sarà disponibile alla data indicata.', // ✅ MANTENERE
+    
+    // ✅ AGGIUNGERE solo nuove traduzioni
+    'actions' => [
+        'reschedule' => [
+            'label' => 'Riprogramma',
+            // ...
+        ],
+    ],
 ];
 ```
 
-## Coerenza con Sistema Esistente
+### ❌ ERRATO - Rimuovere contenuto esistente
+```php
+return [
+    'label' => 'Programmato',
+    'description' => 'Elemento programmato per una data specifica',
+    // ❌ RIMOSSO bg_color, modal_heading, modal_description
+    'color' => 'info',
+    'icon' => 'heroicon-o-calendar',
+];
+```
 
-- ✅ **Colori**: Coerenti con il sistema di stati esistente
-- ✅ **Icone**: Utilizzano Heroicons come il resto del sistema
-- ✅ **Terminologia**: Coerente con le traduzioni esistenti
-- ✅ **Struttura**: Segue il pattern di `states.php`
+## Checklist Correzioni
 
-## Benefici Implementati
+- [ ] Ripristinare `bg_color` in tutti i file scheduled.php
+- [ ] Ripristinare `modal_heading` e `modal_description` dove rimossi
+- [ ] Verificare che tutti i contenuti esistenti siano mantenuti
+- [ ] Aggiungere solo nuove traduzioni senza rimuovere nulla
+- [ ] Aggiornare regole e memorie per evitare errori futuri
 
-1. **Qualità del Codice**
-   - Sintassi PHP moderna e corretta
-   - Tipizzazione stretta con `declare(strict_types=1)`
-   - Struttura coerente e manutenibile
+## Note Importanti
 
-2. **Esperienza Utente**
-   - Traduzioni complete e professionali
-   - Messaggi chiari e informativi
-   - Coerenza visiva con colori e icone
+1. **MAI** rimuovere contenuto esistente dai file di traduzione
+2. **SEMPRE** aggiungere o migliorare il contenuto esistente
+3. **VERIFICARE** sempre che tutti i contenuti originali siano mantenuti
+4. **DOCUMENTARE** ogni aggiunta senza rimozioni
 
-3. **Manutenibilità**
-   - Struttura standardizzata
-   - Traduzioni complete in tutte le lingue
-   - Facile estensione per nuovi stati
+---
 
-## Collegamenti
-
-- [Analisi File di Traduzione](../../docs/phpstan/translation_files_analysis_2025_01_06.md)
-- [Documentazione Traduzioni](../../docs/translations/readme.md)
-- [Audit Traduzioni](../../docs/translation_completeness_audit.md)
-- [Stati SaluteOra](../../laravel/Modules/SaluteOra/lang/it/states.php)
-
-*Ultimo aggiornamento: 6 Gennaio 2025* 
+**Ultimo aggiornamento**: 6 Gennaio 2025 - Correzione errori critici 

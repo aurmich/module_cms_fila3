@@ -151,6 +151,26 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereIseeCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin wherePregnancyCertificate($value)
+ * @property string|null $country_code
+ * @property string|null $children_count
+ * @property string|null $family_members
+ * @property string|null $years_in_italy
+ * @property string|null $nationality
+ * @property string|null $fiscal_code
+ * @property string|null $data_privacy_form
+ * @property string|null $doctor_certificate
+ * @property array<array-key, mixed>|null $certification
+ * @property string|null $last_dental_visit_period
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereCertification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereChildrenCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereDataPrivacyForm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereDoctorCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereFamilyMembers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereFiscalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisitPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereNationality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereYearsInItaly($value)
  * @mixin \Eloquent
  */
 class Admin extends User

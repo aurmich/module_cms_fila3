@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property-read \Modules\FormBuilder\Models\FormTemplate|null $formTemplate
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField query()
+ * @mixin \Eloquent
+ */
 class FormField extends Model
 {
     use HasFactory;

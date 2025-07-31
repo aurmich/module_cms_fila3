@@ -15,6 +15,25 @@ use Modules\Lang\Actions\ReadTranslationFileAction;
 use Modules\Lang\Actions\WriteTranslationFileAction;
 use function Safe\json_encode;
 
+/**
+ * @property string|null $key
+ * @property string|null $path
+ * @property string|null $id
+ * @property string|null $name
+ * @property array<array-key, mixed>|null $content
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\Lang\Database\Factories\TranslationFileFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile wherePath($value)
+ * @mixin \Eloquent
+ */
 class TranslationFile extends BaseModel
 {
     use \Sushi\Sushi;

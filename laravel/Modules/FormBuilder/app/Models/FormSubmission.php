@@ -7,6 +7,16 @@ namespace Modules\FormBuilder\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\FormBuilder\Models\FormTemplate|null $form
+ * @property-read \Modules\FormBuilder\Models\FormTemplate|null $formTemplate
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission query()
+ * @mixin \Eloquent
+ */
 class FormSubmission extends BaseModel
 {
     use HasFactory;

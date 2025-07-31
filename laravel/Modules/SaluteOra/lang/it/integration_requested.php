@@ -7,7 +7,10 @@ return [
     'description' => 'Richiesta di integrazione dati in corso',
     'tooltip' => 'L\'utente ha richiesto l\'integrazione dei dati',
     'color' => 'warning',
+    'bg_color' => '#f59e0b',
     'icon' => 'heroicon-o-clock',
+    'modal_heading' => 'Richiesta di Integrazione Dati',
+    'modal_description' => 'L\'utente ha richiesto l\'integrazione dei propri dati. Rivedi la richiesta e procedi con l\'approvazione o il rifiuto.',
     
     'actions' => [
         'approve' => [

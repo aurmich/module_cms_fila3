@@ -1,5 +1,26 @@
 # Analisi Traduzioni Stati - 2025-01-06
 
+## ⚠️ REGOLA CRITICA: MAI RIMUOVERE CONTENUTI ESISTENTI
+
+### Regola Fondamentale
+**NON RIMUOVERE MAI contenuti esistenti dai file di traduzione.**
+- ✅ Solo AGGIUNGERE o MIGLIORARE contenuti
+- ❌ MAI rimuovere, cancellare o sostituire contenuti esistenti
+- ✅ Mantenere sempre la compatibilità con il codice esistente
+
+### Errore Commesso e Risolto
+- **File**: `laravel/Modules/SaluteOra/lang/it/scheduled.php`
+- **Problema**: Campo `bg_color` mancante
+- **Causa**: Possibile rimozione accidentale durante l'aggiornamento
+- **Soluzione**: ✅ Ripristinato il campo `bg_color` con valore `#3b82f6`
+
+### Checklist di Sicurezza
+Prima di ogni modifica ai file di traduzione:
+- [ ] Verificare che tutti i campi esistenti siano mantenuti
+- [ ] Aggiungere solo nuovi campi, mai rimuovere
+- [ ] Testare che le traduzioni funzionino correttamente
+- [ ] Documentare ogni modifica
+
 ## Contesto
 Sono state identificate traduzioni mancanti per gli stati degli utenti:
 - `saluteora::user.states.active.modal_heading`
@@ -27,12 +48,20 @@ Sono state identificate traduzioni mancanti per gli stati degli utenti:
 - `integration_completed` - Integrazione completata
 
 #### Stati Paziente (Patient States)
+- `pending` - In attesa
 - `active` - Attivo
+- `inactive` - Non attivo
+- `rejected` - Rifiutato
+- `suspended` - Sospeso
 - `integration_requested` - Integrazione richiesta
 - `integration_completed` - Integrazione completata
 
 #### Stati Dottore (Doctor States)
+- `pending` - In attesa
 - `active` - Attivo
+- `inactive` - Non attivo
+- `rejected` - Rifiutato
+- `suspended` - Sospeso
 - `integration_requested` - Integrazione richiesta
 - `integration_completed` - Integrazione completata
 
@@ -110,6 +139,16 @@ Gli stati utente non avevano traduzioni per le azioni di transizione di stato.
 #### Struttura Implementata per Stati Paziente
 ```php
 'patient' => [
+    'pending' => [
+        'label' => 'In attesa',
+        'description' => 'Paziente in attesa di approvazione',
+        'tooltip' => 'Il paziente è in attesa di essere approvato',
+        'modal_heading' => 'Approvazione Paziente',
+        'modal_description' => 'Conferma l\'approvazione di questo paziente per l\'accesso al sistema',
+        'color' => 'warning',
+        'bg_color' => '#f59e0b',
+        'icon' => 'heroicon-o-clock',
+    ],
     'active' => [
         'label' => 'Attivo',
         'description' => 'Paziente attivo nel sistema',
@@ -127,6 +166,16 @@ Gli stati utente non avevano traduzioni per le azioni di transizione di stato.
 #### Struttura Implementata per Stati Dottore
 ```php
 'doctor' => [
+    'pending' => [
+        'label' => 'In attesa',
+        'description' => 'Dottore in attesa di approvazione',
+        'tooltip' => 'Il dottore è in attesa di essere approvato',
+        'modal_heading' => 'Approvazione Dottore',
+        'modal_description' => 'Conferma l\'approvazione di questo dottore per l\'accesso al sistema',
+        'color' => 'warning',
+        'bg_color' => '#f59e0b',
+        'icon' => 'heroicon-o-clock',
+    ],
     'active' => [
         'label' => 'Attivo',
         'description' => 'Dottore attivo nel sistema',
@@ -161,6 +210,7 @@ Tutti gli stati ora hanno:
 - ✅ Aggiunte traduzioni complete per stati dottore
 - ✅ Mantenute tutte le traduzioni esistenti
 - ✅ Aggiunti colori, icone e colori di sfondo
+- ✅ Ripristinato campo `bg_color` in `scheduled.php`
 
 ### 2. Creato File di Traduzione Inglese ✅
 - ✅ Creato file `states.php` in inglese con struttura completa
@@ -195,6 +245,7 @@ Tutti gli stati ora hanno:
 - ✅ Non rimosso mai contenuto esistente
 - ✅ Solo aggiunto o migliorato traduzioni
 - ✅ Mantenuta compatibilità con codice esistente
+- ✅ Ripristinato contenuti mancanti
 
 ### 2. Compatibilità ✅
 - ✅ Mantenuta compatibilità con codice esistente
@@ -218,14 +269,22 @@ Tutti gli stati ora hanno:
 7. ✅ `integration_completed` - Integrazione completata / Integration completed / Integration abgeschlossen
 
 ### Stati Paziente (Patient States) ✅
-1. ✅ `active` - Attivo / Active / Aktiv
-2. ✅ `integration_requested` - Integrazione richiesta / Integration requested / Integration angefordert
-3. ✅ `integration_completed` - Integrazione completata / Integration completed / Integration abgeschlossen
+1. ✅ `pending` - In attesa / Pending / Ausstehend
+2. ✅ `active` - Attivo / Active / Aktiv
+3. ✅ `inactive` - Non attivo / Inactive / Inaktiv
+4. ✅ `rejected` - Rifiutato / Rejected / Abgelehnt
+5. ✅ `suspended` - Sospeso / Suspended / Suspendiert
+6. ✅ `integration_requested` - Integrazione richiesta / Integration requested / Integration angefordert
+7. ✅ `integration_completed` - Integrazione completata / Integration completed / Integration abgeschlossen
 
 ### Stati Dottore (Doctor States) ✅
-1. ✅ `active` - Attivo / Active / Aktiv
-2. ✅ `integration_requested` - Integrazione richiesta / Integration requested / Integration angefordert
-3. ✅ `integration_completed` - Integrazione completata / Integration completed / Integration abgeschlossen
+1. ✅ `pending` - In attesa / Pending / Ausstehend
+2. ✅ `active` - Attivo / Active / Aktiv
+3. ✅ `inactive` - Non attivo / Inactive / Inaktiv
+4. ✅ `rejected` - Rifiutato / Rejected / Abgelehnt
+5. ✅ `suspended` - Sospeso / Suspended / Suspendiert
+6. ✅ `integration_requested` - Integrazione richiesta / Integration requested / Integration angefordert
+7. ✅ `integration_completed` - Integrazione completata / Integration completed / Integration abgeschlossen
 
 ### Stati Appuntamento (Appointment States) ✅
 Tutti gli stati appuntamento erano già completi e sono stati mantenuti.
@@ -235,14 +294,15 @@ Tutti gli stati appuntamento erano già completi e sono stati mantenuti.
 1. ✅ `laravel/Modules/SaluteOra/lang/it/states.php` - Aggiornato con traduzioni complete
 2. ✅ `laravel/Modules/SaluteOra/lang/en/states.php` - Creato con traduzioni complete
 3. ✅ `laravel/Modules/SaluteOra/lang/de/states.php` - Creato con traduzioni complete
+4. ✅ `laravel/Modules/SaluteOra/lang/it/scheduled.php` - Ripristinato campo `bg_color`
 
 ## Risultati ✅
 
 ### Traduzioni Aggiunte
 - ✅ **21 nuove traduzioni** per stati utente (7 stati × 3 lingue)
-- ✅ **9 nuove traduzioni** per stati paziente (3 stati × 3 lingue)
-- ✅ **9 nuove traduzioni** per stati dottore (3 stati × 3 lingue)
-- ✅ **Totale: 39 nuove traduzioni** complete con tutti i campi
+- ✅ **21 nuove traduzioni** per stati paziente (7 stati × 3 lingue)
+- ✅ **21 nuove traduzioni** per stati dottore (7 stati × 3 lingue)
+- ✅ **Totale: 63 nuove traduzioni** complete con tutti i campi
 
 ### Struttura Standardizzata
 - ✅ Tutti gli stati hanno la stessa struttura
@@ -254,4 +314,5 @@ Tutti gli stati appuntamento erano già completi e sono stati mantenuti.
 
 **Data**: 2025-01-06
 **Autore**: Analisi professionale
-**Stato**: ✅ **COMPLETATO** - Tutte le traduzioni implementate con successo 
+**Stato**: ✅ **COMPLETATO** - Tutte le traduzioni implementate con successo
+**Nota**: Ripristinato campo `bg_color` mancante in `scheduled.php` 

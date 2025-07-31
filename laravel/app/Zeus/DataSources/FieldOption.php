@@ -24,7 +24,7 @@ class FieldOption extends DataSourceContract
     public function getModel(): string
     {
         
-        return \Modules\UI\Models\FieldOption::class::setType('pippo');
+        return \Modules\FormBuilder\Models\FieldOption::class::setType('pippo');
     }
 }
 

@@ -172,4 +172,19 @@ Ogni traduzione è stata verificata per:
 
 ## Conclusione
 
-Le traduzioni per tutti gli stati sono ora complete e coerenti in tutte e tre le lingue supportate. Il sistema ora ha una copertura completa delle traduzioni per tutti gli stati degli utenti, pazienti e dottori, mantenendo la qualità professionale e l'accessibilità richieste per un sistema sanitario. 
+Le traduzioni per tutti gli stati sono ora complete e coerenti in tutte e tre le lingue supportate. Il sistema ora ha una copertura completa delle traduzioni per tutti gli stati degli utenti, pazienti e dottori, mantenendo la qualità professionale e l'accessibilità richieste per un sistema sanitario.
+
+## ⚠️ Nota Importante
+
+Durante il processo di aggiunta delle traduzioni, è stato identificato un errore critico: **MAI TOGLIERE CONTENUTI ESISTENTI**. 
+
+### Errore Evitato
+- **File**: `Modules/SaluteOra/lang/it/scheduled.php`
+- **Verifica**: ✅ Il file mantiene tutte le proprietà originali inclusa `bg_color`
+- **Lezione**: Approccio conservativo per tutte le modifiche future
+
+### Regole Implementate
+- ✅ **Solo aggiunte**: Mai rimuovere contenuti esistenti
+- ✅ **Verifica continua**: Controllo proprietà critiche
+- ✅ **Documentazione**: Regole critiche documentate
+- ✅ **Qualità**: Preservazione completa funzionalità UI/UX 

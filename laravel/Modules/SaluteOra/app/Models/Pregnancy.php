@@ -60,6 +60,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereWeeksPregnant($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withoutTrashed()
+ * @method static \Modules\SaluteOra\Database\Factories\PregnancyFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Pregnancy extends BaseModel

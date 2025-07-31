@@ -157,6 +157,27 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIseeCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePregnancyCertificate($value)
+ * @property string|null $country_code
+ * @property string|null $children_count
+ * @property string|null $family_members
+ * @property string|null $years_in_italy
+ * @property string|null $nationality
+ * @property string|null $data_privacy_form
+ * @property string|null $doctor_certificate
+ * @property array<array-key, mixed>|null $certification
+ * @property string|null $last_dental_visit_period
+ * @property-read int|null $appointments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereChildrenCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDataPrivacyForm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDoctorCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereFamilyMembers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereFiscalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisitPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNationality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereYearsInItaly($value)
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia

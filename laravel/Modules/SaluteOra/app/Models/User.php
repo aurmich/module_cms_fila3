@@ -168,6 +168,27 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIseeCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePregnancyCertificate($value)
+ * @property string|null $country_code
+ * @property string|null $children_count
+ * @property string|null $family_members
+ * @property string|null $years_in_italy
+ * @property string|null $nationality
+ * @property string|null $fiscal_code
+ * @property string|null $data_privacy_form
+ * @property string|null $doctor_certificate
+ * @property array<array-key, mixed>|null $certification
+ * @property string|null $last_dental_visit_period
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereChildrenCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDataPrivacyForm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDoctorCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereFamilyMembers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereFiscalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisitPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereNationality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
  * @mixin \Eloquent
  */
 class User extends BaseUser implements HasMedia,HasStatesContract 

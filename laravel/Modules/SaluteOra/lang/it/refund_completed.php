@@ -7,7 +7,10 @@ return [
     'description' => 'Il rimborso è stato elaborato e completato',
     'tooltip' => 'Il rimborso è stato processato con successo',
     'color' => 'success',
+    'bg_color' => '#10b981',
     'icon' => 'heroicon-o-check-circle',
+    'modal_heading' => 'Rimborso Completato',
+    'modal_description' => 'Il rimborso è stato elaborato con successo. L\'importo è stato accreditato secondo le modalità specificate.',
     
     'actions' => [
         'view_receipt' => [

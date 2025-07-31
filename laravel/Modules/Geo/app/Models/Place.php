@@ -14,8 +14,6 @@ use Modules\Geo\Database\Factories\PlaceFactory;
 use function Safe\json_encode;
 
 /**
- * 
- *
  * @property-read \Modules\Geo\Models\Address|null $address
  * @property-read \Modules\User\Models\Profile|null $creator
  * @property-read string $formatted_address
