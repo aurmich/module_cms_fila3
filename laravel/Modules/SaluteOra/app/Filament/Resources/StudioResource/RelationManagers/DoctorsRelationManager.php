@@ -34,16 +34,21 @@ class DoctorsRelationManager extends XotBaseRelationManager
     /**
      * Get the table columns.
      *
-     * @return array<string, Tables\Columns\Column>
+     * @return array<string, \Filament\Tables\Columns\Column>
      */
     public function getTableColumns(): array
     {
         $columns = app(ListDoctors::class)->getTableColumns();
         
-        // Filtra le colonne per assicurarsi che siano tutte di tipo Column
-        return array_filter($columns, function ($column) {
-            return $column instanceof \Filament\Tables\Columns\Column;
-        });
+        // Filtra e converte le colonne per assicurarsi che siano tutte di tipo Column
+        $filteredColumns = [];
+        foreach ($columns as $key => $column) {
+            if ($column instanceof \Filament\Tables\Columns\Column) {
+                $filteredColumns[$key] = $column;
+            }
+        }
+        
+        return $filteredColumns;
     }
 
     /**

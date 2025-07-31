@@ -32,7 +32,11 @@ class SearchTextInDbCommand extends Command
         // Get tables either from specific option or all tables
         $tables = empty($specificTables)
             ? collect(DB::select('SHOW TABLES'))
+<<<<<<< HEAD
+            : collect((array) $specificTables);
+=======
             : collect($specificTables);
+>>>>>>> 224ec15 (.)
 
         foreach ($tables as $table) {
             // Get table name with proper type checking
@@ -98,12 +102,19 @@ class SearchTextInDbCommand extends Command
                                 ])
                                 ->toArray()
                         );
+<<<<<<< HEAD
+=======
                         $this->newLine();
+>>>>>>> 224ec15 (.)
                     }
                 }
             }
         }
 
+<<<<<<< HEAD
+        $this->info('Search completed successfully');
+=======
+>>>>>>> 224ec15 (.)
         return Command::SUCCESS;
     }
 }
