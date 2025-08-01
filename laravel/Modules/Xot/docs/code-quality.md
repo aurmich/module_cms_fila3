@@ -167,65 +167,118 @@ use function Safe\json_encode;
 use function Safe\file_get_contents;
 use function Safe\preg_match;
 
-// ✅ CORRECT
-$json = json_encode($data);
-$content = file_get_contents($file);
+// ✅ CORRETTO
+$content = file_get_contents($path);
+$data = json_decode($content, true);
 
-// ❌ WRONG
-$json = \json_encode($data); // Can return false
-$content = \file_get_contents($file); // Can return false
+// ❌ ERRATO
+$content = \file_get_contents($path); // Può restituire false
 ```
 
-## Documentation Standards
+## Controlli di Qualità Obbligatori
 
-### Module Documentation
-- **ALWAYS** document in module-specific `docs/` folder
-- **ALWAYS** create bidirectional links with root documentation
-- **NEVER** use obvious comments in code
-- **ALWAYS** follow DRY and KISS principles
+### 1. PHPStan Pre-Commit
+```bash
+cd /var/www/html/_bases/base_saluteora/laravel
+./vendor/bin/phpstan analyze Modules/ModuleName --level=9
+```
 
-### PHPDoc Requirements
-- **ALWAYS** document all public methods and properties
-- **ALWAYS** use generics for collections: `Collection<int, User>`
-- **ALWAYS** specify array shapes: `array<string, mixed>`
+### 2. Documentazione Lowercase
+- **TUTTI** i file e cartelle in `docs/` devono essere lowercase
+- **UNICA** eccezione: `README.md`
+- Utilizzare trattini invece di underscore: `code-quality.md`
 
-## Quality Assurance Checklist
+### 3. Testing Senza RefreshDatabase
+- **MAI** usare `RefreshDatabase` trait nei test
+- Database pre-popolato in `.env.testing`
+- Test devono funzionare con dati esistenti
 
-- [ ] `declare(strict_types=1);` in all PHP files
-- [ ] PHPStan level 9+ passes without errors
-- [ ] All models extend module-specific BaseModel
-- [ ] No hardcoded strings in components
-- [ ] Translation files use expanded structure
-- [ ] Migrations use anonymous classes
-- [ ] Namespace follows Laraxot conventions
-- [ ] Documentation updated in module docs/
-- [ ] Safe library used for unsafe functions
-- [ ] Complete PHPDoc for all public APIs
+## Regole Specifiche Laraxot
 
-## Enforcement
+### Dashboard Classes
+```php
+// ✅ CORRETTO - Dashboard senza proprietà di navigazione
+class Dashboard extends XotBaseDashboard
+{
+    // NIENTE navigationIcon, navigationGroup, ecc.
+}
+```
 
-These standards are **MANDATORY** and will be enforced through:
-- Automated PHPStan checks in CI/CD
-- Code review requirements
-- Pre-commit hooks
-- Regular quality audits
+### Service Providers
+```php
+// ✅ CORRETTO
+class ModuleServiceProvider extends XotBaseServiceProvider
+{
+    protected string $module_name = 'ModuleName';
+    
+    // Solo personalizzazioni specifiche del modulo
+}
+```
+
+### Migration Rules
+- Classi anonime che estendono `XotBaseMigration`
+- MAI implementare `down()`
+- Sempre verificare esistenza con `hasTable()` e `hasColumn()`
+- Per aggiungere colonne: copiare migrazione originale con nuovo timestamp
+
+## Anti-Pattern da Evitare
+
+### ❌ Errori Comuni
+```php
+// Namespace errato
+namespace Modules\ModuleName\App\Models;
+
+// Estensione diretta di classi Laravel
+class MyModel extends Model;
+class MyResource extends Resource;
+
+// Stringhe hardcoded
+TextInput::make('name')->label('Nome');
+
+// Struttura traduzioni piatta
+'name_label' => 'Nome'
+
+// PHPStan livello troppo basso
+level: 5 // Minimo 9!
+
+// Rimozione contenuto traduzioni
+unset($translations['existing_key']); // MAI!
+```
+
+## Workflow di Qualità
+
+### 1. Pre-Development
+- Studiare documentazione esistente
+- Verificare convenzioni specifiche del progetto
+- Controllare esempi nel codebase
+
+### 2. Durante Development
+- Strict types in ogni file
+- Estendere sempre classi XotBase
+- Usare enum per stati e tipi
+- Traduzioni con struttura espansa
+
+### 3. Pre-Commit
+- PHPStan livello 9+
+- Verifica naming lowercase per docs
+- Test senza RefreshDatabase
+- Documentazione aggiornata
+
+## Collegamenti e Risorse
+
+- [xot-base-classes.md](./xot-base-classes.md)
+- [filament-resource-rules.md](./filament-resource-rules.md)
+- [migration-standards.md](./migration-standards.md)
+- [phpstan-implementation-guide.md](./phpstan-implementation-guide.md)
+- [translations-best-practices.md](./translations-best-practices.md)
+- [namespace-conventions.md](./namespace-conventions.md)
+
+## Ultimo Aggiornamento
+
+**Data**: 2025-08-01  
+**Versione**: 2.0  
+**Compatibilità**: Laraxot SaluteOra, PHP 8.2+, Laravel 11+
 
 ---
 
-*This document reflects the Laraxot framework philosophy and must be followed without exception.*
-
-## Documentation and Updates
-- Document any deviations from these guidelines or custom quality rules in the relevant module's documentation folder.
-- Update this document if new tools or standards for code quality are introduced.
-
-## Links to Related Documentation
-- [Xot Base Classes](../Xot/docs/XOT_BASE_CLASSES.md)
-- [Filament Extension Pattern](../../Notify/docs/FILAMENT_EXTENSION_PATTERN.md)
-- [Filament Extension Pattern Analysis](../../Notify/docs/FILAMENT_EXTENSION_PATTERN_ANALYSIS.md)
-- [Patient Module - Namespace Conventions](../../Patient/docs/NAMESPACE_CONVENTIONS.md)
-- [Patient Module - Validation Errors](../../Patient/docs/VALIDATION_ERRORS.md)
-- [PHP Strict Types](./PHP-STRICT-TYPES.md)
-- [PHPStan Implementation Guide](./PHPSTAN-IMPLEMENTATION-GUIDE.md)
-- [Naming Conventions](./NAMING-CONVENTIONS.md)
-- [Service Provider Best Practices](./SERVICE-PROVIDER-BEST-PRACTICES.md)
-- [Filament Best Practices](./FILAMENT-BEST-PRACTICES.md)
+*"Nel codice Laraxot, ogni riga è un verso della sinfonia dell'architettura perfetta."*
