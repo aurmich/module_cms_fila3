@@ -1,33 +1,33 @@
-# Componenti Navigazione
+# Componenti di Navigazione 
 
-## 🧭 Menu Principale
+## Indice
+- [Panoramica](#panoramica)
+- [Componenti Disponibili](#componenti-disponibili)
+- [Gestione dell'Autenticazione](#gestione-dellautenticazione)
+- [Localizzazione](#localizzazione)
+- [Best Practices](#best-practices)
 
-### Navbar
-```html
-<nav class="navbar">
-  <div class="navbar-brand">
-    <a href="/">
-      <img src="logo.png" alt="Logo">
-    </a>
-  </div>
-  
-  <button class="navbar-toggler" aria-label="Menu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+## Panoramica
 
-  <div class="navbar-collapse">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button">
-          Servizi
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Servizio 1</a></li>
-          <li><a class="dropdown-item" href="#">Servizio 2</a></li>
-        </ul>
+Questo documento descrive l'utilizzo corretto dei componenti di navigazione , con particolare attenzione alla gestione condizionale dell'autenticazione e alla localizzazione.
+
+## Componenti Disponibili
+
+### Componenti di Navigazione Principali
+
+- `<x-blocks.navigation.user-dropdown>` - Dropdown utente (visualizzato solo per utenti autenticati)
+- `<x-blocks.navigation.login-buttons>` - Pulsanti di login/registrazione (visualizzati solo per utenti non autenticati)
+- `<x-blocks.navigation.language-switcher>` - Selettore della lingua
+
+## Gestione dell'Autenticazione
+
+Il componente `user-dropdown` è progettato per gestire automaticamente la visualizzazione condizionale in base allo stato di autenticazione dell'utente:
+
+```blade
+@props([
+    'alignment' => 'right',
+    'width' => '48',
+    'contentClasses' => 'py-1 bg-white dark:bg-gray-800',
       </li>
     </ul>
   </div>

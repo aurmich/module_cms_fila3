@@ -24,11 +24,11 @@ Vedi: [scripts_location_convention.md](./scripts_location_convention.md)
 
 ## 🚀 Collegamenti Rapidi
 
-- 📑 **[Indice Completo](INDICE_DOCUMENTAZIONE.md)** - Navigazione completa di tutta la documentazione
-- ⚡ **[Quick Reference](QUICK_REFERENCE.md)** - Comandi e snippet per sviluppo rapido  
-- ❓ **[FAQ](FAQ.md)** - Risposte alle domande frequenti
-- 👨‍💻 **[Guida Sviluppatore](GUIDA_SVILUPPATORE.md)** - Setup e sviluppo dettagliato
-- 🏗️ **[Architettura Sistema](ARCHITETTURA_SISTEMA.md)** - Overview architetturale
+- 📑 **[Indice Completo](indice_documentazione.md)** - Navigazione completa di tutta la documentazione
+- ⚡ **[Quick Reference](quick_reference.md)** - Comandi e snippet per sviluppo rapido  
+- ❓ **[FAQ](faq.md)** - Risposte alle domande frequenti
+- 👨‍💻 **[Guida Sviluppatore](guida_sviluppatore.md)** - Setup e sviluppo dettagliato
+- 🏗️ **[Architettura Sistema](architettura_sistema.md)** - Overview architetturale
 
 > **Policy di Memoria e Neutralità**: Questa documentazione segue regole rigorose per garantire memoria persistente, neutralità e prevenzione errori attraverso checklist operative e cross-link tra tutti i file chiave.
 
