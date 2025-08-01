@@ -178,7 +178,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @property string|null $doctor_certificate
  * @property array<array-key, mixed>|null $certification
  * @property string|null $last_dental_visit_period
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCountryCode($value)

@@ -81,6 +81,4 @@ return [
             'description' => 'Unique identifier code for the refund transaction',
         ],
     ],
-    'modal_description' => 'The refund has been completed successfully and paid to the beneficiary.',
-    'bg_color' => '#10b981',
 ]; 

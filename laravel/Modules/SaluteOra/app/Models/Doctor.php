@@ -90,7 +90,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property-read \Modules\User\Models\Membership|DoctorStudio|\Modules\User\Models\DeviceUser|null $pivot
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count

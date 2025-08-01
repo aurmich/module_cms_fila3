@@ -65,6 +65,4 @@ return [
             'description' => 'Date and time of the user\'s last login',
         ],
     ],
-    'modal_description' => 'Are you sure you want to activate this element? The element will be available in the system.',
-    'bg_color' => '#10b981',
 ];

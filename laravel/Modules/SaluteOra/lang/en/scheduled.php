@@ -6,13 +6,9 @@ return [
     'label' => 'Scheduled',
     'description' => 'Element scheduled for a specific date',
     'tooltip' => 'The element has been scheduled and is awaiting execution',
-    'modal_heading' => 'Scheduled Element',
-    'modal_description' => 'This element has been scheduled in the calendar and will be available on the indicated date.',
     'color' => 'info',
     'bg_color' => '#3b82f6',
     'icon' => 'heroicon-o-calendar',
-    'modal_heading' => 'Scheduled Element',
-    'modal_description' => 'This element is scheduled to be executed on a specific date. You can modify the schedule or execute it immediately.',
     
     'actions' => [
         'reschedule' => [

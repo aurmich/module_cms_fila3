@@ -65,6 +65,4 @@ return [
             'description' => 'Datum und Uhrzeit der letzten Anmeldung des Benutzers',
         ],
     ],
-    'modal_description' => 'Sind Sie sicher, dass Sie dieses Element aktivieren möchten? Das Element wird im System verfügbar sein.',
-    'bg_color' => '#10b981',
 ]; 

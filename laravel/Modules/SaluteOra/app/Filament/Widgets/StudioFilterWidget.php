@@ -195,7 +195,7 @@ class StudioFilterWidget extends XotBaseWidget
             ->values();
 
         // Carica lo studio corrente
-        if ($this->currentStudioId) {
+        if ($this->currentStudioId && $this->availableStudios !== null) {
             $foundStudio = $this->availableStudios
                 ->where('id', $this->currentStudioId)
                 ->first();
@@ -208,11 +208,10 @@ class StudioFilterWidget extends XotBaseWidget
         // Se non è stato trovato uno studio corrente, prendi il primo disponibile
         if (!$this->currentStudio && $this->availableStudios && $this->availableStudios->isNotEmpty()) {
             $firstStudio = $this->availableStudios->first();
-            //if ($firstStudio instanceof Studio) {
-                $this->currentStudio = $firstStudio;
-                $firstStudioId = $this->currentStudio->getKey();
-                $this->currentStudioId = is_int($firstStudioId) ? $firstStudioId : (int) $firstStudioId;
-            //}
+            // $firstStudio is guaranteed to be a Studio instance from the collection
+            $this->currentStudio = $firstStudio;
+            $firstStudioId = $this->currentStudio->getKey();
+            $this->currentStudioId = is_int($firstStudioId) ? $firstStudioId : (int) $firstStudioId;
         }
     }
 

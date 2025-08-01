@@ -123,7 +123,9 @@ class RegisterAction
         Assert::isInstanceOf($doctor, Doctor::class);
         
         if($data['state']=='integration_requested'){
-            $doctor->state->transitionTo(IntegrationCompleted::class);
+            if ($doctor->state !== null) {
+                $doctor->state->transitionTo(IntegrationCompleted::class);
+            }
             return $doctor;
         }
 

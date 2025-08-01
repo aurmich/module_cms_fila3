@@ -167,7 +167,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property array<array-key, mixed>|null $certification
  * @property string|null $last_dental_visit_period
  * @property-read int|null $appointments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCountryCode($value)

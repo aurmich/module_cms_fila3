@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $id
  * @property array<array-key, mixed> $name
- * @property string|null $type
  * @property string|null $key
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -45,7 +44,11 @@ use Illuminate\Database\Eloquent\Model;
 class FieldOption extends BaseModel
 {
     use HasTranslations;
-    public static ?string $type=null;
+    
+    /**
+     * Static type property for scoping queries.
+     */
+    protected static ?string $type = null;
 
     public array $translatable = ['name'];
 
@@ -55,14 +58,14 @@ class FieldOption extends BaseModel
 
     public static function setType(string $type): string
     {
-        self::$type = $type;
-        return self::class;
+        static::$type = $type;
+        return static::class;
     }
     protected static function booted(): void
     {
         static::addGlobalScope('type_scope', function (Builder $builder) {
-            if(self::$type){
-                $builder->where('type', self::$type);
+            if (static::$type !== null) {
+                $builder->where('type', static::$type);
             }
         });
     }

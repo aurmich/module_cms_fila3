@@ -9,8 +9,6 @@ return [
     'color' => 'danger',
     'bg_color' => '#dc2626',
     'icon' => 'heroicon-o-pause-circle',
-    'modal_heading' => 'Suspended Element',
-    'modal_description' => 'This element has been temporarily suspended. Contact the administrator for more information or to request reactivation.',
     
     'actions' => [
         'reactivate' => [
@@ -81,5 +79,4 @@ return [
             'description' => 'Notes reserved for administrator about suspension',
         ],
     ],
-    'modal_description' => 'Are you sure you want to suspend this element? The element will not be available until reactivation.',
 ];
