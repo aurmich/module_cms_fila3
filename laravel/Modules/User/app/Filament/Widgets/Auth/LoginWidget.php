@@ -62,7 +62,7 @@ class LoginWidget extends XotBaseWidget
         
         if (Auth::attempt($credentials)) {
             session()->regenerate();
-            redirect()->intended(route('filament.admin.pages.dashboard'));
+            redirect()->intended('/');
         }
 
         $this->addError('email', __('auth.failed'));

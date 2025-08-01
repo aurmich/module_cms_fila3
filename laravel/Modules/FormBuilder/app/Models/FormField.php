@@ -31,12 +31,20 @@ class FormField extends Model
         'is_active',
     ];
 
-    protected $casts = [
-        'required' => 'boolean',
-        'options' => 'array',
-        'validation_rules' => 'array',
-        'is_active' => 'boolean',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'required' => 'boolean',
+            'options' => 'array',
+            'validation_rules' => 'array',
+            'is_active' => 'boolean',
+        ];
+    }
 
     public function formTemplate(): BelongsTo
     {

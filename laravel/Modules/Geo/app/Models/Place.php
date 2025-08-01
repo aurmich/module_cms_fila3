@@ -86,11 +86,19 @@ class Place extends BaseModel implements HasGeolocation
         'nearest_street', 'extra_data',
     ];
 
-    protected $casts = [
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'extra_data' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'latitude' => 'float',
+            'longitude' => 'float',
+            'extra_data' => 'array',
+        ];
+    }
 
     /**
      * @return MorphTo<Model, self>

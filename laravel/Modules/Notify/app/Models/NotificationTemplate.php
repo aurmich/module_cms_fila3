@@ -84,18 +84,26 @@ class NotificationTemplate extends BaseModel implements HasMedia
         'type',
     ];
 
-    protected $casts = [
-        'type' => NotificationTypeEnum::class,
-        'preview_data' => 'array',
-        'body_html' => 'string',
-        'body_text' => 'string',
-        'channels' => 'array',
-        'variables' => 'array',
-        'conditions' => 'array',
-        'metadata' => 'array',
-        'is_active' => 'boolean',
-        'grapesjs_data' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'type' => NotificationTypeEnum::class,
+            'preview_data' => 'array',
+            'body_html' => 'string',
+            'body_text' => 'string',
+            'channels' => 'array',
+            'variables' => 'array',
+            'conditions' => 'array',
+            'metadata' => 'array',
+            'is_active' => 'boolean',
+            'grapesjs_data' => 'array',
+        ];
+    }
 
     public array $translatable = [
         'subject',
