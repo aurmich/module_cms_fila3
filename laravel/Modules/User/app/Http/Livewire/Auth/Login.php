@@ -124,7 +124,8 @@ class Login extends Component implements HasForms
             if (Auth::attempt($data, $remember)) {
                 session()->regenerate();
 
-                return redirect()->intended();
+                // Redirect intelligente basato sui ruoli dell'utente
+                return $this->getRedirectUrl();
             }
 
             $this->addError('email', __('Le credenziali fornite non sono corrette.'));
@@ -132,6 +133,40 @@ class Login extends Component implements HasForms
             $this->addError('email', __('Si è verificato un errore durante il login. Riprova più tardi.'));
             report($e);
         }
+    }
+
+    /**
+     * Determina l'URL di redirect appropriato per l'utente autenticato.
+     *
+     * @return RedirectResponse
+     */
+    protected function getRedirectUrl(): RedirectResponse
+    {
+        $user = Auth::user();
+        
+        if (!$user) {
+            return redirect()->to('/');
+        }
+
+        // Se l'utente ha ruoli admin, redirect al pannello appropriato
+        $adminRoles = $user->roles->filter(function ($role) {
+            return str_ends_with($role->name, '::admin');
+        });
+
+        if ($adminRoles->count() === 1) {
+            // Un solo ruolo admin - redirect al modulo specifico
+            $role = $adminRoles->first();
+            if ($role !== null) {
+                $moduleName = str_replace('::admin', '', $role->name);
+                return redirect()->to("/{$moduleName}/admin");
+            }
+        } elseif ($adminRoles->count() > 1) {
+            // Più ruoli admin - redirect alla dashboard principale
+            return redirect()->to('/admin');
+        }
+
+        // Utente senza ruoli admin - redirect alla homepage
+        return redirect()->to('/' . app()->getLocale());
     }
 
     /**

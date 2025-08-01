@@ -37,15 +37,23 @@ class MailTemplateLog extends BaseModel
         'clicked_at',
     ];
 
-    protected $casts = [
-        'data' => 'array',
-        'metadata' => 'array',
-        'sent_at' => 'datetime',
-        'delivered_at' => 'datetime',
-        'failed_at' => 'datetime',
-        'opened_at' => 'datetime',
-        'clicked_at' => 'datetime',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'data' => 'array',
+            'metadata' => 'array',
+            'sent_at' => 'datetime',
+            'delivered_at' => 'datetime',
+            'failed_at' => 'datetime',
+            'opened_at' => 'datetime',
+            'clicked_at' => 'datetime',
+        ];
+    }
 
     public function template(): BelongsTo
     {

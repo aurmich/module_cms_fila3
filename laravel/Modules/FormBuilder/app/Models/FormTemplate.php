@@ -30,10 +30,18 @@ class FormTemplate extends BaseModel
         'settings',
     ];
 
-    protected $casts = [
-        'is_active' => 'boolean',
-        'settings' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+            'settings' => 'array',
+        ];
+    }
 
     public function fields(): HasMany
     {

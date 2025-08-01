@@ -29,10 +29,18 @@ class FormSubmission extends BaseModel
         'submitted_at',
     ];
 
-    protected $casts = [
-        'data' => 'array',
-        'submitted_at' => 'datetime',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'data' => 'array',
+            'submitted_at' => 'datetime',
+        ];
+    }
 
     /** @var array<string, mixed> */
     public array $data = [];
