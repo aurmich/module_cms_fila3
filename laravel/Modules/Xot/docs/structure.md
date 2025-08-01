@@ -242,6 +242,7 @@ laravel/Themes/[Nome]/
 =======
 b6f667c (.)
 
+
 # Struttura del Modulo Xot
 
 ## Struttura delle Directory
@@ -1056,7 +1057,9 @@ tests_old
 ---
 
 aurmich/dev
-5693302 (.)b6f667c (.)
+5693302 (.)
+b6f667c (.)
+
 
 ## Regole sui Comandi Artisan Custom nei Moduli
 

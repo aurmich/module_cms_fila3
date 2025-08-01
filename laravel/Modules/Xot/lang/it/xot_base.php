@@ -141,5 +141,21 @@ return array (
     array (
       'label' => 'search_step',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'detach' => 
+    array (
+      'label' => 'detach',
+    ),
+    'attach' => 
+    array (
+      'label' => 'attach',
+    ),
   ),
 );

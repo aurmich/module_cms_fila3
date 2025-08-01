@@ -1,3 +1,103 @@
+# Modulo Xot
+
+## Descrizione
+Sistema di gestione modulare per applicazioni Laravel con supporto integrato per Filament.
+
+## Struttura del Modulo
+```
+Xot/
+├── Config/
+├── Console/
+├── Database/
+│   ├── Migrations/
+│   └── Seeders/
+├── Http/
+│   ├── Controllers/
+│   ├── Middleware/
+│   └── Requests/
+├── Models/
+├── Resources/
+│   ├── js/
+│   └── views/
+├── Routes/
+└── Services/
+```
+
+## Checklist di Riavvio
+- [ ] Verificare le dipendenze nel `composer.json`
+- [ ] Controllare le migrazioni pendenti
+- [ ] Verificare i service provider registrati
+- [ ] Controllare le traduzioni
+- [ ] Verificare le configurazioni
+- [ ] Testare le funzionalità principali
+
+## Best Practices
+1. **Gestione dei Moduli**
+   - Mantenere i moduli indipendenti
+   - Utilizzare le interfacce per le dipendenze
+   - Implementare il pattern repository
+
+2. **Struttura del Codice**
+   - Seguire il principio di responsabilità singola
+   - Utilizzare i service layer per la logica di business
+   - Implementare i trait per funzionalità condivise
+
+3. **Compatibilità Filament**
+   - Verificare la versione di Filament
+   - Utilizzare i trait forniti per la compatibilità
+   - Testare le funzionalità specifiche di Filament
+
+## Errori Comuni
+1. **Compatibilità Filament**
+   - Verificare la versione di Filament
+   - Utilizzare i trait corretti per le tabelle
+   - Controllare le dipendenze dei pacchetti
+
+2. **Gestione dei Moduli**
+   - Verificare i namespace corretti
+   - Controllare le dipendenze tra moduli
+   - Gestire correttamente le migrazioni
+
+## Documentazione
+- [Guida alla Compatibilità](/docs/xot_compatibility.md)
+- [Gestione dei Moduli](/docs/module-management.md)
+- [Best Practices](/docs/best-practices.md)
+
+## Testing
+- Eseguire i test unitari: `php artisan test --filter=Xot`
+- Verificare la copertura del codice
+- Testare le funzionalità principali
+
+## Deployment
+1. Eseguire le migrazioni
+2. Pubblicare gli assets
+3. Aggiornare la cache
+4. Verificare i permessi
+
+## Manutenzione
+- Monitorare i log per errori
+- Verificare periodicamente le performance
+- Aggiornare le dipendenze
+- Mantenere la documentazione aggiornata
+
+## Comandi Console
+```bash
+# Lista moduli
+php artisan module:list
+
+# Crea nuovo modulo
+php artisan module:make <NomeModulo>
+
+# Migra modulo specifico
+php artisan module:migrate <NomeModulo>
+```
+
+## Configurazione
+Il modulo può essere configurato tramite il file `config/module_xot.php`:
+- Gestione delle rotte
+- Permessi
+- Configurazioni specifiche per modulo
+
 # Module Xot Fila3 🔥 The Ultimate Laravel Multi-module Solution 🚀
 
 [![Latest Release](https://img.shields.io/github/v/release/laraxot/module_xot_fila3)](https://github.com/laraxot/module_xot_fila3/releases)

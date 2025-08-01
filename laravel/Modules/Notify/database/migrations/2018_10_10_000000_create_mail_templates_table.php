@@ -31,7 +31,7 @@ return new class () extends XotBaseMigration {
          // -- UPDATE --
          $this->tableUpdate(
             function (Blueprint $table): void {
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
             }
         );
     }
