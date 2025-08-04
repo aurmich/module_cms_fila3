@@ -2,4 +2,5 @@
 
 return [
     'name' => 'Patient',
+    'icon' => 'saluteora-icon',
 ];

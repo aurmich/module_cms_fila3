@@ -1,6 +1,6 @@
-# REGOLA CRITICA: NAMING CONVENTION PER CARTELLE DOCS
+# Convenzione Naming per Cartelle Docs
 
-## ⚠️ REGOLA FONDAMENTALE ⚠️
+## ⚠️ REGOLA CRITICA ⚠️
 
 **TUTTI** i file e le cartelle nelle cartelle `docs` DEVONO essere in **MINUSCOLO**:
 - ✅ CORRETTO: `readme.md`, `project.md`, `technical.md`
@@ -63,7 +63,6 @@ find docs -name "README.md" -type f -exec bash -c 'mv "$1" "$(dirname "$1")/read
 - [ ] Aggiornare regole e memorie
 
 ## Collegamenti
-- [Documentazione Naming Convention](docs/readme-naming-convention.md)
-- [Correzione Naming 2025-01-27](docs/readme-naming-correction-2025-01-27.md)
+- [Correzione Naming 2025-01-27](readme-naming-correction-2025-01-27.md)
 
-*Ultimo aggiornamento: 2025-01-27*
+*Ultimo aggiornamento: 2025-01-27* 

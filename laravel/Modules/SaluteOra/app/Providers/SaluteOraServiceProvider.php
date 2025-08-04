@@ -6,6 +6,7 @@ namespace Modules\SaluteOra\Providers;
 
 use Filament\Forms\Components\Component;
 use Filament\Support\Facades\FilamentIcon;
+
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -25,43 +26,9 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
 {
     public string $name = 'SaluteOra';
     protected string $moduleName = 'SaluteOra';
-    protected string $moduleNameLower = 'saluteora';
+   
 
-    public function boot(): void
-    {
-        parent::boot();
-
-       
-    }
-    
-    /**
-     * Registra gli observer per i modelli del modulo.
-     */
-    protected function bootObservers(): void
-    {
-       // \Modules\SaluteOra\Models\Studio::observe(\Modules\SaluteOra\Observers\StudioObserver::class);
-    }
-
-    /*
-     * Registra gli stati per i modelli.
-     */
-    /*
-    protected function registerStates(): void
-    {
-        State::resolveStateUsing(
-            User::class,
-            'state',
-            'Modules\\SaluteOra\\States\\User'
-        );
-    }
-    */
-    
-    public function register(): void
-    {
-        parent::register();
-        
-        
-    }
+   
     
    
 }
