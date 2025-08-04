@@ -65,7 +65,7 @@
 - **Media** - [README](../laravel/Modules/Media/docs/README.md) | [PHPStan](../laravel/Modules/Media/docs/phpstan/README.md)
 - **Notify** - [README](../laravel/Modules/Notify/docs/README.md) | [System](notifications-system.md)
 - **Reporting** - [README](../laravel/Modules/Reporting/docs/README.md)
-- **UI** - [README](../laravel/Modules/UI/docs/README.md) | [Components](../laravel/Modules/UI/docs/components/README.md)
+- **UI** - [README](../laravel/Modules/UI/docs/README.md) | [Components](../laravel/Modules/UI/docs/components/README.md) | [TableLayoutEnum](ui-table-layout-enum.md)
 
 ## 📊 Progettazione e Standards
 
