@@ -12,53 +12,75 @@
 - **VIETATO**: Usare `match()` o `__()` direttamente negli enum
 - **OBBLIGATORIO**: Usare `TransTrait` e `transClass()` per tutti gli enum
 
-### Pattern Corretto per Enum
+## REGOLA CRITICA PER DOCUMENTAZIONE: MAI ESEMPI CON ->label()
+- **VIETATO**: Scrivere esempi con `->label('Nome')` nella documentazione
+- **VIETATO**: Scrivere esempi con `->placeholder('Inserisci nome')` nella documentazione
+- **OBBLIGATORIO**: Scrivere esempi che usano solo il sistema di traduzioni automatico
+
+## REGOLA CRITICA PER FILE README.md: SEMPRE MAIUSCOLO
+- **VIETATO**: Creare file `readme.md` in minuscolo
+- **VIETATO**: Lasciare file `readme.md` esistenti
+- **OBBLIGATORIO**: Usare sempre `README.md` in maiuscolo
+- **OBBLIGATORIO**: Se esiste sia `readme.md` che `README.md`, assemblare i contenuti e eliminare quello minuscolo
+- **OBBLIGATORIO**: Controllare sempre tutte le cartelle docs per file README.md in minuscolo
+
+## REGOLA CRITICA PER CONFLITTI GIT: RISOLVERE IMMEDIATAMENTE
+- **VIETATO**: Lasciare marker nei file
+- **VIETATO**: Ignorare conflitti Git
+- **OBBLIGATORIO**: Risolvere tutti i conflitti mantenendo il contenuto corretto
+- **OBBLIGATORIO**: Eliminare file binari con conflitti (es. .phar)
+
+## PATTERN CORRETTO PER ENUM
 ```php
 use Modules\Xot\Filament\Traits\TransTrait;
 
-enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
+enum MyEnum: string implements HasColor, HasIcon, HasLabel
 {
     use TransTrait;
     
-    case LIST = 'list';
-    case GRID = 'grid';
+    case VALUE1 = 'value1';
+    case VALUE2 = 'value2';
     
     public function getLabel(): string
     {
-        return $this->transClass(self::class, $this->value.'.label');
+        return $this->transClass(self::class, $this->value . '.label');
     }
     
     public function getColor(): string
     {
-        return $this->transClass(self::class, $this->value.'.color');
+        return $this->transClass(self::class, $this->value . '.color');
     }
     
     public function getIcon(): string
     {
-        return $this->transClass(self::class, $this->value.'.icon');
+        return $this->transClass(self::class, $this->value . '.icon');
     }
     
     public function getDescription(): string
     {
-        return $this->transClass(self::class, $this->value.'.description');
+        return $this->transClass(self::class, $this->value . '.description');
     }
     
     public function getTooltip(): string
     {
-        return $this->transClass(self::class, $this->value.'.tooltip');
+        return $this->transClass(self::class, $this->value . '.tooltip');
     }
     
     public function getHelperText(): string
     {
-        return $this->transClass(self::class, $this->value.'.helper_text');
+        return $this->transClass(self::class, $this->value . '.helper_text');
     }
 }
 ```
 
-## Pattern Corretto per Componenti Filament
+## PATTERN CORRETTO PER DOCUMENTAZIONE
 ```php
-// ✅ CORRETTO - Nessun ->label()
-TextInput::make('name')
+// ✅ CORRETTO - Solo make() senza ->label()
+TextColumn::make('name')
+    ->searchable()
+    ->sortable(),
+
+TextInput::make('email')
     ->required(),
 
 Select::make('status')
@@ -66,41 +88,46 @@ Select::make('status')
         'active' => 'Active',
         'inactive' => 'Inactive',
     ]),
-
-// ❌ MAI FARE QUESTO
-TextInput::make('name')
-    ->label('Nome')  // VIETATO
-    ->placeholder('Inserisci nome')  // VIETATO
-    ->helperText('Nome completo')  // VIETATO
 ```
 
-## File di Traduzione Obbligatori
-- Posizionamento: `Modules/{ModuleName}/lang/{locale}/`
-- Struttura espansa obbligatoria per tutti i campi
-- Chiavi in inglese, valori nella lingua target
+## PATTERN CORRETTO PER FILE DI TRADUZIONE
+```php
+// lang/it/my-module.php
+return [
+    'value1' => [
+        'label' => 'Valore Uno',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-check',
+        'description' => 'Descrizione del valore uno',
+        'tooltip' => 'Tooltip del valore uno',
+        'helper_text' => 'Testo di aiuto per il valore uno',
+    ],
+    'value2' => [
+        'label' => 'Valore Due',
+        'color' => 'secondary',
+        'icon' => 'heroicon-o-x-mark',
+        'description' => 'Descrizione del valore due',
+        'tooltip' => 'Tooltip del valore due',
+        'helper_text' => 'Testo di aiuto per il valore due',
+    ],
+];
+```
 
-## Motivazione
-- Centralizzazione delle traduzioni
-- Facilità di manutenzione
-- Coerenza nell'interfaccia
-- Supporto multilingua automatico
-- Evitare duplicazioni
-- Framework consistency con TransTrait
+## CHECKLIST OBBLIGATORIA
+- [ ] Mai usare ->label() o ->placeholder() nei componenti Filament
+- [ ] Mai usare match() o __() negli enum
+- [ ] Sempre usare TransTrait e transClass() negli enum
+- [ ] Mai scrivere esempi con ->label() nella documentazione
+- [ ] Sempre usare README.md in maiuscolo
+- [ ] Controllare tutte le cartelle docs per file readme.md in minuscolo
+- [ ] Risolvere immediatamente tutti i conflitti Git
+- [ ] Eliminare file binari con conflitti
 
-## Controllo Automatico
-Prima di ogni commit, verificare:
-- [ ] Nessun `->label()` nei componenti
-- [ ] Nessun `->placeholder()` hardcoded
-- [ ] Tutte le stringhe nei file di traduzione
-- [ ] Struttura espansa per tutti i campi
-- [ ] Tutti gli enum usano TransTrait
-- [ ] Tutti gli enum usano transClass()
+## MOTIVAZIONE
+- Coerenza nel sistema di traduzioni
+- Manutenibilità del codice
+- Evitare errori e duplicazioni
+- Standardizzazione della documentazione
+- Pulizia del repository Git
 
-## Penalità per Violazioni
-- Rischio di perdita di coerenza
-- Difficoltà di manutenzione
-- Problemi di localizzazione
-- Violazione delle convenzioni del progetto
-- Inconsistenza con il framework
-
-ULTIMO AGGIORNAMENTO: 2025-01-06 - REGOLA CRITICA DA RICORDARE SEMPRE
+ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLE CRITICHE CONSOLIDATE

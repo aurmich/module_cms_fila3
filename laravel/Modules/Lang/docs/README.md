@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 https://github.com/dimsav/laravel-translatable
 
 https://github.com/Astrotomic/laravel-translatable !!
@@ -17,3 +18,511 @@ https://blog.quickadminpanel.com/10-best-laravel-packages-for-multi-language-tra
 ## Extra risorse da _docs
 
 (Nessun nuovo link da aggiungere: i link di _docs/readme.txt sono già presenti in questo file)
+=======
+# Modulo Lang
+
+## Panoramica
+Il modulo Lang gestisce tutte le traduzioni dell'applicazione, fornendo un sistema centralizzato per la gestione dei testi multilingua. Si integra con tutti gli altri moduli per garantire una coerenza nelle traduzioni.
+
+## Collegamenti Principali
+
+### Documentazione Core
+- [Struttura del Modulo](./structure.md)
+- [Gestione Traduzioni](./translations.md)
+- [Messaggi Sistema](./messages.md)
+- [Notifiche](./notifications.md)
+- [Best Practices](./BEST-PRACTICES.md)
+
+### Integrazioni
+- [Integrazione con User](../User/docs/README.md)
+- [Integrazione con Xot](../Xot/docs/README.md)
+- [Integrazione con UI](../UI/docs/README.md)
+
+### Best Practices
+- [Convenzioni Traduzioni](./translation-conventions.md)
+- [Gestione Namespace](./namespace-conventions.md)
+- [PHPStan Fixes](./phpstan-fixes.md)
+
+### Testing e Qualità
+- [PHPStan Level 9](./PHPSTAN_LEVEL9_FIXES.md)
+- [PHPStan Level 10](./PHPSTAN_LEVEL10_FIXES.md)
+- [Testing Best Practices](./testing-best-practices.md)
+
+## Struttura del Modulo
+
+```
+Modules/Lang/
+├── app/
+│   ├── Models/
+│   │   └── Translation.php
+│   ├── Providers/
+│   │   ├── LangServiceProvider.php
+│   │   └── LangBaseServiceProvider.php
+│   ├── Filament/
+│   │   ├── Resources/
+│   │   │   └── TranslationResource.php
+│   │   ├── Widgets/
+│   │   │   └── TranslationStatsWidget.php
+│   │   └── Pages/
+│   │       └── TranslationManager.php
+│   └── Http/
+│       └── Controllers/
+│           └── TranslationController.php
+├── config/
+│   └── lang.php
+├── database/
+│   └── migrations/
+│       └── create_translations_table.php
+└── resources/
+    └── lang/
+        ├── it/
+        │   ├── auth.php
+        │   ├── validation.php
+        │   └── messages.php
+        └── en/
+            ├── auth.php
+            ├── validation.php
+            └── messages.php
+```
+
+## Gestione Traduzioni
+
+### 1. Struttura File di Traduzione
+```php
+// resources/lang/it/auth.php
+return [
+    'login' => [
+        'title' => 'Accedi',
+        'email' => [
+            'label' => 'Email',
+            'placeholder' => 'Inserisci la tua email'
+        ],
+        'password' => [
+            'label' => 'Password',
+            'placeholder' => 'Inserisci la tua password'
+        ],
+        'remember' => [
+            'label' => 'Ricordami',
+            'tooltip' => 'Mantieni la sessione attiva'
+        ],
+        'submit' => [
+            'label' => 'Accedi',
+            'tooltip' => 'Clicca per accedere'
+        ]
+    ]
+];
+```
+
+### 2. Utilizzo in Filament
+```php
+// ❌ NON FARE QUESTO
+->label('Sorgente')
+
+// ✅ FARE QUESTO
+->label(['label' => 'Sorgente'])
+
+// ✅ FARE QUESTO (con tooltip)
+->label([
+    'label' => 'Sorgente',
+    'tooltip' => 'Descrizione del campo'
+])
+
+// ✅ FARE QUESTO (con placeholder)
+->label([
+    'label' => 'Sorgente',
+    'placeholder' => 'Inserisci la sorgente'
+])
+
+// ✅ FARE QUESTO (con icona e colore)
+->label([
+    'label' => 'Sorgente',
+    'icon' => 'heroicon-o-document',
+    'color' => 'primary'
+])
+```
+
+### 3. Utilizzo in Controller
+```php
+use Modules\Lang\Facades\Lang;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        $title = Lang::get('auth.login.title');
+        $emailLabel = Lang::get('auth.login.email.label');
+        $emailPlaceholder = Lang::get('auth.login.email.placeholder');
+        
+        return view('users.index', compact('title', 'emailLabel', 'emailPlaceholder'));
+    }
+}
+```
+
+## Best Practices
+
+### 1. Organizzazione File
+- Raggruppare le traduzioni per modulo
+- Utilizzare chiavi descrittive
+- Mantenere una struttura coerente
+- Documentare le chiavi utilizzate
+
+### 2. Convenzioni Naming
+```php
+// ❌ NON FARE QUESTO
+'login_button' => 'Accedi'
+
+// ✅ FARE QUESTO
+'login' => [
+    'button' => [
+        'label' => 'Accedi'
+    ]
+]
+```
+
+### 3. Gestione Namespace
+```php
+// ❌ NON FARE QUESTO
+'user.login.title'
+
+// ✅ FARE QUESTO
+'user' => [
+    'login' => [
+        'title' => 'Accedi'
+    ]
+]
+```
+
+## Dipendenze Principali
+
+### Moduli
+- **User**: Traduzioni utente
+- **Xot**: Traduzioni core
+- **UI**: Traduzioni interfaccia
+
+### Pacchetti
+- Laravel Framework
+- Filament
+- Livewire
+
+## Roadmap
+
+### Prossime Feature
+1. Sistema di cache traduzioni
+2. Editor visuale traduzioni
+3. Import/Export traduzioni
+
+### Miglioramenti Pianificati
+1. Ottimizzazione performance
+2. Miglioramento UI editor
+3. Integrazione con API esterne
+
+## Contribuire
+
+### Setup Sviluppo
+1. Clona il repository
+2. Installa le dipendenze
+3. Configura l'ambiente
+4. Esegui i test
+
+### Convenzioni di Codice
+- Seguire PSR-12
+- Utilizzare type hints
+- Documentare il codice
+- Scrivere test unitari
+
+### Processo di Pull Request
+1. Crea un branch feature
+2. Implementa le modifiche
+3. Aggiungi i test
+4. Aggiorna la documentazione
+5. Crea la PR
+
+## Troubleshooting
+
+### Problemi Comuni
+1. Chiavi mancanti
+2. Cache non aggiornata
+3. Namespace non trovati
+
+### Soluzioni
+1. Verifica la struttura file
+2. Pulisci la cache
+3. Controlla i namespace
+
+## Riferimenti
+
+### Documentazione
+- [Laravel Localization](https://laravel.com/docs/12.x/localization)
+- [Filament Forms](https://filamentphp.com/docs/3.x/forms)
+- [Livewire](https://livewire.laravel.com/docs)
+
+### Collegamenti Interni
+- [User Module](../User/docs/README.md)
+- [Xot Module](../Xot/docs/README.md)
+- [UI Module](../UI/docs/README.md)
+
+## Changelog
+
+### [1.0.0] - 2024-03-20
+#### Added
+- Implementazione iniziale
+- Sistema traduzioni
+- Editor traduzioni
+- Cache traduzioni
+
+#### Changed
+- Miglioramento performance
+- Ottimizzazione cache
+- Refactoring codice
+
+#### Fixed
+- Bug traduzioni
+- Problemi cache
+- Errori namespace
+
+## Politica, Filosofia, Religione, Etica, Zen
+
+- **Politica**: Il modulo Lang promuove collaborazione, trasparenza e inclusività, senza discriminazioni.
+- **Filosofia**: Minimalismo, chiarezza, miglioramento continuo.
+- **Religione**: Laicità, rispetto di tutte le fedi, libertà di pensiero.
+- **Etica**: Onestà, rispetto, responsabilità, attenzione all'impatto sociale e ambientale.
+- **Zen**: Semplicità, concentrazione sul presente, armonia e serenità nello sviluppo.
+
+## Gestione storage traduzioni: PHP vs JSON
+Vedi [translations-storage.md](./translations-storage.md) per un confronto dettagliato tra i due approcci, vantaggi, svantaggi e raccomandazioni per il progetto.
+
+## FAQ e Problemi Comuni
+Consulta [translations-faq.md](./translations-faq.md) per risposte rapide ai problemi più frequenti (POST non localizzato, fallback, errori comuni, ecc).
+
+## Best Practices (Sintesi)
+- Usa file PHP per UI, errori, messaggi brevi, validazione, notifiche.
+- Usa JSON solo per frasi lunghe o onboarding, se serve collaborazione con traduttori non-dev.
+- Non mischiare chiavi tra PHP e JSON con lo stesso nome.
+- Le chiavi devono essere sempre in inglese, strutturate e mai hardcoded.
+- Imposta sempre fallback_locale in config/app.php.
+- Per traduzioni lunghe, valuta chiavi dedicate in PHP o JSON solo se necessario.
+
+## Processo Dev → Traduttore: Preparazione, Consegna e Reintegrazione delle Traduzioni
+
+### 1. Preparazione dei File di Traduzione
+- **File PHP**: Organizza le stringhe per modulo/funzionalità in `/var/www/html/saluteora/laravel/lang/{locale}/{modulo}.php`.
+- **File JSON**: Usa `/var/www/html/saluteora/laravel/lang/{locale}.json` solo per frasi lunghe o onboarding.
+- **Regole**: Non mischiare chiavi tra PHP e JSON con lo stesso nome. Usa solo chiavi strutturate in inglese.
+
+### 2. Esportazione per Traduttori
+- Invia ai traduttori solo i file di una lingua di riferimento (es. `en.php`, `en.json`).
+- Istruzioni per i traduttori:
+  - Nei file PHP: tradurre SOLO il testo a destra di `=>`, mantenendo le chiavi e la struttura.
+  - Nei file JSON: tradurre SOLO il valore a destra dei `:`.
+  - Non modificare le chiavi, la struttura o l'ordine.
+  - Se serve un apostrofo (`'`), anteporre `\`.
+
+### 3. Reintegrazione delle Traduzioni
+- Sostituire i file tradotti nella cartella della lingua target (es. `it.php`, `it.json`).
+- Verificare la validità sintattica dei file PHP/JSON.
+- Testare l'applicazione in tutte le lingue.
+
+### 4. Modifiche Proposte ai File del Progetto
+- **Blade**: Usare sempre chiavi strutturate (es. `__('auth.login.submit_button')`) e mai stringhe in italiano.
+- **File di traduzione**: Uniformare la struttura delle chiavi e documentare ogni file con commenti per i traduttori.
+- **Esempio**: `/var/www/html/saluteora/laravel/lang/it/auth.php` e `/var/www/html/saluteora/laravel/lang/it.json`.
+- **Automazione**: Valutare l'uso di strumenti come [Laravel-Lang/lang](https://github.com/Laravel-Lang/lang) per scaricare traduzioni core e ridurre il lavoro manuale.
+
+### 5. Raccomandazioni
+- Documentare sempre le regole di naming e struttura per i traduttori.
+- Mantenere una checklist aggiornata per ogni ciclo di traduzione.
+- Versionare i file di traduzione separatamente per facilitare il tracking delle modifiche.
+
+## Gestione messaggi di validazione
+Consulta [validation-messages.md](./validation-messages.md) per una guida dettagliata su come tradurre, personalizzare e gestire i messaggi di validazione, inclusi array di campi, placeholder dinamici e override dei messaggi standard.
+
+### Sintesi regole chiave
+- Personalizza i nomi dei campi con `attributes()` usando la funzione `__()`
+- Per array di campi, usa `campo.*.sotto_campo` e placeholder `:position`
+- Scrivi messaggi custom con `messages()` per i casi complessi
+- Centralizza i messaggi comuni in `validation.php`, override solo se necessario
+- Aggiorna la documentazione in `/Modules/Lang/docs/validation-messages.md`
+
+## Gestione Plurale/Singolare nelle Traduzioni
+
+### 1. Uso di `trans_choice()` e `@choice`
+- Per gestire messaggi che variano in base al conteggio (es. notifiche, risultati, ecc.), usa la funzione `trans_choice()` o la direttiva Blade `@choice()`.
+- Sintassi tipica in PHP:
+  ```php
+  // lang/en/messages.php
+  return [
+      'newMessageIndicator' => '{0} You have no new messages|{1} You have 1 new message|[2,*] You have :count new messages',
+  ];
+  ```
+- In Blade:
+  ```blade
+  {{ trans_choice('messages.newMessageIndicator', $messagesCount) }}
+  // oppure
+  @choice('messages.newMessageIndicator', $messagesCount)
+  ```
+
+### 2. Sintassi delle Regole Plurali
+- `{0}`: usato per il caso zero
+- `{1}`: usato per il caso singolare
+- `[2,*]`: usato per tutti i numeri da 2 in poi
+- Usa `:count` per inserire il numero dinamicamente
+
+### 3. Plurale in JSON
+- È supportato ma meno leggibile e meno DRY:
+  ```json
+  {
+    "{0} You have no new messages|{1} You have 1 new message|[2,*] You have :count new messages": "{0} You have no new messages|{1} You have 1 new message|[2,*] You have :count new messages"
+  }
+  ```
+- In Blade:
+  ```blade
+  {{ trans_choice('{0} You have no new messages|{1} You have 1 new message|[2,*] You have :count new messages', $messagesCount) }}
+  ```
+- **Raccomandazione**: Preferire sempre i file PHP per le stringhe plurali.
+
+### 4. Modifiche Proposte ai File
+- **File PHP**: Inserire tutte le stringhe plurali in file dedicati (es. `/var/www/html/saluteora/laravel/lang/en/messages.php` e `/it/messages.php`).
+- **Blade**: Sostituire blocchi condizionali con `trans_choice()` o `@choice()`.
+- **File JSON**: Evitare l'uso per le stringhe plurali, salvo casi di necessità per traduttori non-dev.
+
+### 5. Esempio Completo
+- `/var/www/html/saluteora/laravel/lang/en/messages.php`:
+  ```php
+  return [
+      'newMessageIndicator' => '{0} You have no new messages|{1} You have 1 new message|[2,*] You have :count new messages',
+  ];
+  ```
+- `/var/www/html/saluteora/laravel/lang/it/messages.php`:
+  ```php
+  return [
+      'newMessageIndicator' => '{0} Non hai nuovi messaggi|{1} Hai 1 nuovo messaggio|[2,*] Hai :count nuovi messaggi',
+  ];
+  ```
+- In Blade:
+  ```blade
+  @choice('messages.newMessageIndicator', $messagesCount)
+  ```
+
+### 6. Raccomandazioni
+- Documentare sempre la presenza di stringhe plurali nei file PHP.
+- Usare chiavi descrittive e strutturate (es. `messages.newMessageIndicator`).
+- Versionare i file di traduzione dopo ogni modifica.
+
+## Plurale/Singolare e Localizzazione Date/Valute
+Consulta [pluralization-and-localization.md](./pluralization-and-localization.md) per una guida dettagliata su:
+- Uso di trans_choice() e @choice()
+- Sintassi plurale in PHP e JSON
+- Localizzazione di date con Carbon
+- Formattazione valute con NumberFormatter
+
+## Risorse e Approfondimenti
+
+- [Integrazione avanzata mcamara/laravel-localization + Folio](./laravel-localization-integration.md): guida completa con analisi tecnica, best practice, gestione slug e parametri dinamici, checklist e raccomandazioni operative.
+
+**Sintesi punti chiave:**
+- Wrappare tutte le route Folio nel gruppo localizzato con i middleware di mcamara
+- Usare file `lang/{locale}/routes.php` per tradurre gli slug
+- Nei Blade, usare sempre i metodi di LaravelLocalization per link e redirect
+- Gestire i parametri dinamici multilingua tramite interfaccia `LocalizedUrlRoutable` nei model
+- Usare sempre `php artisan route:trans:cache` per la cache delle route
+- Versionare e documentare ogni modifica alle route e alle traduzioni
+
+## Console Commands: Registrazione Automatica
+
+Tutti i comandi console del modulo sono autoregistrati tramite `XotBaseServiceProvider`.
+
+- **Non aggiungere mai** `$this->commands([...])` nei provider del modulo.
+- Per approfondimenti, vedi [lang-service-provider.md](./lang-service-provider.md) e [PHILOSOPHY.md](./PHILOSOPHY.md).
+
+> Qualsiasi registrazione manuale è un errore e va rimossa.
+
+## Regola fondamentale: divieto di chiavi .navigation nelle traduzioni
+
+- **Mai usare chiavi che terminano con `.navigation` nei file di traduzione.**
+- Usare invece la struttura array:
+  ```php
+  'navigation' => [
+      'label' => 'Gestione Pazienti',
+      'group' => 'Pazienti',
+      'icon' => 'heroicon-o-user-group',
+      'color' => 'primary',
+  ],
+  ```
+- **Motivazione:**
+  - Migliora la manutenibilità e la localizzazione
+  - Permette l'aggiunta di icone, colori, tooltip, ecc.
+  - Evita errori e duplicazioni
+- **Esempio ERRATO:**
+  ```php
+  'group' => 'patient.navigation',
+  'label' => 'patient.navigation',
+  ```
+- **Esempio CORRETTO:**
+  ```php
+  'navigation' => [
+      'label' => 'Gestione Pazienti',
+      'group' => 'Pazienti',
+      'icon' => 'heroicon-o-user-group',
+      'color' => 'primary',
+  ],
+  ```
+- Consulta anche:
+  - [translation_keys_best_practices.md](./translation_keys_best_practices.md)
+  - [translation_keys_rules.md](./translation_keys_rules.md)
+  - [filament-translations.md](./filament-translations.md)
+  - [docs SaluteOra](../../SaluteOra/docs/translations.md)
+  - [docs Xot](../../Xot/docs/README.md)
+
+## Proprietà fondamentali del ServiceProvider (Laraxot/PTVX)
+
+Tutti i provider dei moduli che estendono XotBaseServiceProvider **devono** dichiarare:
+- `protected string $module_dir = __DIR__;`
+- `protected string $module_ns = __NAMESPACE__;`
+- `public string $name = 'Lang';`
+
+Queste proprietà sono necessarie per:
+- La risoluzione automatica dei path delle risorse
+- Il corretto namespace per autoloading e publish
+- L'identificazione del modulo nelle operazioni di asset publish
+
+### Esempio
+```php
+class LangServiceProvider extends XotBaseServiceProvider
+{
+    protected string $module_dir = __DIR__;
+    protected string $module_ns = __NAMESPACE__;
+    public string $name = 'Lang';
+}
+```
+
+**Motivazione:**  
+- Se mancano queste proprietà, alcune risorse potrebbero non essere caricate correttamente.
+- La dichiarazione esplicita garantisce portabilità, manutenibilità e coerenza tra tutti i moduli.
+
+**Approfondimenti:**  
+- Vedi anche [../../../../docs/PROVIDER_OVERVIEW.md](../../../../docs/PROVIDER_OVERVIEW.md)
+
+## Regola per i file .sh (script shell)
+
+Tutti i file `.sh` (script shell) devono essere posizionati esclusivamente in una sottocartella dedicata chiamata `bashscripts` (ad esempio `docs/bashscripts/`).
+Non devono mai trovarsi direttamente nella root di `docs/` o in altre sottocartelle generiche.
+
+**Motivazione:**
+- Ordine e reperibilità: tutti gli script shell sono facilmente individuabili e gestibili.
+- Sicurezza: si evita l'esecuzione accidentale di script non previsti.
+- Coerenza cross-modulo e tra root/moduli.
+
+**Esempio di struttura corretta:**
+```
+docs/
+└── bashscripts/
+    ├── deploy.sh
+    ├── clear_cache.sh
+    └── backup_db.sh
+```
+
+**Checklist aggiornata:**
+- [x] Nessun file .sh fuori da bashscripts/
+- [x] Documentazione aggiornata
+- [x] Struttura coerente in tutti i moduli
+>>>>>>> 22b41c7f (.)

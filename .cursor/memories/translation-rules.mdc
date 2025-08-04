@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Regole Critiche per Traduzioni - MEMORIA PERMANENTE
 
 ## REGOLA ASSOLUTA: MAI USARE ->label()
@@ -106,4 +107,8 @@ ULTIMO AGGIORNAMENTO: 2025-01-06 - REGOLA CRITICA DA RICORDARE SEMPRE
 description:
 globs:
 alwaysApply: false
+=======
+---
+alwaysApply: true
+>>>>>>> 22b41c7f (.)
 ---

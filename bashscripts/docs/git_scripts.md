@@ -176,6 +176,7 @@ Script per il push dei subtree. Funzionalità:
 2. Errori di path: verificare la configurazione Windows
 3. Problemi di permessi: controllare fileMode e symlinks
 
+<<<<<<< HEAD
 =======
 >>>>>>> 4d4d6cb7 (.)
 =======
@@ -186,3 +187,7 @@ Script per il push dei subtree. Funzionalità:
 >>>>>>> origin/dev
 =======
 >>>>>>> a76e699 (.)
+=======
+[Torna alla documentazione principale](/docs/maintenance.md#git-management) 
+3. Problemi di permessi: controllare fileMode e symlinks
+>>>>>>> 22b41c7f (.)

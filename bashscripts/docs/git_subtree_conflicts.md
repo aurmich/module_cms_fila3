@@ -646,7 +646,10 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - [Documentazione sulla Risoluzione dei Conflitti Bash](CONFLICT_RESOLUTION_BASH.md)
 - [Documentazione degli Script Git](git_scripts.md)
 - [Documentazione Generale sulla Risoluzione dei Conflitti](../../docs/bashscripts_conflict_resolution.md)
+<<<<<<< HEAD
 >>>>>>> f000df5 (.)
+=======
+>>>>>>> 22b41c7f (.)
 # Risoluzione dei Conflitti negli Script Git Subtree
 
 ## Problema
@@ -778,6 +781,7 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - [Documentazione sulla Risoluzione dei Conflitti Bash](CONFLICT_RESOLUTION_BASH.md)
 - [Documentazione degli Script Git](git_scripts.md)
 - [Documentazione Generale sulla Risoluzione dei Conflitti](../../docs/bashscripts_conflict_resolution.md)
+<<<<<<< HEAD
 =======
 >>>>>>> 4d4d6cb7 (.)
 =======
@@ -785,3 +789,6 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - [Archivio degli Script con Conflitti Risolti](../.old_scripts/README.md) 
 =======
 >>>>>>> a76e699 (.)
+=======
+- [Archivio degli Script con Conflitti Risolti](../.old_scripts/README.md) 
+>>>>>>> 22b41c7f (.)

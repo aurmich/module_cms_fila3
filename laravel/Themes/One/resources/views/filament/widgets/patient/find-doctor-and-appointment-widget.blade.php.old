@@ -1,0 +1,288 @@
+{{--
+    FindDoctorAndAppointmentWidget View - Enhanced
+    
+    Widget form-based per la prenotazione appuntamenti con UX avanzata.
+    Pattern: form wizard multi-step con progress indicator e responsive design.
+    
+    @see Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget
+    @version 2.0 - Giugno 2025
+--}}
+
+<x-filament-widgets::widget class="find-doctor-appointment-widget" x-data="{
+    showSuccess: @entangle('success').defer,
+    currentStep: @entangle('currentStep').defer,
+    isSubmitting: false
+}">
+    <x-filament::section>
+        <div class="max-w-5xl mx-auto">
+            {{-- Header Section with Enhanced Typography --}}
+            <div class="mb-8 text-center">
+                <div class="mb-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mb-4">
+                        <x-heroicon-o-calendar-days class="w-8 h-8 text-white" />
+                    </div>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                    {{ __('saluteora::widgets.find_doctor_and_appointment.title') }}
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    {{ __('saluteora::widgets.find_doctor_and_appointment.description') }}
+                </p>
+            </div>
+
+            {{-- Progress Indicator --}}
+            <div class="mb-8" 
+                 x-data="{ 
+                     currentStep: 0,
+                     steps: [
+                         '{{ __('saluteora::widgets.find_doctor_and_appointment.steps.search.label') }}',
+                         '{{ __('saluteora::widgets.find_doctor_and_appointment.steps.studio.label') }}', 
+                         '{{ __('saluteora::widgets.find_doctor_and_appointment.steps.date.label') }}',
+                         '{{ __('saluteora::widgets.find_doctor_and_appointment.steps.time.label') }}',
+                         '{{ __('saluteora::widgets.find_doctor_and_appointment.steps.confirm.label') }}'
+                     ]
+                 }"
+                 x-init="
+                     // Listen for Livewire updates to track wizard progress
+                     Livewire.on('wizard-step-updated', (data) => {
+                         currentStep = data.step || 0;
+                     });
+                 "
+                 role="progressbar"
+                 aria-label="Progresso prenotazione">
+                 
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Passaggio <span x-text="currentStep + 1"></span> di <span x-text="steps.length"></span>
+                        </span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400" x-text="steps[currentStep]"></span>
+                    </div>
+                    
+                    <div class="flex">
+                        <template x-for="(step, index) in steps" :key="index">
+                            <div class="flex-1 flex items-center" :class="{ 'pr-4': index < steps.length - 1 }">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300"
+                                         :class="{
+                                             'bg-blue-600 text-white': index <= currentStep,
+                                             'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400': index > currentStep
+                                         }">
+                                        <span x-text="index + 1"></span>
+                                    </div>
+                                    <span class="ml-2 text-sm font-medium hidden sm:block"
+                                          :class="{
+                                              'text-blue-600 dark:text-blue-400': index <= currentStep,
+                                              'text-gray-500 dark:text-gray-400': index > currentStep
+                                          }"
+                                          x-text="step"></span>
+                                </div>
+                                <div x-show="index < steps.length - 1" 
+                                     class="flex-1 h-0.5 ml-4 transition-all duration-300"
+                                     :class="{
+                                         'bg-blue-600': index < currentStep,
+                                         'bg-gray-200 dark:bg-gray-700': index >= currentStep
+                                     }"></div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Main Form Section --}}
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <form wire:submit.prevent="submit" 
+                      class="relative"
+                      x-data="{ isSubmitting: false }"
+                      @submit="isSubmitting = true">
+                    @csrf
+                    
+                    {{-- Form Container --}}
+                    <div class="p-6 md:p-8">
+                        {{-- Render Filament Form (includes wizard) --}}
+                        <div class="prose prose-sm max-w-none dark:prose-invert">
+                            {{ $this->form }}
+                        </div>
+                    </div>
+                    
+                    {{-- Enhanced Loading State --}}
+                    <div wire:loading 
+                         wire:target="submit,selectStudio,updateAvailableTimeSlots" 
+                         class="absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 flex flex-col items-center space-y-4 border border-gray-200 dark:border-gray-700">
+                            <div class="relative">
+                                <x-filament::loading-indicator class="h-8 w-8 text-blue-600" />
+                                <div class="absolute inset-0 animate-ping">
+                                    <x-filament::loading-indicator class="h-8 w-8 text-blue-600 opacity-20" />
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                                    {{ __('saluteora::widgets.find_doctor_and_appointment.processing') }}
+                                </h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    Stiamo elaborando la tua richiesta...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{-- Error State --}}
+                    @if ($errors->any())
+                        <div class="border-t border-gray-200 dark:border-gray-700 bg-red-50 dark:bg-red-900/20 p-6">
+                            <div class="flex items-start">
+                                <x-heroicon-o-exclamation-triangle class="w-5 h-5 text-red-400 mt-0.5 mr-3 flex-shrink-0" />
+                                <div>
+                                    <h3 class="text-sm font-medium text-red-800 dark:text-red-200 mb-2">
+                                        Si sono verificati alcuni errori:
+                                    </h3>
+                                    <ul class="text-sm text-red-700 dark:text-red-300 space-y-1">
+                                        @foreach ($errors->all() as $error)
+                                            <li>• {{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </form>
+            </div>
+
+            {{-- Help Section with FAQ --}}
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{-- Help Text --}}
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-start">
+                        <x-heroicon-o-information-circle class="w-6 h-6 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                                Come funziona?
+                            </h3>
+                            <p class="text-blue-800 dark:text-blue-200 text-sm leading-relaxed">
+                                {{ __('saluteora::widgets.find_doctor_and_appointment.help_text') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                {{-- Contact Support --}}
+                <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-start">
+                        <x-heroicon-o-phone class="w-6 h-6 text-gray-600 mt-0.5 mr-3 flex-shrink-0" />
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                                Hai bisogno di aiuto?
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+                                Il nostro team è a tua disposizione per supportarti nella prenotazione.
+                            </p>
+                            <a href="tel:+390123456789" 
+                               class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                                <x-heroicon-o-phone class="w-4 h-4 mr-1" />
+                                +39 012 345 6789
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-filament::section>
+    
+    {{-- Filament Modals --}}
+    <x-filament-actions::modals />
+</x-filament-widgets::widget>
+
+@push('styles')
+<style>
+    /* Custom wizard styling for better UX */
+    .filament-wizard .filament-wizard-header {
+        @apply hidden; /* Nascondiamo l'header default per usare il nostro progress indicator */
+    }
+    
+    .filament-wizard .filament-wizard-step {
+        @apply transition-all duration-500 ease-in-out;
+    }
+    
+    /* Enhanced form styling */
+    .prose .filament-forms-field-wrapper {
+        @apply mb-6;
+    }
+    
+    /* Loading animation enhancement */
+    @keyframes gentle-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+    
+    .loading-gentle-pulse {
+        animation: gentle-pulse 2s ease-in-out infinite;
+    }
+    
+    /* Responsive improvements */
+    @media (max-width: 640px) {
+        .progress-step-text {
+            @apply hidden;
+        }
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        // Enhanced wizard step tracking
+        let currentWizardStep = 0;
+        
+        // Listen for wizard navigation
+        Livewire.on('wizard-step-changed', (data) => {
+            currentWizardStep = data.step || 0;
+            window.dispatchEvent(new CustomEvent('wizard-step-updated', { 
+                detail: { step: currentWizardStep } 
+            }));
+        });
+        
+        // Auto-scroll to form on step change (mobile optimization)
+        Livewire.on('wizard-step-changed', () => {
+            if (window.innerWidth < 768) {
+                document.querySelector('.filament-wizard')?.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        });
+        
+        // Enhanced error handling
+        Livewire.on('form-error', (data) => {
+            // Auto-scroll to error
+            const firstError = document.querySelector('.filament-forms-field-wrapper--error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        
+        // Accessibility enhancements
+        document.addEventListener('keydown', (e) => {
+            // ESC key to close loading overlays
+            if (e.key === 'Escape') {
+                const loadingOverlay = document.querySelector('[wire\\:loading]');
+                if (loadingOverlay && loadingOverlay.style.display !== 'none') {
+                    // Let user know they can't cancel during processing
+                    console.log('Processing cannot be cancelled');
+                }
+            }
+        });
+        
+        // Form validation enhancement
+        const form = document.querySelector('form[wire\\:submit\\.prevent="submit"]');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                // Add visual feedback
+                const submitButton = form.querySelector('[type="submit"]');
+                if (submitButton) {
+                    submitButton.classList.add('loading-gentle-pulse');
+                }
+            });
+        }
+    });
+</script>
+@endpush

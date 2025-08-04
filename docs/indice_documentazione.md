@@ -92,6 +92,7 @@
 - 🏷️ [Convenzioni Naming](convenzioni-naming-campi.md) - Naming conventions
 - 🚨 [Struttura Moduli e Namespace](STRUTTURA_MODULI_NAMESPACE.md) - **CRITICO: Regole namespace**
 - ⚠️ [Prevenzione Errori Critici](critical-errors-prevention.md) - **CRITICO: Errori da evitare**
+- 📖 [Convenzione Naming README.md](readme-naming-convention.md) - **CRITICO: README.md sempre maiuscolo**
 
 ### Pattern e Architettura
 - 🎯 [Queueable Actions](queueable-action.md) - Pattern preferito
