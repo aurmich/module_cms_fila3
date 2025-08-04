@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Cms\Models\Page;
-use Webmozart\Assert\Assert;
-use function Safe\preg_replace;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use function Safe\preg_replace;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Cms\Models\Page>
@@ -31,10 +30,10 @@ class PageFactory extends Factory
      */
     public function definition()
     {
-        Assert::string($title = preg_replace('/\./', '', fake()->sentence(3)));
+        $title = preg_replace('/\./', '', fake()->sentence(3));
 
         return [
-            'slug' => Str::of($title)->slug()->toString(),
+            'slug' => Str::slug($title),
             'title' => $title,
             'content' => implode('', [
                 '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed tortor vitae sem cursus ullamcorper. In pellentesque purus et ante eleifend finibus. Fusce quis sapien nunc. Donec molestie arcu vel suscipit tincidunt. Nunc non neque risus. Aliquam fringilla sed quam eu condimentum. Nam viverra enim ut iaculis vulputate. Aenean quis laoreet mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Maecenas vel venenatis magna.</p>',
