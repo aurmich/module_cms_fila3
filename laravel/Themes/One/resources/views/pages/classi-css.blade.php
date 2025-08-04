@@ -205,4 +205,6 @@
 <div class="bg-[#272c4dd6]">bg</div>
 <div class="p-4">p 4</div>
 <div class="ipad:mt-60">mt 28 ipad</div>
+<div class="animate-carousel">carousel</div>
+<div class="animate-marquee">marquee</div>
 </x-layouts.app>

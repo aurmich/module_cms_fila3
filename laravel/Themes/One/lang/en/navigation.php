@@ -30,7 +30,7 @@ return [
             'helper_text' => '',
         ],
         'partners' => [
-            'label' => 'Participants',
+            'label' => 'Created by',
             'tooltip' => '',
             'helper_text' => '',
         ],
@@ -94,7 +94,7 @@ return [
             'helper_text' => '',
         ],
         'importance_title_2' => [
-            'label' => 'Take care and check',
+            'label' => 'A qualified check-up',
             'tooltip' => '',
             'helper_text' => '',
         ],
@@ -109,12 +109,12 @@ return [
             'helper_text' => '',
         ],
         'importance_text_2' => [
-            'label' => ' To maintain the health of mother and baby, it is essential, in addition to a healthy diet and proper dental cleaning, to rely on the care and examination of a dentist starting from the third trimester of pregnancy.',
+            'label' => ' To maintain the health of both mother and baby, it is essential—not only to follow a healthy diet and proper daily hygiene—but also to rely on the care and examination of a dentist starting from the first trimester of pregnancy.',
             'tooltip' => 'Project description and access methods',
             'helper_text' => '',
         ],
         'importance_text_3' => [
-            'label' => 'The Salute Orale project proposes to guarantee, completely free of charge, a complete first dental visit to patients in pregnancy with ISEE equal to or below 20,000 euros. Patients will be able to book a check-up and hygiene visit completely free of charge with participating dentists.',
+            'label' => 'The Salute Orale project aims to provide a complete initial dental check-up for pregnant patients with an ISEE (Equivalent Economic Situation Indicator) equal to or less than 20,000 euros. Patients can book a check-up and hygiene visit with participating dentists. The cost of the visit is covered by the project.',
             'tooltip' => 'Project description and access methods',
             'helper_text' => '',
         ],

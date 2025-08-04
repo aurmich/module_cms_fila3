@@ -30,7 +30,7 @@ return [
             'helper_text' => '',
         ],
         'partners' => [
-            'label' => 'Partners',
+            'label' => 'Realizzato da',
             'tooltip' => '',
             'helper_text' => '',
         ],
@@ -74,7 +74,7 @@ return [
             'helper_text' => '',
         ],
         'welcome_subtitle' => [
-            'label' => 'Il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odonoiatrici di prevenzione a titolo completamente gratuito',
+            'label' => 'Il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odonoiatrici di prevenzione.',
             'tooltip' => 'Servizi gratuiti per gestanti in condizioni di vulnerabilità',
             'helper_text' => '',
         ],
@@ -94,7 +94,7 @@ return [
             'helper_text' => '',
         ],
         'importance_title_2' => [
-            'label' => 'Dieta e Controllo',
+            'label' => 'Un controllo qualificato',
             'tooltip' => '',
             'helper_text' => '',
         ],
@@ -109,12 +109,12 @@ return [
             'helper_text' => '',
         ],
         'importance_text_2' => [
-            'label' => 'Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta pulizia dei denti, affidarsi alle cure e all\'esame di un odontoiatra a partire dal terzo trimestre di gravidanza.',
+            'label' => 'Per mantenere la salute di madre e bambino è fondamentale, oltre ad una dieta sana e una corretta prassi di igiene quotidiana, affidarsi alle cure e all\'esame di un odontoiatra già a partire dal primo trimestre di gravidanza.',
             'tooltip' => '',
             'helper_text' => '',
         ],
         'importance_text_3' => [
-            'label' => 'Il progetto Salute Orale si propone di garantire, a titolo completamente gratuito, una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. Le Pazienti potranno prenotare a titolo totalmente gratuito una visita di controllo e igiene presso i dentisti aderenti.',
+            'label' => 'Il progetto Salute Orale si propone di garantire una prima visita odontoiatrica completa a pazienti in stato di gravidanza con ISEE uguale o inferiore ai 20.000 euro. Le Pazienti potranno prenotare una visita di controllo e igiene presso i dentisti aderenti. I costi della visita sono a carico del progetto.',
             'tooltip' => 'Descrizione del progetto e modalità di accesso',
             'helper_text' => '',
         ],
