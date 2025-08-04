@@ -88,7 +88,6 @@ Gdpr/
 - [Architettura](architecture.md)
 - [Sviluppo](development.md)
 - [Pacchetti](packages.md)
-<<<<<<< HEAD
 - [Roadmap](roadmap.md) 
 
 ## Collegamenti tra versioni di readme.md
@@ -97,59 +96,4 @@ Gdpr/
 * [readme.md](laravel/Modules/Lang/docs/readme.md)
 * [readme.md](laravel/Modules/Activity/docs/readme.md)
 * [readme.md](laravel/Modules/Cms/docs/readme.md)
-=======
-- [Roadmap](roadmap.md)
-
-## Collegamenti Bidirezionali
-
-### Collegamenti ad Altri Moduli
-- [Modulo User](../User/docs/README.md)
-- [Modulo Activity](../Activity/docs/README.md)
-- [Modulo Xot](../Xot/docs/README.md)
-- [Modulo Notify](../Notify/docs/README.md)
-
-### Collegamenti Interni
-- [Configurazione Avanzata](./configuration.md)
-- [Guida Implementazione](./implementation.md)
-- [FAQ](./faq.md)
-- [Troubleshooting](./troubleshooting.md)
-
-## Contribuire
-- Fork del repository
-- Creazione branch (`git checkout -b feature/gdpr-enhancement`)
-- Commit delle modifiche (`git commit -am 'Add: nuova funzionalità GDPR'`)
-- Push del branch (`git push origin feature/gdpr-enhancement`)
-- Creazione Pull Request
-
-## Licenza
-Questo modulo è rilasciato sotto licenza MIT. Vedere il file [LICENSE](./LICENSE) per i dettagli.
-
-## Autori
-- Team il progetto
-- Contributori della community
-
-## Supporto
-Per supporto e domande:
-- Issue Tracker: [GitHub Issues](https://github.com/<nome progetto>/gdpr-module/issues)
-- Email: support@<nome progetto>.com
-
-## Server MCP consigliati per Gdpr
-
-Per il modulo Gdpr, si consiglia di utilizzare i seguenti server MCP:
-
-- **sequential-thinking**: per orchestrare workflow di verifica compliance, automazione di processi di richiesta dati e gestione step-by-step delle procedure GDPR.
-- **memory**: per mantenere uno storico delle richieste GDPR, consensi, log di accesso e pattern di compliance.
-- **filesystem**: per esportare dati personali, generare report di compliance o importare policy.
-- **postgres**: se il modulo utilizza un database PostgreSQL per archiviare richieste, consensi o log di accesso.
-- **puppeteer**: per automatizzare la raccolta di dati da portali esterni, scraping di policy o generazione di report PDF.
-
-**Nota:**
-- Usa solo server MCP Node.js disponibili su npm e avviabili con `npx`.
-- Configura sempre gli argomenti obbligatori (es. directory per filesystem, stringa di connessione per postgres).
-- Non usare fetch, mysql o redis se non attivo.
-
-Per dettagli e best practice consulta la guida generale MCP nel workspace.
-
-*Ultimo aggiornamento: 2025-01-27*
->>>>>>> 22b41c7f (.)
 

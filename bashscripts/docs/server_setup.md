@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 22b41c7f (.)
 # Setup del Progetto Laravel
 
 Questo documento contiene la documentazione dettagliata dei comandi utilizzati per il setup di un progetto Laravel, insieme a spiegazioni, consigli e note per migliorare il processo.
@@ -115,15 +112,12 @@ php artisan key:generate
 - Dopo la generazione della chiave, verificare che sia stata aggiunta al file .env
 - Se necessario, configurare manualmente altre variabili d'ambiente:
   ```ini
-<<<<<<< HEAD
   APP_NAME=<nome progetto>
-=======
 
   APP_NAME=<nome progetto>
 
   APP_NAME=SaluteOra
  80ec88ee9 (.)
->>>>>>> 22b41c7f (.)
   APP_ENV=local
   APP_DEBUG=true
   APP_URL=http://localhost
@@ -817,7 +811,6 @@ sudo pecl install redis
 
 ## Configurazione Database
 
-<<<<<<< HEAD
 ### Creazione Database MySQL
 ```bash
 mysql -u root -p
@@ -825,7 +818,6 @@ CREATE DATABASE nome_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'nome_utente'@'localhost' IDENTIFIED BY 'password_sicura';
 GRANT ALL PRIVILEGES ON nome_database.* TO 'nome_utente'@'localhost';
 FLUSH PRIVILEGES;
-=======
 ### Creazione Database SQLite
 ```bash
 
@@ -2216,12 +2208,10 @@ FLUSH PRIVILEGES;
 
 
 # Esci
->>>>>>> 22b41c7f (.)
 EXIT;
 ```
 
 **Spiegazione:**
-<<<<<<< HEAD
 - Crea un nuovo database e un utente dedicato con privilegi completi
 - Utilizza la codifica utf8mb4 per il massimo supporto Unicode
 
@@ -2236,7 +2226,6 @@ EXIT;
 - Documentare ogni personalizzazione
 - Monitorare costantemente le performance del server
 - Aggiornare regolarmente sistema e dipendenze
-=======
 - Crea un nuovo database per il progetto Laravel
 - Configura un utente dedicato con i permessi necessari
 - Imposta il charset e la collation corretti
@@ -2440,15 +2429,12 @@ php artisan migrate
 - Verificare i permessi dei file
 - Testare la connessione al database
 - Controllare la configurazione di PHP
->>>>>>> 22b41c7f (.)
 
 ## Conclusioni
 
 Questo documento fornisce una guida completa per il setup di un ambiente di sviluppo Laravel. Seguire attentamente le istruzioni e verificare ogni passaggio per garantire un'installazione corretta e sicura.
 
 Per ulteriori informazioni, consultare la [documentazione ufficiale di Laravel](https://laravel.com/docs).
-<<<<<<< HEAD
-=======
 *In attesa dei comandi per documentare...*
 
 ## Ottimizzazione PHP
@@ -2757,4 +2743,3 @@ php artisan user:assign-module
 - Per rimuovere l'assegnazione di un modulo:
   ```
  43df3e0 (.)
->>>>>>> 22b41c7f (.)

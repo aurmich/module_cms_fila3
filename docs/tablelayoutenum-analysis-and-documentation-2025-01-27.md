@@ -47,7 +47,7 @@ Il `TableLayoutEnum` è un componente fondamentale che:
 
 ```bash
 # Verifica conflitti rimanenti
-grep -r "<<<<<<< HEAD" . --exclude-dir=vendor --exclude-dir=node_modules
+grep -r "HEAD" . --exclude-dir=vendor --exclude-dir=node_modules
 # Risultato: Nessun conflitto trovato
 ```
 

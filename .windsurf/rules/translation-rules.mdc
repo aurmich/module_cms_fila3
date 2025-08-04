@@ -8,7 +8,6 @@
 - **OBBLIGATORIO**: Utilizzare SEMPRE i file di traduzione del modulo
 
 ## REGOLA CRITICA PER ENUM: SEMPRE TransTrait
-<<<<<<< HEAD
 - **VIETATO**: Implementare traduzioni manualmente negli enum
 - **VIETATO**: Usare `match()` o `__()` direttamente negli enum
 - **OBBLIGATORIO**: Usare `TransTrait` e `transClass()` per tutti gli enum
@@ -32,11 +31,9 @@
 - **OBBLIGATORIO**: Eliminare file binari con conflitti (es. .phar)
 
 ## PATTERN CORRETTO PER ENUM
-=======
 - **OBBLIGATORIO**: Utilizzare `TransTrait` e `transClass()` per tutti i metodi `get*()`
 - **VIETATO**: `match()` o `__()` manuali per traduzioni negli enum
 - **PATTERN CORRETTO**:
->>>>>>> f644ff6e (remove duplicate lang folders)
 ```php
 use Modules\Xot\Filament\Traits\TransTrait;
 
@@ -116,7 +113,6 @@ return [
 - **OBBLIGATORIO**: File `README.md` in maiuscolo
 - **PROCESSO**: Se esistono entrambi, assemblare contenuti e eliminare quello minuscolo
 
-<<<<<<< HEAD
 ## MOTIVAZIONE
 - Coerenza nel sistema di traduzioni
 - Manutenibilità del codice
@@ -125,7 +121,6 @@ return [
 - Pulizia del repository Git
 
 ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLE CRITICHE CONSOLIDATE
-=======
 ## REGOLA CRITICA PER CONFLITTI GIT: RISOLVERE IMMEDIATAMENTE
 - **VIETATO**: Lasciare marker `<<< HEAD` nei file
 - **OBBLIGATORIO**: Risolvere immediatamente tutti i conflitti
@@ -154,4 +149,3 @@ ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLE CRITICHE CONSOLIDATE
 - [ ] Aggiornare regole e memorie dopo ogni correzione
 
 ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLA CRITICA DA RICORDARE SEMPRE
->>>>>>> f644ff6e (remove duplicate lang folders)

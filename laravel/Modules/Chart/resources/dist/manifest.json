@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
   "/js/chart.js": "/js/chart.js",
@@ -22,10 +21,6 @@
  dacab4a (.)
   "resources/css/app.css": {
     "file": "assets/app-NIGm4AA7.css",
-=======
-  "resources/css/app.css": {
-    "file": "assets/app-B9lCbAED.css",
->>>>>>> 22b41c7f (.)
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -36,17 +31,9 @@
     "isEntry": true
   },
   "resources/js/filament-chart-js-plugins.js": {
-<<<<<<< HEAD
     "file": "assets/filament-chart-js-plugins-1O2DZ1dQ.js",
-=======
-    "file": "assets/filament-chart-js-plugins-DpE-dYqC.js",
->>>>>>> 22b41c7f (.)
     "name": "filament-chart-js-plugins",
     "src": "resources/js/filament-chart-js-plugins.js",
     "isEntry": true
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 22b41c7f (.)

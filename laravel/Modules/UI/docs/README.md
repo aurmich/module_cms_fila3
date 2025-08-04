@@ -126,62 +126,6 @@ class ListUsers extends ListRecords
 }
 ```
 
-<<<<<<< HEAD
-=======
-## Proprietà fondamentali del ServiceProvider (Laraxot/PTVX)
-
-Tutti i provider dei moduli che estendono XotBaseServiceProvider **devono** dichiarare:
-- `protected string $module_dir = __DIR__;`
-- `protected string $module_ns = __NAMESPACE__;`
-- `public string $name = 'UI';`
-
-Queste proprietà sono necessarie per:
-- La risoluzione automatica dei path delle risorse
-- Il corretto namespace per autoloading e publish
-- L'identificazione del modulo nelle operazioni di asset publish
-
-### Esempio
-```php
-class UIServiceProvider extends XotBaseServiceProvider
-{
-    protected string $module_dir = __DIR__;
-    protected string $module_ns = __NAMESPACE__;
-    public string $name = 'UI';
-}
-```
-
-**Motivazione:**  
-- Se mancano queste proprietà, alcune risorse potrebbero non essere caricate correttamente.
-- La dichiarazione esplicita garantisce portabilità, manutenibilità e coerenza tra tutti i moduli.
-
-**Approfondimenti:**  
-- Vedi anche [../../../../docs/PROVIDER_OVERVIEW.md](../../../../docs/PROVIDER_OVERVIEW.md)
-
-## Regola per i file .sh (script shell)
-
-Tutti i file `.sh` (script shell) devono essere posizionati esclusivamente in una sottocartella dedicata chiamata `bashscripts` (ad esempio `docs/bashscripts/`).
-Non devono mai trovarsi direttamente nella root di `docs/` o in altre sottocartelle generiche.
-
-**Motivazione:**
-- Ordine e reperibilità: tutti gli script shell sono facilmente individuabili e gestibili.
-- Sicurezza: si evita l'esecuzione accidentale di script non previsti.
-- Coerenza cross-modulo e tra root/moduli.
-
-**Esempio di struttura corretta:**
-```
-docs/
-└── bashscripts/
-    ├── deploy.sh
-    ├── clear_cache.sh
-    └── backup_db.sh
-```
-
-**Checklist aggiornata:**
-- [x] Nessun file .sh fuori da bashscripts/
-- [x] Documentazione aggiornata
-- [x] Struttura coerente in tutti i moduli
-
->>>>>>> 22b41c7f (.)
 ## Collegamenti
 
 - [Documentazione Root](../../../docs/translation_standards_links.md)
@@ -193,8 +137,4 @@ docs/
 - **[REGOLA CRITICA: MAI usare ->label()](never_use_label_rule.md)**
 - **[REGOLA CRITICA: SEMPRE usa transClass()](transclass_rule.md)**
 
-<<<<<<< HEAD
 *Ultimo aggiornamento: gennaio 2025* 
-=======
-*Ultimo aggiornamento: gennaio 2025*
->>>>>>> 22b41c7f (.)
