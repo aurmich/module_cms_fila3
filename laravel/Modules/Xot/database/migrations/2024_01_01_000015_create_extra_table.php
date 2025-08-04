@@ -31,7 +31,7 @@ return new class extends XotBaseMigration {
                 // if (! $this->hasColumn('name')) {
                 //    $table->string('name')->nullable();
                 // }
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
                 // if (! $this->hasIndex('morph_unique')) {
                 //    $table->unique(['model_id', 'model_type'], 'morph_unique');
                 // }

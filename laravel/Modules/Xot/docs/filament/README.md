@@ -121,4 +121,34 @@ Questa documentazione si applica a tutti i moduli che utilizzano Filament per il
 ### Checklist
 - [ ] Nessuna closure void restituisce un valore
 - [ ] Tutte le azioni custom rispettano la signature void
+# Regole generali per XotBaseResource
+
+## Proprietà e metodi vietati nei Resource
+
+Chi estende XotBaseResource **non deve mai** dichiarare o ridefinire:
+- `protected static ?string $navigationIcon`
+- `protected static ?string $navigationGroup`
+- `protected static ?string $translationPrefix`
+- `public static function table(...)`
+- `public static function getListTableColumns(): array`
+
+**Motivazione:**
+- La logica di navigazione, traduzione e colonne è centralizzata per garantire coerenza e manutenibilità.
+- Ridefinire queste proprietà/metodi nei resource porta a conflitti, duplicazione, errori di autoload e perdita di coerenza.
+- Override solo tramite configurazione o metodi previsti, mai tramite ridefinizione diretta.
+
+**Esempio corretto:**
+```php
+// ❌ NON FARE
+protected static ?string $translationPrefix = 'doctor-resource';
+$prefix = static::$translationPrefix;
+->placeholder(__($prefix . '.first_name'))
+
+// ✅ FARE
+->placeholder(__('patient::doctor-resource.first_name'))
+```
+
+## Moduli che fanno riferimento a questa regola
+- [Patient: DoctorResource](../../../Patient/docs/filament/resources/doctor-resource.md)
+// Aggiungere qui altri moduli se necessario
 

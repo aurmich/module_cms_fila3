@@ -137,6 +137,7 @@ trait RelationX
             class_basename($related),
         ];
         sort($model_names);
+        $msg='';
         $pivot_name = implode('', $model_names);
         
         $pivot_class = $this->guessPivotFullClass($pivot_name, $related, $class);

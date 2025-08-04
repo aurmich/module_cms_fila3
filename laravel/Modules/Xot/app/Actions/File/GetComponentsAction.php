@@ -47,6 +47,7 @@ class GetComponentsAction
             }
             return ComponentFileData::collection($comps);
         }
+        
 
         $files = File::allFiles($path);
         $comps = [];

@@ -65,7 +65,7 @@ return new class () extends XotBaseMigration {
                 if (! $this->hasColumn('view_params')) {
                     $table->json('view_params')->nullable();
                 }
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
             }
         ); // end update
     }

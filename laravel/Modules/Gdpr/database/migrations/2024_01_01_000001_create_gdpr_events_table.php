@@ -50,7 +50,7 @@ return new class extends XotBaseMigration {
                 // if (! $this->hasColumn('email')) {
                 //    $table->string('email')->nullable();
                 // }
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
             }
         );
     }

@@ -90,6 +90,8 @@ edit file composer.json
         "php": "^8.2",
         "filament/filament": "^3.4",
         "laravel/framework": "^11.9",
+        "filament/filament": "^3.3",
+        "laravel/framework": "^12.0",
         "nwidart/laravel-modules": "^11.0"
     },
     "require-dev": {

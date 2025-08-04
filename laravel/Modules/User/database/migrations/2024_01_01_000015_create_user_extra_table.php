@@ -36,7 +36,7 @@ return new class extends XotBaseMigration
                 // if (! $this->hasColumn('name')) {
                 //    $table->string('name')->nullable();
                 // }
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
 
                 if ($this->hasColumn('model_id') && $this->getColumnType('model_id') === 'bigint') {
                     $table->string('model_id', 36)->index()->change();

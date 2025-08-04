@@ -61,7 +61,59 @@ public static function form(Form $form): Form
 }
 ```
 
-### 3. Traduzioni e Label
+### 3. Proprietà e Metodi da NON Definire
+
+#### ✅ DO - Omettere proprietà e metodi gestiti dalla classe base
+
+Quando si estende `XotBaseResource`, NON definire le seguenti proprietà e metodi:
+
+1. **NON definire** `protected static ?string $navigationIcon`
+   - Questa proprietà è gestita automaticamente da `XotBaseResource`
+
+2. **NON definire** `protected static ?string $navigationGroup`
+   - Questa proprietà è gestita automaticamente da `XotBaseResource`
+
+3. **NON definire** `protected static ?int $navigationSort`
+   - Questa proprietà è gestita automaticamente da `XotBaseResource`
+
+4. **NON definire** `public static function getTableColumns()`
+   - Utilizzare invece `getListTableColumns()` definito in `XotBaseResource`
+
+5. **NON definire** `public static function getRelations()`
+   - Se restituisce un array vuoto, non definirlo affatto
+
+6. **NON definire** `public static function getPages()`
+   - Se restituisce solo le route standard (index, create, edit), non definirlo affatto
+
+#### ❌ DON'T - Non ridefinire proprietà e metodi gestiti dalla classe base
+
+```php
+// NON FARE MAI QUESTO
+class DoctorResource extends XotBaseResource
+{
+    protected static ?string $navigationIcon = 'heroicon-o-user'; // ERRORE
+    
+    protected static ?string $navigationGroup = 'Pazienti'; // ERRORE
+    
+    protected static ?int $navigationSort = 3; // ERRORE
+    
+    public static function getRelations(): array
+    {
+        return []; // ERRORE: se vuoto, non definire
+    }
+    
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListDoctors::route('/'),
+            'create' => Pages\CreateDoctor::route('/create'),
+            'edit' => Pages\EditDoctor::route('/{record}/edit'),
+        ]; // ERRORE: se standard, non definire
+    }
+}
+```
+
+### 4. Traduzioni e Label
 
 #### ✅ DO - Utilizzare i file di traduzione
 
@@ -119,9 +171,8 @@ class SocioResource extends XotBaseResource
 {
     protected static ?string $model = Socio::class;
     
-    protected static ?string $navigationIcon = 'heroicon-o-user';
-    
-    protected static ?int $navigationSort = 1;
+    // NON definire $navigationIcon quando si estende XotBaseResource
+    // NON definire $navigationSort quando si estende XotBaseResource
     
     // Form Schema - CORRETTO ✅
     public static function getFormSchema(): array

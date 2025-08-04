@@ -37,7 +37,7 @@ return new class extends XotBaseMigration {
                     $table->renameColumn('name', 'title');
                 }
 
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
+                $this->updateTimestamps(table: $table, softDeletes: true);
             }
         );
     }
