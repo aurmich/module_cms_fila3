@@ -1,13 +1,14 @@
 
-# Regole Critiche per Traduzioni - Windsurf Rules
+# Regole Critiche per Traduzioni e Documentazione
 
 ## REGOLA ASSOLUTA: MAI USARE ->label()
-- **VIETATO**: `->label('Testo')` o `->label(__('chiave'))`
-- **VIETATO**: `->placeholder('Testo')` o `->helperText('Testo')`
-- **VIETATO**: Qualsiasi stringa hardcoded nei componenti Filament
+- **VIETATO**: `->label('Testo')` nei componenti Filament
+- **VIETATO**: `->placeholder('Testo')` nei componenti Filament  
+- **VIETATO**: `->helperText('Testo')` nei componenti Filament
 - **OBBLIGATORIO**: Utilizzare SEMPRE i file di traduzione del modulo
 
 ## REGOLA CRITICA PER ENUM: SEMPRE TransTrait
+<<<<<<< HEAD
 - **VIETATO**: Implementare traduzioni manualmente negli enum
 - **VIETATO**: Usare `match()` o `__()` direttamente negli enum
 - **OBBLIGATORIO**: Usare `TransTrait` e `transClass()` per tutti gli enum
@@ -31,49 +32,47 @@
 - **OBBLIGATORIO**: Eliminare file binari con conflitti (es. .phar)
 
 ## PATTERN CORRETTO PER ENUM
+=======
+- **OBBLIGATORIO**: Utilizzare `TransTrait` e `transClass()` per tutti i metodi `get*()`
+- **VIETATO**: `match()` o `__()` manuali per traduzioni negli enum
+- **PATTERN CORRETTO**:
+>>>>>>> f644ff6e (remove duplicate lang folders)
 ```php
 use Modules\Xot\Filament\Traits\TransTrait;
 
-enum MyEnum: string implements HasColor, HasIcon, HasLabel
-{
+enum MyEnum: string {
     use TransTrait;
     
-    case VALUE1 = 'value1';
-    case VALUE2 = 'value2';
-    
-    public function getLabel(): string
-    {
-        return $this->transClass(self::class, $this->value . '.label');
+    public function getLabel(): string {
+        return $this->transClass(self::class, $this->value.'.label');
     }
     
-    public function getColor(): string
-    {
-        return $this->transClass(self::class, $this->value . '.color');
+    public function getColor(): string {
+        return $this->transClass(self::class, $this->value.'.color');
     }
     
-    public function getIcon(): string
-    {
-        return $this->transClass(self::class, $this->value . '.icon');
+    public function getIcon(): string {
+        return $this->transClass(self::class, $this->value.'.icon');
     }
     
-    public function getDescription(): string
-    {
-        return $this->transClass(self::class, $this->value . '.description');
+    public function getDescription(): string {
+        return $this->transClass(self::class, $this->value.'.description');
     }
     
-    public function getTooltip(): string
-    {
-        return $this->transClass(self::class, $this->value . '.tooltip');
+    public function getTooltip(): string {
+        return $this->transClass(self::class, $this->value.'.tooltip');
     }
     
-    public function getHelperText(): string
-    {
-        return $this->transClass(self::class, $this->value . '.helper_text');
+    public function getHelperText(): string {
+        return $this->transClass(self::class, $this->value.'.helper_text');
     }
 }
 ```
 
-## PATTERN CORRETTO PER DOCUMENTAZIONE
+## REGOLA CRITICA PER DOCUMENTAZIONE: MAI ESEMPI CON ->label()
+- **VIETATO**: Scrivere esempi con `->label()` nella documentazione
+- **OBBLIGATORIO**: Esempi puliti senza hardcoded strings
+- **PATTERN CORRETTO PER DOCUMENTAZIONE**:
 ```php
 // ✅ CORRETTO - Solo make() senza ->label()
 TextColumn::make('name')
@@ -90,39 +89,34 @@ Select::make('status')
     ]),
 ```
 
-## PATTERN CORRETTO PER FILE DI TRADUZIONE
+## REGOLA CRITICA PER FILE DI TRADUZIONE: STRUTTURA ESPANSA
+- **OBBLIGATORIO**: Struttura espansa per tutti i campi
+- **PATTERN CORRETTO PER FILE DI TRADUZIONE**:
 ```php
-// lang/it/my-module.php
 return [
-    'value1' => [
-        'label' => 'Valore Uno',
-        'color' => 'primary',
-        'icon' => 'heroicon-o-check',
-        'description' => 'Descrizione del valore uno',
-        'tooltip' => 'Tooltip del valore uno',
-        'helper_text' => 'Testo di aiuto per il valore uno',
+    'fields' => [
+        'nome_campo' => [
+            'label' => 'Etichetta Campo',
+            'placeholder' => 'Placeholder diverso',
+            'help' => 'Testo di aiuto specifico'
+        ]
     ],
-    'value2' => [
-        'label' => 'Valore Due',
-        'color' => 'secondary',
-        'icon' => 'heroicon-o-x-mark',
-        'description' => 'Descrizione del valore due',
-        'tooltip' => 'Tooltip del valore due',
-        'helper_text' => 'Testo di aiuto per il valore due',
-    ],
+    'actions' => [
+        'nome_azione' => [
+            'label' => 'Etichetta Azione',
+            'success' => 'Operazione completata',
+            'error' => 'Si è verificato un errore'
+        ]
+    ]
 ];
 ```
 
-## CHECKLIST OBBLIGATORIA
-- [ ] Mai usare ->label() o ->placeholder() nei componenti Filament
-- [ ] Mai usare match() o __() negli enum
-- [ ] Sempre usare TransTrait e transClass() negli enum
-- [ ] Mai scrivere esempi con ->label() nella documentazione
-- [ ] Sempre usare README.md in maiuscolo
-- [ ] Controllare tutte le cartelle docs per file readme.md in minuscolo
-- [ ] Risolvere immediatamente tutti i conflitti Git
-- [ ] Eliminare file binari con conflitti
+## REGOLA CRITICA PER FILE README.md: SEMPRE MAIUSCOLO
+- **VIETATO**: File `readme.md` in minuscolo
+- **OBBLIGATORIO**: File `README.md` in maiuscolo
+- **PROCESSO**: Se esistono entrambi, assemblare contenuti e eliminare quello minuscolo
 
+<<<<<<< HEAD
 ## MOTIVAZIONE
 - Coerenza nel sistema di traduzioni
 - Manutenibilità del codice
@@ -131,3 +125,33 @@ return [
 - Pulizia del repository Git
 
 ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLE CRITICHE CONSOLIDATE
+=======
+## REGOLA CRITICA PER CONFLITTI GIT: RISOLVERE IMMEDIATAMENTE
+- **VIETATO**: Lasciare marker `<<< HEAD` nei file
+- **OBBLIGATORIO**: Risolvere immediatamente tutti i conflitti
+- **OBBLIGATORIO**: Eliminare file binari con conflitti
+
+## REGOLA CRITICA PER NOMI FILE E CARTELLE IN DOCS: SEMPRE MINUSCOLO
+- **VIETATO**: Nomi file con caratteri maiuscoli in cartelle docs
+- **VIETATO**: Nomi cartelle con caratteri maiuscoli in cartelle docs
+- **OBBLIGATORIO**: Tutti i file e cartelle in docs devono essere minuscoli
+- **ECCEZIONE**: Solo `README.md` può avere maiuscole
+- **PATTERN CORRETTO**:
+  - ✅ `my-document.md`
+  - ✅ `my-folder/`
+  - ✅ `README.md` (solo questo file)
+  - ❌ `MyDocument.md`
+  - ❌ `MyFolder/`
+
+## CHECKLIST OBBLIGATORIA
+- [ ] MAI usare `->label()`, `->placeholder()`, `->helperText()`
+- [ ] SEMPRE usare `TransTrait` e `transClass()` negli enum
+- [ ] MAI scrivere esempi con `->label()` nella documentazione
+- [ ] SEMPRE struttura espansa per traduzioni
+- [ ] SEMPRE `README.md` in maiuscolo
+- [ ] MAI lasciare conflitti Git
+- [ ] SEMPRE nomi file/cartelle minuscoli in docs
+- [ ] Aggiornare regole e memorie dopo ogni correzione
+
+ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLA CRITICA DA RICORDARE SEMPRE
+>>>>>>> f644ff6e (remove duplicate lang folders)
