@@ -624,7 +624,6 @@ namespace Modules\FormBuilder\Models{
 /**
  * @property string $id
  * @property array<array-key, mixed> $name
- * @property string|null $type
  * @property string|null $key
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -654,6 +653,7 @@ namespace Modules\FormBuilder\Models{
  * @method static Builder<static>|FieldOption whereUpdatedAt($value)
  * @method static Builder<static>|FieldOption whereUpdatedBy($value)
  * @mixin \Eloquent
+ * @property string|null $type
  */
 	class FieldOption extends \Eloquent {}
 }
@@ -4003,7 +4003,7 @@ namespace Modules\SaluteOra\Models{
  * @property array<array-key, mixed>|null $certification
  * @property string|null $last_dental_visit_period
  * @property-read int|null $appointments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCountryCode($value)
@@ -4772,7 +4772,7 @@ namespace Modules\SaluteOra\Models{
  * @property string|null $doctor_certificate
  * @property array<array-key, mixed>|null $certification
  * @property string|null $last_dental_visit_period
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCountryCode($value)
@@ -5998,7 +5998,7 @@ namespace Modules\User\Models{
  * @property-read int|null $socialite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
  * @property-read int|null $team_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Xot\Contracts\UserContract> $all_team_users
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @mixin \Eloquent
  */
 	class User extends \Eloquent {}

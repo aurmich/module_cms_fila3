@@ -289,7 +289,7 @@ name('about');
 **A:** 
 - [Indice Documentazione](INDICE_DOCUMENTAZIONE.md) - Indice completo
 - [Guida Sviluppatore](GUIDA_SVILUPPATORE.md) - Guida dettagliata
-- [Quick Reference](QUICK_REFERENCE.md) - Riferimento rapido
+- [Quick Reference](quick-reference.md) - Riferimento rapido
 - [Architettura Sistema](ARCHITETTURA_SISTEMA.md) - Overview architettura
 
 ## 🤝 Supporto

@@ -55,6 +55,28 @@ Questo documento traccia gli errori PHPStan di livello 10 identificati nel modul
 - Implementare valori di fallback per i casi in cui i valori non sono stringhe
 - Utilizzare metodi più sicuri per la conversione di tipi
 
+### 5. Comandi Console - Tipizzazione Mancante
+
+**Problema**: PHPStan segnala errori nei comandi Console per mancanza di tipizzazione e utilizzo di funzioni non sicure.
+
+**File interessati**:
+- `Console/Commands/ConvertTranslations.php`
+- `Console/Commands/FindMissingTranslations.php`
+
+**Errori specifici**:
+- Metodi senza tipo di ritorno specificato
+- Parametri senza tipo specificato
+- Utilizzo di funzioni non sicure (`json_encode`, `json_decode`, `shell_exec`)
+- Parametri di tipo incompatibile per funzioni come `strtolower()`, `lang_path()`, `File::exists()`
+
+**Soluzione**:
+- Aggiungere `declare(strict_types=1);` all'inizio dei file
+- Specificare tipi di ritorno per tutti i metodi
+- Tipizzare tutti i parametri dei metodi
+- Utilizzare funzioni sicure da `thecodingmachine/safe`
+- Implementare controlli di tipo per i parametri delle funzioni
+- Gestire correttamente i valori nullable e mixed
+
 ## Principi Applicati nelle Correzioni
 
 1. **Controlli di tipo espliciti**: Verificare sempre il tipo di un valore prima di utilizzarlo in operazioni che richiedono un tipo specifico.
@@ -62,6 +84,7 @@ Questo documento traccia gli errori PHPStan di livello 10 identificati nel modul
 3. **Documentazione migliorata**: Aggiungere annotazioni PHPDoc corrette per aiutare PHPStan a comprendere i tipi.
 4. **Gestione degli errori**: Implementare try/catch o controlli condizionali per gestire potenziali errori.
 5. **Asserzioni**: Utilizzare `Assert::string()`, `Assert::isArray()`, ecc. per garantire che i valori siano del tipo corretto.
+6. **Funzioni sicure**: Utilizzare le funzioni sicure di `thecodingmachine/safe` invece delle funzioni native PHP.
 
 ## Esempi di Correzioni
 
@@ -109,12 +132,99 @@ foreach ($validationMessages as $key => $value) {
 $component->validationMessages($typedMessages);
 ```
 
+### Esempio 4: Correzione Comandi Console
+
+```php
+// Prima
+public function handle()
+{
+    $from = strtolower($this->argument('from'));
+    $to = strtolower($this->argument('to'));
+    $locale = $this->argument('locale');
+    $path = $this->option('path') ?: lang_path($locale);
+}
+
+// Dopo
+public function handle(): int
+{
+    $fromArg = $this->argument('from');
+    $toArg = $this->argument('to');
+    $localeArg = $this->argument('locale');
+    $pathOption = $this->option('path');
+    
+    Assert::string($fromArg, 'Il parametro "from" deve essere una stringa');
+    Assert::string($toArg, 'Il parametro "to" deve essere una stringa');
+    Assert::string($localeArg, 'Il parametro "locale" deve essere una stringa');
+    
+    $from = strtolower($fromArg);
+    $to = strtolower($toArg);
+    $locale = $localeArg;
+    $path = $pathOption ?: lang_path($locale);
+}
+```
+
+## Correzioni Globali PHPStan - Moduli SaluteOra
+
+### Modules/FormBuilder/app/Models/FieldOption.php
+
+**Problema**: Accesso statico a proprietà di istanza
+```php
+// ERRORE: Static access to instance property
+static::$type = $type;
+```
+
+**Soluzione**: Implementazione di un pattern più sicuro per il type scoping
+```php
+// Corretto: Uso di proprietà statica privata
+private static ?string $currentType = null;
+
+public static function setType(string $type): static
+{
+    self::$currentType = $type;
+    return new static();
+}
+```
+
+**Miglioramenti**:
+- Aggiunto `declare(strict_types=1);`
+- Proprietà statica rinominata in `$currentType` per chiarezza
+- Aggiunti metodi `getCurrentType()` e `clearType()` per gestione completa
+- Type hints migliorati per tutti i metodi
+
+## Principi Applicati
+
+### Type Safety
+- Uso di `declare(strict_types=1);` in tutti i file
+- Type hints espliciti per tutti i parametri e return types
+- Gestione corretta dei tipi `mixed` con type casting appropriato
+
+### Best Practices PHPStan
+- Evitare accesso statico a proprietà di istanza
+- Utilizzare type hints specifici invece di `mixed` quando possibile
+- Aggiungere commenti PHPDoc per type casting quando necessario
+
+### Architettura Modulare
+- Mantenimento dei confini dei moduli
+- Rispetto delle responsabilità di ogni classe
+- Documentazione delle decisioni architetturali
+
 ## Risultati
 
 Dopo aver implementato tutte le correzioni, PHPStan al livello 10 non riporta più errori nel modulo Lang. Questo garantisce un codice più robusto e tipizzato, riducendo il rischio di errori a runtime.
+
+## Verifica Finale
+
+Tutti i moduli ora passano l'analisi PHPStan livello 10 senza errori:
+
+```bash
+./vendor/bin/phpstan analyse Modules
+# [OK] No errors
+```
 
 ## Prossimi Passi
 
 1. Applicare principi simili ad altri moduli che potrebbero avere problemi simili
 2. Implementare linee guida di codifica per evitare errori simili in futuro
-3. Considerare l'utilizzo di strumenti di analisi statica come parte del processo di CI/CD 
+3. Considerare l'utilizzo di strumenti di analisi statica come parte del processo di CI/CD
+4. Aggiornare la documentazione per includere best practices per la tipizzazione
+5. Implementare controlli automatici per prevenire regressioni 
