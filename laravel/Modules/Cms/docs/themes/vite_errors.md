@@ -40,7 +40,6 @@ cd /var/www/html/_bases/base_predict_fila3_mono/laravel/Themes/[NomeTema]
 
 ### 2. Processo di Compilazione
 ```bash
-
 # Installazione dipendenze
 npm install
 
@@ -50,7 +49,6 @@ npm run copy
 
 ### 3. Verifica Post-Compilazione
 ```bash
-
 # Controllo manifest
 cat dist/manifest.json
 
@@ -101,7 +99,6 @@ export default defineConfig({
 
 ### Comandi di Debug
 ```bash
-
 # Verifica Node.js e npm
 node -v
 npm -v
@@ -117,3 +114,4 @@ npm install && npm run copy
 ## Manutenzione
 - Aggiornare regolarmente le dipendenze npm
 - Verificare la compatibilità con le versioni Laravel
+- Mantenere backup dei file di configurazione 

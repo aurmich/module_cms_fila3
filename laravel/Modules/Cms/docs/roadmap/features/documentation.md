@@ -48,7 +48,6 @@ Le guide principali coprono tutti gli aspetti fondamentali:
 - Guida per utenti con istruzioni operative
 
 ```markdown
-
 # Guida Installazione
 
 ## Requisiti

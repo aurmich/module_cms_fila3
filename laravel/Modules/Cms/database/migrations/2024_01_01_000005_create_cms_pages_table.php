@@ -52,7 +52,7 @@ return new class extends XotBaseMigration {
                     $table->string('slug')->index();
                 }
 
-                $this->updateTimestamps(table: $table, softDeletes: true);
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
     }

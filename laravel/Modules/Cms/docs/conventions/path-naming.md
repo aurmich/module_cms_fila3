@@ -120,7 +120,6 @@ class PathValidator
 
 ### 2. CI/CD
 ```yaml
-
 # .github/workflows/validate-paths.yml
 steps:
   - name: Validate Directory Names
@@ -137,7 +136,6 @@ steps:
 
 ### Comandi
 ```bash
-
 # Backup
 cp -r Resources Resources_backup
 

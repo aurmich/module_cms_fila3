@@ -16,7 +16,6 @@ L'analisi incrementale con PHPStan è un approccio che permette di migliorare gr
 ## Utilizzo
 
 ```bash
-
 # Rendere lo script eseguibile
 chmod +x scripts/phpstan-incremental.sh
 
@@ -103,3 +102,4 @@ Lo script opera sul file `phpstan.neon` nella directory principale. La configura
 
 ## Conclusione
 
+L'analisi incrementale ti consente di migliorare gradualmente la qualità del codice, affrontando i problemi in ordine di importanza e complessità. Una volta raggiunto il livello 9, il codice sarà conforme agli standard più elevati di qualità e tipo-sicurezza. 

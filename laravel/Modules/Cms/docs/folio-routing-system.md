@@ -138,7 +138,6 @@ Il `CmsServiceProvider` verifica che:
 
 ### Comandi Utili
 ```bash
-
 # Verificare le rotte registrate
 php artisan route:list
 

@@ -100,7 +100,6 @@ public function boot(): void
 ## Comandi per la Migrazione
 
 ```bash
-
 # 1. Crea le directory necessarie
 mkdir -p laravel/Modules/Cms/View/Components
 mkdir -p laravel/Modules/Cms/resources/views/components

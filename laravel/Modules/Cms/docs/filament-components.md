@@ -144,7 +144,6 @@ Filament offre una vasta gamma di componenti Blade riutilizzabili. Di seguito i 
 - [Modulo Theme](../Theme/docs/README.md) - Personalizzazione temi Filament
 - [Convenzioni Namespace](convenzioni-namespace-filament.md) - Convenzioni di namespace
 - [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
-
 ## Collegamenti tra versioni di filament-components.md
 * [filament-components.md](laravel/Modules/User/docs/best-practices/filament-components.md)
 * [filament-components.md](laravel/Modules/Cms/docs/best-practices/filament-components.md)
