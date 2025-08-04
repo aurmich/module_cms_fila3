@@ -24,7 +24,7 @@ return new class () extends XotBaseMigration {
                 if (! $this->hasColumn('notify_theme_id')) {
                     $table->integer('notify_theme_id')->nullable();
                 }
-                $this->updateTimestamps(table: $table, softDeletes: true);
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
     }

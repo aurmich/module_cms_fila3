@@ -39,7 +39,7 @@ return new class extends XotBaseMigration {
                 if (! $this->hasColumn('accepted_at')) {
                     $table->timestamp('accepted_at')->nullable();
                 }
-                $this->updateTimestamps(table: $table, softDeletes: true);
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
     }

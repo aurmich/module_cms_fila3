@@ -48,7 +48,7 @@ return new class () extends XotBaseMigration {
                 $table->integer('counter')->default(0);
             }
 
-            $this->updateTimestamps(table: $table, softDeletes: true);
+            $this->updateTimestamps(table: $table, hasSoftDeletes: true);
         });
     }
 
