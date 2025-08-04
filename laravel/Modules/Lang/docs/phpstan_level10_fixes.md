@@ -163,6 +163,65 @@ public function handle(): int
 }
 ```
 
+### Esempio 5: Correzione Type Hints per Array Annidati
+
+```php
+// Prima
+protected function flattenArray(array $array, string $prefix = ''): array
+{
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            $result = array_merge($result, $this->flattenArray($value, $newKey));
+        }
+    }
+}
+
+// Dopo
+protected function flattenArray(array $array, string $prefix = ''): array
+{
+    foreach ($array as $key => $value) {
+        Assert::string($key, 'Le chiavi degli array devono essere stringhe');
+        $newKey = $prefix ? "{$prefix}.{$key}" : $key;
+        
+        if (is_array($value)) {
+            Assert::isArray($value, 'I valori annidati devono essere array');
+            /** @var array<string, mixed> $value */
+            $result = array_merge($result, $this->flattenArray($value, $newKey));
+        } else {
+            Assert::string($value, 'I valori delle traduzioni devono essere stringhe');
+            $result[$newKey] = $value;
+        }
+    }
+}
+```
+
+### Esempio 6: Correzione Accesso Offset su Mixed
+
+```php
+// Prima
+protected function setNestedValue(array &$array, string $key, mixed $value): void
+{
+    foreach ($keys as $k) {
+        if (!isset($current[$k])) {
+            $current[$k] = [];
+        }
+        $current = &$current[$k];
+    }
+}
+
+// Dopo
+protected function setNestedValue(array &$array, string $key, mixed $value): void
+{
+    foreach ($keys as $k) {
+        Assert::string($k, 'Le chiavi annidate devono essere stringhe');
+        if (!isset($current[$k]) || !is_array($current[$k])) {
+            $current[$k] = [];
+        }
+        $current = &$current[$k];
+    }
+}
+```
+
 ## Correzioni Globali PHPStan - Moduli SaluteOra
 
 ### Modules/FormBuilder/app/Models/FieldOption.php

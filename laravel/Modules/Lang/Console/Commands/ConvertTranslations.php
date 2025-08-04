@@ -136,7 +136,7 @@ class ConvertTranslations extends Command
     }
 
     /**
-     * @param array<mixed, mixed> $array
+     * @param array<string, mixed> $array
      * @param string $prefix
      * @return array<string, string>
      */
@@ -149,6 +149,7 @@ class ConvertTranslations extends Command
             $newKey = $prefix ? "{$prefix}.{$key}" : $key;
             
             if (is_array($value)) {
+                Assert::isArray($value, 'I valori annidati devono essere array');
                 /** @var array<string, mixed> $value */
                 $result = array_merge($result, $this->flattenArray($value, $newKey));
             } else {
@@ -172,12 +173,6 @@ class ConvertTranslations extends Command
         
         foreach ($keys as $k) {
             Assert::string($k, 'Le chiavi annidate devono essere stringhe');
-            
-            // Assicuriamoci che $current sia un array
-            if (!is_array($current)) {
-                $current = [];
-            }
-            
             if (!isset($current[$k]) || !is_array($current[$k])) {
                 $current[$k] = [];
             }

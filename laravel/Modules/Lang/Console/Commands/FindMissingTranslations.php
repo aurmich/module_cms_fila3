@@ -84,7 +84,7 @@ class FindMissingTranslations extends Command
     }
     
     /**
-     * @param array<mixed, mixed> $array
+     * @param array<string, mixed> $array
      * @param string $namespace
      * @param string $file
      * @param string $parentKey
@@ -99,6 +99,7 @@ class FindMissingTranslations extends Command
             $currentKey = $parentKey ? "{$parentKey}.{$key}" : $key;
             
             if (is_array($value)) {
+                Assert::isArray($value, 'I valori annidati devono essere array');
                 /** @var array<string, mixed> $value */
                 $missing = array_merge(
                     $missing,
