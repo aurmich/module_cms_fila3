@@ -10,7 +10,7 @@ return [
         'image' => '/img/admin.jpg',
     ],
     'doctor' => [
-        'label' => 'Doctor',
+        'label' => 'Dentist',
         'color' => 'primary',
         'icon' => 'heroicon-o-user-circle',
         'image' => '/img/dentist.png',

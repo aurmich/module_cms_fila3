@@ -5,6 +5,44 @@
     $flagCode = $lang === 'en' ? 'gb' : $lang;
 ?>
 
+<!-- <style>
+.carousel-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 120px;
+	background: transparent;
+}
+
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-250px * 3)); }
+}
+
+.slider {
+	background: transparent;
+	overflow: hidden;
+	position: relative;
+	width: 100%; /* 250 * 3 (3 loghi visibili) */
+	height: 100px;
+}
+
+.slide-track {
+	display: flex;
+	width: calc(250px * 6); /* 3 loghi * 2 (duplicati) */
+	animation: scroll 20s linear infinite;
+}
+
+.slide {
+	width: 250px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+</style> -->
+
 <div 
     style="background-repeat: no-repeat; background-position: top; background-size: cover;"
     class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-per-desktop.svg')] min-h-screen m-0 p-0 bg-top ipad:bg-right-top">
@@ -136,8 +174,13 @@
     <!-- FINE HEADER -->
   
     <!-- INIZIO PRIMA SECTION -->
-     <div class="w-full p-8 ipad:h-[50vh] lg:h-dvh flex items-center">
-       <div class="w-[60%] ipad:w-[40%] lg:text-4xl ipad:ml-5 lg:ml-32 lg:w-2/5 flex flex-col justify-start">
+     <div class="w-full flex justify-start p-8 ipad:h-[50vh] lg:h-dvh items-center"> 
+       <div class="flex flex-col justify-center">
+         <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+         <img class="h-48 lg:h-44 p-5" src="/img/logo-inmp-mobile.svg" />
+         <img class="h-28 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
+      </div>
+       <div class="w-[60%] ipad:w-[40%] lg:text-4xl ipad:ml-5 lg:w-2/5 flex flex-col justify-start">
          <h1 class="text-[#FF5F7E] text-[40px] ipad:text-4xl lg:text-8xl leading-tight font-bold mb-2.5">
            @lang('pub_theme::navigation.hero.welcome_title.label')
          </h1>
@@ -152,8 +195,47 @@
            </button>
          </a>
        </div>
-     </div>
-    <!-- FINE PRIMA SECTION -->
+      </div>
+      <!-- FINE PRIMA SECTION -->
+    
+
+<!-- INIZIO CAROUSEL SECTION -->
+<!-- <div class="slider">
+	<div class="slide-track">
+		<div class="slide">
+			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
+		</div>
+
+    <div class="slide">
+			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
+		</div>
+
+    <div class="slide">
+			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
+		</div>
+		<div class="slide">
+			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
+		</div>
+	</div>
+</div> -->
+<!-- FINE CAROUSEL SECTION -->
+
+
     <!-- INIZIO SECONDA SECTION -->
     <div class="w-full flex flex-col justify-start items-center">
       <div class="flex justify-center lg:w-full p-6 mt-12 ipad:mt-28 lg:mt-24">
@@ -254,15 +336,15 @@
       <div>
         <h1 class="text-[#FF5F7E] text-3xl">@lang('pub_theme::navigation.landing.participation.label')</h1>
       </div>
-      <div class="flex flex-col lg:flex-row items-center lg:items-baseline justify-center w-full">
-        <div class="p-5">
-          <a href="https://www.inmp.it/" target="_blank">
-            <img class="h-48 lg:h-40 p-5" src="/img/logo-INMP-per-landing.svg" />
-          </a>
-        </div>
+      <div class="flex flex-col lg:flex-row items-center lg:items-center justify-center w-full">
         <div class="p-5">
           <a href="https://fondazioneandi.org/" target="_blank">
             <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+          </a>
+        </div>
+        <div class="p-5">
+          <a href="https://www.inmp.it/" target="_blank">
+            <img class="h-48 lg:h-40 p-5" src="/img/logo-completo-inmp.svg" />
           </a>
         </div>
         <div class="p-5">
