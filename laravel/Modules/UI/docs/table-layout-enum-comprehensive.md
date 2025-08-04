@@ -4,6 +4,133 @@
 
 Il `TableLayoutEnum` è un componente fondamentale del modulo UI che gestisce i layout delle tabelle in Filament. Fornisce un sistema standardizzato per alternare tra visualizzazioni lista e griglia, con supporto completo per traduzioni, icone e colori.
 
+## REGOLA CRITICA: SEMPRE TransTrait
+
+**ALWAYS use TransTrait and transClass() for enum translations, NEVER implement match() manually**
+
+### Implementazione Corretta con TransTrait
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\UI\Enums;
+
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
+use Modules\Xot\Filament\Traits\TransTrait;
+
+enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
+{
+    use TransTrait;
+
+    case LIST = 'list';
+    case GRID = 'grid';
+
+    public function getLabel(): string
+    {
+        return $this->transClass(self::class, $this->value.'.label');
+    }
+
+    public function getColor(): string
+    {
+        return $this->transClass(self::class, $this->value.'.color');
+    }
+
+    public function getIcon(): string
+    {
+        return $this->transClass(self::class, $this->value.'.icon');
+    }
+
+    public function getDescription(): string
+    {
+        return $this->transClass(self::class, $this->value.'.description');
+    }
+
+    public function getTooltip(): string
+    {
+        return $this->transClass(self::class, $this->value.'.tooltip');
+    }
+
+    public function getHelperText(): string
+    {
+        return $this->transClass(self::class, $this->value.'.helper_text');
+    }
+
+    // Metodi di utilità
+    public static function init(): self
+    {
+        return self::LIST;
+    }
+
+    public function toggle(): self
+    {
+        return match ($this) {
+            self::LIST => self::GRID,
+            self::GRID => self::LIST,
+        };
+    }
+
+    public function isListLayout(): bool
+    {
+        return $this === self::LIST;
+    }
+
+    public function isGridLayout(): bool
+    {
+        return $this === self::GRID;
+    }
+
+    public function getTableContentGrid(): ?array
+    {
+        return match ($this) {
+            self::LIST => null,
+            self::GRID => [
+                'sm' => 1,
+                'md' => 2,
+                'lg' => 3,
+                'xl' => 4,
+                '2xl' => 5,
+            ],
+        };
+    }
+
+    public function getTableColumns(array $listColumns, array $gridColumns): array
+    {
+        return match ($this) {
+            self::LIST => $listColumns,
+            self::GRID => $gridColumns,
+        };
+    }
+
+    public function getOptions(): array
+    {
+        return [
+            'list' => self::LIST,
+            'grid' => self::GRID,
+        ];
+    }
+
+    public function getContainerClasses(): string
+    {
+        return match ($this) {
+            self::LIST => 'table-layout-list',
+            self::GRID => 'table-layout-grid',
+        };
+    }
+}
+```
+
+### Perché TransTrait è Obbligatorio
+
+1. **DRY Principle**: Elimina duplicazione di codice
+2. **Framework Consistency**: Approccio uniforme in tutti gli enum
+3. **Automatic Fallbacks**: Meccanismi di fallback integrati
+4. **Performance**: Cache delle traduzioni ottimizzata
+5. **Maintainability**: Logica di traduzione centralizzata
+
 ## Scopo e Funzionalità
 
 ### Obiettivo Principale
@@ -18,394 +145,267 @@ Il `TableLayoutEnum` è un componente fondamentale del modulo UI che gestisce i 
 ```php
 enum TableLayoutEnum: string
 {
-    case LIST = 'list';  // Layout tradizionale a tabella
-    case GRID = 'grid';  // Layout a griglia con carte
+    case LIST = 'list';  // Layout tradizionale a righe
+    case GRID = 'grid';  // Layout a griglia responsive
 }
 ```
 
-#### 2. Metodi Principali
-- `getLabel()`: Restituisce etichette tradotte
-- `getColor()`: Restituisce colori per UI components
-- `getIcon()`: Restituisce icone Heroicon
-- `toggle()`: Alterna tra layout
-- `getTableContentGrid()`: Configurazione responsive
-- `getTableColumns()`: Selezione colonne per layout
-
-#### 3. Configurazione Responsive
+#### 2. Interfacce Filament
 ```php
-public function getTableContentGrid(): ?array
-{
-    return $this->isGridLayout()
-        ? [
-            'sm' => 1,   // 1 colonna su mobile
-            'md' => 2,   // 2 colonne su tablet
-            'lg' => 3,   // 3 colonne su desktop
-            'xl' => 4,   // 4 colonne su large
-            '2xl' => 5,  // 5 colonne su extra large
-        ]
-        : null;
-}
+implements HasColor, HasIcon, HasLabel
 ```
+- `HasColor`: Fornisce colori per UI
+- `HasIcon`: Fornisce icone per UI
+- `HasLabel`: Fornisce etichette tradotte
 
-## Integrazione con Filament
-
-### Trait HasXotTable
-Il trait `HasXotTable` integra automaticamente il TableLayoutEnum:
-
+#### 3. Metodi di Traduzione (TransTrait)
 ```php
-trait HasXotTable
+public function getLabel(): string
 {
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-    
-    public function table(Table $table): Table
-    {
-        return $table
-            ->columns($this->layoutView->getTableColumns(
-                $this->getTableColumns(),      // Colonne per lista
-                $this->getGridTableColumns()   // Colonne per griglia
-            ))
-            ->contentGrid($this->layoutView->getTableContentGrid());
-    }
+    return $this->transClass(self::class, $this->value.'.label');
+}
+
+public function getColor(): string
+{
+    return $this->transClass(self::class, $this->value.'.color');
+}
+
+public function getIcon(): string
+{
+    return $this->transClass(self::class, $this->value.'.icon');
 }
 ```
 
-### Action Toggle
-L'action `TableLayoutToggleTableAction` permette di alternare i layout:
+## File di Traduzione
 
-```php
-public function getTableHeaderActions(): array
-{
-    return [
-        'layout' => TableLayoutToggleTableAction::make('layout')
-            ->icon($this->layoutView->getIcon())
-            ->color($this->layoutView->getColor())
-            ->label($this->layoutView->getLabel()),
-    ];
-}
-```
-
-## Utilizzo Pratico
-
-### 1. In ListRecords Pages
-```php
-use Modules\UI\Enums\TableLayoutEnum;
-
-class ListUsers extends ListRecords
-{
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-    
-    public function getTableColumns(): array
-    {
-        return [
-            Tables\Columns\TextColumn::make('name'),
-            Tables\Columns\TextColumn::make('email'),
-            Tables\Columns\TextColumn::make('created_at'),
-        ];
-    }
-    
-    public function getGridTableColumns(): array
-    {
-        return [
-            Tables\Columns\Layout\Stack::make([
-                Tables\Columns\TextColumn::make('name')->weight('bold'),
-                Tables\Columns\TextColumn::make('email'),
-            ]),
-        ];
-    }
-}
-```
-
-### 2. Gestione Layout Personalizzata
-```php
-class CustomListPage extends ListRecords
-{
-    protected TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-    
-    public function mount(): void
-    {
-        // Recupera layout salvato o usa default
-        $this->layoutView = $this->getCurrentLayout();
-    }
-    
-    public function toggleLayout(): void
-    {
-        $this->layoutView = $this->layoutView->toggle();
-        $this->saveLayout($this->layoutView);
-    }
-    
-    protected function getCurrentLayout(): TableLayoutEnum
-    {
-        $saved = session('table_layout_' . $this->getTableIdentifier());
-        return $saved ? TableLayoutEnum::from($saved) : TableLayoutEnum::LIST;
-    }
-    
-    protected function saveLayout(TableLayoutEnum $layout): void
-    {
-        session(['table_layout_' . $this->getTableIdentifier() => $layout->value]);
-    }
-}
-```
-
-## Traduzioni
-
-### File di Traduzione
+### Struttura Obbligatoria
 ```php
 // Modules/UI/lang/it/table-layout.php
 return [
     'list' => [
         'label' => 'Lista',
-        'description' => 'Visualizzazione tradizionale in formato tabella',
+        'color' => 'primary',
+        'icon' => 'heroicon-o-list-bullet',
+        'description' => 'Visualizzazione tradizionale a righe',
         'tooltip' => 'Mostra i dati in righe di tabella',
+        'helper_text' => 'Layout ottimizzato per dati tabellari',
     ],
     'grid' => [
         'label' => 'Griglia',
+        'color' => 'secondary',
+        'icon' => 'heroicon-o-squares-2x2',
         'description' => 'Visualizzazione a griglia responsive',
-        'tooltip' => 'Mostra i dati in formato griglia con carte',
-    ],
-    'toggle' => [
-        'label' => 'Cambia Layout',
-        'tooltip' => 'Alterna tra visualizzazione lista e griglia',
+        'tooltip' => 'Mostra i dati in formato griglia con card',
+        'helper_text' => 'Layout ottimizzato per dispositivi mobili',
     ],
 ];
 ```
 
-### Utilizzo nelle Traduzioni
+### Lingue Supportate
+- `Modules/UI/lang/it/table-layout.php` (Italiano)
+- `Modules/UI/lang/en/table-layout.php` (Inglese)
+- `Modules/UI/lang/de/table-layout.php` (Tedesco)
+
+## Utilizzo nelle Pagine Filament
+
+### Esempio Completo
 ```php
-public function getLabel(): string
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Example\Filament\Resources\UserResource\Pages;
+
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Actions\Action;
+use Modules\UI\Enums\TableLayoutEnum;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\Xot\Filament\Traits\HasXotTable;
+
+class ListUsers extends XotBaseListRecords
 {
-    return match ($this) {
-        self::LIST => __('ui::table-layout.list.label'),
-        self::GRID => __('ui::table-layout.grid.label'),
-    };
+    use HasXotTable;
+
+    protected static string $resource = UserResource::class;
+    protected TableLayoutEnum $layout;
+
+    public function mount(): void
+    {
+        parent::mount();
+        $this->layout = TableLayoutEnum::init();
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->columns($this->getColumnsForLayout())
+            ->contentGrid($this->layout->getTableContentGrid())
+            ->extraAttributes([
+                'class' => $this->layout->getContainerClasses(),
+            ]);
+    }
+
+    protected function getColumnsForLayout(): array
+    {
+        $listColumns = [
+            Tables\Columns\TextColumn::make('name')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('email')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('created_at')
+                ->dateTime()
+                ->sortable(),
+        ];
+
+        $gridColumns = [
+            Tables\Columns\Layout\Stack::make([
+                Tables\Columns\TextColumn::make('name')
+                    ->weight(\Filament\Support\Enums\FontWeight::Bold)
+                    ->size('lg'),
+                Tables\Columns\TextColumn::make('email')
+                    ->color('gray'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->size('sm'),
+            ])->space(2),
+        ];
+
+        return $this->layout->getTableColumns($listColumns, $gridColumns);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('toggleLayout')
+                ->action(function () {
+                    $this->layout = $this->layout->toggle();
+                    $this->resetTable();
+                }),
+        ];
+    }
+}
+```
+
+## API Reference
+
+### Metodi Principali
+
+#### `init(): self`
+Restituisce il layout di default (LIST).
+
+#### `toggle(): self`
+Alterna tra LIST e GRID.
+
+#### `isListLayout(): bool`
+Verifica se il layout corrente è LIST.
+
+#### `isGridLayout(): bool`
+Verifica se il layout corrente è GRID.
+
+#### `getTableContentGrid(): ?array`
+Restituisce la configurazione responsive per il layout griglia.
+
+#### `getTableColumns(array $listColumns, array $gridColumns): array`
+Restituisce le colonne appropriate per il layout corrente.
+
+#### `getOptions(): array`
+Restituisce tutte le opzioni di layout come array.
+
+#### `getContainerClasses(): string`
+Restituisce le classi CSS per il styling del container.
+
+### Metodi di Traduzione (TransTrait)
+
+#### `getLabel(): string`
+Restituisce l'etichetta tradotta per il layout.
+
+#### `getColor(): string`
+Restituisce il colore per il layout.
+
+#### `getIcon(): string`
+Restituisce l'icona per il layout.
+
+#### `getDescription(): string`
+Restituisce la descrizione tradotta per il layout.
+
+#### `getTooltip(): string`
+Restituisce il tooltip tradotto per il layout.
+
+#### `getHelperText(): string`
+Restituisce il testo di aiuto tradotto per il layout.
+
+## Configurazione Responsive
+
+### Layout Griglia
+```php
+[
+    'sm' => 1,   // 1 colonna su schermi piccoli
+    'md' => 2,   // 2 colonne su schermi medi
+    'lg' => 3,   // 3 colonne su schermi grandi
+    'xl' => 4,   // 4 colonne su schermi extra grandi
+    '2xl' => 5,  // 5 colonne su schermi 2xl
+]
+```
+
+### CSS Classes
+```css
+.table-layout-list {
+    /* Stili per layout lista */
+}
+
+.table-layout-grid {
+    /* Stili per layout griglia */
+    display: grid;
+    gap: 1rem;
 }
 ```
 
 ## Best Practices
 
-### 1. Type Safety
-- Utilizzare sempre il tipo `TableLayoutEnum` invece di stringhe
-- Evitare confronti diretti con stringhe
-- Utilizzare i metodi `isListLayout()` e `isGridLayout()`
+### 1. Implementazione Enum
+- **SEMPRE** usare `TransTrait`
+- **SEMPRE** usare `transClass()` per le traduzioni
+- **MAI** implementare traduzioni manualmente
+- **MAI** usare `match()` per le traduzioni
 
-### 2. Performance
-- Cache del layout per utente
-- Lazy loading delle colonne
-- Ottimizzazione query per layout diversi
+### 2. File di Traduzione
+- Struttura espansa obbligatoria
+- Tutte le lingue supportate
+- Chiavi in inglese, valori nella lingua target
 
-### 3. UX/UI
-- Icone intuitive per ogni layout
-- Colori coerenti con il design system
-- Tooltip informativi
-- Transizioni fluide
+### 3. Utilizzo nelle Pagine
+- Inizializzare layout nel `mount()`
+- Usare `toggle()` per cambiare layout
+- Reset table dopo cambio layout
 
-### 4. Responsive Design
-- Configurazioni appropriate per ogni breakpoint
-- Fallback per dispositivi non supportati
-- Test su diversi dispositivi
-
-## Architettura e Design Patterns
-
-### 1. Enum Pattern
-Il TableLayoutEnum segue il pattern Enum di PHP 8.1+:
-- **Type Safety**: Valori tipizzati e immutabili
-- **Interfacce**: Implementa interfacce Filament per integrazione nativa
-- **Metodi**: Metodi di utilità per operazioni comuni
-
-### 2. Strategy Pattern
-Il layout viene gestito tramite il pattern Strategy:
-- **Context**: La pagina ListRecords
-- **Strategy**: TableLayoutEnum (LIST o GRID)
-- **Concrete Strategies**: Implementazioni specifiche per ogni layout
-
-### 3. Observer Pattern
-Il trait HasXotTable osserva i cambiamenti di layout:
-- **Subject**: TableLayoutEnum
-- **Observer**: HasXotTable trait
-- **Notification**: Aggiornamento automatico della tabella
-
-## Estensibilità
-
-### 1. Nuovi Layout Types
-Per aggiungere nuovi layout:
-
-```php
-enum TableLayoutEnum: string
-{
-    case LIST = 'list';
-    case GRID = 'grid';
-    case COMPACT = 'compact';  // Nuovo layout
-    
-    public function getLabel(): string
-    {
-        return match ($this) {
-            self::LIST => __('ui::table-layout.list.label'),
-            self::GRID => __('ui::table-layout.grid.label'),
-            self::COMPACT => __('ui::table-layout.compact.label'),
-        };
-    }
-}
-```
-
-### 2. Layout Personalizzati
-Per layout specifici del modulo:
-
-```php
-// Nel modulo specifico
-enum CustomTableLayoutEnum: string
-{
-    case CARD = 'card';
-    case TIMELINE = 'timeline';
-    
-    public function getTableContentGrid(): ?array
-    {
-        return match ($this) {
-            self::CARD => ['sm' => 1, 'md' => 2, 'lg' => 3],
-            self::TIMELINE => null,
-        };
-    }
-}
-```
-
-## Testing
-
-### 1. Unit Tests
-```php
-class TableLayoutEnumTest extends TestCase
-{
-    public function test_enum_values(): void
-    {
-        $this->assertEquals('list', TableLayoutEnum::LIST->value);
-        $this->assertEquals('grid', TableLayoutEnum::GRID->value);
-    }
-    
-    public function test_toggle_functionality(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
-        
-        $this->assertEquals($grid, $list->toggle());
-        $this->assertEquals($list, $grid->toggle());
-    }
-    
-    public function test_layout_checks(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
-        
-        $this->assertTrue($list->isListLayout());
-        $this->assertFalse($list->isGridLayout());
-        $this->assertTrue($grid->isGridLayout());
-        $this->assertFalse($grid->isListLayout());
-    }
-}
-```
-
-### 2. Integration Tests
-```php
-class TableLayoutIntegrationTest extends TestCase
-{
-    public function test_layout_integration_with_filament(): void
-    {
-        $page = new TestListPage();
-        $page->layoutView = TableLayoutEnum::GRID;
-        
-        $table = $page->table(Table::make());
-        
-        // Verifica che la configurazione sia corretta
-        $this->assertNotNull($table->getContentGrid());
-    }
-}
-```
+### 4. Testing
+- Testare tutti i metodi dell'enum
+- Verificare traduzioni
+- Controllare cambio layout
 
 ## Troubleshooting
 
-### 1. Problemi Comuni
+### Problema: Traduzioni non visualizzate
+**Soluzione**: Verificare che il file di traduzione esista e contenga le chiavi corrette.
 
-#### Layout non cambia
-```php
-// Verifica che il trait sia utilizzato
-use Modules\Xot\Filament\Traits\HasXotTable;
+### Problema: Layout non cambia
+**Soluzione**: Verificare che il metodo `toggle()` sia chiamato correttamente.
 
-class ListPage extends ListRecords
-{
-    use HasXotTable;
-    
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-}
-```
+### Problema: Errori PHPStan
+**Soluzione**: Verificare che tutti i metodi abbiano tipi di ritorno espliciti.
 
-#### Colonne non si aggiornano
-```php
-// Verifica che getTableColumns() e getGridTableColumns() siano implementati
-public function getTableColumns(): array
-{
-    return [/* colonne per lista */];
-}
+## Collegamenti
 
-public function getGridTableColumns(): array
-{
-    return [/* colonne per griglia */];
-}
-```
-
-#### Traduzioni mancanti
-```php
-// Verifica che il file di traduzione esista
-// Modules/UI/lang/it/table-layout.php
-return [
-    'list' => ['label' => 'Lista'],
-    'grid' => ['label' => 'Griglia'],
-];
-```
-
-### 2. Debug
-```php
-// Debug del layout corrente
-dd($this->layoutView->value);
-dd($this->layoutView->getLabel());
-dd($this->layoutView->getTableContentGrid());
-```
-
-## Collegamenti Correlati
-
-- [Table Components](./table-components.md)
-- [HasXotTable Trait](../../Xot/docs/has-xot-table.md)
-- [Filament Integration](./filament-components.md)
-- [Translation Standards](../../Lang/docs/translation-standards.md)
-- [UI Best Practices](./best-practices.md)
-
-## Changelog
-
-### v1.0.0 (2024-01-15)
-- Implementazione iniziale del TableLayoutEnum
-- Supporto per layout LIST e GRID
-- Integrazione con trait HasXotTable
-- Sistema di traduzioni completo
-
-### v1.1.0 (2024-02-20)
-- Aggiunto supporto per configurazioni responsive
-- Migliorata type safety con PHP 8.1+ enum
-- Ottimizzazioni performance
-- Documentazione completa
-
-### v1.2.0 (2024-03-10)
-- Aggiunto metodo `getTableColumns()` con parametri espliciti
-- Rimosso utilizzo di `debug_backtrace()` per migliori performance
-- Migliorata compatibilità con PHPStan livello 10
-- Aggiunto supporto per layout personalizzati
-
-## Contributi
-
-Per contribuire al TableLayoutEnum:
-
-1. Seguire le convenzioni di codice PSR-12
-2. Aggiungere test per nuove funzionalità
-3. Aggiornare la documentazione
-4. Verificare compatibilità con PHPStan livello 10
-5. Testare su diversi dispositivi e browser
+- [TransTrait Documentation](../../Xot/docs/filament/trans-trait.md)
+- [UI Module Architecture](architecture_rules.md)
+- [Filament Best Practices](../../../docs/filament_best_practices.md)
+- [Translation Standards](../../../docs/translation_standards.md)
+- [Table Components](table-components.md)
 
 ---
 
-**Ultimo aggiornamento**: Marzo 2025
-**Versione**: 1.2.0
-**Compatibilità**: PHP 8.1+, Filament 3.x, Laravel 10.x 
+**Ultimo aggiornamento**: Gennaio 2025
+**Versione**: 2.0.0
+**Compatibilità**: Filament 3.x, Laravel 10.x, PHP 8.1+ 

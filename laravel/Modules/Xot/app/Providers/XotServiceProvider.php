@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Providers;
 
+use Filament\Forms\Set;
 use function Safe\realpath;
+use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\Support\Carbon;
 use Modules\Xot\Datas\XotData;
@@ -30,9 +32,9 @@ use Illuminate\Auth\AuthenticationException;
 use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+
 use Modules\Xot\Exceptions\Handlers\HandlerDecorator;
 use Modules\Xot\Exceptions\Handlers\HandlersRepository;
-
 use Modules\Xot\Exceptions\Formatters\WebhookErrorFormatter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -55,6 +57,7 @@ class XotServiceProvider extends XotBaseServiceProvider
         $this->registerEvents();
         //$this->registerExceptionHandler(); // guardare come fa sentry
         $this->registerTimezone();
+        $this->registerFilamentMacros();
         $this->registerProviders();
     }
 
@@ -86,6 +89,24 @@ class XotServiceProvider extends XotBaseServiceProvider
         DatePicker::configureUsing(fn (DatePicker $component) => $component->timezone($timezone)->displayFormat($date_format));
         TimePicker::configureUsing(fn (TimePicker $component) => $component->timezone($timezone));
         TextColumn::configureUsing(fn (TextColumn $column) => $column->timezone($timezone));
+
+        
+    }
+
+    public function registerFilamentMacros(): void
+    {
+        TextInput::macro('generateSlug',function (){
+            /** @phpstan-ignore-next-line */
+            $this
+            ->live(onBlur: true)
+            ->afterStateUpdated(function (string $operation, string $state,Set $set){
+                if($operation === 'create'){
+                    return ;
+                }
+                $set('slug', Str::slug($state));
+            });
+            return $this;
+        });
     }
 
     /*

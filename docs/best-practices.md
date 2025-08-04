@@ -438,23 +438,34 @@ enum WeekDay: string
     case SATURDAY = 'saturday';
     case SUNDAY = 'sunday';
 
-    public function label(): string
+    public function getLabel(): string
     {
-        return trans("core::fields.day.options.{$this->value}");
+        return $this->transClass(self::class, $this->value.'.label');
     }
 
-    public static function options(): array
+    public function getColor(): string
     {
-        return array_combine(
-            array_column(self::cases(), 'value'),
-            array_map(fn($case) => $case->label(), self::cases())
-        );
+        return $this->transClass(self::class, $this->value.'.color');
+    }
+
+    public function getIcon(): string
+    {
+        return $this->transClass(self::class, $this->value.'.icon');
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            self::MONDAY->value => self::MONDAY->getLabel(),
+            self::TUESDAY->value => self::TUESDAY->getLabel(),
+            // ... altri giorni
+        ];
     }
 }
 
 // Uso in Filament
 Forms\Components\Select::make('day')
-    ->options(WeekDay::options())
+    ->options(WeekDay::getOptions())
 ```
 
 ### Variante con Carbon per localizzazione dinamica
@@ -496,17 +507,28 @@ enum DayOfWeek: string
     case SATURDAY = 'saturday';
     case SUNDAY = 'sunday';
 
-    public function label(): string
+    public function getLabel(): string
     {
-        return trans("xot::fields.day.options.{$this->value}");
+        return $this->transClass(self::class, $this->value.'.label');
     }
 
-    public static function options(): array
+    public function getColor(): string
     {
-        return array_combine(
-            array_column(self::cases(), 'value'),
-            array_map(fn($case) => $case->label(), self::cases())
-        );
+        return $this->transClass(self::class, $this->value.'.color');
+    }
+
+    public function getIcon(): string
+    {
+        return $this->transClass(self::class, $this->value.'.icon');
+    }
+
+    public static function getOptions(): array
+    {
+        return [
+            self::MONDAY->value => self::MONDAY->getLabel(),
+            self::TUESDAY->value => self::TUESDAY->getLabel(),
+            // ... altri giorni
+        ];
     }
 }
 
