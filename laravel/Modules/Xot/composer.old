@@ -53,10 +53,7 @@
         "tightenco/parental": "^1.4"
     },
     "require_comment": {
-<<<<<<< HEAD
-=======
 
->>>>>>> cb26a2b (.)
         "laraxot/module_tenant_fila3": "*"
     },
     "require-dev": {

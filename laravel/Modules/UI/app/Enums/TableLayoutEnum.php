@@ -9,9 +9,7 @@ use Webmozart\Assert\Assert;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
-<<<<<<< HEAD
 use Filament\Resources\Pages\ListRecords;
-=======
 >>>>>>> 598d3378 (test)
 
 enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
@@ -97,9 +95,7 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 
         $columns = $this->isGridLayout()
             ? $caller->getGridTableColumns()
-<<<<<<< HEAD
             /** @phpstan-ignore method.protected */
-=======
 >>>>>>> 598d3378 (test)
             : $caller->getTableColumns();
 
