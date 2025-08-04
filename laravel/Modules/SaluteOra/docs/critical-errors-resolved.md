@@ -113,10 +113,10 @@ Il componente `OpeningHoursField` è stato migliorato per utilizzare un layout a
 ### Layout Precedente
 ```php
 // PRIMA: Layout a gruppo con label
-Group::make()->label($label)->schema([
+Group::make()->schema([
     Grid::make(2)->schema([
-        TextInput::make("$dayKey.morning")->label('Mattina'),
-        TextInput::make("$dayKey.afternoon")->label('Pomeriggio'),
+        TextInput::make("$dayKey.morning"),
+        TextInput::make("$dayKey.afternoon"),
     ])
 ])
 ```
@@ -126,8 +126,8 @@ Group::make()->label($label)->schema([
 // DOPO: Layout a 3 colonne con intestazioni chiare
 Grid::make(3)->schema([
     Placeholder::make($dayKey.'_label')->content($label), // Nome giorno
-    TextInput::make("$dayKey.morning")->label(''),        // Input mattina  
-    TextInput::make("$dayKey.afternoon")->label(''),      // Input pomeriggio
+    TextInput::make("$dayKey.morning"),        // Input mattina
+TextInput::make("$dayKey.afternoon"),      // Input pomeriggio
 ])
 ```
 
@@ -207,8 +207,8 @@ TextInput::make("$dayKey.morning")
     ->regex('/^\d{2}:\d{2}-\d{2}:\d{2}$/')
 
 // DOPO: Due TimePicker separati (mobile-friendly)
-TimePicker::make("$dayKey.morning_from")->label('Dalle'),
-TimePicker::make("$dayKey.morning_to")->label('Alle'),
+TimePicker::make("$dayKey.morning_from"),
+TimePicker::make("$dayKey.morning_to"),
 ```
 
 #### Benefici UX Mobile Ottenuti

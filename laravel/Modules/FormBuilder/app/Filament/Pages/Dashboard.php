@@ -38,16 +38,13 @@ class Dashboard extends XotBaseDashboard
     {
         return [
             DatePicker::make('startDate')
-                ->label('Data Inizio')
                 ->maxDate(fn (Get $get) => $get('endDate') ?: now()),
                 
             DatePicker::make('endDate')
-                ->label('Data Fine')
                 ->minDate(fn (Get $get) => $get('startDate') ?: now())
                 ->maxDate(now()),
                 
             Select::make('formStatus')
-                ->label('Stato Form')
                 ->options([
                     'all' => 'Tutti gli stati',
                     'active' => 'Attivi',
@@ -58,7 +55,6 @@ class Dashboard extends XotBaseDashboard
                 ->default('all'),
                 
             Select::make('formCategory')
-                ->label('Categoria Form')
                 ->options([
                     'all' => 'Tutte le categorie',
                     'medical' => 'Medico',

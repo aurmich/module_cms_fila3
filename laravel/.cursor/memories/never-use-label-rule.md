@@ -1,0 +1,95 @@
+# REGOLA CRITICA: MAI usare ->label()
+
+## Data: 2025-01-06
+
+## ❌ ERRORE CRITICO - NON FARE MAI QUESTO
+
+```php
+// ❌ ERRORE - Non usare mai ->label()
+TextColumn::make('name')->label('Nome')
+Action::make('save')->label('Salva')
+Select::make('status')->label('Stato')
+TextInput::make('email')->label('Email')
+```
+
+## ✅ CORRETTO - Sistema Traduzioni Automatico
+
+```php
+// ✅ CORRETTO - Usa il sistema di traduzioni automatico
+TextColumn::make('name')
+Action::make('save')
+Select::make('status')
+TextInput::make('email')
+```
+
+## Perché questa Regola è Critica
+
+### 1. Sistema Traduzioni Automatico
+- Il `LangServiceProvider` gestisce automaticamente le traduzioni
+- Le chiavi vengono generate automaticamente dal nome del campo
+- Struttura: `modulo::risorsa.fields.campo.label`
+
+### 2. Centralizzazione
+- Tutte le traduzioni sono nei file `lang/`
+- Facile manutenzione e aggiornamento
+- Sincronizzazione automatica tra lingue
+
+### 3. Type Safety
+- Previene errori di digitazione nelle label
+- Controllo automatico delle traduzioni mancanti
+- PHPStan può verificare la presenza delle chiavi
+
+### 4. Performance
+- Nessun overhead di chiamate `__()` manuali
+- Cache delle traduzioni ottimizzata
+- Meno codice da mantenere
+
+## Implementazione Corretta
+
+### 1. Prima di usare un componente, implementa le traduzioni
+
+```php
+// File: Modules/User/lang/it/fields.php
+return [
+    'name' => [
+        'label' => 'Nome',
+        'placeholder' => 'Inserisci nome',
+        'tooltip' => 'Nome completo dell\'utente',
+        'helper_text' => 'Nome e cognome dell\'utente',
+    ],
+    'email' => [
+        'label' => 'Email',
+        'placeholder' => 'Inserisci email',
+        'tooltip' => 'Indirizzo email dell\'utente',
+        'helper_text' => 'Email valida per le comunicazioni',
+    ],
+];
+```
+
+### 2. Poi usa il componente senza ->label()
+
+```php
+// ✅ CORRETTO
+TextColumn::make('name')
+TextColumn::make('email')
+```
+
+## Checklist Pre-Implementazione
+
+Prima di usare qualsiasi componente Filament:
+
+- [ ] Implementare traduzioni in `lang/it/fields.php`
+- [ ] Implementare traduzioni in `lang/en/fields.php`
+- [ ] Implementare traduzioni in `lang/de/fields.php`
+- [ ] Verificare struttura espansa (label, placeholder, tooltip, helper_text)
+- [ ] Non usare mai `->label()` nel codice
+
+## Memoria Permanente
+
+**RICORDA SEMPRE**: 
+- MAI `->label()` 
+- SEMPRE traduzioni nei file lang/
+- SEMPRE struttura espansa
+- SEMPRE sincronizzazione IT/EN/DE
+
+*Ultimo aggiornamento: 2025-01-06* 

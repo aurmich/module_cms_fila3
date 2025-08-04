@@ -27,14 +27,13 @@ class CollectionLangResource extends LangBaseResource
         return [
             TextInput::make('name')
                 ->live(onBlur: true)
-                ->label(__('Collections Name'))->required()->maxLength(255)->columnSpan(2),
+                ->required()->maxLength(255)->columnSpan(2),
             Repeater::make('values')
                 ->grid([
                     'default' => 1,
                     'md' => 2,
                     'lg' => 3,
                 ])
-                ->label(__('Collections Values'))
                 ->columnSpan(2)
                 ->columns(1)
                 ->schema([
@@ -45,11 +44,11 @@ class CollectionLangResource extends LangBaseResource
                                 $set('itemKey', $get('itemValue'));
                             }
                         })
-                        ->required()->label(__('Value'))->hint(__('what the user will see')),
+                        ->required()->hint(__('what the user will see')),
                     TextInput::make('itemKey')
                         ->live(onBlur: true)
-                        ->required()->label(__('Key'))->hint(__('what store in the form')),
-                    Toggle::make('itemIsDefault')->label(__('selected by default')),
+                        ->required()->hint(__('what store in the form')),
+                    Toggle::make('itemIsDefault'),
                 ]),
             ];
        }

@@ -169,8 +169,6 @@ class YourResourceListRecords extends XotBaseListRecords
                 Tables\Actions\Action::make('toggleLayout')
                     ->icon($this->layout->getIcon())
                     ->color($this->layout->getColor())
-                    ->label(__('ui::table-layout.toggle.label'))
-                    ->tooltip(__('ui::table-layout.toggle.tooltip'))
                     ->action(function () {
                         $this->layout = $this->layout->toggle();
                     }),
@@ -181,28 +179,22 @@ class YourResourceListRecords extends XotBaseListRecords
     {
         $listColumns = [
             Tables\Columns\TextColumn::make('name')
-                ->label(__('your_module::fields.name.label'))
                 ->searchable()
                 ->sortable(),
             Tables\Columns\TextColumn::make('email')
-                ->label(__('your_module::fields.email.label'))
                 ->searchable(),
             Tables\Columns\TextColumn::make('created_at')
-                ->label(__('your_module::fields.created_at.label'))
                 ->dateTime(),
         ];
         
         $gridColumns = [
             Tables\Columns\Layout\Stack::make([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('your_module::fields.name.label'))
                     ->weight(\Filament\Support\Enums\FontWeight::Bold),
-                Tables\Columns\TextColumn::make('email')
-                    ->label(__('your_module::fields.email.label')),
+                Tables\Columns\TextColumn::make('email'),
             ]),
             Tables\Columns\Layout\Stack::make([
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('your_module::fields.created_at.label'))
                     ->dateTime(),
             ]),
         ];
@@ -269,6 +261,12 @@ return [
 - **List Columns**: Usare colonne standard per dati strutturati
 - **Grid Columns**: Usare `Layout\Stack` per contenuti complessi
 - **Separazione**: Mantenere logica separata per ogni layout
+
+### 2. Traduzioni Enum
+- **SEMPRE** usare `transClass()` negli enum per le traduzioni
+- **MAI** usare `__()` o `trans()` direttamente negli enum
+- **SEMPRE** struttura espansa nei file di traduzione
+- **SEMPRE** `use TransTrait;` negli enum
 
 ### 2. Performance
 - **Lazy Loading**: Caricare colonne solo quando necessario

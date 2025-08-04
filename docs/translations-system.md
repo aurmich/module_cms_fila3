@@ -69,13 +69,13 @@ return [
 
 ### Utilizzo Traduzioni
 ```php
-// ❌ NON FARE
-->label('Nome')
-->placeholder('Inserisci il nome')
+// ❌ NON FARE MAI
+->label('Nome')  // VIETATO: stringa hardcoded
+->label(__('doctor.fields.name'))  // VIETATO: qualsiasi ->label()
 
-// ✅ FARE
-->label(__('doctor.fields.name'))
-->placeholder(__('doctor.fields.name_placeholder'))
+// ✅ SEMPRE FARE
+TextInput::make('name'),  // Traduzione automatica tramite LangServiceProvider
+TextInput::make('email'), // Nessun ->label(), gestione centralizzata
 ```
 
 ### Cache

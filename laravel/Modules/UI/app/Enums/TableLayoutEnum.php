@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\UI\Enums;
 
-use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
+use Modules\Xot\Filament\Traits\TransTrait;
 
 /**
  * Enum for managing table layout types in Filament UI components.
@@ -19,66 +20,46 @@ use Filament\Support\Contracts\HasLabel;
  */
 enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 {
-    /** Standard list layout with traditional table rows */
-    case LIST = 'list';
+    use TransTrait;
     
-    /** Grid layout with responsive card-based display */
+    case LIST = 'list';
     case GRID = 'grid';
 
-    /**
-     * Get the default layout type.
-     *
-     * @return self The default layout (LIST)
-     */
     public static function init(): self
     {
         return self::LIST;
     }
 
-    /**
-     * Get the human-readable label for this layout.
-     *
-     * @return string The translated label for the layout
-     */
     public function getLabel(): string
     {
-        return match ($this) {
-            self::LIST => __('ui::table-layout.list.label'),
-            self::GRID => __('ui::table-layout.grid.label'),
-        };
+        return $this->transClass(self::class, $this->value.'.label');
     }
 
-    /**
-     * Get the color associated with this layout type.
-     *
-     * @return string The color identifier for UI components
-     */
     public function getColor(): string
     {
-        return match ($this) {
-            self::LIST => 'primary',
-            self::GRID => 'secondary',
-        };
+        return $this->transClass(self::class, $this->value.'.color');
     }
 
-    /**
-     * Get the icon associated with this layout type.
-     *
-     * @return string The Heroicon identifier for the layout
-     */
     public function getIcon(): string
     {
-        return match ($this) {
-            self::LIST => 'heroicon-o-list-bullet',
-            self::GRID => 'heroicon-o-squares-2x2',
-        };
+        return $this->transClass(self::class, $this->value.'.icon');
     }
 
-    /**
-     * Toggle between layout types.
-     *
-     * @return self The opposite layout type
-     */
+    public function getDescription(): string
+    {
+        return $this->transClass(self::class, $this->value.'.description');
+    }
+
+    public function getTooltip(): string
+    {
+        return $this->transClass(self::class, $this->value.'.tooltip');
+    }
+
+    public function getHelperText(): string
+    {
+        return $this->transClass(self::class, $this->value.'.helper_text');
+    }
+
     public function toggle(): self
     {
         return match ($this) {
@@ -87,21 +68,11 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    /**
-     * Check if this is a grid layout.
-     *
-     * @return bool True if this is the GRID layout type
-     */
     public function isGridLayout(): bool
     {
         return self::GRID === $this;
     }
 
-    /**
-     * Check if this is a list layout.
-     *
-     * @return bool True if this is the LIST layout type
-     */
     public function isListLayout(): bool
     {
         return self::LIST === $this;
@@ -144,11 +115,6 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
         return $this->isGridLayout() ? $gridColumns : $listColumns;
     }
 
-    /**
-     * Get all available layout options as an array.
-     *
-     * @return array<string, string> Array of layout values and labels
-     */
     public static function getOptions(): array
     {
         return [
@@ -157,11 +123,6 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
         ];
     }
 
-    /**
-     * Get the CSS classes for the layout container.
-     *
-     * @return string CSS classes for styling the layout
-     */
     public function getContainerClasses(): string
     {
         return match ($this) {

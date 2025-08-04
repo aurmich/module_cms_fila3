@@ -67,8 +67,21 @@ class YourResourceListRecords extends XotBaseListRecords
     
     protected function getColumnsForLayout(): array
     {
-        $listColumns = [/* colonne per layout lista */];
-        $gridColumns = [/* colonne per layout griglia */];
+        $listColumns = [
+            Tables\Columns\TextColumn::make('name')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('email')
+                ->searchable(),
+        ];
+        
+        $gridColumns = [
+            Tables\Columns\Layout\Stack::make([
+                Tables\Columns\TextColumn::make('name')
+                    ->weight(\Filament\Support\Enums\FontWeight::Bold),
+                Tables\Columns\TextColumn::make('email'),
+            ]),
+        ];
         
         return $this->layout->getTableColumns($listColumns, $gridColumns);
     }

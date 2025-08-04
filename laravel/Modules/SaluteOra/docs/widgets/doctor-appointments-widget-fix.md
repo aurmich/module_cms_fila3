@@ -106,7 +106,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
     public function deleteAction(): Action
     {
         return Action::make('delete')
-            ->label('Elimina')
+            // Traduzione automatica dal file di lingua
             ->icon('heroicon-o-trash')
             ->color('danger')
             ->requiresConfirmation()

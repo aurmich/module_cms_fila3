@@ -1,5 +1,4 @@
-
-# Regole Critiche per Traduzioni - Windsurf Rules
+# Regole Critiche per Traduzioni - MEMORIA PERMANENTE
 
 ## REGOLA ASSOLUTA: MAI USARE ->label()
 - **VIETATO**: `->label('Testo')` o `->label(__('chiave'))`
@@ -104,3 +103,7 @@ Prima di ogni commit, verificare:
 - Inconsistenza con il framework
 
 ULTIMO AGGIORNAMENTO: 2025-01-06 - REGOLA CRITICA DA RICORDARE SEMPRE
+description:
+globs:
+alwaysApply: false
+---
