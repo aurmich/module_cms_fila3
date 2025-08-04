@@ -7,6 +7,7 @@ Il modulo Pazienti gestisce le anagrafiche dei pazienti, i documenti ISEE e la s
 
 ### Installazione
 ```bash
+
 # Creazione del modulo
 php artisan module:make Patient
 
@@ -640,6 +641,7 @@ class PatientApiTest extends TestCase
     }
 }
 ``` 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)

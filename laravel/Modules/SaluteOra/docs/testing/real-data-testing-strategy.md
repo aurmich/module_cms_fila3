@@ -160,6 +160,7 @@ test('patient cannot have duplicate fiscal code', function () {
 - **Developer Experience**: Feedback loop rallentato
 
 ```bash
+
 # Performance comparison
 Traditional: 1000 tests in 50s
 Real Data:   1000 tests in 200s (4x slower)
@@ -220,6 +221,7 @@ private function seedTestDatabase(): void
 
 ### 3. Test Categories Separation
 ```bash
+
 # Esecuzione test separata per categoria
 ./vendor/bin/pest --group=unit     # Fast unit tests
 ./vendor/bin/pest --group=integration  # Medium integration tests  
@@ -288,6 +290,7 @@ public function definition(): array
 
 ### 3. CI/CD Considerations
 ```yaml
+
 # .github/workflows/tests.yml
 name: Tests
 on: [push, pull_request]
@@ -385,4 +388,3 @@ jobs:
 **Complexity**: 🔧 MEDIUM - Requires process change  
 **Risk Level**: ⚠️ CONTROLLED - With proper mitigation  
 
-*"Testing with real data reveals real problems. The price is complexity, the reward is confidence."* 

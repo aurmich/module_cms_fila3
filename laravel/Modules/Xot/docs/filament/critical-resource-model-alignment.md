@@ -100,6 +100,7 @@ public static function getFormSchema(): array
 
 ### Script di Verifica Automatica
 ```bash
+
 # Verifica che tutti i campi fillable siano presenti nella risorsa
 grep -r "protected \$fillable" Modules/*/app/Models/ | while read line; do
     # Estrai modello e campi

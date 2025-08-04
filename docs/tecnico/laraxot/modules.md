@@ -123,6 +123,7 @@ I seguenti moduli non sono necessari per il progetto:
 ## Installazione con Git Subtree
 
 ```bash
+
 # Moduli Frontend
 git subtree add --prefix laravel/Modules/UI git@github.com:laraxot/module_ui_fila3.git dev
 git subtree add --prefix laravel/Themes/One git@github.com:laraxot/theme_one_fila3.git dev
@@ -154,6 +155,7 @@ git subtree pull --prefix laravel/Modules/[NomeModulo] git@github.com:laraxot/mo
 
 Per aggiornare tutti i moduli:
 ```bash
+
 # Aggiorna tutti i moduli
 for dir in laravel/Modules/*/; do
     if [ -d "$dir/.git" ]; then
@@ -251,6 +253,7 @@ Ogni modulo è configurato attraverso il proprio file `module.json` nella direct
 4. **Testing**
    - Testare ogni modulo dopo l'installazione
    - Verificare le integrazioni tra moduli 
+
 ## Collegamenti tra versioni di modules.md
 * [modules.md](docs/tecnico/laraxot/modules.md)
 * [modules.md](docs/architecture/modules.md)

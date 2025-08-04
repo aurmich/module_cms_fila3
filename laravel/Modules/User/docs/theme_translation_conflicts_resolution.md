@@ -178,6 +178,7 @@ php artisan lang:check
 
 ### 3. Test Coerenza
 ```bash
+
 # Verifica che tutte le chiavi siano presenti in tutte le lingue
 php artisan lang:missing --locale=it,en,de
 ```
@@ -259,4 +260,3 @@ php artisan lang:missing --locale=it,en,de
 
 **Ultimo aggiornamento**: 2025-01-06
 **Autore**: Sistema di correzione automatica
-**Stato**: ✅ Completato

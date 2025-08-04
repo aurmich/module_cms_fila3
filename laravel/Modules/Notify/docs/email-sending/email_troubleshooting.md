@@ -154,6 +154,7 @@ Per testare le email in ambiente locale senza inviarle realmente:
 2. Utilizzare Laravel Log Driver per salvare le email nel log
 
 ```dotenv
+
 # .env per test con Mailtrap
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io

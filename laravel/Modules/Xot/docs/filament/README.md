@@ -12,6 +12,7 @@ Questa cartella contiene la documentazione relativa all'implementazione di Filam
 ## Note
 
 Questa documentazione si applica a tutti i moduli che utilizzano Filament per il backend. 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)
@@ -121,6 +122,7 @@ Questa documentazione si applica a tutti i moduli che utilizzano Filament per il
 ### Checklist
 - [ ] Nessuna closure void restituisce un valore
 - [ ] Tutte le azioni custom rispettano la signature void
+
 # Regole generali per XotBaseResource
 
 ## Proprietà e metodi vietati nei Resource

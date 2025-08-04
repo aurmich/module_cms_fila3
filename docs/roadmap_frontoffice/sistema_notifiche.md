@@ -19,6 +19,7 @@ Il sistema di notifiche di SaluteOra è un'infrastruttura multi-canale progettat
 
 ### Technology Stack
 ```yaml
+
 # Backend
 Queue System: Redis + Laravel Horizon
 Email: Amazon SES + Mailgun (fallback)
@@ -260,6 +261,7 @@ Dettagli: {{details_link}}`
 
 ### Current Performance Metrics
 ```yaml
+
 # Email Performance
 Delivery Rate: 99.2%
 Open Rate: 67.8% (industry avg: 21%)
@@ -378,4 +380,3 @@ Retention Impact: +23%
 - [Mobile App](./mobile_app.md)
 - [Analisi Avanzate](./analisi_avanzate.md)
 
-*Ultimo aggiornamento: Dicembre 2024*

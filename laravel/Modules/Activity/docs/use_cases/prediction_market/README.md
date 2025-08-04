@@ -20,6 +20,7 @@ Questo modulo implementa un prediction market tramite event sourcing, aggregate 
 php artisan activity:market:create "Elezioni 2024" "Prevedi il vincitore" "2024-11-30"
 php artisan activity:market:place-bet market_xxx 12345 "Candidato A" 100
 php artisan activity:market:resolve market_xxx "Candidato A"
+
 # 🎯 Prediction Market Module
 
 ## 📚 Introduzione
@@ -88,6 +89,7 @@ Il modulo Prediction Market implementa un sistema completo di mercati predittivi
 
 ### Comandi Console
 ```bash
+
 # Gestione Mercati
 php artisan market:create "Titolo Mercato" "Descrizione" "2023-12-31 23:59:59"
 php artisan market:resolve {marketId} {outcomeId}

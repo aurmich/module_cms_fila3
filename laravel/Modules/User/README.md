@@ -1,4 +1,5 @@
 # Module User Fila3 🔥 Ultimate User, Roles & Permissions Manager for FilamentPHP 🚀
+
 # 👤 User Module - Advanced User Management
 
 [![Latest Release](https://img.shields.io/github/v/release/laraxot/module_user_fila3)](https://github.com/laraxot/module_user_fila3/releases)
@@ -12,6 +13,7 @@ Manage users, roles, and permissions with lightning speed ⚡ through this Larav
 - **Create Super Admin in Seconds**: Instantly make any user a super admin with `php artisan user:super-admin`. 🛡️
 - **Dynamic Module Assignment**: Control user access to specific modules through `php artisan user:assign-module`. 🎯
 - **Complete Team Management**: Manage teams with simple commands like `php artisan team:create` and `php artisan team:assign-user`. 👥
+
 ### Versione HEAD
 
 - **Permissions that Fit**: Set flexible roles and permissions to fit your app's unique needs! 🔑
@@ -488,6 +490,7 @@ php artisan user:assign-module
 L'account potrà accedere al modulo assegnato.
 
 ## [Gestione dei Team](docs/teams.md)
+
 ### Versione HEAD
 
 

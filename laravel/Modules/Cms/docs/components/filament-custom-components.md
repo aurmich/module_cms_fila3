@@ -329,6 +329,7 @@ class CustomWidgetTest extends DuskTestCase
 
 ### 1. Problemi di Stile
 ```bash
+
 # Ricompilare gli assets
 npm run build
 

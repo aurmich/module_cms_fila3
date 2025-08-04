@@ -79,6 +79,7 @@ Questo documento definisce i contesti e le regole per i modelli dell'applicazion
 Per validare i contesti dei modelli:
 
 ```bash
+
 # Validare tutti i modelli
 php artisan mcp:validate
 

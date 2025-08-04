@@ -1,31 +1,20 @@
 # Indice della Documentazione
 
-## Documentazione Base
-- [README](/docs/README.md) - Panoramica generale del progetto
-- [Presentazione](/docs/presentazione.md) - Presentazione del progetto
-- [Filosofia](/docs/filosofia.md) - Filosofia del progetto
-- [Architettura Tecnologica](/docs/architettura_tecnologica.md) - Architettura del sistema
-- [Progetto](/docs/progetto.md) - Documentazione principale del progetto
-- [Roadmap](/docs/roadmap.md) - Piano di sviluppo del progetto
+## 📚 Documentazione SaluteOra - Indice Consolidato DRY + KISS
 
-## Installazione e Configurazione
-- [Installazione Iniziale](/docs/installazione-iniziale.md)
-- [Server Setup](/docs/server_setup.md)
-- [Configurazione](/docs/configuration.md)
-- [App PHP Configuration](/docs/app-php-configuration.md)
+## 🎯 Navigazione Rapida
 
-## Sviluppo e Standard
-- [Standard Codice](/docs/standard-codice.md)
-- [Convenzioni](/docs/conventions.md)
-- [Naming Conventions](/docs/naming-conventions.md)
-- [Schema Conventions](/docs/schema_conventions.md)
-- [PHPStan Level 10](/docs/phpstan_level10_fixes.md)
-- [Error Resolution Guidelines](/docs/error_resolution_guidelines.md) - Standardized process for identifying, documenting, and resolving errors.
-- [Documentation Standards](/docs/documentation_standards.md) - Guidelines for maintaining consistent and reusable documentation across projects.
-- [Path and Namespace Conventions](/docs/path_and_namespace_conventions.md) - Best practices for file paths and namespace structures.
+### 🏛️ Core - Fondamenti
+- [🎭 Filosofia](core/filosofia.md) - Principi e valori del progetto
+- [🏗️ Architettura](core/architettura_tecnologica.md) - Struttura tecnica
+- [📋 Progetto](core/progetto.md) - Overview completa
+- [🎨 Presentazione](core/presentazione.md) - Materiali presentazione
 
-## Framework e Componenti
-- [Laravel App](/docs/laravel-app)
+### 🛠️ Development - Sviluppo
+- [🚀 Getting Started](development/getting-started.md) - Primi passi
+- [📏 Coding Standards](development/coding-standards.md) - Standard di codifica
+- [🧪 Testing](development/testing.md) - Strategie di test
+- [🐛 Debugging](development/debugging.md) - Risoluzione problemi
 - [Filament](/docs/filament)
 - [Frontend Development](/docs/frontend-development.md)
 - [Temi](/docs/theme-links.md)

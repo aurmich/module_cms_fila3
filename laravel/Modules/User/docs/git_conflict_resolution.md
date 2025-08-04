@@ -5,6 +5,7 @@
 ### 1. Strategie di Prevenzione
 
 ```bash
+
 # Pre-commit hook per verificare conflitti potenziali
 git diff --check
 
@@ -21,6 +22,7 @@ git diff origin/main...HEAD
 
 #### Metodo 1: Merge con Strategy
 ```bash
+
 # Usa strategie di merge avanzate
 git merge -X ours feature_branch    # Preferisci il branch corrente
 git merge -X theirs feature_branch  # Preferisci il branch remoto
@@ -28,17 +30,22 @@ git merge -X theirs feature_branch  # Preferisci il branch remoto
 
 #### Metodo 2: Rebase Interattivo
 ```bash
+
 # Riorganizza i commit per evitare conflitti
 git rebase -i origin/main
 
 # Opzioni disponibili:
+
 # pick   - mantieni il commit
+
 # edit   - modifica il commit
+
 # squash - unisci con il commit precedente
 ```
 
 #### Metodo 3: Stash e Apply
 ```bash
+
 # Salva le modifiche locali
 git stash save "modifiche_importanti"
 
@@ -53,6 +60,7 @@ git stash pop
 
 1. **Git Mergetool**
 ```bash
+
 # Configura il tool preferito
 git config --global merge.tool vscode
 
@@ -71,6 +79,7 @@ git mergetool
 
 3. **PhpStorm**
 ```bash
+
 # Usa il merge tool integrato
 Tools -> Git -> Resolve Conflicts
 ```
@@ -146,6 +155,7 @@ safe_merge() {
 ### 6. Comandi Utili
 
 ```bash
+
 # Verifica branch e modifiche
 git branch -vv
 git status -s
@@ -161,6 +171,7 @@ git log --graph --oneline --all
 ### 7. Configurazione Git
 
 ```bash
+
 # Configurazione globale
 git config --global merge.conflictstyle diff3
 git config --global merge.tool vscode
@@ -195,4 +206,3 @@ git config --global alias.theirs '!f() { git checkout --theirs "$@" && git add "
 2. Mantenere commit atomici e descrittivi
 3. Usare tag per le release
 4. Documentare le decisioni di merge
-5. Testare dopo ogni risoluzione 

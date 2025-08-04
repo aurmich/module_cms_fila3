@@ -81,6 +81,7 @@ Prima di creare una nuova Action, verificare SEMPRE:
 Eseguire questi controlli prima di ogni commit:
 
 ```bash
+
 # Cerca usi errati di metodi statici nelle Actions
 grep -r "Action::" Modules/ --include="*.php" | grep -v "use\|namespace"
 
@@ -105,4 +106,3 @@ grep -r "public static function" Modules/ --include="*.php" | grep "Action"
 - [DRY Actions Rules](../.cursor/rules/DRY-actions-rules.md)
 - [Spatie QueueableAction Documentation](https://github.com/spatie/laravel-queueable-action)
 
-*Ultimo aggiornamento: 2025-01-06* 

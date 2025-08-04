@@ -128,6 +128,7 @@ composer require calebporzio/sushi
 
 ### 2. Backup
 ```bash
+
 # Backup del file JSON
 cp database/content/comuni.json database/content/comuni.json.bak
 

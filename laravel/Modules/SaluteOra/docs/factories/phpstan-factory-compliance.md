@@ -235,6 +235,7 @@ private function createMockAttachments(User $user, array $attachments): void
 ## 📋 Testing Compliance
 
 ```bash
+
 # Verifica compliance PHPStan
 cd /var/www/html/_bases/base_saluteora/laravel
 ./vendor/bin/phpstan analyze Modules/SaluteOra/database/factories --level=9
@@ -250,4 +251,3 @@ php artisan tinker
 
 *Ultimo aggiornamento: Dicembre 2024*
 *Versione: 1.0*
-*Compatibilità: PHPStan 1.10+, Larastan 3.x, Laravel 11+* 

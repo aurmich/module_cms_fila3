@@ -82,6 +82,7 @@ Ogni stato deve avere TUTTE queste proprietà:
 
 ### Verifica Tecnica
 ```bash
+
 # Controllo proprietà critiche
 grep -r "bg_color" Modules/SaluteOra/lang/it/
 grep -r "color" Modules/SaluteOra/lang/it/
@@ -119,4 +120,3 @@ Questo documento serve come promemoria critico per evitare errori futuri. La reg
 
 **MAI TOGLIERE CONTENUTI ESISTENTI - SOLO AGGIUNGERE O MIGLIORARE**
 
-Ogni modifica deve essere conservativa e preservare tutte le funzionalità esistenti. 

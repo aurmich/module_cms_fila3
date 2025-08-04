@@ -96,6 +96,7 @@ class AppointmentResource extends XotBaseResource
 
 ### 1. Test Integrazione
 ```bash
+
 # Test modulo Geo
 php artisan test --filter=Geo
 
@@ -194,4 +195,3 @@ php artisan lang:check
 
 **Ultimo aggiornamento**: 2025-01-06
 **Autore**: Sistema di correzione automatica
-**Stato**: ✅ Completato

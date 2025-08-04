@@ -272,6 +272,7 @@ class MyWidget extends XotBaseChartWidget
 Eseguire sempre questi controlli prima del commit:
 
 ```bash
+
 # Controllo estensione XotBase (CRITICO)
 grep -r "extends ChartWidget" laravel/Modules/SaluteMo/app/Filament/Widgets/
 grep -r "extends Widget" laravel/Modules/SaluteMo/app/Filament/Widgets/
@@ -319,4 +320,3 @@ use Filament\Widgets\Widget;       // ERRORE!
 **Ultimo aggiornamento**: Dicembre 2024
 **Versione**: 2.0
 **Stato**: ✅ Attivo
-**Regola Critica**: ✅ SEMPRE ESTENDERE XOTBASE 

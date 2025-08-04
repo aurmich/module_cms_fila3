@@ -7,6 +7,7 @@ Questo documento fornisce le linee guida per il testing completo e il deployment
 ### 1.1 Setup dell'Ambiente di Testing
 
 ```bash
+
 # Creazione di un database specifico per i test
 mysql -u root -p -e "CREATE DATABASE saluteora_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 mysql -u root -p -e "GRANT ALL PRIVILEGES ON saluteora_test.* TO 'saluteora'@'localhost';"
@@ -28,6 +29,7 @@ QUEUE_CONNECTION=sync
 ### 1.2 Installazione degli Strumenti di Testing
 
 ```bash
+
 # Installazione di PHPUnit e altri strumenti di testing
 composer require --dev phpunit/phpunit laravel/dusk laravel/browser-kit-testing spatie/phpunit-snapshot-assertions
 ```
@@ -39,6 +41,7 @@ composer require --dev phpunit/phpunit laravel/dusk laravel/browser-kit-testing 
 Creare test unitari per i modelli, servizi e altre componenti principali:
 
 ```bash
+
 # Generazione dei test unitari per i modelli principali
 php artisan make:test Models/PatientTest --unit
 php artisan make:test Models/DentistTest --unit
@@ -279,6 +282,7 @@ class GdprComplianceTest extends TestCase
 Eseguire test di sicurezza per verificare la protezione contro vulnerabilità comuni:
 
 ```bash
+
 # Installazione di strumenti per il test di sicurezza
 composer require --dev enlightn/enlightn
 
@@ -291,6 +295,7 @@ php artisan enlightn
 ### 3.1 Ottimizzazione della Performance
 
 ```bash
+
 # Ottimizzazione dell'autoloader
 composer install --optimize-autoloader --no-dev
 
@@ -488,6 +493,7 @@ jobs:
 Creare un file di configurazione per Supervisord:
 
 ```ini
+
 # /etc/supervisor/conf.d/saluteora-worker.conf
 [program:saluteora-worker]
 process_name=%(program_name)s_%(process_num)02d
@@ -517,6 +523,7 @@ Creare uno script di backup automatico:
 
 ```bash
 #!/bin/bash
+
 # /usr/local/bin/saluteora-backup.sh
 
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
@@ -584,6 +591,7 @@ Creare uno script di rollback per situazioni di emergenza:
 
 ```bash
 #!/bin/bash
+
 # /usr/local/bin/saluteora-rollback.sh
 
 # Rollback all'ultima versione stabile
@@ -608,6 +616,7 @@ Pianificare aggiornamenti regolari delle dipendenze e delle patch di sicurezza:
 
 ```bash
 #!/bin/bash
+
 # /usr/local/bin/saluteora-update-deps.sh
 
 cd /var/www/saluteora
@@ -622,4 +631,3 @@ git push
 
 Seguendo queste linee guida per il testing e il deployment, il progetto il progetto potrà essere gestito in modo sicuro e affidabile. Le procedure di test garantiranno la qualità del codice e la conformità ai requisiti, mentre il processo di deployment automatizzato ridurrà il rischio di errori umani e semplificherà l'aggiornamento dell'applicazione.
 
-È importante mantenere aggiornata questa documentazione man mano che il progetto evolve, aggiungendo nuovi test e migliorando le procedure di deployment in base alle esigenze emergenti. 

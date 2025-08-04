@@ -119,6 +119,7 @@ public function handle(Request $request, Closure $next): Response
 ## Comandi Utili
 
 ```bash
+
 # Lista delle route tradotte
 php artisan route:trans:list {locale}
 

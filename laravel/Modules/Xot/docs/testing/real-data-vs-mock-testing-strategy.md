@@ -178,6 +178,7 @@ test('complete tax filing process', function () {
 ### Test Execution Strategy
 
 ```bash
+
 # Development: Fast feedback
 ./vendor/bin/pest --group=unit
 
@@ -387,4 +388,3 @@ test('legacy feature with mocks', function () {
 **Decision Authority**: Technical Architecture Committee  
 **Implementation Timeline**: 4-week migration  
 
-*"Choose your testing strategy not by convention, but by consequence. In healthcare, realism isn't luxury—it's necessity."* 

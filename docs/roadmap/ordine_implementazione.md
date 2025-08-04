@@ -102,6 +102,7 @@ Solo dopo aver importato tutti i moduli Laraxot necessari, procedere con la crea
 ```bash
 php artisan module:make Patient
 php artisan module:make Dental
+
 # Altri moduli custom...
 ```
 
@@ -175,4 +176,3 @@ Importare i moduli nell'ordine corretto garantisce:
 
 ## Conclusione
 
-Seguire l'ordine corretto di implementazione dei moduli è fondamentale per garantire uno sviluppo efficiente e ridurre al minimo i problemi tecnici. L'importazione dei moduli Laraxot esistenti dovrebbe sempre precedere la creazione di moduli personalizzati, assicurando così una solida base per l'estensione del sistema. 

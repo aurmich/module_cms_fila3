@@ -86,6 +86,7 @@ protected function casts(): array
 
 ### File da Verificare
 ```bash
+
 # Cerca tutti i modelli nel modulo Geo
 find laravel/Modules/Geo/app/Models/ -name "*.php" -exec grep -l "protected \$casts" {} \;
 ```
@@ -195,4 +196,3 @@ protected function casts(): array
 - [ ] **Altri moduli**: Ricerca globale
 
 ## Ultimo aggiornamento
-2025-01-06 - Correzione completa del problema critico nel modulo Geo e verifica globale 

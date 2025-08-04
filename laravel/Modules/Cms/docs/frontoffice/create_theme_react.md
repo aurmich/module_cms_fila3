@@ -18,6 +18,7 @@ Questa guida descrive come creare un nuovo tema per il CMS utilizzando React com
 ## Passo 1: Installazione e Configurazione Base
 
 ```bash
+
 # Installare il pacchetto Flowbite Laravel
 composer require flowbite/flowbite-laravel
 

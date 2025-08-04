@@ -46,6 +46,7 @@ Questo documento descrive la struttura e la gestione dei collegamenti tra i modu
 
 ### 1. Documentazione
 ```markdown
+
 # Esempio di struttura docs in un modulo
 docs/
 ├── README.md           # Panoramica e indice
@@ -180,6 +181,7 @@ class ModuleLinksTest extends TestCase
 - Mantenere changelog
 - Aggiornare esempi
 - Verificare coerenza 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)

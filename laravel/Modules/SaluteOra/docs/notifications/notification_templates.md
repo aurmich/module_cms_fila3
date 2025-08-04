@@ -55,6 +55,7 @@ Per maggiori dettagli sull'implementazione multi-canale, consultare la [document
 
 ```php
 @component('mail::message')
+
 # {{ __('patient::notifications.doctor_registration_started.subject') }}
 
 {{ __('patient::notifications.doctor_registration_started.greeting', ['name' => $doctor->first_name]) }}

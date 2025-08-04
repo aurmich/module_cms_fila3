@@ -39,6 +39,7 @@ class ProductResource extends XotBaseResource
 Verificare sempre che le risorse Filament non contengano metodi non necessari:
 
 ```bash
+
 # Cerca implementazioni non necessarie
 grep -r "public static function form" --include="*.php" /path/to/resources
 grep -r "public static function table" --include="*.php" /path/to/resources

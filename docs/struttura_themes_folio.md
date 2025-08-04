@@ -87,6 +87,7 @@ Il parametro `[locale]` NON è gestito come directory dinamica ma attraverso il 
 
 ### ❌ ERRORE 1: Creare file nella struttura standard
 ```bash
+
 # SBAGLIATO
 /laravel/resources/views/pages/[locale]/patient/book.blade.php
 ```
@@ -99,6 +100,7 @@ Folio::path(resource_path('views/pages'));
 
 ### ❌ ERRORE 3: Creare directory [locale]
 ```bash
+
 # SBAGLIATO - [locale] non è una directory fisica
 mkdir -p resources/views/pages/[locale]/patient
 ```
@@ -112,6 +114,7 @@ cat /laravel/config/theme.php | grep "'name'"
 
 ### 2. Crea il File nel Theme Corretto
 ```bash
+
 # Esempio per pagina /it/services/cardiology
 touch /laravel/Themes/One/resources/views/pages/services/cardiology.blade.php
 ```

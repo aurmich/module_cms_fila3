@@ -30,6 +30,7 @@ Gestisce gli aggiornamenti con:
 ## Utilizzo
 
 ```bash
+
 # Manutenzione completa
 ./clear_cache.sh
 ./optimize_database.sh

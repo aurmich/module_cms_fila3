@@ -188,6 +188,7 @@ $users->each(function ($user) {
 ### 2. Gestione Worker
 
 ```bash
+
 # Avvia worker dedicato
 php artisan queue:work --queue=emails
 
@@ -290,6 +291,7 @@ $this->call('queue:prune-batches', [
 ### 1. Orizzontale
 
 ```bash
+
 # Supervisor config
 [program:<nome progetto>-worker]
 process_name=%(program_name)s_%(process_num)02d
@@ -375,6 +377,7 @@ if ($failedJobs > $threshold) {
 ### 1. Pulizia
 
 ```bash
+
 # Pulizia job vecchi
 php artisan queue:prune-failed --hours=168
 php artisan queue:prune-batches --hours=24
@@ -409,4 +412,3 @@ php artisan queue:restart
 ## Vedi Anche
 - [Laravel Queues](https://laravel.com/docs/queues)
 - [Horizon Documentation](https://laravel.com/docs/horizon)
-- [Redis Documentation](https://redis.io/documentation) 

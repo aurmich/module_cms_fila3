@@ -117,6 +117,7 @@ Questo tema è un tema Laravel/Filament riutilizzabile, pensato per essere usato
 
 ## Dipendenze CSS
 ```bash
+
 # Installazione dipendenze Filament
 npm install tailwindcss@3 @tailwindcss/forms @tailwindcss/typography postcss postcss-nesting autoprefixer --save-dev
 ```

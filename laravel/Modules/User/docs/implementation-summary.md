@@ -244,6 +244,7 @@ All changes follow established architectural patterns and maintain the high qual
 ## Testing Commands
 
 ```bash
+
 # Run PHPStan analysis
 ./vendor/bin/phpstan analyse Modules/User
 
@@ -252,4 +253,3 @@ php artisan test --filter=User
 
 # Check for any new errors
 ./vendor/bin/phpstan analyse Modules
-``` 

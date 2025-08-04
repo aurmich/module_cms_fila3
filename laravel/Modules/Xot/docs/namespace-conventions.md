@@ -8790,6 +8790,7 @@ class RatingData extends Data
 
  aurmich/dev
  aurmich/dev
+
 # Convenzioni Namespace in <nome progetto>
 
 Questo documento descrive le convenzioni di namespace adottate nel progetto <nome progetto>, con particolare attenzione alla struttura modulare basata su Laravel.
@@ -9115,6 +9116,7 @@ La configurazione dell'autoloading in `composer.json` deve riflettere questa str
 
 
  aurmich/dev
+
 ## Risoluzione dei Problemi PHPStan con i Namespace
 
 I problemi PHPStan relativi ai namespace possono essere identificati da messaggi come:
@@ -9172,6 +9174,7 @@ aurmich/dev
 
  aurmich/dev
  aurmich/dev
+
 ## Casi Speciali
 
 ### Traits

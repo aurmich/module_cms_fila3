@@ -23,6 +23,7 @@
 
 ### 1. Analisi
 ```bash
+
 # Verifica lo stato
 git status
 
@@ -34,17 +35,21 @@ git diff --name-only --diff-filter=U
 
 #### Approccio Manuale
 ```bash
+
 # Apri i file in conflitto
+
 # Cerca i marcatori di conflitto:
 codice nel tuo branch
 codice nel branch da mergeare
 
 # Decidi quale codice mantenere
+
 # Rimuovi i marcatori di conflitto
 ```
 
 #### Strumenti Visuali
 ```bash
+
 # Usa uno strumento di merge
 git mergetool
 
@@ -73,6 +78,7 @@ git config --global merge.tool vscode
 
 ### 1. Conflitti nei File di Configurazione
 ```bash
+
 # Usa la strategia ours per file di configurazione locali
 git checkout --ours config/local.php
 git add config/local.php
@@ -84,6 +90,7 @@ git add config/shared.php
 
 ### 2. Conflitti nei File di Lock
 ```bash
+
 # Risolvi conflitti in composer.lock
 git checkout --theirs composer.lock
 composer install
@@ -92,8 +99,10 @@ git add composer.lock
 
 ### 3. Conflitti nelle Migrazioni
 ```bash
+
 # Rinomina le migrazioni in conflitto
 git checkout --ours database/migrations/*
+
 # Aggiorna i timestamp
 php artisan migration:fresh
 ```
@@ -101,6 +110,7 @@ php artisan migration:fresh
 ## Comandi Utili
 
 ```bash
+
 # Annulla merge in corso
 git merge --abort
 
@@ -135,18 +145,24 @@ git branch --no-merged
 
 ### 1. Rebase Interattivo
 ```bash
+
 # Inizia rebase interattivo
 git rebase -i main
 
 # Comandi disponibili:
+
 # pick - usa il commit
+
 # squash - unisci con il commit precedente
+
 # edit - modifica il commit
+
 # drop - elimina il commit
 ```
 
 ### 2. Cherry-Pick
 ```bash
+
 # Seleziona commit specifici
 git cherry-pick <commit-hash>
 
@@ -159,6 +175,7 @@ git cherry-pick --continue
 
 1. **Test Automatici**
 ```bash
+
 # Esegui tutti i test
 php artisan test
 

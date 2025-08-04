@@ -83,6 +83,7 @@ Permission denied
 
 ### 1. Analisi Iniziale
 ```bash
+
 # Verifica stato attuale
 ls -la public_html/vendor
 ls -la public_html/css/filament
@@ -94,6 +95,7 @@ stat public_html/css/filament
 
 ### 2. Pulizia Sistema
 ```bash
+
 # Cache
 php artisan cache:clear
 php artisan config:clear
@@ -106,6 +108,7 @@ rm -rf public_html/css/filament/*
 
 ### 3. Ripubblicazione
 ```bash
+
 # Filament
 php artisan filament:assets
 
@@ -120,6 +123,7 @@ php artisan optimize
 
 ### 1. Monitoraggio
 ```bash
+
 # Spazio disco
 df -h
 
@@ -130,6 +134,7 @@ ls -la public_html/css/filament
 
 ### 2. Backup
 ```bash
+
 # Prima degli aggiornamenti
 cp -r public_html/vendor public_html/vendor_backup
 cp -r public_html/css/filament public_html/css/filament_backup
@@ -163,4 +168,3 @@ cp -r public_html/css/filament public_html/css/filament_backup
 - Pubblicare un pacchetto alla volta
 - Verificare dopo ogni pubblicazione
 - Documentare le modifiche
-- Mantenere un registro degli errori 

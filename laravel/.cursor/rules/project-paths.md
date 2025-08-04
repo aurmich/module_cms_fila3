@@ -37,6 +37,7 @@ Tutti i percorsi assoluti nel progetto SaluteOra **DEVONO** includere il segment
 Prima di inviare codice, verificare sempre i percorsi con:
 
 ```bash
+
 # Verifica che non ci siano reference a percorsi errati (senza laravel/)
 grep -r "/var/www/html/base_saluteora/app" --include="*.php" .
 grep -r "/var/www/html/base_saluteora/Modules" --include="*.php" .

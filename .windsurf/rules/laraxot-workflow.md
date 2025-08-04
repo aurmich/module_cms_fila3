@@ -14,6 +14,7 @@ Usa `/laraxot` in Windsurf Cascade per eseguire questo workflow completo.
 
 ### 1.1 Controllo Ambiente
 ```bash
+
 # Verifica la versione PHP e le estensioni necessarie
 php -v
 php -m | grep -E "(pdo|mbstring|xml|ctype|json|openssl|tokenizer|bcmath)"
@@ -28,6 +29,7 @@ npm -v
 
 ### 1.2 Setup Directory di Lavoro
 ```bash
+
 # Assicurati di essere nella directory Laravel corretta
 cd /var/www/html/_bases/base_<nome progetto>/laravel
 
@@ -37,6 +39,7 @@ ls -la Modules/
 
 ### 1.3 Controllo Dipendenze
 ```bash
+
 # Aggiorna dipendenze Composer
 composer install --optimize-autoloader
 
@@ -64,6 +67,7 @@ Verifica che tutti i namespace seguano le convenzioni Laraxot:
 
 ### 2.2 Analisi Statica con PHPStan
 ```bash
+
 # SEMPRE eseguire da /laravel directory
 cd /var/www/html/_bases/base_<nome progetto>/laravel
 
@@ -74,11 +78,13 @@ cd /var/www/html/_bases/base_<nome progetto>/laravel
 ./vendor/bin/phpstan analyze Modules/<nome progetto> --level=9
 
 # Mai usare artisan per phpstan
+
 # ❌ ERRATO: php artisan test:phpstan
 ```
 
 ### 2.3 Controllo Coding Standards
 ```bash
+
 # PHP CS Fixer per standard PSR-12
 ./vendor/bin/php-cs-fixer fix --dry-run --diff
 
@@ -98,6 +104,7 @@ Verifica che le migrazioni seguano le regole Laraxot:
 - ✅ Per aggiungere colonne: copiare migrazione originale con nuovo timestamp
 
 ```bash
+
 # Controllo status migrazioni
 php artisan migrate:status
 
@@ -145,6 +152,7 @@ Verifica che:
 
 ### 5.1 Unit Tests
 ```bash
+
 # Esegui tutti i test
 php artisan test
 
@@ -157,6 +165,7 @@ php artisan test --coverage
 
 ### 5.2 Feature Tests
 ```bash
+
 # Test delle API
 php artisan test tests/Feature/Api/
 

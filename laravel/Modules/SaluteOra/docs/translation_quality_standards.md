@@ -248,12 +248,15 @@ Il file `profile_widget.php` è stato **corretto** seguendo gli standard:
 
 ### Controllo Continuo
 ```bash
+
 # Comando per verifica stato qualità
 grep -r "array(" Modules/SaluteOra/lang/ --include="*.php" | wc -l
+
 # Risultato atteso: 0
 
 # Comando per verifica helper_text
 grep -r "helper_text.*=>.*'[a-z_]*'" Modules/SaluteOra/lang/ --include="*.php" | wc -l
+
 # Risultato atteso: 0
 ```
 

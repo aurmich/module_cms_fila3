@@ -1026,6 +1026,7 @@ return new AddressData(
 - Mantenere aggiornata la documentazione del modulo
 
 ## Componenti
+
 ### Form Builder
 - Creazione form dinamici
 - Validazione integrata
@@ -1047,7 +1048,9 @@ return new AddressData(
 - Integrazione email
 
 ## Troubleshooting
+
 ### Problemi Comuni
+
 #### Widget Issues
 - Percorsi viste non corretti
   - Soluzione: Spostare in `resources/views/filament/widgets/`
@@ -1069,6 +1072,7 @@ return new AddressData(
 - Profiling applicazione
 
 ## Aggiornamenti
+
 ### Procedura
 1. Backup dati
 2. Aggiornamento dipendenze
@@ -1645,6 +1649,7 @@ return [
 - Un file di traduzione dedicato per ogni componente
 - Struttura standardizzata con chiave 'navigation'
 - Definizione completa di gruppo, label, icona e ordinamento
+
 # Laraxot Framework
 
 ## Panoramica
@@ -2318,6 +2323,7 @@ npm install
 
 ### Comandi Build
 ```bash
+
 # Development build
 npm run dev
 
@@ -2559,6 +2565,7 @@ F:\var\www\fixcity\
 
 ### ✅ Modo Corretto
 ```bash
+
 # Posizionarsi nella directory laravel
 cd F:\var\www\fixcity\laravel
 
@@ -2570,6 +2577,7 @@ php artisan config:clear
 
 ### ❌ Modi Errati
 ```bash
+
 # ❌ ERRATO: dalla root del progetto
 cd F:\var\www\fixcity
 php artisan module:seed Fixcity  # Non funzionerà
@@ -2581,6 +2589,7 @@ php artisan module:seed Fixcity  # Non funzionerà
 
 ## Comandi Comuni
 ```bash
+
 # Dalla directory F:\var\www\fixcity\laravel
 php artisan module:seed Fixcity          # Seeding modulo
 php artisan module:make-model Report     # Creare model
@@ -3366,6 +3375,7 @@ return [
 ### 1. Con Spatie Comments
 Se hai bisogno della funzionalità commenti:
 ```bash
+
 # 1. Installa il pacchetto
 composer require spatie/laravel-comments
 
@@ -3542,6 +3552,7 @@ $remember = $data['remember'] ?? false;
 
 ### Installazione
 ```bash
+
 # Nella directory del tema
 cd laravel/Themes/Sixteen
 
@@ -3737,6 +3748,7 @@ input: [
 
 ### 1. Installazione
 ```bash
+
 # Nella directory del tema
 cd laravel/Themes/Sixteen
 
@@ -3752,6 +3764,7 @@ yarn run build && yarn run copy
 
 ### 2. Verifica Build
 ```bash
+
 # Controlla output directory
 ls resources/dist/css
 
@@ -6066,6 +6079,7 @@ return [
 ### 1. Con Spatie Comments
 Se hai bisogno della funzionalità commenti:
 ```bash
+
 # 1. Installa il pacchetto
 composer require spatie/laravel-comments
 
@@ -6242,6 +6256,7 @@ $remember = $data['remember'] ?? false;
 
 ### Installazione
 ```bash
+
 # Nella directory del tema
 cd laravel/Themes/Sixteen
 
@@ -6437,6 +6452,7 @@ input: [
 
 ### 1. Installazione
 ```bash
+
 # Nella directory del tema
 cd laravel/Themes/Sixteen
 
@@ -6452,6 +6468,7 @@ yarn run build && yarn run copy
 
 ### 2. Verifica Build
 ```bash
+
 # Controlla output directory
 ls resources/dist/css
 

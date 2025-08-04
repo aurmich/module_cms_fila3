@@ -16,6 +16,7 @@ All forms in the system must be implemented using Filament widgets. No duplicate
 
 ## Examples
 ```blade
+
 # ❌ Wrong
 <div class="form">
     <form>

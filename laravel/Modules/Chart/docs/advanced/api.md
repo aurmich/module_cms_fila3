@@ -312,6 +312,7 @@ public function generateDashboard()
     ]);
 }
 ``` 
+
 # API del Modulo Chart
 
 Questo documento descrive le principali API disponibili nel modulo Chart, fornendo riferimenti e esempi di utilizzo.
@@ -626,6 +627,7 @@ public function generateDashboard()
     ]);
 }
 ``` 
+
 ## Collegamenti tra versioni di api.md
 * [api.md](../../../Gdpr/docs/api.md)
 * [api.md](../../../Dental/docs/api.md)

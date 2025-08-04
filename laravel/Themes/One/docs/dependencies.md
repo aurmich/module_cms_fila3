@@ -125,6 +125,7 @@ class ThemeServiceProvider extends ServiceProvider
 
 ### Aggiornamento Dipendenze
 ```bash
+
 # Aggiornamento Composer
 composer update --no-dev
 composer update --with-dependencies

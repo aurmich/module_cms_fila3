@@ -38,6 +38,7 @@ Per garantire la conformità a questa convenzione:
 Per verificare la corretta implementazione:
 
 ```bash
+
 # Cerca interfacce con naming errato
 grep -r "interface.*Interface" --include="*.php" /var/www/html/saluteora/laravel/Modules
 

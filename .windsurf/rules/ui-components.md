@@ -17,6 +17,7 @@ globs:
 
 ### Esempi di Componenti
 ```blade
+
 # ✅ Corretto
 <x-filament::button size="sm" href="{{ route('example') }}" tag="a">
     Testo

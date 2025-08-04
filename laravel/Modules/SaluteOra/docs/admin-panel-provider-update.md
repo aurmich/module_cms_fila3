@@ -326,6 +326,7 @@ private function getFullCalendarConfig(): array
 
 ### Nuove Variabili Aggiunte
 ```env
+
 # FullCalendar Scheduler License (opzionale)
 FULLCALENDAR_SCHEDULER_LICENSE_KEY=your-license-key-here
 

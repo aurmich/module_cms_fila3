@@ -11,6 +11,7 @@ Il sistema utilizza diversi template email per gestire il flusso di registrazion
 
 ```blade
 @component('mail::message')
+
 # Registrazione Approvata
 
 Gentile {{ $doctor->full_name }},
@@ -33,6 +34,7 @@ Cordiali saluti,
 
 ```blade
 @component('mail::message')
+
 # Registrazione Non Approvata
 
 Gentile {{ $doctor->full_name }},
@@ -59,6 +61,7 @@ Cordiali saluti,
 
 ```blade
 @component('mail::message')
+
 # Modifiche Richieste
 
 Gentile {{ $doctor->full_name }},
@@ -186,4 +189,3 @@ class DoctorRegistrationMail implements ShouldQueue
 ## Vedi Anche
 - [Laravel Mail](https://laravel.com/docs/mail)
 - [Markdown Mail](https://laravel.com/docs/mail#markdown-mailables)
-- [Queue Configuration](https://laravel.com/docs/queues) 

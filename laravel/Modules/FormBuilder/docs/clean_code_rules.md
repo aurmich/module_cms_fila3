@@ -229,18 +229,21 @@ $form->save();
 
 ### PHPStan
 ```bash
+
 # Validazione statica livello 9+
 ./vendor/bin/phpstan analyze Modules/FormBuilder --level=9
 ```
 
 ### PHP CS Fixer
 ```bash
+
 # Controllo standard di codice
 ./vendor/bin/php-cs-fixer fix Modules/FormBuilder --dry-run
 ```
 
 ### Pint
 ```bash
+
 # Laravel coding standards
 ./vendor/bin/pint Modules/FormBuilder --test
 ```

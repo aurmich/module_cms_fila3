@@ -20,6 +20,7 @@ Questo documento contiene la documentazione dettagliata dei comandi utilizzati p
 
 ### Verifica Requisiti
 ```bash
+
 # Verifica versione PHP
 php -v
 
@@ -81,6 +82,7 @@ sudo add-apt-repository ppa:ondrej/php
 
 ### Configurazione File .env
 ```bash
+
 # Naviga nella directory del progetto
 cd laravel
 
@@ -367,6 +369,7 @@ git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerl
 
 ### Configurazione Tema Powerlevel10k
 ```bash
+
 # Modifica il file ~/.zshrc
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
@@ -503,6 +506,7 @@ sudo apt-get install --install-recommends webmin usermin
 
 ### Aggiornamento Composer e Dipendenze
 ```bash
+
 # Naviga nella directory del progetto
 cd laravel
 

@@ -253,6 +253,7 @@ class ConsentRequest extends FormRequest
 
 ### cURL
 ```bash
+
 # Lista consensi
 curl -X GET \
   https://api.<nome progetto>.com/gdpr/consents \
@@ -294,6 +295,7 @@ $consent = $response->json()['data'];
 - [Implementazione](./implementation.md)
 - [Security](./security.md)
 - [Testing](./testing.md) 
+
 ## Collegamenti tra versioni di api.md
 * [api.md](../../Chart/docs/advanced/api.md)
 * [api.md](../../Dental/docs/api.md)

@@ -65,6 +65,7 @@ L'implementazione di questi metodi è giustificata **SOLO** in casi rari ed ecce
 Prima di ogni commit, verificare che le risorse Filament non contengano metodi proibiti:
 
 ```bash
+
 # Cerca implementazioni non necessarie
 grep -r "public static function getTableColumns" --include="*Resource.php" /var/www/html/base_saluteora/laravel/Modules/
 grep -r "public static function getTableFilters" --include="*Resource.php" /var/www/html/base_saluteora/laravel/Modules/

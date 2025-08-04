@@ -127,6 +127,7 @@ return [
 
 ### Regole di Alert
 ```yaml
+
 # alerting/rules.yml
 groups:
   - name: theme_one

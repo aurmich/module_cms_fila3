@@ -4,7 +4,7 @@
 
 Il modulo FormBuilder mira a raggiungere la **compliance PHPStan livello 9** su tutti i file core, seguendo le best practice identificate negli altri moduli del progetto SaluteOra.
 
->>>>>>> 8dc8761 (.)
+
 ## Target di Qualità
 
 ### File Core PHPStan Level 9

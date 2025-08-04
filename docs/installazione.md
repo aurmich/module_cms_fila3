@@ -82,6 +82,7 @@ php artisan serve
 Quando si aggiorna un modulo:
 
 ```bash
+
 # 1. Aggiornare il modulo
 git subtree pull --prefix laravel/Modules/[NomeModulo] git@github.com:laraxot/module_[nome]_fila3.git dev
 

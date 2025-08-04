@@ -80,6 +80,7 @@ L'utilizzo di strutture di directory errate può causare:
 Per verificare la corretta struttura delle directory nei moduli:
 
 ```bash
+
 # Verifica case sensitivity errata
 find /var/www/html/base_<nome progetto>/laravel/Modules -type d -name "Resources" -o -name "Config" -o -name "Views" -o -name "Lang" -o -name "Images"
 
@@ -92,6 +93,7 @@ find /var/www/html/base_<nome progetto>/laravel/Modules -type d -name "Filament"
 ### Per problemi di case sensitivity:
 
 ```bash
+
 # Rinomina la directory (su sistemi Linux/Unix)
 mv /var/www/html/base_<nome progetto>/laravel/Modules/User/Resources /var/www/html/base_<nome progetto>/laravel/Modules/User/resources_temp
 mv /var/www/html/base_<nome progetto>/laravel/Modules/User/resources_temp /var/www/html/base_<nome progetto>/laravel/Modules/User/resources
@@ -103,6 +105,7 @@ mv /var/www/html/base_<nome progetto>/laravel/Modules/User/config_temp /var/www/
 ### Per problemi di posizione del codice PHP:
 
 ```bash
+
 # Crea la directory app se non esiste
 mkdir -p /var/www/html/base_<nome progetto>/laravel/Modules/User/app/Filament
 

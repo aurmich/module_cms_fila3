@@ -54,6 +54,7 @@ Utilizzare il seguente comando per individuare i marker di conflitto non risolti
 Se vengono trovati, è necessario risolvere i conflitti manualmente:
 
 ```bash
+
 # Per ogni file con conflitti
 nano /percorso/al/file/con/conflitti
 ```
@@ -63,6 +64,7 @@ nano /percorso/al/file/con/conflitti
 Controllare che il file del service provider esista e sia corretto:
 
 ```bash
+
 # Verifica l'esistenza del file
 ls -la laravel/Modules/Chart/app/Providers/ChartServiceProvider.php
 
@@ -121,6 +123,7 @@ Per prevenire questo tipo di errore in futuro:
 
 ```bash
 #!/bin/bash
+
 # check_module_integrity.sh
 
 LARAVEL_PATH="/var/www/html/saluteora/laravel"

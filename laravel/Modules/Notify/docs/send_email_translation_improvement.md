@@ -254,6 +254,7 @@ return [
 ```bash
 cd /var/www/html/_bases/base_saluteora/laravel
 php -l Modules/Notify/lang/it/send_email.php
+
 # Output: No syntax errors detected
 ```
 
@@ -303,4 +304,3 @@ php -l Modules/Notify/lang/it/send_email.php
 
 **Ultimo aggiornamento**: Gennaio 2025  
 **Autore**: Sistema di miglioramento automatico  
-**Stato**: ✅ COMPLETATO 

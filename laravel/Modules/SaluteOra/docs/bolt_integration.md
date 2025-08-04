@@ -146,6 +146,7 @@ activity('form_submitted')
 
 ### Environment Variables
 ```env
+
 # Configurazioni Bolt specifiche
 BOLT_CACHE_FORMS=true
 BOLT_ENABLE_API=false  
@@ -221,6 +222,7 @@ public function it_validates_patient_form_submission(): void
 
 ### Debug Commands
 ```bash
+
 # Verifica plugin registrati
 php artisan filament:list-panels
 
@@ -273,4 +275,3 @@ php artisan migrate:status --path=vendor/lara-zeus/bolt/database/migrations
 - [Filament Best Practices](../../docs/filament-best-practices.md)
 
 *Ultimo aggiornamento: Gennaio 2025*
-*Maintainer: Sviluppatori SaluteOra* 

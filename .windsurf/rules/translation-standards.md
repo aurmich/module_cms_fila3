@@ -63,6 +63,7 @@ Il sistema controllerà automaticamente che:
 ## Comandi Utili
 
 ```bash
+
 # Verifica le traduzioni mancanti
 php artisan translation:check
 

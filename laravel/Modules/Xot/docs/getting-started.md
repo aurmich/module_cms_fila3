@@ -68,13 +68,16 @@ Files that don't require processing (such as images and fonts) can be added dire
 Now that you’ve edited your configuration variables and know how to customize your styles and content, let’s build the site.
 
 ```bash
+
 # build static files with Jigsaw
 ./vendor/bin/jigsaw build
 
 # compile assets with Laravel Mix
+
 # options: dev, prod
 npm run dev
 ```
+
 ### Versione HEAD
 
 

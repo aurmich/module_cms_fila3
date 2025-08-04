@@ -174,6 +174,7 @@ docs/
 ### Template per Nuovi Documenti
 
 ```markdown
+
 # Titolo del Documento
 
 ## Panoramica

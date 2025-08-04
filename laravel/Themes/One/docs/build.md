@@ -41,6 +41,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 ### Sviluppo
 ```bash
+
 # Installazione dipendenze
 npm install
 composer install
@@ -52,6 +53,7 @@ php artisan serve
 
 ### Produzione
 ```bash
+
 # Build assets
 npm run prod
 
@@ -96,6 +98,7 @@ return [
 ### Script di Deployment
 ```bash
 #!/bin/bash
+
 # deploy.sh
 
 # Pull ultime modifiche

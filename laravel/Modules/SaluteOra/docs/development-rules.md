@@ -153,6 +153,7 @@ public function mount(array $parameters = []): void
 ## 🔍 **Comandi Utili**
 
 ```bash
+
 # Pulire cache traduzioni
 php artisan cache:clear
 
@@ -170,4 +171,3 @@ find laravel/Modules/SaluteOra/lang -name "*.php" -exec php -l {} \;
 
 - **Documentazione traduzioni**: `laravel/Modules/SaluteOra/docs/translations.md`
 - **Best practices Filament**: `laravel/Modules/Xot/docs/filament_best_practices.md`
-- **Widget documentation**: `laravel/Modules/Xot/docs/filament/widgets/xot-base-widget.md` 

@@ -11,6 +11,7 @@ Le API di SaluteOra forniscono accesso programmatico a tutte le funzionalità pr
 ### JWT Token Authentication
 
 ```bash
+
 # Login e ottenimento token
 POST /api/auth/login
 Content-Type: application/json
@@ -41,6 +42,7 @@ Content-Type: application/json
 ### Utilizzo Token
 
 ```bash
+
 # Header per richieste autenticate
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 Content-Type: application/json
@@ -50,6 +52,7 @@ Accept: application/json
 ### Rate Limiting
 
 ```bash
+
 # Limiti per endpoint
 Authentication: 10 requests/minute
 General API: 60 requests/minute
@@ -106,6 +109,7 @@ Content-Type: application/json
 ### Profilo Utente
 
 ```bash
+
 # Ottieni profilo corrente
 GET /api/user/profile
 Authorization: Bearer {token}
@@ -129,6 +133,7 @@ Authorization: Bearer {token}
 ```
 
 ```bash
+
 # Aggiorna profilo
 PUT /api/user/profile
 Authorization: Bearer {token}
@@ -316,6 +321,7 @@ Content-Type: application/json
 ### Gestione Appuntamenti
 
 ```bash
+
 # Lista appuntamenti paziente
 GET /api/appointments
 Authorization: Bearer {token}
@@ -344,6 +350,7 @@ Authorization: Bearer {token}
 ```
 
 ```bash
+
 # Dettagli appuntamento
 GET /api/appointments/{id}
 Authorization: Bearer {token}
@@ -495,6 +502,7 @@ Authorization: Bearer {token}
 ### Gestione Appuntamenti Studio
 
 ```bash
+
 # Lista appuntamenti studio
 GET /api/studio/appointments
 Authorization: Bearer {studio_token}
@@ -540,6 +548,7 @@ Content-Type: application/json
 ### Gestione Disponibilità
 
 ```bash
+
 # Crea slot disponibilità
 POST /api/studio/availability
 Authorization: Bearer {studio_token}
@@ -741,4 +750,3 @@ $appointments = $client->appointments()->list([
 
 **📅 Ultimo aggiornamento**: 5 Giugno 2025  
 **🔄 Versione API**: v1.2  
-**✅ Stato**: Completa e testata

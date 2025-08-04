@@ -176,6 +176,7 @@ php bashscripts/translations/sync_theme_translations.php
 
 ### Controllo Qualità
 ```bash
+
 # Verifica sintassi PHP
 php -l laravel/Themes/One/lang/it/widgets.php
 
@@ -217,4 +218,3 @@ Includi sempre esempi pratici:
 ---
 
 *Ultimo aggiornamento: Dicembre 2024*
-*Versione: 1.0* 

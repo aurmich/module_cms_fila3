@@ -127,6 +127,7 @@ GDPR_DEBUG=true
 
 ### 1. Permessi File System
 ```bash
+
 # Problema: Permessi insufficienti
 chmod 644 storage/exports
 
@@ -204,6 +205,7 @@ class GdprMetrics
 - [FAQ](./faq.md)
 - [Bottlenecks](./bottlenecks.md)
 - [Testing](./testing.md) 
+
 ## Collegamenti tra versioni di troubleshooting.md
 * [troubleshooting.md](../../Xot/docs/phpstan/troubleshooting.md)
 * [troubleshooting.md](../../Xot/docs/troubleshooting.md)

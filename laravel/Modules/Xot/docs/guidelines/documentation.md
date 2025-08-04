@@ -25,6 +25,7 @@
 
 ### 1. Intestazione
 ```markdown
+
 # Titolo del Documento
 
 Breve descrizione dello scopo del documento (1-2 frasi).
@@ -36,6 +37,7 @@ Breve descrizione dello scopo del documento (1-2 frasi).
 
 ### 2. Struttura delle Sezioni
 ```markdown
+
 ## Nome Sezione
 
 ### Sottosezione
@@ -89,6 +91,7 @@ Modules/{ModuleName}/docs/
 
 ### 2. File README.md
 ```markdown
+
 # Nome Modulo
 
 Breve descrizione...
@@ -123,6 +126,7 @@ Breve descrizione...
 ## Testing della Documentazione
 
 ```bash
+
 # Verifica collegamenti
 markdown-link-check **/*.md
 

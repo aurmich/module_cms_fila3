@@ -378,6 +378,7 @@ Notification::make()
 
 ### Script di Validazione
 ```bash
+
 # Controllo helper_text problematici
 grep -r "helper_text.*message" Modules/SaluteOra/lang/
 grep -r "helper_text.*state" Modules/SaluteOra/lang/
@@ -591,8 +592,11 @@ Le traduzioni segnalate erano già presenti nel sistema. Il problema potrebbe es
 ## Cronologia Modifiche
 
 ### ✅ **NUOVO**: Verificate traduzioni widget e stati segnalate come mancanti
+
 ### ✅ **NUOVO**: Confermato che tutte le traduzioni sono già presenti nel sistema
+
 ### ✅ **NUOVO**: Documentato il motivo per cui non erano state incluse nelle correzioni precedenti
+
 ### ✅ **NUOVO**: Aggiunta sezione di troubleshooting per problemi di cache e namespace
 
 ## 11. **File patient.php - 🎯 CORREZIONE SINTASSI E TRADUZIONI (2025-01-07)**
@@ -676,9 +680,13 @@ Dopo aver analizzato il file, ho identificato **molteplici problemi**:
 ## Cronologia Modifiche
 
 ### ✅ **NUOVO**: Corretto file patient.php con sintassi moderna e traduzioni corrette
+
 ### ✅ **NUOVO**: Aggiunta direttiva strict_types in patient.php
+
 ### ✅ **NUOVO**: Corretta traduzione previsit_step da 'previsit_step' a 'Pre-Visit'
+
 ### ✅ **NUOVO**: Completata struttura del previsit_step con tutte le proprietà
+
 ### ✅ **NUOVO**: Corretta traduzione family_members da italiano a inglese
 
 ---

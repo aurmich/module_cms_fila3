@@ -266,6 +266,7 @@ return (string) $this->faker->randomElement(['a', 'b', 'c']);
 ### PHPStan Command
 
 ```bash
+
 # Validazione factory specifiche
 ./vendor/bin/phpstan analyze Modules/{ModuleName}/database/factories --level=9
 
@@ -394,4 +395,3 @@ class {Model}FactoryTest extends TestCase
 **Version**: 1.0  
 **Compatibility**: Laravel 10.x, PHP 8.2+, PHPStan 1.10+  
 **Status**: Framework Standard ✅  
-**Last Updated**: 2025-01-XX 

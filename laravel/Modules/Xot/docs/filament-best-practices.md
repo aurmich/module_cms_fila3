@@ -527,7 +527,6 @@ public static function table(Table $table): Table
 - [Ereditarietà modelli](../model-inheritance-best-practices.md)
 
 
-=======
 ### Problema: Form non visualizzato correttamente
 
 **Soluzione:** Assicurarsi di utilizzare `getFormSchema()` invece di `form()` e controllare che tutti i componenti siano configurati correttamente.
@@ -663,4 +662,4 @@ Appointment::where('doctor_id', $doctorId)
 - Un solo punto di verità: nessuna duplicazione, nessun lock-in
 - DRY, KISS, serenità del codice
 - Refactoring sicuro, massima estendibilità
->>>>>>> cb26a2b (.)
+

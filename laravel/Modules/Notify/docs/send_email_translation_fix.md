@@ -3,7 +3,7 @@
 ## Problemi Identificati
 
 ### 1. Conflitti di Merge Non Risolti
-- Presenza di marcatori `<<<<<<<`, `=======`, `>>>>>>>` nel file
+- Presenza di marcatori git  nel file
 - Codice duplicato e inconsistente
 
 ### 2. Sintassi Obsoleta

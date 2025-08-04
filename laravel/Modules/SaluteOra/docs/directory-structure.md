@@ -80,6 +80,7 @@ Modules/
 
 ### Moving Files to Correct Location
 ```bash
+
 # For a single file
 mkdir -p Modules/ModuleName/app/$(dirname path/to/file.php)
 mv Modules/ModuleName/path/to/file.php Modules/ModuleName/app/path/to/file.php
@@ -95,12 +96,14 @@ find Modules/ModuleName/app/Actions -type f -name "*.php" -exec sed -i 's/namesp
 
 ### Verifying PSR-4 Compliance
 ```bash
+
 # Check for PSR-4 compliance
 composer dump-autoload
 
 # Fix autoloading issues
 composer dump-autoload -o
 ```
+
 # For Actions directory
 mkdir -p Modules/SaluteOra/app/Actions/Calendar
 mv Modules/SaluteOra/Actions/Calendar/* Modules/SaluteOra/app/Actions/Calendar/

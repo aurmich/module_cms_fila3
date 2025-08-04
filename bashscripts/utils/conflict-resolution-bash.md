@@ -47,6 +47,7 @@ La risoluzione manuale dei conflitti negli script bash è particolarmente delica
 Spesso i conflitti riguardano funzioni duplicate o con logiche diverse. Ecco una versione integrata e migliorata della funzione di log, che supporta sia il formato semplice che quello con livelli:
 
 ```bash
+
 # Funzione di log avanzata: accetta sia log "message" che log "level" "message"
 log() {
     if [ $# -eq 2 ]; then
@@ -79,6 +80,7 @@ log() {
 Quando si risolvono conflitti tra versioni che richiedono un numero diverso di parametri, preferire la soluzione più flessibile e documentata:
 
 ```bash
+
 # Gestione robusta dei parametri: supporta 2 o 3 parametri, con branch opzionale
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
     echo "Usage: $0 <path> <remote_repo> [branch]"

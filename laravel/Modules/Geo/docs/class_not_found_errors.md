@@ -92,6 +92,7 @@ class Profile
 ### Identificazione delle Classi Mancanti
 
 ```bash
+
 # Trova tutti i riferimenti a classi non esistenti
 grep -r "Modules\\\\Fixcity" Modules/*/app/Models/ --include="*.php"
 ```
@@ -100,6 +101,7 @@ grep -r "Modules\\\\Fixcity" Modules/*/app/Models/ --include="*.php"
 
 ```bash
 #!/bin/bash
+
 # Replace legacy class references
 
 find Modules -name "*.php" -type f -exec sed -i 's/\\Modules\\Fixcity\\Models\\Profile/\\Modules\\User\\Models\\User/g' {} \;
@@ -176,6 +178,7 @@ class Place extends BaseModel
 Eseguire controlli regolari per identificare riferimenti obsoleti:
 
 ```bash
+
 # Script di audit per classi non esistenti
 ./vendor/bin/phpstan analyze --level=9 --error-format=json | jq '.files[].messages[] | select(.message | contains("unknown class"))'
 ```
@@ -185,6 +188,7 @@ Eseguire controlli regolari per identificare riferimenti obsoleti:
 Mantenere un log delle classi rimosse/rinominate:
 
 ```markdown
+
 ## Changelog Classi
 
 ### 2025-07-31
@@ -220,6 +224,7 @@ Configurare l'IDE per segnalare classi non esistenti:
 Includere controlli PHPStan nella pipeline:
 
 ```yaml
+
 # .github/workflows/phpstan.yml
 - name: Run PHPStan
   run: ./vendor/bin/phpstan analyze --level=9 --error-format=github
@@ -229,6 +234,7 @@ Includere controlli PHPStan nella pipeline:
 
 ```bash
 #!/bin/sh
+
 # .git/hooks/pre-commit
 ./vendor/bin/phpstan analyze --level=9 --no-progress --quiet
 ```

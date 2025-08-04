@@ -43,6 +43,7 @@ docs/
 
 ### Struttura README.md
 ```markdown
+
 # Nome Modulo
 
 ## Descrizione
@@ -78,6 +79,7 @@ Informazioni sulla licenza
 
 ### Esempi
 ```markdown
+
 # Link Relativi
 [Documentazione Modulo](modules/user/README.md)
 [Guida Contribuzione](CONTRIBUTING.md)

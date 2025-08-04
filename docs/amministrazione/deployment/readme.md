@@ -95,6 +95,7 @@ jobs:
 
 ### 1. Preparazione
 ```bash
+
 # Backup database
 php artisan backup:run
 
@@ -107,6 +108,7 @@ df -h
 
 ### 2. Aggiornamento
 ```bash
+
 # Pull ultime modifiche
 git pull origin main
 
@@ -128,6 +130,7 @@ npm run build
 
 ### 3. Verifica
 ```bash
+
 # Verifica permessi
 chmod -R 755 storage bootstrap/cache
 chown -R www-data:www-data storage bootstrap/cache
@@ -143,6 +146,7 @@ php artisan cache:clear
 
 ### Logs
 ```bash
+
 # Log applicazione
 tail -f storage/logs/laravel.log
 
@@ -156,6 +160,7 @@ tail -f /var/log/php8.2-fpm.log
 
 ### Performance
 ```bash
+
 # Monitoraggio CPU
 top
 
@@ -173,6 +178,7 @@ iftop
 
 ### Database
 ```bash
+
 # Rollback ultima migrazione
 php artisan migrate:rollback
 
@@ -182,6 +188,7 @@ php artisan migrate:rollback --step=1
 
 ### Files
 ```bash
+
 # Ripristino backup
 tar -xzf backup.tar.gz -C /var/www/html/saluteora
 
@@ -193,6 +200,7 @@ php artisan backup:restore
 
 ### Cache
 ```bash
+
 # Pulizia cache
 php artisan cache:clear
 php artisan config:clear
@@ -202,12 +210,14 @@ php artisan view:clear
 
 ### Logs
 ```bash
+
 # Rotazione logs
 logrotate /etc/logrotate.d/laravel
 
 # Pulizia logs vecchi
 find /var/www/html/saluteora/storage/logs -type f -mtime +30 -delete
 ``` 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)

@@ -203,6 +203,7 @@ Prima di creare nuovi file o spostare file esistenti:
 Per verificare la struttura corretta:
 
 ```bash
+
 # Verifica la struttura delle directory
 find laravel/Modules/SaluteOra -type f -name "*.php" | grep -v "app/"
 

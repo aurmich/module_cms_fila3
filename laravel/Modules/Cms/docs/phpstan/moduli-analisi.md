@@ -117,6 +117,7 @@ public function process(): void
 Per ogni modulo, creare un file `docs/phpstan-analysis.md` con questa struttura:
 
 ```markdown
+
 # Analisi PHPStan - Modulo [Nome]
 
 ## Stato Attuale
@@ -183,4 +184,3 @@ phpstan:
 3. **Team**
    - Condividere best practices
    - Review delle correzioni
-   - Aggiornare documentazione 

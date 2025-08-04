@@ -28,6 +28,7 @@ Questa regola garantisce:
 
 ## Esempi
 ```plaintext
+
 # ❌ Errore
 docs/ErroriGravi/
 docs/Implementazione/
@@ -50,4 +51,3 @@ docs/form-architecture.md
 ## Collegamenti Correlati
 - [Struttura Documentazione](../struttura-documentazione.md)
 - [Best Practices](../best-practices.md)
-- [Standard di Codice](../standards/coding-standards.md) 

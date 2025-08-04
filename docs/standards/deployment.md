@@ -21,6 +21,7 @@
 
 ### 1. Ambiente di Sviluppo
 ```bash
+
 # Clona il repository
 git clone https://github.com/username/repo.git
 
@@ -42,6 +43,7 @@ php artisan serve
 
 ### 2. Ambiente di Staging
 ```bash
+
 # Clona il repository
 git clone https://github.com/username/repo.git
 
@@ -66,6 +68,7 @@ php artisan serve
 
 ### 3. Ambiente di Produzione
 ```bash
+
 # Clona il repository
 git clone https://github.com/username/repo.git
 

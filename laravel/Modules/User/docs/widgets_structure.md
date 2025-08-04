@@ -172,6 +172,7 @@ class LoginWidget extends XotBaseWidget
     }
 }
 ```
+
 # Regole di Struttura per i Widget Filament nel Modulo User
 
 ## Percorso Obbligatorio

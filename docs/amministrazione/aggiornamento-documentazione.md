@@ -86,6 +86,7 @@ Oltre all'aggiornamento automatico, è importante mantenere manualmente la docum
 È possibile automatizzare ulteriormente l'aggiornamento della documentazione utilizzando un job cron:
 
 ```bash
+
 # Esempio: aggiornamento settimanale ogni lunedì alle 9:00
 0 9 * * 1 /var/www/html/saluteora/docs/update-docs.sh >> /var/www/html/saluteora/docs/cron_log.txt 2>&1
 ```
@@ -107,4 +108,3 @@ Se lo script di aggiornamento incontra problemi:
    - Controllare che i file module.json siano validi
 
 4. **Aggiornamento manuale**
-   - In caso di problemi persistenti, è possibile eseguire manualmente le operazioni descritte nello script 

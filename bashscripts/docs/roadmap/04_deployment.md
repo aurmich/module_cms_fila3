@@ -7,6 +7,7 @@
  43df3e0 (.)
 
 aurmich/dev
+
 # 🚀 Fase 4: Deployment
 
 ## 📋 Panoramica
@@ -21,6 +22,7 @@ Questa fase si concentra sul deployment e la distribuzione del sistema.
 - [Fase 5: Monitoraggio](../roadmap/05_monitoring.md) 
 
 aurmich/dev
+
 # 🚀 Fase 4: Deployment
 
 ## 📋 Panoramica
@@ -34,6 +36,7 @@ Questa fase si concentra sul deployment e la distribuzione del sistema.
 
 [0;34mℹ️ [2025-04-22 11:23:26] Scelto blocco incoming (1 linee vs 1)[0m
 aurmich/dev
+
 # 🚀 Fase 4: Deployment
 
 ## 📋 Panoramica

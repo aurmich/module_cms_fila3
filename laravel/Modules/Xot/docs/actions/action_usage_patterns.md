@@ -37,6 +37,7 @@ Prima di usare un'Action:
 
 ### Pattern da cercare e correggere:
 ```bash
+
 # Cerca pattern errati
 grep -r "::cast(" Modules/
 grep -r "::execute(" Modules/
@@ -45,6 +46,7 @@ grep -r "ActionClass::" Modules/
 
 ### Pattern corretti da mantenere:
 ```bash
+
 # Verifica pattern corretti
 grep -r "app.*Action.*->execute" Modules/
 ```
@@ -74,6 +76,7 @@ $expression = \Modules\Xot\Actions\Geo\GetDistanceExpressionAction::getExpressio
 ### Script di Validazione
 ```bash
 #!/bin/bash
+
 # Cerca pattern errati nelle Action
 echo "Cercando pattern errati..."
 find Modules/ -name "*.php" -exec grep -l "Actions.*::" {} \;

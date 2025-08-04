@@ -27,6 +27,7 @@ Il nuovo componente `<x-page>` risolve questi problemi offrendo:
 Cerca tutte le occorrenze del vecchio pattern nei file Blade:
 
 ```bash
+
 # Cerca showPageContent
 grep -r "showPageContent" --include="*.blade.php" /var/www/html/_bases/base_predict_fila3_mono/laravel
 

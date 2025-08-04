@@ -7,6 +7,7 @@
 Il file `Modules/FormBuilder/docs/phpstan/guidelines.md` contiene conflitti Git con i seguenti marker:
 
 ```
+
 ## Correzioni PHPStan Applicate
 ```
 
@@ -66,6 +67,7 @@ Il file `Modules/FormBuilder/docs/phpstan/guidelines.md` contiene conflitti Git 
 
 ### Test di Validazione
 ```bash
+
 # Verificare che non ci siano marker di conflitto
 
 grep -n "=======" Modules/FormBuilder/docs/phpstan/guidelines.md
@@ -95,16 +97,19 @@ Dopo la risoluzione, il file conterrà:
 
 ### Verifiche Effettuate
 ```bash
+
 # ✅ Nessun marker di conflitto trovato
 
 # Output: (vuoto)
 
 # ✅ Sezione integrata correttamente
 grep -n "Correzioni PHPStan Applicate" Modules/FormBuilder/docs/phpstan/guidelines.md
+
 # Output: 7:## Correzioni PHPStan Applicate
 
 # ✅ FormSubmission.php marcato come corretto
 grep -n "✅ \*\*Corretto\*\*" Modules/FormBuilder/docs/phpstan/guidelines.md
+
 # Output: 45:- `app/Models/FormSubmission.php` - Modello submission ✅ **Corretto**
 ```
 
@@ -112,4 +117,3 @@ grep -n "✅ \*\*Corretto\*\*" Modules/FormBuilder/docs/phpstan/guidelines.md
 
 **Stato**: ✅ **COMPLETATO** - Conflitti Git risolti con successo
 **Data completamento**: 2025-01-16
-**File corretto**: `Modules/FormBuilder/docs/phpstan/guidelines.md` 

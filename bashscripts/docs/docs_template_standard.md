@@ -23,6 +23,7 @@ docs/
 
 ### Document Header Template
 ```markdown
+
 # [Document Title]
 
 **Module**: [Module Name]  

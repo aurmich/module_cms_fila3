@@ -16,10 +16,12 @@ Prima di apportare modifiche, analizzare il file esistente per:
 Se il file ha un nome non conforme:
 
 ```bash
+
 # 1. Creare un nuovo file con il nome corretto
 touch /var/www/html/saluteora/laravel/Modules/Notify/lang/it/nome_corretto.php
 
 # 2. Copiare e correggere il contenuto
+
 # (vedere Passo 3 per la struttura corretta)
 
 # 3. Verificare che non ci siano riferimenti al vecchio file
@@ -71,10 +73,12 @@ return [
 Dopo aver corretto un file in italiano, verificare e aggiornare la versione inglese:
 
 ```bash
+
 # 1. Controllare se esiste il file inglese
 ls /var/www/html/saluteora/laravel/Modules/Notify/lang/en/nome_file.php
 
 # 2. Se esiste, aggiornarlo con la stessa struttura
+
 # 3. Se non esiste, crearlo con la traduzione inglese dei messaggi italiani
 ```
 

@@ -147,12 +147,14 @@ NAMESPACE:          Modules\[Modulo]\[Cartella]
 
 ### Verificare un namespace
 ```bash
+
 # Trova tutti i file con namespace errati
 grep -r "namespace Modules.*App\\\\" /var/www/html/_bases/base_saluteora/laravel/Modules/
 ```
 
 ### Correggere un namespace
 ```bash
+
 # Esempio: correggere namespace nel modulo Geo
 find /var/www/html/_bases/base_saluteora/laravel/Modules/Geo -name "*.php" -exec sed -i 's/namespace Modules\\Geo\\App\\/namespace Modules\\Geo\\/g' {} \;
 ```

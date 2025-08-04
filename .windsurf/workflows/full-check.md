@@ -13,6 +13,7 @@ Invoca con `/full-check` per eseguire TUTTI i controlli di qualità in sequenza 
 
 ### 1. Setup e Preparazione
 ```bash
+
 # Verifica directory corretta
 cd /var/www/html/_bases/base_<nome progetto>/laravel
 
@@ -41,6 +42,7 @@ grep -r "extends.*Model" Modules/*/Models/ --include="*.php" | grep -v "BaseMode
 
 ```bash
 echo "🔍 Fase 2: Analisi PHPStan..."
+
 # Eseguito dal workflow phpstan-check
 ```
 
@@ -49,6 +51,7 @@ echo "🔍 Fase 2: Analisi PHPStan..."
 
 ```bash
 echo "🔍 Fase 3: Controllo Migrazioni..."
+
 # Eseguito dal workflow migration-check
 ```
 
@@ -57,6 +60,7 @@ echo "🔍 Fase 3: Controllo Migrazioni..."
 
 ```bash
 echo "🔍 Fase 4: Validazione Traduzioni..."
+
 # Eseguito dal workflow translation-check
 ```
 
@@ -126,6 +130,7 @@ echo "📊 Generazione Report Finale..."
 
 # Crea report di riepilogo
 cat > laraxot-quality-report.md << EOF
+
 # Laraxot Quality Report
 Data: $(date)
 Progetto: <nome progetto>

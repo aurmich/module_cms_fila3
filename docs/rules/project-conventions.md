@@ -82,6 +82,7 @@
 
 ### 1. Comandi Artisan
 ```bash
+
 # Verifica convenzioni
 php artisan xot:check-conventions
 

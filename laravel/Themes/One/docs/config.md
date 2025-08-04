@@ -89,6 +89,7 @@ return [
 
 ### .env
 ```env
+
 # Tema
 THEME_NAME=One
 THEME_VERSION=1.0.0
@@ -111,6 +112,7 @@ ANALYTICS_ID=UA-XXXXXXXXX-X
 
 ### .env.example
 ```env
+
 # Tema
 THEME_NAME=One
 THEME_VERSION=1.0.0

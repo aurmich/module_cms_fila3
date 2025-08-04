@@ -500,6 +500,7 @@ graph TD
 
 ### 1. Identificazione Rapida
 ```bash
+
 # Cerca componenti senza $view
 grep -r "extends.*Component" Modules/ --include="*.php" | xargs grep -L "\$view"
 
@@ -509,6 +510,7 @@ grep -r "implements HasForms" Modules/ --include="*.php" | xargs grep "XotBase"
 
 ### 2. Verifica Strutturale
 ```bash
+
 # Verifica esistenza viste
 find Modules/ -name "*.blade.php" | grep -E "(components|forms)"
 
@@ -518,6 +520,7 @@ find Modules/ -name "*.php" -path "*/lang/*"
 
 ### 3. Test Funzionale
 ```bash
+
 # Test rendering componenti
 php artisan filament:check-components
 
@@ -548,4 +551,3 @@ php artisan route:list | grep filament
 
 *Ultimo aggiornamento: Dicembre 2024*
 
-**Questa documentazione deve essere aggiornata ogni volta che si identifica e risolve un errore critico.** 

@@ -100,6 +100,7 @@ public function getTableColumns(): array
 ## Comandi Utili
 
 ```bash
+
 # Pulire la cache PHPStan
 ./vendor/bin/phpstan clear-result-cache
 

@@ -200,6 +200,7 @@ private $fileHandle = null;
 ```
 
 ### 4. Pattern per Controller
+
 ### 4. Gestione delle API Fluenti di Librerie Esterne
 
 Le API fluenti (method chaining) di alcune librerie esterne come Laravel-FFMpeg possono causare problemi con PHPStan a livello 10, in particolare quando i metodi intermedi restituiscono tipi non standard o quando la catena è lunga e complessa.
@@ -258,6 +259,7 @@ public function show(string $id): \Illuminate\View\View|\Illuminate\Http\Redirec
 ```
 
 ### 5. Gestione delle Proprietà Dinamiche
+
 ### 6. Gestione delle Proprietà Dinamiche
 
 Per le proprietà dinamiche nei modelli, utilizzare annotazioni PHPDoc complete:
@@ -275,6 +277,7 @@ class User extends Model
 ```
 
 ### 6. Conversione Sicura da `mixed` a Tipi Scalari
+
 ### 7. Conversione Sicura da `mixed` a Tipi Scalari
 
 Quando si lavora con valori `mixed` da convertire in tipi scalari (string, int, float, bool), utilizzare controlli di tipo prima della conversione:
@@ -318,6 +321,7 @@ if ($value !== null) {
 ```
 
 ### 7. Gestione Sicura di Array con Chiavi Miste
+
 ### 8. Gestione Sicura di Array con Chiavi Miste
 
 Quando si ottengono array da fonti esterne (es. funzioni Laravel che restituiscono array con chiavi miste):
@@ -336,6 +340,7 @@ foreach ($componentsWithMixedKeys as $key => $component) {
 ```
 
 ### 8. Tipi Unione con Null
+
 ### 9. Tipi Unione con Null
 
 Preferire la sintassi nullable (`?tipo`) per i tipi che possono essere null:
@@ -348,6 +353,7 @@ public function findById(?int $id): ?User
 ```
 
 ### 9. Parametri Variabili (Variadic)
+
 ### 10. Parametri Variabili (Variadic)
 
 Per i parametri variabili, specificare il tipo di ogni elemento nell'array risultante:
@@ -364,6 +370,7 @@ public function buildPath(string ...$segments): string
 ```
 
 ### 10. Callback e Closure
+
 ### 11. Callback e Closure
 
 Per i callback e le closure, utilizzare `callable` con specifiche di tipo dettagliate:

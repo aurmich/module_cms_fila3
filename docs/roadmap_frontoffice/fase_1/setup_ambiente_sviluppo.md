@@ -11,6 +11,7 @@ Configurazione completa dell'ambiente di sviluppo per la piattaforma SaluteOra c
 
 ### Backend
 ```yaml
+
 # Core Backend
 Framework: Laravel 10.x
 PHP Version: 8.2+
@@ -22,6 +23,7 @@ Search: Elasticsearch 8.x
 
 ### Frontend
 ```yaml
+
 # Frontend Stack
 Framework: React 18 + TypeScript
 State Management: Redux Toolkit
@@ -32,6 +34,7 @@ Testing: Jest + React Testing Library
 
 ### Development Tools
 ```yaml
+
 # DevOps e Tooling
 Version Control: Git + GitLab
 CI/CD: GitLab CI
@@ -44,6 +47,7 @@ Documentation: Swagger/OpenAPI
 
 ### Local Development Setup
 ```bash
+
 # Setup Locale Completo
 git clone https://gitlab.com/saluteora/platform.git
 cd platform
@@ -61,6 +65,7 @@ npm run dev
 
 ### Configuration Management
 ```yaml
+
 # Configurazioni Ambiente
 Development: .env.local
 Staging: .env.staging  
@@ -78,6 +83,7 @@ AWS_BUCKET: Storage S3 configurato
 
 ### Code Standards
 ```yaml
+
 # Standard di Codice
 PHP: PSR-12 compliance
 JavaScript: Airbnb style guide
@@ -88,6 +94,7 @@ API: RESTful + OpenAPI 3.0
 
 ### Automated Testing
 ```yaml
+
 # Test Suite
 Unit Tests: PHPUnit + Jest
 Integration Tests: Laravel Feature Tests
@@ -107,4 +114,3 @@ Performance: Lighthouse CI
 - [Architettura Base](./architettura_base.md)
 - [UI/UX di Base](./ui_ux_base.md)
 
-*Ultimo aggiornamento: Dicembre 2024*

@@ -125,6 +125,7 @@
 
 ### 1. Comandi Artisan
 ```bash
+
 # Test connessione provider
 php artisan sms:test-connection
 

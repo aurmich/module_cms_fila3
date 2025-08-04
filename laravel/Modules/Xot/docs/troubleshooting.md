@@ -6,6 +6,7 @@
 
 #### Composer
 ```bash
+
 # Pulire la cache di Composer
 composer clear-cache
 
@@ -15,6 +16,7 @@ composer install --no-scripts
 
 #### NPM
 ```bash
+
 # Pulire la cache di NPM
 npm cache clean --force
 
@@ -26,6 +28,7 @@ npm install
 
 #### Migrazioni
 ```bash
+
 # Ripristinare le migrazioni
 php artisan migrate:fresh
 
@@ -35,6 +38,7 @@ php artisan db:seed
 
 #### Connessione
 ```bash
+
 # Verificare la connessione
 php artisan db:monitor
 
@@ -46,6 +50,7 @@ php artisan db:test
 
 #### Pulizia Cache
 ```bash
+
 # Pulire la cache dell'applicazione
 php artisan cache:clear
 
@@ -63,6 +68,7 @@ php artisan route:clear
 
 ### 1. Errori di Attivazione
 ```bash
+
 # Verificare lo stato dei moduli
 php artisan module:list
 
@@ -75,6 +81,7 @@ php artisan module:disable ModuleName
 
 ### 2. Errori di Pubblicazione
 ```bash
+
 # Pubblicare gli assets
 php artisan module:publish ModuleName
 
@@ -89,6 +96,7 @@ php artisan module:publish-migration ModuleName
 
 ### 1. Errori di Compilazione
 ```bash
+
 # Compilare gli assets
 npm run build
 
@@ -98,6 +106,7 @@ npm run theme:build
 
 ### 2. Errori di Visualizzazione
 ```bash
+
 # Pulire la cache delle viste
 php artisan view:clear
 
@@ -117,6 +126,7 @@ Assicurarsi che l'utente del web server (es. www-data) abbia i permessi di scrit
 
 ### 1. Errori del Pannello
 ```bash
+
 # Pubblicare gli assets
 php artisan filament:assets
 
@@ -126,6 +136,7 @@ php artisan filament:config
 
 ### 2. Errori dei Widget
 ```bash
+
 # Pubblicare i widget
 php artisan filament:widgets
 
@@ -139,6 +150,7 @@ php artisan filament:check
 
 #### Pubblicazione Assets e Configurazioni
 ```bash
+
 # Pubblicare gli assets
 php artisan livewire:publish --assets
 
@@ -182,6 +194,7 @@ Per ulteriori dettagli, consulta la [documentazione sui componenti Volt](../../T
 
 ### 2. Errori di Compilazione
 ```bash
+
 # Compilare gli assets
 npm run dev
 
@@ -193,6 +206,7 @@ npm run build
 
 ### 1. Log dell'Applicazione
 ```bash
+
 # Visualizzare i log
 tail -f storage/logs/laravel.log
 

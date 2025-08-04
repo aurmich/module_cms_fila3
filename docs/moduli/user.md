@@ -66,6 +66,7 @@ Il modulo User è il cuore del sistema di gestione utenti di il progetto. È bas
 
 ## Comandi Artisan Disponibili
 ```bash
+
 # Gestione Utenti
 php artisan user:super-admin
 php artisan user:assign-module
@@ -107,4 +108,3 @@ Il modulo User si integra con:
 - Modulo Tenant per la gestione multi-tenant
 - Modulo Activity per il logging
 - Modulo Notify per le notifiche
-- Modulo UI per l'interfaccia utente 

@@ -607,6 +607,7 @@ test('framework maintains backward compatibility', function (): void {
 ### Comandi Base
 
 ```bash
+
 # Tutti i test del framework Xot
 ./vendor/bin/pest Modules/Xot/tests/
 
@@ -629,6 +630,7 @@ test('framework maintains backward compatibility', function (): void {
 ### Debugging Framework
 
 ```bash
+
 # Test in modalità debug
 ./vendor/bin/pest Modules/Xot/tests/ --debug
 
@@ -690,4 +692,3 @@ test('no memory leaks in repeated operations', function (): void {
 **Ultimo aggiornamento**: Dicembre 2024  
 **Framework**: Pest v2.x  
 **Coverage Target**: 90%+ per core framework  
-**Responsabile**: Team Core Framework Laraxot 

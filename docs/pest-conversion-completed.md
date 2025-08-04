@@ -89,6 +89,7 @@ La migrazione completa da PHPUnit a Pest per il progetto Laraxot SaluteOra è st
 
 #### Test Execution Status
 ```bash
+
 # All converted tests pass
 ./vendor/bin/pest Modules/SaluteOra/tests/Unit/Actions/GenerateReportActionTest.php
 ✓ esegue correttamente la generazione di un report
@@ -166,4 +167,3 @@ The SaluteOra project now benefits from:
 **Success rate:** 100%  
 **Developer satisfaction:** 🎉  
 
-*Next step: Enjoy faster, cleaner, and more maintainable tests!* 

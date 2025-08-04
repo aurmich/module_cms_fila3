@@ -74,6 +74,7 @@ Ogni modifica ai dati sensibili deve essere:
 ## Principi Fondamentali
 
 Il codice del progetto il progetto **deve** aderire ai seguenti principi fondamentali:# Standard di Codice
+
 # Standard di Codice per il progetto
 
 > **Nota**: Questo documento è correlato a [Convenzioni](../../../docs/conventions.md) e [Naming Conventions](../../../docs/naming-conventions.md). Per una panoramica completa, consulta tutti i documenti correlati.
@@ -560,6 +561,7 @@ class PatientPolicy
 - Mantenere la storia pulita
 
 ```bash
+
 # ❌ NO: Commit message non descrittivo
 git commit -m "fix"
 
@@ -600,6 +602,7 @@ git commit -m "fix: correzione calcolo età paziente"
 - Implementare logging
 - Monitorare performance
 - Alert su errori 
+
 ## Collegamenti tra versioni di coding-standards.md
 * [coding-standards.md](../../../Xot/docs/standards/coding-standards.md)
 * [coding-standards.md](../../../Xot/docs/conventions/coding-standards.md)

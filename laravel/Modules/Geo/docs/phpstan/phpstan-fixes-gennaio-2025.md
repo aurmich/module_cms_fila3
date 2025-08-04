@@ -498,6 +498,7 @@ cd /var/www/html/_bases/base_saluteora/laravel
 
 ### ✅ **Comando Validazione Phase 5**
 ```bash
+
 # Test Cms translation file
 cd /var/www/html/_bases/base_saluteora/laravel
 ./vendor/bin/phpstan analyze Modules/Cms/lang/it/edit_section.php --level=9 --no-progress

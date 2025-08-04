@@ -244,6 +244,7 @@ class DatabaseControllerTest extends TestCase
 ### Environment Variables
 
 ```env
+
 # Database Forge Configuration
 DBFORGE_DEBUG=false
 DBFORGE_BACKUP_ENABLED=true
@@ -340,4 +341,3 @@ Seguire queste best practices garantisce:
 - **Performance**: Ottimizzazione delle operazioni database
 - **Manutenibilità**: Codice pulito e ben documentato
 - **Affidabilità**: Gestione robusta degli errori
-- **Scalabilità**: Architettura che supporta la crescita 

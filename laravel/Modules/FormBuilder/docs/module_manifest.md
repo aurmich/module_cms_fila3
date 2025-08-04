@@ -276,6 +276,7 @@ I provider devono essere identici in entrambi i file:
 ### Debug
 
 ```bash
+
 # Verificare caricamento moduli
 php artisan module:list
 

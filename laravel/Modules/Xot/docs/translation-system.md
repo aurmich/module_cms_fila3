@@ -145,6 +145,7 @@ Modules/
 ### 1. Identificare i File da Correggere
 
 ```bash
+
 # Trova tutti i file PHP che usano ->label()
 grep -r "->label(" . --include="*.php"
 ```
@@ -223,4 +224,3 @@ php artisan view:clear
 - [Documentazione Laravel Translations](https://laravel.com/docs/localization)
 - [Filament Form Components](https://filamentphp.com/docs/forms)
 - [Best Practices Filament](../docs/filament-best-practices.md)
-- [Schema Conventions](../docs/schema-conventions.md) 

@@ -117,6 +117,7 @@ composer --version
 
 ### Gestione Dipendenze
 ```bash
+
 # Installare dipendenze
 composer install
 
@@ -132,6 +133,7 @@ composer require package/name
 
 ### Gestione Autoload
 ```bash
+
 # Rigenerare autoload
 composer dump-autoload
 
@@ -141,6 +143,7 @@ composer dump-autoload -o
 
 ### Diagnostica
 ```bash
+
 # Verificare dipendenze
 composer diagnose
 
@@ -155,4 +158,3 @@ composer licenses
 - Mantenere sempre aggiornato composer
 - Verificare la compatibilità delle dipendenze
 - Utilizzare versioni specifiche per stabilità
-- Documentare le dipendenze aggiunte 

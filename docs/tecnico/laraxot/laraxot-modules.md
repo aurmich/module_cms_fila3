@@ -133,6 +133,7 @@ return [
 
 Per aggiornare i moduli:
 ```bash
+
 # Aggiorna un modulo specifico
 git subtree pull --prefix Modules/Tenant https://github.com/laraxot/module_tenant_fila3.git dev
 
@@ -201,4 +202,3 @@ done
         'days' => 14,
     ],
 ],
-``` 

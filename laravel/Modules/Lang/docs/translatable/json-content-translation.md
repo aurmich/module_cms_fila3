@@ -177,6 +177,7 @@ Dopo la traduzione:
 ### Validazione JSON
 
 ```bash
+
 # Validare la sintassi JSON
 cat file.json | jq .
 
@@ -188,6 +189,7 @@ jq '.title | keys' file.json
 
 ```bash
 #!/bin/bash
+
 # Controlla che tutti i file JSON abbiano le traduzioni complete
 
 for file in config/local/saluteora/database/content/pages/*.json; do
@@ -225,4 +227,3 @@ done
 - I contenuti JSON sono utilizzati dal sistema CMS per generare pagine dinamiche
 - Le traduzioni devono essere mantenute sincronizzate con le modifiche al contenuto
 - Il sistema utilizza il fallback alla lingua italiana per contenuti mancanti
-- Tutte le modifiche ai contenuti JSON devono essere testate in ambiente di sviluppo prima del deploy 

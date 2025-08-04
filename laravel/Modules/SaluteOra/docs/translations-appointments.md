@@ -135,6 +135,7 @@ Rimosse le chiavi duplicate mantenendo solo una versione per ogni campo.
 
 ### **PHPStan**
 ```bash
+
 # Esegui PHPStan per verificare che non ci siano più errori
 ./vendor/bin/phpstan analyse laravel/Modules/SaluteOra/app/Models/Policies/
 ./vendor/bin/phpstan analyse laravel/Modules/SaluteOra/lang/
@@ -172,4 +173,3 @@ $canComplete = $policy->complete($user, $appointment);
 - **Spatie Model States**: Sempre usare `getValue()` per accedere al valore dello stato
 - **Proprietà dei modelli**: Verificare sempre il PHPDoc e i `$fillable`
 - **Chiavi duplicate**: Mai avere chiavi duplicate nei file di traduzione
-- **Documentazione**: Aggiornare sempre la documentazione dopo le correzioni 

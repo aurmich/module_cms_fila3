@@ -27,6 +27,7 @@ Oltre agli script standard di Laraxot, sono stati sviluppati script personalizza
 
 **Utilizzo**:
 ```bash
+
 # Per correggere tutti i moduli
 cd /var/www/html/saluteora/laravel
 ./bashscripts/fix-namespace.sh
@@ -193,6 +194,7 @@ Gli script bash sono parte integrante del processo di sviluppo e manutenzione de
 
 L'automazione tramite script bash è un elemento chiave per il successo del progetto il progetto, consentendo di gestire in modo efficiente le complessità dell'architettura modulare e risolvere rapidamente i problemi comuni. Questi script sono in continua evoluzione per soddisfare le esigenze del progetto. 
 L'automazione tramite script bash è un elemento chiave per il successo del progetto SaluteOra, consentendo di gestire in modo efficiente le complessità dell'architettura modulare e risolvere rapidamente i problemi comuni. Questi script sono in continua evoluzione per soddisfare le esigenze del progetto. 
+
 ## Collegamenti tra versioni di bashscripts.md
 * [bashscripts.md](docs/bashscripts.md)
 * [bashscripts.md](docs/tecnico/bashscripts.md)

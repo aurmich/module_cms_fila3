@@ -39,8 +39,10 @@ Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei n
 - I namespace sono stati mantenuti corretti secondo la struttura del modulo
 - Sono stati rimossi solo i marcatori di conflitto, mantenendo il codice funzionale
 - I file di backup sono stati creati con il timestamp per sicurezza
+
 ### Fase 1: Identificazione
 ```bash
+
 # Visualizzare tutti i file con conflitti
 git status
 
@@ -71,6 +73,7 @@ Per ogni file in conflitto:
 - `Modules\Predict\Providers` per i service provider
 - `Modules\Predict\Database\Factories` per le factory
 - `Modules\Predict\lang\it` per i file di traduzione
+
 ### Fase 3: Risoluzione
 Scegliere una delle seguenti strategie:
 
@@ -127,7 +130,7 @@ namespace Modules\NomeModulo\App\Filament;
 2. Eseguire `php artisan config:clear` per pulire la cache
 3. Verificare che tutte le risorse Filament siano registrate correttamente
 4. Testare il modulo in ambiente di sviluppo 
-=======
+
 ## Risoluzione di Casi Specifici
 
 ### Conflitti in File PHP
@@ -162,4 +165,3 @@ Il progetto include alcuni script per facilitare la gestione dei conflitti:
 - [Script di Risoluzione Automatica](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/fix_all_git_conflicts.md)
 - [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
 - [Convenzioni Namespace](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
->>>>>>> d83fe8da (.)

@@ -64,6 +64,7 @@ Questo documento fornisce una panoramica di tutti i workflow automatizzati dispo
 
 ```bash
 .windsurf/workflows/module-setup.md
+
 # Seguire le istruzioni per inserire nome modulo
 ```
 
@@ -194,6 +195,7 @@ Il Project Health Check calcola un punteggio su 100 basato su:
 
 ### Daily Routine
 ```bash
+
 # 1. Health check giornaliero
 .windsurf/workflows/project-health-check.md
 
@@ -204,6 +206,7 @@ Il Project Health Check calcola un punteggio su 100 basato su:
 
 ### Before Commit
 ```bash
+
 # 1. Provider validation
 .windsurf/workflows/provider-validation.md
 
@@ -216,6 +219,7 @@ Il Project Health Check calcola un punteggio su 100 basato su:
 
 ### Weekly Maintenance
 ```bash
+
 # 1. Naming convention audit
 .windsurf/workflows/naming-convention-audit.md
 
@@ -228,6 +232,7 @@ Il Project Health Check calcola un punteggio su 100 basato su:
 
 ### New Module Creation
 ```bash
+
 # 1. Setup nuovo modulo
 .windsurf/workflows/module-setup.md
 
@@ -263,6 +268,7 @@ jobs:
 ### Pre-commit Hook
 ```bash
 #!/bin/sh
+
 # .git/hooks/pre-commit
 .windsurf/workflows/provider-validation.md
 .windsurf/workflows/code-quality-check.md
@@ -270,6 +276,7 @@ jobs:
 
 ### Cron Jobs
 ```bash
+
 # Daily health check
 0 6 * * * /path/to/project/.windsurf/workflows/project-health-check.md
 
@@ -352,4 +359,3 @@ jobs:
 
 **Ultimo aggiornamento**: $(date)  
 **Versione**: 2.0  
-**Compatibilità**: Laravel 12+, PHP 8.1+, Laraxot Framework

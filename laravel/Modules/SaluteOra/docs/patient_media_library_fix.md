@@ -54,6 +54,7 @@ foreach(Patient::$attachments as $attachment) {
 ## Test di Verifica
 
 ```bash
+
 # Test registrazione paziente
 php artisan test --filter=PatientRegistrationTest
 
@@ -73,4 +74,3 @@ php artisan test --filter=MediaLibraryTest
 **Status**: 🚨 BLOCCA REGISTRAZIONE PAZIENTI  
 **Priorità**: MASSIMA  
 **Tempo stimato fix**: 2-4 ore  
-**Ultimo aggiornamento**: 26 Giugno 2025 

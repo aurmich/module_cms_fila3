@@ -74,6 +74,7 @@ Le uniche eccezioni legittime sono:
 Prima di creare nuove cartelle, verificare sempre la struttura esistente:
 
 ```bash
+
 # Esempio di comando per verificare la struttura
 find /var/www/html/saluteora/laravel/Modules/User -type d -maxdepth 1
 ```

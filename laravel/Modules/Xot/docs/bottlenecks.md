@@ -107,6 +107,7 @@ protected $middlewareGroups = [
 5. **Misurare i Miglioramenti**
 
 ```bash
+
 # Prima dell'ottimizzazione
 php artisan xot:benchmark bootstrap
 
@@ -129,10 +130,12 @@ I repository nel modulo Xot spesso generano query N+1 quando recuperano entità 
 1. **Identificare le Query N+1**
 
 ```bash
+
 # Installare Clockwork per il debug
 composer require itsgoingd/clockwork --dev
 
 # Analizzare le query eseguite
+
 # Cercare pattern ripetitivi di query simili
 ```
 
@@ -621,6 +624,7 @@ public function generateReport(Request $request)
 4. **Configurare Queue Worker**
 
 ```bash
+
 # Aggiungere al Supervisor
 [program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
@@ -661,6 +665,7 @@ class SendReportCompletionNotification
 6. **Aggiungere Monitoraggio delle Code**
 
 ```bash
+
 # Installare Horizon per monitoraggio avanzato
 composer require laravel/horizon
 
@@ -668,6 +673,7 @@ composer require laravel/horizon
 php artisan horizon:install
 
 # Configurare Horizon
+
 # In config/horizon.php
 ```
 

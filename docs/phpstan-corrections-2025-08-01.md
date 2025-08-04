@@ -104,12 +104,14 @@ if ($role !== null) {
 ### Initial Run (Before Fixes)
 ```bash
 ./vendor/bin/phpstan analyze --level=9 --memory-limit=2G
+
 # Result: Found 12 errors
 ```
 
 ### Final Run (After Fixes)
 ```bash
 ./vendor/bin/phpstan analyze --level=9 --memory-limit=2G
+
 # Result: [OK] No errors - 4122/4122 files analyzed successfully
 ```
 

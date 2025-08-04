@@ -179,6 +179,7 @@ private function parseErrorLocation(array $matches): array
 
 ```bash
 #!/bin/bash
+
 # Replace unsafe casts with safe cast actions
 
 # Replace (int) casts

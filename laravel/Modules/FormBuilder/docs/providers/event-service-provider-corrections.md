@@ -388,6 +388,7 @@ protected function discoverEventsWithin(): array
 
 ### Comandi di Test
 ```bash
+
 # Verificare che il provider si registri correttamente
 php artisan config:clear
 php artisan cache:clear

@@ -48,6 +48,7 @@ SonarQube
 This one has a large community and supports a lot of languages besides PHP.
 
 Deptrac
+
 ### Versione HEAD
 
 
@@ -191,6 +192,7 @@ class UserData extends Data
 
 ### Comandi Artisan
 ```bash
+
 # Generare helper IDE
 php artisan ide-helper:generate
 

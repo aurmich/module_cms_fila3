@@ -14,6 +14,7 @@
 ### 1. Installazione delle Dipendenze
 
 ```bash
+
 # Installare le dipendenze PHP
 composer require spatie/laravel-event-sourcing laravel/sanctum
 
@@ -115,6 +116,7 @@ tests/
 ### Esecuzione dei Test
 
 ```bash
+
 # Esegui tutti i test
 php artisan test
 
@@ -273,6 +275,7 @@ php artisan migrate
 1. **Ottimizzazione**
 
 ```bash
+
 # Ottimizza il caricamento delle classi
 composer install --optimize-autoloader --no-dev
 

@@ -107,6 +107,7 @@ docs/
 
 ### Verifica Manuale
 ```bash
+
 # Trova file con maiuscole nelle cartelle docs
 find docs/ -name "*[A-Z]*" -type f | grep -v README.md
 
@@ -119,6 +120,7 @@ find ./docs ./Modules/*/docs -name "*[A-Z]*" -type f | grep -v README.md
 
 ### Script Automatico
 ```bash
+
 # Esegui script di correzione automatica
 ./bashscripts/fix_docs_naming_convention.sh
 ```
@@ -135,4 +137,3 @@ find ./docs ./Modules/*/docs -name "*[A-Z]*" -type f | grep -v README.md
 
 **Questa regola è OBBLIGATORIA per tutte le cartelle docs del progetto.**
 
-*Ultimo aggiornamento: 2025-01-06* 

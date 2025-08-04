@@ -124,6 +124,7 @@ composer dump-autoload
 ### Test Providers
 ```bash
 php artisan module:list
+
 # Verificare che FormBuilder sia attivo
 ```
 
@@ -141,4 +142,3 @@ php artisan module:list
 ---
 
 **Ultimo aggiornamento**: 2025-01-06
-**Stato**: ✅ Configurazione corretta e conforme Laraxot

@@ -23,6 +23,7 @@ Questa struttura rispetta due esigenze:
 Per verificare se un modulo rispetta questa struttura:
 
 ```bash
+
 # Trova file che dovrebbero essere in app/
 find Modules/Rating -path "*/Http/*" -o -path "*/Models/*" -o -path "*/Enums/*" | grep -v "/app/"
 
@@ -101,4 +102,3 @@ La struttura non influisce sul namespace. Esempio:
 1. Verificare che tutti i file PHP siano nella directory `app`
 2. Correggere eventuali problemi con lo script di correzione
 3. Assicurarsi che i namespace siano corretti (non includonao `App`)
-4. Solo dopo questi controlli, eseguire PHPStan 

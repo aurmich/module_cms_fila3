@@ -21,6 +21,7 @@
 
 ### 1. Git Flow
 ```bash
+
 # Creazione feature branch
 git checkout -b feature/doctor-registration
 
@@ -44,6 +45,7 @@ git push origin main
 
 ### 2. Versioning
 ```bash
+
 # Creazione tag
 git tag -a v1.0.0 -m "First release"
 git push origin v1.0.0
@@ -54,6 +56,7 @@ git log --pretty=format:"%h - %s (%an)" v1.0.0..HEAD > CHANGELOG.md
 
 ### 3. Deployment
 ```yaml
+
 # .github/workflows/deploy.yml
 name: Deploy
 

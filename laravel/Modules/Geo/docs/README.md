@@ -74,6 +74,7 @@ Il modulo Geo ha raggiunto la **compliance PHPStan livello 9** sui file core:
 
 #### 🧪 Test di Verifica
 ```bash
+
 # Test file core PHPStan level 9
 cd laravel
 ./vendor/bin/phpstan analyze Modules/Geo/app/Services/BaseGeoService.php \
@@ -81,6 +82,7 @@ cd laravel
                              Modules/Geo/database/factories/AddressFactory.php \
                              Modules/Geo/database/seeders/SushiSeeder.php \
                              --level=9 --no-progress
+
 # Risultato: [OK] No errors ✅
 ```
 
@@ -94,6 +96,7 @@ Il modulo contiene **176 errori aggiuntivi** in altri file che rappresentano opp
 ## Installation & Setup
 
 ```bash
+
 # Abilitare il modulo
 php artisan module:enable Geo
 
@@ -135,6 +138,7 @@ return [
 ## Testing
 
 ```bash
+
 # Test del modulo
 php artisan test --testsuite=Geo
 

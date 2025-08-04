@@ -66,6 +66,7 @@ Questa struttura rispetta due esigenze:
 Per verificare se un modulo rispetta questa struttura:
 
 ```bash
+
 # Trova file che dovrebbero essere in app/
 find Modules/Rating -path "*/Http/*" -o -path "*/Models/*" -o -path "*/Enums/*" | grep -v "/app/"
 

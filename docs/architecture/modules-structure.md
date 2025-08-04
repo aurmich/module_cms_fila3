@@ -211,6 +211,7 @@ ModuleName/
 ### Esempi di Path Corretti
 
 ```bash
+
 # ✅ CORRETTO
 Modules/User/Actions/User/DeleteUserAction.php
 
@@ -220,6 +221,7 @@ Modules/User/app/Actions/User/DeleteUserAction.php
 
 ### Documentazione Modulo
 ```markdown
+
 # Modulo Nome
 
 ## Collegamenti

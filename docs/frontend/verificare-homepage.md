@@ -24,6 +24,7 @@ La verifica manuale consiste nel confrontare visivamente l'homepage con le speci
 Per un'analisi più sistematica, è stato creato uno script di verifica in `laravel/tests/HomepageUrlCheck.php`:
 
 ```bash
+
 # Dalla radice del progetto
 php laravel/tests/HomepageUrlCheck.php
 ```
@@ -40,6 +41,7 @@ Lo script utilizza cURL per verificare che tutti gli elementi previsti siano pre
 Per verifiche più approfondite in un processo di CI/CD, sono disponibili test di integrazione:
 
 ```bash
+
 # Test Pest per l'homepage
 cd laravel
 php artisan test tests/Feature/HomepageContentTest.php
@@ -52,6 +54,7 @@ php artisan test tests/Feature/HomepageContentTest.php
 Verificare che il file di configurazione dell'homepage contenga le stringhe corrette:
 
 ```bash
+
 # Usando grep per verificare la presenza delle stringhe chiave
 grep "Benvenuta su Salute Orale" laravel/config/local/saluteora/database/content/pages/1.json
 grep "pazienti vulnerabili in stato di gravidanza" laravel/config/local/saluteora/database/content/pages/1.json

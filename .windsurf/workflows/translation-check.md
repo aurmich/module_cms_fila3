@@ -13,6 +13,7 @@ Invoca con `/translation-check` per eseguire una validazione completa delle trad
 
 ### 1.1 Verifica Struttura Directory
 ```bash
+
 # Verifica directory traduzioni per ogni modulo
 find Modules/ -type d -name "lang" -exec ls -la {} \;
 
@@ -22,6 +23,7 @@ find Modules/ -name "*.php" -path "*/lang/*" | head -20
 
 ### 1.2 Controllo Naming Convention
 ```bash
+
 # Verifica che tutti i file siano in minuscolo (eccetto README.md)
 find Modules/*/docs/ -name "*.md" | grep -E "[A-Z]" | grep -v "README.md" || echo "✅ Naming convention corretta"
 
@@ -35,6 +37,7 @@ find Modules/*/lang/ -name "*.php" | grep -E "[A-Z]" || echo "✅ File traduzion
 Verifica che tutte le traduzioni usino la struttura espansa:
 
 ```bash
+
 # Cerca uso di struttura semplificata (NON PERMESSA)
 grep -r "'[a-zA-Z_]*' =>" Modules/*/lang/ --include="*.php" | grep -v "label\|placeholder\|help" | head -10 || echo "✅ Struttura espansa utilizzata"
 
@@ -46,6 +49,7 @@ grep -r "fields.*=>" Modules/*/lang/ --include="*.php" -A 10 | grep -B2 -A8 "=>"
 Controlla che ogni campo abbia label, placeholder e help:
 
 ```bash
+
 # Script per verificare completezza campi
 for file in $(find Modules/*/lang/ -name "*.php" -path "*/fields*"); do
     echo "Controllo: $file"
@@ -70,6 +74,7 @@ done
 Verifica struttura completa per le azioni:
 
 ```bash
+
 # Controlla che le azioni abbiano tutte le chiavi necessarie
 for file in $(find Modules/*/lang/ -name "*action*" -o -name "*resource*" | grep "\.php$"); do
     echo "Controllo azioni: $file"
@@ -89,6 +94,7 @@ done
 
 ### 3.1 Verifica Assenza di ->label() hardcoded
 ```bash
+
 # Cerca uso di ->label() nei componenti (VIETATO)
 grep -r "->label(" Modules/ --include="*.php" | grep -v "test\|Test" | head -10 || echo "✅ Nessun ->label() hardcoded trovato"
 
@@ -101,6 +107,7 @@ grep -r "->helperText(" Modules/ --include="*.php" | grep -v "test\|Test" | head
 
 ### 3.2 Controllo Uso Corretto Traduzioni
 ```bash
+
 # Verifica uso di __() per traduzioni
 grep -r "__(" Modules/ --include="*.blade.php" | head -10
 
@@ -115,12 +122,14 @@ grep -r ">[A-Z][a-z]" Modules/ --include="*.blade.php" | grep -v "__\|trans\|{{\
 
 ### 4.1 Controllo Sintassi PHP
 ```bash
+
 # Verifica sintassi PHP per tutti i file di traduzione
 find Modules/*/lang/ -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
 ```
 
 ### 4.2 Verifica Array Syntax
 ```bash
+
 # Controlla uso di sintassi [] invece di array() (OBBLIGATORIO)
 grep -r "array(" Modules/*/lang/ --include="*.php" || echo "✅ Sintassi array[] utilizzata correttamente"
 
@@ -130,6 +139,7 @@ find Modules/*/lang/ -name "*.php" -exec grep -L "declare(strict_types=1)" {} \;
 
 ### 4.3 Controllo Return Statement
 ```bash
+
 # Verifica che tutti i file abbiano return con array
 for file in $(find Modules/*/lang/ -name "*.php"); do
     if ! grep -q "^return \[" "$file"; then
@@ -142,6 +152,7 @@ done
 
 ### 5.1 Verifica Traduzioni Mancanti
 ```bash
+
 # Confronta chiavi tra italiano e inglese
 for module in $(ls Modules/); do
     if [ -d "Modules/$module/lang/it" ] && [ -d "Modules/$module/lang/en" ]; then
@@ -163,6 +174,7 @@ done
 
 ### 5.2 Controllo helper_text Duplicati
 ```bash
+
 # Trova helper_text identici a description o placeholder
 for file in $(find Modules/*/lang/ -name "*.php"); do
     # Cerca pattern con helper_text uguale a placeholder
@@ -180,6 +192,7 @@ done
 
 ### 6.1 Report Completezza Traduzioni
 ```bash
+
 # Genera report di completezza per modulo
 echo "# Report Completezza Traduzioni" > translation-report.md
 echo "Data: $(date)" >> translation-report.md
@@ -204,6 +217,7 @@ echo "Report generato: translation-report.md"
 
 ### 6.2 Controllo Coerenza Icon Names
 ```bash
+
 # Verifica che le icone nei file di traduzione usino nomi corretti
 grep -r "'icon'" Modules/*/lang/ --include="*.php" | grep -v "heroicon-\|{module"
 ```
@@ -212,6 +226,7 @@ grep -r "'icon'" Modules/*/lang/ --include="*.php" | grep -v "heroicon-\|{module
 
 ### 7.1 Fix Automatico Helper Text Duplicati
 ```bash
+
 # Script per rimuovere helper_text identici (se regola utente applicabile)
 for file in $(find Modules/*/lang/ -name "*.php"); do
     # Backup
@@ -224,6 +239,7 @@ done
 
 ### 7.2 Validazione Post-Fix
 ```bash
+
 # Verifica che i fix non abbiano rotto la sintassi
 find Modules/*/lang/ -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
 ```

@@ -134,6 +134,7 @@ TextInput::make('name')->label('Nome')
 ### Q: Come gestisco le migrazioni per modulo?
 **A:** Ogni modulo ha le sue migrazioni:
 ```bash
+
 # Crea migrazione per modulo
 php artisan module:make-migration create_users_table NomeModulo
 
@@ -152,6 +153,7 @@ php artisan module:migrate
 ### Q: Come eseguo i test?
 **A:** 
 ```bash
+
 # Tutti i test
 php artisan test
 
@@ -207,6 +209,7 @@ sudo chmod -R 775 storage bootstrap/cache
 **A:** Riavvia i worker:
 ```bash
 php artisan queue:restart
+
 # o con Horizon
 php artisan horizon:terminate
 php artisan horizon

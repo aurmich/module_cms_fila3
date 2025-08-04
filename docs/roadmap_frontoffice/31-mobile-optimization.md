@@ -86,6 +86,7 @@ class OptimizedPatientWidget extends Widget
 
 #### Browser Caching
 ```nginx
+
 # Configurazione nginx per caching
 location ~* \.(jpg|jpeg|png|gif|webp|svg|css|js)$ {
     expires 1y;

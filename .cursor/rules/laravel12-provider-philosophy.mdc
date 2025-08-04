@@ -249,5 +249,3 @@ class SaluteMoServiceProvider extends ServiceProvider
 
 ---
 **Questa regola è vincolante e va applicata in tutti i moduli che usano provider.**
-=======
->>>>>>> app-style

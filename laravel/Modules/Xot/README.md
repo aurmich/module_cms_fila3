@@ -82,6 +82,7 @@ Xot/
 
 ## Comandi Console
 ```bash
+
 # Lista moduli
 php artisan module:list
 

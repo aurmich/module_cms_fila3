@@ -224,6 +224,7 @@ public function getFormattedAddressAttribute(): string
 
 ```bash
 #!/bin/bash
+
 # Check for return type mismatches
 
 ./vendor/bin/phpstan analyze Modules/Geo/Models/Place.php --level=9 --error-format=table | grep "should return"

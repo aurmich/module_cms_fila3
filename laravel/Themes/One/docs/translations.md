@@ -101,6 +101,7 @@ php -l laravel/Themes/One/lang/de/opening_hours.php
 
 ### Verifica Struttura
 ```bash
+
 # Controlla che tutti i file abbiano la stessa struttura
 diff <(php -r "print_r(array_keys(include 'laravel/Themes/One/lang/it/opening_hours.php'));") \
      <(php -r "print_r(array_keys(include 'laravel/Themes/One/lang/en/opening_hours.php'));")
@@ -111,6 +112,7 @@ diff <(php -r "print_r(array_keys(include 'laravel/Themes/One/lang/it/opening_ho
 ### Script di Controllo
 ```bash
 #!/bin/bash
+
 # Controlla sincronizzazione traduzioni tema
 for locale in it en de; do
     echo "Verificando $locale..."
@@ -138,4 +140,3 @@ done
 - **REGOLA CRITICA**: Sintassi moderna e tipizzazione stretta
 - **REGOLA CRITICA**: Namespace `pub_theme::` per tutte le traduzioni
 
-*Ultimo aggiornamento: gennaio 2025* 

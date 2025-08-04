@@ -3,6 +3,7 @@
 ## 🚀 **Comandi Rapidi**
 
 ```bash
+
 # Pulire cache traduzioni
 php artisan cache:clear
 
@@ -152,4 +153,3 @@ find laravel/Modules/SaluteOra/lang -name "*.php" -exec php -l {} \;
 
 - **Regole complete**: `laravel/Modules/SaluteOra/docs/development-rules.md`
 - **Memorie progetto**: `laravel/Modules/SaluteOra/docs/project-memories.md`
-- **Cronologia traduzioni**: `laravel/Modules/SaluteOra/docs/translations.md` 

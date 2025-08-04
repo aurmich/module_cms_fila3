@@ -56,6 +56,7 @@ Le classi XotBase sono integrate con il sistema di configurazione, traduzioni e 
 
 ### Ricerca Violazioni
 ```bash
+
 # Cerca estensioni dirette di Filament (dovrebbe restituire 0 risultati)
 grep -r "extends Filament\\" Modules/ --include="*.php"
 
@@ -65,6 +66,7 @@ grep -r "extends Modules\\Xot\\" Modules/ --include="*.php"
 
 ### Verifica Specifica per Tipo
 ```bash
+
 # Dashboard
 grep -r "XotBaseDashboard" Modules/ --include="*.php"
 
@@ -146,6 +148,7 @@ Aggiungere un controllo pre-commit per verificare che non ci siano estensioni di
 
 ```bash
 #!/bin/bash
+
 # .git/hooks/pre-commit
 
 if grep -r "extends Filament\\" Modules/ --include="*.php" > /dev/null; then
@@ -159,6 +162,7 @@ echo "✅ Controllo XotBase: PASSED"
 
 ### CI/CD Check
 ```yaml
+
 # .github/workflows/xotbase-check.yml
 name: XotBase Extension Check
 on: [push, pull_request]

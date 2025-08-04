@@ -4,6 +4,7 @@
 
 ### 1. Controllo Versione
 ```bash
+
 # Verifica versione Filament
 composer show filament/filament
 

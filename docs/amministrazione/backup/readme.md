@@ -69,6 +69,7 @@ return [
 
 ### Backup Manuale
 ```bash
+
 # Backup completo
 php artisan backup:run
 
@@ -84,6 +85,7 @@ php artisan backup:run --tenant=1
 
 ### Verifica Backup
 ```bash
+
 # Lista backup
 php artisan backup:list
 
@@ -98,6 +100,7 @@ php artisan backup:restore
 
 ### Cron Jobs
 ```bash
+
 # Backup giornaliero
 0 0 * * * cd /var/www/html/saluteora && php artisan backup:run
 
@@ -127,6 +130,7 @@ return [
 
 ### Logs
 ```bash
+
 # Log backup
 tail -f storage/logs/backup.log
 
@@ -149,6 +153,7 @@ $frequency = $lastBackup->created_at->diffInHours(now());
 
 ### Database
 ```bash
+
 # Ripristino completo
 php artisan backup:restore --path=backup.tar.gz
 
@@ -161,6 +166,7 @@ php artisan backup:restore --path=backup.tar.gz --only-files
 
 ### Verifica Ripristino
 ```bash
+
 # Verifica database
 php artisan db:show
 
@@ -174,6 +180,7 @@ php artisan cache:clear
 
 ### Pulizia
 ```bash
+
 # Rimuovi backup vecchi
 php artisan backup:clean
 
@@ -183,12 +190,14 @@ php artisan backup:delete --path=backup.tar.gz
 
 ### Ottimizzazione
 ```bash
+
 # Compressi backup
 php artisan backup:compress
 
 # Verifica integrità
 php artisan backup:verify
 ``` 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)

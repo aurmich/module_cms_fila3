@@ -268,6 +268,7 @@ public function getRequiredFields(): Collection
 ### Test PHPStan Completo
 
 ```bash
+
 # Eseguire da /var/www/html/_bases/base_saluteora/laravel
 cd /var/www/html/_bases/base_saluteora/laravel
 
@@ -283,6 +284,7 @@ cd /var/www/html/_bases/base_saluteora/laravel
 ### Test Incrementale
 
 ```bash
+
 # Test solo Models
 ./vendor/bin/phpstan analyze Modules/FormBuilder/app/Models --level=9
 
@@ -350,6 +352,7 @@ parameters:
 ### Monitoraggio Continuo
 
 ```bash
+
 # Script di monitoraggio qualità
 #!/bin/bash
 echo "=== PHPStan FormBuilder Quality Check ==="

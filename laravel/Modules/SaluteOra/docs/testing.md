@@ -513,6 +513,7 @@ function createPregnancyPatient(array $overrides = []): Patient
 ### Comandi Base
 
 ```bash
+
 # Tutti i test del modulo SaluteOra con real data
 ./vendor/bin/pest Modules/SaluteOra/tests/
 
@@ -535,6 +536,7 @@ function createPregnancyPatient(array $overrides = []): Patient
 ### Debugging Real Data
 
 ```bash
+
 # Test in modalità debug con real data
 ./vendor/bin/pest Modules/SaluteOra/tests/ --debug
 
@@ -700,4 +702,3 @@ test('identify slow queries in real data test', function () {
 **Ultimo aggiornamento**: Gennaio 2025 - Strategia Real Data Implementation  
 **Performance Target**: <5min full suite execution  
 **Quality Target**: >90% business logic coverage  
-**Compliance**: GDPR + Italian Healthcare Standards 

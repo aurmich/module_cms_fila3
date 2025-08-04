@@ -30,6 +30,7 @@ Grazie a questo filosofia, abbiamo:
 la storia di tutto ciò che è successo in passato, quindi si può interrogare  
 quindi si può ricostruire uno stato delle cose ad un certo punto nel tempo  
 avere un controllo su un eventuale corruzione dei dati (bug, malicius, errore umano), in modo da poter correggere
+
 ### Versione HEAD
 
 

@@ -44,6 +44,7 @@ docs/
 
 ### 2. Esempio di File
 ```markdown
+
 # Titolo
 
 ## Descrizione
@@ -70,7 +71,9 @@ Note aggiuntive.
 
 ### 3. Collegamenti Bidirezionali
 ```markdown
+
 # File A
+
 ## Collegamenti
 - [File B](file-b.md)
 - [File C](file-c.md)
@@ -79,6 +82,7 @@ Note aggiuntive.
 - [File F](file-f.md)
 
 # File B
+
 ## Collegamenti
 - [File A](file-a.md)
 - [File C](file-c.md)

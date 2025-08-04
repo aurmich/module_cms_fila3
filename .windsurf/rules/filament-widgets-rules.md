@@ -468,6 +468,7 @@ La documentazione dei widget deve includere:
 Esempio di struttura di documentazione:
 
 ```markdown
+
 # ModuleNameCalendarWidget
 
 ## Descrizione

@@ -73,6 +73,7 @@ docs/
 
 ### ✅ CORRETTO
 ```bash
+
 # Script di utilità
 fix_docs_naming_convention.sh
 composer_init.sh
@@ -85,6 +86,7 @@ fix_module_structure.sh
 
 ### ❌ ERRATO
 ```bash
+
 # Nomi con maiuscole
 FixDocsNaming.sh
 ComposerInit.sh
@@ -98,6 +100,7 @@ composer_init.sh
 
 ### Script Generali
 ```bash
+
 # Dalla root del progetto
 ./bashscripts/fix_docs_naming_convention.sh
 ./bashscripts/composer_init.sh
@@ -105,6 +108,7 @@ composer_init.sh
 
 ### Script Modulo
 ```bash
+
 # Dalla root del progetto
 ./Modules/NomeModulo/bashscripts/composer_init.sh
 ./Modules/NomeModulo/bashscripts/update.sh
@@ -112,6 +116,7 @@ composer_init.sh
 
 ### Script Docker
 ```bash
+
 # Dalla root del progetto
 ./docker/mariadb/create-testing-database.sh
 ./docker/mysql/create-testing-database.sh
@@ -120,6 +125,7 @@ composer_init.sh
 ## Verifica Posizione Script
 
 ```bash
+
 # Trova tutti gli script nel progetto
 find . -name "*.sh" -type f
 
@@ -150,4 +156,3 @@ find ./bashscripts ./Modules/*/bashscripts ./docker -name "*.sh" -type f
 
 **Questa convenzione è OBBLIGATORIA per tutti gli script del progetto.**
 
-*Ultimo aggiornamento: 2025-01-06* 

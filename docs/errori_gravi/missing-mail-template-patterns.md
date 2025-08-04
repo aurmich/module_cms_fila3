@@ -321,6 +321,7 @@ Route::get('/health/mail-templates', function () {
 ## Comandi Utili per Debug
 
 ```bash
+
 # Verifica template esistenti
 php artisan tinker -c "MailTemplate::where('mailable', 'like', '%SpatieEmail%')->get(['id', 'slug', 'subject'])"
 
@@ -357,4 +358,3 @@ php artisan tinker -c "Mail::to('test@example.com')->send(new \Modules\Notify\Em
 **Ultimo aggiornamento**: 26 Giugno 2025  
 **Contributori**: AI Assistant  
 **Review Status**: Pending Technical Review  
-**Priority**: HIGH - Prevenzione errori critici 

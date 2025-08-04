@@ -11,6 +11,7 @@ Implementazione di autenticazione a due fattori per aumentare la sicurezza degli
 
 ### Step 1: TOTP (Time-based One-Time Password)
 ```yaml
+
 # TOTP Implementation Plan
 Library: PragmaRX/Google2FA per Laravel
 QR Code Generation: Endroid/QrCode per setup
@@ -21,6 +22,7 @@ Recovery: SMS backup per utenti che perdono device
 
 ### Step 2: Integrazione UI/UX
 ```yaml
+
 # User Experience Design
 Setup Flow: Wizard guidato per prima configurazione
 QR Code: Generazione e display per app authenticator
@@ -31,6 +33,7 @@ Settings: Gestione 2FA da area personale
 
 ### Step 3: Metodi Supportati
 ```yaml
+
 # Authentication Methods
 Primary: TOTP via app (Google Authenticator, Authy)
 Backup: SMS come fallback opzionale
@@ -117,6 +120,7 @@ class TwoFactorAuthenticationService
 
 ### Setup Process
 ```yaml
+
 # 2FA Activation Flow
 1. User accede alle impostazioni di sicurezza
 2. Clicca "Attiva autenticazione a due fattori"
@@ -129,6 +133,7 @@ class TwoFactorAuthenticationService
 
 ### Login Flow con 2FA
 ```yaml
+
 # Enhanced Login Process
 1. User inserisce email/password normalmente
 2. Se 2FA attivo, redirect a pagina codice
@@ -140,6 +145,7 @@ class TwoFactorAuthenticationService
 
 ### Recovery Options
 ```yaml
+
 # Recovery Methods
 Backup Codes: Input manuale codice di backup
 SMS Fallback: Invio codice via SMS (se configurato)
@@ -151,6 +157,7 @@ Account Recovery: Reset completo con documentazione
 
 ### Security Measures
 ```yaml
+
 # Enhanced Security
 Rate Limiting: Max 5 tentativi 2FA per 15 minuti
 Audit Logging: Tutti i tentativi loggati con IP
@@ -207,6 +214,7 @@ Week 7-8:
 
 ### Security Testing
 ```yaml
+
 # Test Scenarios
 TOTP Timing: Verifica grace period e sincronizzazione
 Backup Codes: Utilizzo singolo e invalidazione
@@ -225,6 +233,7 @@ Cross-device: Funzionamento su diversi dispositivi
 
 ### Adoption Metrics (Target)
 ```yaml
+
 # Expected KPIs
 2FA Activation Rate: 40% entro 6 mesi
 Setup Completion: 85% utenti completano setup
@@ -243,6 +252,7 @@ User Satisfaction: 4.5/5 rating per UX
 
 ### Technical Risks
 ```yaml
+
 # Risk Management
 User Lockout: Recovery procedures ben documentate
 Device Loss: Backup codes e SMS recovery
@@ -261,6 +271,7 @@ Adoption Resistance: Gradual rollout e incentivi
 
 ### Advanced Features (Post-MVP)
 ```yaml
+
 # Future Roadmap
 WebAuthn: Support per FIDO2/hardware keys
 Push Notifications: App-based push authentication
@@ -280,4 +291,3 @@ Biometric: Integrazione con biometric authentication
 - [Login e Logout](./login_logout.md)
 - [Sicurezza Avanzata](./sicurezza_avanzata.md)
 
-*Ultimo aggiornamento: Dicembre 2024*

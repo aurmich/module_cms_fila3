@@ -7,6 +7,7 @@ Filament richiede la pubblicazione di asset specifici per il suo funzionamento. 
 
 ### 1. Pubblicazione Asset
 ```bash
+
 # Pubblicazione standard
 php artisan filament:assets
 
@@ -16,6 +17,7 @@ php artisan filament:assets --force
 
 ### 2. Asset Specifici
 ```bash
+
 # Forms
 php artisan filament:assets --type=forms
 
@@ -66,6 +68,7 @@ public_html/
 
 ### 1. Asset non Caricati
 ```bash
+
 # Verifica presenza
 ls -la public_html/css/filament
 ls -la public_html/js/filament
@@ -76,6 +79,7 @@ php artisan filament:assets --force
 
 ### 2. Timeout durante Pubblicazione
 ```bash
+
 # Aumenta timeout PHP
 php -d max_execution_time=300 artisan filament:assets
 
@@ -87,6 +91,7 @@ php artisan filament:assets --type=widgets
 
 ### 3. Conflitti di Versione
 ```bash
+
 # Pulizia cache
 php artisan cache:clear
 php artisan view:clear
@@ -122,6 +127,7 @@ php artisan filament:assets
 
 ### 3. Cache
 ```bash
+
 # Dopo pubblicazione
 php artisan optimize
 php artisan view:cache
@@ -162,6 +168,7 @@ php artisan view:cache
 
 ### Aggiornamenti
 ```bash
+
 # 1. Backup
 cp -r public_html/css/filament public_html/css/filament_backup
 cp -r public_html/js/filament public_html/js/filament_backup
@@ -175,6 +182,7 @@ php artisan filament:assets
 
 ### Pulizia
 ```bash
+
 # Rimozione vecchi asset
 rm -rf public_html/css/filament_old
 rm -rf public_html/js/filament_old
@@ -189,4 +197,3 @@ php artisan view:clear
 - Verificare compatibilità asset
 - Backup prima degli aggiornamenti
 - Testare dopo pubblicazione
-- Documentare personalizzazioni 

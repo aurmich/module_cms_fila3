@@ -11,6 +11,7 @@ Sistema sicuro per l'upload e gestione documenti pazienti con supporto per tesse
 
 ### 1. Tessera Sanitaria
 ```yaml
+
 # Specifiche Upload
 Formati: PDF, JPG, PNG
 Dimensione Max: 5MB
@@ -21,6 +22,7 @@ Retention: Conforme GDPR
 
 ### 2. ISEE
 ```yaml
+
 # Certificazione Economica
 Formati: PDF (preferito)
 Validazione: Controllo campi obbligatori
@@ -30,6 +32,7 @@ Scadenza: Alert automatico pre-scadenza
 
 ### 3. Attestazione Gravidanza
 ```yaml
+
 # Documentazione Medica
 Formati: PDF, JPG
 Validazione: Data rilascio, struttura sanitaria
@@ -67,6 +70,7 @@ class DocumentUploadService
 ## Security Features
 
 ```yaml
+
 # Misure di Sicurezza
 Antivirus Scan: Integrazione ClamAV
 File Validation: Magic number check
@@ -87,4 +91,3 @@ GDPR Compliance: Right to be forgotten
 - [Gestione Documenti](./gestione_documenti.md)
 - [Visualizzazione Sicura](./visualizzazione_sicura.md)
 
-*Ultimo aggiornamento: Dicembre 2024*

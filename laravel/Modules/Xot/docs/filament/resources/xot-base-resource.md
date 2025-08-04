@@ -84,6 +84,7 @@ Questa struttura garantisce:
 Prima di ogni commit, verificare che le risorse Filament non contengano metodi non necessari:
 
 ```bash
+
 # Cerca risorse che contengono form() o table() o getPages() standard
 grep -r "public static function form" --include="*.php" /path/to/resources
 grep -r "public static function table" --include="*.php" /path/to/resources

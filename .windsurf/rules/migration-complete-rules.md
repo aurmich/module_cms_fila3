@@ -256,6 +256,7 @@ Prima di aggiungere o modificare:
 ### Esempio di Documentazione
 
 ```markdown
+
 # Aggiornamento Tabella prodotti
 
 ## Modifiche apportate

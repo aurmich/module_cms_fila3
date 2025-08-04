@@ -24,6 +24,7 @@ Questa guida fornisce le procedure standard per la risoluzione dei conflitti Git
 
 ### 1. Analisi Preliminare
 ```bash
+
 # Verifica lo stato dei file in conflitto
 git status
 
@@ -96,6 +97,7 @@ class TenantConfig extends XotBaseTenantConfig
 
 ### Git
 ```bash
+
 # Visualizza conflitti in dettaglio
 git diff --name-only --diff-filter=U
 
@@ -111,6 +113,7 @@ git checkout --theirs [file]
 
 ### Composer
 ```bash
+
 # Risolve conflitti nelle dipendenze
 composer update --with-dependencies
 
@@ -158,6 +161,7 @@ composer validate
    - Incorporare nuovi casi
    - Aggiornare le best practices
    - Mantenere gli esempi aggiornati 
+
 ## Collegamenti tra versioni di README.md
 * [README.md](bashscripts/docs/README.md)
 * [README.md](bashscripts/docs/it/README.md)

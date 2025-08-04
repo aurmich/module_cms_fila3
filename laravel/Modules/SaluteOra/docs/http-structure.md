@@ -55,6 +55,7 @@ app/
 To move files to the correct location:
 
 ```bash
+
 # For a single controller
 mkdir -p Modules/{ModuleName}/app/Http/Controllers/
 mv Modules/{ModuleName}/Http/Controllers/SomeController.php Modules/{ModuleName}/app/Http/Controllers/

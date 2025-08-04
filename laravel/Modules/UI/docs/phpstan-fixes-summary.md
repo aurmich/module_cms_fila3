@@ -255,6 +255,7 @@ All changes follow established architectural patterns and maintain the high qual
 ## Testing Commands
 
 ```bash
+
 # Run PHPStan analysis for UI and Xot modules
 ./vendor/bin/phpstan analyse Modules/UI Modules/Xot
 
@@ -264,4 +265,3 @@ php artisan test --filter=Xot
 
 # Check for any new errors
 ./vendor/bin/phpstan analyse Modules
-``` 
