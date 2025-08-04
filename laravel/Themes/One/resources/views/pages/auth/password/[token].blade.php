@@ -56,72 +56,17 @@ $email = request()->query('email', '');
             <!-- Main content grid -->
             <div class="grid lg:grid-cols-2 gap-8 items-center">
                 
-                <!-- Information sidebar (hidden on mobile) -->
-                <div class="hidden lg:block space-y-6">
-                    <div class="bg-white/40 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <x-filament::icon name="heroicon-o-shield-check" class="w-5 h-5 text-blue-600" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-[#272C4D] mb-2">
-                                    {{ __('pub_theme::auth.password.reset.info.security.title') }}
-                                </h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    {{ __('pub_theme::auth.password.reset.info.security.description') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/40 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                    <x-filament::icon name="heroicon-o-key" class="w-5 h-5 text-green-600" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-[#272C4D] mb-2">
-                                    {{ __('pub_theme::auth.password.reset.info.password.title') }}
-                                </h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    {{ __('pub_theme::auth.password.reset.info.password.description') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/40 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                                    <x-filament::icon name="heroicon-o-clock" class="w-5 h-5 text-purple-600" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-[#272C4D] mb-2">
-                                    {{ __('pub_theme::auth.password.reset.info.expiry.title') }}
-                                </h3>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    {{ __('pub_theme::auth.password.reset.info.expiry.description') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <!-- Reset form card -->
                 <div class="w-full">
                     <div class="bg-white/70 backdrop-blur-md rounded-xl shadow-xl border border-white/20 overflow-hidden">
                         <!-- Card header -->
-                        <div class="bg-gradient-to-r from-[#272C4D] to-[#1e40af] px-8 py-6">
-                            <h2 class="text-2xl font-bold text-[#272C4D] mb-2">
+                        <div class="bg-[#FF5F7E] px-8 py-6">
+                            <h2 class="text-2xl font-bold text-white mb-2">
                                 {{ __('pub_theme::auth.password.reset.confirm.title') }}
                             </h2>
-                            <p class="text-[#272C4D] text-sm">
+                            <p class="text-white text-sm">
                                 {{ __('pub_theme::auth.password.reset.confirm.subtitle') }}
                             </p>
                         </div>
