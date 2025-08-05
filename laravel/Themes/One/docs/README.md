@@ -103,6 +103,60 @@ Per personalizzare il tema per un progetto specifico:
 - [Documentazione CMS](../../../laravel/Modules/Cms/docs/README.md)
 - [Documentazione Best Practices](../../../docs/best-practices.md)
 
+## Aggiornamenti Recenti
+
+### Correzione Template PDF Report (Gennaio 2025)
+**Attività**: Miglioramento visualizzazione dati nel template PDF report appuntamenti
+- **Problema**: Utilizzo di `print_r()` per visualizzare array di dati nel PDF
+- **Soluzione**: Sostituiti tutti i `print_r()` con cicli `@foreach` eleganti
+- **File modificato**: `laravel/Themes/One/resources/views/appointment/report_pdf.blade.php`
+- **Miglioramenti**:
+  - ✅ Sostituiti 11 `print_r()` con cicli `@foreach`
+  - ✅ Aggiunti controlli `is_array()` per compatibilità
+  - ✅ Aggiunti stili CSS per elementi lista (`.disease-item`, `.tooth-item`, etc.)
+  - ✅ Visualizzazione con bullet points (•) per maggiore leggibilità
+  - ✅ Gestione fallback per dati non-array
+
+### Dettagli Tecnici
+```blade
+<!-- PRIMA (brutto) -->
+{{ print_r($appointment->report->specify_diseases, true) }}
+
+<!-- DOPO (elegante) -->
+@if (is_array($appointment->report->specify_diseases))
+    @foreach ($appointment->report->specify_diseases as $disease)
+        <div class="disease-item">• {{ $disease }}</div>
+    @endforeach
+@else
+    {{ $appointment->report->specify_diseases }}
+@endif
+```
+
+### Campi Migliorati
+- **Malattie**: `specify_diseases` → lista con bullet points
+- **Denti mancanti**: `specify_missing_teeth` → lista numerata
+- **Denti cariati**: `specify_decayed_teeth` → lista numerata  
+- **Protesi/Impianti**: `specify_prosthesis_or_implants` → lista dettagliata
+- **Tartaro**: `specify_tartar` → lista specifiche
+- **Placca**: `specify_plaque` → lista specifiche
+
+### Stili CSS Aggiunti
+```css
+.disease-item, .tooth-item, .prosthesis-item, .tartar-item, .plaque-item {
+    margin-left: 15px;
+    font-size: 8px;
+    color: #333;
+}
+```
+
+### Benefici
+- **Leggibilità**: Dati presentati in modo chiaro e strutturato
+- **Professionalità**: PDF più professionale e medico
+- **Compatibilità**: Gestione sia array che stringhe
+- **Manutenibilità**: Codice più pulito e comprensibile
+
+---
+
 # Laraxot Theme One Fila3
 
 Questo tema è un tema Laravel/Filament riutilizzabile, pensato per essere usato in più progetti differenti. NON è legato a un singolo progetto o dominio. Tutti gli esempi e le istruzioni sono generici e multiprogetto.

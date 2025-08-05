@@ -7,14 +7,15 @@ SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispos
 ## Aggiornamenti Recenti
 
 ### 06 Gennaio 2025
-- ✅ **Correzioni Traduzioni Appointment**: Completata risoluzione conflitti Git e modernizzazione file traduzioni
-  - Risolti conflitti Git nel file `appointment.php`
-  - Convertita sintassi da `array()` a `[]` moderna
-  - Aggiunto `declare(strict_types=1);` obbligatorio
+- ✅ **Correzioni Traduzioni Appointment Trilingue**: Completata risoluzione conflitti Git e modernizzazione file traduzioni in IT, EN, DE
+  - Risolti conflitti Git nel file `appointment.php` (IT)
+  - Convertita sintassi da `array()` a `[]` moderna in tutti i file
+  - Aggiunto `declare(strict_types=1);` obbligatorio in tutti i file
   - Implementata struttura espansa completa per tutti i campi
   - Corretti helper_text rules (stringa vuota quando uguale alla chiave)
-  - Aggiunte traduzioni mancanti per tutti gli stati degli appuntamenti
-  - Completate traduzioni per azioni, messaggi e validazione
+  - Aggiunte traduzioni mancanti per stati, filtri, azioni e messaggi
+  - **Sincronizzazione completa**: Aggiornati anche file EN e DE per coerenza trilingue
+  - Risolti conflitti Git nel template PDF `report_pdf.blade.php`
   - [Dettagli completi](traduzioni-appointment-correzioni-2025-01-06.md)
 
 ### 06 Gennaio 2025

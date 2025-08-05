@@ -201,6 +201,36 @@
             padding: 8px;
             margin: 10px 0;
         }
+
+        .disease-item {
+            margin-left: 15px;
+            font-size: 8px;
+            color: #333;
+        }
+
+        .tooth-item {
+            margin-left: 15px;
+            font-size: 8px;
+            color: #333;
+        }
+
+        .prosthesis-item {
+            margin-left: 15px;
+            font-size: 8px;
+            color: #333;
+        }
+
+        .tartar-item {
+            margin-left: 15px;
+            font-size: 8px;
+            color: #333;
+        }
+
+        .plaque-item {
+            margin-left: 15px;
+            font-size: 8px;
+            color: #333;
+        }
     </style>
 
     <!-- Header principale -->
@@ -393,7 +423,13 @@
                 @if ($appointment->report->has_diseases && $appointment->report->specify_diseases)
                     <div class="detail-box">
                         <span class="detail-label">@lang('pub_theme::appointment.report.labels.details'):</span>
-                        {{ print_r($appointment->report->specify_diseases, true) }}
+                        @if (is_array($appointment->report->specify_diseases))
+                            @foreach ($appointment->report->specify_diseases as $disease)
+                                <div class="disease-item">• {{ $disease }}</div>
+                            @endforeach
+                        @else
+                            {{ $appointment->report->specify_diseases }}
+                        @endif
                     </div>
                 @endif
             </div>
@@ -430,7 +466,13 @@
                     @if ($appointment->report->specify_missing_teeth)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_missing_teeth, true) }}
+                            @if (is_array($appointment->report->specify_missing_teeth))
+                                @foreach ($appointment->report->specify_missing_teeth as $tooth)
+                                    <div class="tooth-item">• {{ $tooth }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_missing_teeth }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_missing_teeth)
@@ -454,7 +496,13 @@
                     @if ($appointment->report->specify_decayed_teeth)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_decayed_teeth, true) }}
+                            @if (is_array($appointment->report->specify_decayed_teeth))
+                                @foreach ($appointment->report->specify_decayed_teeth as $tooth)
+                                    <div class="tooth-item">• {{ $tooth }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_decayed_teeth }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_decayed_teeth)
@@ -478,7 +526,13 @@
                     @if ($appointment->report->specify_prosthesis_or_implants)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_prosthesis_or_implants, true) }}
+                            @if (is_array($appointment->report->specify_prosthesis_or_implants))
+                                @foreach ($appointment->report->specify_prosthesis_or_implants as $prosthesis)
+                                    <div class="prosthesis-item">• {{ $prosthesis }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_prosthesis_or_implants }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_prosthesis)
@@ -502,7 +556,13 @@
                     @if ($appointment->report->specify_tartar)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_tartar, true) }}
+                            @if (is_array($appointment->report->specify_tartar))
+                                @foreach ($appointment->report->specify_tartar as $tartar)
+                                    <div class="tartar-item">• {{ $tartar }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_tartar }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_tartar)
@@ -526,7 +586,13 @@
                     @if ($appointment->report->specify_plaque)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_plaque, true) }}
+                            @if (is_array($appointment->report->specify_plaque))
+                                @foreach ($appointment->report->specify_plaque as $plaque)
+                                    <div class="plaque-item">• {{ $plaque }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_plaque }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_plaque)
@@ -592,7 +658,13 @@
                     @if ($appointment->report->specify_missing_teeth)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_missing_teeth, true) }}
+                            @if (is_array($appointment->report->specify_missing_teeth))
+                                @foreach ($appointment->report->specify_missing_teeth as $tooth)
+                                    <div class="tooth-item">• {{ $tooth }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_missing_teeth }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_missing_teeth)
@@ -616,7 +688,13 @@
                     @if ($appointment->report->specify_decayed_teeth)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_decayed_teeth, true) }}
+                            @if (is_array($appointment->report->specify_decayed_teeth))
+                                @foreach ($appointment->report->specify_decayed_teeth as $tooth)
+                                    <div class="tooth-item">• {{ $tooth }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_decayed_teeth }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_decayed_teeth)
@@ -640,7 +718,13 @@
                     @if ($appointment->report->specify_prosthesis_or_implants)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_prosthesis_or_implants, true) }}
+                            @if (is_array($appointment->report->specify_prosthesis_or_implants))
+                                @foreach ($appointment->report->specify_prosthesis_or_implants as $prosthesis)
+                                    <div class="prosthesis-item">• {{ $prosthesis }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_prosthesis_or_implants }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_prosthesis)
@@ -664,7 +748,13 @@
                     @if ($appointment->report->specify_tartar)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_tartar, true) }}
+                            @if (is_array($appointment->report->specify_tartar))
+                                @foreach ($appointment->report->specify_tartar as $tartar)
+                                    <div class="tartar-item">• {{ $tartar }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_tartar }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_tartar)
@@ -688,7 +778,13 @@
                     @if ($appointment->report->specify_plaque)
                         <div class="detail-box">
                             <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span>
-                            {{ print_r($appointment->report->specify_plaque, true) }}
+                            @if (is_array($appointment->report->specify_plaque))
+                                @foreach ($appointment->report->specify_plaque as $plaque)
+                                    <div class="plaque-item">• {{ $plaque }}</div>
+                                @endforeach
+                            @else
+                                {{ $appointment->report->specify_plaque }}
+                            @endif
                         </div>
                     @endif
                     @if ($appointment->report->more_info_plaque)
@@ -711,7 +807,6 @@
                     </span>
                 </div>
             </div>
-            >>>>>>> c7480998 (trans)
         @endif
 
 </page>
