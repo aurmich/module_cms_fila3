@@ -551,6 +551,7 @@
             </div>
         @endif
 
+<<<<<<< HEAD
         <!-- Note aggiuntive -->
         @if ($appointment->report->further_notes)
             <div class="medical-item">
@@ -560,6 +561,148 @@
                 </div>
             </div>
         @endif
+=======
+    <!-- Regole alimentari -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.follows_diet_rules.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->follows_diet_rules ? 'yes' : 'no' }}">
+                {{ $appointment->report->follows_diet_rules ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Utilizzo ASL -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.uses_asl_clinic_for_dental_care.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->uses_asl_clinic_for_dental_care ? 'yes' : 'no' }}">
+                {{ $appointment->report->uses_asl_clinic_for_dental_care ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Denti mancanti -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.missing_teeth.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->missing_teeth ? 'yes' : 'no' }}">
+                {{ $appointment->report->missing_teeth ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+            @if($appointment->report->missing_teeth)
+                @if($appointment->report->specify_missing_teeth)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_missing_teeth,true) }}
+                    </div>
+                @endif
+                @if($appointment->report->more_info_missing_teeth)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.additional_info'):</span> {{ $appointment->report->more_info_missing_teeth }}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
+    <!-- Denti cariati -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.decayed_teeth.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->decayed_teeth ? 'yes' : 'no' }}">
+                {{ $appointment->report->decayed_teeth ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+            @if($appointment->report->decayed_teeth)
+                @if($appointment->report->specify_decayed_teeth)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_decayed_teeth,true) }}
+                    </div>
+                @endif
+                @if($appointment->report->more_info_decayed_teeth)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.additional_info'):</span> {{ $appointment->report->more_info_decayed_teeth }}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
+    <!-- Protesi o impianti -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.has_fixed_prosthesis_or_implants.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->has_fixed_prosthesis_or_implants ? 'yes' : 'no' }}">
+                {{ $appointment->report->has_fixed_prosthesis_or_implants ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+            @if($appointment->report->has_fixed_prosthesis_or_implants)
+                @if($appointment->report->specify_prosthesis_or_implants)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_prosthesis_or_implants,true) }}
+                    </div>
+                @endif
+                @if($appointment->report->more_info_prosthesis)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.additional_info'):</span> {{ $appointment->report->more_info_prosthesis }}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
+    <!-- Tartaro -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.has_tartar.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->has_tartar ? 'yes' : 'no' }}">
+                {{ $appointment->report->has_tartar ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+            @if($appointment->report->has_tartar)
+                @if($appointment->report->specify_tartar)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_tartar,true) }}
+                    </div>
+                @endif
+                @if($appointment->report->more_info_tartar)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.additional_info'):</span> {{ $appointment->report->more_info_tartar }}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
+    <!-- Placca -->
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.has_plaque.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->has_plaque ? 'yes' : 'no' }}">
+                {{ $appointment->report->has_plaque ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+            @if($appointment->report->has_plaque)
+                @if($appointment->report->specify_plaque)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.specify'):</span> {{ print_r($appointment->report->specify_plaque,true) }}
+                    </div>
+                @endif
+                @if($appointment->report->more_info_plaque)
+                    <div class="detail-box">
+                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.additional_info'):</span> {{ $appointment->report->more_info_plaque }}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
+    <!-- Cure odontoiatriche aggiuntive -->
+    @if($appointment->report->needs_more_dental_care !== null)
+    <div class="medical-item">
+        <div class="medical-question">@lang('saluteora::report.fields.needs_more_dental_care.label')</div>
+        <div class="medical-answer">
+            <span class="yes-no {{ $appointment->report->needs_more_dental_care ? 'yes' : 'no' }}">
+                {{ $appointment->report->needs_more_dental_care ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+            </span>
+        </div>
+    </div>
+>>>>>>> c7480998 (trans)
     @endif
 
 </page>

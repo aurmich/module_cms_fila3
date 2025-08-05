@@ -87,6 +87,9 @@ return array (
     'telegram_bot_token' => 
     array (
       'description' => 'telegram_bot_token',
+      'helper_text' => 'telegram_bot_token',
+      'placeholder' => 'telegram_bot_token',
+      'label' => 'telegram_bot_token',
     ),
   ),
   'actions' => 

@@ -8,6 +8,8 @@ return array (
       'label' => 'Email',
       'placeholder' => 'Enter your email',
       'help' => 'Enter your email address to log in',
+      'description' => 'email',
+      'helper_text' => 'email',
     ),
     'password' => 
     array (
@@ -15,6 +17,7 @@ return array (
       'placeholder' => 'Enter your password',
       'help' => 'Enter your account password',
       'description' => 'password',
+      'helper_text' => 'password',
     ),
     'remember' => 
     array (

@@ -244,6 +244,36 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+<<<<<<< HEAD
+=======
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+      'label' => 'value',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
+    ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+>>>>>>> c7480998 (trans)
     'patient' => 
     array (
       'full_name' => 
@@ -251,6 +281,7 @@ return array (
         'label' => 'patient.full_name',
       ),
     ),
+<<<<<<< HEAD
     'create' => 
     array (
       'label' => 'create',
@@ -312,6 +343,8 @@ return array (
       'description' => 'first_name',
       'helper_text' => 'first_name',
     ),
+=======
+>>>>>>> c7480998 (trans)
   ),
   'statuses' => 
   array (
