@@ -441,7 +441,7 @@ return [
             'label' => 'Riprogrammato',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path',
+            'icon' => 'heroicon-o-arrow-right-left',
             'modal_heading' => 'Riprogramma Appuntamento',
             'modal_description' => 'Questo appuntamento è stato riprogrammato per una nuova data.'
         ],
@@ -497,7 +497,7 @@ return [
             'label' => 'Rimborso da Integrare',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path',
+            'icon' => 'heroicon-o-arrow-right-left',
             'modal_heading' => 'Rimborso da Integrare',
             'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
         ],
@@ -505,15 +505,7 @@ return [
             'label' => 'Rimborso da Integrare',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path',
-            'modal_heading' => 'Rimborso da Integrare',
-            'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
-        ],
-        'refund_integrate' => [
-            'label' => 'Rimborso da Integrare',
-            'color' => 'info',
-            'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path',
+            'icon' => 'heroicon-o-arrow-right-left',
             'modal_heading' => 'Rimborso da Integrare',
             'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
         ],
@@ -528,6 +520,12 @@ return [
     ],
 
     'widgets' => [
+        'model_trend_chart' => [
+            'heading' => 'Andamento Appuntamenti',
+            'description' => 'Grafico che mostra l\'andamento degli appuntamenti nel tempo',
+            'label' => 'Andamento appuntamenti',
+            'tooltip' => 'Trend degli appuntamenti nel tempo',
+        ],
         'states_chart' => [
             'heading' => 'Distribuzione Stati Appuntamenti',
             'description' => 'Grafico che mostra la distribuzione degli stati degli appuntamenti',
@@ -545,6 +543,12 @@ return [
             'description' => 'Grafico che mostra il trend degli appuntamenti nel tempo',
             'label' => 'Trend appuntamenti',
             'tooltip' => 'Andamento degli appuntamenti per periodo',
+        ],
+        'model_trend_chart' => [
+            'heading' => 'Andamento Modello Appuntamenti',
+            'description' => 'Grafico che mostra l\'andamento del modello degli appuntamenti',
+            'label' => 'Modello appuntamenti',
+            'tooltip' => 'Trend del modello di prenotazione degli appuntamenti',
         ],
     ]
 ];

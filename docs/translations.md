@@ -7,6 +7,18 @@
 
 ## Aggiornamenti Recenti
 
+### Modulo SaluteOra - Correzione Icone (Gennaio 2025)
+**Attività**: Sostituzione icone `heroicon-o-arrow-path` non esistenti con icone valide
+- **Problema**: Errore "Svg by name 'o-arrow-path-20-solid' from set 'heroicons' not found"
+- **Causa**: Icona `heroicon-o-arrow-path` non esiste nel set Heroicons
+- **Soluzione**: Sostituite tutte le icone non valide con `heroicon-o-arrow-right-left`
+- **File aggiornati**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+- **Stati corretti**: rescheduled, refund_to_integrate, refund_integrate
+- **Icona utilizzata**: `heroicon-o-arrow-right-left` (valida e esistente)
+
 ### Modulo SaluteOra - Stati Appuntamenti (Gennaio 2025)
 **Attività**: Completamento traduzioni per stati `completed` e `in_progress` mancanti
 - **Problema**: Stati `completed` e `in_progress` erano presenti nella logica ma mancavano nelle traduzioni

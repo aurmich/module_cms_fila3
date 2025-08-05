@@ -9,6 +9,47 @@
 - **SEMPRE** includere `declare(strict_types=1);` all'inizio del file.
 - **SEMPRE** implementare traduzioni complete in italiano, inglese e tedesco.
 
+## Correzioni Applicate (2025-08-05)
+
+### Aggiunta Traduzione Widget model_trend_chart
+
+**Traduzione Mancante Identificata**: `saluteora::appointment.widgets.model_trend_chart.heading`
+
+#### Modifiche Applicate
+- ✅ **IT**: Aggiunta sezione `model_trend_chart` con traduzione italiana completa
+  - `'heading' => 'Andamento Modello Appuntamenti'`
+  - `'description' => 'Grafico che mostra l\'andamento del modello degli appuntamenti'`
+  - `'label' => 'Modello appuntamenti'`
+  - `'tooltip' => 'Trend del modello di prenotazione degli appuntamenti'`
+
+- ✅ **EN**: Aggiunta intera sezione `widgets` con tutte le traduzioni inglesi
+  - `'heading' => 'Appointment Model Trend'`
+  - `'description' => 'Chart showing the appointment model trend'`
+  - `'label' => 'Appointment model'`
+  - `'tooltip' => 'Appointment booking model trend'`
+
+- ✅ **DE**: Aggiunta intera sezione `widgets` con tutte le traduzioni tedesche
+  - `'heading' => 'Terminmodell-Trend'`
+  - `'description' => 'Diagramm, das den Trend des Terminmodells zeigt'`
+  - `'label' => 'Terminmodell'`
+  - `'tooltip' => 'Trend des Terminbuchungsmodells'`
+
+#### Regola Fondamentale Rispettata
+🔥 **REGOLA CRITICA**: **MAI togliere contenuti dalle traduzioni, solo aggiungere o migliorare**
+- ✅ Nessun contenuto rimosso
+- ✅ Solo aggiunte di nuove traduzioni
+- ✅ Struttura espansa rispettata per tutte le lingue
+- ✅ Coerenza mantenuta con le traduzioni esistenti
+
+#### Sezioni Widget Completate
+Ora tutti i file di lingua hanno la sezione `widgets` completa con:
+- `states_chart` - Distribuzione stati appuntamenti
+- `creation_chart` - Creazione appuntamenti nel tempo
+- `trend_chart` - Trend appuntamenti
+- `model_trend_chart` - **NUOVO** Andamento modello appuntamenti
+
+---
+
 ## Correzioni Applicate (2025-01-07)
 
 ### File Sistematizzati

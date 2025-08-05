@@ -68,6 +68,26 @@ Ho completato la verifica e correzione delle traduzioni per tutti gli stati degl
 - ✅ Aggiornata lista delle transizioni
 - ✅ Rimossi stati obsoleti dalla documentazione
 
+### Correzione Icone Non Valide (Gennaio 2025)
+**Attività**: Sostituzione icone `heroicon-o-arrow-path` non esistenti con icone valide
+- **Problema**: Errore "Svg by name 'o-arrow-path-20-solid' from set 'heroicons' not found"
+- **Causa**: Icona `heroicon-o-arrow-path` non esiste nel set Heroicons
+- **Soluzione**: Sostituite tutte le icone non valide con `heroicon-o-arrow-right-left`
+- **File aggiornati**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+
+### Stati Corretti
+- **rescheduled**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
+- **refund_to_integrate**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
+- **refund_integrate**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
+
+### Rimozione Duplicati
+- ✅ Rimosso duplicato di `refund_integrate` nel file italiano
+- ✅ Mantenuta coerenza tra tutte e tre le lingue
+- ✅ Verificata esistenza di tutte le icone Heroicons utilizzate
+
 ## Aggiornamenti Recenti
 
 ### Aggiunta Traduzioni Mancanti Stati Appuntamenti (Gennaio 2025)

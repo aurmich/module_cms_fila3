@@ -23,6 +23,11 @@
 - **Scoperta**: Il sistema cerca le traduzioni nel file `states.php` usando il pattern `saluteora::states.{nome_stato}.{proprieta}`
 - **Errore precedente**: Stavo aggiungendo traduzioni nel file `appointment.php` invece che nel file corretto `states.php`
 
+### Regola Critica per le Traduzioni
+- **REGOLA FONDAMENTALE**: **MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare**
+- **Motivazione**: Mantenere la coerenza e evitare perdita di informazioni
+- **Applicazione**: Tutte le modifiche devono essere additive o migliorative
+
 ## Soluzione Implementata
 
 ### 1. Sostituzione Icona Non Valida
@@ -38,6 +43,10 @@
 - **File corretto**: Tutte le traduzioni degli stati ora sono in `states.php`
 - **Pattern corretto**: `saluteora::states.{nome_stato}.{proprieta}`
 
+### 4. Aggiunta Traduzioni Widget
+- **`model_trend_chart`**: Aggiunto in tutti i file `appointment.php` (IT, EN, DE)
+- **Coerenza trilingue**: Mantenuta in tutte le lingue
+
 ## File Corretti
 
 ### File States.php
@@ -45,12 +54,20 @@
 - `laravel/Modules/SaluteOra/lang/en/states.php`
 - `laravel/Modules/SaluteOra/lang/de/states.php`
 
+### File Appointment.php
+- `laravel/Modules/SaluteOra/lang/it/appointment.php`
+- `laravel/Modules/SaluteOra/lang/en/appointment.php`
+- `laravel/Modules/SaluteOra/lang/de/appointment.php`
+
 ### Stati Corretti
 1. **rescheduled**: Icona corretta `heroicon-o-arrow-right-left`
 2. **refund_to_integrate**: Icona corretta `heroicon-o-arrow-right-left`
 3. **refund_integrate**: Icona corretta `heroicon-o-arrow-right-left`
 4. **completed**: Aggiunto con icona `heroicon-o-check-circle`
 5. **in_progress**: Aggiunto con icona `heroicon-o-clock`
+
+### Widget Aggiunti
+1. **model_trend_chart**: Aggiunto in tutte le lingue con traduzioni complete
 
 ## Verifica Post-Correzione
 
@@ -63,6 +80,7 @@
 - ✅ Tutte le traduzioni ora sono nel file corretto `states.php`
 - ✅ Pattern di ricerca corretto: `saluteora::states.{nome_stato}.{proprieta}`
 - ✅ Stati mancanti aggiunti: `completed` e `in_progress`
+- ✅ Widget aggiunti: `model_trend_chart` in tutte le lingue
 
 ## Prevenzione Errori Futuri
 
@@ -71,12 +89,16 @@
 2. **Utilizzare icone semanticamente appropriate** per ogni stato
 3. **Testare le traduzioni** nel contesto reale dell'applicazione
 4. **Documentare le scelte** delle icone per futuri riferimenti
+5. **MAI togliere contenuto dalle traduzioni** - solo aggiungere o migliorare
+6. **Mantenere coerenza trilingue** - aggiungere sempre in IT, EN, DE
 
 ### Checklist Pre-Implementazione
 - [ ] Verificare che l'icona sia disponibile in Heroicons
 - [ ] Testare l'icona in un ambiente di sviluppo
 - [ ] Verificare che sia semanticamente appropriata
 - [ ] Documentare la scelta dell'icona
+- [ ] Aggiungere traduzioni in tutte le lingue (IT, EN, DE)
+- [ ] Non rimuovere mai contenuto esistente dalle traduzioni
 
 ## Note Tecniche
 
@@ -97,6 +119,15 @@
         // ...
     ],
 ],
+
+// Nel file appointment.php
+'widgets' => [
+    'model_trend_chart' => [
+        'heading' => 'Andamento Appuntamenti',
+        'description' => 'Grafico che mostra l\'andamento degli appuntamenti nel tempo',
+        // ...
+    ],
+],
 ```
 
 ## Riferimenti
@@ -109,4 +140,5 @@
 
 **Ultimo aggiornamento**: 06 Gennaio 2025
 **Stato**: ✅ Completato
-**Verificato**: ✅ Tutte le icone sono valide e le traduzioni sono nel file corretto 
+**Verificato**: ✅ Tutte le icone sono valide e le traduzioni sono nel file corretto
+**Regola Critica**: ✅ MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare 

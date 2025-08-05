@@ -8,22 +8,36 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 
 ### 06 Gennaio 2025
 - ✅ **Correzione Icona Arrow-Path Completa**: Risolto errore critico "Svg by name not found"
-  - Sostituita icona `heroicon-o-arrow-path` con `heroicon-o-arrow-path`
+  - Sostituita icona `heroicon-o-arrow-path-20-solid` (non valida) con `heroicon-o-arrow-right-left` (valida)
   - Corretta in tutti e 3 gli stati: rescheduled, refund_to_integrate, refund_integrate
   - Aggiornata in tutte e tre le lingue (IT, EN, DE)
   - **File corretti**: states.php e appointment.php in tutte le lingue
   - **Stati obsoleti rimossi**: in_progress e completed eliminati da appointment.php
   - **Stati mancanti aggiunti**: completed e in_progress aggiunti a states.php
   - **Meccanismo corretto**: Traduzioni aggiunte nel file states.php (non appointment.php)
+  - **Icona semanticamente appropriata**: arrow-right-left rappresenta perfettamente riprogrammazione e integrazione
+  - **Regola critica applicata**: MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare
   - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
 
 - ✅ **Correzioni Traduzioni Stati Appuntamenti**: Completata verifica e correzione delle traduzioni per tutti gli stati degli appuntamenti
   - Aggiunto stato `refund_integrate` mancante nelle traduzioni
   - Rimossi stati obsoleti `in_progress` e `completed` da appointment.php
-  - Aggiunti stati `completed` e `in_progress` mancanti in states.php
-  - Corretta icona arrow-path in tutti gli stati che la utilizzavano
-  - Sincronizzazione trilingue completa (IT, EN, DE)
+  - Aggiunti stati `completed` e `in_progress` in states.php (file corretto)
+  - Corretta icona `heroicon-o-arrow-path` in `heroicon-o-arrow-right-left`
+  - **Regola critica**: MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare
   - [Dettagli completi](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
+
+- ✅ **Aggiunta Traduzioni Widget**: Completata aggiunta traduzioni per widget mancanti
+  - Aggiunto `model_trend_chart` in tutti i file appointment.php (IT, EN, DE)
+  - Mantenuta coerenza trilingue in tutte le lingue
+  - **Regola critica applicata**: Solo aggiunte, mai rimozioni di contenuto
+  - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
+
+- ✅ **Regola Critica per Traduzioni**: Implementata e documentata regola fondamentale
+  - **REGOLA**: MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare
+  - **Motivazione**: Mantenere coerenza e evitare perdita di informazioni
+  - **Applicazione**: Tutte le modifiche devono essere additive o migliorative
+  - **Documentazione**: Aggiornata in tutti i file di documentazione correlati
 
 ## File Chiave
 - [Doctor.php](app/Models/Doctor.php)
