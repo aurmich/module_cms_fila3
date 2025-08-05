@@ -251,22 +251,6 @@ return [
             'modal_heading' => 'Geplanter Termin',
             'modal_description' => 'Dieser Termin wurde im Kalender geplant.',
         ],
-        'in_progress' => [
-            'label' => 'Läuft',
-            'color' => 'warning',
-            'bg_color' => '#f59e0b',
-            'icon' => 'heroicon-o-clock',
-            'modal_heading' => 'Besuch Läuft',
-            'modal_description' => 'Der medizinische Besuch läuft derzeit.',
-        ],
-        'completed' => [
-            'label' => 'Abgeschlossen',
-            'color' => 'success',
-            'bg_color' => '#10b981',
-            'icon' => 'heroicon-o-check-badge',
-            'modal_heading' => 'Besuch Abgeschlossen',
-            'modal_description' => 'Der Besuch wurde erfolgreich abgeschlossen.',
-        ],
         'cancelled' => [
             'label' => 'Storniert',
             'color' => 'danger',

@@ -251,22 +251,6 @@ return [
             'modal_heading' => 'Scheduled Appointment',
             'modal_description' => 'This appointment has been scheduled in the calendar.',
         ],
-        'in_progress' => [
-            'label' => 'In Progress',
-            'color' => 'warning',
-            'bg_color' => '#f59e0b',
-            'icon' => 'heroicon-o-clock',
-            'modal_heading' => 'Visit in Progress',
-            'modal_description' => 'The medical visit is currently in progress.',
-        ],
-        'completed' => [
-            'label' => 'Completed',
-            'color' => 'success',
-            'bg_color' => '#10b981',
-            'icon' => 'heroicon-o-check-badge',
-            'modal_heading' => 'Visit Completed',
-            'modal_description' => 'The visit has been completed successfully.',
-        ],
         'cancelled' => [
             'label' => 'Cancelled',
             'color' => 'danger',
