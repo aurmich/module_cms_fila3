@@ -52,4 +52,6 @@ return [
         'name' => 'Meine Gemeinde',
         'tagline' => 'Eine lebenswerte Gemeinde',
     ],
+    
+    'Project' => 'SaluteOra',
 ];

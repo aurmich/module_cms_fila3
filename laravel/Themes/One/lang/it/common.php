@@ -53,4 +53,6 @@ return [
         'name' => 'Il mio Comune',
         'tagline' => 'Un comune da vivere',
     ],
+    
+    'Project' => 'SaluteOra',
 ];

@@ -53,4 +53,6 @@ return [
         'name' => 'My Municipality',
         'tagline' => 'A place to live',
     ],
+    
+    'Project' => 'SaluteOra',
 ];

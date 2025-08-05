@@ -272,8 +272,6 @@ return [
             'notes' => 'Note',
             'medical_report' => 'REFERTO MEDICO',
         ],
-        'pdf_title' => 'REFERTO MEDICO',
-        'ready_title' => 'Il tuo referto è pronto!',
         'labels' => [
             'date' => 'Data',
             'time' => 'Orario',
