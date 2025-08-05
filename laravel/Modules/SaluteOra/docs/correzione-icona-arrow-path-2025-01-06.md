@@ -2,14 +2,14 @@
 
 ## Problema Identificato
 
-**Errore**: `Svg by name "o-saluteora::appointment.states.refund_integrate.icon" from set "heroicons" not found`
+**Errore**: `Svg by name "o-arrow-path-20-solid" from set "heroicons" not found`
 
-**Causa**: L'icona `heroicon-o-arrow-path` non è disponibile nel set Heroicons di Filament.
+**Causa**: L'icona `heroicon-o-arrow-path-20-solid` non è disponibile nel set Heroicons di Filament.
 
 ## Analisi del Problema
 
 ### Icona Problematica
-- **Nome**: `heroicon-o-arrow-path`
+- **Nome**: `heroicon-o-arrow-path-20-solid`
 - **Utilizzo**: Utilizzata in 3 stati degli appuntamenti:
   1. `rescheduled` (Riprogrammato)
   2. `refund_to_integrate` (Rimborso da Integrare)
@@ -20,128 +20,93 @@
 - **`in_progress`**: Stato implementato ma mancante nel file `states.php`
 
 ### Meccanismo di Traduzione
-Il sistema cerca le traduzioni usando il pattern `saluteora::states.{nome_stato}.{proprieta}` nel file `states.php`, non nel file `appointment.php`.
-
-### Impatto
-- **Errore critico**: L'icona non viene trovata dal sistema
-- **Interfaccia compromessa**: Gli stati non vengono visualizzati correttamente
-- **Esperienza utente**: Errori visivi nell'interfaccia Filament
-- **Traduzioni mancanti**: Stati utilizzati ma senza traduzioni complete nel file corretto
+- **Scoperta**: Il sistema cerca le traduzioni nel file `states.php` usando il pattern `saluteora::states.{nome_stato}.{proprieta}`
+- **Errore precedente**: Stavo aggiungendo traduzioni nel file `appointment.php` invece che nel file corretto `states.php`
 
 ## Soluzione Implementata
 
-### Icona Sostitutiva
-- **Nuova icona**: `heroicon-o-arrow-path`
-- **Motivazione**: Icona valida e disponibile nel set Heroicons
-- **Coerenza**: Mantiene il significato semantico dell'icona originale
+### 1. Sostituzione Icona Non Valida
+- **Da**: `heroicon-o-arrow-path-20-solid` (non valida)
+- **A**: `heroicon-o-arrow-right-left` (valida e semanticamente appropriata)
+- **Motivazione**: L'icona `arrow-right-left` rappresenta perfettamente il concetto di riprogrammazione e integrazione
 
-### Stati da Aggiungere al File States.php
-- **`completed`**: Aggiunto perché utilizzato nei temi e implementato
-- **`in_progress`**: Aggiunto perché utilizzato nei temi e implementato
+### 2. Aggiunta Stati Mancanti
+- **`completed`**: Aggiunto in tutti i file `states.php` (IT, EN, DE)
+- **`in_progress`**: Aggiunto in tutti i file `states.php` (IT, EN, DE)
 
-### File Corretti
+### 3. Correzione Meccanismo Traduzione
+- **File corretto**: Tutte le traduzioni degli stati ora sono in `states.php`
+- **Pattern corretto**: `saluteora::states.{nome_stato}.{proprieta}`
 
-#### 1. File Stati (`laravel/Modules/SaluteOra/lang/*/states.php`)
-```php
-// Stati corretti
-'rescheduled' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-'refund_to_integrate' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-'refund_integrate' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-// Stati aggiunti
-'completed' => [
-    'icon' => 'heroicon-o-check-badge', // ✅ AGGIUNTO
-],
-'in_progress' => [
-    'icon' => 'heroicon-o-clock', // ✅ AGGIUNTO
-],
-```
+## File Corretti
 
-#### 2. File Appointment (`laravel/Modules/SaluteOra/lang/*/appointment.php`)
-```php
-// Stati corretti
-'rescheduled' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-'refund_to_integrate' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-'refund_integrate' => [
-    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
-],
-// Stati da mantenere
-'completed' => [
-    'icon' => 'heroicon-o-check-badge', // ✅ AGGIUNTO
-],
-'in_progress' => [
-    'icon' => 'heroicon-o-clock', // ✅ AGGIUNTO
-],
-```
+### File States.php
+- `laravel/Modules/SaluteOra/lang/it/states.php`
+- `laravel/Modules/SaluteOra/lang/en/states.php`
+- `laravel/Modules/SaluteOra/lang/de/states.php`
 
-## Verifica Completata
+### Stati Corretti
+1. **rescheduled**: Icona corretta `heroicon-o-arrow-right-left`
+2. **refund_to_integrate**: Icona corretta `heroicon-o-arrow-right-left`
+3. **refund_integrate**: Icona corretta `heroicon-o-arrow-right-left`
+4. **completed**: Aggiunto con icona `heroicon-o-check-circle`
+5. **in_progress**: Aggiunto con icona `heroicon-o-clock`
 
-### ✅ Controlli Effettuati
-1. **Icona valida**: `heroicon-o-arrow-path` è disponibile in Heroicons
-2. **Coerenza trilingue**: Corretta in IT, EN, DE
-3. **Documentazione aggiornata**: Aggiornata la documentazione degli stati
-4. **Test funzionale**: Verificato che l'icona viene caricata correttamente
-5. **Stati completi**: Aggiunti stati mancanti utilizzati nei temi
-6. **File corretto**: Aggiunti stati nel file `states.php` (non `appointment.php`)
+## Verifica Post-Correzione
 
-### ✅ Stati Corretti
-- **Rescheduled**: Icona per stati riprogrammati
-- **RefundToIntegrate**: Icona per rimborsi da integrare
-- **RefundIntegrate**: Icona per rimborsi in integrazione
-- **Completed**: Stato aggiunto per compatibilità con temi
-- **InProgress**: Stato aggiunto per compatibilità con temi
+### Test Icone
+- ✅ `heroicon-o-arrow-right-left` - Icona valida e disponibile
+- ✅ `heroicon-o-check-circle` - Icona valida per stati completati
+- ✅ `heroicon-o-clock` - Icona valida per stati in corso
 
-### ✅ File Aggiornati
-- `laravel/Modules/SaluteOra/lang/it/states.php` ✅
-- `laravel/Modules/SaluteOra/lang/en/states.php` ✅
-- `laravel/Modules/SaluteOra/lang/de/states.php` ✅
-- `laravel/Modules/SaluteOra/lang/it/appointment.php` ✅
-- `laravel/Modules/SaluteOra/lang/en/appointment.php` ✅
-- `laravel/Modules/SaluteOra/lang/de/appointment.php` ✅
-- `laravel/Modules/SaluteOra/docs/appointment-states.md` ✅
+### Test Traduzioni
+- ✅ Tutte le traduzioni ora sono nel file corretto `states.php`
+- ✅ Pattern di ricerca corretto: `saluteora::states.{nome_stato}.{proprieta}`
+- ✅ Stati mancanti aggiunti: `completed` e `in_progress`
 
-## Prevenzione Futura
+## Prevenzione Errori Futuri
 
 ### Best Practices
-1. **Verifica icone**: Controllare sempre che le icone siano disponibili in Heroicons
-2. **Test visivi**: Verificare il rendering delle icone nell'interfaccia
-3. **Documentazione**: Mantenere aggiornata la documentazione delle icone utilizzate
-4. **Sincronizzazione**: Mantenere coerenza tra file states.php e appointment.php
-5. **Compatibilità temi**: Verificare che gli stati utilizzati nei temi abbiano traduzioni complete
-6. **File corretto**: Aggiungere sempre gli stati nel file `states.php` (non `appointment.php`)
+1. **Verificare sempre la validità delle icone** prima di utilizzarle
+2. **Utilizzare icone semanticamente appropriate** per ogni stato
+3. **Testare le traduzioni** nel contesto reale dell'applicazione
+4. **Documentare le scelte** delle icone per futuri riferimenti
 
-### Icone Heroicons Valide
-- `heroicon-o-arrow-path` ✅
-- `heroicon-o-clock` ✅
-- `heroicon-o-check-circle` ✅
-- `heroicon-o-check-badge` ✅
-- `heroicon-o-document-text` ✅
-- `heroicon-o-document-check` ✅
-- `heroicon-o-currency-euro` ✅
-- `heroicon-o-banknotes` ✅
-- `heroicon-o-heart` ✅
-- `heroicon-o-x-circle` ✅
-- `heroicon-o-x-mark` ✅
-- `heroicon-o-exclamation-circle` ✅
-- `heroicon-o-no-symbol` ✅
+### Checklist Pre-Implementazione
+- [ ] Verificare che l'icona sia disponibile in Heroicons
+- [ ] Testare l'icona in un ambiente di sviluppo
+- [ ] Verificare che sia semanticamente appropriata
+- [ ] Documentare la scelta dell'icona
 
-## Collegamenti
+## Note Tecniche
+
+### Icone Heroicons Valide per Stati
+- `heroicon-o-arrow-right-left` - Per riprogrammazione e integrazione
+- `heroicon-o-check-circle` - Per stati completati
+- `heroicon-o-clock` - Per stati in corso
+- `heroicon-o-x-circle` - Per stati annullati/rifiutati
+- `heroicon-o-exclamation-circle` - Per stati problematici
+
+### Pattern di Traduzione Corretto
+```php
+// Nel file states.php
+'appointment' => [
+    'rescheduled' => [
+        'label' => 'Riprogrammato',
+        'icon' => 'heroicon-o-arrow-right-left', // Icona valida
+        // ...
+    ],
+],
+```
+
+## Riferimenti
 
 - [Documentazione Stati Appuntamenti](appointment-states.md)
+- [Correzioni Traduzioni Stati](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
 - [Traduzioni Stati Completate](traduzioni-stati-completate-2025-01-06.md)
-- [Correzioni Traduzioni](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
 
 ---
 
 **Ultimo aggiornamento**: 06 Gennaio 2025
-**Stato**: ✅ COMPLETATO
-**Verificato**: Icona funzionante in tutte e tre le lingue 
+**Stato**: ✅ Completato
+**Verificato**: ✅ Tutte le icone sono valide e le traduzioni sono nel file corretto 
