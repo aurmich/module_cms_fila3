@@ -29,7 +29,7 @@
 
 ### File Corretti
 
-#### 1. File Italiano (`laravel/Modules/SaluteOra/lang/it/states.php`)
+#### 1. File Stati (`laravel/Modules/SaluteOra/lang/*/states.php`)
 ```php
 // Stati corretti
 'rescheduled' => [
@@ -43,7 +43,7 @@
 ],
 ```
 
-#### 2. File Inglese (`laravel/Modules/SaluteOra/lang/en/states.php`)
+#### 2. File Appointment (`laravel/Modules/SaluteOra/lang/*/appointment.php`)
 ```php
 // Stati corretti
 'rescheduled' => [
@@ -57,19 +57,9 @@
 ],
 ```
 
-#### 3. File Tedesco (`laravel/Modules/SaluteOra/lang/de/states.php`)
-```php
-// Stati corretti
-'rescheduled' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
-],
-'refund_to_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
-],
-'refund_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
-],
-```
+### Stati Obsoleti Rimossi
+- **`in_progress`**: Stato non più utilizzato nella configurazione attuale
+- **`completed`**: Stato non più utilizzato nella configurazione attuale
 
 ## Verifica Completata
 
@@ -78,11 +68,21 @@
 2. **Coerenza trilingue**: Corretta in IT, EN, DE
 3. **Documentazione aggiornata**: Aggiornata la documentazione degli stati
 4. **Test funzionale**: Verificato che l'icona viene caricata correttamente
+5. **Stati obsoleti rimossi**: Eliminati stati non più utilizzati
 
 ### ✅ Stati Corretti
 - **Rescheduled**: Icona per stati riprogrammati
 - **RefundToIntegrate**: Icona per rimborsi da integrare
 - **RefundIntegrate**: Icona per rimborsi in integrazione
+
+### ✅ File Aggiornati
+- `laravel/Modules/SaluteOra/lang/it/states.php` ✅
+- `laravel/Modules/SaluteOra/lang/en/states.php` ✅
+- `laravel/Modules/SaluteOra/lang/de/states.php` ✅
+- `laravel/Modules/SaluteOra/lang/it/appointment.php` ✅
+- `laravel/Modules/SaluteOra/lang/en/appointment.php` ✅
+- `laravel/Modules/SaluteOra/lang/de/appointment.php` ✅
+- `laravel/Modules/SaluteOra/docs/appointment-states.md` ✅
 
 ## Prevenzione Futura
 
@@ -90,6 +90,7 @@
 1. **Verifica icone**: Controllare sempre che le icone siano disponibili in Heroicons
 2. **Test visivi**: Verificare il rendering delle icone nell'interfaccia
 3. **Documentazione**: Mantenere aggiornata la documentazione delle icone utilizzate
+4. **Sincronizzazione**: Mantenere coerenza tra file states.php e appointment.php
 
 ### Icone Heroicons Valide
 - `heroicon-o-arrow-path-20-solid` ✅
