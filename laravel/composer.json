@@ -64,14 +64,17 @@
         ],
         "go":[
             "@php -d memory_limit=-1 composer.phar selfupdate",
+            "rm -rf ./app/View/Components/vendor/",
             "@php -d memory_limit=-1 composer.phar update -W",
             "@php artisan vendor:publish --all",
             "rm -rf database/migrations/*",
+            "rm -rf ./app/View/Components/vendor/",
             "@php artisan migrate",
             "@php artisan filament:upgrade",
             "@php artisan filament:optimize",
             "@php artisan optimize",
-            "@php artisan route:clear"
+            "@php artisan route:clear",
+            "@php artisan serve"
         ]
     },
     "extra": {
