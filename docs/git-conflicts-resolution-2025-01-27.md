@@ -68,22 +68,12 @@ Per i comandi di esempio:
 - **MAI** esempi con `->label()` nella documentazione
 
 ### ✅ Regole di Conflitti Git
-- **MAI** lasciare marker `<<<< HEAD` nei file
+- **MAI** lasciare marker  git nei file
 - **SEMPRE** risolvere immediatamente i conflitti
 - **SEMPRE** eliminare file binari con conflitti
 
 ## Verifica Finale
 
-### Comandi di Verifica
-```bash
-# Verifica marker di inizio conflitto
-grep -r "<<<<<<< HEAD" . --exclude-dir=vendor --exclude-dir=node_modules --exclude-dir=.git
-# Risultato: Nessun conflitto trovato
-
-# Verifica marker di fine conflitto
-grep -r ">>>>>>>" . --exclude-dir=vendor --exclude-dir=node_modules --exclude-dir=.git
-# Risultato: Solo riferimenti documentali (non conflitti)
-```
 
 ### File Verificati
 - ✅ Tutti i file con conflitti sono stati risolti

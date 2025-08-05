@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Notify\Providers;
 
 // use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class NotifyServiceProvider extends XotBaseServiceProvider
@@ -18,5 +19,8 @@ class NotifyServiceProvider extends XotBaseServiceProvider
     public function boot(): void
     {
         parent::boot();
+        if (! app()->environment('production')) {
+            Mail::alwaysTo('test.saluteoraleingravidanza@gmail.com');
+        }
     }
 }

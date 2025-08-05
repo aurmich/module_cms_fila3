@@ -4,6 +4,25 @@
 
 SaluteMo è un modulo progettato per gestire funzionalità specifiche per dispositivi mobili all'interno dell'applicazione SaluteOra. Il modulo fornisce API e servizi ottimizzati per client mobili, con particolare attenzione alla gestione dei pazienti per il Comune di Modena.
 
+## Aggiornamenti Recenti
+
+### 06 Gennaio 2025
+- ✅ **Correzioni Traduzioni Appointment**: Completata risoluzione conflitti Git e modernizzazione file traduzioni
+  - Risolti conflitti Git nel file `appointment.php`
+  - Convertita sintassi da `array()` a `[]` moderna
+  - Aggiunto `declare(strict_types=1);` obbligatorio
+  - Implementata struttura espansa completa per tutti i campi
+  - Corretti helper_text rules (stringa vuota quando uguale alla chiave)
+  - Aggiunte traduzioni mancanti per tutti gli stati degli appuntamenti
+  - Completate traduzioni per azioni, messaggi e validazione
+  - [Dettagli completi](traduzioni-appointment-correzioni-2025-01-06.md)
+
+### 06 Gennaio 2025
+- ✅ **Risoluzione Conflitti Template PDF**: Risolti conflitti Git nel template report PDF
+  - Mantenute entrambe le sezioni complementari (note aggiuntive + campi dentali)
+  - Rimossi tutti i marcatori di conflitto Git
+  - Migliorata struttura e leggibilità del template
+
 ## Indice dei Contenuti
 
 ### Architettura e Struttura
