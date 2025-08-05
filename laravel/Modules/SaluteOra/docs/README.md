@@ -7,6 +7,12 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
 ## Aggiornamenti Recenti
 
 ### 06 Gennaio 2025
+- ✅ **Correzione Icona Arrow-Path**: Risolto errore critico "Svg by name not found"
+  - Sostituita icona `heroicon-o-arrow-path` con `heroicon-o-arrow-path-20-solid`
+  - Corretta in tutti e 3 gli stati: rescheduled, refund_to_integrate, refund_integrate
+  - Aggiornata in tutte e tre le lingue (IT, EN, DE)
+  - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
+
 - ✅ **Correzioni Traduzioni Stati Appuntamenti**: Completata verifica e correzione delle traduzioni per tutti gli stati degli appuntamenti
   - Aggiunto stato `refund_integrate` mancante nelle traduzioni
   - Rimossi stati obsoleti `in_progress` e `completed`
