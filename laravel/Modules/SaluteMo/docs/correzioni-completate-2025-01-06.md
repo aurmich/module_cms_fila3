@@ -9,7 +9,7 @@ Ho completato con successo la risoluzione di tutti i conflitti Git e la moderniz
 ### 1. File `Modules/SaluteMo/lang/it/appointment.php`
 
 #### ✅ Conflitti Git Risolti
-- **Problema**: File contenente marcatori di conflitto `<<<<<<< HEAD`, `=======`, `>>>>>>> c7480998 (trans)`
+- **Problema**: File contenente marcatori di conflitto git
 - **Soluzione**: Analisi manuale di entrambe le versioni e fusione intelligente
 - **Risultato**: Mantenute le traduzioni più complete e accurate da entrambe le versioni
 
