@@ -61,6 +61,17 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "go":[
+            "@php -d memory_limit=-1 composer.phar selfupdate",
+            "@php -d memory_limit=-1 composer.phar update -W",
+            "@php artisan vendor:publish --all",
+            "rm -rf database/migrations/*",
+            "@php artisan migrate",
+            "@php artisan filament:upgrade",
+            "@php artisan filament:optimize",
+            "@php artisan optimize",
+            "@php artisan route:clear"
         ]
     },
     "extra": {
