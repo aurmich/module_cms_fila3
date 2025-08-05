@@ -17,6 +17,7 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
   - **Meccanismo corretto**: Traduzioni aggiunte nel file states.php (non appointment.php)
   - **Icona semanticamente appropriata**: arrows-up-down rappresenta perfettamente riprogrammazione e integrazione
   - **Regola critica rispettata**: MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare
+  - **Conflitti Git risolti**: Eliminati tutti i marcatori di conflitto Git
   - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
 
 - ✅ **Correzioni Traduzioni Stati Appuntamenti**: Completata verifica e correzione delle traduzioni per tutti gli stati degli appuntamenti
@@ -26,12 +27,14 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
   - Corretta icona non valida `heroicon-o-arrow-right-left` con `heroicon-o-arrows-up-down`
   - **Meccanismo corretto**: Traduzioni aggiunte nel file states.php (non appointment.php)
   - **Coerenza trilingue**: Tutte le correzioni applicate in IT, EN, DE
+  - **Conflitti Git risolti**: Tutti i marcatori di conflitto eliminati
   - [Dettagli completi](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
 
 - ✅ **Aggiunta Traduzioni Widget**: Completata aggiunta traduzioni per widget mancanti
   - Aggiunto `model_trend_chart` in tutti i file appointment.php (IT, EN, DE)
   - **Regola critica rispettata**: MAI togliere contenuto dalle traduzioni
   - **Coerenza trilingue**: Mantenuta in tutte le lingue
+  - **Conflitti Git risolti**: Tutti i marcatori di conflitto eliminati
   - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
 
 - ✅ **Regola Critica per Traduzioni**: Implementata e documentata regola fondamentale

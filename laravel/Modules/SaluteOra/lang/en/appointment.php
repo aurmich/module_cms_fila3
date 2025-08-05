@@ -410,11 +410,7 @@ return [
             'label' => 'Rescheduled',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-<<<<<<< HEAD
-            'icon' => 'heroicon-o-arrow-right',
-=======
             'icon' => 'heroicon-o-arrow-left',
->>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Reschedule Appointment',
             'modal_description' => 'This appointment has been rescheduled for a new date.',
         ],
@@ -470,11 +466,7 @@ return [
             'label' => 'Refund to Integrate',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-<<<<<<< HEAD
-            'icon' => 'heroicon-o-arrow-right',
-=======
             'icon' => 'heroicon-o-arrow-down-on-square',
->>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Refund to Integrate',
             'modal_description' => 'The refund needs to be integrated with other services.',
         ],
@@ -482,11 +474,7 @@ return [
             'label' => 'Refund to Integrate',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-<<<<<<< HEAD
-            'icon' => 'heroicon-o-arrow-right',
-=======
             'icon' => 'heroicon-o-arrow-down-on-square',
->>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Refund to Integrate',
             'modal_description' => 'The refund needs to be integrated with other services.',
         ],

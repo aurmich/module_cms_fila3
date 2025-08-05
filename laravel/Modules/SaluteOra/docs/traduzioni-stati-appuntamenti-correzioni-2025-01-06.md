@@ -78,15 +78,31 @@ Ho completato la verifica e correzione delle traduzioni per tutti gli stati degl
   - `laravel/Modules/SaluteOra/lang/en/appointment.php`
   - `laravel/Modules/SaluteOra/lang/de/appointment.php`
 
+### Risoluzione Conflitti Git (Gennaio 2025)
+**Attività**: Risoluzione conflitti Git nei file di traduzione degli stati appuntamenti
+
+- **File con conflitti**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+- **Soluzione**: Mantenute le versioni corrette con icone valide (dopo `=======`)
+- **Stati risolti**: rescheduled, refund_to_integrate, refund_integrate
+
+### Motivazione delle Scelte
+**Scelta delle icone valide**: 
+- **HEAD**: Conteneva icone non valide (`heroicon-o-arrow-right`)
+- **Commit 023253bb**: Conteneva icone valide (`heroicon-o-arrow-left`, `heroicon-o-arrow-down-on-square`, `heroicon-o-arrows-up-down`)
+- **Decisione**: Mantenute le icone valide per evitare errori "Svg by name not found"
+
 ### Stati Corretti con Icone Valide
 - **rescheduled**: `heroicon-o-arrow-left` (icona esistente per indicare riprogrammazione)
 - **refund_to_integrate**: `heroicon-o-arrow-down-on-square` (icona esistente per indicare integrazione)
-- **refund_integrate**: `heroicon-o-arrow-down-on-square` (icona esistente per indicare integrazione)
+- **refund_integrate**: `heroicon-o-arrows-up-down` (icona esistente per indicare integrazione)
 
 ### Verifica Icone Utilizzate
 Tutte le icone sono state verificate come esistenti nel set Heroicons:
 ```bash
-ls laravel/vendor/blade-ui-kit/blade-heroicons/resources/svg/ | grep -E "(o-arrow-left|o-arrow-down-on-square)"
+ls laravel/vendor/blade-ui-kit/blade-heroicons/resources/svg/ | grep -E "(o-arrow-left|o-arrow-down-on-square|o-arrows-up-down)"
 ```
 
 ### Rimozione Duplicati

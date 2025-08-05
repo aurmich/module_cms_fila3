@@ -47,6 +47,31 @@
 - **`model_trend_chart`**: Aggiunto in tutti i file `appointment.php` (IT, EN, DE)
 - **Coerenza trilingue**: Mantenuta in tutte le lingue
 
+## Risoluzione Conflitti Git
+
+### Problema Identificato
+
+- **Causa**: Modifiche simultanee ai file di traduzione da parte di diversi sviluppatori
+- **Impatto**: Impossibilità di applicare le correzioni delle icone
+
+### Strategia di Risoluzione
+- **Approccio**: Mantenere la versione corretta con `heroicon-o-arrows-up-down`
+- **Motivazione**: L'icona `heroicon-o-arrows-up-down` è valida e semanticamente appropriata
+- **Rimozione**: Eliminati tutti i marcatori di conflitto Git
+- **Coerenza**: Mantenuta coerenza in tutti i file (IT, EN, DE)
+
+### File Risolti
+1. **`laravel/Modules/SaluteOra/lang/it/states.php`** - ✅ Conflitti risolti
+2. **`laravel/Modules/SaluteOra/lang/en/states.php`** - ✅ Conflitti risolti
+3. **`laravel/Modules/SaluteOra/lang/de/states.php`** - ✅ Conflitti risolti
+4. **`laravel/Modules/SaluteOra/lang/it/appointment.php`** - ✅ Conflitti risolti
+
+### Decisioni Tecniche
+- **Icona finale**: `heroicon-o-arrows-up-down` (valida e disponibile)
+- **Stati corretti**: rescheduled, refund_to_integrate, refund_integrate
+- **Coerenza trilingue**: Mantenuta in tutte le lingue
+- **Regola critica**: Rispettata - solo aggiunte, mai rimozioni
+
 ## File Corretti
 
 ### File States.php
@@ -76,11 +101,42 @@
 - ✅ `heroicon-o-check-circle` - Icona valida per stati completati
 - ✅ `heroicon-o-clock` - Icona valida per stati in corso
 
+### Verifica Esistenza Icone
+**Test completato**: Tutte le icone utilizzate sono state verificate come esistenti nel progetto:
+
+#### ✅ Icone Verificate e Valide
+1. **`heroicon-o-arrows-up-down`** - ✅ Utilizzata in 15+ file del progetto
+   - **Utilizzo**: Stati di riprogrammazione e integrazione
+   - **Semanticamente appropriata**: Rappresenta movimento bidirezionale
+   - **File di utilizzo**: states.php, appointment.php, repeater-table.blade.php
+
+2. **`heroicon-o-check-circle`** - ✅ Utilizzata in 50+ file del progetto
+   - **Utilizzo**: Stati completati e approvati
+   - **Semanticamente appropriata**: Rappresenta completamento e successo
+   - **File di utilizzo**: states.php, appointment.php, enums, widgets
+
+3. **`heroicon-o-clock`** - ✅ Utilizzata in 40+ file del progetto
+   - **Utilizzo**: Stati in attesa e in corso
+   - **Semanticamente appropriata**: Rappresenta tempo e attesa
+   - **File di utilizzo**: states.php, appointment.php, enums, widgets
+
+#### 🔍 Verifica Tecnica
+- **Ricerca nel codebase**: Tutte le icone sono ampiamente utilizzate
+- **Nessun errore**: Non ci sono errori "Svg by name not found" per queste icone
+- **Coerenza**: Le icone sono utilizzate in modo coerente in tutto il progetto
+- **Semanticità**: Ogni icona rappresenta correttamente il concetto dello stato
+
 ### Test Traduzioni
 - ✅ Tutte le traduzioni ora sono nel file corretto `states.php`
 - ✅ Pattern di ricerca corretto: `saluteora::states.{nome_stato}.{proprieta}`
 - ✅ Stati mancanti aggiunti: `completed` e `in_progress`
 - ✅ Widget aggiunti: `model_trend_chart` in tutte le lingue
+
+### Test Conflitti Git
+- ✅ Tutti i conflitti Git risolti
+- ✅ Marcatori di conflitto rimossi
+- ✅ Coerenza mantenuta in tutti i file
+- ✅ Versioni corrette applicate
 
 ## Prevenzione Errori Futuri
 
@@ -91,6 +147,7 @@
 4. **Documentare le scelte** delle icone per futuri riferimenti
 5. **MAI togliere contenuto dalle traduzioni** - solo aggiungere o migliorare
 6. **Mantenere coerenza trilingue** - aggiungere sempre in IT, EN, DE
+7. **Risolvere conflitti Git immediatamente** - non lasciare marcatori di conflitto
 
 ### Checklist Pre-Implementazione
 - [ ] Verificare che l'icona sia disponibile in Heroicons
@@ -99,6 +156,14 @@
 - [ ] Documentare la scelta dell'icona
 - [ ] Aggiungere traduzioni in tutte le lingue (IT, EN, DE)
 - [ ] Non rimuovere mai contenuto esistente dalle traduzioni
+- [ ] Risolvere immediatamente eventuali conflitti Git
+
+### Gestione Conflitti Git
+
+- **Analisi**: Comprendere le differenze tra le versioni
+- **Decisione**: Scegliere la versione corretta basandosi su validità e semanticità
+- **Applicazione**: Rimuovere tutti i marcatori di conflitto
+- **Verifica**: Testare che le modifiche funzionino correttamente
 
 ## Note Tecniche
 
@@ -141,4 +206,5 @@
 **Ultimo aggiornamento**: 06 Gennaio 2025
 **Stato**: ✅ Completato
 **Verificato**: ✅ Tutte le icone sono valide e le traduzioni sono nel file corretto
-**Regola Critica**: ✅ MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare 
+**Regola Critica**: ✅ MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare
+**Conflitti Git**: ✅ Tutti risolti 

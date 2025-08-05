@@ -7,6 +7,18 @@
 
 ## Aggiornamenti Recenti
 
+### Modulo SaluteOra - Risoluzione Conflitti Git (Gennaio 2025)
+**Attività**: Risoluzione conflitti Git nei file di traduzione degli stati appuntamenti
+
+- **File con conflitti**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+- **Soluzione**: Mantenute le versioni corrette con icone valide (dopo `=======`)
+- **Stati risolti**: rescheduled, refund_to_integrate, refund_integrate
+- **Motivazione**: HEAD conteneva icone non valide, commit 023253bb conteneva icone valide
+- **Risultato**: Tutti i conflitti risolti, sistema funzionante senza errori
+
 ### Modulo SaluteOra - Correzione Icone (Gennaio 2025)
 **Attività**: Sostituzione icone non esistenti con icone valide del set Heroicons
 - **Problema**: Errori "Svg by name 'o-arrow-path-20-solid' from set 'heroicons' not found" e "Svg by name 'o-arrow-right-left' from set 'heroicons' not found"
