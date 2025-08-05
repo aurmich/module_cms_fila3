@@ -14,6 +14,7 @@ use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
 use Modules\Media\Actions\SaveAttachmentsAction;
 use Modules\Notify\Notifications\RecordNotification;
+use Modules\SaluteOra\States\User\IntegrationCompleted;
 
 
 class RegisterAction
@@ -82,6 +83,14 @@ class RegisterAction
                     'accepted_at' => now(),
                 ]);
             }
+            Assert::isInstanceOf($patient, Patient::class);
+            if($data['state']=='integration_requested'){
+                if ($patient->state !== null) {
+                    $patient->state->transitionTo(IntegrationCompleted::class);
+                }
+                return $patient;
+            }
+    
             /** @phpstan-ignore argument.type, argument.type */
             $mail_slug=Str::of($data['type'])->append('-')->append($data['state'])->slug()->toString();
            //$mail_slug=Str::of($patient->type->value)->append('-')->append($patient->state::$name)->slug()->toString();

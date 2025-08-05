@@ -355,6 +355,14 @@ return [
             'modal_heading' => 'Refund to Integrate',
             'modal_description' => 'The refund must be integrated with other services.',
         ],
+        'refund_integrate' => [
+            'label' => 'Refund to Integrate',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Refund to Integrate',
+            'modal_description' => 'The refund must be integrated with other services.',
+        ],
         'pro_bono' => [
             'label' => 'Pro Bono',
             'color' => 'info',

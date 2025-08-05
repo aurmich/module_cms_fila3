@@ -63,11 +63,11 @@ abstract class AppointmentState extends XotBaseState
                 
                 // Refund transitions
                 ->allowTransition(RefundPending::class, RefundAccepted::class, Transitions\RefundPendingToRefundAccepted::class)
-                ->allowTransition(RefundPending::class, RefundToIntegrate::class, Transitions\RefundPendingToRefundToIntegrate::class)
+                ->allowTransition(RefundPending::class, RefundIntegrate::class, Transitions\RefundPendingToRefundIntegrate::class)
                 ->allowTransition(RefundPending::class, RefundCompleted::class, Transitions\RefundPendingToRefundCompleted::class)
                 
                 ->allowTransition(RefundAccepted::class, RefundCompleted::class, Transitions\RefundAcceptedToRefundCompleted::class)
-                ->allowTransition(RefundToIntegrate::class, RefundCompleted::class, Transitions\RefundToIntegrateToRefundCompleted::class);
+                ->allowTransition(RefundIntegrate::class, RefundCompleted::class, Transitions\RefundIntegrateToRefundCompleted::class);
         
     }
     

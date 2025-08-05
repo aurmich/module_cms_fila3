@@ -11,10 +11,10 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  *
  * The appointment has been cancelled by either party.
  */
-class RefundToIntegrate extends AppointmentState
+class RefundIntegrate extends AppointmentState
 {
     /** @var string */
-    public static string $name = 'refund_to_integrate';
+    public static string $name = 'refund_integrate';
 
 
 }

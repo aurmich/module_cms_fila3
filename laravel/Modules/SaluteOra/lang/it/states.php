@@ -355,6 +355,14 @@ return [
             'modal_heading' => 'Rimborso da Integrare',
             'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
         ],
+        'refund_integrate' => [
+            'label' => 'Rimborso da Integrare',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Rimborso da Integrare',
+            'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
+        ],
         'pro_bono' => [
             'label' => 'Pro Bono',
             'color' => 'info',

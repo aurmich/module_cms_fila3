@@ -15,49 +15,80 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 
 ### 2. Confirmed (Confermato)
 - Paziente ha confermato la richiesta di appuntamento
-- **Transizioni possibili**: Scheduled, Cancelled, Rescheduled
+- **Transizioni possibili**: ReportPending, Cancelled, NoShow
 - **Colore**: success
 - **Icona**: heroicon-o-check-circle
 
-### 3. Scheduled (Programmato)
+### 3. ReportPending (Referto in Attesa)
 - Appuntamento confermato e inserito nel calendario
-- **Transizioni possibili**: InProgress, Cancelled, NoShow, Rescheduled
-- **Colore**: info
-- **Icona**: heroicon-o-calendar
+- **Transizioni possibili**: ReportCompleted
+- **Colore**: warning
+- **Icona**: heroicon-o-document-text
 - **Modificabile**: true
 - **Attivo**: true
 
-### 4. InProgress (In corso)
-- Visita medica attualmente in corso
-- **Transizioni possibili**: Completed
-- **Colore**: warning
-- **Icona**: heroicon-o-clock
-- **Attivo**: true
-
-### 5. Completed (Completato)
-- Visita terminata con successo
-- **Stato finale** - nessuna transizione possibile
+### 4. ReportCompleted (Referto Completato)
+- Referto medico completato
+- **Transizioni possibili**: RefundPending, ProBono
 - **Colore**: success
-- **Icona**: heroicon-o-check-badge
+- **Icona**: heroicon-o-document-check
 - **Completato**: true
 
-### 6. Cancelled (Annullato)
+### 5. RefundPending (Rimborso in Attesa)
+- Rimborso in attesa di elaborazione
+- **Transizioni possibili**: RefundAccepted, RefundIntegrate, RefundCompleted
+- **Colore**: warning
+- **Icona**: heroicon-o-currency-euro
+
+### 6. RefundAccepted (Rimborso Accettato)
+- Rimborso accettato e in elaborazione
+- **Transizioni possibili**: RefundCompleted
+- **Colore**: success
+- **Icona**: heroicon-o-check-circle
+
+### 7. RefundIntegrate (Rimborso da Integrare)
+- Rimborso che deve essere integrato con altri servizi
+- **Transizioni possibili**: RefundCompleted
+- **Colore**: info
+- **Icona**: heroicon-o-arrow-path
+
+### 8. RefundCompleted (Rimborso Completato)
+- Rimborso completato e pagato
+- **Stato finale** - nessuna transizione possibile
+- **Colore**: success
+- **Icona**: heroicon-o-banknotes
+- **Completato**: true
+
+### 9. ProBono (Servizio Gratuito)
+- Appuntamento erogato come servizio gratuito
+- **Stato finale** - nessuna transizione possibile
+- **Colore**: info
+- **Icona**: heroicon-o-heart
+- **Completato**: true
+
+### 10. Cancelled (Annullato)
 - Appuntamento annullato
 - **Colore**: danger
 - **Icona**: heroicon-o-x-circle
 
-### 7. Rejected (Rifiutato)
+### 11. Rejected (Rifiutato)
 - Appuntamento rifiutato dal dottore o sistema
 - **Transizioni possibili**: Confirmed (in caso di revisione della decisione)
 - **Colore**: danger
-- **Icona**: heroicon-o-no-symbol
+- **Icona**: heroicon-o-x-mark
 
-### 8. NoShow (Assente)
+### 12. NoShow (Assente)
 - Paziente non si è presentato
+- **Transizioni possibili**: Banned
 - **Colore**: danger
 - **Icona**: heroicon-o-exclamation-circle
 
-### 9. Rescheduled (Riprogrammato)
+### 13. Banned (Bannato)
+- Utente bannato dal sistema per violazioni
+- **Colore**: danger
+- **Icona**: heroicon-o-no-symbol
+
+### 14. Rescheduled (Riprogrammato)
 - Appuntamento spostato a nuovo orario
 - **Colore**: info
 - **Icona**: heroicon-o-arrow-path
@@ -66,14 +97,16 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 ## Diagramma delle Transizioni
 
 ```
-Pending → Confirmed → Scheduled → InProgress → Completed
-   ↓         ↓          ↓
-   ↓      Cancelled   NoShow
+Pending → Confirmed → ReportPending → ReportCompleted → RefundPending → RefundAccepted → RefundCompleted
+   ↓         ↓           ↓              ↓                ↓
+   ↓      Cancelled   ReportCompleted ProBono        RefundIntegrate → RefundCompleted
 Rejected ↔ Confirmed   ↑
             ↓          
           Rescheduled ← Scheduled
                         ↓
                     Cancelled
+
+NoShow → Banned
 ```
 
 **Nota importante**: Da `Pending` si può andare solo a `Confirmed` o `Rejected`. 
@@ -105,17 +138,18 @@ Estende il pattern BaseTransition con:
 ### Transizioni Implementate
 - `PendingToConfirmed`
 - `PendingToRejected`
-- `ConfirmedToScheduled`
+- `ConfirmedToReportPending`
 - `ConfirmedToCancelled`
-- `ConfirmedToRescheduled`
-- `ConfirmedToRejected`
-- `RejectedToConfirmed`
-- `ScheduledToInProgress`
-- `ScheduledToCancelled`
-- `ScheduledToNoShow`
-- `ScheduledToRescheduled`
-- `InProgressToCompleted`
-- `RescheduledToConfirmed`
+- `ConfirmedToNoShow`
+- `NoShowToBanned`
+- `ReportPendingToReportCompleted`
+- `ReportCompletedToRefundPending`
+- `ReportCompletedToProBono`
+- `RefundPendingToRefundAccepted`
+- `RefundPendingToRefundIntegrate`
+- `RefundPendingToRefundCompleted`
+- `RefundAcceptedToRefundCompleted`
+- `RefundIntegrateToRefundCompleted`
 
 ## Pattern di Utilizzo
 
@@ -155,7 +189,7 @@ Le transizioni inviano automaticamente notifiche via email a:
 
 Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 1. Crea appuntamenti in stato `Pending`
-2. Permette transizioni verso `Scheduled`
+2. Permette transizioni verso `ReportPending`
 3. Gestisce automaticamente le notifiche
 
 ## Best Practices
@@ -172,29 +206,35 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 - `app/States/Appointment/AppointmentState.php` (classe base)
 - `app/States/Appointment/Pending.php`
 - `app/States/Appointment/Confirmed.php`
-- `app/States/Appointment/Scheduled.php`
-- `app/States/Appointment/InProgress.php`
-- `app/States/Appointment/Completed.php`
+- `app/States/Appointment/ReportPending.php`
+- `app/States/Appointment/ReportCompleted.php`
+- `app/States/Appointment/RefundPending.php`
+- `app/States/Appointment/RefundAccepted.php`
+- `app/States/Appointment/RefundIntegrate.php`
+- `app/States/Appointment/RefundCompleted.php`
+- `app/States/Appointment/ProBono.php`
 - `app/States/Appointment/Cancelled.php`
 - `app/States/Appointment/Rejected.php`
 - `app/States/Appointment/NoShow.php`
+- `app/States/Appointment/Banned.php`
 - `app/States/Appointment/Rescheduled.php`
 
 ### Transizioni
 - `app/States/Appointment/Transitions/BaseTransition.php`
 - `app/States/Appointment/Transitions/PendingToConfirmed.php`
 - `app/States/Appointment/Transitions/PendingToRejected.php`
-- `app/States/Appointment/Transitions/ConfirmedToScheduled.php`
+- `app/States/Appointment/Transitions/ConfirmedToReportPending.php`
 - `app/States/Appointment/Transitions/ConfirmedToCancelled.php`
-- `app/States/Appointment/Transitions/ConfirmedToRescheduled.php`
-- `app/States/Appointment/Transitions/ConfirmedToRejected.php`
-- `app/States/Appointment/Transitions/RejectedToConfirmed.php`
-- `app/States/Appointment/Transitions/ScheduledToInProgress.php`
-- `app/States/Appointment/Transitions/ScheduledToCancelled.php`
-- `app/States/Appointment/Transitions/ScheduledToNoShow.php`
-- `app/States/Appointment/Transitions/ScheduledToRescheduled.php`
-- `app/States/Appointment/Transitions/InProgressToCompleted.php`
-- `app/States/Appointment/Transitions/RescheduledToConfirmed.php`
+- `app/States/Appointment/Transitions/ConfirmedToNoShow.php`
+- `app/States/Appointment/Transitions/NoShowToBanned.php`
+- `app/States/Appointment/Transitions/ReportPendingToReportCompleted.php`
+- `app/States/Appointment/Transitions/ReportCompletedToRefundPending.php`
+- `app/States/Appointment/Transitions/ReportCompletedToProBono.php`
+- `app/States/Appointment/Transitions/RefundPendingToRefundAccepted.php`
+- `app/States/Appointment/Transitions/RefundPendingToRefundIntegrate.php`
+- `app/States/Appointment/Transitions/RefundPendingToRefundCompleted.php`
+- `app/States/Appointment/Transitions/RefundAcceptedToRefundCompleted.php`
+- `app/States/Appointment/Transitions/RefundIntegrateToRefundCompleted.php`
 
 ## Collegamenti
 
@@ -203,4 +243,4 @@ Il sistema è integrato con il `FindDoctorAndAppointmentWidget` che:
 - [User States Pattern](user-states.md)
 - [BaseTransition Pattern](../app/States/User/Transitions/BaseTransition.php)
 
-*Ultimo aggiornamento: Gennaio 2025 - Aggiunta transizione RejectedToConfirmed* 
+*Ultimo aggiornamento: Gennaio 2025 - Aggiunta stato RefundIntegrate mancante nelle traduzioni* 
