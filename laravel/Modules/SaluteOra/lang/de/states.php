@@ -355,6 +355,14 @@ return [
             'modal_heading' => 'Rückerstattung zu Integrieren',
             'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
         ],
+        'refund_integrate' => [
+            'label' => 'Rückerstattung zu Integrieren',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Rückerstattung zu Integrieren',
+            'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
+        ],
         'pro_bono' => [
             'label' => 'Pro Bono',
             'color' => 'info',
