@@ -343,7 +343,7 @@ return [
             'label' => 'Rückerstattung zu Integrieren',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path',
+            'icon' => 'heroicon-o-arrow-path-20-solid',
             'modal_heading' => 'Rückerstattung zu Integrieren',
             'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
         ],

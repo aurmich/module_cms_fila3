@@ -50,7 +50,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 - Rimborso che deve essere integrato con altri servizi
 - **Transizioni possibili**: RefundCompleted
 - **Colore**: info
-- **Icona**: heroicon-o-arrow-path
+- **Icona**: heroicon-o-arrow-path-20-solid
 
 ### 8. RefundCompleted (Rimborso Completato)
 - Rimborso completato e pagato
@@ -91,7 +91,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 ### 14. Rescheduled (Riprogrammato)
 - Appuntamento spostato a nuovo orario
 - **Colore**: info
-- **Icona**: heroicon-o-arrow-path
+- **Icona**: heroicon-o-arrow-path-20-solid
 - **Modificabile**: true
 
 ## Diagramma delle Transizioni
