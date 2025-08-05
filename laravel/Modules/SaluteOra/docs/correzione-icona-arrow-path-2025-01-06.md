@@ -28,7 +28,7 @@
 ## Soluzione Implementata
 
 ### Icona Sostitutiva
-- **Nuova icona**: `heroicon-o-arrow-path-20-solid`
+- **Nuova icona**: `heroicon-o-arrow-path`
 - **Motivazione**: Icona valida e disponibile nel set Heroicons
 - **Coerenza**: Mantiene il significato semantico dell'icona originale
 
@@ -42,13 +42,13 @@
 ```php
 // Stati corretti
 'rescheduled' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 'refund_to_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 'refund_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 ```
 
@@ -56,13 +56,13 @@
 ```php
 // Stati corretti
 'rescheduled' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 'refund_to_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 'refund_integrate' => [
-    'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
+    'icon' => 'heroicon-o-arrow-path', // ✅ CORRETTO
 ],
 // Stati da mantenere
 'completed' => [
@@ -76,7 +76,7 @@
 ## Verifica Completata
 
 ### ✅ Controlli Effettuati
-1. **Icona valida**: `heroicon-o-arrow-path-20-solid` è disponibile in Heroicons
+1. **Icona valida**: `heroicon-o-arrow-path` è disponibile in Heroicons
 2. **Coerenza trilingue**: Corretta in IT, EN, DE
 3. **Documentazione aggiornata**: Aggiornata la documentazione degli stati
 4. **Test funzionale**: Verificato che l'icona viene caricata correttamente
@@ -108,7 +108,7 @@
 5. **Compatibilità temi**: Verificare che gli stati utilizzati nei temi abbiano traduzioni complete
 
 ### Icone Heroicons Valide
-- `heroicon-o-arrow-path-20-solid` ✅
+- `heroicon-o-arrow-path` ✅
 - `heroicon-o-clock` ✅
 - `heroicon-o-check-circle` ✅
 - `heroicon-o-check-badge` ✅
