@@ -165,7 +165,7 @@ return [
             'helper_text' => '',
         ],
         'participation' => [
-            'label' => 'With the participation of',
+            'label' => 'Created by',
             'tooltip' => 'Project partners and collaborators',
             'helper_text' => '',
         ],

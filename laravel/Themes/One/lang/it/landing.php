@@ -115,7 +115,7 @@ return [
     ],
     'partners' => [
         'title' => [
-            'label' => 'Con la partecipazione di',
+            'label' => 'Realizzato da',
             'tooltip' => 'Titolo sezione partner',
             'helper_text' => '',
         ],
