@@ -231,6 +231,46 @@
             font-size: 8px;
             color: #333;
         }
+        
+        /* Enhanced Medical Report Styles */
+        .medical-section {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+        
+        .medical-section h3 {
+            font-size: 12px;
+            color: #2c5282;
+            background-color: #ebf8ff;
+            padding: 4px 8px;
+            margin: 8px 0 4px 0;
+            border-left: 3px solid #2b6cb0;
+        }
+        
+        .medical-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+        }
+        
+        .medical-table td {
+            padding: 4px 6px;
+            vertical-align: top;
+            border: 1px solid #e2e8f0;
+            font-size: 9px;
+        }
+        
+        .medical-table .medical-question {
+            width: 50%;
+            background-color: #f8fafc;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        
+        .medical-table .medical-answer {
+            width: 50%;
+            color: #2d3748;
+        }
     </style>
 
     <!-- Header principale -->
@@ -352,44 +392,73 @@
 
         <h1>@lang('pub_theme::appointment.report.sections.medical_report')</h1>
 
-        <!-- Dolore a bocca o denti -->
-        <div class="medical-item">
-            <div class="medical-question">@lang('saluteora::report.fields.has_mouth_or_teeth_pain.label')</div>
-            <div class="medical-answer">
-                <span class="yes-no {{ $appointment->report->has_mouth_or_teeth_pain ? 'yes' : 'no' }}">
-                    {{ $appointment->report->has_mouth_or_teeth_pain ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
-                </span>
-                @if ($appointment->report->has_mouth_or_teeth_pain && $appointment->report->mouth_teeth_pain_frequency)
-                    <div class="detail-box">
-                        <span class="detail-label">@lang('pub_theme::appointment.report.labels.frequency'):</span>
-                        {{ $appointment->report->mouth_teeth_pain_frequency }}
-                    </div>
-                @endif
-            </div>
+        <!-- Medical Conditions Section -->
+        <div class="medical-section">
+            <h3>@lang('pub_theme::appointment.report.sections.medical_conditions')</h3>
+            
+            <!-- Mouth or Teeth Pain -->
+            <table class="medical-table">
+                <tr>
+                    <td class="medical-question">@lang('saluteora::report.fields.has_mouth_or_teeth_pain.label')</td>
+                    <td class="medical-answer">
+                        <span class="yes-no {{ $appointment->report->has_mouth_or_teeth_pain ? 'yes' : 'no' }}">
+                            {{ $appointment->report->has_mouth_or_teeth_pain ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+                        </span>
+                        @if ($appointment->report->has_mouth_or_teeth_pain && $appointment->report->mouth_teeth_pain_frequency)
+                            <div class="detail-box">
+                                <span class="detail-label">@lang('pub_theme::appointment.report.labels.frequency'):</span>
+                                {{ $appointment->report->mouth_teeth_pain_frequency }}
+                            </div>
+                        @endif
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <!-- Informazioni gravidanza -->
+        <!-- Pregnancy Information -->
         @if ($appointment->report->pregnancy_month || $appointment->report->pregnancy_week)
-            <div class="medical-item">
-                <div class="medical-question">@lang('pub_theme::appointment.report.labels.pregnancy_info')</div>
-                <div class="medical-answer">
+            <div class="medical-section">
+                <h3>@lang('pub_theme::appointment.report.sections.pregnancy_info')</h3>
+                <table class="medical-table">
                     @if ($appointment->report->pregnancy_month)
-                        <div><span class="detail-label">@lang('pub_theme::appointment.report.labels.month'):</span>
-                            {{ $appointment->report->pregnancy_month }}</div>
+                    <tr>
+                        <td class="medical-question">@lang('pub_theme::appointment.report.labels.month')</td>
+                        <td class="medical-answer">{{ $appointment->report->pregnancy_month }}</td>
+                    </tr>
                     @endif
                     @if ($appointment->report->pregnancy_week)
-                        <div><span class="detail-label">@lang('pub_theme::appointment.report.labels.week'):</span>
-                            {{ $appointment->report->pregnancy_week }}</div>
+                    <tr>
+                        <td class="medical-question">@lang('pub_theme::appointment.report.labels.week')</td>
+                        <td class="medical-answer">{{ $appointment->report->pregnancy_week }}</td>
+                    </tr>
                     @endif
-                </div>
+                </table>
             </div>
         @endif
 
-        <!-- Igiene dentale -->
-        @if ($appointment->report->teeth_brushing_frequency)
-            <div class="medical-item">
-                <div class="medical-question">@lang('saluteora::report.fields.teeth_brushing_frequency.label')</div>
-                <div class="medical-answer">{{ $appointment->report->teeth_brushing_frequency }}</div>
+        <!-- Oral Hygiene -->
+        @if ($appointment->report->teeth_brushing_frequency || $appointment->report->smokes)
+            <div class="medical-section">
+                <h3>@lang('pub_theme::appointment.report.sections.oral_hygiene')</h3>
+                <table class="medical-table">
+                    @if ($appointment->report->teeth_brushing_frequency)
+                    <tr>
+                        <td class="medical-question">@lang('saluteora::report.fields.teeth_brushing_frequency.label')</td>
+                        <td class="medical-answer">{{ $appointment->report->teeth_brushing_frequency }}</td>
+                    </tr>
+                    @endif
+                    
+                    @if ($appointment->report->smokes !== null)
+                    <tr>
+                        <td class="medical-question">@lang('saluteora::report.fields.smokes.label')</td>
+                        <td class="medical-answer">
+                            <span class="yes-no {{ $appointment->report->smokes ? 'yes' : 'no' }}">
+                                {{ $appointment->report->smokes ? trans('pub_theme::common.yes') : trans('pub_theme::common.no') }}
+                            </span>
+                        </td>
+                    </tr>
+                    @endif
+                </table>
             </div>
         @endif
 
