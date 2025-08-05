@@ -335,12 +335,28 @@ return [
     ],
     'states' => [
         'confirmed' => [
-            'label' => 'Confirm',
+            'label' => 'Confirmed',
             'color' => 'success',
-            'icon' => 'heroicon-o-check-circle',
-            'modal_heading' => 'Accept appointment',
-            'modal_description' => 'Are you sure you want to accept this appointment?',
             'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-circle',
+            'modal_heading' => 'Appointment Confirmed',
+            'modal_description' => 'This appointment has been confirmed by the patient.',
+        ],
+        'in_progress' => [
+            'label' => 'In Progress',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Visit in Progress',
+            'modal_description' => 'The medical visit is currently in progress.',
+        ],
+        'completed' => [
+            'label' => 'Completed',
+            'color' => 'success',
+            'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-badge',
+            'modal_heading' => 'Visit Completed',
+            'modal_description' => 'The visit has been completed successfully.',
         ],
         'rejected' => [
             'label' => 'Reject',

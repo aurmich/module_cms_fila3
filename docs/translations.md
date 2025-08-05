@@ -7,6 +7,19 @@
 
 ## Aggiornamenti Recenti
 
+### Modulo SaluteOra - Stati Appuntamenti (Gennaio 2025)
+**Attività**: Completamento traduzioni per stati `completed` e `in_progress` mancanti
+- **Problema**: Stati `completed` e `in_progress` erano presenti nella logica ma mancavano nelle traduzioni
+- **Soluzione**: Aggiunte traduzioni complete per entrambi gli stati in tutte e tre le lingue
+- **File aggiornati**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+- **Stati aggiunti**:
+  - `completed` - Completato / Completed / Abgeschlossen
+  - `in_progress` - In Corso / In Progress / In Bearbeitung
+- **Standard applicati**: Sintassi array breve, strict types, struttura completa con label, color, bg_color, icon, modal_heading, modal_description
+
 ### Modulo SaluteOra - Refund Integration (Gennaio 2025)
 **Attività**: Completamento traduzioni multilingua per refund integration
 - **Problema**: File tedesco incompleto, mancanza coerenza nomi file

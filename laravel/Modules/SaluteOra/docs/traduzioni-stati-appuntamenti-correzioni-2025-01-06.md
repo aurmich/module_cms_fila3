@@ -68,6 +68,70 @@ Ho completato la verifica e correzione delle traduzioni per tutti gli stati degl
 - ✅ Aggiornata lista delle transizioni
 - ✅ Rimossi stati obsoleti dalla documentazione
 
+## Aggiornamenti Recenti
+
+### Aggiunta Traduzioni Mancanti Stati Appuntamenti (Gennaio 2025)
+**Attività**: Completamento traduzioni per stati `completed` e `in_progress` mancanti
+- **Problema**: Stati `completed` e `in_progress` erano presenti nella logica ma mancavano nelle traduzioni
+- **Soluzione**: Aggiunte traduzioni complete per entrambi gli stati in tutte e tre le lingue
+- **File aggiornati**: 
+  - `laravel/Modules/SaluteOra/lang/it/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/en/appointment.php`
+  - `laravel/Modules/SaluteOra/lang/de/appointment.php`
+
+### Dettagli Aggiunte
+
+#### Stato `completed` (Completato)
+```php
+'completed' => [
+    'label' => 'Completato', // Completed, Abgeschlossen
+    'color' => 'success',
+    'bg_color' => '#10b981',
+    'icon' => 'heroicon-o-check-badge',
+    'modal_heading' => 'Visita Completata', // Visit Completed, Besuch abgeschlossen
+    'modal_description' => 'La visita è stata completata con successo.', // The visit has been completed successfully., Der Besuch wurde erfolgreich abgeschlossen.
+],
+```
+
+#### Stato `in_progress` (In Corso)
+```php
+'in_progress' => [
+    'label' => 'In Corso', // In Progress, In Bearbeitung
+    'color' => 'warning',
+    'bg_color' => '#f59e0b',
+    'icon' => 'heroicon-o-clock',
+    'modal_heading' => 'Visita in Corso', // Visit in Progress, Besuch läuft
+    'modal_description' => 'La visita medica è attualmente in corso.', // The medical visit is currently in progress., Der medizinische Besuch läuft derzeit.
+],
+```
+
+### Stati Ora Completamente Tradotti
+✅ **Tutti gli stati hanno traduzioni complete in IT/EN/DE**:
+1. `pending` - In attesa / Pending / Ausstehend
+2. `confirmed` - Confermato / Confirmed / Bestätigt
+3. `in_progress` - In Corso / In Progress / In Bearbeitung
+4. `completed` - Completato / Completed / Abgeschlossen
+5. `cancelled` - Annullato / Cancelled / Storniert
+6. `rejected` - Rifiutato / Rejected / Abgelehnt
+7. `no_show` - Non presentato / No Show / Nicht erschienen
+8. `rescheduled` - Riprogrammato / Rescheduled / Verschoben
+9. `report_pending` - Referto in Attesa / Report Pending / Bericht ausstehend
+10. `report_completed` - Referto Completato / Report Completed / Bericht abgeschlossen
+11. `banned` - Bannato / Banned / Verbannt
+12. `refund_pending` - Rimborso in Attesa / Refund Pending / Rückerstattung ausstehend
+13. `refund_accepted` - Rimborso Accettato / Refund Accepted / Rückerstattung akzeptiert
+14. `refund_completed` - Rimborso Completato / Refund Completed / Rückerstattung abgeschlossen
+15. `refund_to_integrate` - Rimborso da Integrare / Refund to Integrate / Rückerstattung zu integrieren
+16. `refund_integrate` - Rimborso da Integrare / Refund to Integrate / Rückerstattung zu integrieren
+17. `pro_bono` - Pro Bono / Pro Bono / Pro Bono
+
+### Verifica Completezza
+- ✅ **Italiano**: Tutti gli stati presenti con traduzioni complete
+- ✅ **Inglese**: Tutti gli stati presenti con traduzioni complete  
+- ✅ **Tedesco**: Tutti gli stati presenti con traduzioni complete
+- ✅ **Struttura**: Ogni stato include label, color, bg_color, icon, modal_heading, modal_description
+- ✅ **Coerenza**: Icone e colori uniformi tra le lingue
+
 ## Stati Attuali Implementati
 
 ### Stati Principali

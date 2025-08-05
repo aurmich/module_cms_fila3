@@ -15,10 +15,15 @@
   2. `refund_to_integrate` (Rimborso da Integrare)
   3. `refund_integrate` (Rimborso da Integrare)
 
+### Stati Ancora Utilizzati
+- **`completed`**: Ancora utilizzato nei temi e in alcune parti dell'applicazione
+- **`in_progress`**: Ancora utilizzato nei temi e in alcune parti dell'applicazione
+
 ### Impatto
 - **Errore critico**: L'icona non viene trovata dal sistema
 - **Interfaccia compromessa**: Gli stati non vengono visualizzati correttamente
 - **Esperienza utente**: Errori visivi nell'interfaccia Filament
+- **Traduzioni mancanti**: Stati utilizzati ma senza traduzioni complete
 
 ## Soluzione Implementata
 
@@ -26,6 +31,10 @@
 - **Nuova icona**: `heroicon-o-arrow-path-20-solid`
 - **Motivazione**: Icona valida e disponibile nel set Heroicons
 - **Coerenza**: Mantiene il significato semantico dell'icona originale
+
+### Stati da Mantenere
+- **`completed`**: Aggiunto alle traduzioni perché utilizzato nei temi
+- **`in_progress`**: Aggiunto alle traduzioni perché utilizzato nei temi
 
 ### File Corretti
 
@@ -55,11 +64,14 @@
 'refund_integrate' => [
     'icon' => 'heroicon-o-arrow-path-20-solid', // ✅ CORRETTO
 ],
+// Stati da mantenere
+'completed' => [
+    'icon' => 'heroicon-o-check-badge', // ✅ AGGIUNTO
+],
+'in_progress' => [
+    'icon' => 'heroicon-o-clock', // ✅ AGGIUNTO
+],
 ```
-
-### Stati Obsoleti Rimossi
-- **`in_progress`**: Stato non più utilizzato nella configurazione attuale
-- **`completed`**: Stato non più utilizzato nella configurazione attuale
 
 ## Verifica Completata
 
@@ -68,12 +80,14 @@
 2. **Coerenza trilingue**: Corretta in IT, EN, DE
 3. **Documentazione aggiornata**: Aggiornata la documentazione degli stati
 4. **Test funzionale**: Verificato che l'icona viene caricata correttamente
-5. **Stati obsoleti rimossi**: Eliminati stati non più utilizzati
+5. **Stati completi**: Aggiunti stati mancanti utilizzati nei temi
 
 ### ✅ Stati Corretti
 - **Rescheduled**: Icona per stati riprogrammati
 - **RefundToIntegrate**: Icona per rimborsi da integrare
 - **RefundIntegrate**: Icona per rimborsi in integrazione
+- **Completed**: Stato mantenuto per compatibilità con temi
+- **InProgress**: Stato mantenuto per compatibilità con temi
 
 ### ✅ File Aggiornati
 - `laravel/Modules/SaluteOra/lang/it/states.php` ✅
@@ -91,11 +105,13 @@
 2. **Test visivi**: Verificare il rendering delle icone nell'interfaccia
 3. **Documentazione**: Mantenere aggiornata la documentazione delle icone utilizzate
 4. **Sincronizzazione**: Mantenere coerenza tra file states.php e appointment.php
+5. **Compatibilità temi**: Verificare che gli stati utilizzati nei temi abbiano traduzioni complete
 
 ### Icone Heroicons Valide
 - `heroicon-o-arrow-path-20-solid` ✅
 - `heroicon-o-clock` ✅
 - `heroicon-o-check-circle` ✅
+- `heroicon-o-check-badge` ✅
 - `heroicon-o-document-text` ✅
 - `heroicon-o-document-check` ✅
 - `heroicon-o-currency-euro` ✅
