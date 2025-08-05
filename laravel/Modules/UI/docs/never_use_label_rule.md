@@ -152,9 +152,9 @@ rules:
 
 ## Collegamenti
 
-- [Translation Standards](../../../docs/translation_standards.md)
-- [Filament Best Practices](../../../docs/filament_best_practices.md)
-- [LangServiceProvider Documentation](../../../docs/lang_service_provider.md)
+- [Translation Standards](../../../docs/translation-standards.md)
+- [Filament Best Practices](../../../docs/filament-best-practices.md)
+- [LangServiceProvider Documentation](../../../docs/lang-service-provider.md)
 
 ## Memoria Permanente
 
@@ -164,4 +164,4 @@ rules:
 - SEMPRE struttura espansa
 - SEMPRE sincronizzazione IT/EN/DE
 
-*Ultimo aggiornamento: 2025-01-06* 
+*Ultimo aggiornamento: 2025-01-06*

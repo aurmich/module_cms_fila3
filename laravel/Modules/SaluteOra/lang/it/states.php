@@ -251,22 +251,6 @@ return [
             'modal_heading' => 'Appuntamento Programmato',
             'modal_description' => 'Questo appuntamento è stato programmato nel calendario.',
         ],
-        'in_progress' => [
-            'label' => 'In corso',
-            'color' => 'warning',
-            'bg_color' => '#f59e0b',
-            'icon' => 'heroicon-o-clock',
-            'modal_heading' => 'Visita in Corso',
-            'modal_description' => 'La visita medica è attualmente in corso.',
-        ],
-        'completed' => [
-            'label' => 'Completato',
-            'color' => 'success',
-            'bg_color' => '#10b981',
-            'icon' => 'heroicon-o-check-badge',
-            'modal_heading' => 'Visita Completata',
-            'modal_description' => 'La visita è stata completata con successo.',
-        ],
         'cancelled' => [
             'label' => 'Annullato',
             'color' => 'danger',
@@ -348,6 +332,14 @@ return [
             'modal_description' => 'Il rimborso è stato completato e pagato al paziente.',
         ],
         'refund_to_integrate' => [
+            'label' => 'Rimborso da Integrare',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Rimborso da Integrare',
+            'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
+        ],
+        'refund_integrate' => [
             'label' => 'Rimborso da Integrare',
             'color' => 'info',
             'bg_color' => '#3b82f6',

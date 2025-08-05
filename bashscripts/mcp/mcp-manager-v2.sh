@@ -43,7 +43,6 @@ show_help() {
 # Funzione per ottenere il PID di un server MCP
 get_pid() {
     local server_name=$1
-
     if [ "$server_name" = "mysql" ]; then
         ps aux | grep "MYSQL_DB_CONNECTOR_PID_MARKER" | grep -v grep | awk '{print $2}'
     else
@@ -68,14 +67,12 @@ install_server() {
         fi
     else
         echo "📦 Installazione del server MCP $server_name..."
-
         # Verifica se il server è già installato
         if npm list -g | grep -q "@modelcontextprotocol/server-$server_name"; then
             echo "✅ Server MCP $server_name è già installato globalmente"
         else
             echo "🔄 Installazione globale di @modelcontextprotocol/server-$server_name..."
             npm install -g @modelcontextprotocol/server-$server_name
-
             if [ $? -eq 0 ]; then
                 echo "✅ Server MCP $server_name installato globalmente con successo"
             else
@@ -94,7 +91,6 @@ install_server() {
             fi
         fi
     fi
-
     return 0
 }
 
@@ -102,12 +98,10 @@ install_server() {
 start_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
-
     if [ -n "$pid" ]; then
         echo "⚠️ Il server MCP $server_name è già in esecuzione con PID $pid"
         return 0
     fi
-
     if [ "$server_name" = "mysql" ]; then
         if [ ! -f "$MYSQL_CONNECTOR" ]; then
             echo "❌ Script connector MySQL non trovato: $MYSQL_CONNECTOR"
@@ -163,7 +157,6 @@ start_server() {
 stop_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
-
     if [ -z "$pid" ]; then
         echo "⚠️ Il server MCP $server_name non è in esecuzione"
         return 0
@@ -182,7 +175,6 @@ stop_server() {
         echo "⚠️ Tentativo di arresto forzato..."
         kill -9 "$pid" 2>/dev/null
         sleep 1
-
         pid=$(get_pid "$server_name")
         if [ -z "$pid" ]; then
             echo "✅ Server MCP $server_name arrestato forzatamente"
@@ -198,7 +190,6 @@ stop_server() {
 status_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
-
     if [ -n "$pid" ]; then
         echo "✅ Server MCP $server_name è in esecuzione con PID $pid"
         return 0
@@ -220,7 +211,6 @@ restart_server() {
 logs_server() {
     local server_name=$1
     local log_file="$LOGS_DIR/$server_name.log"
-
     if [ -f "$log_file" ]; then
         echo "📋 Log del server MCP $server_name:"
         tail -n 50 "$log_file"
@@ -238,7 +228,6 @@ all_servers() {
     local command=$1
     local success=0
     local total=0
-
     for server in "${ALL_SERVERS[@]}"; do
         ((total++))
         case "$command" in
@@ -262,7 +251,6 @@ all_servers() {
                 ;;
         esac
     done
-
     echo ""
     echo "📊 Riepilogo: $success/$total server MCP gestiti con successo"
 }

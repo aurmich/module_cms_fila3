@@ -4,6 +4,15 @@
 
 Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medici, incluse le loro interazioni con il sistema. Questo modulo implementa funzionalità per la gestione dell'anagrafica, la registrazione di pazienti e medici, la gestione delle visite e dei trattamenti, e l'integrazione con altri moduli del sistema.
 
+## Aggiornamenti Recenti
+
+### 06 Gennaio 2025
+- ✅ **Correzioni Traduzioni Stati Appuntamenti**: Completata verifica e correzione delle traduzioni per tutti gli stati degli appuntamenti
+  - Aggiunto stato `refund_integrate` mancante nelle traduzioni
+  - Rimossi stati obsoleti `in_progress` e `completed`
+  - Aggiornata documentazione per riflettere la configurazione attuale
+  - [Dettagli completi](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
+
 ## File Chiave
 - [Doctor.php](app/Models/Doctor.php)
 - [User.php](app/Models/User.php)

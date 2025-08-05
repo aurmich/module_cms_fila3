@@ -251,22 +251,6 @@ return [
             'modal_heading' => 'Geplanter Termin',
             'modal_description' => 'Dieser Termin wurde im Kalender geplant.',
         ],
-        'in_progress' => [
-            'label' => 'Läuft',
-            'color' => 'warning',
-            'bg_color' => '#f59e0b',
-            'icon' => 'heroicon-o-clock',
-            'modal_heading' => 'Besuch Läuft',
-            'modal_description' => 'Der medizinische Besuch läuft derzeit.',
-        ],
-        'completed' => [
-            'label' => 'Abgeschlossen',
-            'color' => 'success',
-            'bg_color' => '#10b981',
-            'icon' => 'heroicon-o-check-badge',
-            'modal_heading' => 'Besuch Abgeschlossen',
-            'modal_description' => 'Der Besuch wurde erfolgreich abgeschlossen.',
-        ],
         'cancelled' => [
             'label' => 'Storniert',
             'color' => 'danger',
@@ -348,6 +332,14 @@ return [
             'modal_description' => 'Die Rückerstattung wurde abgeschlossen und an den Patienten ausgezahlt.',
         ],
         'refund_to_integrate' => [
+            'label' => 'Rückerstattung zu Integrieren',
+            'color' => 'info',
+            'bg_color' => '#3b82f6',
+            'icon' => 'heroicon-o-arrow-path',
+            'modal_heading' => 'Rückerstattung zu Integrieren',
+            'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
+        ],
+        'refund_integrate' => [
             'label' => 'Rückerstattung zu Integrieren',
             'color' => 'info',
             'bg_color' => '#3b82f6',

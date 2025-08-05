@@ -42,7 +42,7 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 ### Git Conflicts Resolution
 
 - Resolved Git merge conflicts with proper syntax for PHPStan comments
-- Cleaned up conflicting code markers (`>>>>>>> 598d3378 (test)`)
+- Cleaned up conflicting code markers
 - Standardized on modern PHPStan ignore syntax
 - Implemented correct TransTrait usage pattern
 
