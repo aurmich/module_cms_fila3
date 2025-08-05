@@ -295,7 +295,11 @@ return [
             'label' => 'Riprogrammato',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Riprogramma Appuntamento',
             'modal_description' => 'Questo appuntamento è stato riprogrammato per una nuova data.',
         ],
@@ -351,7 +355,11 @@ return [
             'label' => 'Rimborso da Integrare',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Rimborso da Integrare',
             'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
         ],
@@ -359,7 +367,11 @@ return [
             'label' => 'Rimborso da Integrare',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Rimborso da Integrare',
             'modal_description' => 'Il rimborso deve essere integrato con altri servizi.',
         ],

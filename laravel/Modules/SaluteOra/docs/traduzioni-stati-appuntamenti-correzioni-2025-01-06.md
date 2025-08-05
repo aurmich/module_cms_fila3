@@ -69,19 +69,25 @@ Ho completato la verifica e correzione delle traduzioni per tutti gli stati degl
 - ✅ Rimossi stati obsoleti dalla documentazione
 
 ### Correzione Icone Non Valide (Gennaio 2025)
-**Attività**: Sostituzione icone `heroicon-o-arrow-path` non esistenti con icone valide
-- **Problema**: Errore "Svg by name 'o-arrow-path-20-solid' from set 'heroicons' not found"
-- **Causa**: Icona `heroicon-o-arrow-path` non esiste nel set Heroicons
-- **Soluzione**: Sostituite tutte le icone non valide con `heroicon-o-arrow-right-left`
+**Attività**: Sostituzione icone non esistenti con icone valide del set Heroicons
+- **Problema**: Errori "Svg by name 'o-arrow-path-20-solid' from set 'heroicons' not found" e "Svg by name 'o-arrow-right-left' from set 'heroicons' not found"
+- **Causa**: Icone `heroicon-o-arrow-path` e `heroicon-o-arrow-right-left` non esistono nel set Heroicons
+- **Soluzione**: Sostituite con icone che esistono realmente nel set Heroicons
 - **File aggiornati**: 
   - `laravel/Modules/SaluteOra/lang/it/appointment.php`
   - `laravel/Modules/SaluteOra/lang/en/appointment.php`
   - `laravel/Modules/SaluteOra/lang/de/appointment.php`
 
-### Stati Corretti
-- **rescheduled**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
-- **refund_to_integrate**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
-- **refund_integrate**: `heroicon-o-arrow-right-left` (invece di `heroicon-o-arrow-path`)
+### Stati Corretti con Icone Valide
+- **rescheduled**: `heroicon-o-arrow-left` (icona esistente per indicare riprogrammazione)
+- **refund_to_integrate**: `heroicon-o-arrow-down-on-square` (icona esistente per indicare integrazione)
+- **refund_integrate**: `heroicon-o-arrow-down-on-square` (icona esistente per indicare integrazione)
+
+### Verifica Icone Utilizzate
+Tutte le icone sono state verificate come esistenti nel set Heroicons:
+```bash
+ls laravel/vendor/blade-ui-kit/blade-heroicons/resources/svg/ | grep -E "(o-arrow-left|o-arrow-down-on-square)"
+```
 
 ### Rimozione Duplicati
 - ✅ Rimosso duplicato di `refund_integrate` nel file italiano

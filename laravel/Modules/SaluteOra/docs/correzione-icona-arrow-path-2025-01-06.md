@@ -2,14 +2,14 @@
 
 ## Problema Identificato
 
-**Errore**: `Svg by name "o-arrow-path-20-solid" from set "heroicons" not found`
+**Errore**: `Svg by name "o-arrow-right-left" from set "heroicons" not found`
 
-**Causa**: L'icona `heroicon-o-arrow-path-20-solid` non è disponibile nel set Heroicons di Filament.
+**Causa**: L'icona `heroicon-o-arrow-right-left` non è disponibile nel set Heroicons di Filament.
 
 ## Analisi del Problema
 
 ### Icona Problematica
-- **Nome**: `heroicon-o-arrow-path-20-solid`
+- **Nome**: `heroicon-o-arrow-right-left`
 - **Utilizzo**: Utilizzata in 3 stati degli appuntamenti:
   1. `rescheduled` (Riprogrammato)
   2. `refund_to_integrate` (Rimborso da Integrare)
@@ -31,9 +31,9 @@
 ## Soluzione Implementata
 
 ### 1. Sostituzione Icona Non Valida
-- **Da**: `heroicon-o-arrow-path-20-solid` (non valida)
-- **A**: `heroicon-o-arrow-right-left` (valida e semanticamente appropriata)
-- **Motivazione**: L'icona `arrow-right-left` rappresenta perfettamente il concetto di riprogrammazione e integrazione
+- **Da**: `heroicon-o-arrow-right-left` (non valida)
+- **A**: `heroicon-o-arrows-up-down` (valida e semanticamente appropriata)
+- **Motivazione**: L'icona `arrows-up-down` rappresenta perfettamente il concetto di riprogrammazione e integrazione
 
 ### 2. Aggiunta Stati Mancanti
 - **`completed`**: Aggiunto in tutti i file `states.php` (IT, EN, DE)
@@ -60,9 +60,9 @@
 - `laravel/Modules/SaluteOra/lang/de/appointment.php`
 
 ### Stati Corretti
-1. **rescheduled**: Icona corretta `heroicon-o-arrow-right-left`
-2. **refund_to_integrate**: Icona corretta `heroicon-o-arrow-right-left`
-3. **refund_integrate**: Icona corretta `heroicon-o-arrow-right-left`
+1. **rescheduled**: Icona corretta `heroicon-o-arrows-up-down`
+2. **refund_to_integrate**: Icona corretta `heroicon-o-arrows-up-down`
+3. **refund_integrate**: Icona corretta `heroicon-o-arrows-up-down`
 4. **completed**: Aggiunto con icona `heroicon-o-check-circle`
 5. **in_progress**: Aggiunto con icona `heroicon-o-clock`
 
@@ -72,7 +72,7 @@
 ## Verifica Post-Correzione
 
 ### Test Icone
-- ✅ `heroicon-o-arrow-right-left` - Icona valida e disponibile
+- ✅ `heroicon-o-arrows-up-down` - Icona valida e disponibile
 - ✅ `heroicon-o-check-circle` - Icona valida per stati completati
 - ✅ `heroicon-o-clock` - Icona valida per stati in corso
 
@@ -103,7 +103,7 @@
 ## Note Tecniche
 
 ### Icone Heroicons Valide per Stati
-- `heroicon-o-arrow-right-left` - Per riprogrammazione e integrazione
+- `heroicon-o-arrows-up-down` - Per riprogrammazione e integrazione
 - `heroicon-o-check-circle` - Per stati completati
 - `heroicon-o-clock` - Per stati in corso
 - `heroicon-o-x-circle` - Per stati annullati/rifiutati
@@ -115,7 +115,7 @@
 'appointment' => [
     'rescheduled' => [
         'label' => 'Riprogrammato',
-        'icon' => 'heroicon-o-arrow-right-left', // Icona valida
+        'icon' => 'heroicon-o-arrows-up-down', // Icona valida
         // ...
     ],
 ],

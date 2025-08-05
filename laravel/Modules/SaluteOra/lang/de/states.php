@@ -295,7 +295,11 @@ return [
             'label' => 'Verschoben',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Termin verschieben',
             'modal_description' => 'Dieser Termin wurde auf ein neues Datum verschoben.',
         ],
@@ -351,7 +355,11 @@ return [
             'label' => 'Rückerstattung zu integrieren',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Rückerstattung zu integrieren',
             'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
         ],
@@ -359,7 +367,11 @@ return [
             'label' => 'Rückerstattung zu integrieren',
             'color' => 'info',
             'bg_color' => '#3b82f6',
+<<<<<<< HEAD
             'icon' => 'heroicon-o-arrow-right',
+=======
+            'icon' => 'heroicon-o-arrows-up-down',
+>>>>>>> 023253bb (✨ (translations): update invalid icons in appointment states to valid Heroicons)
             'modal_heading' => 'Rückerstattung zu integrieren',
             'modal_description' => 'Die Rückerstattung muss mit anderen Dienstleistungen integriert werden.',
         ],

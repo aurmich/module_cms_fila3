@@ -50,7 +50,7 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 - Rimborso che deve essere integrato con altri servizi
 - **Transizioni possibili**: RefundCompleted
 - **Colore**: info
-- **Icona**: heroicon-o-arrow-right-left
+- **Icona**: heroicon-o-arrows-up-down
 
 ### 8. RefundCompleted (Rimborso Completato)
 - Rimborso completato e pagato
@@ -72,27 +72,26 @@ Il sistema di gestione degli stati degli appuntamenti utilizza il pattern State 
 - **Icona**: heroicon-o-x-circle
 
 ### 11. Rejected (Rifiutato)
-- Appuntamento rifiutato dal dottore o sistema
-- **Transizioni possibili**: Confirmed (in caso di revisione della decisione)
+- Appuntamento rifiutato dal paziente
 - **Colore**: danger
-- **Icona**: heroicon-o-x-mark
+- **Icona**: heroicon-o-x-circle
 
-### 12. NoShow (Assente)
-- Paziente non si è presentato
-- **Transizioni possibili**: Banned
+### 12. NoShow (Non Presentato)
+- Il paziente non si è presentato all'appuntamento
 - **Colore**: danger
 - **Icona**: heroicon-o-exclamation-circle
 
-### 13. Banned (Bannato)
-- Utente bannato dal sistema per violazioni
-- **Colore**: danger
-- **Icona**: heroicon-o-no-symbol
+### 13. InProgress (In Corso)
+- La visita medica è attualmente in corso
+- **Colore**: warning
+- **Icona**: heroicon-o-clock
 
-### 14. Rescheduled (Riprogrammato)
-- Appuntamento spostato a nuovo orario
-- **Colore**: info
-- **Icona**: heroicon-o-arrow-right-left
-- **Modificabile**: true
+### 14. Completed (Completato)
+- Appuntamento completato con successo
+- **Stato finale** - nessuna transizione possibile
+- **Colore**: success
+- **Icona**: heroicon-o-check-circle
+- **Completato**: true
 
 ## Diagramma delle Transizioni
 
