@@ -1,4 +1,51 @@
-# Errori Critici Risolti nel Modulo SaluteOra
+# Errori Critici Risolti - Modulo SaluteOra
+
+## Aggiornamenti Recenti
+
+### Errore Icona RefundIntegrate (Gennaio 2025)
+**Problema**: Errore "Svg by name 'o-saluteora::appointment.states.refund_integrate.icon' from set 'heroicons' not found"
+- **Causa**: Il sistema sta cercando l'icona con il prefisso 'o-' invece del modulo corretto
+- **Analisi**: Il metodo `transClass` nel trait TransTrait costruisce la chiave di traduzione
+- **Chiave attesa**: `saluteora::appointment.states.refund_integrate.icon`
+- **Chiave cercata**: `o-saluteora::appointment.states.refund_integrate.icon`
+- **Stato**: In analisi - verificare configurazione GetTransKeyAction
+
+### Dettagli Tecnici
+```php
+// Metodo icon() in XotBaseState.php
+public function icon(): string
+{
+    return static::transClass(static::class,'states.'.static::getName().'.icon');
+}
+
+// Metodo transClass in TransTrait.php
+public static function transClass(string $class, string $key): string
+{
+    $class_key = static::getKeyTransClass($class);
+    $key_full = $class_key.'.'.$key;
+    // Per RefundIntegrate dovrebbe essere: saluteora::appointment.states.refund_integrate.icon
+}
+```
+
+### File Coinvolti
+- `laravel/Modules/SaluteOra/app/States/Appointment/RefundIntegrate.php`
+- `laravel/Modules/Xot/app/States/XotBaseState.php`
+- `laravel/Modules/Xot/app/Filament/Traits/TransTrait.php`
+- `laravel/Modules/SaluteOra/lang/{locale}/states.php`
+
+### Verifiche Completate
+- ✅ Traduzioni presenti in tutti i file di lingua (it, en, de)
+- ✅ Stato RefundIntegrate implementato correttamente
+- ✅ Metodo getName() restituisce 'refund_integrate'
+- ✅ Icona 'heroicon-o-arrow-path' definita nelle traduzioni
+
+### Prossimi Passi
+1. Verificare configurazione GetTransKeyAction
+2. Controllare se c'è un override nella configurazione del modulo
+3. Verificare se il problema è nel namespace o nella costruzione della chiave
+4. Testare con altri stati per verificare se il problema è specifico o generale
+
+## Errori Precedenti Risolti
 
 Questa documentazione mantiene traccia degli errori critici identificati e risolti durante lo sviluppo del modulo SaluteOra, per evitare regressioni future e fornire linee guida per prevenire errori simili.
 
