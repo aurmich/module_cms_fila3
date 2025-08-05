@@ -45,7 +45,7 @@ class ListPatients extends ListUsers
     public function getHeaderWidgets(): array
     {
         return [
-            StateOverviewWidget::class,
+            StateOverviewWidget::make(['stateClass'=>UserState::class,'model'=>Patient::class]),
         ];
     }
 

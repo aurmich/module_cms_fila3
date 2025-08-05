@@ -42,6 +42,8 @@ class StateOverviewWidget extends XotBaseWidget
 
     public string $stateClass;
     public string $model;
+
+    public string $cacheKey='';
     /**
      * Schema del form (vuoto per questo widget).
      *
@@ -71,9 +73,17 @@ class StateOverviewWidget extends XotBaseWidget
 
     protected function getCacheKey(): string
     {
-        $cacheKey = 'states-' . class_basename($this->model).'-'.class_basename($this->stateClass);
-        $cacheKey = Str::slug($cacheKey);
-        return $cacheKey;
+        try{
+            $cacheKey = 'states-' . class_basename($this->model).'-'.class_basename($this->stateClass);
+            $cacheKey = Str::slug($cacheKey);
+            $this->cacheKey = $cacheKey;
+            return $cacheKey;
+        }catch(\Error $e){
+            if($this->cacheKey==''){
+                $this->cacheKey = Str::uuid()->toString();
+            }
+            return $this->cacheKey;
+        }
     }
     
     /**
