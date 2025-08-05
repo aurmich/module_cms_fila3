@@ -5,44 +5,6 @@
     $flagCode = $lang === 'en' ? 'gb' : $lang;
 ?>
 
-<!-- <style>
-.carousel-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 120px;
-	background: transparent;
-}
-
-@keyframes scroll {
-	0% { transform: translateX(0); }
-	100% { transform: translateX(calc(-250px * 3)); }
-}
-
-.slider {
-	background: transparent;
-	overflow: hidden;
-	position: relative;
-	width: 100%; /* 250 * 3 (3 loghi visibili) */
-	height: 100px;
-}
-
-.slide-track {
-	display: flex;
-	width: calc(250px * 6); /* 3 loghi * 2 (duplicati) */
-	animation: scroll 20s linear infinite;
-}
-
-.slide {
-	width: 250px;
-	height: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-</style> -->
-
 <div 
     style="background-repeat: no-repeat; background-position: top; background-size: cover;"
     class="bg-[url('/img/landing-mobile-salute-orale.svg')] ipad:bg-[url('/img/landing-mobile-salute-orale.svg')] lg:bg-[url('/img/soluzione-unita-per-desktop.svg')] min-h-screen m-0 p-0 bg-top ipad:bg-right-top">
@@ -174,11 +136,17 @@
     <!-- FINE HEADER -->
   
     <!-- INIZIO PRIMA SECTION -->
-     <div class="w-full flex justify-start p-8 ipad:h-[50vh] lg:h-dvh items-center"> 
-       <div class="flex flex-col justify-center">
-         <img class="h-44 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
-         <img class="h-48 lg:h-44 p-5" src="/img/logo-inmp-mobile.svg" />
-         <img class="h-28 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
+     <div class="w-full flex flex-col-reverse items-start lg:flex-row justify-start p-8 ipad:h-[50vh] lg:h-dvh lg:items-center"> 
+       <div class="flex flex-row items-center lg:flex-col justify-start lg:justify-center">
+       <a href="https://fondazioneandi.org/" target="_blank">
+         <img class="h-28 lg:h-[150px] p-5" src="/img/fondazione-andi-white.png" />
+       </a>
+       <a href="https://www.inmp.it/" target="_blank">
+         <img class="h-32 lg:h-44 p-5" src="/img/logo-inmp-mobile.svg" />
+       </a>
+       <a href="https://www.cooperazioneodontoiatrica.eu/" target="_blank">
+         <img class="h-24 lg:h-28 p-5" src="/img/coi-logo-updated.png" />
+       </a>
       </div>
        <div class="w-[60%] ipad:w-[40%] lg:text-4xl ipad:ml-5 lg:w-2/5 flex flex-col justify-start">
          <h1 class="text-[#FF5F7E] text-[40px] ipad:text-4xl lg:text-8xl leading-tight font-bold mb-2.5">
@@ -198,42 +166,6 @@
       </div>
       <!-- FINE PRIMA SECTION -->
     
-
-<!-- INIZIO CAROUSEL SECTION -->
-<!-- <div class="slider">
-	<div class="slide-track">
-		<div class="slide">
-			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
-		</div>
-
-    <div class="slide">
-			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
-		</div>
-
-    <div class="slide">
-			<img src="/img/fondazione-andi-white.png" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/logo-completo-inmp.svg" height="100" width="250" alt="" />
-		</div>
-		<div class="slide">
-			<img src="/img/coi-logo-updated.png" height="100" width="250" alt="" />
-		</div>
-	</div>
-</div> -->
-<!-- FINE CAROUSEL SECTION -->
 
 
     <!-- INIZIO SECONDA SECTION -->
