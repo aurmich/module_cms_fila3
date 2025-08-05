@@ -67,6 +67,68 @@ return [ /* contenuto */ ];
 ],
 ```
 
+## 🔄 Aggiornamento Traduzioni Refund Integration (Gennaio 2025)
+
+### Problema Identificato
+- **File italiano**: `refund_integrate.php` (completo)
+- **File inglese**: `refund_to_integrate.php` (completo)
+- **File tedesco**: `refund_to_integrate.php` (incompleto - solo 14 righe)
+
+### Soluzione Implementata
+1. **Completamento file tedesco**: Aggiunta struttura completa con actions, modal, messages, fields
+2. **Coerenza multilingua**: Mantenuta struttura identica tra le tre lingue
+3. **Standardizzazione**: Tutti i file seguono gli standard di qualità del modulo
+4. **Creazione file mancanti**: Creati `refund_integrate.php` in inglese e tedesco per coerenza
+
+### File Creati/Aggiornati
+- ✅ `laravel/Modules/SaluteOra/lang/it/refund_integrate.php` (già esistente)
+- ✅ `laravel/Modules/SaluteOra/lang/it/refund_to_integrate.php` (già esistente)
+- ✅ `laravel/Modules/SaluteOra/lang/en/refund_to_integrate.php` (già esistente)
+- ✅ `laravel/Modules/SaluteOra/lang/en/refund_integrate.php` (creato)
+- ✅ `laravel/Modules/SaluteOra/lang/de/refund_to_integrate.php` (aggiornato)
+- ✅ `laravel/Modules/SaluteOra/lang/de/refund_integrate.php` (creato)
+
+### Struttura Standardizzata Refund Integration
+```php
+// Struttura completa per tutte e tre le lingue
+return [
+    'label' => '...',
+    'description' => '...',
+    'tooltip' => '...',
+    'color' => 'warning',
+    'bg_color' => '#f59e0b',
+    'icon' => 'heroicon-o-exclamation-triangle',
+    'modal_heading' => '...',
+    'modal_description' => '...',
+    
+    'actions' => [
+        'start_integration' => [...],
+        'request_documents' => [...],
+        'view_requirements' => [...],
+        'contact_support' => [...],
+    ],
+    
+    'modal' => [...],
+    'messages' => [...],
+    'fields' => [...],
+];
+```
+
+### Controlli di Qualità Applicati
+- ✅ Sintassi array breve `[]`
+- ✅ `declare(strict_types=1)`
+- ✅ Struttura espansa completa
+- ✅ Helper text corretti (vuoti dove appropriato)
+- ✅ Traduzioni semantiche corrette
+- ✅ Coerenza multilingua
+- ✅ Completezza traduzioni in tutte e tre le lingue (it, en, de)
+
+### Note sulla Duplicazione
+- **Situazione**: Esistono file con nomi diversi ma contenuto identico
+- **File italiani**: `refund_integrate.php` e `refund_to_integrate.php` (identici)
+- **Soluzione**: Mantenuti entrambi per compatibilità con codice esistente
+- **Raccomandazione**: Standardizzare su un solo nome in futuro per evitare confusione
+
 ## 🏥 Traduzioni Specifiche Sanitarie
 
 ### Campi Anagrafici Standard

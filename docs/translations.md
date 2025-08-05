@@ -5,6 +5,19 @@
 - [Modulo Lang](../../Lang/docs/module_lang.md) - Documentazione principale sulle traduzioni
 - [Regole Generali Traduzioni](../../Xot/docs/translations.md)
 
+## Aggiornamenti Recenti
+
+### Modulo SaluteOra - Refund Integration (Gennaio 2025)
+**Attività**: Completamento traduzioni multilingua per refund integration
+- **Problema**: File tedesco incompleto, mancanza coerenza nomi file
+- **Soluzione**: Aggiornato file tedesco e creati file mancanti per coerenza
+- **File aggiornati**: 
+  - `laravel/Modules/SaluteOra/lang/de/refund_to_integrate.php` (completato)
+  - `laravel/Modules/SaluteOra/lang/en/refund_integrate.php` (creato)
+  - `laravel/Modules/SaluteOra/lang/de/refund_integrate.php` (creato)
+- **Standard applicati**: Sintassi array breve, strict types, struttura espansa completa
+- **Documentazione**: Aggiornata in `laravel/Modules/SaluteOra/docs/translation_quality_standards.md`
+
 ## Struttura
 
 ```
