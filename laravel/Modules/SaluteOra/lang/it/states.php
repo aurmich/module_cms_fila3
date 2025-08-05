@@ -275,6 +275,22 @@ return [
             'modal_heading' => 'Paziente Assente',
             'modal_description' => 'Il paziente non si è presentato all\'appuntamento.',
         ],
+        'in_progress' => [
+            'label' => 'In corso',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Visita in Corso',
+            'modal_description' => 'La visita medica è attualmente in corso.',
+        ],
+        'completed' => [
+            'label' => 'Completato',
+            'color' => 'success',
+            'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-badge',
+            'modal_heading' => 'Visita Completata',
+            'modal_description' => 'La visita è stata completata con successo.',
+        ],
         'rescheduled' => [
             'label' => 'Riprogrammato',
             'color' => 'info',

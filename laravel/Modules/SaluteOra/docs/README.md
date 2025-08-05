@@ -12,13 +12,17 @@ Il modulo Patient gestisce tutte le informazioni relative ai pazienti e ai medic
   - Corretta in tutti e 3 gli stati: rescheduled, refund_to_integrate, refund_integrate
   - Aggiornata in tutte e tre le lingue (IT, EN, DE)
   - **File corretti**: states.php e appointment.php in tutte le lingue
-  - **Stati obsoleti rimossi**: in_progress e completed eliminati
+  - **Stati obsoleti rimossi**: in_progress e completed eliminati da appointment.php
+  - **Stati mancanti aggiunti**: completed e in_progress aggiunti a states.php
+  - **Meccanismo corretto**: Traduzioni aggiunte nel file states.php (non appointment.php)
   - [Dettagli completi](correzione-icona-arrow-path-2025-01-06.md)
 
 - ✅ **Correzioni Traduzioni Stati Appuntamenti**: Completata verifica e correzione delle traduzioni per tutti gli stati degli appuntamenti
   - Aggiunto stato `refund_integrate` mancante nelle traduzioni
-  - Rimossi stati obsoleti `in_progress` e `completed`
-  - Aggiornata documentazione per riflettere la configurazione attuale
+  - Rimossi stati obsoleti `in_progress` e `completed` da appointment.php
+  - Aggiunti stati `completed` e `in_progress` mancanti in states.php
+  - Corretta icona arrow-path in tutti gli stati che la utilizzavano
+  - Sincronizzazione trilingue completa (IT, EN, DE)
   - [Dettagli completi](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md)
 
 ## File Chiave

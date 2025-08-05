@@ -275,6 +275,22 @@ return [
             'modal_heading' => 'Patient Abwesend',
             'modal_description' => 'Der Patient ist nicht zum Termin erschienen.',
         ],
+        'in_progress' => [
+            'label' => 'In Bearbeitung',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Besuch läuft',
+            'modal_description' => 'Der medizinische Besuch läuft derzeit.',
+        ],
+        'completed' => [
+            'label' => 'Abgeschlossen',
+            'color' => 'success',
+            'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-badge',
+            'modal_heading' => 'Besuch Abgeschlossen',
+            'modal_description' => 'Der Besuch wurde erfolgreich abgeschlossen.',
+        ],
         'rescheduled' => [
             'label' => 'Neu geplant',
             'color' => 'info',

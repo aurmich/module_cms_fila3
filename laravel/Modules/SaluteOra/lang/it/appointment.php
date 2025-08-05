@@ -401,7 +401,7 @@ return [
             'label' => 'Completato',
             'color' => 'success',
             'bg_color' => '#10b981',
-            'icon' => 'heroicon-o-check-badge',
+            'icon' => 'heroicon-o-check-circle',
             'modal_heading' => 'Visita Completata',
             'modal_description' => 'La visita è stata completata con successo.',
         ],
