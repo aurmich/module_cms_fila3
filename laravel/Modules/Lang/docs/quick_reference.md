@@ -89,7 +89,6 @@ __('patient.profile.title')
 ## Comandi Utili
 
 ```bash
-
 # Pubblicare file di lingua
 php artisan lang:publish
 

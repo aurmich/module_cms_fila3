@@ -118,7 +118,6 @@ Aggiungi un selettore di lingua alla tua vista:
 Per la cache delle route, utilizza i comandi dedicati:
 
 ```bash
-
 # Cache delle route tradotte
 php artisan route:trans:cache
 
