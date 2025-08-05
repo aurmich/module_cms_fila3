@@ -74,7 +74,7 @@ return [
             'helper_text' => '',
         ],
         'welcome_subtitle' => [
-            'label' => 'Il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odonoiatrici di prevenzione.',
+            'label' => 'Il portale che vuole garantire alle pazienti vulnerabili in stato di gravidanza la possibilità di accedere a servizi odontoiatrici di prevenzione.',
             'tooltip' => 'Servizi gratuiti per gestanti in condizioni di vulnerabilità',
             'helper_text' => '',
         ],
