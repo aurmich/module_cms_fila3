@@ -74,7 +74,7 @@ return [
             'helper_text' => '',
         ],
         'welcome_subtitle' => [
-            'label' => 'The portal that aims to guarantee vulnerable pregnant patients the opportunity to access preventive dental services completely free of charge',
+            'label' => 'The portal that aims to guarantee vulnerable pregnant patients the opportunity to access preventive dental services.',
             'tooltip' => 'Free services for pregnant women in vulnerable conditions',
             'helper_text' => '',
         ],
