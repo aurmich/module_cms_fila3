@@ -61,11 +61,11 @@ class Locality extends BaseModel
     public static function getOptions(Get $get): array
     {
 
-        $region = $get('administrative_area_level_1');
+        $region = $get('administrative_area_level_1') ?? $get('region');
         if (!$region) {
             return [];
         }
-        $province = $get('administrative_area_level_2');
+        $province = $get('administrative_area_level_2') ?? $get('province');
         if (!$province) {
             return [];
         }
@@ -95,11 +95,11 @@ class Locality extends BaseModel
 
     public static function getPostalCodeOptions(Get $get): array
     {
-        $region = $get('administrative_area_level_1');
+        $region = $get('administrative_area_level_1') ?? $get('region');
         if (!$region) {
             return [];
         }
-        $province = $get('administrative_area_level_2');
+        $province = $get('administrative_area_level_2') ?? $get('province');
         if (!$province) {
             return [];
         }

@@ -16,7 +16,7 @@ return [
     'alternate_days' => [
         'label' => 'Alternate days',
         'color' => 'warning',
-        'icon' => 'heroicon-o-arrow-right-left',
+        'icon' => 'heroicon-o-arrow-right',
     ],
     'occasionally' => [
         'label' => 'Occasionally',

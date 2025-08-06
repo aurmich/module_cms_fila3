@@ -128,68 +128,30 @@ class AddressResource extends XotBaseResource
         ];
     }
 
-    protected function getSearchStep(): array
+    public static function getSearchStep(): array
     {
         return [
-            "region" => Select::make("region")
-                ->options(function () {
-                   
-                    return Region::orderBy('name')->get()->pluck("name", "id");
-                })
+            'region' => Select::make('region')
+                ->options(fn(Get $get)=>Region::getOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
-                ->afterStateUpdated(function (Set $set) {
-                    $set("province", null);
-                    $set("cap", null);
+                ->afterStateUpdated(function (Set $set){
+                    $set('province', null);
+                    $set('cap', null);
                 }),
-            "province" => Select::make("province")
-                ->options(function (Get $get) {
-                    $region = $get("region");
-                    if (!$region) {
-                        return [];
-                    }
-                   
-                    $res=Province::where('region_id',$region)
-                    ->orderBy('name')
-                    ->get()
-                    ->pluck("name", "id")
-                    ->toArray();
-                    return $res;
-                })
+            'province' => Select::make('province')
+                ->options(fn(Get $get)=>Province::getOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
-                ->afterStateUpdated(fn(Set $set) => $set("cap", null)),
-            "cap" => Select::make("cap")
-                ->options(function (Get $get) {
-                    $region = $get("region");
-                    if (!$region) {
-                        return [];
-                    }
-                    $province = $get("province");
-                    if (!$province) {
-                        return [];
-                    }
-                    
-                    $res=Locality::query()
-                        ->where('region_id', $region)
-                        ->where('province_id', $province)
-                        //->when($city, fn($query) => $query->where('id', $city))
-                        ->select('postal_code')
-                        ->distinct()
-                        ->orderBy('postal_code')
-                        ->get()
-                        ->pluck('postal_code', 'postal_code')
-                        ->toArray();
-                    return $res;
-                })
+                ->afterStateUpdated(fn (Set $set) => $set('cap', null)),
+            'cap' => Select::make('cap')
+                ->options(fn(Get $get)=>Locality::getPostalCodeOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
-                ->disabled(
-                    fn(Get $get) => !$get("region") || !$get("province")
-                ),
+                ->disabled(fn (Get $get) => !$get('region') || !$get('province')),
         ];
     }
 

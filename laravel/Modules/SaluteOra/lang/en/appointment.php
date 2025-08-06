@@ -335,12 +335,28 @@ return [
     ],
     'states' => [
         'confirmed' => [
-            'label' => 'Confirm',
+            'label' => 'Confirmed',
             'color' => 'success',
-            'icon' => 'heroicon-o-check-circle',
-            'modal_heading' => 'Accept appointment',
-            'modal_description' => 'Are you sure you want to accept this appointment?',
             'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-circle',
+            'modal_heading' => 'Appointment Confirmed',
+            'modal_description' => 'This appointment has been confirmed by the patient.',
+        ],
+        'in_progress' => [
+            'label' => 'In Progress',
+            'color' => 'warning',
+            'bg_color' => '#f59e0b',
+            'icon' => 'heroicon-o-clock',
+            'modal_heading' => 'Visit in Progress',
+            'modal_description' => 'The medical visit is currently in progress.',
+        ],
+        'completed' => [
+            'label' => 'Completed',
+            'color' => 'success',
+            'bg_color' => '#10b981',
+            'icon' => 'heroicon-o-check-badge',
+            'modal_heading' => 'Visit Completed',
+            'modal_description' => 'The visit has been completed successfully.',
         ],
         'rejected' => [
             'label' => 'Reject',
@@ -374,14 +390,6 @@ return [
             'modal_heading' => 'Cancel Appointment',
             'modal_description' => 'Are you sure you want to cancel this appointment?',
         ],
-        'rejected' => [
-            'label' => 'Reject',
-            'color' => 'danger',
-            'icon' => 'heroicon-o-x-mark',
-            'modal_heading' => 'Reject appointment',
-            'modal_description' => 'Are you sure you want to reject this appointment?',
-            'bg_color' => '#ef4444',
-        ],
         'no_show' => [
             'label' => 'No Show',
             'color' => 'danger',
@@ -394,7 +402,7 @@ return [
             'label' => 'Rescheduled',
             'color' => 'info',
             'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path-20-solid',
+            'icon' => 'heroicon-o-arrow-left',
             'modal_heading' => 'Reschedule Appointment',
             'modal_description' => 'This appointment has been rescheduled for a new date.',
         ],
@@ -446,22 +454,6 @@ return [
             'modal_heading' => 'Refund Completed',
             'modal_description' => 'The refund has been completed and paid to the patient.',
         ],
-        'refund_to_integrate' => [
-            'label' => 'Refund to Integrate',
-            'color' => 'info',
-            'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path-20-solid',
-            'modal_heading' => 'Refund to Integrate',
-            'modal_description' => 'The refund needs to be integrated with other services.',
-        ],
-        'refund_integrate' => [
-            'label' => 'Refund to Integrate',
-            'color' => 'info',
-            'bg_color' => '#3b82f6',
-            'icon' => 'heroicon-o-arrow-path-20-solid',
-            'modal_heading' => 'Refund to Integrate',
-            'modal_description' => 'The refund needs to be integrated with other services.',
-        ],
         'pro_bono' => [
             'label' => 'Pro Bono',
             'color' => 'info',
@@ -469,6 +461,33 @@ return [
             'icon' => 'heroicon-o-heart',
             'modal_heading' => 'Pro Bono Service',
             'modal_description' => 'This appointment was provided as a free service.',
+        ],
+    ],
+
+    'widgets' => [
+        'states_chart' => [
+            'heading' => 'Appointment Status Distribution',
+            'description' => 'Chart showing the distribution of appointment statuses',
+            'label' => 'Appointment statuses',
+            'tooltip' => 'Distribution of appointments by status',
+        ],
+        'creation_chart' => [
+            'heading' => 'Appointment Creation Over Time',
+            'description' => 'Chart showing the trend of appointment creation',
+            'label' => 'New appointments',
+            'tooltip' => 'Number of appointments created per period',
+        ],
+        'trend_chart' => [
+            'heading' => 'Appointment Trends',
+            'description' => 'Chart showing appointment trends over time',
+            'label' => 'Appointment trends',
+            'tooltip' => 'Appointment trends per period',
+        ],
+        'model_trend_chart' => [
+            'heading' => 'Appointment Model Trend',
+            'description' => 'Chart showing the appointment model trend',
+            'label' => 'Appointment model',
+            'tooltip' => 'Appointment booking model trend',
         ],
     ],
 ];

@@ -1,0 +1,208 @@
+# Regola: Gestione Duplicati Chiavi Traduzioni
+
+## Problema Critico
+- **Errore PHPStan**: `Array has 2 duplicate keys with value 'key_name'`
+- **Causa**: Chiavi duplicate negli array di traduzione
+- **Impatto**: Sovrascrittura accidentale di traduzioni, perdita di contenuto
+
+## Regola Fondamentale
+- **MAI togliere contenuto dalle traduzioni**, solo rimuovere duplicati
+- **Mantenere sempre il contenuto migliore** quando si rimuovono duplicati
+- **Verificare sempre l'unicità delle chiavi** prima di aggiungere traduzioni
+
+## Tipi di Duplicati Comuni
+
+### 1. Duplicati di Stato
+```php
+// ❌ ERRATO - Duplicato 'rejected'
+'rejected' => [
+    'label' => 'Reject',
+    'color' => 'danger',
+    // ...
+],
+'rejected' => [  // ❌ DUPLICATO
+    'label' => 'Reject',
+    'color' => 'danger',
+    // ...
+],
+
+// ✅ CORRETTO - Unica definizione
+'rejected' => [
+    'label' => 'Reject',
+    'color' => 'danger',
+    'icon' => 'heroicon-o-x-mark',
+    'modal_heading' => 'Reject appointment',
+    'modal_description' => 'Are you sure you want to reject this appointment?',
+    'bg_color' => '#ef4444',
+],
+```
+
+### 2. Duplicati di Proprietà
+```php
+// ❌ ERRATO - Proprietà duplicate
+'refund_completed' => [
+    'label' => 'Refund Completed',
+    'bg_color' => '#10b981',
+    'icon' => 'heroicon-o-banknotes',
+    'bg_color' => '#3b82f6',  // ❌ DUPLICATO
+    'icon' => 'heroicon-o-heart',  // ❌ DUPLICATO
+],
+
+// ✅ CORRETTO - Proprietà uniche
+'refund_completed' => [
+    'label' => 'Refund Completed',
+    'bg_color' => '#10b981',
+    'icon' => 'heroicon-o-banknotes',
+    'modal_heading' => 'Refund Completed',
+    'modal_description' => 'The refund has been completed and paid to the patient.',
+],
+```
+
+### 3. Duplicati di Widget
+```php
+// ❌ ERRATO - Widget duplicato
+'widgets' => [
+    'model_trend_chart' => [
+        'heading' => 'Appointment Model Trend',
+        // ...
+    ],
+    'model_trend_chart' => [  // ❌ DUPLICATO
+        'heading' => 'Appointment Model Trend',
+        // ...
+    ],
+],
+
+// ✅ CORRETTO - Widget unico
+'widgets' => [
+    'model_trend_chart' => [
+        'heading' => 'Appointment Model Trend',
+        'description' => 'Chart showing the appointment model trend',
+        'label' => 'Appointment model',
+        'tooltip' => 'Appointment booking model trend',
+    ],
+],
+```
+
+## Processo di Correzione
+
+### 1. Identificazione
+- **Strumento**: PHPStan con livello 9+
+- **Comando**: `./vendor/bin/phpstan analyse --level=9 laravel/Modules/SaluteOra/lang/`
+- **Output**: Lista dettagliata di duplicati con linee specifiche
+
+### 2. Analisi
+- **Confronto**: Analizzare le due versioni del duplicato
+- **Decisione**: Identificare quale versione mantenere
+- **Criteri**: Completezza, correttezza, coerenza
+
+### 3. Correzione
+- **Azione**: Rimuovere solo il duplicato
+- **Mantenimento**: Conservare la versione migliore
+- **Verifica**: Testare che le traduzioni funzionino
+
+### 4. Documentazione
+- **File**: Creare documentazione della correzione
+- **Motivazione**: Spiegare perché è stata scelta una versione
+- **Prevenzione**: Documentare best practices
+
+## Best Practices
+
+### Prevenzione
+1. **Verificare sempre l'unicità** prima di aggiungere traduzioni
+2. **Utilizzare editor con evidenziazione sintassi** per identificare duplicati
+3. **Testare con PHPStan** dopo ogni modifica
+4. **Documentare le modifiche** per futuri riferimenti
+
+### Gestione
+1. **MAI togliere contenuto dalle traduzioni** - solo rimuovere duplicati
+2. **Mantenere sempre il contenuto migliore** quando si rimuovono duplicati
+3. **Verificare coerenza trilingue** - controllare sempre IT, EN, DE
+4. **Testare le traduzioni** nel contesto reale dell'applicazione
+
+### Verifica
+1. **PHPStan**: Eseguire dopo ogni correzione
+2. **Test funzionale**: Verificare che le traduzioni funzionino
+3. **Coerenza**: Controllare che le modifiche siano applicate in tutte le lingue
+
+## Esempi di Correzione
+
+### Caso 1: Duplicato di Stato
+```php
+// PRIMA (con duplicato)
+'rejected' => [
+    'label' => 'Reject',
+    'color' => 'danger',
+],
+'rejected' => [  // DUPLICATO
+    'label' => 'Reject',
+    'color' => 'danger',
+],
+
+// DOPO (corretto)
+'rejected' => [
+    'label' => 'Reject',
+    'color' => 'danger',
+    'icon' => 'heroicon-o-x-mark',
+    'modal_heading' => 'Reject appointment',
+    'modal_description' => 'Are you sure you want to reject this appointment?',
+    'bg_color' => '#ef4444',
+],
+```
+
+### Caso 2: Duplicati di Proprietà
+```php
+// PRIMA (con duplicati)
+'refund_completed' => [
+    'label' => 'Refund Completed',
+    'bg_color' => '#10b981',
+    'icon' => 'heroicon-o-banknotes',
+    'bg_color' => '#3b82f6',  // DUPLICATO
+    'icon' => 'heroicon-o-heart',  // DUPLICATO
+],
+
+// DOPO (corretto)
+'refund_completed' => [
+    'label' => 'Refund Completed',
+    'bg_color' => '#10b981',
+    'icon' => 'heroicon-o-banknotes',
+    'modal_heading' => 'Refund Completed',
+    'modal_description' => 'The refund has been completed and paid to the patient.',
+],
+```
+
+## Checklist
+
+### Pre-Correzione
+- [ ] Identificare tutti i duplicati con PHPStan
+- [ ] Analizzare le differenze tra le versioni
+- [ ] Decidere quale versione mantenere
+- [ ] Documentare la decisione
+
+### Durante Correzione
+- [ ] Rimuovere solo i duplicati
+- [ ] Mantenere il contenuto migliore
+- [ ] Non togliere contenuto esistente
+- [ ] Verificare coerenza trilingue
+
+### Post-Correzione
+- [ ] Testare con PHPStan
+- [ ] Verificare funzionamento traduzioni
+- [ ] Aggiornare documentazione
+- [ ] Testare in contesto reale
+
+## Riferimenti
+
+- [Correzione Duplicati Chiavi Traduzioni](../../laravel/Modules/SaluteOra/docs/duplicate-translation-keys-fix-2025-01-27.md)
+- [Correzione Icona Arrow Path](../../laravel/Modules/SaluteOra/docs/correzione-icona-arrow-path-2025-01-06.md)
+- [Regola Traduzioni Helper Text](translation-helper-text-rule.mdc)
+
+---
+
+**Ultimo aggiornamento**: 27 Gennaio 2025
+**Stato**: ✅ Attiva
+**Applicazione**: Tutti i file di traduzione
+**PHPStan**: ✅ Compatibile livello 9+
+description:
+globs:
+alwaysApply: false
+---

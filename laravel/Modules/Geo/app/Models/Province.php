@@ -58,7 +58,8 @@ class Province extends BaseModel
 
     public static function getOptions(Get $get): array
     {
-        return self::where('region_id',$get('administrative_area_level_1'))
+        $region=$get('administrative_area_level_1') ?? $get('region');
+        return self::where('region_id',$region)
             ->orderBy('name')
             ->get()
             ->pluck("name", "id")

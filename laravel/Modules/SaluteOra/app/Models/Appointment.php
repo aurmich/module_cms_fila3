@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Carbon\Carbon;
 use Spatie\ModelStates\HasStates;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -108,6 +109,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel implements HasStatesContract
@@ -307,6 +309,21 @@ class Appointment extends BaseModel implements HasStatesContract
      */
     public function scopeInDateRange($query, string $start, string $end)
     {
+        return $query->whereBetween('starts_at', [$start, $end]);
+    }
+
+     /**
+     * Scope to filter appointments by date range for FullCalendar.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $yearMonth
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfYearMonth($query, string $yearMonth)
+    {
+        $start = Carbon::createFromFormat('Y-m', $yearMonth)?->startOfMonth();
+        $end   = Carbon::createFromFormat('Y-m', $yearMonth)?->endOfMonth();
+
         return $query->whereBetween('starts_at', [$start, $end]);
     }
 

@@ -625,6 +625,7 @@ namespace Modules\FormBuilder\Models{
  * @property string $id
  * @property array<array-key, mixed> $name
  * @property string|null $key
+ * @property string|null $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $updated_by
@@ -652,8 +653,8 @@ namespace Modules\FormBuilder\Models{
  * @method static Builder<static>|FieldOption whereType($value)
  * @method static Builder<static>|FieldOption whereUpdatedAt($value)
  * @method static Builder<static>|FieldOption whereUpdatedBy($value)
- * @mixin \Eloquent
  * @property string|null $type
+ * @mixin \Eloquent
  */
 	class FieldOption extends \Eloquent {}
 }
@@ -3456,6 +3457,7 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
  */
 	class Appointment extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
@@ -3674,6 +3676,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read int|null $appointments_count
  */
 	class DoctorStudio extends \Eloquent {}
 }

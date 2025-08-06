@@ -16,7 +16,7 @@ return [
     'alternate_days' => [
         'label' => 'A giorni alterni',
         'color' => 'warning',
-        'icon' => 'heroicon-o-arrow-right-left',
+        'icon' => 'heroicon-o-arrow-right',
     ],
     'occasionally' => [
         'label' => 'Saltuariamente',

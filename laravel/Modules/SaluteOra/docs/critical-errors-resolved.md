@@ -497,6 +497,43 @@ graph TD
 
 ---
 
+## Correzione Critica: File README.md in Minuscolo (Gennaio 2025)
+
+### Problema Identificato
+**ERRORE GRAVE**: Trovati file `readme.md` in minuscolo in diverse cartelle del progetto.
+
+### Motivazione della Correzione
+1. **Convenzione Standard**: I file README.md devono SEMPRE essere in maiuscolo
+2. **Visibilità**: I file README.md in maiuscolo sono immediatamente riconoscibili
+3. **Professionalità**: Segue le convenzioni internazionali per la documentazione
+4. **Consistenza**: Mantiene coerenza in tutto il progetto
+5. **Accessibilità**: Facilita la navigazione e la comprensione della struttura
+
+### File Corretti
+- ✅ `docs_project/readme.md` → `docs_project/README.md`
+- ✅ `docs_project/it/readme.md` → `docs_project/it/README.md`
+- ✅ `docs_project/amministrazione/backup/readme.md` → `docs_project/amministrazione/backup/README.md`
+- ✅ `docs_project/roadmap_frontoffice/readme.md` → `docs_project/roadmap_frontoffice/README.md`
+- ✅ `laravel/Modules/Gdpr/docs/readme.md` → `laravel/Modules/Gdpr/docs/README.md`
+- ✅ `laravel/Modules/Lang/docs/readme.md` → `laravel/Modules/Lang/docs/README.md`
+- ✅ `laravel/Modules/UI/docs/readme.md` → `laravel/Modules/UI/docs/README.md`
+- ✅ `laravel/Modules/User/.devcontainer/readme.md` → `laravel/Modules/User/.devcontainer/README.md`
+- ✅ `laravel/Modules/Activity/docs/readme.md` → `laravel/Modules/Activity/docs/README.md`
+
+### Verifica Post-Correzione
+- ✅ Nessun file `readme.md` in minuscolo rimane nel progetto (esclusi node_modules e vendor)
+- ✅ Tutti i file README.md sono ora in maiuscolo
+- ✅ Struttura documentazione coerente e professionale
+
+### Lezione Appresa
+**NON posso mai permettermi di avere file README.md in minuscolo.** Devo sempre:
+1. Verificare che i file README.md siano in maiuscolo
+2. Correggere immediatamente quando trovo errori di naming
+3. Documentare le correzioni per prevenire errori futuri
+4. Mantenere standard professionali in tutto il progetto
+
+## Correzione Icone Non Valide (Gennaio 2025)
+
 ## Checklist Prevenzione Errori Futuri
 
 ### Per Componenti Filament Custom

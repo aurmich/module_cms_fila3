@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Modules\Notify\Providers;
 
 // use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Arr;
+use Webmozart\Assert\Assert;
 use Illuminate\Support\Facades\Mail;
+use Modules\Tenant\Services\TenantService;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class NotifyServiceProvider extends XotBaseServiceProvider
@@ -20,7 +23,12 @@ class NotifyServiceProvider extends XotBaseServiceProvider
     {
         parent::boot();
         if (! app()->environment('production')) {
-            Mail::alwaysTo('test.saluteoraleingravidanza@gmail.com');
+            $mail=TenantService::config('mail');
+            Assert::isArray($mail);
+            $fallback_to=Arr::get($mail,'fallback_to',null);
+            if(is_string($fallback_to)){
+                Mail::alwaysTo($fallback_to);
+            }
         }
     }
 }

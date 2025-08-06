@@ -1,0 +1,112 @@
+# Regola Critica: Organizzazione Documentazione e Alleggerimento docs_project
+
+## REGOLA FONDAMENTALE
+**ALLEGGERIRE docs_project**: 
+- ✅ **docs_project**: Solo documentazione generale del progetto
+- ✅ **Cartelle docs moduli**: Documentazione specifica di ogni modulo
+- ❌ **MAI**: Creare file specifici di moduli in docs_project
+- ❌ **MAI**: Scrivere in docs_project file che dovrebbero essere nei moduli
+
+## Motivazioni
+
+### 1. **Separazione delle Responsabilità**
+- **Problema**: File specifici di moduli erano nella cartella globale `docs_project`
+- **Soluzione**: Ogni modulo ha la propria documentazione nella sua cartella `docs/`
+- **Beneficio**: Documentazione più facile da trovare e mantenere
+
+### 2. **Principio Modulare**
+- **Regola**: I moduli sono indipendenti e riutilizzabili
+- **Motivazione**: Ogni modulo deve avere la propria documentazione completa
+- **Coerenza**: Rispetto della struttura modulare del progetto
+
+### 3. **Manutenibilità**
+- **Problema**: Documentazione sparsa e difficile da gestire
+- **Soluzione**: Documentazione centralizzata per ogni modulo
+- **Beneficio**: Aggiornamenti più semplici e mirati
+
+### 4. **Coerenza Architetturale**
+- **Regola**: `docs_project` solo per documentazione generale del progetto
+- **File specifici di moduli**: Nelle rispettive cartelle `docs` dei moduli
+- **Standard**: Rispetto delle convenzioni di organizzazione
+
+## Esempi di Organizzazione
+
+### **docs_project - Solo Documentazione Generale**
+- **Contenuto**: Documentazione generale del progetto, standard, convenzioni
+- **Esempi**: 
+  - `docs-naming-convention.md` - Convenzioni naming
+  - `module-documentation-standards.md` - Standard documentazione moduli
+  - `readme.md` - Documentazione principale del progetto
+  - `documentation-reorganization-2025-01-27.md` - Log riorganizzazioni
+
+### **Cartelle docs dei Moduli - Documentazione Specifica**
+- **Contenuto**: Documentazione specifica del modulo
+- **Esempi**:
+  - `appointment-states.md` - Stati appuntamenti (SaluteOra)
+  - `doctor-registration-widget.md` - Widget registrazione (User)
+  - `module-icons-design-system.md` - Sistema icone (UI)
+
+## Checklist per Nuovi File
+
+### Prima di Creare un File
+- [ ] **È documentazione generale del progetto?** → `docs_project/`
+- [ ] **È documentazione specifica di un modulo?** → `laravel/Modules/[Module]/docs/`
+- [ ] **Il modulo ha già una cartella docs?** → Usa quella esistente
+- [ ] **Il file è nel posto giusto?** → Verifica la destinazione
+
+### Verifica Post-Creazione
+- [ ] **File nella posizione corretta?**
+- [ ] **Collegamenti bidirezionali creati?**
+- [ ] **README del modulo aggiornato?**
+- [ ] **Documentazione generale aggiornata?**
+
+## Anti-Pattern da Evitare
+
+### ❌ **ERRORE**: File specifici di moduli in docs_project
+```bash
+# ❌ SBAGLIATO
+docs_project/doctor-registration-widget.md
+docs_project/appointment-states.md
+docs_project/module-icons-design-system.md
+```
+
+### ✅ **CORRETTO**: File specifici nei moduli
+```bash
+# ✅ GIUSTO
+laravel/Modules/User/docs/doctor-registration-widget.md
+laravel/Modules/SaluteOra/docs/appointment-states.md
+laravel/Modules/UI/docs/module-icons-design-system.md
+```
+
+## Comandi di Verifica
+
+### Controllo File Specifici di Moduli in docs_project
+```bash
+ls -la docs_project/ | grep -E "(doctor|appointment|saluteora|salutemo|ui-table|module-icons)" | wc -l
+# Risultato dovrebbe essere: 0
+```
+
+### Controllo Organizzazione Moduli
+```bash
+# Verifica che ogni modulo abbia la sua documentazione
+ls -la laravel/Modules/*/docs/ | head -20
+```
+
+## Regola da Ricordare Sempre
+
+**ALLEGGERIRE docs_project**: 
+- ✅ **docs_project**: Solo documentazione generale del progetto
+- ✅ **Cartelle docs moduli**: Documentazione specifica di ogni modulo
+- ❌ **MAI**: Creare file specifici di moduli in docs_project
+- ❌ **MAI**: Scrivere in docs_project file che dovrebbero essere nei moduli
+
+## Collegamenti
+- [Documentation Reorganization 2025-01-27](../../docs_project/documentation-reorganization-2025-01-27.md)
+- [Module Documentation Standards](../../docs_project/module-documentation-standards.md)
+- [Docs Naming Convention](../../docs_project/docs-naming-convention.md)
+
+*Ultimo aggiornamento: 27 Gennaio 2025*
+description:
+globs:
+alwaysApply: false
+---

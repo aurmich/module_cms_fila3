@@ -41,6 +41,7 @@ use Filament\Forms\Components\Wizard\Step;
 use Modules\SaluteOra\Models\DoctorStudio;
 use Livewire\Component as LivewireComponent;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\Geo\Filament\Resources\AddressResource;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\UI\Filament\Forms\Components\RadioCollection;
 use Modules\UI\Filament\Forms\Components\InlineDatePicker;
@@ -184,11 +185,10 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      */
     protected function getSearchStepSchema(): array
     {
+        /*
         return [
             'region' => Select::make('region')
-                ->options(function () {
-                    return Region::orderBy('name')->get()->pluck("name", "id");
-                })
+                ->options(fn(Get $get)=>Region::getOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
@@ -197,49 +197,21 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                     $set('cap', null);
                 }),
             'province' => Select::make('province')
-                ->options(function (Get $get) {
-                    $region = $get('region');
-                    if (!$region) {
-                        return [];
-                    }
-                    return Province::where('region_id',$region)
-                    ->orderBy('name')
-                    ->get()
-                    ->pluck("name", "id")
-                    ->toArray();
-                })
+                ->options(fn(Get $get)=>Province::getOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
                 ->afterStateUpdated(fn (Set $set) => $set('cap', null)),
             'cap' => Select::make('cap')
-                ->options(function (Get $get) {
-                    $region = $get('region');
-                    if (!$region) {
-                        return [];
-                    }
-                    $province = $get('province');
-                    if (!$province) {
-                        return [];
-                    }
-                   
-                    return Locality::query()
-                        ->where('region_id', $region)
-                        ->where('province_id', $province)
-                        //->when($city, fn($query) => $query->where('id', $city))
-                        ->select('postal_code')
-                        ->distinct()
-                        ->orderBy('postal_code')
-                        ->get()
-                        ->pluck('postal_code', 'postal_code')
-                        ->toArray();
-                })
+                ->options(fn(Get $get)=>Locality::getPostalCodeOptions($get))
                 ->searchable()
                 ->required()
                 ->live()
                 ->disabled(fn (Get $get) => !$get('region') || !$get('province'))
                 ->extraAttributes(['class' => 'h-8 flex items-center']),
         ];
+        */
+        return AddressResource::getSearchStep();
     }
 
     protected function getStudioStepSchema(): array

@@ -1,16 +1,16 @@
 <?php
 
-return array (
+declare(strict_types=1);
+
+return [
   'singular' => 'Indirizzo',
   'plural' => 'Indirizzi',
-  'navigation' => 
-  array (
+  'navigation' => [
     'sort' => 96,
     'icon' => 'address.navigation',
     'group' => 'address.navigation',
-  ),
-  'actions' => 
-  array (
+  ],
+  'actions' => [
     'create' => 'Crea indirizzo',
     'edit' => 'Modifica indirizzo',
     'view' => 'Visualizza indirizzo',
@@ -18,160 +18,192 @@ return array (
     'set_primary' => 'Imposta come principale',
     'verify' => 'Verifica indirizzo',
     'geocode' => 'Geocodifica',
-  ),
-  'fields' => 
-  array (
-    'model_type' => 
-    array (
+  ],
+  'fields' => [
+    'model_type' => [
       'label' => 'Tipo modello',
       'placeholder' => 'Seleziona il tipo di modello',
-    ),
-    'model_id' => 
-    array (
+      'help' => 'Tipo di modello associato all\'indirizzo',
+      'description' => 'Tipo del modello che possiede questo indirizzo',
+      'helper_text' => '',
+    ],
+    'model_id' => [
       'label' => 'ID modello',
       'placeholder' => 'Inserisci ID del modello',
-    ),
-    'name' => 
-    array (
+      'help' => 'Identificativo del modello associato',
+      'description' => 'ID del modello che possiede questo indirizzo',
+      'helper_text' => '',
+    ],
+    'name' => [
       'label' => 'Nome',
       'placeholder' => 'Inserisci un nome per l\'indirizzo',
-      'helper' => 'Un nome identificativo per questo indirizzo, es. "Casa" o "Ufficio"',
+      'help' => 'Un nome identificativo per questo indirizzo, es. "Casa" o "Ufficio"',
       'helper_text' => '',
-      'description' => 'name',
-    ),
-    'description' => 
-    array (
+      'description' => 'Nome identificativo dell\'indirizzo',
+    ],
+    'description' => [
       'label' => 'Descrizione',
       'placeholder' => 'Inserisci una descrizione',
-      'helper' => 'Note aggiuntive sull\'indirizzo',
-    ),
-    'route' => 
-    array (
+      'help' => 'Note aggiuntive sull\'indirizzo',
+      'description' => 'Descrizione aggiuntiva dell\'indirizzo',
+      'helper_text' => '',
+    ],
+    'route' => [
       'label' => 'Via',
       'placeholder' => 'Inserisci la via',
-      'helper' => 'Nome della via o strada',
-      'description' => 'route',
+      'help' => 'Nome della via o strada',
+      'description' => 'Nome della via o strada',
       'helper_text' => '',
-    ),
-    'street_number' => 
-    array (
+    ],
+    'street_number' => [
       'label' => 'Numero civico',
       'placeholder' => 'Inserisci il numero civico',
-      'description' => 'street_number',
+      'help' => 'Numero civico dell\'edificio',
+      'description' => 'Numero civico dell\'edificio',
       'helper_text' => '',
-    ),
-    'locality' => 
-    array (
+    ],
+    'locality' => [
       'label' => 'Città',
       'placeholder' => 'Inserisci la città',
-      'description' => 'locality',
+      'help' => 'Nome della città o località',
+      'description' => 'Nome della città o località',
       'helper_text' => '',
-    ),
-    'administrative_area_level_3' => 
-    array (
+    ],
+    'administrative_area_level_3' => [
       'label' => 'Comune',
       'placeholder' => 'Inserisci il comune',
-    ),
-    'administrative_area_level_2' => 
-    array (
+      'help' => 'Comune di appartenenza',
+      'description' => 'Comune di appartenenza',
+      'helper_text' => '',
+    ],
+    'administrative_area_level_2' => [
       'label' => 'Provincia',
       'placeholder' => 'Inserisci la provincia',
-      'description' => 'administrative_area_level_2',
+      'help' => 'Provincia di appartenenza',
+      'description' => 'Provincia di appartenenza',
       'helper_text' => '',
-    ),
-    'administrative_area_level_1' => 
-    array (
+    ],
+    'administrative_area_level_1' => [
       'label' => 'Regione',
       'placeholder' => 'Inserisci la regione',
-      'description' => 'administrative_area_level_1',
+      'help' => 'Regione amministrativa',
+      'description' => 'Regione di appartenenza',
       'helper_text' => '',
-    ),
-    'country' => 
-    array (
+    ],
+    'country' => [
       'label' => 'Paese',
       'placeholder' => 'Inserisci il paese',
-      'description' => 'country',
+      'help' => 'Paese di appartenenza',
+      'description' => 'Paese di appartenenza',
       'helper_text' => '',
-    ),
-    'postal_code' => 
-    array (
+    ],
+    'postal_code' => [
       'label' => 'CAP',
       'placeholder' => 'Inserisci il CAP',
-      'description' => 'postal_code',
+      'help' => 'Codice di avviamento postale',
+      'description' => 'Codice di avviamento postale',
       'helper_text' => '',
-    ),
-    'formatted_address' => 
-    array (
+    ],
+    'formatted_address' => [
       'label' => 'Indirizzo formattato',
       'placeholder' => 'Indirizzo formattato completo',
-      'description' => 'formatted_address',
+      'help' => 'Indirizzo completo formattato',
+      'description' => 'Indirizzo completo formattato',
       'helper_text' => '',
-    ),
-    'place_id' => 
-    array (
+    ],
+    'place_id' => [
       'label' => 'ID luogo',
       'placeholder' => 'ID riferimento Google Maps',
-    ),
-    'latitude' => 
-    array (
+      'help' => 'Identificativo Google Maps del luogo',
+      'description' => 'Identificativo Google Maps del luogo',
+      'helper_text' => '',
+    ],
+    'latitude' => [
       'label' => 'Latitudine',
       'placeholder' => 'Inserisci la latitudine',
-    ),
-    'longitude' => 
-    array (
+      'help' => 'Coordinate geografiche latitudine',
+      'description' => 'Coordinate geografiche latitudine',
+      'helper_text' => '',
+    ],
+    'longitude' => [
       'label' => 'Longitudine',
       'placeholder' => 'Inserisci la longitudine',
-      'description' => 'longitude',
+      'help' => 'Coordinate geografiche longitudine',
+      'description' => 'Coordinate geografiche longitudine',
       'helper_text' => '',
-    ),
-    'type' => 
-    array (
+    ],
+    'type' => [
       'label' => 'Tipo',
       'placeholder' => 'Seleziona il tipo di indirizzo',
-      'options' => 
-      array (
+      'help' => 'Tipo di indirizzo (casa, lavoro, ecc.)',
+      'description' => 'Tipo di indirizzo',
+      'helper_text' => '',
+      'options' => [
         'billing' => 'Fatturazione',
         'shipping' => 'Spedizione',
         'home' => 'Casa',
         'work' => 'Lavoro',
         'other' => 'Altro',
-      ),
-    ),
-    'is_primary' => 
-    array (
+      ],
+    ],
+    'is_primary' => [
       'label' => 'Principale',
       'helper' => 'Imposta questo indirizzo come indirizzo principale',
-      'description' => 'is_primary',
+      'description' => 'Indirizzo principale',
       'helper_text' => '',
-      'placeholder' => 'is_primary',
-    ),
-    'extra_data' => 
-    array (
+      'placeholder' => 'Imposta come principale',
+    ],
+    'extra_data' => [
       'label' => 'Dati aggiuntivi',
       'placeholder' => 'Inserisci dati aggiuntivi',
-    ),
-    'full_address' => 
-    array (
-      'label' => 'Indirizzo completo',
-    ),
-    'street_address' => 
-    array (
-      'label' => 'Indirizzo stradale',
-    ),
-    'map' => 
-    array (
-      'description' => 'map',
+      'help' => 'Informazioni aggiuntive sull\'indirizzo',
+      'description' => 'Dati aggiuntivi dell\'indirizzo',
       'helper_text' => '',
-    ),
-    'aaa' => 
-    array (
-      'description' => 'aaa',
-      'helper_text' => 'aaa',
-      'placeholder' => 'aaa',
-    ),
-  ),
-  'columns' => 
-  array (
+    ],
+    'full_address' => [
+      'label' => 'Indirizzo completo',
+      'placeholder' => '',
+      'help' => 'Indirizzo completo formattato',
+      'description' => 'Indirizzo completo formattato',
+      'helper_text' => '',
+    ],
+    'street_address' => [
+      'label' => 'Indirizzo stradale',
+      'placeholder' => '',
+      'help' => 'Indirizzo stradale completo',
+      'description' => 'Indirizzo stradale completo',
+      'helper_text' => '',
+    ],
+    'map' => [
+      'label' => 'Mappa',
+      'placeholder' => '',
+      'help' => 'Visualizzazione su mappa',
+      'description' => 'Visualizzazione su mappa',
+      'helper_text' => '',
+    ],
+    'cap' => [
+      'label' => 'CAP',
+      'placeholder' => 'Inserisci il CAP',
+      'help' => 'Codice di Avviamento Postale',
+      'description' => 'Codice di Avviamento Postale',
+      'helper_text' => '',
+    ],
+    'region' => [
+      'label' => 'Regione',
+      'placeholder' => 'Inserisci la regione',
+      'help' => 'Regione di appartenenza',
+      'description' => 'Regione di appartenenza',
+      'helper_text' => '',
+    ],
+    'province' => [
+      'label' => 'Provincia',
+      'placeholder' => 'Inserisci la provincia',
+      'help' => 'Provincia di appartenenza',
+      'description' => 'Provincia di appartenenza',
+      'helper_text' => '',
+    ],
+  ],
+  'columns' => [
     'name' => 'Nome',
     'full_address' => 'Indirizzo completo',
     'type' => 'Tipo',
@@ -179,35 +211,29 @@ return array (
     'locality' => 'Città',
     'postal_code' => 'CAP',
     'model' => 'Associato a',
-  ),
-  'messages' => 
-  array (
+  ],
+  'messages' => [
     'primary_set' => 'Indirizzo impostato come principale con successo',
     'address_verified' => 'Indirizzo verificato correttamente',
     'geocoding_success' => 'Geocodifica completata con successo',
     'geocoding_failed' => 'Impossibile geocodificare l\'indirizzo',
-  ),
-  'sections' => 
-  array (
-    'location' => 
-    array (
+  ],
+  'sections' => [
+    'location' => [
       'label' => 'Informazioni di localizzazione',
       'description' => 'Dati relativi alla posizione geografica',
-    ),
-    'address' => 
-    array (
+    ],
+    'address' => [
       'label' => 'Dati indirizzo',
       'description' => 'Dettagli dell\'indirizzo',
-    ),
-    'metadata' => 
-    array (
+    ],
+    'metadata' => [
       'label' => 'Metadati',
       'description' => 'Informazioni aggiuntive sull\'indirizzo',
-    ),
-    'map' => 
-    array (
+    ],
+    'map' => [
       'label' => 'Mappa',
       'description' => 'Visualizzazione su mappa',
-    ),
-  ),
-);
+    ],
+  ],
+];

@@ -43,7 +43,7 @@ class ListAppointments extends XotBaseListRecords
             */
             'invoice'=> IconMediaColumn::make('invoice'),
             'state' => IconStateColumn::make('state'),
-            'states' => IconStateGroupColumn::make('states')->stateClass(AppointmentState::class,Appointment::class),
+            //'states' => IconStateGroupColumn::make('states')->stateClass(AppointmentState::class,Appointment::class),
             //'states' => IconStateSplitColumn::make('states')->stateClass(AppointmentState::class, Appointment::class),
 
 
