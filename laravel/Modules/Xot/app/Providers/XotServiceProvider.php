@@ -207,9 +207,10 @@ class XotServiceProvider extends XotBaseServiceProvider
             /*
              * da fare in htaccess
              */
-            if (! request()->secure() /* && in_array(env('APP_ENV'), ['stage', 'production']) */) {
-                exit(redirect()->secure(request()->getRequestUri()));
-            }
+            
+            //if (! request()->secure() /* && in_array(env('APP_ENV'), ['stage', 'production']) */) {
+            //    exit(redirect()->secure(request()->getRequestUri()));
+            //}
         }
     }
 
