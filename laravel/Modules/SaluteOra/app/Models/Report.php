@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Illuminate\Support\Arr;
 use Modules\User\Models\BaseProfile;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteOra\Enums\DayFrequencyEnum;
@@ -201,5 +202,12 @@ class Report extends BaseModel{
             'pregnancy_month' => 'integer',
             'pregnancy_week' => 'integer',
         ];
+    }
+
+
+    public function getSpecifyDiseases(){
+        return Arr::map($this->specify_diseases, function($disease){
+            return MedicalConditionEnum::tryFrom($disease);
+        });
     }
 }

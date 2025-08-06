@@ -40,9 +40,6 @@ class AddressResource extends XotBaseResource
 
     /**
      * @return array<string, \Filament\Forms\Components\Component>
-     *  'administrative_area_level_3', // Provincia
-     *  'administrative_area_level_2', // Regione
-     *  'administrative_area_level_1', // Stato/Paese
      */
     public static function getFormSchema(): array
     {

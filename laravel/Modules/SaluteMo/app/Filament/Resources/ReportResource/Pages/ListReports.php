@@ -58,6 +58,7 @@ class ListReports extends XotBaseListRecords
             'appointment_id' => Tables\Columns\TextColumn::make('appointment_id')
                 ->sortable()
                 ->searchable(),
+            
            /*     
             'has_mouth_or_teeth_pain' => Tables\Columns\IconColumn::make('has_mouth_or_teeth_pain')
                 ->boolean()
@@ -201,6 +202,13 @@ class ListReports extends XotBaseListRecords
                 ->dateTime('d/m/Y H:i')
                 ->sortable(),
             */
+        ];
+    }
+
+    public function getTableActions(): array
+    {
+        return [
+            ...parent::getTableActions(),
         ];
     }
 }

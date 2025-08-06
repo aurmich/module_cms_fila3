@@ -264,13 +264,180 @@ return [
         'error' => 'Errore nel caricamento del referto',
         'generated_by' => 'Generato da',
         'pdf_title' => 'Referto Appuntamento',
+        'fields' => [
+            'date' => [
+                'label' => 'Data',
+                'tooltip' => 'Data dell\'appuntamento',
+                'helper_text' => 'Data in formato dd/mm/yyyy',
+            ],
+            'time' => [
+                'label' => 'Ora',
+                'tooltip' => 'Orario dell\'appuntamento',
+                'helper_text' => 'Orario in formato hh:mm',
+            ],
+            'full_name' => [
+                'label' => 'Nome Completo',
+                'tooltip' => 'Nome e cognome completi',
+                'helper_text' => 'Nome e cognome della persona',
+            ],
+            'email' => [
+                'label' => 'Email',
+                'tooltip' => 'Indirizzo email',
+                'helper_text' => 'Email per contatti',
+            ],
+            'phone' => [
+                'label' => 'Telefono',
+                'tooltip' => 'Numero di telefono',
+                'helper_text' => 'Numero per contatti urgenti',
+            ],
+            'date_of_birth' => [
+                'label' => 'Data di Nascita',
+                'tooltip' => 'Data di nascita',
+                'helper_text' => 'Data in formato dd/mm/yyyy',
+            ],
+            'specialization' => [
+                'label' => 'Specializzazione',
+                'tooltip' => 'Specializzazione del medico',
+                'helper_text' => 'Area di competenza',
+            ],
+            'patient' => [
+                'full_name' => [
+                    'label' => 'Nome Completo',
+                    'tooltip' => 'Nome e cognome del paziente',
+                    'helper_text' => 'Nome e cognome completi',
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'tooltip' => 'Indirizzo email del paziente',
+                    'helper_text' => 'Email per contatti',
+                ],
+                'phone' => [
+                    'label' => 'Telefono',
+                    'tooltip' => 'Numero di telefono del paziente',
+                    'helper_text' => 'Numero per contatti urgenti',
+                ],
+                'date_of_birth' => [
+                    'label' => 'Data di Nascita',
+                    'tooltip' => 'Data di nascita del paziente',
+                    'helper_text' => 'Data in formato dd/mm/yyyy',
+                ],
+            ],
+            'doctor' => [
+                'full_name' => [
+                    'label' => 'Nome Completo',
+                    'tooltip' => 'Nome e cognome del medico',
+                    'helper_text' => 'Nome e cognome completi',
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'tooltip' => 'Indirizzo email del medico',
+                    'helper_text' => 'Email per contatti',
+                ],
+                'phone' => [
+                    'label' => 'Telefono',
+                    'tooltip' => 'Numero di telefono del medico',
+                    'helper_text' => 'Numero per contatti urgenti',
+                ],
+                'specialization' => [
+                    'label' => 'Specializzazione',
+                    'tooltip' => 'Specializzazione del medico',
+                    'helper_text' => 'Area di competenza',
+                ],
+            ],
+            'studio' => [
+                'name' => [
+                    'label' => 'Nome Studio',
+                    'tooltip' => 'Nome dello studio medico',
+                    'helper_text' => 'Nome completo dello studio',
+                ],
+                'address' => [
+                    'label' => 'Indirizzo',
+                    'tooltip' => 'Indirizzo dello studio',
+                    'helper_text' => 'Indirizzo completo',
+                ],
+                'full_address' => [
+                    'label' => 'Indirizzo Completo',
+                    'tooltip' => 'Indirizzo completo dello studio',
+                    'helper_text' => 'Via, città, CAP e provincia - Indirizzo completo con CAP e città',
+                ],
+                'phone' => [
+                    'label' => 'Telefono',
+                    'tooltip' => 'Numero di telefono dello studio',
+                    'helper_text' => 'Numero per contatti',
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'tooltip' => 'Indirizzo email dello studio',
+                    'helper_text' => 'Email per contatti',
+                ],
+            ],
+        ],
         'sections' => [
-            'appointment_info' => 'Informazioni Appuntamento',
-            'patient_info' => 'Paziente',
-            'doctor_info' => 'Medico',
-            'studio_info' => 'Studio Medico',
-            'notes' => 'Note',
-            'medical_report' => 'REFERTO MEDICO',
+            'appointment_info' => [
+                'label' => 'Informazioni Appuntamento',
+                'tooltip' => 'Dettagli dell\'appuntamento',
+                'helper_text' => 'Data, ora e stato',
+            ],
+            'patient_info' => [
+                'label' => 'Paziente',
+                'tooltip' => 'Informazioni sul paziente',
+                'helper_text' => 'Dati anagrafici e contatti',
+            ],
+            'doctor_info' => [
+                'label' => 'Medico',
+                'tooltip' => 'Informazioni sul medico',
+                'helper_text' => 'Nome e specializzazione',
+            ],
+            'studio_info' => [
+                'label' => 'Studio Medico',
+                'tooltip' => 'Informazioni sullo studio',
+                'helper_text' => 'Nome e indirizzo',
+            ],
+            'notes' => [
+                'label' => 'Note',
+                'tooltip' => 'Note aggiuntive',
+                'helper_text' => 'Informazioni supplementari',
+            ],
+            'medical_report' => [
+                'label' => 'REFERTO MEDICO',
+                'tooltip' => 'Referto medico completo',
+                'helper_text' => 'Diagnosi e osservazioni',
+            ],
+            'medical_conditions' => [
+                'label' => 'Condizioni Mediche',
+                'tooltip' => 'Condizioni mediche del paziente',
+                'helper_text' => 'Patologie e stato di salute',
+            ],
+            'oral_hygiene' => [
+                'label' => 'Igiene Orale',
+                'tooltip' => 'Stato dell\'igiene orale',
+                'helper_text' => 'Abitudini di igiene dentale',
+            ],
+            'pregnancy_info' => [
+                'label' => 'Informazioni Gravidanza',
+                'tooltip' => 'Informazioni sulla gravidanza',
+                'helper_text' => 'Mese e settimana di gestazione',
+            ],
+            'appointment_info' => [
+                'label' => 'Informazioni Appuntamento',
+                'tooltip' => 'Dettagli dell\'appuntamento',
+                'helper_text' => 'Data, ora e stato',
+            ],
+            'patient_info' => [
+                'label' => 'Paziente',
+                'tooltip' => 'Informazioni sul paziente',
+                'helper_text' => 'Dati anagrafici e contatti',
+            ],
+            'doctor_info' => [
+                'label' => 'Medico',
+                'tooltip' => 'Informazioni sul medico',
+                'helper_text' => 'Nome e specializzazione',
+            ],
+            'studio_info' => [
+                'label' => 'Studio Medico',
+                'tooltip' => 'Informazioni sullo studio',
+                'helper_text' => 'Nome e indirizzo',
+            ],
         ],
         'labels' => [
             'date' => 'Data',
@@ -328,5 +495,94 @@ return [
         'further_notes' => 'Ulteriori specifiche',
         'yes' => 'Sì',
         'no' => 'No',
+    ],
+    'report' => [
+        'pdf_title' => 'Referto Medico PDF',
+        'sections' => [
+            'notes' => [
+                'label' => 'Note Appuntamento',
+                'tooltip' => 'Note aggiuntive relative all\'appuntamento',
+                'helper_text' => 'Informazioni supplementari',
+            ],
+            'medical_report' => [
+                'label' => 'Referto Medico',
+                'tooltip' => 'Referto medico completo del paziente',
+                'helper_text' => 'Dati clinici e diagnostici',
+            ],
+            'medical_conditions' => [
+                'label' => 'Condizioni Mediche',
+                'tooltip' => 'Stato di salute generale del paziente',
+                'helper_text' => 'Patologie e condizioni cliniche',
+            ],
+            'pregnancy_info' => [
+                'label' => 'Informazioni Gravidanza',
+                'tooltip' => 'Dati relativi allo stato di gravidanza',
+                'helper_text' => 'Mese e settimana di gestazione',
+            ],
+            'oral_hygiene' => [
+                'label' => 'Igiene Orale',
+                'tooltip' => 'Abitudini di igiene orale del paziente',
+                'helper_text' => 'Frequenza spazzolamento e abitudini',
+            ],
+            'patient_info' => [
+                'label' => 'Informazioni Paziente',
+                'tooltip' => 'Dati anagrafici del paziente',
+                'helper_text' => 'Nome, contatti e informazioni personali',
+            ],
+            'doctor_info' => [
+                'label' => 'Informazioni Medico',
+                'tooltip' => 'Dati del medico curante',
+                'helper_text' => 'Nome, specializzazione e contatti',
+            ],
+            'studio_info' => [
+                'label' => 'Informazioni Studio',
+                'tooltip' => 'Dati dello studio medico',
+                'helper_text' => 'Nome, indirizzo e contatti studio',
+            ],
+        ],
+        'fields' => [
+            'has_mouth_or_teeth_pain' => [
+                'label' => 'Dolore a bocca o denti (ultimi 12 mesi)',
+            ],
+            'teeth_brushing_frequency' => [
+                'label' => 'Frequenza di spazzolamento denti',
+            ],
+            'smokes' => [
+                'label' => 'Fuma',
+            ],
+            'visits_dentist_yearly' => [
+                'label' => 'Visite dentistiche annuali',
+            ],
+            'has_diseases' => [
+                'label' => 'Affetta da malattie',
+            ],
+            'follows_diet_rules' => [
+                'label' => 'Segue regole alimentari',
+            ],
+            'uses_asl_clinic_for_dental_care' => [
+                'label' => 'Si rivolge ad ambulatorio ASL',
+            ],
+            'missing_teeth' => [
+                'label' => 'Denti mancanti',
+            ],
+            'decayed_teeth' => [
+                'label' => 'Denti cariati',
+            ],
+            'has_fixed_prosthesis_or_implants' => [
+                'label' => 'Protesi fissa o impianti',
+            ],
+            'has_tartar' => [
+                'label' => 'Tartaro',
+            ],
+            'has_plaque' => [
+                'label' => 'Placca',
+            ],
+            'needs_more_dental_care' => [
+                'label' => 'Necessita cure odontoiatriche',
+            ],
+            'further_notes' => [
+                'label' => 'Ulteriori specifiche',
+            ],
+        ],
     ],
 ];

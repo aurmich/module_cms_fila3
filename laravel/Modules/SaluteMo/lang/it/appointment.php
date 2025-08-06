@@ -399,6 +399,10 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+    'report' => 
+    array (
+      'label' => 'report',
+    ),
   ),
   'statuses' => 
   array (

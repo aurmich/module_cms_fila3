@@ -98,6 +98,11 @@ export default defineConfig({
 Il tema fornisce diversi layout base in `resources/views/layouts/`:
 - `app.blade.php` - Layout principale
 - `marketing.blade.php` - Layout per pagine marketing
+
+### Template PDF
+Il tema include template PDF specializzati in `resources/views/`:
+- `appointment/report_pdf.blade.php` - Report appuntamenti medici
+- Per dettagli completi, vedere [Template PDF](pdf_templates.md)
 - `auth.blade.php` - Layout per pagine di autenticazione
 
 ### Componenti UI
@@ -193,6 +198,79 @@ php artisan view:cache
 
 ## Collegamenti alla Documentazione
 
+- [Template PDF](pdf_templates.md) - Template PDF specializzati
+- [Componenti PDF](pdf_components.md) - Componenti riutilizzabili per PDF
+- [Miglioramenti DRY + KISS](dry_kiss_improvements.md) - Ottimizzazioni template PDF
+- [Correzioni Errori Traduzioni](translation_errors_fixes.md) - Errori corretti e best practices
+- [Componenti UI](components.md) - Componenti riutilizzabili
+- [Best Practices](best_practices.md) - Linee guida sviluppo
+- [Traduzioni](translations.md) - Gestione multilingua
+
+### Risorse Esterne
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Laravel Blade](https://laravel.com/docs/blade)
 - [Vite](https://vitejs.dev/guide/) 
+
+## Template PDF
+
+### Report PDF
+Il template `resources/views/appointment/report_pdf.blade.php` genera PDF per i referti medici.
+
+#### Caratteristiche:
+- Utilizza namespace `pub_theme::` per tutte le traduzioni
+- Struttura HTML ottimizzata per HTML2PDF
+- **NUOVO**: CSS riutilizzabile con `@include('xot::pdf.css')`
+- **NUOVO**: Componenti riutilizzabili per informazioni paziente e studio
+- Supporto multilingua completo
+
+#### Refactoring CSS DRY+KISS:
+**Motivazione DRY**: Evita duplicazione di stili CSS tra diversi template PDF
+**Motivazione KISS**: Componente con responsabilità singola e ben definita
+
+```blade
+{{-- Prima: CSS inline duplicato --}}
+<style type="text/css">
+    body { font-family: Arial, sans-serif; }
+    /* ... centinaia di righe CSS ... */
+</style>
+
+{{-- Dopo: CSS riutilizzabile --}}
+@include('xot::pdf.css')
+```
+
+#### Refactoring Componenti DRY+KISS:
+**Motivazione DRY**: Evita duplicazione di blocchi HTML per informazioni paziente e studio
+**Motivazione KISS**: Componenti con responsabilità singola e ben definita
+
+```blade
+{{-- Prima: Blocchi HTML duplicati --}}
+<!-- Informazioni paziente -->
+<h2>...</h2>
+<table class="info">...</table>
+
+<!-- Informazioni studio -->
+<div class="studio-box">...</div>
+
+{{-- Dopo: Componenti riutilizzabili --}}
+@includeWhen($appointment->patient, 'pub_theme::appointment.report_pdf.patient', ['patient' => $appointment->patient])
+@includeWhen($appointment->studio, 'pub_theme::appointment.report_pdf.studio', ['studio' => $appointment->studio])
+```
+
+#### Vantaggi del Refactoring:
+- **Manutenibilità**: Un solo punto di modifica per CSS e componenti
+- **Riutilizzabilità**: CSS e componenti utilizzabili in tutti i PDF
+- **Coerenza**: Layout e stili uniformi in tutti i PDF
+- **Performance**: Inclusione condizionale e ottimizzata
+- **Scalabilità**: Facile aggiungere nuovi componenti
+
+#### Componenti Disponibili:
+- **Appointment**: `pub_theme::appointment.report_pdf.appointment` - Informazioni appuntamento
+- **Patient**: `pub_theme::appointment.report_pdf.patient` - Informazioni paziente
+- **Doctor**: `pub_theme::appointment.report_pdf.doctor` - Informazioni medico
+- **Studio**: `pub_theme::appointment.report_pdf.studio` - Informazioni studio
+- **CSS**: `xot::pdf.css`
+
+#### Documentazione Correlata:
+- [CSS Refactoring](css_refactoring.md)
+- [Component Refactoring](component_refactoring.md)
+- [PDF Report Errors](pdf_report_errors.md) 

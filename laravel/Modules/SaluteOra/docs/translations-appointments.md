@@ -1,7 +1,7 @@
-# Traduzioni Appuntamenti - Correzione Errori PHPStan
+# Traduzioni Appuntamenti - Correzione Errori e Standardizzazione
 
 ## Panoramica
-Questo documento descrive le correzioni apportate ai file di traduzione per gli appuntamenti e le policy per risolvere gli errori PHPStan.
+Questo documento descrive le correzioni apportate ai file di traduzione per gli appuntamenti e le policy per risolvere gli errori PHPStan e standardizzare la struttura delle chiavi di traduzione.
 
 ## Errori Corretti
 
@@ -68,6 +68,59 @@ Rimosse le chiavi duplicate mantenendo solo una versione per ogni campo.
 ```php
 // RIMOSSE - Chiavi duplicate
 'patient' => [...],     // Seconda occorrenza
+```
+
+### 4. **Struttura Espansa per Sezioni nei File di Traduzione**
+
+#### **Problema**
+
+Nel file di traduzione italiano, le sezioni del report non utilizzavano la struttura espansa con chiavi `.label` come richiesto dalle regole del progetto:
+
+```php
+// ERRATO - Struttura non espansa
+'sections' => [
+    'appointment_info' => 'Informazioni Appuntamento',
+    'patient_info' => 'Paziente',
+    // altre sezioni...
+],
+```
+
+#### **Soluzione**
+
+Aggiornata la struttura per utilizzare il formato espanso con chiavi `.label`, `.tooltip` e `.helper_text` per tutte le sezioni:
+
+```php
+// CORRETTO - Struttura espansa
+'sections' => [
+    'appointment_info' => [
+        'label' => 'Informazioni Appuntamento',
+        'tooltip' => 'Dettagli dell\'appuntamento',
+        'helper_text' => 'Data, ora e stato',
+    ],
+    'patient_info' => [
+        'label' => 'Paziente',
+        'tooltip' => 'Informazioni sul paziente',
+        'helper_text' => 'Dati anagrafici e contatti',
+    ],
+    // altre sezioni...
+],
+```
+
+#### **File Corretti**
+- `laravel/Themes/One/lang/it/appointment.php`
+
+#### **Motivazione**
+La struttura espansa è obbligatoria per tutti i file di traduzione del progetto per garantire:
+1. Coerenza strutturale in tutti i file di traduzione
+2. Estensibilità (possibilità di aggiungere description, help, ecc.)
+3. Conformità con il pattern di struttura espansa per tutti gli elementi
+4. Facilità di manutenzione e aggiunta di nuovi campi
+
+#### **Audit Completo**
+È stato eseguito un audit completo di tutti i file di traduzione per le sezioni del report:
+- **Italiano**: Corretto per utilizzare la struttura espansa con `.label`, `.tooltip` e `.helper_text`
+- **Inglese**: Già conforme alla struttura espansa richiesta
+- **Tedesco**: Già conforme alla struttura espansa richiesta
 'doctor' => [...],      // Seconda occorrenza  
 'studio' => [...],      // Seconda occorrenza
 'starts_at' => [...],   // Seconda occorrenza

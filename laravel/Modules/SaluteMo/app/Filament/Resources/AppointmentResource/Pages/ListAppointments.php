@@ -8,11 +8,13 @@ use Filament\Tables;
 use Filament\Actions;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
 use Modules\SaluteOra\Models\Appointment;
+use Modules\Xot\Actions\Pdf\StreamDownloadPdfAction;
 use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\UI\Filament\Tables\Columns\IconStateColumn;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
@@ -42,6 +44,15 @@ class ListAppointments extends XotBaseListRecords
                 ->searchable(),
             */
             'invoice'=> IconMediaColumn::make('invoice'),
+            'report' => IconColumn::make('report')
+                ->default(true)
+                ->icon('heroicon-o-document-text')
+                ->action(function(Appointment $record){
+                    $view='pub_theme::appointment.report_pdf';
+                    $data=['appointment'=>$record];
+                    $filename='report-' . $record->id . '.pdf';
+                    return app(StreamDownloadPdfAction::class)->execute(view:$view, data:$data, filename:$filename);
+                }),
             'state' => IconStateColumn::make('state'),
             //'states' => IconStateGroupColumn::make('states')->stateClass(AppointmentState::class,Appointment::class),
             //'states' => IconStateSplitColumn::make('states')->stateClass(AppointmentState::class, Appointment::class),
