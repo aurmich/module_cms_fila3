@@ -1,0 +1,49 @@
+# Memoria: Regole Critiche Estensione Filament
+
+## Principio Fondamentale
+MAI estendere direttamente classi Filament - SEMPRE usare classi base Xot con prefisso XotBase
+
+## Classi Base da Usare
+- `Modules\Xot\Filament\Pages\XotBasePage` invece di `Filament\Pages\Page`
+- `Modules\Xot\Filament\Resources\XotBaseResource` invece di `Filament\Resources\Resource`
+- `Modules\Xot\Filament\Widgets\XotBaseWidget` invece di `Filament\Widgets\Widget`
+
+## Principio DRY + KISS
+- MAI ridichiarare trait già presenti nella classe base (es. InteractsWithForms in XotBasePage)
+- MAI ridichiarare interfacce già implementate (es. HasForms in XotBasePage)
+- SEMPRE studiare la classe base prima di estendere
+
+## Esempio di Correzione
+```php
+// PRIMA (ERRATO)
+class S3Test extends Page implements HasForms
+{
+    use InteractsWithForms; // ERRORE: duplicazione
+}
+
+// DOPO (CORRETTO)
+class S3Test extends XotBasePage
+{
+    // NIENTE implements HasForms (già implementato)
+    // NIENTE use InteractsWithForms (già presente)
+}
+```
+
+## Checklist Obbligatoria
+1. Verificare classe base Xot esiste
+2. Studiare cosa è già implementato
+3. NON ridichiarare trait/interfacce
+4. Utilizzare metodi classe base
+5. Sovrascrivere solo se necessario
+
+## Motivazione
+- DRY: Evita duplicazione
+- KISS: Mantiene semplicità
+- Manutenibilità: Centralizza funzionalità
+- Coerenza: Comportamento uniforme
+
+*Memoria creata: 2025-01-06*
+description:
+globs:
+alwaysApply: false
+---

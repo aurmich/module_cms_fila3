@@ -34,5 +34,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'cloudfront' => [
+        'region' => env('CLOUDFRONT_REGION', 'eu-west-1'),
+        'base_url' => env('CLOUDFRONT_RESOURCE_KEY_BASE_URL'),
+        'private_key' => env('CLOUDFRONT_PRIVATE_KEY'),
+        'key_pair_id' => env('CLOUDFRONT_KEYPAIR_ID'),
+    ],
 
 ];

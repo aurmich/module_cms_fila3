@@ -1,0 +1,75 @@
+# Regole Critiche per Estensione Classi Filament
+
+## Principio Fondamentale: MAI estendere direttamente classi Filament
+- **SEMPRE** estendere le classi base Xot con prefisso `XotBase`
+- **MAI** estendere direttamente `Filament\Pages\Page`, `Filament\Resources\Resource`, ecc.
+- **SEMPRE** verificare cosa è già implementato nella classe base prima di ridichiarare
+
+## Esempi di Estensione Corretta
+```php
+// ✅ CORRETTO
+use Modules\Xot\Filament\Pages\XotBasePage;
+class MyPage extends XotBasePage
+
+// ✅ CORRETTO  
+use Modules\Xot\Filament\Resources\XotBaseResource;
+class MyResource extends XotBaseResource
+
+// ❌ ERRATO
+use Filament\Pages\Page;
+class MyPage extends Page
+
+// ❌ ERRATO
+use Filament\Resources\Resource;
+class MyResource extends Resource
+```
+
+## Principio DRY + KISS per Traits e Interfacce
+- **MAI** ridichiarare trait già presenti nella classe base
+- **MAI** ridichiarare interfacce già implementate nella classe base
+- **SEMPRE** studiare la classe base prima di estendere
+
+### Esempio di Violazione DRY
+```php
+// ❌ ERRATO - Ridichiara trait già presenti in XotBasePage
+class MyPage extends XotBasePage implements HasForms
+{
+    use InteractsWithForms; // ERRORE: già presente in XotBasePage
+}
+
+// ✅ CORRETTO - Non ridichiara trait già presenti
+class MyPage extends XotBasePage
+{
+    // NIENTE implements HasForms (già implementato)
+    // NIENTE use InteractsWithForms (già presente)
+}
+```
+
+## Checklist Obbligatoria
+- [ ] Verificare che la classe base Xot esista per il tipo di classe
+- [ ] Studiare cosa è già implementato nella classe base
+- [ ] NON ridichiarare trait, interfacce o metodi già presenti
+- [ ] Utilizzare i metodi della classe base quando possibile
+- [ ] Sovrascrivere solo quando necessario per funzionalità specifiche
+
+## Classi Base Disponibili
+- `Modules\Xot\Filament\Pages\XotBasePage`
+- `Modules\Xot\Filament\Resources\XotBaseResource`
+- `Modules\Xot\Filament\Widgets\XotBaseWidget`
+- `Modules\Xot\Providers\XotBaseServiceProvider`
+
+## Motivazione
+- **DRY**: Evita duplicazione di codice e funzionalità
+- **KISS**: Mantiene il codice semplice e leggibile
+- **Manutenibilità**: Centralizza le funzionalità comuni
+- **Coerenza**: Garantisce comportamento uniforme in tutto il progetto
+
+## Documentazione Correlata
+- [Modules/Xot/docs/xotbasepage_implementation.md](mdc:../../laravel/Modules/Xot/docs/xotbasepage_implementation.md)
+- [docs/FILAMENT-BEST-PRACTICES.md](mdc:../../docs/FILAMENT-BEST-PRACTICES.md)
+
+*Ultimo aggiornamento: 2025-01-06*
+description:
+globs:
+alwaysApply: false
+---

@@ -462,12 +462,29 @@ return array (
     'forms_count' => 
     array (
       'description' => 'forms_count',
+      'helper_text' => 'forms_count',
+      'placeholder' => 'forms_count',
+      'label' => 'forms_count',
     ),
     'responses_exists' => 
     array (
       'description' => 'responses_exists',
       'helper_text' => 'responses_exists',
       'placeholder' => 'responses_exists',
+      'label' => 'responses_exists',
+    ),
+    'logo' => 
+    array (
+      'description' => 'logo',
+      'helper_text' => 'logo',
+    ),
+    'category' => 
+    array (
+      'name' => 
+      array (
+        'description' => 'category.name',
+        'helper_text' => 'category.name',
+      ),
     ),
   ),
   'actions' => 

@@ -474,3 +474,15 @@ php artisan test --coverage --min=95
 **🐛 PHPStan Level 9**: File core certificati ✅  
 **🧪 Testing Framework**: Modulare completo ✅  
 **🚀 Performance**: 98/100 score
+
+# Modulo Xot - Documentazione
+
+## Documentazione Principale
+
+- [XotBasePage Implementation](xotbasepage_implementation.md) - Implementazione completa di XotBasePage
+- [Filament Best Practices](filament_best_practices.md) - Best practice per estendere classi Filament
+- [DRY + KISS Principles](dry_kiss_principles.md) - Principi DRY e KISS nel progetto
+
+## Collegamenti Correlati
+
+- [UI Module Filament Refactoring](../../UI/docs/filament_pages_refactoring.md) - Refactoring delle pagine Filament nel modulo UI

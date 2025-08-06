@@ -9,7 +9,7 @@ use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Page;
+use Filament\Pages\Page as FilamentPage;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\Support\Facades\App;
@@ -36,7 +36,7 @@ use Modules\Xot\Filament\Traits\TransTrait;
  *
  * @see \Modules\Xot\docs\xotbasepage_implementation.md Documentazione completa
  */
-abstract class XotBasePage extends Page implements HasForms
+abstract class XotBasePage extends FilamentPage implements HasForms
 {
     use TransTrait;
     use InteractsWithForms;
@@ -215,17 +215,8 @@ abstract class XotBasePage extends Page implements HasForms
         return null; // Disabilitato per default
     }
 
-    /**
-     * Ottiene lo schema del form.
-     * Può essere sovrascritto nelle classi figlie per fornire uno schema personalizzato.
-     * RIMOSSO ABSTRACT - questo era l'errore principale!
-     *
-     * @return array<int|string, \Filament\Forms\Components\Component>
-     */
-    protected function getFormSchema(): array
-    {
-        return [];
-    }
+    
+    
 
     /**
      * Ottiene l'utente autenticato.
