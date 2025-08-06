@@ -52,6 +52,8 @@ return array (
         'email' => 'Inserisci un indirizzo email valido',
         'unique' => 'Questo indirizzo email è già in uso',
       ),
+      'description' => 'email',
+      'helper_text' => 'email',
     ),
     'password' => 
     array (
@@ -76,6 +78,8 @@ return array (
       'label' => 'Numero di Telefono',
       'placeholder' => 'Inserisci numero telefono (es. +39 333 123 4567)',
       'help' => 'Numero di telefono per contatti diretti e urgenze',
+      'description' => 'phone',
+      'helper_text' => 'phone',
     ),
     'address' => 
     array (
@@ -100,6 +104,8 @@ return array (
         'doctor' => 'Dottore/Medico',
         'admin' => 'Amministratore',
       ),
+      'description' => 'type',
+      'helper_text' => 'type',
     ),
     'state' => 
     array (
@@ -114,6 +120,8 @@ return array (
         'integration_requested' => 'Integrazione Documenti Richiesta',
         'suspended' => 'Sospeso Temporaneamente',
       ),
+      'description' => 'state',
+      'helper_text' => 'state',
     ),
     'registration_number' => 
     array (
@@ -301,62 +309,70 @@ return array (
     'account_suspended' => 'Il tuo account è stato temporaneamente sospeso',
     'account_reinstated' => 'Il tuo account è stato ripristinato e puoi accedere nuovamente',
   ),
-  'states' => [
-    'pending' => [
+  'states' => 
+  array (
+    'pending' => 
+    array (
       'label' => 'In Attesa',
       'description' => 'Account in attesa di approvazione amministrativa',
       'modal_heading' => 'Stato: In Attesa di Approvazione',
       'modal_description' => 'L\'account è in attesa di verifica e approvazione da parte dell\'amministrazione. Riceverai una notifica una volta completato il processo.',
       'icon' => 'heroicon-o-clock',
       'color' => 'warning',
-    ],
-    'active' => [
+    ),
+    'active' => 
+    array (
       'label' => 'Attivo',
       'description' => 'Account attivo e operativo nel sistema',
       'modal_heading' => 'Stato: Account Attivo',
       'modal_description' => 'L\'account è attivo e l\'utente ha pieno accesso a tutte le funzionalità del sistema sanitario.',
       'icon' => 'heroicon-o-check-circle',
       'color' => 'success',
-    ],
-    'inactive' => [
+    ),
+    'inactive' => 
+    array (
       'label' => 'Inattivo',
       'description' => 'Account temporaneamente disattivato',
       'modal_heading' => 'Stato: Account Inattivo',
       'modal_description' => 'L\'account è temporaneamente inattivo. Contattare l\'amministrazione per informazioni sulla riattivazione.',
       'icon' => 'heroicon-o-minus-circle',
       'color' => 'gray',
-    ],
-    'rejected' => [
+    ),
+    'rejected' => 
+    array (
       'label' => 'Rifiutato',
       'description' => 'Account rifiutato dall\'amministrazione',
       'modal_heading' => 'Stato: Account Rifiutato',
       'modal_description' => 'L\'account è stato rifiutato dall\'amministrazione. Per maggiori informazioni sui motivi del rifiuto, contattare il supporto.',
       'icon' => 'heroicon-o-x-circle',
       'color' => 'danger',
-    ],
-    'suspended' => [
+    ),
+    'suspended' => 
+    array (
       'label' => 'Sospeso',
       'description' => 'Account temporaneamente sospeso',
       'modal_heading' => 'Stato: Account Sospeso',
       'modal_description' => 'L\'account è stato temporaneamente sospeso. Durante la sospensione l\'accesso al sistema è limitato o bloccato.',
       'icon' => 'heroicon-o-pause-circle',
       'color' => 'warning',
-    ],
-    'integration_requested' => [
+    ),
+    'integration_requested' => 
+    array (
       'label' => 'Integrazione Richiesta',
       'description' => 'Richiesta integrazione documenti',
       'modal_heading' => 'Stato: Integrazione Documenti Richiesta',
       'modal_description' => 'È stata richiesta l\'integrazione di documenti aggiuntivi per completare la registrazione. Caricare i documenti richiesti per procedere.',
       'icon' => 'heroicon-o-document-plus',
       'color' => 'warning',
-    ],
-    'integration_completed' => [
+    ),
+    'integration_completed' => 
+    array (
       'label' => 'Integrazione Completata',
       'description' => 'Integrazione documenti completata',
       'modal_heading' => 'Stato: Integrazione Documenti Completata',
       'modal_description' => 'L\'integrazione dei documenti è stata completata con successo. L\'account è ora in fase di revisione finale.',
       'icon' => 'heroicon-o-document-check',
       'color' => 'info',
-    ],
-  ],
+    ),
+  ),
 );

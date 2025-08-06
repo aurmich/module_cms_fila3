@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\UI\Filament\Forms\Components;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Spatie\ModelStates\State;
 use Modules\SaluteOra\Models\User;
 use Filament\Forms\Components\Select;
@@ -20,23 +21,21 @@ class SelectState extends Select
     {
         parent::setUp();
       //  $this->selectablePlaceholder(false);
-        $this->options(function (Model&HasStatesContract $record): array {
+        $this->options(function ((Model&HasStatesContract)|null $record): array {
             $name=$this->getName();
+            if(is_null($record)){
+                $model=$this->getModel();
+                $states=Arr::wrap(app($model)->getDefaultStateFor($name));
+                /**
+             * @var array<int|string>
+             * @phpstan-ignore argument.type
+             */
+                return array_combine($states, $states);
+                
+            }
+            
             $states=$record->getStatesFor($name)->toArray();
-            /*
-            dddx([
-                'name'=>$name,
-                'states'=>$states,
-                'record'=>$record,
-                'state'=>$record->state,
-                'default_state'=>$record->getDefaultStates(),
-                'default_states_for'=>$record->getDefaultStateFor($name),
-                'record_method'=>get_class_methods($record),
-                'userstate_method'=>get_class_methods(UserState::class),
-                //'aa'=>$record->state->transitionableStates(),
-                //'getStateConfigurations'=>$record->getStateConfigurations(),
-            ]);
-            */
+            
             /**
              * @var array<int|string>
              * @phpstan-ignore argument.type
