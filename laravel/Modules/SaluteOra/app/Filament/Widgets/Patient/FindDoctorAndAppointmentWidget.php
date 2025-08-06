@@ -237,7 +237,8 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 ->searchable()
                 ->required()
                 ->live()
-                ->disabled(fn (Get $get) => !$get('region') || !$get('province')),
+                ->disabled(fn (Get $get) => !$get('region') || !$get('province'))
+                ->extraAttributes(['class' => 'h-8 flex items-center']),
         ];
     }
 

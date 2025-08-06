@@ -84,6 +84,7 @@ class AddressResource extends XotBaseResource
                         $set('locality', null);
                     })
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') )
+                    ->extraAttributes(['class' => 'h-8 flex items-center'])
                 ,
                
 
@@ -93,6 +94,7 @@ class AddressResource extends XotBaseResource
                     ->required()
                     ->live()
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2'))
+                    ->extraAttributes(['class' => 'h-8 flex items-center'])
                     ->afterStateUpdated(function (Set $set){
                         $set('postal_code', null);
                     }),
@@ -102,7 +104,8 @@ class AddressResource extends XotBaseResource
                     ->searchable()
                     ->required()
                     ->live()
-                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
+                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2'))
+                    ->extraAttributes(['class' => 'h-8 flex items-center']),
 
             
 
