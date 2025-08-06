@@ -35,6 +35,13 @@ return array (
       'placeholder' => 'attachment',
       'label' => 'attachment',
     ),
+    'debug_output' => 
+    array (
+      'description' => 'debug_output',
+      'helper_text' => 'debug_output',
+      'placeholder' => 'debug_output',
+      'label' => 'debug_output',
+    ),
   ),
   'actions' => 
   array (
@@ -53,6 +60,42 @@ return array (
     'sendEmail' => 
     array (
       'label' => 'sendEmail',
+    ),
+    'runAllTests' => 
+    array (
+      'label' => 'runAllTests',
+    ),
+    'testCloudFront' => 
+    array (
+      'label' => 'testCloudFront',
+    ),
+    'testPermissions' => 
+    array (
+      'label' => 'testPermissions',
+    ),
+    'testS3Connection' => 
+    array (
+      'label' => 'testS3Connection',
+    ),
+    'testCredentials' => 
+    array (
+      'label' => 'testCredentials',
+    ),
+    'clearResults' => 
+    array (
+      'label' => 'clearResults',
+    ),
+    'debugConfig' => 
+    array (
+      'label' => 'debugConfig',
+    ),
+    'testBucketPolicy' => 
+    array (
+      'label' => 'testBucketPolicy',
+    ),
+    'testFileOperations' => 
+    array (
+      'label' => 'testFileOperations',
     ),
   ),
 );

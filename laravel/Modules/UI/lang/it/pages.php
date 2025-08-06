@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     's3test' => [
-        'heading' => 'Test Invio Email S3',
-        'description' => 'Pagina di test per l\'invio di email tramite S3',
+        'heading' => 'Test',
+        'description' => 'Pagina di test ',
         'info' => [
             'title' => 'Informazioni Test',
             'description' => 'Questa pagina permette di testare l\'invio di email tramite il sistema S3. Inserisci i dati richiesti e clicca su "Invia Email" per procedere con il test.',

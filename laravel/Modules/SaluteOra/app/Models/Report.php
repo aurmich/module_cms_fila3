@@ -205,7 +205,11 @@ class Report extends BaseModel{
     }
 
 
-    public function getSpecifyDiseases(){
+    /**
+     * @return array<int, MedicalConditionEnum|null>
+     */
+    public function getSpecifyDiseases(): array
+    {
         return Arr::map($this->specify_diseases, function($disease){
             return MedicalConditionEnum::tryFrom($disease);
         });

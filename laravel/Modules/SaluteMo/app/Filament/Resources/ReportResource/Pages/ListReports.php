@@ -204,11 +204,4 @@ class ListReports extends XotBaseListRecords
             */
         ];
     }
-
-    public function getTableActions(): array
-    {
-        return [
-            ...parent::getTableActions(),
-        ];
-    }
 }

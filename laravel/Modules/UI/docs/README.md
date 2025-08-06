@@ -94,6 +94,7 @@ enum TableLayoutEnum: string implements HasColor, HasIcon, HasLabel
 - **Type Safety**: 100% sui componenti principali
 - **Runtime Safety**: 100% con error handling robusto
 - **Template Types**: Risolti tutti i problemi Collection generics
+- **Bugfix Recenti**: [S3Test Null ErrorCode Handling](s3test-bugfix-null-errorcode.md), [AwsTest Undefined Variable Fix](awstest-bugfix-undefined-variable.md), [S3Test Method Duplication Fix](s3test-method-duplication-bugfix.md), [PHPStan Level 10 Comprehensive Fixes](phpstan-level10-bugfixes-comprehensive.md)
 
 ### ✅ **Translation Standards Compliance**
 - **Helper Text**: 100% corretti (vuoti quando uguali alla chiave)

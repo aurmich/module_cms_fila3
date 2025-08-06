@@ -27,8 +27,24 @@ class GetCloudFrontSignedUrlAction
             'url' => env('CLOUDFRONT_RESOURCE_KEY_BASE_URL') . '/' . ltrim($key, '/'),
             'expires' => time() + ($expiry * 60),
             'key_pair_id' => env('CLOUDFRONT_KEYPAIR_ID'),
-            'private_key' => self::formatPrivateKey(env('CLOUDFRONT_PRIVATE_KEY')),
+            'private_key' => self::formatPrivateKey(self::getPrivateKeyFromEnv()),
         ]);
+    }
+
+    /**
+     * Get private key from environment with type safety.
+     * 
+     * @throws \RuntimeException
+     */
+    private static function getPrivateKeyFromEnv(): string
+    {
+        $privateKey = env('CLOUDFRONT_PRIVATE_KEY');
+        
+        if (!is_string($privateKey) || trim($privateKey) === '') {
+            throw new \RuntimeException('CLOUDFRONT_PRIVATE_KEY environment variable is not set or empty');
+        }
+        
+        return $privateKey;
     }
 
     private static function formatPrivateKey(string $key): string

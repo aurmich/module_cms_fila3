@@ -112,24 +112,18 @@ return [
         ],
 
         's3' => [
-            /*
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-            */
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            //'url' => env('CLOUDFRONT_RESOURCE_KEY_BASE_URL'), // Usa CloudFront come URL base
-            'url' => env('AWS_URL'),
-            'use_path_style_endpoint' => false,
-            'visibility' => 'private',
+            //'url' => env('CLOUDFRONT_RESOURCE_KEY_BASE_URL'), // CloudFront URL
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => true,
+            'report' => true,
+            'visibility' => 'private', // Importante per CloudFront
         ],
 
         'dropbox' => [
