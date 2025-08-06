@@ -6,13 +6,15 @@ namespace Modules\SaluteOra\Models;
 
 
 use Carbon\Carbon;
+use Safe\DateTime;
 use Parental\HasParent;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Spatie\OpeningHours\OpeningHours;
 use Modules\SaluteOra\Models\BasePivot;
+use Modules\SaluteOra\Models\Appointment;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Safe\DateTime;
 
 /**
  * Modello pivot per la relazione many-to-many tra Doctor e Studio.
@@ -57,6 +59,8 @@ use Safe\DateTime;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
+ * @property-read int|null $appointments_count
  * @mixin \Eloquent
  */
 class DoctorStudio extends StudioUser
@@ -90,7 +94,13 @@ class DoctorStudio extends StudioUser
     }
 
 
-    public function getOpeningHours(): OpeningHours
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class,'studio_id','studio_id')->where('doctor_id','=',$this->user_id);
+    }
+
+
+    public function getOpeningHours(string $month): OpeningHours
     {
         $schedule = $this->schedule;
         if(!$schedule){
@@ -107,15 +117,79 @@ class DoctorStudio extends StudioUser
             }
         }
 
+        
+       
+
 
         $days['exceptions'] = [
                 //'2016-11-11' => ['09:00-12:00'],
                 //'2016-12-25' => [],
+                //'2025-08-09' => ['09:00-10:00'], // Chiuso dalle 8:00 alle 9:00
                 '01-01'      => [],                // Recurring on each 1st of January
-                '12-25'      => ['09:00-12:00'],   // Recurring on each 25th of December
+                '12-25'      => [],   // Recurring on each 25th of December
         ];
+
+        $days=$this->subAppointments($days,$month);
+        
         /** @phpstan-ignore argument.type */
-        return OpeningHours::create($days);
+        $res= OpeningHours::create($days);
+        
+
+        return $res;
+    }
+
+
+    public function subAppointments(array $baseOpeningHours,string $month):array{
+
+        /** @phpstan-ignore-next-line */
+        $appointments=$this->appointments()
+            ->ofYearMonth($month)
+            ->get();
+        
+        foreach($appointments as $appointment){
+            //$date=$appointment->starts_at->format('Y-m-d');
+            //$days[$date][]=$appointment->starts_at->format('H:i').'-'.$appointment->ends_at->format('H:i');
+            $date = $appointment->starts_at->format('Y-m-d');
+            $closedFrom = $appointment->starts_at->format('H:i');
+            $closedTo   = $appointment->ends_at->format('H:i');
+    
+            // Ricava il giorno della settimana
+            $weekday = strtolower($appointment->starts_at->format('l'));
+    
+            // Prendi gli orari base di quel giorno
+            /** @phpstan-ignore-next-line */
+            $default = collect($baseOpeningHours[$weekday] ?? []);
+    
+            // Spezza le fasce eliminando l'intervallo di chiusura
+            $updatedDaySchedule = $default->flatMap(function ($range) use ($closedFrom, $closedTo) {
+                [$from, $to] = explode('-', $range);
+    
+                // Caso 1: la chiusura è completamente fuori dalla fascia → non toccare
+                if ($closedTo <= $from || $closedFrom >= $to) {
+                    return [$range];
+                }
+    
+                // Caso 2: la chiusura copre tutta la fascia → rimuovi completamente
+                if ($closedFrom <= $from && $closedTo >= $to) {
+                    return [];
+                }
+    
+                $segments = [];
+    
+                // Caso 3: la chiusura è interna → spezza in due segmenti
+                if ($closedFrom > $from) {
+                    $segments[] = "{$from}-{$closedFrom}";
+                }
+    
+                if ($closedTo < $to) {
+                    $segments[] = "{$closedTo}-{$to}";
+                }
+    
+                return $segments;
+            })->values()->all();
+            $baseOpeningHours['exceptions'][$date]=$updatedDaySchedule;
+        }
+        return $baseOpeningHours;
     }
 
 
@@ -133,7 +207,12 @@ class DoctorStudio extends StudioUser
         $dateTime = new DateTime($date);
         
         // Ottieni gli orari di apertura tramite getOpeningHours()
-        $openingHours = $this->getOpeningHours();
+        $month = Carbon::createFromFormat('Y-m-d', $date)?->format('Y-m');
+        if($month==null){
+            throw new \Exception('Invalid date format ['.$date.']');
+        }
+        
+        $openingHours = $this->getOpeningHours($month);
         
         // Verifica se è aperto nel giorno della settimana
         if (!$openingHours->isOpenOn($date)) {
@@ -220,9 +299,19 @@ class DoctorStudio extends StudioUser
 
     public function getEnabledDatesByMonth(string $month): array
     {
+        $start=1;
         $dates=[];
-        $openingHours=$this->getOpeningHours();
-        for($i=1;$i<=31;$i++){
+        $currentYearMonth = Carbon::now()->format('Y-m');
+        if($month<$currentYearMonth){
+            return [];
+        }
+        if($month==$currentYearMonth){
+            $start=Carbon::now()->day+1;
+        }
+        $openingHours=$this->getOpeningHours($month);
+        
+
+        for($i=$start;$i<=31;$i++){
             $date = Carbon::parse($month.'-'.$i);
             $date1=$date->format('Y-m-d');
             if($openingHours->isOpenOn($date1)){

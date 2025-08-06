@@ -390,14 +390,6 @@ return [
             'modal_heading' => 'Cancel Appointment',
             'modal_description' => 'Are you sure you want to cancel this appointment?',
         ],
-        'rejected' => [
-            'label' => 'Reject',
-            'color' => 'danger',
-            'icon' => 'heroicon-o-x-mark',
-            'modal_heading' => 'Reject appointment',
-            'modal_description' => 'Are you sure you want to reject this appointment?',
-            'bg_color' => '#ef4444',
-        ],
         'no_show' => [
             'label' => 'No Show',
             'color' => 'danger',
@@ -461,6 +453,10 @@ return [
             'icon' => 'heroicon-o-banknotes',
             'modal_heading' => 'Refund Completed',
             'modal_description' => 'The refund has been completed and paid to the patient.',
+        ],
+        'pro_bono' => [
+            'label' => 'Pro Bono',
+            'color' => 'info',
             'bg_color' => '#3b82f6',
             'icon' => 'heroicon-o-heart',
             'modal_heading' => 'Pro Bono Service',

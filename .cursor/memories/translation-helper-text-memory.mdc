@@ -1,0 +1,57 @@
+# Memory: Gestione helper_text nelle Traduzioni - Regola Critica
+
+## REGOLA FONDAMENTALE DA RICORDARE SEMPRE
+
+**SE** `helper_text` è uguale alla chiave dell'array → **IMPOSTARE** `helper_text = ''`
+**SE** ci sono `label` e `placeholder` → **DEVE** esserci `helper_text`
+
+## Motivazioni Principali
+
+### 1. **Evitare Duplicazione**
+- **Problema**: Mostrare lo stesso testo due volte nell'interfaccia
+- **Soluzione**: Impostare `helper_text = ''` quando uguale alla chiave
+- **Beneficio**: Interfacce pulite e professionali
+
+### 2. **Coerenza UX**
+- **Regola**: Mantenere standard di design moderni
+- **Motivazione**: Evitare confusione nell'utente
+- **Coerenza**: Struttura uniforme in tutte le traduzioni
+
+### 3. **Localizzazione**
+- **Problema**: Valori non tradotti nelle interfacce
+- **Soluzione**: Tradurre sempre i valori in italiano appropriato
+- **Beneficio**: Interfacce completamente localizzate
+
+## Pattern da Applicare
+
+### ✅ CORRETTO
+```php
+'region' => [
+    'label' => 'Regione',
+    'placeholder' => 'Inserisci la regione',
+    'help' => 'Regione amministrativa',
+    'description' => 'Regione di appartenenza',
+    'helper_text' => '', // Vuoto perché diverso da 'region'
+],
+```
+
+### ❌ ERRATO
+```php
+'region' => [
+    'label' => 'region', // ERRORE: valore non tradotto
+    'placeholder' => 'region', // ERRORE: valore non tradotto
+    'helper_text' => 'region', // ERRORE: uguale alla chiave
+],
+```
+
+## Regola Critica Aggiuntiva
+**MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare**
+
+## Applicazione Globale
+- Tutti i moduli: `Modules/*/lang/*/`
+- Tutti i temi: `Themes/*/lang/*/`
+- Qualsiasi file di traduzione del progetto
+description:
+globs:
+alwaysApply: false
+---

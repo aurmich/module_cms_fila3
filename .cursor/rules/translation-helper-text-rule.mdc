@@ -1,0 +1,46 @@
+# Regola Critica: Gestione helper_text nelle Traduzioni
+
+## REGOLA FONDAMENTALE
+**SE** `helper_text` è uguale alla chiave dell'array → **IMPOSTARE** `helper_text = ''`
+**SE** ci sono `label` e `placeholder` → **DEVE** esserci `helper_text`
+**SE** `label` è uguale alla chiave dell'array → **TRADURRE** in italiano appropriato
+
+## Motivazioni
+- **Evitare duplicazione**: Non mostrare lo stesso testo due volte
+- **Coerenza UX**: Mantenere interfacce pulite e professionali
+- **Best Practice**: Seguire standard di design moderni
+- **Localizzazione**: Evitare valori non tradotti nelle interfacce utente
+- **Sintassi moderna**: Utilizzare sempre `[]` invece di `array()`
+
+## Pattern Corretto
+```php
+'field_name' => [
+    'label' => 'Etichetta Campo',
+    'placeholder' => 'Placeholder diverso',
+    'help' => 'Testo di aiuto specifico',
+    'description' => 'Descrizione del campo',
+    'helper_text' => '', // Vuoto perché diverso da 'field_name'
+],
+```
+
+## Pattern Errato
+```php
+'field_name' => [
+    'label' => 'field_name', // ERRORE: uguale alla chiave
+    'placeholder' => 'field_name', // ERRORE: uguale alla chiave
+    'helper_text' => 'field_name', // ERRORE: uguale alla chiave
+],
+'region' => [
+    'label' => 'region', // ERRORE: uguale alla chiave
+    'placeholder' => 'region', // ERRORE: uguale alla chiave
+    'description' => 'region', // ERRORE: uguale alla chiave
+],
+```
+
+## Applicazione
+- Tutti i moduli: `Modules/*/lang/*/`
+- Tutti i temi: `Themes/*/lang/*/`
+- Qualsiasi file di traduzione del progetto
+
+## Regola Critica Aggiuntiva
+**MAI togliere contenuto dalle traduzioni, solo aggiungere o migliorare**

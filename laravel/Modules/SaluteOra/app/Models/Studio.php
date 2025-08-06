@@ -396,7 +396,7 @@ class Studio extends BaseTenant
         if(!$pivot){
             return [];
         }
-        $openingHours=$pivot->getOpeningHours();
+        $openingHours=$pivot->getOpeningHours($month);
         for($i=1;$i<=31;$i++){
             $date = Carbon::parse($month.'-'.$i);
             $date1=$date->format('Y-m-d');

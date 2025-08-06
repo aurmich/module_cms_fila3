@@ -71,8 +71,11 @@
         "orchestra/testbench": "*",
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
-        "spatie/laravel-error-solutions": "*",
+        
         "thecodingmachine/phpstan-safe-rule": "*"
+    },
+    "require-dev_comment": {
+        "spatie/laravel-error-solutions": "*"
     },
     "repositories": [
         {

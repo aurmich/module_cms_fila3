@@ -126,6 +126,16 @@ class ListUsers extends ListRecords
 }
 ```
 
+## Aggiornamenti Recenti
+
+### 27 Gennaio 2025
+- ✅ **Riorganizzazione Documentazione**: Spostati file specifici da docs_project alle cartelle docs dei moduli
+  - **File spostati in UI/docs/**: 
+    - `module-icons-design-system.md` - Sistema design icone moduli
+    - `ui-table-layout-enum.md` - Enum layout tabelle UI
+  - **Motivazione**: Separazione responsabilità, principio modulare, manutenibilità
+  - **Regola**: docs_project solo per documentazione generale del progetto, file specifici di moduli nelle rispettive cartelle docs
+
 ## Collegamenti
 
 - [Documentazione Root](../../../docs/translation_standards_links.md)

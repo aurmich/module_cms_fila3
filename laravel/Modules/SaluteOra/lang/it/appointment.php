@@ -520,12 +520,6 @@ return [
     ],
 
     'widgets' => [
-        'model_trend_chart' => [
-            'heading' => 'Andamento Appuntamenti',
-            'description' => 'Grafico che mostra l\'andamento degli appuntamenti nel tempo',
-            'label' => 'Andamento appuntamenti',
-            'tooltip' => 'Trend degli appuntamenti nel tempo',
-        ],
         'states_chart' => [
             'heading' => 'Distribuzione Stati Appuntamenti',
             'description' => 'Grafico che mostra la distribuzione degli stati degli appuntamenti',
