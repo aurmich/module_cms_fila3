@@ -38,6 +38,7 @@ return [
         'region' => env('CLOUDFRONT_REGION', 'eu-west-1'),
         'base_url' => env('CLOUDFRONT_RESOURCE_KEY_BASE_URL'),
         'private_key' => env('CLOUDFRONT_PRIVATE_KEY'),
+        'private_key_path' => env('CLOUDFRONT_PRIVATE_KEY_PATH'),
         'key_pair_id' => env('CLOUDFRONT_KEYPAIR_ID'),
     ],
 ];

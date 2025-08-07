@@ -123,6 +123,18 @@ return array (
     array (
       'label' => 'openFilters',
     ),
+    'state' => 
+    array (
+      'label' => 'state',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
   ),
   'actions' => 
   array (

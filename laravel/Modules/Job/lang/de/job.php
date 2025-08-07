@@ -14,7 +14,7 @@ return [
         ],
         'label' => 'jobs',
         'sort' => 30,
-        'icon' => 'job.navigation',
+        'icon' => 'heroicon-o-cog',
     ],
     'fields' => [
         'id' => [

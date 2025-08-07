@@ -4,24 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Filament\Resources;
 
-use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
-use Cheesegrits\FilamentGoogleMaps\Fields\Map;
-use Cheesegrits\FilamentGoogleMaps\Filters\RadiusFilter;
 use Filament\Forms;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Enums\FiltersLayout;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Modules\Geo\Filament\Resources\LocationResource\Pages;
 use Modules\Geo\Models\Location;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Geo\Filament\Resources\LocationResource\Pages;
+use Modules\Geo\Filament\Resources\LocationResource\RelationManagers;
+use Modules\Geo\Filament\Resources\LocationResource\Filters\RadiusFilter;
+use Modules\Geo\Filament\Resources\LocationResource\Actions\RadiusAction;
+use Cheesegrits\FilamentGoogleMaps\Fields\Map;
+use Filament\Tables\Filters\FiltersLayout;
 
 /**
- * Resource per la gestione dei luoghi.
+ * Resource per la gestione dei luoghi geografici.
  *
- * Questa classe gestisce l'interfaccia amministrativa per i luoghi,
- * fornendo funzionalità per la creazione, modifica e visualizzazione dei luoghi
- * sulla mappa.
+ * Fornisce un'interfaccia completa per:
+ * - Creazione di nuovi luoghi con coordinate geografiche
+ * - Modifica dei dati esistenti
+ * - Visualizzazione delle informazioni su mappa
+ * - Ricerca per raggio geografico
+ * - Gestione delle relazioni con altri modelli
  */
 class LocationResource extends XotBaseResource
 {
@@ -29,7 +33,7 @@ class LocationResource extends XotBaseResource
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static ?string $navigationGroup = 'Geo';
+    // ✅ CORRETTO - NIENTE navigationGroup - La gestione è centralizzata in XotBaseResource
 
     protected static ?int $navigationSort = 2;
 
@@ -97,53 +101,7 @@ class LocationResource extends XotBaseResource
         ];
     }
 
-    /**
-     * Definisce la tabella per la visualizzazione dei luoghi.
-     *
-     * La tabella include colonne per:
-     * - Nome del luogo
-     * - Indirizzo
-     * - Città
-     * - Stato
-     * - CAP
-     * Con funzionalità di ricerca e ordinamento per ogni colonna
-     *
-     * @param Table $table La tabella da configurare
-     *
-     * @return Table La tabella configurata
-     */
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('street'),
-                Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('state')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('zip'),
-            ])
-            ->filters([
-                Tables\Filters\TernaryFilter::make('processed'),
-                RadiusFilter::make('radius')
-                    ->latitude('lat')
-                    ->longitude('lng')
-                    ->selectUnit()
-                    ->section('Radius Search'),
-            ]
-            )
-            ->filtersLayout(FiltersLayout::Dropdown)
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                RadiusAction::make('radius'),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
+    // ✅ CORRETTO - NIENTE metodo table() - La gestione è centralizzata in XotBaseResource
 
     /**
      * Definisce le relazioni disponibili per questo resource.

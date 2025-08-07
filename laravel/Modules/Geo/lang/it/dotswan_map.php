@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'navigation' => [
-        'label' => 'dotswan map.navigation',
-        'group' => 'dotswan map.navigation',
+        'label' => 'Navigation Label',
+        'group' => 'Geo',
     ],
     'fields' => [
         'location' => [

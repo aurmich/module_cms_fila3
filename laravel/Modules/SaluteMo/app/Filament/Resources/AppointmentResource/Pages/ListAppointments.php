@@ -23,6 +23,7 @@ use Modules\SaluteMo\Filament\Resources\AppointmentResource;
 use Modules\UI\Filament\Tables\Columns\IconStateGroupColumn;
 use Modules\UI\Filament\Tables\Columns\IconStateSplitColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\Media\Filament\Tables\Columns\CloudFrontIconMediaColumn;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource\Widgets;
 
 class ListAppointments extends XotBaseListRecords
@@ -43,7 +44,7 @@ class ListAppointments extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             */
-            'invoice'=> IconMediaColumn::make('invoice'),
+            'invoice'=> CloudFrontIconMediaColumn::make('invoice'),
             'report' => IconColumn::make('report')
                 ->default(true)
                 ->icon('heroicon-o-document-text')

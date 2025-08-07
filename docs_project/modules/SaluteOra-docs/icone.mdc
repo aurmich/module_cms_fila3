@@ -1,0 +1,51 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Gestione delle Icone nel Modulo SaluteOra
+
+## Convenzione di Naming
+- Le icone SVG personalizzate devono seguire il formato: `saluteora-<nome>`
+- Esempio: `saluteora-doctor` per l'icona del medico
+
+## Registrazione delle Icone
+Le icone devono essere registrate nel `SaluteOraServiceProvider`:
+
+```php
+use Filament\Support\Facades\FilamentIcon;
+
+public function register(): void
+{
+    FilamentIcon::register([
+        'saluteora-doctor' => asset('modules/SaluteOra/resources/svg/doctor.svg'),
+    ]);
+}
+```
+
+## Utilizzo nelle Traduzioni
+Nelle traduzioni, utilizzare il nome completo dell'icona:
+
+```php
+'navigation' => [
+    'icon' => 'saluteora-doctor',
+]
+```
+
+## Struttura delle Directory
+```
+resources/
+  └── svg/
+      └── doctor.svg
+```
+
+## Best Practices
+1. Mantenere i nomi delle icone consistenti
+2. Documentare le nuove icone qui
+3. Testare in modalità chiara e scura
+4. Verificare la registrazione nel ServiceProvider
+
+## Icone Disponibili
+| Nome | Descrizione | File |
+|------|-------------|------|
+| `saluteora-doctor` | Icona del medico | `doctor.svg` |

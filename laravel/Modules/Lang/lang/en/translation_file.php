@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'model' => [
         'label' => 'translation file.model',
     ],
     'navigation' => [
-        'label' => 'translation file.navigation',
-        'group' => 'translation file.navigation',
-        'icon' => 'translation file.navigation',
+        'label' => 'Navigation Label',
+        'group' => 'Lang',
+        'icon' => 'heroicon-o-cog',
         'sort' => '23',
     ],
     'fields' => [

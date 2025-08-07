@@ -102,23 +102,6 @@ class TenantResource extends XotBaseResource
         ];
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                //
-            ])
-            ->bulkActions([
-                //
-            ]);
-    }
-
     public static function getRelations(): array
     {
         return [

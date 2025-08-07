@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'navigation' => [
-        'label' => 'mixed chart.navigation',
-        'group' => 'mixed chart.navigation',
-        'icon' => 'mixed chart.navigation',
+        'label' => 'Navigation Label',
+        'group' => 'Chart',
+        'icon' => 'heroicon-o-cog',
         'sort' => '77',
     ],
 ];

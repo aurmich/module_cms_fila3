@@ -7,8 +7,8 @@ return [
   'plural' => 'Indirizzi',
   'navigation' => [
     'sort' => 96,
-    'icon' => 'address.navigation',
-    'group' => 'address.navigation',
+    'icon' => 'heroicon-o-map-pin',
+    'group' => 'Geo',
   ],
   'actions' => [
     'create' => 'Crea indirizzo',

@@ -152,10 +152,16 @@ return array (
     'type' => 
     array (
       'label' => 'type',
+      'description' => 'type',
+      'helper_text' => 'type',
+      'placeholder' => 'type',
     ),
     'state' => 
     array (
       'label' => 'state',
+      'description' => 'state',
+      'helper_text' => 'state',
+      'placeholder' => 'state',
     ),
     'create' => 
     array (

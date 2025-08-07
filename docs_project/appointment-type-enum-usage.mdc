@@ -1,0 +1,22 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola: Path Enum AppointmentType
+
+- L'enum `AppointmentType` deve essere sempre posizionato in `Modules/SaluteOra/app/Enums/AppointmentType.php`.
+- Non deve mai trovarsi in `Modules/SaluteOra/Enums/AppointmentType.php` o altre posizioni.
+- Tutti gli import devono essere:
+  ```php
+  use Modules\SaluteOra\App\Enums\AppointmentType;
+  ```
+- Aggiornare sempre la documentazione e i file .mdc windsurf/cursor in caso di modifica del path.
+- Esempio di utilizzo corretto:
+  ```php
+  Select::make('type')
+      ->options(AppointmentType::class)
+      ->required();
+  ```
+
+> **Nota:** Ogni refuso di path va corretto in tutto il codice, nella documentazione e nei file di regole.

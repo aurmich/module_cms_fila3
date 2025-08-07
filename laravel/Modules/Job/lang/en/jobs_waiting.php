@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'navigation' => [
         'name' => 'Waiting Jobs',
@@ -10,7 +12,7 @@ return [
         ],
         'label' => 'Waiting Jobs',
         'sort' => '15',
-        'icon' => 'jobs waiting.navigation',
+        'icon' => 'heroicon-o-cog',
     ],
     'fields' => [
         'id' => [

@@ -20,6 +20,7 @@ class SelectState extends Select
     protected function setUp(): void
     {
         parent::setUp();
+       
       //  $this->selectablePlaceholder(false);
         $this->options(function ((Model&HasStatesContract)|null $record): array {
             $name=$this->getName();
@@ -42,6 +43,7 @@ class SelectState extends Select
              */
             return array_combine($states, $states);
         });
+        $this->required();
        
     }
 

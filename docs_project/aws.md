@@ -20,6 +20,8 @@ quarta
 http://ec2-52-51-189-151.eu-west-1.compute.amazonaws.com/it
 quinta
 http://ec2-34-247-221-151.eu-west-1.compute.amazonaws.com/it
+6^
+ec2-18-202-58-252.eu-west-1.compute.amazonaws.com
 
 
 http://staging.saluteoraleingravidanza.it/

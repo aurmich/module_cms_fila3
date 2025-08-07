@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'fields' => [
         'id' => [
@@ -122,6 +124,6 @@ return [
     ],
     'navigation' => [
         'sort' => '20',
-        'icon' => 'chart.navigation',
+        'icon' => 'heroicon-o-cog',
     ],
 ];

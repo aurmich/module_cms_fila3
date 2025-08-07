@@ -1,0 +1,281 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Indice Documentazione FullCalendar SaluteOra
+
+## 📋 Panoramica
+
+Questa documentazione copre l'implementazione completa del sistema FullCalendar multi-tenant per SaluteOra, utilizzando Parental STI (Single Table Inheritance) e il sistema di tenancy di Filament.
+
+## 📚 Documentazione Principale
+
+### 🏗️ Architettura e Implementazione
+
+#### [fullcalendar_parental_widgets.md](fullcalendar_parental_widgets.md)
+**Documentazione completa dell'architettura**
+- Architettura con Parental STI
+- Modelli User, Doctor, Patient, Admin
+- Sistema multi-tenant con Studio
+- Widget PatientCalendarWidget, DoctorCalendarWidget, AdminCalendarWidget
+- Enum AppointmentType e AppointmentStatus
+- Configurazione panel e sicurezza
+- Testing e best practices
+
+#### [fullcalendar_implementation_guide.md](fullcalendar_implementation_guide.md)
+**Guida step-by-step per l'implementazione**
+- Prerequisiti e installazione dipendenze
+- Migrazioni database dettagliate
+- Configurazione modelli passo-passo
+- Creazione widget con codice completo
+- Configurazione panel provider
+- Middleware e policy
+- Seeder e testing
+
+### ⚙️ Configurazione e Setup
+
+#### [fullcalendar_configuration.mdc](fullcalendar_configuration.mdc)
+**Configurazioni complete del sistema**
+- File di configurazione principale `config/fullcalendar.php`
+- Trait `HasFullCalendarConfig` riutilizzabile
+- Middleware `EnsureUserType` per sicurezza
+- Service Provider per registrazione servizi
+- CSS e JavaScript personalizzati
+- Configurazioni responsive e accessibilità
+
+#### [fullcalendar_widget_implementation.mdc](fullcalendar_widget_implementation.mdc)
+**Implementazione specifica dei widget**
+- Struttura base widget con Parental STI
+- Codice completo per PatientCalendarWidget
+- Codice completo per DoctorCalendarWidget
+- Codice completo per AdminCalendarWidget
+- Enum implementati con colori e icone
+- Configurazione panel e middleware
+- Testing unitari e feature
+
+### 🔄 Migrazione e Aggiornamento
+
+#### [fullcalendar_migration_guide.mdc](fullcalendar_migration_guide.mdc)
+**Guida migrazione da legacy a Parental STI**
+- Cambiamenti principali da ruoli a tipi utente
+- Migrazione modelli e widget step-by-step
+- Aggiornamento configurazioni e database
+- Checklist completa per migrazione
+- Troubleshooting problemi comuni
+- Piano di rollback e supporto post-migrazione
+
+### 📖 Documentazione Legacy (Riferimento)
+
+#### [fullcalendar_widgets.md](fullcalendar_widgets.md)
+Documentazione precedente dei widget (mantenuta per riferimento)
+
+#### [fullcalendar_configuration.md](fullcalendar_configuration.md)
+Configurazioni precedenti (mantenuta per riferimento)
+
+#### [fullcalendar_integration.md](fullcalendar_integration.md)
+Integrazione base (mantenuta per riferimento)
+
+## 🎯 Quick Start
+
+### 1. Installazione Rapida
+```bash
+# Installa dipendenze
+composer require saade/filament-fullcalendar:^3.0
+composer require tightenco/parental
+composer require spatie/laravel-model-states
+
+# Pubblica configurazioni
+php artisan vendor:publish --tag=filament-fullcalendar-config
+```
+
+### 2. Configurazione Base
+```php
+// config/fullcalendar.php
+return [
+    'locale' => 'it',
+    'timezone' => 'Europe/Rome',
+    'firstDay' => 1,
+    'businessHours' => [
+        'daysOfWeek' => [1, 2, 3, 4, 5, 6],
+        'startTime' => '08:00',
+        'endTime' => '19:00',
+    ],
+];
+```
+
+### 3. Widget Base
+```php
+class PatientCalendarWidget extends FullCalendarWidget
+{
+    use HasFullCalendarConfig;
+
+    public Model|string|null $model = Appointment::class;
+
+    public function canView(): bool
+    {
+        return auth()->user()?->type === UserType::PATIENT;
+    }
+}
+```
+
+## 🔧 Componenti Principali
+
+### Modelli
+- **User** (con Parental STI)
+- **Patient** (estende User)
+- **Doctor** (estende User con tenancy)
+- **Admin** (estende User)
+- **Studio** (tenant model)
+- **Appointment** (modello principale)
+
+### Enum
+- **UserType**: ADMIN, DOCTOR, PATIENT
+- **AppointmentType**: CONSULTATION, CLEANING, TREATMENT, EMERGENCY, etc.
+- **AppointmentStatus**: SCHEDULED, CONFIRMED, IN_PROGRESS, COMPLETED, etc.
+
+### Widget
+- **PatientCalendarWidget**: Vista pazienti (sola lettura)
+- **DoctorCalendarWidget**: Vista dottori con tenancy (CRUD)
+- **AdminCalendarWidget**: Vista admin globale (CRUD)
+
+### Sicurezza
+- **EnsureUserType**: Middleware per controllo tipo utente
+- **AppointmentPolicy**: Policy per controlli granulari
+- **Audit Trail**: Logging completo delle azioni
+
+## 🎨 Caratteristiche Specifiche
+
+### 🏥 Settore Sanitario
+- Business hours sanitarie (Lun-Sab 8:00-19:00)
+- Gestione emergenze con priorità visive
+- Mascheramento nomi pazienti per privacy
+- Audit trail per responsabilità legali
+- Conformità normative settore sanitario
+
+### 🌐 Multi-Tenancy
+- Isolamento completo dati tra studi
+- Tenancy trasparente per dottori
+- Scalabilità orizzontale per nuovi studi
+- Performance ottimizzate per tenant
+
+### 🇮🇹 Localizzazione Italiana
+- Interfaccia completamente in italiano
+- Formato date e ore europeo
+- Business hours italiane
+- Tooltip e messaggi localizzati
+
+### 📱 Responsive Design
+- Vista mobile ottimizzata (`listWeek`)
+- Configurazioni tablet specifiche
+- Touch-friendly per dispositivi mobili
+- Accessibilità completa
+
+## 🚀 Performance
+
+### Caching Intelligente
+- Cache eventi per 5 minuti
+- Chiavi cache specifiche per utente/tenant
+- Invalidazione automatica su modifiche
+- Lazy loading per grandi dataset
+
+### Ottimizzazioni Query
+- Eager loading relazioni
+- Limite 100 eventi per fetch
+- Filtri per range di date
+- Indici database ottimizzati
+
+## 🔒 Sicurezza
+
+### Controlli Accesso
+- Middleware per tipo utente
+- Policy granulari per appuntamenti
+- Verifica tenancy per dottori
+- Isolamento dati sensibili
+
+### Privacy
+- Mascheramento nomi pazienti
+- Crittografia dati sensibili
+- Audit trail completo
+- Logging azioni utente
+
+## 🧪 Testing
+
+### Test Coverage
+- Test unitari per widget
+- Test feature per flussi completi
+- Test sicurezza per controlli accesso
+- Test performance per ottimizzazioni
+
+### Test Specifici
+```php
+test_patient_can_view_only_own_appointments()
+test_doctor_can_view_studio_appointments()
+test_admin_can_view_all_appointments()
+test_doctor_cannot_view_other_studio_appointments()
+```
+
+## 📋 Checklist Implementazione
+
+### ✅ Setup Base
+- [ ] Installazione dipendenze
+- [ ] Configurazione database
+- [ ] Migrazioni eseguite
+- [ ] Seeder configurati
+
+### ✅ Modelli
+- [ ] User con Parental STI
+- [ ] Studio tenant model
+- [ ] Appointment model
+- [ ] Enum implementati
+
+### ✅ Widget
+- [ ] PatientCalendarWidget
+- [ ] DoctorCalendarWidget
+- [ ] AdminCalendarWidget
+- [ ] Trait HasFullCalendarConfig
+
+### ✅ Sicurezza
+- [ ] Middleware EnsureUserType
+- [ ] AppointmentPolicy
+- [ ] Panel configuration
+- [ ] Audit trail
+
+### ✅ Testing
+- [ ] Test unitari
+- [ ] Test feature
+- [ ] Test sicurezza
+- [ ] Test performance
+
+## 🆘 Troubleshooting
+
+### Problemi Comuni
+
+#### Widget non visibile
+- Verificare `canView()` method
+- Controllare middleware panel
+- Verificare tipo utente
+
+#### Eventi non caricati
+- Controllare filtri `fetchEvents()`
+- Verificare eager loading
+- Controllare cache
+
+#### Errori tenancy
+- Verificare configurazione Studio
+- Controllare relazioni tenant
+- Verificare middleware tenancy
+
+## 📞 Supporto
+
+Per problemi o domande:
+1. Consultare la documentazione completa
+2. Verificare i test esistenti
+3. Controllare i log di audit
+4. Consultare il team di sviluppo
+
+---
+
+**Ultima modifica**: {data_corrente}
+**Versione**: 2.0 (Parental STI + Multi-Tenancy)
+**Compatibilità**: Laravel 11.x, Filament 3.x, PHP 8.1+

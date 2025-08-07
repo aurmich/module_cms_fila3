@@ -34,12 +34,16 @@ return array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'help' => 'Nome di battesimo dell\'utente',
+      'helper_text' => 'first_name',
+      'description' => 'first_name',
     ),
     'last_name' => 
     array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
       'help' => 'Cognome di famiglia dell\'utente',
+      'helper_text' => 'last_name',
+      'description' => 'last_name',
     ),
     'email' => 
     array (

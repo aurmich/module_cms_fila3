@@ -456,6 +456,18 @@ return array (
     array (
       'label' => 'state',
     ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
   ),
   'actions' => 
   array (

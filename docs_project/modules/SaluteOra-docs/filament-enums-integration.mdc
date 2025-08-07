@@ -1,0 +1,117 @@
+---
+description: >
+  Linee guida per l'integrazione degli Enum di PHP 8.1+ con Filament.
+  Questo documento copre le best practice per utilizzare gli Enum in Filament Forms, Tables e Resources.
+globs:
+  - '*/Filament/Resources/*.php'
+  - '*/Filament/Tables/Columns/*.php'
+  - '*/Filament/Forms/Components/*.php'
+alwaysApply: true
+---
+
+# Integrazione Enum in Filament
+
+## Indice
+
+1. [Introduzione](#introduzione)
+2. [Enum in Form](#enum-in-form)
+3. [Enum in Tabelle](#enum-in-tabelle)
+4. [Enum in Filtri](#enum-in-filtri)
+5. [Best Practice](#best-practice)
+6. [Esempi Avanzati](#esempi-avanzati)
+7. [Risoluzione Problemi](#risoluzione-problemi)
+
+## Introduzione
+
+Filament offre un supporto nativo per gli Enum di PHP 8.1+. Questo documento spiega come sfruttare al meglio questa funzionalità per mantenere il codice tipizzato e manutenibile.
+
+## Enum in Form
+
+### Select con Enum
+
+```php
+use Filament\Forms\Components\Select;
+use App\Enums\UserType;
+
+Select::make('type')
+    ->label('Tipo Utente')
+    ->options(UserType::class) // Usa automaticamente toSelectArray()
+    ->enum(UserType::class)
+    ->searchable()
+    ->required();
+```
+
+### Radio Buttons con Enum
+
+```php
+use Filament\Forms\Components\Radio;
+
+Radio::make('type')
+    ->label('Tipo Utente')
+    ->options(UserType::class)
+    ->enum(UserType::class);
+```
+
+## Enum in Tabelle
+
+### Colonna Enum con Badge
+
+```php
+use Filament\Tables\Columns\TextColumn;
+
+TextColumn::make('type')
+    ->badge()
+    ->color(fn (UserType $state): string => $state->getColor())
+    ->formatStateUsing(fn (UserType $state): string => $state->getLabel());
+```
+
+### Filtro per Enum
+
+```php
+use Filament\Tables\Filters\SelectFilter;
+
+SelectFilter::make('type')
+    ->options(UserType::class);
+```
+
+## Best Practice
+
+1. **Interfaccia HasLabel**: Implementa `Filament\Support\Contracts\HasLabel` per gli enum usati nei form
+2. **Metodi di Supporto**: Aggiungi metodi come `getColor()` e `getIcon()` direttamente nell'enum
+3. **Documentazione**: Documenta sempre i metodi aggiuntivi con PHPDoc
+4. **Test**: Verifica il comportamento degli enum in tutti i contesti (form, tabelle, filtri)
+
+## Esempi Avanzati
+
+### Enum con Dipendenze
+
+```php
+public function getPermissions(): array
+{
+    return match($this) {
+        self::ADMIN => ['view_all', 'edit_all'],
+        self::DOCTOR => ['view_own', 'edit_own'],
+        self::PATIENT => ['view_own'],
+    };
+}
+```
+
+### Traduzioni
+
+```php
+public function getLabel(): string
+{
+    return __("enums.user_type.{$this->value}");
+}
+```
+
+## Risoluzione Problemi
+
+### Problema: L'enum non viene visualizzato correttamente
+- **Soluzione**: Assicurati che l'enum implementi `HasLabel` e che il metodo `getLabel()` restituisca una stringa
+
+### Problema: Il valore non viene salvato
+- **Soluzione**: Verifica che il cast sia configurato correttamente nel modello
+
+### Problema: Le opzioni non vengono caricate
+- **Soluzione**: Implementa il metodo `toSelectArray()` o assicurati che `options()` riceva l'enum corretto

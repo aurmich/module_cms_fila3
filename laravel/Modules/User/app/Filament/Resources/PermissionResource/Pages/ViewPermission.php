@@ -19,14 +19,14 @@ class ViewPermission extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRe
     {
         return [
             'name' => TextEntry::make('name')
-                ->label('Name'),
+                ->label(__('user::permission.fields.name.label')),
             'guard_name' => TextEntry::make('guard_name')
-                ->label('Guard Name'),
+                ->label(__('user::permission.fields.guard_name.label')),
             'active' => TextEntry::make('active')
-                ->label('Active')
-                ->formatStateUsing(fn ($state): string => $state ? 'Yes' : 'No'),
+                ->label(__('user::permission.fields.active.label'))
+                ->formatStateUsing(fn ($state): string => $state ? __('user::common.yes') : __('user::common.no')),
             'created_at' => TextEntry::make('created_at')
-                ->label('Created At')
+                ->label(__('user::permission.fields.created_at.label'))
                 ->dateTime(),
         ];
     }

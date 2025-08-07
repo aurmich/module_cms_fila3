@@ -16,6 +16,7 @@ use Modules\Xot\Datas\XotData;
 use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use Spatie\MediaLibrary\HasMedia;
+use Filament\Resources\Pages\Page;
 use Illuminate\Support\HtmlString;
 use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,7 @@ use Modules\Lang\Filament\Forms\Components\NationalFlagSelect;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Tapp\FilamentCountryCodeField\Forms\Components\CountryCodeSelect;
 use Modules\Media\Filament\Resources\PatientResource\Pages\PreviewAttachment;
+use Modules\SaluteOra\Filament\Resources\PatientResource\Pages;
 
 class PatientResource extends XotBaseResource
 {
@@ -178,7 +180,7 @@ class PatientResource extends XotBaseResource
 
    
 
-    protected static function getPreVisitStepSchema(): array
+    public static function getPreVisitStepSchema(): array
     {
         return [
             //Forms\Components\DatePicker::make('last_dental_visit')
@@ -197,7 +199,7 @@ class PatientResource extends XotBaseResource
      *
      * @return array<string, \Filament\Forms\Components\Component>
      */
-    protected static function getPrivacyStepSchema(): array
+    public  static function getPrivacyStepSchema(): array
     {
         return [
             'privacy_policy' => Forms\Components\View::make('pub_theme::gdpr.patient-privacy-policy')
@@ -240,29 +242,13 @@ class PatientResource extends XotBaseResource
     {
         return self::getPersonalDataStepSchema();
         /*
-        $schema= [
-            'first_name' => Forms\Components\TextInput::make('first_name')
-                ->required()
-                ->maxLength(255),
-            'last_name' => Forms\Components\TextInput::make('last_name')
-                ->required()
-                ->maxLength(255),
-            
-            'email' => Forms\Components\TextInput::make('email')
-                ->email()
-                ->required()
-                ->maxLength(255),
-            'phone' => Forms\Components\TextInput::make('phone')
-                ->tel()
-                ->required()
-                ->maxLength(20),
-            'nationality' => NationalFlagSelect::make('nationality'),
-            ...self::getAttachmentsSchema(),
+        return [Tabs::make('edit')->tabs([
+            Tabs\Tab::make('Personal Data')
+                ->schema(self::getPersonalDataStepSchema()),
+            Tabs\Tab::make('Documents')
+                ->schema(self::getDocumentsStepSchema()),
+        ])->columnSpanFull()
         ];
-
-       
-        
-        return $schema;
         */
     }
 
@@ -284,6 +270,20 @@ class PatientResource extends XotBaseResource
         return [
             ...parent::getPages(),
          //   'preview-attachment' => PreviewAttachment::route('/{record}/preview/{type}'),
+            'edit-attachments' => Pages\EditPatientAttachments::route('/{record}/edit/attachments'),
+            'edit-previsit' => Pages\EditPatientPreVisit::route('/{record}/edit/previsit'),
+            'edit-privacy' => Pages\EditPatientPrivacy::route('/{record}/edit/privacy'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            // ...
+            Pages\EditPatient::class,
+            Pages\EditPatientAttachments::class,
+            Pages\EditPatientPreVisit::class,
+            Pages\EditPatientPrivacy::class,
+        ]);
     }
 }

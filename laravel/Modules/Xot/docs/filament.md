@@ -1,158 +1,476 @@
+# Filament - Best Practices Centralizzate
 
------------------------------------------------------------------------------------
-https://github.com/cheesegrits/filament-google-maps
-star:204
-updated:4 months ago
-----------------------------------------------------------------------------------
-https://github.com/Traineratwot/filament-openstreetmap
-star:14
-updated: 2 weeks ago
-----------------------------------------------------------------------------------
-https://github.com/humaidem/filament-map-picker
-star:32
-updated: 8 months ago
-----------------------------------------------------------------------------------
-https://github.com/webbingbrasil/filament-maps
-star:53
-updated: 3 months ago
-----------------------------------------------------------------------------------
-https://github.com/dotswan/filament-map-picker
-star:28
-updated: 2 days ago
-----------------------------------------------------------------------------------
-https://github.com/arbermustafa/filament-locationpickr-field
-star: 11
-updated: 7 months ago
-----------------------------------------------------------------------------------
+## Principi Fondamentali
 
+### Estensione delle Classi Base
+- **SEMPRE** estendere `XotBaseResource` invece di `Resource` direttamente
+- **SEMPRE** estendere `XotBaseServiceProvider` invece di `ServiceProvider` direttamente
+- **SEMPRE** estendere `XotBaseWidget` per i widget
+- **MAI** estendere direttamente le classi Filament
 
-https://packagist.org/packages/tanthammar/filament-extras
+### 🚨 REGOLA CRITICA: NO METODO TABLE()
 
-https://github.com/tanthammar/filament-extras/blob/main/src/Forms/AddressFields.php
+**Se una classe estende `XotBaseResource`, NON deve mai dichiarare:**
+- `protected static ?string $navigationGroup`
+- `protected static ?string $navigationLabel`
+- `public static function table(Table $table): Table`
 
+**Motivazione:**
+- La gestione di navigationGroup/navigationLabel è centralizzata nella classe base o nei provider
+- Il metodo `table()` viene gestito tramite trait, macro o configurazione centralizzata per garantire coerenza e DRY
+- Dichiarare questi elementi nelle risorse che estendono XotBaseResource causa override indesiderati, perdita di automazione e incoerenza tra moduli
 
-https://github.com/Lecturize/Laravel-Addresses/blob/master/src/Models/Address.php
+### Pattern Corretto
+```php
+<?php
 
+declare(strict_types=1);
 
-https://laraveldaily.com/code-examples/example/laravel-filament-filamentadmin-com/map
+namespace Modules\ModuleName\Filament\Resources;
 
-https://laraveldaily.com/post/laravel-get-latitude-longitude-from-address-geocoder
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 
+class ExampleResource extends XotBaseResource
+{
+    public static function getFormSchema(): array
+    {
+        return [
+            TextInput::make('nome')->required(),
+            DatePicker::make('data_nascita'),
+            // Altri campi...
+        ];
+    }
 
-https://dev.to/bradisrad83/browser-location-with-laravel-livewire-54bd
-
-
-
-<script>
- function getLocation() {
-   if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition(showPosition);
-   } else {
-     console.log("Geolocation is not supported by this browser.");
-   }
- }
-
-function showPosition(position) {
-  var Latitude = position.coords.latitude;
-  var Longitude = position.coords.longitude;
+    // ✅ CORRETTO - Solo metodi e proprietà specifiche non già gestite dalla base
+    // NIENTE navigationGroup/navigationLabel/table()
 }
-</script>
-
-
-
-
-
-https://polodev.github.io/tuts/2018/11/05/nearby-location-using-latitude-and-longitude-in-laravel-application-mysql-query-plus-vue-implementation/
-
-https://github.com/geocoder-php/GeocoderLaravel
-
-# Integrazione Filament nel Modulo Geo
-
-## AddressResource: regole, filosofia e best practice
-
-### Filosofia
-- AddressResource è la risorsa centrale per la gestione CRUD degli indirizzi geografici.
-- Segue la policy: **mai estendere direttamente le classi Filament**, ma sempre XotBaseResource e XotBasePage.
-- Tutti i form e le tabelle devono usare solo chiavi di traduzione, mai label inline.
-- La relazione polimorfica (model_type/model_id) va gestita in modo trasparente e neutro.
-- La UI deve essere neutra, riusabile, multi-tenant e pronta per ogni contesto (utente, studio, azienda, ecc.).
-
-### Naming e struttura
-- Resource: `AddressResource`
-- Namespace: `Modules\Geo\Filament\Resources`
-- Pagine: `ListAddresses`, `CreateAddress`, `EditAddress`, `ViewAddress` in `Modules\Geo\Filament\Resources\AddressResource\Pages`
-- Traduzioni: `lang/it/address-resource.php`
-- Widget: solo se necessario, in `AddressResource/Widgets`
-
-### Best practice
-- Usare sempre array associativi con chiavi stringa per form/table.
-- I form devono coprire tutti i campi principali di Address (vedi address-implementation.md).
-- Per la selezione della posizione, integrare un map picker (vedi link in testa a questo file).
-- La relazione polimorfica va gestita come select dinamica o hidden, a seconda del contesto.
-- I filtri devono permettere ricerca per città, provincia, regione, CAP, tipo, is_primary.
-- Le azioni devono essere neutre e non legate a un solo contesto (es. non "Assegna a utente" ma "Assegna a modello").
-- Le colonne della tabella devono essere leggibili e ordinabili.
-- Le viste devono essere responsive e accessibili.
-- **Quando un modulo (es. StudioResource) gestisce indirizzi, usare sempre**:
-  ```php
-  'addresses' => Forms\Components\Repeater::make('addresses')
-      ->relationship('addresses')
-      ->schema(Modules\Geo\Filament\Resources\AddressResource::getFormSchema())
-  ```
-- Aggiornare sempre la documentazione e i collegamenti relativi.
-
-### Esempio di struttura
-
-```
-Modules/Geo/app/Filament/Resources/
-├── AddressResource.php
-└── AddressResource/
-    └── Pages/
-        ├── ListAddresses.php
-        ├── CreateAddress.php
-        ├── EditAddress.php
-        └── ViewAddress.php
 ```
 
-### Mapping campi principali
-- name, description, type, is_primary
-- route, street_number, locality, province, region, country, postal_code
-- latitude, longitude, formatted_address, place_id
-- extra_data (solo in advanced)
+### ❌ Esempio ERRATO
+```php
+class UserModerationResource extends XotBaseResource
+{
+    protected static ?string $navigationGroup = 'User Management'; // ERRORE
+    protected static ?string $navigationLabel = 'User Moderation'; // ERRORE
+    
+    public static function table(Table $table): Table { // ERRORE
+        return $table->columns([...]);
+    }
+}
+```
 
-### Traduzioni
-- Tutte le label, placeholder, help, ecc. vanno in `lang/it/address-resource.php`
-- Le chiavi devono essere coerenti con la struttura del form/table
+### ✅ Esempio CORRETTO
+```php
+class UserModerationResource extends XotBaseResource
+{
+    // Solo metodi e proprietà specifiche non già gestite dalla base
+    // NIENTE navigationGroup/navigationLabel/table()
+}
+```
 
-### Integrazione Map Picker
-- Usare un map picker compatibile Filament (vedi link in testa a questo file)
-- Il campo lat/lng deve essere aggiornato in tempo reale
-- Il map picker deve essere opzionale e non obbligatorio
+## Service Providers
 
-### Gestione relazioni polimorfiche
-- Se Address è creato da una risorsa polimorfica, i campi model_type/model_id vanno gestiti come hidden o precompilati
-- Se Address è gestito standalone, permettere la selezione del modello associato (solo per admin)
+### Struttura Standard
+```php
+<?php
 
-### UI/UX
-- Le viste devono essere semplici, chiare, accessibili
-- I campi principali devono essere sempre visibili
-- I campi avanzati (extra_data, place_id) possono essere in una sezione collapsible
-- Le azioni devono essere chiare e neutre
+declare(strict_types=1);
 
-### Collegamenti
-- [address-implementation.md](./address-implementation.md)
-- [Xot/docs/filament/README.md](../../Xot/docs/filament/README.md)
-- [place-address-schemaorg.md](./place-address-schemaorg.md)
+namespace Modules\ModuleName\Providers;
 
-### TODO
-- Implementare AddressResource e relative pagine secondo questa policy
-- Aggiornare la documentazione ogni volta che si aggiunge un campo o una feature
+use Modules\Xot\Providers\XotBaseServiceProvider;
 
-## Perché i collegamenti sono sempre relativi?
+class ModuleNameServiceProvider extends XotBaseServiceProvider
+{
+    public string $name = 'ModuleName'; // SEMPRE dichiarare subito
 
-- **Logica**: I link relativi garantiscono portabilità, versionamento e refactoring sicuro della documentazione.
-- **Politica**: Ogni modulo è autonomo e la sua documentazione deve essere navigabile anche se spostata o estratta.
-- **Filosofia**: Un solo punto di verità, nessun path assoluto, nessun lock-in.
-- **Religione**: "Non avrai altro path all'infuori del relativo".
-- **Zen**: Serenità nella navigazione, nessun errore di path, nessun link rotto dopo un refactor.
+    public function boot(): void
+    {
+        parent::boot();
+        // Solo personalizzazioni specifiche del modulo
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        // Solo registrazioni specifiche del modulo
+    }
+}
+```
+
+### Registrazione Corretta
+```php
+// config/app.php
+'providers' => [
+    // ...
+    Modules\ModuleName\Providers\ModuleNameServiceProvider::class,
+],
+```
+
+## Resources
+
+### Metodi Obbligatori
+```php
+/**
+ * @return array<string, \Filament\Forms\Components\Component>
+ */
+public static function getFormSchema(): array
+{
+    return [
+        // Schema del form
+    ];
+}
+
+/**
+ * @return array<string, \Filament\Tables\Columns\Column>
+ */
+public static function getTableColumns(): array
+{
+    return [
+        // Colonne della tabella
+    ];
+}
+```
+
+### Utilizzo Corretto dei Componenti
+```php
+// ✅ CORRETTO - Senza label hardcoded
+TextInput::make('name')->required()
+Select::make('role')->options($options)
+DatePicker::make('birth_date')
+
+// ❌ ERRATO - Con label hardcoded
+TextInput::make('name')->label('Nome')->required()
+Select::make('role')->label('Ruolo')->options($options)
+```
+
+## Widgets
+
+### Estensione Corretta
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Modules\UI\Filament\Widgets\XotBaseWidget;
+
+class ExampleWidget extends XotBaseWidget
+{
+    // Implementazione widget
+}
+```
+
+### Posizionamento Corretto
+```php
+/**
+ * @return array<class-string<Widget>>
+ */
+protected function getHeaderWidgets(): array
+{
+    return [
+        ExampleWidget::class,
+    ];
+}
+
+/**
+ * @return array<class-string<Widget>>
+ */
+protected function getFooterWidgets(): array
+{
+    return [
+        ChartWidget::class,
+    ];
+}
+```
+
+## Actions
+
+### Struttura Standard
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Actions;
+
+use Filament\Actions\Action;
+use Filament\Support\Colors\Color;
+
+class CustomAction extends Action
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->label(__('modulename::actions.custom.label'))
+            ->icon('heroicon-o-pencil')
+            ->color(Color::BLUE)
+            ->requiresConfirmation()
+            ->modalHeading(__('modulename::actions.custom.modal_heading'))
+            ->modalDescription(__('modulename::actions.custom.modal_description'))
+            ->action(fn () => $this->executeAction());
+    }
+
+    protected function executeAction(): void
+    {
+        // Implementazione azione
+    }
+}
+```
+
+### Registrazione Actions
+```php
+/**
+ * @return array<\Filament\Tables\Actions\Action>
+ */
+protected function getTableActions(): array
+{
+    return [
+        CustomAction::make(),
+    ];
+}
+```
+
+## Pages
+
+### Estensione Corretta
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Pages;
+
+use Modules\Xot\Filament\Pages\XotBasePage;
+
+class ExamplePage extends XotBasePage
+{
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string $view = 'modulename::filament.pages.example-page';
+
+    // Implementazione pagina
+}
+```
+
+## View Custom
+
+### Wrapper Principale
+```blade
+{{-- ✅ CORRETTO --}}
+<x-filament::page>
+    <div>
+        <h2>{{ __('modulename::pages.example.title') }}</h2>
+        <p>{{ __('modulename::pages.example.description') }}</p>
+    </div>
+</x-filament::page>
+```
+
+### Passaggio Dati
+```php
+/**
+ * Dati da passare alla view.
+ *
+ * @return array<string, mixed>
+ */
+protected function getViewData(): array
+{
+    return [
+        'items' => ExampleModel::query()->latest()->get(),
+        'title' => __('modulename::pages.example.title'),
+    ];
+}
+```
+
+## Traduzioni
+
+### Struttura File di Traduzione
+```php
+// Modules/ModuleName/lang/it/filament.php
+return [
+    'resources' => [
+        'example' => [
+            'label' => 'Esempi',
+            'plural_label' => 'Esempi',
+            'navigation_group' => 'Gestione',
+            'navigation_icon' => 'heroicon-o-document-text',
+            'navigation_sort' => 1,
+        ],
+    ],
+    'pages' => [
+        'example' => [
+            'title' => 'Pagina Esempio',
+            'description' => 'Descrizione della pagina',
+        ],
+    ],
+    'actions' => [
+        'custom' => [
+            'label' => 'Azione Personalizzata',
+            'modal_heading' => 'Conferma Azione',
+            'modal_description' => 'Sei sicuro di voler eseguire questa azione?',
+            'success' => 'Azione completata con successo',
+            'error' => 'Si è verificato un errore',
+        ],
+    ],
+];
+```
+
+## Componenti UI
+
+### Posizionamento Corretto
+```
+Modules/UI/resources/views/components/ui/
+├── button.blade.php
+├── card.blade.php
+└── logo.blade.php
+```
+
+### Utilizzo Corretto
+```blade
+{{-- ✅ CORRETTO --}}
+<x-ui::ui.button>Salva</x-ui::ui.button>
+<x-ui::ui.card>Contenuto</x-ui::ui.card>
+
+{{-- ❌ ERRATO --}}
+<x-button>Salva</x-button>
+<x-ui.button>Salva</x-ui.button>
+```
+
+## Best Practices
+
+### 1. Ereditarietà
+- Estendere sempre le classi base Xot
+- Non duplicare funzionalità già presenti nelle classi base
+- Utilizzare i metodi helper delle classi base
+
+### 2. Traduzioni
+- Mai utilizzare stringhe hardcoded
+- Utilizzare sempre i file di traduzione del modulo
+- Struttura espansa per tutte le traduzioni
+
+### 3. Performance
+- Utilizzare eager loading per le relazioni
+- Implementare caching per dati statici
+- Ottimizzare le query del database
+
+### 4. Sicurezza
+- Validare sempre i dati di input
+- Utilizzare le policy per l'autorizzazione
+- Implementare controlli di accesso appropriati
+
+## Troubleshooting
+
+### Problemi Comuni
+
+#### Errore: "Class not found"
+**Causa**: Namespace errato o autoload non aggiornato.
+
+**Soluzione**:
+```bash
+composer dump-autoload
+```
+
+#### Errore: "Method not found"
+**Causa**: Estensione diretta di classi Filament invece di XotBase.
+
+**Soluzione**: Estendere sempre le classi base Xot.
+
+#### Errore: "Translation key not found"
+**Causa**: Chiave di traduzione mancante o namespace errato.
+
+**Soluzione**: Verificare file di traduzione e namespace.
+
+## Checklist di Conformità
+
+### Prima dell'Implementazione
+- [ ] Studiare la documentazione del modulo
+- [ ] Verificare namespace e struttura
+- [ ] Controllare ereditarietà delle classi
+- [ ] Verificare file di traduzione
+
+### Durante l'Implementazione
+- [ ] Seguire convenzioni di naming
+- [ ] Utilizzare tipizzazione rigorosa
+- [ ] Implementare traduzioni complete
+- [ ] Testare funzionalità
+
+### Dopo l'Implementazione
+- [ ] Eseguire PHPStan livello 9+
+- [ ] Verificare traduzioni in tutte le lingue
+- [ ] Aggiornare documentazione
+- [ ] Testare regressioni
+
+## Checklist Filament
+
+### Prima del Commit
+- [ ] Nessuna classe estende direttamente una classe Filament
+- [ ] Tutte le classi Filament estendono la corrispondente XotBase
+- [ ] Se estendi XotBaseResource, NON dichiarare navigationGroup
+- [ ] Se estendi XotBaseResource, NON dichiarare navigationLabel
+- [ ] Se estendi XotBaseResource, NON dichiarare il metodo table()
+- [ ] Import inutili rimossi
+- [ ] Naming conforme
+- [ ] Proprietà critiche rispettate
+- [ ] Moderazione centralizzata e neutra
+- [ ] Audit trail tramite Spatie Activitylog
+- [ ] Documentazione aggiornata e linkata
+
+## Errori Comuni e Soluzioni
+
+### Errore: Estensione Diretta di Classi Filament
+**Sintomo**: `Call to undefined method Filament\Resources\Resource::getFormSchema()`
+
+**Causa**: Estensione diretta di classi Filament invece delle classi base Xot.
+
+**Soluzione**:
+```php
+// ❌ ERRATO
+use Filament\Resources\Resource;
+class ExampleResource extends Resource
+
+// ✅ CORRETTO
+use Modules\Xot\Filament\Resources\XotBaseResource;
+class ExampleResource extends XotBaseResource
+```
+
+### Errore: Metodo Table in XotBaseResource
+**Sintomo**: Override accidentale del metodo table() o dichiarazione di navigationGroup/navigationLabel
+
+**Causa**: Violazione della regola critica per XotBaseResource.
+
+**Soluzione**:
+```php
+// ❌ ERRATO
+class ExampleResource extends XotBaseResource
+{
+    protected static ?string $navigationGroup = 'Group'; // ERRORE
+    protected static ?string $navigationLabel = 'Label'; // ERRORE
+    
+    public static function table(Table $table): Table { // ERRORE
+        return $table->columns([...]);
+    }
+}
+
+// ✅ CORRETTO
+class ExampleResource extends XotBaseResource
+{
+    // Solo metodi e proprietà specifiche non già gestite dalla base
+    // NIENTE navigationGroup/navigationLabel/table()
+}
+```
+
+## Collegamenti
+
+- [Best Practices](best-practices-consolidated.md)
+- [PHPStan Guide](phpstan-consolidated.md)
+- [Testing Guide](testing-consolidated.md)
+
+---
+
+*Ultimo aggiornamento: 2025-08-04*
+*Modulo: Xot*
+*Categoria: Filament*
 

@@ -170,8 +170,8 @@ return [
     'plural' => 'Addresses',
     'navigation' => [
         'sort' => 96,
-        'icon' => 'address.navigation',
-        'group' => 'address.navigation',
+        'icon' => 'heroicon-o-cog',
+        'group' => 'Geo',
     ],
     'actions' => [
         'create' => 'Create address',

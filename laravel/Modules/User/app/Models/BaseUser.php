@@ -266,6 +266,13 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
         return $this->hasRole('super-admin');
     }
 
+    public function assignModule(string $module): void
+    {   
+        $role_name=$module.'::admin';
+        $role=Role::firstOrCreate(['name' => $role_name]);
+        $this->assignRole($role);
+    }
+
 
     public function canAccessPanel(Panel $panel): bool
     {

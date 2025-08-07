@@ -1,101 +1,98 @@
 <?php
 
-return array (
-  'navigation' => 
-  array (
-    'group' => 's3 test.navigation',
-  ),
-  'fields' => 
-  array (
-    'to' => 
-    array (
-      'label' => 'to',
-      'placeholder' => 'to',
-      'helper_text' => 'to',
-      'description' => 'to',
-    ),
-    'subject' => 
-    array (
-      'label' => 'subject',
-      'placeholder' => 'subject',
-      'helper_text' => 'subject',
-      'description' => 'subject',
-    ),
-    'body_html' => 
-    array (
-      'label' => 'body_html',
-      'placeholder' => 'body_html',
-      'helper_text' => 'body_html',
-      'description' => 'body_html',
-    ),
-    'attachment' => 
-    array (
-      'description' => 'attachment',
-      'helper_text' => 'attachment',
-      'placeholder' => 'attachment',
-      'label' => 'attachment',
-    ),
-    'debug_output' => 
-    array (
-      'description' => 'debug_output',
-      'helper_text' => 'debug_output',
-      'placeholder' => 'debug_output',
-      'label' => 'debug_output',
-    ),
-  ),
-  'actions' => 
-  array (
-    'emailFormActions' => 
-    array (
-      'label' => 'emailFormActions',
-    ),
-    'save' => 
-    array (
-      'label' => 'save',
-    ),
-    'formActions' => 
-    array (
-      'label' => 'formActions',
-    ),
-    'sendEmail' => 
-    array (
-      'label' => 'sendEmail',
-    ),
-    'runAllTests' => 
-    array (
-      'label' => 'runAllTests',
-    ),
-    'testCloudFront' => 
-    array (
-      'label' => 'testCloudFront',
-    ),
-    'testPermissions' => 
-    array (
-      'label' => 'testPermissions',
-    ),
-    'testS3Connection' => 
-    array (
-      'label' => 'testS3Connection',
-    ),
-    'testCredentials' => 
-    array (
-      'label' => 'testCredentials',
-    ),
-    'clearResults' => 
-    array (
-      'label' => 'clearResults',
-    ),
-    'debugConfig' => 
-    array (
-      'label' => 'debugConfig',
-    ),
-    'testBucketPolicy' => 
-    array (
-      'label' => 'testBucketPolicy',
-    ),
-    'testFileOperations' => 
-    array (
-      'label' => 'testFileOperations',
-    ),
-  ),
-);
+declare(strict_types=1);
+
+return [
+    'navigation' => [
+        'label' => 'Test S3',
+        'group' => 'UI',
+        'icon' => 'heroicon-o-cloud',
+        'sort' => 50,
+    ],
+    'fields' => [
+        'to' => [
+            'label' => 'Destinatario',
+            'placeholder' => 'Inserisci email destinatario',
+            'helper_text' => '',
+            'description' => 'Indirizzo email del destinatario',
+        ],
+        'subject' => [
+            'label' => 'Oggetto',
+            'placeholder' => 'Inserisci oggetto email',
+            'helper_text' => '',
+            'description' => 'Oggetto dell\'email di test',
+        ],
+        'body_html' => [
+            'label' => 'Corpo HTML',
+            'placeholder' => 'Inserisci contenuto HTML',
+            'helper_text' => '',
+            'description' => 'Contenuto HTML dell\'email',
+        ],
+        'attachment' => [
+            'description' => 'Allegato per il test S3',
+            'helper_text' => '',
+            'placeholder' => 'Seleziona file da allegare',
+            'label' => 'Allegato',
+        ],
+        'debug_output' => [
+            'description' => 'Output di debug per i test',
+            'helper_text' => '',
+            'placeholder' => 'Output debug',
+            'label' => 'Debug Output',
+        ],
+    ],
+    'actions' => [
+        'emailFormActions' => [
+            'label' => 'Azioni Email',
+            'tooltip' => 'Azioni per la gestione email',
+        ],
+        'save' => [
+            'label' => 'Salva',
+            'tooltip' => 'Salva configurazione test',
+        ],
+        'formActions' => [
+            'label' => 'Azioni Form',
+            'tooltip' => 'Azioni per la gestione form',
+        ],
+        'sendEmail' => [
+            'label' => 'Invia Email',
+            'tooltip' => 'Invia email di test',
+        ],
+        'runAllTests' => [
+            'label' => 'Esegui Tutti i Test',
+            'tooltip' => 'Esegui tutti i test S3',
+        ],
+        'testCloudFront' => [
+            'label' => 'Test CloudFront',
+            'tooltip' => 'Testa connessione CloudFront',
+        ],
+        'testPermissions' => [
+            'label' => 'Test Permessi',
+            'tooltip' => 'Testa permessi S3',
+        ],
+        'testS3Connection' => [
+            'label' => 'Test Connessione S3',
+            'tooltip' => 'Testa connessione Amazon S3',
+        ],
+        'testCredentials' => [
+            'label' => 'Test Credenziali',
+            'tooltip' => 'Testa credenziali AWS',
+        ],
+        'clearResults' => [
+            'label' => 'Pulisci Risultati',
+            'tooltip' => 'Pulisci risultati test',
+        ],
+        'debugConfig' => [
+            'label' => 'Debug Configurazione',
+            'tooltip' => 'Debug configurazione S3',
+        ],
+        'testBucketPolicy' => [
+            'label' => 'Test Policy Bucket',
+            'tooltip' => 'Testa policy del bucket S3',
+        ],
+        'testFileOperations' => [
+            'label' => 'Test Operazioni File',
+            'tooltip' => 'Testa operazioni sui file S3',
+        ],
+    ],
+];

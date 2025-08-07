@@ -6,11 +6,12 @@ namespace Modules\Xot\Filament\Resources\Pages;
 
 
 use Filament\Forms\Form;
+use Modules\Xot\Filament\Traits\TransTrait;
 use Filament\Resources\Pages\EditRecord as FilamentEditRecord;
 
 abstract class XotBaseEditRecord extends FilamentEditRecord
 {
-    // ...
+    use TransTrait;
 
     /**
      * Configure the form.
@@ -43,4 +44,15 @@ abstract class XotBaseEditRecord extends FilamentEditRecord
     {
         return [];
     }
+
+    public static function getNavigationLabel(): string
+    {
+        return static::transFunc(__FUNCTION__);
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return static::transFunc(__FUNCTION__);
+    }
+
 }

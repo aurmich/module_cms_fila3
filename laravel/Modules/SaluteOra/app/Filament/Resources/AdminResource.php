@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\SaluteOra\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Modules\SaluteOra\Models\User;
 use Modules\SaluteOra\Models\Admin;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\EditAction;
@@ -26,7 +27,10 @@ class AdminResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
-            Forms\Components\TextInput::make('name')
+            Forms\Components\TextInput::make('first_name')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(255),
             Forms\Components\TextInput::make('email')
@@ -43,48 +47,7 @@ class AdminResource extends XotBaseResource
         ];
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->searchable(),
-                TextColumn::make('type')
-                    ->badge(),
-                TextColumn::make('state')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        UserStateEnum::ACTIVE->value => 'success',
-                        UserStateEnum::PENDING->value => 'warning',
-                        UserStateEnum::SUSPENDED->value => 'danger',
-                        default => 'gray',
-                    }),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                SelectFilter::make('type')
-                    ->options(UserTypeEnum::class),
-                SelectFilter::make('state')
-                    ->options(UserStateEnum::class),
-            ])
-            ->actions([
-                EditAction::make(),
-            ])
-            ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+    // ✅ CORRETTO - NIENTE metodo table() - La gestione è centralizzata in XotBaseResource
 
     public static function getRelations(): array
     {

@@ -1,0 +1,26 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Configurazione FullCalendar
+
+## Struttura
+- Path: `Modules/SaluteOra/app/Actions/Calendar/Calendar.php`
+- Namespace: `Modules\SaluteOra\Actions\Calendar`
+
+## Implementazione
+Il componente Calendar è implementato come Action per garantire una migliore separazione delle responsabilità e una maggiore manutenibilità.
+
+## Configurazione
+La configurazione del calendario viene gestita attraverso il trait `HasFullCalendarConfig` che fornisce tutte le impostazioni necessarie per:
+- Localizzazione italiana
+- Orari lavorativi sanitari
+- Formattazione date/ore
+- Gestione multi-tenant
+- Permessi basati su tipo utente
+
+Per maggiori dettagli vedere:
+- [Guida Implementazione](fullcalendar_implementation_guide.md)
+- [Best Practices](fullcalendar-best-practices.md)
+- [Configurazione Widget](fullcalendar_widget_implementation.mdc)

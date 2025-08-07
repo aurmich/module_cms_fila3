@@ -1,53 +1,44 @@
 <?php
 
-return array (
-  'model' => 
-  array (
-    'label' => 'collection lang.model',
-  ),
-  'navigation' => 
-  array (
-    'label' => 'collection lang.navigation',
-    'group' => 'collection lang.navigation',
-    'icon' => 'collection lang.navigation',
-    'sort' => 68,
-  ),
-  'fields' => 
-  array (
-    'itemIsDefault' => 
-    array (
-      'description' => 'itemIsDefault',
-      'helper_text' => 'itemIsDefault',
-      'placeholder' => 'itemIsDefault',
-      'label' => 'itemIsDefault',
-    ),
-    'itemKey' => 
-    array (
-      'description' => 'itemKey',
-      'helper_text' => 'itemKey',
-      'placeholder' => 'itemKey',
-      'label' => 'itemKey',
-    ),
-    'itemValue' => 
-    array (
-      'description' => 'itemValue',
-      'helper_text' => 'itemValue',
-      'placeholder' => 'itemValue',
-      'label' => 'itemValue',
-    ),
-    'values' => 
-    array (
-      'description' => 'values',
-      'helper_text' => 'values',
-      'placeholder' => 'values',
-      'label' => 'values',
-    ),
-    'name' => 
-    array (
-      'description' => 'name',
-      'helper_text' => 'name',
-      'label' => 'name',
-      'placeholder' => 'name',
-    ),
-  ),
-);
+declare(strict_types=1);
+
+return [
+    'model' => [
+        'label' => 'Modello Collezione',
+        'placeholder' => 'Seleziona modello',
+        'helper_text' => 'Modello per la gestione delle collezioni',
+    ],
+    'navigation' => [
+        'label' => 'Collezioni',
+        'group' => 'UI',
+        'icon' => 'heroicon-o-collection',
+        'sort' => 68,
+    ],
+    'fields' => [
+        'itemIsDefault' => [
+            'label' => 'Elemento Predefinito',
+            'placeholder' => 'Seleziona elemento predefinito',
+            'helper_text' => 'Elemento predefinito della collezione',
+        ],
+        'itemKey' => [
+            'label' => 'Chiave Elemento',
+            'placeholder' => 'Inserisci chiave elemento',
+            'helper_text' => 'Chiave identificativa dell\'elemento',
+        ],
+        'itemValue' => [
+            'label' => 'Valore Elemento',
+            'placeholder' => 'Inserisci valore elemento',
+            'helper_text' => 'Valore dell\'elemento della collezione',
+        ],
+        'values' => [
+            'label' => 'Valori',
+            'placeholder' => 'Inserisci valori',
+            'helper_text' => 'Valori della collezione',
+        ],
+        'name' => [
+            'label' => 'Nome',
+            'placeholder' => 'Inserisci nome collezione',
+            'helper_text' => 'Nome identificativo della collezione',
+        ],
+    ],
+];

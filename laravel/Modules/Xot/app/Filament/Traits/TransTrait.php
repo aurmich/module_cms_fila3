@@ -52,6 +52,9 @@ trait TransTrait
 
         $key = $transKey . '.' . $key;
         $key = Str::of($key)->replace('.cluster.pages.', '.')->toString();
+        if(Str::startsWith($key,'edit_')){
+            $key=Str::after($key,'edit_');
+        }
         return $key;
     }
 
@@ -70,6 +73,7 @@ trait TransTrait
 
         $key = $transKey . '.' . $key;
         $key = Str::of($key)->replace('.cluster.pages.', '.')->toString();
+        $key = Str::of($key)->replace('::edit_', '::')->toString();
         return $key;
     }
 
@@ -87,7 +91,7 @@ trait TransTrait
         $model=Str::of($class)->between('\\'.$type.'\\','\\')->toString();
         $model_snake=Str::of($model)->snake()->toString();
         $key=$module_low.'::'.$model_snake;
-
+        
         return $key;
     }
 

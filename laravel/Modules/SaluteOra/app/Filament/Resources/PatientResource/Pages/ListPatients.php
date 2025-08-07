@@ -15,6 +15,7 @@ use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\SaluteOra\Filament\Resources\PatientResource;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\Media\Filament\Tables\Columns\CloudFrontIconMediaColumn;
 use Modules\SaluteOra\Filament\Resources\UserResource\Pages\ListUsers;
 
 class ListPatients extends ListUsers
@@ -33,7 +34,8 @@ class ListPatients extends ListUsers
         $attachments = Patient::getAttachments();
 
         foreach ($attachments as $attachment) {
-            $columns[$attachment] = IconMediaColumn::make($attachment);
+            $columns[$attachment] = CloudFrontIconMediaColumn::make($attachment);
+            // $columns[$attachment] = IconMediaColumn::make($attachment);
         }
         
         return $columns;

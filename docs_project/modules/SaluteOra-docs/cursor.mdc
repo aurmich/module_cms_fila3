@@ -1,0 +1,152 @@
+---
+description: Linee guida per l'implementazione dei Wizard in SaluteOra
+globs: ['**/app/Filament/Widgets/**/*.php', '**/app/Filament/Resources/**/*.php']
+alwaysApply: true
+---
+# Linee Guida per l'Implementazione dei Wizard
+
+## Principi di Clean Code per i Wizard
+
+### 1. Struttura a Classi Separate
+
+Ogni step del wizard deve essere implementato come una classe separata che estende una classe base astratta:
+
+```php
+namespace App\Wizard\Steps;
+
+use Filament\Forms\Form;
+
+abstract class WizardStep
+{
+    abstract public static function buildForm(Form $form): Form;
+    abstract public static function handle(array $data, WizardState $state): void;
+    abstract public static function validate(array $data): array;
+    
+    public static function getLabel(): string
+    {
+        return str(class_basename(static::class))
+            ->kebab()
+            ->replace('-', ' ')
+            ->title();
+    }
+}
+```
+
+### 2. Gestione dello Stato
+
+Utilizzare un DTO (Data Transfer Object) per gestire lo stato tra gli step:
+
+```php
+class WizardState
+{
+    public function __construct(
+        public array $data = [],
+        public int $currentStep = 0,
+        public array $completedSteps = []
+    ) {
+    }
+    
+    public function toArray(): array
+    {
+        return [
+            'data' => $this->data,
+            'current_step' => $this->currentStep,
+            'completed_steps' => $this->completedSteps,
+        ];
+    }
+}
+```
+
+### 3. Registrazione degli Step
+
+Registrare tutti gli step in un service provider dedicato:
+
+```php
+class WizardServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->singleton('wizard', function ($app) {
+            return new WizardManager($app);
+        });
+    }
+    
+    public function boot()
+    {
+        $this->registerSteps([
+            PersonalInfoStep::class,
+            ContactInfoStep::class,
+            AppointmentDetailsStep::class,
+            // Altri step...
+        ]);
+    }
+}
+```
+
+## Analisi Errore Precedente
+
+L'analisi dell'errore nell'implementazione del wizard di ricerca dentista è documentata in [analisi_errore_wizard.md](./analisi_errore_wizard.md).
+
+## Regole per i Wizard
+
+1. **Struttura del Flusso**
+   - Separare la logica di ricerca dalla prenotazione
+   - Mantenere ogni step del wizard focalizzato su un singolo compito
+   - Documentare il flusso completo prima dell'implementazione
+
+2. **Documentazione Obbligatoria**
+   - Diagramma di flusso del wizard
+   - Descrizione di ogni step
+   - Stati e transizioni
+   - Gestione degli errori
+
+3. **Best Practice**
+   - Utilizzare i componenti Filament esistenti
+   - Mantenere la coerenza con gli altri wizard dell'applicazione
+   - Implementare la validazione a ogni step
+   - Fornire feedback chiari all'utente
+
+## Collegamenti Utili
+- [Documentazione Ufficiale Filament](https://filamentphp.com/docs/3.x/forms/layout/wizard)
+- [Analisi Errori Precedenti](./analisi_errore_wizard.md)
+- [Linee Guida UI](../UI/docs/guidelines.md)
+
+# Aggiornamento appointment.php (2024-06-XX)
+
+La traduzione appointment.php è stata riscritta secondo le regole di centralizzazione, DRY, KISS, nessun lock-in, struttura gerarchica inglese e coerenza enum/actions/messages. Motivazione: filosofia (un solo punto di verità), logica (manutenzione semplice), religione (nessuna duplicazione), politica (nessun lock-in), zen (serenità del codice).
+
+Collegamenti:
+- [Lang/translation-standards.md](../../Lang/docs/translation-standards.md)
+- [Lang/translation_keys_best_practices.md](../../Lang/docs/translation_keys_best_practices.md)
+- [SaluteOra/docs/appointment-management.md](./appointment-management.md)
+
+Checklist aggiornata:
+- Usare solo chiavi inglesi e struttura gerarchica
+- Validare la presenza di tutte le chiavi in tutte le lingue
+- Aggiornare la documentazione ogni volta che si modifica una risorsa clinica
+- Non duplicare chiavi tra moduli
+- Seguire sempre la filosofia DRY, KISS, centralizzazione
+
+# [AGGIORNAMENTO 2024-06-XX] - Disponibilità solo su appointments
+
+**Regola fondamentale:**
+- Le disponibilità dei dottori vanno gestite solo tramite la tabella `appointments` (con `patient_id` null o flag dedicato).
+- È vietato creare tabelle o modelli separati (es. doctor_availabilities) per le disponibilità.
+- Tutto il calendario (FullCalendar/Filament) lavora su appointments, distinguendo tra disponibilità e appuntamenti tramite i campi esistenti.
+
+**Motivazione:**
+- Filosofia: un solo punto di verità, nessuna duplicazione, serenità del codice.
+- Logica: DRY, KISS, nessun lock-in, massima compatibilità con FullCalendar e Filament.
+- Religione: non avrai altro modello di disponibilità all'infuori di Appointment.
+- Politica: ogni modulo è autonomo, ma rispetta la centralizzazione delle entità.
+- Zen: serenità, nessun errore di sync, nessuna tabella fantasma, nessun refactor doloroso.
+
+**Checklist aggiornata:**
+- Gestire sempre le disponibilità tramite appointments
+- Vietato creare/gestire tabelle o modelli separati per le disponibilità
+- Aggiornare la documentazione ogni volta che si modifica la logica di disponibilità/appuntamenti
+- Seguire sempre la filosofia DRY, KISS, centralizzazione
+
+**Collegamenti:**
+- [appointment-management.md](./appointment-management.md)
+- [fullcalendar_parental_widgets.md](./fullcalendar_parental_widgets.md)

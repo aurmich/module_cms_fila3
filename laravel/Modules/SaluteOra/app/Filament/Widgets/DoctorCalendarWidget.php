@@ -3,10 +3,12 @@
 namespace Modules\SaluteOra\Filament\Widgets;
 
 use Filament\Forms;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Saade\FilamentFullCalendar\Actions;
 use Modules\SaluteOra\Models\Appointment;
 use Saade\FilamentFullCalendar\Data\EventData;
+use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class DoctorCalendarWidget extends FullCalendarWidget
@@ -127,23 +129,28 @@ class DoctorCalendarWidget extends FullCalendarWidget
             ->where('doctor_id',auth()->id())
             ->get()
             ->map(
-                fn (Appointment $event) => EventData::make()
+                function (Appointment $event){
+                    $state=$event->state;
+                    if($state!=null){
+                      $stateClass=AppointmentState::config()->defaultStateClass;
+                      $state=new $stateClass($event);
+                    }
+                    $res=EventData::make()
                     ->id($event->id)
                     ->title($event->patient()->first()->full_name ?? 'N/A')
                     /** @phpstan-ignore argument.type */
                     ->start($event->starts_at)
                     ->end($event->ends_at)
-                    ->backgroundColor($event->state->bgColor())
-                    //->backgroundColor('#00aa00')
-                    ->borderColor($event->state->bgColor())
-                    //->textColor('blue')
-                    ->textColor($event->state->bgColor())
-                    //->textColor('blue')
+                    ->backgroundColor($state->bgColor())  //->backgroundColor('#00aa00')
+                    ->borderColor($state->bgColor())
+                    ->textColor($state->bgColor());//->textColor('blue')
                     //->extraProperties(['class'=>['text-gray-600']])
                     //->url(
                     //    url: EventResource::getUrl(name: 'view', parameters: ['record' => $event]),
                     //    shouldOpenUrlInNewTab: true
                     //)
+                    return $res;
+                }
             )
             ->toArray();
     }

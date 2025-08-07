@@ -1,129 +1,140 @@
 # Errori comuni nei file di traduzione
 
-## Errori di sintassi
+## Errori di sintassi critici identificati
 
-### Parentesi mancanti in array annidati
+### 1. Dichiarazione `declare(strict_types=1)` posizionata erroneamente
+
+**Errore comune**: La dichiarazione `declare(strict_types=1);` viene posizionata dopo il `return` o in posizione errata.
+
+**Esempio di errore**:
+```php
+<?php 
+return [
+
+declare(strict_types=1);  // ERRORE: dopo return
+  'navigation' => [
+    'label' => 'Navigation Label',
+  ],
+);
+```
+
+**Correzione**:
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+  'navigation' => [
+    'label' => 'Navigation Label',
+  ],
+];
+```
+
+### 2. Parentesi mancanti in array annidati
 
 Un errore comune nei file di traduzione è la mancanza di parentesi chiuse negli array annidati. Questo tipo di errore causa un `ParseError` che blocca l'intera applicazione.
 
 **Esempio di errore**:
 ```php
-'azione_esempio' => 
-array (
-  'label' => 'Etichetta azione',
-'altra_azione' => // Manca la parentesi chiusa e la virgola dell'array precedente
+return [
+  'fields' => [
+    'name' => [
+      'label' => 'Nome',
+      'placeholder' => 'Inserisci nome',
+      // ERRORE: manca parentesi chiusa
+    ],
+  ],
+]; // ERRORE: parentesi non bilanciate
 ```
 
 **Correzione**:
 ```php
-'azione_esempio' => 
-array (
-  'label' => 'Etichetta azione',
-), // Aggiunta parentesi chiusa e virgola
-'altra_azione' =>
+return [
+  'fields' => [
+    'name' => [
+      'label' => 'Nome',
+      'placeholder' => 'Inserisci nome',
+      'helper_text' => 'Nome completo',
+    ],
+  ],
+];
 ```
 
-### Virgole in eccesso o mancanti
+### 3. Traduzioni non tradotte (chiavi inglesi)
 
-Le virgole mancanti tra gli elementi di un array o le virgole in eccesso alla fine dell'ultimo elemento possono causare errori di sintassi.
+**Problema**: Utilizzo di chiavi non tradotte come valori.
 
 **Esempio di errore**:
 ```php
-'campo1' => 'valore1'
-'campo2' => 'valore2' // Manca la virgola dopo 'valore1'
+'fields' => [
+  'name' => [
+    'label' => 'name',  // ERRORE: chiave non tradotta
+    'placeholder' => 'name',  // ERRORE: chiave non tradotta
+  ],
+],
 ```
 
 **Correzione**:
 ```php
-'campo1' => 'valore1',
-'campo2' => 'valore2'
+'fields' => [
+  'name' => [
+    'label' => 'Nome',
+    'placeholder' => 'Inserisci nome',
+    'helper_text' => 'Nome completo dell\'utente',
+  ],
+],
 ```
 
-## Pattern e best practices
+### 4. Pattern ".navigation" non tradotto
 
-### Pattern da seguire
+**Problema**: Utilizzo di pattern `.navigation` invece di traduzioni appropriate.
 
-1. **Struttura chiara e indentazione coerente**:
-   ```php
-   'azione' => [
-       'label' => 'Etichetta',
-       'tooltip' => 'Descrizione tooltip',
-   ],
-   ```
+**Esempio di errore**:
+```php
+'navigation' => [
+  'label' => 'permission.navigation',  // ERRORE: pattern non tradotto
+  'group' => 'permission.navigation',  // ERRORE: pattern non tradotto
+],
+```
 
-2. **Utilizzare la sintassi breve degli array** (quando possibile):
-   ```php
-   'azioni' => [
-       'crea' => [
-           'label' => 'Crea nuovo',
-       ],
-   ],
-   ```
+**Correzione**:
+```php
+'navigation' => [
+  'label' => 'Permessi',
+  'group' => 'Gestione Utenti',
+  'icon' => 'heroicon-o-shield-check',
+],
+```
 
-3. **Aggiungere commenti per blocchi complessi**:
-   ```php
-   // Azioni per la gestione degli utenti
-   'user_actions' => [
-       // ...
-   ],
-   ```
+## Best Practices per la Correzione
 
-### Anti-pattern da evitare
+### Struttura Espansa Obbligatoria
+Tutti i campi devono seguire la struttura espansa:
 
-1. **Evitare stringhe hardcoded per le etichette**:
-   ```php
-   // NO: Etichetta hardcoded nel codice
-   ->label('Crea nuovo')
-   
-   // SI: Riferimento alla traduzione
-   ->label(__('lang_service.actions.create.label'))
-   ```
+```php
+'fields' => [
+  'field_name' => [
+    'label' => 'Etichetta Campo',
+    'placeholder' => 'Placeholder diverso',
+    'helper_text' => 'Testo di aiuto specifico'
+  ]
+]
+```
 
-2. **Evitare di mischiare stili di array**:
-   ```php
-   // NO: Mischiare stili array()
-   'azioni' => array(
-       'crea' => [
-           'label' => 'Crea',
-       ],
-   ),
-   
-   // SI: Mantenere lo stesso stile
-   'azioni' => array(
-       'crea' => array(
-           'label' => 'Crea',
-       ),
-   ),
-   ```
+### Helper Text Rules
+- **SE** `helper_text` è uguale alla chiave → impostare `'helper_text' => ''`
+- **SE** ci sono `label` e `placeholder` → **DEVE** esserci `helper_text`
 
-3. **Non lasciare etichette non tradotte**:
-   ```php
-   // NO: Lasciare chiavi non tradotte
-   'import_valutatori_' => [
-       'label' => 'import_valutatori_',
-   ],
-   
-   // SI: Tradurre tutte le etichette
-   'import_valutatori' => [
-       'label' => 'Importa valutatori',
-   ],
-   ```
+### Naming Convention
+- Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+- Traduzioni in italiano per file `it/`
+- Traduzioni in inglese per file `en/`
 
-## Controlli preventivi
+## Documentazione Correlata
 
-Per evitare errori nei file di traduzione:
+- [Correzioni Errori Sintassi 2025](correzioni_errori_sintassi_2025.md)
+- [Traduzioni Navigation Audit](traduzioni_navigation_2025.md)
+- [Best Practices Traduzioni](../../Xot/docs/TRANSLATION_RULES.md)
 
-1. Utilizzare un editor con evidenziazione della sintassi PHP
-2. Verificare sempre la corretta chiusura delle parentesi
-3. Eseguire una validazione della sintassi PHP prima del commit:
-   ```bash
-   php -l Modules/Lang/lang/it/lang_service.php
-   ```
-4. Considerare l'uso di strumenti automatici per la formattazione
-
-## Collegamenti alla documentazione correlata
-
-- [Regole generali per i file di traduzione](/laravel/Modules/Xot/docs/translation_rules.md)
-- [Documentazione principale sulle traduzioni](/docs/translation_rules.md)
-
-*Ultimo aggiornamento: 3 Giugno 2025*
+*Ultimo aggiornamento: 6 Gennaio 2025*

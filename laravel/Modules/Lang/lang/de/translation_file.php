@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'actions' => [
         'create' => [
@@ -55,10 +57,10 @@ return [
         ],
     ],
     'navigation' => [
-        'label' => 'translation file.navigation',
+        'label' => 'Navigation Label',
         'sort' => '73',
-        'icon' => 'translation file.navigation',
-        'group' => 'translation file.navigation',
+        'icon' => 'heroicon-o-cog',
+        'group' => 'Lang',
     ],
     'model' => [
         'label' => 'translation file.model',
