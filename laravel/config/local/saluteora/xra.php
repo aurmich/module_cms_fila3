@@ -18,5 +18,5 @@ return [
     'colors' => [
         'primary' => '#FF5F7E',
     ],
-    'force_ssl' => env('FORCE_SSL', false),
+    'force_ssl' => env('FORCE_SSL',true),
 ];

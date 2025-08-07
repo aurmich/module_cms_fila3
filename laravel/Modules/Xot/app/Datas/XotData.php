@@ -66,6 +66,7 @@ class XotData extends Data implements Wireable
     {
         if (! self::$instance) {
             $data = TenantService::getConfig('xra');
+            
             self::$instance = self::from($data);
         }
 
