@@ -444,7 +444,7 @@ return [
       'description' => 'Modulo per il consenso al trattamento dei dati personali',
       'placeholder' => 'Carica il modulo Trattamento Dati compilato',
       'tooltip' => 'Upload del modulo privacy compilato e firmato',
-      'helper_text' => '',
+      'helper_text' => 'Scarica qui sotto e compila il modulo Trattamento Dati',
     ],
   ],
   'filters' => [

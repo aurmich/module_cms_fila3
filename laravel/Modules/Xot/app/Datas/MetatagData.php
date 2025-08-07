@@ -11,6 +11,7 @@ use Webmozart\Assert\Assert;
 use Filament\Support\Colors\Color;
 use Modules\Xot\Actions\File\AssetAction;
 use Modules\Tenant\Services\TenantService;
+use Modules\Xot\Actions\File\AssetPathAction;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Attributes\WithTransformer;
 use Modules\Xot\Datas\Transformers\AssetTransformer;
@@ -201,6 +202,11 @@ class MetatagData extends Data implements Wireable
         } catch (\Throwable $e) {
             return asset($this->logo_header);
         }
+    }
+
+    public function getBrandLogoPath():string
+    {
+        return app(AssetPathAction::class)->execute($this->logo_header);
     }
 
     /**
@@ -611,5 +617,13 @@ class MetatagData extends Data implements Wireable
     public function getLogoHeight(): string
     {
         return $this->getBrandLogoHeight();
+    }
+
+    public function getBrandLogoSvg(): string
+    {
+        $xot=XotData::make();
+        $path=base_path('Modules/'.$xot->main_module.'/resources/svg/logo.svg');
+        return file_get_contents($path);
+
     }
 }

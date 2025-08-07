@@ -64,11 +64,38 @@ class SpatieEmail extends TemplateMailable
 
         $this->data['logo_header']=MetatagData::make()->getBrandLogo();
         $this->data['logo_header_base64']=MetatagData::make()->getBrandLogoBase64();
+        $this->data['logo_svg']=MetatagData::make()->getBrandLogoSvg();
         
         $this->data=array_merge($this->data,$data);
         $this->setAdditionalData($this->data);
+
+        $logoPath=MetatagData::make()->getBrandLogoPath();
+        $this->embedLogo($logoPath, 'logo_header');
         
 
+    }
+
+
+    public function embedLogo(string $path, string $cid = 'logo_header'): self
+    {
+        
+
+        if (!file_exists($path)) {
+            return $this;
+        }
+        
+        $mime = File::mimeType($path);
+        $filename = basename($path);
+    
+        $attachment = Attachment::fromPath($path)
+            ->as($filename)
+            ->withMime($mime)
+            ->setContentDisposition('inline')  // <-- Metodo corretto
+        ->setContentId($cid);  
+    
+        $this->customAttachments[] = $attachment;
+    
+        return $this;
     }
 
     public function mergeData(array $data): self

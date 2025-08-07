@@ -25,6 +25,11 @@ class ThemeServiceProvider extends XotBaseThemeServiceProvider
     public function boot(): void
     {
         parent::boot();
-        // Aggiungi qui solo logica specifica del tema
+        
+        // Registra il namespace pub_theme per le traduzioni
+        $this->loadTranslationsFrom($this->module_dir.'/../lang', 'pub_theme');
+        
+        // Registra anche le view con il namespace pub_theme
+        $this->loadViewsFrom($this->module_dir.'/../resources/views', 'pub_theme');
     }
 } 

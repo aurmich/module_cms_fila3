@@ -9,6 +9,9 @@ Tutte le traduzioni utilizzano il namespace `pub_theme::` e seguono la struttura
 - I nomi dei campi utilizzano la notazione `fields.field_name.label`
 - I pulsanti utilizzano la notazione `buttons.action_name`
 
+## Documentazione Correlata
+- [Traduzioni Mancanti Appointment 2025](traduzioni_mancanti_appointment_2025.md) - Analisi e risoluzione delle traduzioni mancanti per appointment.fields.date.label e appointment.fields.time.label
+
 ## Modifiche Apportate
 
 ### 0. Pagina About e Autenticazione (21 Luglio 2024 - Aggiornamento)

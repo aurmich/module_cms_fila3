@@ -14,7 +14,7 @@ class AssetPathAction
     public function execute(string $asset): string
     {
         [$ns,$file] = explode('::', $asset);
-        $module_path = Module::getModulePath($ns).'Resources';
+        $module_path = Module::getModulePath($ns).'resources';
 
         return $module_path.'/'.$file;
     }
