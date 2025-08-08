@@ -11,4 +11,10 @@ use Modules\SaluteOra\Filament\Resources\UserResource\Pages\CreateUser;
 class CreateAdmin extends CreateUser
 {
     protected static string $resource = AdminResource::class;
+
+    public function afterCreate(): void
+    {
+       $record=$this->record;
+       $record->assignModule('salutemo');
+    }
 }
