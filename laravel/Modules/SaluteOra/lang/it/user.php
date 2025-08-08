@@ -34,7 +34,7 @@ return array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'help' => 'Nome di battesimo dell\'utente',
-      'helper_text' => 'first_name',
+      'helper_text' => '',
       'description' => 'first_name',
     ),
     'last_name' => 
@@ -42,7 +42,7 @@ return array (
       'label' => 'Cognome',
       'placeholder' => 'Inserisci il cognome',
       'help' => 'Cognome di famiglia dell\'utente',
-      'helper_text' => 'last_name',
+      'helper_text' => '',
       'description' => 'last_name',
     ),
     'email' => 
@@ -57,7 +57,7 @@ return array (
         'unique' => 'Questo indirizzo email è già in uso',
       ),
       'description' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
     ),
     'password' => 
     array (
@@ -83,7 +83,7 @@ return array (
       'placeholder' => 'Inserisci numero telefono (es. +39 333 123 4567)',
       'help' => 'Numero di telefono per contatti diretti e urgenze',
       'description' => 'phone',
-      'helper_text' => 'phone',
+      'helper_text' => '',
     ),
     'address' => 
     array (
@@ -109,7 +109,7 @@ return array (
         'admin' => 'Amministratore',
       ),
       'description' => 'type',
-      'helper_text' => 'type',
+      'helper_text' => '',
     ),
     'state' => 
     array (
@@ -125,7 +125,7 @@ return array (
         'suspended' => 'Sospeso Temporaneamente',
       ),
       'description' => 'state',
-      'helper_text' => 'state',
+      'helper_text' => '',
     ),
     'registration_number' => 
     array (

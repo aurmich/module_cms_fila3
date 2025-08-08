@@ -13,7 +13,7 @@ return array (
     'schedule' => 
     array (
       'description' => 'schedule',
-      'helper_text' => 'schedule',
+      'helper_text' => '',
       'placeholder' => 'schedule',
       'label' => 'schedule',
     ),

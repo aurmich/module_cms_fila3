@@ -98,6 +98,9 @@ Per personalizzare il tema per un progetto specifico:
 
 ## Link Utili
 
+### Template Email
+- [Integrazione Logo SVG Inline](email_template_logo_integration.md) - Documentazione sull'integrazione del logo SVG nel template email
+
 - [Documentazione Root](../../../docs/README.md)
 - [Documentazione Temi](../../../docs/theme-links.md)
 - [Documentazione CMS](../../../laravel/Modules/Cms/docs/README.md)

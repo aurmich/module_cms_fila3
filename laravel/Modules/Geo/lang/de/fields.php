@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'region' => [
-        'label' => 'Regione',
-        'placeholder' => 'Seleziona una regione',
-        'tooltip' => 'Seleziona la regione di appartenenza',
+        'label' => 'Region',
+        'placeholder' => 'Region auswählen',
+        'tooltip' => 'Wählen Sie die Region der Zugehörigkeit',
     ],
     'province' => [
-        'label' => 'Provincia',
-        'placeholder' => 'Seleziona una provincia',
-        'tooltip' => 'Seleziona la provincia di appartenenza',
+        'label' => 'Provinz',
+        'placeholder' => 'Provinz auswählen',
+        'tooltip' => 'Wählen Sie die Provinz der Zugehörigkeit',
     ],
     'city' => [
-        'label' => 'Città',
-        'placeholder' => 'Seleziona una città',
-        'tooltip' => 'Seleziona la città di appartenenza',
+        'label' => 'Stadt',
+        'placeholder' => 'Stadt auswählen',
+        'tooltip' => 'Wählen Sie die Stadt der Zugehörigkeit',
     ],
     'cap' => [
-        'label' => 'CAP',
-        'placeholder' => 'Seleziona un CAP',
-        'tooltip' => 'CAP della città selezionata',
+        'label' => 'PLZ',
+        'placeholder' => 'PLZ auswählen',
+        'tooltip' => 'PLZ der ausgewählten Stadt',
     ],
 ];

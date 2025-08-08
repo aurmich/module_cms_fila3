@@ -34,14 +34,20 @@ return [
     'region' => [
         'label' => 'Region',
         'placeholder' => 'Select a region',
+        'tooltip' => 'Region for search',
         'helper_text' => 'Choose the region to search for a practice',
         'description' => 'Geographical area of interest',
+        'icon' => 'heroicon-o-map-pin',
+        'color' => 'primary',
     ],
     'province' => [
         'label' => 'Province',
         'placeholder' => 'Select a province',
+        'tooltip' => 'Province for search',
         'helper_text' => 'Specify the province within the selected region',
         'description' => 'Province of interest for the search',
+        'icon' => 'heroicon-o-map-pin',
+        'color' => 'primary',
     ],
     'cap' => [
         'label' => 'ZIP Code',

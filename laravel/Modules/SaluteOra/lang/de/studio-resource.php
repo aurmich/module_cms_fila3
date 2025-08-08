@@ -1,54 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-    'title' => [
-        'singular' => 'Praxis Arzt',
-        'plural' => 'Studi Ärzte',
-    ],
+    'label' => 'Praxis',
+    'plural_label' => 'Praxen',
+    'navigation_group' => 'SaluteOra',
+    'navigation_icon' => 'heroicon-o-building-office',
+    'navigation_sort' => 1,
+    'description' => 'Verwaltung der medizinischen Praxen',
     'fields' => [
         'name' => [
-            'label' => 'Vorname',
-            'placeholder' => 'eingeben il nome dello studio',
+            'label' => 'Name',
+            'placeholder' => 'Name der Praxis eingeben',
         ],
         'address' => [
             'label' => 'Adresse',
-            'placeholder' => 'eingeben l\'indirizzo',
+            'placeholder' => 'Adresse eingeben',
         ],
         'city' => [
             'label' => 'Stadt',
-            'placeholder' => 'eingeben la città',
+            'placeholder' => 'Stadt eingeben',
+            'tooltip' => 'Stadt der Praxis',
+            'helper_text' => 'Geben Sie die Stadt ein, in der sich die Praxis befindet',
+            'description' => 'Stadt der Praxis für die Terminbuchung',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'postal_code' => [
-            'label' => 'CAP',
-            'placeholder' => 'eingeben il CAP',
+            'label' => 'PLZ',
+            'placeholder' => 'PLZ eingeben',
         ],
         'phone' => [
             'label' => 'Telefon',
-            'placeholder' => 'eingeben il numero di telefono',
+            'placeholder' => 'Telefonnummer eingeben',
         ],
         'email' => [
             'label' => 'E-Mail',
-            'placeholder' => 'eingeben l\'indirizzo email',
+            'placeholder' => 'E-Mail-Adresse eingeben',
         ],
         'website' => [
-            'label' => 'Sito Web',
-            'placeholder' => 'eingeben l\'URL del sito web',
+            'label' => 'Website',
+            'placeholder' => 'Website-URL eingeben',
         ],
         'registration_number' => [
-            'label' => 'Numero di Registrazione',
-            'placeholder' => 'eingeben il numero di registrazione',
+            'label' => 'Registrierungsnummer',
+            'placeholder' => 'Registrierungsnummer eingeben',
         ],
         'vat_number' => [
             'label' => 'Umsatzsteuernummer',
-            'placeholder' => 'eingeben la partita IVA',
+            'placeholder' => 'Umsatzsteuernummer eingeben',
         ],
         'description' => [
-            'label' => 'Descrizione',
-            'placeholder' => 'eingeben una descrizione dello studio',
+            'label' => 'Beschreibung',
+            'placeholder' => 'Beschreibung der Praxis eingeben',
         ],
         'opening_hours' => [
-            'label' => 'Orari di Apertura',
-            'placeholder' => 'Configura gli orari di apertura',
+            'label' => 'Öffnungszeiten',
+            'placeholder' => 'Öffnungszeiten konfigurieren',
             'days' => [
                 'monday' => 'Montag',
                 'tuesday' => 'Dienstag',
@@ -58,18 +67,18 @@ return [
                 'saturday' => 'Samstag',
                 'sunday' => 'Sonntag',
             ],
-            'open' => 'Apertura',
-            'close' => 'Chiusura',
-            'closed' => 'Chiuso',
+            'open' => 'Öffnung',
+            'close' => 'Schließung',
+            'closed' => 'Geschlossen',
         ],
         'services' => [
-            'label' => 'Servizi',
-            'placeholder' => 'auswählen i servizi offerti',
+            'label' => 'Dienstleistungen',
+            'placeholder' => 'Angebotene Dienstleistungen auswählen',
         ],
         'active' => [
             'label' => 'Aktiv',
-            'true' => 'Sì',
-            'false' => 'No',
+            'true' => 'Ja',
+            'false' => 'Nein',
         ],
     ],
     'filters' => [
@@ -82,23 +91,23 @@ return [
         ],
         'city' => [
             'label' => 'Stadt',
-            'placeholder' => 'Filtra per città',
+            'placeholder' => 'Nach Stadt filtern',
         ],
     ],
     'actions' => [
-        'activate' => 'aktivieren',
-        'deactivate' => 'Disattiva',
-        'view_doctors' => 'anzeigen Dottori',
-        'view_appointments' => 'anzeigen Appuntamenti',
+        'activate' => 'Aktivieren',
+        'deactivate' => 'Deaktivieren',
+        'view_doctors' => 'Ärzte anzeigen',
+        'view_appointments' => 'Termine anzeigen',
     ],
     'notifications' => [
-        'activated' => 'Praxis attivato erfolgreich',
-        'deactivated' => 'Praxis disattivato erfolgreich',
+        'activated' => 'Praxis erfolgreich aktiviert',
+        'deactivated' => 'Praxis erfolgreich deaktiviert',
     ],
     'sections' => [
-        'basic_info' => 'Informazioni di Base',
-        'contact_info' => 'Informazioni di Contatto',
-        'fiscal_info' => 'Informazioni Fiscali',
-        'operations' => 'Operatività',
+        'basic_info' => 'Grundinformationen',
+        'contact_info' => 'Kontaktinformationen',
+        'fiscal_info' => 'Steuerinformationen',
+        'operations' => 'Betrieb',
     ],
 ];

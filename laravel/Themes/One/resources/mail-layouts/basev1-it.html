@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ subject }}</title>
+    <style>
+        /* Reset essenziale per client email */
+        body, table, td, a { 
+            -webkit-text-size-adjust: 100%; 
+            -ms-text-size-adjust: 100%; 
+            margin: 0; 
+            padding: 0; 
+        }
+        table, td { 
+            mso-table-lspace: 0pt; 
+            mso-table-rspace: 0pt; 
+            border-collapse: collapse !important; 
+        }
+        img { 
+            -ms-interpolation-mode: bicubic; 
+            border: 0; 
+            height: auto; 
+            line-height: 100%; 
+            outline: none; 
+            text-decoration: none; 
+            display: block; 
+        }
+        
+        /* Stili base centralizzati (DRY) */
+        body { 
+            width: 100% !important; 
+            background-color: #f4f4f4; 
+            font-family: Arial, Helvetica, sans-serif; 
+            color: #111827;
+        }
+        .email-wrapper { 
+            background-color: #f4f4f4; 
+        }
+        .email-container { 
+            width: 600px; 
+            max-width: 600px; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        .email-header { 
+            padding: 20px; 
+            border-bottom: 1px solid #E5E7EB; 
+        }
+        .email-body { 
+            padding: 40px; 
+            color: #111827; 
+        }
+        .email-footer { 
+            background-color: #272C4D; 
+            color: #F9FAFB; 
+            padding: 15px 20px; 
+        }
+        .footer-links { 
+            font-size: 11px; 
+            line-height: 1.4; 
+        }
+        .footer-links a { 
+            color: #F9FAFB; 
+            text-decoration: none; 
+            padding: 0 8px; 
+        }
+        .footer-links a:hover { 
+            text-decoration: underline; 
+        }
+        .footer-logo { 
+            height: 28px; 
+            margin: 8px auto 0; 
+        }
+        
+        /* Media queries responsive ottimizzate */
+        @media screen and (max-width: 600px) {
+            .email-container { 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                border-radius: 0 !important; 
+            }
+            .email-body { 
+                padding: 20px !important; 
+            }
+            .email-header { 
+                padding: 15px !important; 
+            }
+            .footer-links { 
+                font-size: 10px !important; 
+            }
+            .footer-links a { 
+                padding: 0 4px !important; 
+                display: inline-block !important; 
+                margin: 2px 0 !important; 
+            }
+        }
+        
+        /* Dark mode migliorato con fallback sicuri */
+        @media (prefers-color-scheme: dark) {
+            .email-wrapper { 
+                background-color: #1F2937 !important; 
+            }
+            .email-container { 
+                background-color: #374151 !important; 
+            }
+            .email-body { 
+                color: #F9FAFB !important; 
+            }
+            .email-header { 
+                border-bottom-color: #4B5563 !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preheader nascosto per migliorare open rate -->
+    <div style="display:none; font-size:1px; color:#f4f4f4; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+        {{ preheader }}
+    </div>
+
+    <!-- Wrapper principale -->
+    <table role="presentation" class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                
+                <!-- Container email -->
+                <table role="presentation" class="email-container" cellpadding="0" cellspacing="0" border="0">
+                    
+                    <!-- Header con logo -->
+                    <tr>
+                        <td class="email-header" align="center">
+                            <img src="{{ logo_header }}" alt="Logo SaluteOra" width="200" style="max-width: 200px; height: auto;" />
+                        </td>
+                    </tr>
+
+                    <!-- Contenuto principale -->
+                    <tr>
+                        <td class="email-body">
+                            {{{ body }}}
+                        </td>
+                    </tr>
+
+                    <!-- Footer con links -->
+                    <tr>
+                        <td class="email-footer" align="center">
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr class="footer-links">
+                                    <td align="center">
+                                        <a href="{{ site_url }}">Home</a>
+                                    </td>
+                                    <td align="center">
+                                        <a href="{{ site_url }}/pages/progetto">Progetto</a>
+                                    </td>
+                                    <td align="center">
+                                        <a href="{{ site_url }}/pages/partners">Realizzato da</a>
+                                    </td>
+                                    <td align="center">
+                                        <a href="{{ site_url }}/pages/faqs">FAQ</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Logo footer -->
+                            <div style="text-align: center; margin-top: 8px;">
+                                <img src="{{ logo_header }}" alt="Logo SaluteOra" class="footer-logo" style="height: 28px; margin: 0 auto;" />
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -70,6 +70,9 @@ Le icone sono state standardizzate per evitare errori:
 ## Documentazione Recente
 
 ### Correzioni e Miglioramenti
+- [Audit Traduzioni Campi "Regione", "Provincia", "Accedi"](translation_audit_region_province_login.md) - **⭐ RISOLTO** - Correzione completa traduzioni campi regione, provincia e login
+- [Audit Traduzioni Campi "Città"](translation_audit_city_fields.md) - **⭐ RISOLTO** - Correzione completa traduzioni campi città in tutti i file
+- [Audit Traduzioni Find Doctor Widget](translation_audit_find_doctor_widget.md) - **⭐ RISOLTO** - Correzione completa traduzioni tedesche widget find doctor
 - [Correzione File Traduzione Edit Patient](edit_patient_translation_fix.md) - **⭐ RISOLTO** - Correzione completa file traduzioni modifica paziente
 - [Correzione File Traduzione Edit Patient Privacy](edit_patient_privacy_translation_fix.md) - **⭐ RISOLTO** - Correzione completa file traduzioni privacy paziente
 - [Correzione Duplicati Chiavi Traduzioni](duplicate-translation-keys-fix-2025-01-27.md) - **⭐ RISOLTO** - Risoluzione duplicati nelle traduzioni

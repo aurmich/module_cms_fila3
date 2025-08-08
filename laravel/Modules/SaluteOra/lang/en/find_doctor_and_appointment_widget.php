@@ -1,6 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 return [
+    'errors' => [
+        'no_doctors_in_area' => [
+            'label' => '⚠️ No doctors available in the selected area',
+        ],
+    ],
+    'success' => [
+        'doctors_in_area' => [
+            'label' => 'Available doctors',
+        ],
+    ],
     'widget' => [
         'title' => 'Find Doctor and Book Appointment',
         'description' => 'Search for a doctor in your area and book an appointment online',
@@ -51,36 +63,39 @@ return [
             'label' => 'Region',
             'placeholder' => 'Select the region',
             'helper_text' => '',
-            'help' => 'Scegli la regione dove cercare il dottore',
-            'description' => 'Prima seleziona la regione, poi potrai scegliere provincia e città',
+            'help' => 'Choose the region where to look for the doctor',
+            'description' => 'First select the region, then you can choose province and city',
         ],
         'province' => [
             'label' => 'Province',
             'placeholder' => 'Select the province',
             'helper_text' => '',
-            'help' => 'Scegli la provincia nella regione selezionata',
-            'description' => 'La provincia restringerà l\'area di ricerca',
+            'help' => 'Choose the province in the selected region',
+            'description' => 'The province will narrow down the search area',
         ],
         'city' => [
             'label' => 'City',
             'placeholder' => 'Select the city',
-            'helper_text' => '',
-            'help' => 'Scegli la città dove preferisci trovare il dottore',
-            'description' => 'La città determinerà i risultati più vicini a te',
+            'tooltip' => 'City for doctor search',
+            'helper_text' => 'Choose the city where you prefer to find the doctor',
+            'help' => 'Choose the city where you prefer to find the doctor',
+            'description' => 'The city will determine the results closest to you',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'cap' => [
             'label' => 'ZIP Code',
             'placeholder' => 'Enter the postal code',
             'helper_text' => '',
-            'help' => 'Enter il CAP per una ricerca più precisa (opzionale)',
-            'description' => 'Il CAP aiuta a trovare studi medici nella tua zona specifica',
+            'help' => 'Enter the ZIP code for a more precise search (optional)',
+            'description' => 'The ZIP code helps find medical practices in your specific area',
         ],
         'appointment_type' => [
             'label' => 'Appointment Type',
             'placeholder' => 'Select the type of visit',
             'helper_text' => '',
-            'help' => 'Scegli se hai bisogno di una prima visita, controllo o consulenza',
-            'description' => 'Il tipo di appuntamento influenza durata e costo della visita',
+            'help' => 'Choose if you need a first visit, check-up or consultation',
+            'description' => 'The appointment type affects duration and cost of the visit',
         ],
         'selected_studio' => [
             'label' => 'Selected Practice',

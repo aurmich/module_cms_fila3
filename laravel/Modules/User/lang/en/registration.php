@@ -34,8 +34,11 @@ return [
         'city' => [
             'label' => 'City',
             'placeholder' => 'Enter your city',
-            'tooltip' => 'Enter your city of residence',
-            'help' => 'Città di residenza o domicilio',
+            'tooltip' => 'City of residence or location',
+            'helper_text' => 'Enter the name of the city where you reside or are located',
+            'description' => 'Field to specify the user\'s city of residence for registration',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'postal_code' => [
             'label' => 'Postal Code',
@@ -45,7 +48,11 @@ return [
         'province' => [
             'label' => 'Province',
             'placeholder' => 'Enter province',
-            'tooltip' => 'Enter your province of residence',
+            'tooltip' => 'Province of residence or state',
+            'helper_text' => 'Enter the name of your province or state of residence',
+            'description' => 'Field to specify the user\'s province or state for registration and location purposes',
+            'icon' => 'heroicon-o-map',
+            'color' => 'secondary',
         ],
         'country' => [
             'label' => 'Country',
@@ -82,9 +89,13 @@ return [
             'help' => 'Il tuo nome di battesimo',
         ],
         'state' => [
-            'label' => 'Provincia/Stato',
-            'placeholder' => 'Inserisci la provincia o stato',
-            'help' => 'Provincia italiana o stato se estero',
+            'label' => 'Province/State',
+            'placeholder' => 'Enter province or state',
+            'tooltip' => 'Italian province or foreign state',
+            'help' => 'Italian province or state if abroad',
+            'description' => 'Province for Italian addresses, state for foreign ones',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'zip' => [
             'label' => 'CAP',
@@ -102,9 +113,13 @@ return [
             'help' => 'La tua data di nascita nel formato gg/mm/aaaa',
         ],
         'birth_place' => [
-            'label' => 'Luogo di Nascita',
-            'placeholder' => 'Inserisci il luogo di nascita',
-            'help' => 'Città e provincia di nascita',
+            'label' => 'Place of Birth',
+            'placeholder' => 'Enter place of birth',
+            'tooltip' => 'City and province/state of birth',
+            'help' => 'City and province/state of birth',
+            'description' => 'Place of birth for demographic documentation',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'gender' => [
             'label' => 'Genere',

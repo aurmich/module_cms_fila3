@@ -185,32 +185,26 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
      */
     protected function getSearchStepSchema(): array
     {
-        /*
-        return [
-            'region' => Select::make('region')
-                ->options(fn(Get $get)=>Region::getOptions($get))
-                ->searchable()
-                ->required()
-                ->live()
-                ->afterStateUpdated(function (Set $set){
-                    $set('province', null);
-                    $set('cap', null);
-                }),
-            'province' => Select::make('province')
-                ->options(fn(Get $get)=>Province::getOptions($get))
-                ->searchable()
-                ->required()
-                ->live()
-                ->afterStateUpdated(fn (Set $set) => $set('cap', null)),
-            'cap' => Select::make('cap')
-                ->options(fn(Get $get)=>Locality::getPostalCodeOptions($get))
-                ->searchable()
-                ->required()
-                ->live()
-                ->disabled(fn (Get $get) => !$get('region') || !$get('province')),
-        ];
-        */
-        return AddressResource::getSearchStep();
+        
+        $schema= AddressResource::getSearchStep();
+        unset($schema['locality']);
+
+        $schema['message']=Placeholder::make('')
+        //->content('⚠️ Non puoi procedere oltre con il tipo "Ospite"')
+        ->content(function ($get){
+            $postal_code=$get('postal_code');
+            if(!$postal_code){
+                return '';
+            }
+            $count= Studio::ofCap($postal_code)->whereHas('doctors')->count();
+            if($count==0){
+                return static::trans('errors.no_doctors_in_area.label');
+            }
+            return strval($count).' '.static::trans('success.doctors_in_area.label');
+        })
+        //->visible(fn (Get $get): bool => $get('user_type') === 'guest')
+        ;
+        return $schema;
     }
 
     protected function getStudioStepSchema(): array
@@ -219,7 +213,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         return [
             
             RadioCollection::make('studio_id')
-                ->options(fn($get) => Studio::ofCap($get('cap'))->whereHas('doctors')->get()) // La tua collection
+                ->options(fn($get) => Studio::ofCap($get('postal_code'))->whereHas('doctors')->get()) // La tua collection
                 
                 ->itemView('pub_theme::filament.forms.components.studio-item') // La tua blade personalizzata
                 //->emptyView('pub_theme::filament.forms.components.studio-empty') // La tua blade personalizzata
@@ -319,22 +313,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         return $options;
     }
 
-    /**
-     * Ottiene le date non disponibili per gli appuntamenti
-     *
-     * @return array<string> Date formattate nel formato Y-m-d
-     */
-    protected function getDisabledDates(): array
-    {
-        return [
-            '2025-06-01', // Domenica
-            '2025-06-02', // Festa della Repubblica  
-            '2025-06-08', // Domenica
-            '2025-06-15', // Domenica
-            '2025-06-22', // Domenica
-            '2025-06-29', // Domenica
-        ];
-    }
+   
 
     /**
      * Aggiorna gli slot orari disponibili in base alla data selezionata

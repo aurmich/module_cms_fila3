@@ -44,38 +44,39 @@
                     <!-- Header con Logo -->
                     
                     <tr>
+                        
                         <td style="padding: 20px; text-align: center; border-bottom: 1px solid #E5E7EB;">
-                            <img src="cid:logo_header" alt="Logo" style="max-width: 200px;">
+                            <img src="{{ logo_header }}" alt="Logo" style="max-width: 200px; height: auto; display: block; margin: 0 auto;">
                         </td>
                     </tr>
                     <!-- Contenuto Principale -->
                     <tr>
                         <td style="padding: 40px; color: black;" class="email-text">
-                            {{{body}}}
+                            {{{ body }}}
                         </td>
                     </tr>
 
                     <!-- Footer -->
                     <tr>
                         <td style="padding: 10px; text-align: center; background-color: #272C4D; color: #F9FAFB; display: flex; flex-direction: row; justify-content: center">
-                            <img style="height: 32px;" src="{{ asset('/img/logo.png') }}"/>
+                            <img style="height: 32px;" src="{{ logo_header }}"/>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px; text-align: center; background-color: #272C4D; color: #F9FAFB; display: flex; flex-direction: row; justify-content: center">
                              <p style="margin: 10px">
-                                <a href="{{ company_url }}" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Home</a>
+                                <a href="{{ site_url }}" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Home</a>
                             </p>
                             <p style="margin: 10px">
-                                <a href="{{ company_url }}" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Progetto</a>
+                                <a href="{{ site_url }}/pages/progetto" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Progetto</a>
                             </p>
                             <p style="margin: 10px">
-                                <a href="{{ company_url }}" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Partners</a>
+                                <a href="{{ site_url }}/pages/partners" style="color: #F9FAFB; text-decoration: none; font-size: 10px">Realizzato da</a>
                             </p>
                              <p style="margin: 10px">
-                                <a href="{{ company_url }}" style="color: #F9FAFB; text-decoration: none; font-size: 10px">FAQ'S</a>
+                                <a href="{{ site_url }}/pages/faqs" style="color: #F9FAFB; text-decoration: none; font-size: 10px">FAQ'S</a>
                             </p>
-                            {{{ logo_svg }}}
+                           
                         </td>
                     </tr>
                 </table>

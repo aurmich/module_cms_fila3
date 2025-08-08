@@ -55,6 +55,9 @@ trait TransTrait
         if(Str::startsWith($key,'edit_')){
             $key=Str::after($key,'edit_');
         }
+        if(Str::endsWith($key,'_widget')){
+            $key=Str::beforeLast($key,'_widget');
+        }
         return $key;
     }
 

@@ -141,7 +141,7 @@ return array (
     'value' => 
     array (
       'description' => 'value',
-      'helper_text' => 'value',
+      'helper_text' => '',
       'label' => 'value',
       'placeholder' => 'value',
     ),
@@ -153,14 +153,14 @@ return array (
     array (
       'label' => 'type',
       'description' => 'type',
-      'helper_text' => 'type',
+      'helper_text' => '',
       'placeholder' => 'type',
     ),
     'state' => 
     array (
       'label' => 'state',
       'description' => 'state',
-      'helper_text' => 'state',
+      'helper_text' => '',
       'placeholder' => 'state',
     ),
     'create' => 

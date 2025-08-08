@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'login' => [
-        'title' => 'Accedi',
-        'email' => 'Email',
-        'password' => 'Password',
-        'remember_me' => 'Ricordami',
-        'forgot_password' => 'Password dimenticata?',
-        'submit' => 'Accedi',
-        'or' => 'oppure',
-        'create_account' => 'crea un account',
-        'link' => 'Accedi',
+        'title' => 'Anmelden',
+        'email' => 'E-Mail',
+        'password' => 'Passwort',
+        'remember_me' => 'Angemeldet bleiben',
+        'forgot_password' => 'Passwort vergessen?',
+        'submit' => 'Anmelden',
+        'or' => 'oder',
+        'create_account' => 'Konto erstellen',
+        'link' => 'Anmelden',
     ],
     'register' => [
         'title' => 'Registrati',
@@ -33,7 +35,7 @@ return [
         'profile' => 'Profilo',
         'settings' => 'Impostazioni',
         'logout' => 'Logout',
-        'login_link' => 'Accedi',
+        'login_link' => 'Anmelden',
         'register_link' => 'Registrati',
     ],
     'logout' => [

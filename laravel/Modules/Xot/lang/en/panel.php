@@ -39,12 +39,12 @@ return [
         'confirmed' => 'La conferma non corrisponde',
     ],
     'auth' => [
-        'login' => 'Accedi',
-        'logout' => 'Esci',
-        'register' => 'Registrati',
-        'forgot_password' => 'Password dimenticata?',
-        'reset_password' => 'Reimposta password',
-        'remember_me' => 'Ricordami',
+        'login' => 'Login',
+        'logout' => 'Logout',
+        'register' => 'Register',
+        'forgot_password' => 'Forgot password?',
+        'reset_password' => 'Reset password',
+        'remember_me' => 'Remember me',
     ],
     'profile' => [
         'title' => 'Profilo',

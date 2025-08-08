@@ -81,6 +81,7 @@ class AddressResource extends XotBaseResource
                         $set('locality', null);
                     })
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') )
+                    ->placeholder(__('filament-forms::components.select.placeholder'))
                 ,
                
 
@@ -92,14 +93,16 @@ class AddressResource extends XotBaseResource
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2'))
                     ->afterStateUpdated(function (Set $set){
                         $set('postal_code', null);
-                    }),
+                    })
+                    ->placeholder(__('filament-forms::components.select.placeholder')),
 
                 'postal_code' => Select::make('postal_code')
                     ->options(fn(Get $get)=>Locality::getPostalCodeOptions($get))
                     ->searchable()
                     ->required()
                     ->live()
-                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2')),
+                    ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2'))
+                    ->placeholder(__('filament-forms::components.select.placeholder')),
 
             
 
@@ -148,6 +151,10 @@ class AddressResource extends XotBaseResource
                     $set('locality', null);
                 })
                 ->disabled(fn (Get $get) => !$get('region') )
+                ->placeholder(__('filament-forms::components.select.placeholder'))
+                //->extraAttributes([
+                    //'class' => 'h-9'
+                //])
             ,
            
 
@@ -157,6 +164,7 @@ class AddressResource extends XotBaseResource
                 ->required()
                 ->live()
                 ->disabled(fn (Get $get) => !$get('region') || !$get('province'))
+                ->placeholder(__('filament-forms::components.select.placeholder'))
                 ->afterStateUpdated(function (Set $set){
                     $set('postal_code', null);
                 }),
@@ -166,7 +174,8 @@ class AddressResource extends XotBaseResource
                 ->searchable()
                 ->required()
                 ->live()
-                ->disabled(fn (Get $get) => !$get('region') || !$get('province')),
+                ->disabled(fn (Get $get) => !$get('region') || !$get('province'))
+                ->placeholder(__('filament-forms::components.select.placeholder')),
         ];
     }
 

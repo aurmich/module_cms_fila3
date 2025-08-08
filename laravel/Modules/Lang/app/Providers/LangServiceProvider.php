@@ -23,6 +23,7 @@ use Modules\Lang\Services\TranslatorService;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\Xot\Services\BladeService;
 use Webmozart\Assert\Assert;
+use Filament\Forms\Components\Select;
 
 /**
  * ---.
@@ -77,7 +78,10 @@ class LangServiceProvider extends XotBaseServiceProvider
 
     public function registerFilamentLabel(): void
     {
-
+        Select::configureUsing(function (Select $component) {
+            $component->placeholder(__('filament-forms::components.select.placeholder'));
+            return $component;
+        });
         Field::configureUsing(function (Field $component) {
             $component = app(AutoLabelAction::class)->execute($component);
             Assert::isInstanceOf($component, Field::class);

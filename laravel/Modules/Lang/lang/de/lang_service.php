@@ -53,9 +53,13 @@ return [
             'help' => 'Numero civico dell\'indirizzo specificato',
         ],
         'province' => [
-            'label' => 'Provincia',
-            'placeholder' => 'Seleziona provincia',
-            'help' => 'Provincia di appartenenza dell\'indirizzo',
+            'label' => 'Provinz',
+            'placeholder' => 'Provinz auswählen',
+            'tooltip' => 'Provinz der Zugehörigkeit',
+            'help' => 'Provinz der Zugehörigkeit der Adresse',
+            'description' => 'Provinz für Dokumentation und Statistiken',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'postal_code' => [
             'label' => 'Codice Postale',

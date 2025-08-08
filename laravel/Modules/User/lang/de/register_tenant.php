@@ -53,13 +53,17 @@ return [
             ],
         ],
         'address' => [
-            'label' => 'Indirizzo Completo Studio',
-            'placeholder' => 'Via/Piazza Nome Strada, Numero Civico, CAP Città (Provincia)',
-            'help' => 'Indirizzo fisico completo dello studio medico comprensivo di CAP e provincia',
+            'label' => 'Vollständige Praxisadresse',
+            'placeholder' => 'Straße/Platz Straßenname, Hausnummer, PLZ Stadt (Provinz)',
+            'tooltip' => 'Vollständige Adresse der medizinischen Praxis',
+            'helper_text' => 'Geben Sie die vollständige physische Adresse der medizinischen Praxis einschließlich Postleitzahl und Provinz ein',
+            'description' => 'Vollständige Adresse der medizinischen Praxis für die Registrierung des Mandanten',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
             'validation' => [
-                'required' => 'L\'indirizzo dello studio è obbligatorio',
-                'min' => 'L\'indirizzo deve contenere almeno 15 caratteri',
-                'max' => 'L\'indirizzo non può superare i 300 caratteri',
+                'required' => 'Die Praxisadresse ist erforderlich',
+                'min' => 'Die Adresse muss mindestens 15 Zeichen enthalten',
+                'max' => 'Die Adresse darf nicht mehr als 300 Zeichen haben',
             ],
         ],
         'director_name' => [

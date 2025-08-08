@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 return [
     'login' => [
-        'title' => 'Accedi al tuo account',
-        'or' => 'oppure',
-        'create_account' => 'crea un nuovo account',
-        'forgot_password' => 'Hai dimenticato la password?',
-        'back_to_login' => 'torna al login',
-        'email' => 'Indirizzo email',
-        'password' => 'Password',
-        'remember_me' => 'Ricordami',
-        'login_button' => 'Accedi',
+        'title' => 'Anmelden bei Ihrem Konto',
+        'or' => 'oder',
+        'create_account' => 'neues Konto erstellen',
+        'forgot_password' => 'Passwort vergessen?',
+        'back_to_login' => 'zurück zum Login',
+        'email' => 'E-Mail-Adresse',
+        'password' => 'Passwort',
+        'remember_me' => 'Angemeldet bleiben',
+        'login_button' => 'Anmelden',
     ],
     'register' => [
         'title' => 'Crea il tuo account',
         'welcome_message' => 'Benvenuto in <span class=\\\"font-bold\\\">SaluteOra</span>',
         'description' => 'Crea il tuo account per accedere a tutti i servizi',
-        'already_have_account' => 'Hai già un account?',
-        'login_link' => 'accedi qui',
+        'already_have_account' => 'Haben Sie bereits ein Konto?',
+        'login_link' => 'hier anmelden',
         'register_button' => 'Registrati',
         'already_registered' => 'Sei già registrato?',
         'doctor' => [

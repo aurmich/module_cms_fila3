@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'region' => [
-        'label' => 'Regione',
-        'placeholder' => 'Seleziona una regione',
-        'help' => 'Scegli la regione di interesse',
+        'label' => 'Region',
+        'placeholder' => 'Select a region',
+        'help' => 'Choose the region of interest',
     ],
     'province' => [
-        'label' => 'Provincia',
-        'placeholder' => 'Seleziona una provincia',
-        'help' => 'Prima seleziona una regione',
+        'label' => 'Province',
+        'placeholder' => 'Select a province',
+        'help' => 'First select a region',
     ],
     'cap' => [
-        'label' => 'CAP',
-        'placeholder' => 'Seleziona un CAP',
-        'help' => 'Prima seleziona regione e provincia',
+        'label' => 'Postal Code',
+        'placeholder' => 'Select a postal code',
+        'help' => 'First select region and province',
     ],
     'validation' => [
-        'region_required_for_province' => 'Devi selezionare una regione prima di scegliere la provincia',
-        'region_province_required_for_cap' => 'Devi selezionare regione e provincia prima di scegliere il CAP',
+        'region_required_for_province' => 'You must select a region before choosing the province',
+        'region_province_required_for_cap' => 'You must select region and province before choosing the postal code',
     ],
 ];

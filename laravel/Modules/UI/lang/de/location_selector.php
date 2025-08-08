@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'region' => [
-        'label' => 'Regione',
-        'placeholder' => 'Seleziona una regione',
-        'help' => 'Scegli la regione di interesse',
+        'label' => 'Region',
+        'placeholder' => 'Region auswählen',
+        'help' => 'Wählen Sie die Region von Interesse',
     ],
     'province' => [
-        'label' => 'Provincia',
-        'placeholder' => 'Seleziona una provincia',
-        'help' => 'Prima seleziona una regione',
+        'label' => 'Provinz',
+        'placeholder' => 'Provinz auswählen',
+        'help' => 'Zuerst eine Region auswählen',
     ],
     'cap' => [
-        'label' => 'CAP',
-        'placeholder' => 'Seleziona un CAP',
-        'help' => 'Prima seleziona regione e provincia',
+        'label' => 'PLZ',
+        'placeholder' => 'PLZ auswählen',
+        'help' => 'Zuerst Region und Provinz auswählen',
     ],
     'validation' => [
-        'region_required_for_province' => 'Devi selezionare una regione prima di scegliere la provincia',
-        'region_province_required_for_cap' => 'Devi selezionare regione e provincia prima di scegliere il CAP',
+        'region_required_for_province' => 'Sie müssen eine Region auswählen, bevor Sie die Provinz wählen',
+        'region_province_required_for_cap' => 'Sie müssen Region und Provinz auswählen, bevor Sie die PLZ wählen',
     ],
 ];

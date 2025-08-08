@@ -53,13 +53,17 @@ return [
             ],
         ],
         'address' => [
-            'label' => 'Indirizzo Completo Studio',
-            'placeholder' => 'Via/Piazza Nome Strada, Numero Civico, CAP Città (Provincia)',
-            'help' => 'Indirizzo fisico completo dello studio medico comprensivo di CAP e provincia',
+            'label' => 'Complete Practice Address',
+            'placeholder' => 'Street/Plaza Street Name, Civic Number, Postal Code City (Province)',
+            'tooltip' => 'Complete physical address of the medical practice',
+            'help' => 'Complete physical address of the medical practice including postal code and province',
+            'description' => 'Complete address of the practice for tenant registration',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
             'validation' => [
-                'required' => 'L\'indirizzo dello studio è obbligatorio',
-                'min' => 'L\'indirizzo deve contenere almeno 15 caratteri',
-                'max' => 'L\'indirizzo non può superare i 300 caratteri',
+                'required' => 'Practice address is required',
+                'min' => 'Address must contain at least 15 characters',
+                'max' => 'Address cannot exceed 300 characters',
             ],
         ],
         'director_name' => [

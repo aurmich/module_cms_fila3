@@ -235,6 +235,17 @@ return [
         'search_required' => 'Compila i campi di ricerca per iniziare',
     ],
     
+    'errors' => [
+        'no_doctors_in_area' => [
+            'label' => '⚠️ Nessun dottore disponibile nell\'area selezionata',
+        ],
+    ],
+    'success' => [
+        'doctors_in_area' => [
+            'label' => 'Dottori disponibili',
+        ],
+    ],
+    
     'validation' => [
         'specialization_required' => 'La specializzazione è obbligatoria',
         'location_required' => 'La località è obbligatoria',

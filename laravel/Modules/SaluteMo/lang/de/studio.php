@@ -52,9 +52,13 @@ return [
             'description' => 'name',
         ],
         'address' => [
-            'label' => 'Indirizzo',
-            'placeholder' => 'Via Roma, 123 - 41121 Modena (MO)',
-            'helper_text' => 'Indirizzo completo dello studio con CAP e provincia',
+            'label' => 'Adresse',
+            'placeholder' => 'Musterstraße 123 - 12345 Berlin (BE)',
+            'tooltip' => 'Vollständige Praxisadresse',
+            'helper_text' => 'Vollständige Adresse der Praxis mit PLZ und Bundesland',
+            'description' => 'Vollständige Adresse der Praxis für die Registrierung',
+            'icon' => 'heroicon-o-map-pin',
+            'color' => 'primary',
         ],
         'phone' => [
             'label' => 'Telefono',

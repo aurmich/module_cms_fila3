@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'region' => [
-        'label' => 'Regione',
-        'placeholder' => 'Seleziona una regione',
-        'tooltip' => 'Seleziona la regione di appartenenza',
+        'label' => 'Region',
+        'placeholder' => 'Select a region',
+        'tooltip' => 'Select the region of belonging',
     ],
     'province' => [
-        'label' => 'Provincia',
-        'placeholder' => 'Seleziona una provincia',
-        'tooltip' => 'Seleziona la provincia di appartenenza',
+        'label' => 'Province',
+        'placeholder' => 'Select a province',
+        'tooltip' => 'Select the province of belonging',
     ],
     'city' => [
-        'label' => 'Città',
-        'placeholder' => 'Seleziona una città',
-        'tooltip' => 'Seleziona la città di appartenenza',
+        'label' => 'City',
+        'placeholder' => 'Select a city',
+        'tooltip' => 'Select the city of belonging',
     ],
     'cap' => [
-        'label' => 'CAP',
-        'placeholder' => 'Seleziona un CAP',
-        'tooltip' => 'CAP della città selezionata',
+        'label' => 'Postal Code',
+        'placeholder' => 'Select a postal code',
+        'tooltip' => 'Postal code of the selected city',
     ],
 ];

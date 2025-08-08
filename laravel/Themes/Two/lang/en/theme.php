@@ -10,7 +10,7 @@ return [
         'about' => 'Chi Siamo',
         'services' => 'Servizi',
         'contact' => 'Contatti',
-        'login' => 'Accedi',
+        'login' => 'Login',
         'register' => 'Registrati',
         'profile' => 'Profilo',
         'logout' => 'Esci',

@@ -57,10 +57,11 @@ class SpatieEmail extends TemplateMailable
         ]);
 
         $tpl->increment('counter');
-        
+        $lang=app()->getLocale();
         $data = app(GetSicureArrayByModelAction::class)->execute($record);
+        $this->data['lang']=$lang;
         $this->data['login_url']=route('login');
-        $this->data['site_url']=url('/');
+        $this->data['site_url']=url('/'.$lang);
 
         $this->data['logo_header']=MetatagData::make()->getBrandLogo();
         $this->data['logo_header_base64']=MetatagData::make()->getBrandLogoBase64();
@@ -90,8 +91,7 @@ class SpatieEmail extends TemplateMailable
         $attachment = Attachment::fromPath($path)
             ->as($filename)
             ->withMime($mime)
-            ->setContentDisposition('inline')  // <-- Metodo corretto
-        ->setContentId($cid);  
+            ;  
     
         $this->customAttachments[] = $attachment;
     

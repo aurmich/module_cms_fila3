@@ -1,50 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-    'title' => 'Cerca un dentista',
+    'title' => 'Zahnarzt finden',
     'messages' => [
-        'loading_available_slots' => 'Caricamento slot disponibili...',
-        'appointment_booked_successfully' => 'Appuntamento prenotato con successo',
-        'error_booking_appointment' => 'Errore durante la prenotazione',
+        'loading_available_slots' => 'Verfügbare Termine werden geladen...',
+        'appointment_booked_successfully' => 'Termin erfolgreich gebucht',
+        'error_booking_appointment' => 'Fehler bei der Terminbuchung',
     ],
     'fields' => [
         'region' => [
-            'label' => 'Regione',
-            'placeholder' => 'Seleziona una regione',
+            'label' => 'Region',
+            'placeholder' => 'Region auswählen',
         ],
         'province' => [
-            'label' => 'Provincia',
-            'placeholder' => 'Seleziona una provincia',
+            'label' => 'Provinz',
+            'placeholder' => 'Provinz auswählen',
         ],
         'city' => [
-            'label' => 'Città',
-            'placeholder' => 'Seleziona una città',
+            'label' => 'Stadt',
+            'placeholder' => 'Stadt auswählen',
         ],
         'cap' => [
-            'label' => 'CAP',
-            'placeholder' => 'Seleziona un CAP',
+            'label' => 'PLZ',
+            'placeholder' => 'PLZ auswählen',
         ],
         'date' => [
-            'label' => 'Data',
-            'placeholder' => 'Seleziona una data',
+            'label' => 'Datum',
+            'placeholder' => 'Datum auswählen',
         ],
         'time' => [
-            'label' => 'Orario',
-            'placeholder' => 'Seleziona un orario',
+            'label' => 'Uhrzeit',
+            'placeholder' => 'Uhrzeit auswählen',
         ],
     ],
     'steps' => [
         'search' => [
-            'label' => 'Ricerca',
-            'description' => 'Trova un dentista nella tua zona',
+            'label' => 'Suche',
+            'description' => 'Finden Sie einen Zahnarzt in Ihrer Nähe',
         ],
         'date_time' => [
-            'label' => 'Data e Ora',
-            'description' => 'Scegli data e ora dell\'appuntamento',
+            'label' => 'Datum und Uhrzeit',
+            'description' => 'Wählen Sie Datum und Uhrzeit des Termins',
         ],
         'confirmation' => [
-            'label' => 'Conferma',
-            'description' => 'Conferma la prenotazione',
+            'label' => 'Bestätigung',
+            'description' => 'Bestätigen Sie die Buchung',
         ],
     ],
 ];
