@@ -114,7 +114,7 @@ return [
             'description' => 'Form for consent to personal data processing',
             'placeholder' => 'Upload completed Data Processing form',
             'tooltip' => 'Upload of completed and signed privacy form',
-            'helper_text' => '',
+            'helper_text' => 'Download below and complete the Data Processing form',
         ],
         'id' => [
             'label' => 'ID',

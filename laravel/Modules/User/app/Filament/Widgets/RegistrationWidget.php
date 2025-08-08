@@ -26,6 +26,7 @@ use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Filament\Actions\Concerns\InteractsWithRecord;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 class RegistrationWidget extends XotBaseWidget
@@ -62,6 +63,7 @@ class RegistrationWidget extends XotBaseWidget
 
     public function getFormModel(): Model
     {
+       
         $data = request()->all();
         $email = Arr::get($data, 'email');
         $token = Arr::get($data, 'token');
@@ -104,6 +106,8 @@ class RegistrationWidget extends XotBaseWidget
      */
     public function register(): \Illuminate\Http\RedirectResponse|\Livewire\Features\SupportRedirects\Redirector
     {
+        $lang=app()->getLocale();
+        
         $data = $this->form->getState();
         
         $data=array_merge($this->data ?? [],$data);
@@ -111,7 +115,12 @@ class RegistrationWidget extends XotBaseWidget
        
         $user = app($this->action)->execute($record, $data);
 
-        return redirect()->route('pages.view', ['slug' => $this->type . '_register_complete']);
+        $lang=app()->getLocale();
+        $route=route('pages.view', ['slug' => $this->type . '_register_complete']);
+        $route=LaravelLocalization::localizeUrl($route,$lang);
+        
+        //return redirect()->route('pages.view', ['slug' => $this->type . '_register_complete','lang'=>$lang]);
+        return redirect($route);
     }
 
     

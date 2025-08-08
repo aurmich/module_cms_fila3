@@ -114,7 +114,7 @@ return [
       'description' => 'Formular für die Einwilligung zur Verarbeitung personenbezogener Daten',
       'placeholder' => 'Lade das ausgefüllte Datenverarbeitungsformular hoch',
       'tooltip' => 'Upload des ausgefüllten und unterzeichneten Datenschutzformulars',
-      'helper_text' => '',
+            'helper_text' => 'Laden Sie unten das Datenverarbeitungsformular herunter und füllen Sie es aus',
     ],
     'download_privacy_form' => [
       'label' => 'Datenschutzformular herunterladen',
