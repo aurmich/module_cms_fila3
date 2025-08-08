@@ -9,6 +9,9 @@ return [
             'placeholder' => 'Reinserisci la nuova password',
             'helper_text' => '',
             'description' => 'Digita nuovamente la nuova password per conferma',
+            'tooltip' => 'Ripeti la nuova password per sicurezza',
+            'icon' => 'heroicon-o-lock-closed',
+            'color' => 'warning',
         ],
     ],
 ];

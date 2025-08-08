@@ -7,6 +7,9 @@ return [
             'placeholder' => 'Re-enter your new password',
             'helper_text' => '',
             'description' => 'Please type the new password again to confirm',
+            'tooltip' => 'Repeat the new password for security',
+            'icon' => 'heroicon-o-lock-closed',
+            'color' => 'warning',
         ],
     ],
 ];

@@ -82,7 +82,7 @@ class PatientResource extends XotBaseResource
 
     
 
-    protected static function getPersonalDataStepSchema(): array
+    public static function getPersonalDataStepSchema(): array
     {
         $family_members_options=[
             '1' => 'Sola',
