@@ -29,6 +29,7 @@ use Filament\Forms\Components\Placeholder;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Modules\UI\Filament\Forms\Components\OpeningHoursField;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * DoctorAvailabilitiesWidget
@@ -117,6 +118,7 @@ class ProfileWidget extends XotBaseWidget
             ->fillForm(fn()=>$this->user->attributesToArray())
             ->action(function(array $data){
                 $this->user->update($data);
+                Cache::flush();
             })
             ;
     }

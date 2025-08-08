@@ -223,20 +223,6 @@ return [
             'icon' => 'heroicon-o-document-text',
             'color' => 'gray',
         ],
-        'status' => [
-            'label' => 'Status',
-            'placeholder' => 'Status auswählen',
-            'help' => 'Aktueller Status des Termins',
-            'tooltip' => 'Der aktuelle Status des Termins',
-            'helper_text' => '',
-        ],
-        'notes' => [
-            'label' => 'Notizen',
-            'placeholder' => 'Zusätzliche Notizen eingeben...',
-            'help' => 'Zusätzliche Notizen oder Kommentare zum Termin',
-            'tooltip' => 'Zusätzliche Informationen zum Termin',
-            'helper_text' => '',
-        ],
         'is_emergency' => [
             'label' => 'Notfall',
             'help' => 'Gibt an, ob es sich um einen Notfalltermin handelt',
