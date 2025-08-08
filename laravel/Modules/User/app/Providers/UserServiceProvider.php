@@ -108,6 +108,8 @@ class UserServiceProvider extends XotBaseServiceProvider
             return $email;
         });
 
+        
+        /*
         $salutation = __('user::verify_email.salutation', ['app_name' => $app_name]);
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) use ($salutation): MailMessage {
             return (new MailMessage)
@@ -118,6 +120,20 @@ class UserServiceProvider extends XotBaseServiceProvider
                 ->action(__('user::verify_email.action'), $url)
                 ->line(__('user::verify_email.line2'))
                 ->salutation($salutation);
+        });
+        */
+        VerifyEmail::toMailUsing(function ($notifiable, string $url): SpatieEmail {
+            Assert::isInstanceOf($notifiable, Model::class);
+            $email = new SpatieEmail($notifiable, 'verify-email');
+            $email->mergeData([
+                'verification_url' => $url,
+            ]);
+            if (method_exists($notifiable, 'getEmailForPasswordReset')) {
+                $email->to($notifiable->getEmailForPasswordReset());
+            } elseif (isset($notifiable->email)) {
+                $email->to($notifiable->email);
+            }
+            return $email;
         });
     }
 

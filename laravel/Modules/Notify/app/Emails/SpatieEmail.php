@@ -86,6 +86,9 @@ class SpatieEmail extends TemplateMailable
         }
         
         $mime = File::mimeType($path);
+        if(!is_string($mime)){
+            $mime='application/octet-stream';
+        }
         $filename = basename($path);
     
         $attachment = Attachment::fromPath($path)

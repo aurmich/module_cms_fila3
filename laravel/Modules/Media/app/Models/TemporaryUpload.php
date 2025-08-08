@@ -56,7 +56,7 @@ class TemporaryUpload extends Model implements HasMedia
     protected $connection = 'media';
 
     /**
-     * @var array<string>|bool
+     * @var array<string>
      */
     protected $guarded = [];
 

@@ -15,6 +15,7 @@ use Modules\Xot\Actions\File\AssetPathAction;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Attributes\WithTransformer;
 use Modules\Xot\Datas\Transformers\AssetTransformer;
+use function Safe\file_get_contents;
 
 /**
  * Class MetatagData

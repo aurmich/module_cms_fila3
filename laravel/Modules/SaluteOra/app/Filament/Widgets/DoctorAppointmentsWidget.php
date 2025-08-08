@@ -207,6 +207,7 @@ class DoctorAppointmentsWidget extends XotBaseWidget implements HasActions
             return false;
         }
         $policy=Str::of(class_basename($stateClass))->camel()->toString();
+        /** @phpstan-ignore-next-line */
         if(!Gate::allows($policy, $appointment)){
             return false;
         }

@@ -400,14 +400,6 @@ return [
         ],
     ],
     'filters' => [
-        'active' => [
-            'label' => 'Status',
-            'options' => [
-                'all' => 'Alle Praxen',
-                'active' => 'Nur aktive Praxen',
-                'inactive' => 'Nur inaktive Praxen',
-            ],
-        ],
         'city' => [
             'label' => 'Nach Stadt filtern',
             'placeholder' => 'Stadt auswählen',
