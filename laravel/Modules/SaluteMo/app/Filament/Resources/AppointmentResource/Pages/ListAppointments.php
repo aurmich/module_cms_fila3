@@ -59,7 +59,15 @@ class ListAppointments extends XotBaseListRecords
             //'states' => IconStateSplitColumn::make('states')->stateClass(AppointmentState::class, Appointment::class),
 
 
-            'patient.full_name' => TextColumn::make('patient.full_name'),
+            'patient.full_name' => TextColumn::make('patient.full_name')
+                ->searchable()
+                ->sortable(),
+            'doctor.full_name' => TextColumn::make('doctor.full_name')
+                ->searchable()
+                ->sortable(),
+            'studio.name' => TextColumn::make('studio.name')
+                ->searchable()
+                ->sortable(),
             'title' => TextColumn::make('title')
                 ->sortable()
                 ->searchable(),

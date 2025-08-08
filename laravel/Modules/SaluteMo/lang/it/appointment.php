@@ -174,6 +174,7 @@ return array (
       'help' => 'Note o commenti aggiuntivi sull\'appuntamento',
       'tooltip' => 'Informazioni aggiuntive sull\'appuntamento',
       'helper_text' => '',
+      'description' => 'notes',
     ),
     'treatment_plan' => 
     array (
@@ -402,6 +403,20 @@ return array (
     'report' => 
     array (
       'label' => 'report',
+    ),
+    'studio' => 
+    array (
+      'name' => 
+      array (
+        'label' => 'Studio',
+      ),
+    ),
+    'doctor' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Nome Completo Dottore',
+      ),
     ),
   ),
   'statuses' => 
