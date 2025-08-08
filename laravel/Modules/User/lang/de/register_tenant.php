@@ -26,9 +26,9 @@ return [
             'placeholder' => 'Inserisci il nome completo dello studio (es. Studio Dentistico Rossi)',
             'help' => 'Nome ufficiale dello studio medico come registrato in camera di commercio',
             'validation' => [
-                'required' => 'Il nome dello studio è obbligatorio',
-                'min' => 'Il nome deve contenere almeno 3 caratteri',
-                'max' => 'Il nome non può superare i 100 caratteri',
+                'required' => 'Der Praxisname ist erforderlich',
+                'min' => 'Der Name muss mindestens 3 Zeichen enthalten',
+                'max' => 'Der Name darf 100 Zeichen nicht überschreiten',
             ],
         ],
         'phone' => [
@@ -36,9 +36,9 @@ return [
             'placeholder' => 'Inserisci numero telefonico principale (es. +39 06 1234567)',
             'help' => 'Numero di telefono principale dello studio per contatti diretti e urgenze',
             'validation' => [
-                'required' => 'Il numero di telefono è obbligatorio',
-                'regex' => 'Inserisci un numero di telefono italiano valido',
-                'min' => 'Il numero deve contenere almeno 10 cifre',
+                'required' => 'Die Telefonnummer ist erforderlich',
+                'regex' => 'Bitte geben Sie eine gültige italienische Telefonnummer ein',
+                'min' => 'Die Nummer muss mindestens 10 Ziffern enthalten',
             ],
         ],
         'email' => [
@@ -46,10 +46,10 @@ return [
             'placeholder' => 'Inserisci email istituzionale (es. info@studiodentistico.it)',
             'help' => 'Indirizzo email ufficiale dello studio per comunicazioni istituzionali',
             'validation' => [
-                'required' => 'L\'indirizzo email è obbligatorio',
-                'email' => 'Inserisci un indirizzo email valido e funzionante',
-                'unique' => 'Questo indirizzo email è già registrato per un altro studio',
-                'max' => 'L\'indirizzo email non può superare i 255 caratteri',
+                'required' => 'Die E-Mail-Adresse ist erforderlich',
+                'email' => 'Bitte geben Sie eine gültige und funktionierende E-Mail-Adresse ein',
+                'unique' => 'Diese E-Mail-Adresse ist bereits für eine andere Praxis registriert',
+                'max' => 'Die E-Mail-Adresse darf 255 Zeichen nicht überschreiten',
             ],
         ],
         'address' => [
@@ -71,9 +71,9 @@ return [
             'placeholder' => 'Inserisci nome e cognome del direttore sanitario',
             'help' => 'Nome completo del medico responsabile e direttore sanitario dello studio',
             'validation' => [
-                'required' => 'Il nome del direttore sanitario è obbligatorio',
-                'min' => 'Il nome deve contenere almeno 5 caratteri',
-                'max' => 'Il nome non può superare i 100 caratteri',
+                'required' => 'Der Name des ärztlichen Leiters ist erforderlich',
+                'min' => 'Der Name muss mindestens 5 Zeichen enthalten',
+                'max' => 'Der Name darf 100 Zeichen nicht überschreiten',
             ],
         ],
         'director_registration' => [
@@ -81,9 +81,9 @@ return [
             'placeholder' => 'Inserisci numero iscrizione all\'ordine dei medici',
             'help' => 'Numero di iscrizione del direttore sanitario all\'albo professionale',
             'validation' => [
-                'required' => 'Il numero di iscrizione all\'albo è obbligatorio',
-                'numeric' => 'Il numero di iscrizione deve contenere solo cifre',
-                'min' => 'Il numero di iscrizione deve contenere almeno 3 cifre',
+                'required' => 'Die Registrierungsnummer ist erforderlich',
+                'numeric' => 'Die Registrierungsnummer darf nur Ziffern enthalten',
+                'min' => 'Die Registrierungsnummer muss mindestens 3 Ziffern enthalten',
             ],
         ],
         'vat_number' => [
@@ -91,9 +91,9 @@ return [
             'placeholder' => 'Inserisci partita IVA (11 cifre)',
             'help' => 'Partita IVA dello studio medico registrata presso l\'Agenzia delle Entrate',
             'validation' => [
-                'required' => 'La partita IVA è obbligatoria',
-                'regex' => 'La partita IVA deve essere composta da esattamente 11 cifre',
-                'unique' => 'Questa partita IVA è già registrata per un altro studio',
+                'required' => 'Die Umsatzsteuer-Identifikationsnummer ist erforderlich',
+                'regex' => 'Die Umsatzsteuer-Identifikationsnummer muss genau aus 11 Ziffern bestehen',
+                'unique' => 'Diese Umsatzsteuer-Identifikationsnummer ist bereits für eine andere Praxis registriert',
             ],
         ],
         'specialization' => [
@@ -130,10 +130,10 @@ return [
             'placeholder' => 'Indica il numero totale di medici e operatori',
             'help' => 'Numero totale di medici, odontoiatri e operatori sanitari che lavorano nello studio',
             'validation' => [
-                'required' => 'Il numero di operatori è obbligatorio',
-                'numeric' => 'Inserisci un numero valido',
-                'min' => 'Lo studio deve avere almeno 1 operatore',
-                'max' => 'Il numero massimo consentito è 100 operatori',
+                'required' => 'Die Anzahl der Mitarbeiter ist erforderlich',
+                'numeric' => 'Bitte geben Sie eine gültige Zahl ein',
+                'min' => 'Die Praxis muss mindestens 1 Mitarbeiter haben',
+                'max' => 'Die maximale Anzahl beträgt 100 Mitarbeiter',
             ],
         ],
         'privacy_acceptance' => [
@@ -141,7 +141,7 @@ return [
             'placeholder' => 'Accetto il trattamento dei dati secondo GDPR',
             'help' => 'Consenso obbligatorio al trattamento dei dati personali secondo Regolamento UE 679/2016',
             'validation' => [
-                'accepted' => 'È obbligatorio accettare l\'informativa sulla privacy per procedere',
+                'accepted' => 'Sie müssen die Datenschutzerklärung akzeptieren, um fortzufahren',
             ],
         ],
         'terms_acceptance' => [
@@ -149,7 +149,7 @@ return [
             'placeholder' => 'Accetto i termini e condizioni del servizio',
             'help' => 'Accettazione dei termini e condizioni per l\'utilizzo della piattaforma',
             'validation' => [
-                'accepted' => 'È obbligatorio accettare i termini e condizioni per procedere',
+                'accepted' => 'Sie müssen die Nutzungsbedingungen akzeptieren, um fortzufahren',
             ],
         ],
     ],

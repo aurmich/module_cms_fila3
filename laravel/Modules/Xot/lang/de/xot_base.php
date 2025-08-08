@@ -237,12 +237,12 @@ return [
     ],
     'validation' => [
         'required' => [
-            'label' => 'Campo obbligatorio',
-            'description' => 'Questo campo è obbligatorio e deve essere compilato',
+            'label' => 'Pflichtfeld',
+            'description' => 'Dieses Feld ist erforderlich und muss ausgefüllt werden',
         ],
         'email' => [
-            'label' => 'Email non valida',
-            'description' => 'Inserisci un indirizzo email valido',
+            'label' => 'Ungültige E-Mail',
+            'description' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
         ],
         'numeric' => [
             'label' => 'Deve essere un numero',

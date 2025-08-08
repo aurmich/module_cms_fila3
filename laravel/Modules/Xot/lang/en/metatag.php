@@ -172,7 +172,7 @@ return [
     'messages' => [
         'validation' => [
             'title' => [
-                'required' => 'Il titolo è obbligatorio',
+                'required' => 'The title is required',
                 'max' => 'Il titolo non può superare i :max caratteri',
                 'unique' => 'Questo titolo è già in uso',
             ],

@@ -91,15 +91,15 @@ return [
         'email_failed' => 'Impossibile inviare l\'email di test. Verifica la configurazione.',
     ],
     'validation' => [
-        'host_required' => 'L\'host SMTP è obbligatorio',
+        'host_required' => 'Der SMTP-Host ist erforderlich',
         'port_required' => 'La porta SMTP è obbligatoria',
         'port_numeric' => 'La porta deve essere un numero',
-        'username_required' => 'Lo username SMTP è obbligatorio',
+        'username_required' => 'Der SMTP-Benutzername ist erforderlich',
         'password_required' => 'La password SMTP è obbligatoria',
         'from_email_required' => 'L\'email mittente è obbligatoria',
         'from_email_valid' => 'L\'email mittente deve essere un indirizzo valido',
         'to_required' => 'L\'email destinatario è obbligatoria',
         'to_valid' => 'L\'email destinatario deve essere un indirizzo valido',
-        'subject_required' => 'L\'oggetto della email è obbligatorio',
+        'subject_required' => 'Der Betreff ist erforderlich',
     ],
 ];

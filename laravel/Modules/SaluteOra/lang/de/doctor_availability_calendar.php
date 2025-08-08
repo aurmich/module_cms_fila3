@@ -203,7 +203,7 @@ return [
         ],
     ],
     'validation' => [
-        'required' => 'Questo campo è obbligatorio',
+        'required' => 'Dieses Feld ist erforderlich',
         'date' => 'eingeben una data valida',
         'time' => 'eingeben un orario valido',
         'end_time_after' => 'L\'ora di fine deve essere successiva all\'ora di inizio',

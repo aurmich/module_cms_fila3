@@ -151,12 +151,12 @@ return [
     'messages' => [
         'validation' => [
             'name' => [
-                'required' => 'Il nome è obbligatorio',
+                'required' => 'Der Name ist erforderlich',
                 'unique' => 'Questo nome è già in uso',
                 'regex' => 'Il nome può contenere solo lettere, numeri e trattini',
             ],
             'type' => [
-                'required' => 'Il tipo è obbligatorio',
+                'required' => 'Der Typ ist erforderlich',
                 'in' => 'Il tipo selezionato non è valido',
             ],
             'version' => [

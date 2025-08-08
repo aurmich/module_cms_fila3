@@ -192,7 +192,7 @@ return array (
       'description' => 'province',
       'helper_text' => '',
       'placeholder' => 'province',
-      'label' => 'province',
+      'label' => 'Province',
     ),
     'region' => 
     array (

@@ -113,7 +113,7 @@ return [
         ],
     ],
     'validation' => [
-        'required' => 'Questo campo è obbligatorio',
+        'required' => 'Dieses Feld ist erforderlich',
         'date' => 'Inserisci una data valida',
         'after' => 'La data di fine deve essere successiva alla data di inizio',
     ],

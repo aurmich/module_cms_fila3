@@ -232,7 +232,7 @@ return [
         'privacy' => [
             'label' => 'Informativa Privacy',
             'placeholder' => 'Accetta l\'informativa sulla privacy',
-            'help' => 'Consenso obbligatorio al trattamento dei dati personali',
+            'help' => 'Erforderliche Zustimmung zur Verarbeitung personenbezogener Daten',
         ],
         'marketing' => [
             'label' => 'Comunicazioni Marketing',

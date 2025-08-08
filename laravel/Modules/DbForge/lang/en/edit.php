@@ -237,7 +237,7 @@ return [
         'unsaved_changes' => 'Hai modifiche non salvate',
     ],
     'validation' => [
-        'required' => 'Questo campo è obbligatorio',
+        'required' => 'This field is required',
         'slug_exists' => 'Questo slug è già in uso',
         'invalid_url' => 'Inserisci un URL valido',
         'min' => 'Il valore deve essere almeno :min',

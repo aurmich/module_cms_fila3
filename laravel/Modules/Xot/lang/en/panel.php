@@ -31,12 +31,12 @@ return [
         'loading' => 'Caricamento...',
     ],
     'validation' => [
-        'required' => 'Il campo :field è obbligatorio',
-        'email' => 'Inserisci un indirizzo email valido',
-        'min' => 'Il campo :field deve contenere almeno :min caratteri',
-        'max' => 'Il campo :field non può contenere più di :max caratteri',
-        'unique' => 'Il valore inserito è già in uso',
-        'confirmed' => 'La conferma non corrisponde',
+        'required' => 'The :field field is required',
+        'email' => 'Please enter a valid email address',
+        'min' => 'The :field field must contain at least :min characters',
+        'max' => 'The :field field may not contain more than :max characters',
+        'unique' => 'The entered value is already in use',
+        'confirmed' => 'The confirmation does not match',
     ],
     'auth' => [
         'login' => 'Login',

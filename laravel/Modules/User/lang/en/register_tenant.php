@@ -26,7 +26,7 @@ return [
             'placeholder' => 'Inserisci il nome completo dello studio (es. Studio Dentistico Rossi)',
             'help' => 'Nome ufficiale dello studio medico come registrato in camera di commercio',
             'validation' => [
-                'required' => 'Il nome dello studio è obbligatorio',
+                'required' => 'Studio name is required',
                 'min' => 'Il nome deve contenere almeno 3 caratteri',
                 'max' => 'Il nome non può superare i 100 caratteri',
             ],
@@ -36,7 +36,7 @@ return [
             'placeholder' => 'Inserisci numero telefonico principale (es. +39 06 1234567)',
             'help' => 'Numero di telefono principale dello studio per contatti diretti e urgenze',
             'validation' => [
-                'required' => 'Il numero di telefono è obbligatorio',
+                'required' => 'Phone number is required',
                 'regex' => 'Inserisci un numero di telefono italiano valido',
                 'min' => 'Il numero deve contenere almeno 10 cifre',
             ],
@@ -46,7 +46,7 @@ return [
             'placeholder' => 'Inserisci email istituzionale (es. info@studiodentistico.it)',
             'help' => 'Indirizzo email ufficiale dello studio per comunicazioni istituzionali',
             'validation' => [
-                'required' => 'L\'indirizzo email è obbligatorio',
+                'required' => 'Email address is required',
                 'email' => 'Inserisci un indirizzo email valido e funzionante',
                 'unique' => 'Questo indirizzo email è già registrato per un altro studio',
                 'max' => 'L\'indirizzo email non può superare i 255 caratteri',
@@ -71,7 +71,7 @@ return [
             'placeholder' => 'Inserisci nome e cognome del direttore sanitario',
             'help' => 'Nome completo del medico responsabile e direttore sanitario dello studio',
             'validation' => [
-                'required' => 'Il nome del direttore sanitario è obbligatorio',
+                'required' => 'Medical director name is required',
                 'min' => 'Il nome deve contenere almeno 5 caratteri',
                 'max' => 'Il nome non può superare i 100 caratteri',
             ],
@@ -81,7 +81,7 @@ return [
             'placeholder' => 'Inserisci numero iscrizione all\'ordine dei medici',
             'help' => 'Numero di iscrizione del direttore sanitario all\'albo professionale',
             'validation' => [
-                'required' => 'Il numero di iscrizione all\'albo è obbligatorio',
+                'required' => 'Registration number is required',
                 'numeric' => 'Il numero di iscrizione deve contenere solo cifre',
                 'min' => 'Il numero di iscrizione deve contenere almeno 3 cifre',
             ],
@@ -91,7 +91,7 @@ return [
             'placeholder' => 'Inserisci partita IVA (11 cifre)',
             'help' => 'Partita IVA dello studio medico registrata presso l\'Agenzia delle Entrate',
             'validation' => [
-                'required' => 'La partita IVA è obbligatoria',
+                'required' => 'VAT number is required',
                 'regex' => 'La partita IVA deve essere composta da esattamente 11 cifre',
                 'unique' => 'Questa partita IVA è già registrata per un altro studio',
             ],
@@ -130,7 +130,7 @@ return [
             'placeholder' => 'Indica il numero totale di medici e operatori',
             'help' => 'Numero totale di medici, odontoiatri e operatori sanitari che lavorano nello studio',
             'validation' => [
-                'required' => 'Il numero di operatori è obbligatorio',
+                'required' => 'Number of staff is required',
                 'numeric' => 'Inserisci un numero valido',
                 'min' => 'Lo studio deve avere almeno 1 operatore',
                 'max' => 'Il numero massimo consentito è 100 operatori',
@@ -141,7 +141,7 @@ return [
             'placeholder' => 'Accetto il trattamento dei dati secondo GDPR',
             'help' => 'Consenso obbligatorio al trattamento dei dati personali secondo Regolamento UE 679/2016',
             'validation' => [
-                'accepted' => 'È obbligatorio accettare l\'informativa sulla privacy per procedere',
+                'accepted' => 'You must accept the privacy policy to continue',
             ],
         ],
         'terms_acceptance' => [
@@ -149,7 +149,7 @@ return [
             'placeholder' => 'Accetto i termini e condizioni del servizio',
             'help' => 'Accettazione dei termini e condizioni per l\'utilizzo della piattaforma',
             'validation' => [
-                'accepted' => 'È obbligatorio accettare i termini e condizioni per procedere',
+                'accepted' => 'You must accept the terms and conditions to continue',
             ],
         ],
     ],

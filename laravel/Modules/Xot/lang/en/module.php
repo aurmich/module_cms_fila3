@@ -140,7 +140,7 @@ return [
     'messages' => [
         'validation' => [
             'name' => [
-                'required' => 'Il nome è obbligatorio',
+                'required' => 'The name is required',
                 'unique' => 'Questo nome è già in uso',
                 'regex' => 'Il nome può contenere solo lettere, numeri e trattini',
             ],

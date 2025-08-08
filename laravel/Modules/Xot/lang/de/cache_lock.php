@@ -126,7 +126,7 @@ return [
                 'regex' => 'La chiave può contenere solo lettere, numeri e trattini',
             ],
             'owner' => [
-                'required' => 'Il proprietario è obbligatorio',
+                'required' => 'Der Besitzer ist erforderlich',
                 'exists' => 'Il proprietario specificato non esiste',
             ],
             'expiration' => [
@@ -136,7 +136,7 @@ return [
                 'before' => 'La data di scadenza non può superare 24 ore',
             ],
             'type' => [
-                'required' => 'Il tipo di lock è obbligatorio',
+                'required' => 'Der Lock-Typ ist erforderlich',
                 'in' => 'Il tipo selezionato non è valido',
             ],
         ],

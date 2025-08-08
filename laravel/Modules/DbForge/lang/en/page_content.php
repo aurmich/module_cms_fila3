@@ -87,7 +87,7 @@ return [
         'deleted' => 'Contenuto eliminato con successo',
     ],
     'validation' => [
-        'name_required' => 'Il nome è obbligatorio',
+        'name_required' => 'The name is required',
         'slug_unique' => 'Lo slug deve essere unico',
         'blocks_required' => 'I blocchi di contenuto sono obbligatori',
     ],

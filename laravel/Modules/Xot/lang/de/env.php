@@ -116,11 +116,11 @@ return [
                 'reserved' => 'Questa chiave è riservata dal sistema',
             ],
             'value' => [
-                'required' => 'Il valore è obbligatorio',
+                'required' => 'Der Wert ist erforderlich',
                 'type' => 'Il valore deve essere del tipo :type',
             ],
             'environment' => [
-                'required' => 'L\'ambiente è obbligatorio',
+                'required' => 'Die Umgebung ist erforderlich',
                 'exists' => 'L\'ambiente selezionato non è valido',
             ],
         ],

@@ -352,7 +352,7 @@ return [
         'appointment_updated' => 'Appuntamento aggiornato erfolgreich',
     ],
     'validation' => [
-        'required' => 'Il campo :attribute è obbligatorio',
+        'required' => 'Das Feld :attribute ist erforderlich',
         'date' => 'Il campo :attribute deve essere una data valida',
         'after' => 'Il campo :attribute deve essere successivo a :date',
         'before' => 'Il campo :attribute deve essere precedente a :date',

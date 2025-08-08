@@ -7,7 +7,7 @@ return [
             'placeholder' => 'Inserisci il nome',
             'help' => 'Il nome dell\'utente',
             'validation' => [
-                'required' => 'Il nome è obbligatorio',
+                'required' => 'Der Name ist erforderlich',
                 'max' => 'Il nome non può superare i 255 caratteri',
             ],
         ],

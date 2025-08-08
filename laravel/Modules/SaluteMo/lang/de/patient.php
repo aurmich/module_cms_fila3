@@ -212,7 +212,7 @@ return [
         'error' => 'Si è verificato un errore durante l\'operazione',
     ],
     'validation' => [
-        'required' => 'Il campo :attribute è obbligatorio',
+        'required' => 'Das Feld :attribute ist erforderlich',
         'email' => 'Il campo :attribute deve essere un indirizzo email valido',
         'unique' => 'Il valore del campo :attribute è già stato utilizzato',
         'min' => [

@@ -199,7 +199,7 @@ return [
         'confirm_delete' => 'Sei sicuro di voler eliminare questo elemento?',
     ],
     'validation' => [
-        'required' => 'Questo campo è obbligatorio',
+        'required' => 'This field is required',
         'email' => 'Inserisci un indirizzo email valido',
         'url' => 'Inserisci un URL valido (inizia con http:// o https://)',
     ],

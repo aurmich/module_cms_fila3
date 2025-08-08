@@ -103,7 +103,7 @@ return [
         'validation' => [
             'email_unique' => 'Questo indirizzo email è già in uso',
             'password_confirmation' => 'La conferma password non corrisponde',
-            'required' => 'Questo campo è obbligatorio',
+            'required' => 'Dieses Feld ist erforderlich',
         ],
     ],
     'registration' => [

@@ -31,12 +31,12 @@ return [
         'loading' => 'Caricamento...',
     ],
     'validation' => [
-        'required' => 'Il campo :field è obbligatorio',
-        'email' => 'Inserisci un indirizzo email valido',
-        'min' => 'Il campo :field deve contenere almeno :min caratteri',
-        'max' => 'Il campo :field non può contenere più di :max caratteri',
-        'unique' => 'Il valore inserito è già in uso',
-        'confirmed' => 'La conferma non corrisponde',
+        'required' => 'Das Feld :field ist erforderlich',
+        'email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+        'min' => 'Das Feld :field muss mindestens :min Zeichen enthalten',
+        'max' => 'Das Feld :field darf nicht mehr als :max Zeichen enthalten',
+        'unique' => 'Der eingegebene Wert wird bereits verwendet',
+        'confirmed' => 'Die Bestätigung stimmt nicht überein',
     ],
     'auth' => [
         'login' => 'Anmelden',
