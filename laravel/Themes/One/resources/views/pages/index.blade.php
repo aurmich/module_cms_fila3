@@ -10,24 +10,19 @@ use Livewire\Volt\Component;
 use Modules\Tenant\Services\TenantService;
 
 /** @var array */
-$base_middleware=[];
+$base_middleware = [];
 
 name('home');
 middleware($base_middleware);
 
-
-
-new class extends Component
-{
-
-};
+new class extends Component {};
 
 ?>
 
 <x-layouts.app>
- @volt('home')
-    <div>
-        <x-page side="content" slug="home" :type="auth()->user()?->type?->value"/>
-    </div>
- @endvolt
+    @volt('home')
+        <div>
+            <x-page side="content" slug="home" :type="auth()->user()?->type?->value" />
+        </div>
+    @endvolt
 </x-layouts.app>
