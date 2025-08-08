@@ -3,13 +3,13 @@
 return [
     'fields' => [
         'new_password_confirmation' => [
-            'label' => 'new_password_confirmation',
-            'description' => 'new_password_confirmation',
-            'helper_text' => 'new_password_confirmation',
-            'placeholder' => 'new_password_confirmation',
+            'label' => 'Neues Passwort bestätigen',
+            'description' => 'Bitte geben Sie das neue Passwort erneut ein',
+            'helper_text' => '',
+            'placeholder' => 'Bestätigen Sie Ihr neues Passwort',
         ],
         'changePassword' => [
-            'label' => 'changePassword',
+            'label' => 'Passwort ändern',
         ],
     ],
 ];

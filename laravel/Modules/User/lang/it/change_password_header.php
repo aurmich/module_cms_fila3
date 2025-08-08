@@ -1,14 +1,17 @@
 <?php
 
-return array (
-  'fields' => 
-  array (
-    'new_password_confirmation' => 
-    array (
-      'label' => 'new_password_confirmation',
-      'placeholder' => 'new_password_confirmation',
-      'helper_text' => 'new_password_confirmation',
-      'description' => 'new_password_confirmation',
-    ),
-  ),
-);
+declare(strict_types=1);
+
+return [
+    'fields' => [
+        'new_password_confirmation' => [
+            'label' => 'Conferma nuova password',
+            'placeholder' => 'Conferma la tua nuova password',
+            'helper_text' => '',
+            'description' => 'Inserisci nuovamente la nuova password per confermarla',
+            'tooltip' => 'Ripeti la nuova password per sicurezza',
+            'icon' => 'heroicon-o-lock-closed',
+            'color' => 'warning',
+        ],
+    ],
+];
