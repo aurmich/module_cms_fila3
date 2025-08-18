@@ -58,6 +58,46 @@ Le icone sono state standardizzate per evitare errori:
 - **Funzionalità**: Vista globale tutti gli appuntamenti
 - **Filtro**: Tutti gli appuntamenti del sistema
 
+## Calendar System
+
+### Documentazione Calendar
+- [Calendar Architecture](calendar/architecture.md) - Architettura del sistema calendar
+- [Calendar Implementation](calendar-implementation.md) - Implementazione completa
+- [Theme Calendar Integration](theme-calendar-integration.md) - Integrazione con temi
+- [FullCalendar Widget Analysis](fullcalendar-widget-analysis.md) - Analisi tecnica widget
+- [FullCalendar Implementation Guide](fullcalendar_implementation_guide.md) - Guida implementazione
+- [FullCalendar Summary](fullcalendar-summary.md) - Riepilogo funzionalità
+
+### Widget Calendar Specifici
+- [Calendar Widgets Overview](calendar/widgets/README.md) - Panoramica widget calendar
+- [Admin Calendar Widget](calendar/widgets/admin-calendar-widget.md) - Widget amministratore
+- [Doctor Calendar Widget](calendar/widgets/doctor-calendar-widget.md) - Widget dottore
+- [Patient Calendar Widget](calendar/widgets/patient-calendar-widget.md) - Widget paziente
+
+### Funzionalità Calendar
+- [Doctor Authentication Calendar](calendar/doctor-authentication-calendar.md) - Autenticazione dottori
+- [Doctor Availability Implementation](calendar/doctor-availability-implementation.md) - Implementazione disponibilità
+- [Doctor Availability Management](calendar/doctor-availability-management.md) - Gestione disponibilità
+- [Patient Booking Flow](calendar/patient_booking_flow.md) - Flusso prenotazione pazienti
+- [Patient Calendar Actions](calendar/patient_calendar_actions.md) - Azioni calendar pazienti
+- [Fetch Events](calendar/fetch-events.md) - Recupero eventi
+- [FullCalendar Widget v3.2.4 Configuration](calendar/fullcalendar-widget-v324-configuration.md) - Configurazione versione specifica
+
+## Stati Appuntamenti
+
+### Documentazione Stati
+- [Appointment States](appointment-states.md) - Stati completi degli appuntamenti
+- [Appointment States Complete Standardization](appointment-states-complete-standardization.md) - Standardizzazione completa
+- [Appointment State Methods Fix](appointment-state-methods-fix.md) - Correzioni metodi stati
+- [Appointment Start End Migration](appointment_start_end_migration.md) - Migrazione campi data
+
+### Transizioni Stati
+- [Report Pending to Completed Transition](states/report-pending-to-completed-transition.md) - Transizione report completato
+
+### Correzioni Stati
+- [Correzione Icona Arrow Path](correzione-icona-arrow-path-2025-01-06.md) - Correzioni icone stati
+- [Traduzioni Stati Appuntamenti Correzioni](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md) - Correzioni traduzioni stati
+
 ## Modelli Principali
 
 ### DoctorStudio
@@ -156,3 +196,7 @@ Le icone sono state standardizzate per evitare errori:
 - [State Best Practices](models/state-best-practices.md) - Best practices per stati
 - [Single Table Inheritance](models/single-table-inheritance.md) - Pattern STI
 - [User Inheritance Pattern](models/user-inheritance-pattern.md) - Pattern ereditarietà utenti
+- [Pivot Models Pattern](pivot-models-pattern.md) - Pattern per modelli pivot
+- [RelationX Trait](models/relationx-trait.md) - Trait per relazioni avanzate
+- [Doctor Studio Model](doctor-studio-model.md) - Modello pivot Doctor-Studio
+- [Doctor Studio Pivot Model](doctor-studio-pivot-model.md) - Documentazione completa pivot

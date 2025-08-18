@@ -43,7 +43,7 @@ SaluteOra è un sistema sanitario modulare basato su Laravel che gestisce appunt
 - **[Translations](laravel/Modules/Xot/docs/translation-system.md)** - Sistema traduzioni
 - **[Migrations](laravel/Modules/Xot/docs/migration-consolidated.md)** - Gestione database
 
-## Regole Critiche
+## Regole Generali Cross-Modulo
 
 ### XotBaseResource
 - **MAI** dichiarare `table()`, `navigationGroup`, `navigationLabel` in classi che estendono `XotBaseResource`
@@ -54,7 +54,6 @@ SaluteOra è un sistema sanitario modulare basato su Laravel che gestisce appunt
 - **SEMPRE** struttura espansa per campi (`label`, `placeholder`, `help`)
 - **MAI** mescolare lingue diverse in una traduzione
 - **SEMPRE** aggiornare tutte e tre le lingue (IT, EN, DE)
-- **SEMPRE** usare file `states.php` per stati, non `appointment.php`
 
 ### PHPStan
 - **SEMPRE** eseguire da directory `/laravel`
@@ -66,51 +65,6 @@ SaluteOra è un sistema sanitario modulare basato su Laravel che gestisce appunt
 - **MAI** includere segmento 'App' nei namespace
 - **SEMPRE** `Modules\NomeModulo\` (non `Modules\NomeModulo\App\`)
 - **SEMPRE** estendere classi base del modulo specifico
-
-## Stati degli Appuntamenti
-
-### Stati Implementati
-- **Scheduled**: Appuntamento programmato
-- **Confirmed**: Appuntamento confermato  
-- **In Progress**: Appuntamento in corso
-- **Completed**: Appuntamento completato
-- **Cancelled**: Appuntamento cancellato
-- **No Show**: Paziente non presentato
-- **Rejected**: Appuntamento rifiutato
-- **Rescheduled**: Appuntamento riprogrammato
-- **Refund To Integrate**: Rimborso da integrare
-- **Refund Integrate**: Rimborso integrato
-
-### Traduzioni Complete
-Tutti gli stati hanno traduzioni complete in IT, EN, DE con icone standardizzate.
-
-## Widget Calendar
-
-### DoctorCalendarWidget
-- **Estende**: `FullCalendarWidget`
-- **Accesso**: Solo dottori (`UserTypeEnum::DOCTOR`)
-- **Funzionalità**: CRUD completo appuntamenti
-- **Filtro**: Appuntamenti dello studio corrente
-
-### PatientCalendarWidget  
-- **Estende**: `FullCalendarWidget`
-- **Accesso**: Solo pazienti (`UserTypeEnum::PATIENT`)
-- **Funzionalità**: Visualizzazione sola lettura
-- **Filtro**: Appuntamenti del paziente corrente
-
-### AdminCalendarWidget
-- **Estende**: `FullCalendarWidget` 
-- **Accesso**: Solo amministratori (`UserTypeEnum::ADMIN`)
-- **Funzionalità**: Vista globale tutti gli appuntamenti
-- **Filtro**: Tutti gli appuntamenti del sistema
-
-## Modelli Principali
-
-### DoctorStudio
-- **Tipo**: Pivot model many-to-many
-- **Funzionalità**: Gestione relazione dottore-studio con orari
-- **Cross-Database**: Attraversa database 'user' e 'salute_ora'
-- **Caratteristiche**: Gestione orari apertura, slot temporali, date disponibili
 
 ## AWS Configuration
 
@@ -155,6 +109,9 @@ Tutti gli stati hanno traduzioni complete in IT, EN, DE con icone standardizzate
 - [User Management](laravel/Modules/User/docs/)
 - [UI Components](laravel/Modules/UI/docs/)
 - [SaluteOra Business Logic](laravel/Modules/SaluteOra/docs/)
+
+### Calendar System
+- [Calendar Documentation](laravel/Modules/SaluteOra/docs/README.md#calendar-system) - Documentazione completa sistema calendar
 
 ---
 
