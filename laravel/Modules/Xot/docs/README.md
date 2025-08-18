@@ -6,6 +6,10 @@ Modulo base del framework Laraxot con funzionalità core e best practices.
 ## Quick Links
 - [Filament Complete Guide](consolidated/filament-complete-guide.md)
 - [PHPStan Complete Guide](consolidated/phpstan-complete-guide.md)
+- [🚨 PHPStan Critical Rules](phpstan-critical-rules.md) - **🚨 CRITICO** - Regole assolute PHPStan (phpstan.neon INTOCCABILE)
+- [PHPStan Missing Array Types Fixes](phpstan-missing-array-types-fixes.md) - **⭐ NUOVO** - Correzioni tipi array mancanti
+- [PHPStan Configuration Fixes](phpstan-configuration-fixes.md) - **⭐ NUOVO** - Correzioni configurazione PHPStan
+- [PHPStan Relationship Best Practices](phpstan-relationship-best-practices.md) - **⭐ NUOVO** - Best practices relazioni Eloquent
 - [Migration Complete Guide](consolidated/migration-complete-guide.md)
 - [Testing Complete Guide](consolidated/testing-complete-guide.md)
 - [Translation Complete Guide](consolidated/translation-complete-guide.md)

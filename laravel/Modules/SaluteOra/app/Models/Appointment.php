@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Models;
 
 use Carbon\Carbon;
-use Spatie\ModelStates\HasStates;
-use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\ModelStates\HasStatesContract;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Modules\SaluteOra\Enums\AppointmentTypeEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\SaluteOra\Enums\AppointmentTypeEnum;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\ModelStates\HasStates;
+use Spatie\ModelStates\HasStatesContract;
 
 /**
  * Appointment Model for the SaluteOra Module.
- * 
+ *
  * Represents an appointment booked by a patient with a doctor in a studio.
  * Supports FullCalendar widgets with multi-tenancy and user type filtering.
  *
@@ -62,6 +62,7 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment emergency()
  * @method static \Modules\SaluteOra\Database\Factories\AppointmentFactory factory($count = null, $state = [])
@@ -91,8 +92,10 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUserId($value)
+ *
  * @property \Illuminate\Support\Carbon|null $starts_at
  * @property \Illuminate\Support\Carbon|null $ends_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereNotState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDoctorId($value)
@@ -101,21 +104,24 @@ use Modules\SaluteOra\States\Appointment\AppointmentState;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePatientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
+ *
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @property string|null $invoice File fattura
  * @property-read string $time_range
  * @property-read \Modules\SaluteOra\Models\Report|null $report
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
+ *
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel implements HasStatesContract
 {
-    use LogsActivity;
     use HasStates;
+    use LogsActivity;
 
     /**
      * Gli attributi che sono mass assignable.
@@ -126,7 +132,7 @@ class Appointment extends BaseModel implements HasStatesContract
         'patient_id',
         'doctor_id',
         'studio_id',
-        //'tenant_id',
+        // 'tenant_id',
         'title',
         'type',
         'status',
@@ -139,7 +145,7 @@ class Appointment extends BaseModel implements HasStatesContract
         'state',
         'starts_at',
         'ends_at',
-        'invoice',//fattura
+        'invoice', // fattura
     ];
 
     /**
@@ -164,8 +170,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Get the options for activity logging.
-     *
-     * @return LogOptions
      */
     public function getActivitylogOptions(): LogOptions
     {
@@ -186,8 +190,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Get the patient that booked the appointment.
-     *
-     * @return BelongsTo<Patient, Appointment>
      */
     public function patient(): BelongsTo
     {
@@ -196,8 +198,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Get the doctor for the appointment.
-     *
-     * @return BelongsTo<Doctor, Appointment>
      */
     public function doctor(): BelongsTo
     {
@@ -206,8 +206,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Get the studio where the appointment takes place.
-     *
-     * @return BelongsTo<Studio, Appointment>
      */
     public function studio(): BelongsTo
     {
@@ -219,21 +217,18 @@ class Appointment extends BaseModel implements HasStatesContract
         return $this->hasOne(Report::class);
     }
 
-
     public function hasReport(): bool
     {
-        $state_name=$this->state->getName();
-        if(in_array($state_name,['pending','report_pending','refund_pending','no_show','banned','cancelled','confirmed','annulled'])){
+        $state_name = $this->state->getName();
+        if (in_array($state_name, ['pending', 'report_pending', 'refund_pending', 'no_show', 'banned', 'cancelled', 'confirmed', 'annulled'])) {
             return false;
         }
-        
+
         return $this->report()->exists();
     }
 
     /**
      * Get the formatted title for calendar display.
-     *
-     * @return string
      */
     public function getFormattedTitleAttribute(): string
     {
@@ -246,13 +241,11 @@ class Appointment extends BaseModel implements HasStatesContract
 
     public function getTimeRangeAttribute(): string
     {
-        return $this->starts_at?->format('H:i') . ' - ' . $this->ends_at?->format('H:i');
+        return $this->starts_at?->format('H:i').' - '.$this->ends_at?->format('H:i');
     }
 
     /**
      * Get the duration in minutes.
-     *
-     * @return int
      */
     public function getDurationAttribute(): int
     {
@@ -261,8 +254,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Check if the appointment is active.
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -271,8 +262,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Check if the appointment is completed.
-     *
-     * @return bool
      */
     public function isCompleted(): bool
     {
@@ -281,8 +270,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Check if the appointment is cancelled.
-     *
-     * @return bool
      */
     public function isCancelled(): bool
     {
@@ -291,8 +278,6 @@ class Appointment extends BaseModel implements HasStatesContract
 
     /**
      * Check if the appointment is an emergency.
-     *
-     * @return bool
      */
     public function isEmergency(): bool
     {
@@ -302,9 +287,7 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter appointments by date range for FullCalendar.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $start
-     * @param string $end
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeInDateRange($query, string $start, string $end)
@@ -312,17 +295,16 @@ class Appointment extends BaseModel implements HasStatesContract
         return $query->whereBetween('starts_at', [$start, $end]);
     }
 
-     /**
+    /**
      * Scope to filter appointments by date range for FullCalendar.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $yearMonth
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOfYearMonth($query, string $yearMonth)
     {
         $start = Carbon::createFromFormat('Y-m', $yearMonth)?->startOfMonth();
-        $end   = Carbon::createFromFormat('Y-m', $yearMonth)?->endOfMonth();
+        $end = Carbon::createFromFormat('Y-m', $yearMonth)?->endOfMonth();
 
         return $query->whereBetween('starts_at', [$start, $end]);
     }
@@ -330,8 +312,7 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter appointments by patient.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $patientId
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForPatient($query, int $patientId)
@@ -342,8 +323,7 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter appointments by doctor.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $doctorId
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForDoctor($query, int $doctorId)
@@ -354,8 +334,7 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter appointments by studio.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $studioId
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForStudio($query, int $studioId)
@@ -366,7 +345,7 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter only active appointments.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeActive($query)
@@ -377,14 +356,14 @@ class Appointment extends BaseModel implements HasStatesContract
     /**
      * Scope to filter emergency appointments.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeEmergency($query)
     {
         return $query->where(function ($q) {
             $q->where('emergency', true)
-              ->orWhere('type', AppointmentTypeEnum::EMERGENCY);
+                ->orWhere('type', AppointmentTypeEnum::EMERGENCY);
         });
     }
 }

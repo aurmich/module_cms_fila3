@@ -22,6 +22,7 @@ SaluteOra è un sistema sanitario modulare basato su Laravel che gestisce appunt
 ## Documentazione Consolidata
 
 ### 🏛️ Core - Fondamenti
+- **[🚨 PHPStan INTOCCABILE](phpstan-intouchable-rule.md)** - **🚨 CRITICO** - phpstan.neon è INTOCCABILE
 - **[Regole Critiche XotBaseResource](xot-base-resource-guidelines.md)** - Regole fondamentali per Filament Resources
 - **[Sistema Traduzioni Stati](translations-states-analysis.md)** - Gestione traduzioni e stati
 - **[PHPStan Analisi Statica](phpstan-errors-analysis.md)** - Controllo qualità codice

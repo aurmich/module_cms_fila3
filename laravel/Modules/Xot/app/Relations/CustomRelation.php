@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Relations;
 
-use function call_user_func;
-
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,12 +17,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Webmozart\Assert\Assert;
 
+use function call_user_func;
+
 /**
  * Class CustomRelation.
  *
  * @method static \Illuminate\Database\Eloquent\Builder when($value = null, callable $callback = null, callable $default = null)
- * @method static \Illuminate\Database\Eloquent\Builder whereBetween($column, iterable $values, $boolean = 'and', $not = false)
- * @method static \Illuminate\Database\Eloquent\Builder selectRaw($expression, array $bindings = []);
+ * @method static \Illuminate\Database\Eloquent\Builder whereBetween($column, iterable<int, mixed> $values, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder selectRaw($expression, array<int, mixed> $bindings = []);
  * @method static \Illuminate\Database\Eloquent\Builder where($column, $operator = null, $value = null, $boolean = 'and')
  */
 class CustomRelation extends Relation
@@ -76,7 +76,7 @@ class CustomRelation extends Relation
     /**
      * Initialize the relation on a set of models.
      *
-     * @param string $relation
+     * @param  string  $relation
      */
     public function initRelation(array $models, $relation): array
     {
@@ -90,8 +90,7 @@ class CustomRelation extends Relation
     /**
      * Match the eagerly loaded results to their parents.
      *
-     * @param string $relation
-     *
+     * @param  string  $relation
      * @return array<int, Model>
      */
     public function match(array $models, Collection $collection, $relation): array
@@ -120,7 +119,7 @@ class CustomRelation extends Relation
     /**
      * Execute the query as a "select" statement.
      *
-     * @param array $columns
+     * @param  array<int, string>  $columns
      */
     public function get($columns = ['*']): Collection
     {

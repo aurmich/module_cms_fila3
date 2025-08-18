@@ -210,3 +210,15 @@ Le icone sono state standardizzate per evitare errori:
 - [UserFactory Implementation Final](factories/userfactory-implementation-final.md) - Implementazione finale
 - [Patient Doctor Admin Factories](factories/patient-doctor-admin-factories-implementation-complete.md) - Factory complete
 - [PHPStan Factory Compliance](factories/phpstan-factory-compliance.md) - Conformità PHPStan
+
+## Analisi Modelli
+
+### Modelli Non Utilizzati
+- [Analisi Modelli Non Utilizzati](unused-models-analysis.md) - **⭐ NUOVO** - Identificazione modelli non utilizzati per pulizia codice
+
+### PHPStan e Qualità Codice
+- [🚨 PHPStan Critical Rules](../Xot/docs/phpstan-critical-rules.md) - **🚨 CRITICO** - phpstan.neon INTOCCABILE
+- [PHPStan Relationship Covariance Fix](phpstan-relationship-covariance-fix.md) - **⭐ NUOVO** - Correzione errori covarianza relazioni Eloquent
+- [PHPStan Covariance Resolution Summary](phpstan-covariance-resolution-summary.md) - **⭐ NUOVO** - Riepilogo completo risoluzione
+
+## Models

@@ -319,6 +319,8 @@ Il modulo User gestisce l'autenticazione, l'autorizzazione e la gestione degli u
 - [Analisi Performance](./BOTTLENECKS.md)
 
 ### Testing e Qualità
+- [🚨 PHPStan Critical Rules](../Xot/docs/phpstan-critical-rules.md) - **🚨 CRITICO** - phpstan.neon INTOCCABILE
+- [PHPStan Array Types Fixes](phpstan-array-types-fixes.md) - **⭐ NUOVO** - Correzioni tipi array mancanti
 - [PHPStan Fixes](./phpstan_fixes.md)
 - [PHPStan Level 9](./PHPSTAN_LEVEL9_FIXES.md)
 - [PHPStan Level 10](./PHPSTAN_LEVEL10_FIXES.md)

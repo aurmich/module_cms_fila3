@@ -18,6 +18,7 @@ class ChartColumn extends Column
 
     protected static ?string $maxHeight = null;
 
+    /** @var array<string, mixed>|null */
     protected static ?array $options = null;
 
     // class ChartColumn extends Component
@@ -27,6 +28,7 @@ class ChartColumn extends Column
 
     // protected string $view='filament::widgets.chart-widget';
     // protected $listeners = ['refreshChartColumn' => '$refresh'];
+    /** @var array<string, mixed> */
     public array $chartData = [
         'datasets' => [
             [
@@ -39,8 +41,10 @@ class ChartColumn extends Column
 
     public string $chartType = 'bar';
 
+    /** @var array<string, mixed> */
     public array $chartOptions = [];
 
+    /** @var array<string, mixed>|null */
     protected ?array $cachedData = null;
 
     protected string $view = 'chart::tables.columns.chart-column';
@@ -67,6 +71,9 @@ class ChartColumn extends Column
         return view($this->view, $view_params);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getCachedData(): array
     {
         return $this->cachedData ??= $this->getData();
@@ -77,6 +84,9 @@ class ChartColumn extends Column
         return static::$maxHeight;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getOptions(): ?array
     {
         return $this->chartOptions;
@@ -126,11 +136,17 @@ class ChartColumn extends Column
         return md5(json_encode($this->getCachedData()));
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getData(): array
     {
         return $this->chartData;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     protected function getFilters(): ?array
     {
         return null;

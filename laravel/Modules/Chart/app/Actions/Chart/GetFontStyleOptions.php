@@ -11,7 +11,9 @@ class GetFontStyleOptions
     use QueueableAction;
 
     /**
-     * Undocumented function.
+     * Get font style options for charts.
+     *
+     * @return array<int, string>
      */
     public function execute(): array
     {

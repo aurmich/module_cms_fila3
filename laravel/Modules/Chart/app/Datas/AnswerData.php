@@ -14,8 +14,10 @@ class AnswerData extends Data
 
     public int $gid = 0;
 
+    /** @var float|array<string, mixed> */
     public float|array $value = 0;
 
+    /** @var float|array<string, mixed>|string */
     public float|array|string $value1 = '';
 
     public ?string $_key = null;
@@ -28,6 +30,7 @@ class AnswerData extends Data
 
     // public ?array $sub_labels;
     // public $values; NO ! NO ! NO !
+    /** @var float|array<string, mixed>|string */
     public float|array|string $avg = 0;
 
     // public int $tot = 1;
@@ -36,6 +39,9 @@ class AnswerData extends Data
 
     public ?string $subtitle = null;
 
+    /**
+     * @param  EloquentCollection<int, \Illuminate\Database\Eloquent\Model>|array<int, mixed>  $data
+     */
     public static function collection(EloquentCollection|array $data): DataCollection
     {
         return self::collect($data, DataCollection::class);

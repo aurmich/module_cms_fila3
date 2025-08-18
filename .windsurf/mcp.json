@@ -30,7 +30,12 @@
         "-y",
         "mcp-package-docs"
       ]
-    }
+    },
+    "laravel-boost": {
+            "command": "php",
+            "args": ["./laravel/artisan", "boost:mcp"]
+        }
+  
   
   }
 }

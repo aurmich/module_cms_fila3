@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Webmozart\Assert\Assert;
-use Modules\Xot\Actions\Cast\SafeFloatCastAction;
 
 class AnswersChartData extends Data
 {
@@ -59,6 +58,9 @@ class AnswersChartData extends Data
         return $type;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getChartJsData(): array
     {
         $datasets = [];
@@ -77,8 +79,10 @@ class AnswersChartData extends Data
                 $other = $this->chart->max - $sum;
                 if ($other > 0.01) {
                     $data[] = $other;
+                    $labels = [];
                     $labels[] = $this->chart->answer_value_no_txt ?? 'answer_value_no_txt';
-                    if (\count($labels) === 2 && \strlen($labels[0]) < 3) {
+                    /** @phpstan-ignore isset.offset */
+                    if (\count($labels) === 2 && isset($labels[0]) && \is_string($labels[0]) && \strlen($labels[0]) < 3) {
                         $labels[0] = $this->chart->answer_value_txt;
                     }
                 }
@@ -109,9 +113,11 @@ class AnswersChartData extends Data
                 $other = $this->chart->max - $sum;
                 if ($other > 0.01) {
                     $data[] = $other;
+                    $labels = [];
                     $labels[] = $this->chart->answer_value_no_txt ?? 'answer_value_no_txt';
                     Assert::notNull($labels[0], '['.__FILE__.']['.__LINE__.']');
-                    if (\count($labels) === 2 && \strlen($labels[0]) < 3) {
+                    /** @phpstan-ignore isset.offset */
+                    if (\count($labels) === 2 && isset($labels[0]) && \is_string($labels[0]) && \strlen($labels[0]) < 3) {
                         $labels[0] = $this->chart->answer_value_txt;
                     }
                 }
@@ -147,6 +153,9 @@ class AnswersChartData extends Data
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getChartJsOptionsArray(): array
     {
         $title = [];
@@ -169,6 +178,7 @@ class AnswersChartData extends Data
             ];
         }
 
+        $options = [];
         $options['plugins'] = [
             'title' => $title,
         ];
@@ -179,6 +189,7 @@ class AnswersChartData extends Data
 
         $chartjs_type = $this->getChartJsType();
         $method = 'getChartJs'.Str::of($chartjs_type)->studly()->toString().'OptionsArray';
+        /** @var array<string, mixed> */
         $options = $this->{$method}($options);
 
         return $options;
@@ -200,7 +211,8 @@ class AnswersChartData extends Data
         $title = '{}';
 
         $labels = '{}';
-        if (\count($this->getChartJsData()['datasets']) === 1 && $this->chart->type !== 'horizbar1') {
+        $chartJsData = $this->getChartJsData();
+        if (\is_array($chartJsData['datasets']) && \count($chartJsData['datasets']) === 1 && $this->chart->type !== 'horizbar1') {
             $labels = "{
                 name: {
                     align: 'center',
@@ -246,7 +258,8 @@ class AnswersChartData extends Data
                     }";
         }
         $tooltip = '{}';
-        if ($this->chart->type === 'bar2' && \count($this->getChartJsData()['datasets']) === 1) {
+        $chartJsData = $this->getChartJsData();
+        if ($this->chart->type === 'bar2' && \is_array($chartJsData['datasets']) && \count($chartJsData['datasets']) === 1) {
             $tooltip = "{
                 callbacks: {
                     label: function(context) {
@@ -436,8 +449,16 @@ class AnswersChartData extends Data
         return $js;
     }
 
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
     public function getChartJsBarOptionsArray(array $options): array
     {
+        if (!isset($options['plugins'])) {
+            $options['plugins'] = [];
+        }
+        Assert::isArray($options['plugins']);
         $options['plugins']['datalabels'] = [
             'display' => true,
             'backgroundColor' => '#ccc',
@@ -455,6 +476,10 @@ class AnswersChartData extends Data
         return $options;
     }
 
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
     public function getChartJsDoughnutOptionsArray(array $options): array
     {
         $options['scales'] = [
@@ -476,6 +501,10 @@ class AnswersChartData extends Data
             ],
         ];
 
+        if (!isset($options['plugins'])) {
+            $options['plugins'] = [];
+        }
+        Assert::isArray($options['plugins']);
         $options['plugins']['datalabels'] = [
             'display' => false,
         ];
@@ -496,12 +525,16 @@ class AnswersChartData extends Data
 
         // return '{'.$js.'}';
 
-        return RawJs::make('{
-            '.$js.'
+                    return RawJs::make('{
+            '.(string)$js.'
             }');
     }
 
-    // funzione deprecata, utilizzata nella dashboard precedente
+    /**
+     * funzione deprecata, utilizzata nella dashboard precedente
+     *
+     * @return array<string, mixed>
+     */
     public function getChartJsOptions(): array
     {
         $title = [];
@@ -524,6 +557,7 @@ class AnswersChartData extends Data
             ];
         }
 
+        $options = [];
         $options['plugins'] = [
             'title' => $title,
         ];
@@ -534,6 +568,7 @@ class AnswersChartData extends Data
 
         $chartjs_type = $this->getChartJsType();
         $method = 'getChartJs'.Str::of($chartjs_type)->studly()->toString().'OptionsArray';
+        /** @var array<string, mixed> */
         $options = $this->{$method}($options);
 
         return $options;

@@ -11,7 +11,9 @@ class GetFontFamilyOptions
     use QueueableAction;
 
     /**
-     * Undocumented function.
+     * Get font family options for charts.
+     *
+     * @return array<int, string>
      */
     public function execute(): array
     {

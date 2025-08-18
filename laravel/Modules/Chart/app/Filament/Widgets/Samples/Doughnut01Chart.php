@@ -11,6 +11,9 @@ class Doughnut01Chart extends ChartWidget
 {
     protected static ?string $heading = 'Blog Posts';
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getData(): array
     {
         return [
@@ -31,6 +34,9 @@ class Doughnut01Chart extends ChartWidget
         return 'doughnut';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getOptions(): array
     {
         return [

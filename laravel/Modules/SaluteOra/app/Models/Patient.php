@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Parental\HasParent;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
-use Modules\SaluteOra\Models\User;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -32,7 +30,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $updated_by
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
- * @property-read \Modules\SaluteOra\Models\PatientIsee|null $isee
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
@@ -46,6 +44,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUserId($value)
+ *
  * @property string|null $name
  * @property string|null $first_name
  * @property string|null $last_name
@@ -104,6 +103,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment> $treatments
  * @property-read int|null $treatments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient admins()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient doctors()
  * @method static \Modules\User\Database\Factories\UserFactory factory($count = null, $state = [])
@@ -139,6 +139,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutRole($roles, $guard = null)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
  * @property string|null $dental_problems
@@ -150,6 +151,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $certificates
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
  * @property-read int|null $team_users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertificates($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDentalProblems($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereHealthCard($value)
@@ -157,6 +159,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIseeCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePregnancyCertificate($value)
+ *
  * @property string|null $country_code
  * @property string|null $children_count
  * @property string|null $family_members
@@ -168,6 +171,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $last_dental_visit_period
  * @property-read int|null $appointments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCountryCode($value)
@@ -178,6 +182,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereYearsInItaly($value)
+ *
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia
@@ -214,20 +219,21 @@ class Patient extends User implements HasMedia
         'fiscal_code',
 
     ];
+
     protected $appends = [
-        //'health_card',
-        //'identity_document',
-        //'isee_certificate',
-        //'pregnancy_certificate',
+        // 'health_card',
+        // 'identity_document',
+        // 'isee_certificate',
+        // 'pregnancy_certificate',
     ];
 
-    /** @var array<string, mixed>  */
+    /** @var array<string, mixed> */
     protected $attributes = [
-        //'state' => Pending::class,
-        //'state' => 'pending',
-        'is_otp'=>false,
-        'is_active'=>true,
-        'type'=>'patient',
+        // 'state' => Pending::class,
+        // 'state' => 'pending',
+        'is_otp' => false,
+        'is_active' => true,
+        'type' => 'patient',
         /*
         'studio'=>[
             'description' => null,
@@ -242,10 +248,11 @@ class Patient extends User implements HasMedia
         */
     ];
 
-    public static function getAttachments():array{
+    public static function getAttachments(): array
+    {
         return [
             'health_card',
-            //'identity_document',
+            // 'identity_document',
             'isee_certificate',
             'pregnancy_certificate',
         ];
@@ -272,16 +279,14 @@ class Patient extends User implements HasMedia
         // Conversione per le anteprime dei documenti
         $this
             ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            //->nonQueued()
-            ;
+            ->fit(Fit::Contain, 300, 300);
+        // ->nonQueued()
 
         // Conversione per le immagini dei documenti
         $this
             ->addMediaConversion('document')
-            ->fit(Fit::Contain, 800, 800)
-            //->nonQueued()
-            ;
+            ->fit(Fit::Contain, 800, 800);
+        // ->nonQueued()
     }
 
     /**
@@ -297,7 +302,7 @@ class Patient extends User implements HasMedia
         }
     }
 
-        /**
+    /**
      * Verifica se un allegato specifico esiste
      */
     public function hasAttachment(string $type): bool
@@ -311,7 +316,7 @@ class Patient extends User implements HasMedia
     public function getAttachmentUrl(string $type): ?string
     {
         $media = $this->getFirstMedia($type);
-        if (!$media) {
+        if (! $media) {
             return null;
         }
 
@@ -322,8 +327,8 @@ class Patient extends User implements HasMedia
                 'patient_id' => $this->id,
                 'type' => $type,
                 'user_id' => auth()->id(),
-                'expires_at' => now()->addHour()
-            ])
+                'expires_at' => now()->addHour(),
+            ]),
         ]);
     }
 
@@ -338,6 +343,7 @@ class Patient extends User implements HasMedia
                 $count++;
             }
         }
+
         return $count;
     }
 
@@ -348,28 +354,27 @@ class Patient extends User implements HasMedia
     {
         $required = ['health_card', 'identity_document'];
         foreach ($required as $type) {
-            if (!$this->hasAttachment($type)) {
+            if (! $this->hasAttachment($type)) {
                 return false;
             }
         }
+
         return true;
     }
 
-
     public function appointments(): HasMany
     {
-        return $this->hasMany(Appointment::class,'patient_id');
+        return $this->hasMany(Appointment::class, 'patient_id');
     }
-
 
     public function canBook(): bool
     {
-        if($this->appointments->count()==0){
+        if ($this->appointments->count() == 0) {
             return true;
-        };
-        $res=true;
-        foreach($this->appointments as $appointment){
-            if(in_array($appointment->state->getName(),[
+        }
+        $res = true;
+        foreach ($this->appointments as $appointment) {
+            if (in_array($appointment->state->getName(), [
                 'pending',
                 'report_pending',
                 'report_completed',
@@ -384,11 +389,12 @@ class Patient extends User implements HasMedia
                 'refund_accepted',
                 'scheduled',
                 'rescheduled',
-                ])){
+            ])) {
                 return false;
 
             }
         }
+
         return $res;
     }
 }

@@ -242,6 +242,9 @@ class ArtisanService
         return 'Debugbar Storage cleared! ('.\count($files).' Files )';
     }
 
+    /**
+     * @param array<string, mixed> $arguments
+     */
     public static function exe(string $command, array $arguments = []): string
     {
         try {

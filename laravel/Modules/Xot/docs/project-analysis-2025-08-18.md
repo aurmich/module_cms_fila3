@@ -142,6 +142,13 @@ return [
 - **Push**: Firebase
 - **Maps**: Google Maps API
 
+### Theme System
+- **Directory**: `/Themes/One/` e `/Themes/Two/`
+- **⚠️ WORKFLOW CSS/JS**: Modifiche SOLO nella cartella tema
+- **Build Process**: `npm run build` → `npm run copy` (dalla cartella tema)
+- **Assets Source**: `/Themes/[Theme]/resources/`
+- **Assets Compiled**: `/public/` (via copy)
+
 ## 📈 Roadmap Architecture
 
 ### Punti di Forza

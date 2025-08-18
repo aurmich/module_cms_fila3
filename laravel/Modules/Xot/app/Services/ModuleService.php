@@ -53,7 +53,9 @@ class ModuleService
     }
 
     /**
-     * Undocumented function.
+     * Get models for the module.
+     *
+     * @return array<string, class-string>
      */
     public function getModels(): array
     {

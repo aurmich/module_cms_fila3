@@ -23,9 +23,9 @@ parameters:
         - '#Static call to instance method Nwidart#'
         - '#is used zero times and is not analysed#'
         - "#^Unsafe usage of new static#"
-        - '#Method .+::.+ should return .+<.+, (.+)> but returns .+<.+, \$this\(\1\)>#' # Ignora errori di covarianza nei tipi generici delle relazioni Eloquent
+        # - '#Method .+::.+ should return .+<.+, (.+)> but returns .+<.+, \$this\(\1\)>#' # Ignora errori di covarianza nei tipi generici delle relazioni Eloquent
         - '#Cannot cast mixed to (string|float|double|int|bool|boolean).#' # Ignora errori di cast da mixed a tipi specifici
-        - '#Call to function is_object\(\) with .+ will always evaluate to true.#' 
+        # - '#Call to function is_object\(\) with .+ will always evaluate to true.#' 
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
         - identifier: larastan.noEnvCallsOutsideOfConfig

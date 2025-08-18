@@ -5,25 +5,19 @@ declare(strict_types=1);
 namespace Modules\Xot\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Set;
-use function Safe\glob;
 use Filament\Forms\Form;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use Illuminate\Support\HtmlString;
-
-use Illuminate\Contracts\View\View;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
 use Filament\Pages\SubNavigationPosition;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Xot\Actions\ModelClass\CountAction;
 use Filament\Resources\Resource as FilamentResource;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 use Modules\Media\Actions\GetAttachmentsSchemaAction;
+use Modules\Xot\Actions\ModelClass\CountAction;
 use Modules\Xot\Filament\Traits\NavigationLabelTrait;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Webmozart\Assert\Assert;
+
+use function Safe\glob;
 
 /**
  * @method static string getUrl(string $name, array<string, mixed> $parameters = [], bool $isAbsolute = true)
@@ -53,17 +47,15 @@ abstract class XotBaseResource extends FilamentResource
         return true;
     }
 
-
-
-
     /**
      * @return class-string<\Illuminate\Database\Eloquent\Model>
      */
     public static function getModel(): string
     {
-        if (null != static::$model) {
+        if (static::$model != null) {
             $res = static::$model;
             Assert::subclassOf($res, \Illuminate\Database\Eloquent\Model::class, sprintf('Class %s must extend Eloquent Model', $res));
+
             return $res;
         }
         $moduleName = static::getModuleName();
@@ -80,7 +72,6 @@ abstract class XotBaseResource extends FilamentResource
      * @return array<string|int,\Filament\Forms\Components\Component>
      */
     abstract public static function getFormSchema(): array;
-    
 
     final public static function form(Form $form): Form
     {
@@ -97,6 +88,11 @@ abstract class XotBaseResource extends FilamentResource
         ];
     }
 
+    /**
+     * Get form extension callbacks.
+     *
+     * @return array<string, mixed>
+     */
     public static function extendFormCallback(): array
     {
         return [
@@ -187,34 +183,39 @@ abstract class XotBaseResource extends FilamentResource
         return $res;
     }
 
-    public static function getWizardSubmitAction():Htmlable
+    public static function getWizardSubmitAction(): Htmlable
     {
         $submit_view = 'pub_theme::filament.wizard.submit-button';
-        if(!view()->exists($submit_view)){
+        if (! view()->exists($submit_view)) {
             throw new \Exception("View {$submit_view} does not exist");
         }
-        $render= view($submit_view)->render();
+        $render = view($submit_view)->render();
+
         return new HtmlString($render);
     }
 
-    public static function getAttachmentsSchema(bool $multiple=true): array{
+    /**
+     * Get attachments schema for forms.
+     *
+     * @return array<int, \Filament\Forms\Components\Component>
+     */
+    public static function getAttachmentsSchema(bool $multiple = true): array
+    {
         $model = static::getModel();
-        if(!method_exists($model,'getAttachments')){
+        if (! method_exists($model, 'getAttachments')) {
             return [];
         }
         $attachments = $model::getAttachments();
-        $disk='attachments';
-        $schema=app(GetAttachmentsSchemaAction::class)->execute($attachments,$disk);
-        
+        $disk = 'attachments';
+        $schema = app(GetAttachmentsSchemaAction::class)->execute($attachments, $disk);
+
         return $schema;
     }
 
-    
-
     protected static function getStepByName(string $name): Forms\Components\Wizard\Step
     {
-        $schema=Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
-        
+        $schema = Str::of($name)->snake()->studly()->prepend('get')->append('Schema')->toString();
+
         return Forms\Components\Wizard\Step::make($name)
             ->schema(static::$schema());
     }

@@ -11,6 +11,9 @@ class Sample01Chart extends ChartWidget
 {
     protected static ?string $heading = 'Blog Posts';
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getData(): array
     {
         return [

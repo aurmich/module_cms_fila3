@@ -30,7 +30,7 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|Module wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereStatus($value)
  * @property string|null $icon
- * @property array|null  $colors
+ * @property array<string, string>|null $colors
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereColors($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereIcon($value)
  * @mixin \Eloquent
@@ -51,9 +51,9 @@ class Module extends Model
     ];
 
     /**
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
-    public function getRows()
+    public function getRows(): array
     {
         $modules = ModuleFacade::all();
         $modules = Arr::map(

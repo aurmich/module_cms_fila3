@@ -35,16 +35,19 @@ use Webmozart\Assert\Assert;
  * @property string|null $group_by
  * @property string|null $sort_by
  * @property int|null $transparency
- * @property array|null $colors
+ * @property array<string, mixed>|null $colors
  * @property string|null $post_id
  * @property string|null $post_type
  * @property string|null $chart_type
+ *
  * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
  * @method static Builder|Chart query()
+ *
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ *
  * @mixin \Eloquent
  */
 class Chart extends BaseModel
@@ -79,7 +82,7 @@ class Chart extends BaseModel
         'colors',
     ];
 
-    /** @var  array<string, mixed>   */
+    /** @var array<string, mixed> */
     protected $attributes = [
         'list_color' => '#d60021',
         'color' => '#d60021',
@@ -110,6 +113,7 @@ class Chart extends BaseModel
     public function getPanelRow(string $parent_field, string $my_field): int|string|null
     {
         $panel_row = $this;
+        $value = null;
 
         try {
             $value = $panel_row->{$parent_field};
@@ -125,6 +129,7 @@ class Chart extends BaseModel
             $value = null;
         }
 
+        /** @var int|string|null */
         return $value;
     }
 
@@ -136,6 +141,7 @@ class Chart extends BaseModel
 
         $res = $this->attributes['type'] ?? (string) $this->getPanelRow('chart_type', 'type');
         Assert::string($res);
+
         return $res;
     }
 
@@ -164,6 +170,9 @@ class Chart extends BaseModel
         return (int) $value;
     }
 
+    /**
+     * @return array<string, array<int|string, mixed>>
+     */
     public function getSettings(): array
     {
         Assert::notNull($this->type, '['.__FILE__.']['.__LINE__.']');
@@ -177,6 +186,8 @@ class Chart extends BaseModel
             return $mixed->charts->toArray();
         }
 
-        return [$this->toArray()];
+        /** @var array<string, array<int|string, mixed>> */
+        $result = [$this->toArray()];
+        return $result;
     }
-} 
+}

@@ -22,24 +22,38 @@ class ReportPending extends AppointmentState
     /** @var string */
     public static string $name = 'report_pending';
 
+    /**
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
     public function modalFormSchema(): array
     {
+        /** @var array<string, \Filament\Forms\Components\Component> */
         return ReportResource::getFormSchema();
     }
 
+    /**
+     * @param array<string, mixed> $arguments
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
     public function modalFillForm(array $arguments,array $data): array
     {
         $appointmentId = $arguments['appointment'];
         $where=['appointment_id'=>$appointmentId];
         $report=Report::firstOrCreate($where);
+        /** @var array<string, mixed> */
         return $report->toArrayForce();
     }
 
 
+    /**
+     * @return array<string, mixed>
+     */
     public function modalFillFormByRecord(Model $record): array
     {
         $where=['appointment_id'=>$record->getKey()];
         $report=Report::firstOrCreate($where);
+        /** @var array<string, mixed> */
         return $report->toArrayForce();
     }
 

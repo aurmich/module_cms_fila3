@@ -35,6 +35,9 @@ class Log extends BaseModel
 
     protected $fillable = ['id', 'name', 'size'];
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     public function getRows(): array
     {
         $rows = [];

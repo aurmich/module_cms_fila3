@@ -12,7 +12,9 @@ class GetTypeOptions
     use QueueableAction;
 
     /**
-     * Undocumented function.
+     * Get chart type options including mixed charts.
+     *
+     * @return array<string, string>
      */
     public function execute(): array
     {

@@ -66,17 +66,25 @@ class ChartData extends Data
     public ?string $answer_value_txt = null;
 
     // public ?string $legend;
+    /** @var array<string, mixed>|null */
     public ?array $legend = null;
 
+    /** @var array<int, string>|null */
     public ?array $sublabels = null;
 
     public ?float $avg = null;
 
+    /**
+     * @return array<int, string>
+     */
     public function getColors(): array
     {
         return explode(',', $this->list_color);
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getColorsRgba(float $alpha = 1): array
     {
         $colors = $this->getColors();
