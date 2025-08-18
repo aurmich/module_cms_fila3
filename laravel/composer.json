@@ -64,7 +64,6 @@
             "@php artisan test"
         ],
         "go":[
-            "git pull",
             "@php -d memory_limit=-1 composer.phar selfupdate",
             "rm -rf ./app/View/Components/vendor/",
             "@php -d memory_limit=-1 composer.phar update -W",
