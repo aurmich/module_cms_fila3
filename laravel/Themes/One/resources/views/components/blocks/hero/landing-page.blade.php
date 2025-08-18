@@ -243,9 +243,11 @@
                <img class="h-44 px-2 pt-2" src="/img/woman-characterrr.png" />
              </div>
              <div class="flex flex-col items-center justify-center m-5">
-               <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
-                 >@lang('pub_theme::navigation.landing.consult_guide.label')</span
-               >
+              <a href="/img/Guida-Paziente-Salute-Orale.pdf" target="_blank">
+                <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
+                  >@lang('pub_theme::navigation.landing.consult_guide.label')</span
+                >
+              </a>
              </div>
            </div>
          </div>
@@ -255,8 +257,10 @@
                <img class="h-44 p-2" src="/img/dentist.png" />
              </div>
              <div class="flex flex-col items-center justify-center m-5">
-               <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
-                 >@lang('pub_theme::navigation.landing.consult_guide.label')</span>
+              <a href="/img/Guida-Odontoiatra-Salute-Orale.pdf" target="_blank">
+                <span class="text-[#FF5F7E] text-xl lg:text-2xl text-center"
+                  >@lang('pub_theme::navigation.landing.consult_guide.label')</span>
+              </a>
              </div>
            </div>
          </div>
