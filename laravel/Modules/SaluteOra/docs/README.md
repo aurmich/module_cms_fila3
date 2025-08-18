@@ -200,3 +200,13 @@ Le icone sono state standardizzate per evitare errori:
 - [RelationX Trait](models/relationx-trait.md) - Trait per relazioni avanzate
 - [Doctor Studio Model](doctor-studio-model.md) - Modello pivot Doctor-Studio
 - [Doctor Studio Pivot Model](doctor-studio-pivot-model.md) - Documentazione completa pivot
+
+## Factory System
+
+### UserFactory e Ecosistema
+- [UserFactory Implementation Completed](factories/userfactory_implementation_completed.md) - Implementazione completata
+- [UserFactory Advanced Improvements](factories/userfactory-advanced-improvements-analysis.md) - Miglioramenti avanzati
+- [UserFactory Implementation Guide](factories/userfactory-implementation-guide.md) - Guida implementazione
+- [UserFactory Implementation Final](factories/userfactory-implementation-final.md) - Implementazione finale
+- [Patient Doctor Admin Factories](factories/patient-doctor-admin-factories-implementation-complete.md) - Factory complete
+- [PHPStan Factory Compliance](factories/phpstan-factory-compliance.md) - Conformità PHPStan

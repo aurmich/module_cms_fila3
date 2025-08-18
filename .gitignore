@@ -82,6 +82,7 @@ vendor/
 build/
 node_modules
 docs/cache/
+docs/
 cache/
 .git-blame-ignore-revs
 .php-cs-fixer.cache

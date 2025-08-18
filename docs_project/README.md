@@ -25,6 +25,7 @@ SaluteOra è un sistema sanitario modulare basato su Laravel che gestisce appunt
 - **[Regole Critiche XotBaseResource](xot-base-resource-guidelines.md)** - Regole fondamentali per Filament Resources
 - **[Sistema Traduzioni Stati](translations-states-analysis.md)** - Gestione traduzioni e stati
 - **[PHPStan Analisi Statica](phpstan-errors-analysis.md)** - Controllo qualità codice
+- **[Struttura DRY + KISS](DRY_KISS_DOCUMENTATION_STRUCTURE.md)** - Organizzazione documentazione modulare
 
 ### 🛠️ Development - Sviluppo
 - **[Best Practices](laravel/Modules/Xot/docs/best-practices-consolidated.md)** - Regole consolidate per sviluppo
