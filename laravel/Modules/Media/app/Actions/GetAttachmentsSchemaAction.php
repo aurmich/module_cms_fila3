@@ -47,6 +47,7 @@ class GetAttachmentsSchemaAction
             ->maxSize(5120*2)
             ->preserveFilenames()
             ->required()
+            ->previewable(false)
             //->saveUploadedFiles()
             ->afterStateUpdated(function ($state, Set $set) use ($attachment,$sessionDir,$disk) {
                 if (!$state) return;
