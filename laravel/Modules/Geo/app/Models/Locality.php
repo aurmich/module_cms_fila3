@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Geo\Models;
 
 use Filament\Forms\Get;
+use Illuminate\Support\Arr;
 use function Safe\json_decode;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,6 +39,22 @@ class Locality extends BaseModel
         'name' => 'string',
         'postal_code' => 'json',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'region_id' => 'integer',
+            'province_id' => 'integer',
+            'id' => 'integer',
+            'name' => 'string',
+            'postal_code' => 'array',
+        ];
+    }
     
 
 
@@ -48,9 +65,9 @@ class Locality extends BaseModel
             ->get()
             ->map(function($row){
                 /** @phpstan-ignore offsetAccess.nonOffsetAccessible, property.notFound */
-                $postal_code=json_decode($row->postal_code)[0];
+                //$postal_code=json_decode($row->postal_code)[0];
                 /** @phpstan-ignore property.notFound */
-                $row->postal_code=$postal_code;
+                //$row->postal_code=$postal_code;
                 return $row;
             });
             
@@ -107,17 +124,21 @@ class Locality extends BaseModel
         $city = $get('locality');
         $res=self::where('region_id', $region)
         ->where('province_id', $province)
-        
         ->when($city !== null, fn($query) => $query->where('id', $city))
         ->select('postal_code')
         ->distinct()
         ->orderBy('postal_code')
         ->get()
-        ->pluck('postal_code', 'postal_code')
-        ->toArray();
-
-                        
-                        
-        return $res ?? [];
+        //->pluck('postal_code', 'postal_code')
+        //->toArray()
+        ;
+        $arr=$res->toArray();
+        $arr=Arr::mapWithKeys($arr, function($item){
+            $res=$item['postal_code'];
+            $res=array_combine($res,$res);
+            return $res;
+        });
+                      
+        return $arr ?? [];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Modules\Gdpr\Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +15,9 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
+pest()->extend(TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +30,12 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeGdprConsent', function () {
+    return $this->toBeInstanceOf(\Modules\Gdpr\Models\GdprConsent::class);
+});
+
+expect()->extend('toBeGdprRequest', function () {
+    return $this->toBeInstanceOf(\Modules\Gdpr\Models\GdprRequest::class);
 });
 
 /*
@@ -41,45 +49,22 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-/**
- * Check if a module is enabled.
- */
-function moduleEnabled(string $module): bool
+function createGdprConsent(array $attributes = []): \Modules\Gdpr\Models\GdprConsent
 {
-    $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
-    return $moduleStatuses[$module] ?? false;
+    return \Modules\Gdpr\Models\GdprConsent::factory()->create($attributes);
 }
 
-/**
- * Skip test if module is disabled.
- */
-function skipIfModuleDisabled(string $module): void
+function makeGdprConsent(array $attributes = []): \Modules\Gdpr\Models\GdprConsent
 {
-    if (!moduleEnabled($module)) {
-        test()->markTestSkipped("Module {$module} is disabled");
-    }
+    return \Modules\Gdpr\Models\GdprConsent::factory()->make($attributes);
 }
 
-/**
- * Create user of specific type using XotData.
- */
-function createUserOfType(\Modules\SaluteOra\Enums\UserTypeEnum $type, array $attributes = []): \Modules\User\Models\User
+function createGdprRequest(array $attributes = []): \Modules\Gdpr\Models\GdprRequest
 {
-    return \Tests\Helpers\ModuleTestHelper::createUserOfType($type, $attributes);
+    return \Modules\Gdpr\Models\GdprRequest::factory()->create($attributes);
 }
 
-/**
- * Assert that translations exist for all locales.
- */
-function assertTranslationsExist(string $translationKey, array $locales = ['it', 'en', 'de']): void
+function makeGdprRequest(array $attributes = []): \Modules\Gdpr\Models\GdprRequest
 {
-    \Tests\Helpers\ModuleTestHelper::assertTranslationsExist($translationKey, $locales);
-}
-
-/**
- * Benchmark performance of a callback.
- */
-function benchmarkPerformance(callable $callback, float $maxDuration = 1.0): float
-{
-    return \Tests\Helpers\ModuleTestHelper::benchmarkPerformance($callback, $maxDuration);
+    return \Modules\Gdpr\Models\GdprRequest::factory()->make($attributes);
 }

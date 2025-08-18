@@ -256,9 +256,13 @@ $variabile = $oggetto->proprietaNonStandard;
 
 ## 🔗 Risorse
 
+### Documentazione Generale
 - [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
 - [Modules/Xot/docs/PHPSTAN_LIVELLO10_LINEE_GUIDA.md](PHPSTAN_LIVELLO10_LINEE_GUIDA.md)
 - [docs/PHPSTAN_LEVEL10_FIXES.md](../../../docs/PHPSTAN_LEVEL10_FIXES.md)
+
+### Fix Specifici per Modulo
+- [Chart Module - getSettings() Array Types](../laravel/Modules/Chart/docs/phpstan/chart-getsettings-fix.md) - Risoluzione array type specifications (2025-01-06)
 
 ---
 

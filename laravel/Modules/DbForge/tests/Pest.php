@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Modules\DbForge\Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +15,9 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
+pest()->extend(TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +30,8 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeDbForgeModel', function () {
+    return $this->toBeInstanceOf(\Illuminate\Database\Eloquent\Model::class);
 });
 
 /*
@@ -41,45 +45,26 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-/**
- * Check if a module is enabled.
- */
-function moduleEnabled(string $module): bool
+function createDbForgeConnection(array $attributes = []): array
 {
-    $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
-    return $moduleStatuses[$module] ?? false;
+    return array_merge([
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'test_db',
+        'username' => 'test_user',
+        'password' => 'test_password',
+    ], $attributes);
 }
 
-/**
- * Skip test if module is disabled.
- */
-function skipIfModuleDisabled(string $module): void
+function makeDbForgeSchema(string $table = 'test_table'): array
 {
-    if (!moduleEnabled($module)) {
-        test()->markTestSkipped("Module {$module} is disabled");
-    }
-}
-
-/**
- * Create user of specific type using XotData.
- */
-function createUserOfType(\Modules\SaluteOra\Enums\UserTypeEnum $type, array $attributes = []): \Modules\User\Models\User
-{
-    return \Tests\Helpers\ModuleTestHelper::createUserOfType($type, $attributes);
-}
-
-/**
- * Assert that translations exist for all locales.
- */
-function assertTranslationsExist(string $translationKey, array $locales = ['it', 'en', 'de']): void
-{
-    \Tests\Helpers\ModuleTestHelper::assertTranslationsExist($translationKey, $locales);
-}
-
-/**
- * Benchmark performance of a callback.
- */
-function benchmarkPerformance(callable $callback, float $maxDuration = 1.0): float
-{
-    return \Tests\Helpers\ModuleTestHelper::benchmarkPerformance($callback, $maxDuration);
+    return [
+        'table' => $table,
+        'columns' => [
+            'id' => ['type' => 'bigint', 'auto_increment' => true, 'primary' => true],
+            'name' => ['type' => 'varchar', 'length' => 255, 'nullable' => false],
+            'created_at' => ['type' => 'timestamp', 'nullable' => true],
+            'updated_at' => ['type' => 'timestamp', 'nullable' => true],
+        ],
+    ];
 }

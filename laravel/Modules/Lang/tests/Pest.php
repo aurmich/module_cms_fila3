@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Modules\Lang\Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +15,9 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
+pest()->extend(TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +30,12 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeTranslation', function () {
+    return $this->toBeInstanceOf(\Modules\Lang\Models\Translation::class);
+});
+
+expect()->extend('toBeLanguage', function () {
+    return $this->toBeInstanceOf(\Modules\Lang\Models\Language::class);
 });
 
 /*
@@ -41,45 +49,22 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-/**
- * Check if a module is enabled.
- */
-function moduleEnabled(string $module): bool
+function createTranslation(array $attributes = []): \Modules\Lang\Models\Translation
 {
-    $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
-    return $moduleStatuses[$module] ?? false;
+    return \Modules\Lang\Models\Translation::factory()->create($attributes);
 }
 
-/**
- * Skip test if module is disabled.
- */
-function skipIfModuleDisabled(string $module): void
+function makeTranslation(array $attributes = []): \Modules\Lang\Models\Translation
 {
-    if (!moduleEnabled($module)) {
-        test()->markTestSkipped("Module {$module} is disabled");
-    }
+    return \Modules\Lang\Models\Translation::factory()->make($attributes);
 }
 
-/**
- * Create user of specific type using XotData.
- */
-function createUserOfType(\Modules\SaluteOra\Enums\UserTypeEnum $type, array $attributes = []): \Modules\User\Models\User
+function createLanguage(array $attributes = []): \Modules\Lang\Models\Language
 {
-    return \Tests\Helpers\ModuleTestHelper::createUserOfType($type, $attributes);
+    return \Modules\Lang\Models\Language::factory()->create($attributes);
 }
 
-/**
- * Assert that translations exist for all locales.
- */
-function assertTranslationsExist(string $translationKey, array $locales = ['it', 'en', 'de']): void
+function makeLanguage(array $attributes = []): \Modules\Lang\Models\Language
 {
-    \Tests\Helpers\ModuleTestHelper::assertTranslationsExist($translationKey, $locales);
-}
-
-/**
- * Benchmark performance of a callback.
- */
-function benchmarkPerformance(callable $callback, float $maxDuration = 1.0): float
-{
-    return \Tests\Helpers\ModuleTestHelper::benchmarkPerformance($callback, $maxDuration);
+    return \Modules\Lang\Models\Language::factory()->make($attributes);
 }

@@ -218,6 +218,10 @@ return array (
     array (
       'label' => 'view',
     ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
   ),
   'actions' => 
   array (

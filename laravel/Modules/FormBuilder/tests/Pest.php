@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Modules\FormBuilder\Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +15,9 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
+pest()->extend(TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +30,12 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeForm', function () {
+    return $this->toBeInstanceOf(\Modules\FormBuilder\Models\Form::class);
+});
+
+expect()->extend('toBeFormField', function () {
+    return $this->toBeInstanceOf(\Modules\FormBuilder\Models\FormField::class);
 });
 
 /*
@@ -41,45 +49,22 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-/**
- * Check if a module is enabled.
- */
-function moduleEnabled(string $module): bool
+function createForm(array $attributes = []): \Modules\FormBuilder\Models\Form
 {
-    $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
-    return $moduleStatuses[$module] ?? false;
+    return \Modules\FormBuilder\Models\Form::factory()->create($attributes);
 }
 
-/**
- * Skip test if module is disabled.
- */
-function skipIfModuleDisabled(string $module): void
+function makeForm(array $attributes = []): \Modules\FormBuilder\Models\Form
 {
-    if (!moduleEnabled($module)) {
-        test()->markTestSkipped("Module {$module} is disabled");
-    }
+    return \Modules\FormBuilder\Models\Form::factory()->make($attributes);
 }
 
-/**
- * Create user of specific type using XotData.
- */
-function createUserOfType(\Modules\SaluteOra\Enums\UserTypeEnum $type, array $attributes = []): \Modules\User\Models\User
+function createFormField(array $attributes = []): \Modules\FormBuilder\Models\FormField
 {
-    return \Tests\Helpers\ModuleTestHelper::createUserOfType($type, $attributes);
+    return \Modules\FormBuilder\Models\FormField::factory()->create($attributes);
 }
 
-/**
- * Assert that translations exist for all locales.
- */
-function assertTranslationsExist(string $translationKey, array $locales = ['it', 'en', 'de']): void
+function makeFormField(array $attributes = []): \Modules\FormBuilder\Models\FormField
 {
-    \Tests\Helpers\ModuleTestHelper::assertTranslationsExist($translationKey, $locales);
-}
-
-/**
- * Benchmark performance of a callback.
- */
-function benchmarkPerformance(callable $callback, float $maxDuration = 1.0): float
-{
-    return \Tests\Helpers\ModuleTestHelper::benchmarkPerformance($callback, $maxDuration);
+    return \Modules\FormBuilder\Models\FormField::factory()->make($attributes);
 }
