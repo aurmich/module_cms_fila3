@@ -136,6 +136,7 @@ Le icone sono state standardizzate per evitare errori:
 
 ## Collegamenti
 
+- [📊 **Project Analysis 2025-08-18**](../Xot/docs/project-analysis-2025-08-18.md) - **⭐ NUOVO** - Analisi completa architettura e stato progetto  
 - [Modulo User](../User/docs/README.md) - Gestione utenti e autenticazione
 - [Modulo UI](../UI/docs/README.md) - Componenti UI condivisi
 - [Modulo Geo](../Geo/docs/README.md) - Gestione indirizzi e localizzazione

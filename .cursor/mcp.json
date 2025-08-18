@@ -37,6 +37,10 @@
         "-y",
         "playwright-mcp"
       ]
-    }
+    },
+    "laravel-boost": {
+            "command": "php",
+            "args": ["./laravel/artisan", "boost:mcp"]
+        }
   }
 }
