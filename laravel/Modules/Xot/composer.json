@@ -64,6 +64,7 @@
         "barryvdh/laravel-ide-helper": "^3.2",
         "fakerphp/faker": "^1.24",
         "larastan/larastan": "*",
+        "laravel/boost": "^1.0",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
@@ -71,7 +72,6 @@
         "orchestra/testbench": "*",
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
-        
         "thecodingmachine/phpstan-safe-rule": "*"
     },
     "require-dev_comment": {
