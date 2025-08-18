@@ -16,4 +16,10 @@ class Rejected extends AppointmentState
     /** @var string */
     public static string $name = 'rejected';
 
+
+    public function isMessageRequired(): bool
+    {
+        return true;
+    }
+
 }

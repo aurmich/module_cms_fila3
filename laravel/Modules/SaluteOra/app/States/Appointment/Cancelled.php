@@ -16,4 +16,10 @@ class Cancelled extends AppointmentState
     /** @var string */
     public static string $name = 'cancelled';
 
+
+    public function isMessageRequired(): bool
+    {
+        return true;
+    }
+
 }
