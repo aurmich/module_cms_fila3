@@ -90,11 +90,7 @@ class ListAppointments extends XotBaseListRecords
     {
      return [
          ...parent::getTableFilters(),
-         SelectFilter::make('state')->options(function(){
-             $res=array_keys(AppointmentState::getStateMapping()->toArray());
-             $res=array_combine($res,$res);
-             return $res;
-         }),//->options(UserTypeEnum::class),
+         SelectFilter::make('state')->options(AppointmentState::getOptions()),
      ];
     }
 

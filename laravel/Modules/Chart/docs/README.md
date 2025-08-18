@@ -29,8 +29,9 @@ Il modulo **Chart** gestisce la visualizzazione e l'analisi di dati tramite graf
 - [installazione.md](./installazione.md): Guida all'installazione e setup.
 - [introduzione.md](./introduzione.md): Introduzione e overview del modulo.
 - [lang-link.md](./lang-link.md): Collegamento alle regole di traduzione e risorse Lang.
-- [phpstan/](./phpstan/): Configurazioni e fix avanzati per static analysis (directory).
-- [query.md](./query.md): Query e ottimizzazioni sulle sorgenti dati dei grafici.
+- **phpstan/:** Configurazioni e fix avanzati per static analysis.
+- **phpstan/chart-model-fixes.md:** Correzioni specifiche per errori PHPStan nel modello Chart.
+- **query.md:** Ottimizzazione e uso delle query per i grafici.
 - [roadmap.md](./roadmap.md): Roadmap di sviluppo e milestone.
 - [translations.md](./translations.md): Struttura e best practice per i file di traduzione.
 

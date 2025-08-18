@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Xot\States;
 
-use Filament\Forms\Components;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
+use Spatie\ModelStates\State;
+use Filament\Forms\Components;
+use Spatie\ModelStates\StateConfig;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Contracts\StateContract;
 use Modules\Xot\Filament\Traits\TransTrait;
-use Spatie\ModelStates\State;
-use Spatie\ModelStates\StateConfig;
 
 /**
  * Abstract base class for appointment state management.
@@ -214,5 +215,18 @@ abstract class XotBaseState extends State implements StateContract
         */
         /** @phpstan-ignore-next-line */
         $record->state->transitionTo($stateClass,$message);
+    }
+
+
+    public static function getOptions(): array
+    {
+
+        $states=static::getStateMapping()->toArray();
+        
+        $states=Arr::map($states,function($stateClass,$state){
+            return static::transClass(static::class, 'states.'.$state.'.label');
+        });
+        
+        return $states;
     }
 }

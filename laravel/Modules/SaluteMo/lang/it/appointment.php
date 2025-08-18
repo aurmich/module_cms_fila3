@@ -351,6 +351,18 @@ return array (
       'placeholder' => 'state',
       'label' => 'state',
     ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
+    'toggleColumns' => 
+    array (
+      'label' => 'toggleColumns',
+    ),
+    'reorderRecords' => 
+    array (
+      'label' => 'reorderRecords',
+    ),
   ),
   'actions' => 
   array (

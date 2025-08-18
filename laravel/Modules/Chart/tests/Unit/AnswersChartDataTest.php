@@ -10,37 +10,50 @@ use Filament\Support\RawJs;
 
 describe('AnswersChartData', function () {
     beforeEach(function () {
-        // Mock ChartData
-        $this->chartData = new ChartData(
-            type: 'bar1',
-            max: 100.0,
-            answer_value_no_txt: 'No Answer',
-            answer_value_txt: 'Yes Answer'
-        );
+        // Mock ChartData using from() method
+        $this->chartData = ChartData::from([
+            'type' => 'bar1',
+            'max' => 100.0,
+            'min' => 0.0,
+            'height' => 400,
+            'list_color' => '#ff0000',
+            'font_family' => 'Arial',
+            'font_size' => '12',
+            'font_style' => 'normal',
+            'x_label_angle' => '0',
+            'show_box' => 1,
+            'x_label_margin' => 10,
+            'plot_perc_width' => 90,
+            'plot_value_show' => true,
+            'plot_value_pos' => 1,
+            'plot_value_color' => '#000000',
+            'answer_value_no_txt' => 'No Answer',
+            'answer_value_txt' => 'Yes Answer'
+        ]);
 
         // Mock AnswerData collection
         $this->answerData = [
-            new AnswerData(
-                label: 'Test Answer 1',
-                value: 25,
-                avg: 75.5
-            ),
-            new AnswerData(
-                label: 'Test Answer 2', 
-                value: 15,
-                avg: 85.2
-            ),
+            AnswerData::from([
+                'label' => 'Test Answer 1',
+                'value' => 25,
+                'avg' => 75.5
+            ]),
+            AnswerData::from([
+                'label' => 'Test Answer 2', 
+                'value' => 15,
+                'avg' => 85.2
+            ]),
         ];
 
-        $this->answersChartData = new AnswersChartData(
-            tot: 100,
-            title: 'Test Chart',
-            footer: 'Test Footer',
-            tot_answered: 40,
-            tot_invited: 100,
-            answers: new DataCollection(AnswerData::class, $this->answerData),
-            chart: $this->chartData
-        );
+        $this->answersChartData = AnswersChartData::from([
+            'tot' => 100,
+            'title' => 'Test Chart',
+            'footer' => 'Test Footer',
+            'tot_answered' => 40,
+            'tot_invited' => 100,
+            'answers' => new DataCollection(AnswerData::class, $this->answerData),
+            'chart' => $this->chartData
+        ]);
     });
 
     it('can be instantiated', function () {
@@ -60,31 +73,63 @@ describe('AnswersChartData', function () {
     });
 
     it('returns correct chart js type for pie1', function () {
-        $chartData = new ChartData(type: 'pie1');
-        $answersChartData = new AnswersChartData(
-            tot: 100,
-            title: 'Test',
-            footer: 'Test',
-            tot_answered: 40,
-            tot_invited: 100,
-            answers: new DataCollection(AnswerData::class, $this->answerData),
-            chart: $chartData
-        );
+        $chartData = ChartData::from([
+            'type' => 'pie1',
+            'max' => 100.0,
+            'min' => 0.0,
+            'height' => 400,
+            'list_color' => '#ff0000',
+            'font_family' => 'Arial',
+            'font_size' => '12',
+            'font_style' => 'normal',
+            'x_label_angle' => '0',
+            'show_box' => 1,
+            'x_label_margin' => 10,
+            'plot_perc_width' => 90,
+            'plot_value_show' => true,
+            'plot_value_pos' => 1,
+            'plot_value_color' => '#000000'
+        ]);
+        $answersChartData = AnswersChartData::from([
+            'tot' => 100,
+            'title' => 'Test',
+            'footer' => 'Test',
+            'tot_answered' => 40,
+            'tot_invited' => 100,
+            'answers' => new DataCollection(AnswerData::class, $this->answerData),
+            'chart' => $chartData
+        ]);
 
         expect($answersChartData->getChartJsType())->toBe('doughnut');
     });
 
     it('returns correct chart js type for lineSubQuestion', function () {
-        $chartData = new ChartData(type: 'lineSubQuestion');
-        $answersChartData = new AnswersChartData(
-            tot: 100,
-            title: 'Test',
-            footer: 'Test',
-            tot_answered: 40,
-            tot_invited: 100,
-            answers: new DataCollection(AnswerData::class, $this->answerData),
-            chart: $chartData
-        );
+        $chartData = ChartData::from([
+            'type' => 'lineSubQuestion',
+            'max' => 100.0,
+            'min' => 0.0,
+            'height' => 400,
+            'list_color' => '#ff0000',
+            'font_family' => 'Arial',
+            'font_size' => '12',
+            'font_style' => 'normal',
+            'x_label_angle' => '0',
+            'show_box' => 1,
+            'x_label_margin' => 10,
+            'plot_perc_width' => 90,
+            'plot_value_show' => true,
+            'plot_value_pos' => 1,
+            'plot_value_color' => '#000000'
+        ]);
+        $answersChartData = AnswersChartData::from([
+            'tot' => 100,
+            'title' => 'Test',
+            'footer' => 'Test',
+            'tot_answered' => 40,
+            'tot_invited' => 100,
+            'answers' => new DataCollection(AnswerData::class, $this->answerData),
+            'chart' => $chartData
+        ]);
 
         expect($answersChartData->getChartJsType())->toBe('line');
     });
@@ -114,15 +159,15 @@ describe('AnswersChartData', function () {
     });
 
     it('handles footer in options correctly', function () {
-        $answersChartData = new AnswersChartData(
-            tot: 100,
-            title: 'no_set',
-            footer: 'Test Footer',
-            tot_answered: 40,
-            tot_invited: 100,
-            answers: new DataCollection(AnswerData::class, $this->answerData),
-            chart: $this->chartData
-        );
+        $answersChartData = AnswersChartData::from([
+            'tot' => 100,
+            'title' => 'no_set',
+            'footer' => 'Test Footer',
+            'tot_answered' => 40,
+            'tot_invited' => 100,
+            'answers' => new DataCollection(AnswerData::class, $this->answerData),
+            'chart' => $this->chartData
+        ]);
 
         $options = $answersChartData->getChartJsOptionsArray();
 
@@ -132,16 +177,32 @@ describe('AnswersChartData', function () {
     });
 
     it('handles horizontal bar chart type', function () {
-        $chartData = new ChartData(type: 'horizbar1');
-        $answersChartData = new AnswersChartData(
-            tot: 100,
-            title: 'Test',
-            footer: 'no_set',
-            tot_answered: 40,
-            tot_invited: 100,
-            answers: new DataCollection(AnswerData::class, $this->answerData),
-            chart: $chartData
-        );
+        $chartData = ChartData::from([
+            'type' => 'horizbar1',
+            'max' => 100.0,
+            'min' => 0.0,
+            'height' => 400,
+            'list_color' => '#ff0000',
+            'font_family' => 'Arial',
+            'font_size' => '12',
+            'font_style' => 'normal',
+            'x_label_angle' => '0',
+            'show_box' => 1,
+            'x_label_margin' => 10,
+            'plot_perc_width' => 90,
+            'plot_value_show' => true,
+            'plot_value_pos' => 1,
+            'plot_value_color' => '#000000'
+        ]);
+        $answersChartData = AnswersChartData::from([
+            'tot' => 100,
+            'title' => 'Test',
+            'footer' => 'no_set',
+            'tot_answered' => 40,
+            'tot_invited' => 100,
+            'answers' => new DataCollection(AnswerData::class, $this->answerData),
+            'chart' => $chartData
+        ]);
 
         $options = $answersChartData->getChartJsOptionsArray();
 

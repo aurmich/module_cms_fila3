@@ -271,14 +271,14 @@ return array (
     'value' => 
     array (
       'description' => 'value',
-      'helper_text' => 'value',
+      'helper_text' => '',
       'placeholder' => 'value',
       'label' => 'value',
     ),
     'values-list' => 
     array (
       'description' => 'values-list',
-      'helper_text' => 'values-list',
+      'helper_text' => '',
       'placeholder' => 'values-list',
       'label' => 'values-list',
     ),
@@ -286,139 +286,139 @@ return array (
     array (
       'label' => 'user_id',
       'placeholder' => 'user_id',
-      'helper_text' => 'user_id',
+      'helper_text' => '',
       'description' => 'user_id',
     ),
     'name' => 
     array (
       'label' => 'name',
       'placeholder' => 'name',
-      'helper_text' => 'name',
+      'helper_text' => '',
       'description' => 'name',
     ),
     'slug' => 
     array (
       'label' => 'slug',
       'placeholder' => 'slug',
-      'helper_text' => 'slug',
+      'helper_text' => '',
       'description' => 'slug',
     ),
     'category_id' => 
     array (
       'label' => 'category_id',
       'placeholder' => 'category_id',
-      'helper_text' => 'category_id',
+      'helper_text' => '',
       'description' => 'category_id',
     ),
     'description' => 
     array (
       'label' => 'description',
       'placeholder' => 'description',
-      'helper_text' => 'description',
+      'helper_text' => '',
       'description' => 'description',
     ),
     'details' => 
     array (
       'label' => 'details',
       'placeholder' => 'details',
-      'helper_text' => 'details',
+      'helper_text' => '',
       'description' => 'details',
     ),
     'is_active' => 
     array (
       'label' => 'is_active',
       'placeholder' => 'is_active',
-      'helper_text' => 'is_active',
+      'helper_text' => '',
       'description' => 'is_active',
     ),
     'ordering' => 
     array (
       'label' => 'ordering',
       'placeholder' => 'ordering',
-      'helper_text' => 'ordering',
+      'helper_text' => '',
       'description' => 'ordering',
     ),
     'start_date' => 
     array (
       'label' => 'start_date',
       'placeholder' => 'start_date',
-      'helper_text' => 'start_date',
+      'helper_text' => '',
       'description' => 'start_date',
     ),
     'end_date' => 
     array (
       'label' => 'end_date',
       'placeholder' => 'end_date',
-      'helper_text' => 'end_date',
+      'helper_text' => '',
       'description' => 'end_date',
     ),
     'extensions' => 
     array (
       'label' => 'extensions',
       'placeholder' => 'extensions',
-      'helper_text' => 'extensions',
+      'helper_text' => '',
       'description' => 'extensions',
     ),
     'sections' => 
     array (
       'label' => 'sections',
       'placeholder' => 'sections',
-      'helper_text' => 'sections',
+      'helper_text' => '',
       'description' => 'sections',
     ),
     'fields' => 
     array (
       'label' => 'fields',
       'placeholder' => 'fields',
-      'helper_text' => 'fields',
+      'helper_text' => '',
       'description' => 'fields',
     ),
     'type' => 
     array (
       'label' => 'type',
       'placeholder' => 'type',
-      'helper_text' => 'type',
+      'helper_text' => '',
       'description' => 'type',
     ),
     'compact' => 
     array (
       'label' => 'compact',
       'placeholder' => 'compact',
-      'helper_text' => 'compact',
+      'helper_text' => '',
       'description' => 'compact',
     ),
     'aside' => 
     array (
       'label' => 'aside',
       'placeholder' => 'aside',
-      'helper_text' => 'aside',
+      'helper_text' => '',
       'description' => 'aside',
     ),
     'borderless' => 
     array (
       'label' => 'borderless',
       'placeholder' => 'borderless',
-      'helper_text' => 'borderless',
+      'helper_text' => '',
       'description' => 'borderless',
     ),
     'icon' => 
     array (
       'label' => 'icon',
       'placeholder' => 'icon',
-      'helper_text' => 'icon',
+      'helper_text' => '',
       'description' => 'icon',
     ),
     'columns' => 
     array (
       'label' => 'columns',
       'placeholder' => 'columns',
-      'helper_text' => 'columns',
+      'helper_text' => '',
       'description' => 'columns',
     ),
     'itemIsDefault' => 
     array (
       'description' => 'itemIsDefault',
-      'helper_text' => 'itemIsDefault',
+      'helper_text' => '',
       'placeholder' => 'itemIsDefault',
       'label' => 'itemIsDefault',
     ),
@@ -433,7 +433,7 @@ return array (
     'isActive' => 
     array (
       'description' => 'isActive',
-      'helper_text' => 'isActive',
+      'helper_text' => '',
       'placeholder' => 'isActive',
       'label' => 'isActive',
     ),
@@ -448,42 +448,42 @@ return array (
     'responses_count' => 
     array (
       'description' => 'responses_count',
-      'helper_text' => 'responses_count',
+      'helper_text' => '',
       'placeholder' => 'responses_count',
       'label' => 'responses_count',
     ),
     'itemKey' => 
     array (
       'description' => 'itemKey',
-      'helper_text' => 'itemKey',
+      'helper_text' => '',
       'placeholder' => 'itemKey',
       'label' => 'itemKey',
     ),
     'forms_count' => 
     array (
       'description' => 'forms_count',
-      'helper_text' => 'forms_count',
+      'helper_text' => '',
       'placeholder' => 'forms_count',
       'label' => 'forms_count',
     ),
     'responses_exists' => 
     array (
       'description' => 'responses_exists',
-      'helper_text' => 'responses_exists',
+      'helper_text' => '',
       'placeholder' => 'responses_exists',
       'label' => 'responses_exists',
     ),
     'logo' => 
     array (
       'description' => 'logo',
-      'helper_text' => 'logo',
+      'helper_text' => '',
     ),
     'category' => 
     array (
       'name' => 
       array (
         'description' => 'category.name',
-        'helper_text' => 'category.name',
+        'helper_text' => '',
       ),
     ),
   ),

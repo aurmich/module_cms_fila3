@@ -56,11 +56,8 @@ class ListUsers extends BaseListUsers
    {
     return [
         ...parent::getTableFilters(),
-        'state'=>SelectFilter::make('state')->options(function(){
-            $res=array_keys(UserState::getStateMapping()->toArray());
-            $res=array_combine($res,$res);
-            return $res;
-        }),//->options(UserTypeEnum::class),
+        'state'=>SelectFilter::make('state')->options(UserState::getOptions())
+            ,//->options(UserTypeEnum::class),
     ];
    }
 

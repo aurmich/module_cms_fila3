@@ -171,11 +171,14 @@ class Chart extends BaseModel
     }
 
     /**
+     * Get chart settings as array of chart configurations.
+     *
      * @return array<string, array<int|string, mixed>>
      */
     public function getSettings(): array
     {
         Assert::notNull($this->type, '['.__FILE__.']['.__LINE__.']');
+        
         if (Str::startsWith($this->type, 'mixed')) {
             $parz = \array_slice(explode(':', $this->type), 1);
             $mixed_id = implode('|', $parz);
@@ -183,11 +186,13 @@ class Chart extends BaseModel
             Assert::notNull($mixed, '['.__FILE__.']['.__LINE__.']');
             Assert::isInstanceof($mixed->charts, Collection::class);
 
-            return $mixed->charts->toArray();
+            /** @var array<string, array<int|string, mixed>> $chartsArray */
+            $chartsArray = $mixed->charts->toArray();
+            return $chartsArray;
         }
 
-        /** @var array<string, array<int|string, mixed>> */
-        $result = [$this->toArray()];
+        /** @var array<string, array<int|string, mixed>> $result */
+        $result = ['chart' => $this->toArray()];
         return $result;
     }
 }
