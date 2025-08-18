@@ -373,8 +373,21 @@ class Patient extends User implements HasMedia
             return true;
         }
         $res = true;
+        $noShowCount = 0;
+
+        
         foreach ($this->appointments as $appointment) {
-            if (in_array($appointment->state->getName(), [
+            $stateName=$appointment->state->getName();
+
+            if($stateName=='no_show'){
+                $noShowCount++;
+            }
+
+            if ($noShowCount >= 2) {
+                return false;
+            }
+
+            if (in_array($stateName, [
                 'pending',
                 'report_pending',
                 'report_completed',
