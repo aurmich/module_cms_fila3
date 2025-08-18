@@ -10,21 +10,21 @@ uses(Tests\TestCase::class);
 
 beforeEach(function (): void {
     $this->user = User::factory()->create([
-        'type' => UserType::DOCTOR,
-        'email' => 'doctor@example.com',
+        'type' => UserType::MasterAdmin,
+        'email' => 'admin@example.com',
         'password' => Hash::make('password123'),
     ]);
 });
 
 test('user can be created', function (): void {
     expect($this->user)->toBeInstanceOf(User::class);
-    expect($this->user->email)->toBe('doctor@example.com');
-    expect($this->user->type)->toBe(UserType::DOCTOR);
+    expect($this->user->email)->toBe('admin@example.com');
+    expect($this->user->type)->toBe(UserType::MasterAdmin);
 });
 
 test('user has correct type casting', function (): void {
     expect($this->user->type)->toBeInstanceOf(UserType::class);
-    expect($this->user->type->value)->toBe('doctor');
+    expect($this->user->type->value)->toBe('master_admin');
 });
 
 test('user password is hashed', function (): void {
@@ -42,13 +42,13 @@ test('user can change password', function (): void {
 test('user can be updated', function (): void {
     $this->user->update([
         'email' => 'updated@example.com',
-        'type' => UserType::ADMIN,
+        'type' => UserType::BoUser,
     ]);
     
     $this->user->refresh();
     
     expect($this->user->email)->toBe('updated@example.com');
-    expect($this->user->type)->toBe(UserType::ADMIN);
+    expect($this->user->type)->toBe(UserType::BoUser);
 });
 
 test('user can be deleted', function (): void {
@@ -75,25 +75,25 @@ test('user has hidden attributes', function (): void {
 });
 
 test('user can be found by email', function (): void {
-    $foundUser = User::where('email', 'doctor@example.com')->first();
+    $foundUser = User::where('email', 'admin@example.com')->first();
     
     expect($foundUser)->toBeInstanceOf(User::class);
     expect($foundUser->id)->toBe($this->user->id);
 });
 
 test('user can be found by type', function (): void {
-    $doctors = User::where('type', UserType::DOCTOR)->get();
+    $admins = User::where('type', UserType::MasterAdmin)->get();
     
-    expect($doctors)->toHaveCount(1);
-    expect($doctors->first()->id)->toBe($this->user->id);
+    expect($admins)->toHaveCount(1);
+    expect($admins->first()->id)->toBe($this->user->id);
 });
 
 test('user can be created with different types', function (): void {
-    $patient = User::factory()->create(['type' => UserType::PATIENT]);
-    $admin = User::factory()->create(['type' => UserType::ADMIN]);
+    $boUser = User::factory()->create(['type' => UserType::BoUser]);
+    $customerUser = User::factory()->create(['type' => UserType::CustomerUser]);
     
-    expect($patient->type)->toBe(UserType::PATIENT);
-    expect($admin->type)->toBe(UserType::ADMIN);
+    expect($boUser->type)->toBe(UserType::BoUser);
+    expect($customerUser->type)->toBe(UserType::CustomerUser);
 });
 
 test('user has timestamps', function (): void {
