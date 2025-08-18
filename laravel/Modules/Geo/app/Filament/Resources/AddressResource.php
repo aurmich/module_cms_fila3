@@ -91,6 +91,7 @@ class AddressResource extends XotBaseResource
                     ->required()
                     ->live()
                     ->disabled(fn (Get $get) => !$get('administrative_area_level_1') || !$get('administrative_area_level_2'))
+                    ->extraAttributes(['class' => 'h-8 flex items-center'])
                     ->afterStateUpdated(function (Set $set){
                         $set('postal_code', null);
                     })

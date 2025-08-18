@@ -12,7 +12,7 @@
         </a>
     </div>
     <div class="flex justify-center">
-        <h1 class="text-[#272C4D]">{{ $title }}</h1>
+        <h1 class="text-[#272C4D] text-center">{{ $title }}</h1>
     </div>
     <div class="w-full flex flex-col justify-center items-center p-5">
     <div class="w-full lg:w-3/4 flex flex-col items-start">

@@ -40,8 +40,8 @@
                             "cta_link": "#"
                         },
                         {
-                            "title": "Vuoi sapere di più sui nostri partners?",
-                            "cta_text": "Visita la pagina dei partners",
+                            "title": "Vuoi conoscere meglio coloro che hanno realizzato il progetto?",
+                            "cta_text": "Visita questa pagina!",
                             "cta_link": "/it/pages/partners"
                         }
                     ]
@@ -81,8 +81,8 @@
                             "cta_link": "#"
                         },
                         {
-                            "title": "Want to know more about our partners?",
-                            "cta_text": "Visit the partners page",
+                            "title": "Do you want to know who has developed the Salute Orale initiative? ",
+                            "cta_text": "Meet them here!",
                             "cta_link": "/en/pages/partners"
                         }
                     ]
