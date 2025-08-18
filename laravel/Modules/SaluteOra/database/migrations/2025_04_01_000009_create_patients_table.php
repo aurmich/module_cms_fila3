@@ -94,6 +94,10 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn( 'fiscal_code')) {
                     $table->string('fiscal_code',16)->nullable()->after('registration_number');
                 }
+
+                if (! $this->hasColumn( 'age_range')) {
+                    $table->string('age_range')->nullable()->after('registration_number');
+                }
                 
                 foreach(Patient::getAttachments() as $attachment){
                     if (! $this->hasColumn($attachment)) {

@@ -96,6 +96,38 @@ public function getPermissions(): array
 }
 ```
 
+### Enum con Metodi Utilità
+
+```php
+// PatientAgeRangeEnum - Esempio di enum con metodi avanzati
+public function isAgeInRange(int $age): bool
+{
+    if ($age < $this->getMinAge()) {
+        return false;
+    }
+
+    $maxAge = $this->getMaxAge();
+    if ($maxAge === null) {
+        return $age >= $this->getMinAge();
+    }
+
+    return $age <= $maxAge;
+}
+
+public static function fromAge(int $age): self
+{
+    return match (true) {
+        $age < 20 => self::UNDER_20,
+        $age <= 22 => self::AGE_20_22,
+        $age <= 25 => self::AGE_23_25,
+        $age <= 29 => self::AGE_26_29,
+        $age <= 34 => self::AGE_30_34,
+        $age <= 40 => self::AGE_35_40,
+        default => self::OVER_40,
+    };
+}
+```
+
 ### Traduzioni
 
 ```php
@@ -104,6 +136,38 @@ public function getLabel(): string
     return __("enums.user_type.{$this->value}");
 }
 ```
+
+### Traduzioni con TransTrait (Raccomandato)
+
+```php
+use Modules\Xot\Filament\Traits\TransTrait;
+
+enum MyEnum: string implements HasLabel, HasIcon, HasColor
+{
+    use TransTrait;
+    
+    public function getLabel(): string
+    {
+        return $this->transClass(self::class, $this->value.'.label');
+    }
+    
+    public function getColor(): string
+    {
+        return $this->transClass(self::class, $this->value.'.color');
+    }
+    
+    public function getIcon(): string
+    {
+        return $this->transClass(self::class, $this->value.'.icon');
+    }
+}
+```
+
+**Vantaggi del TransTrait:**
+- Generazione automatica delle chiavi di traduzione
+- Pattern uniforme per tutti gli enum del modulo
+- Meno errori di digitazione nelle chiavi
+- Refactoring sicuro quando si cambia il nome della classe
 
 ## Risoluzione Problemi
 
@@ -115,3 +179,56 @@ public function getLabel(): string
 
 ### Problema: Le opzioni non vengono caricate
 - **Soluzione**: Implementa il metodo `toSelectArray()` o assicurati che `options()` riceva l'enum corretto
+
+## Enum Specifici del Modulo SaluteOra
+
+### PatientAgeRangeEnum
+
+L'enum `PatientAgeRangeEnum` gestisce le fasce d'età delle pazienti con metodi avanzati per la gestione delle età.
+
+#### Caratteristiche
+- **Fasce d'età**: 7 fasce predefinite da "Inferiore a 20 anni" a "Oltre 40 anni"
+- **Metodi utilità**: `getMinAge()`, `getMaxAge()`, `isAgeInRange()`, `fromAge()`
+- **Supporto Filament**: Implementa `HasLabel`, `HasIcon`, `HasColor`
+- **Traduzioni**: Supporto completo per italiano, inglese e tedesco
+- **TransTrait**: Utilizza il TransTrait per generazione automatica delle chiavi di traduzione
+
+#### Utilizzo nei Form
+
+```php
+use Filament\Forms\Components\Select;
+use Modules\SaluteOra\Enums\PatientAgeRangeEnum;
+
+Select::make('age_range')
+    ->label('Fascia d\'età')
+    ->options(PatientAgeRangeEnum::class)
+    ->enum(PatientAgeRangeEnum::class)
+    ->searchable()
+    ->required();
+```
+
+#### Utilizzo nelle Tabelle
+
+```php
+use Filament\Tables\Columns\TextColumn;
+use Modules\SaluteOra\Enums\PatientAgeRangeEnum;
+
+TextColumn::make('age_range')
+    ->badge()
+    ->color(fn (PatientAgeRangeEnum $state): string => $state->getColor())
+    ->formatStateUsing(fn (PatientAgeRangeEnum $state): string => $state->getLabel());
+```
+
+#### Metodi Avanzati
+
+```php
+// Ottenere la fascia d'età da un'età specifica
+$ageRange = PatientAgeRangeEnum::fromAge(25); // Returns AGE_23_25
+
+// Verificare se un'età rientra in una fascia
+$isInRange = PatientAgeRangeEnum::AGE_30_34->isAgeInRange(32); // Returns true
+
+// Ottenere i limiti della fascia
+$minAge = PatientAgeRangeEnum::AGE_26_29->getMinAge(); // Returns 26
+$maxAge = PatientAgeRangeEnum::AGE_26_29->getMaxAge(); // Returns 29
+```

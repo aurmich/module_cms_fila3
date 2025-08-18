@@ -1,0 +1,14 @@
+Patient Age Range Enum (Modules\SaluteOra\Tests\Unit\Enums\PatientAgeRangeEnum)
+ [x] It has correct number of cases
+ [ ] It returns correct labels
+ [x] It returns correct min ages
+ [x] It returns correct max ages
+ [x] It correctly identifies age in range
+ [ ] It correctly assigns age ranges
+ [ ] It returns correct colors
+ [ ] It returns correct icons
+ [ ] It returns select array
+ [x] It implements filament interfaces
+ [ ] It returns translated labels
+ [ ] It returns descriptions
+

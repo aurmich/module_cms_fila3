@@ -98,6 +98,43 @@ Le icone sono state standardizzate per evitare errori:
 - [Correzione Icona Arrow Path](correzione-icona-arrow-path-2025-01-06.md) - Correzioni icone stati
 - [Traduzioni Stati Appuntamenti Correzioni](traduzioni-stati-appuntamenti-correzioni-2025-01-06.md) - Correzioni traduzioni stati
 
+## Enum del Sistema
+
+Il modulo SaluteOra implementa numerosi enum per la gestione tipizzata dei dati:
+
+### Enum Principali
+- **AppointmentTypeEnum**: Tipi di appuntamento (consultazione, pulizia, trattamento, emergenza, ecc.)
+- **AppointmentStatusEnum**: Stati degli appuntamenti con transizioni complete
+- **UserTypeEnum**: Tipi di utente (paziente, dottore, amministratore)
+- **PatientAgeRangeEnum**: Fasce d'età delle pazienti (7 fasce da "Inferiore a 20 anni" a "Oltre 40 anni")
+
+### Pattern di Implementazione
+
+Il modulo SaluteOra utilizza due pattern per gli enum:
+
+1. **TransTrait (Raccomandato)**: Utilizza `Modules\Xot\Filament\Traits\TransTrait` per generazione automatica delle chiavi di traduzione
+2. **Traduzioni Dirette**: Pattern tradizionale con chiavi hardcoded
+
+**Vantaggi del TransTrait:**
+- Generazione automatica delle chiavi di traduzione
+- Pattern uniforme per tutti gli enum del modulo
+- Meno errori di digitazione nelle chiavi
+- Refactoring sicuro quando si cambia il nome della classe
+
+Vedi [Pattern TransTrait](enums/trans-trait-pattern.md) per dettagli completi.
+- **DoctorStatusEnum**: Stati dei dottori nel sistema
+- **PatientStatusEnum**: Stati dei pazienti nel sistema
+
+### Documentazione Enum
+- [Integrazione Enum in Filament](filament-enums-integration.mdc) - Linee guida complete per l'uso degli enum in Filament
+- [PatientAgeRangeEnum](enums/patient-age-range-enum.md) - Documentazione specifica per le fasce d'età
+
+### Caratteristiche Enum
+- **Tipizzazione Rigorosa**: Tutti gli enum implementano interfacce Filament
+- **Traduzioni Complete**: Supporto per italiano, inglese e tedesco
+- **Metodi Utilità**: Metodi avanzati per la gestione dei dati
+- **Integrazione Filament**: Supporto nativo per form, tabelle e filtri
+
 ## Modelli Principali
 
 ### DoctorStudio

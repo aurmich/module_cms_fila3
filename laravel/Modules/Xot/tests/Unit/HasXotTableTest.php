@@ -323,7 +323,7 @@ class HasTableWithXot implements HasTable
         return null;
     }
 
-    public function callTableColumnAction(): mixed
+    public function callTableColumnAction(string $name, string $recordKey): mixed
     {
         return null;
     }
@@ -571,7 +571,7 @@ class HasTableWithoutOptionalMethods implements HasTable
         return null;
     }
 
-    public function callTableColumnAction(): mixed
+    public function callTableColumnAction(string $name, string $recordKey): mixed
     {
         return null;
     }

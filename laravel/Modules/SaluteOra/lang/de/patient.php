@@ -266,6 +266,12 @@ return [
             ],
             'description' => 'privacy_acceptance',
         ],
+        'age_range' => [
+            'label' => 'Altersgruppe',
+            'placeholder' => 'Altersgruppe auswählen',
+            'helper_text' => 'Altersgruppe der Patientin für demografische Analysen',
+            'description' => 'Klassifizierung des Alters der Patientin in vordefinierten Bereichen',
+        ],
         'newsletter' => [
             'label' => 'Newsletter-Anmeldung',
             'placeholder' => 'Ich möchte Updates per E-Mail erhalten',

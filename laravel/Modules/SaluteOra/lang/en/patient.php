@@ -426,6 +426,12 @@ return [
             'placeholder' => 'Last modification timestamp generated automatically',
             'helper_text' => '',
         ],
+        'age_range' => [
+            'label' => 'Age Range',
+            'placeholder' => 'Select age range',
+            'helper_text' => 'Patient age range for demographic analysis',
+            'description' => 'Classification of patient age in predefined ranges',
+        ],
         'family_members' => [
             'label' => 'Family Members',
             'placeholder' => 'Enter the number of family members',

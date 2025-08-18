@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Modules\Activity\Tests;
+namespace Modules\Notify\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
- * Base test case for Activity module tests.
+ * Base test case for Notify module tests.
  */
 abstract class TestCase extends BaseTestCase
 {
@@ -22,11 +21,11 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // Load Activity module specific configurations
-        $this->artisan('migrate', ['--database' => 'testing']);
+        // Load Notify module specific configurations
+        $this->loadLaravelMigrations();
         
-        // Seed any required data for Activity tests
-        $this->artisan('module:seed', ['module' => 'Activity']);
+        // Seed any required data for Notify tests
+        $this->artisan('module:seed', ['module' => 'Notify']);
     }
 
     /**
@@ -38,7 +37,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            \Modules\Activity\Providers\ActivityServiceProvider::class,
+            \Modules\Notify\Providers\NotifyServiceProvider::class,
         ];
     }
 }

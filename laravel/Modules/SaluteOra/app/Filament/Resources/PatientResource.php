@@ -36,15 +36,16 @@ use Modules\SaluteOra\Enums\YearsInItalyEnum;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Modules\Xot\Actions\View\GetViewPathAction;
 use Modules\Xot\Filament\Widgets\XotBaseWidget;
+use Modules\SaluteOra\Enums\PatientAgeRangeEnum;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Modules\SaluteOra\Enums\LastDentalVisitPeriodEnum;
 use Modules\Patient\Filament\Components\HealthCardUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Modules\Lang\Filament\Forms\Components\NationalFlagSelect;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Modules\SaluteOra\Filament\Resources\PatientResource\Pages;
 use Tapp\FilamentCountryCodeField\Forms\Components\CountryCodeSelect;
 use Modules\Media\Filament\Resources\PatientResource\Pages\PreviewAttachment;
-use Modules\SaluteOra\Filament\Resources\PatientResource\Pages;
 
 class PatientResource extends XotBaseResource
 {
@@ -106,6 +107,8 @@ class PatientResource extends XotBaseResource
             'last_name' => Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(255),
+            'age_range' => Forms\Components\Select::make('age_range')
+                ->options(PatientAgeRangeEnum::class),
             'address' => Forms\Components\TextInput::make('address')
                 ->maxLength(255),
             'city' => Forms\Components\TextInput::make('city')
