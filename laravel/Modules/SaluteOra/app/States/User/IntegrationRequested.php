@@ -28,4 +28,10 @@ class IntegrationRequested extends UserState
     {
         return 'heroicon-o-document-text';
     }
+
+    public function isMessageRequired(): bool
+    {
+        return true;
+    }
+
 }

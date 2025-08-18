@@ -38,7 +38,20 @@ class ListUsers extends BaseListUsers
         'first_name' => TextColumn::make('first_name')
                 ->searchable(),
         'last_name' => TextColumn::make('last_name')
-                ->searchable(),
+                ->searchable()
+                /*
+                ->formatStateUsing(function($record,$state){
+                    //$stateClass=app()
+                    dddx([
+                        'stat1'=>$record->state::getStateMapping(),
+                        'userState'=>UserState::getStateMapping(),
+                        'getStatesFor'=>$record->getStatesFor('state'),
+                        'getStates'=>$record->getStates(),
+                        'methods'=>get_class_methods($record), 
+                        'state'=>$state
+                    ]);
+                })
+                    */,
 
         'type'=>SelectColumn::make('type')->options(UserTypeEnum::class),
         //'state'=>SelectStateColumn::make('state'),

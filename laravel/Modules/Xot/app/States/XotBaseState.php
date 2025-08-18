@@ -218,6 +218,12 @@ abstract class XotBaseState extends State implements StateContract
     }
 
 
+    public function isMessageRequired(): bool
+    {
+        return false;
+    }
+
+
     public static function getOptions(): array
     {
 
