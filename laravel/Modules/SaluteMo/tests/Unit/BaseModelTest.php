@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
+namespace Modules\SaluteMo\Tests\Unit;
+
 use Modules\SaluteMo\Models\BaseModel;
 
-// Create a concrete implementation for testing
+/**
+ * Concrete implementation of BaseModel for testing purposes.
+ */
 class TestableBaseModel extends BaseModel
 {
     protected $table = 'test_models';

@@ -57,7 +57,7 @@ return [
             'placeholder' => 'Enter your city or area',
             'helper_text' => '',
             'help' => 'Specifica dove preferisci che si trovi lo studio dentist',
-            'description' => 'La ricerca mostrerà i dottori disponibili nella zona indicata',
+            'description' => 'La ricerca mostrerà i dentisti disponibili nella zona indicata',
         ],
         'region' => [
             'label' => 'Region',

@@ -2,7 +2,7 @@
 
 return array (
   'title' => 'Appuntamenti Dentista',
-  'description' => 'Gestione appuntamenti per i dottori',
+  'description' => 'Gestione appuntamenti per i dentisti',
   'actions' => 
   array (
     'delete' => 
@@ -254,8 +254,8 @@ return array (
     array (
       'label' => 'Nota',
       'placeholder' => 'Inserisci una nota privata',
-      'helper_text' => 'Questa nota sarà visibile solo ai dottori',
-      'description' => 'Nota privata per i dottori',
+      'helper_text' => 'Questa nota sarà visibile solo ai dentisti',
+      'description' => 'Nota privata per i dentisti',
     ),
     'reason' => 
     array (

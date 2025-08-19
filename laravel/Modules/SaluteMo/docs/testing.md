@@ -166,3 +166,98 @@ XDEBUG_MODE=coverage phpunit --coverage-html coverage-report
 8. Clean up after tests
 9. Run tests before pushing code
 10. Document complex test scenarios
+
+## PSR-4 Compliance for Test Classes
+
+### Namespace Requirements
+
+All test classes MUST follow PSR-4 autoloading standards:
+
+- **Test namespace**: `Modules\{ModuleName}\Tests\`
+- **Test directory**: `tests/`
+- **Helper classes**: Must be in the same namespace as the test file
+
+### Correct Structure
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\SaluteMo\Tests\Unit;
+
+use Modules\SaluteMo\Models\BaseModel;
+
+/**
+ * Concrete implementation for testing purposes.
+ */
+class TestableBaseModel extends BaseModel
+{
+    protected $table = 'test_models';
+    
+    /** @var list<string> */
+    protected $fillable = ['name', 'description'];
+}
+
+describe('SaluteMo BaseModel', function () {
+    // Test implementation...
+});
+```
+
+### Common PSR-4 Violations to Avoid
+
+❌ **WRONG**: Missing namespace declaration
+```php
+<?php
+declare(strict_types=1);
+// Missing: namespace Modules\SaluteMo\Tests\Unit;
+```
+
+❌ **WRONG**: Helper classes without proper namespace
+```php
+// Helper class without namespace - causes PSR-4 violation
+class TestHelper extends Model 
+{
+    // ...
+}
+```
+
+✅ **CORRECT**: Proper namespace and documentation
+```php
+<?php
+declare(strict_types=1);
+
+namespace Modules\SaluteMo\Tests\Unit;
+
+/**
+ * Helper class for testing specific functionality.
+ */
+class TestHelper extends Model 
+{
+    // ...
+}
+```
+
+### Autoload Configuration
+
+The `composer.json` autoload-dev section handles test namespaces:
+
+```json
+"autoload-dev": {
+    "psr-4": {
+        "Modules\\SaluteMo\\Tests\\": "tests/"
+    }
+}
+```
+
+### Verification
+
+To verify PSR-4 compliance:
+
+```bash
+# Run composer dump-autoload to check for violations
+composer dump-autoload
+
+# Run PHPStan to catch namespace issues
+./vendor/bin/phpstan analyze tests/ --level=9
+```

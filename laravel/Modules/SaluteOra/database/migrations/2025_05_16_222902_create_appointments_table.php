@@ -84,6 +84,13 @@ return new class extends XotBaseMigration
                     $table->index(['patient_id', 'starts_at'], 'appointments_patient_starts_at_index');
                 }
 
+                if(!$this->hasColumn('starts_at')){
+                    $table->dateTime('starts_at')->nullable();
+                }
+                if(!$this->hasColumn('ends_at')){
+                    $table->dateTime('ends_at')->nullable();
+                }
+
                 if(!$this->hasColumn('invoice')){
                     $table->string('invoice')->nullable()->comment('File fattura');
                 }

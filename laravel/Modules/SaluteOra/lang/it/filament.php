@@ -5,7 +5,7 @@ return [
         'doctor' => [
             'label' => [
                 'singular' => 'Dentista',
-                'plural' => 'Dottori',
+                'plural' => 'Dentisti',
             ],
             'fields' => [
                 'name' => [
@@ -26,7 +26,7 @@ return [
                 ],
             ],
             'navigation' => [
-                'label' => 'Dottori',
+                'label' => 'Dentisti',
                 'icon' => 'heroicon-o-user-group',
                 'group' => 'Gestione Personale',
             ],

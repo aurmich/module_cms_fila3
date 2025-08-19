@@ -90,7 +90,7 @@ return [
     'actions' => [
         'activate' => 'Attiva',
         'deactivate' => 'Disattiva',
-        'view_doctors' => 'Visualizza Dottori',
+        'view_doctors' => 'Visualizza Dentisti',
         'view_appointments' => 'Visualizza Appuntamenti',
     ],
     'notifications' => [

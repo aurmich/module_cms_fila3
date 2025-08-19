@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Modules\Xot\Tests\Unit;
+
 use Modules\Xot\Models\Traits\HasExtraTrait;
 use Modules\Xot\Contracts\ExtraContract;
 use Illuminate\Database\Eloquent\Model;
@@ -197,12 +199,21 @@ describe('HasExtraTrait', function () {
     });
 });
 
-// Helper class for testing
+/**
+ * Helper class for testing HasExtraTrait.
+ */
 class TestExtra extends Model implements ExtraContract 
 {
     protected $table = 'test_extras';
+    
+    /** @var list<string> */
     protected $fillable = ['model_id', 'model_type', 'extra_attributes'];
     
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
@@ -210,6 +221,11 @@ class TestExtra extends Model implements ExtraContract
         ];
     }
     
+    /**
+     * Get the parent model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
     public function model()
     {
         return $this->morphTo();

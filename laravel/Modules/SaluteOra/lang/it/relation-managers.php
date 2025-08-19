@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'doctors' => [
-        'title' => 'Dottori',
+        'title' => 'Dentisti',
         'fields' => [
             'first_name' => 'Nome',
             'last_name' => 'Cognome',

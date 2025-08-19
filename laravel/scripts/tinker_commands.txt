@@ -1,0 +1,95 @@
+# Comandi Tinker per popolare il database SaluteOra con molti record
+
+## Esecuzione rapida dello script completo:
+php artisan tinker < scripts/populate_database.php
+
+## Oppure esegui questi comandi uno per volta in Tinker:
+
+# 1. Crea 500 pazienti con dati realistici
+\Modules\SaluteOra\Models\Patient::factory()->active()->count(500)->create()->each(function($patient) { $patient->assignRole('patient'); });
+
+# 2. Crea 100 dottori con specializzazioni diverse
+\Modules\SaluteOra\Models\Doctor::factory()->active()->count(50)->create()->each(function($doctor) { $doctor->assignRole('doctor'); });
+\Modules\SaluteOra\Models\Doctor::factory()->senior()->count(20)->create()->each(function($doctor) { $doctor->assignRole('doctor'); });
+\Modules\SaluteOra\Models\Doctor::factory()->newGraduate()->count(30)->create()->each(function($doctor) { $doctor->assignRole('doctor'); });
+
+# 3. Crea 50 studi dentistici
+\Modules\SaluteOra\Models\Studio::factory()->count(30)->create();
+\Modules\SaluteOra\Models\Studio::factory()->orthodontics()->count(10)->create();
+\Modules\SaluteOra\Models\Studio::factory()->fullService()->count(10)->create();
+
+# 4. Assegna dottori agli studi
+$doctors = \Modules\SaluteOra\Models\Doctor::all();
+$studios = \Modules\SaluteOra\Models\Studio::all();
+foreach($doctors as $doctor) {
+    $randomStudios = $studios->random(rand(1,3));
+    $doctor->tenants()->sync($randomStudios->pluck('id'));
+}
+
+# 5. Crea 2000 appuntamenti
+$patients = \Modules\SaluteOra\Models\Patient::all();
+$doctors = \Modules\SaluteOra\Models\Doctor::all();
+$studios = \Modules\SaluteOra\Models\Studio::all();
+
+for($i = 0; $i < 2000; $i++) {
+    $patient = $patients->random();
+    $doctor = $doctors->random();
+    $studio = $studios->random();
+    
+    \Modules\SaluteOra\Models\Appointment::factory()
+        ->forPatient($patient->id)
+        ->forDoctor($doctor->id)
+        ->forStudio($studio->id)
+        ->create();
+}
+
+# 6. Crea appuntamenti di emergenza
+\Modules\SaluteOra\Models\Appointment::factory()->emergency()->count(100)->create();
+
+# 7. Crea appuntamenti completati
+\Modules\SaluteOra\Models\Appointment::factory()->completed()->count(300)->create();
+
+# 8. Crea team per gli studi
+$studios = \Modules\SaluteOra\Models\Studio::with('doctors')->get();
+foreach($studios as $studio) {
+    $team = \Modules\User\Models\Team::factory()->create(['name' => "Team {$studio->name}"]);
+    $studioDoctors = $studio->doctors()->take(5)->get();
+    foreach($studioDoctors as $doctor) {
+        $team->users()->attach($doctor, ['role' => 'member', 'created_at' => now(), 'updated_at' => now()]);
+    }
+}
+
+# 9. Crea indirizzi per studi e utenti
+$studios = \Modules\SaluteOra\Models\Studio::all();
+foreach($studios as $studio) {
+    \Modules\Geo\Models\Address::factory()->forModel($studio)->create();
+}
+
+$users = \Modules\SaluteOra\Models\User::inRandomOrder()->take(200)->get();
+foreach($users as $user) {
+    \Modules\Geo\Models\Address::factory()->forModel($user)->create();
+}
+
+# 10. Crea consensi GDPR per i pazienti
+$patients = \Modules\SaluteOra\Models\Patient::all();
+foreach($patients as $patient) {
+    \Modules\Gdpr\Models\Consent::factory()->forUser($patient->id)->privacy()->create();
+    if(rand(1,2) === 1) {
+        \Modules\Gdpr\Models\Consent::factory()->forUser($patient->id)->marketing()->create();
+    }
+}
+
+# 11. Crea notifiche per gli utenti
+$users = \Modules\SaluteOra\Models\User::inRandomOrder()->take(500)->get();
+foreach($users as $user) {
+    \Modules\Notify\Models\Notification::factory()->forUser($user->id)->count(rand(1,5))->create();
+}
+
+# 12. Verifica i dati creati
+echo "👥 Utenti: " . \Modules\SaluteOra\Models\User::count();
+echo "🏥 Studi: " . \Modules\SaluteOra\Models\Studio::count();
+echo "📅 Appuntamenti: " . \Modules\SaluteOra\Models\Appointment::count();
+echo "👥 Team: " . \Modules\User\Models\Team::count();
+echo "📍 Indirizzi: " . \Modules\Geo\Models\Address::count();
+echo "📄 Consensi: " . \Modules\Gdpr\Models\Consent::count();
+echo "🔔 Notifiche: " . \Modules\Notify\Models\Notification::count();

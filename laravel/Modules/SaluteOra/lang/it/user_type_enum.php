@@ -28,7 +28,7 @@ return [
     ],
     'plural' => [
         'patient' => 'Pazienti',
-        'doctor' => 'Dottori',
+        'doctor' => 'Dentisti',
         'admin' => 'Amministratori',
     ],
 ];

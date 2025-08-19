@@ -2,7 +2,7 @@
 
 return [
     'doctors' => [
-        'title' => 'Dottori',
+        'title' => 'Dentisti',
         'fields' => [
             'first_name' => 'Nome',
             'last_name' => 'Cognome',

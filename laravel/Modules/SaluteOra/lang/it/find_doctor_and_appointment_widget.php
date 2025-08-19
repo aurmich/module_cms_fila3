@@ -48,7 +48,7 @@ return [
             'label' => 'Località',
             'placeholder' => 'Inserisci la tua città o zona',
             'help' => 'Specifica dove preferisci che si trovi lo studio medico',
-            'description' => 'La ricerca mostrerà i dottori disponibili nella zona indicata',
+            'description' => 'La ricerca mostrerà i dentisti disponibili nella zona indicata',
             'helper_text' => '',
         ],
         'region' => [
@@ -165,7 +165,7 @@ return [
         ],
         'search' => [
             'label' => 'Ricerca',
-            'placeholder' => 'Cerca dottori nella tua zona',
+            'placeholder' => 'Cerca dentisti nella tua zona',
             'help' => 'Usa i filtri per trovare il dentista più adatto',
             'description' => 'Sistema di ricerca medici specializzati',
             'helper_text' => '',
@@ -189,8 +189,8 @@ return [
             'tooltip' => 'Completa la prenotazione del tuo appuntamento',
         ],
         'search' => [
-            'label' => 'Cerca Dottori',
-            'tooltip' => 'Inizia la ricerca dei dottori disponibili',
+            'label' => 'Cerca Dentisti',
+            'tooltip' => 'Inizia la ricerca dei dentisti disponibili',
             'messages' => [
                 'success' => 'Ricerca completata',
                 'error' => 'Errore durante la ricerca',
@@ -242,7 +242,7 @@ return [
     ],
     'success' => [
         'doctors_in_area' => [
-            'label' => 'Dottori disponibili',
+            'label' => 'Dentisti disponibili',
         ],
     ],
     

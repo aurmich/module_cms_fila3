@@ -5,27 +5,73 @@ declare(strict_types=1);
 namespace Modules\User\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 use Modules\User\Models\Team;
+use Modules\User\Models\User;
 
+/**
+ * Factory per il modello Team del modulo User.
+ *
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\User\Models\Team>
+ */
 class TeamFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
+     * Il nome del modello corrispondente alla factory.
      *
-     * @var class-string<Model>
+     * @var class-string<\Modules\User\Models\Team>
      */
     protected $model = Team::class;
 
     /**
-     * Define the model's default state.
+     * Definisce lo stato di default del modello.
+     *
+     * @return array<string, mixed>
      */
     public function definition(): array
     {
-        return [
-            // 'user_id' => $this->faker->randomNumber(5),
-            'name' => $this->faker->name,
-            'personal_team' => $this->faker->boolean,
+        $teamTypes = [
+            'Amministrazione',
+            'Sviluppo',
+            'Marketing',
+            'Vendite',
+            'Supporto Clienti',
+            'Risorse Umane',
+            'Contabilità',
+            'Produzione',
+            'Qualità',
+            'Logistica'
         ];
+
+        return [
+            'name' => $this->faker->randomElement($teamTypes) . ' Team',
+            'user_id' => User::factory(),
+            'personal_team' => false,
+        ];
+    }
+
+    /**
+     * Indica che il team è un team personale.
+     *
+     * @return static
+     */
+    public function personal(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'personal_team' => true,
+            'name' => $this->faker->firstName() . "'s Team",
+        ]);
+    }
+
+    /**
+     * Crea un team con un owner specifico.
+     *
+     * @param int $userId
+     * @return static
+     */
+    public function ownedBy(int $userId): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_id' => $userId,
+        ]);
     }
 }

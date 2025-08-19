@@ -16,7 +16,7 @@ return [
             'active' => 'Studi Attivi',
             'inactive' => 'Studi Inattivi',
             'cities' => 'Città Coperte',
-            'doctors' => 'Dottori Associati',
+            'doctors' => 'Dentisti Associati',
             'appointments' => 'Appuntamenti Mensili',
         ],
         'chart' => [
@@ -143,7 +143,7 @@ return [
             'email' => 'Email',
             'website' => 'Sito Web',
             'opening_hours' => 'Orari di Apertura',
-            'doctors' => 'Dottori Associati',
+            'doctors' => 'Dentisti Associati',
             'created_at' => 'Creato il',
             'general_info' => 'Informazioni Generali',
             'contact_info' => 'Contatti',

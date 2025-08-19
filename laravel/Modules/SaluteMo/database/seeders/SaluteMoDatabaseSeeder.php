@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\SaluteMo\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\SaluteOra\Database\Seeders\SaluteOraSeeder;
 
 class SaluteMoDatabaseSeeder extends Seeder
 {
@@ -11,6 +14,10 @@ class SaluteMoDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        // Orchestrate seeding for SaluteMo by leveraging SaluteOra's rich seeder.
+        // Extend this list with SaluteMo-specific seeders when available.
+        $this->call([
+            SaluteOraSeeder::class,
+        ]);
     }
 }
