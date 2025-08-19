@@ -11,13 +11,11 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
 use Modules\SaluteOra\Models\Patient;
 
 /**
- * PatientFactory for SaluteOra module.
+ * Factory per la generazione di dati realistici per i pazienti.
  * 
- * Generates realistic patient data for healthcare consumers.
+ * Generates realistic patient data for healthcare applications.
  * Extends UserFactory to inherit base user functionality and adds
- * patient-specific medical and administrative data.
- * 
- * @extends \Modules\SaluteOra\Database\Factories\UserFactory<\Modules\SaluteOra\Models\Patient>
+ * medical history, demographics, and healthcare preferences data.
  */
 class PatientFactory extends UserFactory
 {

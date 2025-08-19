@@ -64,13 +64,13 @@ class PivotSeeder extends Seeder
         $createdCount = 0;
 
         foreach ($admins as $admin) {
-            // Each admin manages 1-3 studios
-            $studioCount = rand(1, 3);
+            // Each admin manages 2-4 studios
+            $studioCount = rand(2, 4);
             $selectedStudios = $studios->random($studioCount);
             $isPrimarySet = false;
 
             foreach ($selectedStudios as $studio) {
-                AdminStudio::factory()->create([
+                AdminStudio::create([
                     'user_id' => $admin->id,
                     'studio_id' => $studio->id,
                     'is_primary' => !$isPrimarySet, // First one is primary
@@ -109,7 +109,7 @@ class PivotSeeder extends Seeder
             foreach ($selectedStudios as $studio) {
                 $isPrimary = !$isPrimarySet;
                 
-                DoctorStudio::factory()->create([
+                \Modules\SaluteOra\Database\Factories\DoctorStudioFactory::new()->create([
                     'user_id' => $doctor->id,
                     'studio_id' => $studio->id,
                     'is_primary' => $isPrimary,
@@ -148,7 +148,7 @@ class PivotSeeder extends Seeder
             foreach ($selectedStudios as $studio) {
                 $isPrimary = !$isPrimarySet;
                 
-                PatientStudio::factory()->create([
+                \Modules\SaluteOra\Database\Factories\PatientStudioFactory::new()->create([
                     'user_id' => $patient->id,
                     'studio_id' => $studio->id,
                     'is_primary' => $isPrimary,

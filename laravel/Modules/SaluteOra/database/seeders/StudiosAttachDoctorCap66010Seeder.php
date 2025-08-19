@@ -43,7 +43,7 @@ class StudiosAttachDoctorCap66010Seeder extends Seeder
                         $studio->doctors()->attach($doctor->getKey());
                     } catch (\Throwable $e2) {
                         // As last resort, ignore to not stop seeding flow
-                        $this->command?->warn("Could not attach doctor to studio ID {$studio->getKey()}: " . $e2->getMessage());
+                        $this->command->warn("Could not attach doctor to studio ID " . (string) $studio->getKey() . ": " . $e2->getMessage());
                     }
                 }
             }

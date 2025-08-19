@@ -179,7 +179,10 @@ class PatientTeamFactory extends Factory
     public function withCommunicationPreferences(array $preferences): static
     {
         return $this->state(fn (array $attributes) => [
-            'communication_preferences' => array_merge($attributes['communication_preferences'], $preferences),
+            'communication_preferences' => array_merge(
+                (array) ($attributes['communication_preferences'] ?? []), 
+                $preferences
+            ),
         ]);
     }
 

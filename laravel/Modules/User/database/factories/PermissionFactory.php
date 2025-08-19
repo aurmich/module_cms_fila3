@@ -6,6 +6,7 @@ namespace Modules\User\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\User\Models\Permission;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * Factory per il modello Permission del modulo User.
@@ -15,7 +16,7 @@ use Modules\User\Models\Permission;
 class PermissionFactory extends Factory
 {
     /**
-     * Il nome del modello corrispondente alla factory.
+     * The name of the factory's corresponding model.
      *
      * @var class-string<\Modules\User\Models\Permission>
      */
@@ -31,11 +32,11 @@ class PermissionFactory extends Factory
         $actions = ['create', 'read', 'update', 'delete', 'manage', 'view', 'edit'];
         $resources = ['users', 'posts', 'comments', 'pages', 'settings', 'reports', 'analytics', 'teams', 'roles', 'permissions'];
 
-        $action = $this->faker->randomElement($actions);
-        $resource = $this->faker->randomElement($resources);
+        $action = SafeStringCastAction::cast($this->faker->randomElement($actions));
+        $resource = SafeStringCastAction::cast($this->faker->randomElement($resources));
 
         return [
-            'name' => "{$action} {$resource}",
+            'name' => $action . ' ' . $resource,
             'guard_name' => 'web',
         ];
     }
@@ -49,7 +50,7 @@ class PermissionFactory extends Factory
     public function forResource(string $resource): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => $this->faker->randomElement(['create', 'read', 'update', 'delete']) . " {$resource}",
+            'name' => SafeStringCastAction::cast($this->faker->randomElement(['create', 'read', 'update', 'delete'])) . ' ' . $resource,
         ]);
     }
 
@@ -61,7 +62,7 @@ class PermissionFactory extends Factory
     public function read(): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => 'read ' . $this->faker->randomElement(['users', 'posts', 'comments', 'pages']),
+            'name' => 'read ' . SafeStringCastAction::cast($this->faker->randomElement(['users', 'posts', 'comments', 'pages'])),
         ]);
     }
 
@@ -73,7 +74,7 @@ class PermissionFactory extends Factory
     public function write(): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => $this->faker->randomElement(['create', 'update', 'delete']) . ' ' . $this->faker->randomElement(['users', 'posts', 'comments', 'pages']),
+            'name' => SafeStringCastAction::cast($this->faker->randomElement(['create', 'update', 'delete'])) . ' ' . SafeStringCastAction::cast($this->faker->randomElement(['users', 'posts', 'comments', 'pages'])),
         ]);
     }
 
@@ -85,7 +86,7 @@ class PermissionFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => 'manage ' . $this->faker->randomElement(['users', 'system', 'settings', 'permissions']),
+            'name' => 'manage ' . SafeStringCastAction::cast($this->faker->randomElement(['users', 'system', 'settings', 'permissions'])),
         ]);
     }
 

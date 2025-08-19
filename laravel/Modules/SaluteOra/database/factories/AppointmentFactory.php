@@ -4,42 +4,39 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\User;
-use Modules\SaluteOra\Models\Studio;
 use Modules\SaluteOra\Enums\AppointmentStatusEnum;
 use Modules\SaluteOra\Enums\AppointmentTypeEnum;
-use Modules\SaluteOra\States\Appointment\Scheduled;
-use Modules\SaluteOra\States\Appointment\Confirmed;
-use Modules\SaluteOra\States\Appointment\Completed;
-use Carbon\Carbon;
+use Modules\SaluteOra\Models\Appointment;
+use Modules\SaluteOra\Models\Studio;
+use Modules\SaluteOra\Models\User;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
 
 /**
- * Factory per il modello Appointment del modulo SaluteOra.
- *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\SaluteOra\Models\Appointment>
  */
 class AppointmentFactory extends Factory
 {
     /**
-     * Il nome del modello corrispondente alla factory.
+     * The name of the factory's corresponding model.
      *
      * @var class-string<\Modules\SaluteOra\Models\Appointment>
      */
     protected $model = Appointment::class;
 
     /**
-     * Definisce lo stato di default del modello.
+     * Define the model's default state.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         $startTime = $this->faker->dateTimeBetween('now', '+2 months');
-        $duration = $this->faker->randomElement([30, 45, 60, 90]); // Durata in minuti
+        // Centralized safe cast from mixed to int via Xot Cast actions
+        $duration = SafeIntCastAction::cast($this->faker->randomElement([30, 45, 60, 90]), 30); // Durata in minuti
         $endTime = clone $startTime;
-        $endTime->modify("+{$duration} minutes");
+        $endTime->modify(sprintf('+%d minutes', $duration));
 
         $treatmentTypes = [
             'Visita di controllo',
@@ -53,6 +50,11 @@ class AppointmentFactory extends Factory
             'Chirurgia orale',
             'Sbiancamento',
         ];
+
+        $typeCases = AppointmentTypeEnum::cases();
+        $statusCases = AppointmentStatusEnum::cases();
+        $appointmentType = $typeCases[array_rand($typeCases)];
+        $appointmentStatus = $statusCases[array_rand($statusCases)];
 
         return [
             'patient_id' => User::factory()->patient(),
@@ -68,9 +70,9 @@ class AppointmentFactory extends Factory
             'date' => Carbon::parse($startTime)->format('Y-m-d'),
             'start_datetime' => $startTime->format('Y-m-d H:i:s'),
             'end_datetime' => $endTime->format('Y-m-d H:i:s'),
-            'type' => $this->faker->randomElement(AppointmentTypeEnum::cases())->value,
-            'status' => $this->faker->randomElement(AppointmentStatusEnum::cases())->value,
-            'state' => $this->faker->randomElement([Scheduled::class, Confirmed::class]),
+            'type' => $appointmentType->value,
+            'status' => $appointmentStatus->value,
+            'state' => $this->faker->randomElement(['scheduled', 'confirmed']),
             'notes' => $this->faker->optional()->paragraph(),
             'treatment_plan' => $this->faker->optional()->paragraph(),
             'emergency' => $this->faker->boolean(10), // 10% di probabilità di emergenza
@@ -129,47 +131,9 @@ class AppointmentFactory extends Factory
     public function confirmed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'state' => Confirmed::class,
+            'state' => 'confirmed',
             'status' => AppointmentStatusEnum::CONFIRMED->value,
             'eligibility_confirmed' => true,
-            'reminder_sent' => true,
-            'reminder_sent_at' => $this->faker->dateTimeBetween('-3 days', 'now'),
-        ]);
-    }
-
-    /**
-     * Crea un appuntamento completato.
-     *
-     * @return static
-     */
-    public function completed(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'state' => Completed::class,
-            'status' => AppointmentStatusEnum::COMPLETED->value,
-            'starts_at' => $this->faker->dateTimeBetween('-2 months', '-1 week'),
-            'ends_at' => function (array $attributes) {
-                $start = Carbon::parse($attributes['starts_at']);
-                return $start->copy()->addMinutes(60);
-            },
-            'treatment_plan' => $this->faker->paragraph(),
-            'notes' => $this->faker->paragraph() . ' - Trattamento completato con successo.',
-        ]);
-    }
-
-    /**
-     * Crea un appuntamento programmato.
-     *
-     * @return static
-     */
-    public function scheduled(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'state' => Scheduled::class,
-            'status' => AppointmentStatusEnum::SCHEDULED->value,
-            'starts_at' => $this->faker->dateTimeBetween('+1 week', '+2 months'),
-            'reminder_sent' => false,
-            'reminder_sent_at' => null,
         ]);
     }
 
@@ -223,8 +187,14 @@ class AppointmentFactory extends Factory
      */
     public function onDate(string $date): static
     {
-        $startTime = Carbon::parse($date)->setHour($this->faker->numberBetween(9, 17))->setMinute($this->faker->randomElement([0, 15, 30, 45]));
-        $endTime = $startTime->copy()->addMinutes($this->faker->randomElement([30, 45, 60]));
+        $startHour = SafeIntCastAction::cast($this->faker->numberBetween(9, 17), 9);
+        $minuteOptions = [0, 15, 30, 45];
+        $durationOptions = [30, 45, 60];
+        $startMinute = $minuteOptions[$this->faker->numberBetween(0, count($minuteOptions) - 1)];
+        $durationMinutes = $durationOptions[$this->faker->numberBetween(0, count($durationOptions) - 1)];
+
+        $startTime = Carbon::parse($date)->setHour($startHour)->setMinute(SafeIntCastAction::cast($this->faker->randomElement([0, 15, 30, 45])));
+        $endTime = $startTime->copy()->addMinutes(SafeIntCastAction::cast($this->faker->randomElement([30, 45, 60])));
 
         return $this->state(fn (array $attributes) => [
             'starts_at' => $startTime,

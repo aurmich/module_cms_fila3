@@ -61,6 +61,7 @@ laravel_bak/
 *.old
 *.old1
 *.old2
+*.new
 backup*/
 *.bak 
 *.backup 

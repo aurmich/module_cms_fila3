@@ -11,13 +11,11 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
 use Modules\SaluteOra\Models\Doctor;
 
 /**
- * DoctorFactory for SaluteOra module.
+ * Factory per la generazione di dati realistici per i dottori.
  * 
  * Generates realistic doctor data for healthcare providers.
  * Extends UserFactory to inherit base user functionality and adds
  * professional credentials, specializations, and medical expertise data.
- * 
- * @extends \Modules\SaluteOra\Database\Factories\UserFactory<\Modules\SaluteOra\Models\Doctor>
  */
 class DoctorFactory extends UserFactory
 {

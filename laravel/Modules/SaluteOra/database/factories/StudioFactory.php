@@ -6,23 +6,22 @@ namespace Modules\SaluteOra\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\SaluteOra\Models\Studio;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
- * Factory per il modello Studio del modulo SaluteOra.
- *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\SaluteOra\Models\Studio>
  */
 class StudioFactory extends Factory
 {
     /**
-     * Il nome del modello corrispondente alla factory.
+     * The name of the factory's corresponding model.
      *
      * @var class-string<\Modules\SaluteOra\Models\Studio>
      */
     protected $model = Studio::class;
 
     /**
-     * Definisce lo stato di default del modello.
+     * Define the model's default state.
      *
      * @return array<string, mixed>
      */
@@ -30,10 +29,13 @@ class StudioFactory extends Factory
     {
         $studioTypes = [
             'Studio Dentistico',
-            'Clinica Odontoiatrica',
             'Centro Odontoiatrico',
-            'Poliambulatorio Dentale',
-            'Studio Odontoiatrico'
+            'Clinica Dentale',
+            'Ambulatorio Odontoiatrico',
+            'Centro di Igiene Dentale',
+            'Studio di Ortodonzia',
+            'Centro Implantologico',
+            'Studio di Endodonzia',
         ];
 
         $services = [
@@ -46,21 +48,28 @@ class StudioFactory extends Factory
             'Protesi dentale',
             'Odontoiatria pediatrica',
             'Estetica dentale',
-            'Radiologia dentale'
+            'Radiologia dentale',
+            'Sbiancamento',
+            'Devitalizzazione',
+            'Otturazione',
+            'Estrazione',
         ];
 
         $openingHours = [
-            'monday' => ['09:00-12:30', '14:30-18:30'],
-            'tuesday' => ['09:00-12:30', '14:30-18:30'],
-            'wednesday' => ['09:00-12:30', '14:30-18:30'],
-            'thursday' => ['09:00-12:30', '14:30-18:30'],
-            'friday' => ['09:00-12:30', '14:30-18:30'],
-            'saturday' => ['09:00-13:00'],
+            'monday' => ['08:00-13:00', '14:00-19:00'],
+            'tuesday' => ['08:00-13:00', '14:00-19:00'],
+            'wednesday' => ['08:00-13:00', '14:00-19:00'],
+            'thursday' => ['08:00-13:00', '14:00-19:00'],
+            'friday' => ['08:00-13:00', '14:00-19:00'],
+            'saturday' => ['08:00-14:00'],
             'sunday' => [],
         ];
 
+        $studioType = SafeStringCastAction::cast($this->faker->randomElement($studioTypes));
+        $lastName = SafeStringCastAction::cast($this->faker->lastName());
+
         return [
-            'name' => $this->faker->randomElement($studioTypes) . ' ' . $this->faker->lastName(),
+            'name' => SafeStringCastAction::cast($studioType) . ' ' . SafeStringCastAction::cast($lastName),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->companyEmail(),
             'website' => $this->faker->optional()->url(),
@@ -169,7 +178,8 @@ class StudioFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'website' => $this->faker->url(),
             'description' => $this->faker->paragraph(3),
-            'settings' => json_encode([
+            // Provide native array; let Eloquent JSON cast handle serialization
+            'settings' => [
                 'appointment_duration' => 45,
                 'max_appointments_per_day' => 12,
                 'booking_advance_days' => 60,
@@ -177,7 +187,7 @@ class StudioFactory extends Factory
                 'online_booking_enabled' => true,
                 'reminder_emails' => true,
                 'reminder_sms' => false,
-            ]),
+            ],
         ]);
     }
 

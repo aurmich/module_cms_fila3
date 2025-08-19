@@ -200,7 +200,7 @@ class StudioUserFactory extends Factory
     public function withPermissions(array $permissions): static
     {
         return $this->state(fn (array $attributes) => [
-            'permissions' => array_merge($attributes['permissions'], $permissions),
+            'permissions' => array_merge((array) $attributes['permissions'], $permissions),
         ]);
     }
 
@@ -224,6 +224,21 @@ class StudioUserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'hourly_rate' => $hourlyRate,
             'commission_rate' => $commissionRate,
+        ]);
+    }
+
+    /**
+     * Set specific communication preferences.
+     *
+     * @param array<string, mixed> $preferences
+     */
+    public function withCommunicationPreferences(array $preferences): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'communication_preferences' => array_merge(
+                (array) ($attributes['communication_preferences'] ?? []), 
+                $preferences
+            ),
         ]);
     }
 }
