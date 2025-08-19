@@ -9,7 +9,7 @@ return [
         ],
         'doctor_id' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select doctor',
+            'placeholder' => 'Select dentist',
             'tooltip' => 'Select the doctor to view statistics for',
         ],
         'start_date' => [

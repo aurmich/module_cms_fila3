@@ -4,7 +4,7 @@ return [
     'resources' => [
         'doctor' => [
             'label' => [
-                'singular' => 'Dottore',
+                'singular' => 'Dentista',
                 'plural' => 'Dottori',
             ],
             'fields' => [

@@ -353,3 +353,4 @@ class ModuleTestHelper
         expect(is_dir("{$modulePath}/database"))->toBeTrue();
     }
 }
+

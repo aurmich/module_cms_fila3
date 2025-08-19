@@ -43,7 +43,7 @@ return [
         'doctor_id' => [
             'label' => 'Doctor',
             'tooltip' => 'The doctor this availability belongs to',
-            'placeholder' => 'Select doctor',
+            'placeholder' => 'Select dentist',
             'helper_text' => 'Select the doctor to assign this availability to',
         ],
         'studio_id' => [
@@ -110,7 +110,7 @@ return [
     'filters' => [
         'title' => 'Filters',
         'studio' => 'Filter by Practice',
-        'doctor' => 'Filter by Doctor',
+        'dentist' => 'Filter by Doctor',
         'day' => 'Filter by Day',
         'active' => 'Active Only',
         'inactive' => 'Inactive Only',

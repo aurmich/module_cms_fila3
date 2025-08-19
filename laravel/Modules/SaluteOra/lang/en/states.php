@@ -152,7 +152,7 @@ return [
     ],
 
     // Doctor States - Doctor States
-    'doctor' => [
+    'dentist' => [
         'pending' => [
             'label' => 'Pending',
             'description' => 'Doctor pending approval',

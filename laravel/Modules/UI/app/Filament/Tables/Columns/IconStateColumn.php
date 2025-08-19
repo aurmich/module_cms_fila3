@@ -69,9 +69,15 @@ class IconStateColumn extends IconColumn
                     $name=$this->getName();
                     $state=$record->getAttribute($name);
                     $states=$state::getStateMapping();
-                    $newStateClass=Arr::get($states,$newState);
+                    /** @var class-string<\Spatie\ModelStates\State> $newStateClass */
+                    $newStateClass=Arr::get($states, (string) $newState);
+                    if (!is_string($newStateClass) || !class_exists($newStateClass)) {
+                        return false;
+                    }
                     $newStateInstance=new $newStateClass($record);
-                    return $newStateInstance->isMessageRequired();
+                    return method_exists($newStateInstance, 'isMessageRequired') 
+                        ? $newStateInstance->isMessageRequired() 
+                        : false;
                 }),
             ])
             ->fillForm(function($record){

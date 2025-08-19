@@ -105,7 +105,7 @@ return array (
       'options' => 
       array (
         'patient' => 'Paziente',
-        'doctor' => 'Dottore/Medico',
+        'doctor' => 'Dentista/Medico',
         'admin' => 'Amministratore',
       ),
       'description' => 'type',

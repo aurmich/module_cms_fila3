@@ -42,9 +42,9 @@ return [
         ],
     ],
     'fields' => [
-        'doctor' => [
+        'dentist' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select doctor',
+            'placeholder' => 'Select dentist',
             'helper_text' => 'Choose healthcare professional',
             'tooltip' => 'Select doctor to view/edit their availability',
             'required' => '1',
@@ -187,7 +187,7 @@ return [
         ],
         'filters' => [
             'date_range' => 'Date range',
-            'doctor' => 'Filter by doctor',
+            'dentist' => 'Filter by dentist',
             'status' => 'Filter by status',
             'apply' => 'Apply filters',
             'reset' => 'Reset filters',

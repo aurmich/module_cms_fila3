@@ -9,7 +9,7 @@ return [
     ],
     'doctor_name' => [
         'label' => 'Doctor',
-        'placeholder' => 'Select a doctor',
+        'placeholder' => 'Select a dentist',
         'helper_text' => 'Choose the doctor for your appointment',
         'description' => 'Specialist doctor for the visit',
     ],
@@ -64,7 +64,7 @@ return [
     'doctor_id' => [
         'label' => 'Doctor ID',
         'placeholder' => 'Doctor identifier',
-        'helper_text' => 'Unique identifier of the doctor',
+        'helper_text' => 'Unique identifier of the dentist',
         'description' => 'Unique ID of the doctor in the system',
     ],
     'appointment_date' => [

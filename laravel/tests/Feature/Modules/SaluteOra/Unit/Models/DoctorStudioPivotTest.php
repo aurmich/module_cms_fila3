@@ -328,3 +328,4 @@ describe('DoctorStudio Queries and Scopes', function () {
         expect($mondayAvailable->first()->doctor_id)->toBe($doctor1->id);
     });
 });
+

@@ -26,8 +26,8 @@ return [
     ],
     
     'find_doctor_and_appointment' => [
-        'title' => 'Trova dottore e prenota appuntamento',
-        'description' => 'Seleziona la tua zona, scegli un dottore e prenota un appuntamento',
+        'title' => 'Trova dentista e prenota appuntamento',
+        'description' => 'Seleziona la tua zona, scegli un dentista e prenota un appuntamento',
         
         'steps' => [
             'studio' => [
@@ -71,9 +71,9 @@ return [
                 'helper_text' => 'Studio dentistico per la prenotazione',
             ],
             'doctor' => [
-                'label' => 'Dottore',
-                'placeholder' => 'Seleziona un dottore',
-                'helper_text' => 'Scegli il dottore con cui vuoi prenotare l\'appuntamento',
+                'label' => 'Dentista',
+                'placeholder' => 'Seleziona un dentista',
+                'helper_text' => 'Scegli il dentista con cui vuoi prenotare l\'appuntamento',
             ],
             'appointment_date' => [
                 'label' => 'Data Appuntamento',
@@ -88,7 +88,7 @@ return [
             'notes' => [
                 'label' => 'Note',
                 'placeholder' => 'Aggiungi eventuali note o richieste speciali',
-                'helper_text' => 'Informazioni aggiuntive per il dottore (opzionale)',
+                'helper_text' => 'Informazioni aggiuntive per il dentista (opzionale)',
             ],
         ],
 
@@ -107,7 +107,7 @@ return [
         'messages' => [
             'success' => 'Appuntamento prenotato con successo!',
             'error' => 'Si è verificato un errore durante la prenotazione.',
-            'no_doctors' => 'Nessun dottore disponibile per questo studio.',
+            'no_doctors' => 'Nessun dentista disponibile per questo studio.',
             'no_times' => 'Nessun orario disponibile per la data selezionata.',
         ],
     ],
@@ -123,7 +123,7 @@ return [
         ],
         
         'doctor_info' => [
-            'label' => 'Informazioni Dottore',
+            'label' => 'Informazioni Dentista',
             'full_name' => 'Dr. :first_name :last_name',
             'studios_count' => '{0} Nessuno studio|{1} 1 studio|[2,*] :count studi',
         ],

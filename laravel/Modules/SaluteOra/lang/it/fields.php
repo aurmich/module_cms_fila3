@@ -11,9 +11,9 @@ return [
     ],
     
     'doctor_name' => [
-        'label' => 'Dottore',
-        'placeholder' => 'Seleziona un dottore',
-        'helper_text' => 'Scegli il dottore con cui vuoi prenotare l\'appuntamento',
+        'label' => 'Dentista',
+        'placeholder' => 'Seleziona un dentista',
+        'helper_text' => 'Scegli il dentista con cui vuoi prenotare l\'appuntamento',
         'description' => 'Medico specialista per la visita',
     ],
     
@@ -34,7 +34,7 @@ return [
     'notes' => [
         'label' => 'Note',
         'placeholder' => 'Aggiungi eventuali note o richieste speciali',
-        'helper_text' => 'Informazioni aggiuntive per il dottore (opzionale)',
+        'helper_text' => 'Informazioni aggiuntive per il dentista (opzionale)',
         'description' => 'Note aggiuntive per l\'appuntamento',
     ],
     
@@ -68,10 +68,10 @@ return [
     ],
     
     'doctor_id' => [
-        'label' => 'ID Dottore',
-        'placeholder' => 'Identificativo del dottore',
-        'helper_text' => 'Identificativo unico del dottore',
-        'description' => 'ID univoco del dottore nel sistema',
+        'label' => 'ID Dentista',
+        'placeholder' => 'Identificativo del dentista',
+        'helper_text' => 'Identificativo unico del dentista',
+        'description' => 'ID univoco del dentista nel sistema',
     ],
     
     'appointment_date' => [

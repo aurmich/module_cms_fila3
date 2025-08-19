@@ -52,7 +52,7 @@ return [
             'label' => 'Studio',
             'tooltip' => 'Studio medico associato',
             'placeholder' => 'Seleziona studio',
-            'helper_text' => 'Lo studio medico dove il dottore sarà disponibile',
+            'helper_text' => 'Lo studio medico dove il dentista sarà disponibile',
         ],
         'day_of_week' => [
             'label' => 'Giorno della Settimana',

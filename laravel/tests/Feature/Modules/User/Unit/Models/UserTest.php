@@ -183,3 +183,4 @@ describe('User Scopes and Queries', function () {
         expect($found->email)->toBe('unique@example.com');
     });
 });
+

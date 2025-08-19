@@ -20,7 +20,7 @@ return [
     'steps' => [
         'search_step' => [
             'label' => 'Search Doctor',
-            'description' => 'Select specialization and location to find the right doctor',
+            'description' => 'Select specialization and location to find the right dentist',
             'icon' => 'heroicon-o-magnifying-glass',
         ],
         'studio_step' => [
@@ -56,14 +56,14 @@ return [
             'label' => 'Location',
             'placeholder' => 'Enter your city or area',
             'helper_text' => '',
-            'help' => 'Specifica dove preferisci che si trovi lo studio doctor',
+            'help' => 'Specifica dove preferisci che si trovi lo studio dentist',
             'description' => 'La ricerca mostrerà i dottori disponibili nella zona indicata',
         ],
         'region' => [
             'label' => 'Region',
             'placeholder' => 'Select the region',
             'helper_text' => '',
-            'help' => 'Choose the region where to look for the doctor',
+            'help' => 'Choose the region where to look for the dentist',
             'description' => 'First select the region, then you can choose province and city',
         ],
         'province' => [
@@ -77,8 +77,8 @@ return [
             'label' => 'City',
             'placeholder' => 'Select the city',
             'tooltip' => 'City for doctor search',
-            'helper_text' => 'Choose the city where you prefer to find the doctor',
-            'help' => 'Choose the city where you prefer to find the doctor',
+            'helper_text' => 'Choose the city where you prefer to find the dentist',
+            'help' => 'Choose the city where you prefer to find the dentist',
             'description' => 'The city will determine the results closest to you',
             'icon' => 'heroicon-o-map-pin',
             'color' => 'primary',
@@ -108,12 +108,12 @@ return [
             'label' => 'Practice Name',
             'placeholder' => 'Medical studio name',
             'helper_text' => '',
-            'help' => 'Denominazione completa dello studio doctor',
+            'help' => 'Denominazione completa dello studio dentist',
             'description' => 'First Name ufficiale della struttura sanitaria',
         ],
         'doctor_id' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select a doctor',
+            'placeholder' => 'Select a dentist',
             'helper_text' => '',
             'help' => 'Dottore che effettuerà la visita',
             'description' => 'Doctor specialista che ti riceverà',

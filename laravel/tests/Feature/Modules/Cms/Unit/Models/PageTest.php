@@ -66,3 +66,4 @@ describe('Page Model', function () {
         expect($drafts)->toHaveCount(1);
     });
 });
+

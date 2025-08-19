@@ -80,7 +80,7 @@ return [
             'help' => 'User classification in the healthcare system',
             'options' => [
                 'patient' => 'Patient',
-                'doctor' => 'Doctor/Physician',
+                'dentist' => 'Doctor/Physician',
                 'admin' => 'Administrator',
             ],
         ],

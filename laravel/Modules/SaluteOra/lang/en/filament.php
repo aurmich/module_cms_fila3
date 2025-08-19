@@ -2,7 +2,7 @@
 
 return [
     'resources' => [
-        'doctor' => [
+        'dentist' => [
             'label' => [
                 'singular' => 'Doctor',
                 'plural' => 'Doctors',

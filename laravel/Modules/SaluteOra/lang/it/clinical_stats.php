@@ -8,9 +8,9 @@ return [
             'tooltip' => 'Seleziona la struttura per cui visualizzare le statistiche',
         ],
         'doctor_id' => [
-            'label' => 'Dottore',
-            'placeholder' => 'Seleziona il dottore',
-            'tooltip' => 'Seleziona il dottore per cui visualizzare le statistiche',
+            'label' => 'Dentista',
+            'placeholder' => 'Seleziona il dentista',
+            'tooltip' => 'Seleziona il dentista per cui visualizzare le statistiche',
         ],
         'start_date' => [
             'label' => 'Data inizio',

@@ -227,14 +227,14 @@ return [
             'color' => 'success',
             'bg_color' => '#D1FAE5',
             'icon' => 'heroicon-o-check-circle',
-            'description' => 'Appointment confirmed by doctor',
+            'description' => 'Appointment confirmed by dentist',
         ],
         'rejected' => [
             'label' => 'Rejected',
             'color' => 'danger',
             'bg_color' => '#FEE2E2',
             'icon' => 'heroicon-o-x-circle',
-            'description' => 'Appointment rejected by doctor',
+            'description' => 'Appointment rejected by dentist',
         ],
         'completed' => [
             'label' => 'Completed',

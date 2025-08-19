@@ -14,10 +14,10 @@ return [
             'created_at' => 'Created at',
         ],
         'actions' => [
-            'create' => 'Add doctor',
-            'edit' => 'Edit doctor',
-            'delete' => 'Remove doctor',
-            'view' => 'View doctor',
+            'create' => 'Add dentist',
+            'edit' => 'Edit dentist',
+            'delete' => 'Remove dentist',
+            'view' => 'View dentist',
         ],
     ],
     'studios' => [

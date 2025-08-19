@@ -132,11 +132,17 @@ class Locality extends BaseModel
         //->pluck('postal_code', 'postal_code')
         //->toArray()
         ;
+        /** @var array<int, array<string, mixed>> $arr */
         $arr=$res->toArray();
-        $arr=Arr::mapWithKeys($arr, function($item){
-            $res=$item['postal_code'];
-            $res=array_combine($res,$res);
-            return $res;
+        $arr=Arr::mapWithKeys($arr, function(array $item){
+            if (!isset($item['postal_code']) || !is_array($item['postal_code'])) {
+                return [];
+            }
+            /** @var array<int, string> $postalCodes */
+            $postalCodes = array_values((array) $item['postal_code']);
+            /** @var array<string, string> $result */
+            $result = array_combine($postalCodes, $postalCodes);
+            return $result;
         });
                       
         return $arr ?? [];

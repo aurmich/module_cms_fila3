@@ -25,7 +25,7 @@ return [
         ],
         'create' => [
             'title' => 'New Doctor',
-            'subtitle' => 'Register a new doctor',
+            'subtitle' => 'Register a new dentist',
             'description' => 'Add a new doctor to the team',
         ],
         'edit' => [
@@ -40,14 +40,14 @@ return [
             'description' => 'Enter personal information',
             'icon' => 'heroicon-o-user',
             'color' => 'primary',
-            'tooltip' => 'Personal and biographical data of the doctor',
+            'tooltip' => 'Personal and biographical data of the dentist',
         ],
         'personal_info_step' => [
             'label' => 'Personal Information',
             'description' => 'Enter personal information',
             'icon' => 'heroicon-o-user',
             'color' => 'primary',
-            'tooltip' => 'Personal and biographical data of the doctor',
+            'tooltip' => 'Personal and biographical data of the dentist',
         ],
         'moderation' => [
             'label' => 'Moderation',
@@ -376,7 +376,7 @@ return [
             'modal_heading' => 'Create New Doctor',
             'modal_description' => 'Enter new doctor data',
             'success' => 'Doctor created successfully',
-            'error' => 'Error creating doctor',
+            'error' => 'Error creating dentist',
         ],
         'edit' => [
             'label' => 'Edit',
@@ -386,18 +386,18 @@ return [
             'modal_heading' => 'Edit Doctor',
             'modal_description' => 'Edit doctor data',
             'success' => 'Doctor updated successfully',
-            'error' => 'Error updating doctor',
+            'error' => 'Error updating dentist',
         ],
         'delete' => [
             'label' => 'Delete',
             'icon' => 'heroicon-o-trash',
             'color' => 'danger',
-            'tooltip' => 'Delete selected doctor',
+            'tooltip' => 'Delete selected dentist',
             'modal_heading' => 'Delete Doctor',
             'modal_description' => 'Are you sure you want to delete this doctor? This action cannot be undone.',
             'confirmation' => 'Are you sure you want to delete this doctor? All their data will be permanently lost.',
             'success' => 'Doctor deleted successfully',
-            'error' => 'Error deleting doctor',
+            'error' => 'Error deleting dentist',
         ],
         'view' => [
             'label' => 'View',
@@ -413,7 +413,7 @@ return [
             'tooltip' => 'Approve doctor profile',
             'confirmation' => 'Are you sure you want to approve this doctor?',
             'success' => 'Doctor approved successfully',
-            'error' => 'Error approving doctor',
+            'error' => 'Error approving dentist',
         ],
         'suspend' => [
             'label' => 'Suspend',
@@ -422,7 +422,7 @@ return [
             'tooltip' => 'Temporarily suspend profile',
             'confirmation' => 'Are you sure you want to suspend this doctor?',
             'success' => 'Doctor suspended successfully',
-            'error' => 'Error suspending doctor',
+            'error' => 'Error suspending dentist',
         ],
     ],
     'messages' => [
@@ -481,7 +481,7 @@ return [
     'empty_state' => [
         'heading' => 'No doctors found',
         'description' => 'There are no registered doctors matching the search criteria',
-        'action' => 'Register the first doctor',
+        'action' => 'Register the first dentist',
     ],
     'specialties' => [
         'label' => 'Specializations',

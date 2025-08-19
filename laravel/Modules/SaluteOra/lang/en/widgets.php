@@ -62,9 +62,9 @@ return [
                 'placeholder' => 'Selected studio name',
                 'helper_text' => 'Dental studio for the booking',
             ],
-            'doctor' => [
+            'dentist' => [
                 'label' => 'Doctor',
-                'placeholder' => 'Select a doctor',
+                'placeholder' => 'Select a dentist',
                 'helper_text' => 'Choose the doctor you want to book the appointment with',
             ],
             'appointment_date' => [

@@ -437,3 +437,4 @@ describe('DoctorCalendarWidget Performance', function () {
         }
     });
 });
+

@@ -253,3 +253,4 @@ describe('LoginWidget Performance', function () {
         expect($duration)->toBeLessThan(1.0); // Authentication should take less than 1 second
     });
 });
+

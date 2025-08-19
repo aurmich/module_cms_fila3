@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 return [
     'widget' => [
-        'title' => 'Trova Dottore e Prenota Appuntamento',
-        'description' => 'Cerca un dottore nella tua zona e prenota un appuntamento online',
+        'title' => 'Trova Dentista e Prenota Appuntamento',
+        'description' => 'Cerca un dentista nella tua zona e prenota un appuntamento online',
     ],
     
     'steps' => [
         'search_step' => [
-            'label' => 'Ricerca Dottore',
-            'description' => 'Seleziona specializzazione e località per trovare il dottore giusto',
+            'label' => 'Ricerca Dentista',
+            'description' => 'Seleziona specializzazione e località per trovare il dentista giusto',
             'icon' => 'heroicon-o-magnifying-glass',
         ],
         'studio_step' => [
@@ -54,7 +54,7 @@ return [
         'region' => [
             'label' => 'Regione',
             'placeholder' => 'Seleziona la regione',
-            'help' => 'Scegli la regione dove cercare il dottore',
+            'help' => 'Scegli la regione dove cercare il dentista',
             'description' => 'Prima seleziona la regione, poi potrai scegliere provincia e città',
             'helper_text' => '',
         ],
@@ -68,7 +68,7 @@ return [
         'city' => [
             'label' => 'Città',
             'placeholder' => 'Seleziona la città',
-            'help' => 'Scegli la città dove preferisci trovare il dottore',
+            'help' => 'Scegli la città dove preferisci trovare il dentista',
             'description' => 'La città determinerà i risultati più vicini a te',
             'helper_text' => '',
         ],
@@ -101,9 +101,9 @@ return [
             'helper_text' => '',
         ],
         'doctor_id' => [
-            'label' => 'Dottore',
-            'placeholder' => 'Seleziona un dottore',
-            'help' => 'Dottore che effettuerà la visita',
+            'label' => 'Dentista',
+            'placeholder' => 'Seleziona un dentista',
+            'help' => 'Dentista che effettuerà la visita',
             'description' => 'Medico specialista che ti riceverà',
             'helper_text' => '',
         ],
@@ -159,14 +159,14 @@ return [
         'notes' => [
             'label' => 'Note Aggiuntive',
             'placeholder' => 'Inserisci eventuali note o richieste particolari',
-            'help' => 'Aggiungi informazioni utili per il dottore (sintomi, allergie, farmaci)',
+            'help' => 'Aggiungi informazioni utili per il dentista (sintomi, allergie, farmaci)',
             'description' => 'Note che aiuteranno il medico a prepararsi meglio per la visita',
             'helper_text' => '',
         ],
         'search' => [
             'label' => 'Ricerca',
             'placeholder' => 'Cerca dottori nella tua zona',
-            'help' => 'Usa i filtri per trovare il dottore più adatto',
+            'help' => 'Usa i filtri per trovare il dentista più adatto',
             'description' => 'Sistema di ricerca medici specializzati',
             'helper_text' => '',
         ],
@@ -194,7 +194,7 @@ return [
             'messages' => [
                 'success' => 'Ricerca completata',
                 'error' => 'Errore durante la ricerca',
-                'no_results' => 'Nessun dottore trovato con i criteri selezionati',
+                'no_results' => 'Nessun dentista trovato con i criteri selezionati',
             ],
         ],
         'back' => [
@@ -220,7 +220,7 @@ return [
     'messages' => [
         'welcome' => 'Benvenuto nel sistema di prenotazione online',
         'loading' => 'Caricamento in corso...',
-        'no_doctors_found' => 'Nessun dottore trovato con i criteri di ricerca selezionati',
+        'no_doctors_found' => 'Nessun dentista trovato con i criteri di ricerca selezionati',
         'no_appointments_available' => 'Non ci sono appuntamenti disponibili per questa data',
         'select_specialization' => 'Seleziona prima una specializzazione',
         'select_location' => 'Specifica la località per la ricerca',
@@ -229,7 +229,7 @@ return [
     ],
     
     'empty_states' => [
-        'no_doctors' => 'Nessun dottore disponibile',
+        'no_doctors' => 'Nessun dentista disponibile',
         'no_appointments' => 'Nessun appuntamento disponibile',
         'no_results' => 'Nessun risultato trovato',
         'search_required' => 'Compila i campi di ricerca per iniziare',
@@ -237,7 +237,7 @@ return [
     
     'errors' => [
         'no_doctors_in_area' => [
-            'label' => '⚠️ Nessun dottore disponibile nell\'area selezionata',
+            'label' => '⚠️ Nessun dentista disponibile nell\'area selezionata',
         ],
     ],
     'success' => [
@@ -251,7 +251,7 @@ return [
         'location_required' => 'La località è obbligatoria',
         'date_required' => 'La data è obbligatoria',
         'time_required' => 'L\'orario è obbligatorio',
-        'doctor_required' => 'Il dottore è obbligatorio',
+        'doctor_required' => 'Il dentista è obbligatorio',
         'studio_required' => 'Lo studio è obbligatorio',
         'invalid_date' => 'La data selezionata non è valida',
         'past_date' => 'Non puoi selezionare una data passata',

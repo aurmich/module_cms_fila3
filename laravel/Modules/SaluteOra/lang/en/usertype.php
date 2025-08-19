@@ -7,7 +7,7 @@ return [
         'icon' => 'heroicon-o-shield-check',
         'image' => '/img/admin.jpg',
     ],
-    'doctor' => [
+    'dentist' => [
         'label' => 'Doctor',
         'color' => 'primary',
         'icon' => 'heroicon-o-user-circle',

@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'title' => 'Appuntamenti Dottore',
+  'title' => 'Appuntamenti Dentista',
   'description' => 'Gestione appuntamenti per i dottori',
   'actions' => 
   array (
@@ -198,7 +198,7 @@ return array (
       'color' => 'success',
       'bg_color' => '#D1FAE5',
       'icon' => 'heroicon-o-check-circle',
-      'description' => 'Appuntamento confermato dal dottore',
+      'description' => 'Appuntamento confermato dal dentista',
     ),
     'rejected' => 
     array (
@@ -206,7 +206,7 @@ return array (
       'color' => 'danger',
       'bg_color' => '#FEE2E2',
       'icon' => 'heroicon-o-x-circle',
-      'description' => 'Appuntamento rifiutato dal dottore',
+      'description' => 'Appuntamento rifiutato dal dentista',
     ),
     'completed' => 
     array (

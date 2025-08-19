@@ -8,7 +8,7 @@ return [
     'steps' => [
         'search_step' => [
             'label' => 'Search Doctor',
-            'description' => 'Select specialization and location to find the right doctor',
+            'description' => 'Select specialization and location to find the right dentist',
             'icon' => 'heroicon-o-magnifying-glass',
         ],
         'studio_step' => [
@@ -98,7 +98,7 @@ return [
         ],
         'doctor_id' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select a doctor',
+            'placeholder' => 'Select a dentist',
             'helper_text' => '',
             'help' => 'Dottore che effettuerà la visita',
             'description' => 'Medico specialista che ti riceverà',

@@ -68,7 +68,7 @@ return [
             'title' => 'Disponibilità salvate',
             'body' => 'Le tue disponibilità sono state aggiornate con successo.',
         ],
-        'not_doctor' => [
+        'not_dentist' => [
             'title' => 'Utente non autorizzato',
             'body' => 'Solo i profili medico possono gestire le disponibilità.',
         ],

@@ -25,7 +25,7 @@ return [
     'enums' => [
         'user_type' => [
             'admin' => 'Administrator',
-            'doctor' => 'Doctor',
+            'dentist' => 'Doctor',
             'patient' => 'Patient',
         ],
         'appointment_type' => [

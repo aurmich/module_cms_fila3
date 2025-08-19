@@ -9,7 +9,7 @@ return [
         'icon' => 'heroicon-o-shield-check',
         'image' => '/img/admin.jpg',
     ],
-    'doctor' => [
+    'dentist' => [
         'label' => 'Dentist',
         'color' => 'primary',
         'icon' => 'heroicon-o-user-circle',
@@ -23,12 +23,12 @@ return [
     ],
     'descriptions' => [
         'patient' => 'Healthcare service recipient',
-        'doctor' => 'Healthcare professional',
+        'dentist' => 'Healthcare professional',
         'admin' => 'System administrator',
     ],
     'plural' => [
         'patient' => 'Patients',
-        'doctor' => 'Doctors',
+        'dentist' => 'Doctors',
         'admin' => 'Administrators',
     ],
 ];

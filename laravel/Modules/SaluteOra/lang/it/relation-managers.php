@@ -16,10 +16,10 @@ return [
             'created_at' => 'Creato il',
         ],
         'actions' => [
-            'create' => 'Aggiungi dottore',
-            'edit' => 'Modifica dottore',
-            'delete' => 'Rimuovi dottore',
-            'view' => 'Visualizza dottore',
+            'create' => 'Aggiungi dentista',
+            'edit' => 'Modifica dentista',
+            'delete' => 'Rimuovi dentista',
+            'view' => 'Visualizza dentista',
         ],
     ],
     'studios' => [

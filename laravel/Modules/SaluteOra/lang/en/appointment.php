@@ -59,7 +59,7 @@ return [
         ],
         'doctor_id' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select the doctor',
+            'placeholder' => 'Select the dentist',
             'help' => 'Doctor who will hold the appointment',
             'helper_text' => '',
         ],
@@ -233,10 +233,10 @@ return [
             'help' => 'Filter appointments by status',
             'helper_text' => '',
         ],
-        'by_doctor' => [
+        'by_dentist' => [
             'label' => 'By Doctor',
-            'placeholder' => 'Select a doctor',
-            'help' => 'Filter by specific doctor',
+            'placeholder' => 'Select a dentist',
+            'help' => 'Filter by specific dentist',
             'helper_text' => '',
         ],
         'by_date_range' => [
@@ -311,7 +311,7 @@ return [
         'completed' => 'Appointment completed successfully',
         'rescheduled' => 'Appointment rescheduled successfully',
         'conflict' => 'Another appointment already exists at this time',
-        'unavailable_slot' => 'This time slot is not available for the selected doctor',
+        'unavailable_slot' => 'This time slot is not available for the selected dentist',
         'past_date' => 'Cannot schedule appointments in the past',
         'unavailable' => 'The doctor is not available at this time',
         'availability_created' => 'Availability created successfully',

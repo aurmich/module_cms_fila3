@@ -215,7 +215,7 @@ return [
         ],
         'doctor_id' => [
             'label' => 'Doctor',
-            'placeholder' => 'Select the doctor',
+            'placeholder' => 'Select the dentist',
             'help' => 'Doctor responsible for the appointment',
             'helper_text' => '',
         ],
@@ -370,7 +370,7 @@ return [
         'name' => 'name',
         'description' => 'description',
         'patient_id' => 'patient',
-        'doctor_id' => 'doctor',
+        'doctor_id' => 'dentist',
         'studio_id' => 'practice',
         'room_id' => 'room',
         'status' => 'status',
@@ -408,7 +408,7 @@ return [
             'help' => 'Filtra per intervallo di date',
             'helper_text' => '',
         ],
-        'doctor' => [
+        'dentist' => [
             'label' => 'Per Medico',
             'placeholder' => 'Seleziona medico',
             'help' => 'Filtra per medico specifico',

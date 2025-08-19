@@ -184,7 +184,7 @@ return [
       'placeholder' => 'Seleziona la specializzazione',
       'tooltip' => 'Specializzazione medica principale',
       'helper_text' => '',
-      'description' => 'Specializzazione medica del dottore',
+      'description' => 'Specializzazione medica del dentista',
     ],
     'status' => [
       'label' => 'Stato',
@@ -581,7 +581,7 @@ return [
   ],
   'specialties' => [
     'label' => 'Specializzazioni',
-    'description' => 'Specializzazioni mediche del dottore',
+    'description' => 'Specializzazioni mediche del dentista',
     'tooltip' => 'Gestione delle specializzazioni mediche',
     'helper_text' => '',
     'empty' => 'Nessuna specializzazione registrata',
