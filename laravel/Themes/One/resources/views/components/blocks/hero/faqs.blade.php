@@ -16,7 +16,7 @@
 
     <!-- Page title -->
     <div class="p-10 w-full flex justify-center">
-        <h1 class="text-center">FAQ'S</h1>
+        <h1 class="text-center">FAQS</h1>
     </div>
 
     <!-- FAQ Content -->

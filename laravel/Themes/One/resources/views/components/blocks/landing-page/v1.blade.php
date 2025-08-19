@@ -186,7 +186,7 @@ class="min-h-screen m-0 p-0"
     <span class="text-white text-xl m-3">Home</span>
     <span class="text-white text-xl m-3">Progetto</span>
     <span class="text-white text-xl m-3">Partners</span>
-    <span class="text-white text-xl m-3">FAQ'S</span>
+    <span class="text-white text-xl m-3">FAQS</span>
   </div>
 </div> -->
 <!-- FINE FOOTER -->
