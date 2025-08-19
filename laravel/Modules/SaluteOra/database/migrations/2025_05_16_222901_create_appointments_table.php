@@ -54,35 +54,33 @@ return new class extends XotBaseMigration
                 $this->updateTimestamps($table, true);
                 
                 // Indici per migliorare le prestazioni delle query sul calendario
-                if (!$this->hasIndex('appointments_starts_at_index')) {
+                if (!$this->hasIndex('appointments_starts_at_index') && $this->hasColumn('starts_at')) {
                     $table->index('starts_at', 'appointments_starts_at_index');
                 }
 
-                if (!$this->hasIndex('appointments_ends_at_index')) {
+                if (!$this->hasIndex('appointments_ends_at_index') && $this->hasColumn('ends_at')) {
                     $table->index('ends_at', 'appointments_ends_at_index');
                 }
 
-                if (!$this->hasIndex('appointments_type_index')) {
+                if (!$this->hasIndex('appointments_type_index') && $this->hasColumn('type')) {
                     $table->index('type', 'appointments_type_index');
                 }
 
-                if (!$this->hasIndex('appointments_state_index')) {
+                if (!$this->hasIndex('appointments_state_index') && $this->hasColumn('state')) {
                     $table->index('state', 'appointments_state_index');
                 }
 
-                if (!$this->hasIndex('appointments_emergency_index')) {
-                    $table->index('emergency', 'appointments_emergency_index');
-                }
+                
 
-                if (!$this->hasIndex('appointments_studio_starts_at_index')) {
+                if (!$this->hasIndex('appointments_studio_starts_at_index') && $this->hasColumn('studio_id') && $this->hasColumn('starts_at')) {
                     $table->index(['studio_id', 'starts_at'], 'appointments_studio_starts_at_index');
                 }
 
-                if (!$this->hasIndex('appointments_doctor_starts_at_index')) {
+                if (!$this->hasIndex('appointments_doctor_starts_at_index') && $this->hasColumn('doctor_id') && $this->hasColumn('starts_at')) {
                     $table->index(['doctor_id', 'starts_at'], 'appointments_doctor_starts_at_index');
                 }
 
-                if (!$this->hasIndex('appointments_patient_starts_at_index')) {
+                if (!$this->hasIndex('appointments_patient_starts_at_index') && $this->hasColumn('patient_id') && $this->hasColumn('starts_at')) {
                     $table->index(['patient_id', 'starts_at'], 'appointments_patient_starts_at_index');
                 }
 

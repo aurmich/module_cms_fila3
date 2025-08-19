@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
+use Modules\Tenant\Models\Tenant;
+use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\Studio;
+use Modules\SaluteOra\Models\Patient;
 use Illuminate\Database\Schema\Blueprint;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\Doctor;
-use Modules\SaluteOra\Models\Patient;
-use Modules\Tenant\Models\Tenant;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 return new class extends XotBaseMigration
@@ -22,8 +23,9 @@ return new class extends XotBaseMigration
         $this->tableCreate(
             function (Blueprint $table): void {
                 $table->id();
-                $table->foreignIdFor(Patient::class);
-                $table->foreignIdFor(Doctor::class);
+                $table->foreignIdFor(Patient::class,'patient_id');
+                $table->foreignIdFor(Doctor::class,'doctor_id');
+                $table->foreignIdFor(Studio::class,'studio_id')->nullable();
                 $table->date('date');
                 $table->time('start_time');
                 $table->time('end_time');
@@ -41,7 +43,7 @@ return new class extends XotBaseMigration
                 
                 // Aggiunta dei campi per il calendario
                 if (!$this->hasColumn('studio_id')) {
-                    $table->foreignId('studio_id')->nullable()->constrained('studios')->onDelete('cascade');
+                    $table->foreignIdFor(Studio::class,'studio_id')->nullable();
                 }
 
                 if (!$this->hasColumn('title')) {
