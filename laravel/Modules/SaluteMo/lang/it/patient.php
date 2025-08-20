@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 return [
-  'navigation' => [
+  'navigation' => 
+  [
     'label' => 'Pazienti',
     'group' => 'Gestione Utenti',
     'icon' => 'heroicon-o-users',
@@ -11,35 +10,42 @@ return [
     'tooltip' => 'Gestisci i pazienti registrati nel sistema',
     'helper_text' => '',
   ],
-  'model' => [
+  'model' => 
+  [
     'label' => 'Paziente',
     'plural' => 'Pazienti',
     'description' => 'Gestione completa dei pazienti',
     'icon' => 'heroicon-o-user',
   ],
-  'pages' => [
-    'index' => [
+  'pages' => 
+  [
+    'index' => 
+    [
       'title' => 'Elenco Pazienti',
       'subtitle' => 'Gestisci i pazienti registrati nell\'app mobile',
       'description' => 'Visualizza e gestisci tutti i pazienti del sistema',
     ],
-    'create' => [
+    'create' => 
+    [
       'title' => 'Nuovo Paziente',
       'subtitle' => 'Registra un nuovo paziente',
       'description' => 'Inserisci i dati per registrare un nuovo paziente',
     ],
-    'edit' => [
+    'edit' => 
+    [
       'title' => 'Modifica Paziente',
       'subtitle' => 'Modifica le informazioni del paziente',
       'description' => 'Aggiorna le informazioni del paziente selezionato',
     ],
-    'view' => [
+    'view' => 
+    [
       'title' => 'Dettagli Paziente',
       'subtitle' => 'Visualizza le informazioni complete del paziente',
       'description' => 'Informazioni dettagliate sul paziente selezionato',
     ],
   ],
-  'fields' => [
+  'fields' => 
+  [
     'personal_info_section' => 
     [
       'label' => 'Informazioni Personali',
@@ -407,73 +413,85 @@ return [
       'tooltip' => 'Ultimo accesso',
       'helper_text' => '',
     ],
-    'applyFilters' => [
+    'applyFilters' => 
+    [
       'label' => 'Applica Filtri',
       'placeholder' => 'Filtra risultati',
       'helper_text' => 'Applica i filtri selezionati per limitare i risultati visualizzati',
       'tooltip' => 'Applica filtri di ricerca',
     ],
-    'toggleColumns' => [
+    'toggleColumns' => 
+    [
       'label' => 'Gestione Colonne',
       'placeholder' => 'Personalizza colonne tabella',
       'helper_text' => 'Mostra o nascondi le colonne della tabella per personalizzare la vista',
       'tooltip' => 'Personalizza colonne visibili',
     ],
-    'value' => [
+    'value' => 
+    [
       'label' => 'Valore',
       'placeholder' => 'Inserisci un valore',
       'helper_text' => '',
       'description' => 'Campo generico per valori aggiuntivi',
     ],
-    'delete' => [
+    'delete' => 
+    [
       'label' => 'Elimina',
       'placeholder' => 'Conferma eliminazione',
       'helper_text' => 'Elimina definitivamente il record selezionato',
       'tooltip' => 'Elimina elemento',
     ],
-    'edit' => [
+    'edit' => 
+    [
       'label' => 'Modifica',
       'placeholder' => 'Modifica dati',
       'helper_text' => 'Modifica le informazioni del record selezionato',
       'tooltip' => 'Modifica elemento',
     ],
-    'view' => [
+    'view' => 
+    [
       'label' => 'Visualizza',
       'placeholder' => 'Apri dettagli',
       'helper_text' => 'Visualizza i dettagli completi del record',
       'tooltip' => 'Visualizza dettagli',
     ],
-    'changePassword' => [
+    'changePassword' => 
+    [
       'label' => 'Cambia Password',
       'placeholder' => 'Nuova password',
       'helper_text' => 'Modifica la password di accesso dell\'utente',
       'tooltip' => 'Cambia password utente',
     ],
-    'layout' => [
+    'layout' => 
+    [
       'label' => 'Layout',
       'placeholder' => 'Seleziona layout',
       'helper_text' => 'Configurazione del layout di visualizzazione della pagina',
       'tooltip' => 'Imposta layout pagina',
     ],
-    'create' => [
+    'create' => 
+    [
       'label' => 'Crea Nuovo',
       'placeholder' => 'Inserisci dati',
       'helper_text' => 'Crea un nuovo record nel sistema',
       'tooltip' => 'Crea nuovo elemento',
     ],
-    'state' => [
+    'state' => 
+    [
       'label' => 'Stato',
       'placeholder' => 'Seleziona stato',
       'helper_text' => 'Stato attuale del record nel workflow del sistema',
       'tooltip' => 'Stato elemento',
     ],
-    'reorderRecords' => [
+    'reorderRecords' => 
+    [
       'label' => 'Riordina Record',
       'placeholder' => 'Trascina per riordinare',
       'helper_text' => 'Riordina manualmente i record trascinandoli nella posizione desiderata',
       'tooltip' => 'Riordina elementi',
     ],
-    'resetFilters' => [
+    'resetFilters' => 
+    [
       'label' => 'Azzera Filtri',
       'placeholder' => 'Rimuovi tutti i filtri',
       'helper_text' => 'Rimuove tutti i filtri applicati e mostra tutti i record',
@@ -484,161 +502,216 @@ return [
       'placeholder' => 'Apri opzioni filtro',
       'helper_text' => 'Apre il pannello per configurare i filtri di ricerca avanzata',
       'tooltip' => 'Apri pannello filtri',
+      'icon' => 'heroicon-o-funnel',
+      'description' => 'Controllo per aprire il pannello dei filtri di ricerca',
+    ],
+    'age_range' => [
+      'label' => 'Fascia d\'Età',
+      'placeholder' => 'Seleziona fascia d\'età',
+      'helper_text' => 'Filtra i pazienti per fascia d\'età',
+      'tooltip' => 'Filtro per fascia d\'età',
+      'icon' => 'heroicon-o-user-group',
+      'description' => 'Filtro per selezionare pazienti in base alla fascia d\'età',
     ],
   ],
-  'actions' => 
-  [
-    'view_medical_history' => 
-    [
+  'actions' => [
+    'view_medical_history' => [
       'label' => 'Storia Clinica',
       'icon' => 'heroicon-o-document-text',
       'tooltip' => 'Visualizza la storia clinica del paziente',
+      'placeholder' => 'Visualizza storia clinica',
+      'helper_text' => 'Accede alla storia clinica completa del paziente',
+      'description' => 'Azione per visualizzare la cronologia medica del paziente',
     ],
-    'view_appointments' => 
-    [
+    'view_appointments' => [
       'label' => 'Appuntamenti',
       'icon' => 'heroicon-o-calendar-days',
       'tooltip' => 'Visualizza gli appuntamenti del paziente',
+      'placeholder' => 'Visualizza appuntamenti',
+      'helper_text' => 'Mostra tutti gli appuntamenti programmati del paziente',
+      'description' => 'Azione per visualizzare la lista degli appuntamenti',
     ],
-    'send_notification' => 
-    [
+    'send_notification' => [
       'label' => 'Invia Notifica',
       'icon' => 'heroicon-o-bell',
       'tooltip' => 'Invia una notifica push al paziente',
+      'placeholder' => 'Invia notifica',
+      'helper_text' => 'Invia una notifica push al dispositivo del paziente',
+      'description' => 'Azione per inviare notifiche al paziente',
     ],
-    'deactivate' => 
-    [
+    'deactivate' => [
       'label' => 'Disattiva',
       'icon' => 'heroicon-o-x-circle',
       'tooltip' => 'Disattiva temporaneamente il paziente',
+      'placeholder' => 'Disattiva paziente',
+      'helper_text' => 'Disattiva temporaneamente l\'account del paziente',
+      'description' => 'Azione per disattivare l\'account del paziente',
     ],
-    'add_medical_note' => 
-    [
+    'add_medical_note' => [
       'label' => 'Aggiungi Nota',
       'icon' => 'heroicon-o-plus-circle',
       'tooltip' => 'Aggiungi una nota medica',
+      'placeholder' => 'Aggiungi nota medica',
+      'helper_text' => 'Inserisci una nuova nota medica per il paziente',
+      'description' => 'Azione per aggiungere note mediche al paziente',
     ],
-    'create' => 
-    [
+    'create' => [
       'label' => 'Crea Paziente',
       'icon' => 'heroicon-o-plus',
       'tooltip' => 'Crea un nuovo paziente',
+      'placeholder' => 'Crea nuovo paziente',
+      'helper_text' => 'Registra un nuovo paziente nel sistema',
+      'description' => 'Azione per creare un nuovo paziente',
     ],
-    'edit' => 
-    [
+    'edit' => [
       'label' => 'Modifica',
       'icon' => 'heroicon-o-pencil',
       'tooltip' => 'Modifica il paziente',
+      'placeholder' => 'Modifica paziente',
+      'helper_text' => 'Modifica le informazioni del paziente selezionato',
+      'description' => 'Azione per modificare i dati del paziente',
     ],
-    'view' => 
-    [
+    'view' => [
       'label' => 'Visualizza',
       'icon' => 'heroicon-o-eye',
       'tooltip' => 'Visualizza i dettagli del paziente',
+      'placeholder' => 'Visualizza paziente',
+      'helper_text' => 'Visualizza i dettagli completi del paziente',
+      'description' => 'Azione per visualizzare i dettagli del paziente',
     ],
-    'delete' => 
-    [
+    'delete' => [
       'label' => 'Elimina',
       'icon' => 'heroicon-o-trash',
       'tooltip' => 'Elimina il paziente',
+      'placeholder' => 'Elimina paziente',
+      'helper_text' => 'Elimina definitivamente il paziente dal sistema',
+      'description' => 'Azione per eliminare il paziente',
     ],
-    'changePassword' => 
-    [
+    'changePassword' => [
       'label' => 'Cambia Password',
       'icon' => 'heroicon-o-key',
       'tooltip' => 'Cambia la password del paziente',
+      'placeholder' => 'Cambia password',
+      'helper_text' => 'Modifica la password di accesso del paziente',
+      'description' => 'Azione per cambiare la password del paziente',
     ],
   ],
-  'filters' => 
-  [
-    'active' => 
-    [
+  'filters' => [
+    'active' => [
       'label' => 'Solo Attivi',
+      'placeholder' => 'Filtra per stato attivo',
+      'helper_text' => 'Mostra solo i pazienti attivi nel sistema',
+      'tooltip' => 'Filtro per pazienti attivi',
+      'icon' => 'heroicon-o-check-circle',
+      'description' => 'Filtro per visualizzare solo i pazienti attivi',
     ],
-    'gender' => 
-    [
+    'gender' => [
       'label' => 'Per Sesso',
+      'placeholder' => 'Seleziona sesso',
+      'helper_text' => 'Filtra i pazienti per sesso',
+      'tooltip' => 'Filtro per sesso',
+      'icon' => 'heroicon-o-user',
+      'description' => 'Filtro per selezionare pazienti in base al sesso',
     ],
-    'age_range' => 
-    [
+    'age_range' => [
       'label' => 'Fascia d\'Età',
+      'placeholder' => 'Seleziona fascia d\'età',
+      'helper_text' => 'Filtra i pazienti per fascia d\'età',
+      'tooltip' => 'Filtro per fascia d\'età',
+      'icon' => 'heroicon-o-user-group',
+      'description' => 'Filtro per selezionare pazienti in base alla fascia d\'età',
     ],
-    'city' => 
-    [
+    'city' => [
       'label' => 'Per Città',
+      'placeholder' => 'Seleziona città',
+      'helper_text' => 'Filtra i pazienti per città di residenza',
+      'tooltip' => 'Filtro per città',
+      'icon' => 'heroicon-o-map-pin',
+      'description' => 'Filtro per selezionare pazienti in base alla città',
     ],
-    'is_pregnant' => 
-    [
+    'is_pregnant' => [
       'label' => 'In Gravidanza',
+      'placeholder' => 'Filtra per stato di gravidanza',
+      'helper_text' => 'Mostra solo i pazienti in stato di gravidanza',
+      'tooltip' => 'Filtro per pazienti in gravidanza',
+      'icon' => 'heroicon-o-user-group',
+      'description' => 'Filtro per visualizzare solo i pazienti in gravidanza',
     ],
-    'isee_range' => 
-    [
+    'isee_range' => [
       'label' => 'Fascia ISEE',
+      'placeholder' => 'Seleziona fascia ISEE',
+      'helper_text' => 'Filtra i pazienti per fascia ISEE',
+      'tooltip' => 'Filtro per fascia ISEE',
+      'icon' => 'heroicon-o-currency-euro',
+      'description' => 'Filtro per selezionare pazienti in base alla fascia ISEE',
     ],
   ],
-  'bulk_actions' => 
-  [
-    'send_notification_selected' => 
-    [
+  'bulk_actions' => [
+    'send_notification_selected' => [
       'label' => 'Notifica Selezionati',
       'icon' => 'heroicon-o-bell',
+      'placeholder' => 'Invia notifica ai pazienti selezionati',
+      'helper_text' => 'Invia una notifica push a tutti i pazienti selezionati',
+      'tooltip' => 'Notifica pazienti selezionati',
+      'description' => 'Azione per inviare notifiche ai pazienti selezionati',
     ],
-    'export_selected' => 
-    [
+    'export_selected' => [
       'label' => 'Esporta Selezionati',
       'icon' => 'heroicon-o-arrow-down-tray',
+      'placeholder' => 'Esporta i pazienti selezionati',
+      'helper_text' => 'Esporta i dati dei pazienti selezionati in formato CSV o Excel',
+      'tooltip' => 'Esporta pazienti selezionati',
+      'description' => 'Azione per esportare i dati dei pazienti selezionati',
     ],
-    'activate_selected' => 
-    [
+    'activate_selected' => [
       'label' => 'Attiva Selezionati',
       'icon' => 'heroicon-o-check-circle',
+      'placeholder' => 'Attiva i pazienti selezionati',
+      'helper_text' => 'Riattiva i pazienti selezionati nel sistema',
+      'tooltip' => 'Attiva pazienti selezionati',
+      'description' => 'Azione per riattivare i pazienti selezionati',
     ],
-    'deactivate_selected' => 
-    [
-      'label' => 'Disattiva Selezionati',
-      'icon' => 'heroicon-o-x-circle',
-    ],
+          'deactivate_selected' => [
+        'label' => 'Disattiva Selezionati',
+        'icon' => 'heroicon-o-x-circle',
+        'placeholder' => 'Disattiva i pazienti selezionati',
+        'helper_text' => 'Disattiva temporaneamente i pazienti selezionati',
+        'tooltip' => 'Disattiva pazienti selezionati',
+        'description' => 'Azione per disattivare i pazienti selezionati',
+      ],
   ],
-  'messages' => 
-  [
+  'messages' => [
     'deactivated_successfully' => 'Paziente disattivato con successo',
     'notification_sent' => 'Notifica inviata con successo',
     'medical_note_added' => 'Nota medica aggiunta con successo',
     'export_completed' => 'Esportazione completata',
     'activated_successfully' => 'Paziente attivato con successo',
   ],
-  'notifications' => 
-  [
+  'notifications' => [
     'created' => 'Paziente creato con successo',
     'updated' => 'Paziente aggiornato con successo',
     'deleted' => 'Paziente eliminato con successo',
     'error' => 'Si è verificato un errore durante l\'operazione',
   ],
-  'validation' => 
-  [
+  'validation' => [
     'required' => 'Il campo :attribute è obbligatorio',
     'email' => 'Il campo :attribute deve essere un indirizzo email valido',
     'unique' => 'Il valore del campo :attribute è già stato utilizzato',
-    'min' => 
-    [
+    'min' => [
       'string' => 'Il campo :attribute deve contenere almeno :min caratteri',
     ],
-    'max' => 
-    [
+    'max' => [
       'string' => 'Il campo :attribute non può superare :max caratteri',
     ],
-    'fiscal_code' => 
-    [
+    'fiscal_code' => [
       'format' => 'Il codice fiscale deve essere nel formato corretto',
       'unique' => 'Questo codice fiscale è già registrato',
     ],
-    'isee_value' => 
-    [
+    'isee_value' => [
       'numeric' => 'Il valore ISEE deve essere un numero',
       'min' => 'Il valore ISEE non può essere negativo',
     ],
-    'birth_date' => 
-    [
+    'birth_date' => [
       'date' => 'La data di nascita deve essere una data valida',
       'before' => 'La data di nascita deve essere nel passato',
     ],

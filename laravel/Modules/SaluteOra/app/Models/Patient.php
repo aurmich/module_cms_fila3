@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Parental\HasParent;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\SaluteOra\Enums\YearsInItalyEnum;
+use Modules\SaluteOra\Enums\PatientAgeRangeEnum;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -268,6 +270,8 @@ class Patient extends User implements HasMedia
         return [
             ...parent::casts(),
             'date_of_birth' => 'date',
+            'years_in_italy' => YearsInItalyEnum::class,
+            'age_range' => PatientAgeRangeEnum::class,
         ];
     }
 
@@ -409,5 +413,31 @@ class Patient extends User implements HasMedia
         }
 
         return $res;
+    }
+
+
+
+    public function getYearsInItalyAttribute(null|string|YearsInItalyEnum $value): ?YearsInItalyEnum
+    {
+        if($value instanceof YearsInItalyEnum){
+            return $value;
+        }
+        if(is_string($value)){
+            return YearsInItalyEnum::tryFrom($value);
+        }
+        return null;
+    }
+
+
+    
+    public function getAgeRangeAttribute(null|string|PatientAgeRangeEnum $value): ?PatientAgeRangeEnum
+    {
+        if($value instanceof PatientAgeRangeEnum){
+            return $value;
+        }
+        if(is_string($value)){
+            return PatientAgeRangeEnum::tryFrom($value);
+        }
+        return null;
     }
 }

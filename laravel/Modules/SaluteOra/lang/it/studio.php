@@ -256,7 +256,7 @@ return array (
     'deactivate' => 
     array (
       'label' => 'Disattiva',
-      'modal_heading' => 'Disattiva studio',
+      'modal_heading' => 'Disattiva temporaneamente lo studio',
       'modal_description' => 'Disattiva temporaneamente lo studio',
       'success' => 'Studio disattivato con successo',
       'error' => 'Errore durante la disattivazione',
@@ -374,6 +374,127 @@ return array (
     array (
       'label' => 'Informazioni Commerciali',
       'description' => 'Dati fiscali e commerciali dello studio',
+    ),
+    'address' => 
+    array (
+      'label' => 'Indirizzo',
+      'description' => 'Informazioni complete sull\'ubicazione dello studio',
+      'heading' => 'Indirizzo',
+    ),
+  ),
+  'steps' => 
+  array (
+    'description' => 
+    array (
+      'label' => 'Descrizione',
+      'placeholder' => 'Inserisci la descrizione dello studio',
+      'helper_text' => 'Descrivi i servizi e le specializzazioni',
+      'description' => 'Descrizione dettagliata dello studio',
+    ),
+    'name' => 
+    array (
+      'label' => 'Nome Studio',
+      'placeholder' => 'Inserisci il nome dello studio',
+      'helper_text' => 'Denominazione ufficiale dello studio',
+      'description' => 'Nome dello studio odontoiatrico',
+    ),
+    'phone' => 
+    array (
+      'label' => 'Telefono',
+      'placeholder' => 'Inserisci il numero di telefono',
+      'helper_text' => 'Numero per contatti e prenotazioni',
+      'description' => 'Numero di telefono dello studio',
+    ),
+    'email' => 
+    array (
+      'label' => 'Email',
+      'placeholder' => 'Inserisci l\'email di contatto',
+      'helper_text' => 'Email per comunicazioni professionali',
+      'description' => 'Indirizzo email ufficiale',
+    ),
+    'website' => 
+    array (
+      'label' => 'Sito Web',
+      'placeholder' => 'Inserisci l\'URL del sito web',
+      'helper_text' => 'Sito web ufficiale dello studio',
+      'description' => 'Indirizzo del sito web',
+    ),
+    'registration_number' => 
+    array (
+      'label' => 'Numero di Registrazione',
+      'placeholder' => 'Inserisci il numero di registrazione',
+      'helper_text' => 'Registrazione presso ordine o enti competenti',
+      'description' => 'Numero di registrazione ufficiale',
+    ),
+    'vat_number' => 
+    array (
+      'label' => 'Partita IVA',
+      'placeholder' => 'Inserisci la partita IVA',
+      'helper_text' => 'Partita IVA per fatturazione',
+      'description' => 'Numero di partita IVA',
+    ),
+  ),
+  'address_fields' => 
+  array (
+    'address' => 
+    array (
+      'heading' => 'address',
+      'label' => 'address',
+    ),
+  ),
+  'text_inputs' => 
+  array (
+    'name' => 
+    array (
+      'label' => 'name',
+      'placeholder' => 'name',
+      'helper_text' => 'name',
+      'description' => 'name',
+    ),
+    'phone' => 
+    array (
+      'label' => 'phone',
+      'placeholder' => 'phone',
+      'helper_text' => 'phone',
+      'description' => 'phone',
+    ),
+    'email' => 
+    array (
+      'label' => 'email',
+      'placeholder' => 'email',
+      'helper_text' => 'email',
+      'description' => 'email',
+    ),
+    'website' => 
+    array (
+      'label' => 'website',
+      'placeholder' => 'website',
+      'helper_text' => 'website',
+      'description' => 'website',
+    ),
+    'registration_number' => 
+    array (
+      'label' => 'registration_number',
+      'placeholder' => 'registration_number',
+      'helper_text' => 'registration_number',
+      'description' => 'registration_number',
+    ),
+    'vat_number' => 
+    array (
+      'label' => 'vat_number',
+      'placeholder' => 'vat_number',
+      'helper_text' => 'vat_number',
+      'description' => 'vat_number',
+    ),
+  ),
+  'textareas' => 
+  array (
+    'description' => 
+    array (
+      'label' => 'description',
+      'placeholder' => 'description',
+      'helper_text' => 'description',
+      'description' => 'description',
     ),
   ),
 );

@@ -16,6 +16,10 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         // Set up any module-specific test configuration here
-        $this->artisan('module:migrate', ['module' => 'SaluteMo']);
+        $this->artisan('module:migrate', ['module' => 'SaluteMo', '--force' => true]);
+        
+        // Configure test database connection
+        config(['database.default' => 'sqlite']);
+        config(['database.connections.sqlite.database' => ':memory:']);
     }
 }

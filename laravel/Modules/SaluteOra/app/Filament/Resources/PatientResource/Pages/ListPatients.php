@@ -26,6 +26,7 @@ class ListPatients extends ListUsers
     {
         $columns = parent::getTableColumns();
         $columns = Arr::except($columns, ['type']);
+        $columns['age_range'] = Tables\Columns\TextColumn::make('age_range');
         $columns['nationality'] = Tables\Columns\TextColumn::make('nationality');
         $columns['country_code'] = Tables\Columns\TextColumn::make('country_code');
         $columns['years_in_italy'] = Tables\Columns\TextColumn::make('years_in_italy');

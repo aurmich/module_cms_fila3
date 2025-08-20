@@ -198,7 +198,7 @@ class DoctorResource extends XotBaseResource
         $schema = StudioResource::getFormSchemaForWizard();
         
         return [
-                Forms\Components\Section::make('Dati Studio')
+                Forms\Components\Section::make('studio_info')
                 ->relationship('studio')  
                 ->schema($schema)
             ];

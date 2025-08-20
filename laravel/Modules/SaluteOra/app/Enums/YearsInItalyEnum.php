@@ -19,7 +19,7 @@ use Modules\Xot\Filament\Traits\TransTrait;
  * @method static self tryFromValue(string $value)
  * @method static self[] cases()
  */
-enum YearsInItalyEnum: string implements HasLabel, HasIcon, HasColor
+enum YearsInItalyEnum: string implements HasLabel, HasColor
 {
     use TransTrait;
     case YEAR_0_1 = 'YEAR_0_1';

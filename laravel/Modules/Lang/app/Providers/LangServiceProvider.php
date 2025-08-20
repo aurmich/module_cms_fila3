@@ -102,7 +102,11 @@ class LangServiceProvider extends XotBaseServiceProvider
 
             return $component;
         });
-
+        \Filament\Forms\Components\Section::configureUsing(function (\Filament\Forms\Components\Section $component) {
+            $component = app(AutoLabelAction::class)->execute($component);
+            $component = app(AutoLabelAction::class)->execute($component,'heading');
+            return $component;
+        });
         BaseFilter::configureUsing(function (BaseFilter $component) {
             $component = app(AutoLabelAction::class)->execute($component);
 

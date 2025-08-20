@@ -19,7 +19,7 @@ use function Safe\class_alias;
  * @method static self tryFromValue(string $value)
  * @method static self[] cases()
  */
-enum PatientAgeRangeEnum: string implements HasLabel, HasIcon, HasColor
+enum PatientAgeRangeEnum: string implements HasLabel,  HasColor
 {
     use TransTrait;
     

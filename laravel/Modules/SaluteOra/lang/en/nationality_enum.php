@@ -14,13 +14,13 @@ return [
     'IT' => [
         'label' => 'Italian',
         'color' => 'primary',
-        'icon' => 'heroicon-o-flag-checkered',
+        'icon' => 'heroicon-o-flag',
         'description' => 'Italiano',
     ],
     'EE' => [
         'label' => 'Foreign',
         'color' => 'primary',
-        'icon' => 'heroicon-o-flag-checkered',
+        'icon' => 'heroicon-o-flag',
         'description' => 'Estera',
     ],
 ];
