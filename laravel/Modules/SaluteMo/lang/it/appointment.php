@@ -376,6 +376,15 @@ return array (
       'description' => 'value',
       'helper_text' => 'value',
       'placeholder' => 'value',
+      'label' => 'value',
+    ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'edit' => 
+    array (
+      'label' => 'edit',
     ),
   ),
   'actions' => 

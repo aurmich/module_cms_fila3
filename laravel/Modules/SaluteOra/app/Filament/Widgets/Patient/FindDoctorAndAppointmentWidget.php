@@ -228,6 +228,7 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                     }
                     
                 })
+                ->required()
                     
                 ,
         ];
@@ -251,12 +252,14 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
             'appointment_date' => InlineDatePicker::make('appointment_date')
                 ->enabledDates(fn(Get $get)=>$this->getEnabledDates($get))
                 ->view('pub_theme::filament.forms.components.inline-date-picker')
-                ->currentViewMonth($this->getCurrentCalendarMonth()),
+                ->currentViewMonth($this->getCurrentCalendarMonth())
+                ->required(),
             
             'appointment_time'=>  RadioCollection::make('appointment_time')
                 ->options(fn(Get $get) => $this->getAvailableTimeSlots($get)) // La tua collection
                 ->itemView('pub_theme::filament.forms.components.studio-time') // La tua blade personalizzata
                 ->valueKey('id') 
+                ->required(),
             
         ];
     }
