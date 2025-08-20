@@ -386,6 +386,14 @@ return array (
     array (
       'label' => 'edit',
     ),
+    'view' => 
+    array (
+      'label' => 'view',
+    ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
   ),
   'actions' => 
   array (

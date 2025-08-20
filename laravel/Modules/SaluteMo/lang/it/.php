@@ -25,4 +25,17 @@ return array (
       'description' => 'endDate',
     ),
   ),
+  'sections' => 
+  array (
+    'no-set' => 
+    array (
+      'heading' => 'no-set',
+      'label' => 'no-set',
+    ),
+    'empty' => 
+    array (
+      'heading' => '',
+      'label' => 'empty',
+    ),
+  ),
 );

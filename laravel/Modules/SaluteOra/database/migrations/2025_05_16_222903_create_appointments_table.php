@@ -90,6 +90,13 @@ return new class extends XotBaseMigration
                 if(!$this->hasColumn('ends_at')){
                     $table->dateTime('ends_at')->nullable();
                 }
+                if(!$this->hasColumn('title')){
+                    $table->string('title')->nullable();
+                }
+                if(!$this->hasColumn('state')){
+                    $table->string('state')->default('pending');
+                }
+               
 
                 if(!$this->hasColumn('invoice')){
                     $table->string('invoice')->nullable()->comment('File fattura');

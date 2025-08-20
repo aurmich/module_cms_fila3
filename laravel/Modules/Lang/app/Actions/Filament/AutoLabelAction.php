@@ -78,8 +78,12 @@ class AutoLabelAction
         } 
         if($label_tkey == null && $component instanceof FormsSection){
            
-            Assert::string($val = $component->getHeading());
+            $val = $component->getHeading();
+            if($val==null){
+                $val='empty';
+            }
             $label_tkey = $trans_key.'.sections.'.$val.'';
+            
         }
         if($label_tkey == null){
             Assert::string($val = $component->getName());
