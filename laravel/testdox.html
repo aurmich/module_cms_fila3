@@ -51,6 +51,12 @@
         </style>
     </head>
     <body>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php</h2>
+        <ul>
+            <li class="defect">patient can book appointment</li>
+            <li class="defect">appointment cannot overlap with existing appointments</li>
+            <li class="defect">emergency appointment can be created</li>
+        </ul>
         <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php</h2>
         <ul>
             <li class="defect">`SaluteMo BaseModel` → it has correct default configuration</li>
@@ -60,6 +66,14 @@
             <li class="success">`SaluteMo BaseModel` → it has correct casts configuration</li>
             <li class="success">`SaluteMo BaseModel` → it has factory method</li>
             <li class="defect">`SaluteMo BaseModel` → it can create media collections</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Models/AppointmentTest.php</h2>
+        <ul>
+            <li class="defect">appointment can be created</li>
+            <li class="defect">appointment has required attributes</li>
+            <li class="defect">appointment can be marked as emergency</li>
+            <li class="defect">appointment duration is calculated correctly</li>
+            <li class="defect">appointment can change status</li>
         </ul>
     </body>
 </html>

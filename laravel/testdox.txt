@@ -1,3 +1,8 @@
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php
+ [ ] patient can book appointment
+ [ ] appointment cannot overlap with existing appointments
+ [ ] emergency appointment can be created
+
 /var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php
  [ ] `SaluteMo BaseModel` → it has correct default configuration
  [x] `SaluteMo BaseModel` → it has snake case attributes enabled
@@ -6,4 +11,11 @@
  [x] `SaluteMo BaseModel` → it has correct casts configuration
  [x] `SaluteMo BaseModel` → it has factory method
  [ ] `SaluteMo BaseModel` → it can create media collections
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Models/AppointmentTest.php
+ [ ] appointment can be created
+ [ ] appointment has required attributes
+ [ ] appointment can be marked as emergency
+ [ ] appointment duration is calculated correctly
+ [ ] appointment can change status
 
