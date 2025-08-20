@@ -46,6 +46,7 @@ use Modules\Notify\Notifications\RecordNotification;
 use Modules\UI\Filament\Forms\Components\RadioCollection;
 use Modules\UI\Filament\Forms\Components\InlineDatePicker;
 use Illuminate\Support\Facades\Notification as LaravelNotification;
+use Filament\Support\Exceptions\Halt;
 
 /**
  * --
@@ -137,7 +138,12 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
                 //->startOnStep($this->getStartStep())
                 ->steps([
                     $this->getStepByName('search_step')
-                        ->icon('heroicon-o-map-pin'),
+                        ->icon('heroicon-o-map-pin')
+                        ->afterValidation(function ($get) {
+                            if($get('studios_count')==0){
+                                throw new Halt();
+                            }
+                        }),
                     $this->getStepByName('studio_step')
                         ->icon('heroicon-o-building-office'),
                     $this->getStepByName('date_step')
@@ -191,12 +197,14 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
 
         $schema['message']=Placeholder::make('')
         //->content('⚠️ Non puoi procedere oltre con il tipo "Ospite"')
-        ->content(function ($get){
+        ->content(function ($get,$set){
             $postal_code=$get('postal_code');
             if(!$postal_code){
                 return '';
             }
+            
             $count= Studio::ofCap($postal_code)->whereHas('doctors')->count();
+            $set('studios_count', $count);
             if($count==0){
                 return static::trans('errors.no_doctors_in_area.label');
             }
@@ -204,6 +212,9 @@ class FindDoctorAndAppointmentWidget extends XotBaseWidget
         })
         //->visible(fn (Get $get): bool => $get('user_type') === 'guest')
         ;
+
+        
+
         return $schema;
     }
 
