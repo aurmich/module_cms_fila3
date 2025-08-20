@@ -51,29 +51,303 @@
         </style>
     </head>
     <body>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php</h2>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentIntegrationTest.php</h2>
         <ul>
-            <li class="defect">patient can book appointment</li>
-            <li class="defect">appointment cannot overlap with existing appointments</li>
-            <li class="defect">emergency appointment can be created</li>
+            <li class="defect">`Appointment Integration` → it creates complete appointment with all relationships</li>
+            <li class="defect">`Appointment Integration` → it handles appointment scheduling workflow</li>
+            <li class="defect">`Appointment Integration` → it can filter appointments by date range</li>
+            <li class="defect">`Appointment Integration` → it handles emergency appointments correctly</li>
+            <li class="defect">`Appointment Integration` → it supports multi-tenant filtering</li>
         </ul>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php</h2>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentStateTransitionTest.php</h2>
         <ul>
-            <li class="defect">`SaluteMo BaseModel` → it has correct default configuration</li>
-            <li class="success">`SaluteMo BaseModel` → it has snake case attributes enabled</li>
-            <li class="success">`SaluteMo BaseModel` → it implements HasMedia interface</li>
-            <li class="defect">`SaluteMo BaseModel` → it uses required traits</li>
-            <li class="success">`SaluteMo BaseModel` → it has correct casts configuration</li>
-            <li class="success">`SaluteMo BaseModel` → it has factory method</li>
-            <li class="defect">`SaluteMo BaseModel` → it can create media collections</li>
+            <li class="defect">`Appointment State Transitions` → it can transition appointment to report pending state</li>
+            <li class="defect">`Appointment State Transitions` → it creates report when transitioning to report pending</li>
+            <li class="defect">`Appointment State Transitions` → it updates existing report when processing state action</li>
+            <li class="defect">`Appointment State Transitions` → it maintains data integrity during state transitions</li>
+            <li class="defect">`Appointment State Transitions` → it handles form schema integration</li>
+            <li class="defect">`Appointment State Transitions` → it processes appointment data correctly in form filling</li>
+            <li class="defect">`Appointment State Transitions` → it processes appointment data correctly in form filling by record</li>
+            <li class="defect">`Appointment State Transitions` → it handles multiple appointments correctly</li>
+            <li class="defect">`Appointment State Transitions` → it validates appointment state workflow</li>
+            <li class="defect">`Appointment State Transitions` → it handles report creation with minimal data</li>
+            <li class="defect">`Appointment State Transitions` → it handles report creation with complete data</li>
+            <li class="defect">`Appointment State Transitions` → it validates state name consistency</li>
+            <li class="defect">`Appointment State Transitions` → it ensures appointment model relationships</li>
         </ul>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Models/AppointmentTest.php</h2>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageContentTest.php</h2>
+        <ul>
+            <li class="defect">homepage shows the correct title</li>
+            <li class="defect">homepage shows the correct main text</li>
+            <li class="defect">homepage shows the correct requirements text</li>
+            <li class="defect">homepage shows the CTA button with correct text</li>
+            <li class="defect">homepage shows all required elements according to specifications</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageRequirementsTest.php</h2>
+        <ul>
+            <li class="defect">la homepage contiene tutti gli elementi richiesti dai requisiti</li>
+            <li class="defect">la homepage ha la corretta struttura semantica</li>
+            <li class="defect">la homepage è accessibile</li>
+            <li class="defect">la homepage contiene meta tag per la responsività</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageTest.php</h2>
+        <ul>
+            <li class="success">it homepage redirect</li>
+            <li class="success">it homepage lang</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Actions/GenerateReportActionTest.php</h2>
+        <ul>
+            <li class="success">esegue correttamente la generazione di un report</li>
+            <li class="success">gestisce correttamente gli errori durante la generazione</li>
+            <li class="success">unisce correttamente i parametri del report e quelli aggiuntivi</li>
+            <li class="success">pulisce i dati precedenti prima di generare un nuovo report</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/AppointmentModelTest.php</h2>
+        <ul>
+            <li class="defect">`Appointment Model` → it can be created with factory</li>
+            <li class="defect">`Appointment Model` → it belongs to patient, doctor, and studio</li>
+            <li class="defect">`Appointment Model` → it has correct fillable attributes</li>
+            <li class="defect">`Appointment Model` → it casts datetime fields correctly</li>
+            <li class="defect">`Appointment Model` → it casts enum fields correctly</li>
+            <li class="defect">`Appointment Model` → it casts boolean fields correctly</li>
+            <li class="defect">`Appointment Model` → `Aliases and Accessors` → it has dentist_id alias for doctor_id</li>
+            <li class="defect">`Appointment Model` → `Aliases and Accessors` → it has is_emergency alias for emergency</li>
+            <li class="defect">`Appointment Model` → `Scopes and Queries` → it can filter by status</li>
+            <li class="defect">`Appointment Model` → `Scopes and Queries` → it can filter by emergency status</li>
+            <li class="defect">`Appointment Model` → `Scopes and Queries` → it can filter by date range</li>
+            <li class="defect">`Appointment Model` → `Scopes and Queries` → it can filter by tenant</li>
+            <li class="defect">`Appointment Model` → `Business Logic` → it requires essential fields</li>
+            <li class="defect">`Appointment Model` → `Business Logic` → it can have optional fields null</li>
+            <li class="defect">`Appointment Model` → `Business Logic` → it logs activity when created</li>
+            <li class="defect">`Appointment Model` → `State Management` → it has states functionality</li>
+            <li class="defect">`Appointment Model` → `State Management` → it can transition between states</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/AppointmentTest.php</h2>
         <ul>
             <li class="defect">appointment can be created</li>
-            <li class="defect">appointment has required attributes</li>
-            <li class="defect">appointment can be marked as emergency</li>
-            <li class="defect">appointment duration is calculated correctly</li>
-            <li class="defect">appointment can change status</li>
+            <li class="defect">appointment extends correct base class</li>
+            <li class="defect">appointment has correct fillable attributes</li>
+            <li class="defect">appointment has correct casting</li>
+            <li class="defect">appointment has patient relationship</li>
+            <li class="defect">appointment has doctor relationship</li>
+            <li class="defect">appointment has studio relationship</li>
+            <li class="defect">appointment has report relationship</li>
+            <li class="defect">appointment has correct table name</li>
+            <li class="defect">appointment has correct primary key</li>
+            <li class="defect">appointment has correct connection</li>
+            <li class="defect">appointment can be updated</li>
+            <li class="defect">appointment can be deleted</li>
+            <li class="defect">appointment has formatted title attribute</li>
+            <li class="defect">appointment has time range attribute</li>
+            <li class="defect">appointment has duration attribute</li>
+            <li class="defect">appointment has isActive method</li>
+            <li class="defect">appointment has isCompleted method</li>
+            <li class="defect">appointment has isCancelled method</li>
+            <li class="defect">appointment has isEmergency method</li>
+            <li class="defect">appointment has inDateRange scope</li>
+            <li class="defect">appointment has ofYearMonth scope</li>
+            <li class="defect">appointment has forPatient scope</li>
+            <li class="defect">appointment has forDoctor scope</li>
+            <li class="defect">appointment has forStudio scope</li>
+            <li class="defect">appointment has active scope</li>
+            <li class="defect">appointment has emergency scope</li>
+            <li class="defect">appointment has hasReport method</li>
+            <li class="defect">appointment has activity logging</li>
+            <li class="defect">appointment has correct namespace</li>
+            <li class="defect">appointment has correct strict types declaration</li>
+            <li class="defect">appointment uses required traits</li>
+            <li class="defect">appointment implements required interfaces</li>
+            <li class="defect">appointment can be found by title</li>
+            <li class="defect">appointment can be found by type</li>
+            <li class="defect">appointment can be found by status</li>
+            <li class="defect">appointment can be found by emergency flag</li>
+            <li class="defect">appointment has correct date casting</li>
+            <li class="defect">appointment has correct boolean casting</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Factories/SpecializedFactoriesTest.php</h2>
+        <ul>
+            <li class="defect">`PatientFactory` → creates basic patient with default values</li>
+            <li class="defect">`PatientFactory` → creates eligible patient with correct ISEE</li>
+            <li class="defect">`PatientFactory` → creates non-eligible patient with high ISEE</li>
+            <li class="defect">`PatientFactory` → creates pregnant patient with complete pregnancy data</li>
+            <li class="defect">`PatientFactory` → creates vulnerable patient with multiple risk factors</li>
+            <li class="defect">`PatientFactory` → creates patient with medical history</li>
+            <li class="defect">`PatientFactory` → creates patient with urgent dental need</li>
+            <li class="defect">`PatientFactory` → creates patient with pregnancy documents</li>
+            <li class="defect">`DoctorFactory` → creates basic doctor with professional credentials</li>
+            <li class="defect">`DoctorFactory` → creates doctor with full certifications</li>
+            <li class="defect">`DoctorFactory` → creates orthodontist specialist</li>
+            <li class="defect">`DoctorFactory` → creates oral surgeon specialist</li>
+            <li class="defect">`DoctorFactory` → creates pediatric dentist</li>
+            <li class="defect">`DoctorFactory` → creates senior doctor with extensive experience</li>
+            <li class="defect">`DoctorFactory` → creates junior doctor recently graduated</li>
+            <li class="defect">`DoctorFactory` → creates high performer doctor</li>
+            <li class="defect">`DoctorFactory` → creates full-time doctor with standard schedule</li>
+            <li class="defect">`DoctorFactory` → creates part-time doctor with flexible schedule</li>
+            <li class="defect">`DoctorFactory` → creates emergency available doctor</li>
+            <li class="defect">`AdminFactory` → creates basic admin with default permissions</li>
+            <li class="defect">`AdminFactory` → creates super admin with all permissions</li>
+            <li class="defect">`AdminFactory` → creates studio manager with limited permissions</li>
+            <li class="defect">`AdminFactory` → creates user moderator specialist</li>
+            <li class="defect">`AdminFactory` → creates support admin with limited scope</li>
+            <li class="defect">`AdminFactory` → creates financial admin with audit access</li>
+            <li class="defect">`AdminFactory` → creates admin with multi-studio access</li>
+            <li class="defect">`AdminFactory` → creates admin with regional access</li>
+            <li class="defect">`AdminFactory` → creates high performer admin</li>
+            <li class="defect">`AdminFactory` → creates team lead admin</li>
+            <li class="defect">`AdminFactory` → creates emergency access admin</li>
+            <li class="defect">`AdminFactory` → creates security certified admin</li>
+            <li class="defect">`Factory Integration Tests` → can create complete healthcare ecosystem with real data</li>
+            <li class="defect">`Factory Integration Tests` → factory performance benchmarks with real data</li>
+            <li class="defect">`Factory Integration Tests` → factory data consistency across types with real constraints</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Factories/UserFactoryTest.php</h2>
+        <ul>
+            <li class="defect">factory creates valid user with default values</li>
+            <li class="success">factory generates realistic italian names</li>
+            <li class="defect">factory generates italian phone numbers</li>
+            <li class="defect">factory generates italian addresses</li>
+            <li class="success">factory creates patient with correct type</li>
+            <li class="defect">factory creates doctor with correct type and professional number</li>
+            <li class="defect">factory creates admin with correct type and email</li>
+            <li class="success">factory creates user in pending state by default</li>
+            <li class="success">factory creates active user correctly</li>
+            <li class="defect">factory creates user in integration requested state</li>
+            <li class="defect">factory creates rejected user correctly</li>
+            <li class="defect">factory creates suspended user correctly</li>
+            <li class="defect">factory creates low income patient with valid ISEE</li>
+            <li class="defect">factory creates high income patient with ISEE above threshold</li>
+            <li class="defect">factory creates pregnant patient with correct data</li>
+            <li class="defect">factory creates non-pregnant patient with dental history</li>
+            <li class="defect">factory creates doctor with professional certifications</li>
+            <li class="defect">factory creates admin with full permissions</li>
+            <li class="defect">factory creates eligible pregnant patient scenario</li>
+            <li class="defect">factory creates complete doctor profile scenario</li>
+            <li class="defect">factory creates admin with multi-studio access</li>
+            <li class="success">factory can create multiple users efficiently with real data</li>
+            <li class="success">factory creates diverse user types in bulk</li>
+            <li class="success">factory generates unique emails for multiple users</li>
+            <li class="success">factory respects custom attributes override</li>
+            <li class="success">factory handles state transitions correctly with real data</li>
+            <li class="success">factory creates GDPR-compliant test data</li>
+            <li class="defect">factory creates anonymized sensitive data</li>
+            <li class="defect">factory supports complete patient registration workflow</li>
+            <li class="defect">factory supports doctor onboarding workflow</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Models/DoctorTest.php</h2>
+        <ul>
+            <li class="defect">doctor can be created</li>
+            <li class="defect">doctor extends correct base class</li>
+            <li class="defect">doctor uses has parent trait</li>
+            <li class="defect">doctor has correct fillable attributes</li>
+            <li class="defect">doctor has studios relationship</li>
+            <li class="defect">doctor has appointments relationship</li>
+            <li class="defect">doctor has doctor studios relationship</li>
+            <li class="defect">doctor has correct table name</li>
+            <li class="defect">doctor has correct primary key</li>
+            <li class="defect">doctor has correct connection</li>
+            <li class="defect">doctor can be updated</li>
+            <li class="defect">doctor can be deleted</li>
+            <li class="defect">doctor has correct type enum</li>
+            <li class="defect">doctor has correct boolean casting</li>
+            <li class="defect">doctor has correct namespace</li>
+            <li class="defect">doctor has correct strict types declaration</li>
+            <li class="defect">doctor can be found by registration number</li>
+            <li class="defect">doctor can be found by fiscal code</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Models/PatientTest.php</h2>
+        <ul>
+            <li class="defect">patient can be created</li>
+            <li class="defect">patient extends correct base class</li>
+            <li class="defect">patient uses has parent trait</li>
+            <li class="defect">patient has correct fillable attributes</li>
+            <li class="defect">patient has user relationship</li>
+            <li class="defect">patient has appointments relationship</li>
+            <li class="defect">patient has studios relationship</li>
+            <li class="defect">patient has correct table name</li>
+            <li class="defect">patient has correct primary key</li>
+            <li class="defect">patient has correct connection</li>
+            <li class="defect">patient can be updated</li>
+            <li class="defect">patient can be deleted</li>
+            <li class="defect">patient has correct type enum</li>
+            <li class="defect">patient has correct date casting</li>
+            <li class="defect">patient has correct namespace</li>
+            <li class="defect">patient has correct strict types declaration</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Models/ReportTest.php</h2>
+        <ul>
+            <li class="defect">it correctly casts teeth brushing frequency to enum</li>
+            <li class="defect">it correctly sets teeth brushing frequency using enum</li>
+            <li class="defect">it correctly serializes teeth brushing frequency to json</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Models/StudioTest.php</h2>
+        <ul>
+            <li class="defect">studio can be created</li>
+            <li class="defect">studio extends correct base class</li>
+            <li class="defect">studio has correct fillable attributes</li>
+            <li class="defect">studio has doctors relationship</li>
+            <li class="defect">studio has appointments relationship</li>
+            <li class="defect">studio has users relationship</li>
+            <li class="defect">studio has members relationship</li>
+            <li class="defect">studio has correct table name</li>
+            <li class="defect">studio has correct primary key</li>
+            <li class="defect">studio has correct connection</li>
+            <li class="defect">studio can be updated</li>
+            <li class="defect">studio can be deleted</li>
+            <li class="defect">studio has correct boolean casting</li>
+            <li class="defect">studio has correct namespace</li>
+            <li class="defect">studio has correct strict types declaration</li>
+            <li class="defect">studio can be found by registration number</li>
+            <li class="defect">studio can be found by vat number</li>
+            <li class="defect">studio can be found by city</li>
+            <li class="defect">studio has active scope</li>
+            <li class="defect">studio has inCity scope</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/PatientModelTest.php</h2>
+        <ul>
+            <li class="defect">`Patient Model` → it can be created with factory</li>
+            <li class="defect">`Patient Model` → it belongs to a user</li>
+            <li class="defect">`Patient Model` → it has many appointments</li>
+            <li class="defect">`Patient Model` → it has correct fillable attributes</li>
+            <li class="defect">`Patient Model` → it casts date_of_birth to datetime</li>
+            <li class="defect">`Patient Model` → it can have media attachments</li>
+            <li class="defect">`Patient Model` → `Scopes and Queries` → it can filter by gender</li>
+            <li class="defect">`Patient Model` → `Scopes and Queries` → it can filter by tenant</li>
+            <li class="defect">`Patient Model` → `Attributes and Accessors` → it has birth_date alias for date_of_birth</li>
+            <li class="defect">`Patient Model` → `Attributes and Accessors` → it handles null date_of_birth gracefully</li>
+            <li class="defect">`Patient Model` → `Validation and Business Logic` → it requires user_id</li>
+            <li class="defect">`Patient Model` → `Validation and Business Logic` → it can have optional fields null</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/ReportPendingStateTest.php</h2>
+        <ul>
+            <li class="defect">`ReportPending State` → it can be instantiated</li>
+            <li class="defect">`ReportPending State` → it has correct state name</li>
+            <li class="defect">`ReportPending State` → it returns form schema from ReportResource</li>
+            <li class="defect">`ReportPending State` → it fills form with report data using arguments</li>
+            <li class="defect">`ReportPending State` → it creates report if not exists when filling form</li>
+            <li class="defect">`ReportPending State` → it fills form by record</li>
+            <li class="defect">`ReportPending State` → it creates report if not exists when filling form by record</li>
+            <li class="defect">`ReportPending State` → it processes modal action with arguments</li>
+            <li class="defect">`ReportPending State` → it processes modal action by record</li>
+            <li class="defect">`ReportPending State` → it updates existing report when processing action</li>
+            <li class="defect">`ReportPending State` → it handles appointment not found gracefully in modal action</li>
+            <li class="defect">`ReportPending State` → it validates appointment instance in modal action by record</li>
+            <li class="defect">`ReportPending State` → it processes data correctly in modal action by record</li>
+        </ul>
+        <h2>Patient Age Range Enum (Modules\SaluteOra\Tests\Unit\Enums\PatientAgeRangeEnum)</h2>
+        <ul>
+            <li class="success">It has correct number of cases</li>
+            <li class="defect">It returns correct labels</li>
+            <li class="success">It returns correct min ages</li>
+            <li class="success">It returns correct max ages</li>
+            <li class="success">It correctly identifies age in range</li>
+            <li class="success">It correctly assigns age ranges</li>
+            <li class="defect">It returns correct colors</li>
+            <li class="defect">It returns correct icons</li>
+            <li class="defect">It returns select array</li>
+            <li class="success">It implements filament interfaces</li>
+            <li class="defect">It returns translated labels</li>
+            <li class="defect">It returns descriptions</li>
         </ul>
     </body>
 </html>
