@@ -38,8 +38,15 @@ class JobsWaitingOverview extends BaseWidget
             ->first();
 
         if ($aggregatedInfo) {
-            $averageTime = property_exists($aggregatedInfo, 'average_time_elapsed') ? ceil((float) $aggregatedInfo->average_time_elapsed).'s' : '0';
-            $totalTime = property_exists($aggregatedInfo, 'total_time_elapsed') ? $this->formatSeconds($aggregatedInfo->total_time_elapsed).'s' : '0';
+            $averageTime = app(\Modules\Xot\Actions\Cast\SafeEloquentCastAction::class)
+                ->getStringAttribute($aggregatedInfo, 'average_time_elapsed', '0') ? 
+                ceil((float) app(\Modules\Xot\Actions\Cast\SafeEloquentCastAction::class)
+                    ->getStringAttribute($aggregatedInfo, 'average_time_elapsed', '0')).'s' : '0';
+            
+            $totalTime = app(\Modules\Xot\Actions\Cast\SafeEloquentCastAction::class)
+                ->getStringAttribute($aggregatedInfo, 'total_time_elapsed', '0') ? 
+                $this->formatSeconds((int) app(\Modules\Xot\Actions\Cast\SafeEloquentCastAction::class)
+                    ->getStringAttribute($aggregatedInfo, 'total_time_elapsed', '0')).'s' : '0';
         } else {
             $averageTime = '0';
             $totalTime = '0';

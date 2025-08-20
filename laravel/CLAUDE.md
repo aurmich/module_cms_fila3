@@ -87,6 +87,13 @@ This application is a Laravel application and its main Laravel ecosystems packag
 
 - Always use curly braces for control structures, even if it has one line.
 
+### CRITICAL: Never use property_exists() with Laravel Models
+- **NEVER** use `property_exists()` with Laravel Eloquent models or objects with magic methods
+- Models use `__get()` and `__set()` - `property_exists()` will always return `false` for model attributes
+- Use `isset($model->attribute)` instead to properly check Laravel magic properties
+- Use `in_array($field, $model->getFillable())` to check fillable attributes
+- Use `Schema::hasColumn($table, $column)` to check database columns
+
 ### Constructors
 - Use PHP 8 constructor property promotion in `__construct()`.
     - <code-snippet>public function __construct(public GitHub $github) { }</code-snippet>

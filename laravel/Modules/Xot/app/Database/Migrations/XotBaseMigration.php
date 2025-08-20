@@ -91,7 +91,7 @@ abstract class XotBaseMigration extends Migration
         /*
         // During testing, use table property or derive from migration name
         if (app()->environment('testing')) {
-            if (property_exists($this, 'table') && !empty($this->table)) {
+            if (app(\Modules\Xot\Actions\Cast\SafeObjectCastAction::class)->hasProperty($this, 'table') && !empty($this->table)) {
                 return $this->table;
             }
             
@@ -228,12 +228,13 @@ abstract class XotBaseMigration extends Migration
 
         // Check if result is an array or object and handle accordingly
         if (is_array($result)) {
-            return isset($result['count']) && $result['count'] > 0;
+            return isset($result['count']) && (int) $result['count'] > 0;
         }
 
-        // If it's an object, access the property directly
-        if (is_object($result) && property_exists($result, 'count')) {
-            return $result->count > 0;
+        // If it's an object, cast to array to avoid undefined property issues
+        if (is_object($result)) {
+            $resArray = (array) $result;
+            return isset($resArray['count']) && (int) $resArray['count'] > 0;
         }
 
         // If neither, handle the error or unexpected case

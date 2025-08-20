@@ -202,7 +202,7 @@ describe('HasExtraTrait', function () {
 /**
  * Helper class for testing HasExtraTrait.
  */
-class TestExtra extends Model implements ExtraContract 
+class HasExtraTraitTest extends Model implements ExtraContract 
 {
     protected $table = 'test_extras';
     

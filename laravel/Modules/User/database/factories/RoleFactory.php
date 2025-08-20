@@ -99,3 +99,4 @@ class RoleFactory extends Factory
         ]);
     }
 }
+

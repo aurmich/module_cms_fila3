@@ -39,6 +39,7 @@ use Webmozart\Assert\Assert;
  * @property string|null $post_id
  * @property string|null $post_type
  * @property string|null $chart_type
+ * @property array<string, mixed>|null $totali
  *
  * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
  * @method static Builder|Chart newModelQuery()

@@ -207,3 +207,4 @@ class UserSeeder extends Seeder
         $this->command->info("   ✓ Creati 5 team di sistema");
     }
 }
+

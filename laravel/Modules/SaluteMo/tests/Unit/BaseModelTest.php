@@ -9,7 +9,7 @@ use Modules\SaluteMo\Models\BaseModel;
 /**
  * Concrete implementation of BaseModel for testing purposes.
  */
-class TestableBaseModel extends BaseModel
+class BaseModelTest extends BaseModel
 {
     protected $table = 'test_models';
     
@@ -19,7 +19,7 @@ class TestableBaseModel extends BaseModel
 
 describe('SaluteMo BaseModel', function () {
     it('has correct default configuration', function () {
-        $model = new TestableBaseModel();
+        $model = new BaseModelTest();
         
         expect($model->getIncrementing())->toBeTrue()
             ->and($model->getTimestamps())->toBeTrue()
@@ -30,17 +30,17 @@ describe('SaluteMo BaseModel', function () {
     });
 
     it('has snake case attributes enabled', function () {
-        expect(TestableBaseModel::$snakeAttributes)->toBeTrue();
+        expect(BaseModelTest::$snakeAttributes)->toBeTrue();
     });
 
     it('implements HasMedia interface', function () {
-        $model = new TestableBaseModel();
+        $model = new BaseModelTest();
         
         expect($model)->toBeInstanceOf(\Spatie\MediaLibrary\HasMedia::class);
     });
 
     it('uses required traits', function () {
-        $model = new TestableBaseModel();
+        $model = new BaseModelTest();
         $traits = class_uses_recursive($model);
         
         expect($traits)->toContain([
@@ -52,7 +52,7 @@ describe('SaluteMo BaseModel', function () {
     });
 
     it('has correct casts configuration', function () {
-        $model = new TestableBaseModel();
+        $model = new BaseModelTest();
         $casts = $model->getCasts();
         
         expect($casts)->toHaveKeys([
@@ -66,11 +66,11 @@ describe('SaluteMo BaseModel', function () {
     });
 
     it('has factory method', function () {
-        expect(TestableBaseModel::class)->toHaveMethod('factory');
+        expect(BaseModelTest::class)->toHaveMethod('factory');
     });
 
     it('can create media collections', function () {
-        $model = new TestableBaseModel();
+        $model = new BaseModelTest();
         
         expect($model)->toHaveMethod('addMedia')
             ->and($model)->toHaveMethod('getMedia')

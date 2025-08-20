@@ -14,6 +14,8 @@ use Modules\Chart\Datas\AnswerData;
 use Modules\Chart\Datas\AnswersChartData;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
+use Modules\Xot\Actions\Cast\SafeArrayCastAction;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 class Bar3Action
 {
@@ -32,8 +34,9 @@ class Bar3Action
         $answers_first = $answers->first();
         Assert::isInstanceOf($answers_first, AnswerData::class);
         $legends = [];
-        if (is_array($answers_first->value)) {
-            $legends = array_keys($answers_first->value);
+        $valueArray = SafeArrayCastAction::cast($answers_first->value);
+        if (!empty($valueArray)) {
+            $legends = array_keys($valueArray);
         }
 
         // dddx(['legends' => $legends, 'labels' => $labels, 'datay' => $datay, 'datay1' => $datay1]);
@@ -82,10 +85,14 @@ class Bar3Action
             $graph->title->SetFont($chart->font_family, $chart->font_style, 11);
         }
 
-        if (property_exists($chart, 'totali') && $chart->totali !== null) {
+        // Controllo sicuro per la proprietà totali che potrebbe essere aggiunta dinamicamente
+        $totaliArray = SafeArrayCastAction::cast($chart->totali ?? null);
+        if (!empty($totaliArray)) {
             $str = '';
-            foreach ($chart->totali as $k => $v) {
-                $str .= $k.' '.$v.' - ';
+            foreach ($totaliArray as $k => $v) {
+                $kString = SafeStringCastAction::cast($k);
+                $vString = SafeStringCastAction::cast($v);
+                $str .= $kString.' '.$vString.' - ';
             }
 
             $graph->footer->center->Set($str);
@@ -95,12 +102,14 @@ class Bar3Action
         // cifre sopra il grafico
         $delta = ($chart->width - 100) / \count($datay1);
 
-        if (is_array($datay1)) {
-            foreach ($datay1 as $i => $v) {
+        $datay1Array = SafeArrayCastAction::cast($datay1);
+        if (!empty($datay1Array)) {
+            foreach ($datay1Array as $i => $v) {
                 $txt = new Text('');
-                if (\is_array($v) && isset($v[0])) {
-                    Assert::string($v[0]);
-                    $txt = new Text($v[0].'');
+                $vArray = SafeArrayCastAction::cast($v);
+                if (isset($vArray[0])) {
+                    $v0String = SafeStringCastAction::cast($vArray[0]);
+                    $txt = new Text($v0String);
                 }
 
                 $x = 50 + ($delta * $i) + ($delta / 3);
@@ -108,8 +117,9 @@ class Bar3Action
                 $graph->AddText($txt);
 
                 $txt2 = new Text('');
-                if (\is_array($v) && isset($v[1])) {
-                    $txt2 = new Text($v[1]);
+                if (isset($vArray[1])) {
+                    $v1String = SafeStringCastAction::cast($vArray[1]);
+                    $txt2 = new Text($v1String);
                 }
 
                 $txt2->SetPos($x, 35);

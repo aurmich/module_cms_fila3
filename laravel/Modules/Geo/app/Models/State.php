@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|State query()
  * @mixin \Eloquent
  */
-class State extends Model
+class State extends BaseModel
 {
     protected $fillable = [
         'state',

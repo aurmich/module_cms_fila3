@@ -329,3 +329,4 @@ describe('DoctorStudio Queries and Scopes', function () {
     });
 });
 
+

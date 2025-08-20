@@ -63,49 +63,44 @@ class SendPushNotificationPage extends XotBasePage
          * Callback per mappare i dispositivi in opzioni per il select.
          */
         $callback = function ($item) {
-            // Verifichiamo che $item sia un oggetto
-            if (!$item) {
+            /** @var mixed $item */
+            if (!is_object($item)) {
                 return [];
             }
             
-            // Verifichiamo che $item abbia le proprietà necessarie
-            if (!$item->profile || !property_exists($item->profile, 'full_name')) {
+            // Relations & attributes (Laravel-safe)
+            $profile = method_exists($item, 'getRelationValue') ? $item->getRelationValue('profile') : null;
+            if (!is_object($profile)) {
                 return [];
             }
-            
-            // Otteniamo il token
-            $token = $item->push_notifications_token;
-            if (!$token) {
+            $fullName = (string) (data_get($profile, 'full_name') ?? 'Utente');
+
+            $tokenAttr = method_exists($item, 'getAttribute') ? $item->getAttribute('push_notifications_token') : null;
+            $token = is_string($tokenAttr) ? $tokenAttr : '';
+            if ($token === '' || $token === 'unknown') {
                 return [];
             }
-            
-            // Otteniamo il nome completo
-            $fullName = $item->profile->full_name;
-            if (!is_string($fullName)) {
-                $fullName = 'Utente';
-            }
-            
-            // Otteniamo il robot
-            $robot = '';
-            if ($item->device && 
-                property_exists($item->device, 'robot') &&
-                is_string($item->device->robot)) {
-                $robot = $item->device->robot;
-            } else {
-                $robot = null;
-            }
+
+            $device = method_exists($item, 'getRelationValue') ? $item->getRelationValue('device') : null;
+            $robotVal = data_get($device, 'robot');
+            $robot = is_string($robotVal) ? $robotVal : null;
             
             // Creiamo la label con gli ultimi 5 caratteri del token
             $tokenSuffix = mb_substr($token, -5);
+            $label = $fullName.' ('.($robot ?? '').') '.$tokenSuffix;
             
-            return [$token => $fullName.' ('.$robot.') '.$tokenSuffix];
+            return [$token => $label];
         };
 
         /**
          * Callback per filtrare i dispositivi.
          */
         $filterCallback = function ($item): bool {
-            return $item && $item->profile !== null;
+            if (!is_object($item)) {
+                return false;
+            }
+            $profile = method_exists($item, 'getRelationValue') ? $item->getRelationValue('profile') : null;
+            return is_object($profile);
         };
 
         $to = $devices

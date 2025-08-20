@@ -1,14 +1,9 @@
-Patient Age Range Enum (Modules\SaluteOra\Tests\Unit\Enums\PatientAgeRangeEnum)
- [x] It has correct number of cases
- [ ] It returns correct labels
- [x] It returns correct min ages
- [x] It returns correct max ages
- [x] It correctly identifies age in range
- [ ] It correctly assigns age ranges
- [ ] It returns correct colors
- [ ] It returns correct icons
- [ ] It returns select array
- [x] It implements filament interfaces
- [ ] It returns translated labels
- [ ] It returns descriptions
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php
+ [ ] `SaluteMo BaseModel` → it has correct default configuration
+ [x] `SaluteMo BaseModel` → it has snake case attributes enabled
+ [x] `SaluteMo BaseModel` → it implements HasMedia interface
+ [ ] `SaluteMo BaseModel` → it uses required traits
+ [x] `SaluteMo BaseModel` → it has correct casts configuration
+ [x] `SaluteMo BaseModel` → it has factory method
+ [ ] `SaluteMo BaseModel` → it can create media collections
 

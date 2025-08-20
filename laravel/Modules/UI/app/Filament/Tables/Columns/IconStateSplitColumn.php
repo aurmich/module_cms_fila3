@@ -127,7 +127,7 @@ class IconStateSplitColumn extends Column
             ->color('primary')
             ->tooltip('Test Prova')
             ->action(function () use ($record) {
-                $recordId = $record && property_exists($record, 'id') ? (string) $record->id : 'N/A';
+                $recordId = $record && isset($record->id) ? (string) $record->id : 'N/A';
                 \Filament\Notifications\Notification::make()
                     ->title('Prova funziona!')
                     ->body('Record ID: ' . $recordId)
@@ -137,7 +137,7 @@ class IconStateSplitColumn extends Column
         
         // Aggiungi azioni per gli stati
         foreach ($states as $stateKey => $state) {
-            $recordId = $record && property_exists($record, 'id') ? $record->id : null;
+            $recordId = $record && isset($record->id) ? $record->id : null;
             if ($recordId !== null && $this->canTransitionTo($recordId, $state['class']::class)) {
                 $actions["transition_to_{$stateKey}"] = \Filament\Tables\Actions\Action::make("transition_to_{$stateKey}")
                     ->icon($state['icon'])

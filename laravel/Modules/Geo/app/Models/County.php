@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|County query()
  * @mixin \Eloquent
  */
-class County extends Model
+class County extends BaseModel
 {
     protected $fillable = [
         'state_id',

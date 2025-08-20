@@ -45,7 +45,8 @@ class LocationMapWidget extends MapWidget
      */
     protected function getMaxHeight(): ?string
     {
-        return $this->maxHeight ?? '50vh';
+        $height = $this->maxHeight ?? '50vh';
+        return is_string($height) ? $height : (string) $height;
     }
 
     /**
@@ -161,13 +162,9 @@ class LocationMapWidget extends MapWidget
             return null;
         }
 
-        // Verifico che la proprietà slug esista sul placeType
-        if (!property_exists($placeType, 'slug')) {
-            return null;
-        }
-
+        // Recupero slug in modo sicuro senza accesso diretto alla proprietà
         /** @var string|null $slug */
-        $slug = $placeType->slug;
+        $slug = data_get($placeType, 'slug');
 
         if (!is_string($slug) || !isset($config['icons'][$slug])) {
             return null;

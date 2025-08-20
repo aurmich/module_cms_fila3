@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType query()
  * @mixin \Eloquent
  */
-class PlaceType extends Model
+class PlaceType extends BaseModel
 {
     protected $fillable = [
         'name',
