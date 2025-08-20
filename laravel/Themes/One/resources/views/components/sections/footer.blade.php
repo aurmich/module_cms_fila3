@@ -4,10 +4,7 @@
     'class' => ''
 ])
 
-@php
-    $locale = app()->getLocale();
-    $componentsBlocks = is_array($blocks) && isset($blocks[$locale]) ? $blocks[$locale] : $blocks;
-@endphp
+
 
 <footer {{ $attributes->merge([
     'class' => 'bg-[#272C4D] h-32 lg:min-h-36 text-white flex justify-center items-center' . ($section['attributes']['class'] ?? '') . ' ' . $class,
@@ -31,7 +28,7 @@
                 <div class="text-center m-1 lg:m-6 md:text-right space-x-4">
                     <a href="/{{ $lang }}/pages/partners" class="text-white text-md m-1">@lang('pub_theme::navigation.main_menu.partners.label')</a>
                     <a href="/{{ $lang }}/pages/faqs" class="text-white text-md">@lang('pub_theme::navigation.main_menu.faqs.label')</a>
-                    <a href="/img/trattamento-dati-odonoiatra.pdf" target="_blank" class="text-white text-md">Trattamento Dati</a>
+                    <a href="/img/trattamento-dati-odonoiatra.pdf" target="_blank" class="text-white text-md">@lang('pub_theme::footer.data_processing.label')</a>
                 </div>
             </div>          
             </div>
