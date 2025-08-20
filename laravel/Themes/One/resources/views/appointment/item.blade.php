@@ -35,7 +35,7 @@ new class extends Component {
                         </div>
                         <div class="flex flex-row items-center mb-2">
                             <span class="mr-2 font-medium">@lang('pub_theme::txt.appointment.time')</span>
-                            <p>10:00 - 11:00</p>
+                            <p>{{ $appointment->starts_at->format('H:i') }} - {{ $appointment->ends_at->format('H:i') }}</p>
                         </div>
                         @if ($appointment->studio)
                             <div class="flex flex-row items-center mb-2">

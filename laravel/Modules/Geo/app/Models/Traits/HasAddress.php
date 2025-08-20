@@ -82,7 +82,7 @@ trait HasAddress
             return null;
         }
         /** @phpstan-ignore property.notFound, property.notFound */
-        return $address->street_address.' '.$address->street_number.' '.implode('',$locality['cap']).' '.$locality['nome'].' ('.$locality['provincia']['nome'].') - '.$locality['regione']['nome'];
+        return $address->street_address.', '.$address->street_number.' - '.$address->postal_code.' '.$locality['nome'].' ('.$locality['provincia']['nome'].') ';
     }
     
     /**

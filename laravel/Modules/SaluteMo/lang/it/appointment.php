@@ -363,6 +363,20 @@ return array (
     array (
       'label' => 'reorderRecords',
     ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
+    'value' => 
+    array (
+      'description' => 'value',
+      'helper_text' => 'value',
+      'placeholder' => 'value',
+    ),
   ),
   'actions' => 
   array (
