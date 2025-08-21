@@ -372,7 +372,7 @@ class Patient extends User implements HasMedia
      */
     public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Appointment::class, 'patient_id');
     }
 
     /**
