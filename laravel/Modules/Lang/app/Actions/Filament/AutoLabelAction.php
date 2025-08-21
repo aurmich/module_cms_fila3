@@ -18,6 +18,7 @@ use Modules\Xot\Actions\GetTransKeyAction;
 use Spatie\QueueableAction\QueueableAction;
 use Filament\Tables\Actions\Action as TableAction;
 use Filament\Forms\Components\Section as FormsSection;
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 class AutoLabelAction
 {
@@ -27,9 +28,9 @@ class AutoLabelAction
      * Undocumented function.
      * return number of input added.
      *
-     * @param Field|BaseFilter|Column|Step|Action|TableAction $component
+     * @param Field|BaseFilter|Column|Step|Action|TableAction|FormsSection $component
      *
-     * @return Field|BaseFilter|Column|Step|Action|TableAction
+     * @return Field|BaseFilter|Column|Step|Action|TableAction|FormsSection
      */
     public function execute($component,string $type = 'label')
     {
@@ -71,6 +72,7 @@ class AutoLabelAction
         }
 
         $label_tkey = null;
+        $val = 'no-set-val';
         
         if ($component instanceof Step) {
             Assert::string($val = $component->getLabel());
@@ -82,15 +84,19 @@ class AutoLabelAction
             if($val==null){
                 $val='empty';
             }
+            if(!is_string($val)){
+                $val=app(SafeStringCastAction::class)->execute($val);
+            }
             $label_tkey = $trans_key.'.sections.'.$val.'';
             
         }
-        if($label_tkey == null){
+        if($label_tkey == null && method_exists($component,'getName')){
             Assert::string($val = $component->getName());
             $label_tkey = $trans_key.'.fields.'.$val.'';
         }
 
-        if ($component instanceof Action) {
+        if ($component instanceof Action ) {
+            Assert::string($val = $component->getName());
             $label_tkey = $trans_key.'.actions.'.$val.'';
         }
         
@@ -136,7 +142,7 @@ class AutoLabelAction
                 'message'=>'preso',
                 'label_key'=>$label_key,
                 'label_tkey'=>$label_tkey,
-                'val'=>$val,
+                //'val'=>$val,
                 'type'=>$type,
                 'component'=>$component,
                 'class'=>$class,

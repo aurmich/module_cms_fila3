@@ -76,12 +76,13 @@ trait HasAddress
         if($address==null){
             return null;
         }
-        /** @phpstan-ignore method.notFound */
+        Assert::isInstanceOf($address, Address::class);
+        
         $locality=$address->getLocality();
         if($locality==null){
             return null;
         }
-        /** @phpstan-ignore property.notFound, property.notFound */
+        
         return $address->street_address.', '.$address->street_number.' - '.$address->postal_code.' '.$locality['nome'].' ('.$locality['provincia']['nome'].') ';
     }
     

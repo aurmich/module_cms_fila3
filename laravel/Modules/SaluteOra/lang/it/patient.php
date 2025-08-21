@@ -136,6 +136,10 @@ return array (
       'tooltip' => 'Gestione consensi privacy e marketing',
       'helper_text' => 'Il consenso privacy è obbligatorio per legge, la newsletter è facoltativa',
     ),
+    'previsit_step' => 
+    array (
+      'label' => 'previsit_step',
+    ),
   ),
   'fields' => 
   array (

@@ -63,14 +63,10 @@ class PatientResource extends XotBaseResource
 
         return [
             Forms\Components\Wizard::make([
-                //self::getPersonalDataStep(),      // Step 1: Dati personali
-                self::getStepByName('personal_data_step'),
-                //self::getDocumentsStep(),         // Step 2: Documenti
-                self::getStepByName('documents_step'),
-                //self::getPreVisitStep(),          // Step 3: Informazioni preventive
-                self::getStepByName('previsit_step'),
-                //self::getPrivacyStep(),           // Step 4: Privacy e consensi
-                self::getStepByName('privacy_step'),
+                self::getStepByName('personal_data_step'),   // Step 1: Dati personali
+                self::getStepByName('documents_step'),      // Step 2: Documenti
+                self::getStepByName('pre_visit_step'),       // Step 3: Informazioni preventive
+                self::getStepByName('privacy_step'),        // Step 4: Privacy e consensi
             ])
             //->model(Patient::class)
             ->extraAttributes(['class' => 'mobile-friendly-wizard'])
