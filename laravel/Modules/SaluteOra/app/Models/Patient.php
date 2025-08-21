@@ -11,6 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\SaluteOra\Enums\YearsInItalyEnum;
 use Modules\SaluteOra\Enums\PatientAgeRangeEnum;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -32,7 +33,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $updated_by
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
@@ -46,7 +46,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Patient whereUserId($value)
- *
  * @property string|null $name
  * @property string|null $first_name
  * @property string|null $last_name
@@ -105,7 +104,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment> $treatments
  * @property-read int|null $treatments_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient admins()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient doctors()
  * @method static \Modules\User\Database\Factories\UserFactory factory($count = null, $state = [])
@@ -141,7 +139,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient withoutRole($roles, $guard = null)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
  * @property-read int|null $devices_count
  * @property string|null $dental_problems
@@ -153,7 +150,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $certificates
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
  * @property-read int|null $team_users_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertificates($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereDentalProblems($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereHealthCard($value)
@@ -161,7 +157,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereIseeCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePregnancyCertificate($value)
- *
  * @property string|null $country_code
  * @property string|null $children_count
  * @property string|null $family_members
@@ -173,7 +168,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $last_dental_visit_period
  * @property-read int|null $appointments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCertification($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereCountryCode($value)
@@ -184,7 +178,12 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereYearsInItaly($value)
- *
+ * @property null|\Modules\SaluteOra\Enums\PatientAgeRangeEnum $age_range
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
+ * @property-read int|null $studios_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereAgeRange($value)
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia
@@ -330,7 +329,7 @@ class Patient extends User implements HasMedia
             'token' => encrypt([
                 'patient_id' => $this->id,
                 'type' => $type,
-                'user_id' => auth()->id(),
+                'user_id' => auth()->id() ?? 0,
                 'expires_at' => now()->addHour(),
             ]),
         ]);
@@ -366,9 +365,44 @@ class Patient extends User implements HasMedia
         return true;
     }
 
-    public function appointments(): HasMany
+    /**
+     * Relazione con gli appuntamenti del paziente.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Appointment, $this>
+     */
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Appointment::class, 'patient_id');
+        return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * Relazione molti-a-molti con gli studi frequentati dal paziente.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Studio, $this>
+     */
+    public function studios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Studio::class);
+    }
+
+    /**
+     * Relazione molti-a-molti con i dottori che hanno visitato il paziente.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Doctor, $this>
+     */
+    public function doctors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Doctor::class);
+    }
+
+    /**
+     * Relazione con i report del paziente.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Report, $this>
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class, 'patient_id');
     }
 
     public function canBook(): bool

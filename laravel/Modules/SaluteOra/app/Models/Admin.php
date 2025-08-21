@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\SaluteOra\Models\User;
 use Parental\HasParent;
+use Modules\SaluteOra\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * Class Admin
@@ -171,6 +173,14 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereYearsInItaly($value)
+ * @property string|null $age_range
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read int|null $appointments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
+ * @property-read int|null $studios_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereAgeRange($value)
  * @mixin \Eloquent
  */
 class Admin extends User
@@ -204,5 +214,73 @@ class Admin extends User
         ]);
     }
 
+    /**
+     * Relazione molti-a-molti con gli studi gestiti dall'admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Studio, $this>
+     */
+    public function studios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Studio::class);
+    }
 
+    /**
+     * Relazione con gli appuntamenti supervisionati dall'admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<Appointment, Studio, $this>
+     */
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Appointment::class,
+            Studio::class,
+            'id', // Foreign key on studios table
+            'studio_id', // Foreign key on appointments table
+            'id', // Local key on admins table
+            'id' // Local key on studios table
+        );
+    }
+
+    /**
+     * Relazione con i dottori che lavorano negli studi gestiti dall'admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Doctor, $this>
+     */
+    public function doctors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        // Relazione many-to-many attraverso studios
+        return $this->belongsToManyX(Doctor::class, 'admin_studio')
+            ->join('doctor_studio', 'studios.id', '=', 'doctor_studio.studio_id');
+    }
+
+    /**
+     * Relazione con i pazienti che frequentano gli studi gestiti dall'admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Patient, $this>
+     */
+    public function patients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        // Relazione many-to-many attraverso studios e appointments
+        return $this->belongsToManyX(Patient::class, 'admin_studio')
+            ->join('appointments', 'studios.id', '=', 'appointments.studio_id')
+            ->distinct();
+    }
+
+    /**
+     * Relazione con i report generati negli studi gestiti dall'admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<Report, Studio, $this>
+     */
+    public function reports(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Report::class,
+            Studio::class,
+            'id', // Foreign key su studios table
+            'appointment_id', // Foreign key su reports table (attraverso appointment)
+            'id', // Local key su admins table
+            'id' // Local key su studios table
+        )->join('appointments', 'reports.appointment_id', '=', 'appointments.id')
+         ->where('appointments.studio_id', '=', 'studios.id');
+    }
 }

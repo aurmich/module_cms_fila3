@@ -1,36 +1,33 @@
-/vendor
-*.lock
-/build
-*.cache
-*.phar
-.git-blame-ignore-revs
-.git-rewrite
-.php-cs-fixer.cache
-*.phar
-*.cache
-package-lock.json
-.git-rewrite/
-node_modules
-.git-blame-ignore-revs
-.git-blame-ignore-revs
-node_modules
-vendor
-.git-blame-ignore-revs
-build/
+# Dependencies
 vendor/
-build/
-node_modules
-docs/cache/
+node_modules/
+package-lock.json
+
+# Build and compiled files
+/build
 cache/
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-build
+docs/cache/
+
+# Cache and temporary files
+*.cache
+*.lock
+*.phar
 *.exe
 *:Zone.Identifier
+.php-cs-fixer.cache
+
+# Git related
+.git-rewrite/
+.git-blame-ignore-revs
 
 # Backup files
+*.old
+*.old1
+*.backup
 *.bak
+
 # File di log
 *.log
+
 # PHPStan documentation
 docs/phpstan/

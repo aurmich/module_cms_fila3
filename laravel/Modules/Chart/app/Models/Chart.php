@@ -40,15 +40,12 @@ use Webmozart\Assert\Assert;
  * @property string|null $post_type
  * @property string|null $chart_type
  * @property array<string, mixed>|null $totali
- *
  * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
  * @method static Builder|Chart query()
- *
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
- *
  * @mixin \Eloquent
  */
 class Chart extends BaseModel

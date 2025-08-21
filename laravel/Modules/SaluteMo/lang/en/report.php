@@ -349,6 +349,168 @@ return array (
     array (
       'label' => 'View',
     ),
+    'studio_id' => 
+    array (
+      'label' => 'Studio',
+      'placeholder' => 'Select the studio',
+      'help' => 'Medical studio associated with the report',
+      'tooltip' => 'Studio where the report was created',
+      'helper_text' => '',
+      'description' => 'Medical studio associated with the dental report',
+    ),
+    'name' => 
+    array (
+      'label' => 'Report Name',
+      'placeholder' => 'Enter the report name',
+      'help' => 'Identifying name of the dental report',
+      'tooltip' => 'Report name for identification',
+      'helper_text' => '',
+      'description' => 'Name of the dental report',
+    ),
+    'description' => 
+    array (
+      'label' => 'Description',
+      'placeholder' => 'Enter the report description',
+      'help' => 'Detailed description of the dental report',
+      'tooltip' => 'Complete report description',
+      'helper_text' => '',
+      'description' => 'Description of the dental report',
+    ),
+    'type' => 
+    array (
+      'label' => 'Report Type',
+      'placeholder' => 'Select the report type',
+      'help' => 'Type of dental report',
+      'tooltip' => 'Dental report category',
+      'helper_text' => '',
+      'description' => 'Type of dental report',
+    ),
+    'period_start' => 
+    array (
+      'label' => 'Period Start',
+      'placeholder' => 'Select the period start date',
+      'help' => 'Start date of the reference period',
+      'tooltip' => 'Start of the report validity period',
+      'helper_text' => '',
+      'description' => 'Start date of the report reference period',
+    ),
+    'period_end' => 
+    array (
+      'label' => 'Period End',
+      'placeholder' => 'Select the period end date',
+      'help' => 'End date of the reference period',
+      'tooltip' => 'End of the report validity period',
+      'helper_text' => '',
+      'description' => 'End date of the report reference period',
+    ),
+    'parameters' => 
+    array (
+      'label' => 'Parameters',
+      'placeholder' => 'Enter report parameters',
+      'help' => 'Specific parameters of the dental report',
+      'tooltip' => 'Report configuration parameters',
+      'helper_text' => '',
+      'description' => 'Configuration parameters of the dental report',
+    ),
+    'last_generated_at' => 
+    array (
+      'label' => 'Last Generated',
+      'placeholder' => 'Last generation date',
+      'help' => 'Date and time of last report generation',
+      'tooltip' => 'When the last report was generated',
+      'helper_text' => '',
+      'description' => 'Date and time of last dental report generation',
+    ),
+    'created_by' => 
+    array (
+      'label' => 'Created By',
+      'placeholder' => 'User who created the report',
+      'help' => 'User who created the dental report',
+      'tooltip' => 'Author of the dental report',
+      'helper_text' => '',
+      'description' => 'User who created the dental report',
+    ),
+    'tenant_id' => 
+    array (
+      'label' => 'Tenant',
+      'placeholder' => 'Select the tenant',
+      'help' => 'Tenant associated with the dental report',
+      'tooltip' => 'Organization of the dental report',
+      'helper_text' => '',
+      'description' => 'Tenant associated with the dental report',
+    ),
+    'updated_by' => 
+    array (
+      'label' => 'Updated By',
+      'placeholder' => 'User who updated the report',
+      'help' => 'User who updated the dental report',
+      'tooltip' => 'User who modified the dental report',
+      'helper_text' => '',
+      'description' => 'User who updated the dental report',
+    ),
+    'deleted_at' => 
+    array (
+      'label' => 'Deletion Date',
+      'placeholder' => 'Report deletion date',
+      'help' => 'Date and time of dental report deletion',
+      'tooltip' => 'When the dental report was deleted',
+      'helper_text' => '',
+      'description' => 'Date and time of dental report deletion',
+    ),
+    'deleted_by' => 
+    array (
+      'label' => 'Deleted By',
+      'placeholder' => 'User who deleted the report',
+      'help' => 'User who deleted the dental report',
+      'tooltip' => 'User who cancelled the dental report',
+      'helper_text' => '',
+      'description' => 'User who deleted the dental report',
+    ),
+    'patient' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Patient Full Name',
+        'placeholder' => 'Patient first and last name',
+        'help' => 'Full name of the patient associated with the report',
+        'tooltip' => 'Full name of the dental report patient',
+        'helper_text' => '',
+        'description' => 'Full name of the patient associated with the dental report',
+      ),
+    ),
+    'doctor' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Doctor Full Name',
+        'placeholder' => 'Doctor first and last name',
+        'help' => 'Full name of the doctor responsible for the report',
+        'tooltip' => 'Full name of the dental report doctor',
+        'helper_text' => '',
+        'description' => 'Full name of the doctor responsible for the dental report',
+      ),
+    ),
+    'studio' => 
+    array (
+      'name' => 
+      array (
+        'label' => 'Studio Name',
+        'placeholder' => 'Medical studio name',
+        'help' => 'Identifying name of the medical studio',
+        'tooltip' => 'Official medical studio name',
+        'helper_text' => '',
+        'description' => 'Name of the medical studio associated with the dental report',
+      ),
+      'full_address' => 
+      array (
+        'label' => 'Studio Full Address',
+        'placeholder' => 'Complete address with ZIP code and city',
+        'help' => 'Complete address of the medical studio with all details',
+        'tooltip' => 'Complete address with street, number, ZIP code, city and province',
+        'helper_text' => 'Complete address for location and navigation',
+        'description' => 'Complete address of the medical studio for location',
+      ),
+    ),
   ),
   'actions' => 
   array (
@@ -386,6 +548,15 @@ return array (
       'label' => 'Print Dental Report',
       'success' => 'Dental report sent to print',
       'error' => 'Error printing dental report',
+    ),
+    'export_xls' => 
+    array (
+      'label' => 'Export Excel',
+      'tooltip' => 'Export the report in Excel format',
+      'helper_text' => '',
+      'description' => 'Action to export the report in Excel',
+      'success' => 'Dental report exported to Excel successfully',
+      'error' => 'Error exporting dental report to Excel',
     ),
   ),
   'filters' => 

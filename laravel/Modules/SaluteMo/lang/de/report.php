@@ -349,6 +349,168 @@ return array (
     array (
       'label' => 'Anzeigen',
     ),
+    'studio_id' => 
+    array (
+      'label' => 'Studio',
+      'placeholder' => 'Studio auswählen',
+      'help' => 'Mit dem Bericht verknüpftes medizinisches Studio',
+      'tooltip' => 'Studio, in dem der Bericht erstellt wurde',
+      'helper_text' => '',
+      'description' => 'Mit dem zahnärztlichen Bericht verknüpftes medizinisches Studio',
+    ),
+    'name' => 
+    array (
+      'label' => 'Berichtsname',
+      'placeholder' => 'Namen des Berichts eingeben',
+      'help' => 'Identifizierender Name des zahnärztlichen Berichts',
+      'tooltip' => 'Berichtsname zur Identifikation',
+      'helper_text' => '',
+      'description' => 'Name des zahnärztlichen Berichts',
+    ),
+    'description' => 
+    array (
+      'label' => 'Beschreibung',
+      'placeholder' => 'Beschreibung des Berichts eingeben',
+      'help' => 'Detaillierte Beschreibung des zahnärztlichen Berichts',
+      'tooltip' => 'Vollständige Berichtsbeschreibung',
+      'helper_text' => '',
+      'description' => 'Beschreibung des zahnärztlichen Berichts',
+    ),
+    'type' => 
+    array (
+      'label' => 'Berichtstyp',
+      'placeholder' => 'Berichtstyp auswählen',
+      'help' => 'Typ des zahnärztlichen Berichts',
+      'tooltip' => 'Kategorie des zahnärztlichen Berichts',
+      'helper_text' => '',
+      'description' => 'Typ des zahnärztlichen Berichts',
+    ),
+    'period_start' => 
+    array (
+      'label' => 'Periodenbeginn',
+      'placeholder' => 'Datum des Periodenbeginns auswählen',
+      'help' => 'Startdatum des Referenzzeitraums',
+      'tooltip' => 'Beginn des Gültigkeitszeitraums des Berichts',
+      'helper_text' => '',
+      'description' => 'Startdatum des Referenzzeitraums des Berichts',
+    ),
+    'period_end' => 
+    array (
+      'label' => 'Periodenende',
+      'placeholder' => 'Datum des Periodenendes auswählen',
+      'help' => 'Enddatum des Referenzzeitraums',
+      'tooltip' => 'Ende des Gültigkeitszeitraums des Berichts',
+      'helper_text' => '',
+      'description' => 'Enddatum des Referenzzeitraums des Berichts',
+    ),
+    'parameters' => 
+    array (
+      'label' => 'Parameter',
+      'placeholder' => 'Berichtsparameter eingeben',
+      'help' => 'Spezifische Parameter des zahnärztlichen Berichts',
+      'tooltip' => 'Konfigurationsparameter des Berichts',
+      'helper_text' => '',
+      'description' => 'Konfigurationsparameter des zahnärztlichen Berichts',
+    ),
+    'last_generated_at' => 
+    array (
+      'label' => 'Zuletzt generiert',
+      'placeholder' => 'Datum der letzten Generierung',
+      'help' => 'Datum und Uhrzeit der letzten Berichtsgenerierung',
+      'tooltip' => 'Wann der letzte Bericht generiert wurde',
+      'helper_text' => '',
+      'description' => 'Datum und Uhrzeit der letzten Generierung des zahnärztlichen Berichts',
+    ),
+    'created_by' => 
+    array (
+      'label' => 'Erstellt von',
+      'placeholder' => 'Benutzer, der den Bericht erstellt hat',
+      'help' => 'Benutzer, der den zahnärztlichen Bericht erstellt hat',
+      'tooltip' => 'Autor des zahnärztlichen Berichts',
+      'helper_text' => '',
+      'description' => 'Benutzer, der den zahnärztlichen Bericht erstellt hat',
+    ),
+    'tenant_id' => 
+    array (
+      'label' => 'Tenant',
+      'placeholder' => 'Tenant auswählen',
+      'help' => 'Mit dem zahnärztlichen Bericht verknüpfter Tenant',
+      'tooltip' => 'Organisation des zahnärztlichen Berichts',
+      'helper_text' => '',
+      'description' => 'Mit dem zahnärztlichen Bericht verknüpfter Tenant',
+    ),
+    'updated_by' => 
+    array (
+      'label' => 'Aktualisiert von',
+      'placeholder' => 'Benutzer, der den Bericht aktualisiert hat',
+      'help' => 'Benutzer, der den zahnärztlichen Bericht aktualisiert hat',
+      'tooltip' => 'Benutzer, der den zahnärztlichen Bericht geändert hat',
+      'helper_text' => '',
+      'description' => 'Benutzer, der den zahnärztlichen Bericht aktualisiert hat',
+    ),
+    'deleted_at' => 
+    array (
+      'label' => 'Löschdatum',
+      'placeholder' => 'Datum der Berichtslöschung',
+      'help' => 'Datum und Uhrzeit der Löschung des zahnärztlichen Berichts',
+      'tooltip' => 'Wann der zahnärztliche Bericht gelöscht wurde',
+      'helper_text' => '',
+      'description' => 'Datum und Uhrzeit der Löschung des zahnärztlichen Berichts',
+    ),
+    'deleted_by' => 
+    array (
+      'label' => 'Gelöscht von',
+      'placeholder' => 'Benutzer, der den Bericht gelöscht hat',
+      'help' => 'Benutzer, der den zahnärztlichen Bericht gelöscht hat',
+      'tooltip' => 'Benutzer, der den zahnärztlichen Bericht abgebrochen hat',
+      'helper_text' => '',
+      'description' => 'Benutzer, der den zahnärztlichen Bericht gelöscht hat',
+    ),
+    'patient' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Vollständiger Patientname',
+        'placeholder' => 'Vor- und Nachname des Patienten',
+        'help' => 'Vollständiger Name des mit dem Bericht verknüpften Patienten',
+        'tooltip' => 'Vollständiger Name des Patienten des zahnärztlichen Berichts',
+        'helper_text' => '',
+        'description' => 'Vollständiger Name des mit dem zahnärztlichen Bericht verknüpften Patienten',
+      ),
+    ),
+    'doctor' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Vollständiger Arztname',
+        'placeholder' => 'Vor- und Nachname des Arztes',
+        'help' => 'Vollständiger Name des für den Bericht verantwortlichen Arztes',
+        'tooltip' => 'Vollständiger Name des Arztes des zahnärztlichen Berichts',
+        'helper_text' => '',
+        'description' => 'Vollständiger Name des für den zahnärztlichen Bericht verantwortlichen Arztes',
+      ),
+    ),
+    'studio' => 
+    array (
+      'name' => 
+      array (
+        'label' => 'Studioname',
+        'placeholder' => 'Name des medizinischen Studios',
+        'help' => 'Identifizierender Name des medizinischen Studios',
+        'tooltip' => 'Offizieller Name des medizinischen Studios',
+        'helper_text' => '',
+        'description' => 'Name des mit dem zahnärztlichen Bericht verknüpften medizinischen Studios',
+      ),
+      'full_address' => 
+      array (
+        'label' => 'Vollständige Studioadresse',
+        'placeholder' => 'Vollständige Adresse mit PLZ und Stadt',
+        'help' => 'Vollständige Adresse des medizinischen Studios mit allen Details',
+        'tooltip' => 'Vollständige Adresse mit Straße, Nummer, PLZ, Stadt und Bundesland',
+        'helper_text' => 'Vollständige Adresse für Standort und Navigation',
+        'description' => 'Vollständige Adresse des medizinischen Studios für den Standort',
+      ),
+    ),
   ),
   'actions' => 
   array (
@@ -386,6 +548,15 @@ return array (
       'label' => 'Zahnärztlichen Bericht drucken',
       'success' => 'Zahnärztlicher Bericht zum Drucken gesendet',
       'error' => 'Fehler beim Drucken des zahnärztlichen Berichts',
+    ),
+    'export_xls' => 
+    array (
+      'label' => 'Excel exportieren',
+      'tooltip' => 'Den Bericht im Excel-Format exportieren',
+      'helper_text' => '',
+      'description' => 'Aktion zum Exportieren des Berichts in Excel',
+      'success' => 'Zahnärztlicher Bericht erfolgreich nach Excel exportiert',
+      'error' => 'Fehler beim Exportieren des zahnärztlichen Berichts nach Excel',
     ),
   ),
   'filters' => 

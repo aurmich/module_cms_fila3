@@ -167,10 +167,11 @@ namespace Modules\Chart\Models{
  * @property string|null $group_by
  * @property string|null $sort_by
  * @property int|null $transparency
- * @property array|null $colors
+ * @property array<string, mixed>|null $colors
  * @property string|null $post_id
  * @property string|null $post_type
  * @property string|null $chart_type
+ * @property array<string, mixed>|null $totali
  * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
  * @method static Builder|Chart newModelQuery()
  * @method static Builder|Chart newQuery()
@@ -568,6 +569,8 @@ namespace Modules\FormBuilder\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withoutTrashed()
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Collection<array-key, mixed>|null $values
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereValues($value)
  */
 	class Collection extends \Eloquent {}
 }
@@ -782,6 +785,8 @@ namespace Modules\FormBuilder\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $extensions
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereExtensions($value)
  */
 	class Form extends \Eloquent {}
 }
@@ -1457,6 +1462,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|County newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|County query()
  * @mixin \Eloquent
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
  */
 	class County extends \Eloquent {}
 }
@@ -1600,6 +1607,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType query()
  * @mixin \Eloquent
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
  */
 	class PlaceType extends \Eloquent {}
 }
@@ -1649,6 +1658,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|State newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|State query()
  * @mixin \Eloquent
+ * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
  */
 	class State extends \Eloquent {}
 }
@@ -3288,6 +3299,14 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereYearsInItaly($value)
  * @mixin \Eloquent
+ * @property string|null $age_range
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read int|null $appointments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
+ * @property-read int|null $studios_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereAgeRange($value)
  */
 	class Admin extends \Eloquent {}
 }
@@ -3456,8 +3475,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
+ * @mixin \Eloquent
  */
 	class Appointment extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
@@ -3468,103 +3487,103 @@ namespace Modules\SaluteOra\Models{
  * 
  * Extends the User model to provide doctor-specific functionality.
  *
- * @property string $id
- * @property string|null $name
- * @property string|null $first_name
- * @property string|null $last_name
- * @property string $email
- * @property string|null $phone
- * @property string|null $country_code
- * @property string|null $children_count
- * @property string|null $family_members
- * @property string|null $years_in_italy
- * @property string|null $nationality
- * @property Address|null $address
- * @property string|null $city
- * @property string|null $registration_number
- * @property string|null $fiscal_code
- * @property string|null $dental_problems
- * @property string|null $last_dental_visit
- * @property string|null $status
- * @property array<array-key, mixed>|null $certifications
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string|null $password
- * @property string|null $remember_token
- * @property int|null $current_team_id
- * @property string|null $profile_photo_path
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $lang
- * @property UserTypeEnum|null $type
- * @property string|null $data_privacy_form
- * @property string|null $doctor_certificate
- * @property array<array-key, mixed>|null $certification
- * @property string|null $pregnancy_certificate
- * @property string|null $isee_certificate
- * @property string|null $identity_document
- * @property string|null $health_card
- * @property string|null $date_of_birth
- * @property string|null $gender
- * @property bool|null $is_active
- * @property bool|null $is_otp
- * @property \Illuminate\Support\Carbon|null $password_expires_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_by
- * @property UserState|null $state
- * @property array<array-key, mixed>|null $moderation_data
- * @property string|null $uuid
- * @property string|null $full_name
- * @property string|null $certificates
- * @property string|null $last_dental_visit_period
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $activeConsents
- * @property-read int|null $active_consents_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
- * @property-read int|null $appointments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication> $authentications
- * @property-read int|null $authentications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
- * @property-read int|null $clients_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
- * @property-read int|null $consents_count
- * @property-read \Modules\User\Models\Team|null $currentTeam
- * @property-read \Modules\User\Models\Membership|DoctorStudio|\Modules\User\Models\DeviceUser|null $pivot
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
- * @property-read int|null $devices_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
- * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Modules\User\Models\Notification> $notifications
- * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $ownedTeams
- * @property-read int|null $owned_teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Permission> $permissions
- * @property-read int|null $permissions_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $profile
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role> $roles
- * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser> $socialiteUsers
- * @property-read int|null $socialite_users_count
- * @property-read \Modules\SaluteOra\Models\Studio|null $studio
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
- * @property-read int|null $studios_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
- * @property-read int|null $team_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $teams
- * @property-read int|null $teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $tenants
- * @property-read int|null $tenants_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token> $tokens
- * @property-read int|null $tokens_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment> $treatments
- * @property-read int|null $treatments_count
+ * @property string                                                                                                     $id
+ * @property string|null                                                                                                $name
+ * @property string|null                                                                                                $first_name
+ * @property string|null                                                                                                $last_name
+ * @property string                                                                                                     $email
+ * @property string|null                                                                                                $phone
+ * @property string|null                                                                                                $country_code
+ * @property string|null                                                                                                $children_count
+ * @property string|null                                                                                                $family_members
+ * @property string|null                                                                                                $years_in_italy
+ * @property string|null                                                                                                $nationality
+ * @property Address|null                                                                                               $address
+ * @property string|null                                                                                                $city
+ * @property string|null                                                                                                $registration_number
+ * @property string|null                                                                                                $fiscal_code
+ * @property string|null                                                                                                $dental_problems
+ * @property string|null                                                                                                $last_dental_visit
+ * @property string|null                                                                                                $status
+ * @property array<array-key, mixed>|null                                                                               $certifications
+ * @property \Illuminate\Support\Carbon|null                                                                            $email_verified_at
+ * @property string|null                                                                                                $password
+ * @property string|null                                                                                                $remember_token
+ * @property int|null                                                                                                   $current_team_id
+ * @property string|null                                                                                                $profile_photo_path
+ * @property \Illuminate\Support\Carbon|null                                                                            $deleted_at
+ * @property string|null                                                                                                $lang
+ * @property UserTypeEnum|null                                                                                          $type
+ * @property string|null                                                                                                $data_privacy_form
+ * @property string|null                                                                                                $doctor_certificate
+ * @property array<array-key, mixed>|null                                                                               $certification
+ * @property string|null                                                                                                $pregnancy_certificate
+ * @property string|null                                                                                                $isee_certificate
+ * @property string|null                                                                                                $identity_document
+ * @property string|null                                                                                                $health_card
+ * @property string|null                                                                                                $date_of_birth
+ * @property string|null                                                                                                $gender
+ * @property bool|null                                                                                                  $is_active
+ * @property bool|null                                                                                                  $is_otp
+ * @property \Illuminate\Support\Carbon|null                                                                            $password_expires_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $created_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $updated_at
+ * @property string|null                                                                                                $updated_by
+ * @property string|null                                                                                                $created_by
+ * @property string|null                                                                                                $deleted_by
+ * @property UserState|null                                                                                             $state
+ * @property array<array-key, mixed>|null                                                                               $moderation_data
+ * @property string|null                                                                                                $uuid
+ * @property string|null                                                                                                $full_name
+ * @property string|null                                                                                                $certificates
+ * @property string|null                                                                                                $last_dental_visit_period
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent>                                $activeConsents
+ * @property int|null                                                                                                   $active_consents_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity>                           $activities
+ * @property int|null                                                                                                   $activities_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, Appointment>                                                 $appointments
+ * @property int|null                                                                                                   $appointments_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication>                         $authentications
+ * @property int|null                                                                                                   $authentications_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client>                                    $clients
+ * @property int|null                                                                                                   $clients_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent>                                $consents
+ * @property int|null                                                                                                   $consents_count
+ * @property \Modules\User\Models\Team|null                                                                             $currentTeam
+ * @property \Modules\User\Models\Membership|DoctorStudio|\Modules\User\Models\DeviceUser|null                          $pivot
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device>                                 $devices
+ * @property int|null                                                                                                   $devices_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $all_team_users
+ * @property \Modules\User\Models\AuthenticationLog|null                                                                $latestAuthentication
+ * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property int|null                                                                                                   $media_count
+ * @property \Illuminate\Notifications\DatabaseNotificationCollection<int, \Modules\User\Models\Notification>           $notifications
+ * @property int|null                                                                                                   $notifications_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team>                                   $ownedTeams
+ * @property int|null                                                                                                   $owned_teams_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Permission>                             $permissions
+ * @property int|null                                                                                                   $permissions_count
+ * @property Profile|null                                                                                               $profile
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role>                                   $roles
+ * @property int|null                                                                                                   $roles_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser>                          $socialiteUsers
+ * @property int|null                                                                                                   $socialite_users_count
+ * @property Studio|null                                                                                                $studio
+ * @property \Illuminate\Database\Eloquent\Collection<int, Studio>                                                      $studios
+ * @property int|null                                                                                                   $studios_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership>                             $teamUsers
+ * @property int|null                                                                                                   $team_users_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team>                                   $teams
+ * @property int|null                                                                                                   $teams_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, Studio>                                                      $tenants
+ * @property int|null                                                                                                   $tenants_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token>                                     $tokens
+ * @property int|null                                                                                                   $tokens_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment>                              $treatments
+ * @property int|null                                                                                                   $treatments_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor admins()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor doctors()
- * @method static \Modules\SaluteOra\Database\Factories\DoctorFactory factory($count = null, $state = [])
+ * @method static \Modules\SaluteOra\Database\Factories\DoctorFactory  factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor orWhereNotState(string $column, $states)
@@ -3627,6 +3646,11 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
  * @mixin \Eloquent
+ * @property string|null $age_range
+ * @property-read array $schedule
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereAgeRange($value)
  */
 	class Doctor extends \Eloquent {}
 }
@@ -3675,9 +3699,9 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\User|null $user
- * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
  * @property-read int|null $appointments_count
+ * @mixin \Eloquent
  */
 	class DoctorStudio extends \Eloquent {}
 }
@@ -3716,144 +3740,6 @@ namespace Modules\SaluteOra\Models{
 
 namespace Modules\SaluteOra\Models{
 /**
- * DoctorValidation Model for the Patient Module.
- * 
- * Represents the validation process for a doctor's registration.
- *
- * @property int $id
- * @property int $doctor_id
- * @property string $validation_status Stato della validazione
- * @property \Illuminate\Support\Carbon|null $validation_date Data di validazione
- * @property int|null $validator_id
- * @property string|null $validation_notes Note aggiuntive sulla validazione
- * @property string|null $document_path Percorso del documento di validazione
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
- * @property-read \Modules\SaluteOra\Models\User|null $validator
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDoctorId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereDocumentPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidationStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorValidation whereValidatorId($value)
- * @mixin \Eloquent
- */
-	class DoctorValidation extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * Modello Isee per la gestione dei dati relativi all'ISEE delle pazienti.
- *
- * @property string $id
- * @property string $tenant_id
- * @property string $user_id
- * @property string|null $isee_code
- * @property numeric|null $isee_value
- * @property \Illuminate\Support\Carbon|null $isee_expiry_date
- * @property \Illuminate\Support\Carbon|null $isee_issue_date
- * @property string|null $isee_type
- * @property string|null $isee_document_path
- * @property bool $is_valid
- * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee eligibleForProject()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIsValid($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeDocumentPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeExpiryDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeIssueDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereIseeValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Isee withoutTrashed()
- * @method static \Modules\SaluteOra\Database\Factories\IseeFactory factory($count = null, $state = [])
- * @mixin \Eloquent
- */
-	class Isee extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * Modello per la storia clinica del paziente (MedicalHistory).
- * 
- * Rappresenta una voce di documentazione clinica associata a un utente/paziente.
- *
- * @property int $id
- * @property int $user_id
- * @property string|null $date
- * @property string|null $type
- * @property string|null $description
- * @property string|null $attachments
- * @see User
- * @property int $patient_id
- * @property string $condition
- * @property string|null $diagnosis_date
- * @property string|null $treatment
- * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Modules\SaluteOra\Models\User|null $user
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereCondition($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereDiagnosisDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereTreatment($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MedicalHistory withoutTrashed()
- * @mixin \Eloquent
- */
-	class MedicalHistory extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
  * Class Patient
  *
  * @property string $id
@@ -3872,7 +3758,6 @@ namespace Modules\SaluteOra\Models{
  * @property string|null $updated_by
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
- * @property-read \Modules\SaluteOra\Models\PatientIsee|null $isee
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Patient query()
@@ -4019,75 +3904,14 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereYearsInItaly($value)
  * @mixin \Eloquent
+ * @property null|\Modules\SaluteOra\Enums\PatientAgeRangeEnum $age_range
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
+ * @property-read int|null $studios_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereAgeRange($value)
  */
 	class Patient extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * PatientDocument Model for the Patient Module.
- * 
- * Represents a document uploaded by or for a patient, such as clinical documentation.
- *
- * @property int $id
- * @property int $patient_id
- * @property string $document_type
- * @property string $document_path
- * @property \Illuminate\Support\Carbon $upload_date
- * @property string|null $description
- * @property int|null $uploaded_by
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @property-read \Modules\SaluteOra\Models\User|null $uploader
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereDocumentPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereDocumentType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereUploadDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientDocument whereUploadedBy($value)
- * @mixin \Eloquent
- */
-	class PatientDocument extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * PatientIsee Model - wrapper per Isee con mapping campi specifici pazienti.
- *
- * @property int $id
- * @property int $patient_id
- * @property float|null $value
- * @property float|null $isee_value Alias for value
- * @property \Carbon\Carbon|null $valid_until
- * @property \Carbon\Carbon|null $isee_expiry_date Alias for valid_until
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read Patient $patient
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee eligibleForProject()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientIsee withoutTrashed()
- * @method static \Modules\SaluteOra\Database\Factories\PatientIseeFactory factory($count = null, $state = [])
- * @mixin \Eloquent
- */
-	class PatientIsee extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4158,64 +3982,6 @@ namespace Modules\SaluteOra\Models{
  * @mixin \Eloquent
  */
 	class PatientTeam extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
- * Modello Pregnancy per la gestione dei dati relativi alla gravidanza.
- *
- * @property string $id
- * @property string $tenant_id
- * @property string $user_id
- * @property \Illuminate\Support\Carbon|null $expected_delivery_date
- * @property int|null $weeks_pregnant
- * @property int|null $trimester
- * @property bool $high_risk
- * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $last_checkup_date
- * @property \Illuminate\Support\Carbon|null $next_checkup_date
- * @property string|null $healthcare_provider
- * @property string|null $healthcare_facility
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy tenant(?int $tenantId = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereExpectedDeliveryDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHealthcareFacility($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHealthcareProvider($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereHighRisk($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereLastCheckupDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereNextCheckupDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereTenantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereTrimester($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy whereWeeksPregnant($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Pregnancy withoutTrashed()
- * @method static \Modules\SaluteOra\Database\Factories\PregnancyFactory factory($count = null, $state = [])
- * @mixin \Eloquent
- */
-	class Pregnancy extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4295,46 +4061,6 @@ namespace Modules\SaluteOra\Models{
 
 namespace Modules\SaluteOra\Models{
 /**
- * ReimbursementRequest Model for the Patient Module.
- * 
- * Represents a request for reimbursement submitted by a patient.
- *
- * @property int $id
- * @property int $patient_id
- * @property int|null $appointment_id
- * @property numeric $amount
- * @property \Illuminate\Support\Carbon $request_date
- * @property string $status
- * @property string|null $reason
- * @property string|null $document_path
- * @property string|null $response_notes
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
- * @property-read \Modules\SaluteOra\Models\Patient|null $patient
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereAmount($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereAppointmentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereDocumentPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereReason($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereRequestDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereResponseNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ReimbursementRequest whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class ReimbursementRequest extends \Eloquent {}
-}
-
-namespace Modules\SaluteOra\Models{
-/**
  * Modello Report.
  *
  * @property int $id
@@ -4376,6 +4102,7 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Modules\SaluteOra\Models\Patient|null $patient
  * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
  * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
+ * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property string $name
  * @property string|null $description
  * @property string $type
@@ -4542,6 +4269,12 @@ namespace Modules\SaluteOra\Models{
  * @method static Builder<static>|Studio whereSettings($value)
  * @method static Builder<static>|Studio whereTaxCode($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Admin> $admins
+ * @property-read int|null $admins_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Patient> $patients
+ * @property-read int|null $patients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
  */
 	class Studio extends \Eloquent {}
 }
@@ -4788,6 +4521,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
  * @mixin \Eloquent
+ * @property string|null $age_range
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
  */
 	class User extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
@@ -6004,6 +5739,26 @@ namespace Modules\User\Models{
  * @property-read int|null $team_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
  * @mixin \Eloquent
+ * @property string|null $phone
+ * @property string|null $address
+ * @property string|null $city
+ * @property string|null $registration_number
+ * @property string|null $status
+ * @property string|null $state
+ * @property string|null $moderation_data
+ * @property string|null $certifications
+ * @property string|null $type
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIsOtp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereModerationData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePasswordExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRegistrationNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
  */
 	class User extends \Eloquent {}
 }
@@ -6259,7 +6014,7 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Module wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereStatus($value)
  * @property string|null $icon
- * @property array|null  $colors
+ * @property array<string, string>|null $colors
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereColors($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereIcon($value)
  * @mixin \Eloquent

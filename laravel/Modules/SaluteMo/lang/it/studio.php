@@ -376,4 +376,11 @@ return array (
     ),
   ),
   'search_placeholder' => 'Cerca per nome, indirizzo, telefono, email o specializzazione...',
+  'sections' => 
+  array (
+    'address' => 
+    array (
+      'heading' => 'address',
+    ),
+  ),
 );

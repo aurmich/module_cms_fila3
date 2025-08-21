@@ -20,8 +20,18 @@ class EditDoctorAvailability extends XotBaseEditRecord
     protected function afterSave(): void
     {
         $data = $this->form->getState();
-        $doctor = $this->record;
+        $record = $this->record;
+        
+        if (!($record instanceof \Modules\SaluteOra\Models\Doctor)) {
+            throw new \InvalidArgumentException('Record must be a Doctor instance');
+        }
+        
+        $doctor = $record;
         $studio = $doctor->studio;
+        
+        if ($studio === null) {
+            return;
+        }
         
         $res=$doctor->studios()->sync([$studio->id=>['schedule'=>$data['schedule']]]);
 
@@ -29,7 +39,5 @@ class EditDoctorAvailability extends XotBaseEditRecord
         if($pivot->schedule==null){
             $pivot->update(['schedule'=>$data['schedule']]);
         }
-        
-        
     }
 }

@@ -18,7 +18,7 @@ use Spatie\ModelStates\HasStatesContract;
 
 /**
  * Appointment Model for the SaluteOra Module.
- *
+ * 
  * Represents an appointment booked by a patient with a doctor in a studio.
  * Supports FullCalendar widgets with multi-tenancy and user type filtering.
  *
@@ -62,7 +62,6 @@ use Spatie\ModelStates\HasStatesContract;
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
  * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment emergency()
  * @method static \Modules\SaluteOra\Database\Factories\AppointmentFactory factory($count = null, $state = [])
@@ -92,10 +91,8 @@ use Spatie\ModelStates\HasStatesContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUserId($value)
- *
  * @property \Illuminate\Support\Carbon|null $starts_at
  * @property \Illuminate\Support\Carbon|null $ends_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereNotState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment orWhereState(string $column, $states)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDoctorId($value)
@@ -104,18 +101,15 @@ use Spatie\ModelStates\HasStatesContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePatientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereState($value)
- *
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @property string|null $invoice File fattura
  * @property-read string $time_range
  * @property-read \Modules\SaluteOra\Models\Report|null $report
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
- *
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel implements HasStatesContract

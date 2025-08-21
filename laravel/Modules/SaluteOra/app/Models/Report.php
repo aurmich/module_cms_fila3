@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteOra\Enums\DayFrequencyEnum;
 use Modules\SaluteOra\Enums\MedicalConditionEnum;
 use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 
 /**
@@ -54,6 +56,7 @@ use Modules\SaluteOra\Enums\OccurrenceFrequencyEnum;
  * @property-read \Modules\SaluteOra\Models\Patient|null $patient
  * @property-read \Modules\SaluteOra\Models\Doctor|null $doctor
  * @property-read \Modules\SaluteOra\Models\Appointment|null $appointment
+ * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property string $name
  * @property string|null $description
  * @property string $type
@@ -244,4 +247,56 @@ class Report extends BaseModel{
         }
         return null;
     }
+
+    /**
+     * Appuntamento a cui è associato il report.
+     *
+     * @return BelongsTo<Appointment, $this>
+     */
+    public function appointment(): BelongsTo
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_id');
+    }
+
+    /**
+     * Paziente a cui è associato il report.
+     *
+     * @return BelongsTo<Patient, $this>
+     */
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class, 'patient_id');
+    }
+
+    /**
+     * Dottore che ha redatto il report.
+     *
+     * @return BelongsTo<Doctor, $this>
+     */
+    public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(Doctor::class, 'doctor_id');
+    }
+
+    /*
+     * Studio dove è stato generato il report (attraverso l'appuntamento).
+     * Relazione indiretta attraverso l'appuntamento.
+     *
+     * @return HasOneThrough<Studio, Appointment, $this>
+     
+    public function studio(): HasOneThrough
+    {
+        return $this->hasOneThrough(Studio::class, Appointment::class, 'id', 'id', 'appointment_id', 'studio_id');
+    }
+    */
+    /*
+     * Studio dove è stato generato il report (accessor per backward compatibility).
+     * 
+     * @return Studio|null
+     
+    public function getStudioAttribute(): ?Studio
+    {
+        return $this->appointment?->studio;
+    }
+        */
 }

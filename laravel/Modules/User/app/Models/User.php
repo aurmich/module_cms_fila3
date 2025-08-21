@@ -89,6 +89,26 @@ use Modules\Xot\Contracts\ProfileContract;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
  * @property-read int|null $team_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
+ * @property string|null $phone
+ * @property string|null $address
+ * @property string|null $city
+ * @property string|null $registration_number
+ * @property string|null $status
+ * @property string|null $state
+ * @property string|null $moderation_data
+ * @property string|null $certifications
+ * @property string|null $type
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCertifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIsOtp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereModerationData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePasswordExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRegistrationNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
  * @mixin \Eloquent
  */
 class User extends BaseUser

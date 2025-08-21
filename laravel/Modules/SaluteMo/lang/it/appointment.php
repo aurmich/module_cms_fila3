@@ -499,6 +499,10 @@ return array (
       'error' => 'Errore durante l\'annullamento',
       'helper_text' => '',
     ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
+    ),
   ),
   'messages' => 
   array (

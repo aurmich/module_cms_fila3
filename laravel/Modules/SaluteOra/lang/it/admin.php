@@ -221,6 +221,10 @@ return array (
       'error' => 'Errore durante l\'eliminazione',
       'confirmation' => 'Questa operazione non può essere annullata',
     ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
+    ),
   ),
   'widgets' => 
   array (

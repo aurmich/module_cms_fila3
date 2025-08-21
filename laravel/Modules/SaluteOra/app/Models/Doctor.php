@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Doctor model for the SaluteOra module.
- *
+ * 
  * Extends the User model to provide doctor-specific functionality.
  *
  * @property string                                                                                                     $id
@@ -113,7 +113,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property int|null                                                                                                   $tokens_count
  * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment>                              $treatments
  * @property int|null                                                                                                   $treatments_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor admins()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor doctors()
  * @method static \Modules\SaluteOra\Database\Factories\DoctorFactory  factory($count = null, $state = [])
@@ -178,7 +177,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereYearsInItaly($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
- *
+ * @property string|null $age_range
+ * @property-read array $schedule
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereAgeRange($value)
  * @mixin \Eloquent
  */
 class Doctor extends User implements HasMedia
@@ -292,17 +295,49 @@ class Doctor extends User implements HasMedia
     {
         $studio = $this->studio;
         $doctor = $this;
+        
+        if ($studio === null || $studio->id === null) {
+            return [];
+        }
+        
         $pivot=DoctorStudio::firstOrCreate(['user_id'=>$doctor->id,'studio_id'=>$studio->id]);
         $res=$pivot->schedule;
         
 
-        return $res;
+        return $res ?? [];
     }
 
    
 
+    /**
+     * Relazione con gli appuntamenti del dottore.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Appointment, $this>
+     */
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    /**
+     * Relazione con i report creati dal dottore.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Report, $this>
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class, 'doctor_id');
+    }
+
+    /**
+     * Relazione con i pazienti che hanno avuto appuntamenti con questo dottore.
+     * Relazione attraverso gli appuntamenti.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Patient, $this>
+     */
+    public function patients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Patient::class, 'appointments', 'doctor_id', 'patient_id')
+            ->distinct();
     }
 }

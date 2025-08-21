@@ -1,42 +1,48 @@
-*.jar
-*.log
-*.lock
-package-lock.json
-*.phar
-.git-rewrite
-.php-cs-fixer.cache
-package-lock.json
+# Dependencies
 vendor/
 node_modules/
+package-lock.json
+composer.lock
+
+# Environment and configuration
 .env
 /.vagrant
-.phpunit.result.cache
-.DS_Store
-error_log
-.phpintel
 /.idea
 
-v8-compile-cache-0
-/resources/views/maps/farmshops/data
-package-lock.json
-
-*.stackdump
-
+# Cache and temporary files
 *.cache
+*.log
+*.lock
+*.phar
+*.stackdump
+*.exe
+*:Zone.Identifier
+v8-compile-cache-0
+.php-cs-fixer.cache
+.phpunit.result.cache
+.phpintel
+
+# Build and compiled files
+/build
 /fonts
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
+/resources/views/maps/farmshops/data
+
+# Git related
 .git-rewrite/
-.php-cs-fixer.cache
-node_modules
 .git-blame-ignore-revs
+
+# System files
+.DS_Store
+error_log
+
+# Backup files
 *.old
-node_modules
-vendor
-vendor/
-build/
--e 
+*.old1
+*.backup
+*.bak
+
 # PHPStan documentation
 docs/phpstan/
+
+# Other
+-e

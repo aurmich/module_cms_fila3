@@ -434,6 +434,15 @@ return array (
         'helper_text' => '',
         'description' => 'Nome completo del paziente',
       ),
+      'full_name' => 
+      array (
+        'label' => 'Nome Completo Paziente',
+        'placeholder' => 'Nome e cognome del paziente',
+        'help' => 'Nome completo del paziente associato al referto',
+        'tooltip' => 'Nome completo del paziente del referto odontoiatrico',
+        'helper_text' => '',
+        'description' => 'Nome completo del paziente associato al referto odontoiatrico',
+      ),
     ),
     'is_breastfeeding' => 
     array (
@@ -480,7 +489,153 @@ return array (
     ),
     'studio_id' => 
     array (
-      'label' => 'studio_id',
+      'label' => 'Studio',
+      'placeholder' => 'Seleziona lo studio',
+      'help' => 'Studio medico associato al referto',
+      'tooltip' => 'Studio dove è stato creato il referto',
+      'helper_text' => '',
+      'description' => 'Studio medico associato al referto odontoiatrico',
+    ),
+    'name' => 
+    array (
+      'label' => 'Nome Referto',
+      'placeholder' => 'Inserisci il nome del referto',
+      'help' => 'Nome identificativo del referto odontoiatrico',
+      'tooltip' => 'Nome del referto per identificazione',
+      'helper_text' => '',
+      'description' => 'Nome del referto odontoiatrico',
+    ),
+    'description' => 
+    array (
+      'label' => 'Descrizione',
+      'placeholder' => 'Inserisci la descrizione del referto',
+      'help' => 'Descrizione dettagliata del referto odontoiatrico',
+      'tooltip' => 'Descrizione completa del referto',
+      'helper_text' => '',
+      'description' => 'Descrizione del referto odontoiatrico',
+    ),
+    'type' => 
+    array (
+      'label' => 'Tipo Referto',
+      'placeholder' => 'Seleziona il tipo di referto',
+      'help' => 'Tipo di referto odontoiatrico',
+      'tooltip' => 'Categoria del referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Tipo di referto odontoiatrico',
+    ),
+    'period_start' => 
+    array (
+      'label' => 'Inizio Periodo',
+      'placeholder' => 'Seleziona la data di inizio periodo',
+      'help' => 'Data di inizio del periodo di riferimento',
+      'tooltip' => 'Inizio del periodo di validità del referto',
+      'helper_text' => '',
+      'description' => 'Data di inizio del periodo di riferimento del referto',
+    ),
+    'period_end' => 
+    array (
+      'label' => 'Fine Periodo',
+      'placeholder' => 'Seleziona la data di fine periodo',
+      'help' => 'Data di fine del periodo di riferimento',
+      'tooltip' => 'Fine del periodo di validità del referto',
+      'helper_text' => '',
+      'description' => 'Data di fine del periodo di riferimento del referto',
+    ),
+    'parameters' => 
+    array (
+      'label' => 'Parametri',
+      'placeholder' => 'Inserisci i parametri del referto',
+      'help' => 'Parametri specifici del referto odontoiatrico',
+      'tooltip' => 'Parametri di configurazione del referto',
+      'helper_text' => '',
+      'description' => 'Parametri di configurazione del referto odontoiatrico',
+    ),
+    'last_generated_at' => 
+    array (
+      'label' => 'Ultima Generazione',
+      'placeholder' => 'Data ultima generazione',
+      'help' => 'Data e ora dell\'ultima generazione del referto',
+      'tooltip' => 'Quando è stato generato l\'ultimo referto',
+      'helper_text' => '',
+      'description' => 'Data e ora dell\'ultima generazione del referto odontoiatrico',
+    ),
+    'created_by' => 
+    array (
+      'label' => 'Creato Da',
+      'placeholder' => 'Utente che ha creato il referto',
+      'help' => 'Utente che ha creato il referto odontoiatrico',
+      'tooltip' => 'Autore del referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Utente che ha creato il referto odontoiatrico',
+    ),
+    'tenant_id' => 
+    array (
+      'label' => 'Tenant',
+      'placeholder' => 'Seleziona il tenant',
+      'help' => 'Tenant associato al referto odontoiatrico',
+      'tooltip' => 'Organizzazione del referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Tenant associato al referto odontoiatrico',
+    ),
+    'updated_by' => 
+    array (
+      'label' => 'Aggiornato Da',
+      'placeholder' => 'Utente che ha aggiornato il referto',
+      'help' => 'Utente che ha aggiornato il referto odontoiatrico',
+      'tooltip' => 'Utente che ha modificato il referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Utente che ha aggiornato il referto odontoiatrico',
+    ),
+    'deleted_at' => 
+    array (
+      'label' => 'Data Eliminazione',
+      'placeholder' => 'Data di eliminazione del referto',
+      'help' => 'Data e ora di eliminazione del referto odontoiatrico',
+      'tooltip' => 'Quando è stato eliminato il referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Data e ora di eliminazione del referto odontoiatrico',
+    ),
+    'deleted_by' => 
+    array (
+      'label' => 'Eliminato Da',
+      'placeholder' => 'Utente che ha eliminato il referto',
+      'help' => 'Utente che ha eliminato il referto odontoiatrico',
+      'tooltip' => 'Utente che ha cancellato il referto odontoiatrico',
+      'helper_text' => '',
+      'description' => 'Utente che ha eliminato il referto odontoiatrico',
+    ),
+    'doctor' => 
+    array (
+      'full_name' => 
+      array (
+        'label' => 'Nome Completo Dottore',
+        'placeholder' => 'Nome e cognome del dottore',
+        'help' => 'Nome completo del dottore responsabile del referto',
+        'tooltip' => 'Nome completo del dottore del referto odontoiatrico',
+        'helper_text' => '',
+        'description' => 'Nome completo del dottore responsabile del referto odontoiatrico',
+      ),
+    ),
+    'studio' => 
+    array (
+      'name' => 
+      array (
+        'label' => 'Nome Studio',
+        'placeholder' => 'Nome dello studio medico',
+        'help' => 'Nome identificativo dello studio medico',
+        'tooltip' => 'Nome ufficiale dello studio medico',
+        'helper_text' => '',
+        'description' => 'Nome dello studio medico associato al referto odontoiatrico',
+      ),
+      'full_address' => 
+      array (
+        'label' => 'Indirizzo Completo Studio',
+        'placeholder' => 'Indirizzo completo con CAP e città',
+        'help' => 'Indirizzo completo dello studio medico con tutti i dettagli',
+        'tooltip' => 'Indirizzo completo con via, numero, CAP, città e provincia',
+        'helper_text' => 'Indirizzo completo per la localizzazione e navigazione',
+        'description' => 'Indirizzo completo dello studio medico per la localizzazione',
+      ),
     ),
   ),
   'actions' => 
@@ -542,7 +697,12 @@ return array (
     ),
     'export_xls' => 
     array (
-      'label' => 'export_xls',
+      'label' => 'Esporta Excel',
+      'tooltip' => 'Esporta il referto in formato Excel',
+      'helper_text' => '',
+      'description' => 'Azione per esportare il referto in Excel',
+      'success' => 'Referto odontoiatrico esportato in Excel con successo',
+      'error' => 'Errore nell\'esportazione Excel del referto odontoiatrico',
     ),
   ),
   'filters' => 

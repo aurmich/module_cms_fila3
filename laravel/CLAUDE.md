@@ -119,6 +119,48 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ## Enums
 - Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
 
+### PHPStan Error Handling
+- **NEVER** use `@phpstan-ignore` comments unless absolutely necessary (e.g., known framework limitations)
+- **ALWAYS** prefer fixing the actual issue over ignoring it
+- Common fixes for PHPStan errors:
+  - **Type checking**: Use `instanceof` checks instead of assuming types
+  - **Null safety**: Add proper null checks before accessing properties/methods
+  - **Return types**: Fix method signatures to match parent classes or use proper generic types
+  - **Template covariance**: Use `$this` instead of concrete class names in generic annotations
+  - **Method overrides**: Remove unnecessary overrides when parent implementation is sufficient
+
+<code-snippet name="Proper Type Checking Example" lang="php">
+// Bad - ignoring the error
+/** @phpstan-ignore property.nonObject */
+$result = $record->someMethod();
+
+// Good - proper type checking
+if (!($record instanceof ExpectedClass)) {
+    throw new \InvalidArgumentException('Record must be ExpectedClass instance');
+}
+$result = $record->someMethod();
+</code-snippet>
+
+<code-snippet name="Proper Null Checking Example" lang="php">
+// Bad - ignoring the error
+/** @phpstan-ignore property.nonObject */
+$id = $studio->id;
+
+// Good - proper null checking
+if ($studio === null || $studio->id === null) {
+    return [];
+}
+$id = $studio->id;
+</code-snippet>
+
+<code-snippet name="Proper Generic Types Example" lang="php">
+// Bad - template covariance issues
+@return BelongsTo<Model, ConcreteClass>
+
+// Good - using $this for covariance
+@return BelongsTo<Model, $this>
+</code-snippet>
+
 
 === filament/core rules ===
 
@@ -142,6 +184,31 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - Schemas: Represent components that define the structure and behavior of the UI, such as forms, tables, or lists.
 - Tables: Interactive tables with filtering, sorting, pagination, and more.
 - Widgets: Small component included within dashboards, often used for displaying data in charts, tables, or as a stat.
+
+### Filament Resources Best Practices
+- **getRelations()**: Must return array of RelationManager class names, NOT field names or strings
+- **getXlsFields()**: Use this method for field export configurations, not getRelations()
+- **Resource inheritance**: Extend base resources correctly, ensure proper model assignment
+
+<code-snippet name="Correct Resource Relations" lang="php">
+// Correct - RelationManager classes
+public static function getRelations(): array
+{
+    return [
+        AppointmentsRelationManager::class,
+        PatientsRelationManager::class,
+    ];
+}
+
+// Wrong - field names
+public static function getRelations(): array
+{
+    return [
+        'id',
+        'patient.full_name', // This causes "Class 'id' not found" errors
+    ];
+}
+</code-snippet>
 
 ### Relationships
 - Determine if you can use the `relationship()` method on form components when you need `options` for a select, checkbox, repeater, or when building a `Fieldset`:

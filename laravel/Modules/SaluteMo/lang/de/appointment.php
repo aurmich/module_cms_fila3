@@ -85,36 +85,9 @@ return [
             'tooltip' => 'Die medizinische Klinik, in der der Termin stattfindet',
             'helper_text' => '',
         ],
-        'patient' => [
-            'label' => 'Patient',
-            'placeholder' => 'Eine Option auswählen',
-            'help' => 'Wählen Sie den Patienten für diesen Termin',
-            'tooltip' => 'Der Patient, der den Termin gebucht hat',
-            'helper_text' => '',
-            'description' => 'Patientenauswahl für Termin',
-            'icon' => 'heroicon-o-user',
-            'color' => 'primary',
-        ],
-        'doctor' => [
-            'label' => 'Arzt',
-            'placeholder' => 'Eine Option auswählen',
-            'help' => 'Wählen Sie den Arzt, der die Untersuchung durchführt',
-            'tooltip' => 'Der für den Termin verantwortliche Arzt',
-            'helper_text' => '',
-            'description' => 'Arztauswahl für Termin',
-            'icon' => 'heroicon-o-user-circle',
-            'color' => 'success',
-        ],
-        'studio' => [
-            'label' => 'Studio',
-            'placeholder' => 'Eine Option auswählen',
-            'help' => 'Wählen Sie das Studio, in dem der Termin stattfindet',
-            'tooltip' => 'Das medizinische Studio, in dem der Termin stattfindet',
-            'helper_text' => '',
-            'description' => 'Studioauswahl für Termin',
-            'icon' => 'heroicon-o-building-office',
-            'color' => 'info',
-        ],
+
+
+
         'start_time' => [
             'label' => 'Startdatum und -zeit',
             'placeholder' => 'Startdatum und -zeit auswählen',

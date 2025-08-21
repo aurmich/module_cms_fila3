@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Lang\Actions;
 
-
 use Illuminate\Support\Arr;
-use Webmozart\Assert\Assert;
-use Illuminate\Support\Collection;
-use Spatie\QueueableAction\QueueableAction;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Spatie\QueueableAction\QueueableAction;
 
 /**
  * Action per la traduzione di elementi di una collezione.
@@ -23,9 +20,6 @@ class TransArrayAction
     /**
      * Esegue la traduzione di una collezione.
      *
-     * @param array $array
-     * @param string|null $transKey
-     *
      * @return array<int|string, string>
      */
     public function execute(
@@ -33,12 +27,12 @@ class TransArrayAction
         ?string $transKey,
     ): array {
         if (null === $transKey) {
-            return Arr::map($array,fn (mixed $item): string => SafeStringCastAction::cast($item));
+            return Arr::map($array, fn (mixed $item): string => SafeStringCastAction::cast($item));
         }
 
         $this->transKey = $transKey;
 
-        return Arr::map($array,fn (mixed $item): string => $this->trans($item));
+        return Arr::map($array, fn (mixed $item): string => $this->trans($item));
     }
 
     /**
@@ -50,9 +44,8 @@ class TransArrayAction
      */
     public function trans(mixed $item): string
     {
-        
         // Converte l'item in stringa se non lo è già
-        if (!\is_string($item)) {
+        if (! \is_string($item)) {
             $item = SafeStringCastAction::cast($item);
         }
 
@@ -62,10 +55,8 @@ class TransArrayAction
 
         // Prima prova la traduzione diretta
         $key = $this->transKey.'.'.$item.'.label';
-        
-        $trans = trans($key);
 
-        
+        $trans = trans($key);
 
         // Se la traduzione esiste ed è una stringa, la restituisce
         if ($trans !== $key && \is_string($trans)) {

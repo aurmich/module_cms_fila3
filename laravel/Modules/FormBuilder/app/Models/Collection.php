@@ -44,6 +44,8 @@ use LaraZeus\Bolt\Models\Collection as LaraZeusCollection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withoutTrashed()
+ * @property \Illuminate\Support\Collection<array-key, mixed>|null $values
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereValues($value)
  * @mixin \Eloquent
  */
 class Collection extends LaraZeusCollection

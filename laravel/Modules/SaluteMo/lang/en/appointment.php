@@ -85,36 +85,9 @@ return [
             'tooltip' => 'The medical clinic where the appointment will take place',
             'helper_text' => '',
         ],
-        'patient' => [
-            'label' => 'Patient',
-            'placeholder' => 'Select an option',
-            'help' => 'Choose the patient for this appointment',
-            'tooltip' => 'The patient who booked the appointment',
-            'helper_text' => '',
-            'description' => 'Patient selection for appointment',
-            'icon' => 'heroicon-o-user',
-            'color' => 'primary',
-        ],
-        'doctor' => [
-            'label' => 'Doctor',
-            'placeholder' => 'Select an option',
-            'help' => 'Choose the doctor who will perform the visit',
-            'tooltip' => 'The doctor responsible for the appointment',
-            'helper_text' => '',
-            'description' => 'Doctor selection for appointment',
-            'icon' => 'heroicon-o-user-circle',
-            'color' => 'success',
-        ],
-        'studio' => [
-            'label' => 'Studio',
-            'placeholder' => 'Select an option',
-            'help' => 'Choose the studio where the appointment will take place',
-            'tooltip' => 'The medical studio where the appointment will take place',
-            'helper_text' => '',
-            'description' => 'Studio selection for appointment',
-            'icon' => 'heroicon-o-building-office',
-            'color' => 'info',
-        ],
+
+
+
         'type' => [
             'label' => 'Type',
             'placeholder' => 'Select appointment type',

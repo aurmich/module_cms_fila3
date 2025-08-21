@@ -118,6 +118,7 @@ class DoctorsRelationManager extends XotBaseRelationManager
                     ->getSearchResultsUsing(
                         function (string $search):array {
                         // Query sui dottori con la connessione corretta (user database)
+                        /** @phpstan-ignore staticMethod.notFound */
                         return Doctor::where(function (Builder $query) use ($search) {
                                 $query->where('name', 'like', "%{$search}%")
                                     ->orWhere('email', 'like', "%{$search}%");

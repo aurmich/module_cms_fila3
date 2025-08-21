@@ -215,6 +215,10 @@ return array (
       'label' => 'Riordina Record',
       'tooltip' => 'Riordina i record della tabella',
     ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
+    ),
   ),
   'filters' => 
   array (

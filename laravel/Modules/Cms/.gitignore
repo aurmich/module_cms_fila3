@@ -1,62 +1,48 @@
-/vendor/
+# Dependencies
+vendor/
 node_modules/
-npm-debug.log
-*.cache
-*.phar
-*.lock
-*.bak
-*.log
 package-lock.json
+composer.lock
 yarn-error.log
+npm-debug.log
 
-# Laravel 4 specific
+# Build and compiled files
+/build
+/docs/cache
+cache/
+docs/cache/
+
+# Cache and temporary files
+*.cache
+*.lock
+*.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Laravel specific
 bootstrap/compiled.php
 app/storage/
-
-# Laravel 5 & Lumen specific
 public/storage
 public/hot
-
-# Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
-
 storage/*.key
+
+# Environment and configuration
 .env
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
-*.cache
 
-.git-rewrite
-/.git-rewrite
-
-vendor/
-vendor
-*.lock
-package-lock.json
-composer.lock
-*.log
-package-lock.json
-
-build/
-/build
-/.git-rewrite
-*.phar
-*.lock
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
+# Git related
 .git-rewrite/
-/docs/cache
-node_modules
+.git-blame-ignore-revs
 
+# Backup files
+*.old
+*.old1
+*.backup
+*.bak
 
-
-
-
-
-docs/cache/
-cache/
+# File di log
+*.log

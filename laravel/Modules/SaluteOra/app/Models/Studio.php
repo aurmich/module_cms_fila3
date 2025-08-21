@@ -112,6 +112,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder<static>|Studio whereRegion($value)
  * @method static Builder<static>|Studio whereSettings($value)
  * @method static Builder<static>|Studio whereTaxCode($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Admin> $admins
+ * @property-read int|null $admins_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Patient> $patients
+ * @property-read int|null $patients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
+ * @property-read int|null $reports_count
  * @mixin \Eloquent
  */
 class Studio extends BaseTenant
@@ -189,9 +195,9 @@ class Studio extends BaseTenant
      * - Studio risiede nel database 'salute_ora'
      * - doctor_studio (pivot) risiede nel database 'salute_ora'
      *
-     * @return BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Doctor, $this>
      */
-    public function doctors(): BelongsToMany
+    public function doctors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         // Per una relazione cross-database, non possiamo usare belongsToManyX
         // Dobbiamo specificare esplicitamente tutti i parametri
@@ -200,10 +206,43 @@ class Studio extends BaseTenant
 
     /**
      * Relazione con gli appuntamenti dello studio.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Appointment, $this>
      */
-    public function appointments(): HasMany
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Appointment::class, 'studio_id');
+        return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * Relazione molti-a-molti con i pazienti che frequentano lo studio.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Patient, $this>
+     */
+    public function patients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Patient::class);
+    }
+
+    /**
+     * Relazione molti-a-molti con gli admin che gestiscono lo studio.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Admin, $this>
+     */
+    public function admins(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToManyX(Admin::class);
+    }
+
+    /**
+     * Relazione con i report generati nello studio.
+     * Accesso indiretto attraverso gli appuntamenti.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<Report, Appointment, $this>
+     */
+    public function reports(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(Report::class, Appointment::class, 'studio_id', 'appointment_id');
     }
 
     /**

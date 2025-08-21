@@ -86,6 +86,8 @@ use LaraZeus\Bolt\Models\Form as BaseForm;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withoutTrashed()
+ * @property string|null $extensions
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereExtensions($value)
  * @mixin \Eloquent
  */
 class Form extends BaseForm

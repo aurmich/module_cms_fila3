@@ -1,33 +1,59 @@
-.git-blame-ignore-revs
-/vendor
-/build
+# Dependencies and packages
+/vendor/
+/node_modules/
+/docs/vendor/
+
+# Lock files and cache
 *.lock
-.git-rewrite
-.php-cs-fixer.cache
+*.cache
 *.phar
+package-lock.json
+yarn-error.log
+npm-debug.log
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Log files
 *.log
-.php-cs-fixer.cache
-*.lock
+
+# Build directories
+/build/
+/build
+build/
+
+# Laravel specific
+bootstrap/compiled.php
+app/storage/
+public/storage
+public/hot
+public_html/storage
+public_html/hot
+storage/*.key
+.env
+
+# Local configurations
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Git specific
 .git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
 .git-rewrite/
-.php-cs-fixer.cache
-node_modules
-/*.cache
-.git-blame-ignore-revs
-node_modules
-vendor
-.php-cs-fixer.cache
-.git-blame-ignore-revs
-build/
-vendor/
-build/
-node_modules
+.git-rewrite
+
+# Temporary and system files
+*.tmp
+*.swp
+*.swo
+*.stackdump
+*.exe
+*:Zone.Identifier
+.DS_Store
+*.old
+*.old1
+*.backup
+
+# Documentation and cache
+docs/phpstan/
 docs/cache/
 cache/
-.php-cs-fixer.cache
--e 
-# PHPStan documentation
-docs/phpstan/

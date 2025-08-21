@@ -189,6 +189,8 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
+ * @property string|null $age_range
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
  * @mixin \Eloquent
  */
 class User extends BaseUser implements HasMedia,HasStatesContract 
@@ -449,5 +451,15 @@ class User extends BaseUser implements HasMedia,HasStatesContract
     public function scopePatients(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('type', UserTypeEnum::PATIENT->value);
+    }
+
+    /**
+     * Relazione uno-a-uno con il profilo utente.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<Profile, $this>
+     */
+    public function profile(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Profile::class);
     }
 }

@@ -1,56 +1,59 @@
-# Dependency directories
+# Dependencies and packages
 /vendor/
 /node_modules/
+/docs/vendor/
 
-# Dependency logs and cache
-npm-debug.log
-*.log
+# Lock files and cache
+*.lock
 *.cache
 *.phar
-*.lock
 package-lock.json
 yarn-error.log
+npm-debug.log
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Log files
+*.log
 
 # Build directories
 /build/
+/build
+build/
 
-# Laravel 4 specific
+# Laravel specific
 bootstrap/compiled.php
 app/storage/
-
-# Laravel 5 & Lumen specific
 public/storage
 public/hot
-
-# Laravel with changed public path
 public_html/storage
 public_html/hot
-
-# Laravel specific keys and environment
 storage/*.key
 .env
 
-# Homestead specific files
+# Local configurations
 Homestead.yaml
 Homestead.json
 /.vagrant
 
-# PHPUnit specific files
-.phpunit.result.cache
-
-# PHP CS Fixer
-.php-cs-fixer.cache
-
 # Git specific
 .git-blame-ignore-revs
 .git-rewrite/
+.git-rewrite
 
-
-# Ignored temporary files
+# Temporary and system files
 *.tmp
 *.swp
 *.swo
-.php-cs-fixer.cache
--e 
-# PHPStan documentation
+*.stackdump
+*.exe
+*:Zone.Identifier
+.DS_Store
+*.old
+*.old1
+*.backup
+
+# Documentation and cache
 docs/phpstan/
+docs/cache/
+cache/

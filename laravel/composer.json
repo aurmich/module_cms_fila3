@@ -67,6 +67,7 @@
         "go":[
             "@php -d memory_limit=-1 composer.phar selfupdate",
             "rm -rf ./app/View/Components/vendor/",
+            "rm -rf ./resources/views/vendor/",
             "@php -d memory_limit=-1 composer.phar update -W",
             "@php artisan vendor:publish --all",
             "rm -rf database/migrations/*",

@@ -82,4 +82,5 @@ use Illuminate\Database\Eloquent\Builder;
 class Profile extends BaseProfile{
     /** @var string */
     protected $connection = 'salute_ora';
+
 } 

@@ -1,107 +1,60 @@
-vendor
+# Dependencies and packages
 /vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+/node_modules/
+/docs/vendor/
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
-
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-.git-rewrite
-.git-blame-ignore-revs
-/vendor
+# Lock files and cache
 *.lock
 composer.lock
 package-lock.json
-.php-cs-fixer.cache
 *.cache
-build/
-/build
-*.cache
-docs/vendor
-/docs/vendor
-node_modules
-.git-blame-ignore-revs
-vendor
-build
-node_modules
-vendor
-/vendor/
-node_modules/
-npm-debug.log
 yarn-error.log
+npm-debug.log
+.phpunit.result.cache
+.php-cs-fixer.cache
 
-# Laravel 4 specific
+# Log files
+*.log
+
+# Build directories
+/build/
+/build
+build/
+
+# Laravel specific
 bootstrap/compiled.php
 app/storage/
-
-# Laravel 5 & Lumen specific
 public/storage
 public/hot
-
-# Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
-
 storage/*.key
 .env
+
+# Local configurations
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
+
+# Git specific
+.git-blame-ignore-revs
+.git-rewrite/
 .git-rewrite
-.git-blame-ignore-revs
-/vendor
-*.lock
-composer.lock
-package-lock.json
-.php-cs-fixer.cache
-*.cache
-build/
-/build
-*.cache
-docs/vendor
-/docs/vendor
-node_modules
-.git-blame-ignore-revs
-.git-blame-ignore-revs
-vendor
-build
-vendor/
-/vendor
-vendor/
-vendor/*
-.php-cs-fixer.cache
-.git-blame-ignore-revs
-build/
-vendor/
-build/
-node_modules
+
+# Temporary and system files
+*.tmp
+*.swp
+*.swo
+*.stackdump
+*.exe
+*:Zone.Identifier
+.DS_Store
+*.old
+*.old1
+*.backup
+*.bak
+
+# Documentation and cache
+docs/phpstan/
 docs/cache/
 cache/
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-
-# Backup files
-*.bak
-# File di log
-*.log
--e 
-# PHPStan documentation
-docs/phpstan/
