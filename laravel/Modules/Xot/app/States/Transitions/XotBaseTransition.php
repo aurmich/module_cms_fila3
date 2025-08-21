@@ -7,13 +7,16 @@ namespace Modules\Xot\States\Transitions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Modules\Notify\Datas\RecordNotificationData;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\ModelStates\Transition;
 
 abstract class XotBaseTransition extends Transition
 {
-    public function __construct(public Model $record, public ?string $message = '') {}
+    public function __construct(public Model $record, public ?string $message = '')
+    {
+    }
 
     public function handle(): Model
     {
@@ -24,7 +27,7 @@ abstract class XotBaseTransition extends Transition
         $stateClassName = Str::of($class)->afterLast('To')->toString();
         $newStateClass = $stateNamespace.'\\'.$stateClassName;
 
-        /** @phpstan-ignore-next-line */
+        /* @phpstan-ignore-next-line */
         $this->record->state = new $newStateClass($this->record);
         $this->record->save();
 
@@ -33,26 +36,26 @@ abstract class XotBaseTransition extends Transition
 
     public function sendNotifications(): void
     {
-
         $recipients = $this->getNotificationRecipients();
         foreach ($recipients as $recipient) {
-            if ($recipient instanceof UserContract) {
-                $this->sendRecipientNotification($recipient);
-            } elseif ($recipient === null) {
-                $this->sendRecipientNotification(null);
-            }
+            
+            $this->sendRecipientNotification($recipient);
+            
         }
     }
 
     /**
-     * @return array<string, Model|null>
+     * @return  array<string, RecordNotificationData>
      */
     public function getNotificationRecipients(): array
     {
         return [
-            'me' => $this->record,
+            // 'me' => $this->record,
+            'me_mail' => RecordNotificationData::from(['record' => $this->record, 'channel' => 'mail']),
             // 'patient' => $this->record->patient,
             // 'doctor' => $this->record->doctor,
+            // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+            // 'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
         ];
     }
 
@@ -66,7 +69,6 @@ abstract class XotBaseTransition extends Transition
 
     public function getNotificationSlug(UserContract $recipient): string
     {
-
         $type = $recipient->type->value;
         $slug = class_basename($this->record).'-'.$type.'-'.Str::of(class_basename(static::class))->kebab()->toString();
         $slug = Str::slug($slug);
@@ -74,13 +76,11 @@ abstract class XotBaseTransition extends Transition
         return $slug;
     }
 
-    public function sendRecipientNotification(?UserContract $recipient): void
+    public function sendRecipientNotification(RecordNotificationData $recipient): void
     {
-        if ($recipient == null) {
-            return;
-        }
+       
 
-        $slug = $this->getNotificationSlug($recipient);
+        $slug = $this->getNotificationSlug($recipient->record);
 
         $notify = new RecordNotification(
             $this->record,
@@ -92,7 +92,7 @@ abstract class XotBaseTransition extends Transition
         $notify = $notify->addAttachments($this->getNotificationAttachments());
         // appointment-patient-pending-to-confirmed
         try {
-            Notification::route('mail', $recipient->email)
+            Notification::route($recipient->getChannel(), $recipient->getRoute())
                 ->notify($notify);
         } catch (\TypeError $e) {
             dddx($e);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\Appointment\Transitions;
 
+use Modules\Notify\Datas\RecordNotificationData;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\States\Transitions\XotBaseTransition;
 use Webmozart\Assert\Assert;
@@ -19,8 +20,8 @@ abstract class BaseTransition extends XotBaseTransition
 
         // Assert::isInstanceOf($record, Appointment::class);
         return [
-            'patient' => $record->patient,
-            // 'doctor' => $record->doctor,
+            'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+            // 'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
         ];
     }
 
