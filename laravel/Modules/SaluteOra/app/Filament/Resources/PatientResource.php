@@ -285,4 +285,30 @@ class PatientResource extends XotBaseResource
             Pages\EditPatientPrivacy::class,
         ]);
     }
+
+
+    public static function getXlsFields(): array
+    {
+        return [
+            'id',
+            'first_name',
+            'last_name',
+            'age_range',
+            'address',
+            'city',
+            'nationality',
+            'country_code',
+            'years_in_italy',
+            'family_members',
+            'children_count',
+            'phone',
+            'email',
+            'last_dental_visit_period',
+            'dental_problems',
+            'state',
+            'created_at',
+            'updated_at',
+            
+        ];
+    }
 }

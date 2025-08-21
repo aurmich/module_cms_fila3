@@ -17,6 +17,7 @@ use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Actions\Pdf\StreamDownloadPdfAction;
 use Modules\Xot\Filament\Widgets\StateOverviewWidget;
 use Modules\UI\Filament\Tables\Columns\IconStateColumn;
+use Modules\Xot\Filament\Actions\Header\ExportXlsAction;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\SaluteOra\States\Appointment\AppointmentState;
 use Modules\SaluteMo\Filament\Resources\AppointmentResource;
@@ -99,6 +100,18 @@ class ListAppointments extends XotBaseListRecords
         return [
             //Widgets\AppointmentOverviewWidget::make(['paperino'=>'pluto']),
             StateOverviewWidget::make(['stateClass'=>AppointmentState::class,'model'=>Appointment::class]),
+        ];
+    }
+
+     /**
+     * Get the header actions.
+     *
+     * @return array<string, \Filament\Actions\Action>
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+           'export_xls' => ExportXlsAction::make('export_xls'),
         ];
     }
 

@@ -189,8 +189,8 @@ class Report extends BaseModel{
             'needs_more_dental_care' => 'boolean',
             
             // Enum casts - these use PHP 8.1+ backed enums (string-based)
-            'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
-            'teeth_brushing_frequency' => DayFrequencyEnum::class,
+            //'mouth_teeth_pain_frequency' => OccurrenceFrequencyEnum::class,
+            //'teeth_brushing_frequency' => DayFrequencyEnum::class,
             'specify_diseases' => 'array', // Array of MedicalConditionEnum values
             'specify_missing_teeth' => 'array', // Array of ToothFDIEnum values
             'specify_decayed_teeth' => 'array', // Array of ToothFDIEnum values
@@ -213,5 +213,35 @@ class Report extends BaseModel{
         return Arr::map($this->specify_diseases, function($disease){
             return MedicalConditionEnum::tryFrom($disease);
         });
+    }
+
+    /**
+     * @param null|string|OccurrenceFrequencyEnum $value
+     * @return null|OccurrenceFrequencyEnum
+     */
+    public function getMouthTeethPainFrequencyAttribute($value)
+    {
+        if($value instanceof OccurrenceFrequencyEnum){
+            return $value;
+        }
+        if(is_string($value)){
+            return OccurrenceFrequencyEnum::tryFrom($value);
+        }
+        return null;
+    }
+    
+    /**
+     * @param null|string|DayFrequencyEnum $value
+     * @return null|DayFrequencyEnum
+     */
+    public function getTeethBrushingFrequencyAttribute($value)
+    {
+        if($value instanceof DayFrequencyEnum){
+            return $value;
+        }
+        if(is_string($value)){
+            return DayFrequencyEnum::tryFrom($value);
+        }
+        return null;
     }
 }

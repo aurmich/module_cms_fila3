@@ -8,6 +8,7 @@ use Filament\Tables;
 use Filament\Actions;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\SaluteMo\Filament\Resources\ReportResource;
+use Modules\Xot\Filament\Actions\Header\ExportXlsAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Modules\Media\Filament\Tables\Columns\IconMediaColumn;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
@@ -202,6 +203,19 @@ class ListReports extends XotBaseListRecords
                 ->dateTime('d/m/Y H:i')
                 ->sortable(),
             */
+        ];
+    }
+
+
+     /**
+     * Get the header actions.
+     *
+     * @return array<string, \Filament\Actions\Action>
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+           'export_xls' => ExportXlsAction::make('export_xls'),
         ];
     }
 }

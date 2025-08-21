@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Modules\Xot\Filament\Actions\Header;
 
-// Header actions must be an instance of Filament\Actions\Action, or Filament\Actions\ActionGroup.
-// use Filament\Tables\Actions\Action;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,10 +22,16 @@ class ExportXlsLazyAction extends Action
     protected function setUp(): void
     {
         parent::setUp();
-        $this->translateLabel()
-            
-            ->tooltip(__('xot::actions.export_xls'))
-            ->icon('heroicon-o-arrow-down-tray')
+        
+        $this->label(__('xot::actions.export_xls.label'))
+            ->tooltip(__('xot::actions.export_xls.tooltip'))
+            ->icon(__('xot::actions.export_xls.icon'))
+            ->modalHeading(__('xot::actions.export_xls.modal.heading'))
+            ->modalDescription(__('xot::actions.export_xls.modal.description'))
+            ->modalSubmitActionLabel(__('xot::actions.export_xls.modal.confirm'))
+            ->modalCancelActionLabel(__('xot::actions.export_xls.modal.cancel'))
+            ->successNotificationTitle(__('xot::actions.export_xls.success'))
+            ->requiresConfirmation()
             ->action(static function (ListRecords $livewire) {
                 $filename = class_basename($livewire).'-'.collect($livewire->tableFilters)->flatten()->implode('-').'.xlsx';
                 $transKey = app(GetTransKeyAction::class)->execute($livewire::class);

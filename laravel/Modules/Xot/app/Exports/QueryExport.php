@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Modules\Xot\Actions\Collection\TransCollectionAction;
+use Modules\Lang\Actions\TransCollectionAction;
 
 // use Staudenmeir\LaravelCte\Query\Builder as CteBuilder;
 

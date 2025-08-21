@@ -270,8 +270,8 @@ class Patient extends User implements HasMedia
         return [
             ...parent::casts(),
             'date_of_birth' => 'date',
-            'years_in_italy' => YearsInItalyEnum::class,
-            'age_range' => PatientAgeRangeEnum::class,
+            //'years_in_italy' => YearsInItalyEnum::class,
+            //'age_range' => PatientAgeRangeEnum::class,
         ];
     }
 
@@ -416,8 +416,11 @@ class Patient extends User implements HasMedia
     }
 
 
-
-    public function getYearsInItalyAttribute(null|string|YearsInItalyEnum $value): ?YearsInItalyEnum
+    /**
+     * @param null|string|YearsInItalyEnum $value
+     * @return null|YearsInItalyEnum
+     */
+    public function getYearsInItalyAttribute($value)
     {
         if($value instanceof YearsInItalyEnum){
             return $value;
@@ -429,8 +432,11 @@ class Patient extends User implements HasMedia
     }
 
 
-    
-    public function getAgeRangeAttribute(null|string|PatientAgeRangeEnum $value): ?PatientAgeRangeEnum
+    /**
+     * @param null|string|PatientAgeRangeEnum $value
+     * @return null|PatientAgeRangeEnum
+     */
+    public function getAgeRangeAttribute($value)
     {
         if($value instanceof PatientAgeRangeEnum){
             return $value;

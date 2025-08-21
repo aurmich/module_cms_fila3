@@ -179,6 +179,36 @@ return [
         'suspended' => 'Gesperrt',
       ],
     ],
+    'studio' => [
+      'name' => [
+        'label' => 'Praxisname',
+        'placeholder' => 'Namen der Arztpraxis eingeben',
+        'tooltip' => 'Identifikationsname der Arztpraxis',
+        'helper_text' => 'Offizieller Praxisname wie registriert',
+        'description' => 'Name der Arztpraxis, in der der Arzt tätig ist',
+      ],
+      'email' => [
+        'label' => 'Praxis-E-Mail',
+        'placeholder' => 'praxis@example.com',
+        'tooltip' => 'E-Mail-Adresse der Arztpraxis',
+        'helper_text' => 'E-Mail für Praxis-Kommunikation',
+        'description' => 'Offizielle E-Mail-Adresse der Arztpraxis',
+      ],
+      'full_address' => [
+        'label' => 'Vollständige Praxisadresse',
+        'placeholder' => 'Straße, 123 - 00100 Stadt (PR)',
+        'tooltip' => 'Vollständige Adresse der Arztpraxis',
+        'helper_text' => 'Vollständige Adresse mit PLZ und Bundesland',
+        'description' => 'Vollständige Adresse der Arztpraxis mit Details',
+      ],
+    ],
+    'updated_at' => [
+      'label' => 'Aktualisierungsdatum',
+      'placeholder' => 'Datum der letzten Aktualisierung',
+      'tooltip' => 'Datum der letzten Profilaktualisierung',
+      'helper_text' => 'Datum der letzten Datenänderung',
+      'description' => 'Datum der letzten medizinischen Profilaktualisierung',
+    ],
   ],
   'filters' => [
     'search_placeholder' => 'Ärzte suchen...',

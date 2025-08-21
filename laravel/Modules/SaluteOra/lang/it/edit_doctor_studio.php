@@ -3,17 +3,13 @@
 return array (
   'actions' => 
   array (
-    'delete' => 
+    'save' => 
     array (
-      'label' => 'delete',
+      'label' => 'save',
     ),
     'cancel' => 
     array (
       'label' => 'cancel',
-    ),
-    'save' => 
-    array (
-      'label' => 'save',
     ),
   ),
 );

@@ -566,6 +566,41 @@ return array (
       'tooltip' => 'Upload del modulo privacy compilato e firmato',
       'helper_text' => 'Scarica qui sotto e compila il modulo Trattamento Dati',
     ),
+    'studio' => 
+    array (
+      'name' => 
+      array (
+        'label' => 'Nome Studio',
+        'placeholder' => 'Inserisci il nome dello studio medico',
+        'tooltip' => 'Nome identificativo dello studio medico',
+        'helper_text' => 'Nome ufficiale dello studio come registrato',
+        'description' => 'Nome dello studio medico dove opera il dottore',
+      ),
+      'email' => 
+      array (
+        'label' => 'Email Studio',
+        'placeholder' => 'studio@example.com',
+        'tooltip' => 'Indirizzo email dello studio medico',
+        'helper_text' => 'Email per comunicazioni con lo studio',
+        'description' => 'Indirizzo email ufficiale dello studio medico',
+      ),
+      'full_address' => 
+      array (
+        'label' => 'Indirizzo Completo Studio',
+        'placeholder' => 'Via Roma, 123 - 00100 Roma (RM)',
+        'tooltip' => 'Indirizzo completo dello studio medico',
+        'helper_text' => 'Indirizzo completo con CAP e provincia',
+        'description' => 'Indirizzo completo dello studio medico con dettagli',
+      ),
+    ),
+    'updated_at' => 
+    array (
+      'label' => 'Data Aggiornamento',
+      'placeholder' => 'Data di ultimo aggiornamento',
+      'tooltip' => 'Data dell\'ultimo aggiornamento del profilo',
+      'helper_text' => 'Data di ultima modifica dei dati',
+      'description' => 'Data di ultimo aggiornamento del profilo medico',
+    ),
   ),
   'filters' => 
   array (
@@ -652,6 +687,10 @@ return array (
       'description' => 'Modulo privacy da compilare e firmare',
       'success' => 'Modulo privacy scaricato con successo',
       'error' => 'Si è verificato un errore durante il download del modulo',
+    ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
     ),
   ),
   'messages' => 

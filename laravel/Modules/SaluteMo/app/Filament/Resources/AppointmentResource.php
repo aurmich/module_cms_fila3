@@ -130,6 +130,20 @@ class AppointmentResource extends XotBaseResource
         ];
     }
 
-
+    public static function getXlsFields(): array
+    {
+        return [
+            'id',
+            'patient.full_name',
+            'doctor.full_name',
+            'studio.name',
+            'studio.full_address',
+            'starts_at',
+            'ends_at',
+            'state',
+            'notes',
+            'created_at',
+        ];
+    }
     
 }

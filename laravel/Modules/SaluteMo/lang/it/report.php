@@ -540,6 +540,10 @@ return array (
       'success' => 'Referto odontoiatrico inviato alla stampa',
       'error' => 'Errore nella stampa del referto odontoiatrico',
     ),
+    'export_xls' => 
+    array (
+      'label' => 'export_xls',
+    ),
   ),
   'filters' => 
   array (

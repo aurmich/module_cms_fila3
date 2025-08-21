@@ -6,15 +6,16 @@ namespace Modules\User\Filament\Resources\UserResource\Pages;
 
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ExportBulkAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Query\Builder;
-use Modules\User\Filament\Actions\ChangePasswordAction;
-use Modules\User\Filament\Resources\UserResource;
-use Modules\User\Filament\Resources\UserResource\Widgets\UserOverview;
+use Filament\Tables\Columns\TextColumn;
 use Modules\Xot\Contracts\UserContract;
+use Filament\Tables\Actions\ExportBulkAction;
+use Modules\User\Filament\Resources\UserResource;
+use Modules\User\Filament\Actions\ChangePasswordAction;
+use Modules\Xot\Filament\Actions\Header\ExportXlsAction;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+use Modules\User\Filament\Resources\UserResource\Widgets\UserOverview;
 use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 abstract class BaseListUsers extends XotBaseListRecords
@@ -33,6 +34,18 @@ abstract class BaseListUsers extends XotBaseListRecords
                 ->searchable(),
             'email' => TextColumn::make('email')
                 ->searchable(),
+        ];
+    }
+
+     /**
+     * Get the header actions.
+     *
+     * @return array<string, \Filament\Actions\Action>
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+           'export_xls' => ExportXlsAction::make('export_xls'),
         ];
     }
 
@@ -97,16 +110,5 @@ abstract class BaseListUsers extends XotBaseListRecords
         ];
     }
 
-    /**
-     * Get table bulk actions for user records.
-     *
-     * @return array<\Filament\Tables\Actions\BulkAction>
-     */
-    public function getTableBulkActions(): array
-    {
-        return [
-            Tables\Actions\DeleteBulkAction::make(),
-            //ExportBulkAction::make(),
-        ];
-    }
+    
 }

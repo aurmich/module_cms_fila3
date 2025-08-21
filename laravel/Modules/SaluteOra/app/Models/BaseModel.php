@@ -90,7 +90,7 @@ abstract class BaseModel extends Model implements HasMedia
     public function toArrayForce(): array
     {
         try{
-            return $this->attributesToArray(); //"" is not a valid backing value for enum Modules\SaluteOra\Enums\OccurrenceFrequencyEnum
+            return $this->attributesToArray(); 
         }catch(\ValueError $e){
             $data=[];
             foreach($this->getAttributes() as $key=>$value){

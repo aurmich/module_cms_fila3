@@ -167,3 +167,4 @@ grep -n "pub_theme::appointment.fields.time.label" Themes/One/resources/views/ap
 **Ultimo aggiornamento**: Gennaio 2025
 **Stato**: ✅ COMPLETATO
 **Principi**: ✅ DRY + KISS + Coerenza Multilingua
+

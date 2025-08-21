@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromIterator;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Modules\Xot\Actions\Collection\TransCollectionAction;
+use Modules\Lang\Actions\TransCollectionAction;
 
 class LazyCollectionExport implements FromIterator, ShouldQueue, WithHeadings, WithMapping
 {

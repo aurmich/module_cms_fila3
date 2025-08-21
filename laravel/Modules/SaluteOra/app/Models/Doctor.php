@@ -4,123 +4,119 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\Models;
 
-use Parental\HasParent;
-use Modules\Geo\Models\Address;
-use Spatie\MediaLibrary\HasMedia;
-use Modules\SaluteOra\Enums\UserTypeEnum;
-use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Enums\UserStateEnum;
-use Modules\SaluteOra\Models\DoctorStudio;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Modules\SaluteOra\States\User\UserState;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Modules\Geo\Models\Address;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+use Modules\SaluteOra\States\User\UserState;
+use Parental\HasParent;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Doctor model for the SaluteOra module.
- * 
+ *
  * Extends the User model to provide doctor-specific functionality.
  *
- * @property string $id
- * @property string|null $name
- * @property string|null $first_name
- * @property string|null $last_name
- * @property string $email
- * @property string|null $phone
- * @property string|null $country_code
- * @property string|null $children_count
- * @property string|null $family_members
- * @property string|null $years_in_italy
- * @property string|null $nationality
- * @property Address|null $address
- * @property string|null $city
- * @property string|null $registration_number
- * @property string|null $fiscal_code
- * @property string|null $dental_problems
- * @property string|null $last_dental_visit
- * @property string|null $status
- * @property array<array-key, mixed>|null $certifications
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string|null $password
- * @property string|null $remember_token
- * @property int|null $current_team_id
- * @property string|null $profile_photo_path
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $lang
- * @property UserTypeEnum|null $type
- * @property string|null $data_privacy_form
- * @property string|null $doctor_certificate
- * @property array<array-key, mixed>|null $certification
- * @property string|null $pregnancy_certificate
- * @property string|null $isee_certificate
- * @property string|null $identity_document
- * @property string|null $health_card
- * @property string|null $date_of_birth
- * @property string|null $gender
- * @property bool|null $is_active
- * @property bool|null $is_otp
- * @property \Illuminate\Support\Carbon|null $password_expires_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_by
- * @property UserState|null $state
- * @property array<array-key, mixed>|null $moderation_data
- * @property string|null $uuid
- * @property string|null $full_name
- * @property string|null $certificates
- * @property string|null $last_dental_visit_period
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $activeConsents
- * @property-read int|null $active_consents_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
- * @property-read int|null $appointments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication> $authentications
- * @property-read int|null $authentications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
- * @property-read int|null $clients_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent> $consents
- * @property-read int|null $consents_count
- * @property-read \Modules\User\Models\Team|null $currentTeam
- * @property-read \Modules\User\Models\Membership|DoctorStudio|\Modules\User\Models\DeviceUser|null $pivot
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device> $devices
- * @property-read int|null $devices_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
- * @property-read \Modules\User\Models\AuthenticationLog|null $latestAuthentication
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Modules\User\Models\Notification> $notifications
- * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $ownedTeams
- * @property-read int|null $owned_teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Permission> $permissions
- * @property-read int|null $permissions_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $profile
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role> $roles
- * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser> $socialiteUsers
- * @property-read int|null $socialite_users_count
- * @property-read \Modules\SaluteOra\Models\Studio|null $studio
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
- * @property-read int|null $studios_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
- * @property-read int|null $team_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team> $teams
- * @property-read int|null $teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $tenants
- * @property-read int|null $tenants_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token> $tokens
- * @property-read int|null $tokens_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment> $treatments
- * @property-read int|null $treatments_count
+ * @property string                                                                                                     $id
+ * @property string|null                                                                                                $name
+ * @property string|null                                                                                                $first_name
+ * @property string|null                                                                                                $last_name
+ * @property string                                                                                                     $email
+ * @property string|null                                                                                                $phone
+ * @property string|null                                                                                                $country_code
+ * @property string|null                                                                                                $children_count
+ * @property string|null                                                                                                $family_members
+ * @property string|null                                                                                                $years_in_italy
+ * @property string|null                                                                                                $nationality
+ * @property Address|null                                                                                               $address
+ * @property string|null                                                                                                $city
+ * @property string|null                                                                                                $registration_number
+ * @property string|null                                                                                                $fiscal_code
+ * @property string|null                                                                                                $dental_problems
+ * @property string|null                                                                                                $last_dental_visit
+ * @property string|null                                                                                                $status
+ * @property array<array-key, mixed>|null                                                                               $certifications
+ * @property \Illuminate\Support\Carbon|null                                                                            $email_verified_at
+ * @property string|null                                                                                                $password
+ * @property string|null                                                                                                $remember_token
+ * @property int|null                                                                                                   $current_team_id
+ * @property string|null                                                                                                $profile_photo_path
+ * @property \Illuminate\Support\Carbon|null                                                                            $deleted_at
+ * @property string|null                                                                                                $lang
+ * @property UserTypeEnum|null                                                                                          $type
+ * @property string|null                                                                                                $data_privacy_form
+ * @property string|null                                                                                                $doctor_certificate
+ * @property array<array-key, mixed>|null                                                                               $certification
+ * @property string|null                                                                                                $pregnancy_certificate
+ * @property string|null                                                                                                $isee_certificate
+ * @property string|null                                                                                                $identity_document
+ * @property string|null                                                                                                $health_card
+ * @property string|null                                                                                                $date_of_birth
+ * @property string|null                                                                                                $gender
+ * @property bool|null                                                                                                  $is_active
+ * @property bool|null                                                                                                  $is_otp
+ * @property \Illuminate\Support\Carbon|null                                                                            $password_expires_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $created_at
+ * @property \Illuminate\Support\Carbon|null                                                                            $updated_at
+ * @property string|null                                                                                                $updated_by
+ * @property string|null                                                                                                $created_by
+ * @property string|null                                                                                                $deleted_by
+ * @property UserState|null                                                                                             $state
+ * @property array<array-key, mixed>|null                                                                               $moderation_data
+ * @property string|null                                                                                                $uuid
+ * @property string|null                                                                                                $full_name
+ * @property string|null                                                                                                $certificates
+ * @property string|null                                                                                                $last_dental_visit_period
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent>                                $activeConsents
+ * @property int|null                                                                                                   $active_consents_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity>                           $activities
+ * @property int|null                                                                                                   $activities_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, Appointment>                                                 $appointments
+ * @property int|null                                                                                                   $appointments_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication>                         $authentications
+ * @property int|null                                                                                                   $authentications_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client>                                    $clients
+ * @property int|null                                                                                                   $clients_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Consent>                                $consents
+ * @property int|null                                                                                                   $consents_count
+ * @property \Modules\User\Models\Team|null                                                                             $currentTeam
+ * @property \Modules\User\Models\Membership|DoctorStudio|\Modules\User\Models\DeviceUser|null                          $pivot
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Device>                                 $devices
+ * @property int|null                                                                                                   $devices_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User>                                   $all_team_users
+ * @property \Modules\User\Models\AuthenticationLog|null                                                                $latestAuthentication
+ * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property int|null                                                                                                   $media_count
+ * @property \Illuminate\Notifications\DatabaseNotificationCollection<int, \Modules\User\Models\Notification>           $notifications
+ * @property int|null                                                                                                   $notifications_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team>                                   $ownedTeams
+ * @property int|null                                                                                                   $owned_teams_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Permission>                             $permissions
+ * @property int|null                                                                                                   $permissions_count
+ * @property Profile|null                                                                                               $profile
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Role>                                   $roles
+ * @property int|null                                                                                                   $roles_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\SocialiteUser>                          $socialiteUsers
+ * @property int|null                                                                                                   $socialite_users_count
+ * @property Studio|null                                                                                                $studio
+ * @property \Illuminate\Database\Eloquent\Collection<int, Studio>                                                      $studios
+ * @property int|null                                                                                                   $studios_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership>                             $teamUsers
+ * @property int|null                                                                                                   $team_users_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Team>                                   $teams
+ * @property int|null                                                                                                   $teams_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, Studio>                                                      $tenants
+ * @property int|null                                                                                                   $tenants_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Token>                                     $tokens
+ * @property int|null                                                                                                   $tokens_count
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\Gdpr\Models\Treatment>                              $treatments
+ * @property int|null                                                                                                   $treatments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor admins()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor doctors()
- * @method static \Modules\SaluteOra\Database\Factories\DoctorFactory factory($count = null, $state = [])
+ * @method static \Modules\SaluteOra\Database\Factories\DoctorFactory  factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor orWhereNotState(string $column, $states)
@@ -182,6 +178,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereYearsInItaly($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
+ *
  * @mixin \Eloquent
  */
 class Doctor extends User implements HasMedia
@@ -189,10 +186,9 @@ class Doctor extends User implements HasMedia
     use HasParent;
     use InteractsWithMedia;
 
-   
-    /** @var list<string>     */
+    /** @var list<string> */
     protected $fillable = [
-        //'tenant_id',
+        // 'tenant_id',
         'first_name',
         'last_name',
         'email',
@@ -200,52 +196,51 @@ class Doctor extends User implements HasMedia
         'address',
         'city',
         'registration_number',
-        //'specialization',
+        // 'specialization',
         'certifications', // Mantenuto per retrocompatibilità
-        'certification', // 
+        'certification',
         'doctor_certificate',
-        //'availability',
+        // 'availability',
         'status',
         'country_code',
         'data_privacy_form',
     ];
 
-    /** @var list<string>     */
+    /** @var list<string> */
     protected $appends = [
-        //'health_card',
-        //'identity_document',
-        
-        //'pregnancy_certificate',
+        // 'health_card',
+        // 'identity_document',
+
+        // 'pregnancy_certificate',
         // 'certifications', // Gestito da getter personalizzato
-        //'studio',
-        //'studio::description',
-        //'studio:address',
+        // 'studio',
+        // 'studio::description',
+        // 'studio:address',
     ];
 
     /** @return list<string>     */
-    public static function getAttachments():array{
-        return  [
-            //'certification', // Gestito come allegato singolo
+    public static function getAttachments(): array
+    {
+        return [
+            // 'certification', // Gestito come allegato singolo
             'doctor_certificate',
             'data_privacy_form',
         ];
     }
 
-    /** @var list<string>     */
+    /** @var list<string> */
     protected $with = [
         'studio',
         'studio.address',
     ];
 
-   
-
     public function getDataDefaults(): array
     {
         return [
-            //'certification'=> null,
-            'studio'=>[
+            // 'certification'=> null,
+            'studio' => [
                 'description' => null,
-                'address'=>[
+                'address' => [
                     'administrative_area_level_1' => null,
                     'administrative_area_level_2' => null,
                     'administrative_area_level_3' => null,
@@ -264,12 +259,11 @@ class Doctor extends User implements HasMedia
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
-            //'certification' => 'array',  // OBBLIGATORIO: campo in $attachments DEVE essere array per FileUpload
+            // 'certification' => 'array',  // OBBLIGATORIO: campo in $attachments DEVE essere array per FileUpload
             'certifications' => 'array', // Per retrocompatibilità
         ]);
     }
 
-    
     /**
      * Relazione molti-a-molti con gli studi in cui il dottore lavora.
      *
@@ -277,53 +271,38 @@ class Doctor extends User implements HasMedia
      * - Doctor risiede nel database 'user'
      * - Studio risiede nel database 'salute_ora'
      * - doctor_studio (pivot) risiede nel database 'saluteora_data'
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function studios(): BelongsToMany
     {
         return $this->belongsToManyX(Studio::class);
     }
 
-
-
     public function studio(): MorphOne
     {
         return $this->morphOne(Studio::class, 'model');
     }
 
-    public function address(): MorphOne{
+    public function address(): MorphOne
+    {
         return $this->morphOne(Address::class, 'model');
     }
     // Implementazione della relazione BelongsToMany con Studio completata
 
-/*
-    public function getCertificationsAttribute()
+    public function getScheduleAttribute(?array $value):array
     {
-        // Prima controlla se c'è un valore nel database (campo array)
-        if ($this->attributes['certifications'] ?? null) {
-            return json_decode($this->attributes['certifications'], true);
-        }
+        $studio = $this->studio;
+        $doctor = $this;
+        $pivot=DoctorStudio::firstOrCreate(['user_id'=>$doctor->id,'studio_id'=>$studio->id]);
+        $res=$pivot->schedule;
         
-        // Altrimenti usa Media Library
-        return $this->getFirstMediaPath('certifications');
+
+        return $res;
     }
-    
-    public function setCertificationsAttribute($value)
-    {
-        // Se è un array di file paths (da FileUpload), salva come JSON
-        if (is_array($value)) {
-            $this->attributes['certifications'] = json_encode($value);
-        } else {
-            $this->attributes['certifications'] = $value;
-        }
-    }
-        */
+
+   
 
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'doctor_id');
     }
-
-
 }

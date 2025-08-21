@@ -336,6 +336,36 @@ return [
             'tooltip' => 'Manage availability schedule',
             'helper_text' => '',
         ],
+        'studio' => [
+            'name' => [
+                'label' => 'Practice Name',
+                'placeholder' => 'Enter medical practice name',
+                'tooltip' => 'Medical practice identifier name',
+                'helper_text' => 'Official practice name as registered',
+                'description' => 'Name of the medical practice where the doctor works',
+            ],
+            'email' => [
+                'label' => 'Practice Email',
+                'placeholder' => 'practice@example.com',
+                'tooltip' => 'Medical practice email address',
+                'helper_text' => 'Email for practice communications',
+                'description' => 'Official email address of the medical practice',
+            ],
+            'full_address' => [
+                'label' => 'Complete Practice Address',
+                'placeholder' => 'Street Address, 123 - 00100 City (PR)',
+                'tooltip' => 'Complete medical practice address',
+                'helper_text' => 'Complete address with ZIP code and province',
+                'description' => 'Complete address of the medical practice with details',
+            ],
+        ],
+        'updated_at' => [
+            'label' => 'Update Date',
+            'placeholder' => 'Last update date',
+            'tooltip' => 'Date of last profile update',
+            'helper_text' => 'Date of last data modification',
+            'description' => 'Date of last medical profile update',
+        ],
     ],
     'filters' => [
         'search_placeholder' => 'Search doctors...',

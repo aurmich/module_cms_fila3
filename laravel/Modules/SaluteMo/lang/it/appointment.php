@@ -103,36 +103,67 @@ return array (
     ),
     'patient' => 
     array (
-      'label' => 'Paziente',
-      'placeholder' => 'Seleziona un\'opzione',
-      'help' => 'Scegli il paziente per questo appuntamento',
-      'tooltip' => 'Il paziente che ha prenotato l\'appuntamento',
-      'helper_text' => '',
-      'description' => 'Selezione paziente per appuntamento',
-      'icon' => 'heroicon-o-user',
-      'color' => 'primary',
+      'full_name' => 
+      array (
+        'label' => 'Nome Completo Paziente',
+        'placeholder' => 'Nome e cognome del paziente',
+        'help' => 'Nome completo del paziente',
+        'tooltip' => 'Nome e cognome del paziente',
+        'helper_text' => 'Nome completo del paziente',
+        'description' => 'Nome completo del paziente che ha prenotato l\'appuntamento',
+        'icon' => 'heroicon-o-user',
+        'color' => 'primary',
+      ),
     ),
     'doctor' => 
     array (
-      'label' => 'Medico',
-      'placeholder' => 'Seleziona un\'opzione',
-      'help' => 'Scegli il medico che effettuerà la visita',
-      'tooltip' => 'Il medico responsabile dell\'appuntamento',
-      'helper_text' => '',
-      'description' => 'Selezione medico per appuntamento',
-      'icon' => 'heroicon-o-user-circle',
-      'color' => 'success',
+      'full_name' => 
+      array (
+        'label' => 'Nome Completo Dottore',
+        'placeholder' => 'Nome e cognome del dottore',
+        'help' => 'Nome completo del medico responsabile',
+        'tooltip' => 'Nome e cognome del dottore',
+        'helper_text' => 'Nome completo del medico',
+        'description' => 'Nome completo del dottore responsabile dell\'appuntamento',
+        'icon' => 'heroicon-o-user-circle',
+        'color' => 'success',
+      ),
     ),
     'studio' => 
     array (
-      'label' => 'Studio',
-      'placeholder' => 'Seleziona un\'opzione',
-      'help' => 'Scegli lo studio dove si terrà l\'appuntamento',
-      'tooltip' => 'Lo studio medico dove si terrà l\'appuntamento',
-      'helper_text' => '',
-      'description' => 'Selezione studio per appuntamento',
-      'icon' => 'heroicon-o-building-office',
-      'color' => 'info',
+      'name' => 
+      array (
+        'label' => 'Nome Studio',
+        'placeholder' => 'Nome dello studio medico',
+        'help' => 'Nome identificativo dello studio',
+        'tooltip' => 'Nome ufficiale dello studio medico',
+        'helper_text' => 'Nome registrato dello studio medico',
+        'description' => 'Nome dello studio dove si terrà l\'appuntamento',
+        'icon' => 'heroicon-o-building-office-2',
+        'color' => 'primary',
+      ),
+      'address' => 
+      array (
+        'label' => 'Indirizzo Studio',
+        'placeholder' => 'Indirizzo completo dello studio',
+        'help' => 'Indirizzo completo dello studio medico',
+        'tooltip' => 'Indirizzo fisico dello studio',
+        'helper_text' => 'Indirizzo completo per la localizzazione',
+        'description' => 'Indirizzo dello studio medico',
+        'icon' => 'heroicon-o-map-pin',
+        'color' => 'info',
+      ),
+      'full_address' => 
+      array (
+        'label' => 'Indirizzo Completo Studio',
+        'placeholder' => 'Indirizzo completo con CAP e città',
+        'help' => 'Indirizzo completo dello studio medico con tutti i dettagli',
+        'tooltip' => 'Indirizzo completo con via, numero, CAP, città e provincia',
+        'helper_text' => 'Indirizzo completo per la localizzazione e navigazione',
+        'description' => 'Indirizzo completo dello studio medico per la localizzazione',
+        'icon' => 'heroicon-o-map-pin',
+        'color' => 'info',
+      ),
     ),
     'title' => 
     array (
@@ -393,6 +424,18 @@ return array (
     'layout' => 
     array (
       'label' => 'layout',
+    ),
+    'create' => 
+    array (
+      'label' => 'create',
+    ),
+    'report' => 
+    array (
+      'label' => 'report',
+    ),
+    'invoice' => 
+    array (
+      'label' => 'invoice',
     ),
   ),
   'actions' => 

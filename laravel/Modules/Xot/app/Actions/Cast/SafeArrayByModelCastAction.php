@@ -30,9 +30,9 @@ class SafeArrayByModelCastAction
         $data=[];
         foreach($model->getAttributes() as $key=>$value){
             try{
-                $data[$key]=$this->$key;
+                $data[$key]=$model->$key;
                 /** @phpstan-ignore-next-line */
-            }catch(\ValueError|\Error|\Exception $e){
+            }catch(\ValueError|\Error $e){
                 
             }
         }

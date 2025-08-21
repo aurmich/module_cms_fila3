@@ -25,6 +25,11 @@ class SafeStringCastAction
         if (is_string($value)) {
             return $value;
         }
+        /*
+        if ($value instanceof \BackedEnum) {
+            return $value->value;
+        }
+            */
         
         if (is_null($value)) {
             return '';
