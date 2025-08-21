@@ -187,7 +187,7 @@ class Appointment extends BaseModel implements HasStatesContract
      */
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(Patient::class, 'patient_id');
     }
 
     /**
@@ -195,7 +195,7 @@ class Appointment extends BaseModel implements HasStatesContract
      */
     public function doctor(): BelongsTo
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
     /**
