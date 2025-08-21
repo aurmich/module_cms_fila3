@@ -143,7 +143,6 @@ class ReportResource extends XotBaseResource
         ];
     }
 
-    
     public static function getXlsFields(): array
     {
         return [
@@ -186,7 +185,7 @@ class ReportResource extends XotBaseResource
             'needs_more_dental_care', // La Paziente necessita di ulteriori cure odontoiatriche?
             'further_notes', // Inserisci ulteriori specifiche
 
-            'invoice', // file fattura
+            // 'invoice', // file fattura
         ];
     }
 
