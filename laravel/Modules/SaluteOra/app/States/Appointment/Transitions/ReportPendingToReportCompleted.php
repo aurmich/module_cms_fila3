@@ -7,6 +7,7 @@ namespace Modules\SaluteOra\States\Appointment\Transitions;
 use Webmozart\Assert\Assert;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\Xot\Actions\Pdf\ContentPdfAction;
+use Modules\Notify\Datas\RecordNotificationData;
 use Modules\Xot\Actions\Pdf\StreamDownloadPdfAction;
 
 /**
@@ -42,5 +43,19 @@ class ReportPendingToReportCompleted extends BaseTransition
             ]
         ];
         return $attachments;
+    }
+
+
+    //---
+    public function getNotificationRecipients(): array
+    {
+        $record = $this->record;
+        // Assert::isInstanceOf($record, Appointment::class);
+
+        return [
+           'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+           // 'patient_sms' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'sms']),
+           'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
+        ];
     }
 }

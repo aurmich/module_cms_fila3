@@ -380,6 +380,13 @@ class ProductFormWidget extends XotBaseWidget implements HasForms
 - MySQL for database
 - Git for version control
 
+### CRITICAL PROJECT STRUCTURE RULE
+**⚠️ NEVER ALLOW `/var/www/html/_bases/base_saluteora/docs` TO EXIST**
+- This directory is **OUTSIDE** the Laravel project structure
+- All documentation belongs within individual modules in their `docs/` directories
+- If found, it **MUST** be removed immediately to prevent confusion
+- Correct locations: `laravel/.ai/guidelines/` and `laravel/Modules/*/docs/`
+
 ### Development Workflow
 1. Create feature branch
 2. Use Artisan commands for file creation

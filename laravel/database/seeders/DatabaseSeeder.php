@@ -31,8 +31,10 @@ class DatabaseSeeder extends Seeder
 
         // Seeding dei moduli in ordine di dipendenza
         $this->call([
-            UserSeeder::class,      // Base: ruoli, permessi, team di sistema
-            SaluteOraSeeder::class, // Principale: utenti, studi, appuntamenti
+            UserSeeder::class,                // Base: ruoli, permessi, team di sistema
+            \Modules\Activity\Database\Seeders\ActivityDatabaseSeeder::class, // Attività di sistema
+            \Modules\Geo\Database\Seeders\GeoDatabaseSeeder::class,           // Dati geografici
+            SaluteOraSeeder::class,           // Principale: utenti, studi, appuntamenti
         ]);
 
         $endTime = microtime(true);

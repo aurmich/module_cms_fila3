@@ -22,15 +22,16 @@ use Webmozart\Assert\Assert;
  */
 class ReportCompletedToRefundPending extends BaseTransition
 {
-    // --- (Funziona automaticamente grazie al pattern BaseTransition!)
-    public function getNotificationRecipients(): array
-    {
-        $record = $this->record;
-        // Assert::isInstanceOf($record, Appointment::class);
+   //---
+   public function getNotificationRecipients(): array
+   {
+       $record = $this->record;
+       // Assert::isInstanceOf($record, Appointment::class);
 
-        return [
-            // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
-            'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
-        ];
-    }
+       return [
+          // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+          // 'patient_sms' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'sms']),
+          // 'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
+       ];
+   }
 }

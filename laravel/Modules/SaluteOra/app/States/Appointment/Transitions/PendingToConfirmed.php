@@ -24,6 +24,7 @@ class PendingToConfirmed extends BaseTransition
 
         return [
             'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+            'patient_sms' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'sms']),
             'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
         ];
     }

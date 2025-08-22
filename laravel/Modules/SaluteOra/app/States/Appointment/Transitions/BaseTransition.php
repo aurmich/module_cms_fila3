@@ -33,8 +33,9 @@ abstract class BaseTransition extends XotBaseTransition
         return [
             'message' => $this->message,
             'appointment_date' => $record->starts_at?->format('d/m/Y H:i') ?? 'N/A',
-            'patient_name' => $record->patient->name ?? 'N/A',
-            'doctor_name' => $record->doctor->name ?? 'N/A',
+            'patient_name' => $record->patient->full_name ?? 'N/A',
+            'doctor_name' => $record->doctor->full_name ?? 'N/A',
+            'studio_name' => $record->studio->name ?? 'N/A',
         ];
     }
 }
