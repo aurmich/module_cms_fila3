@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
-    <testcase name="`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
-      <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fieldsInvalidArgumentException: Unknown format "randomElement"
-at vendor/fakerphp/faker/src/Faker/Generator.php:743
-at vendor/fakerphp/faker/src/Faker/Generator.php:708
-at vendor/fakerphp/faker/src/Faker/Generator.php:973
-at Modules/SaluteOra/database/factories/PatientFactory.php:39
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
-at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
-    </testcase>
+  <testsuite name="Modules\SaluteMo\tests\Unit\BaseModelTest" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.022368">
+    <testcase name="`SaluteMo BaseModel Business Logic` → it supports media methods presence" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it supports media methods presence" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.021068"/>
+    <testcase name="`SaluteMo BaseModel Business Logic` → it exposes casts as array" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it exposes casts as array" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.001300"/>
   </testsuite>
 </testsuites>

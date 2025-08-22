@@ -36,11 +36,7 @@ class PatientFactory extends UserFactory
         return array_merge(parent::definition(), [
             // Patient type and state
             'type' => UserTypeEnum::PATIENT->value,
-            'state' => $this->faker->randomElement([
-                Pending::class,
-                IntegrationRequested::class, 
-                Active::class
-            ]),
+            'state' => [Pending::class, IntegrationRequested::class, Active::class][random_int(0, 2)],
 
             // Medical and dental information
             'dental_problems' => $this->generateDentalProblems(),
