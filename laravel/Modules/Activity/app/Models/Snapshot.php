@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 /**
  * Modules\Activity\Models\Snapshot.
  *
@@ -27,10 +29,13 @@ namespace Modules\Activity\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereUpdatedBy($value)
+ * @mixin IdeHelperSnapshot
  * @mixin \Eloquent
  */
 class Snapshot extends BaseSnapshot
 {
+    use HasFactory;
+    
     /** @var list<string> */
     protected $fillable = ['id', 'aggregate_uuid', 'aggregate_version', 'state', 'created_at', 'updated_at'];
 

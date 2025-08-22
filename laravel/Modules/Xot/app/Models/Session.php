@@ -61,6 +61,7 @@ namespace Modules\Xot\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperSession
  * @mixin \Eloquent
  */
 class Session extends BaseModel

@@ -33,6 +33,7 @@ use Sushi\Sushi;
  * @property array<string, string>|null $colors
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereColors($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereIcon($value)
+ * @mixin IdeHelperModule
  * @mixin \Eloquent
  */
 class Module extends Model

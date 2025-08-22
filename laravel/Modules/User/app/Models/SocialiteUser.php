@@ -48,6 +48,7 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|SocialiteUser whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperSocialiteUser
  * @mixin \Eloquent
  */
 class SocialiteUser extends BaseModel

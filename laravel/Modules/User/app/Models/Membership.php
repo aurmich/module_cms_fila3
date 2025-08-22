@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 /**
@@ -38,10 +39,12 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Membership whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperMembership
  * @mixin \Eloquent
  */
 class Membership extends BasePivot
 {
+    use HasFactory;
     /** @var bool */
     public $incrementing = true;
 

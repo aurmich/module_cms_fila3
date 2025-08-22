@@ -17,10 +17,12 @@ Comprehensive AI guidelines for the Quaeris Fila3 Mono Laravel application. Thes
 - **[Development Workflow](./development-workflow.md)** - File creation, testing, and deployment workflows
 - **[Testing Priority Rule](./testing-priority-rule.md)** - ⚠️ **CRITICAL** - Fix existing tests first, no `RefreshDatabase`
 
-### Documentation Naming Convention
-- **All files and folders in docs/ must use lowercase** (except README.md)
-- **Examples**: `coding-standards.md`, `architecture-patterns.md`, `user-module.md`
-- **Never use**: `CODING_STANDARDS.md`, `Architecture_Patterns.md`, `UserModule.md`
+### Documentation Naming Standards (CRITICAL)
+- **[Documentation Naming Standards](./documentation-naming-standards.md)** - ⚠️ **CRITICAL** - Uniform naming for all docs
+- **No dates in filenames**: `phpstan-fixes.md` NOT `phpstan-fixes-2025-01-06.md`
+- **English only**: `optimizations.md` NOT `ottimizzazioni.md`
+- **Kebab-case only**: `module-analysis.md` NOT `module_analysis.md`
+- **Exception**: Only `README.md` can use uppercase
 
 ### Documentation Management (CRITICAL)
 - **docs/ folders are the system's memory** - must be constantly studied and updated

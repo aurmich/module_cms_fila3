@@ -6,6 +6,7 @@ namespace Modules\Geo\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 use Modules\Xot\Contracts\ProfileContract;
 
@@ -57,10 +58,12 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static Builder<static>|Location whereStreet($value)
  * @method static Builder<static>|Location whereUpdatedAt($value)
  * @method static Builder<static>|Location whereUpdatedBy($value)
+ * @mixin IdeHelperLocation
  * @mixin \Eloquent
  */
 class Location extends BaseModel
 {
+    
     protected $fillable = [
         'name',
         'lat',

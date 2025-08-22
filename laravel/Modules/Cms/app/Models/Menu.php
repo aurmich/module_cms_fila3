@@ -124,6 +124,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @method static \Modules\Cms\Database\Factories\MenuFactory factory($count = null, $state = [])
  * @property-read int $depth
  * @property-read string $path
+ * @mixin IdeHelperMenu
  * @mixin \Eloquent
  */
 class Menu extends BaseModel implements HasRecursiveRelationshipsContract

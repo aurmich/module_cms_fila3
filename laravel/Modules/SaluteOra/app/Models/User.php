@@ -191,6 +191,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
  * @property string|null $age_range
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
+ * @mixin IdeHelperUser
  * @mixin \Eloquent
  */
 class User extends BaseUser implements HasMedia,HasStatesContract 

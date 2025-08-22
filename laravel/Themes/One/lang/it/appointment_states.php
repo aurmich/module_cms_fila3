@@ -121,6 +121,14 @@ return [
         'modal_heading' => 'Rimborso da integrare',
         'modal_description' => 'Il rimborso richiede integrazione',
     ],
+    'refund_integrate' => [
+        'label' => 'Rimborso da integrare',
+        'color' => 'info',
+        'bg_color' => 'info',
+        'icon' => 'heroicon-o-plus-circle',
+        'modal_heading' => 'Rimborso da integrare',
+        'modal_description' => 'Il rimborso richiede integrazione documentale',
+    ],
     'refund_completed' => [
         'label' => 'Rimborso completato',
         'color' => 'success',

@@ -13,6 +13,9 @@ use Modules\Notify\Notifications\RecordNotification;
 use Modules\Xot\States\Transitions\XotBaseTransition;
 use Modules\Xot\Contracts\UserContract;
 
+/**
+ * @property \Modules\SaluteOra\Models\User $record
+ */
 abstract class BaseTransition extends XotBaseTransition
 {
     

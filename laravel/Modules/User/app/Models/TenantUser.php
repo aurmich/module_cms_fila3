@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 /**
@@ -36,10 +37,13 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|TenantUser whereTenantId($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTenantUser
  * @mixin \Eloquent
  */
 class TenantUser extends BasePivot
 {
+    use HasFactory;
+    
     protected $connection = 'user';
 
     // public $incrementing = false;

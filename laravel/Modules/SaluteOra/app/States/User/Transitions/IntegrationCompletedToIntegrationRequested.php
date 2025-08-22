@@ -7,12 +7,15 @@ namespace Modules\SaluteOra\States\User\Transitions;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Modules\SaluteOra\Models\User;
+use Modules\Notify\Datas\RecordNotificationData;
 
 /**
  * Transizione da IntegrationCompleted a IntegrationRequested.
  * 
  * Questa transizione avviene quando durante la verifica si scopre che servono
  * ulteriori documenti, correzioni o chiarimenti da parte dell'utente.
+ * 
+ * @property User $record
  */
 class IntegrationCompletedToIntegrationRequested extends BaseTransition
 {
@@ -36,5 +39,25 @@ class IntegrationCompletedToIntegrationRequested extends BaseTransition
             'register_url' => $register_url,
         ];
         return $data;
+    }
+
+
+     /**
+     * @return  array<string, RecordNotificationData>
+     */
+    public function getNotificationRecipients(): array
+    {
+        $record=$this->record;
+        //dddx($record->type==UserTypeEnum::PATIENT);
+        $res= [
+            // 'me' => $this->record,
+            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
+            'me_sms' => RecordNotificationData::from(['record' => $record, 'channel' => 'sms']),
+            // 'patient' => $this->record->patient,
+            // 'doctor' => $this->record->doctor,
+            // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+            // 'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
+        ];
+        return $res;
     }
 } 

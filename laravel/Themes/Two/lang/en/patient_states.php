@@ -43,4 +43,8 @@ return [
         'label' => 'Integration Cancelled',
         'color' => 'danger',
     ],
+    'suspended' => [
+        'label' => 'Suspended',
+        'color' => 'warning',
+    ],
 ];

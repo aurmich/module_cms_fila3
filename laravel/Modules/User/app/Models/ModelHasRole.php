@@ -36,6 +36,7 @@ use Modules\User\Database\Factories\ModelHasRoleFactory;
  * @method static \Illuminate\Database\Eloquent\Builder|ModelHasRole whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperModelHasRole
  * @mixin \Eloquent
  */
 class ModelHasRole extends BaseMorphPivot

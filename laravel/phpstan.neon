@@ -13,7 +13,6 @@ parameters:
     #    minimumNumberOfJobsPerProcess: 1
 
     paths:
-        # - ./Modules/*/app/*
         - ./Modules/
         # - ./Themes
         # - ./app
@@ -37,9 +36,9 @@ parameters:
         - ./*/Tests/*
         - ./*/phpinsights.php
         - ./*/rector.php
-        - ./Modules/*/packages/*
+        - ./Modules/Activity
         - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
-        - ./Modules/*/Activity
+        - ./Modules/*/packages/*
         - ./Modules/*/tests/*
         - ./Modules/*/vendor/*
         - ./Modules/*/*.blade.php

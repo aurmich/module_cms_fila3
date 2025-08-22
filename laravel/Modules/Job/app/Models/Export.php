@@ -52,6 +52,7 @@ use Filament\Actions\Exports\Models\Export as BaseExport;
  * @property string|null $user_type
  * @method static \Illuminate\Database\Eloquent\Builder|Export whereUserType($value)
  * @mixin \Eloquent
+ * @mixin IdeHelperExport
  * @mixin Eloquent
  */
 class Export extends BaseExport

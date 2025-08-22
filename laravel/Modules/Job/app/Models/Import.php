@@ -47,6 +47,7 @@ namespace Modules\Job\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Import whereUserType($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperImport
  * @mixin \Eloquent
  */
 class Import extends BaseModel

@@ -6,6 +6,8 @@ namespace Modules\User\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 use Modules\Xot\Contracts\UserContract;
@@ -16,20 +18,21 @@ use Webmozart\Assert\Assert;
 
 /**
  * Class Permission.
- * 
+ *
  * Extends Spatie's Permission model to interact with the permission system.
  *
- * @property string $id
- * @property string $name
- * @property string $guard_name
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property Collection<int, Role> $roles
- * @property int|null $roles_count
+ * @property string                                                                    $id
+ * @property string                                                                    $name
+ * @property string                                                                    $guard_name
+ * @property Carbon|null                                                               $created_at
+ * @property Carbon|null                                                               $updated_at
+ * @property string|null                                                               $created_by
+ * @property string|null                                                               $updated_by
+ * @property Collection<int, Role>                                                     $roles
+ * @property int|null                                                                  $roles_count
  * @property EloquentCollection<int, \Illuminate\Database\Eloquent\Model&UserContract> $users
- * @property int|null $users_count
+ * @property int|null                                                                  $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission query()
@@ -42,15 +45,21 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission permission($permissions)
+ *
  * @property EloquentCollection<int, Permission> $permissions
- * @property int|null $permissions_count
+ * @property int|null                            $permissions_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Permission withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission withoutRole($roles, $guard = null)
+ *
  * @property PermissionRole|null $pivot
+ *
+ * @mixin IdeHelperPermission
  * @mixin \Eloquent
  */
 class Permission extends SpatiePermission
 {
+    use HasFactory;
     use RelationX;
 
     /** @var string */
@@ -106,5 +115,16 @@ class Permission extends SpatiePermission
         $userClass = XotData::make()->getUserClass();
 
         return $this->belongsToManyX($userClass);
+    }
+
+    /**
+     * @see vendor/ laravel / framework / src / Illuminate / Database / Eloquent / Factories / HasFactory.php
+     * Create a new factory instance for the model.
+     *
+     * @return Factory<static>
+     */
+    protected static function newFactory()
+    {
+        return app(\Modules\Xot\Actions\Factory\GetFactoryAction::class)->execute(static::class);
     }
 }

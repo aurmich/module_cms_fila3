@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Modules\SaluteMo\tests\Unit\BaseModelTest" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.022368">
-    <testcase name="`SaluteMo BaseModel Business Logic` → it supports media methods presence" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it supports media methods presence" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.021068"/>
-    <testcase name="`SaluteMo BaseModel Business Logic` → it exposes casts as array" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it exposes casts as array" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.001300"/>
+  <testsuite name="Modules\SaluteOra\tests\Unit\Actions\FetchCalendarEventsActionTest" file="Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.123115">
+    <testcase name="it marks event editable only for future dates and matching doctor/admin" file="Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php::it marks event editable only for future dates and matching doctor/admin" class="Modules\SaluteOra\tests\Unit\Actions\FetchCalendarEventsActionTest" classname="Modules.SaluteOra.tests.Unit.Actions.FetchCalendarEventsActionTest" assertions="0" time="0.079732">
+      <error type="InvalidArgumentException">it marks event editable only for future dates and matching doctor/adminInvalidArgumentException: Unknown format "randomElement"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/DoctorFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php:62</error>
+    </testcase>
+    <testcase name="it builds an emergency event with proper title, colors and contrast" file="Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php::it builds an emergency event with proper title, colors and contrast" class="Modules\SaluteOra\tests\Unit\Actions\FetchCalendarEventsActionTest" classname="Modules.SaluteOra.tests.Unit.Actions.FetchCalendarEventsActionTest" assertions="0" time="0.043383">
+      <error type="InvalidArgumentException">it builds an emergency event with proper title, colors and contrastInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:312
+at Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php:23</error>
+    </testcase>
   </testsuite>
 </testsuites>

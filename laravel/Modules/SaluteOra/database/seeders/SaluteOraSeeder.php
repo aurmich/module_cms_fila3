@@ -36,15 +36,28 @@ class SaluteOraSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         try {
-            // Run individual seeders in correct order
-            $this->call([
-                UserSeeder::class,
-                StudioSeeder::class,
-                ProfileSeeder::class,
-                AppointmentSeeder::class,
-                ReportSeeder::class,
-                PivotSeeder::class,
-            ]);
+            // Ask user for seeding mode
+            $mode = $this->command->choice(
+                'Choose seeding mode:',
+                ['basic' => 'Basic seeding (few records)', 'mass' => 'Mass seeding (thousands of records)'],
+                'basic'
+            );
+
+            if ($mode === 'mass') {
+                $this->call([
+                    MassDataSeeder::class,
+                ]);
+            } else {
+                // Run individual seeders in correct order
+                $this->call([
+                    UserSeeder::class,
+                    StudioSeeder::class,
+                    ProfileSeeder::class,
+                    AppointmentSeeder::class,
+                    ReportSeeder::class,
+                    PivotSeeder::class,
+                ]);
+            }
             
             $this->command->info('✅ SaluteOra seeding completed successfully!');
             $this->displaySummary();

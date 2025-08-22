@@ -63,6 +63,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereWidth($value)
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperMediaConvert
  * @mixin \Eloquent
  */
 class MediaConvert extends BaseModel

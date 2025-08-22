@@ -81,6 +81,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Task whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Task whereUpdatedBy($value)
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @mixin IdeHelperTask
  * @mixin \Eloquent
  */
 class Task extends BaseModel

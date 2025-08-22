@@ -31,6 +31,7 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUserId($value)
+ * @mixin IdeHelperAdminTeam
  * @mixin \Eloquent
  */
 class AdminTeam extends TeamUser

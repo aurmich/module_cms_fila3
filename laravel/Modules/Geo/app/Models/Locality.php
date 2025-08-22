@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality wherePostalCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality whereProvinceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality whereRegionId($value)
+ * @mixin IdeHelperLocality
  * @mixin \Eloquent
  */
 class Locality extends BaseModel

@@ -124,6 +124,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @method static Builder<static>|Report whereUpdatedBy($value)
  * @method static Builder<static>|Report whereUsesAslClinicForDentalCare($value)
  * @method static Builder<static>|Report whereVisitsDentistYearly($value)
+ * @mixin IdeHelperReport
  * @mixin \Eloquent
  */
 class Report extends BaseModel{

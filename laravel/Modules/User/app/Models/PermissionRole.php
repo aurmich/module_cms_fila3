@@ -26,6 +26,7 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereUpdatedBy($value)
+ * @mixin IdeHelperPermissionRole
  * @mixin \Eloquent
  */
 class PermissionRole extends BasePivot

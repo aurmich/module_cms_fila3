@@ -89,6 +89,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
+ * @mixin IdeHelperPost
  * @mixin Eloquent
  */
 class Post extends Model

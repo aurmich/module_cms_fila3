@@ -48,6 +48,7 @@ use Illuminate\Support\Carbon;
  * @method static \Modules\Lang\Database\Factories\TranslationFactory factory($count = null, $state = [])
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTranslation
  * @mixin \Eloquent
  */
 class Translation extends BaseModel

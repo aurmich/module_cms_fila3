@@ -22,6 +22,7 @@ use Laravel\Passport\RefreshToken as PassportRefreshToken;
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereExpiresAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereRevoked($value)
+ * @mixin IdeHelperOauthRefreshToken
  * @mixin \Eloquent
  */
 class OauthRefreshToken extends PassportRefreshToken

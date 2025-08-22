@@ -36,6 +36,7 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
+ * @mixin IdeHelperProfileTeam
  * @mixin \Eloquent
  */
 class ProfileTeam extends TeamUser

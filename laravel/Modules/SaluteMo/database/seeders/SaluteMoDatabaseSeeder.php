@@ -17,7 +17,7 @@ class SaluteMoDatabaseSeeder extends Seeder
         // Orchestrate seeding for SaluteMo by leveraging SaluteOra's rich seeder.
         // Extend this list with SaluteMo-specific seeders when available.
         $this->call([
-            SaluteOraSeeder::class,
+            // SaluteOraSeeder::class,
         ]);
     }
 }

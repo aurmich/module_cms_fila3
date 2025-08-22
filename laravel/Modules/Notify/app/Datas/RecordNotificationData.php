@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Modules\Notify\Datas;
 
 use Spatie\LaravelData\Data;
+use Webmozart\Assert\Assert;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Contracts\UserContract;
+use Modules\Notify\Actions\SMS\NormalizePhoneNumberAction;
 
 class RecordNotificationData extends Data
 {
@@ -22,9 +24,12 @@ class RecordNotificationData extends Data
     {
         switch($this->channel){
             case 'mail':
-                return $this->record->email;
+                Assert::string($email=$this->record->email);
+                return $email;
             case 'sms':
-                return $this->record->phone;
+                Assert::string($phone=$this->record->phone);
+                $phone=app(NormalizePhoneNumberAction::class)->execute($phone);
+                return $phone;
         }
         throw new \Exception('Channel ['.$this->channel.'] not supported');
     }

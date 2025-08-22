@@ -47,6 +47,7 @@ namespace Modules\User\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereUuid($value)
  * @property string|null $owner_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereOwnerId($value)
+ * @mixin IdeHelperTeam
  * @mixin \Eloquent
  */
 class Team extends BaseTeam {}

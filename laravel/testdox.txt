@@ -1,4 +1,4 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php
- [x] `SaluteMo BaseModel Business Logic` → it exposes casts as array
- [x] `SaluteMo BaseModel Business Logic` → it supports media methods presence
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php
+ [ ] it builds an emergency event with proper title, colors and contrast
+ [ ] it marks event editable only for future dates and matching doctor/admin
 

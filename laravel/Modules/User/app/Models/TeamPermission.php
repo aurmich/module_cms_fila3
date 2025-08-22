@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
+ * @mixin IdeHelperTeamPermission
  * @mixin \Eloquent
  */
 class TeamPermission extends Model

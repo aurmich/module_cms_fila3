@@ -26,6 +26,7 @@ use Laravel\Passport\AuthCode as PassportAuthCode;
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereRevoked($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereScopes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereUserId($value)
+ * @mixin IdeHelperOauthAuthCode
  * @mixin \Eloquent
  */
 class OauthAuthCode extends PassportAuthCode

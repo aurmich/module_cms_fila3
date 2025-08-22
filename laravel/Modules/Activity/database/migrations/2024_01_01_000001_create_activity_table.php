@@ -28,8 +28,12 @@ return new class extends XotBaseMigration
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
+                // Ensure causer columns are nullable to allow console operations without an authenticated user
                 if ($this->hasColumn('causer_id')) {
-                    $table->string('causer_id')->change();
+                    $table->unsignedBigInteger('causer_id')->nullable()->change();
+                }
+                if ($this->hasColumn('causer_type')) {
+                    $table->string('causer_type')->nullable()->change();
                 }
                 $this->updateTimestamps($table, true);
             }

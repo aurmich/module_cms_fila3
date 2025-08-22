@@ -31,6 +31,7 @@ namespace Modules\Job\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|FailedJob whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFailedJob
  * @mixin \Eloquent
  */
 class FailedJob extends BaseModel

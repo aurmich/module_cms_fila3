@@ -58,23 +58,14 @@ abstract class BaseModel extends Model implements HasMedia
         // 'password'
     ];
 
-    /**
+     /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
      */
     protected static function newFactory()
     {
-        // Use standard Laravel factory resolution
-        $factoryClass = static::class . 'Factory';
-        $factoryClass = str_replace('Models\\', 'Database\\Factories\\', $factoryClass);
-        
-        if (class_exists($factoryClass)) {
-            return $factoryClass::new();
-        }
-        
-        // Fallback to standard factory resolution
-        return parent::newFactory();
+        return app(\Modules\Xot\Actions\Factory\GetFactoryAction::class)->execute(static::class);
     }
 
     /** @return array<string, string> */

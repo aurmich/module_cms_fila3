@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\File;
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereSize($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperLog
  * @mixin \Eloquent
  */
 class Log extends BaseModel

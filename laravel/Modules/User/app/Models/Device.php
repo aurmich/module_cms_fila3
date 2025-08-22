@@ -58,6 +58,7 @@ use Modules\Xot\Datas\XotData;
  * @property string|null $created_by
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereUuid($value)
+ * @mixin IdeHelperDevice
  * @mixin \Eloquent
  */
 class Device extends BaseModel

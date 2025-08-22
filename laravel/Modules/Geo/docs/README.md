@@ -150,7 +150,7 @@ php artisan tinker
 
 ### 🔧 **Development**
 - [PHPStan Fixes](phpstan/phpstan-fixes-gennaio-2025.md) - Log completo correzioni PHPStan
-- [Translation Fixes](address-translation-fixes-2025-01-27.md) - Correzioni traduzioni address
+- [Translation Fixes](address-translation-fixes.md) - Correzioni traduzioni address
 - [Best Practices](best-practices.md) - Linee guida sviluppo
 
 ## 🎨 **Componenti Filament**

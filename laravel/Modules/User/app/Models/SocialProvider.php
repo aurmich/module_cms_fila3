@@ -46,6 +46,7 @@ use Modules\Xot\Contracts\ProfileContract;
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereUpdatedBy($value)
+ * @mixin IdeHelperSocialProvider
  * @mixin \Eloquent
  */
 class SocialProvider extends BaseModel

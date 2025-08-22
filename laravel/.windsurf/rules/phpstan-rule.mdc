@@ -1,0 +1,127 @@
+# REGOLA CRITICA WINDSURF: NON MODIFICARE PHPSTAN.NEON
+
+## ⚠️ MEMORIZZA QUESTA REGOLA PERMANENTEMENTE ⚠️
+
+**File Sacro**: `/var/www/html/_bases/base_saluteora/laravel/phpstan.neon`  
+**Stato**: **ASSOLUTAMENTE INTOCCABILE**
+
+## Istruzioni per Windsurf Cascade
+
+### Comportamento Obbligatorio
+- ❌ **MAI** suggerire modifiche a phpstan.neon
+- ❌ **MAI** proporre di commentare regole PHPStan
+- ❌ **MAI** suggerire di abbassare il livello di controllo
+- ✅ **SEMPRE** migliorare il codice per superare i controlli
+- ✅ **SEMPRE** utilizzare type hints espliciti e specifici
+- ✅ **SEMPRE** implementare generics per Collection
+
+### Pattern di Correzione Automatici
+
+#### 1. Proprietà Modello Non Documentate
+```php
+// ❌ PHPStan Error: Access to an undefined property
+class User extends Model
+{
+    // Manca documentazione
+}
+
+// ✅ Correzione Windsurf
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property Carbon|null $created_at
+ */
+class User extends Model
+{
+    // ...
+}
+```
+
+#### 2. Metodi Senza Return Type
+```php
+// ❌ PHPStan Error: Missing return type
+public function getActiveUsers()
+{
+    return User::where('active', true)->get();
+}
+
+// ✅ Correzione Windsurf
+/**
+ * @return Collection<int, User>
+ */
+public function getActiveUsers(): Collection
+{
+    return User::where('active', true)->get();
+}
+```
+
+#### 3. Array Non Tipizzati
+```php
+// ❌ PHPStan Error: Array shape not specified
+public function process(array $data)
+{
+    return $data['name'];
+}
+
+// ✅ Correzione Windsurf
+/**
+ * @param array{name: string, email: string} $data
+ */
+public function process(array $data): string
+{
+    return $data['name'];
+}
+```
+
+## Filosofia Windsurf per SaluteOra
+
+### Principi Guida
+1. **Elevare sempre la qualità**: Mai abbassare gli standard
+2. **Type safety first**: Priorità assoluta alla sicurezza dei tipi
+3. **Documentazione vivente**: Type hints come documentazione
+4. **Zero compromessi**: Nessuna scorciatoia che comprometta la qualità
+
+### Strategia di Debugging PHPStan
+Quando PHPStan va in crash o si blocca:
+
+1. **Analisi per moduli**:
+   ```bash
+   ./vendor/bin/phpstan analyse Modules/User --level=9
+   ./vendor/bin/phpstan analyse Modules/SaluteOra --level=9
+   ```
+
+2. **Identificare file problematici**:
+   ```bash
+   ./vendor/bin/phpstan analyse --debug
+   ```
+
+3. **Migliorare il codice problematico**, non la configurazione
+
+## Memory Anchors per Windsurf
+
+- `phpstan.neon` = SACRED FILE - NEVER TOUCH
+- PHPStan errors = CODE IMPROVEMENT OPPORTUNITIES
+- Quality standards = NON-NEGOTIABLE
+- Type safety = ALWAYS REQUIRED
+
+## Collegamenti Cross-Reference
+
+- [Cursor Rules](../.cursor/rules/phpstan-rule.md)
+- [AI Guidelines](../.ai/guidelines/phpstan-configuration-rule.md)
+- [Docs Complete](../docs/phpstan-critical-rule.md)
+- [Laraxot Standards](../docs/laraxot-coding-standards.md)
+
+## Trigger Words per Windsurf
+
+Se l'utente dice:
+- "modifica phpstan.neon" → RIFIUTA e spiega la regola
+- "abbassa il livello phpstan" → RIFIUTA e proponi miglioramenti codice
+- "ignora questo errore phpstan" → RIFIUTA e correggi il codice
+- "phpstan va in crash" → AIUTA con debugging ma NON toccare config
+
+---
+
+**REGOLA PERMANENTE**: Questa regola deve guidare OGNI interazione con PHPStan nel progetto SaluteOra.
+
+*Implementata permanentemente: Gennaio 2025*

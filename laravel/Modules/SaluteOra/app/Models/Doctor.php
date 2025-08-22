@@ -182,6 +182,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereAgeRange($value)
+ * @mixin IdeHelperDoctor
  * @mixin \Eloquent
  */
 class Doctor extends User implements HasMedia

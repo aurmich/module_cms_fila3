@@ -1,0 +1,20 @@
+---
+description: Root PHPStan config immutability rule
+---
+
+# PHPStan Config Immutability (Do Not Modify)
+
+- Target: `/var/www/html/_bases/base_saluteora/laravel/phpstan.neon`
+- Status: IMMUTABLE. Assistants, scripts, and automation must NEVER edit this file.
+- Owner: User. Any changes are manual-only.
+
+## How to adapt analysis without editing phpstan.neon
+- Use CLI flags and explicit paths per run:
+  - `./vendor/bin/phpstan analyze Modules --level=9 --no-progress --memory-limit=2G`
+  - Per-module: `./vendor/bin/phpstan analyze Modules/User Modules/Geo --level=9`
+  - With debug: `./vendor/bin/phpstan analyze Modules --debug -vvv`
+- Prefer scoping by passing paths instead of changing config.
+
+## Enforcement
+- If a task suggests patching `phpstan.neon`, decline and propose CLI alternatives.
+- Cross-ref: `.ai/guidelines/phpstan-config-immutability.md`, `.cursor/rules/phpstan-config-immutability.mdc`.

@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|Result whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperResult
  * @mixin \Eloquent
  */
 class Result extends BaseModel

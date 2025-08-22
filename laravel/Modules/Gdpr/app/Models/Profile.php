@@ -141,6 +141,7 @@ use Modules\User\Models\BaseProfile;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereCountry($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile wherePostalCode($value)
+ * @mixin IdeHelperProfile
  * @mixin \Eloquent
  */
 class Profile extends BaseProfile

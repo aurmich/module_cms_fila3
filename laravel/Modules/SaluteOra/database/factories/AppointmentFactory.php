@@ -54,6 +54,9 @@ class AppointmentFactory extends Factory
 
         $typeCases = AppointmentTypeEnum::cases();
         $statusCases = AppointmentStatusEnum::cases();
+        // Select enum instances via typed index to avoid mixed->value access
+        $typeEnum = $typeCases[$this->faker->numberBetween(0, count($typeCases) - 1)];
+        $statusEnum = $statusCases[$this->faker->numberBetween(0, count($statusCases) - 1)];
 
         return [
             'patient_id' => User::factory()->patient()->create()->id,
@@ -69,8 +72,8 @@ class AppointmentFactory extends Factory
             'date' => Carbon::parse($startTime)->format('Y-m-d'),
             'start_datetime' => $startTime->format('Y-m-d H:i:s'),
             'end_datetime' => $endTime->format('Y-m-d H:i:s'),
-            'type' => $this->faker->randomElement($typeCases)->value,
-            'status' => $this->faker->randomElement($statusCases)->value,
+            'type' => $typeEnum->value,
+            'status' => $statusEnum->value,
             'notes' => $this->faker->optional(0.7)->text(200),
             'emergency' => $this->faker->boolean(10), // 10% chance of emergency
             'confirmed' => $this->faker->boolean(80), // 80% chance of confirmed

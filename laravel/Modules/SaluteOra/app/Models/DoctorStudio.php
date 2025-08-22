@@ -61,6 +61,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
  * @property-read int|null $appointments_count
+ * @mixin IdeHelperDoctorStudio
  * @mixin \Eloquent
  */
 class DoctorStudio extends StudioUser

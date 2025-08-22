@@ -46,6 +46,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUserAgent($value)
+ * @mixin IdeHelperAuthenticationLog
  * @mixin \Eloquent
  */
 class AuthenticationLog extends BaseModel

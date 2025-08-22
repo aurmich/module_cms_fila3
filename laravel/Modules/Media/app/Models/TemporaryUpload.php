@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Media\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -41,12 +42,24 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedBy($value)
+ * @mixin IdeHelperTemporaryUpload
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia
 {
+    use HasFactory;
     use InteractsWithMedia;
     use MassPrunable;
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Modules\Media\Database\Factories\TemporaryUploadFactory
+     */
+    protected static function newFactory(): \Modules\Media\Database\Factories\TemporaryUploadFactory
+    {
+        return \Modules\Media\Database\Factories\TemporaryUploadFactory::new();
+    }
 
     public static ?\Closure $manipulatePreview = null;
 

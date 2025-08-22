@@ -24,6 +24,7 @@ use Modules\Xot\Contracts\UserContract;
  * @property TenantUser $pivot
  * @property EloquentCollection<int, User> $users
  * @property int|null $users_count
+ * @mixin IdeHelperTenant
  * @mixin \Eloquent
  */
 class Tenant extends BaseTenant {}

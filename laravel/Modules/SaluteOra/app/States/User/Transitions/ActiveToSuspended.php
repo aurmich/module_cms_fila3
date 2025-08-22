@@ -9,6 +9,9 @@ use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Suspended;
 use Modules\SaluteOra\Models\User;
 
+/**
+ * @property \Modules\SaluteOra\Models\User $record
+ */
 class ActiveToSuspended extends BaseTransition
 {
     //---

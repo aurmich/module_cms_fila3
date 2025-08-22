@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\User\Models;
 
 // use Laravel\Passport\AccessToken as PassportAccessToken;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Passport\Token as PassportToken;
 
 /**
@@ -42,10 +43,12 @@ use Laravel\Passport\Token as PassportToken;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereUpdatedBy($value)
+ * @mixin IdeHelperOauthAccessToken
  * @mixin \Eloquent
  */
 class OauthAccessToken extends PassportToken
 {
+    use HasFactory;
     /** @var string */
     protected $connection = 'user';
 

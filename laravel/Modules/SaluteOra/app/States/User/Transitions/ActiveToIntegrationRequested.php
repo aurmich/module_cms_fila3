@@ -11,6 +11,9 @@ use Spatie\ModelStates\Transition;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\IntegrationRequested;
 
+/**
+ * @property \Modules\SaluteOra\Models\User $record
+ */
 class ActiveToIntegrationRequested extends BaseTransition
 {
     //--- 

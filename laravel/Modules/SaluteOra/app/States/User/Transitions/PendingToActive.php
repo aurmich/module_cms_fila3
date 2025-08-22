@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\SaluteOra\States\User\Transitions;
 
-use Spatie\ModelStates\Transition;
-use Modules\SaluteOra\States\User\Pending;
-use Modules\SaluteOra\States\User\Active;
-use Modules\SaluteOra\Models\User;
 use Illuminate\Support\Str;
+use Modules\SaluteOra\Models\User;
+use Spatie\ModelStates\Transition;
+use Modules\SaluteOra\States\User\Active;
+use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
+use Modules\Notify\Datas\RecordNotificationData;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationRequested;
 
@@ -27,6 +28,25 @@ class PendingToActive extends BaseTransition
             'password' => $password,
         ];
         return $data;
+    }
+
+
+     /**
+     * @return  array<string, RecordNotificationData>
+     */
+    public function getNotificationRecipients(): array
+    {
+        $record=$this->record;
+        //dddx($record->type==UserTypeEnum::PATIENT);
+        return [
+            // 'me' => $this->record,
+            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
+            'me_sms' => RecordNotificationData::from(['record' => $record, 'channel' => 'sms']),
+            // 'patient' => $this->record->patient,
+            // 'doctor' => $this->record->doctor,
+            // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),
+            // 'doctor_mail' => RecordNotificationData::from(['record' => $record->doctor, 'channel' => 'mail']),
+        ];
     }
 }
 

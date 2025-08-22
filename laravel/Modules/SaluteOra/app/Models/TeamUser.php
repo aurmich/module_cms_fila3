@@ -39,6 +39,7 @@ use Modules\User\Models\BaseTeamUser;
  * @method static \Illuminate\Database\Eloquent\Builder|TeamUser whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamUser
  * @mixin \Eloquent
  */
 class TeamUser extends BaseTeamUser

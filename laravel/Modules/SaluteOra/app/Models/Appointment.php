@@ -110,6 +110,7 @@ use Spatie\ModelStates\HasStatesContract;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
+ * @mixin IdeHelperAppointment
  * @mixin \Eloquent
  */
 class Appointment extends BaseModel implements HasStatesContract

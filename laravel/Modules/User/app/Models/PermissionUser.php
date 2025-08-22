@@ -11,6 +11,7 @@ namespace Modules\User\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser query()
+ * @mixin IdeHelperPermissionUser
  * @mixin \Eloquent
  */
 class PermissionUser extends ModelHasPermission {}

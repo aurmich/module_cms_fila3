@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -44,10 +45,12 @@ use Modules\Xot\Datas\XotData;
  * @property UserContract|null $user
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
+ * @mixin IdeHelperDeviceUser
  * @mixin \Eloquent
  */
 class DeviceUser extends BasePivot
 {
+    use HasFactory;
     /** @var list<string> */
     protected $fillable = [
         'id',

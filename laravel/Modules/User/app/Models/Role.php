@@ -55,6 +55,7 @@ use Webmozart\Assert\Assert;
  * @mixin Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|Role withoutPermission($permissions)
  * @property PermissionRole|null $pivot
+ * @mixin IdeHelperRole
  * @mixin \Eloquent
  */
 class Role extends SpatieRole

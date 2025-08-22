@@ -121,6 +121,14 @@ return [
         'modal_heading' => 'Rückerstattung zu integrieren',
         'modal_description' => 'Die Rückerstattung erfordert Integration',
     ],
+    'refund_integrate' => [
+        'label' => 'Rückerstattung Integration',
+        'color' => 'info',
+        'bg_color' => 'info',
+        'icon' => 'heroicon-o-plus-circle',
+        'modal_heading' => 'Rückerstattung Integration',
+        'modal_description' => 'Die Rückerstattung erfordert Dokumentenintegration',
+    ],
     'refund_completed' => [
         'label' => 'Rückerstattung abgeschlossen',
         'color' => 'success',

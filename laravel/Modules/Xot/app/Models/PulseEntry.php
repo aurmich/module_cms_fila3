@@ -23,6 +23,7 @@ namespace Modules\Xot\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereValue($value)
+ * @mixin IdeHelperPulseEntry
  * @mixin \Eloquent
  */
 class PulseEntry extends BaseModel

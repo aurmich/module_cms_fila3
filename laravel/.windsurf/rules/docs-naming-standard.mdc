@@ -1,0 +1,101 @@
+# REGOLA WINDSURF: Standard Naming File Documentazione
+
+## ⚠️ MEMORIZZA QUESTA REGOLA PERMANENTEMENTE ⚠️
+
+### 🎯 Standard Obbligatorio per File Docs
+
+**TUTTI i file nelle cartelle `docs/` DEVONO seguire questo standard:**
+
+1. **Lingua**: SEMPRE inglese (english-only)
+2. **Separatori**: SEMPRE trattini `-` (kebab-case)
+3. **Case**: SEMPRE minuscolo (lowercase)
+4. **Date**: MAI nei nomi file (no dates)
+5. **Contenuto**: Nome descrittivo funzionale
+
+### 🚫 Pattern da Evitare
+
+```regex
+# Date nei nomi (da rimuovere)
+.*-[0-9]{4}-[0-9]{2}-[0-9]{2}\.md$
+
+# Underscore (da convertire in trattini)
+.*_.*\.md$
+
+# Maiuscole (da convertire in minuscolo, eccetto README.md)
+.*[A-Z].*\.md$ (exclude README.md)
+
+# Termini italiani (da tradurre)
+.*ottimizzazioni.*\.md$
+.*sicurezza.*\.md$
+.*analisi.*\.md$
+```
+
+### 🔄 Mapping Automatico per Windsurf
+
+**Traduzioni Comuni:**
+- `ottimizzazioni` → `optimization-analysis`
+- `sicurezza` → `security-guidelines`
+- `analisi` → `analysis`
+- `linee-guida` → `guidelines`
+- `best-practice` → `best-practices`
+- `risoluzione-problemi` → `troubleshooting-guide`
+
+**Conversioni Strutturali:**
+- `file_name.md` → `file-name.md`
+- `FileName.md` → `file-name.md`
+- `file-2025-08-22.md` → `file.md`
+
+### 🎯 Istruzioni Comportamentali per Windsurf
+
+**Quando crei nuovi file docs:**
+1. **SEMPRE** verificare naming prima di creare
+2. **SEMPRE** usare pattern: `[action]-[subject].md`
+3. **SEMPRE** inglese per tutti i nomi
+4. **SEMPRE** kebab-case per separatori
+
+**Quando trovi file non conformi:**
+1. **SEMPRE** suggerire rinominazione immediata
+2. **SEMPRE** proporre nome corretto
+3. **SEMPRE** aggiornare riferimenti
+4. **SEMPRE** mantenere contenuto intatto
+
+**Pattern di Naming Raccomandati:**
+- Analisi: `*-analysis.md`
+- Linee guida: `*-guidelines.md`
+- Best practices: `*-best-practices.md`
+- Troubleshooting: `*-troubleshooting.md`
+- Panoramiche: `*-overview.md`
+- Guide: `*-guide.md`
+
+### 🏗️ Motivazioni Architetturali
+
+**DRY (Don't Repeat Yourself)**
+- Standard unico elimina duplicazione decisionale
+- Pattern uniforme riduce cognitive load
+
+**KISS (Keep It Simple, Stupid)**
+- Naming semplice e intuitivo
+- Meno regole da ricordare
+
+**SOLID Principles**
+- Single Responsibility: ogni file ha scopo chiaro
+- Open/Closed: estensibile senza modificare esistente
+
+**ROBUST**
+- Resistente a refactoring
+- Compatibile con tool automatici
+- Futuro-proof per evoluzione progetto
+
+### 🔗 Memory Anchors per Windsurf
+
+- `docs/` = ENGLISH + KEBAB-CASE + NO-DATES + LOWERCASE
+- Date in filename = IMMEDIATE RENAME REQUIRED
+- Underscore = CONVERT TO DASH
+- Italian terms = TRANSLATE TO ENGLISH
+- Uppercase = CONVERT TO LOWERCASE (except README.md)
+
+---
+
+**REGOLA PERMANENTE**: Applicare questo standard a OGNI file di documentazione nel progetto SaluteOra.
+
+*Implementata permanentemente: Gennaio 2025*

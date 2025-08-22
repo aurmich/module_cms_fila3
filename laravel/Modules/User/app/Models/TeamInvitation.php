@@ -43,6 +43,7 @@ use Modules\Xot\Datas\XotData;
  * @method static \Illuminate\Database\Eloquent\Builder|TeamInvitation whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamInvitation
  * @mixin \Eloquent
  */
 class TeamInvitation extends BaseModel

@@ -18,6 +18,7 @@ namespace Modules\User\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile query()
+ * @mixin IdeHelperDeviceProfile
  * @mixin \Eloquent
  */
 class DeviceProfile extends DeviceUser

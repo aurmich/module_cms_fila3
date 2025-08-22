@@ -121,6 +121,14 @@ return [
         'modal_heading' => 'Refund to Integrate',
         'modal_description' => 'The refund requires integration',
     ],
+    'refund_integrate' => [
+        'label' => 'Refund Integration',
+        'color' => 'info',
+        'bg_color' => 'info',
+        'icon' => 'heroicon-o-plus-circle',
+        'modal_heading' => 'Refund Integration',
+        'modal_description' => 'The refund requires documentation integration',
+    ],
     'refund_completed' => [
         'label' => 'Refund Completed',
         'color' => 'success',

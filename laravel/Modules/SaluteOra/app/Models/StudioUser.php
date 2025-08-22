@@ -41,6 +41,7 @@ use Parental\HasChildren;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudioUser whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @mixin IdeHelperStudioUser
  * @mixin \Eloquent
  */
 class StudioUser extends BasePivot

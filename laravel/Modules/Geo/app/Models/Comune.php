@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Geo\Models;
 
 use Sushi\Sushi;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
@@ -50,10 +51,12 @@ use Modules\Tenant\Models\Traits\SushiToJson;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereRegione($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereSigla($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereZona($value)
+ * @mixin IdeHelperComune
  * @mixin \Eloquent
  */
 class Comune extends BaseModel
 {
+    use HasFactory;
     use SushiToJson;
 
     public string $jsonDirectory='';

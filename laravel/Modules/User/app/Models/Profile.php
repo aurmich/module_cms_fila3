@@ -71,6 +71,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withExtraAttributes()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
+ * @mixin IdeHelperProfile
  * @mixin \Eloquent
  */
 class Profile extends BaseProfile implements HasMedia

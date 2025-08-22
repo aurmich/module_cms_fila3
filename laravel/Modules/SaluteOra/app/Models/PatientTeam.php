@@ -31,6 +31,7 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUserId($value)
+ * @mixin IdeHelperPatientTeam
  * @mixin \Eloquent
  */
 class PatientTeam extends TeamUser

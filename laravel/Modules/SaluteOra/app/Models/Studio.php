@@ -118,6 +118,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int|null $patients_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
+ * @mixin IdeHelperStudio
  * @mixin \Eloquent
  */
 class Studio extends BaseTenant

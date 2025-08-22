@@ -31,6 +31,7 @@ namespace Modules\User\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereValue($value)
+ * @mixin IdeHelperFeature
  * @mixin \Eloquent
  */
 class Feature extends BaseModel

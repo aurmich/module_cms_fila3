@@ -29,6 +29,7 @@ namespace Modules\Xot\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate wherePeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate whereValue($value)
+ * @mixin IdeHelperPulseAggregate
  * @mixin \Eloquent
  */
 class PulseAggregate extends BaseModel

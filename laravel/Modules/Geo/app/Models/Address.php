@@ -50,7 +50,6 @@ use Modules\Geo\Enums\AddressTypeEnum;
  * @property-read string $street_address
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent|null $model
  * @property-read \Modules\User\Models\Profile|null $updater
- * @method static \Modules\Geo\Database\Factories\AddressFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address nearby(float $latitude, float $longitude, float $radiusKm = '10')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newQuery()
@@ -83,6 +82,7 @@ use Modules\Geo\Enums\AddressTypeEnum;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedBy($value)
+ * @mixin IdeHelperAddress
  * @mixin \Eloquent
  */
 class Address extends BaseModel 

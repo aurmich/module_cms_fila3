@@ -34,6 +34,7 @@ use Modules\User\Database\Factories\PasswordResetFactory;
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PasswordReset whereUuid($value)
+ * @mixin IdeHelperPasswordReset
  * @mixin \Eloquent
  */
 class PasswordReset extends BaseModel

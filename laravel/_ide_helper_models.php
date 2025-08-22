@@ -63,7 +63,8 @@ namespace Modules\Activity\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Activity whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Activity extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperActivity {}
 }
 
 namespace Modules\Activity\Models{
@@ -92,7 +93,8 @@ namespace Modules\Activity\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Snapshot extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSnapshot {}
 }
 
 namespace Modules\Activity\Models{
@@ -137,67 +139,8 @@ namespace Modules\Activity\Models{
  * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
  * @mixin \Eloquent
  */
-	class StoredEvent extends \Eloquent {}
-}
-
-namespace Modules\Chart\Models{
-/**
- * Modules\Chart\Models\Chart.
- *
- * @property int|null $height
- * @property string|null $type
- * @property int|null $width
- * @property string|null $color
- * @property string|null $bg_color
- * @property int|null $font_family
- * @property int|null $font_size
- * @property int|null $font_style
- * @property int|null $y_grace
- * @property bool|null $yaxis_hide
- * @property string|null $list_color
- * @property int|null $grace
- * @property int|null $x_label_angle
- * @property bool|null $show_box
- * @property int|null $x_label_margin
- * @property int|null $plot_perc_width
- * @property int|null $plot_value_show
- * @property string|null $plot_value_format
- * @property int|null $plot_value_pos
- * @property string|null $plot_value_color
- * @property string|null $group_by
- * @property string|null $sort_by
- * @property int|null $transparency
- * @property array<string, mixed>|null $colors
- * @property string|null $post_id
- * @property string|null $post_type
- * @property string|null $chart_type
- * @property array<string, mixed>|null $totali
- * @method static \Modules\Chart\Database\Factories\ChartFactory factory($count = null, $state = [])
- * @method static Builder|Chart newModelQuery()
- * @method static Builder|Chart newQuery()
- * @method static Builder|Chart query()
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
- * @mixin \Eloquent
- */
-	class Chart extends \Eloquent {}
-}
-
-namespace Modules\Chart\Models{
-/**
- * Modules\Chart\Models\MixedChart.
- *
- * @property Collection<int, \Modules\Chart\Models\Chart> $charts
- * @property int|null $charts_count
- * @method static \Modules\Chart\Database\Factories\MixedChartFactory factory($count = null, $state = [])
- * @method static Builder|MixedChart newModelQuery()
- * @method static Builder|MixedChart newQuery()
- * @method static Builder|MixedChart query()
- * @property-read ProfileContract|null $creator
- * @property-read ProfileContract|null $updater
- * @mixin \Eloquent
- */
-	class MixedChart extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperStoredEvent {}
 }
 
 namespace Modules\Cms\Models{
@@ -211,10 +154,10 @@ namespace Modules\Cms\Models{
  * @method static Builder|Conf query()
  * @method static Builder|Conf whereId($value)
  * @method static Builder|Conf whereName($value)
- * @mixin IdeHelperConf
  * @mixin \Eloquent
  */
-	class Conf extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperConf {}
 }
 
 namespace Modules\Cms\Models{
@@ -335,7 +278,8 @@ namespace Modules\Cms\Models{
  * @property-read string $path
  * @mixin \Eloquent
  */
-	class Menu extends \Eloquent implements \Modules\Xot\Contracts\HasRecursiveRelationshipsContract {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMenu {}
 }
 
 namespace Modules\Cms\Models{
@@ -352,10 +296,10 @@ namespace Modules\Cms\Models{
  * @method static Builder|Module query()
  * @method static Builder|Module whereId($value)
  * @method static Builder|Module whereName($value)
- * @mixin IdeHelperModule
  * @mixin \Eloquent
  */
-	class Module extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperModule {}
 }
 
 namespace Modules\Cms\Models{
@@ -406,7 +350,8 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
  * @mixin \Eloquent
  */
-	class Page extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPage {}
 }
 
 namespace Modules\Cms\Models{
@@ -442,7 +387,8 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class PageContent extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPageContent {}
 }
 
 namespace Modules\Cms\Models{
@@ -478,475 +424,8 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Section extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property array<array-key, mixed> $name
- * @property int $ordering
- * @property int $is_active
- * @property array<array-key, mixed>|null $description
- * @property string $slug
- * @property string|null $logo
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_by
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\Form> $forms
- * @property-read int|null $forms_count
- * @property-read string $last_updated
- * @property-read mixed $logo_url
- * @property-read mixed $translations
- * @method static \LaraZeus\Bolt\Database\Factories\CategoryFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereOrdering($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withoutTrashed()
- * @mixin \Eloquent
- */
-	class Category extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property string $name
- * @property int|null $ordering
- * @property int $is_active
- * @property string|null $description
- * @property string|null $slug
- * @property string|null $logo
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read string $last_updated
- * @property-read string|null $values_list
- * @property-read \Modules\SaluteOra\Models\User|null $user
- * @method static \LaraZeus\Bolt\Database\Factories\CollectionFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereOrdering($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection withoutTrashed()
- * @mixin \Eloquent
- * @property \Illuminate\Support\Collection<array-key, mixed>|null $values
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Collection whereValues($value)
- */
-	class Collection extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property int|null $section_id
- * @property array<array-key, mixed> $name
- * @property string|null $description
- * @property string $type
- * @property int $ordering
- * @property array<array-key, mixed>|null $options
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\FieldResponse> $fieldResponses
- * @property-read int|null $field_responses_count
- * @property-read \Modules\FormBuilder\Models\Section|null $section
- * @property-read mixed $translations
- * @method static \LaraZeus\Bolt\Database\Factories\FieldFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereOptions($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereOrdering($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Field withoutTrashed()
- * @mixin \Eloquent
- */
-	class Field extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property string $id
- * @property array<array-key, mixed> $name
- * @property string|null $key
- * @property string|null $type
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read mixed $translations
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Modules\FormBuilder\Database\Factories\FieldOptionFactory factory($count = null, $state = [])
- * @method static Builder<static>|FieldOption newModelQuery()
- * @method static Builder<static>|FieldOption newQuery()
- * @method static Builder<static>|FieldOption query()
- * @method static Builder<static>|FieldOption whereCreatedAt($value)
- * @method static Builder<static>|FieldOption whereCreatedBy($value)
- * @method static Builder<static>|FieldOption whereDeletedAt($value)
- * @method static Builder<static>|FieldOption whereDeletedBy($value)
- * @method static Builder<static>|FieldOption whereId($value)
- * @method static Builder<static>|FieldOption whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static Builder<static>|FieldOption whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static Builder<static>|FieldOption whereKey($value)
- * @method static Builder<static>|FieldOption whereLocale(string $column, string $locale)
- * @method static Builder<static>|FieldOption whereLocales(string $column, array $locales)
- * @method static Builder<static>|FieldOption whereName($value)
- * @method static Builder<static>|FieldOption whereType($value)
- * @method static Builder<static>|FieldOption whereUpdatedAt($value)
- * @method static Builder<static>|FieldOption whereUpdatedBy($value)
- * @property string|null $type
- * @mixin \Eloquent
- */
-	class FieldOption extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property int|null $form_id
- * @property int|null $field_id
- * @property int|null $response_id
- * @property string|null $response
- * @property int|null $grade
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property-read \Modules\FormBuilder\Models\Field|null $field
- * @property-read \Modules\FormBuilder\Models\Form|null $form
- * @property-read \Modules\FormBuilder\Models\Response|null $parentResponse
- * @method static \LaraZeus\Bolt\Database\Factories\FieldResponseFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereFormId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereGrade($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereResponse($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereResponseId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldResponse withoutTrashed()
- * @mixin \Eloquent
- */
-	class FieldResponse extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * Form model for the FormBuilder module.
- *
- * @property int $id
- * @property string $name
- * @property string $slug
- * @property string|null $description
- * @property bool $is_active
- * @property array|null $options
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Form newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Form newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Form query()
- * @property int|null $form_id
- * @property int|null $field_id
- * @property int|null $response_id
- * @property string|null $response
- * @property int|null $grade
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property int|null $user_id
- * @property int|null $category_id
- * @property int $ordering
- * @property array<array-key, mixed>|null $details
- * @property string|null $start_at
- * @property string|null $end_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property \Illuminate\Support\Carbon|null $start_date
- * @property \Illuminate\Support\Carbon|null $end_date
- * @property-read \Modules\FormBuilder\Models\Category|null $category
- * @property-read mixed $date_available
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\Field> $fields
- * @property-read int|null $fields_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\FieldResponse> $fieldsResponses
- * @property-read int|null $fields_responses_count
- * @property-read string $is_active_desc
- * @property-read string $last_updated
- * @property-read mixed $need_login
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\Response> $responses
- * @property-read int|null $responses_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\Section> $sections
- * @property-read int|null $sections_count
- * @property-read mixed $slug_url
- * @property-read mixed $translations
- * @property-read \Modules\SaluteOra\Models\User|null $user
- * @method static \LaraZeus\Bolt\Database\Factories\FormFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereDetails($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereEndAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereEndDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereFormId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereGrade($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereOptions($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereOrdering($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereResponse($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereResponseId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereStartAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereStartDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form withoutTrashed()
- * @mixin \Eloquent
- * @property string|null $extensions
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Form whereExtensions($value)
- */
-	class Form extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property-read \Modules\FormBuilder\Models\FormTemplate|null $formTemplate
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormField query()
- * @mixin \Eloquent
- */
-	class FormField extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\FormBuilder\Models\FormTemplate|null $form
- * @property-read \Modules\FormBuilder\Models\FormTemplate|null $formTemplate
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormSubmission query()
- * @mixin \Eloquent
- */
-	class FormSubmission extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\FormField> $fields
- * @property-read int|null $fields_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\FormSubmission> $submissions
- * @property-read int|null $submissions_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormTemplate newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormTemplate newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|FormTemplate query()
- * @mixin \Eloquent
- */
-	class FormTemplate extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property int|null $form_id
- * @property int|null $field_id
- * @property int|null $response_id
- * @property string|null $response
- * @property int|null $grade
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property string|null $user_id
- * @property string|null $status
- * @property string|null $notes
- * @property int|null $extension_item_id
- * @property int|null $grades
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\FieldResponse> $fieldsResponses
- * @property-read int|null $fields_responses_count
- * @property-read \Modules\FormBuilder\Models\Form|null $form
- * @property-read string $last_updated
- * @property-read \Modules\SaluteOra\Models\User|null $user
- * @method static \LaraZeus\Bolt\Database\Factories\ResponseFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereExtensionItemId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereFormId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereGrade($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereGrades($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereResponse($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereResponseId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Response withoutTrashed()
- * @mixin \Eloquent
- */
-	class Response extends \Eloquent {}
-}
-
-namespace Modules\FormBuilder\Models{
-/**
- * @property int $id
- * @property int|null $form_id
- * @property int|null $field_id
- * @property int|null $response_id
- * @property string|null $response
- * @property int|null $grade
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property string|null $deleted_by
- * @property array<array-key, mixed> $name
- * @property int $ordering
- * @property int $columns
- * @property string|null $description
- * @property string|null $icon
- * @property int $aside
- * @property int $compact
- * @property array<array-key, mixed>|null $options
- * @property int $borderless
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\FormBuilder\Models\Field> $fields
- * @property-read int|null $fields_count
- * @property-read \Modules\FormBuilder\Models\Form|null $form
- * @property-read mixed $translations
- * @method static \LaraZeus\Bolt\Database\Factories\SectionFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereAside($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereBorderless($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereColumns($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCompact($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereDeletedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereFormId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereGrade($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereIcon($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereOptions($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereOrdering($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereResponse($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereResponseId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Section withoutTrashed()
- * @mixin \Eloquent
- */
-	class Section extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSection {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -1013,7 +492,8 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consent whereUserType($value)
  * @mixin \Eloquent
  */
-	class Consent extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperConsent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -1086,7 +566,8 @@ namespace Modules\Gdpr\Models{
  * @property ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Event extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperEvent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -1227,7 +708,8 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile wherePostalCode($value)
  * @mixin \Eloquent
  */
-	class Profile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProfile {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -1331,7 +813,8 @@ namespace Modules\Gdpr\Models{
  * @property ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Treatment extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTreatment {}
 }
 
 namespace Modules\Geo\Models{
@@ -1408,7 +891,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Address extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAddress {}
 }
 
 namespace Modules\Geo\Models{
@@ -1453,7 +937,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereZona($value)
  * @mixin \Eloquent
  */
-	class Comune extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperComune {}
 }
 
 namespace Modules\Geo\Models{
@@ -1461,11 +946,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|County newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|County newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|County query()
- * @mixin \Eloquent
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
  * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @mixin \Eloquent
  */
-	class County extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperCounty {}
 }
 
 namespace Modules\Geo\Models{
@@ -1479,7 +965,8 @@ namespace Modules\Geo\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class GeoNamesCap extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperGeoNamesCap {}
 }
 
 namespace Modules\Geo\Models{
@@ -1501,7 +988,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality whereRegionId($value)
  * @mixin \Eloquent
  */
-	class Locality extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperLocality {}
 }
 
 namespace Modules\Geo\Models{
@@ -1555,7 +1043,8 @@ namespace Modules\Geo\Models{
  * @method static Builder<static>|Location whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Location extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperLocation {}
 }
 
 namespace Modules\Geo\Models{
@@ -1598,7 +1087,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Place extends \Eloquent implements \Modules\Geo\Contracts\HasGeolocation {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPlace {}
 }
 
 namespace Modules\Geo\Models{
@@ -1606,11 +1096,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType query()
- * @mixin \Eloquent
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
  * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @mixin \Eloquent
  */
-	class PlaceType extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPlaceType {}
 }
 
 namespace Modules\Geo\Models{
@@ -1631,7 +1122,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereRegionId($value)
  * @mixin \Eloquent
  */
-	class Province extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProvince {}
 }
 
 namespace Modules\Geo\Models{
@@ -1649,7 +1141,8 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereName($value)
  * @mixin \Eloquent
  */
-	class Region extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperRegion {}
 }
 
 namespace Modules\Geo\Models{
@@ -1657,11 +1150,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|State newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|State newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|State query()
- * @mixin \Eloquent
  * @property-read \Modules\SaluteOra\Models\Profile|null $creator
  * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @mixin \Eloquent
  */
-	class State extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperState {}
 }
 
 namespace Modules\Job\Models{
@@ -1705,10 +1199,11 @@ namespace Modules\Job\Models{
  * @property \Illuminate\Database\Eloquent\Model|Eloquent|null $user
  * @property string|null $user_type
  * @method static \Illuminate\Database\Eloquent\Builder|Export whereUserType($value)
- * @mixin \Eloquent
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
-	class Export extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperExport {}
 }
 
 namespace Modules\Job\Models{
@@ -1737,7 +1232,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class FailedImportRow extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperFailedImportRow {}
 }
 
 namespace Modules\Job\Models{
@@ -1766,7 +1262,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class FailedJob extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperFailedJob {}
 }
 
 namespace Modules\Job\Models{
@@ -1800,7 +1297,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Frequency extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperFrequency {}
 }
 
 namespace Modules\Job\Models{
@@ -1845,7 +1343,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Import extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperImport {}
 }
 
 namespace Modules\Job\Models{
@@ -1882,7 +1381,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Job extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperJob {}
 }
 
 namespace Modules\Job\Models{
@@ -1917,7 +1417,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class JobBatch extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperJobBatch {}
 }
 
 namespace Modules\Job\Models{
@@ -1957,7 +1458,8 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobManager whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-	class JobManager extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperJobManager {}
 }
 
 namespace Modules\Job\Models{
@@ -1994,7 +1496,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class JobsWaiting extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperJobsWaiting {}
 }
 
 namespace Modules\Job\Models{
@@ -2026,7 +1529,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Parameter extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperParameter {}
 }
 
 namespace Modules\Job\Models{
@@ -2059,7 +1563,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Result extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperResult {}
 }
 
 namespace Modules\Job\Models{
@@ -2135,7 +1640,8 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule withoutTrashed()
  * @mixin \Eloquent
  */
-	class Schedule extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSchedule {}
 }
 
 namespace Modules\Job\Models{
@@ -2174,7 +1680,8 @@ namespace Modules\Job\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class ScheduleHistory extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperScheduleHistory {}
 }
 
 namespace Modules\Job\Models{
@@ -2250,7 +1757,8 @@ namespace Modules\Job\Models{
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @mixin \Eloquent
  */
-	class Task extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTask {}
 }
 
 namespace Modules\Lang\Models{
@@ -2325,10 +1833,11 @@ namespace Modules\Lang\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViewsCount($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @mixin \Eloquent
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
-	class Post extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPost {}
 }
 
 namespace Modules\Lang\Models{
@@ -2368,7 +1877,8 @@ namespace Modules\Lang\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Translation extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTranslation {}
 }
 
 namespace Modules\Lang\Models{
@@ -2391,7 +1901,8 @@ namespace Modules\Lang\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile wherePath($value)
  * @mixin \Eloquent
  */
-	class TranslationFile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTranslationFile {}
 }
 
 namespace Modules\Media\Models{
@@ -2569,7 +2080,6 @@ namespace Modules\Media\Models{
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @mixin \Eloquent
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
@@ -2605,8 +2115,10 @@ namespace Modules\Media\Models{
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
-	class Media extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMedia {}
 }
 
 namespace Modules\Media\Models{
@@ -2665,7 +2177,8 @@ namespace Modules\Media\Models{
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class MediaConvert extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMediaConvert {}
 }
 
 namespace Modules\Media\Models{
@@ -2695,7 +2208,8 @@ namespace Modules\Media\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class TemporaryUpload extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTemporaryUpload {}
 }
 
 namespace Modules\Notify\Models{
@@ -2798,7 +2312,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedBy($value)
  * @mixin \Eloquent
  */
-	class Contact extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperContact {}
 }
 
 namespace Modules\Notify\Models{
@@ -2850,7 +2365,8 @@ namespace Modules\Notify\Models{
  * @method static Builder<static>|MailTemplate whereSmsTemplate($value)
  * @mixin \Eloquent
  */
-	class MailTemplate extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMailTemplate {}
 }
 
 namespace Modules\Notify\Models{
@@ -2867,7 +2383,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog query()
  * @mixin \Eloquent
  */
-	class MailTemplateLog extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMailTemplateLog {}
 }
 
 namespace Modules\Notify\Models{
@@ -2914,7 +2431,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion withoutTrashed()
  * @mixin \Eloquent
  */
-	class MailTemplateVersion extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMailTemplateVersion {}
 }
 
 namespace Modules\Notify\Models{
@@ -2960,7 +2478,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class Notification extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotification {}
 }
 
 namespace Modules\Notify\Models{
@@ -3009,7 +2528,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplate whereLocales(string $column, array $locales)
  * @mixin \Eloquent
  */
-	class NotificationTemplate extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotificationTemplate {}
 }
 
 namespace Modules\Notify\Models{
@@ -3025,7 +2545,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion query()
  * @mixin \Eloquent
  */
-	class NotificationTemplateVersion extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotificationTemplateVersion {}
 }
 
 namespace Modules\Notify\Models{
@@ -3035,7 +2556,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationType query()
  * @mixin \Eloquent
  */
-	class NotificationType extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotificationType {}
 }
 
 namespace Modules\Notify\Models{
@@ -3090,14 +2612,15 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|NotifyTheme whereViewParams($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @mixin \Eloquent
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyTheme whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyTheme whereDeletedBy($value)
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
-	class NotifyTheme extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotifyTheme {}
 }
 
 namespace Modules\Notify\Models{
@@ -3131,7 +2654,8 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyThemeable whereDeletedBy($value)
  * @mixin \Eloquent
  */
-	class NotifyThemeable extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotifyThemeable {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3298,7 +2822,6 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereYearsInItaly($value)
- * @mixin \Eloquent
  * @property string|null $age_range
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Appointment> $appointments
  * @property-read int|null $appointments_count
@@ -3307,8 +2830,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
  * @property-read int|null $studios_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereAgeRange($value)
+ * @mixin \Eloquent
  */
-	class Admin extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAdmin {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3346,7 +2871,8 @@ namespace Modules\SaluteOra\Models{
  * @property-read User|null $user
  * @mixin \Eloquent
  */
-	class AdminStudio extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAdminStudio {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3378,7 +2904,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUserId($value)
  * @mixin \Eloquent
  */
-	class AdminTeam extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAdminTeam {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3478,7 +3005,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
  * @mixin \Eloquent
  */
-	class Appointment extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAppointment {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3645,14 +3173,15 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereYearsInItaly($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor withoutRole($roles, $guard = null)
- * @mixin \Eloquent
  * @property string|null $age_range
  * @property-read array $schedule
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereAgeRange($value)
+ * @mixin \Eloquent
  */
-	class Doctor extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDoctor {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3703,7 +3232,8 @@ namespace Modules\SaluteOra\Models{
  * @property-read int|null $appointments_count
  * @mixin \Eloquent
  */
-	class DoctorStudio extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDoctorStudio {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3735,7 +3265,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorTeam whereUserId($value)
  * @mixin \Eloquent
  */
-	class DoctorTeam extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDoctorTeam {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3903,15 +3434,16 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereYearsInItaly($value)
- * @mixin \Eloquent
  * @property null|\Modules\SaluteOra\Enums\PatientAgeRangeEnum $age_range
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
  * @property-read int|null $studios_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereAgeRange($value)
+ * @mixin \Eloquent
  */
-	class Patient extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPatient {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3949,7 +3481,8 @@ namespace Modules\SaluteOra\Models{
  * @property-read User|null $user
  * @mixin \Eloquent
  */
-	class PatientStudio extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPatientStudio {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3981,7 +3514,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUserId($value)
  * @mixin \Eloquent
  */
-	class PatientTeam extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPatientTeam {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4056,7 +3590,8 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
-	class Profile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProfile {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4172,7 +3707,8 @@ namespace Modules\SaluteOra\Models{
  * @method static Builder<static>|Report whereVisitsDentistYearly($value)
  * @mixin \Eloquent
  */
-	class Report extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperReport {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4268,15 +3804,16 @@ namespace Modules\SaluteOra\Models{
  * @method static Builder<static>|Studio whereRegion($value)
  * @method static Builder<static>|Studio whereSettings($value)
  * @method static Builder<static>|Studio whereTaxCode($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Admin> $admins
  * @property-read int|null $admins_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Patient> $patients
  * @property-read int|null $patients_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
+ * @mixin \Eloquent
  */
-	class Studio extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperStudio {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4314,7 +3851,8 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @mixin \Eloquent
  */
-	class StudioUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperStudioUser {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4352,7 +3890,8 @@ namespace Modules\SaluteOra\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class TeamUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTeamUser {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4520,11 +4059,12 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastDentalVisitPeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
- * @mixin \Eloquent
  * @property string|null $age_range
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
 }
 
 namespace Modules\Tenant\Models{
@@ -4541,7 +4081,8 @@ namespace Modules\Tenant\Models{
  * @method static \Modules\Tenant\Database\Factories\DomainFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
-	class Domain extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDomain {}
 }
 
 namespace Modules\User\Models{
@@ -4580,7 +4121,8 @@ namespace Modules\User\Models{
  * @method static Builder<static>|Authentication whereAuthenticatableId($value)
  * @mixin \Eloquent
  */
-	class Authentication extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAuthentication {}
 }
 
 namespace Modules\User\Models{
@@ -4622,7 +4164,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUserAgent($value)
  * @mixin \Eloquent
  */
-	class AuthenticationLog extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperAuthenticationLog {}
 }
 
 namespace Modules\User\Models{
@@ -4676,7 +4219,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereUuid($value)
  * @mixin \Eloquent
  */
-	class Device extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDevice {}
 }
 
 namespace Modules\User\Models{
@@ -4696,7 +4240,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile query()
  * @mixin \Eloquent
  */
-	class DeviceProfile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDeviceProfile {}
 }
 
 namespace Modules\User\Models{
@@ -4735,7 +4280,8 @@ namespace Modules\User\Models{
  * @property ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class DeviceUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperDeviceUser {}
 }
 
 namespace Modules\User\Models{
@@ -4769,7 +4315,8 @@ namespace Modules\User\Models{
  * @method static \Modules\User\Database\Factories\ExtraFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
-	class Extra extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperExtra {}
 }
 
 namespace Modules\User\Models{
@@ -4802,7 +4349,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereValue($value)
  * @mixin \Eloquent
  */
-	class Feature extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperFeature {}
 }
 
 namespace Modules\User\Models{
@@ -4840,7 +4388,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Membership extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperMembership {}
 }
 
 namespace Modules\User\Models{
@@ -4873,7 +4422,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ModelHasPermission whereTeamId($value)
  * @mixin \Eloquent
  */
-	class ModelHasPermission extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperModelHasPermission {}
 }
 
 namespace Modules\User\Models{
@@ -4908,7 +4458,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class ModelHasRole extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperModelHasRole {}
 }
 
 namespace Modules\User\Models{
@@ -4927,7 +4478,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Notifications\DatabaseNotificationCollection<int, static> get($columns = ['*'])
  * @mixin \Eloquent
  */
-	class Notification extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperNotification {}
 }
 
 namespace Modules\User\Models{
@@ -4968,7 +4520,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class OauthAccessToken extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperOauthAccessToken {}
 }
 
 namespace Modules\User\Models{
@@ -4993,7 +4546,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereUserId($value)
  * @mixin \Eloquent
  */
-	class OauthAuthCode extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperOauthAuthCode {}
 }
 
 namespace Modules\User\Models{
@@ -5040,7 +4594,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthClient whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class OauthClient extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperOauthClient {}
 }
 
 namespace Modules\User\Models{
@@ -5067,7 +4622,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class OauthPersonalAccessClient extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperOauthPersonalAccessClient {}
 }
 
 namespace Modules\User\Models{
@@ -5088,7 +4644,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereRevoked($value)
  * @mixin \Eloquent
  */
-	class OauthRefreshToken extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperOauthRefreshToken {}
 }
 
 namespace Modules\User\Models{
@@ -5121,7 +4678,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PasswordReset whereUuid($value)
  * @mixin \Eloquent
  */
-	class PasswordReset extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPasswordReset {}
 }
 
 namespace Modules\User\Models{
@@ -5160,7 +4718,8 @@ namespace Modules\User\Models{
  * @property PermissionRole|null $pivot
  * @mixin \Eloquent
  */
-	class Permission extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPermission {}
 }
 
 namespace Modules\User\Models{
@@ -5186,7 +4745,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class PermissionRole extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPermissionRole {}
 }
 
 namespace Modules\User\Models{
@@ -5199,7 +4759,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser query()
  * @mixin \Eloquent
  */
-	class PermissionUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPermissionUser {}
 }
 
 namespace Modules\User\Models{
@@ -5259,7 +4820,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
-	class Profile extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProfile {}
 }
 
 namespace Modules\User\Models{
@@ -5295,7 +4857,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
  * @mixin \Eloquent
  */
-	class ProfileTeam extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperProfileTeam {}
 }
 
 namespace Modules\User\Models{
@@ -5335,7 +4898,8 @@ namespace Modules\User\Models{
  * @property PermissionRole|null $pivot
  * @mixin \Eloquent
  */
-	class Role extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperRole {}
 }
 
 namespace Modules\User\Models{
@@ -5363,7 +4927,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class RoleHasPermission extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperRoleHasPermission {}
 }
 
 namespace Modules\User\Models{
@@ -5404,7 +4969,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class SocialProvider extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSocialProvider {}
 }
 
 namespace Modules\User\Models{
@@ -5445,7 +5011,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class SocialiteUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSocialiteUser {}
 }
 
 namespace Modules\User\Models{
@@ -5494,7 +5061,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereOwnerId($value)
  * @mixin \Eloquent
  */
-	class Team extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTeam {}
 }
 
 namespace Modules\User\Models{
@@ -5533,7 +5101,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class TeamInvitation extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTeamInvitation {}
 }
 
 namespace Modules\User\Models{
@@ -5555,7 +5124,8 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
  * @mixin \Eloquent
  */
-	class TeamPermission extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTeamPermission {}
 }
 
 namespace Modules\User\Models{
@@ -5593,7 +5163,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class TeamUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTeamUser {}
 }
 
 namespace Modules\User\Models{
@@ -5615,7 +5186,8 @@ namespace Modules\User\Models{
  * @property int|null $users_count
  * @mixin \Eloquent
  */
-	class Tenant extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTenant {}
 }
 
 namespace Modules\User\Models{
@@ -5651,7 +5223,8 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class TenantUser extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperTenantUser {}
 }
 
 namespace Modules\User\Models{
@@ -5738,7 +5311,6 @@ namespace Modules\User\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Membership> $teamUsers
  * @property-read int|null $team_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\User> $all_team_users
- * @mixin \Eloquent
  * @property string|null $phone
  * @property string|null $address
  * @property string|null $city
@@ -5759,8 +5331,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
 }
 
 namespace Modules\Xot\Models{
@@ -5789,7 +5363,8 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Cache extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperCache {}
 }
 
 namespace Modules\Xot\Models{
@@ -5818,7 +5393,8 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class CacheLock extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperCacheLock {}
 }
 
 namespace Modules\Xot\Models{
@@ -5856,7 +5432,8 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Extra extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperExtra {}
 }
 
 namespace Modules\Xot\Models{
@@ -5874,7 +5451,8 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Feed extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperFeed {}
 }
 
 namespace Modules\Xot\Models{
@@ -5910,65 +5488,8 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|HealthCheckResultHistoryItem whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-	class HealthCheckResultHistoryItem extends \Eloquent {}
-}
-
-namespace Modules\Xot\Models{
-/**
- * Represents a table in the INFORMATION_SCHEMA.TABLES.
- * 
- * Provides metadata and statistics about database tables.
- *
- * @property string|null $TABLE_CATALOG
- * @property string|null $TABLE_SCHEMA
- * @property string|null $TABLE_NAME
- * @property string|null $TABLE_TYPE
- * @property string|null $ENGINE
- * @property int|null $VERSION
- * @property string|null $ROW_FORMAT
- * @property int|null $TABLE_ROWS
- * @property int|null $AVG_ROW_LENGTH
- * @property int|null $DATA_LENGTH
- * @property int|null $MAX_DATA_LENGTH
- * @property int|null $INDEX_LENGTH
- * @property int|null $DATA_FREE
- * @property int|null $AUTO_INCREMENT
- * @property \Illuminate\Support\Carbon|null $CREATE_TIME
- * @property \Illuminate\Support\Carbon|null $UPDATE_TIME
- * @property \Illuminate\Support\Carbon|null $CHECK_TIME
- * @property string|null $TABLE_COLLATION
- * @property int|null $CHECKSUM
- * @property string|null $CREATE_OPTIONS
- * @property string|null $TABLE_COMMENT
- * @property int $id
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereAUTOINCREMENT($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereAVGROWLENGTH($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereCHECKSUM($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereCHECKTIME($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereCREATEOPTIONS($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereCREATETIME($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereDATAFREE($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereDATALENGTH($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereENGINE($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereINDEXLENGTH($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereMAXDATALENGTH($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereROWFORMAT($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLECATALOG($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLECOLLATION($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLECOMMENT($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLENAME($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLEROWS($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLESCHEMA($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereTABLETYPE($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereUPDATETIME($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|InformationSchemaTable whereVERSION($value)
- * @mixin \Eloquent
- */
-	class InformationSchemaTable extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperHealthCheckResultHistoryItem {}
 }
 
 namespace Modules\Xot\Models{
@@ -5993,7 +5514,8 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Log extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperLog {}
 }
 
 namespace Modules\Xot\Models{
@@ -6019,7 +5541,8 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereIcon($value)
  * @mixin \Eloquent
  */
-	class Module extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperModule {}
 }
 
 namespace Modules\Xot\Models{
@@ -6050,7 +5573,8 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate whereValue($value)
  * @mixin \Eloquent
  */
-	class PulseAggregate extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPulseAggregate {}
 }
 
 namespace Modules\Xot\Models{
@@ -6075,7 +5599,8 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereValue($value)
  * @mixin \Eloquent
  */
-	class PulseEntry extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPulseEntry {}
 }
 
 namespace Modules\Xot\Models{
@@ -6100,7 +5625,8 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseValue whereValue($value)
  * @mixin \Eloquent
  */
-	class PulseValue extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPulseValue {}
 }
 
 namespace Modules\Xot\Models{
@@ -6163,6 +5689,7 @@ namespace Modules\Xot\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin \Eloquent
  */
-	class Session extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperSession {}
 }
 

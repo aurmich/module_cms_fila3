@@ -39,6 +39,7 @@ namespace Modules\Job\Models;
  * @property mixed $status
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperJobsWaiting
  * @mixin \Eloquent
  */
 class JobsWaiting extends Job {}

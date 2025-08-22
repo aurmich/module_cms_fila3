@@ -34,6 +34,7 @@ use Modules\Xot\Models\Extra as XotBaseExtra;
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Modules\User\Database\Factories\ExtraFactory factory($count = null, $state = [])
+ * @mixin IdeHelperExtra
  * @mixin \Eloquent
  */
 class Extra extends XotBaseExtra

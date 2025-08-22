@@ -18,6 +18,7 @@ use Modules\Xot\Traits\Updater;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion query()
+ * @mixin IdeHelperNotificationTemplateVersion
  * @mixin \Eloquent
  */
 class NotificationTemplateVersion extends BaseModel

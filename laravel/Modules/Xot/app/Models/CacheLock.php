@@ -27,6 +27,7 @@ namespace Modules\Xot\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|CacheLock  whereOwner($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperCacheLock
  * @mixin \Eloquent
  */
 class CacheLock extends BaseModel

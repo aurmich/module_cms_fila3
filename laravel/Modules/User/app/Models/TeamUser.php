@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 
 /**
@@ -38,9 +39,11 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|TeamUser whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamUser
  * @mixin \Eloquent
  */
 class TeamUser extends BaseTeamUser
 {
+    use HasFactory;
     protected $connection = 'user';
 }

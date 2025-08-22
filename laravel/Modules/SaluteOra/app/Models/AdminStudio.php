@@ -42,6 +42,7 @@ use Parental\HasParent;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property-read User|null $user
+ * @mixin IdeHelperAdminStudio
  * @mixin \Eloquent
  */
 class AdminStudio extends StudioUser

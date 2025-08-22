@@ -31,6 +31,7 @@ namespace Modules\Job\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|FailedImportRow whereValidationError($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFailedImportRow
  * @mixin \Eloquent
  */
 class FailedImportRow extends BaseModel

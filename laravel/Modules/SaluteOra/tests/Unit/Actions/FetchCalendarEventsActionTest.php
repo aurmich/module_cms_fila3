@@ -13,25 +13,11 @@ use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Models\Studio;
-use Pest\Expectation;
 
 /**
  * Business-logic-first tests for FetchCalendarEventsAction transformation.
  * No RefreshDatabase. We create only the records we need using factories and the global test SQLite setup.
  */
-
-// Helper subclass to expose behavior via a public method (keeps unit under test focused on observable event payload)
-class TestableFetchCalendarEventsAction extends FetchCalendarEventsAction
-{
-    /**
-     * @return array<string, mixed>
-     */
-    public function toEvent(Appointment $appointment): array
-    {
-        // call the protected transform through a public proxy
-        return \Closure::bind(fn () => $this->transformAppointment($appointment), $this, FetchCalendarEventsAction::class)();
-    }
-}
 
 it('builds an emergency event with proper title, colors and contrast', function (): void {
     $patient = Patient::factory()->create(['first_name' => 'Anna', 'last_name' => 'Bianchi']);
@@ -47,8 +33,11 @@ it('builds an emergency event with proper title, colors and contrast', function 
         'notes' => 'Note',
     ]);
 
-    $action = new TestableFetchCalendarEventsAction();
-    $event = $action->toEvent($appt);
+    $action = new FetchCalendarEventsAction();
+    $reflection = new \ReflectionClass($action);
+    $method = $reflection->getMethod('transformAppointment');
+    $method->setAccessible(true);
+    $event = $method->invoke($action, $appt);
 
     expect($event)
         ->toHaveKeys(['id','title','start','end','backgroundColor','borderColor','textColor','extendedProps','editable'])
@@ -91,14 +80,20 @@ it('marks event editable only for future dates and matching doctor/admin', funct
         'ends_at' => Carbon::now()->subHour(),
     ]);
 
-    $action = new TestableFetchCalendarEventsAction();
+    $action = new FetchCalendarEventsAction();
+    $reflection = new \ReflectionClass($action);
+    $method = $reflection->getMethod('transformAppointment');
+    $method->setAccessible(true);
 
     // as the assigned doctor -> future editable, past not editable
     Auth::login($doctor);
-    expect($action->toEvent($futureAppt)['editable'])->toBeTrue();
-    expect($action->toEvent($pastAppt)['editable'])->toBeFalse();
+    $futureEvent = $method->invoke($action, $futureAppt);
+    $pastEvent = $method->invoke($action, $pastAppt);
+    expect($futureEvent['editable'])->toBeTrue();
+    expect($pastEvent['editable'])->toBeFalse();
 
     // as a different doctor -> not editable
     Auth::login($otherDoctor);
-    expect($action->toEvent($futureAppt)['editable'])->toBeFalse();
+    $futureEvent = $method->invoke($action, $futureAppt);
+    expect($futureEvent['editable'])->toBeFalse();
 });

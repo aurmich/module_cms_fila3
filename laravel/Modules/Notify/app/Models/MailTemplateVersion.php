@@ -49,6 +49,7 @@ use Modules\Xot\Traits\Updater;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion whereVersion($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion withoutTrashed()
+ * @mixin IdeHelperMailTemplateVersion
  * @mixin \Eloquent
  */
 class MailTemplateVersion extends BaseModel
