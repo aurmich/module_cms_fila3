@@ -1,8 +1,8 @@
 <?php
 
-use Modules\SaluteMo\Models\Appointment;
-use Modules\SaluteMo\Enums\AppointmentStatus;
-use Modules\SaluteMo\Enums\AppointmentType;
+declare(strict_types=1);
+
+use Modules\SaluteOra\Models\Appointment;
 
 /**
  * Create an appointment for testing.

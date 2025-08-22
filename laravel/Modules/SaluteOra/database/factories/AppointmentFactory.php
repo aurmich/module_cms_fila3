@@ -21,7 +21,7 @@ class AppointmentFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\Modules\SaluteOra\Models\Appointment>
+     * @var class-string<Appointment>
      */
     protected $model = Appointment::class;
 
@@ -32,7 +32,8 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
-        $startTime = $this->faker->dateTimeBetween('now', '+2 months');
+        // Usa metodi Faker corretti - genera data futura
+        $startTime = $this->faker->dateTimeBetween('+1 day', '+2 months');
         // Centralized safe cast from mixed to int via Xot Cast actions
         $duration = SafeIntCastAction::cast($this->faker->randomElement([30, 45, 60, 90]), 30); // Durata in minuti
         $endTime = clone $startTime;
@@ -53,14 +54,12 @@ class AppointmentFactory extends Factory
 
         $typeCases = AppointmentTypeEnum::cases();
         $statusCases = AppointmentStatusEnum::cases();
-        $appointmentType = $typeCases[array_rand($typeCases)];
-        $appointmentStatus = $statusCases[array_rand($statusCases)];
 
         return [
-            'patient_id' => User::factory()->patient(),
-            'doctor_id' => User::factory()->doctor(),
+            'patient_id' => User::factory()->patient()->create()->id,
+            'doctor_id' => User::factory()->doctor()->create()->id,
             'dentist_id' => null, // Legacy field - will be synced with doctor_id
-            'studio_id' => Studio::factory(),
+            'studio_id' => Studio::factory()->create()->id,
             'tenant_id' => null, // Will be set based on studio
             'title' => $this->faker->randomElement($treatmentTypes),
             'starts_at' => $startTime,
@@ -70,23 +69,23 @@ class AppointmentFactory extends Factory
             'date' => Carbon::parse($startTime)->format('Y-m-d'),
             'start_datetime' => $startTime->format('Y-m-d H:i:s'),
             'end_datetime' => $endTime->format('Y-m-d H:i:s'),
-            'type' => $appointmentType->value,
-            'status' => $appointmentStatus->value,
-            'state' => $this->faker->randomElement(['scheduled', 'confirmed']),
-            'notes' => $this->faker->optional()->paragraph(),
-            'treatment_plan' => $this->faker->optional()->paragraph(),
-            'emergency' => $this->faker->boolean(10), // 10% di probabilità di emergenza
-            'is_emergency' => false, // Will be synced with emergency
-            'eligibility_confirmed' => $this->faker->boolean(80),
-            'reminder_sent' => $this->faker->boolean(60),
-            'reminder_sent_at' => $this->faker->optional()->dateTimeBetween('-1 week', 'now'),
+            'type' => $this->faker->randomElement($typeCases)->value,
+            'status' => $this->faker->randomElement($statusCases)->value,
+            'notes' => $this->faker->optional(0.7)->text(200),
+            'emergency' => $this->faker->boolean(10), // 10% chance of emergency
+            'confirmed' => $this->faker->boolean(80), // 80% chance of confirmed
+            'cancelled' => false,
+            'no_show' => false,
+            'completed' => false,
+            'report_pending' => false,
+            'report_completed' => false,
+            'created_at' => (clone $startTime)->modify('-' . rand(1, 30) . ' days'),
+            'updated_at' => (clone $startTime)->modify('-' . rand(1, 30) . ' days'),
         ];
     }
 
     /**
      * Configura l'appuntamento dopo la creazione.
-     *
-     * @return static
      */
     public function configure(): static
     {
@@ -103,8 +102,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento di emergenza.
-     *
-     * @return static
      */
     public function emergency(): static
     {
@@ -125,8 +122,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento confermato.
-     *
-     * @return static
      */
     public function confirmed(): static
     {
@@ -139,9 +134,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento per un paziente specifico.
-     *
-     * @param int $patientId
-     * @return static
      */
     public function forPatient(int $patientId): static
     {
@@ -153,9 +145,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento per un dottore specifico.
-     *
-     * @param int $doctorId
-     * @return static
      */
     public function forDoctor(int $doctorId): static
     {
@@ -167,9 +156,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento per uno studio specifico.
-     *
-     * @param int $studioId
-     * @return static
      */
     public function forStudio(int $studioId): static
     {
@@ -183,7 +169,6 @@ class AppointmentFactory extends Factory
      * Crea un appuntamento in una data specifica.
      *
      * @param string $date Formato Y-m-d
-     * @return static
      */
     public function onDate(string $date): static
     {
@@ -209,9 +194,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento di tipo specifico.
-     *
-     * @param AppointmentTypeEnum $type
-     * @return static
      */
     public function ofType(AppointmentTypeEnum $type): static
     {
@@ -249,8 +231,6 @@ class AppointmentFactory extends Factory
 
     /**
      * Crea un appuntamento con dati completi per testing avanzato.
-     *
-     * @return static
      */
     public function withCompleteData(): static
     {
@@ -259,7 +239,7 @@ class AppointmentFactory extends Factory
             'treatment_plan' => $this->faker->paragraph(3),
             'eligibility_confirmed' => true,
             'reminder_sent' => true,
-            'reminder_sent_at' => $this->faker->dateTimeBetween('-1 week', 'now'),
+            'reminder_sent_at' => $this->faker->dateTimeBetween('-1 week', '-1 day'),
         ]);
     }
 }

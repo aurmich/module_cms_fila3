@@ -46,11 +46,12 @@ class PatientFactory extends UserFactory
             'dental_problems' => $this->generateDentalProblems(),
             'health_conditions' => $this->generateHealthConditions(),
             'allergies' => $this->generateAllergies(),
-            'medical_notes' => $this->faker->optional(0.7)->paragraph(),
+            'medical_notes' => $this->faker->boolean(70) ? 'note cliniche' : null,
 
             // Emergency contact information
-            'emergency_contact_name' => $this->faker->name(),
-            'emergency_contact_phone' => $this->faker->phoneNumber(),
+            // Avoid Faker name() provider in tests
+            'emergency_contact_name' => 'Mario Rossi',
+            'emergency_contact_phone' => '+39 333 111 2222',
             'emergency_contact_relationship' => $this->faker->randomElement([
                 'coniuge', 'genitore', 'figlio', 'fratello', 'amico'
             ]),
@@ -63,8 +64,8 @@ class PatientFactory extends UserFactory
             // Pregnancy and special conditions
             'has_pregnancy_certificate' => $this->faker->boolean(15), // 15% pregnancy rate
             'pregnancy_due_date' => function (array $attributes) {
-                return $attributes['has_pregnancy_certificate'] 
-                    ? $this->faker->dateTimeBetween('now', '+9 months')
+                return $attributes['has_pregnancy_certificate']
+                    ? now()->addDays($this->faker->numberBetween(7, 270))
                     : null;
             },
             'pregnancy_weeks' => function (array $attributes) {
@@ -86,7 +87,7 @@ class PatientFactory extends UserFactory
             'insurance_provider' => $this->faker->optional(0.6)->randomElement([
                 'SSN', 'Unisalute', 'Generali', 'AXA', 'Allianz', 'MetLife'
             ]),
-            'insurance_number' => $this->faker->optional(0.6)->regexify('[A-Z]{2}[0-9]{8}'),
+            'insurance_number' => $this->faker->boolean(60) ? $this->faker->regexify('[A-Z]{2}[0-9]{8}') : null,
             'payment_method_preference' => $this->faker->randomElement([
                 'cash', 'card', 'bank_transfer', 'installments'
             ]),
@@ -100,7 +101,7 @@ class PatientFactory extends UserFactory
             'previous_bad_experience' => $this->faker->boolean(20),
 
             // Personal medical history
-            'last_dental_visit' => $this->faker->optional(0.9)->dateTimeBetween('-2 years', 'now'),
+            'last_dental_visit' => $this->faker->boolean(90) ? now()->subDays($this->faker->numberBetween(30, 730)) : null,
             'brushing_frequency' => $this->faker->randomElement([
                 'twice_daily', 'once_daily', 'occasionally', 'rarely'
             ]),
@@ -225,7 +226,7 @@ class PatientFactory extends UserFactory
         return $this->state([
             'state' => Active::class,
             'isee_value' => $this->faker->numberBetween(8000, 25000),
-            'last_dental_visit' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'last_dental_visit' => now()->subDays($this->faker->numberBetween(7, 365)),
         ]);
     }
 
@@ -260,8 +261,8 @@ class PatientFactory extends UserFactory
             'dental_problems' => ['caries', 'gingivitis', 'periodontal_disease', 'tooth_extraction_needed'],
             'health_conditions' => ['hypertension', 'diabetes_type_2', 'heart_disease'],
             'allergies' => ['penicillin', 'lidocaine'],
-            'medical_notes' => $this->faker->paragraphs(3, true),
-            'last_dental_visit' => $this->faker->dateTimeBetween('-2 years', '-6 months'),
+            'medical_notes' => 'storico clinico complesso',
+            'last_dental_visit' => now()->subDays($this->faker->numberBetween(180, 730)),
             'treatment_anxiety_level' => $this->faker->numberBetween(7, 10),
             'requires_sedation' => true,
             'previous_bad_experience' => true,
@@ -306,7 +307,7 @@ class PatientFactory extends UserFactory
     public function elderly(): static
     {
         return $this->state([
-            'date_of_birth' => $this->faker->dateTimeBetween('-85 years', '-65 years'),
+            'date_of_birth' => now()->subYears($this->faker->numberBetween(65, 85))->startOfDay(),
             'health_conditions' => ['hypertension', 'osteoporosis', 'arthritis'],
             'accessibility_needs' => $this->faker->randomElement(['wheelchair_access', 'large_print']),
             'communication_preferences' => ['phone'], // Prefer phone calls
@@ -323,7 +324,7 @@ class PatientFactory extends UserFactory
     public function pediatric(): static
     {
         return $this->state([
-            'date_of_birth' => $this->faker->dateTimeBetween('-17 years', '-1 year'),
+            'date_of_birth' => now()->subYears($this->faker->numberBetween(1, 17))->startOfDay(),
             'emergency_contact_relationship' => 'genitore',
             'dental_problems' => $this->faker->randomElements(['caries', 'orthodontics_needed'], 1),
             'health_conditions' => [], // Generally healthier

@@ -27,14 +27,22 @@ alwaysApply: false
 - `public ?array $data = []` in XotBaseWidget: NON rimuovere, NON ridichiarare nelle derivate
 - `protected static string $view` e `public array $listener = []`: NON alterare la firma
 
-## 4. Moderazione centralizzata
+## 4. Architettura Table vs Resource (CRITICO)
+- **XotBaseResource**: Gestisce form, model, navigazione - NON implementa mai `table()`
+- **HasXotTable trait**: Nelle pagine ListRecords, gestisce automaticamente il metodo `table()`
+- **Separazione netta**: Resource = form/model, ListRecords = tabelle/filtri/azioni
+- **Mai mescolare**: Se estendi XotBaseResource, usa `getTableColumns()`, `getTableActions()`, `getTableFilters()` nelle pagine ListRecords
+- **Automazione**: HasXotTable configura automaticamente colonne, layout, paginazione, azioni
+
+## 5. Moderazione centralizzata
 - La moderazione utenti (stato, dati moderazione) va gestita in risorse Filament neutre, riusabili per tutti i tipi utente (`type`, `state`)
 - Evitare logica specifica per ruoli: usare STI e campi generici
 - Usare sempre Spatie Activitylog per audit trail
 
-## 5. Checklist prima del commit
+## 6. Checklist prima del commit
 - [ ] Nessuna classe estende direttamente una classe Filament
 - [ ] Tutte le classi Filament estendono la corrispondente XotBase
+- [ ] **CRITICO**: Nessun metodo `table()` implementato in Resources che estendono XotBaseResource
 - [ ] Import inutili rimossi
 - [ ] Naming conforme
 - [ ] Proprietà critiche rispettate
@@ -42,7 +50,7 @@ alwaysApply: false
 - [ ] Audit trail tramite Spatie Activitylog
 - [ ] Documentazione aggiornata e linkata
 
-## 6. Link documentazione
+## 7. Link documentazione
 - [README Filament Patient](../../Modules/Patient/docs/README.md)
 - [README Filament Xot](../../Modules/Xot/docs/filament/README.md)
 - [Critical Properties](../../Modules/Xot/docs/filament/critical-properties/data-property.md)

@@ -27,10 +27,12 @@ test('description', function () {
     expect($result)->toBe($expected);
 });
 
-// Model test
+// Model test - FOCUS ON FUNCTIONALITY, NOT BASIC PROPERTIES
 test('model works', function () {
     $model = Model::factory()->create();
     expect($model)->toBeInstanceOf(Model::class);
+    // Don't test fillable fields, table names, etc.
+    // Test behavior and functionality instead
 });
 
 // Filament test

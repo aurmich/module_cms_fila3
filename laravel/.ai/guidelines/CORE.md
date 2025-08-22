@@ -26,6 +26,26 @@ namespace Modules\Ptv\Filament\Resources;
 namespace Modules\User\App\Models;
 ```
 
+### FOCUS ON BUSINESS LOGIC
+**CONCENTRARSI SEMPRE sulla logica di business, NON sui dettagli implementativi.**
+
+```php
+// ✅ CORRETTO - Testare comportamento business
+it('calculates appointment revenue correctly', function () {
+    $appointment = Appointment::factory()->create([
+        'duration' => 2.5,
+        'hourly_rate' => 100
+    ]);
+    
+    expect($appointment->calculateRevenue())->toBe(250.0);
+});
+
+// ❌ ERRATO - Testare dettagli implementativi
+it('has correct fillable fields', function () {
+    // Questo è un dettaglio implementativo, non logica business
+});
+```
+
 ### Estensioni Obbligatorie
 ```php
 // ✅ CORRETTO - Service Provider

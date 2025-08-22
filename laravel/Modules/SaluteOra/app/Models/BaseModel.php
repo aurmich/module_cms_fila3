@@ -65,7 +65,16 @@ abstract class BaseModel extends Model implements HasMedia
      */
     protected static function newFactory()
     {
-        return app(\Modules\Xot\Actions\Factory\GetFactoryAction::class)->execute(static::class);
+        // Use standard Laravel factory resolution
+        $factoryClass = static::class . 'Factory';
+        $factoryClass = str_replace('Models\\', 'Database\\Factories\\', $factoryClass);
+        
+        if (class_exists($factoryClass)) {
+            return $factoryClass::new();
+        }
+        
+        // Fallback to standard factory resolution
+        return parent::newFactory();
     }
 
     /** @return array<string, string> */
@@ -85,6 +94,20 @@ abstract class BaseModel extends Model implements HasMedia
             'created_by' => 'string',
             'deleted_by' => 'string',
         ];
+    }
+
+    /**
+     * Use default connection in testing to simplify multi-connection setup.
+     */
+    public function getConnectionName(): ?string
+    {
+        if (app()->environment('testing')) {
+            /** @var string|null $default */
+            $default = config('database.default');
+            return $default ?: 'sqlite';
+        }
+
+        return parent::getConnectionName();
     }
 
     public function toArrayForce(): array

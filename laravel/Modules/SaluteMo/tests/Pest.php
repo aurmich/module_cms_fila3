@@ -15,9 +15,66 @@ use Modules\SaluteMo\Tests\TestCase;
 |
 */
 
-pest()->extend(TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature', 'Unit');
+uses(TestCase::class)->in('Feature', 'Unit');
+
+beforeAll(function (): void {
+    $dbPath = base_path('database/testing.sqlite');
+    if (! file_exists($dbPath)) {
+        @touch($dbPath);
+    }
+    \Illuminate\Database\Eloquent\Model::setConnectionResolver(app('db'));
+    \Illuminate\Database\Eloquent\Model::setEventDispatcher(app('events'));
+    app()->when(\Spatie\EventSourcing\StoredEvents\EventSubscriber::class)
+        ->needs(\Spatie\EventSourcing\StoredEvents\Repositories\StoredEventRepository::class)
+        ->give(\Spatie\EventSourcing\StoredEvents\Repositories\EloquentStoredEventRepository::class);
+
+    // Ensure an in-memory session is available for components consuming it (e.g., Filament)
+    if (! config('session.driver')) {
+        config(['session.driver' => 'array']);
+    }
+    try {
+        /** @var \Illuminate\Contracts\Session\Session $session */
+        $session = app('session');
+        if (method_exists($session, 'start')) {
+            $session->start();
+        }
+    } catch (\Throwable $e) {
+        // ignore if session cannot be resolved here; TestCase will attempt again
+    }
+
+    // Normalize Faker configuration to guarantee person provider availability
+    config(['app.faker_locale' => config('app.faker_locale', 'it_IT')]);
+    try {
+        /** @var \Faker\Generator $faker */
+        $faker = app(\Faker\Generator::class);
+        // Add generic and locale-specific person providers if missing
+        if (! method_exists($faker, 'name')) {
+            $faker->addProvider(new \Faker\Provider\Person($faker));
+        }
+        // Add a known locale provider to cover name(), firstName(), lastName()
+        $locale = config('app.faker_locale', 'it_IT');
+        if ($locale === 'it_IT' && class_exists(\Faker\Provider\it_IT\Person::class)) {
+            $faker->addProvider(new \Faker\Provider\it_IT\Person($faker));
+        }
+    } catch (\Throwable $e) {
+        // If Faker binding not available yet, factories may still create their own later.
+    }
+});
+
+beforeEach(function (): void {
+    \Illuminate\Database\Eloquent\Model::setConnectionResolver(app('db'));
+    \Illuminate\Database\Eloquent\Model::setEventDispatcher(app('events'));
+    // Keep session active between tests when possible
+    try {
+        /** @var \Illuminate\Contracts\Session\Session $session */
+        $session = app('session');
+        if (method_exists($session, 'start') && ! $session->isStarted()) {
+            $session->start();
+        }
+    } catch (\Throwable $e) {
+        // ignore
+    }
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -31,16 +88,10 @@ pest()->extend(TestCase::class)
 */
 
 expect()->extend('toBeAppointment', function () {
-    return $this->toBeInstanceOf(\Modules\SaluteMo\Models\Appointment::class);
+    return $this->toBeInstanceOf(\Modules\SaluteOra\Models\Appointment::class);
 });
 
-expect()->extend('toBePatient', function () {
-    return $this->toBeInstanceOf(\Modules\SaluteMo\Models\Patient::class);
-});
-
-expect()->extend('toBeDoctor', function () {
-    return $this->toBeInstanceOf(\Modules\SaluteMo\Models\Doctor::class);
-});
+// Keep expectations focused on observable business entities available in this module
 
 /*
 |--------------------------------------------------------------------------
@@ -53,22 +104,14 @@ expect()->extend('toBeDoctor', function () {
 |
 */
 
-function createAppointment(array $attributes = []): \Modules\SaluteMo\Models\Appointment
+function createAppointment(array $attributes = []): \Modules\SaluteOra\Models\Appointment
 {
-    return \Modules\SaluteMo\Models\Appointment::factory()->create($attributes);
+    return \Modules\SaluteOra\Models\Appointment::factory()->create($attributes);
 }
 
-function makeAppointment(array $attributes = []): \Modules\SaluteMo\Models\Appointment
+function makeAppointment(array $attributes = []): \Modules\SaluteOra\Models\Appointment
 {
-    return \Modules\SaluteMo\Models\Appointment::factory()->make($attributes);
+    return \Modules\SaluteOra\Models\Appointment::factory()->make($attributes);
 }
 
-function createPatient(array $attributes = []): \Modules\SaluteMo\Models\Patient
-{
-    return \Modules\SaluteMo\Models\Patient::factory()->create($attributes);
-}
-
-function createDoctor(array $attributes = []): \Modules\SaluteMo\Models\Doctor
-{
-    return \Modules\SaluteMo\Models\Doctor::factory()->create($attributes);
-}
+// Remove Patient/Doctor helpers to prevent autoloading undefined classes here

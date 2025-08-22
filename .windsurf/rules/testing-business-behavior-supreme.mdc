@@ -1,0 +1,78 @@
+# 🎯 REGOLA SUPREMA: Testing Business Behavior Only
+
+## LA REGOLA PIÙ IMPORTANTE DA RICORDARE SEMPRE
+
+**IL TESTING DEVE VERIFICARE IL COMPORTAMENTO BUSINESS, NON L'IMPLEMENTAZIONE!**
+
+Questa è la regola fondamentale che ha precedenza su qualsiasi altra considerazione di testing.
+
+## MANTRA ASSOLUTO
+
+🔥 **"COMPORTAMENTO BUSINESS, NON IMPLEMENTAZIONE"** 🔥
+
+## PRIORITÀ OPERATIVE ASSOLUTE
+
+### 1. PRIMA PRIORITÀ: Sistemare Test Esistenti
+- **MAI cancellare test esistenti**
+- **SEMPRE** farli funzionare correggendo l'approccio
+- Convertire da test implementativi a test comportamentali
+- Mantenere la copertura ma migliorarne la qualità
+
+### 2. SECONDA PRIORITÀ: Focus su Business Logic
+- Testare solo comportamenti visibili all'utente finale
+- Testare regole di business e validazioni
+- Testare flussi completi (input → elaborazione → output)
+- Testare autorizzazioni e permessi business
+
+## COSA TESTARE (Business Behavior) ✅
+
+- **Regole di Business**: Validazioni, constraint, policy
+- **Flussi Utente**: Dall'input al risultato finale
+- **Autorizzazioni**: Permessi e controlli di accesso
+- **Effetti Collaterali**: Notifiche, log, cambi di stato
+- **Calcoli Business**: Logiche di calcolo specifiche
+- **Workflow**: Processi multi-step
+- **API Endpoints**: Risposta e comportamento per l'utente
+- **UI Interactions**: Comportamento dell'interfaccia
+
+## COSA NON TESTARE (Implementation Details) ❌
+
+- **Proprietà Modelli**: `$fillable`, `$casts`, `$hidden`, `$table`
+- **Trait Usage**: Quali trait usa una classe
+- **Relazioni Base**: `belongsTo`, `hasMany` basilari
+- **Struttura Interna**: Come funziona internamente il codice
+- **Framework Config**: Configurazioni di Laravel/Filament
+- **Method Calls**: Se un metodo specifico viene chiamato
+- **Database Schema**: Struttura delle tabelle (coperta dalle migrazioni)
+
+## REGOLE DI QUALITÀ
+
+### Test Resilienti
+- I test devono essere **black-box**: non devono conoscere l'implementazione interna
+- Devono sopravvivere ai refactor che non cambiano il comportamento business
+- Devono documentare il comportamento atteso del sistema
+
+### Test di Valore
+- Ogni test deve avere un chiaro valore business
+- Deve proteggere da regressioni funzionali reali
+- Deve essere comprensibile a un business analyst
+
+## RESPONSABILITÀ ASSOLUTE
+
+- **MAI** cancellare test esistenti senza averli prima sistemati
+- **SEMPRE** convertire test implementativi in test comportamentali
+- **PRIORITÀ** ai test esistenti su quelli nuovi
+- **FOCUS** sul valore business, non sulla copertura tecnica
+
+## COLLEGAMENTI E RIFERIMENTI
+
+- [Testing Priority Rule](../../docs/testing-priority-rule.md)
+- [Model Testing Philosophy](../../docs/model-testing-philosophy.md)
+- [Testing Business Behavior Supreme Rule](../../docs/testing-business-behavior-supreme-rule.md)
+- [Laravel Guidelines](../../laravel/.ai/guidelines/testing-fundamental-rule.md)
+
+---
+
+**Questa regola è SUPREMA e ha precedenza su qualsiasi altra considerazione di testing.**
+
+*Ultimo aggiornamento: Gennaio 2025*

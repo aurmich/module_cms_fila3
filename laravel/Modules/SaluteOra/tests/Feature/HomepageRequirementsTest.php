@@ -6,14 +6,16 @@ namespace Modules\SaluteOra\Tests\Feature;
 
 use function Pest\Laravel\get;
 
+uses(\Modules\SaluteOra\Tests\TestCase::class);
+
 /**
  * Test che verifica se la homepage rispetta i requisiti documentati.
  * 
  * I requisiti sono documentati in /var/www/html/saluteora/docs/images/2.md
  */
 test('la homepage contiene tutti gli elementi richiesti dai requisiti', function () {
-    // Visita la homepage
-    $response = get('/');
+    // Visita la homepage localizzata
+    $response = get('/' . app()->getLocale());
     
     // Verifica che la risposta sia corretta
     $response->assertStatus(200);
@@ -43,7 +45,7 @@ test('la homepage contiene tutti gli elementi richiesti dai requisiti', function
  */
 test('la homepage ha la corretta struttura semantica', function () {
     // Visita la homepage
-    $response = get('/');
+    $response = get('/' . app()->getLocale());
     
     // Verifica che la risposta sia corretta
     $response->assertStatus(200);
@@ -64,7 +66,7 @@ test('la homepage ha la corretta struttura semantica', function () {
  */
 test('la homepage è accessibile', function () {
     // Visita la homepage
-    $response = get('/');
+    $response = get('/' . app()->getLocale());
     
     // Verifica che la risposta sia corretta
     $response->assertStatus(200);
@@ -86,7 +88,7 @@ test('la homepage è accessibile', function () {
  */
 test('la homepage contiene meta tag per la responsività', function () {
     // Visita la homepage
-    $response = get('/');
+    $response = get('/' . app()->getLocale());
     
     // Verifica che la risposta sia corretta
     $response->assertStatus(200);

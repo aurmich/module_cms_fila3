@@ -101,13 +101,15 @@ if (Schema::hasColumn($model->getTable(), 'field_name')) {
 ```
 
 ### Testing Considerations
-When writing tests, use the correct methods:
+When writing tests, use the correct methods. However, note that testing basic model properties like fillable fields should be avoided - focus on functional behavior instead:
 
 ```php
-// ✅ Correct test assertions
+// ✅ Correct test assertions for functionality
 $this->assertTrue($model->hasAttribute('field_name'));
-$this->assertTrue($model->isFillable('field_name'));
 $this->assertTrue(isset($model->field_name));
+
+// ❌ Avoid testing basic properties - focus on functionality
+// $this->assertTrue($model->isFillable('field_name')); // Don't test fillable
 
 // ❌ Incorrect test assertions
 $this->assertTrue(property_exists($model, 'field_name')); // Always fails

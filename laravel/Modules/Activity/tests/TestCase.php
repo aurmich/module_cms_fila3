@@ -6,7 +6,6 @@ namespace Modules\Activity\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /**
  * Base test case for Activity module tests.

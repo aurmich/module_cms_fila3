@@ -6,9 +6,11 @@ use Modules\Xot\Services\ModuleService;
 use Nwidart\Modules\Module;
 use Nwidart\Modules\Facades\Module as ModuleFacade;
 
+uses(Tests\TestCase::class);
+
 describe('ModuleService', function () {
     beforeEach(function () {
-        $this->service = new ModuleService('TestModule');
+        $this->service = (new ModuleService())->setName('TestModule');
     });
 
     it('can be instantiated', function () {
@@ -24,8 +26,8 @@ describe('ModuleService', function () {
     });
 
     it('can be instantiated with different module names', function () {
-        $service1 = new ModuleService('Chart');
-        $service2 = new ModuleService('User');
+        $service1 = (new ModuleService())->setName('Chart');
+        $service2 = (new ModuleService())->setName('User');
         
         expect($service1)->toBeInstanceOf(ModuleService::class)
             ->and($service2)->toBeInstanceOf(ModuleService::class);
@@ -94,7 +96,7 @@ describe('ModuleService', function () {
     });
 
     it('handles empty module gracefully', function () {
-        $emptyService = new ModuleService('NonExistentModule');
+        $emptyService = (new ModuleService())->setName('NonExistentModule');
         $result = $emptyService->getModels();
         
         expect($result)->toBeArray()
@@ -108,16 +110,13 @@ describe('ModuleService', function () {
         expect($reflection->hasProperty('name'))->toBeTrue();
     });
 
-    it('has proper constructor', function () {
+    it('uses setName method for configuration', function () {
+        // ModuleService doesn't have a constructor with parameters
+        // It uses setName() method for configuration (fluent interface)
         $reflection = new ReflectionClass($this->service);
-        $constructor = $reflection->getConstructor();
         
-        expect($constructor)->not->toBeNull()
-            ->and($constructor->isPublic())->toBeTrue();
-            
-        $parameters = $constructor->getParameters();
-        expect(count($parameters))->toBeGreaterThanOrEqual(1)
-            ->and($parameters[0]->getName())->toBe('name');
+        expect($reflection->hasMethod('setName'))->toBeTrue()
+            ->and($reflection->getMethod('setName')->isPublic())->toBeTrue();
     });
 
     it('validates class structure', function () {

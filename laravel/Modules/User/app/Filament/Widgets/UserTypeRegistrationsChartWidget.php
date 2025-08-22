@@ -4,49 +4,46 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets;
 
-use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
-use Modules\SaluteOra\Models\Patient;
+use Modules\Xot\Filament\Widgets\XotBaseChartWidget;
 
 class UserTypeRegistrationsChartWidget extends XotBaseChartWidget
 {
     protected static ?string $heading = null;
     protected static ?int $sort = 1;
     protected static bool $isLazy = true;
-    
 
     public string $model;
 
     public function getHeading(): ?string
     {
         return static::transClass($this->model, 'widgets.user_type_registrations_chart.heading');
-        
     }
 
     protected function getData(): array
     {
         // Debug: Verifica se i filtri sono disponibili
         $filters = $this->getFilters();
-        
+
         // Accesso sicuro ai filtri della pagina con fallback appropriati
         $startDate = null;
         $endDate = null;
-        
+
         // Verifica se i filtri sono disponibili e validi
-        if (is_array($filters) && !empty($filters)) {
+        if (is_array($filters) && ! empty($filters)) {
             /** @phpstan-ignore-next-line */
-            $startDate = !empty($filters['startDate']) ?   Carbon::parse($filters['startDate']) : null;
+            $startDate = ! empty($filters['startDate']) ? Carbon::parse($filters['startDate']) : null;
             /** @phpstan-ignore-next-line */
-            $endDate = !empty($filters['endDate']) ?  Carbon::parse($filters['endDate']) : null;
+            $endDate = ! empty($filters['endDate']) ? Carbon::parse($filters['endDate']) : null;
         }
-        
+
         // Fallback ai valori di default se i filtri non sono disponibili
-        if ($startDate === null) {
+        if (null === $startDate) {
             $startDate = now()->subDays(30);
         }
-        if ($endDate === null) {
+        if (null === $endDate) {
             $endDate = now();
         }
 
@@ -94,4 +91,4 @@ class UserTypeRegistrationsChartWidget extends XotBaseChartWidget
     {
         return 'line';
     }
-} 
+}

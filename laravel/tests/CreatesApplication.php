@@ -6,6 +6,7 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
+use Illuminate\Config\Repository as ConfigRepository;
 
 trait CreatesApplication
 {

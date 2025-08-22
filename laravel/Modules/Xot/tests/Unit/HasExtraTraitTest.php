@@ -7,9 +7,10 @@ namespace Modules\Xot\Tests\Unit;
 use Modules\Xot\Models\Traits\HasExtraTrait;
 use Modules\Xot\Contracts\ExtraContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-uses(RefreshDatabase::class);
+use ReflectionClass;
+use ReflectionMethod;
+use stdClass;
+use Exception;
 
 describe('HasExtraTrait', function () {
     beforeEach(function () {
@@ -23,7 +24,7 @@ describe('HasExtraTrait', function () {
             // Mock the getExtraClass method
             public function getExtraClass(): string
             {
-                return TestExtra::class;
+                return HasExtraTraitTest::class;
             }
         };
 
@@ -57,6 +58,9 @@ describe('HasExtraTrait', function () {
     });
 
     it('returns null for non-existent extra', function () {
+        // Mock the extra relationship to be null
+        $this->testModel->extra = null;
+        
         $result = $this->testModel->getExtra('non_existent_key');
         
         expect($result)->toBeNull();

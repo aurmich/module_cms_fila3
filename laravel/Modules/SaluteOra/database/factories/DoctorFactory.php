@@ -259,7 +259,7 @@ class DoctorFactory extends UserFactory
                     'Dentista Associato', 'Dirigente Odontoiatra', 'Libero Professionista',
                     'Consulente', 'Responsabile Clinico'
                 ]),
-                'clinic_name' => 'Studio ' . $this->faker->lastName(),
+                'clinic_name' => 'Studio ' . $this->faker->lastName,
                 'location' => $this->faker->city(),
                 'start_year' => $startYear,
                 'end_year' => min($endYear, (int) date('Y')),

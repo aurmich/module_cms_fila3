@@ -1,0 +1,70 @@
+# Regola Critica: Priorità dei Test in Laraxot
+
+## Regola Fondamentale
+**PRIMA** far funzionare TUTTI i test esistenti, **POI** creare nuovi test. Questa è una regola assoluta e non negoziabile.
+
+## Workflow Obbligatorio
+
+### Fase 1: Analisi e Riparazione Test Esistenti
+1. **Identificare** tutti i test esistenti nel progetto
+2. **Eseguire** i test per identificare quelli che falliscono
+3. **Riparare** ogni test fallito uno per uno
+4. **Convertire** test PHPUnit in Pest se necessario
+5. **Verificare** che tutti i test passino al 100%
+
+### Fase 2: Creazione Nuovi Test (SOLO DOPO)
+1. **Solo dopo** che tutti i test esistenti funzionano
+2. **Creare** nuovi test per funzionalità mancanti
+3. **Mantenere** la coerenza con i test esistenti
+
+## Motivazione
+- I test esistenti rappresentano la conoscenza del sistema
+- Test falliti indicano problemi di configurazione o dipendenze
+- La conversione PHPUnit → Pest migliora la manutenibilità
+- Test funzionanti garantiscono stabilità del sistema
+
+## Comandi di Verifica
+```bash
+# Eseguire tutti i test
+cd /var/www/html/_bases/base_saluteora/laravel
+php artisan test
+
+# Eseguire test specifici per modulo
+php artisan test --testsuite=Feature
+php artisan test --testsuite=Unit
+php artisan test --testsuite=Browser
+
+# Verificare test PHPUnit vs Pest
+find . -name "*.php" -path "*/tests/*" | grep -E "(Test\.php|test\.php)"
+```
+
+## Conversione PHPUnit → Pest
+- **Sempre** convertire test PHPUnit esistenti in Pest
+- **Mantenere** la stessa logica di test
+- **Aggiornare** le asserzioni per la sintassi Pest
+- **Verificare** che i test passino dopo la conversione
+
+## Checklist Obbligatoria
+- [ ] Tutti i test esistenti vengono eseguiti
+- [ ] Tutti i test falliti vengono identificati
+- [ ] Tutti i test falliti vengono riparati
+- [ ] Tutti i test PHPUnit vengono convertiti in Pest
+- [ ] Tutti i test passano al 100%
+- [ ] Solo dopo: creazione di nuovi test
+
+## Penalità per Violazione
+- **NON** creare mai nuovi test se quelli esistenti falliscono
+- **NON** ignorare test falliti
+- **NON** procedere senza aver completato la Fase 1
+
+## Collegamenti
+- [phpunit.xml](laravel/phpunit.xml)
+- [Pest.php](laravel/tests/Pest.php)
+- [Test Case](laravel/tests/TestCase.php)
+
+---
+**Questa regola è CRITICA e va applicata SEMPRE prima di qualsiasi sviluppo di nuovi test.**
+description:
+globs:
+alwaysApply: false
+---

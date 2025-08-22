@@ -10,11 +10,6 @@ use Modules\User\Filament\Widgets\LoginWidget;
 use Modules\User\Models\User;
 use function Pest\Laravel\assertAuthenticatedAs;
 
-// Skip this test if the test database is not configured
-if (!env('DB_CONNECTION') || (env('DB_CONNECTION') === 'sqlite' && !file_exists(database_path('database.sqlite')))) {
-    return;
-}
-
 uses(Tests\TestCase::class);
 
 beforeEach(function (): void {

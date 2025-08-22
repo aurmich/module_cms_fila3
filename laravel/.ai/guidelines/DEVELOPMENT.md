@@ -29,7 +29,7 @@ cd /var/www/html/ptvx/laravel
 - Evitare `mixed` quando possibile
 - **MAI usare `property_exists()` per proprietà magiche dei modelli Laravel** - usare sempre `isset()` invece
 
-### Pest Testing
+### Pest Testing - FOCUS ON BUSINESS LOGIC
 
 ```php
 <?php
@@ -42,32 +42,28 @@ use Tests\TestCase;
 use Modules\NomeModulo\Models\User;
 use Modules\NomeModulo\Data\UserData;
 use Modules\NomeModulo\Actions\CreateUserAction;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserManagementTest extends TestCase
 {
-    use RefreshDatabase;
-    
     /** @test */
     public function it_can_create_user_with_valid_data(): void
     {
-        // Arrange
+        // Arrange - Focus on business data
         $userData = new UserData(
             name: 'John Doe',
             email: 'john@example.com'
         );
         
-        // Act
+        // Act - Business logic execution
         $user = app(CreateUserAction::class)->execute($userData);
         
-        // Assert
+        // Assert - Verify business outcomes, not implementation details
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals('John Doe', $user->name);
         $this->assertEquals('john@example.com', $user->email);
-        $this->assertDatabaseHas('users', [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-        ]);
+        
+        // Verify data exists through business behavior, not direct DB checks
+        $this->assertTrue(User::where('email', 'john@example.com')->exists());
     }
     
     /** @test */

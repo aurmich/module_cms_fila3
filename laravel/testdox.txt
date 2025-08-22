@@ -1,24 +1,3 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/Xot/tests/Unit/Actions/Cast/SafeFloatCastActionTest.php
- [x] it casts float values
- [x] it casts integer values
- [x] it casts null values
- [x] it casts null values with custom default
- [x] it casts numeric strings
- [x] it casts integer strings
- [x] it casts empty strings
- [x] it casts whitespace strings
- [x] it casts non-numeric strings
- [x] it casts non-numeric strings with default
- [x] it casts boolean values
- [x] it casts arrays
- [x] it casts objects
- [x] it casts with range validation
- [x] it casts with range and default
- [x] it has static cast method
- [x] it has static cast method with default
- [x] it has static castWithRange method
- [x] it handles infinite values
- [x] it handles infinite values with default
- [ ] it casts scientific notation
- [ ] it handles decimal comma
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php
+ [ ] `SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields
 

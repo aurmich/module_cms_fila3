@@ -104,8 +104,8 @@ class SafeFloatCastAction
         // Gestisci separatori decimali comuni (virgola europea)
         $normalized = str_replace(',', '.', $trimmed);
         
-        // Rimuovi caratteri non numerici eccetto punto, segno meno e plus
-        $cleaned = preg_replace('/[^0-9.\-+]/', '', $normalized);
+        // Rimuovi caratteri non numerici eccetto punto, segno meno, plus e notazione scientifica
+        $cleaned = preg_replace('/[^0-9.\-+eE]/', '', $normalized);
         
         // Verifica se è un numero valido dopo la pulizia
         if (is_numeric($cleaned) && !empty($cleaned)) {

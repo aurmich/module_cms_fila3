@@ -7,9 +7,7 @@ use Modules\SaluteOra\Models\Report;
 use Modules\SaluteOra\Models\Appointment;
 use Modules\SaluteOra\Filament\Resources\ReportResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
 
 describe('ReportPending State', function () {
     beforeEach(function () {

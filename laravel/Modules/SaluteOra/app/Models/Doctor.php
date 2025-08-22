@@ -293,6 +293,7 @@ class Doctor extends User implements HasMedia
 
     public function getScheduleAttribute(?array $value):array
     {
+       
         $studio = $this->studio;
         $doctor = $this;
         

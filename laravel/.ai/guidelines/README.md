@@ -2,9 +2,12 @@
 
 Comprehensive AI guidelines for the Quaeris Fila3 Mono Laravel application. These guidelines ensure consistent development practices and proper use of the project's modular architecture.
 
+> Policy: All guideline files MUST live inside `laravel/.ai/guidelines/` (folder-only). Do not keep a duplicate `laravel/.ai/guidelines.md` at root. Consolidate here (DRY + KISS + Laraxot).
+
 ## 📁 Guidelines Structure
 
 ### Core Guidelines
+- **[Critical Principles](./critical-principles.md)** - ⚠️ **MASSIMA PRIORITÀ** - Regole assolute non negoziabili
 - **[Project Overview](./project-overview.md)** - High-level project architecture and technology stack
 - **[Architecture Patterns](./architecture-patterns.md)** - Modular architecture, patterns, and structures
 - **[Routing Architecture](./routing-architecture.md)** - ⚠️ **CRITICAL** - No Controllers/Routes pattern
@@ -12,6 +15,7 @@ Comprehensive AI guidelines for the Quaeris Fila3 Mono Laravel application. Thes
 - **[Filament Widgets Frontend](./filament-widgets-frontend.md)** - ⚠️ **CRITICAL** - No Livewire components, use Filament Widgets
 - **[Coding Standards](./coding-standards.md)** - PHP, Laravel, and framework-specific coding conventions
 - **[Development Workflow](./development-workflow.md)** - File creation, testing, and deployment workflows
+- **[Testing Priority Rule](./testing-priority-rule.md)** - ⚠️ **CRITICAL** - Fix existing tests first, no `RefreshDatabase`
 
 ### Documentation Naming Convention
 - **All files and folders in docs/ must use lowercase** (except README.md)
@@ -26,17 +30,51 @@ Comprehensive AI guidelines for the Quaeris Fila3 Mono Laravel application. Thes
 - **Documentation quality**: Essential for AI agents and human developers
 
 ### Specialized Guidelines  
+- **[Quick Reference](./quick-reference.md)** - ⚡ **ACCESSO RAPIDO** - Regole critiche in formato veloce
 - **[XotBase Patterns](./xot-base-patterns.md)** - ⚠️ **CRITICAL** - XotBase class hierarchy and usage patterns
 - **[Module BaseModel Pattern](./module-basemodel-pattern.md)** - ⚠️ **CRITICAL** - Module-specific BaseModel usage
+- **[Modular Architecture Dependencies](./modular-architecture-dependencies.md)** - ⚠️ **CRITICAL** - Dependencies must go from specific to base modules, never reverse
+- **[Testing Business Behavior](./testing-business-behavior.md)** - ⚠️ **CRITICAL** - Test WHAT the system does, not HOW it does it
 - **[Environment Configuration](./environment-configuration.md)** - ⚠️ **CRITICAL** - APP_URL-based config and theme system
 - **[Documentation Management](./documentation-management.md)** - ⚠️ **CRITICAL** - docs/ as memory system, DRY + KISS refactoring
 - **[Security Guidelines](./security-guidelines.md)** - Authentication, authorization, and security best practices
 - **[Performance Optimization](./performance-optimization.md)** - Database, caching, and performance strategies
 - **[Testing Guidelines](./testing-guidelines.md)** - Pest testing framework and testing patterns
+ - **[Filament – XotBaseResource Rules](./filament-xotbase-resource-rules.md)** - ⚠️ **CRITICAL** - No `table()` in XotBaseResource descendants; use getFormSchema()/getTableColumns()
 
 ## 🚨 Critical Rules
 
-### 1. XotBase Class Usage (MANDATORY)
+### 1. Modular Architecture Dependencies (MANDATORY)
+```php
+// ✅ CORRECT: Specific modules depend on base modules
+// SaluteOra/Models/Patient.php
+use Modules\User\Models\User; // OK: specific → base
+
+// ❌ WRONG: Base modules depend on specific modules
+// User/Models/User.php
+use Modules\SaluteOra\Enums\UserType; // DON'T DO THIS
+```
+
+### 2. Testing Business Behavior (MANDATORY)
+```php
+// ✅ CORRECT: Test WHAT the system does
+test('user can login and access dashboard', function () {
+    $user = User::factory()->create();
+    
+    $response = $this->post('/login', $credentials);
+    
+    $response->assertRedirect('/dashboard');
+    $this->assertAuthenticatedAs($user);
+});
+
+// ❌ WRONG: Test HOW the system does it
+test('login calls auth service method', function () {
+    $mock = Mockery::mock(AuthService::class);
+    $mock->shouldReceive('authenticate')->once(); // DON'T DO THIS
+});
+```
+
+### 3. XotBase Class Usage (MANDATORY)
 ```php
 // ✅ ALWAYS extend XotBase classes
 class UserResource extends XotBaseResource {}
@@ -48,7 +86,7 @@ class UserResource extends Resource {} // DON'T DO THIS
 class User extends Model {} // DON'T DO THIS
 ```
 
-### 2. Namespace Structure (MANDATORY)
+### 4. Namespace Structure (MANDATORY)
 ```php
 // ✅ Correct namespace structure
 namespace Modules\[Module]\Filament\Resources;
@@ -59,7 +97,7 @@ namespace Modules\[Module]\Http\Controllers;
 namespace Modules\[Module]\App\Filament\Resources; // DON'T DO THIS
 ```
 
-### 3. Configuration and Theme System (MANDATORY)
+### 5. Configuration and Theme System (MANDATORY)
 ```php
 // ✅ Environment-based Configuration
 APP_URL=http://quaeris.local  // Determines active configuration
@@ -77,7 +115,7 @@ laravel/Themes/One/              // Frontend theme directory
 └── npm run build && npm run copy  // Build process
 ```
 
-### 4. No Traditional Controllers/Routes/Services/Livewire
+### 6. No Traditional Controllers/Routes/Services/Livewire
 ```php
 // ❌ DON'T create these
 class UserController extends Controller {} // DON'T DO THIS
@@ -91,7 +129,7 @@ class UserFormWidget extends XotBaseWidget {} // Forms everywhere
 class CreateUserAction {} // Business logic (prefer Spatie Laravel Queueable Actions)
 ```
 
-### 5. Module BaseModel Pattern
+### 7. Module BaseModel Pattern
 ```php
 // ✅ Each module has BaseModel extending XotBaseModel
 class BaseModel extends XotBaseModel {} // In each module
@@ -100,7 +138,7 @@ class BaseModel extends XotBaseModel {} // In each module
 class User extends BaseModel {} // NOT XotBaseModel directly
 ```
 
-### 6. Documentation and File Naming
+### 8. Documentation and File Naming
 ```bash
 # ✅ CORRECT - All lowercase (except README.md)
 docs/
@@ -116,7 +154,7 @@ docs/
 └── UserModule.md          # DON'T DO THIS
 ```
 
-### 7. Frontend Development Rules
+### 9. Frontend Development Rules
 ```php
 // ✅ Use Filament Widgets in Blade (NOT Livewire components)
 @livewire(\Modules\ModuleName\Filament\Widgets\WidgetName::class)
@@ -128,7 +166,7 @@ docs/
 // ✅ Run npm run build && npm run copy after CSS changes
 ```
 
-### 8. Documentation Management (MANDATORY)
+### 10. Documentation Management (MANDATORY)
 ```bash
 # ✅ ALWAYS FIRST - Study and update docs
 # docs/ folders = system memory

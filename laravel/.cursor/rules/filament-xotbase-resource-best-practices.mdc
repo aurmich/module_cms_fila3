@@ -13,7 +13,10 @@ alwaysApply: false
 
 ## Motivazione
 - La gestione di navigationGroup/navigationLabel è centralizzata nella classe base o nei provider.
-- Il metodo `table()` viene gestito tramite trait, macro o configurazione centralizzata per garantire coerenza e DRY.
+- **CRITICO**: XotBaseResource NON implementa il metodo `table()` - questo è gestito dal trait `HasXotTable` nelle pagine ListRecords
+- Il trait `HasXotTable` fornisce un metodo `table()` completo e centralizzato che gestisce automaticamente colonne, azioni, filtri, layout, paginazione
+- Implementare `table()` in XotBaseResource rompe questa architettura centralizzata e causa conflitti
+- Invece di `table()`, usare i metodi specifici: `getTableColumns()`, `getTableActions()`, `getTableFilters()`
 - Dichiarare questi elementi nelle risorse che estendono XotBaseResource causa override indesiderati, perdita di automazione e incoerenza tra moduli.
 
 ## Esempio ERRATO
@@ -44,6 +47,8 @@ class UserModerationResource extends XotBaseResource
 
 ## Errori Comuni
 - Override accidentale di navigationGroup/navigationLabel
+- **ERRORE CRITICO**: Implementare il metodo table() in Resources che estendono XotBaseResource
+- Confondere l'architettura: XotBaseResource (per form/model) vs HasXotTable (per tabelle nelle pagine)
 - Duplicazione del metodo table() tra risorse
 - Incoerenza tra moduli per la navigazione Filament
 

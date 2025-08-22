@@ -1,0 +1,44 @@
+# Memoria: Priorità dei Test in Laraxot
+
+## Regola Assoluta
+**PRIMA** far funzionare TUTTI i test esistenti, **POI** creare nuovi test.
+
+## Stato Attuale
+- Progetto: base_saluteora
+- Root Laravel: /var/www/html/_bases/base_saluteora/laravel/
+- Framework di test: Pest (con supporto PHPUnit legacy)
+- Configurazione: phpunit.xml con testsuite per Unit, Feature, Browser
+
+## Workflow Obbligatorio
+1. **Fase 1**: Riparare tutti i test esistenti falliti
+2. **Fase 2**: Convertire test PHPUnit → Pest
+3. **Fase 3**: Verificare 100% successo
+4. **Fase 4**: Solo dopo creare nuovi test
+
+## Comandi Critici
+```bash
+cd /var/www/html/_bases/base_saluteora/laravel
+php artisan test  # Eseguire tutti i test
+php artisan test --testsuite=Feature  # Test funzionali
+php artisan test --testsuite=Unit     # Test unitari
+php artisan test --testsuite=Browser  # Test browser
+```
+
+## Conversione PHPUnit → Pest
+- **Sempre** convertire test esistenti in Pest
+- **Mantenere** logica di test identica
+- **Aggiornare** sintassi asserzioni
+- **Verificare** funzionamento dopo conversione
+
+## Penalità
+- **NON** creare nuovi test se quelli esistenti falliscono
+- **NON** ignorare test falliti
+- **NON** procedere senza completare Fase 1
+
+---
+**Ultimo aggiornamento**: Dicembre 2024
+**Stato**: Regola critica attiva
+description:
+globs:
+alwaysApply: false
+---

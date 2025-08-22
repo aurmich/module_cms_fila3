@@ -108,3 +108,8 @@ laravel/_ide_helper_models.php
 package-lock.json
 *.phar
 .git-rewrite
+laravel/junit.xml
+laravel/teamcity.txt
+laravel/testdox.html
+laravel/testdox.txt
+laravel/scripts

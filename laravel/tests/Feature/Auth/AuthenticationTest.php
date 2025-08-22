@@ -1,16 +1,16 @@
 <?php
 
-use App\Models\User;
+use Modules\Xot\Datas\XotData;
 use Livewire\Volt\Volt as LivewireVolt;
 
 test('login screen can be rendered', function () {
-    $response = $this->get('/login');
+    $response = $this->get('/it/auth/login');
 
     $response->assertStatus(200);
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    $user = createUser();
 
     $response = LivewireVolt::test('auth.login')
         ->set('email', $user->email)
@@ -19,13 +19,14 @@ test('users can authenticate using the login screen', function () {
 
     $response
         ->assertHasNoErrors()
-        ->assertRedirect(route('dashboard', absolute: false));
+        ->assertRedirect('/');
 
     $this->assertAuthenticated();
 });
 
 test('users can not authenticate with invalid password', function () {
-    $user = User::factory()->create();
+    $userClass = XotData::make()->getUserClass();
+    $user = $userClass::factory()->create();
 
     $response = LivewireVolt::test('auth.login')
         ->set('email', $user->email)
@@ -38,7 +39,8 @@ test('users can not authenticate with invalid password', function () {
 });
 
 test('users can logout', function () {
-    $user = User::factory()->create();
+    $userClass = XotData::make()->getUserClass();
+    $user = $userClass::factory()->create();
 
     $response = $this->actingAs($user)->post('/logout');
 

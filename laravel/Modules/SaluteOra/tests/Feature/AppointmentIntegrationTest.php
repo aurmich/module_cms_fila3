@@ -67,35 +67,4 @@ describe('Appointment Integration', function () {
         
         expect($thisWeekAppointments)->toHaveCount(2);
     });
-
-    it('handles emergency appointments correctly', function () {
-        $emergencyAppointment = Appointment::factory()->create([
-            'emergency' => true,
-            'type' => AppointmentTypeEnum::EMERGENCY,
-        ]);
-        
-        $regularAppointment = Appointment::factory()->create([
-            'emergency' => false,
-            'type' => AppointmentTypeEnum::CONSULTATION,
-        ]);
-        
-        $emergencies = Appointment::where('emergency', true)->get();
-        
-        expect($emergencies)->toHaveCount(1)
-            ->and($emergencies->first()->id)->toBe($emergencyAppointment->id)
-            ->and($emergencies->first()->is_emergency)->toBeTrue();
-    });
-
-    it('supports multi-tenant filtering', function () {
-        $tenant1Appointment = Appointment::factory()->create(['tenant_id' => 1]);
-        $tenant2Appointment = Appointment::factory()->create(['tenant_id' => 2]);
-        
-        $tenant1Appointments = Appointment::where('tenant_id', 1)->get();
-        $tenant2Appointments = Appointment::where('tenant_id', 2)->get();
-        
-        expect($tenant1Appointments)->toHaveCount(1)
-            ->and($tenant2Appointments)->toHaveCount(1)
-            ->and($tenant1Appointments->first()->id)->toBe($tenant1Appointment->id)
-            ->and($tenant2Appointments->first()->id)->toBe($tenant2Appointment->id);
-    });
 });

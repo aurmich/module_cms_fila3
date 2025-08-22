@@ -126,11 +126,11 @@ it('casts scientific notation', function (): void {
     $result1 = $this->action->execute('1.23e2');
     $result2 = $this->action->execute('1.23E-2');
     
-    expect($result1)->toBe(1.232)
-        ->and($result2)->toBe(1.232);
+    expect($result1)->toBe(123.0)
+        ->and($result2)->toBe(0.0123);
 });
 
 it('handles decimal comma', function (): void {
     $result = $this->action->execute('123,45');
-    expect($result)->toBe(0.0);
+    expect($result)->toBe(123.45);
 });

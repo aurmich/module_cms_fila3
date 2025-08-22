@@ -27,12 +27,35 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
 - Check for existing components to reuse before writing a new one.
 
-## Verification Scripts
-- Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
+## Test Management Priority Rules
+- **CRITICAL RULE**: Prima devi far funzionare TUTTI i test esistenti nei moduli. Se trovi test fatti in PHPUnit, convertili in Pest.
+- Concentrati SOLO sui test esistenti che devono passare la validazione prima di fare qualsiasi nuovo test.
+- Una volta che tutti i test esistenti funzionano e passano, allora si possono fare nuovi test.
+- **IMPORTANTE**: NON usare mai RefreshDatabase nei test! I test usano il database configurato in .env.testing, ma senza RefreshDatabase.
+- **IMPORTANTE**: Non fare test stupidi sui modelli! I modelli sono "slim". Non testare fillable, casts, relationships basilari.
+
+## REGOLA FONDAMENTALE DI TESTING
+- **IL TESTING DEVE VERIFICARE IL COMPORTAMENTO BUSINESS, NON L'IMPLEMENTAZIONE!**
+- **FONDAMENTALE**: Concentrarsi SEMPRE sulla logica di business, NON sui dettagli implementativi.
+- Non testare come funziona internamente il codice, ma testare COSA fa il codice per l'utente finale.
+- Testare i risultati attesi dal punto di vista business, non i meccanismi interni.
+- Esempio SBAGLIATO: testare se un metodo è chiamato, se una proprietà esiste, se un trait è usato.
+- Esempio CORRETTO: testare se l'utente può fare login, se un appuntamento viene creato correttamente, se le validazioni business funzionano.
+- Testare la logica business nel frontend e nelle azioni, verificando che i dati ci siano tramite l'UI.
+- Non creare verification scripts o tinker quando i test coprono quella funzionalità. Unit e feature tests sono più importanti.
+
+## Guidelines Management
+- **IMPORTANTE**: NON deve esistere il file .ai/guidelines.md - deve essere una cartella .ai/guidelines/
+- Aggiornare sempre i file dentro /var/www/html/_bases/base_saluteora/laravel/.ai/guidelines/ in ottica DRY + KISS + SOLID + robust + intelligent + laraxot
 
 ## Application Structure & Architecture
 - Stick to existing directory structure - don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
+
+## XotBaseResource Rules
+- **CRITICAL**: Il metodo `table()` NON deve MAI essere implementato nelle classi che estendono XotBaseResource!
+- XotBaseResource fornisce già la configurazione base per le tabelle, sovrascriverla causa errori.
+- Seguire sempre la documentazione e l'architettura esistente di XotBase per tutti i Resources.
 
 ## Frontend Bundling
 - If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.

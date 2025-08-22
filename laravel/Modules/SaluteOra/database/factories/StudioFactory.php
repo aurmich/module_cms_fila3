@@ -66,7 +66,7 @@ class StudioFactory extends Factory
         ];
 
         $studioType = SafeStringCastAction::cast($this->faker->randomElement($studioTypes));
-        $lastName = SafeStringCastAction::cast($this->faker->lastName());
+        $lastName = SafeStringCastAction::cast($this->faker->lastName);
 
         return [
             'name' => SafeStringCastAction::cast($studioType) . ' ' . SafeStringCastAction::cast($lastName),
@@ -134,7 +134,7 @@ class StudioFactory extends Factory
     public function orthodontics(): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => 'Centro Ortodontico ' . $this->faker->lastName(),
+            'name' => 'Centro Ortodontico ' . $this->faker->lastName,
             'services' => [
                 'Ortodonzia',
                 'Ortodonzia invisibile',
