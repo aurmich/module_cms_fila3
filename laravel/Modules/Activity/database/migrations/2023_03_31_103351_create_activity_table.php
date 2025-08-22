@@ -31,6 +31,10 @@ return new class extends XotBaseMigration
              * @param Blueprint $table
              */
             function (Blueprint $table) {
+                // Assicuriamoci che causer_id sia nullable se esiste
+                if ($this->hasColumn('causer_id')) {
+                    $table->string('causer_id')->nullable()->change();
+                }
                 $this->updateTimestamps($table, true);
             }
         );

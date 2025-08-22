@@ -39,6 +39,8 @@ Comprehensive AI guidelines for the Quaeris Fila3 Mono Laravel application. Thes
 - **[Testing Business Behavior](./testing-business-behavior.md)** - ⚠️ **CRITICAL** - Test WHAT the system does, not HOW it does it
 - **[Environment Configuration](./environment-configuration.md)** - ⚠️ **CRITICAL** - APP_URL-based config and theme system
 - **[Documentation Management](./documentation-management.md)** - ⚠️ **CRITICAL** - docs/ as memory system, DRY + KISS refactoring
+- **[Database Migrations Rules](./database-migrations-rules.md)** - ⚠️ **CRITICAL** - Single migration per table, UUID support, shared resources
+- **[Factory & Seeder Rules](./factory-seeder-rules.md)** - ⚠️ **CRITICAL** - Every business model must have factory + seeder
 - **[Security Guidelines](./security-guidelines.md)** - Authentication, authorization, and security best practices
 - **[Performance Optimization](./performance-optimization.md)** - Database, caching, and performance strategies
 - **[Testing Guidelines](./testing-guidelines.md)** - Pest testing framework and testing patterns
