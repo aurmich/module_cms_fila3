@@ -2,178 +2,108 @@
 
 declare(strict_types=1);
 
-namespace Modules\UI\Tests\Unit\Enums;
-
-use Tests\TestCase;
 use Modules\UI\Enums\TableLayoutEnum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\Layout\Stack;
 
-class TableLayoutEnumTest extends TestCase
-{
-    /**
-     * Test enum values.
-     */
-    public function test_enum_values(): void
-    {
-        $this->assertEquals('list', TableLayoutEnum::LIST->value);
-        $this->assertEquals('grid', TableLayoutEnum::GRID->value);
-    }
+it('has correct enum values', function (): void {
+    expect(TableLayoutEnum::LIST->value)->toBe('list')
+        ->and(TableLayoutEnum::GRID->value)->toBe('grid');
+});
 
-    /**
-     * Test default layout.
-     */
-    public function test_default_layout(): void
-    {
-        $default = TableLayoutEnum::init();
-        $this->assertEquals(TableLayoutEnum::LIST, $default);
-    }
+it('has correct default layout', function (): void {
+    $default = TableLayoutEnum::init();
+    expect($default)->toBe(TableLayoutEnum::LIST);
+});
 
-    /**
-     * Test toggle functionality.
-     */
-    public function test_toggle_functionality(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
+it('can toggle layout', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-        $this->assertEquals($grid, $list->toggle());
-        $this->assertEquals($list, $grid->toggle());
-    }
+    expect($list->toggle())->toBe($grid)
+        ->and($grid->toggle())->toBe($list);
+});
 
-    /**
-     * Test layout type checks.
-     */
-    public function test_layout_type_checks(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
+it('can check layout types', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-        $this->assertTrue($list->isListLayout());
-        $this->assertFalse($list->isGridLayout());
+    expect($list->isListLayout())->toBeTrue()
+        ->and($list->isGridLayout())->toBeFalse()
+        ->and($grid->isGridLayout())->toBeTrue()
+        ->and($grid->isListLayout())->toBeFalse();
+});
 
-        $this->assertTrue($grid->isGridLayout());
-        $this->assertFalse($grid->isListLayout());
-    }
+it('has grid configuration', function (): void {
+    $grid = TableLayoutEnum::GRID;
+    $config = $grid->getTableContentGrid();
 
-    /**
-     * Test grid configuration.
-     */
-    public function test_grid_configuration(): void
-    {
-        $grid = TableLayoutEnum::GRID;
-        $config = $grid->getTableContentGrid();
+    expect($config)->toBeArray()
+        ->toHaveKeys(['sm', 'md', 'lg', 'xl', '2xl']);
+});
 
-        $this->assertIsArray($config);
-        $this->assertArrayHasKey('sm', $config);
-        $this->assertArrayHasKey('md', $config);
-        $this->assertArrayHasKey('lg', $config);
-        $this->assertArrayHasKey('xl', $config);
-        $this->assertArrayHasKey('2xl', $config);
-    }
+it('can get table columns', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-    /**
-     * Test table columns method.
-     */
-    public function test_table_columns_method(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
+    $listColumns = [
+        TextColumn::make('name'),
+        TextColumn::make('email'),
+    ];
 
-        $listColumns = [
+    $gridColumns = [
+        Stack::make([
             TextColumn::make('name'),
             TextColumn::make('email'),
-        ];
+        ]),
+    ];
 
-        $gridColumns = [
-            Stack::make([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-            ]),
-        ];
+    expect($list->getTableColumns($listColumns, $gridColumns))->toEqual($listColumns)
+        ->and($grid->getTableColumns($listColumns, $gridColumns))->toEqual($gridColumns);
+});
 
-        // Test list layout
-        $result = $list->getTableColumns($listColumns, $gridColumns);
-        $this->assertEquals($listColumns, $result);
+it('can get options', function (): void {
+    $options = TableLayoutEnum::getOptions();
 
-        // Test grid layout
-        $result = $grid->getTableColumns($listColumns, $gridColumns);
-        $this->assertEquals($gridColumns, $result);
-    }
+    expect($options)->toBeArray()
+        ->toHaveKeys(['list', 'grid'])
+        ->and($options['list'])->toBe(TableLayoutEnum::LIST)
+        ->and($options['grid'])->toBe(TableLayoutEnum::GRID);
+});
 
-    /**
-     * Test options method.
-     */
-    public function test_options_method(): void
-    {
-        $options = TableLayoutEnum::getOptions();
+it('has container classes', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-        $this->assertIsArray($options);
-        $this->assertArrayHasKey('list', $options);
-        $this->assertArrayHasKey('grid', $options);
-        $this->assertEquals(TableLayoutEnum::LIST, $options['list']);
-        $this->assertEquals(TableLayoutEnum::GRID, $options['grid']);
-    }
+    $listClasses = $list->getContainerClasses();
+    $gridClasses = $grid->getContainerClasses();
 
-    /**
-     * Test container classes.
-     */
-    public function test_container_classes(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
+    expect($listClasses)->toBeString()->not->toBeEmpty()
+        ->and($gridClasses)->toBeString()->not->toBeEmpty();
+});
 
-        $listClasses = $list->getContainerClasses();
-        $gridClasses = $grid->getContainerClasses();
+it('supports translation', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-        $this->assertIsString($listClasses);
-        $this->assertIsString($gridClasses);
-        $this->assertNotEmpty($listClasses);
-        $this->assertNotEmpty($gridClasses);
-    }
+    $listLabel = $list->getLabel();
+    $gridLabel = $grid->getLabel();
 
-    /**
-     * Test translation support.
-     */
-    public function test_translation_support(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
+    expect($listLabel)->toBeString()->not->toBeEmpty()
+        ->and($gridLabel)->toBeString()->not->toBeEmpty();
+});
 
-        // Test that labels are translatable
-        $listLabel = $list->getLabel();
-        $gridLabel = $grid->getLabel();
+it('has color and icon methods', function (): void {
+    $list = TableLayoutEnum::LIST;
+    $grid = TableLayoutEnum::GRID;
 
-        $this->assertIsString($listLabel);
-        $this->assertIsString($gridLabel);
-        $this->assertNotEmpty($listLabel);
-        $this->assertNotEmpty($gridLabel);
-    }
+    $listColor = $list->getColor();
+    $gridColor = $grid->getColor();
+    $listIcon = $list->getIcon();
+    $gridIcon = $grid->getIcon();
 
-    /**
-     * Test color and icon methods.
-     */
-    public function test_color_and_icon_methods(): void
-    {
-        $list = TableLayoutEnum::LIST;
-        $grid = TableLayoutEnum::GRID;
-
-        // Test colors
-        $listColor = $list->getColor();
-        $gridColor = $grid->getColor();
-
-        $this->assertIsString($listColor);
-        $this->assertIsString($gridColor);
-        $this->assertNotEmpty($listColor);
-        $this->assertNotEmpty($gridColor);
-
-        // Test icons
-        $listIcon = $list->getIcon();
-        $gridIcon = $grid->getIcon();
-
-        $this->assertIsString($listIcon);
-        $this->assertIsString($gridIcon);
-        $this->assertNotEmpty($listIcon);
-        $this->assertNotEmpty($gridIcon);
-    }
-} 
+    expect($listColor)->toBeString()->not->toBeEmpty()
+        ->and($gridColor)->toBeString()->not->toBeEmpty()
+        ->and($listIcon)->toBeString()->not->toBeEmpty()
+        ->and($gridIcon)->toBeString()->not->toBeEmpty();
+}); 

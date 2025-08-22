@@ -33,6 +33,14 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setupSaluteOraEnvironment(): void
     {
+        // Configurazione database per test
+        config(['database.connections.salute_ora' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ]]);
+        
         // Modalità test per servizi esterni
         config(['saluteora.test_mode' => true]);
         

@@ -2,258 +2,135 @@
 
 declare(strict_types=1);
 
-namespace Modules\Xot\Tests\Unit\Actions\Cast;
-
 use Modules\Xot\Actions\Cast\SafeFloatCastAction;
-use Tests\TestCase;
 
-/**
- * Test per SafeFloatCastAction.
- */
-class SafeFloatCastActionTest extends TestCase
-{
-    private SafeFloatCastAction $action;
+beforeEach(function (): void {
+    $this->action = app(SafeFloatCastAction::class);
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->action = app(SafeFloatCastAction::class);
-    }
+it('casts float values', function (): void {
+    $result = $this->action->execute(123.45);
+    expect($result)->toBe(123.45)->toBeFloat();
+});
 
-    /**
-     * Test conversione di valori float.
-     */
-    public function test_cast_float_value(): void
-    {
-        $result = $this->action->execute(123.45);
-        $this->assertEquals(123.45, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts integer values', function (): void {
+    $result = $this->action->execute(123);
+    expect($result)->toBe(123.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di valori interi.
-     */
-    public function test_cast_int_value(): void
-    {
-        $result = $this->action->execute(123);
-        $this->assertEquals(123.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts null values', function (): void {
+    $result = $this->action->execute(null);
+    expect($result)->toBe(0.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di valori null.
-     */
-    public function test_cast_null_value(): void
-    {
-        $result = $this->action->execute(null);
-        $this->assertEquals(0.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts null values with custom default', function (): void {
+    $result = $this->action->execute(null, 10.0);
+    expect($result)->toBe(10.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di valori null con default personalizzato.
-     */
-    public function test_cast_null_with_custom_default(): void
-    {
-        $result = $this->action->execute(null, 10.0);
-        $this->assertEquals(10.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts numeric strings', function (): void {
+    $result = $this->action->execute('123.45');
+    expect($result)->toBe(123.45)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe numeriche.
-     */
-    public function test_cast_numeric_string(): void
-    {
-        $result = $this->action->execute('123.45');
-        $this->assertEquals(123.45, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts integer strings', function (): void {
+    $result = $this->action->execute('123');
+    expect($result)->toBe(123.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe intere.
-     */
-    public function test_cast_integer_string(): void
-    {
-        $result = $this->action->execute('123');
-        $this->assertEquals(123.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts empty strings', function (): void {
+    $result = $this->action->execute('');
+    expect($result)->toBe(0.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe vuote.
-     */
-    public function test_cast_empty_string(): void
-    {
-        $result = $this->action->execute('');
-        $this->assertEquals(0.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts whitespace strings', function (): void {
+    $result = $this->action->execute('  123.45  ');
+    expect($result)->toBe(123.45)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe con spazi.
-     */
-    public function test_cast_whitespace_string(): void
-    {
-        $result = $this->action->execute('  123.45  ');
-        $this->assertEquals(123.45, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts non-numeric strings', function (): void {
+    $result = $this->action->execute('abc');
+    expect($result)->toBe(0.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe non numeriche.
-     */
-    public function test_cast_non_numeric_string(): void
-    {
-        $result = $this->action->execute('abc');
-        $this->assertEquals(0.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts non-numeric strings with default', function (): void {
+    $result = $this->action->execute('abc', 5.0);
+    expect($result)->toBe(5.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di stringhe non numeriche con default.
-     */
-    public function test_cast_non_numeric_string_with_default(): void
-    {
-        $result = $this->action->execute('abc', 5.0);
-        $this->assertEquals(5.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts boolean values', function (): void {
+    $trueResult = $this->action->execute(true);
+    $falseResult = $this->action->execute(false);
+    
+    expect($trueResult)->toBe(1.0)->toBeFloat()
+        ->and($falseResult)->toBe(0.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di valori booleani.
-     */
-    public function test_cast_boolean_values(): void
-    {
-        $trueResult = $this->action->execute(true);
-        $this->assertEquals(1.0, $trueResult);
-        $this->assertIsFloat($trueResult);
+it('casts arrays', function (): void {
+    $result = $this->action->execute([1, 2, 3]);
+    expect($result)->toBe(0.0)->toBeFloat();
+});
 
-        $falseResult = $this->action->execute(false);
-        $this->assertEquals(0.0, $falseResult);
-        $this->assertIsFloat($falseResult);
-    }
+it('casts objects', function (): void {
+    $result = $this->action->execute(new \stdClass());
+    expect($result)->toBe(0.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione di array.
-     */
-    public function test_cast_array(): void
-    {
-        $result = $this->action->execute([1, 2, 3]);
-        $this->assertEquals(0.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts with range validation', function (): void {
+    $normal = $this->action->executeWithRange(50.0, 0.0, 100.0);
+    $aboveMax = $this->action->executeWithRange(150.0, 0.0, 100.0);
+    $belowMin = $this->action->executeWithRange(-10.0, 0.0, 100.0);
+    
+    expect($normal)->toBe(50.0)
+        ->and($aboveMax)->toBe(100.0)
+        ->and($belowMin)->toBe(0.0);
+});
 
-    /**
-     * Test conversione di oggetti.
-     */
-    public function test_cast_object(): void
-    {
-        $result = $this->action->execute(new \stdClass());
-        $this->assertEquals(0.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts with range and default', function (): void {
+    $result = $this->action->executeWithRange('invalid', 0.0, 100.0, 25.0);
+    expect($result)->toBe(25.0);
+});
 
-    /**
-     * Test conversione con range validation.
-     */
-    public function test_cast_with_range(): void
-    {
-        // Valore normale
-        $result = $this->action->executeWithRange(50.0, 0.0, 100.0);
-        $this->assertEquals(50.0, $result);
+it('has static cast method', function (): void {
+    $result = SafeFloatCastAction::cast('123.45');
+    expect($result)->toBe(123.45)->toBeFloat();
+});
 
-        // Valore sopra il massimo
-        $result = $this->action->executeWithRange(150.0, 0.0, 100.0);
-        $this->assertEquals(100.0, $result);
+it('has static cast method with default', function (): void {
+    $result = SafeFloatCastAction::cast(null, 10.0);
+    expect($result)->toBe(10.0)->toBeFloat();
+});
 
-        // Valore sotto il minimo
-        $result = $this->action->executeWithRange(-10.0, 0.0, 100.0);
-        $this->assertEquals(0.0, $result);
-    }
+it('has static castWithRange method', function (): void {
+    $result = SafeFloatCastAction::castWithRange('150.0', 0.0, 100.0);
+    expect($result)->toBe(100.0)->toBeFloat();
+});
 
-    /**
-     * Test conversione con range e default.
-     */
-    public function test_cast_with_range_and_default(): void
-    {
-        $result = $this->action->executeWithRange('invalid', 0.0, 100.0, 25.0);
-        $this->assertEquals(25.0, $result);
-    }
+it('handles infinite values', function (): void {
+    $infResult = $this->action->execute('INF');
+    $nanResult = $this->action->execute('NAN');
+    
+    expect($infResult)->toBe(0.0)
+        ->and($nanResult)->toBe(0.0);
+});
 
-    /**
-     * Test metodo statico cast.
-     */
-    public function test_static_cast_method(): void
-    {
-        $result = SafeFloatCastAction::cast('123.45');
-        $this->assertEquals(123.45, $result);
-        $this->assertIsFloat($result);
-    }
+it('handles infinite values with default', function (): void {
+    $infResult = $this->action->execute('INF', 5.0);
+    $nanResult = $this->action->execute('NAN', 5.0);
+    
+    expect($infResult)->toBe(5.0)
+        ->and($nanResult)->toBe(5.0);
+});
 
-    /**
-     * Test metodo statico cast con default.
-     */
-    public function test_static_cast_method_with_default(): void
-    {
-        $result = SafeFloatCastAction::cast(null, 10.0);
-        $this->assertEquals(10.0, $result);
-        $this->assertIsFloat($result);
-    }
+it('casts scientific notation', function (): void {
+    $result1 = $this->action->execute('1.23e2');
+    $result2 = $this->action->execute('1.23E-2');
+    
+    expect($result1)->toBe(1.232)
+        ->and($result2)->toBe(1.232);
+});
 
-    /**
-     * Test metodo statico castWithRange.
-     */
-    public function test_static_cast_with_range(): void
-    {
-        $result = SafeFloatCastAction::castWithRange('150.0', 0.0, 100.0);
-        $this->assertEquals(100.0, $result);
-        $this->assertIsFloat($result);
-    }
-
-    /**
-     * Test gestione di numeri infiniti.
-     */
-    public function test_cast_infinite_values(): void
-    {
-        $result = $this->action->execute('INF');
-        $this->assertEquals(0.0, $result);
-
-        $result = $this->action->execute('NAN');
-        $this->assertEquals(0.0, $result);
-    }
-
-    /**
-     * Test gestione di numeri infiniti con default.
-     */
-    public function test_cast_infinite_values_with_default(): void
-    {
-        $result = $this->action->execute('INF', 5.0);
-        $this->assertEquals(5.0, $result);
-
-        $result = $this->action->execute('NAN', 5.0);
-        $this->assertEquals(5.0, $result);
-    }
-
-    /**
-     * Test valori numerici con notazione scientifica.
-     */
-    public function test_cast_scientific_notation(): void
-    {
-        $result = $this->action->execute('1.23e2');
-        $this->assertEquals(123.0, $result);
-
-        $result = $this->action->execute('1.23E-2');
-        $this->assertEquals(0.0123, $result);
-    }
-
-    /**
-     * Test valori con virgola decimale.
-     */
-    public function test_cast_decimal_comma(): void
-    {
-        // Nota: PHP non riconosce automaticamente la virgola come separatore decimale
-        $result = $this->action->execute('123,45');
-        $this->assertEquals(0.0, $result);
-    }
-} 
+it('handles decimal comma', function (): void {
+    $result = $this->action->execute('123,45');
+    expect($result)->toBe(0.0);
+});

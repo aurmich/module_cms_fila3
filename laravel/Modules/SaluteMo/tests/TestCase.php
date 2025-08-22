@@ -15,11 +15,19 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // Set up any module-specific test configuration here
-        $this->artisan('module:migrate', ['module' => 'SaluteMo', '--force' => true]);
+        // Configure salute_ora database connection for tests
+        config(['database.connections.salute_ora' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ]]);
         
         // Configure test database connection
         config(['database.default' => 'sqlite']);
         config(['database.connections.sqlite.database' => ':memory:']);
+        
+        // Set up any module-specific test configuration here
+        // $this->artisan('module:migrate', ['module' => 'SaluteMo', '--force' => true]);
     }
 }

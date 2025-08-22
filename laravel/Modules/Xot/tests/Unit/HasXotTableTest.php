@@ -178,7 +178,7 @@ class HasTableWithXot implements HasTable
         return null;
     }
 
-    public function getTableFilterState(): array
+    public function getTableFilterState(string $name): ?array
     {
         return [];
     }
@@ -426,7 +426,7 @@ class HasTableWithoutOptionalMethods implements HasTable
         return null;
     }
 
-    public function getTableFilterState(): array
+    public function getTableFilterState(string $name): ?array
     {
         return [];
     }
