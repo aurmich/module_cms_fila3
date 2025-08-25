@@ -27,7 +27,7 @@
                 "type": "feature_sections",
                 "data": {
                     "view": "pub_theme::components.blocks.feature_sections.faqs",
-                    "title": "FAQ'S",
+                    "title": "FAQS",
                     "sections": [
                         {
                             "title": "A chi é rivolto questo servizio?",
@@ -115,7 +115,7 @@
                 "type": "feature_sections",
                 "data": {
                     "view": "pub_theme::components.blocks.feature_sections.faqs",
-                    "title": "FAQ'S",
+                    "title": "FAQS",
                     "sections": [
                         {
                             "title": "Who is this service for?",

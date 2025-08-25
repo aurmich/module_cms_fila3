@@ -37,7 +37,7 @@
                         {
                             "title": "Vuoi sapere di più sul progetto?",
                             "cta_text": "Consulta le guide",
-                            "cta_link": "#"
+                            "cta_link": "/it#guide-section"
                         },
                         {
                             "title": "Vuoi conoscere meglio coloro che hanno realizzato il progetto?",
@@ -78,7 +78,7 @@
                         {
                             "title": "Want to know more about the project?",
                             "cta_text": "Consult the guides",
-                            "cta_link": "#"
+                            "cta_link": "/en#guide-section"
                         },
                         {
                             "title": "Do you want to know who has developed the Salute Orale initiative? ",
