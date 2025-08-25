@@ -1,4 +1,13 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php
- [ ] it builds an emergency event with proper title, colors and contrast
- [ ] it marks event editable only for future dates and matching doctor/admin
+/var/www/html/_bases/base_saluteora/laravel/Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php
+ [x] change password action has correct default name
+ [x] change password action extends correct base class
+ [ ] change password action has correct icon
+ [ ] change password action form has required fields
+ [ ] change password action can be executed
+ [ ] change password action uses password data component
+ [ ] change password action has confirmation field
+ [ ] change password action shows success notification
+ [ ] change password action validates password confirmation
+ [ ] change password action uses translation keys
+ [ ] change password action has correct setup method
 
