@@ -1,0 +1,43 @@
+# Memoria Permanente: Regola del Buon Boy Scout
+
+## Regola Fondamentale
+**"Lascia il campo più pulito di come l'hai trovato"**
+
+## Significato
+Ogni modifica al codice deve migliorare la codebase, non peggiorarla. Questa è una regola SACRA e IMMUTABILE.
+
+## Applicazione
+- **PRIMA** di ogni commit: verificare che il codice sia più pulito
+- **DURANTE** lo sviluppo: migliorare sempre il codice esistente  
+- **DOPO** ogni modifica: pulire, documentare e organizzare
+
+## Checklist Obbligatoria
+- [ ] Codice più pulito di prima?
+- [ ] Documentazione aggiornata?
+- [ ] Test migliorati?
+- [ ] Struttura più organizzata?
+- [ ] Naming più chiaro?
+- [ ] Tipizzazione migliorata?
+
+## Responsabilità
+- **Sviluppatore**: Applicare SEMPRE questa regola
+- **Team Lead**: Verificare il rispetto della regola
+- **Code Review**: Rifiutare violazioni della regola
+
+## Anti-Pattern
+- ❌ "Fix later"
+- ❌ "Works for me" 
+- ❌ "Quick fix"
+- ❌ "Someone else will fix it"
+- ❌ "It's not my code"
+
+## Filosofia
+La qualità del codice è responsabilità di ogni sviluppatore. Non esistono scuse per lasciare il codice peggiore di prima.
+
+**⚠️ QUESTA REGOLA È SACRA E NON PUÒ ESSERE VIOLATA ⚠️**
+
+Ultimo aggiornamento: 2025-06-04
+description:
+globs:
+alwaysApply: false
+---

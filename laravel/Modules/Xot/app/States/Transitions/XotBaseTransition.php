@@ -11,6 +11,7 @@ use Modules\Notify\Datas\RecordNotificationData;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\Xot\Contracts\UserContract;
 use Spatie\ModelStates\Transition;
+use Filament\Notifications\Notification as FilamentNotification;
 
 abstract class XotBaseTransition extends Transition
 {
@@ -90,12 +91,18 @@ abstract class XotBaseTransition extends Transition
         $data = $this->getNotificationData();
         $notify = $notify->mergeData($data);
         $notify = $notify->addAttachments($this->getNotificationAttachments());
-        // appointment-patient-pending-to-confirmed
+        
         try {
             Notification::route($recipient->getChannel(), $recipient->getRoute())
                 ->notify($notify);
-        } catch (\TypeError $e) {
-            dddx($e);
+        } catch (\TypeError|\Webmozart\Assert\InvalidArgumentException $e) {
+            $message = 'channel :['.$recipient->getChannel() .'] error: ['.$e->getMessage().']';
+            FilamentNotification::make()
+                ->title('Error')
+                ->danger()
+                ->body($message)
+                ->send();
+            
         }
     }
 

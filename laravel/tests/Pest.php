@@ -46,6 +46,7 @@ beforeAll(function (): void {
         'sqlite',
         'user',
         'salute_ora',
+        'geo',
         'job',
         'tenant',
         'activity',
@@ -61,12 +62,15 @@ beforeAll(function (): void {
     // Minimal Spatie Event Sourcing configuration to avoid unresolved bindings in tests
     Config::set('event-sourcing.stored_event_repository', \Spatie\EventSourcing\StoredEvents\Repositories\EloquentStoredEventRepository::class);
     Config::set('event-sourcing.event_handlers', []);
+    Config::set('event-sourcing.event_subscribers', []);
     Config::set('event-sourcing.reactor_pipes', []);
     
-    // Bind the missing dependency for EventSubscriber
-    app()->when(\Spatie\EventSourcing\StoredEvents\EventSubscriber::class)
-        ->needs('$storedEventRepository')
-        ->give('Spatie\\EventSourcing\\StoredEvents\\Repositories\\EloquentStoredEventRepository');
+    // Bind the missing dependency for EventSubscriber (constructor requires repository class string)
+    app()->bind(\Spatie\EventSourcing\StoredEvents\EventSubscriber::class, function () {
+        return new \Spatie\EventSourcing\StoredEvents\EventSubscriber(
+            \Spatie\EventSourcing\StoredEvents\Repositories\EloquentStoredEventRepository::class
+        );
+    });
 
     // Ensure Eloquent resolver and dispatcher are available in test runtime
     \Illuminate\Database\Eloquent\Model::setConnectionResolver(app('db'));
@@ -109,7 +113,7 @@ beforeAll(function (): void {
     }
 
     // Run migrations on all connections
-    foreach (['sqlite', 'user', 'salute_ora'] as $connection) {
+    foreach (['sqlite', 'user', 'salute_ora', 'geo'] as $connection) {
         try {
             Artisan::call('migrate', [
                 '--force' => true,
@@ -154,6 +158,22 @@ function createUser(array $attributes = []): \Modules\User\Models\User
 
 function makeUser(array $attributes = []): \Modules\User\Models\User
 {
+    // Ensure resolver/dispatcher are set even in isolated test runs
+    try {
+        \Illuminate\Database\Eloquent\Model::setConnectionResolver(app('db'));
+        \Illuminate\Database\Eloquent\Model::setEventDispatcher(app('events'));
+    } catch (\Throwable $e) {
+        // ignore, bootstrap handles this
+    }
+    // If a plain-text password is provided, hash it to simulate mutator behavior in memory
+    if (array_key_exists('password', $attributes) && is_string($attributes['password'])) {
+        $plain = $attributes['password'];
+        // Simple heuristic: if it doesn't look like a bcrypt hash, hash it
+        if (!str_starts_with($plain, '$2y$') && !str_starts_with($plain, '$argon2')) {
+            $attributes['password'] = \Hash::make($plain);
+        }
+    }
+
     return \Modules\User\Models\User::factory()->make($attributes);
 }
 
@@ -214,8 +234,13 @@ expect()->extend('toBeOne', function () {
  */
 function moduleEnabled(string $module): bool
 {
-    $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
-    return $moduleStatuses[$module] ?? false;
+    try {
+        $moduleStatuses = json_decode(file_get_contents(base_path('modules_statuses.json')), true);
+        return $moduleStatuses[$module] ?? false;
+    } catch (\Throwable $e) {
+        // If base_path is not available (application not booted), assume module is enabled
+        return true;
+    }
 }
 
 /**

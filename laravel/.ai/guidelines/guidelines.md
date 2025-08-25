@@ -29,6 +29,12 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
 - Check for existing components to reuse before writing a new one.
 
+## Boy Scout Rule (CRITICAL)
+- **ALWAYS leave the code better than you found it** - Every code change should improve readability, maintainability, or performance
+- Apply incremental improvements during development and bug fixing
+- Remove dead code, improve naming, simplify complex logic, update documentation
+- Follow the detailed guidelines in `BOY_SCOUT_RULE.md`
+
 ## Verification Scripts
 - Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
 

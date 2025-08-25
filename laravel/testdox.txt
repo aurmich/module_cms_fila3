@@ -1,72 +1,25 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php
- [x] `Appointment Booking` → it validates basic appointment booking setup
- [x] `Appointment Booking` → it validates user types for appointment booking
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php
- [x] `Appointment Business Logic` → `Basic Appointment Management` → it creates appointment with required fields
- [x] `Appointment Business Logic` → `Basic Appointment Management` → it validates appointment time constraints
- [x] `Appointment Business Logic` → `Basic Appointment Management` → it detects invalid time range (end before start) without DB
- [x] `Appointment Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow
- [x] `Appointment Business Logic` → `Appointment Status Management` → it handles appointment cancellation
- [x] `Appointment Business Logic` → `Appointment Status Management` → it handles no-show appointments
- [x] `Appointment Business Logic` → `Appointment Type Management` → it creates consultation appointment
- [x] `Appointment Business Logic` → `Appointment Type Management` → it creates treatment appointment
- [x] `Appointment Business Logic` → `Appointment Type Management` → it creates emergency appointment with priority
- [x] `Appointment Business Logic` → `Business Rules Validation` → it detects double booking for same doctor and overlapping time
- [x] `Appointment Business Logic` → `Business Rules Validation` → it allows same time for different doctors
- [x] `Appointment Business Logic` → `Business Rules Validation` → it flags weekend appointments as outside business hours
- [x] `Appointment Business Logic` → `Data Integrity (in-memory)` → it keeps core foreign keys assigned
- [x] `Appointment Business Logic` → `Data Integrity (in-memory)` → it validates required fields conceptually
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php
- [x] `SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields
- [x] `SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it validates appointment time constraints
- [x] `SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointment
- [x] `SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointment
- [x] `SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow
- [x] `SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellation
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentValidationTest.php
- [x] `Appointment Validation` → it validates basic appointment creation
- [x] `Appointment Validation` → it validates user types are correctly set
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php
- [x] `SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates doctor user type
- [x] `SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates admin user type
- [x] `SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates patient user type
- [x] `SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it validates studio creation
- [x] `SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it allows admin users to access dashboard
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php
- [x] `SaluteMo BaseModel Business Logic` → it exposes casts as array
- [x] `SaluteMo BaseModel Business Logic` → it supports media methods presence
- [x] `SaluteMo BaseModel Business Logic` → it has correct trait usage
- [x] `SaluteMo BaseModel Business Logic` → it implements HasMedia interface
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php
- [x] `SaluteMo AdminResource` → it has correct model configuration
- [x] `SaluteMo AdminResource` → it has correct navigation configuration
- [x] `SaluteMo AdminResource` → it has correct resource pages
- [x] `SaluteMo AdminResource` → `Form Schema` → it has form schema defined
- [x] `SaluteMo AdminResource` → `Table Schema` → it inherits table method from base class without overriding
- [x] `SaluteMo AdminResource` → `Resource Configuration` → it has correct slug configuration
- [x] `SaluteMo AdminResource` → `Resource Configuration` → it has correct record title attribute
- [x] `SaluteMo AdminResource` → `Permissions` → it has correct resource permissions
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/AppointmentResourceTest.php
- [x] `SaluteMo AppointmentResource` → it has correct model configuration
- [x] `SaluteMo AppointmentResource` → it has correct navigation configuration
- [x] `SaluteMo AppointmentResource` → it has correct resource pages
- [x] `SaluteMo AppointmentResource` → it has widgets defined
- [x] `SaluteMo AppointmentResource` → `Resource Configuration` → it has form schema components
- [x] `SaluteMo AppointmentResource` → `Resource Configuration` → it supports table configuration via pages
- [x] `SaluteMo AppointmentResource` → `Navigation Configuration` → it has correct slug configuration
- [x] `SaluteMo AppointmentResource` → `Navigation Configuration` → it has record title configuration
- [x] `SaluteMo AppointmentResource` → `Navigation Configuration` → it has navigation sort configuration
- [x] `SaluteMo AppointmentResource` → `Business Logic` → it supports appointment reporting
- [x] `SaluteMo AppointmentResource` → `Widget Integration` → it has widget configuration
-
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/DoctorResourceTest.php
- [x] `SaluteMo DoctorResource` → it has correct model configuration
- [x] `SaluteMo DoctorResource` → it has correct resource pages
+Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)
+ [ ] Get json file returns correct path
+ [ ] Get sushi rows loads existing data
+ [ ] Get sushi rows returns empty array when file not exists
+ [ ] Get sushi rows throws exception with malformed json
+ [ ] Get sushi rows throws exception with non array data
+ [ ] Get sushi rows normalizes nested arrays
+ [ ] Save to json saves data successfully
+ [ ] Save to json creates directory if not exists
+ [ ] Save to json returns false on write error
+ [ ] Load existing data loads data correctly
+ [ ] Load existing data returns empty array when file not exists
+ [ ] Get next id returns next available id
+ [ ] Get next id returns one when no existing data
+ [ ] Get next id returns one with non numeric ids
+ [ ] Get auth id returns authenticated user id
+ [ ] Get auth id returns null when not authenticated
+ [ ] Creating event generates id and timestamps
+ [ ] Updating event updates timestamp
+ [ ] Deleting event removes record from json
+ [ ] Error handling during json operations
+ [ ] Data validation with schema
+ [ ] Performance with large json files
+ [ ] Memory usage with large json files
 

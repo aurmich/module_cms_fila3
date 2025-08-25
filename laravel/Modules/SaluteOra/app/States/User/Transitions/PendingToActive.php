@@ -11,6 +11,7 @@ use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Datas\RecordNotificationData;
+use Modules\User\Actions\User\GetNewPasswordAction;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationRequested;
 
@@ -20,8 +21,7 @@ class PendingToActive extends BaseTransition
 
     public function getNotificationData(): array{
         $user=$this->record;
-        $password=Str::random(10);
-        $user->update(['password'=>$password]);
+        $password=app(GetNewPasswordAction::class)->execute($user);
 
         $data = [
             'message' => $this->message,

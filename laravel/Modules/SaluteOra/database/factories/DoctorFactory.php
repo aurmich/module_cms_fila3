@@ -9,6 +9,15 @@ use Modules\SaluteOra\Models\Doctor;
 use Modules\SaluteOra\Enums\UserTypeEnum;
 
 /**
+ * Factory per la creazione di dottori con dati realistici.
+ * 
+ * Boy Scout Rule Applied:
+ * - Aggiunta gestione nomi realistici per dottori italiani
+ * - Migliorata struttura delle certificazioni
+ * - Aggiunta coerenza con dati italiani
+ * - Rimossi campi non esistenti nella tabella
+ * - Cleaner code structure and better documentation
+ *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\SaluteOra\Models\Doctor>
  */
 class DoctorFactory extends Factory
@@ -27,109 +36,173 @@ class DoctorFactory extends Factory
      */
     public function definition(): array
     {
-        $yearsExperience = $this->faker->numberBetween(1, 35);
-        $graduationYear = (int) date('Y') - $yearsExperience - $this->faker->numberBetween(6, 8);
-
+        $firstName = $this->getRandomFirstName();
+        $lastName = $this->getRandomLastName();
+        $title = $this->getRandomDoctorTitle();
+        
         return [
-            'name' => 'Dr. ' . $this->faker->name(),
-            'last_name' => $this->faker->lastName(),
+            'name' => $title . ' ' . $firstName . ' ' . $lastName,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
-            'address' => $this->faker->streetAddress(),
-            'city' => $this->faker->city(),
-            'postal_code' => $this->faker->postcode(),
-            'province' => $this->faker->stateAbbr(),
-            'country' => 'IT',
+            'phone' => $this->generateItalianPhoneNumber(),
+            'address' => $this->generateFullAddress(),
+            'city' => $this->getRandomItalianCity(),
             'type' => UserTypeEnum::DOCTOR->value,
             'status' => 'active',
+            'is_active' => true,
+            'is_otp' => $this->faker->boolean(20), // 20% doctors use OTP
             
-            // Professional credentials
-            'registration_number' => 'OMD' . $this->faker->unique()->numberBetween(10000, 99999),
-            'specialization' => $this->faker->randomElement([
-                'Odontoiatria Generale',
-                'Ortodonzia',
-                'Endodonzia',
-                'Parodontologia',
-                'Chirurgia Orale',
-                'Implantologia',
-                'Odontoiatria Pediatrica',
-                'Estetica Dentale'
-            ]),
-            'certifications' => json_encode([
-                'basic_certification' => true,
-                'advanced_certification' => $this->faker->boolean(70),
-                'specialty_certification' => $this->faker->boolean(50)
-            ]),
-            
-            // Education and training
-            'graduation_year' => $graduationYear,
-            'years_experience' => $yearsExperience,
-            
-            // Practice information
-            'consultation_fee' => $this->faker->numberBetween(50, 200),
-            'accepts_new_patients' => $this->faker->boolean(80),
-            'emergency_availability' => $this->faker->boolean(60),
-            
-            // Availability
-            'availability' => json_encode([
-                'monday' => ['08:00-13:00', '14:00-19:00'],
-                'tuesday' => ['08:00-13:00', '14:00-19:00'],
-                'wednesday' => ['08:00-13:00', '14:00-19:00'],
-                'thursday' => ['08:00-13:00', '14:00-19:00'],
-                'friday' => ['08:00-13:00', '14:00-19:00'],
-                'saturday' => ['08:00-14:00'],
-                'sunday' => []
-            ]),
+            // Professional credentials (enhanced structure)
+            'registration_number' => $this->generateRegistrationNumber(),
+            'certifications' => $this->generateCertifications(),
         ];
     }
 
     /**
-     * Indica che il dottore è specializzato in ortodonzia.
+     * Indica che il dottore ha molte certificazioni.
+     *
+     * @return static
      */
-    public function orthodontist(): static
+    public function highlyCertified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'specialization' => 'Ortodonzia',
+            'certifications' => json_encode([
+                'basic_certification' => true,
+                'advanced_certification' => true,
+                'specialty_certification' => true
+            ]),
         ]);
     }
 
     /**
-     * Indica che il dottore è specializzato in implantologia.
+     * Indica che il dottore ha poche certificazioni.
+     *
+     * @return static
      */
-    public function implantologist(): static
+    public function basicCertified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'specialization' => 'Implantologia',
+            'certifications' => json_encode([
+                'basic_certification' => true,
+                'advanced_certification' => false,
+                'specialty_certification' => false
+            ]),
         ]);
     }
 
     /**
-     * Indica che il dottore è specializzato in endodonzia.
+     * Get a random Italian first name.
+     *
+     * @return string
      */
-    public function endodontist(): static
+    private function getRandomFirstName(): string
     {
-        return $this->state(fn (array $attributes) => [
-            'specialization' => 'Endodonzia',
-        ]);
+        $firstNames = [
+            'Marco', 'Giuseppe', 'Francesco', 'Antonio', 'Alessandro', 'Andrea', 'Luigi', 
+            'Matteo', 'Luca', 'Giovanni', 'Maria', 'Anna', 'Giuseppina', 'Rosa', 'Angela',
+            'Giovanna', 'Teresa', 'Lucia', 'Francesca', 'Paola'
+        ];
+        
+        return $this->faker->randomElement($firstNames);
     }
 
     /**
-     * Indica che il dottore ha molti anni di esperienza.
+     * Get a random Italian last name.
+     *
+     * @return string
      */
-    public function experienced(): static
+    private function getRandomLastName(): string
     {
-        return $this->state(fn (array $attributes) => [
-            'years_experience' => $this->faker->numberBetween(15, 35),
-        ]);
+        $lastNames = [
+            'Rossi', 'Russo', 'Ferrari', 'Esposito', 'Bianchi', 'Romano', 'Colombo', 
+            'Ricci', 'Marino', 'Greco', 'Bruno', 'Gallo', 'Conti', 'De Luca', 'Mancini'
+        ];
+        
+        return $this->faker->randomElement($lastNames);
     }
 
     /**
-     * Indica che il dottore è nuovo e ha poca esperienza.
+     * Get a random doctor title.
+     *
+     * @return string
      */
-    public function newGraduate(): static
+    private function getRandomDoctorTitle(): string
     {
-        return $this->state(fn (array $attributes) => [
-            'years_experience' => $this->faker->numberBetween(1, 5),
-        ]);
+        $doctorTitles = ['Dr.', 'Dr.ssa'];
+        return $this->faker->randomElement($doctorTitles);
+    }
+
+    /**
+     * Get a random Italian city.
+     *
+     * @return string
+     */
+    private function getRandomItalianCity(): string
+    {
+        $cities = ['Milano', 'Roma', 'Napoli', 'Torino', 'Palermo', 'Genova', 'Bologna', 'Firenze'];
+        return $this->faker->randomElement($cities);
+    }
+
+    /**
+     * Generate a realistic Italian phone number.
+     *
+     * @return string
+     */
+    private function generateItalianPhoneNumber(): string
+    {
+        $prefixes = ['+39', '0039'];
+        $prefix = $this->faker->randomElement($prefixes);
+        
+        // Italian mobile numbers: 3xx xxx xxxx
+        if ($this->faker->boolean(70)) {
+            return $prefix . ' ' . $this->faker->numerify('### ### ####');
+        }
+        
+        // Italian landline numbers: 0xx xxx xxxx
+        return $prefix . ' ' . $this->faker->numerify('### ### ####');
+    }
+
+    /**
+     * Generate a full address with building number.
+     *
+     * @return string
+     */
+    private function generateFullAddress(): string
+    {
+        return $this->faker->streetAddress() . ', ' . $this->faker->buildingNumber();
+    }
+
+    /**
+     * Generate a registration number.
+     *
+     * @return string
+     */
+    private function generateRegistrationNumber(): string
+    {
+        return 'ORD' . $this->faker->unique()->numberBetween(1000, 9999);
+    }
+
+    /**
+     * Generate certifications data.
+     *
+     * @return array<string, mixed>
+     */
+    private function generateCertifications(): array
+    {
+        $specializations = [
+            'Odontoiatria Generale', 'Ortodonzia', 'Endodonzia', 'Parodontologia',
+            'Chirurgia Orale', 'Implantologia', 'Odontoiatria Pediatrica', 'Estetica Dentale'
+        ];
+
+        return [
+            'specialization' => $this->faker->randomElement($specializations),
+            'basic_certification' => true,
+            'advanced_certification' => $this->faker->boolean(70),
+            'specialty_certification' => $this->faker->boolean(50),
+            'years_experience' => $this->faker->numberBetween(2, 35),
+            'graduation_year' => $this->faker->numberBetween(1990, 2020),
+            'continuing_education' => $this->faker->boolean(80),
+        ];
     }
 }

@@ -11,6 +11,7 @@ use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Inactive;
 use Modules\Notify\Datas\RecordNotificationData;
+use Modules\User\Actions\User\GetNewPasswordAction;
 
 /**
  * @property \Modules\SaluteOra\Models\User $record
@@ -20,8 +21,7 @@ class InactiveToActive extends BaseTransition
    //---
    public function getNotificationData(): array{
       $user=$this->record;
-      $password=Str::random(10);
-      $user->update(['password'=>$password]);
+      $password=app(GetNewPasswordAction::class)->execute($user);
       return [
           'message' => $this->message,
           'password' => $password,

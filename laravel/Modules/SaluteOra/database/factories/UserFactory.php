@@ -27,47 +27,81 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
-    /**
+        /**
      * Define the model's default state.
+     * 
+     * Boy Scout Rule Applied:
+     * - Migliorata randomizzazione con dati realistici
+     * - Aggiunta gestione locale per nomi italiani
+     * - Implementato pattern per dati demografici coerenti
+     * - Migliorata leggibilità e manutenibilità
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
-        // Avoid Faker name provider in tests: use static fallback
-        $firstName = 'Mario';
-        $lastName = 'Rossi';
+        // Nomi italiani realistici per migliore variety
+        $firstNames = [
+            'male' => ['Marco', 'Giuseppe', 'Francesco', 'Antonio', 'Alessandro', 'Andrea', 'Luigi', 'Matteo', 'Luca', 'Giovanni'],
+            'female' => ['Maria', 'Anna', 'Giuseppina', 'Rosa', 'Angela', 'Giovanna', 'Teresa', 'Lucia', 'Francesca', 'Paola'],
+        ];
+        
+        $lastNames = [
+            'Rossi', 'Russo', 'Ferrari', 'Esposito', 'Bianchi', 'Romano', 'Colombo', 'Ricci', 'Marino', 'Greco',
+            'Bruno', 'Gallo', 'Conti', 'De Luca', 'Mancini', 'Costa', 'Giordano', 'Rizzo', 'Lombardi', 'Moretti'
+        ];
+        
+        $gender = $this->faker->randomElement(['male', 'female', 'other']);
+        $firstName = $gender === 'other' ? $this->faker->firstName() : $this->faker->randomElement($firstNames[$gender] ?? $firstNames['male']);
+        $lastName = $this->faker->randomElement($lastNames);
+        
+        // Città italiane realistiche
+        $cities = [
+            ['name' => 'Milano', 'code' => 'MI', 'region' => 'Lombardia'],
+            ['name' => 'Roma', 'code' => 'RM', 'region' => 'Lazio'],
+            ['name' => 'Napoli', 'code' => 'NA', 'region' => 'Campania'],
+            ['name' => 'Torino', 'code' => 'TO', 'region' => 'Piemonte'],
+            ['name' => 'Palermo', 'code' => 'PA', 'region' => 'Sicilia'],
+            ['name' => 'Genova', 'code' => 'GE', 'region' => 'Liguria'],
+            ['name' => 'Bologna', 'code' => 'BO', 'region' => 'Emilia-Romagna'],
+            ['name' => 'Firenze', 'code' => 'FI', 'region' => 'Toscana'],
+        ];
+        
+        $city = $this->faker->randomElement($cities);
+        $age = $this->faker->numberBetween(18, 85);
         
         return [
             'name' => $firstName . ' ' . $lastName,
             'first_name' => $firstName,
             'last_name' => $lastName,
-            'email' => 'test' . uniqid('', true) . '@example.com',
-            'email_verified_at' => $this->faker->optional(0.8) ? now()->subDays(random_int(0, 365)) : null,
-            // Use native hash to avoid container 'hash' binding during tests
-            'password' => password_hash('password', PASSWORD_BCRYPT),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => $this->faker->optional(0.85)->dateTimeBetween('-1 year', 'now'),
+            'password' => Hash::make('password'), // Più sicuro
             'remember_token' => Str::random(10),
             'type' => UserTypeEnum::PATIENT, // Default to patient
-            'state' => [Active::class, Pending::class][random_int(0, 1)],
-            'date_of_birth' => now()->subYears(random_int(18, 80))->startOfDay(),
-            'gender' => ['male', 'female', 'other'][random_int(0, 2)],
-            'address' => 'Via Roma 1',
-            'city' => 'Milano',
-            'phone' => '+39 123 456 7890',
-            'lang' => ['it', 'en', 'de'][random_int(0, 2)],
-            'is_active' => random_int(1, 100) <= 90, // 90% active
-            'is_otp' => random_int(1, 100) <= 10, // 10% OTP enabled
+            'state' => $this->faker->randomElement([Active::class, Pending::class]),
+            'date_of_birth' => now()->subYears($age)->subDays($this->faker->numberBetween(0, 364)),
+            'gender' => $gender,
+            'address' => $this->faker->streetAddress() . ', ' . $this->faker->buildingNumber(),
+            'city' => $city['name'],
+            'phone' => '+39 ' . $this->faker->numerify('### ### ####'),
+            'lang' => $this->faker->randomElement(['it', 'en', 'de']),
+            'is_active' => $this->faker->boolean(90), // 90% active
+            'is_otp' => $this->faker->boolean(15), // 15% OTP enabled
             'country_code' => 'IT',
-            'nationality' => ['Italiana', 'Straniera'][random_int(0, 1)],
+            'nationality' => $this->faker->randomElement(['Italiana', 'Straniera']),
             'fiscal_code' => $this->generateItalianFiscalCode($firstName, $lastName),
-            'children_count' => (string) random_int(0, 5),
-            'family_members' => (string) random_int(1, 8),
-            'years_in_italy' => (string) random_int(0, 50),
-            'dental_problems' => random_int(1, 100) <= 30 ? 'generic issue' : null,
-            'last_dental_visit' => random_int(1, 100) <= 70 ? Carbon::now()->subDays(random_int(30, 720))->toDateString() : null,
-            'last_dental_visit_period' => random_int(1, 100) <= 70 ? [
+            'children_count' => (string) $this->faker->numberBetween(0, 4),
+            'family_members' => (string) $this->faker->numberBetween(1, 6),
+            'years_in_italy' => (string) $this->faker->numberBetween(0, min($age, 50)),
+            'dental_problems' => $this->faker->optional(0.3)->randomElement([
+                'Carie dentali', 'Gengivite', 'Sensibilità dentale', 'Malocclusione', 
+                'Bruxismo', 'Alitosi', 'Dolore mandibolare'
+            ]),
+            'last_dental_visit' => $this->faker->optional(0.75, null)->dateTimeBetween('-2 years', 'now')?->format('Y-m-d'),
+            'last_dental_visit_period' => $this->faker->optional(0.75)->randomElement([
                 '< 6 mesi', '6-12 mesi', '1-2 anni', '> 2 anni'
-            ][random_int(0, 3)] : null,
+            ]),
         ];
     }
 

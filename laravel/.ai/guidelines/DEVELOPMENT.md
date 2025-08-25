@@ -634,6 +634,7 @@ class PostPolicy
 - [ ] Tipizzazione rigorosa implementata
 - [ ] Gestione errori appropriata
 - [ ] Sicurezza e validazione implementate
+- [ ] **Boy Scout Rule applicata** - Codice migliore di come è stato trovato
 
 ### Per Nuove Funzionalità
 - [ ] Test unitari scritti

@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see https://dev.to/hasanmn/automatically-update-createdby-and-updatedby-in-laravel-using-bootable-traits-28g9.
- */
-
 declare(strict_types=1);
 
 namespace Modules\Tenant\Models\Traits;
@@ -17,108 +13,245 @@ use function Safe\json_decode;
 use function Safe\file_get_contents;
 use function Safe\unlink;
 
+/**
+ * Trait SushiToJson.
+ * 
+ * Questo trait permette ai modelli di utilizzare il pacchetto Sushi per leggere
+ * dati da file JSON con isolamento per tenant. Ogni tenant ha i propri file JSON
+ * nella directory config/{tenant_name}/database/content/.
+ * 
+ * @see https://github.com/calebporzio/sushi
+ */
 trait SushiToJson
 {
     use \Sushi\Sushi;
 
+    /**
+     * Ottiene il percorso del file JSON per il modello corrente.
+     * Il file è specifico per il tenant corrente e la tabella del modello.
+     *
+     * @return string Percorso completo del file JSON
+     */
     public function getJsonFile(): string
     {
-        $tbl = $this->getTable();
-        $path= TenantService::filePath('database/content/'.$tbl.'.json');
+        Assert::string($tbl = $this->getTable());
+        $path = TenantService::filePath('database/content/'.$tbl.'.json');
+
         return $path;
     }
 
+    /**
+     * Ottiene i dati dal file JSON per il modello Sushi.
+     * I dati vengono normalizzati per garantire compatibilità con Eloquent.
+     *
+     * @return array<int, array<string, mixed>> Array di record per Sushi
+     * @throws \Exception Se i dati non sono in formato array valido
+     */
     public function getSushiRows(): array
     {
-        
         $path = $this->getJsonFile();
+
+        if (! File::exists($path)) {
+            return [];
+        }
+
+        /** @var array<int, array<string, mixed>>|mixed $data */
         $data = json_decode(file_get_contents($path), true);
-        if(!is_array($data)){
+        if (! \is_array($data)) {
             throw new \Exception('Data is not array ['.$path.']');
         }
-        foreach($data as $id => $item){
-            if(is_array($item)){
-                foreach($item as $key => $value){
-                    if(is_array($value)){
-                        $value=json_encode($value);
+
+        // Normalize nested arrays/objects into JSON strings for Sushi
+        foreach ($data as $idx => $item) {
+            if (\is_array($item)) {
+                foreach ($item as $key => $value) {
+                    if (\is_array($value) || \is_object($value)) {
+                        $value = json_encode($value, JSON_PRETTY_PRINT);
                     }
-                    $item[$key]=$value;
+                    $item[$key] = $value;
                 }
             }
-            $data[$id]=$item;
+            $data[$idx] = $item;
         }
+
         Assert::isArray($data);
+
         return $data;
     }
 
-   
+    /**
+     * Salva i dati del modello nel file JSON.
+     * Crea la directory se non esiste e salva con formattazione JSON.
+     *
+     * @param array<string, mixed> $data Dati da salvare
+     * @return bool True se il salvataggio è riuscito
+     */
+    public function saveToJson(array $data): bool
+    {
+        try {
+            $file = $this->getJsonFile();
+            $directory = dirname($file);
+            
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0755, true, true);
+            }
+            
+            $content = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            File::put($file, $content);
+            
+            return true;
+        } catch (\Exception $e) {
+            report($e);
+            return false;
+        }
+    }
 
     /**
-     * bootUpdater function.
+     * Carica i dati esistenti dal file JSON.
+     *
+     * @return array<int, array<string, mixed>> Dati esistenti
      */
-    protected static function bootSushiToJsons(): void
+    protected function loadExistingData(): array
     {
-        /*
-         * During a model create Eloquent will also update the updated_at field so
-         * need to have the updated_by field here as well.
-         */
+        $path = $this->getJsonFile();
+        
+        if (!File::exists($path)) {
+            return [];
+        }
+        
+        $content = file_get_contents($path);
+        $data = json_decode($content, true);
+        
+        if (!is_array($data)) {
+            return [];
+        }
+        
+        // Assicura che i dati siano nel formato corretto
+        $normalizedData = [];
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $normalizedData[(int)$key] = $value;
+            }
+        }
+        
+        return $normalizedData;
+    }
+
+    /**
+     * Ottiene l'ID successivo disponibile per un nuovo record.
+     *
+     * @return int ID successivo disponibile
+     */
+    protected function getNextId(): int
+    {
+        $existingData = $this->loadExistingData();
+        
+        if (empty($existingData)) {
+            return 1;
+        }
+        
+        $keys = array_keys($existingData);
+        if (empty($keys)) {
+            return 1;
+        }
+        
+        $maxId = max($keys);
+        return is_numeric($maxId) ? (int) $maxId + 1 : 1;
+    }
+
+    /**
+     * Boot method per il trait SushiToJson.
+     * Gestisce gli eventi di creazione, aggiornamento e cancellazione
+     * per sincronizzare automaticamente i dati con i file JSON.
+     */
+    protected static function bootSushiToJson(): void
+    {
+        // Evento di creazione
         static::creating(
             function ($model): void {
-                /*
-                $model->id = $model->max('id') + 1;
-                $model->updated_at = now();
-                $model->updated_by = authId();
-                $model->created_at = now();
-                $model->created_by = authId();
-                $data = $model->toArray();
-                $item = [];
-                if (! is_iterable($model->schema)) {
-                    throw new \Exception('Schema not iterable');
+                /** @var static $modelWithTrait */
+                $modelWithTrait = $model;
+                /** @phpstan-ignore-next-line */
+                $file = $modelWithTrait->getJsonFile();
+
+                // Load existing rows
+                /** @var array<int, array<string, mixed>> $rows */
+                $rows = [];
+                if (File::exists($file)) {
+                    $decoded = json_decode(file_get_contents($file), true);
+                    if (\is_array($decoded)) {
+                        $rows = $decoded;
+                    }
                 }
-                foreach ($model->schema as $name => $type) {
-                    $value = $data[$name] ?? null;
-                    $item[$name] = $value;
+
+                // Compute next id
+                $maxId = 0;
+                foreach ($rows as $r) {
+                    // Ensure each row is an array before accessing offsets
+                    if (!\is_array($r)) {
+                        continue;
+                    }
+                    $rawId = $r['id'] ?? 0;
+                    $id = \is_numeric($rawId) ? (int) $rawId : 0;
+                    $maxId = max($maxId, $id);
                 }
-                $content = json_encode($item, JSON_PRETTY_PRINT);
-                $file = $model->getJsonFile();
+
+                $modelWithTrait->setAttribute('id', $maxId + 1);
+                $modelWithTrait->setAttribute('updated_at', now());
+                if (\function_exists('authId')) {
+                    $modelWithTrait->setAttribute('updated_by', authId());
+                }
+                $modelWithTrait->setAttribute('created_at', now());
+                if (\function_exists('authId')) {
+                    $modelWithTrait->setAttribute('created_by', authId());
+                }
+
+                // Append new row from attributes
+                $rows[] = $modelWithTrait->getAttributes();
+
                 if (! File::exists(\dirname($file))) {
                     File::makeDirectory(\dirname($file), 0755, true, true);
                 }
-                File::put($file, $content);
-                */
-                dddx('wip');
-            }
-        );
-        /*
-         * updating.
-         */
-        static::updating(
-            function ($model): void {
-                /*
-                $file = $model->getJsonFile();
-                $model->updated_at = now();
-                $model->updated_by = authId();
-                $content = $model->toJson(JSON_PRETTY_PRINT);
-                File::put($file, $content);
-                */
-                dddx('wip');
-            }
-        );
-        // -------------------------------------------------------------------------------------
-        /*
-         * Deleting a model is slightly different than creating or deleting.
-         * For deletes we need to save the model first with the deleted_by field
-        */
 
-        static::deleting(
-            function ($model): void {
-                dddx('wip');
-                //unlink($model->getJsonFile());
+                /** @phpstan-ignore-next-line */
+                $modelWithTrait->saveToJson($rows);
             }
         );
 
-        // ----------------------
+        // Evento di aggiornamento
+        static::updating(function ($model): void {
+            /** @var static $modelWithTrait */
+            $modelWithTrait = $model;
+            $modelWithTrait->setAttribute('updated_at', now());
+
+            if (\function_exists('authId')) {
+                $modelWithTrait->setAttribute('updated_by', authId());
+            }
+
+            // Aggiorna i dati nel file JSON
+            /** @phpstan-ignore-next-line */
+            $existingData = $modelWithTrait->loadExistingData();
+            $id = (int) ($modelWithTrait->getAttribute('id') ?? 0);
+            if ($id > 0) {
+                $existingData[$id] = $modelWithTrait->toArray();
+                /** @phpstan-ignore-next-line */
+                $modelWithTrait->saveToJson($existingData);
+            }
+        });
+
+        // Evento di cancellazione
+        static::deleting(function ($model): void {
+            /** @var static $modelWithTrait */
+            $modelWithTrait = $model;
+            // Rimuove il record dal file JSON
+            $id = (int) ($modelWithTrait->getAttribute('id') ?? 0);
+            if ($id > 0) {
+                /** @phpstan-ignore-next-line */
+                $existingData = $modelWithTrait->loadExistingData();
+                unset($existingData[$id]);
+                /** @phpstan-ignore-next-line */
+                $modelWithTrait->saveToJson($existingData);
+            }
+        });
     }
-
-    // end function boot
-}// end trait Updater
+}

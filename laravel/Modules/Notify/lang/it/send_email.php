@@ -44,6 +44,10 @@ return array (
       'label' => 'Avanzate',
       'description' => 'Opzioni avanzate per l\'invio',
     ),
+    'empty' => 
+    array (
+      'heading' => 'empty',
+    ),
   ),
   'fields' => 
   array (
