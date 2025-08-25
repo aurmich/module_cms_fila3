@@ -1,52 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php" tests="11" assertions="2" errors="9" failures="0" skipped="0" time="3.401590">
-    <testcase name="change password action shows success notification" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action shows success notification" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.555436">
-      <error type="BadMethodCallException">change password action shows success notificationBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:69</error>
-    </testcase>
-    <testcase name="change password action extends correct base class" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action extends correct base class" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="1" time="0.286256"/>
-    <testcase name="change password action can be executed" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action can be executed" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.281630">
-      <error type="BadMethodCallException">change password action can be executedBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:48</error>
-    </testcase>
-    <testcase name="change password action has correct setup method" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action has correct setup method" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.288119">
-      <error type="BadMethodCallException">change password action has correct setup methodBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:90</error>
-    </testcase>
-    <testcase name="change password action uses translation keys" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action uses translation keys" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.276040">
-      <error type="BadMethodCallException">change password action uses translation keysBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:83</error>
-    </testcase>
-    <testcase name="change password action form has required fields" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action form has required fields" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.276073">
-      <error type="BadMethodCallException">change password action form has required fieldsBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:41</error>
-    </testcase>
-    <testcase name="change password action has confirmation field" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action has confirmation field" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.279575">
-      <error type="BadMethodCallException">change password action has confirmation fieldBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:62</error>
-    </testcase>
-    <testcase name="change password action has correct icon" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action has correct icon" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.288280">
-      <error type="BadMethodCallException">change password action has correct iconBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:34</error>
-    </testcase>
-    <testcase name="change password action validates password confirmation" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action validates password confirmation" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.288751">
-      <error type="BadMethodCallException">change password action validates password confirmationBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:76</error>
-    </testcase>
-    <testcase name="change password action uses password data component" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action uses password data component" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="0" time="0.303889">
-      <error type="BadMethodCallException">change password action uses password data componentBadMethodCallException: Method Modules\User\Filament\Actions\ChangePasswordAction::setUp does not exist.
-at vendor/filament/support/src/Concerns/Macroable.php:77
-at Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php:55</error>
-    </testcase>
-    <testcase name="change password action has correct default name" file="Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php::change password action has correct default name" class="Modules\User\tests\Feature\Filament\Actions\ChangePasswordActionTest" classname="Modules.User.tests.Feature.Filament.Actions.ChangePasswordActionTest" assertions="1" time="0.277541"/>
+  <testsuite name="CLI Arguments" tests="31" assertions="36" errors="14" failures="0" skipped="0" time="0.127218">
+    <testsuite name="Modules\SaluteMo\tests\Feature\AppointmentValidationTest" file="Modules/SaluteMo/tests/Feature/AppointmentValidationTest.php" tests="2" assertions="5" errors="0" failures="0" skipped="0" time="0.007103">
+      <testcase name="it validates basic appointment creation" file="Modules/SaluteMo/tests/Feature/AppointmentValidationTest.php::it validates basic appointment creation" class="Modules\SaluteMo\tests\Feature\AppointmentValidationTest" classname="Modules.SaluteMo.tests.Feature.AppointmentValidationTest" assertions="3" time="0.006605"/>
+      <testcase name="it validates user types are correctly set" file="Modules/SaluteMo/tests/Feature/AppointmentValidationTest.php::it validates user types are correctly set" class="Modules\SaluteMo\tests\Feature\AppointmentValidationTest" classname="Modules.SaluteMo.tests.Feature.AppointmentValidationTest" assertions="2" time="0.000498"/>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Unit\BaseModelTest" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.017510">
+      <testcase name="`SaluteMo BaseModel Business Logic` → it exposes casts as array" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it exposes casts as array" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.016486"/>
+      <testcase name="`SaluteMo BaseModel Business Logic` → it supports media methods presence" file="Modules/SaluteMo/tests/Unit/BaseModelTest.php::`SaluteMo BaseModel Business Logic` → it supports media methods presence" class="Modules\SaluteMo\tests\Unit\BaseModelTest" classname="Modules.SaluteMo.tests.Unit.BaseModelTest" assertions="1" time="0.001024"/>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php" tests="8" assertions="22" errors="0" failures="0" skipped="0" time="0.074233">
+      <testcase name="`SaluteMo AdminResource` → it has correct model configuration" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → it has correct model configuration" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="1" time="0.016707"/>
+      <testcase name="`SaluteMo AdminResource` → `Form Schema` → it has form schema defined" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → `Form Schema` → it has form schema defined" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="3" time="0.049240"/>
+      <testcase name="`SaluteMo AdminResource` → `Permissions` → it has correct resource permissions" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → `Permissions` → it has correct resource permissions" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="3" time="0.000393"/>
+      <testcase name="`SaluteMo AdminResource` → `Resource Configuration` → it has correct record title attribute" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → `Resource Configuration` → it has correct record title attribute" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="1" time="0.000343"/>
+      <testcase name="`SaluteMo AdminResource` → it has correct navigation configuration" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → it has correct navigation configuration" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="2" time="0.000296"/>
+      <testcase name="`SaluteMo AdminResource` → `Resource Configuration` → it has correct slug configuration" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → `Resource Configuration` → it has correct slug configuration" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="2" time="0.006346"/>
+      <testcase name="`SaluteMo AdminResource` → it has correct resource pages" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → it has correct resource pages" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="7" time="0.000563"/>
+      <testcase name="`SaluteMo AdminResource` → `Table Schema` → it inherits table method from base class without overriding" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php::`SaluteMo AdminResource` → `Table Schema` → it inherits table method from base class without overriding" class="Modules\SaluteMo\tests\Unit\Filament\Resources\AdminResourceTest" classname="Modules.SaluteMo.tests.Unit.Filament.Resources.AdminResourceTest" assertions="3" time="0.000346"/>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php" tests="5" assertions="7" errors="0" failures="0" skipped="0" time="0.003964">
+      <testcase name="`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it validates studio creation" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php::`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it validates studio creation" class="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.DashboardBusinessLogicTest" assertions="2" time="0.002789"/>
+      <testcase name="`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates doctor user type" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php::`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates doctor user type" class="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.DashboardBusinessLogicTest" assertions="1" time="0.000439"/>
+      <testcase name="`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates admin user type" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php::`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates admin user type" class="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.DashboardBusinessLogicTest" assertions="1" time="0.000251"/>
+      <testcase name="`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates patient user type" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php::`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates patient user type" class="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.DashboardBusinessLogicTest" assertions="1" time="0.000214"/>
+      <testcase name="`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it allows admin users to access dashboard" file="Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php::`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it allows admin users to access dashboard" class="Modules\SaluteMo\tests\Feature\DashboardBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.DashboardBusinessLogicTest" assertions="2" time="0.000272"/>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Feature\AppointmentBookingTest" file="Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.024407">
+      <testcase name="it validates basic appointment booking setup" file="Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php::it validates basic appointment booking setup" class="Modules\SaluteMo\tests\Feature\AppointmentBookingTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBookingTest" assertions="0" time="0.023557">
+        <error type="Error">it validates basic appointment booking setupError: Call to a member function connection() on null
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1965
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1931
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:364
+at vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:271
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:362
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:318
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:312
+at Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php:9</error>
+      </testcase>
+      <testcase name="it validates user types for appointment booking" file="Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php::it validates user types for appointment booking" class="Modules\SaluteMo\tests\Feature\AppointmentBookingTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBookingTest" assertions="0" time="0.000850">
+        <error type="Error">it validates user types for appointment bookingError: Call to a member function connection() on null
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1965
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1931
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:364
+at vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:271
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:362
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:318
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:312
+at Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php:19</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php" tests="6" assertions="0" errors="6" failures="0" skipped="0" time="0.000000">
+      <testcase name="`Appointment Business Logic` → `Basic Appointment Management` → it validates appointment time constraints" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Basic Appointment Management` → it validates appointment time constraints" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Basic Appointment Management` → it validates appointment time constraintsInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`Appointment Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Basic Appointment Management` → it creates appointment with required fieldsInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`Appointment Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Appointment Status Management` → it transitions appointment through status workflowInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`Appointment Business Logic` → `Appointment Type Management` → it creates consultation appointment" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Appointment Type Management` → it creates consultation appointment" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Appointment Type Management` → it creates consultation appointmentInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`Appointment Business Logic` → `Appointment Type Management` → it creates treatment appointment" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Appointment Type Management` → it creates treatment appointment" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Appointment Type Management` → it creates treatment appointmentInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`Appointment Business Logic` → `Appointment Status Management` → it handles appointment cancellation" file="Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php::`Appointment Business Logic` → `Appointment Status Management` → it handles appointment cancellation" class="Modules\SaluteMo\tests\Feature\AppointmentBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`Appointment Business Logic` → `Appointment Status Management` → it handles appointment cancellationInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php:16</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php" tests="6" assertions="0" errors="6" failures="0" skipped="0" time="0.000000">
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointment" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointment" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointmentInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointment" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointment" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointmentInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fieldsInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellation" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellation" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellationInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflowInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+      <testcase name="`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it validates appointment time constraints" file="Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php::`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it validates appointment time constraints" class="Modules\SaluteMo\tests\Feature\AppointmentManagementBusinessLogicTest" classname="Modules.SaluteMo.tests.Feature.AppointmentManagementBusinessLogicTest" assertions="0" time="0.000000">
+        <error type="InvalidArgumentException">`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it validates appointment time constraintsInvalidArgumentException: Unknown format "boolean"
+at vendor/fakerphp/faker/src/Faker/Generator.php:743
+at vendor/fakerphp/faker/src/Faker/Generator.php:708
+at vendor/fakerphp/faker/src/Faker/Generator.php:973
+at Modules/SaluteOra/database/factories/PatientFactory.php:126
+at Modules/SaluteOra/database/factories/PatientFactory.php:42
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:493
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:472
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:456
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/GuardsAttributes.php:157
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:455
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:426
+at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:315
+at Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php:16</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="Modules\SaluteMo\tests\Unit\Filament\Resources\AppointmentResourceTest" file="Modules/SaluteMo/tests/Unit/Filament/Resources/AppointmentResourceTest.php" tests="0" assertions="0" errors="0" failures="0" skipped="0" time="0.000000"/>
+    <testsuite name="Modules\SaluteMo\tests\Unit\Filament\Resources\DoctorResourceTest" file="Modules/SaluteMo/tests/Unit/Filament/Resources/DoctorResourceTest.php" tests="0" assertions="0" errors="0" failures="0" skipped="0" time="0.000000"/>
   </testsuite>
 </testsuites>

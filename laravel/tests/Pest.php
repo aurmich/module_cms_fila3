@@ -119,6 +119,19 @@ beforeAll(function (): void {
             // Some migrations might not exist for all connections, that's ok
         }
     }
+
+    // Ensure User module migrations are applied (teams, team_user, users extras)
+    foreach (['sqlite', 'user'] as $connection) {
+        try {
+            Artisan::call('migrate', [
+                '--force' => true,
+                '--database' => $connection,
+                '--path' => 'Modules/User/database/migrations',
+            ]);
+        } catch (\Throwable $e) {
+            // ignore if path not found
+        }
+    }
 });
 
 beforeEach(function (): void {
@@ -144,16 +157,50 @@ beforeEach(function (): void {
             'foreign_key_constraints' => true,
         ]);
     }
+
+    // Begin transaction on all connections to keep tests isolated without RefreshDatabase
+    foreach ($connections as $name) {
+        try {
+            DB::connection($name)->beginTransaction();
+        } catch (\Throwable $e) {
+            // ignore if connection not available
+        }
+    }
+});
+
+afterEach(function (): void {
+    // Rollback transactions started in beforeEach
+    $connections = [
+        'sqlite', 'user', 'salute_ora', 'job', 'tenant', 'activity', 'media', 'xot', 'notify',
+    ];
+    foreach ($connections as $name) {
+        try {
+            $conn = DB::connection($name);
+            if ($conn->transactionLevel() > 0) {
+                while ($conn->transactionLevel() > 0) {
+                    $conn->rollBack();
+                }
+            }
+        } catch (\Throwable $e) {
+            // ignore rollback errors
+        }
+    }
 });
 
 // Global helpers for tests across all modules
 function createUser(array $attributes = []): \Modules\User\Models\User
 {
+    if (! array_key_exists('email', $attributes)) {
+        $attributes['email'] = 'user+' . uniqid('', true) . '@example.com';
+    }
     return \Modules\User\Models\User::factory()->create($attributes);
 }
 
 function makeUser(array $attributes = []): \Modules\User\Models\User
 {
+    if (! array_key_exists('email', $attributes)) {
+        $attributes['email'] = 'user+' . uniqid('', true) . '@example.com';
+    }
     return \Modules\User\Models\User::factory()->make($attributes);
 }
 

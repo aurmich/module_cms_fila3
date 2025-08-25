@@ -51,19 +51,76 @@
         </style>
     </head>
     <body>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/User/tests/Feature/Filament/Actions/ChangePasswordActionTest.php</h2>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBookingTest.php</h2>
         <ul>
-            <li class="success">change password action has correct default name</li>
-            <li class="success">change password action extends correct base class</li>
-            <li class="defect">change password action has correct icon</li>
-            <li class="defect">change password action form has required fields</li>
-            <li class="defect">change password action can be executed</li>
-            <li class="defect">change password action uses password data component</li>
-            <li class="defect">change password action has confirmation field</li>
-            <li class="defect">change password action shows success notification</li>
-            <li class="defect">change password action validates password confirmation</li>
-            <li class="defect">change password action uses translation keys</li>
-            <li class="defect">change password action has correct setup method</li>
+            <li class="defect">it validates basic appointment booking setup</li>
+            <li class="defect">it validates user types for appointment booking</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php</h2>
+        <ul>
+            <li class="defect">`Appointment Business Logic` → `Basic Appointment Management` → it creates appointment with required fields</li>
+            <li class="defect">`Appointment Business Logic` → `Basic Appointment Management` → it validates appointment time constraints</li>
+            <li class="defect">`Appointment Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow</li>
+            <li class="defect">`Appointment Business Logic` → `Appointment Status Management` → it handles appointment cancellation</li>
+            <li class="defect">`Appointment Business Logic` → `Appointment Type Management` → it creates consultation appointment</li>
+            <li class="defect">`Appointment Business Logic` → `Appointment Type Management` → it creates treatment appointment</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentManagementBusinessLogicTest.php</h2>
+        <ul>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it creates appointment with required fields</li>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Basic Appointment Management` → it validates appointment time constraints</li>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow</li>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellation</li>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointment</li>
+            <li class="defect">`SaluteMo Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointment</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/AppointmentValidationTest.php</h2>
+        <ul>
+            <li class="success">it validates basic appointment creation</li>
+            <li class="success">it validates user types are correctly set</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Feature/DashboardBusinessLogicTest.php</h2>
+        <ul>
+            <li class="success">`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it allows admin users to access dashboard</li>
+            <li class="success">`SaluteMo Dashboard Business Logic` → `Basic Dashboard Access` → it validates studio creation</li>
+            <li class="success">`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates admin user type</li>
+            <li class="success">`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates doctor user type</li>
+            <li class="success">`SaluteMo Dashboard Business Logic` → `User Type Validation` → it validates patient user type</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/BaseModelTest.php</h2>
+        <ul>
+            <li class="success">`SaluteMo BaseModel Business Logic` → it exposes casts as array</li>
+            <li class="success">`SaluteMo BaseModel Business Logic` → it supports media methods presence</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/AdminResourceTest.php</h2>
+        <ul>
+            <li class="success">`SaluteMo AdminResource` → it has correct model configuration</li>
+            <li class="success">`SaluteMo AdminResource` → it has correct navigation configuration</li>
+            <li class="success">`SaluteMo AdminResource` → it has correct resource pages</li>
+            <li class="success">`SaluteMo AdminResource` → `Form Schema` → it has form schema defined</li>
+            <li class="success">`SaluteMo AdminResource` → `Table Schema` → it inherits table method from base class without overriding</li>
+            <li class="success">`SaluteMo AdminResource` → `Resource Configuration` → it has correct slug configuration</li>
+            <li class="success">`SaluteMo AdminResource` → `Resource Configuration` → it has correct record title attribute</li>
+            <li class="success">`SaluteMo AdminResource` → `Permissions` → it has correct resource permissions</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/AppointmentResourceTest.php</h2>
+        <ul>
+            <li class="success">`SaluteMo AppointmentResource` → it has correct model configuration</li>
+            <li class="success">`SaluteMo AppointmentResource` → it has correct navigation configuration</li>
+            <li class="success">`SaluteMo AppointmentResource` → it has correct resource pages</li>
+            <li class="success">`SaluteMo AppointmentResource` → it has widgets defined</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Resource Configuration` → it has form schema components</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Resource Configuration` → it supports table configuration via pages</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Navigation Configuration` → it has correct slug configuration</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Navigation Configuration` → it has record title configuration</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Navigation Configuration` → it has navigation sort configuration</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Business Logic` → it supports appointment reporting</li>
+            <li class="success">`SaluteMo AppointmentResource` → `Widget Integration` → it has widget configuration</li>
+        </ul>
+        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteMo/tests/Unit/Filament/Resources/DoctorResourceTest.php</h2>
+        <ul>
+            <li class="success">`SaluteMo DoctorResource` → it has correct model configuration</li>
+            <li class="success">`SaluteMo DoctorResource` → it has correct resource pages</li>
         </ul>
     </body>
 </html>

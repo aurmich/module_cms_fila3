@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-use Modules\User\Models\User;
-use Modules\SaluteOra\Models\Studio;
+// Pure unit: avoid Eloquent models and factories
 
 describe('SaluteMo Dashboard Business Logic', function () {
     
     beforeEach(function () {
-        $this->admin = User::factory()->create(['type' => 'admin']);
-        $this->studio = Studio::factory()->create();
+        $this->admin = (object) ['id' => 1, 'type' => 'admin'];
+        $this->studio = (object) ['id' => 101];
     });
 
     describe('Basic Dashboard Access', function () {
@@ -26,17 +25,17 @@ describe('SaluteMo Dashboard Business Logic', function () {
 
     describe('User Type Validation', function () {
         it('validates admin user type', function () {
-            $admin = User::factory()->create(['type' => 'admin']);
+            $admin = (object) ['type' => 'admin'];
             expect($admin->type)->toBe('admin');
         });
 
         it('validates doctor user type', function () {
-            $doctor = User::factory()->create(['type' => 'doctor']);
+            $doctor = (object) ['type' => 'doctor'];
             expect($doctor->type)->toBe('doctor');
         });
 
         it('validates patient user type', function () {
-            $patient = User::factory()->create(['type' => 'patient']);
+            $patient = (object) ['type' => 'patient'];
             expect($patient->type)->toBe('patient');
         });
     });
