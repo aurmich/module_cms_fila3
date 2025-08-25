@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return array (
   'navigation' => 
@@ -415,7 +416,7 @@ return array (
     'user_not_found' => 'Utente non trovato',
     'password_fields_required' => 'Tutti i campi password sono obbligatori',
     'password_current_incorrect' => 'La password attuale non è corretta',
-    'credentials_incorrect' => 'Le credenziali fornite non sono corrette',
+    'credentials_incorrect' => 'Le credenziali fornite non sono corrette...',
     'login_error' => 'Si è verificato un errore durante il login. Riprova più tardi',
     'logout_error_generic' => 'Errore durante il logout. Riprova.',
     'team_switched' => 'Team cambiato con successo',
@@ -426,6 +427,9 @@ return array (
     'password_reset_success' => 'Password reimpostata con successo',
     'password_reset_error' => 'Errore durante il reset della password',
     'email_already_taken' => 'Questa email è già in uso',
+    // Added keys for LoginWidget
+    'login_success' => 'Accesso effettuato con successo',
+    'validation_error' => 'Errore di validazione',
   ),
   'validation' => 
   array (

@@ -37,6 +37,15 @@ class DatabaseSeeder extends Seeder
             SaluteOraSeeder::class,           // Principale: utenti, studi, appuntamenti
         ]);
 
+        // Seeding di massa per grandi quantità di dati
+        $this->command->info('🚀 Avvio seeding di massa per tutti i moduli...');
+        $this->call([
+            \Modules\User\Database\Seeders\UserMassSeeder::class,           // Utenti, ruoli, team
+            \Modules\Activity\Database\Seeders\ActivityMassSeeder::class,   // Attività, snapshot, eventi
+            \Modules\Cms\Database\Seeders\CmsMassSeeder::class,            // Pagine, sezioni, menu
+            \Modules\SaluteOra\Database\Seeders\MassDataSeeder::class,      // Dati principali SaluteOra
+        ]);
+
         $endTime = microtime(true);
         $executionTime = round($endTime - $startTime, 2);
 

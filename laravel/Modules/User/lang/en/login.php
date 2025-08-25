@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return array (
   'fields' => 
@@ -9,7 +10,7 @@ return array (
       'placeholder' => 'Enter your email',
       'help' => 'Enter your email address to log in',
       'description' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
     ),
     'password' => 
     array (
@@ -17,7 +18,7 @@ return array (
       'placeholder' => 'Enter your password',
       'help' => 'Enter your account password',
       'description' => 'password',
-      'helper_text' => 'password',
+      'helper_text' => '',
     ),
     'remember' => 
     array (
@@ -25,7 +26,7 @@ return array (
       'placeholder' => '',
       'help' => 'Keep me logged in on this device',
       'description' => 'remember',
-      'helper_text' => 'remember',
+      'helper_text' => '',
     ),
     'name' => 
     array (

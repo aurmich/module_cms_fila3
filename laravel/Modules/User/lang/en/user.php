@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return array (
   'actions' => 
@@ -36,14 +37,14 @@ return array (
       'label' => 'Nome',
       'placeholder' => 'Inserisci il nome',
       'description' => 'name',
-      'helper_text' => 'name',
+      'helper_text' => '',
     ),
     'email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'Inserisci l\'email',
       'description' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
     ),
     'created_at' => 
     array (
@@ -67,7 +68,7 @@ return array (
       'label' => 'Password',
       'placeholder' => 'Inserisci la password',
       'description' => 'password',
-      'helper_text' => 'password',
+      'helper_text' => '',
     ),
     'password_confirmation' => 
     array (
@@ -200,6 +201,7 @@ return array (
     'no_records' => 'No users found',
     'loading' => 'Loading users...',
     'search' => 'Search users...',
+    'credentials_incorrect' => 'The provided credentials are incorrect.',
     'created' => 'Utente creato con successo',
     'updated' => 'Utente aggiornato con successo',
     'deleted' => 'Utente eliminato con successo',
@@ -208,6 +210,10 @@ return array (
     'reset_link_sent' => 'Link per il reset della password inviato',
     'email_verified' => 'Email verificata con successo',
     'impersonating' => 'Stai impersonando l\'utente :name',
+    // Added for LoginWidget
+    'login_success' => 'Login successful',
+    'validation_error' => 'Validation error',
+    'login_error' => 'An error occurred during login. Please try again later.',
   ),
   'modals' => 
   array (

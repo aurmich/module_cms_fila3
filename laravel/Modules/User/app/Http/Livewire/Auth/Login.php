@@ -128,7 +128,7 @@ class Login extends Component implements HasForms
                 return $this->getRedirectUrl();
             }
 
-            $this->addError('email', __('Le credenziali fornite non sono corrette.'));
+            $this->addError('email', __('Le credenziali fornite non sono corrette..'));
         } catch (\Exception $e) {
             $this->addError('email', __('Si è verificato un errore durante il login. Riprova più tardi.'));
             report($e);

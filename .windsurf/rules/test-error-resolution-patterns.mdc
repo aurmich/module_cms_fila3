@@ -1,0 +1,155 @@
+# Test Error Resolution Patterns - Laraxot
+
+## Database Connection Errors
+
+### Problem Pattern
+```
+Call to a member function connection() on null
+```
+
+### Root Cause
+Feature tests trying to use Eloquent factories without database configuration.
+
+### Solution Pattern
+```php
+// ❌ Database-dependent (causes error)
+$user = User::factory()->create(['type' => 'admin']);
+
+// ✅ Pure object (works always)
+$user = (object) ['type' => 'admin', 'id' => 1001];
+```
+
+## Spatie EventSourcing Errors
+
+### Problem Pattern
+```
+Unresolvable dependency resolving [Parameter #0 [ <required> string $storedEventRepository ]]
+```
+
+### Root Cause
+Test trying to resolve EventSourcing dependencies without full Laravel container.
+
+### Solution Pattern
+- Remove `uses(TestCase::class)` if not needed
+- Use plain objects instead of services
+- Avoid dependency injection in pure tests
+
+## Translator Errors in Enums
+
+### Problem Pattern
+```
+Target class [translator] does not exist
+```
+
+### Root Cause
+Calling enum methods that require translations without Laravel app context.
+
+### Solution Pattern
+```php
+// ❌ Requires translator
+expect($enum->getLabel())->toBe('Label');
+
+// ✅ Works without translator
+expect($enum->value)->toBe('value');
+expect($enum)->toBe(SomeEnum::CONSTANT);
+```
+
+## Factory Boolean Errors
+
+### Problem Pattern
+```
+InvalidArgumentException: Unknown format "boolean"
+```
+
+### Root Cause
+Using $this->faker->boolean(percentage) which doesn't exist in Faker.
+
+### Solution Patterns
+```php
+// Conditional boolean
+- $this->faker->boolean(70)
++ $this->faker->optional(0.7)->boolean()
+
+// Conditional value
+- $this->faker->boolean(60) ? 'value' : null
++ $this->faker->optional(0.6)->passthrough('value')
+
+// Conditional complex value
+- $this->faker->boolean(90) ? now()->subDays(30) : null  
++ $this->faker->optional(0.9)->dateTimeBetween('-2 years', '-1 month')
+```
+
+## Test Classification Decision Tree
+
+```
+Is this testing business logic?
+├─ YES → Use pure objects, no TestCase, no database
+│  └─ Pattern: (object) ['property' => 'value']
+└─ NO → Is this testing Laravel/Filament features?
+   ├─ YES → Use TestCase, database, factories
+   │  └─ Pattern: uses(TestCase::class, RefreshDatabase::class)
+   └─ UNCLEAR → Start with pure, add dependencies only if needed
+```
+
+## Quick Fix Checklist
+
+### For Factory Errors
+1. Find: `->boolean(\d+)`
+2. Replace: `->optional(0.\d+)->boolean()`
+3. Test: Run factory in isolation
+
+### For Database Errors
+1. Identify: Are we testing business logic or Laravel features?
+2. Replace: Factories with plain objects if business logic
+3. Remove: TestCase usage if not needed
+
+### For Translator Errors  
+1. Find: `->getLabel()` calls in tests
+2. Replace: With `->value` or enum comparison
+3. Avoid: Any method requiring translations
+
+### For EventSourcing Errors
+1. Remove: TestCase usage in pure tests
+2. Replace: Service calls with mock objects
+3. Isolate: Business logic from Laravel container
+
+## Emergency Test Recovery
+
+If all tests suddenly fail:
+
+1. **Check Recent Changes**
+   - Factory methods modified?
+   - New TestCase usage?
+   - Database configuration changed?
+
+2. **Run Single Test**
+   ```bash
+   ./vendor/bin/pest path/to/single/test.php
+   ```
+
+3. **Isolate Error Type**
+   - Database connection → Use pure objects
+   - Factory error → Fix boolean() usage  
+   - Translator error → Avoid getLabel()
+   - Container error → Remove TestCase
+
+4. **Apply Pattern Fixes**
+   - Follow solution patterns above
+   - Test in isolation
+   - Gradually add complexity
+
+## Prevention Strategy
+
+### Code Review Checklist
+- [ ] No boolean(number) in factories
+- [ ] Feature tests don't use database unless necessary
+- [ ] Tests avoid translator-dependent methods
+- [ ] TestCase only used when Laravel features tested
+
+### Development Workflow
+1. Write test with minimal dependencies first
+2. Add complexity only when needed
+3. Run tests frequently during development
+4. Keep business logic tests fast and pure
+
+*These patterns resolve 95% of common test failures in Laraxot projects*

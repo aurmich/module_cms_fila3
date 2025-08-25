@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Modules\Geo\Models\Province;
+use Modules\Geo\Database\Factories\ProvinceFactory;
+use Illuminate\Support\Facades\DB;
 
 class ProvinceSeeder extends Seeder
 {
@@ -17,8 +18,19 @@ class ProvinceSeeder extends Seeder
     {
         $this->command->info('🏛️  Seeding province italiane...');
 
-        // Crea province italiane di esempio
-        Province::factory()->count(20)->create();
+        // Crea province italiane di esempio usando la factory direttamente
+        $factory = new ProvinceFactory();
+        $provinces = [];
+        
+        for ($i = 0; $i < 20; $i++) {
+            $data = $factory->definition();
+            // Aggiungi i campi timestamp richiesti
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            $provinces[] = $data;
+        }
+
+        DB::table('provinces')->insert($provinces);
 
         $this->command->info('✅ Creati 20 province italiane');
     }

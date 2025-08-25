@@ -231,3 +231,39 @@ Le icone sono state standardizzate per evitare errori:
 
 ### 🔧 Relazioni Implementate Recentemente
 - **`Report.studio()`** - Accessor verso Studio attraverso Appointment (Gennaio 2025)
+
+# Modulo SaluteOra
+
+## Testing
+
+### ❌ REGOLA CRITICA: MAI USARE RefreshDatabase
+- I test di business logic devono essere puri e veloci
+- Usare oggetti in memoria (object) invece di factory
+- Performance: i test devono essere istantanei
+
+### Documentazione Testing
+- [Testing Guidelines](testing.md) - Regole fondamentali per i test
+- [Appointment Business Logic Testing](appointment-business-logic-testing.md) - Test specifici per appuntamenti
+- [Common Testing Errors](common-testing-errors.md) - Errori comuni e soluzioni
+- [Testing Best Practices](testing-best-practices.md) - Best practice per i test
+
+### Pattern Test Corretto
+```php
+// ✅ CORRETTO - Test puro senza database
+uses(TestCase::class); // SENZA RefreshDatabase!
+
+beforeEach(function () {
+    $this->patient = (object) ['id' => 1001, 'name' => 'Mario Rossi'];
+    $this->doctor = (object) ['id' => 2001, 'name' => 'Dr. Bianchi'];
+});
+
+// ❌ ERRATO - Test lento con database
+uses(TestCase::class, RefreshDatabase::class); // MAI!
+```
+
+## Struttura del Modulo
+
+- **Models**: Modelli Eloquent per entità di business
+- **Enums**: Enumerazioni per stati e tipi
+- **Tests**: Test di business logic puri e veloci
+- **Docs**: Documentazione completa e aggiornata

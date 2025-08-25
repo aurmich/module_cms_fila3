@@ -1,0 +1,31 @@
+---
+description: Enforce project-wide NO RefreshDatabase in tests
+---
+
+# Rule: NO RefreshDatabase in Tests (Project-wide)
+
+- Absolutely never use `Illuminate\Foundation\Testing\RefreshDatabase` in any test file.
+- Applies to: `laravel/tests/` and `laravel/Modules/*/tests/`.
+- Tests must focus on business behavior and observable outcomes.
+- Prefer pure unit tests and light integration with explicit setup (factories, seeders). Never reset DB state.
+
+## Do
+- Use module `TestCase` classes without RefreshDatabase.
+- Create only the models you need with factories.
+- Keep SQLite in-memory or dedicated sqlite file configured in `Tests\TestCase`.
+
+## Don’t
+- Do not import `RefreshDatabase`.
+- Do not call `uses(TestCase::class, RefreshDatabase::class)` in Pest.
+- Do not reset the DB between tests.
+
+## Auto-check (heuristics for linters/CI)
+- Fail CI if a test file contains:
+  - `use Illuminate\\Foundation\\Testing\\RefreshDatabase;`
+  - `uses(TestCase::class, RefreshDatabase::class)`
+
+## Rationale
+- Performance, determinism, business-logic-first testing philosophy.
+- Avoids migration/seeding overhead and DB state churn.
+
+Last updated: 2025-08-25

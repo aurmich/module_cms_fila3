@@ -50,22 +50,72 @@ Quick reference: [Business Logic First](./business-logic-first.md)
 **Regola Assoluta:**
 **Testa la LOGICA DI BUSINESS, non i DETTAGLI IMPLEMENTATIVI!**
 
-### 3. NO RefreshDatabase nei Test
-**MAI** usare `RefreshDatabase` nei test di Laraxot.
+### 3. NO RefreshDatabase nei Test - REGOLA ASSOLUTA
+**⚠️ ASSOLUTAMENTE VIETATO ⚠️** usare `RefreshDatabase` nei test di Laraxot.
 
-**Motivazione:**
-- I test devono essere veloci e non devono resettare il database
-- Mantenere i dati tra i test per coerenza
-- Evitare overhead di migrazione e seeding
-- Focus sulla logica di business, non sui dettagli implementativi
+**ZERO ECCEZIONI - SEMPRE RIMUOVERE:**
+```php
+// ❌ VIETATO SEMPRE - Rimuovere immediatamente
+use Illuminate\Foundation\Testing\RefreshDatabase;
+uses(TestCase::class, RefreshDatabase::class);
 
-### 4. Struttura del Progetto
+// ✅ CORRETTO - Solo TestCase
+uses(TestCase::class);
+```
+
+**Motivazione Critica:**
+- **Performance**: I test devono essere veloci, RefreshDatabase è lento
+- **Consistenza**: Mantenere i dati tra i test per coerenza business
+- **Filosofia**: Focus sulla logica di business, non sui dettagli implementativi
+- **Architettura**: Il database è configurato per test persistenti
+
+**Attenzione Linter/IDE:**
+- I linter possono aggiungere RefreshDatabase automaticamente
+- Gli IDE possono suggerirlo come "best practice"
+- **SEMPRE RIMUOVERE** quando viene aggiunto automaticamente
+- **VERIFICARE** ogni test prima del commit
+
+### 4. Test di Modelli con Trait Complessi - Pattern di Sicurezza
+
+**PROBLEMA CRITICO**: Modelli che estendono BaseModel con molti trait (HasMedia, Updater, etc.) causano `BindingResolutionException` quando istanziati nei test.
+
+**CAUSA**: I trait si inizializzano automaticamente nel costruttore e richiedono il container Laravel completo.
+
+**SOLUZIONE SICURA - Pattern Reflection**:
+```php
+it('tests model behavior safely', function () {
+    // ✅ CORRETTO - Reflection senza istanziazione
+    $reflection = new \ReflectionClass(ModelClass::class);
+    expect($reflection->hasMethod('methodName'))->toBeTrue();
+    
+    // ✅ CORRETTO - newInstanceWithoutConstructor per evitare trait initialization
+    $instance = $reflection->newInstanceWithoutConstructor();
+    $method = $reflection->getMethod('protectedMethod');
+    $method->setAccessible(true);
+    expect($method->invoke($instance))->toBeSomething();
+});
+
+// ❌ SBAGLIATO - Istanziazione diretta causa BindingResolutionException
+new class extends BaseModel { ... }; // ERRORE!
+
+// ❌ SBAGLIATO - Mocking deprecato
+$this->getMockBuilder(BaseModel::class)->disableOriginalConstructor()...
+```
+
+**Regole per Test di Modelli Complessi**:
+1. **MAI** istanziare direttamente modelli con trait complessi nei unit test
+2. **USA** `ReflectionClass::newInstanceWithoutConstructor()` quando necessario
+3. **PREFERISCI** test strutturali (method_exists, class_uses_recursive) 
+4. **EVITA** MockBuilder (deprecato in PHPUnit recenti)
+5. **TESTA** la struttura e presenza di metodi, non l'implementazione interna
+
+### 5. Struttura del Progetto
 - Root progetto: `/var/www/html/_bases/base_saluteora/`
 - Root Laravel: `/var/www/html/_bases/base_saluteora/laravel/`
 - Moduli: `/var/www/html/_bases/base_saluteora/laravel/Modules/{ModuleName}/`
 - Temi: `/var/www/html/_bases/base_saluteora/laravel/Themes/One/`
 
-### 5. Concentrarsi sulla Logica di Business
+### 6. Concentrarsi sulla Logica di Business
 **SEMPRE** concentrarsi sulla logica di business, non sui dettagli implementativi.
 
 **Principi:**

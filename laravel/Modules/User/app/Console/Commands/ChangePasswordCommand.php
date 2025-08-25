@@ -28,6 +28,13 @@ class ChangePasswordCommand extends Command
             return;
         }
 
+        // Ensure we fetched a persisted user and not a transient instance to avoid accidental insert
+        if ($user === null || (property_exists($user, 'exists') && $user->exists !== true)) {
+            $this->error('User not found or not persisted. Please create the user first (name, email, type, etc.).');
+
+            return;
+        }
+
         Assert::string($password = $this->secret('Enter the new password:'));
         $confirmPassword = $this->secret('Confirm the new password:');
 
