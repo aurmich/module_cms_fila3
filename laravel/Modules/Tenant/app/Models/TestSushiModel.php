@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Tenant\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 use Modules\Tenant\Models\Traits\SushiToJson;
 
 /**
@@ -16,9 +17,46 @@ class TestSushiModel extends Model
     use SushiToJson;
 
     /**
+     * Schema esplicito per Sushi quando non ci sono righe.
+     *
+     * @var array<string, string>
+     */
+    protected $schema = [
+        'id' => 'integer',
+        'name' => 'string',
+        'description' => 'string',
+        'status' => 'string',
+        'metadata' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
+    ];
+
+    /**
      * La tabella associata al modello.
      */
     protected $table = 'test_sushi';
+
+    /**
+     * Override del path JSON in ambiente di test per NON toccare config/local/saluteora/.
+     */
+    public function getJsonFile(): string
+    {
+        if (app()->environment('testing')) {
+            $dir = storage_path('tests/sushi-json');
+            if (! File::exists($dir)) {
+                File::makeDirectory($dir, 0755, true, true);
+            }
+            return $dir.'/test_sushi.json';
+        }
+
+        // fallback: usa il comportamento del trait (replicato qui)
+        $tbl = $this->getTable();
+        /** @var class-string $tenantService */
+        $tenantService = \Modules\Tenant\Services\TenantService::class;
+        return $tenantService::filePath('database/content/'.$tbl.'.json');
+    }
 
     /**
      * Implementa il metodo getRows() richiesto da Sushi.
@@ -32,6 +70,11 @@ class TestSushiModel extends Model
     }
 
     /**
+     * Nota: non esporre i metodi protetti del trait.
+     * I metodi del trait vengono utilizzati internamente dagli eventi Eloquent.
+     */
+
+    /**
      * Gli attributi che sono assegnabili in massa.
      *
      * @var list<string>
@@ -41,6 +84,8 @@ class TestSushiModel extends Model
         'description',
         'status',
         'metadata',
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -54,6 +99,8 @@ class TestSushiModel extends Model
             'metadata' => 'array',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'created_by' => 'integer',
+            'updated_by' => 'integer',
         ];
     }
 }

@@ -52,8 +52,8 @@ class UserFactory extends Factory
         ];
         
         $gender = $this->faker->randomElement(['male', 'female', 'other']);
-        $firstName = $gender === 'other' ? $this->faker->firstName() : $this->faker->randomElement($firstNames[$gender] ?? $firstNames['male']);
-        $lastName = $this->faker->randomElement($lastNames);
+        $firstName = (string) ($gender === 'other' ? $this->faker->firstName() : $this->faker->randomElement($firstNames[$gender]));
+        $lastName = (string) $this->faker->randomElement($lastNames);
         
         // Città italiane realistiche
         $cities = [
@@ -83,8 +83,8 @@ class UserFactory extends Factory
             'date_of_birth' => now()->subYears($age)->subDays($this->faker->numberBetween(0, 364)),
             'gender' => $gender,
             'address' => $this->faker->streetAddress() . ', ' . $this->faker->buildingNumber(),
-            'city' => $city['name'],
-            'phone' => '+39 ' . $this->faker->numerify('### ### ####'),
+            'city' => (string) $city['name'],
+            'phone' => '+39 ' . sprintf('%03d %03d %04d', rand(100, 999), rand(100, 999), rand(1000, 9999)),
             'lang' => $this->faker->randomElement(['it', 'en', 'de']),
             'is_active' => $this->faker->boolean(90), // 90% active
             'is_otp' => $this->faker->boolean(15), // 15% OTP enabled
@@ -94,14 +94,9 @@ class UserFactory extends Factory
             'children_count' => (string) $this->faker->numberBetween(0, 4),
             'family_members' => (string) $this->faker->numberBetween(1, 6),
             'years_in_italy' => (string) $this->faker->numberBetween(0, min($age, 50)),
-            'dental_problems' => $this->faker->optional(0.3)->randomElement([
-                'Carie dentali', 'Gengivite', 'Sensibilità dentale', 'Malocclusione', 
-                'Bruxismo', 'Alitosi', 'Dolore mandibolare'
-            ]),
-            'last_dental_visit' => $this->faker->optional(0.75, null)->dateTimeBetween('-2 years', 'now')?->format('Y-m-d'),
-            'last_dental_visit_period' => $this->faker->optional(0.75)->randomElement([
-                '< 6 mesi', '6-12 mesi', '1-2 anni', '> 2 anni'
-            ]),
+            'dental_problems' => $this->faker->optional(0.3)->randomElement(['Carie dentali', 'Gengivite', 'Sensibilità dentale', 'Malocclusione', 'Bruxismo', 'Alitosi', 'Dolore mandibolare']),
+            'last_dental_visit' => $this->faker->optional(0.75)->passthrough($this->faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d')),
+            'last_dental_visit_period' => $this->faker->optional(0.75)->randomElement(['< 6 mesi', '6-12 mesi', '1-2 anni', '> 2 anni']),
         ];
     }
 

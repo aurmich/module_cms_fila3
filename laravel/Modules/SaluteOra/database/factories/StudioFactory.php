@@ -65,15 +65,15 @@ class StudioFactory extends Factory
         ];
 
         return [
-            'name' => $this->faker->randomElement($studioTypes) . ' ' . $this->faker->lastName(),
+            'name' => $studioTypes[array_rand($studioTypes)] . ' ' . $this->faker->lastName(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->companyEmail(),
             'website' => $this->faker->optional()->url(),
-            'registration_number' => $this->faker->numerify('######'),
-            'vat_number' => $this->faker->numerify('IT###########'),
+            'registration_number' => sprintf('%06d', rand(100000, 999999)),
+            'vat_number' => 'IT' . sprintf('%011d', rand(10000000000, 99999999999)),
             'description' => $this->faker->optional()->paragraph(),
             'opening_hours' => $openingHours,
-            'services' => $this->faker->randomElements($services, $this->faker->numberBetween(3, 7)),
+            'services' => array_slice(array_values(array_intersect_key($services, array_flip(array_rand($services, rand(3, 7))))), 0, rand(3, 7)),
             'active' => true,
             'slug' => $this->faker->unique()->slug(),
         ];

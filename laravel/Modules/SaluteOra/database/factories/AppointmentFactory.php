@@ -58,32 +58,32 @@ class AppointmentFactory extends Factory
         $typeEnum = $typeCases[$this->faker->numberBetween(0, count($typeCases) - 1)];
         $statusEnum = $statusCases[$this->faker->numberBetween(0, count($statusCases) - 1)];
 
+        // Crea User e Studio una sola volta per evitare duplicati
+        static $patientId = null;
+        static $doctorId = null;
+        static $studioId = null;
+        
+        if ($patientId === null) {
+            $patientId = User::factory()->patient()->create()->id;
+        }
+        if ($doctorId === null) {
+            $doctorId = User::factory()->doctor()->create()->id;
+        }
+        if ($studioId === null) {
+            $studioId = Studio::factory()->create()->id;
+        }
+        
         return [
-            'patient_id' => User::factory()->patient()->create()->id,
-            'doctor_id' => User::factory()->doctor()->create()->id,
-            'dentist_id' => null, // Legacy field - will be synced with doctor_id
-            'studio_id' => Studio::factory()->create()->id,
-            'tenant_id' => null, // Will be set based on studio
+            'patient_id' => $patientId,
+            'doctor_id' => $doctorId,
+            'studio_id' => $studioId,
             'title' => $this->faker->randomElement($treatmentTypes),
             'starts_at' => $startTime,
             'ends_at' => $endTime,
-            'start_time' => $startTime,
-            'end_time' => $endTime,
-            'date' => Carbon::parse($startTime)->format('Y-m-d'),
-            'start_datetime' => $startTime->format('Y-m-d H:i:s'),
-            'end_datetime' => $endTime->format('Y-m-d H:i:s'),
             'type' => $typeEnum->value,
-            'status' => $statusEnum->value,
+            'state' => $statusEnum->value,
             'notes' => $this->faker->optional(0.7)->text(200),
             'emergency' => $this->faker->boolean(10), // 10% chance of emergency
-            'confirmed' => $this->faker->boolean(80), // 80% chance of confirmed
-            'cancelled' => false,
-            'no_show' => false,
-            'completed' => false,
-            'report_pending' => false,
-            'report_completed' => false,
-            'created_at' => (clone $startTime)->modify('-' . rand(1, 30) . ' days'),
-            'updated_at' => (clone $startTime)->modify('-' . rand(1, 30) . ' days'),
         ];
     }
 
@@ -93,13 +93,8 @@ class AppointmentFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (Appointment $appointment) {
-            // Sincronizza i campi legacy
-            $appointment->update([
-                'dentist_id' => $appointment->doctor_id,
-                'is_emergency' => $appointment->emergency,
-                'user_id' => $appointment->patient_id,
-                'tenant_id' => $appointment->studio_id,
-            ]);
+            // Configurazione post-creazione se necessaria
+            // Rimossi campi legacy non esistenti nello schema
         });
     }
 
@@ -110,7 +105,6 @@ class AppointmentFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'emergency' => true,
-            'is_emergency' => true,
             'type' => AppointmentTypeEnum::EMERGENCY->value,
             'title' => $this->faker->randomElement([
                 'Emergenza - Dolore acuto',
@@ -153,7 +147,6 @@ class AppointmentFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'doctor_id' => $doctorId,
-            'dentist_id' => $doctorId,
         ]);
     }
 
@@ -164,7 +157,6 @@ class AppointmentFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'studio_id' => $studioId,
-            'tenant_id' => $studioId,
         ]);
     }
 
@@ -187,11 +179,6 @@ class AppointmentFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'starts_at' => $startTime,
             'ends_at' => $endTime,
-            'start_time' => $startTime,
-            'end_time' => $endTime,
-            'date' => $date,
-            'start_datetime' => $startTime->format('Y-m-d H:i:s'),
-            'end_datetime' => $endTime->format('Y-m-d H:i:s'),
         ]);
     }
 
@@ -239,10 +226,6 @@ class AppointmentFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'notes' => $this->faker->paragraph(),
-            'treatment_plan' => $this->faker->paragraph(3),
-            'eligibility_confirmed' => true,
-            'reminder_sent' => true,
-            'reminder_sent_at' => $this->faker->dateTimeBetween('-1 week', '-1 day'),
         ]);
     }
 }

@@ -47,6 +47,7 @@ return array (
     'empty' => 
     array (
       'heading' => 'empty',
+      'label' => 'empty',
     ),
   ),
   'fields' => 

@@ -100,16 +100,17 @@ class PatientFactory extends Factory
         $vowels = 'AEIOU';
         
         // Generate 6 letters from name/surname simulation
-        $letters = $this->generateRandomLetters(6, $consonants, $vowels);
+        $letters = $this->generateRandomLetters(6, $consonants . $vowels);
         
         // Generate 2 digits for year (birth year)
-        $year = str_pad((string) $this->faker->numberBetween(40, 99), 2, '0', STR_PAD_LEFT);
+        $year = str_pad((string) rand(40, 99), 2, '0', STR_PAD_LEFT);
         
         // Generate 1 letter for month
-        $month = $this->faker->randomElement(str_split('ABCDEHLMPRST'));
+        $monthChars = str_split('ABCDEHLMPRST');
+        $month = $monthChars[array_rand($monthChars)];
         
         // Generate 2 digits for day + gender indicator
-        $day = str_pad((string) $this->faker->numberBetween(1, 71), 2, '0', STR_PAD_LEFT);
+        $day = str_pad((string) rand(1, 71), 2, '0', STR_PAD_LEFT);
         
         // Generate 4 characters for municipality code
         $municipality = $this->generateRandomLetters(4, $consonants . $vowels . '0123456789');
@@ -127,8 +128,9 @@ class PatientFactory extends Factory
     private function generateRandomLetters(int $length, string $characters): string
     {
         $result = '';
+        $charArray = str_split($characters);
         for ($i = 0; $i < $length; $i++) {
-            $result .= $this->faker->randomElement(str_split($characters));
+            $result .= $charArray[array_rand($charArray)];
         }
         return $result;
     }
@@ -141,15 +143,15 @@ class PatientFactory extends Factory
     private function generateItalianPhoneNumber(): string
     {
         $prefixes = ['+39', '0039'];
-        $prefix = $this->faker->randomElement($prefixes);
+        $prefix = $prefixes[array_rand($prefixes)];
         
         // Italian mobile numbers: 3xx xxx xxxx
-        if ($this->faker->boolean(70)) {
-            return $prefix . ' ' . $this->faker->numerify('3## ### ####');
+        if (rand(1, 100) <= 70) {
+            return $prefix . ' ' . sprintf('3%02d %03d %04d', rand(0, 99), rand(100, 999), rand(1000, 9999));
         }
         
         // Italian landline numbers: 0xx xxx xxxx
-        return $prefix . ' ' . $this->faker->numerify('0## ### ####');
+        return $prefix . ' ' . sprintf('0%02d %03d %04d', rand(10, 99), rand(100, 999), rand(1000, 9999));
     }
 
     /**

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\SaluteOra\Models\Report;
 use Modules\SaluteOra\Models\Appointment;
-use Modules\SaluteOra\Models\Patient;
 use Modules\SaluteOra\Models\Doctor;
+use Modules\SaluteOra\Models\Patient;
+use Modules\SaluteOra\Models\Report;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\SaluteOra\Models\Report>
@@ -29,11 +29,20 @@ class ReportFactory extends Factory
      */
     public function definition(): array
     {
+        // Crea Patient e Appointment una sola volta per evitare duplicati
+        static $patientId = null;
+        static $appointmentId = null;
+
+        if (null === $patientId) {
+            $patientId = Patient::factory()->create()->id;
+        }
+        if (null === $appointmentId) {
+            $appointmentId = Appointment::factory()->create()->id;
+        }
+
         return [
-            'patient_id' => Patient::factory()->create()->id,
-            'appointment_id' => Appointment::factory()->create()->id,
-            'doctor_id' => Doctor::factory()->create()->id,
-            'status' => 'pending',
+            'patient_id' => $patientId,
+            'appointment_id' => $appointmentId,
             'has_mouth_or_teeth_pain' => $this->faker->boolean(),
             'mouth_teeth_pain_frequency' => $this->faker->randomElement(['never', 'rarely', 'sometimes', 'often', 'always']),
             'pregnancy_month' => $this->faker->optional()->numberBetween(1, 9),
@@ -62,11 +71,6 @@ class ReportFactory extends Factory
             'more_info_plaque' => $this->faker->optional()->text(200),
             'needs_more_dental_care' => $this->faker->boolean(),
             'further_notes' => $this->faker->optional()->text(300),
-            'content' => $this->faker->text(500),
-            'diagnosis' => $this->faker->text(200),
-            'treatment_plan' => $this->faker->text(300),
-            'medications' => $this->faker->optional()->text(200),
-            'follow_up_date' => $this->faker->optional()->dateTimeBetween('+1 month', '+6 months'),
         ];
     }
 
@@ -78,7 +82,6 @@ class ReportFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'appointment_id' => $appointment->id,
             'patient_id' => $appointment->patient_id,
-            'doctor_id' => $appointment->doctor_id,
         ]);
     }
 
@@ -94,12 +97,12 @@ class ReportFactory extends Factory
 
     /**
      * Indicate that the report is for a specific doctor.
+     * Note: Reports don't have doctor_id field in current schema.
      */
     public function forDoctor(Doctor $doctor): static
     {
         return $this->state(fn (array $attributes) => [
-            'doctor_id' => $doctor->id,
+            // doctor_id not available in reports table
         ]);
     }
 }
-

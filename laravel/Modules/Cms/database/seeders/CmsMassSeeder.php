@@ -69,7 +69,7 @@ class CmsMassSeeder extends Seeder
         $this->command->info('🔧 Creazione moduli CMS...');
         
         // Crea 20 moduli CMS
-        $modules = Module::factory()->count(20)->create([
+        $modules = Module::factory(20)->create([
             'is_active' => true,
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);
@@ -85,7 +85,7 @@ class CmsMassSeeder extends Seeder
         $this->command->info('📑 Creazione sezioni...');
         
         // Crea 100 sezioni
-        $sections = Section::factory()->count(100)->create([
+        $sections = Section::factory(100)->create([
             'is_active' => true,
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);
@@ -101,7 +101,7 @@ class CmsMassSeeder extends Seeder
         $this->command->info('📄 Creazione pagine...');
         
         // Crea 500 pagine
-        $pages = Page::factory()->count(500)->create([
+        $pages = Page::factory(500)->create([
             'is_active' => true,
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);
@@ -117,7 +117,7 @@ class CmsMassSeeder extends Seeder
         $this->command->info('📝 Creazione contenuti delle pagine...');
         
         // Crea 1000 contenuti di pagina
-        $contents = PageContent::factory()->count(1000)->create([
+        $contents = PageContent::factory(1000)->create([
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);
         
@@ -132,7 +132,7 @@ class CmsMassSeeder extends Seeder
         $this->command->info('🍽️ Creazione menu...');
         
         // Crea 50 menu
-        $menus = Menu::factory()->count(50)->create([
+        $menus = Menu::factory(50)->create([
             'is_active' => true,
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);
@@ -147,12 +147,11 @@ class CmsMassSeeder extends Seeder
     {
         $this->command->info('⚙️ Creazione configurazioni...');
         
-        // Crea 100 configurazioni
-        $configs = Conf::factory()->count(100)->create([
-            'created_at' => Carbon::now()->subDays(rand(1, 365)),
-        ]);
+        // Conf è un modello Sushi che ottiene i dati da TenantService::getConfigNames()
+        // Non supporta factories, i dati sono caricati dinamicamente
+        $configs = Conf::all();
         
-        $this->command->info("✅ Create " . $configs->count() . " configurazioni");
+        $this->command->info("✅ Caricati " . $configs->count() . " configurazioni da Sushi");
     }
     
     /**

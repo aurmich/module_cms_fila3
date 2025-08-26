@@ -6,6 +6,9 @@ namespace Modules\User\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
+
+use function Laravel\Prompts\password;
+
 use Modules\User\Datas\PasswordData;
 use Modules\User\Events\NewPasswordSet;
 use Modules\Xot\Datas\XotData;
@@ -29,7 +32,7 @@ class ChangePasswordCommand extends Command
         }
 
         // Ensure we fetched a persisted user and not a transient instance to avoid accidental insert
-        if ($user === null || (property_exists($user, 'exists') && $user->exists !== true)) {
+        if (null == $user || ! $user->exists) {
             $this->error('User not found or not persisted. Please create the user first (name, email, type, etc.).');
 
             return;

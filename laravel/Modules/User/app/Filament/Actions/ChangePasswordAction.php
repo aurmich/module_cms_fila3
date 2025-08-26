@@ -33,14 +33,6 @@ class ChangePasswordAction extends Action
                     ->body(__('user::notifications.password_changed_successfully.message'));
             })
             ->form([
-                /*
-                    TextInput::make('new_password')
-                        ->password()
-
-                        ->placeholder(__('user::fields.new_password.placeholder'))
-                        ->required()
-                        ->rule(Password::default()),
-                    */
                 PasswordData::make()->getPasswordFormComponent('new_password'),
                 TextInput::make('new_password_confirmation')
                     ->password()

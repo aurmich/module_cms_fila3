@@ -53,29 +53,24 @@
     <body>
         <h2>Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)</h2>
         <ul>
-            <li class="defect">Get json file returns correct path</li>
-            <li class="defect">Get sushi rows loads existing data</li>
-            <li class="defect">Get sushi rows returns empty array when file not exists</li>
-            <li class="defect">Get sushi rows throws exception with malformed json</li>
-            <li class="defect">Get sushi rows throws exception with non array data</li>
-            <li class="defect">Get sushi rows normalizes nested arrays</li>
-            <li class="defect">Save to json saves data successfully</li>
-            <li class="defect">Save to json creates directory if not exists</li>
-            <li class="defect">Save to json returns false on write error</li>
-            <li class="defect">Load existing data loads data correctly</li>
-            <li class="defect">Load existing data returns empty array when file not exists</li>
-            <li class="defect">Get next id returns next available id</li>
-            <li class="defect">Get next id returns one when no existing data</li>
-            <li class="defect">Get next id returns one with non numeric ids</li>
-            <li class="defect">Get auth id returns authenticated user id</li>
-            <li class="defect">Get auth id returns null when not authenticated</li>
-            <li class="defect">Creating event generates id and timestamps</li>
-            <li class="defect">Updating event updates timestamp</li>
-            <li class="defect">Deleting event removes record from json</li>
-            <li class="defect">Error handling during json operations</li>
-            <li class="defect">Data validation with schema</li>
-            <li class="defect">Performance with large json files</li>
-            <li class="defect">Memory usage with large json files</li>
+            <li class="success">It returns correct json file path</li>
+            <li class="success">It loads existing data from json file</li>
+            <li class="success">It returns empty array when file not exists</li>
+            <li class="success">It throws exception with malformed json</li>
+            <li class="success">It throws exception with non array data</li>
+            <li class="defect">It normalizes nested arrays to json strings</li>
+            <li class="success">It saves data successfully to json file</li>
+            <li class="success">It creates directory if not exists</li>
+            <li class="defect">It handles save errors gracefully</li>
+            <li class="success">It handles creating event correctly</li>
+            <li class="success">It handles updating event correctly</li>
+            <li class="success">It handles deleting event correctly</li>
+            <li class="success">It integrates with tenant service correctly</li>
+            <li class="success">It handles large datasets efficiently</li>
+            <li class="defect">It logs errors appropriately</li>
+            <li class="defect">It maintains data integrity during operations</li>
+            <li class="defect">It handles empty and null values correctly</li>
+            <li class="defect">It handles unicode and special characters</li>
         </ul>
     </body>
 </html>

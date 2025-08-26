@@ -219,6 +219,7 @@ class Patient extends User implements HasMedia
         'last_dental_visit_period',
         'age_range',
         'fiscal_code',
+        'password',
 
     ];
 

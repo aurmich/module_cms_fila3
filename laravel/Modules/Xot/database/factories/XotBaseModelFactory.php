@@ -15,7 +15,7 @@ class XotBaseModelFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<\Modules\Xot\Models\XotBaseModel>
      */
     protected $model = XotBaseModel::class;
 

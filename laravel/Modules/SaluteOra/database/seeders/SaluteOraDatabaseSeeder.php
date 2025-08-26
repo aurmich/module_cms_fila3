@@ -39,7 +39,7 @@ class SaluteOraDatabaseSeeder extends Seeder
             : Patient::factory()->count(200)->create();
 
         // Optionally relate doctors to studios if relation exists on the model
-        if (method_exists(Studio::class, 'doctors')) {
+        if (Studio::query()->getModel()->isRelation('doctors')) {
             $studios->each(function (Studio $studio) use ($doctors): void {
                 $ids = $doctors->random(min(6, max(2, (int) floor($doctors->count() / 5))))->pluck('id')->all();
                 try {
@@ -84,7 +84,7 @@ class SaluteOraDatabaseSeeder extends Seeder
             $appointmentsForReport->each(function (Appointment $appointment): void {
                 try {
                     // Avoid duplicates
-                    if (method_exists($appointment, 'report') && ! $appointment->report) {
+                    if ($appointment->isRelation('report') && ! $appointment->report) {
                         Report::factory()->create([
                             'appointment_id' => $appointment->id,
                         ]);

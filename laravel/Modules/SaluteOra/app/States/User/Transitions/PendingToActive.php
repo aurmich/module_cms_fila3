@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Modules\SaluteOra\States\User\Transitions;
 
 use Illuminate\Support\Str;
+use Modules\Xot\Datas\XotData;
 use Modules\SaluteOra\Models\User;
 use Spatie\ModelStates\Transition;
+use Illuminate\Support\Facades\Hash;
 use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
@@ -20,9 +22,8 @@ class PendingToActive extends BaseTransition
     
 
     public function getNotificationData(): array{
-        $user=$this->record;
-        $password=app(GetNewPasswordAction::class)->execute($user);
-
+        $password=app(GetNewPasswordAction::class)->execute($this->record);
+       
         $data = [
             'message' => $this->message,
             'password' => $password,
@@ -40,8 +41,8 @@ class PendingToActive extends BaseTransition
         //dddx($record->type==UserTypeEnum::PATIENT);
         return [
             // 'me' => $this->record,
-            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             'me_sms' => RecordNotificationData::from(['record' => $record, 'channel' => 'sms']),
+            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             // 'patient' => $this->record->patient,
             // 'doctor' => $this->record->doctor,
             // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),

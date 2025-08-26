@@ -20,6 +20,13 @@ abstract class BaseModel extends Model
     use Updater;
 
     /**
+     * The factory class for this model.
+     *
+     * @var class-string<\Illuminate\Database\Eloquent\Factories\Factory>
+     */
+    protected static $factory = null;
+
+    /**
      * Indicates whether attributes are snake cased on arrays.
      *
      * @see  https://laravel-news.com/6-eloquent-secrets

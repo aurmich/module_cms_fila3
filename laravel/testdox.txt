@@ -1,25 +1,20 @@
 Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)
- [ ] Get json file returns correct path
- [ ] Get sushi rows loads existing data
- [ ] Get sushi rows returns empty array when file not exists
- [ ] Get sushi rows throws exception with malformed json
- [ ] Get sushi rows throws exception with non array data
- [ ] Get sushi rows normalizes nested arrays
- [ ] Save to json saves data successfully
- [ ] Save to json creates directory if not exists
- [ ] Save to json returns false on write error
- [ ] Load existing data loads data correctly
- [ ] Load existing data returns empty array when file not exists
- [ ] Get next id returns next available id
- [ ] Get next id returns one when no existing data
- [ ] Get next id returns one with non numeric ids
- [ ] Get auth id returns authenticated user id
- [ ] Get auth id returns null when not authenticated
- [ ] Creating event generates id and timestamps
- [ ] Updating event updates timestamp
- [ ] Deleting event removes record from json
- [ ] Error handling during json operations
- [ ] Data validation with schema
- [ ] Performance with large json files
- [ ] Memory usage with large json files
+ [x] It returns correct json file path
+ [x] It loads existing data from json file
+ [x] It returns empty array when file not exists
+ [x] It throws exception with malformed json
+ [x] It throws exception with non array data
+ [ ] It normalizes nested arrays to json strings
+ [x] It saves data successfully to json file
+ [x] It creates directory if not exists
+ [ ] It handles save errors gracefully
+ [x] It handles creating event correctly
+ [x] It handles updating event correctly
+ [x] It handles deleting event correctly
+ [x] It integrates with tenant service correctly
+ [x] It handles large datasets efficiently
+ [ ] It logs errors appropriately
+ [ ] It maintains data integrity during operations
+ [ ] It handles empty and null values correctly
+ [ ] It handles unicode and special characters
 

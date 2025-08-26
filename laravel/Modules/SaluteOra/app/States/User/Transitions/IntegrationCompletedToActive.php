@@ -45,8 +45,8 @@ class IntegrationCompletedToActive extends BaseTransition
         //dddx($record->type==UserTypeEnum::PATIENT);
         return [
             // 'me' => $this->record,
-            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             'me_sms' => RecordNotificationData::from(['record' => $record, 'channel' => 'sms']),
+            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             // 'patient' => $this->record->patient,
             // 'doctor' => $this->record->doctor,
             // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),

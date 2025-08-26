@@ -37,10 +37,11 @@ abstract class XotBaseTransition extends Transition
 
     public function sendNotifications(): void
     {
+        $data = $this->getNotificationData();
         $recipients = $this->getNotificationRecipients();
         foreach ($recipients as $recipient) {
             
-            $this->sendRecipientNotification($recipient);
+            $this->sendRecipientNotification($recipient,$data);
             
         }
     }
@@ -77,7 +78,7 @@ abstract class XotBaseTransition extends Transition
         return $slug;
     }
 
-    public function sendRecipientNotification(RecordNotificationData $recipient): void
+    public function sendRecipientNotification(RecordNotificationData $recipient,array $data): void
     {
        
 
@@ -88,7 +89,7 @@ abstract class XotBaseTransition extends Transition
             $slug
         );
 
-        $data = $this->getNotificationData();
+        //$data = $this->getNotificationData();
         $notify = $notify->mergeData($data);
         $notify = $notify->addAttachments($this->getNotificationAttachments());
         

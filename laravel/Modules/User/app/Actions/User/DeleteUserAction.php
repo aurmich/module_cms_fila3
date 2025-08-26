@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\User\Actions\User;
 
+use Modules\User\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Modules\User\Models\User;
+use Spatie\QueueableAction\QueueableAction;
 
 class DeleteUserAction
 {
+    use QueueableAction;
     /**
      * Elimina l'utente dopo aver verificato la password.
      *

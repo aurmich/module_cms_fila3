@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Modules\Xot\Datas\XotData;
 use Spatie\MediaLibrary\HasMedia;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Traits\HasRoles;
@@ -512,5 +513,16 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
         return false;
     }
 
+    public function setPasswordAttribute(?string $value): void{
+        if(empty($value)){
+            unset($this->attributes['password']);
+            return;
+        }
+        if(strlen($value)<32){
+            $this->attributes['password']=Hash::make($value);
+            return;
+        }
+        $this->attributes['password']=$value;
+    }
 
 }

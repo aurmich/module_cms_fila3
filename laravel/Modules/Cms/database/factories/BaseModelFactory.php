@@ -15,7 +15,7 @@ class BaseModelFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<\Modules\Cms\Models\BaseModel>
      */
     protected $model = BaseModel::class;
 

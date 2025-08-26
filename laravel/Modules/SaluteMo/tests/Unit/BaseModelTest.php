@@ -5,13 +5,7 @@ declare(strict_types=1);
 namespace Modules\SaluteMo\Tests\Unit;
 
 use Modules\SaluteMo\Models\BaseModel;
-
-// Create a simple concrete test model class to avoid anonymous class issues
-class TestBaseModel extends BaseModel
-{
-    protected $table = 'test_models';
-    protected $connection = 'sqlite';
-}
+use Modules\SaluteMo\Tests\Support\Models\TestBaseModel;
 
 describe('SaluteMo BaseModel Business Logic', function () {
     it('exposes casts as array', function () {

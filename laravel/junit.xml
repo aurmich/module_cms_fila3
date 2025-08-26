@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)" tests="18" assertions="45" errors="6" failures="0" skipped="0" time="4.145409">
+    <testcase name="It loads existing data from json file" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It loads existing data from json file" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="4" time="0.592943"/>
+    <testcase name="It returns correct json file path" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It returns correct json file path" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="2" time="0.201572"/>
+    <testcase name="It throws exception with non array data" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It throws exception with non array data" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="2" time="0.196596"/>
+    <testcase name="It logs errors appropriately" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It logs errors appropriately" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="0" time="0.204359">
+      <error type="Mockery\Exception\BadMethodCallException">It logs errors appropriatelyMockery\Exception\BadMethodCallException: Method Mockery_1__log::log() does not exist on this mock object
+at vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php:404
+at vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php:366
+at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:740
+at Modules/Tenant/app/Models/Traits/SushiToJson.php:141
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:378</error>
+    </testcase>
+    <testcase name="It maintains data integrity during operations" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It maintains data integrity during operations" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="6" time="0.183337">
+      <error type="Mockery\Exception\InvalidCountException">It maintains data integrity during operationsMockery\Exception\InvalidCountException: Method error('Failed to save data to JSON file', &lt;Any&gt;) from Mockery_1__log should be called
+ exactly 1 times but called 0 times.
+at vendor/mockery/mockery/library/Mockery/CountValidator/Exact.php:32
+at vendor/mockery/mockery/library/Mockery/Expectation.php:739
+at vendor/mockery/mockery/library/Mockery/ExpectationDirector.php:202
+at vendor/mockery/mockery/library/Mockery/Container.php:583
+at vendor/mockery/mockery/library/Mockery/Container.php:519
+at vendor/mockery/mockery/library/Mockery.php:176
+at vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/InteractsWithTestCaseLifecycle.php:142
+at vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php:66
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:61</error>
+    </testcase>
+    <testcase name="It integrates with tenant service correctly" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It integrates with tenant service correctly" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="2" time="0.198659"/>
+    <testcase name="It handles deleting event correctly" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles deleting event correctly" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="4" time="0.198231"/>
+    <testcase name="It returns empty array when file not exists" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It returns empty array when file not exists" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="2" time="0.206636"/>
+    <testcase name="It handles large datasets efficiently" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles large datasets efficiently" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="4" time="0.243080"/>
+    <testcase name="It saves data successfully to json file" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It saves data successfully to json file" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="3" time="0.217194"/>
+    <testcase name="It handles creating event correctly" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles creating event correctly" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="4" time="0.248237"/>
+    <testcase name="It handles empty and null values correctly" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles empty and null values correctly" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="1" time="0.264144">
+      <error type="ErrorException">It handles empty and null values correctlyErrorException: Undefined array key 1
+at vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:258
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:425</error>
+    </testcase>
+    <testcase name="It handles updating event correctly" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles updating event correctly" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="4" time="0.217637"/>
+    <testcase name="It throws exception with malformed json" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It throws exception with malformed json" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="2" time="0.204148"/>
+    <testcase name="It normalizes nested arrays to json strings" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It normalizes nested arrays to json strings" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="0" time="0.208072">
+      <error type="ErrorException">It normalizes nested arrays to json stringsErrorException: Undefined array key 1
+at vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:258
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:179</error>
+    </testcase>
+    <testcase name="It handles unicode and special characters" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles unicode and special characters" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="1" time="0.187904">
+      <error type="ErrorException">It handles unicode and special charactersErrorException: Undefined array key 1
+at vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php:258
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:448</error>
+    </testcase>
+    <testcase name="It creates directory if not exists" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It creates directory if not exists" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="3" time="0.185101"/>
+    <testcase name="It handles save errors gracefully" file="Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)::It handles save errors gracefully" class="Modules\Tenant\Tests\Unit\SushiToJsonTraitTest" classname="Modules.Tenant.Tests.Unit.SushiToJsonTraitTest" assertions="1" time="0.187561">
+      <error type="Mockery\Exception\BadMethodCallException">It handles save errors gracefullyMockery\Exception\BadMethodCallException: Received Mockery_2_Illuminate_Filesystem_Filesystem::exists(), but no expectations were specified
+at vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+at Modules/Tenant/tests/Unit/SushiToJsonTraitTest.php:53</error>
+    </testcase>
+  </testsuite>
+</testsuites>
