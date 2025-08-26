@@ -94,7 +94,6 @@ pipeline {
 
                             // gestione timeout
                             if (status == "InProgress") {
-                                echo "Timeout raggiunto: il comando non è stato completato entro ${env.MAX_WAIT_TIME} secondi"
                                 env.ERROR_MESSAGE = "Deploy fallito: timeout raggiunto dopo ${env.MAX_WAIT_TIME} secondi"
                                 error(env.ERROR_MESSAGE)
                             }
@@ -155,12 +154,6 @@ pipeline {
                     from: "jenkins@jenkins.exacloud.it"
                 )
             }
-        }
-        success {
-            echo 'Deploy completato con successo!'
-        }
-        failure {
-            echo 'Deploy fallito!'
         }
     }
 }
