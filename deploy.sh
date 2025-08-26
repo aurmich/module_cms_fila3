@@ -15,7 +15,13 @@ sudo git config --global --add safe.directory /var/www/saluteorale
 
 # eseguo pull
 echo "Esecuzione git pull..."
-sudo git pull
+echo "Esecuzione git pull..."
+if [ -z "$GITLAB_TOKEN" ]; then
+  sudo git pull
+else
+  # serve passare esplicitamente la variabile GITLAB_TOKEN a sudo altrimenti la si perde
+  sudo GITLAB_TOKEN="$GITLAB_TOKEN" git -c credential.helper= -c credential.helper='!f() { echo username=gitlab-ci-token; echo password=$GITLAB_TOKEN; }; f' pull
+fi
 
 # aggiornamento applicazione
 cd laravel
