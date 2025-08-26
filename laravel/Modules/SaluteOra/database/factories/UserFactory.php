@@ -56,6 +56,7 @@ class UserFactory extends Factory
         $lastName = (string) $this->faker->randomElement($lastNames);
         
         // Città italiane realistiche
+        /** @var array<int, array{name: string, code: string, region: string}> $cities */
         $cities = [
             ['name' => 'Milano', 'code' => 'MI', 'region' => 'Lombardia'],
             ['name' => 'Roma', 'code' => 'RM', 'region' => 'Lazio'],
@@ -67,6 +68,7 @@ class UserFactory extends Factory
             ['name' => 'Firenze', 'code' => 'FI', 'region' => 'Toscana'],
         ];
         
+        /** @var array{name: string, code: string, region: string} $city */
         $city = $this->faker->randomElement($cities);
         $age = $this->faker->numberBetween(18, 85);
         
@@ -83,7 +85,7 @@ class UserFactory extends Factory
             'date_of_birth' => now()->subYears($age)->subDays($this->faker->numberBetween(0, 364)),
             'gender' => $gender,
             'address' => $this->faker->streetAddress() . ', ' . $this->faker->buildingNumber(),
-            'city' => (string) $city['name'],
+            'city' => $city['name'],
             'phone' => '+39 ' . sprintf('%03d %03d %04d', rand(100, 999), rand(100, 999), rand(1000, 9999)),
             'lang' => $this->faker->randomElement(['it', 'en', 'de']),
             'is_active' => $this->faker->boolean(90), // 90% active

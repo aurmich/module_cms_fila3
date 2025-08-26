@@ -18,8 +18,8 @@ class GetNewPasswordAction
     
     public function execute(UserContract $record): string
     {
-        $user = XotData::make()->getUserByEmail($record->email);;
-        //$password=app(GetNewPasswordAction::class)->execute($this->record);
+        //$user = XotData::make()->getUserByEmail($record->email);
+        $user=$record;
         /*
         $password=Str::password(10);
         $user->update([
