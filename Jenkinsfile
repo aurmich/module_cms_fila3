@@ -106,6 +106,7 @@ pipeline {
 
                             // gestione timeout
                             if (status == "InProgress") {
+<<<<<<< HEAD
                                 env.ERROR_MESSAGE = "Deploy fallito: timeout raggiunto dopo ${env.MAX_WAIT_TIME} secondi"
                                 error(env.ERROR_MESSAGE)
                             }
@@ -271,6 +272,8 @@ pipeline {
                             // gestione timeout
                             if (status == "InProgress") {
                                 echo "Timeout raggiunto: il comando non è stato completato entro ${env.MAX_WAIT_TIME} secondi"
+=======
+>>>>>>> e29fb26b (feat: update Jenkins)
                                 env.ERROR_MESSAGE = "Deploy fallito: timeout raggiunto dopo ${env.MAX_WAIT_TIME} secondi"
                                 error(env.ERROR_MESSAGE)
                             }
@@ -356,6 +359,7 @@ pipeline {
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         success {
             echo 'Deploy completato con successo!'
@@ -364,5 +368,7 @@ pipeline {
             echo 'Deploy fallito!'
         }
 >>>>>>> baf99f0f (Add Jenkinsfile)
+=======
+>>>>>>> e29fb26b (feat: update Jenkins)
     }
 }
