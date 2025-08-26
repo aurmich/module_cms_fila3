@@ -5,9 +5,13 @@ pipeline {
         INSTANCE_ID = 'i-06de104551729bd9f'
         SCRIPT_PATH = '/var/www/saluteorale/deploy.sh'
 <<<<<<< HEAD
+<<<<<<< HEAD
         GITLAB_TOKEN_ID = 'gitlab-access-token-saluteorale'
 =======
 >>>>>>> baf99f0f (Add Jenkinsfile)
+=======
+        GITLAB_TOKEN_ID = 'gitlab-access-token-saluteorale'
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
         MAX_WAIT_TIME = '300' // Come stringa per evitare problemi di cast
         POLL_INTERVAL = '5'  // Come stringa per evitare problemi di cast
         EMAIL_TO = 'g.casati@exabytesrl.it,m.sottana@exabytesrl.it'
@@ -18,11 +22,15 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws-jenkins', region: env.AWS_REGION) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
                         withCredentials([usernamePassword(credentialsId: env.GITLAB_TOKEN_ID, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GITLAB_TOKEN')]) {
                             // inizializza variabili per il polling
                             def status = "InProgress"
                             def startTime = System.currentTimeMillis()
                             def elapsedTime = 0
+<<<<<<< HEAD
 
                             def command = "GITLAB_TOKEN=${GITLAB_TOKEN} ${SCRIPT_PATH}"
 
@@ -159,39 +167,79 @@ pipeline {
                                 """,
                                 returnStdout: true
                             ).trim()
+=======
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
 
-                            // recupera lo standard output del comando
-                            env.SCRIPT_STDOUT = sh(
+                            def command = "GITLAB_TOKEN=${GITLAB_TOKEN} ${SCRIPT_PATH}"
+
+                            // esegui il comando ssm e cattura il CommandId
+                            commandId = sh(
                                 script: """
-                                    aws ssm get-command-invocation \
-                                        --command-id ${commandId} \
-                                        --instance-id ${INSTANCE_ID} \
-                                        --query 'StandardOutputContent' \
-                                        --output text
+                                    aws ssm send-command \
+                                        --region ${AWS_REGION} \
+                                        --instance-ids ${INSTANCE_ID} \
+                                        --document-name "AWS-RunShellScript" \
+                                        --parameters 'commands=["${command}"]' \
+                                        --output text \
+                                        --query 'Command.CommandId'
                                 """,
                                 returnStdout: true
                             ).trim()
+                            echo "Comando SSM inviato, CommandId: ${commandId}"
 
-                            // recupera lo standard error del comando
-                            env.SCRIPT_STDERR = sh(
-                                script: """
-                                    aws ssm get-command-invocation \
-                                        --command-id ${commandId} \
-                                        --instance-id ${INSTANCE_ID} \
-                                        --query 'StandardErrorContent' \
-                                        --output text
-                                """,
-                                returnStdout: true
-                            ).trim()
-                            
+                            // converti le variabili d'ambiente in interi
+                            int maxWaitTimeMs = env.MAX_WAIT_TIME.toInteger() * 1000
+                            int pollIntervalSec = env.POLL_INTERVAL.toInteger()
+
+                            // esegui il polling fino a quando il comando non è completato o scade il timeout
+                            while (status == "InProgress" && elapsedTime < maxWaitTimeMs) {
+                                sleep(time: pollIntervalSec, unit: 'SECONDS')
+
+                                // recupera lo stato del comando
+                                status = sh(
+                                    script: """
+                                        aws ssm get-command-invocation \
+                                            --command-id ${commandId} \
+                                            --instance-id ${INSTANCE_ID} \
+                                            --query 'Status' \
+                                            --output text
+                                    """,
+                                    returnStdout: true
+                                ).trim()
+
+                                // recupera lo standard output del comando
+                                env.SCRIPT_STDOUT = sh(
+                                    script: """
+                                        aws ssm get-command-invocation \
+                                            --command-id ${commandId} \
+                                            --instance-id ${INSTANCE_ID} \
+                                            --query 'StandardOutputContent' \
+                                            --output text
+                                    """,
+                                    returnStdout: true
+                                ).trim()
+
+                                // recupera lo standard error del comando
+                                env.SCRIPT_STDERR = sh(
+                                    script: """
+                                        aws ssm get-command-invocation \
+                                            --command-id ${commandId} \
+                                            --instance-id ${INSTANCE_ID} \
+                                            --query 'StandardErrorContent' \
+                                            --output text
+                                    """,
+                                    returnStdout: true
+                                ).trim()
+
+                                elapsedTime = System.currentTimeMillis() - startTime
+                                echo "Stato comando: ${status}, Tempo trascorso: ${elapsedTime/1000} secondi"
+                            }
+
+                            // calcola il tempo totale trascorso e salvalo in una variabile d'ambiente
                             elapsedTime = System.currentTimeMillis() - startTime
-                            echo "Stato comando: ${status}, Tempo trascorso: ${elapsedTime/1000} secondi"
-                        }
-                        
-                        // calcola il tempo totale trascorso e salvalo in una variabile d'ambiente
-                        elapsedTime = System.currentTimeMillis() - startTime
-                        env.ELAPSED_TIME = "${elapsedTime/1000}"
+                            env.ELAPSED_TIME = "${elapsedTime/1000}"
 
+<<<<<<< HEAD
                         echo "Standard output dello script: ${env.SCRIPT_STDOUT}"
                         echo "Standard error dello script: ${env.SCRIPT_STDERR}"
                         
@@ -216,6 +264,32 @@ pipeline {
                             env.ERROR_MESSAGE = ""
                             echo "Deploy completato con successo!"
 >>>>>>> baf99f0f (Add Jenkinsfile)
+=======
+                            echo "Standard output dello script: ${env.SCRIPT_STDOUT}"
+                            echo "Standard error dello script: ${env.SCRIPT_STDERR}"
+
+                            // gestione timeout
+                            if (status == "InProgress") {
+                                echo "Timeout raggiunto: il comando non è stato completato entro ${env.MAX_WAIT_TIME} secondi"
+                                env.ERROR_MESSAGE = "Deploy fallito: timeout raggiunto dopo ${env.MAX_WAIT_TIME} secondi"
+                                error(env.ERROR_MESSAGE)
+                            }
+                            // gestione fallimento del comando ssm
+                            else if (status == "Failed") {
+                                env.ERROR_MESSAGE = "Deploy fallito: il comando SSM è terminato con stato 'Failed'."
+                                error(env.ERROR_MESSAGE)
+                            }
+                            // gestione standard output che non termina con DEPLOY_SUCCESS
+                            else if (!env.SCRIPT_STDOUT.endsWith("DEPLOY_SUCCESS")) {
+                                env.ERROR_MESSAGE = "Deploy fallito: Lo standard output dello script non termina con 'DEPLOY_SUCCESS'."
+                                error(env.ERROR_MESSAGE)
+                            }
+                            // tutto ok
+                            else {
+                                env.ERROR_MESSAGE = ""
+                                echo "Deploy completato con successo!"
+                            }
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
                         }
                     }
                 }
@@ -239,6 +313,7 @@ pipeline {
                     body: """
                         Il deploy è ${contentResult} per il progetto <b>${env.JOB_NAME}</b>.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                         <br/><br/><b>URL:</b>
                         <br/>${env.BUILD_URL}
@@ -249,16 +324,26 @@ pipeline {
                         <br/>${env.BUILD_URL}
                         
 >>>>>>> baf99f0f (Add Jenkinsfile)
+=======
+
+                        <br/><br/><b>URL:</b>
+                        <br/>${env.BUILD_URL}
+
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
                         <br/><br/><b>Tempo di esecuzione:</b>
                         <br/>${env.ELAPSED_TIME} secondi
 
                         <br/><br/><b>Errore:</b>
                         <br/>${formattedErrorMessage}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
                         
 >>>>>>> baf99f0f (Add Jenkinsfile)
+=======
+
+>>>>>>> 95c2f3ab (Update Jenkinsfile)
                         <br/><br/><b>Standard output dello script:</b>
                         <br/>${formattedScriptStdOut}
 
