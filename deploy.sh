@@ -15,6 +15,10 @@ sudo git config --global --add safe.directory /var/www/saluteorale
 
 # eseguo pull
 echo "Esecuzione git pull..."
+<<<<<<< HEAD
+=======
+echo "Esecuzione git pull..."
+>>>>>>> 91021a7c (Update deploy.sh)
 if [ -z "$GITLAB_TOKEN" ]; then
   sudo git pull
 else
