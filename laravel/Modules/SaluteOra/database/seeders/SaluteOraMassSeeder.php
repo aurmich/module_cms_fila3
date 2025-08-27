@@ -292,3 +292,4 @@ class SaluteOraMassSeeder extends Seeder
         $this->command->info('   ✅ Verifica completata');
     }
 }
+
