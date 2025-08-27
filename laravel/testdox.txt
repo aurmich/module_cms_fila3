@@ -1,20 +1,160 @@
-Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)
- [x] It returns correct json file path
- [x] It loads existing data from json file
- [x] It returns empty array when file not exists
- [x] It throws exception with malformed json
- [x] It throws exception with non array data
- [ ] It normalizes nested arrays to json strings
- [x] It saves data successfully to json file
- [x] It creates directory if not exists
- [ ] It handles save errors gracefully
- [x] It handles creating event correctly
- [x] It handles updating event correctly
- [x] It handles deleting event correctly
- [x] It integrates with tenant service correctly
- [x] It handles large datasets efficiently
- [ ] It logs errors appropriately
- [ ] It maintains data integrity during operations
- [ ] It handles empty and null values correctly
- [ ] It handles unicode and special characters
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentBusinessLogicTest.php
+ [x] `Appointment Business Logic` → `State Transitions` → it transitions from pending to confirmed correctly
+ [x] `Appointment Business Logic` → `State Transitions` → it transitions from confirmed to completed correctly
+ [x] `Appointment Business Logic` → `State Transitions` → it transitions from confirmed to cancelled correctly
+ [x] `Appointment Business Logic` → `State Transitions` → it prevents invalid state transitions
+ [x] `Appointment Business Logic` → `Scheduling Constraints` → it detects overlapping appointments for same doctor
+ [x] `Appointment Business Logic` → `Scheduling Constraints` → it allows non-overlapping appointments for same doctor
+ [x] `Appointment Business Logic` → `Scheduling Constraints` → it ignores cancelled appointments for overlap detection
+ [x] `Appointment Business Logic` → `Revenue Calculation` → it calculates correct revenue for completed appointment
+ [x] `Appointment Business Logic` → `Revenue Calculation` → it returns zero revenue for non-completed appointments
+ [x] `Appointment Business Logic` → `Revenue Calculation` → it handles pro bono appointments with zero revenue
+ [x] `Appointment Business Logic` → `No Show Handling` → it tracks no-show appointments count
+ [x] `Appointment Business Logic` → `No Show Handling` → it determines if patient should be blocked due to no-shows
+ [x] `Appointment Business Logic` → `No Show Handling` → it allows patient with less than threshold no-shows
+ [x] `Appointment Business Logic` → `Patient History` → it retrieves patient appointment history correctly
+ [x] `Appointment Business Logic` → `Patient History` → it filters appointments by date range
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentIntegrationTest.php
+ [x] `Appointment Integration` → it creates complete appointment with all relationships
+ [x] `Appointment Integration` → it handles appointment scheduling workflow
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentManagementBusinessLogicTest.php
+ [x] `Appointment Management Business Logic` → `Appointment Creation` → it creates appointment with required fields
+ [x] `Appointment Management Business Logic` → `Appointment Creation` → it validates appointment time constraints
+ [x] `Appointment Management Business Logic` → `Appointment Status Management` → it transitions appointment through status workflow
+ [x] `Appointment Management Business Logic` → `Appointment Status Management` → it handles appointment cancellation
+ [x] `Appointment Management Business Logic` → `Appointment Type Management` → it creates consultation appointment
+ [x] `Appointment Management Business Logic` → `Appointment Type Management` → it creates treatment appointment
+ [x] `Appointment Management Business Logic` → `Appointment Type Management` → it creates emergency appointment
+ [x] `Appointment Management Business Logic` → `Appointment Scheduling Logic` → it prevents overlapping appointments
+ [x] `Appointment Management Business Logic` → `Appointment Scheduling Logic` → it allows consecutive appointments
+ [x] `Appointment Management Business Logic` → `Business Rules Validation` → it enforces minimum advance booking time
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentStateTransitionTest.php
+ [x] `Appointment State Transition` → `Basic Status Transitions` → it creates appointment in scheduled state
+ [x] `Appointment State Transition` → `Basic Status Transitions` → it transitions from scheduled to confirmed
+ [x] `Appointment State Transition` → `Basic Status Transitions` → it transitions from confirmed to completed
+ [x] `Appointment State Transition` → `Status Validation` → it handles status enum values correctly
+ [x] `Appointment State Transition` → `Status Validation` → it validates status transitions
+ [x] `Appointment State Transition` → `Time-Based Transitions` → it handles future appointments correctly
+ [x] `Appointment State Transition` → `Time-Based Transitions` → it handles past appointments correctly
+ [x] `Appointment State Transition` → `Cancellation and No-Show` → it allows cancellation of scheduled appointment
+ [x] `Appointment State Transition` → `Cancellation and No-Show` → it marks appointment as no-show
+ [x] `Appointment State Transition` → `Business Logic Validation` → it enforces appointment time constraints
+ [x] `Appointment State Transition` → `Business Logic Validation` → it maintains appointment relationships integrity
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/AppointmentWorkflowTest.php
+ [x] `Appointment Workflow` → `Basic Workflow` → it creates appointment in scheduled state
+ [x] `Appointment Workflow` → `Basic Workflow` → it transitions appointment through workflow states
+ [x] `Appointment Workflow` → `Appointment Scheduling` → it schedules appointment at specific time
+ [x] `Appointment Workflow` → `Appointment Scheduling` → it prevents double booking for same time slot
+ [x] `Appointment Workflow` → `Appointment Cancellation and Rescheduling` → it cancels appointment and frees time slot
+ [x] `Appointment Workflow` → `Appointment Cancellation and Rescheduling` → it reschedules appointment to new time
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/DoctorBusinessLogicTest.php
+ [x] `Doctor Business Logic` → `Appointment Management` → it tracks doctor appointments correctly
+ [x] `Doctor Business Logic` → `Appointment Management` → it tracks patients through appointments
+ [x] `Doctor Business Logic` → `Appointment Management` → it manages appointment scheduling for specific dates
+ [x] `Doctor Business Logic` → `Studio Relationships and Schedule Management` → it maintains data isolation between studios
+ [x] `Doctor Business Logic` → `Studio Relationships and Schedule Management` → it works within specific studio context
+ [x] `Doctor Business Logic` → `Report Generation and Medical Records` → it tracks reports created by doctor
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageContentTest.php
+ [x] homepage is localized and reachable
+ [x] homepage outputs correct html lang attribute
+ [x] homepage contains at least one localized internal link
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageRequirementsTest.php
+ [x] la homepage contiene tutti gli elementi richiesti dai requisiti
+ [x] la homepage ha la corretta struttura semantica
+ [x] la homepage è accessibile
+ [x] la homepage contiene meta tag per la responsività
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/HomepageTest.php
+ [x] `Homepage Business Logic` → it redirects root path to localized homepage
+ [x] `Homepage Business Logic` → it serves localized homepage content
+ [x] `Homepage Business Logic` → it has localized routing structure
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/PatientBusinessLogicTest.php
+ [x] `Patient Business Logic` → `Booking Eligibility` → it allows new patient to book first appointment
+ [x] `Patient Business Logic` → `Booking Eligibility` → it tracks patient appointment history
+ [x] `Patient Business Logic` → `Patient Information Management` → it stores essential patient contact information
+ [x] `Patient Business Logic` → `Patient Information Management` → it manages patient medical history
+ [x] `Patient Business Logic` → `Appointment Preferences` → it tracks patient appointment preferences
+ [x] `Patient Business Logic` → `Appointment Preferences` → it manages patient scheduling constraints
+ [x] `Patient Business Logic` → `Patient-Studio Relationship` → it associates patient with studio
+ [x] `Patient Business Logic` → `Patient-Studio Relationship` → it tracks patient studio preferences
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/ReportBusinessLogicTest.php
+ [x] `Report Business Logic` → `Medical Report Creation` → it creates comprehensive medical report after appointment
+ [x] `Report Business Logic` → `Medical Report Creation` → it links report to appointment correctly
+ [x] `Report Business Logic` → `Report Data Validation` → it validates required report fields
+ [x] `Report Business Logic` → `Report Data Validation` → it handles optional report fields
+ [x] `Report Business Logic` → `Report Workflow` → it manages report status transitions
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/StudioBusinessLogicTest.php
+ [x] `Studio Business Logic` → `Studio Management` → it creates studio with basic information
+ [x] `Studio Business Logic` → `Studio Management` → it manages studio operating hours
+ [x] `Studio Business Logic` → `Doctor Management` → it associates doctors with studio
+ [x] `Studio Business Logic` → `Doctor Management` → it tracks doctor schedules within studio
+ [x] `Studio Business Logic` → `Appointment Management` → it tracks studio appointments
+ [x] `Studio Business Logic` → `Appointment Management` → it manages studio capacity and availability
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/UrlLocalizationTest.php
+ [x] `URL Localization` → it homepage renders links prefixed by current locale
+ [x] `URL Localization` → it generates localized url for a content page
+ [x] `URL Localization` → it handles locale prefix correctly
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/UserAuthenticationTest.php
+ [x] `User Authentication` → `User Registration` → it creates patient user successfully
+ [x] `User Authentication` → `User Registration` → it creates doctor user successfully
+ [x] `User Authentication` → `User Registration` → it creates admin user successfully
+ [x] `User Authentication` → `User Type Management` → it validates user type enum values
+ [x] `User Authentication` → `User Type Management` → it handles user type transitions
+ [x] `User Authentication` → `User Relationships` → it associates user with studio
+ [x] `User Authentication` → `User Relationships` → it manages user permissions based on type
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Actions/FetchCalendarEventsActionTest.php
+ [x] it builds an emergency event with proper title, colors and contrast
+ [x] it marks event editable only for future dates and matching doctor/admin
+ [x] it formats event title based on appointment type
+ [x] it calculates event duration correctly
+ [x] it handles appointment color coding by status
+ [x] it builds comprehensive event data structure
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/Actions/GenerateReportActionTest.php
+ [x] esegue correttamente la generazione di un report
+ [x] gestisce correttamente gli errori durante la generazione
+ [x] unisce correttamente i parametri del report e quelli aggiuntivi
+ [x] pulisce i dati precedenti prima di generare un nuovo report
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/AppointmentTest.php
+ [x] appointment can be created with business data
+ [x] appointment can be updated with business logic
+ [x] appointment calculates correct duration in minutes for business scheduling
+ [x] appointment can be marked as emergency
+ [x] appointment can be marked as completed
+ [x] appointment can be cancelled
+ [x] appointment can be filtered by emergency status (in-memory)
+ [x] appointment can be filtered by status (in-memory)
+ [x] appointment has access to patient information (assigned in-memory)
+ [x] appointment has access to doctor information (assigned in-memory)
+ [x] appointment has access to studio information (assigned in-memory)
+ [x] appointment can be logically removed from a collection (no DB delete)
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Unit/ReportPendingStateTest.php
+ [x] `ReportPending State` → it can be instantiated
+ [x] `ReportPending State` → it has correct state name
+ [x] `ReportPending State` → it returns form schema from ReportResource
+ [x] `ReportPending State` → it fills form with report data using arguments
+ [x] `ReportPending State` → it creates report if not exists when filling form
+ [x] `ReportPending State` → it fills form by record
+ [x] `ReportPending State` → it creates report if not exists when filling form by record
+ [x] `ReportPending State` → it processes modal action with arguments
+ [x] `ReportPending State` → it processes modal action by record
+ [x] `ReportPending State` → it updates existing report when processing action
+ [x] `ReportPending State` → it validates appointment instance in modal action by record
+ [x] `ReportPending State` → it processes data correctly in modal action by record
+ [x] `ReportPending State` → it handles appointment not found gracefully in modal action
 

@@ -22,4 +22,7 @@ yarn-error.log
 /.vscode
 /.zed
 junit.xml
-docs/
+docs/junit.xml
+teamcity.txt
+testdox.html
+testdox.txt
