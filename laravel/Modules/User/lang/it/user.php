@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 return array (
   'navigation' => 
@@ -309,6 +308,10 @@ return array (
     array (
       'label' => 'applyFilters',
     ),
+    'layout' => 
+    array (
+      'label' => 'layout',
+    ),
   ),
   'actions' => 
   array (
@@ -427,7 +430,6 @@ return array (
     'password_reset_success' => 'Password reimpostata con successo',
     'password_reset_error' => 'Errore durante il reset della password',
     'email_already_taken' => 'Questa email è già in uso',
-    // Added keys for LoginWidget
     'login_success' => 'Accesso effettuato con successo',
     'validation_error' => 'Errore di validazione',
   ),

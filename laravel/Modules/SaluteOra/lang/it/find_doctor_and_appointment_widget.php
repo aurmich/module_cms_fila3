@@ -299,4 +299,12 @@ return array (
     'past_date' => 'Non puoi selezionare una data passata',
     'appointment_not_available' => 'L\'orario selezionato non è più disponibile',
   ),
+  'sections' => 
+  array (
+    'Conferma Appuntamento' => 
+    array (
+      'heading' => 'Conferma Appuntamento',
+      'label' => 'Conferma Appuntamento',
+    ),
+  ),
 );

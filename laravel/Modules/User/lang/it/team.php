@@ -98,6 +98,10 @@ return array (
       'helper_text' => 'description',
       'placeholder' => 'description',
     ),
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
   ),
   'actions' => 
   array (
