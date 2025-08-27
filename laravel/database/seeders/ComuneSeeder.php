@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Modules\Geo\Models\Comune;
 
 class ComuneSeeder extends Seeder
 {
@@ -17,9 +16,8 @@ class ComuneSeeder extends Seeder
     {
         $this->command->info('🏘️  Seeding comuni italiani...');
 
-        // Crea comuni italiani di esempio
-        Comune::factory()->count(50)->create();
-
-        $this->command->info('✅ Creati 50 comuni italiani');
+        // Il modello Comune utilizza Sushi e carica i dati da file JSON
+        // Non è necessario creare comuni nel database
+        $this->command->info('✅ Modello Comune utilizza Sushi - dati caricati da file JSON');
     }
 }

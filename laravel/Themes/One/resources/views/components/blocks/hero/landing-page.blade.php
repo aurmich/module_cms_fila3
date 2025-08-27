@@ -232,7 +232,7 @@
     </div>
     <!-- FINE TERZA SECTION -->
     <!-- INIZIO QUARTA SECTION -->
-     <div class="mt-5">
+     <div class="mt-5" id="guide-section">
        <div class="w-full flex justify-center">
          <h1 class="text-[#FF5F7E] text-3xl">@lang('pub_theme::navigation.landing.additional_info.label')</h1>
        </div>
@@ -308,7 +308,7 @@
         <span class="text-white text-xl m-3">Home</span>
         <span class="text-white text-xl m-3">Progetto</span>
         <span class="text-white text-xl m-3">Partners</span>
-        <span class="text-white text-xl m-3">FAQ'S</span>
+        <span class="text-white text-xl m-3">FAQS</span>
       </div>
     </div> -->
     <!-- FINE FOOTER -->

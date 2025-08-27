@@ -1,0 +1,45 @@
+# Windsurf - Regola Critica Email nelle Factory
+
+## ⚠️ REGOLA ASSOLUTAMENTE VIETATA ⚠️
+**MAI utilizzare email fittizie come "@example.com" nelle factory**
+
+## Cosa NON Fare
+```php
+// ❌ VIETATO
+'email' => 'patient+'.uniqid('', true).'@example.com',
+'email' => 'user@example.com',
+'email' => 'test@test.com',
+```
+
+## Cosa Fare SEMPRE
+```php
+// ✅ OBBLIGATORIO
+'email' => $this->faker->unique()->safeEmail(),
+'email' => $this->faker->unique()->email(),
+'email' => $this->faker->unique()->freeEmail(),
+```
+
+## Pattern Corretto
+```php
+public function definition(): array
+{
+    return [
+        'name' => $this->faker->firstName(),
+        'last_name' => $this->faker->lastName(),
+        'email' => $this->faker->unique()->safeEmail(), // ✅ SEMPRE così
+    ];
+}
+```
+
+## Checklist
+- [ ] Ho rimosso tutte le email "@example.com"?
+- [ ] Ho usato sempre i faker appropriati?
+- [ ] Ho verificato l'unicità con `unique()`?
+
+---
+
+**⚠️ QUESTA REGOLA È SACRA E NON PUÒ ESSERE VIOLATA ⚠️**
+description:
+globs:
+alwaysApply: false
+---

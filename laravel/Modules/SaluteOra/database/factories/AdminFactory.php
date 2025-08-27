@@ -85,9 +85,9 @@ class AdminFactory extends UserFactory
             'account_locked_until' => null,
 
             // Contact and emergency information
-            'emergency_contact_admin' => $this->faker->optional(0.8)->name(),
-            'emergency_contact_phone' => $this->faker->optional(0.8)->phoneNumber(),
-            'backup_email' => $this->faker->optional(0.6)->unique()->safeEmail(),
+            'emergency_contact_admin' => $this->faker->optional(0.8)->passthrough($this->faker->name()),
+            'emergency_contact_phone' => $this->faker->optional(0.8)->passthrough($this->faker->phoneNumber()),
+            'backup_email' => $this->faker->optional(0.6)->passthrough($this->faker->unique()->safeEmail()),
 
             // Professional information
             'employee_id' => $this->faker->unique()->regexify('[A-Z]{2}[0-9]{4}'),

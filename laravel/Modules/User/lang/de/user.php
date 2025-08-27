@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return [
     'navigation' => [
@@ -20,19 +21,19 @@ return [
             'label' => 'Nome',
             'placeholder' => 'Inserisci il nome',
             'description' => 'name',
-            'helper_text' => 'name',
+            'helper_text' => '',
         ],
         'email' => [
             'label' => 'Email',
             'placeholder' => 'Inserisci l\'email',
             'description' => 'email',
-            'helper_text' => 'email',
+            'helper_text' => '',
         ],
         'password' => [
             'label' => 'Password',
             'placeholder' => 'Inserisci la password',
             'description' => 'password',
-            'helper_text' => 'password',
+            'helper_text' => '',
         ],
         'password_confirmation' => [
             'label' => 'Conferma Password',
@@ -149,6 +150,11 @@ return [
         'reset_link_sent' => 'Link per il reset della password inviato',
         'email_verified' => 'Email verificata con successo',
         'impersonating' => 'Stai impersonando l\'utente :name',
+        // Added for LoginWidget
+        'credentials_incorrect' => 'Die angegebenen Anmeldedaten sind nicht korrekt',
+        'login_success' => 'Anmeldung erfolgreich',
+        'validation_error' => 'Validierungsfehler',
+        'login_error' => 'Bei der Anmeldung ist ein Fehler aufgetreten. Versuchen Sie es später erneut',
     ],
     'validation' => [
         'email_unique' => 'Questa email è già in uso',

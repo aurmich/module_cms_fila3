@@ -24,9 +24,11 @@ class ChangePasswordHeaderAction extends Action
         $this->translateLabel()
             ->icon('heroicon-o-key')
             ->action(function (UserContract $record, array $data): void {
-                $record->update([
+                $old_password = $record->getAttribute('password');
+                $res=tap($record)->update([
                     'password' => Hash::make($data['new_password']),
                 ]);
+                
                 Notification::make()
                     ->success()
                     ->title(__('user::notifications.password_changed_successfully.title'))

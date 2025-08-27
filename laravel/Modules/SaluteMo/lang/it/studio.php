@@ -381,6 +381,7 @@ return array (
     'address' => 
     array (
       'heading' => 'address',
+      'label' => 'address',
     ),
   ),
 );

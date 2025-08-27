@@ -72,6 +72,7 @@
         "orchestra/testbench": "*",
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest-plugin-type-coverage": "^3.6",
         "thecodingmachine/phpstan-safe-rule": "*"
     },
     "require-dev_comment": {

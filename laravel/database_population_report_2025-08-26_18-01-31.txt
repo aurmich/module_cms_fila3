@@ -1,0 +1,23 @@
+REPORT POPOLAMENTO DATABASE - 2025-08-26 18:01:31
+Tempo esecuzione: 1.3s
+Record totali: 23,000
+Seeder completati: 8
+Seeder falliti: 6
+
+Seeder completati:
+User\Database\Seeders\UserDatabaseSeeder
+User\Database\Seeders\RolesSeeder
+SaluteOra\Database\Seeders\PatientDatabaseSeeder
+SaluteOra\Database\Seeders\DentalDatabaseSeeder
+SaluteOra\Database\Seeders\ReportingDatabaseSeeder
+Gdpr\Database\Seeders\GdprDatabaseSeeder
+Notify\Database\Seeders\NotifyDatabaseSeeder
+Media\Database\Seeders\MediaDatabaseSeeder
+
+Seeder falliti:
+User\Database\Seeders\PermissionsSeeder (SQLSTATE[42S02]: Base table or view not found: 1146 Table 'saluteora_data.permissions' doesn't exist (Connection: mysql, SQL: select * from `permissions` where (`name` = moderate_doctors and `guard_name` = web and `description` = Può moderare le registrazioni dei medici) limit 1))
+Geo\Database\Seeders\GeoDatabaseSeeder (SQLSTATE[42S02]: Base table or view not found: 1146 Table 'saluteora_data.provinces' doesn't exist (Connection: mysql, SQL: insert into `provinces` (`created_at`, `name`, `region_id`, `updated_at`) values (2025-08-26 18:01:30, Torino, 2, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Varese, 9, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Fermo, 6, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Como, 5, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Bari, 17, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Potenza, 11, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Messina, 8, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Salerno, 3, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Siracusa, 1, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Lodi, 6, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Oristano, 7, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Livorno, 12, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Cosenza, 5, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Venezia, 10, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Ogliastra, 19, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Verona, 13, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Pistoia, 20, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Pavia, 7, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Lecco, 6, 2025-08-26 18:01:30), (2025-08-26 18:01:30, Rovigo, 7, 2025-08-26 18:01:30)))
+SaluteOra\Database\Seeders\MassDataSeeder (SQLSTATE[42S22]: Column not found: 1054 Unknown column 'display_name' in 'field list' (Connection: user, SQL: insert into `teams` (`name`, `display_name`, `description`, `updated_at`, `created_at`) values (Sistema, Team di Sistema, Team per la gestione del sistema, 2025-08-26 18:01:30, 2025-08-26 18:01:30)))
+SaluteOra\Database\Seeders\SaluteOraDatabaseSeeder (Undefined array key "NA")
+Activity\Database\Seeders\ActivityMassSeeder (Call to undefined method Modules\Activity\Models\Activity::factory())
+Cms\Database\Seeders\CmsMassSeeder (SQLSTATE[HY000]: General error: 1 table modules has no column named is_active (Connection: , SQL: insert into "modules" ("name", "is_active", "created_at") values (Edvige D'amico, 1, 2025-04-23 18:01:31)))

@@ -31,8 +31,20 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - **CRITICAL RULE**: Prima devi far funzionare TUTTI i test esistenti nei moduli. Se trovi test fatti in PHPUnit, convertili in Pest.
 - Concentrati SOLO sui test esistenti che devono passare la validazione prima di fare qualsiasi nuovo test.
 - Una volta che tutti i test esistenti funzionano e passano, allora si possono fare nuovi test.
-- **IMPORTANTE**: NON usare mai RefreshDatabase nei test! I test usano il database configurato in .env.testing, ma senza RefreshDatabase.
+- **REGOLA ASSOLUTA - ZERO ECCEZIONI**: NON usare MAI RefreshDatabase nei test! ASSOLUTAMENTE VIETATO in qualsiasi contesto. I test usano il database configurato senza RefreshDatabase. Linter e IDE possono suggerirlo automaticamente - SEMPRE RIMUOVERE.
 - **IMPORTANTE**: Non fare test stupidi sui modelli! I modelli sono "slim". Non testare fillable, casts, relationships basilari.
+- **CRITICO**: BaseModel con trait complessi (HasMedia, Updater, etc.) non possono essere istanziati direttamente nei test. Usare pattern Reflection con `newInstanceWithoutConstructor()` per evitare `BindingResolutionException`.
+- **PATTERN TESTING IN-MEMORY**: Per test puri senza database, usare oggetti semplici invece di modelli Eloquent:
+  ```php
+  // Invece di: $patient = Patient::factory()->create();
+  $patient = (object) ['id' => 1, 'type' => 'patient'];
+  ```
+- **EVITARE FAKE FORMATS**: Non usare metodi Faker personalizzati (`pickOne`, `pickMany`) nei test. Usare valori fissi o metodi Faker standard.
+- **TEST CONCETTUALI**: Per interfacce e trait complessi, testare concettualmente senza istanziazione:
+  ```php
+  expect(method_exists(BaseModel::class, 'getMedia'))->toBeTrue();
+  expect(is_subclass_of(BaseModel::class, HasMedia::class))->toBeTrue();
+  ```
 
 ## REGOLA FONDAMENTALE DI TESTING
 - **IL TESTING DEVE VERIFICARE IL COMPORTAMENTO BUSINESS, NON L'IMPLEMENTAZIONE!**

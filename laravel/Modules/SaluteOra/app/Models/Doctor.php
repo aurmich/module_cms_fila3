@@ -208,6 +208,7 @@ class Doctor extends User implements HasMedia
         'status',
         'country_code',
         'data_privacy_form',
+        'password',
     ];
 
     /** @var list<string> */

@@ -11,6 +11,7 @@ use Modules\SaluteOra\States\User\Active;
 use Modules\SaluteOra\States\User\Pending;
 use Illuminate\Support\Facades\Notification;
 use Modules\Notify\Datas\RecordNotificationData;
+use Modules\User\Actions\User\GetNewPasswordAction;
 use Modules\Notify\Notifications\RecordNotification;
 use Modules\SaluteOra\States\User\IntegrationCompleted;
 use Modules\SaluteOra\States\User\IntegrationRequested;
@@ -27,8 +28,7 @@ class IntegrationCompletedToActive extends BaseTransition
 
     public function getNotificationData(): array{
         $user=$this->record;
-        $password=Str::random(10);
-        $user->update(['password'=>$password]);
+        $password=app(GetNewPasswordAction::class)->execute($user);
         return [
             'message' => $this->message,
             'password' => $password,
@@ -45,8 +45,8 @@ class IntegrationCompletedToActive extends BaseTransition
         //dddx($record->type==UserTypeEnum::PATIENT);
         return [
             // 'me' => $this->record,
-            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             'me_sms' => RecordNotificationData::from(['record' => $record, 'channel' => 'sms']),
+            'me_mail' => RecordNotificationData::from(['record' => $record, 'channel' => 'mail']),
             // 'patient' => $this->record->patient,
             // 'doctor' => $this->record->doctor,
             // 'patient_mail' => RecordNotificationData::from(['record' => $record->patient, 'channel' => 'mail']),

@@ -30,6 +30,13 @@ class Region extends BaseModel
     use \Sushi\Sushi;
 
     /**
+     * The factory class for this model.
+     *
+     * @var class-string<\Illuminate\Database\Eloquent\Factories\Factory>
+     */
+    protected static $factory = \Modules\Geo\Database\Factories\RegionFactory::class;
+
+    /**
      * The data type of the primary key ID.
      *
      * @var string

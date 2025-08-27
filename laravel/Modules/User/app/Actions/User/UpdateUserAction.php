@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\QueueableAction\QueueableAction;
 use Illuminate\Validation\ValidationException;
 use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
@@ -19,6 +20,7 @@ use Modules\Xot\Actions\Cast\SafeStringCastAction;
  */
 class UpdateUserAction
 {
+    use QueueableAction;
     /**
      * Esegue l'aggiornamento dell'utente.
      * 

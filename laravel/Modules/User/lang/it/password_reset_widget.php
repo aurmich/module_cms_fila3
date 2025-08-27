@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return array (
   'fields' => 
@@ -7,7 +8,7 @@ return array (
     array (
       'label' => 'email',
       'placeholder' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
       'description' => 'email',
     ),
   ),

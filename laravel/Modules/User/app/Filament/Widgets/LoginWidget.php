@@ -109,14 +109,14 @@ class LoginWidget extends XotBaseWidget
             
             if (!Auth::attempt($attempt_data, $remember)) {
                 throw ValidationException::withMessages([
-                    'email' => [__('Le credenziali fornite non sono corrette.')],
+                    'email' => [__('user::messages.credentials_incorrect')],
                 ]);
             }
 
             session()->regenerate();
             
             Notification::make()
-                ->title('Accesso effettuato con successo')
+                ->title(__('user::messages.login_success'))
                 ->success()
                 ->send();
                 
@@ -124,7 +124,7 @@ class LoginWidget extends XotBaseWidget
             
         } catch (ValidationException $e) {
             Notification::make()
-                ->title('Errore di validazione')
+                ->title(__('user::messages.validation_error'))
                 ->body($e->getMessage())
                 ->danger()
                 ->send();
@@ -143,8 +143,8 @@ class LoginWidget extends XotBaseWidget
             report($e);
             
             Notification::make()
-                ->title('Errore durante il login')
-                ->body(__('Si è verificato un errore durante il login. Riprova più tardi.'))
+                ->title(__('user::messages.login_error'))
+                ->body(__('user::messages.login_error'))
                 ->danger()
                 ->send();
                 
@@ -152,7 +152,7 @@ class LoginWidget extends XotBaseWidget
             $this->form->saveRelationships();
             //$this->form->callAfter();
             
-            $this->addError('email', __('Si è verificato un errore durante il login. Riprova più tardi.'));
+            $this->addError('email', __('user::messages.login_error'));
         }
     }
     

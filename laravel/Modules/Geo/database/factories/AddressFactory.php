@@ -20,19 +20,19 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'street' => $this->faker->streetName(),
-            'number' => $this->faker->buildingNumber(),
-            'zip' => $this->faker->postcode(),
-            'city' => $this->faker->city(),
+            'route' => $this->faker->streetName(),
+            'street_number' => $this->faker->buildingNumber(),
+            'postal_code' => $this->faker->postcode(),
+            'locality' => $this->faker->city(),
             // Use explicit Italian regions to avoid calling unavailable faker->state()
-            'state' => $this->faker->randomElement([
+            'administrative_area_level_1' => $this->faker->randomElement([
                 'Lombardia', 'Lazio', 'Campania', 'Sicilia', 'Veneto',
                 'Piemonte', 'Toscana', 'Emilia-Romagna', 'Puglia', 'Calabria',
             ]),
             'country' => 'IT',
             'latitude' => $this->faker->latitude(35.0, 47.0), // Italy bounds
             'longitude' => $this->faker->longitude(6.0, 19.0),
-            'comune_id' => Comune::factory(),
+            'formatted_address' => $this->faker->address(),
         ];
     }
 
@@ -40,7 +40,7 @@ class AddressFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'country' => 'IT',
-            'state' => $this->faker->randomElement(['Lombardia', 'Lazio', 'Campania', 'Sicilia', 'Veneto']),
+            'administrative_area_level_1' => $this->faker->randomElement(['Lombardia', 'Lazio', 'Campania', 'Sicilia', 'Veneto']),
         ]);
     }
 }

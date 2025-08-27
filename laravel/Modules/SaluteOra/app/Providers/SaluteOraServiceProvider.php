@@ -19,6 +19,7 @@ use Modules\SaluteOra\Filament\Resources\SaluteOraResource;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\SaluteOra\Providers\Filament\AdminPanelProvider;
 use Modules\SaluteOra\Console\Commands\CheckDirectoryStructure;
+use Modules\SaluteOra\Console\Commands\PopulateDatabaseCommand;
 use Modules\SaluteOra\Models\User;
 use Spatie\ModelStates\State;
 
@@ -27,8 +28,18 @@ class SaluteOraServiceProvider extends XotBaseServiceProvider
     public string $name = 'SaluteOra';
     protected string $moduleName = 'SaluteOra';
    
-
-   
-    
-   
+    /**
+     * Boot the application events.
+     */
+    public function boot(): void
+    {
+        parent::boot();
+        
+        // Registra i comandi console
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PopulateDatabaseCommand::class,
+            ]);
+        }
+    }
 }

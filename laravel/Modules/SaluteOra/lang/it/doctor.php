@@ -127,12 +127,12 @@ return array (
       'description' => 'Data privacy form',
       'label' => 'Data privacy form',
       'placeholder' => 'Data privacy form',
-      'helper_text' => 'Data privacy form',
+      'helper_text' => '',
     ),
     'Privacy acceptance' => 
     array (
       'description' => 'Privacy acceptance',
-      'helper_text' => 'Privacy acceptance',
+      'helper_text' => '',
       'placeholder' => 'Privacy acceptance',
       'label' => 'Privacy acceptance',
     ),
@@ -140,42 +140,42 @@ return array (
     array (
       'label' => 'Id',
       'placeholder' => 'Id',
-      'helper_text' => 'Id',
+      'helper_text' => '',
       'description' => 'Id',
     ),
     'First name' => 
     array (
       'label' => 'First name',
       'placeholder' => 'First name',
-      'helper_text' => 'First name',
+      'helper_text' => '',
       'description' => 'First name',
     ),
     'Last name' => 
     array (
       'label' => 'Last name',
       'placeholder' => 'Last name',
-      'helper_text' => 'Last name',
+      'helper_text' => '',
       'description' => 'Last name',
     ),
     'Email' => 
     array (
       'label' => 'Email',
       'placeholder' => 'Email',
-      'helper_text' => 'Email',
+      'helper_text' => '',
       'description' => 'Email',
     ),
     'Doctor certificate' => 
     array (
       'label' => 'Doctor certificate',
       'placeholder' => 'Doctor certificate',
-      'helper_text' => 'Doctor certificate',
+      'helper_text' => '',
       'description' => 'Doctor certificate',
     ),
     'Schedule' => 
     array (
       'label' => 'Schedule',
       'placeholder' => 'Schedule',
-      'helper_text' => 'Schedule',
+      'helper_text' => '',
       'description' => 'Schedule',
     ),
   ),
@@ -863,7 +863,7 @@ return array (
     'privacy_acceptance' => 
     array (
       'description' => 'privacy_acceptance',
-      'helper_text' => 'privacy_acceptance',
+      'helper_text' => '',
       'label' => 'privacy_acceptance',
       'placeholder' => 'privacy_acceptance',
     ),
@@ -874,7 +874,7 @@ return array (
     array (
       'label' => 'id',
       'placeholder' => 'id',
-      'helper_text' => 'id',
+      'helper_text' => '',
       'description' => 'id',
     ),
   ),
@@ -884,21 +884,21 @@ return array (
     array (
       'label' => 'first_name',
       'placeholder' => 'first_name',
-      'helper_text' => 'first_name',
+      'helper_text' => '',
       'description' => 'first_name',
     ),
     'last_name' => 
     array (
       'label' => 'last_name',
       'placeholder' => 'last_name',
-      'helper_text' => 'last_name',
+      'helper_text' => '',
       'description' => 'last_name',
     ),
     'email' => 
     array (
       'label' => 'email',
       'placeholder' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
       'description' => 'email',
     ),
   ),
@@ -908,14 +908,14 @@ return array (
     array (
       'label' => 'doctor_certificate',
       'placeholder' => 'doctor_certificate',
-      'helper_text' => 'doctor_certificate',
+      'helper_text' => '',
       'description' => 'doctor_certificate',
     ),
     'data_privacy_form' => 
     array (
       'label' => 'data_privacy_form',
       'placeholder' => 'data_privacy_form',
-      'helper_text' => 'data_privacy_form',
+      'helper_text' => '',
       'description' => 'data_privacy_form',
     ),
   ),
@@ -925,7 +925,7 @@ return array (
     array (
       'label' => 'schedule',
       'placeholder' => 'schedule',
-      'helper_text' => 'schedule',
+      'helper_text' => '',
       'description' => 'schedule',
     ),
   ),

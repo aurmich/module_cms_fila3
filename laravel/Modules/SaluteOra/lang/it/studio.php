@@ -448,42 +448,42 @@ return array (
     array (
       'label' => 'name',
       'placeholder' => 'name',
-      'helper_text' => 'name',
+      'helper_text' => '',
       'description' => 'name',
     ),
     'phone' => 
     array (
       'label' => 'phone',
       'placeholder' => 'phone',
-      'helper_text' => 'phone',
+      'helper_text' => '',
       'description' => 'phone',
     ),
     'email' => 
     array (
       'label' => 'email',
       'placeholder' => 'email',
-      'helper_text' => 'email',
+      'helper_text' => '',
       'description' => 'email',
     ),
     'website' => 
     array (
       'label' => 'website',
       'placeholder' => 'website',
-      'helper_text' => 'website',
+      'helper_text' => '',
       'description' => 'website',
     ),
     'registration_number' => 
     array (
       'label' => 'registration_number',
       'placeholder' => 'registration_number',
-      'helper_text' => 'registration_number',
+      'helper_text' => '',
       'description' => 'registration_number',
     ),
     'vat_number' => 
     array (
       'label' => 'vat_number',
       'placeholder' => 'vat_number',
-      'helper_text' => 'vat_number',
+      'helper_text' => '',
       'description' => 'vat_number',
     ),
   ),
@@ -493,7 +493,7 @@ return array (
     array (
       'label' => 'description',
       'placeholder' => 'description',
-      'helper_text' => 'description',
+      'helper_text' => '',
       'description' => 'description',
     ),
   ),

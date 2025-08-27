@@ -101,8 +101,12 @@ User/
 - [Best Practices](./best-practices/README.md)
 - [Error Handling](./error-handling.md)
 - [Validation](./validation.md)
+- [Popolamento Database](./database-population.md)
 - [Linee guida Actions](./actions.mdc)
 - [Linee guida Activitylog](./activitylog.mdc)
+- [Comandi Console](./console_commands/README.md)
+- [ChangePasswordCommand](./console_commands/change-password-command.md)
+- [Filosofia Comandi Console](./console_commands/console_commands_philosophy.md)
 
 ## Collegamenti Bidirezionali
 - [Modulo Xot](../Xot/docs/README.md)

@@ -17,6 +17,7 @@
                 <div class="text-center m-1 lg:m-6 md:text-right space-x-4">
                 <a href="{{ route('home') }}" class="text-white text-md m-1">@lang('pub_theme::navigation.main_menu.home.label')</a>
                 <a href="/{{ $lang }}/pages/progetto" class="text-white text-md m-1">@lang('pub_theme::navigation.main_menu.project.label')</a>
+                <a class="text-white text-md m-1">Cookie Policy</a>
                 </div>
             </div>
             <a href="{{ route('home') }}">

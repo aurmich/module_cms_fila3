@@ -20,7 +20,7 @@ trait TransTrait
     public static function trans(string $key, bool $exceptionIfNotExist = false): string
     {
         $tmp = static::getKeyTrans($key);
-        /** @var string|array<int|string,mixed>|null $res */
+        /** @var array|\Illuminate\Contracts\Translation\Translator|string $res */
         $res = trans($tmp);
 
         if (is_string($res)) {
@@ -181,6 +181,8 @@ trait TransTrait
      */
     protected function transChoice(string $key, int $number, array $replace = []): string
     {
-        return trans_choice($key, $number, $replace) ?? $key;
+        $result = trans_choice($key, $number, $replace);
+        //@phpstan-ignore-next-line
+        return is_string($result) ? $result : $key;
     }
 }

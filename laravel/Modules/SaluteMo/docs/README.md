@@ -180,6 +180,68 @@ Standard error codes and messages for mobile clients.
 
 Run tests with: `php artisan test modules/SaluteMo`
 
+Or use Pest directly: `./vendor/bin/pest Modules/SaluteMo`
+
+### Test Documentation
+
+- [Testing Guide](testing.md) - General testing guidelines and best practices
+- [Appointment Business Logic Testing](appointment-business-logic-testing.md) - Comprehensive testing of appointment management business rules
+- [Common Testing Errors](common-testing-errors.md) - Solutions to common testing problems and error patterns
+- [Test Coverage Business Logic](test-coverage-business-logic.md) - Overview of business logic testing approach
+
+### Test Categories
+
+The module includes comprehensive testing for:
+
+1. **Feature Tests**: API endpoints, business logic, and user workflows
+2. **Unit Tests**: Individual components and services
+3. **Business Logic Tests**: Appointment management rules and constraints
+4. **Integration Tests**: Cross-module functionality and relationships
+
+### Running Specific Tests
+
+```bash
+# Run all tests
+./vendor/bin/pest Modules/SaluteMo
+
+# Run specific test file
+./vendor/bin/pest Modules/SaluteMo/tests/Feature/AppointmentBusinessLogicTest.php
+
+# Run with verbose output
+./vendor/bin/pest Modules/SaluteMo --verbose
+
+# Run specific test by name
+./vendor/bin/pest Modules/SaluteMo --filter="it validates appointment time constraints"
+```
+
+### Test Performance
+
+- **Business Logic Tests**: 1-10ms per test (optimal for CI/CD)
+- **Unit Tests**: 1-5ms per test (fastest execution)
+- **Database Tests**: 100-500ms per test (when necessary)
+
+### Common Testing Patterns
+
+#### Pure Business Logic Tests (No Database)
+```php
+uses(TestCase::class); // No RefreshDatabase
+
+it('validates business rules', function () {
+    $data = (object) ['id' => 1, 'status' => 'active'];
+    expect($data->status)->toBe('active');
+});
+```
+
+#### Database Integration Tests
+```php
+uses(TestCase::class, RefreshDatabase::class);
+
+it('creates database record', function () {
+    $model = Model::factory()->create();
+    expect($model->exists)->toBeTrue();
+});
+```
+
 ## Deployment
 
 Deployment instructions for mobile-specific services.

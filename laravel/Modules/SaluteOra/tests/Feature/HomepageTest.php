@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-uses(Tests\TestCase::class);
+namespace Modules\SaluteOra\Tests\Feature;
+
+use Modules\SaluteOra\Tests\TestCase;
+
+uses(TestCase::class);
 
 describe('Homepage Business Logic', function () {
     it('redirects root path to localized homepage', function () {

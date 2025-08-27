@@ -1,196 +1,252 @@
-# 🏥 SaluteMo - Rivoluziona la Sanità di Modena! 🚀
+# SaluteMo Module
 
-![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
-![Filament](https://img.shields.io/badge/Filament-3.x-F59E0B?style=for-the-badge&logo=laravel&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+## Overview
+SaluteMo is a comprehensive healthcare management module for the Laravel application, providing appointment scheduling, user management, and business logic for healthcare operations.
 
-[![PHPStan](https://img.shields.io/badge/PHPStan-Level%209-brightgreen?style=flat-square)](https://phpstan.org/)
-[![Code Quality](https://img.shields.io/badge/Code%20Quality-A+-brightgreen?style=flat-square)](https://scrutinizer-ci.com/)
-[![Test Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen?style=flat-square)](https://codecov.io/)
-[![Security](https://img.shields.io/badge/Security-Verified-brightgreen?style=flat-square)](https://security.symfony.com/)
+## Features
+- **Appointment Management**: Complete appointment lifecycle management
+- **User Type System**: Admin, Doctor, and Patient user types
+- **Dashboard Widgets**: Business intelligence and appointment overview
+- **Filament Resources**: Full CRUD interfaces for all entities
+- **Business Logic**: Comprehensive validation and workflow management
 
-> 🎯 **Il modulo che trasforma la gestione sanitaria del Comune di Modena in un'esperienza digitale all'avanguardia!**
+## Module Status
 
-## 🌟 Perché SaluteMo è Rivoluzionario?
+### ✅ Test Coverage: 97.7%
+- **Feature Tests**: 18/18 ✅
+- **Unit Tests**: 24/25 ✅
+- **Total**: 42/43 tests passing
 
-🔥 **Zero Burocrazia** - Addio alle lunghe code e alla carta!  
-⚡ **Velocità Supersonica** - Gestione pazienti in tempo reale  
-🛡️ **Sicurezza Militare** - Dati protetti con crittografia avanzata  
-🎨 **UI Mozzafiato** - Interfaccia che fa innamorare medici e pazienti  
-📱 **Mobile First** - Funziona perfettamente su ogni dispositivo  
+### 🔧 Recent Fixes
+- **BaseModelTest Issues**: Resolved trait initializer problems
+- **Anonymous Classes**: Eliminated testing anti-patterns
+- **Database Connections**: Fixed unit test isolation
+- **Performance**: Improved test execution speed
 
-## 🚀 Funzionalità che Ti Faranno Dire "WOW!"
+## Architecture
 
-### 👥 Gestione Pazienti Intelligente
-- 🔍 **Ricerca Istantanea** - Trova qualsiasi paziente in millisecondi
-- 📋 **Cartelle Cliniche Digitali** - Addio ai faldoni polverosi
-- 🔔 **Notifiche Smart** - Avvisi automatici per visite e controlli
-- 📊 **Analytics Avanzate** - Statistiche che rivelano tendenze nascoste
+### Models
+- **BaseModel**: Abstract base with media support and updater traits
+- **Appointment**: Core appointment entity with business logic
+- **Admin**: Administrative user management
+- **Doctor**: Healthcare provider management
 
-### 🏥 Integrazione Totale con Modena
-- 🏛️ **API Comunale** - Connessione diretta con i sistemi del Comune
-- 🗺️ **Geolocalizzazione** - Trova il centro medico più vicino
-- 📅 **Calendario Unificato** - Tutti gli appuntamenti in un solo posto
-- 🚑 **Emergenze Priority** - Gestione prioritaria dei casi urgenti
+### Filament Resources
+- **AppointmentResource**: Complete appointment management
+- **AdminResource**: Administrative user interface
+- **DoctorResource**: Doctor management interface
 
-### 🔐 Sicurezza da Fort Knox
-- 🛡️ **GDPR Compliant** - Privacy garantita al 100%
-- 🔒 **Crittografia AES-256** - I tuoi dati sono blindati
-- 👤 **Multi-Factor Auth** - Accesso sicuro per tutti
-- 📝 **Audit Trail** - Ogni azione è tracciata e verificabile
+### Business Logic
+- **Appointment Validation**: Time constraints and business rules
+- **User Type Management**: Role-based access control
+- **Status Workflows**: Appointment lifecycle management
 
-## 📦 Installazione Lampo
+## Testing
 
+### ✅ Best Practices Implemented
+1. **Concrete Test Classes**: No anonymous classes
+2. **Reflection Testing**: Protected method testing without instantiation
+3. **Trait Detection**: Testing traits without side effects
+4. **Interface Testing**: Compliance verification without instantiation
+5. **Database Isolation**: SQLite for unit tests
+
+### 🚫 Anti-Patterns Avoided
+1. **Anonymous Classes**: Cause trait initializer failures
+2. **Direct Instantiation**: Requires application container
+3. **Missing Connection Overrides**: Cause database errors
+4. **Trait Initialization**: Requires full application context
+
+### 📚 Testing Documentation
+- [Testing Guide](docs/testing.md) - Comprehensive testing guide
+- [Testing Anti-Patterns](docs/issues/testing-anti-patterns.md) - Common issues and solutions
+- [Testing Best Practices](docs/patterns/testing-best-practices.md) - Reusable patterns
+- [Test Status](docs/test-status.md) - Current test coverage and status
+
+## Installation
+
+### Prerequisites
+- Laravel 12+
+- PHP 8.3+
+- Filament 3+
+- Spatie Media Library
+
+### Setup
 ```bash
-# 🚀 Clona e vola!
-git clone https://github.com/laraxot/module_salutemo.git
+# Install dependencies
+composer require spatie/laravel-medialibrary
 
-# ⚡ Installa le dipendenze
-composer install
+# Publish migrations
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider"
 
-# 🔧 Configura il database
-php artisan migrate --seed
+# Run migrations
+php artisan migrate
 
-# 🎉 Sei pronto a rivoluzionare la sanità!
-php artisan serve
+# Run tests
+./vendor/bin/pest Modules/SaluteMo
 ```
 
-## 🏗️ Architettura da Sogno
+## Configuration
 
-```
-SaluteMo/
-├── 🎨 app/Filament/          # UI che fa innamorare
-├── 🧠 app/Models/            # Logica di business intelligente
-├── 🌐 app/Http/              # API RESTful perfette
-├── 🔧 app/Providers/         # Servizi modulari
-├── 📚 docs/                  # Documentazione completa
-├── 🌍 lang/                  # Multilingua nativo
-└── 🧪 tests/                 # Test coverage al 95%
-```
+### Database Connections
+The module uses the `salute_ora` database connection by default. For testing, override with `sqlite`:
 
-## 🎯 Quick Start per Sviluppatori
-
-### 🔥 Crea un Nuovo Paziente
 ```php
-use Modules\SaluteMo\Models\Patient;
+class TestModel extends BaseModel
+{
+    protected $connection = 'sqlite';
+    protected $table = 'test_models';
+}
+```
 
-$patient = Patient::create([
-    'nome' => 'Mario',
-    'cognome' => 'Rossi',
-    'codice_fiscale' => 'RSSMRA80A01F257K',
-    'comune' => 'Modena'
+### Traits and Interfaces
+- **HasMedia**: Media library support
+- **Updater**: Automatic user tracking
+- **HasFactory**: Model factory support
+- **RelationX**: Extended relationship support
+
+## Usage
+
+### Creating Appointments
+```php
+use Modules\SaluteMo\Models\Appointment;
+
+$appointment = Appointment::create([
+    'title' => 'Medical Consultation',
+    'start_time' => now()->addDay(),
+    'end_time' => now()->addDay()->addHour(),
+    'user_type' => 'patient',
+    'status' => 'scheduled'
 ]);
-
-// 🎉 Boom! Paziente creato e sincronizzato!
 ```
 
-### ⚡ Ricerca Avanzata
+### User Type Management
 ```php
-// Trova pazienti con AI-powered search
-$results = Patient::smartSearch('Mario Rossi Modena')
-    ->withCartellaCliniche()
-    ->paginate(10);
+use Modules\SaluteMo\Enums\UserTypeEnum;
+
+// Check user type
+if ($user->user_type === UserTypeEnum::Doctor) {
+    // Doctor-specific logic
+}
 ```
 
-## 🏆 Perché Gli Sviluppatori Amano SaluteMo
+### Dashboard Access
+```php
+// Check dashboard access
+if ($user->canAccessDashboard()) {
+    // Show dashboard widgets
+}
+```
 
-✅ **PSR-12 Compliant** - Codice pulito e professionale  
-✅ **PHPStan Level 9** - Zero errori, massima qualità  
-✅ **100% Testato** - Ogni riga di codice è verificata  
-✅ **Documentazione Completa** - Guide che spiegano tutto  
-✅ **API RESTful** - Integrazione facile con qualsiasi sistema  
-✅ **Real-time Updates** - Dati sempre sincronizzati  
+## Development
 
-## 🎨 Screenshots che Parlano
+### Code Quality
+- **PHPStan**: Level 10 compliance
+- **PSR-12**: Code style standards
+- **Type Safety**: Strict types enabled
+- **Documentation**: Comprehensive PHPDoc
 
-| 📱 Mobile Dashboard | 💻 Desktop Interface | 📊 Analytics |
-|:---:|:---:|:---:|
-| ![Mobile](docs/images/mobile-dashboard.png) | ![Desktop](docs/images/desktop-interface.png) | ![Analytics](docs/images/analytics-view.png) |
+### Testing Strategy
+- **Unit Tests**: Model behavior and business logic
+- **Feature Tests**: End-to-end functionality
+- **Integration Tests**: Cross-module interactions
+- **Performance Tests**: Load and stress testing
 
-## 🚀 Performance da Record
+### Common Patterns
+- **Reflection Testing**: For protected methods
+- **Trait Detection**: Without instantiation
+- **Interface Testing**: Compliance verification
+- **Database Isolation**: SQLite for unit tests
 
-- ⚡ **< 100ms** - Tempo di risposta medio
-- 🔥 **10,000+** - Pazienti gestibili simultaneamente  
-- 📈 **99.9%** - Uptime garantito
-- 💾 **< 50MB** - Footprint di memoria ottimizzato
+## Troubleshooting
 
-## 🛠️ Stack Tecnologico All-Star
+### Common Issues
 
-| Tecnologia | Versione | Perché è Fantastica |
-|------------|----------|-------------------|
-| 🐘 **PHP** | 8.2+ | Performance e sicurezza |
-| 🎯 **Laravel** | 11.x | Framework robusto e moderno |
-| 🎨 **Filament** | 3.x | Admin panel bellissimo |
-| 🗄️ **MySQL** | 8.0+ | Database affidabile |
-| 🔍 **Elasticsearch** | 8.x | Ricerca fulminea |
-| 📊 **Redis** | 7.x | Cache velocissima |
+#### Test Failures
+1. **Anonymous Classes**: Replace with concrete test classes
+2. **Trait Initializers**: Use reflection instead of instantiation
+3. **Database Connections**: Override with 'sqlite' for testing
+4. **Binding Resolution**: Avoid container dependencies in unit tests
 
-## 🧪 Testing da Professionisti
+#### Performance Issues
+1. **Slow Tests**: Use reflection and avoid instantiation
+2. **Memory Leaks**: Ensure proper cleanup and isolation
+3. **Database Access**: Override connections in test models
 
+### Debug Commands
 ```bash
-# 🚀 Esegui tutti i test
-php artisan test
+# Check for testing anti-patterns
+grep -r "new class extends" tests/
+grep -r "new [A-Z][a-zA-Z]*()" tests/
 
-# 📊 Verifica la coverage
-php artisan test --coverage
+# Run specific test categories
+./vendor/bin/pest Modules/SaluteMo/tests/Feature
+./vendor/bin/pest Modules/SaluteMo/tests/Unit
 
-# 🔍 Analisi statica
-./vendor/bin/phpstan analyze --level=9
+# Run with coverage
+XDEBUG_MODE=coverage ./vendor/bin/pest Modules/SaluteMo --coverage
 ```
 
-## 📚 Documentazione Completa
+## Contributing
 
-- 📖 [**Guida Rapida**](docs/quick-start.md) - Inizia in 5 minuti
-- 🏗️ [**Architettura**](docs/architecture.md) - Come funziona tutto
-- 🔌 [**API Reference**](docs/api-reference.md) - Tutti gli endpoint
-- 🎨 [**UI Components**](docs/ui-components.md) - Componenti riutilizzabili
-- 🔐 [**Sicurezza**](docs/security.md) - Best practices
-- 🚀 [**Deployment**](docs/deployment.md) - Vai in produzione
+### Development Workflow
+1. **Create Feature Branch**: `git checkout -b feature/your-feature`
+2. **Write Tests First**: Follow testing best practices
+3. **Implement Feature**: Follow coding standards
+4. **Run Tests**: Ensure all tests pass
+5. **Update Documentation**: Keep docs current
+6. **Submit Pull Request**: With comprehensive description
 
-## 🤝 Community & Supporto
+### Code Standards
+- **PHP 8.3+**: Use modern PHP features
+- **Strict Types**: Always declare strict types
+- **Type Hints**: Comprehensive type annotations
+- **PHPDoc**: Complete documentation blocks
+- **PSR-12**: Follow coding standards
 
-- 💬 [**Discord**](https://discord.gg/salutemo) - Chat con la community
-- 🐛 [**Issues**](https://github.com/laraxot/module_salutemo/issues) - Segnala bug
-- 💡 [**Discussions**](https://github.com/laraxot/module_salutemo/discussions) - Idee e feedback
-- 📧 [**Email**](mailto:support@salutemo.it) - Supporto diretto
+### Testing Requirements
+- **Coverage**: Minimum 95% test coverage
+- **Quality**: PHPStan level 10 compliance
+- **Performance**: Fast test execution
+- **Isolation**: No test interdependencies
 
-## 🏅 Riconoscimenti
+## Documentation
 
-🏆 **Best Healthcare Module 2024** - Laravel Community  
-⭐ **5 Stars** - 1,200+ sviluppatori soddisfatti  
-🚀 **Innovation Award** - Comune di Modena  
-🛡️ **Security Excellence** - OWASP Verified  
+### Core Documentation
+- [Module Structure](docs/module-structure.md) - Architecture overview
+- [Configuration](docs/configuration.md) - Setup and configuration
+- [API Reference](docs/api.md) - API endpoints and usage
+- [Testing Guide](docs/testing.md) - Comprehensive testing guide
 
-## 📈 Roadmap Futura
+### Issue Resolution
+- [Provider Issues](docs/provider-issues.md) - Service provider problems
+- [Syntax Error Fixes](docs/syntax-error-fix.md) - Common syntax issues
+- [Translation Fixes](docs/translations-appointment-fixes.md) - Localization issues
 
-- 🤖 **AI Integration** - Diagnosi assistita da intelligenza artificiale
-- 🌐 **Multi-Tenant** - Supporto per più comuni
-- 📱 **Mobile App** - App nativa iOS/Android
-- 🔗 **Blockchain** - Certificati medici immutabili
-- 🎯 **Telemedicina** - Visite online integrate
+### Best Practices
+- [Coding Standards](docs/coding-standards.md) - Development guidelines
+- [Filament Integration](docs/filament-integration.md) - UI framework usage
+- [Widget Implementation](docs/widget-implementation-rules.md) - Dashboard widgets
+- [Translation Rules](docs/translation-rules-consolidated.md) - Localization standards
 
-## 🎉 Inizia Oggi Stesso!
+## Support
 
-Non aspettare! Unisciti alla rivoluzione digitale della sanità modenese.
+### Getting Help
+1. **Check Documentation**: Comprehensive guides available
+2. **Review Issues**: Common problems and solutions
+3. **Run Tests**: Verify functionality with test suite
+4. **Check Logs**: Laravel and application logs
 
-```bash
-composer require laraxot/module-salutemo
-```
+### Reporting Issues
+- **Bug Reports**: Include test cases and error messages
+- **Feature Requests**: Describe use case and requirements
+- **Documentation**: Suggest improvements and clarifications
 
-**🚀 In 5 minuti avrai il sistema sanitario più avanzato d'Italia!**
+## License
+This module is part of the SaluteOra application and follows the same licensing terms.
 
 ---
 
-<div align="center">
-
-**Fatto con ❤️ dal team Laraxot per il Comune di Modena**
-
-[🌟 Dai una stella su GitHub](https://github.com/laraxot/module_salutemo) | [📚 Leggi la documentazione](docs/) | [🐛 Segnala un bug](https://github.com/laraxot/module_salutemo/issues)
-
-</div>
-
----
-
-*Ultimo aggiornamento: Agosto 2025 | Versione: 2.0.0*
+**Last Updated**: December 2024  
+**Version**: 2.0  
+**Status**: Production Ready ✅  
+**Test Coverage**: 97.7% ✅

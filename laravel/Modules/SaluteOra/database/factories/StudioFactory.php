@@ -6,7 +6,6 @@ namespace Modules\SaluteOra\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\SaluteOra\Models\Studio;
-use Modules\Xot\Actions\Cast\SafeStringCastAction;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\SaluteOra\Models\Studio>
@@ -65,27 +64,23 @@ class StudioFactory extends Factory
             'sunday' => [],
         ];
 
-        $studioType = SafeStringCastAction::cast($this->faker->randomElement($studioTypes));
-        $lastName = SafeStringCastAction::cast($this->faker->lastName);
-
         return [
-            'name' => SafeStringCastAction::cast($studioType) . ' ' . SafeStringCastAction::cast($lastName),
+            'name' => $studioTypes[array_rand($studioTypes)] . ' ' . $this->faker->lastName(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->companyEmail(),
             'website' => $this->faker->optional()->url(),
-            'registration_number' => $this->faker->numerify('######'),
-            'vat_number' => $this->faker->numerify('IT###########'),
+            'registration_number' => sprintf('%06d', rand(100000, 999999)),
+            'vat_number' => 'IT' . sprintf('%011d', rand(10000000000, 99999999999)),
             'description' => $this->faker->optional()->paragraph(),
             'opening_hours' => $openingHours,
-            'services' => $this->faker->randomElements($services, $this->faker->numberBetween(3, 7)),
+            'services' => array_slice(array_values(array_intersect_key($services, array_flip(array_rand($services, rand(3, 7))))), 0, rand(3, 7)),
             'active' => true,
+            'slug' => $this->faker->unique()->slug(),
         ];
     }
 
     /**
      * Indica che lo studio è attivo.
-     *
-     * @return static
      */
     public function active(): static
     {
@@ -96,8 +91,6 @@ class StudioFactory extends Factory
 
     /**
      * Indica che lo studio è inattivo.
-     *
-     * @return static
      */
     public function inactive(): static
     {
@@ -107,101 +100,24 @@ class StudioFactory extends Factory
     }
 
     /**
-     * Crea uno studio con orari estesi.
-     *
-     * @return static
-     */
-    public function withExtendedHours(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'opening_hours' => [
-                'monday' => ['08:00-13:00', '14:00-20:00'],
-                'tuesday' => ['08:00-13:00', '14:00-20:00'],
-                'wednesday' => ['08:00-13:00', '14:00-20:00'],
-                'thursday' => ['08:00-13:00', '14:00-20:00'],
-                'friday' => ['08:00-13:00', '14:00-20:00'],
-                'saturday' => ['08:00-14:00'],
-                'sunday' => ['09:00-13:00'],
-            ],
-        ]);
-    }
-
-    /**
-     * Crea uno studio specializzato in ortodonzia.
-     *
-     * @return static
+     * Indica che lo studio è specializzato in ortodonzia.
      */
     public function orthodontics(): static
     {
         return $this->state(fn (array $attributes) => [
-            'name' => 'Centro Ortodontico ' . $this->faker->lastName,
-            'services' => [
-                'Ortodonzia',
-                'Ortodonzia invisibile',
-                'Ortodonzia pediatrica',
-                'Apparecchi ortodontici',
-                'Bite dentali'
-            ],
+            'name' => 'Studio di Ortodonzia ' . $this->faker->lastName(),
+            'services' => ['Ortodonzia', 'Igiene dentale', 'Odontoiatria pediatrica'],
         ]);
     }
 
     /**
-     * Crea uno studio con servizi completi.
-     *
-     * @return static
+     * Indica che lo studio è specializzato in implantologia.
      */
-    public function fullService(): static
+    public function implantology(): static
     {
         return $this->state(fn (array $attributes) => [
-            'services' => [
-                'Igiene dentale',
-                'Ortodonzia',
-                'Implantologia',
-                'Endodonzia',
-                'Parodontologia',
-                'Chirurgia orale',
-                'Protesi dentale',
-                'Odontoiatria pediatrica',
-                'Estetica dentale',
-                'Radiologia dentale'
-            ],
-        ]);
-    }
-
-    /**
-     * Crea uno studio con dati completi per testing avanzato.
-     *
-     * @return static
-     */
-    public function withCompleteData(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'website' => $this->faker->url(),
-            'description' => $this->faker->paragraph(3),
-            // Provide native array; let Eloquent JSON cast handle serialization
-            'settings' => [
-                'appointment_duration' => 45,
-                'max_appointments_per_day' => 12,
-                'booking_advance_days' => 60,
-                'cancellation_hours' => 48,
-                'online_booking_enabled' => true,
-                'reminder_emails' => true,
-                'reminder_sms' => false,
-            ],
-        ]);
-    }
-
-    /**
-     * Crea uno studio in una città specifica.
-     *
-     * @param string $city
-     * @return static
-     */
-    public function inCity(string $city): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'city' => $city,
-            'address' => $this->faker->streetAddress() . ', ' . $city,
+            'name' => 'Centro Implantologico ' . $this->faker->lastName(),
+            'services' => ['Implantologia', 'Chirurgia orale', 'Protesi dentale'],
         ]);
     }
 }
