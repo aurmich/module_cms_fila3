@@ -1,156 +1,110 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'navigation' => [
-        'label' => 'Flusso Appuntamenti',
-        'group' => 'Agenda',
-        'icon' => 'heroicon-o-document-chart-bar',
-        'sort' => '60',
-        'tooltip' => 'Gestione dei flussi di prenotazione e appuntamenti',
-    ],
-    'model' => [
-        'label' => 'Flusso Appuntamento',
-        'plural_label' => 'Flussi Appuntamenti',
+        'label' => 'Termin-Workflow',
+        'group' => 'Termine',
     ],
     'actions' => [
         'create' => [
-            'label' => 'Crea Nuovo',
-            'tooltip' => 'Crea un nuovo flusso di appuntamento',
-            'icon' => 'heroicon-o-plus',
+            'label' => 'Neuen Workflow erstellen',
+            'tooltip' => 'Erstellen Sie einen neuen Termin-Workflow',
         ],
         'edit' => [
-            'label' => 'Modifica',
-            'tooltip' => 'Modifica questo flusso di appuntamento',
-            'icon' => 'heroicon-o-pencil',
+            'label' => 'Workflow bearbeiten',
+            'tooltip' => 'Bearbeiten Sie diesen Termin-Workflow',
         ],
         'delete' => [
-            'label' => 'Elimina',
-            'tooltip' => 'Elimina questo flusso di appuntamento',
-            'icon' => 'heroicon-o-trash',
-        ],
-        'view' => [
-            'label' => 'Visualizza',
-            'tooltip' => 'Visualizza i dettagli del flusso',
-            'icon' => 'heroicon-o-eye',
+            'label' => 'Workflow löschen',
+            'tooltip' => 'Löschen Sie diesen Termin-Workflow',
         ],
     ],
     'fields' => [
-        'id' => [
-            'label' => 'ID',
-            'tooltip' => 'Identificativo univoco del flusso',
-        ],
         'patient' => [
-            'label' => 'Paziente',
-            'tooltip' => 'Paziente associato al flusso',
-            'placeholder' => 'Seleziona paziente',
-            'helper_text' => 'Il paziente che ha richiesto l\'appuntamento',
-            'last_name' => [
-                'label' => 'Cognome',
-                'placeholder' => 'Inserisci il cognome',
-                'help' => 'Inserisci il cognome completo',
-            ],
-            'first_name' => [
-                'label' => 'Nome',
-                'placeholder' => 'Inserisci il nome',
-                'help' => 'Inserisci il nome completo',
-            ],
+            'label' => 'Patient',
+            'tooltip' => 'Der Patient, der den Termin angefordert hat',
+            'placeholder' => 'Patient auswählen',
+            'helper_text' => 'Der Patient, der den Termin angefordert hat',
         ],
         'current_step' => [
-            'label' => 'Fase Attuale',
-            'tooltip' => 'Fase attuale del flusso di appuntamento',
-            'placeholder' => 'Seleziona fase',
-            'helper_text' => 'Indica a che punto del processo si trova l\'appuntamento',
-        ],
-        'status' => [
-            'label' => 'Stato',
-            'tooltip' => 'Stato corrente del flusso',
-            'placeholder' => 'Seleziona stato',
-            'helper_text' => 'Indica se il flusso è attivo, completato o annullato',
-            'options' => [
-                'pending' => 'In attesa',
-                'active' => 'Attivo',
-                'completed' => 'Completato',
-                'cancelled' => 'Annullato',
-            ],
+            'label' => 'Aktueller Schritt',
+            'tooltip' => 'Aktuelle Phase des Termin-Workflows',
+            'placeholder' => 'Schritt auswählen',
+            'helper_text' => 'Gibt an, in welcher Phase des Prozesses sich der Termin befindet',
         ],
         'appointment' => [
-            'label' => 'Appuntamento',
-            'tooltip' => 'Appuntamento collegato al flusso',
-            'placeholder' => 'Seleziona appuntamento',
-            'helper_text' => 'L\'appuntamento associato a questo flusso',
-            'title' => [
-                'label' => 'Titolo Appuntamento',
-                'tooltip' => 'Titolo dell\'appuntamento collegato',
-                'placeholder' => 'Inserisci titolo',
-                'helper_text' => 'Breve descrizione dell\'appuntamento',
-            ],
+            'label' => 'Termin',
+            'tooltip' => 'Mit dem Workflow verknüpfter Termin',
+            'placeholder' => 'Termin auswählen',
+            'helper_text' => 'Der mit diesem Workflow verknüpfte Termin',
         ],
-        'started_at' => [
-            'label' => 'Data Inizio',
-            'tooltip' => 'Data di inizio del flusso',
-            'placeholder' => 'Seleziona data inizio',
-            'helper_text' => 'Quando è stato avviato il flusso di prenotazione',
+        'appointment_title' => [
+            'label' => 'Termintitel',
+            'tooltip' => 'Titel des verknüpften Termins',
+            'placeholder' => 'Titel eingeben',
+            'helper_text' => 'Kurze Beschreibung des Termins',
         ],
-        'completed_at' => [
-            'label' => 'Data Completamento',
-            'tooltip' => 'Data di completamento del flusso',
-            'placeholder' => 'Seleziona data completamento',
-            'helper_text' => 'Quando è stato completato il flusso di prenotazione',
+        'notes' => [
+            'label' => 'Notizen',
+            'tooltip' => 'Zusätzliche Informationen zum Workflow',
+            'placeholder' => 'Notizen eingeben',
+            'helper_text' => 'Wichtige Informationen oder Anweisungen',
         ],
-        'session_id' => [
-            'label' => 'ID Sessione',
-            'tooltip' => 'Identificativo della sessione utente',
-            'placeholder' => 'ID Sessione',
-            'helper_text' => 'Identificativo tecnico della sessione di navigazione',
+        'status' => [
+            'label' => 'Status',
+            'tooltip' => 'Aktueller Status des Workflows',
+            'placeholder' => 'Status auswählen',
+            'helper_text' => 'Der aktuelle Status des Termin-Workflows',
         ],
-        'created_at' => [
-            'label' => 'Data Creazione',
-            'tooltip' => 'Data di creazione del record',
-            'placeholder' => 'Data creazione',
-            'helper_text' => 'Data e ora di creazione nel sistema',
+        'priority' => [
+            'label' => 'Priorität',
+            'tooltip' => 'Prioritätsstufe des Workflows',
+            'placeholder' => 'Priorität auswählen',
+            'helper_text' => 'Wie dringend ist dieser Workflow?',
         ],
-        'openFilters' => [
-            'label' => 'openFilters',
+        'assigned_to' => [
+            'label' => 'Zugewiesen an',
+            'tooltip' => 'Verantwortlicher für diesen Workflow',
+            'placeholder' => 'Mitarbeiter auswählen',
+            'helper_text' => 'Wer ist für die Bearbeitung verantwortlich?',
         ],
-        'applyFilters' => [
-            'label' => 'applyFilters',
-        ],
-        'resetFilters' => [
-            'label' => 'resetFilters',
-        ],
-        'reorderRecords' => [
-            'label' => 'reorderRecords',
-        ],
-        'toggleColumns' => [
-            'label' => 'toggleColumns',
+        'due_date' => [
+            'label' => 'Fälligkeitsdatum',
+            'tooltip' => 'Wann sollte der Workflow abgeschlossen sein?',
+            'placeholder' => 'Datum auswählen',
+            'helper_text' => 'Das Datum, bis zu dem der Workflow abgeschlossen werden sollte',
         ],
     ],
-    'filters' => [
-        'title' => 'Filtri',
-        'open' => 'Apri Filtri',
-        'apply' => 'Applica Filtri',
-        'reset' => 'Reimposta Filtri',
-        'close' => 'Chiudi Filtri',
+    'statuses' => [
+        'pending' => 'Ausstehend',
+        'in_progress' => 'In Bearbeitung',
+        'completed' => 'Abgeschlossen',
+        'cancelled' => 'Abgebrochen',
+        'on_hold' => 'Pausiert',
     ],
-    'table' => [
-        'reorder' => 'Riordina Record',
-        'toggle_columns' => 'Mostra/Nascondi Colonne',
-        'empty' => 'Nessun flusso di appuntamento trovato',
-        'loading' => 'Caricamento flussi di appuntamento...',
+    'priorities' => [
+        'low' => 'Niedrig',
+        'medium' => 'Mittel',
+        'high' => 'Hoch',
+        'urgent' => 'Dringend',
+    ],
+    'empty_states' => [
+        'no_workflows' => 'Keine Termin-Workflows gefunden',
+        'loading' => 'Termin-Workflows werden geladen...',
     ],
     'messages' => [
-        'success' => [
-            'created' => 'Flusso di appuntamento creato con successo',
-            'updated' => 'Flusso di appuntamento aggiornato con successo',
-            'deleted' => 'Flusso di appuntamento eliminato con successo',
+        'created' => 'Termin-Workflow erfolgreich erstellt',
+        'updated' => 'Termin-Workflow erfolgreich aktualisiert',
+        'deleted' => 'Termin-Workflow erfolgreich gelöscht',
+        'errors' => [
+            'create' => 'Fehler beim Erstellen des Termin-Workflows',
+            'update' => 'Fehler beim Aktualisieren des Termin-Workflows',
+            'delete' => 'Fehler beim Löschen des Termin-Workflows',
         ],
-        'error' => [
-            'create' => 'Errore durante la creazione del flusso di appuntamento',
-            'update' => 'Errore durante l\'aggiornamento del flusso di appuntamento',
-            'delete' => 'Errore durante l\'eliminazione del flusso di appuntamento',
-        ],
-        'confirm' => [
-            'delete' => 'Sei sicuro di voler eliminare questo flusso di appuntamento?',
-        ],
+    ],
+    'confirmations' => [
+        'delete' => 'Sind Sie sicher, dass Sie diesen Termin-Workflow löschen möchten?',
     ],
 ];

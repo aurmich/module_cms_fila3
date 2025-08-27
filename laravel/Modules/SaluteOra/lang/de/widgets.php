@@ -1,220 +1,164 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-    'doctor_availabilities' => [
-        'schedule' => [
-            'no_schedule' => 'Nessun orario disponibile',
-            'click_edit_to_configure' => 'Clicca su modifica per configurare la tua disponibilità',
-        ],
-    ],
-    'studio_overview' => [
-        'title' => 'Panoramica Studi',
-        'stats' => [
-            'total' => 'Studi Totali',
-            'active' => 'Studi Attivi',
-            'inactive' => 'Studi Inattivi',
-            'cities' => 'Stadt Coperte',
-            'doctors' => 'Dentisti Associati',
-            'appointments' => 'Appuntamenti Mensili',
-        ],
-        'chart' => [
-            'title' => 'Distribuzione per Stadt',
-            'empty' => 'Nessun dato disponibile',
-        ],
-    ],
     'find_doctor_and_appointment' => [
-        'title' => 'Trova dottore e prenota appuntamento',
-        'description' => 'auswählen la tua zona, scegli un dottore e prenota un appuntamento',
+        'title' => 'Arzt finden und Termin buchen',
+        'description' => 'Wählen Sie Ihre Region, wählen Sie einen Arzt und buchen Sie einen Termin',
         'steps' => [
-            'studio' => [
-                'title' => 'auswählen Praxis',
-                'description' => 'Scegli lo studio arzt nella tua zona',
+            'search' => [
+                'title' => 'Suche',
+                'description' => 'Finden Sie Ärzte in Ihrer Nähe',
             ],
-            'date' => [
-                'title' => 'Data e Orario',
-                'description' => 'auswählen la data e l\'orario per il tuo appuntamento',
+            'select' => [
+                'title' => 'Auswahl',
+                'description' => 'Wählen Sie Ihren bevorzugten Arzt und Zeit',
             ],
-            'confirmation' => [
-                'title' => 'Conferma',
-                'description' => 'Controlla i dettagli e conferma la prenotazione',
+            'confirm' => [
+                'title' => 'Bestätigung',
+                'description' => 'Überprüfen Sie die Details Ihres Termins vor der Bestätigung',
             ],
-        ],
-        'studio_step' => [
-            'title' => 'auswählen Praxis',
-            'description' => 'Scegli lo studio arzt nella tua zona',
-        ],
-        'date_step' => [
-            'title' => 'Data e Orario',
-            'description' => 'auswählen la data e l\'orario per il tuo appuntamento',
-        ],
-        'confirm_step' => [
-            'title' => 'Conferma Appuntamento',
-            'description' => 'Verifica i dettagli del tuo appuntamento prima di confermare',
         ],
         'fields' => [
-            'cap' => [
-                'label' => 'CAP',
-                'placeholder' => 'eingeben il CAP',
-                'helper_text' => 'eingeben il codice postale della tua zona',
+            'specialization' => [
+                'label' => 'Fachrichtung',
+                'placeholder' => 'Medizinische Fachrichtung auswählen',
+                'helper_text' => 'Wählen Sie die medizinische Fachrichtung',
             ],
-            'studio' => [
-                'label' => 'Praxis',
-                'placeholder' => 'Vorname dello studio selezionato',
-                'helper_text' => 'Praxis dentistico per la prenotazione',
+            'location' => [
+                'label' => 'Standort',
+                'placeholder' => 'Stadt oder Region eingeben',
+                'helper_text' => 'Geben Sie Ihren Standort ein',
             ],
             'doctor' => [
-                'label' => 'Dottore',
-                'placeholder' => 'auswählen un dottore',
-                'helper_text' => 'Scegli il dottore con cui vuoi prenotare l\'appuntamento',
+                'label' => 'Arzt',
+                'placeholder' => 'Arzt auswählen',
+                'helper_text' => 'Wählen Sie den Arzt, mit dem Sie den Termin buchen möchten',
             ],
-            'appointment_date' => [
-                'label' => 'Data Appuntamento',
-                'placeholder' => 'auswählen una data',
-                'helper_text' => 'Scegli la data per il tuo appuntamento',
+            'date' => [
+                'label' => 'Termindatum',
+                'placeholder' => 'Datum auswählen',
+                'helper_text' => 'Wählen Sie das Datum für Ihren Termin',
             ],
-            'appointment_time' => [
-                'label' => 'Orario',
-                'placeholder' => 'auswählen un orario',
-                'helper_text' => 'Scegli l\'orario per il tuo appuntamento',
-            ],
-            'notes' => [
-                'label' => 'Note',
-                'placeholder' => 'Aggiungi eventuali note o richieste speciali',
-                'helper_text' => 'Informazioni aggiuntive per il dottore (opzionale)',
+            'time' => [
+                'label' => 'Terminzeit',
+                'placeholder' => 'Zeit auswählen',
+                'helper_text' => 'Wählen Sie die Zeit für Ihren Termin',
             ],
         ],
         'actions' => [
-            'next' => [
-                'label' => 'Avanti',
+            'search' => [
+                'label' => 'Suchen',
+                'loading' => 'Suche läuft...',
             ],
-            'previous' => [
-                'label' => 'Indietro',
-            ],
-            'submit' => [
-                'label' => 'Conferma Prenotazione',
+            'book' => [
+                'label' => 'Termin buchen',
+                'loading' => 'Buchung läuft...',
             ],
         ],
         'messages' => [
-            'success' => 'Appuntamento prenotato erfolgreich!',
-            'error' => 'Si è verificato un errore durante la prenotazione.',
-            'no_doctors' => 'Nessun dottore disponibile per questo studio.',
-            'no_times' => 'Nessun orario disponibile per la data selezionata.',
+            'success' => 'Termin erfolgreich gebucht!',
+            'error' => 'Fehler bei der Terminbuchung',
+            'no_doctors' => 'Keine Ärzte für diese Praxis verfügbar.',
+            'no_availability' => 'Keine verfügbaren Termine für den ausgewählten Zeitraum',
+        ],
+        'validation' => [
+            'past_date' => 'Sie können kein vergangenes Datum auswählen',
+            'invalid_time' => 'Ungültige Zeit ausgewählt',
+            'doctor_unavailable' => 'Der ausgewählte Arzt ist zu dieser Zeit nicht verfügbar',
         ],
     ],
-    'studio_filter' => [
-        'title' => 'Filtro Praxis',
-        'description' => 'auswählen lo studio per filtrare i dati visualizzati',
-        'current_studio' => [
-            'label' => 'Praxis Attuale',
-            'no_studio' => 'Nessuno studio selezionato',
-            'primary_badge' => 'Principale',
-        ],
-        'doctor_info' => [
-            'label' => 'Informazioni Dottore',
-            'full_name' => 'Dr. :first_name :last_name',
-            'studios_count' => '{0} Nessuno studio|{1} 1 studio|[2,*] :count studi',
-        ],
-        'studio_selector' => [
-            'label' => 'Cambia Praxis',
-            'placeholder' => 'auswählen uno studio...',
-            'help_text' => 'Il cambio studio aggiornerà automaticamente tutti i filtri',
-        ],
-        'studio_details' => [
-            'name' => 'Praxis',
-            'description' => 'Descrizione',
-            'status' => 'Status',
-            'address' => 'Adresse',
-            'phone' => 'Telefon',
-            'email' => 'E-Mail',
-            'website' => 'Sito Web',
-            'opening_hours' => 'Orari di Apertura',
-            'doctors' => 'Dentisti Associati',
-            'created_at' => 'Creato il',
-            'general_info' => 'Informazioni Generali',
-            'contact_info' => 'Kontakte',
-            'no_address' => 'Adresse non specificato',
-            'closed' => 'Chiuso',
-            'view_on_map' => 'anzeigen su Mappa',
-            'not_found' => [
-                'title' => 'Praxis Non Trovato',
-                'description' => 'Le informazioni dello studio non sono disponibili.',
+
+    'studio_overview' => [
+        'title' => 'Praxis-Übersicht',
+        'description' => 'Verwalten Sie Ihre Praxis und überwachen Sie die Aktivitäten',
+        'stats' => [
+            'total_patients' => [
+                'label' => 'Gesamtpatienten',
+                'value' => ':count Patienten',
             ],
-        ],
-        'status' => [
-            'active' => 'Aktiv',
-            'inactive' => 'Inaktiv',
+            'active_appointments' => [
+                'label' => 'Aktive Termine',
+                'value' => ':count Termine',
+            ],
+            'pending_requests' => [
+                'label' => 'Ausstehende Anfragen',
+                'value' => ':count Anfragen',
+            ],
         ],
         'actions' => [
-            'switch_studio' => [
-                'label' => 'Azioni Rapide',
+            'quick_actions' => [
+                'label' => 'Schnellaktionen',
             ],
             'view_details' => [
-                'label' => 'anzeigen Dettagli',
-                'tooltip' => 'Mostra informazioni dettagliate dello studio',
+                'label' => 'Details anzeigen',
+                'tooltip' => 'Detaillierte Informationen der Praxis anzeigen',
             ],
             'manage_schedule' => [
-                'label' => 'Gestisci Orari',
-                'tooltip' => 'bearbeiten gli orari di apertura dello studio',
+                'label' => 'Zeitplan verwalten',
+                'tooltip' => 'Öffnungszeiten der Praxis bearbeiten',
             ],
         ],
         'empty_states' => [
             'no_current_studio' => [
-                'title' => 'Nessuno Praxis auswählento',
-                'description' => 'auswählen uno studio per visualizzare i dettagli e filtrare i dati.',
+                'title' => 'Keine Praxis ausgewählt',
+                'description' => 'Wählen Sie eine Praxis aus, um Details anzuzeigen und Daten zu filtern.',
             ],
         ],
         'messages' => [
-            'studio_changed' => 'Praxis cambiato erfolgreich',
-            'studio_change_error' => 'Fehler durante il cambio di studio',
+            'studio_changed' => 'Praxis erfolgreich gewechselt',
+            'studio_change_error' => 'Fehler beim Wechsel der Praxis',
         ],
     ],
+
     'doctor_appointments' => [
-        'title' => 'Appuntamenti in Attesa',
+        'title' => 'Ausstehende Termine',
         'empty' => [
-            'title' => 'Nessun appuntamento in attesa',
-            'description' => 'Non hai appuntamenti da confermare al momento.',
+            'title' => 'Keine ausstehenden Termine',
+            'description' => 'Sie haben derzeit keine Termine zu bestätigen.',
         ],
         'actions' => [
             'view_details' => [
-                'label' => 'anzeigen Dettagli',
-                'tooltip' => 'Mostra i dettagli dell\'appuntamento',
+                'label' => 'Details anzeigen',
+                'tooltip' => 'Details des Termins anzeigen',
             ],
             'confirm' => [
-                'label' => 'Conferma',
-                'tooltip' => 'Conferma l\'appuntamento',
+                'label' => 'Bestätigen',
+                'tooltip' => 'Termin bestätigen',
                 'modal' => [
-                    'title' => 'Conferma Appuntamento',
-                    'description' => 'Sind Sie sicher di voler confermare questo appuntamento?',
-                    'confirm_button' => 'Conferma',
-                    'cancel_button' => 'Annulla',
+                    'title' => 'Termin bestätigen',
+                    'description' => 'Sind Sie sicher, dass Sie diesen Termin bestätigen möchten?',
+                    'confirm_button' => 'Bestätigen',
+                    'cancel_button' => 'Abbrechen',
                 ],
             ],
             'reject' => [
-                'label' => 'Rifiuta',
-                'tooltip' => 'Rifiuta l\'appuntamento',
+                'label' => 'Ablehnen',
+                'tooltip' => 'Termin ablehnen',
                 'modal' => [
-                    'title' => 'Rifiuta Appuntamento',
-                    'description' => 'Sind Sie sicher di voler rifiutare questo appuntamento?',
-                    'confirm_button' => 'Rifiuta',
-                    'cancel_button' => 'Annulla',
+                    'title' => 'Termin ablehnen',
+                    'description' => 'Sind Sie sicher, dass Sie diesen Termin ablehnen möchten?',
+                    'confirm_button' => 'Ablehnen',
+                    'cancel_button' => 'Abbrechen',
                 ],
             ],
         ],
         'messages' => [
-            'appointment_confirmed' => 'Appuntamento confermato erfolgreich',
-            'appointment_rejected' => 'Appuntamento rifiutato erfolgreich',
+            'appointment_confirmed' => 'Termin erfolgreich bestätigt',
+            'appointment_rejected' => 'Termin erfolgreich abgelehnt',
         ],
         'errors' => [
-            'cannot_confirm' => 'Impossibile confermare questo appuntamento',
-            'cannot_reject' => 'Impossibile rifiutare questo appuntamento',
-            'confirm_failed' => 'Fehler durante la conferma dell\'appuntamento',
-            'reject_failed' => 'Fehler durante il rifiuto dell\'appuntamento',
-            'appointment_not_found' => 'Appuntamento non trovato',
+            'cannot_confirm' => 'Termin kann nicht bestätigt werden',
+            'cannot_reject' => 'Termin kann nicht abgelehnt werden',
+            'confirm_failed' => 'Fehler bei der Bestätigung des Termins',
+            'reject_failed' => 'Fehler bei der Ablehnung des Termins',
+            'appointment_not_found' => 'Termin nicht gefunden',
         ],
         'status' => [
             'pending' => 'Ausstehend',
-            'confirmed' => 'Confermato',
-            'rejected' => 'Rifiutato',
+            'confirmed' => 'Bestätigt',
+            'rejected' => 'Abgelehnt',
         ],
     ],
 

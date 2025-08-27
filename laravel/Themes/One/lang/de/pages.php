@@ -97,4 +97,29 @@ return [
             'helper_text' => '',
         ],
     ],
+    'patient' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Einen Termin buchen',
+                'tooltip' => 'Schaltfläche zum Buchen eines Patiententermins',
+                'helper_text' => '',
+            ],
+        ],
+        'book' => [
+            'title' => [
+                'label' => 'Buchen Sie Ihren Termin',
+                'tooltip' => 'Titel der Buchungsseite',
+                'helper_text' => '',
+            ],
+        ],
+    ],
+    'appointment' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Einen Termin buchen',
+                'tooltip' => 'Schaltfläche zum Buchen eines Termins',
+                'helper_text' => '',
+            ],
+        ],
+    ],
 ]; 

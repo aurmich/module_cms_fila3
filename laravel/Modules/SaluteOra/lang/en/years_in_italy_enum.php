@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'less_than_1' => 'Less than 1 year',
     '1_to_2' => '1 to 2 years',
@@ -22,39 +24,39 @@ return [
         'help_text' => 'Select the option that best describes your time in Italy',
     ],
     'YEAR_0_1' => [
-        'label' => '0-1 anno',
+        'label' => '0-1 year',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '0-1 anno',
+        'description' => '0-1 year',
     ],
     'YEAR_2_3' => [
-        'label' => '2-3 anni',
+        'label' => '2-3 years',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '2-3 anni',
+        'description' => '2-3 years',
     ],
     'YEAR_3_4' => [
-        'label' => '3-4 anni',
+        'label' => '3-4 years',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '3-4 anni',
+        'description' => '3-4 years',
     ],
     'YEAR_4_5' => [
-        'label' => '4-5 anni',
+        'label' => '4-5 years',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '6-10 anni',
+        'description' => '4-5 years',
     ],
     'YEAR_6_10' => [
-        'label' => '6-10 anni',
+        'label' => '6-10 years',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '6-10 anni',
+        'description' => '6-10 years',
     ],
     'YEAR_10_99' => [
-        'label' => '10-99 anni',
+        'label' => '10+ years',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => '10-99 anni',
+        'description' => '10+ years',
     ],
 ];

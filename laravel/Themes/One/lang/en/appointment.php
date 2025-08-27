@@ -322,4 +322,11 @@ return [
             'week' => 'Week',
         ],
     ],
+    'actions' => [
+        'book' => [
+            'label' => 'Book an appointment',
+            'tooltip' => 'Button to book an appointment',
+            'helper_text' => '',
+        ],
+    ],
 ];

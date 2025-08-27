@@ -97,4 +97,29 @@ return [
             'helper_text' => '',
         ],
     ],
+    'patient' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Book an appointment',
+                'tooltip' => 'Button to book a patient appointment',
+                'helper_text' => '',
+            ],
+        ],
+        'book' => [
+            'title' => [
+                'label' => 'Book your appointment',
+                'tooltip' => 'Booking page title',
+                'helper_text' => '',
+            ],
+        ],
+    ],
+    'appointment' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Book an appointment',
+                'tooltip' => 'Button to book an appointment',
+                'helper_text' => '',
+            ],
+        ],
+    ],
 ]; 

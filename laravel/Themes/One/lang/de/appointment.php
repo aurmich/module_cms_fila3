@@ -313,4 +313,11 @@ return [
             'week' => 'Woche',
         ],
     ],
+    'actions' => [
+        'book' => [
+            'label' => 'Einen Termin buchen',
+            'tooltip' => 'Schaltfläche zum Buchen eines Termins',
+            'helper_text' => '',
+        ],
+    ],
 ];

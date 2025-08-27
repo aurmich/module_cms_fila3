@@ -1,40 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'within_1_year' => [
-        'label' => 'Entro 1 anno',
+        'label' => 'Innerhalb 1 Jahr',
         'color' => 'success',
         'icon' => 'fas fa-check',
-        'description' => 'Entro 1 anno',
+        'description' => 'Innerhalb 1 Jahr',
     ],
     '2_years_ago' => [
-        'label' => '2 anni fa',
+        'label' => 'Vor 2 Jahren',
         'color' => 'warning',
         'icon' => 'fas fa-check',
-        'description' => '2 anni fa',
+        'description' => 'Vor 2 Jahren',
     ],
     '3_years_ago' => [
-        'label' => '3 anni fa',
+        'label' => 'Vor 3 Jahren',
         'color' => 'warning',
         'icon' => 'fas fa-check',
-        'description' => '3 anni fa',
+        'description' => 'Vor 3 Jahren',
     ],
     '4_years_ago' => [
-        'label' => '4 anni fa',
+        'label' => 'Vor 4 Jahren',
         'color' => 'warning',
         'icon' => 'fas fa-check',
-        'description' => '4 anni fa',
+        'description' => 'Vor 4 Jahren',
     ],
     '5_years_or_more' => [
-        'label' => '5 anni fa o più',
+        'label' => 'Vor 5 Jahren oder mehr',
         'color' => 'warning',
         'icon' => 'fas fa-check',
-        'description' => '5 anni fa o più',
+        'description' => 'Vor 5 Jahren oder mehr',
     ],
     'first_visit' => [
-        'label' => 'Prima visita',
+        'label' => 'Erster Besuch',
         'color' => 'warning',
         'icon' => 'fas fa-check',
-        'description' => 'Prima visita',
+        'description' => 'Erster Besuch',
     ],
 ];

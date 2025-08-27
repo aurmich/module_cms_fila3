@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'italian' => 'Italian',
     'european' => 'European Union',
@@ -15,12 +17,12 @@ return [
         'label' => 'Italian',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => 'Italiano',
+        'description' => 'Italian',
     ],
     'EE' => [
         'label' => 'Foreign',
         'color' => 'primary',
         'icon' => 'heroicon-o-flag',
-        'description' => 'Estera',
+        'description' => 'Foreign',
     ],
 ];

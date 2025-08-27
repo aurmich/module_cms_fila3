@@ -523,4 +523,11 @@ return [
             ],
         ],
     ],
+    'actions' => [
+        'book' => [
+            'label' => 'Prenota una visita',
+            'tooltip' => 'Pulsante per prenotare un appuntamento',
+            'helper_text' => '',
+        ],
+    ],
 ];

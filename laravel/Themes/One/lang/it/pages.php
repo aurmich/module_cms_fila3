@@ -97,4 +97,29 @@ return [
             'helper_text' => '',
         ],
     ],
+    'patient' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Prenota una visita',
+                'tooltip' => 'Pulsante per prenotare una visita paziente',
+                'helper_text' => '',
+            ],
+        ],
+        'book' => [
+            'title' => [
+                'label' => 'Prenota la tua visita',
+                'tooltip' => 'Titolo della pagina di prenotazione',
+                'helper_text' => '',
+            ],
+        ],
+    ],
+    'appointment' => [
+        'actions' => [
+            'book' => [
+                'label' => 'Prenota una visita',
+                'tooltip' => 'Pulsante per prenotare una visita',
+                'helper_text' => '',
+            ],
+        ],
+    ],
 ]; 
