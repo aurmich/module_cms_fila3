@@ -39,6 +39,13 @@ return new class extends XotBaseMigration {
                 if (! $this->hasColumn('accepted_at')) {
                     $table->timestamp('accepted_at')->nullable();
                 }
+                 // -- Change --
+                if ($this->hasColumn('user_id')) {
+                    $table->string('user_id')->nullable()->change();
+                }
+                $table->uuid('treatment_id')->nullable()->change();
+                $table->string('subject_id')->nullable()->change();
+                
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
