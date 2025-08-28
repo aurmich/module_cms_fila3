@@ -32,7 +32,7 @@ describe('Activity Business Logic', function () {
     });
 
     test('activity extends spatie activity functionality', function () {
-        expect(Activity::class)->toBeSubclassOf(\Spatie\Activitylog\Models\Activity::class);
+        expect(is_subclass_of(Activity::class, \Spatie\Activitylog\Models\Activity::class))->toBeTrue();
     });
 
     test('activity has in log scope method', function () {

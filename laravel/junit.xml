@@ -1,109 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CLI Arguments" tests="24" assertions="7" errors="17" failures="0" skipped="0" time="0.128466">
-    <testsuite name="Modules\Activity\tests\Unit\Models\ActivityTest" file="Modules/Activity/tests/Unit/Models/ActivityTest.php" tests="4" assertions="0" errors="4" failures="0" skipped="0" time="0.044601">
-      <testcase name="activity can be soft deleted" file="Modules/Activity/tests/Unit/Models/ActivityTest.php::activity can be soft deleted" class="Modules\Activity\tests\Unit\Models\ActivityTest" classname="Modules.Activity.tests.Unit.Models.ActivityTest" assertions="0" time="0.031621">
-        <error type="Error">activity can be soft deletedError: Call to undefined function createActivity()
-at Modules/Activity/tests/Unit/Models/ActivityTest.php:30</error>
-      </testcase>
-      <testcase name="activity can be created" file="Modules/Activity/tests/Unit/Models/ActivityTest.php::activity can be created" class="Modules\Activity\tests\Unit\Models\ActivityTest" classname="Modules.Activity.tests.Unit.Models.ActivityTest" assertions="0" time="0.001281">
-        <error type="Error">activity can be createdError: Call to undefined function createActivity()
-at Modules/Activity/tests/Unit/Models/ActivityTest.php:8</error>
-      </testcase>
-      <testcase name="activity factory creates valid instances" file="Modules/Activity/tests/Unit/Models/ActivityTest.php::activity factory creates valid instances" class="Modules\Activity\tests\Unit\Models\ActivityTest" classname="Modules.Activity.tests.Unit.Models.ActivityTest" assertions="0" time="0.010672">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">activity factory creates valid instancesIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityTest.php:38
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityTest.php:38</error>
-      </testcase>
-      <testcase name="activity has required attributes" file="Modules/Activity/tests/Unit/Models/ActivityTest.php::activity has required attributes" class="Modules\Activity\tests\Unit\Models\ActivityTest" classname="Modules.Activity.tests.Unit.Models.ActivityTest" assertions="0" time="0.001027">
-        <error type="Error">activity has required attributesError: Call to undefined function makeActivity()
-at Modules/Activity/tests/Unit/Models/ActivityTest.php:20</error>
-      </testcase>
-    </testsuite>
-    <testsuite name="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php" tests="6" assertions="0" errors="6" failures="0" skipped="0" time="0.038173">
-      <testcase name="`Activity Business Logic` → activity has expected fillable fields" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has expected fillable fields" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.026786">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has expected fillable fieldsIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15</error>
-      </testcase>
-      <testcase name="`Activity Business Logic` → activity can be queried by log name" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity can be queried by log name" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.002112">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity can be queried by log nameIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:39
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:39</error>
-      </testcase>
-      <testcase name="`Activity Business Logic` → activity can be queried by batch" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity can be queried by batch" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.002002">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity can be queried by batchIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:51
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:51</error>
-      </testcase>
-      <testcase name="`Activity Business Logic` → activity has correct connection configured" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has correct connection configured" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.001734">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has correct connection configuredIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
+  <testsuite name="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php" tests="6" assertions="3" errors="3" failures="0" skipped="0" time="0.024271">
+    <testcase name="`Activity Business Logic` → activity extends spatie activity functionality" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity extends spatie activity functionality" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.011540">
+      <error type="BadMethodCallException">`Activity Business Logic` → activity extends spatie activity functionalityBadMethodCallException: Method "toBeSubclassOf" does not exist in string.
+at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:35</error>
+    </testcase>
+    <testcase name="`Activity Business Logic` → activity has correct connection configured" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has correct connection configured" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.009213">
+      <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has correct connection configuredIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
@@ -121,21 +24,19 @@ at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
 at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
 at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
 at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:9</error>
-      </testcase>
-      <testcase name="`Activity Business Logic` → activity extends spatie activity functionality" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity extends spatie activity functionality" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.003421">
-        <error type="BadMethodCallException">`Activity Business Logic` → activity extends spatie activity functionalityBadMethodCallException: Method "toBeSubclassOf" does not exist in string.
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:35</error>
-      </testcase>
-      <testcase name="`Activity Business Logic` → activity can be queried by event type" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity can be queried by event type" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.002119">
-        <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity can be queried by event typeIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
+    </testcase>
+    <testcase name="`Activity Business Logic` → activity has for event scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has for event scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.001069"/>
+    <testcase name="`Activity Business Logic` → activity has batch scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has batch scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.000446"/>
+    <testcase name="`Activity Business Logic` → activity has in log scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has in log scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.000383"/>
+    <testcase name="`Activity Business Logic` → activity has expected fillable fields" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has expected fillable fields" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.001621">
+      <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has expected fillable fieldsIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
 at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
 at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
 at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
 at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:45
+at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15
 Caused by
 ReflectionException: Class "config" does not exist
 
@@ -145,88 +46,7 @@ at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
 at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
 at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
 at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:45</error>
-      </testcase>
-    </testsuite>
-    <testsuite name="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php" tests="6" assertions="3" errors="3" failures="0" skipped="0" time="0.025650">
-      <testcase name="`Snapshot Business Logic` → snapshot has factory trait for testing" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot has factory trait for testing" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="1" time="0.012332"/>
-      <testcase name="`Snapshot Business Logic` → snapshot has correct connection configured" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot has correct connection configured" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="1" time="0.005253"/>
-      <testcase name="`Snapshot Business Logic` → snapshot can be queried by aggregate version" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot can be queried by aggregate version" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="0" time="0.003695">
-        <error type="Error">`Snapshot Business Logic` → snapshot can be queried by aggregate versionError: Call to a member function connection() on null
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1977
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1943
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1598
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2537
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php:45</error>
-      </testcase>
-      <testcase name="`Snapshot Business Logic` → snapshot can be queried by uuid" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot can be queried by uuid" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="0" time="0.001540">
-        <error type="Error">`Snapshot Business Logic` → snapshot can be queried by uuidError: Call to a member function connection() on null
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1977
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1943
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1598
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2537
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php:39</error>
-      </testcase>
-      <testcase name="`Snapshot Business Logic` → snapshot extends base snapshot" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot extends base snapshot" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="0" time="0.001080">
-        <error type="BadMethodCallException">`Snapshot Business Logic` → snapshot extends base snapshotBadMethodCallException: Method "toBeSubclassOf" does not exist in string.
-at Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php:29</error>
-      </testcase>
-      <testcase name="`Snapshot Business Logic` → snapshot has expected fillable fields for event sourcing" file="Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php::`Snapshot Business Logic` → snapshot has expected fillable fields for event sourcing" class="Modules\Activity\tests\Unit\Models\SnapshotBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.SnapshotBusinessLogicTest" assertions="1" time="0.001749"/>
-    </testsuite>
-    <testsuite name="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php" tests="8" assertions="4" errors="4" failures="0" skipped="0" time="0.020042">
-      <testcase name="`StoredEvent Business Logic` → stored event has correct table configured" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event has correct table configured" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="1" time="0.012781"/>
-      <testcase name="`StoredEvent Business Logic` → stored event can be queried after version" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event can be queried after version" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="0" time="0.001483">
-        <error type="Error">`StoredEvent Business Logic` → stored event can be queried after versionError: Call to a member function connection() on null
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1977
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1943
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1598
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2537
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php:49</error>
-      </testcase>
-      <testcase name="`StoredEvent Business Logic` → stored event extends eloquent stored event for event sourcing" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event extends eloquent stored event for event sourcing" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="0" time="0.001136">
-        <error type="BadMethodCallException">`StoredEvent Business Logic` → stored event extends eloquent stored event for event sourcingBadMethodCallException: Method "toBeSubclassOf" does not exist in string.
-at Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php:39</error>
-      </testcase>
-      <testcase name="`StoredEvent Business Logic` → stored event can be queried by aggregate uuid" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event can be queried by aggregate uuid" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="0" time="0.001373">
-        <error type="Error">`StoredEvent Business Logic` → stored event can be queried by aggregate uuidError: Call to a member function connection() on null
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1977
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1943
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1598
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2537
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php:55</error>
-      </testcase>
-      <testcase name="`StoredEvent Business Logic` → stored event has factory trait for testing" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event has factory trait for testing" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="1" time="0.000534"/>
-      <testcase name="`StoredEvent Business Logic` → stored event has expected fillable fields for event sourcing" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event has expected fillable fields for event sourcing" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="1" time="0.000567"/>
-      <testcase name="`StoredEvent Business Logic` → stored event can filter by event class" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event can filter by event class" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="0" time="0.001554">
-        <error type="Error">`StoredEvent Business Logic` → stored event can filter by event classError: Call to a member function connection() on null
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1977
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1943
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1711
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1609
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1645
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1598
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2537
-at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2553
-at Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php:61</error>
-      </testcase>
-      <testcase name="`StoredEvent Business Logic` → stored event has correct connection configured" file="Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php::`StoredEvent Business Logic` → stored event has correct connection configured" class="Modules\Activity\tests\Unit\Models\StoredEventBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.StoredEventBusinessLogicTest" assertions="1" time="0.000614"/>
-    </testsuite>
+at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15</error>
+    </testcase>
   </testsuite>
 </testsuites>

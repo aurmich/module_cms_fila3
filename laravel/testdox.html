@@ -56,36 +56,9 @@
             <li class="defect">`Activity Business Logic` → activity has correct connection configured</li>
             <li class="defect">`Activity Business Logic` → activity has expected fillable fields</li>
             <li class="defect">`Activity Business Logic` → activity extends spatie activity functionality</li>
-            <li class="defect">`Activity Business Logic` → activity can be queried by log name</li>
-            <li class="defect">`Activity Business Logic` → activity can be queried by event type</li>
-            <li class="defect">`Activity Business Logic` → activity can be queried by batch</li>
-        </ul>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/ActivityTest.php</h2>
-        <ul>
-            <li class="defect">activity can be created</li>
-            <li class="defect">activity has required attributes</li>
-            <li class="defect">activity can be soft deleted</li>
-            <li class="defect">activity factory creates valid instances</li>
-        </ul>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php</h2>
-        <ul>
-            <li class="success">`Snapshot Business Logic` → snapshot has correct connection configured</li>
-            <li class="success">`Snapshot Business Logic` → snapshot has expected fillable fields for event sourcing</li>
-            <li class="defect">`Snapshot Business Logic` → snapshot extends base snapshot</li>
-            <li class="success">`Snapshot Business Logic` → snapshot has factory trait for testing</li>
-            <li class="defect">`Snapshot Business Logic` → snapshot can be queried by uuid</li>
-            <li class="defect">`Snapshot Business Logic` → snapshot can be queried by aggregate version</li>
-        </ul>
-        <h2>/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php</h2>
-        <ul>
-            <li class="success">`StoredEvent Business Logic` → stored event has correct connection configured</li>
-            <li class="success">`StoredEvent Business Logic` → stored event has correct table configured</li>
-            <li class="success">`StoredEvent Business Logic` → stored event has expected fillable fields for event sourcing</li>
-            <li class="defect">`StoredEvent Business Logic` → stored event extends eloquent stored event for event sourcing</li>
-            <li class="success">`StoredEvent Business Logic` → stored event has factory trait for testing</li>
-            <li class="defect">`StoredEvent Business Logic` → stored event can be queried after version</li>
-            <li class="defect">`StoredEvent Business Logic` → stored event can be queried by aggregate uuid</li>
-            <li class="defect">`StoredEvent Business Logic` → stored event can filter by event class</li>
+            <li class="success">`Activity Business Logic` → activity has in log scope method</li>
+            <li class="success">`Activity Business Logic` → activity has for event scope method</li>
+            <li class="success">`Activity Business Logic` → activity has batch scope method</li>
         </ul>
     </body>
 </html>
