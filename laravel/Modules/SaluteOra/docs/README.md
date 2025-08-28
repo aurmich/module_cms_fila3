@@ -1,22 +1,33 @@
-# Modulo SaluteOra - Documentazione Consolidata
+# SaluteOra Module
 
-## Panoramica
+## Quick Reference
+SaluteOra is the core healthcare management system handling patient registration, doctor management, appointment scheduling, and reporting for Italian healthcare facilities.
 
-Il modulo SaluteOra gestisce tutte le informazioni relative ai pazienti e ai medici, incluse le loro interazioni con il sistema. Questo modulo implementa funzionalità per la gestione dell'anagrafica, la registrazione di pazienti e medici, la gestione delle visite e dei trattamenti, e l'integrazione con altri moduli del sistema.
+### Core Entities
+- **Patients**: Healthcare service recipients with pregnancy management (extends to SaluteMo)
+- **Doctors**: Healthcare providers with certifications and studio associations  
+- **Studios**: Physical locations where healthcare services are provided
+- **Appointments**: Scheduled healthcare visits with full lifecycle management
+- **Reports**: Healthcare documentation and patient records
 
-**Principi di Design**: DRY, KISS, ROBUST, SOLID
+### Key Business Logic
+- **User Registration**: Patient and doctor onboarding with Italian compliance
+- **Appointment Booking**: Calendar-based scheduling with availability management
+- **Studio Management**: Multi-location support with doctor associations
+- **State Transitions**: Workflow management for users and appointments
 
-## Architettura e Principi
+## Design Principles
+**Foundation**: DRY, KISS, ROBUST, SOLID
 
 ### DRY (Don't Repeat Yourself)
-- **Trait condivisi**: `HasMedia`, `HasStates`, `HasAddress`, `IsTenant`
-- **Pattern comuni**: Stati e transizioni ereditano da `BaseTransition`
-- **Relazioni standardizzate**: Utilizzo del trait `RelationX` per relazioni cross-database
+- **Shared Traits**: `HasMedia`, `HasStates`, `HasAddress`, `IsTenant`
+- **Common Patterns**: States and transitions inherit from `BaseTransition`
+- **Standardized Relations**: Using `RelationX` trait for cross-database relationships
 
 ### KISS (Keep It Simple, Stupid)
-- **Ereditarietà lineare**: Catena semplice e prevedibile
-- **Relazioni dirette**: Evitare relazioni complesse e circolari
-- **Metodi focalizzati**: Ogni metodo ha una responsabilità singola
+- **Linear Inheritance**: Simple and predictable chain
+- **Direct Relations**: Avoid complex and circular relationships
+- **Focused Methods**: Single responsibility principle
 
 ### ROBUST
 - **Validazione**: Controlli di integrità a livello di modello

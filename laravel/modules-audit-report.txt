@@ -1,0 +1,91 @@
+MODULES FACTORY & SEEDER AUDIT REPORT
+====================================
+Generated: $(date)
+
+MISSING FACTORIES ANALYSIS:
+==========================
+
+ACTIVITY MODULE:
+Models: Snapshot, BaseModel, StoredEvent, BaseStoredEvent, BaseActivity, BaseSnapshot, Activity
+Factories: ActivityFactory, StoredEventFactory, SnapshotFactory, BaseActivityFactory
+Missing Factories: BaseModelFactory (✓ Base model), BaseStoredEventFactory, BaseSnapshotFactory
+
+CMS MODULE:
+Models: BaseTreeModel, Module, Section, BaseModel, HasBlocks, BasePivot, PageContent, BaseMorphPivot, BaseModelLang, Menu, Page, Conf
+Factories: BaseModelFactory, PageFactory, MenuFactory, SectionFactory, ConfFactory, ModuleFactory, PageContentFactory
+Missing Factories: BaseTreeModelFactory, HasBlocksFactory (trait, no factory needed), BasePivotFactory (base class), BaseMorphPivotFactory (base class), BaseModelLangFactory
+
+GDPR MODULE:
+Models: Profile, BaseModel, Consent, HasGdpr, BasePivot, BaseMorphPivot, Treatment, Event
+Factories: ProfileFactory, ConsentFactory, TreatmentFactory, EventFactory
+Missing Factories: BaseModelFactory (✓ Base model), HasGdprFactory (trait, no factory needed), BasePivotFactory, BaseMorphPivotFactory
+
+GEO MODULE:
+Models: Place, County, Province, Address, Location, Comune, BaseModel, GeoTrait, HasAddress, HasPlaceTrait, GeographicalScopes, SushiToJsons, PlaceType, Region, BasePivot, BaseMorphPivot, Locality, State, GeoJsonModel, ComuneJson
+Factories: LocalityFactory, ProvinceFactory, LocationFactory, StateFactory, CountyFactory, AddressFactory, RegionFactory, ComuneFactory, PlaceTypeFactory, PlaceFactory
+Missing Factories: BaseModelFactory, GeoTraitFactory (trait), HasAddressFactory (trait), HasPlaceTraitFactory (trait), GeographicalScopesFactory, SushiToJsonsFactory, BasePivotFactory, BaseMorphPivotFactory, GeoJsonModelFactory, ComuneJsonFactory
+
+JOB MODULE:
+Models: BaseModel, Import, FrontendSortable, FailedJobPolicy, JobPolicy, JobBatchPolicy, JobManager, Schedule, Frequency, JobsWaiting, FailedJob, Result, JobBatch, FailedImportRow, BaseMorphPivot, Parameter, ScheduleHistory, Task, Job, Export
+Factories: ScheduleHistoryFactory, JobsWaitingFactory, ScheduleFactory, JobManagerFactory, ExportFactory, TaskFactory, ParameterFactory, JobBatchFactory, FailedJobFactory, FailedImportRowFactory, JobFactory, FrequencyFactory, ResultFactory, ImportFactory
+Missing Factories: BaseModelFactory, FrontendSortableFactory, FailedJobPolicyFactory (policy), JobPolicyFactory (policy), JobBatchPolicyFactory (policy), BaseMorphPivotFactory
+
+LANG MODULE:
+Models: Translation, BaseModel, LinkedTrait, HasStrictTranslations, Post, BaseMorphPivot, BaseModelLang, TranslationFile, HasTranslationsContract
+Factories: PostFactory, TranslationFileFactory, TranslationFactory
+Missing Factories: BaseModelFactory, LinkedTraitFactory (trait), HasStrictTranslationsFactory (trait), BaseMorphPivotFactory, BaseModelLangFactory, HasTranslationsContractFactory (contract)
+
+MEDIA MODULE:
+Models: MediaConvert, BaseModel, TemporaryUpload, Media
+Factories: MediaFactory, TemporaryUploadFactory, MediaConvertFactory
+Missing Factories: BaseModelFactory ✓ All main models have factories
+
+NOTIFY MODULE:
+Models: Notification, MailTemplateLog, NotificationTemplateVersion, Contact, NotifyTheme, BaseModel, MailTemplateVersion, BasePivot, NotificationType, BaseMorphPivot, NotificationTemplate, MailTemplate, NotifyThemeable
+Factories: NotificationTemplateVersionFactory, MailTemplateFactory, NotificationTemplateFactory, MailTemplateVersionFactory, NotifyThemeFactory, NotifyThemeableFactory, NotificationFactory, ContactFactory, NotificationTypeFactory, MailTemplateLogFactory
+Missing Factories: BaseModelFactory, BasePivotFactory, BaseMorphPivotFactory ✓ All main models have factories
+
+SALUTEMO MODULE:
+Models: BaseModel, BasePivot
+Factories: NONE
+Missing Factories: BaseModelFactory, BasePivotFactory ⚠️ NO FACTORIES AT ALL
+
+SALUTEORA MODULE:
+Models: TeamUser, AdminTeam, StudioUser, Doctor, Profile, Studio, DoctorStudio, BaseModel, Appointment, PatientStudio, ReportPolicy, PatientPolicy, StudioPolicy, DoctorPolicy, AppointmentPolicy, DoctorStudioPolicy, UserPolicy, BasePivot, Admin, AdminStudio, Report, User, Patient, DoctorTeam, PatientTeam
+Factories: AdminTeamFactory, AppointmentFactory, AdminStudioFactory, DoctorTeamFactory, ProfileFactory, UserFactory, PatientFactory, PatientTeamFactory, DoctorStudioFactory, DoctorFactory, TeamUserFactory, PatientStudioFactory, AdminFactory, ReportFactory, StudioFactory, StudioUserFactory
+Missing Factories: BaseModelFactory, Various Policy Factories (policies don't need factories), BasePivotFactory ✓ All main models have factories
+
+TENANT MODULE:
+Models: BaseModelJsons, Domain, BaseModel, SushiToCsv, SushiToJson, SushiToJsons, SushiToPhpArray, TestSushiModel
+Factories: DomainFactory, TenantFactory
+Missing Factories: BaseModelJsonsFactory, BaseModelFactory, SushiToCsvFactory, SushiToJsonFactory, SushiToJsonsFactory, SushiToPhpArrayFactory, TestSushiModelFactory
+
+UI MODULE:
+Models: NONE
+Factories: NONE
+Status: ✓ No models, no factories needed
+
+USER MODULE:
+Models: [49+ models listed above]
+Factories: [39+ factories listed above]
+Missing Factories: Several base classes and utility models ✓ Most business models have factories
+
+XOT MODULE:
+Models: [25+ models listed above]  
+Factories: [13+ factories listed above]
+Missing Factories: Several base and utility models ✓ Core business models have factories
+
+CRITICAL FINDINGS:
+=================
+1. SaluteMo module has NO factories at all
+2. Tenant module missing most factories
+3. Several modules missing seeders for their models
+4. Base classes and traits don't need factories (this is expected)
+5. Policy classes don't need factories (this is expected)
+
+PRIORITY ACTIONS NEEDED:
+=======================
+1. Create factories for SaluteMo module models
+2. Create missing factories for Tenant module
+3. Audit and create missing seeders
+4. Focus on business logic models first, skip base classes and traits

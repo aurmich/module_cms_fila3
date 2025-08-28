@@ -294,3 +294,4 @@ class SaluteOraMassSeeder extends Seeder
 }
 
 
+
