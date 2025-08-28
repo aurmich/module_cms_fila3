@@ -727,3 +727,25 @@ it('has emails', function (string $email) {
 ]);
 </code-snippet>
 </laravel-boost-guidelines>
+## Testing Rules Enforcement
+- **ALL tests must be written in Pest format** - NO PHPUnit TestCase classes
+- **ALWAYS use .env.testing for test configuration** - Never use production environment
+- **NEVER use RefreshDatabase trait** - Use configured database without refreshing
+- **Focus on BUSINESS LOGIC testing** - Not implementation details
+- **Convert existing PHPUnit tests to Pest** - Systematic conversion required
+
+## Environment Configuration Priority
+1. **.env.testing** - Primary test environment configuration
+2. **APP_ENV=testing** - Always set environment to testing
+3. **DB_CONNECTION=sqlite** - Use in-memory or file-based SQLite for tests
+4. **No production credentials** - Never expose real credentials in tests
+
+## Pest Conversion Commands
+```bash
+# Find PHPUnit tests to convert
+find Modules -name "*Test.php" -path "*/tests/*" | grep -v "Pest"
+
+# Run tests with testing environment
+php artisan test --env=testing
+APP_ENV=testing php artisan test
+```

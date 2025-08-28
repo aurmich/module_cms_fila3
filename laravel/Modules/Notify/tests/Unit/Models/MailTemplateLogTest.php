@@ -622,3 +622,4 @@ class MailTemplateLogTest extends TestCase
         $this->assertEmpty($log->metadata);
     }
 }
+

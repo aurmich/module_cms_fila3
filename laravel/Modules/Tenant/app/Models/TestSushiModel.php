@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Tenant\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
+use Modules\Tenant\Database\Factories\TestSushiModelFactory;
 use Modules\Tenant\Models\Traits\SushiToJson;
 
 /**
@@ -14,7 +16,18 @@ use Modules\Tenant\Models\Traits\SushiToJson;
  */
 class TestSushiModel extends Model
 {
+    use HasFactory;
     use SushiToJson;
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return TestSushiModelFactory
+     */
+    protected static function newFactory(): TestSushiModelFactory
+    {
+        return TestSushiModelFactory::new();
+    }
 
     /**
      * Schema esplicito per Sushi quando non ci sono righe.

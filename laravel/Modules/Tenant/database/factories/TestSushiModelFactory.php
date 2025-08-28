@@ -78,7 +78,8 @@ class TestSushiModelFactory extends Factory
     public function highPriority(): static
     {
         return $this->state(function (array $attributes) {
-            $metadata = $attributes['metadata'] ?? [];
+            /** @var array<string, mixed> $metadata */
+            $metadata = is_array($attributes['metadata'] ?? null) ? $attributes['metadata'] : [];
             $metadata['priority'] = 'high';
             
             return [

@@ -656,3 +656,4 @@ class ContactTest extends TestCase
         $this->assertEquals(3, $orderedContacts[2]->order_column);
     }
 }
+

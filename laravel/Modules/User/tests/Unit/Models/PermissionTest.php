@@ -250,3 +250,4 @@ class PermissionTest extends TestCase
         $this->assertTrue(method_exists($permission, 'getTable'));
     }
 }
+

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\User\Tests\Unit;
 
 use Carbon\Carbon;
-use Modules\User\Tests\TestCase;
+use Tests\TestCase;
 
 uses(TestCase::class);
 

@@ -31,6 +31,8 @@ cd /var/www/html/ptvx/laravel
 
 ### Pest Testing - FOCUS ON BUSINESS LOGIC
 
+**CRITICAL**: Tutti i test DEVONO utilizzare l'ambiente `.env.testing`. Mai usare `.env` principale.
+
 ```php
 <?php
 
@@ -45,6 +47,14 @@ use Modules\NomeModulo\Actions\CreateUserAction;
 
 class UserManagementTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        
+        // Verifica che siamo in ambiente testing
+        $this->assertSame('testing', app()->environment());
+    }
+    
     /** @test */
     public function it_can_create_user_with_valid_data(): void
     {
@@ -171,6 +181,47 @@ class UserFormTest extends TestCase
             ->call('submit')
             ->assertHasErrors(['name', 'email']);
     }
+}
+```
+
+## 🧪 **TEST EXECUTION & ENVIRONMENT**
+
+### Test Environment Rules
+- **CRITICAL**: Tutti i test DEVONO utilizzare l'ambiente `.env.testing`
+- **MAI** usare `.env` principale per i test
+- **VERIFICARE** che `APP_ENV=testing` sia impostato nel .env.testing
+- **PREFERIRE** database SQLite in-memory (`DB_DATABASE=:memory:`) per velocità
+- **ISOLARE** i dati di test da quelli di sviluppo
+
+### Test Execution Commands
+```bash
+# ✅ CORRETTO - Usa .env.testing automaticamente
+php artisan test
+
+# ✅ CORRETTO - Specifica environment testing  
+php artisan test --env=testing
+
+# ✅ CORRETTO - Usa database sqlite per testing
+DB_CONNECTION=sqlite php artisan test
+
+# ✅ CORRETTO - Test specifico modulo
+DB_CONNECTION=sqlite php artisan test Modules/SaluteOra/tests/
+
+# ❌ SBAGLIATO - Non usare mai .env principale per i test
+php artisan test --env=local
+```
+
+### Environment Verification in Tests
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+    
+    // Verifica che siamo in ambiente testing
+    $this->assertSame('testing', app()->environment());
+    
+    // Verifica configurazione database testing
+    $this->assertEquals('sqlite', config('database.default'));
 }
 ```
 

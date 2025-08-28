@@ -215,3 +215,4 @@ class RoleTest extends TestCase
         $this->assertTrue(method_exists($role, 'withoutRole'));
     }
 }
+

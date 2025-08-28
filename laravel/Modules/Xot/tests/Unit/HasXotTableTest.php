@@ -1,31 +1,20 @@
 <?php
 
-namespace Modules\Xot\Tests\Unit;
+declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
 use Mockery;
 use Filament\Tables\Table;
 use Filament\Tables\Contracts\HasTable;
 use Modules\Xot\Filament\Traits\HasXotTable;
 use Illuminate\Support\Collection;
 
-class HasXotTableTest extends TestCase
-{
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+uses(Tests\TestCase::class);
 
-    protected function tearDown(): void
-    {
-        Mockery::close();
-        parent::tearDown();
-    }
+afterEach(function () {
+    Mockery::close();
+});
 
-    /**
-     * Test the table method with all methods implemented.
-     *
-     * @return void
-     */
-    public function testTableMethodWithAllMethodsImplemented(): void
-    {
+it('tests table method with all methods implemented', function () {
         // Avoid DB/Schema access inside TableExistsByModelClassActions
         Mockery::mock('overload:Modules\\Xot\\Actions\\Model\\TableExistsByModelClassActions')
             ->shouldReceive('execute')
@@ -36,71 +25,65 @@ class HasXotTableTest extends TestCase
             ->makePartial()
             ->shouldDeferMissing();
 
-        // Expect getTableHeaderActions to be called
-        $mock->shouldReceive('getTableHeaderActions')
-            ->once()
-            ->andReturn([]);
+    // Expect getTableHeaderActions to be called
+    $mock->shouldReceive('getTableHeaderActions')
+        ->once()
+        ->andReturn([]);
 
-        // Expect getTableActions to be called
-        $mock->shouldReceive('getTableActions')
-            ->once()
-            ->andReturn([]);
+    // Expect getTableActions to be called
+    $mock->shouldReceive('getTableActions')
+        ->once()
+        ->andReturn([]);
 
-        // Expect getTableBulkActions to be called
-        $mock->shouldReceive('getTableBulkActions')
-            ->once()
-            ->andReturn([]);
+    // Expect getTableBulkActions to be called
+    $mock->shouldReceive('getTableBulkActions')
+        ->once()
+        ->andReturn([]);
 
-        // Other required method stubs
-        $mock->shouldReceive('getModelClass')
-            ->andReturn(DummyModel::class);
-        $mock->shouldReceive('getTableRecordTitleAttribute')
-            ->andReturn('name');
-        $mock->shouldReceive('getTableHeading')
-            ->andReturn('Test Table');
-        $mock->shouldReceive('getTableFilters')
-            ->andReturn([]);
-        // Stub optional methods to avoid resolving translator / actions
-        $mock->shouldReceive('getTableHeaderActions')->andReturn([]);
-        $mock->shouldReceive('getTableActions')->andReturn([]);
-        $mock->shouldReceive('getTableBulkActions')->andReturn([]);
-        $mock->shouldReceive('getTableFiltersFormColumns')
-            ->andReturn(1);
-        $mock->shouldReceive('getTableEmptyStateActions')
-            ->andReturn([]);
+    // Other required method stubs
+    $mock->shouldReceive('getModelClass')
+        ->andReturn(DummyModel::class);
+    $mock->shouldReceive('getTableRecordTitleAttribute')
+        ->andReturn('name');
+    $mock->shouldReceive('getTableHeading')
+        ->andReturn('Test Table');
+    $mock->shouldReceive('getTableFilters')
+        ->andReturn([]);
+    // Stub optional methods to avoid resolving translator / actions
+    $mock->shouldReceive('getTableHeaderActions')->andReturn([]);
+    $mock->shouldReceive('getTableActions')->andReturn([]);
+    $mock->shouldReceive('getTableBulkActions')->andReturn([]);
+    $mock->shouldReceive('getTableFiltersFormColumns')
+        ->andReturn(1);
+    $mock->shouldReceive('getTableEmptyStateActions')
+        ->andReturn([]);
 
-        // Create a mock for Table
-        $tableMock = Mockery::mock(Table::class);
-        $tableMock->shouldReceive('recordTitleAttribute')->andReturnSelf();
-        $tableMock->shouldReceive('heading')->andReturnSelf();
-        $tableMock->shouldReceive('columns')->andReturnSelf();
-        $tableMock->shouldReceive('contentGrid')->andReturnSelf();
-        $tableMock->shouldReceive('filters')->andReturnSelf();
-        $tableMock->shouldReceive('filtersLayout')->andReturnSelf();
-        $tableMock->shouldReceive('filtersFormColumns')->andReturnSelf();
-        $tableMock->shouldReceive('persistFiltersInSession')->andReturnSelf();
-        $tableMock->shouldReceive('headerActions')->andReturnSelf();
-        $tableMock->shouldReceive('actions')->andReturnSelf();
-        $tableMock->shouldReceive('bulkActions')->andReturnSelf();
-        $tableMock->shouldReceive('actionsPosition')->andReturnSelf();
-        $tableMock->shouldReceive('emptyStateActions')->andReturnSelf();
-        $tableMock->shouldReceive('striped')->andReturnSelf();
-        $tableMock->shouldReceive('paginated')->andReturnSelf();
+    // Create a mock for Table
+    $tableMock = Mockery::mock(Table::class);
+    $tableMock->shouldReceive('recordTitleAttribute')->andReturnSelf();
+    $tableMock->shouldReceive('heading')->andReturnSelf();
+    $tableMock->shouldReceive('columns')->andReturnSelf();
+    $tableMock->shouldReceive('contentGrid')->andReturnSelf();
+    $tableMock->shouldReceive('filters')->andReturnSelf();
+    $tableMock->shouldReceive('filtersLayout')->andReturnSelf();
+    $tableMock->shouldReceive('filtersFormColumns')->andReturnSelf();
+    $tableMock->shouldReceive('persistFiltersInSession')->andReturnSelf();
+    $tableMock->shouldReceive('headerActions')->andReturnSelf();
+    $tableMock->shouldReceive('actions')->andReturnSelf();
+    $tableMock->shouldReceive('bulkActions')->andReturnSelf();
+    $tableMock->shouldReceive('actionsPosition')->andReturnSelf();
+    $tableMock->shouldReceive('emptyStateActions')->andReturnSelf();
+    $tableMock->shouldReceive('striped')->andReturnSelf();
+    $tableMock->shouldReceive('paginated')->andReturnSelf();
 
-        // Call the table method
-        $result = $mock->table($tableMock);
+    // Call the table method
+    $result = $mock->table($tableMock);
 
-        // Assert the result is a Table instance
-        $this->assertSame($tableMock, $result);
-    }
+    // Assert the result is a Table instance
+    expect($result)->toBe($tableMock);
+});
 
-    /**
-     * Test the table method without any of the optional methods implemented.
-     *
-     * @return void
-     */
-    public function testTableMethodWithNoOptionalMethodsImplemented(): void
-    {
+it('tests table method with no optional methods implemented', function () {
         // Avoid DB/Schema access inside TableExistsByModelClassActions
         Mockery::mock('overload:Modules\\Xot\\Actions\\Model\\TableExistsByModelClassActions')
             ->shouldReceive('execute')
@@ -111,50 +94,49 @@ class HasXotTableTest extends TestCase
             ->makePartial()
             ->shouldDeferMissing();
 
-        // Other required method stubs
-        $mock->shouldReceive('getModelClass')
-            ->andReturn(DummyModel::class);
-        $mock->shouldReceive('getTableRecordTitleAttribute')
-            ->andReturn('name');
-        $mock->shouldReceive('getTableHeading')
-            ->andReturn('Test Table');
-        $mock->shouldReceive('getTableFilters')
-            ->andReturn([]);
-        // Avoid constructing Filament Actions which require translator binding
-        $mock->shouldReceive('getTableHeaderActions')->andReturn([]);
-        $mock->shouldReceive('getTableActions')->andReturn([]);
-        $mock->shouldReceive('getTableBulkActions')->andReturn([]);
-        $mock->shouldReceive('getTableFiltersFormColumns')
-            ->andReturn(1);
-        $mock->shouldReceive('getTableEmptyStateActions')
-            ->andReturn([]);
+    // Other required method stubs
+    $mock->shouldReceive('getModelClass')
+        ->andReturn(DummyModel::class);
+    $mock->shouldReceive('getTableRecordTitleAttribute')
+        ->andReturn('name');
+    $mock->shouldReceive('getTableHeading')
+        ->andReturn('Test Table');
+    $mock->shouldReceive('getTableFilters')
+        ->andReturn([]);
+    // Avoid constructing Filament Actions which require translator binding
+    $mock->shouldReceive('getTableHeaderActions')->andReturn([]);
+    $mock->shouldReceive('getTableActions')->andReturn([]);
+    $mock->shouldReceive('getTableBulkActions')->andReturn([]);
+    $mock->shouldReceive('getTableFiltersFormColumns')
+        ->andReturn(1);
+    $mock->shouldReceive('getTableEmptyStateActions')
+        ->andReturn([]);
 
-        // Create a mock for Table
-        $tableMock = Mockery::mock(Table::class);
-        $tableMock->shouldReceive('recordTitleAttribute')->andReturnSelf();
-        $tableMock->shouldReceive('heading')->andReturnSelf();
-        $tableMock->shouldReceive('columns')->andReturnSelf();
-        $tableMock->shouldReceive('contentGrid')->andReturnSelf();
-        $tableMock->shouldReceive('filters')->andReturnSelf();
-        $tableMock->shouldReceive('filtersLayout')->andReturnSelf();
-        $tableMock->shouldReceive('filtersFormColumns')->andReturnSelf();
-        $tableMock->shouldReceive('persistFiltersInSession')->andReturnSelf();
-        // headerActions, actions, and bulkActions are called with empty arrays
-        $tableMock->shouldReceive('headerActions')->andReturnSelf();
-        $tableMock->shouldReceive('actions')->andReturnSelf();
-        $tableMock->shouldReceive('bulkActions')->andReturnSelf();
-        $tableMock->shouldReceive('actionsPosition')->andReturnSelf();
-        $tableMock->shouldReceive('emptyStateActions')->andReturnSelf();
-        $tableMock->shouldReceive('striped')->andReturnSelf();
-        $tableMock->shouldReceive('paginated')->andReturnSelf();
+    // Create a mock for Table
+    $tableMock = Mockery::mock(Table::class);
+    $tableMock->shouldReceive('recordTitleAttribute')->andReturnSelf();
+    $tableMock->shouldReceive('heading')->andReturnSelf();
+    $tableMock->shouldReceive('columns')->andReturnSelf();
+    $tableMock->shouldReceive('contentGrid')->andReturnSelf();
+    $tableMock->shouldReceive('filters')->andReturnSelf();
+    $tableMock->shouldReceive('filtersLayout')->andReturnSelf();
+    $tableMock->shouldReceive('filtersFormColumns')->andReturnSelf();
+    $tableMock->shouldReceive('persistFiltersInSession')->andReturnSelf();
+    // headerActions, actions, and bulkActions are called with empty arrays
+    $tableMock->shouldReceive('headerActions')->andReturnSelf();
+    $tableMock->shouldReceive('actions')->andReturnSelf();
+    $tableMock->shouldReceive('bulkActions')->andReturnSelf();
+    $tableMock->shouldReceive('actionsPosition')->andReturnSelf();
+    $tableMock->shouldReceive('emptyStateActions')->andReturnSelf();
+    $tableMock->shouldReceive('striped')->andReturnSelf();
+    $tableMock->shouldReceive('paginated')->andReturnSelf();
 
-        // Call the table method
-        $result = $mock->table($tableMock);
+    // Call the table method
+    $result = $mock->table($tableMock);
 
-        // Assert the result is a Table instance
-        $this->assertSame($tableMock, $result);
-    }
-}
+    // Assert the result is a Table instance
+    expect($result)->toBe($tableMock);
+});
 
 /**
  * Dummy class that uses HasTable and HasXotTable traits for testing.

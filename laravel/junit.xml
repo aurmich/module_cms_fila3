@@ -1,52 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php" tests="6" assertions="3" errors="3" failures="0" skipped="0" time="0.024271">
-    <testcase name="`Activity Business Logic` → activity extends spatie activity functionality" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity extends spatie activity functionality" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.011540">
-      <error type="BadMethodCallException">`Activity Business Logic` → activity extends spatie activity functionalityBadMethodCallException: Method "toBeSubclassOf" does not exist in string.
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:35</error>
+  <testsuite name="Modules\SaluteOra\tests\Feature\Folio\IndexPageTest" file="Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php" tests="3" assertions="0" errors="3" failures="0" skipped="0" time="0.010669">
+    <testcase name="it displays welcome content" file="Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php::it displays welcome content" class="Modules\SaluteOra\tests\Feature\Folio\IndexPageTest" classname="Modules.SaluteOra.tests.Feature.Folio.IndexPageTest" assertions="0" time="0.008185">
+      <error type="ReflectionException">it displays welcome contentReflectionException: Call to undefined method PHPUnit\Framework\TestCase::get()
+at vendor/pestphp/pest-plugin-laravel/src/Http.php:189
+at Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php:15</error>
     </testcase>
-    <testcase name="`Activity Business Logic` → activity has correct connection configured" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has correct connection configured" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.009213">
-      <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has correct connection configuredIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:9
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:9</error>
+    <testcase name="it has correct meta tags" file="Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php::it has correct meta tags" class="Modules\SaluteOra\tests\Feature\Folio\IndexPageTest" classname="Modules.SaluteOra.tests.Feature.Folio.IndexPageTest" assertions="0" time="0.001305">
+      <error type="ReflectionException">it has correct meta tagsReflectionException: Call to undefined method PHPUnit\Framework\TestCase::get()
+at vendor/pestphp/pest-plugin-laravel/src/Http.php:189
+at Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php:21</error>
     </testcase>
-    <testcase name="`Activity Business Logic` → activity has for event scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has for event scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.001069"/>
-    <testcase name="`Activity Business Logic` → activity has batch scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has batch scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.000446"/>
-    <testcase name="`Activity Business Logic` → activity has in log scope method" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has in log scope method" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="1" time="0.000383"/>
-    <testcase name="`Activity Business Logic` → activity has expected fillable fields" file="Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php::`Activity Business Logic` → activity has expected fillable fields" class="Modules\Activity\tests\Unit\Models\ActivityBusinessLogicTest" classname="Modules.Activity.tests.Unit.Models.ActivityBusinessLogicTest" assertions="0" time="0.001621">
-      <error type="Illuminate\Contracts\Container\BindingResolutionException">`Activity Business Logic` → activity has expected fillable fieldsIlluminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist.
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15
-Caused by
-ReflectionException: Class "config" does not exist
-
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:1160
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:971
-at vendor/laravel/framework/src/Illuminate/Container/Container.php:902
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:138
-at vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:321
-at vendor/spatie/laravel-activitylog/src/Models/Activity.php:56
-at Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php:15</error>
+    <testcase name="it can access homepage" file="Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php::it can access homepage" class="Modules\SaluteOra\tests\Feature\Folio\IndexPageTest" classname="Modules.SaluteOra.tests.Feature.Folio.IndexPageTest" assertions="0" time="0.001180">
+      <error type="ReflectionException">it can access homepageReflectionException: Call to undefined method PHPUnit\Framework\TestCase::get()
+at vendor/pestphp/pest-plugin-laravel/src/Http.php:189
+at Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php:8</error>
     </testcase>
   </testsuite>
 </testsuites>

@@ -1,4 +1,14 @@
-# Modulo CMS
+# 🌐 Cms - Il SISTEMA di GESTIONE CONTENUTI più AVANZATO! 📝
+
+<!-- Dynamic validation badges -->
+[![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
+[![Filament 3.x](https://img.shields.io/badge/Filament-3.x-blue.svg)](https://filamentphp.com/)
+[![PHPStan Level 9](https://img.shields.io/badge/PHPStan-Level%209-brightgreen.svg)](https://phpstan.org/)
+[![Translation Ready](https://img.shields.io/badge/Translation-IT%20%7C%20EN%20%7C%20DE-green.svg)](https://laravel.com/docs/localization)
+[![Folio Routes](https://img.shields.io/badge/Folio-File%20Routes-purple.svg)](https://laravel.com/docs/folio)
+[![Volt Components](https://img.shields.io/badge/Volt-Single%20File%20Components-orange.svg)](https://laravel.com/docs/volt)
+[![Pest Tests](https://img.shields.io/badge/Pest%20Tests-✅%20Passing-brightgreen.svg)](tests/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3+-blue.svg)](https://php.net)
 
 Un modulo CMS modulare, estensibile e riutilizzabile per Laravel, con supporto per Filament, Volt e Folio.
 

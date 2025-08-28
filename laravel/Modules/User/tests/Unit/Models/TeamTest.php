@@ -245,3 +245,4 @@ class TeamTest extends TestCase
         $this->assertEquals(0, $teams->first()->personal_team);
     }
 }
+

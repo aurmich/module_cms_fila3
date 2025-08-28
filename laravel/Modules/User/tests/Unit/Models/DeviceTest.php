@@ -366,3 +366,4 @@ class DeviceTest extends TestCase
         $this->assertEquals($expectedCasts, $device->getCasts());
     }
 }
+

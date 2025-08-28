@@ -266,3 +266,4 @@ class TenantTest extends TestCase
         $this->assertEquals('dark', $darkThemeTenants->first()->settings['theme']);
     }
 }
+

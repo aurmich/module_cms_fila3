@@ -324,3 +324,4 @@ class ProfileTest extends TestCase
         $this->assertInstanceOf(Profile::class, $profile);
     }
 }
+

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Tests\Unit;
 
-use Modules\Geo\Tests\TestCase;
+use Tests\TestCase;
 
 uses(TestCase::class);
 

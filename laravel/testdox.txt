@@ -1,8 +1,5 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php
- [ ] `Activity Business Logic` → activity has correct connection configured
- [ ] `Activity Business Logic` → activity has expected fillable fields
- [ ] `Activity Business Logic` → activity extends spatie activity functionality
- [x] `Activity Business Logic` → activity has in log scope method
- [x] `Activity Business Logic` → activity has for event scope method
- [x] `Activity Business Logic` → activity has batch scope method
+/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php
+ [ ] it can access homepage
+ [ ] it displays welcome content
+ [ ] it has correct meta tags
 

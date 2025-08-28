@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Modules\Activity\Tests\Unit;
 
 use Carbon\Carbon;
-use Modules\Activity\Tests\TestCase;
+use Tests\TestCase;
+use Modules\Activity\Models\Activity;
+use Modules\Activity\Models\Snapshot;
+use Modules\Activity\Models\StoredEvent;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(TestCase::class);
 
