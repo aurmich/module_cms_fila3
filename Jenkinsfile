@@ -4,14 +4,7 @@ pipeline {
         AWS_REGION = 'eu-west-1'
         INSTANCE_ID = 'i-06de104551729bd9f'
         SCRIPT_PATH = '/var/www/saluteorale/deploy.sh'
-<<<<<<< HEAD
-<<<<<<< HEAD
         GITLAB_TOKEN_ID = 'gitlab-access-token-saluteorale'
-=======
->>>>>>> baf99f0f (Add Jenkinsfile)
-=======
-        GITLAB_TOKEN_ID = 'gitlab-access-token-saluteorale'
->>>>>>> 95c2f3ab (Update Jenkinsfile)
         MAX_WAIT_TIME = '300' // Come stringa per evitare problemi di cast
         POLL_INTERVAL = '5'  // Come stringa per evitare problemi di cast
         EMAIL_TO = 'g.casati@exabytesrl.it,m.sottana@exabytesrl.it'
