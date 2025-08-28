@@ -98,6 +98,10 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn( 'age_range')) {
                     $table->string('age_range')->nullable()->after('registration_number');
                 }
+
+                if (! $this->hasColumn( 'identity_document')) {
+                    $table->string('identity_document')->nullable()->after('type');
+                }
                 
                 foreach(Patient::getAttachments() as $attachment){
                     if (! $this->hasColumn($attachment)) {
