@@ -1,3 +1,32 @@
-Sushi To Json Trait (Modules\Tenant\Tests\Unit\SushiToJsonTrait)
- [ ] It throws exception with non array data
+/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/ActivityBusinessLogicTest.php
+ [ ] `Activity Business Logic` → activity has correct connection configured
+ [ ] `Activity Business Logic` → activity has expected fillable fields
+ [ ] `Activity Business Logic` → activity extends spatie activity functionality
+ [ ] `Activity Business Logic` → activity can be queried by log name
+ [ ] `Activity Business Logic` → activity can be queried by event type
+ [ ] `Activity Business Logic` → activity can be queried by batch
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/ActivityTest.php
+ [ ] activity can be created
+ [ ] activity has required attributes
+ [ ] activity can be soft deleted
+ [ ] activity factory creates valid instances
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/SnapshotBusinessLogicTest.php
+ [x] `Snapshot Business Logic` → snapshot has correct connection configured
+ [x] `Snapshot Business Logic` → snapshot has expected fillable fields for event sourcing
+ [ ] `Snapshot Business Logic` → snapshot extends base snapshot
+ [x] `Snapshot Business Logic` → snapshot has factory trait for testing
+ [ ] `Snapshot Business Logic` → snapshot can be queried by uuid
+ [ ] `Snapshot Business Logic` → snapshot can be queried by aggregate version
+
+/var/www/html/_bases/base_saluteora/laravel/Modules/Activity/tests/Unit/Models/StoredEventBusinessLogicTest.php
+ [x] `StoredEvent Business Logic` → stored event has correct connection configured
+ [x] `StoredEvent Business Logic` → stored event has correct table configured
+ [x] `StoredEvent Business Logic` → stored event has expected fillable fields for event sourcing
+ [ ] `StoredEvent Business Logic` → stored event extends eloquent stored event for event sourcing
+ [x] `StoredEvent Business Logic` → stored event has factory trait for testing
+ [ ] `StoredEvent Business Logic` → stored event can be queried after version
+ [ ] `StoredEvent Business Logic` → stored event can be queried by aggregate uuid
+ [ ] `StoredEvent Business Logic` → stored event can filter by event class
 
