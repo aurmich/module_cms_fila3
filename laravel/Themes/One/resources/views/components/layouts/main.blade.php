@@ -10,7 +10,7 @@
         <meta name="description" content="SaluteOra - La piattaforma per la gestione della tua salute">
         <meta name="keywords" content="salute, medici, studi, appuntamenti, prenotazioni">
         <meta name="author" content="SaluteOra">
-        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('themes/One/favicon.ico') }}">
         @filamentStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'],'themes/One')
         <link rel="preconnect" href="https://fonts.googleapis.com">
