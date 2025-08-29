@@ -625,3 +625,4 @@ class MailTemplateLogTest extends TestCase
 
 
 
+
