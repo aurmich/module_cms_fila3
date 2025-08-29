@@ -48,4 +48,8 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
+<<<<<<< HEAD
         run: vendor/bin/pest
+=======
+        run: vendor/bin/pest
+>>>>>>> fd753da3 (.)

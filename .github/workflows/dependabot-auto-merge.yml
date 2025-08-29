@@ -13,7 +13,11 @@ jobs:
     
       - name: Dependabot metadata
         id: metadata
+<<<<<<< HEAD
         uses: dependabot/fetch-metadata@v1.3.5
+=======
+        uses: dependabot/fetch-metadata@v1.6.0
+>>>>>>> fd753da3 (.)
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           
@@ -29,4 +33,8 @@ jobs:
         run: gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+=======
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+>>>>>>> fd753da3 (.)

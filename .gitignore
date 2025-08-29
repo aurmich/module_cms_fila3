@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🔧  .gitignore
 # Questo file definisce quali file e cartelle devono essere ignorati dal controllo di versione
 # Organizzato secondo la filosofia di sviluppo : chiarezza, organizzazione e manutenibilità
@@ -47,12 +48,37 @@ package-lock.json
 /docs/package-lock.json
 
 # 📱 Laravel specifici
+=======
+# Dependencies
+vendor/
+node_modules/
+package-lock.json
+composer.lock
+yarn-error.log
+npm-debug.log
+
+# Build and compiled files
+/build
+/docs/cache
+cache/
+docs/cache/
+
+# Cache and temporary files
+*.cache
+*.lock
+*.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Laravel specific
+>>>>>>> fd753da3 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
 public/hot
 public_html/storage
 public_html/hot
+<<<<<<< HEAD
 laravel_bak/
 .git-rewrite
 .fuse_hidden*
@@ -127,3 +153,25 @@ laravel/junit.xml
 laravel/teamcity.txt
 laravel/testdox.html
 laravel/testdox.txt
+=======
+storage/*.key
+
+# Environment and configuration
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Git related
+.git-rewrite/
+.git-blame-ignore-revs
+
+# Backup files
+*.old
+*.old1
+*.backup
+*.bak
+
+# File di log
+*.log
+>>>>>>> fd753da3 (.)

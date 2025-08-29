@@ -4,3 +4,21 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+<<<<<<< HEAD
+=======
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "npm"
+      - "dependencies"
+>>>>>>> fd753da3 (.)
