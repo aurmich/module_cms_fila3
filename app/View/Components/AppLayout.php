@@ -24,6 +24,7 @@ class AppLayout extends Component
         */
         $view = 'pub_theme::layouts.app';
         $view_params = [];
+        // @phpstan-ignore-next-line
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }

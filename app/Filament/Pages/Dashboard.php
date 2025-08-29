@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Pages;
 
-use Filament\Facades\Filament;
-use Filament\Pages\Page;
 use Filament\Panel;
-use Filament\Support\Facades\FilamentIcon;
+use Filament\Pages\Page;
 use Filament\Widgets\Widget;
-use Filament\Widgets\WidgetConfiguration;
-use Illuminate\Contracts\Support\Htmlable;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
+use Filament\Widgets\WidgetConfiguration;
+use Filament\Support\Facades\FilamentIcon;
+use Illuminate\Contracts\Support\Htmlable;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
-class Dashboard extends Page
+class Dashboard extends XotBaseDashboard
 {
     //
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';

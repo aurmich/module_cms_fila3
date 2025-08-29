@@ -259,4 +259,11 @@ return array (
       'label' => 'cancel',
     ),
   ),
+  'sections' => 
+  array (
+    'empty' => 
+    array (
+      'heading' => '',
+    ),
+  ),
 );
