@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Modulo Cms - Content Management System
 
 ## Panoramica
@@ -30,7 +29,6 @@ laravel/Modules/Cms/
 - **Providers**: `Modules\Cms\Providers`
 
 ## Funzionalità Principali
-=======
 # Modulo CMS
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
@@ -52,7 +50,6 @@ laravel/Modules/Cms/
 > - [README.md tema One](../../../../laravel/Themes/One/docs/README.md)
 > - [README.md tema Two](../../../../laravel/Themes/Two/docs/README.md)
 > - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
->>>>>>> b85e13f (.)
 
 ### 1. Gestione Menu
 - Creazione e gestione di menu dinamici
