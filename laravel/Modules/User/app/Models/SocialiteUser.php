@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Xot\Datas\XotData;
@@ -49,11 +48,11 @@ use Modules\Xot\Datas\XotData;
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin IdeHelperSocialiteUser
+ * @method static \Modules\User\Database\Factories\SocialiteUserFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class SocialiteUser extends BaseModel
 {
-    use HasFactory;
 
     /** @var list<string> */
     protected $fillable = [

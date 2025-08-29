@@ -384,6 +384,14 @@ class XotData extends Data implements Wireable
         // return $userInstance->getChildTypes();
     }
 
+    /**
+     * Get the project namespace dynamically.
+     */
+    public function getProjectNamespace(): string
+    {
+        return 'Modules\\' . $this->main_module;
+    }
+
     public function forceSSL(): bool
     {
         if (! $this->force_ssl) {

@@ -61,10 +61,10 @@ namespace Modules\Activity\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Activity whereSubjectType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Activity whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Activity whereUpdatedBy($value)
+ * @mixin IdeHelperActivity
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperActivity {}
+	class Activity extends \Eloquent {}
 }
 
 namespace Modules\Activity\Models{
@@ -91,10 +91,10 @@ namespace Modules\Activity\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Snapshot whereUpdatedBy($value)
+ * @mixin IdeHelperSnapshot
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSnapshot {}
+	class Snapshot extends \Eloquent {}
 }
 
 namespace Modules\Activity\Models{
@@ -137,10 +137,10 @@ namespace Modules\Activity\Models{
  * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIsNot(string $property, ?mixed $value)
  * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
  * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
+ * @mixin IdeHelperStoredEvent
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperStoredEvent {}
+	class StoredEvent extends \Eloquent {}
 }
 
 namespace Modules\Cms\Models{
@@ -154,10 +154,10 @@ namespace Modules\Cms\Models{
  * @method static Builder|Conf query()
  * @method static Builder|Conf whereId($value)
  * @method static Builder|Conf whereName($value)
+ * @mixin IdeHelperConf
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperConf {}
+	class Conf extends \Eloquent {}
 }
 
 namespace Modules\Cms\Models{
@@ -276,10 +276,10 @@ namespace Modules\Cms\Models{
  * @method static \Modules\Cms\Database\Factories\MenuFactory factory($count = null, $state = [])
  * @property-read int $depth
  * @property-read string $path
+ * @mixin IdeHelperMenu
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMenu {}
+	class Menu extends \Eloquent implements \Modules\Xot\Contracts\HasRecursiveRelationshipsContract {}
 }
 
 namespace Modules\Cms\Models{
@@ -296,10 +296,10 @@ namespace Modules\Cms\Models{
  * @method static Builder|Module query()
  * @method static Builder|Module whereId($value)
  * @method static Builder|Module whereName($value)
+ * @mixin IdeHelperModule
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperModule {}
+	class Module extends \Eloquent {}
 }
 
 namespace Modules\Cms\Models{
@@ -348,10 +348,10 @@ namespace Modules\Cms\Models{
  * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
  * @property array<array-key, mixed>|null $middleware
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
+ * @mixin IdeHelperPage
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPage {}
+	class Page extends \Eloquent {}
 }
 
 namespace Modules\Cms\Models{
@@ -385,10 +385,10 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
+ * @mixin IdeHelperPageContent
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPageContent {}
+	class PageContent extends \Eloquent {}
 }
 
 namespace Modules\Cms\Models{
@@ -422,10 +422,10 @@ namespace Modules\Cms\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedBy($value)
+ * @mixin IdeHelperSection
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSection {}
+	class Section extends \Eloquent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -490,10 +490,10 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consent whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consent whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consent whereUserType($value)
+ * @mixin IdeHelperConsent
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperConsent {}
+	class Consent extends \Eloquent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -564,10 +564,10 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Event   whereUpdatedBy($value)
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
+ * @mixin IdeHelperEvent
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperEvent {}
+	class Event extends \Eloquent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -706,10 +706,10 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile whereCountry($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile wherePostalCode($value)
+ * @mixin IdeHelperProfile
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperProfile {}
+	class Profile extends \Eloquent {}
 }
 
 namespace Modules\Gdpr\Models{
@@ -811,10 +811,10 @@ namespace Modules\Gdpr\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Treatment   whereWeight($value)
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
+ * @mixin IdeHelperTreatment
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTreatment {}
+	class Treatment extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -856,7 +856,6 @@ namespace Modules\Geo\Models{
  * @property-read string $street_address
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent|null $model
  * @property-read \Modules\User\Models\Profile|null $updater
- * @method static \Modules\Geo\Database\Factories\AddressFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address nearby(float $latitude, float $longitude, float $radiusKm = '10')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address newQuery()
@@ -889,10 +888,10 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Address whereUpdatedBy($value)
+ * @mixin IdeHelperAddress
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAddress {}
+	class Address extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -935,10 +934,10 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereRegione($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereSigla($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Comune whereZona($value)
+ * @mixin IdeHelperComune
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperComune {}
+	class Comune extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -946,27 +945,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|County newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|County newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|County query()
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
+ * @mixin IdeHelperCounty
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperCounty {}
-}
-
-namespace Modules\Geo\Models{
-/**
- * Modules\Geo\Models\GeoNamesCap.
- *
- * @method static \Illuminate\Database\Eloquent\Builder|GeoNamesCap newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoNamesCap newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|GeoNamesCap query()
- * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @mixin \Eloquent
- */
-	#[\AllowDynamicProperties]
-	class IdeHelperGeoNamesCap {}
+	class County extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -976,8 +960,8 @@ namespace Modules\Geo\Models{
  * @property string|null $name
  * @property int $id
  * @property string|null $postal_code
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality query()
@@ -986,10 +970,10 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality wherePostalCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality whereProvinceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Locality whereRegionId($value)
+ * @mixin IdeHelperLocality
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperLocality {}
+	class Locality extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -1041,10 +1025,10 @@ namespace Modules\Geo\Models{
  * @method static Builder<static>|Location whereStreet($value)
  * @method static Builder<static>|Location whereUpdatedAt($value)
  * @method static Builder<static>|Location whereUpdatedBy($value)
+ * @mixin IdeHelperLocation
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperLocation {}
+	class Location extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -1057,7 +1041,6 @@ namespace Modules\Geo\Models{
  * @property-read \Illuminate\Database\Eloquent\Model $linked
  * @property-read \Modules\Geo\Models\PlaceType|null $placeType
  * @property-read \Modules\User\Models\Profile|null $updater
- * @method static \Modules\Geo\Database\Factories\PlaceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place query()
@@ -1085,10 +1068,10 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place wherePostType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Place whereUpdatedBy($value)
+ * @mixin IdeHelperPlace
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPlace {}
+	class Place extends \Eloquent implements \Modules\Geo\Contracts\HasGeolocation {}
 }
 
 namespace Modules\Geo\Models{
@@ -1096,12 +1079,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PlaceType query()
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
+ * @mixin IdeHelperPlaceType
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPlaceType {}
+	class PlaceType extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -1109,40 +1092,40 @@ namespace Modules\Geo\Models{
  * @property int|null $region_id
  * @property int $id
  * @property string|null $name
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Locality> $localities
  * @property-read int|null $localities_count
  * @property-read \Modules\Geo\Models\Region|null $region
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Province whereRegionId($value)
+ * @mixin IdeHelperProvince
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperProvince {}
+	class Province extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
 /**
  * @property int $id
  * @property string|null $name
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Geo\Models\Province> $provinces
  * @property-read int|null $provinces_count
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereName($value)
+ * @mixin IdeHelperRegion
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperRegion {}
+	class Region extends \Eloquent {}
 }
 
 namespace Modules\Geo\Models{
@@ -1150,12 +1133,12 @@ namespace Modules\Geo\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|State newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|State newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|State query()
- * @property-read \Modules\SaluteOra\Models\Profile|null $creator
- * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @property-read \Illuminate\Database\Eloquent\Model|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Model|null $updater
+ * @mixin IdeHelperState
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperState {}
+	class State extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1199,11 +1182,11 @@ namespace Modules\Job\Models{
  * @property \Illuminate\Database\Eloquent\Model|Eloquent|null $user
  * @property string|null $user_type
  * @method static \Illuminate\Database\Eloquent\Builder|Export whereUserType($value)
- * @mixin Eloquent
  * @mixin \Eloquent
+ * @mixin IdeHelperExport
+ * @mixin Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperExport {}
+	class Export extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1230,10 +1213,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|FailedImportRow whereValidationError($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFailedImportRow
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperFailedImportRow {}
+	class FailedImportRow extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1260,10 +1243,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|FailedJob whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFailedJob
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperFailedJob {}
+	class FailedJob extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1295,10 +1278,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Frequency whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFrequency
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperFrequency {}
+	class Frequency extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1341,10 +1324,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Import whereUserType($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperImport
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperImport {}
+	class Import extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1379,10 +1362,10 @@ namespace Modules\Job\Models{
  * @property mixed $status
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperJob
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperJob {}
+	class Job extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1415,10 +1398,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobBatch whereTotalJobs($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperJobBatch
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperJobBatch {}
+	class JobBatch extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1456,10 +1439,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobManager whereQueue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobManager whereStartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobManager whereUpdatedAt($value)
+ * @mixin IdeHelperJobManager
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperJobManager {}
+	class JobManager extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1494,10 +1477,10 @@ namespace Modules\Job\Models{
  * @property mixed $status
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperJobsWaiting
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperJobsWaiting {}
+	class JobsWaiting extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1527,10 +1510,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Parameter whereValue($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperParameter
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperParameter {}
+	class Parameter extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1561,10 +1544,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Result whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperResult
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperResult {}
+	class Result extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1638,10 +1621,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereWithoutOverlapping($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule withoutTrashed()
+ * @mixin IdeHelperSchedule
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSchedule {}
+	class Schedule extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1678,10 +1661,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ScheduleHistory whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperScheduleHistory
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperScheduleHistory {}
+	class ScheduleHistory extends \Eloquent {}
 }
 
 namespace Modules\Job\Models{
@@ -1755,10 +1738,10 @@ namespace Modules\Job\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Task whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Task whereUpdatedBy($value)
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @mixin IdeHelperTask
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTask {}
+	class Task extends \Eloquent {}
 }
 
 namespace Modules\Lang\Models{
@@ -1833,11 +1816,11 @@ namespace Modules\Lang\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViewsCount($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
- * @mixin Eloquent
  * @mixin \Eloquent
+ * @mixin IdeHelperPost
+ * @mixin Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPost {}
+	class Post extends \Eloquent {}
 }
 
 namespace Modules\Lang\Models{
@@ -1875,10 +1858,10 @@ namespace Modules\Lang\Models{
  * @method static \Modules\Lang\Database\Factories\TranslationFactory factory($count = null, $state = [])
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTranslation
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTranslation {}
+	class Translation extends \Eloquent {}
 }
 
 namespace Modules\Lang\Models{
@@ -1899,10 +1882,10 @@ namespace Modules\Lang\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TranslationFile wherePath($value)
+ * @mixin IdeHelperTranslationFile
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTranslationFile {}
+	class TranslationFile extends \Eloquent {}
 }
 
 namespace Modules\Media\Models{
@@ -2080,45 +2063,46 @@ namespace Modules\Media\Models{
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
- * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
- * @mixin Eloquent
  * @mixin \Eloquent
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @mixin IdeHelperMedia
+ * @mixin Eloquent
+ * @method static \Modules\Media\Database\Factories\MediaFactory factory($count = null, $state = [])
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMedia {}
+	class Media extends \Eloquent {}
 }
 
 namespace Modules\Media\Models{
@@ -2175,10 +2159,10 @@ namespace Modules\Media\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereWidth($value)
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperMediaConvert
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMediaConvert {}
+	class MediaConvert extends \Eloquent {}
 }
 
 namespace Modules\Media\Models{
@@ -2206,10 +2190,11 @@ namespace Modules\Media\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedBy($value)
+ * @mixin IdeHelperTemporaryUpload
  * @mixin \Eloquent
+ * @method static \Modules\Media\Database\Factories\TemporaryUploadFactory factory($count = null, $state = [])
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTemporaryUpload {}
+	class TemporaryUpload extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace Modules\Notify\Models{
@@ -2310,10 +2295,10 @@ namespace Modules\Notify\Models{
  * @property string|null $deleted_by
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contact whereDeletedBy($value)
+ * @mixin IdeHelperContact
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperContact {}
+	class Contact extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2363,10 +2348,10 @@ namespace Modules\Notify\Models{
  * @property int $counter
  * @method static Builder<static>|MailTemplate whereCounter($value)
  * @method static Builder<static>|MailTemplate whereSmsTemplate($value)
+ * @mixin IdeHelperMailTemplate
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMailTemplate {}
+	class MailTemplate extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2381,10 +2366,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateLog query()
+ * @mixin IdeHelperMailTemplateLog
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMailTemplateLog {}
+	class MailTemplateLog extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2429,10 +2414,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion whereVersion($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailTemplateVersion withoutTrashed()
+ * @mixin IdeHelperMailTemplateVersion
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMailTemplateVersion {}
+	class MailTemplateVersion extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2476,10 +2461,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedBy($value)
+ * @mixin IdeHelperNotification
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotification {}
+	class Notification extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2526,10 +2511,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplate whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplate whereLocale(string $column, string $locale)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplate whereLocales(string $column, array $locales)
+ * @mixin IdeHelperNotificationTemplate
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotificationTemplate {}
+	class NotificationTemplate extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2543,10 +2528,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationTemplateVersion query()
+ * @mixin IdeHelperNotificationTemplateVersion
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotificationTemplateVersion {}
+	class NotificationTemplateVersion extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2554,10 +2539,10 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationType query()
+ * @mixin IdeHelperNotificationType
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotificationType {}
+	class NotificationType extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2612,15 +2597,15 @@ namespace Modules\Notify\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|NotifyTheme whereViewParams($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin \Eloquent
  * @property Carbon|null $deleted_at
  * @property string|null $deleted_by
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyTheme whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyTheme whereDeletedBy($value)
+ * @mixin IdeHelperNotifyTheme
  * @mixin Eloquent
- * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotifyTheme {}
+	class NotifyTheme extends \Eloquent {}
 }
 
 namespace Modules\Notify\Models{
@@ -2652,10 +2637,10 @@ namespace Modules\Notify\Models{
  * @property string|null $deleted_by
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyThemeable whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotifyThemeable whereDeletedBy($value)
+ * @mixin IdeHelperNotifyThemeable
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotifyThemeable {}
+	class NotifyThemeable extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -2830,10 +2815,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
  * @property-read int|null $studios_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereAgeRange($value)
+ * @mixin IdeHelperAdmin
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAdmin {}
+	class Admin extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -2869,10 +2854,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property-read User|null $user
+ * @mixin IdeHelperAdminStudio
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAdminStudio {}
+	class AdminStudio extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -2902,10 +2887,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdminTeam whereUserId($value)
+ * @mixin IdeHelperAdminTeam
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAdminTeam {}
+	class AdminTeam extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3003,10 +2988,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereInvoice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment ofYearMonth(string $yearMonth)
+ * @mixin IdeHelperAppointment
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAppointment {}
+	class Appointment extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3178,10 +3163,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereAgeRange($value)
+ * @mixin IdeHelperDoctor
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDoctor {}
+	class Doctor extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3230,10 +3215,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Modules\SaluteOra\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Appointment> $appointments
  * @property-read int|null $appointments_count
+ * @mixin IdeHelperDoctorStudio
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDoctorStudio {}
+	class DoctorStudio extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3263,10 +3248,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DoctorTeam whereUserId($value)
+ * @mixin IdeHelperDoctorTeam
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDoctorTeam {}
+	class DoctorTeam extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3440,10 +3425,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Studio> $studios
  * @property-read int|null $studios_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereAgeRange($value)
+ * @mixin IdeHelperPatient
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPatient {}
+	class Patient extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3479,10 +3464,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientStudio whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property-read User|null $user
+ * @mixin IdeHelperPatientStudio
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPatientStudio {}
+	class PatientStudio extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3512,10 +3497,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientTeam whereUserId($value)
+ * @mixin IdeHelperPatientTeam
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPatientTeam {}
+	class PatientTeam extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3588,10 +3573,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withExtraAttributes()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
+ * @mixin IdeHelperProfile
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperProfile {}
+	class Profile extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3705,10 +3690,10 @@ namespace Modules\SaluteOra\Models{
  * @method static Builder<static>|Report whereUpdatedBy($value)
  * @method static Builder<static>|Report whereUsesAslClinicForDentalCare($value)
  * @method static Builder<static>|Report whereVisitsDentistYearly($value)
+ * @mixin IdeHelperReport
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperReport {}
+	class Report extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3810,10 +3795,10 @@ namespace Modules\SaluteOra\Models{
  * @property-read int|null $patients_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\SaluteOra\Models\Report> $reports
  * @property-read int|null $reports_count
+ * @mixin IdeHelperStudio
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperStudio {}
+	class Studio extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3849,10 +3834,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudioUser whereUserId($value)
  * @property-read \Modules\SaluteOra\Models\Studio|null $studio
  * @property-read \Modules\SaluteOra\Models\User|null $user
+ * @mixin IdeHelperStudioUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperStudioUser {}
+	class StudioUser extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -3888,10 +3873,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TeamUser whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTeamUser {}
+	class TeamUser extends \Eloquent {}
 }
 
 namespace Modules\SaluteOra\Models{
@@ -4061,10 +4046,10 @@ namespace Modules\SaluteOra\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearsInItaly($value)
  * @property string|null $age_range
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
+ * @mixin IdeHelperUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperUser {}
+	class User extends \Eloquent implements \Spatie\ModelStates\HasStatesContract {}
 }
 
 namespace Modules\Tenant\Models{
@@ -4079,50 +4064,38 @@ namespace Modules\Tenant\Models{
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Modules\Tenant\Database\Factories\DomainFactory factory($count = null, $state = [])
+ * @mixin IdeHelperDomain
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDomain {}
+	class Domain extends \Eloquent {}
 }
 
-namespace Modules\User\Models{
+namespace Modules\Tenant\Models{
 /**
- * Authentication Model
+ * Modello di test per il trait SushiToJson.
  * 
- * Tracks user authentication attempts and sessions.
+ * Utilizzato esclusivamente per i test del trait.
  *
  * @property int $id
- * @property string $type Type of authentication (e.g., 'login', 'logout')
- * @property string|null $ip_address IP address used for authentication
- * @property string|null $user_agent User agent string from the request
- * @property string|null $location Geographic location derived from IP
- * @property bool $login_successful Whether the login attempt was successful
- * @property Carbon|null $login_at When the login attempt occurred
- * @property Carbon|null $logout_at When the logout occurred
- * @property string $authenticatable_type The class name of the authenticatable model
- * @property string $authenticatable_id The ID of the authenticatable model
- * @property Carbon|null $created_at When the record was created
- * @property Carbon|null $updated_at When the record was last updated
- * @property-read Model|\Eloquent $authenticatable The authenticatable model instance
- * @method static Builder<static>|Authentication newModelQuery()
- * @method static Builder<static>|Authentication newQuery()
- * @method static Builder<static>|Authentication query()
- * @method static Builder<static>|Authentication whereCreatedAt($value)
- * @method static Builder<static>|Authentication whereId($value)
- * @method static Builder<static>|Authentication whereIpAddress($value)
- * @method static Builder<static>|Authentication whereLocation($value)
- * @method static Builder<static>|Authentication whereType($value)
- * @method static Builder<static>|Authentication whereUpdatedAt($value)
- * @method static Builder<static>|Authentication whereUserAgent($value)
- * @method static Builder<static>|Authentication whereLoginAt($value)
- * @method static Builder<static>|Authentication whereLogoutAt($value)
- * @method static Builder<static>|Authentication whereLoginSuccessful($value)
- * @method static Builder<static>|Authentication whereAuthenticatableType($value)
- * @method static Builder<static>|Authentication whereAuthenticatableId($value)
- * @mixin \Eloquent
+ * @property string|null $name
+ * @property string|null $description
+ * @property string|null $status
+ * @property array<array-key, mixed>|null $metadata
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Modules\Tenant\Database\Factories\TestSushiModelFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereMetadata($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TestSushiModel whereUpdatedAt($value)
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAuthentication {}
+	class TestSushiModel extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4162,10 +4135,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AuthenticationLog whereUserAgent($value)
+ * @mixin IdeHelperAuthenticationLog
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperAuthenticationLog {}
+	class AuthenticationLog extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4217,10 +4190,10 @@ namespace Modules\User\Models{
  * @property string|null $created_by
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereUuid($value)
+ * @mixin IdeHelperDevice
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDevice {}
+	class Device extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4238,10 +4211,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|DeviceProfile query()
+ * @mixin IdeHelperDeviceProfile
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDeviceProfile {}
+	class DeviceProfile extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4278,10 +4251,10 @@ namespace Modules\User\Models{
  * @property UserContract|null $user
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
+ * @mixin IdeHelperDeviceUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperDeviceUser {}
+	class DeviceUser extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4313,10 +4286,10 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @method static \Modules\User\Database\Factories\ExtraFactory factory($count = null, $state = [])
+ * @mixin IdeHelperExtra
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperExtra {}
+	class Extra extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4347,10 +4320,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feature whereValue($value)
+ * @mixin IdeHelperFeature
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperFeature {}
+	class Feature extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4386,10 +4359,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Membership whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperMembership
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperMembership {}
+	class Membership extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4420,10 +4393,10 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @property string|null $team_id
  * @method static \Illuminate\Database\Eloquent\Builder|ModelHasPermission whereTeamId($value)
+ * @mixin IdeHelperModelHasPermission
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperModelHasPermission {}
+	class ModelHasPermission extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4456,10 +4429,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ModelHasRole whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperModelHasRole
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperModelHasRole {}
+	class ModelHasRole extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4476,10 +4449,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Notifications\DatabaseNotificationCollection<int, static> get($columns = ['*'])
  * @method static \Illuminate\Notifications\DatabaseNotificationCollection<int, static> all($columns = ['*'])
  * @method static \Illuminate\Notifications\DatabaseNotificationCollection<int, static> get($columns = ['*'])
+ * @mixin IdeHelperNotification
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperNotification {}
+	class Notification extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4518,10 +4491,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OauthAccessToken whereUpdatedBy($value)
+ * @mixin IdeHelperOauthAccessToken
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperOauthAccessToken {}
+	class OauthAccessToken extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4544,10 +4517,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereRevoked($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereScopes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthAuthCode whereUserId($value)
+ * @mixin IdeHelperOauthAuthCode
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperOauthAuthCode {}
+	class OauthAuthCode extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4592,10 +4565,10 @@ namespace Modules\User\Models{
  * @property string|null $created_by
  * @method static \Illuminate\Database\Eloquent\Builder|OauthClient whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthClient whereUpdatedBy($value)
+ * @mixin IdeHelperOauthClient
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperOauthClient {}
+	class OauthClient extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4620,10 +4593,10 @@ namespace Modules\User\Models{
  * @property string|null $created_by
  * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthPersonalAccessClient whereUpdatedBy($value)
+ * @mixin IdeHelperOauthPersonalAccessClient
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperOauthPersonalAccessClient {}
+	class OauthPersonalAccessClient extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4642,10 +4615,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereExpiresAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OauthRefreshToken whereRevoked($value)
+ * @mixin IdeHelperOauthRefreshToken
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperOauthRefreshToken {}
+	class OauthRefreshToken extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4676,10 +4649,10 @@ namespace Modules\User\Models{
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PasswordReset whereUuid($value)
+ * @mixin IdeHelperPasswordReset
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPasswordReset {}
+	class PasswordReset extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4688,17 +4661,17 @@ namespace Modules\User\Models{
  * 
  * Extends Spatie's Permission model to interact with the permission system.
  *
- * @property string $id
- * @property string $name
- * @property string $guard_name
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property Collection<int, Role> $roles
- * @property int|null $roles_count
+ * @property string                                                                    $id
+ * @property string                                                                    $name
+ * @property string                                                                    $guard_name
+ * @property Carbon|null                                                               $created_at
+ * @property Carbon|null                                                               $updated_at
+ * @property string|null                                                               $created_by
+ * @property string|null                                                               $updated_by
+ * @property Collection<int, Role>                                                     $roles
+ * @property int|null                                                                  $roles_count
  * @property EloquentCollection<int, \Illuminate\Database\Eloquent\Model&UserContract> $users
- * @property int|null $users_count
+ * @property int|null                                                                  $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission query()
@@ -4712,14 +4685,15 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Permission role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission permission($permissions)
  * @property EloquentCollection<int, Permission> $permissions
- * @property int|null $permissions_count
+ * @property int|null                            $permissions_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission withoutRole($roles, $guard = null)
  * @property PermissionRole|null $pivot
+ * @mixin IdeHelperPermission
  * @mixin \Eloquent
+ * @method static \Modules\User\Database\Factories\PermissionFactory factory($count = null, $state = [])
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPermission {}
+	class Permission extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4743,10 +4717,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereUpdatedBy($value)
+ * @mixin IdeHelperPermissionRole
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPermissionRole {}
+	class PermissionRole extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4757,10 +4731,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PermissionUser query()
+ * @mixin IdeHelperPermissionUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPermissionUser {}
+	class PermissionUser extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4818,10 +4792,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withExtraAttributes()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Profile withoutRole($roles, $guard = null)
+ * @mixin IdeHelperProfile
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperProfile {}
+	class Profile extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4855,10 +4829,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ProfileTeam whereUserId($value)
+ * @mixin IdeHelperProfileTeam
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperProfileTeam {}
+	class ProfileTeam extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4896,10 +4870,10 @@ namespace Modules\User\Models{
  * @mixin Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|Role withoutPermission($permissions)
  * @property PermissionRole|null $pivot
+ * @mixin IdeHelperRole
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperRole {}
+	class Role extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4925,10 +4899,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RoleHasPermission whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperRoleHasPermission
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperRoleHasPermission {}
+	class RoleHasPermission extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -4967,10 +4941,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialProvider whereUpdatedBy($value)
+ * @mixin IdeHelperSocialProvider
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSocialProvider {}
+	class SocialProvider extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5009,10 +4983,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SocialiteUser whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperSocialiteUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSocialiteUser {}
+	class SocialiteUser extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5059,10 +5033,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereUuid($value)
  * @property string|null $owner_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereOwnerId($value)
+ * @mixin IdeHelperTeam
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTeam {}
+	class Team extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5099,10 +5073,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TeamInvitation whereUuid($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamInvitation
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTeamInvitation {}
+	class TeamInvitation extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5122,10 +5096,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TeamPermission query()
+ * @mixin IdeHelperTeamPermission
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTeamPermission {}
+	class TeamPermission extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5161,10 +5135,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TeamUser whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTeamUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTeamUser {}
+	class TeamUser extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5184,10 +5158,10 @@ namespace Modules\User\Models{
  * @property TenantUser $pivot
  * @property EloquentCollection<int, User> $users
  * @property int|null $users_count
+ * @mixin IdeHelperTenant
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTenant {}
+	class Tenant extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5221,10 +5195,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TenantUser whereTenantId($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperTenantUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperTenantUser {}
+	class TenantUser extends \Eloquent {}
 }
 
 namespace Modules\User\Models{
@@ -5331,10 +5305,10 @@ namespace Modules\User\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
+ * @mixin IdeHelperUser
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperUser {}
+	class User extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5361,10 +5335,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Cache  whereValue($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperCache
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperCache {}
+	class Cache extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5391,10 +5365,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CacheLock  whereOwner($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperCacheLock
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperCacheLock {}
+	class CacheLock extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5430,10 +5404,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Extra whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperExtra
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperExtra {}
+	class Extra extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5449,10 +5423,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Feed  query()
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperFeed
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperFeed {}
+	class Feed extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5486,10 +5460,10 @@ namespace Modules\Xot\Models{
  * @property string|null $created_by
  * @method static \Illuminate\Database\Eloquent\Builder|HealthCheckResultHistoryItem whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HealthCheckResultHistoryItem whereUpdatedBy($value)
+ * @mixin IdeHelperHealthCheckResultHistoryItem
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperHealthCheckResultHistoryItem {}
+	class HealthCheckResultHistoryItem extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5512,10 +5486,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereSize($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperLog
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperLog {}
+	class Log extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5539,10 +5513,10 @@ namespace Modules\Xot\Models{
  * @property array<string, string>|null $colors
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereColors($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereIcon($value)
+ * @mixin IdeHelperModule
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperModule {}
+	class Module extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5571,10 +5545,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate wherePeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseAggregate whereValue($value)
+ * @mixin IdeHelperPulseAggregate
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPulseAggregate {}
+	class PulseAggregate extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5597,10 +5571,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseEntry whereValue($value)
+ * @mixin IdeHelperPulseEntry
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPulseEntry {}
+	class PulseEntry extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5623,10 +5597,10 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PulseValue whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseValue whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PulseValue whereValue($value)
+ * @mixin IdeHelperPulseValue
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperPulseValue {}
+	class PulseValue extends \Eloquent {}
 }
 
 namespace Modules\Xot\Models{
@@ -5687,9 +5661,9 @@ namespace Modules\Xot\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereDeletedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property \Modules\Xot\Contracts\ProfileContract|null $updater
+ * @mixin IdeHelperSession
  * @mixin \Eloquent
  */
-	#[\AllowDynamicProperties]
-	class IdeHelperSession {}
+	class Session extends \Eloquent {}
 }
 

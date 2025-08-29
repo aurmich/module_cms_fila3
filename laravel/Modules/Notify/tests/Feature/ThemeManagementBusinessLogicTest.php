@@ -2,49 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Modules\Notify\Tests\Feature;
-
 use Modules\Notify\Models\Theme;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\Notify\Helpers\ConfigHelper;
 
-class ThemeManagementBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_theme_with_basic_information(): void
-    {
-        // Arrange
+describe('Theme Management Business Logic', function () {
+    it('can create theme with basic information', function () {
+        $testData = ConfigHelper::getTestData();
+        
         $themeData = [
-            'name' => 'SaluteOra Professional',
-            'description' => 'Tema professionale per SaluteOra',
+            'name' => $testData['theme_name'] ?? (config('app.name', 'Our Platform') . ' Professional'),
+            'description' => $testData['theme_description'] ?? ('Tema professionale per ' . config('app.name', 'Our Platform')),
             'version' => '1.0.0',
             'is_active' => true,
         ];
 
-        // Act
         $theme = Theme::create($themeData);
 
-        // Assert
+        expect($theme)->toBeInstanceOf(Theme::class)
+            ->and($theme->name)->toBe($themeData['name'])
+            ->and($theme->description)->toBe($themeData['description'])
+            ->and($theme->version)->toBe('1.0.0')
+            ->and($theme->is_active)->toBeTrue();
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
-            'name' => 'SaluteOra Professional',
-            'description' => 'Tema professionale per SaluteOra',
+            'name' => $themeData['name'],
+            'description' => $themeData['description'],
             'version' => '1.0.0',
             'is_active' => true,
         ]);
+    });
 
-        $this->assertEquals('SaluteOra Professional', $theme->name);
-        $this->assertEquals('Tema professionale per SaluteOra', $theme->description);
-        $this->assertEquals('1.0.0', $theme->version);
-        $this->assertTrue($theme->is_active);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_colors(): void
-    {
-        // Arrange
+    it('can manage theme colors', function () {
         $theme = Theme::factory()->create();
         $colors = [
             'primary' => '#001F3F',
@@ -58,28 +47,23 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'border' => '#E5E7EB',
         ];
 
-        // Act
         $theme->update(['colors' => $colors]);
 
-        // Assert
+        expect($theme->fresh()->colors['primary'])->toBe('#001F3F')
+            ->and($theme->fresh()->colors['secondary'])->toBe('#3B82F6')
+            ->and($theme->fresh()->colors['accent'])->toBe('#F59E0B')
+            ->and($theme->fresh()->colors['success'])->toBe('#10B981')
+            ->and($theme->fresh()->colors['error'])->toBe('#EF4444')
+            ->and($theme->fresh()->colors['background'])->toBe('#FFFFFF')
+            ->and($theme->fresh()->colors['text'])->toBe('#1F2937');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'colors' => json_encode($colors),
         ]);
+    });
 
-        $this->assertEquals('#001F3F', $theme->fresh()->colors['primary']);
-        $this->assertEquals('#3B82F6', $theme->fresh()->colors['secondary']);
-        $this->assertEquals('#F59E0B', $theme->fresh()->colors['accent']);
-        $this->assertEquals('#10B981', $theme->fresh()->colors['success']);
-        $this->assertEquals('#EF4444', $theme->fresh()->colors['error']);
-        $this->assertEquals('#FFFFFF', $theme->fresh()->colors['background']);
-        $this->assertEquals('#1F2937', $theme->fresh()->colors['text']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_fonts(): void
-    {
-        // Arrange
+    it('can manage theme fonts', function () {
         $theme = Theme::factory()->create();
         $fonts = [
             'heading' => 'Segoe UI, Arial, sans-serif',
@@ -97,26 +81,21 @@ class ThemeManagementBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $theme->update(['fonts' => $fonts]);
 
-        // Assert
+        expect($theme->fresh()->fonts['heading'])->toBe('Segoe UI, Arial, sans-serif')
+            ->and($theme->fresh()->fonts['body'])->toBe('Georgia, serif')
+            ->and($theme->fresh()->fonts['monospace'])->toBe('Consolas, Monaco, monospace')
+            ->and($theme->fresh()->fonts['sizes']['base'])->toBe('1rem')
+            ->and($theme->fresh()->fonts['sizes']['2xl'])->toBe('1.5rem');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'fonts' => json_encode($fonts),
         ]);
+    });
 
-        $this->assertEquals('Segoe UI, Arial, sans-serif', $theme->fresh()->fonts['heading']);
-        $this->assertEquals('Georgia, serif', $theme->fresh()->fonts['body']);
-        $this->assertEquals('Consolas, Monaco, monospace', $theme->fresh()->fonts['monospace']);
-        $this->assertEquals('1rem', $theme->fresh()->fonts['sizes']['base']);
-        $this->assertEquals('1.5rem', $theme->fresh()->fonts['sizes']['2xl']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_spacing(): void
-    {
-        // Arrange
+    it('can manage theme spacing', function () {
         $theme = Theme::factory()->create();
         $spacing = [
             'xs' => '0.25rem',
@@ -129,25 +108,20 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'auto' => 'auto',
         ];
 
-        // Act
         $theme->update(['spacing' => $spacing]);
 
-        // Assert
+        expect($theme->fresh()->spacing['xs'])->toBe('0.25rem')
+            ->and($theme->fresh()->spacing['md'])->toBe('1rem')
+            ->and($theme->fresh()->spacing['xl'])->toBe('2rem')
+            ->and($theme->fresh()->spacing['3xl'])->toBe('4rem');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'spacing' => json_encode($spacing),
         ]);
+    });
 
-        $this->assertEquals('0.25rem', $theme->fresh()->spacing['xs']);
-        $this->assertEquals('1rem', $theme->fresh()->spacing['md']);
-        $this->assertEquals('2rem', $theme->fresh()->spacing['xl']);
-        $this->assertEquals('4rem', $theme->fresh()->spacing['3xl']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_border_radius(): void
-    {
-        // Arrange
+    it('can manage theme border radius', function () {
         $theme = Theme::factory()->create();
         $borderRadius = [
             'none' => '0',
@@ -160,25 +134,20 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'full' => '9999px',
         ];
 
-        // Act
         $theme->update(['border_radius' => $borderRadius]);
 
-        // Assert
+        expect($theme->fresh()->border_radius['none'])->toBe('0')
+            ->and($theme->fresh()->border_radius['base'])->toBe('0.25rem')
+            ->and($theme->fresh()->border_radius['lg'])->toBe('0.5rem')
+            ->and($theme->fresh()->border_radius['full'])->toBe('9999px');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'border_radius' => json_encode($borderRadius),
         ]);
+    });
 
-        $this->assertEquals('0', $theme->fresh()->border_radius['none']);
-        $this->assertEquals('0.25rem', $theme->fresh()->border_radius['base']);
-        $this->assertEquals('0.5rem', $theme->fresh()->border_radius['lg']);
-        $this->assertEquals('9999px', $theme->fresh()->border_radius['full']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_shadows(): void
-    {
-        // Arrange
+    it('can manage theme shadows', function () {
         $theme = Theme::factory()->create();
         $shadows = [
             'none' => 'none',
@@ -189,24 +158,19 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'xl' => '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         ];
 
-        // Act
         $theme->update(['shadows' => $shadows]);
 
-        // Assert
+        expect($theme->fresh()->shadows['none'])->toBe('none')
+            ->and($theme->fresh()->shadows['sm'])->toBe('0 1px 2px 0 rgba(0, 0, 0, 0.05)')
+            ->and($theme->fresh()->shadows['xl'])->toBe('0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'shadows' => json_encode($shadows),
         ]);
+    });
 
-        $this->assertEquals('none', $theme->fresh()->shadows['none']);
-        $this->assertEquals('0 1px 2px 0 rgba(0, 0, 0, 0.05)', $theme->fresh()->shadows['sm']);
-        $this->assertEquals('0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', $theme->fresh()->shadows['xl']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_breakpoints(): void
-    {
-        // Arrange
+    it('can manage theme breakpoints', function () {
         $theme = Theme::factory()->create();
         $breakpoints = [
             'sm' => '640px',
@@ -216,26 +180,21 @@ class ThemeManagementBusinessLogicTest extends TestCase
             '2xl' => '1536px',
         ];
 
-        // Act
         $theme->update(['breakpoints' => $breakpoints]);
 
-        // Assert
+        expect($theme->fresh()->breakpoints['sm'])->toBe('640px')
+            ->and($theme->fresh()->breakpoints['md'])->toBe('768px')
+            ->and($theme->fresh()->breakpoints['lg'])->toBe('1024px')
+            ->and($theme->fresh()->breakpoints['xl'])->toBe('1280px')
+            ->and($theme->fresh()->breakpoints['2xl'])->toBe('1536px');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'breakpoints' => json_encode($breakpoints),
         ]);
+    });
 
-        $this->assertEquals('640px', $theme->fresh()->breakpoints['sm']);
-        $this->assertEquals('768px', $theme->fresh()->breakpoints['md']);
-        $this->assertEquals('1024px', $theme->fresh()->breakpoints['lg']);
-        $this->assertEquals('1280px', $theme->fresh()->breakpoints['xl']);
-        $this->assertEquals('1536px', $theme->fresh()->breakpoints['2xl']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_animations(): void
-    {
-        // Arrange
+    it('can manage theme animations', function () {
         $theme = Theme::factory()->create();
         $animations = [
             'fade_in' => 'fadeIn 0.3s ease-in-out',
@@ -246,25 +205,20 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'pulse' => 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         ];
 
-        // Act
         $theme->update(['animations' => $animations]);
 
-        // Assert
+        expect($theme->fresh()->animations['fade_in'])->toBe('fadeIn 0.3s ease-in-out')
+            ->and($theme->fresh()->animations['slide_up'])->toBe('slideUp 0.3s ease-out')
+            ->and($theme->fresh()->animations['bounce'])->toBe('bounce 1s infinite')
+            ->and($theme->fresh()->animations['pulse'])->toBe('pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'animations' => json_encode($animations),
         ]);
+    });
 
-        $this->assertEquals('fadeIn 0.3s ease-in-out', $theme->fresh()->animations['fade_in']);
-        $this->assertEquals('slideUp 0.3s ease-out', $theme->fresh()->animations['slide_up']);
-        $this->assertEquals('bounce 1s infinite', $theme->fresh()->animations['bounce']);
-        $this->assertEquals('pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', $theme->fresh()->animations['pulse']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_transitions(): void
-    {
-        // Arrange
+    it('can manage theme transitions', function () {
         $theme = Theme::factory()->create();
         $transitions = [
             'default' => 'all 0.3s ease',
@@ -275,25 +229,20 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'transform' => 'transform 0.3s ease',
         ];
 
-        // Act
         $theme->update(['transitions' => $transitions]);
 
-        // Assert
+        expect($theme->fresh()->transitions['default'])->toBe('all 0.3s ease')
+            ->and($theme->fresh()->transitions['fast'])->toBe('all 0.15s ease')
+            ->and($theme->fresh()->transitions['slow'])->toBe('all 0.5s ease')
+            ->and($theme->fresh()->transitions['colors'])->toBe('color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'transitions' => json_encode($transitions),
         ]);
+    });
 
-        $this->assertEquals('all 0.3s ease', $theme->fresh()->transitions['default']);
-        $this->assertEquals('all 0.15s ease', $theme->fresh()->transitions['fast']);
-        $this->assertEquals('all 0.5s ease', $theme->fresh()->transitions['slow']);
-        $this->assertEquals('color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease', $theme->fresh()->transitions['colors']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_components(): void
-    {
-        // Arrange
+    it('can manage theme components', function () {
         $theme = Theme::factory()->create();
         $components = [
             'button' => [
@@ -313,24 +262,19 @@ class ThemeManagementBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $theme->update(['components' => $components]);
 
-        // Assert
+        expect($theme->fresh()->components['button']['primary'])->toBe('bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded')
+            ->and($theme->fresh()->components['card']['base'])->toBe('bg-white rounded-lg shadow-md p-6')
+            ->and($theme->fresh()->components['input']['base'])->toBe('border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'components' => json_encode($components),
         ]);
+    });
 
-        $this->assertEquals('bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded', $theme->fresh()->components['button']['primary']);
-        $this->assertEquals('bg-white rounded-lg shadow-md p-6', $theme->fresh()->components['card']['base']);
-        $this->assertEquals('border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500', $theme->fresh()->components['input']['base']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_utilities(): void
-    {
-        // Arrange
+    it('can manage theme utilities', function () {
         $theme = Theme::factory()->create();
         $utilities = [
             'text_align' => [
@@ -356,58 +300,49 @@ class ThemeManagementBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $theme->update(['utilities' => $utilities]);
 
-        // Assert
+        expect($theme->fresh()->utilities['text_align']['left'])->toBe('text-left')
+            ->and($theme->fresh()->utilities['text_align']['center'])->toBe('text-center')
+            ->and($theme->fresh()->utilities['display']['flex'])->toBe('flex')
+            ->and($theme->fresh()->utilities['position']['relative'])->toBe('relative');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'utilities' => json_encode($utilities),
         ]);
+    });
 
-        $this->assertEquals('text-left', $theme->fresh()->utilities['text_align']['left']);
-        $this->assertEquals('text-center', $theme->fresh()->utilities['text_align']['center']);
-        $this->assertEquals('flex', $theme->fresh()->utilities['display']['flex']);
-        $this->assertEquals('relative', $theme->fresh()->utilities['position']['relative']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_metadata(): void
-    {
-        // Arrange
+    it('can manage theme metadata', function () {
+        $testData = ConfigHelper::getTestData();
         $theme = Theme::factory()->create();
         $metadata = [
-            'author' => 'Team SaluteOra',
+            'author' => $testData['team_name'] ?? ('Team ' . config('app.name', 'Our Platform')),
             'created_date' => '2024-01-15',
             'last_modified' => '2024-12-01',
             'tags' => ['professional', 'healthcare', 'modern'],
             'category' => 'business',
             'compatibility' => ['Laravel 10', 'PHP 8.2+'],
             'license' => 'MIT',
-            'repository' => 'https://github.com/saluteora/themes',
+            'repository' => $testData['repository_url'] ?? ('https://github.com/' . strtolower(config('app.name', 'ourplatform')) . '/themes'),
         ];
 
-        // Act
         $theme->update(['metadata' => $metadata]);
 
-        // Assert
+        expect($theme->fresh()->metadata['author'])->toBe($metadata['author'])
+            ->and($theme->fresh()->metadata['created_date'])->toBe('2024-01-15')
+            ->and($theme->fresh()->metadata['category'])->toBe('business')
+            ->and($theme->fresh()->metadata['license'])->toBe('MIT')
+            ->and($theme->fresh()->metadata['compatibility'])->toContain('Laravel 10')
+            ->and($theme->fresh()->metadata['tags'])->toContain('professional');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'metadata' => json_encode($metadata),
         ]);
+    });
 
-        $this->assertEquals('Team SaluteOra', $theme->fresh()->metadata['author']);
-        $this->assertEquals('2024-01-15', $theme->fresh()->metadata['created_date']);
-        $this->assertEquals('business', $theme->fresh()->metadata['category']);
-        $this->assertEquals('MIT', $theme->fresh()->metadata['license']);
-        $this->assertContains('Laravel 10', $theme->fresh()->metadata['compatibility']);
-        $this->assertContains('professional', $theme->fresh()->metadata['tags']);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_settings(): void
-    {
-        // Arrange
+    it('can manage theme settings', function () {
         $theme = Theme::factory()->create();
         $settings = [
             'dark_mode' => true,
@@ -420,51 +355,41 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'image_optimization' => true,
         ];
 
-        // Act
         $theme->update(['settings' => $settings]);
 
-        // Assert
+        expect($theme->fresh()->settings['dark_mode'])->toBeTrue()
+            ->and($theme->fresh()->settings['rtl_support'])->toBeFalse()
+            ->and($theme->fresh()->settings['accessibility'])->toBeTrue()
+            ->and($theme->fresh()->settings['performance_optimization'])->toBeTrue()
+            ->and($theme->fresh()->settings['cache_enabled'])->toBeTrue()
+            ->and($theme->fresh()->settings['minify_css'])->toBeTrue();
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'settings' => json_encode($settings),
         ]);
+    });
 
-        $this->assertTrue($theme->fresh()->settings['dark_mode']);
-        $this->assertFalse($theme->fresh()->settings['rtl_support']);
-        $this->assertTrue($theme->fresh()->settings['accessibility']);
-        $this->assertTrue($theme->fresh()->settings['performance_optimization']);
-        $this->assertTrue($theme->fresh()->settings['cache_enabled']);
-        $this->assertTrue($theme->fresh()->settings['minify_css']);
-    }
-
-    /** @test */
-    public function it_can_activate_deactivate_theme(): void
-    {
-        // Arrange
+    it('can activate and deactivate theme', function () {
         $theme = Theme::factory()->create(['is_active' => true]);
 
-        // Act - Deactivate
+        // Deactivate
         $theme->update(['is_active' => false]);
 
-        // Assert
+        expect($theme->fresh()->is_active)->toBeFalse();
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'is_active' => false,
         ]);
 
-        $this->assertFalse($theme->fresh()->is_active);
-
-        // Act - Activate
+        // Activate
         $theme->update(['is_active' => true]);
 
-        // Assert
-        $this->assertTrue($theme->fresh()->is_active);
-    }
+        expect($theme->fresh()->is_active)->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_manage_theme_versions(): void
-    {
-        // Arrange
+    it('can manage theme versions', function () {
         $theme = Theme::factory()->create(['version' => '1.0.0']);
         $versionData = [
             'version' => '1.1.0',
@@ -477,27 +402,22 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'is_current' => true,
         ];
 
-        // Act
         $theme->update($versionData);
 
-        // Assert
+        expect($theme->fresh()->version)->toBe('1.1.0')
+            ->and($theme->fresh()->is_current)->toBeTrue()
+            ->and($theme->fresh()->changelog)->toHaveCount(4)
+            ->and($theme->fresh()->changelog[0])->toBe('Added dark mode support')
+            ->and($theme->fresh()->changelog[3])->toBe('Updated color palette');
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'version' => '1.1.0',
             'is_current' => true,
         ]);
+    });
 
-        $this->assertEquals('1.1.0', $theme->fresh()->version);
-        $this->assertTrue($theme->fresh()->is_current);
-        $this->assertCount(4, $theme->fresh()->changelog);
-        $this->assertEquals('Added dark mode support', $theme->fresh()->changelog[0]);
-        $this->assertEquals('Updated color palette', $theme->fresh()->changelog[3]);
-    }
-
-    /** @test */
-    public function it_can_search_themes_by_category(): void
-    {
-        // Arrange
+    it('can search themes by category', function () {
         $businessTheme = Theme::factory()->create([
             'metadata' => ['category' => 'business']
         ]);
@@ -508,21 +428,16 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'metadata' => ['category' => 'modern']
         ]);
 
-        // Act
         $businessThemes = Theme::whereJsonContains('metadata->category', 'business')->get();
         $healthcareThemes = Theme::whereJsonContains('metadata->category', 'healthcare')->get();
 
-        // Assert
-        $this->assertCount(1, $businessThemes);
-        $this->assertCount(1, $healthcareThemes);
-        $this->assertTrue($businessThemes->contains($businessTheme));
-        $this->assertTrue($healthcareThemes->contains($healthcareTheme));
-    }
+        expect($businessThemes)->toHaveCount(1)
+            ->and($healthcareThemes)->toHaveCount(1)
+            ->and($businessThemes->contains($businessTheme))->toBeTrue()
+            ->and($healthcareThemes->contains($healthcareTheme))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_search_themes_by_tags(): void
-    {
-        // Arrange
+    it('can search themes by tags', function () {
         $professionalTheme = Theme::factory()->create([
             'metadata' => ['tags' => ['professional', 'business']]
         ]);
@@ -530,66 +445,51 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'metadata' => ['tags' => ['modern', 'clean']]
         ]);
 
-        // Act
         $professionalThemes = Theme::whereJsonContains('metadata->tags', 'professional')->get();
         $modernThemes = Theme::whereJsonContains('metadata->tags', 'modern')->get();
 
-        // Assert
-        $this->assertCount(1, $professionalThemes);
-        $this->assertCount(1, $modernThemes);
-        $this->assertTrue($professionalThemes->contains($professionalTheme));
-        $this->assertTrue($modernThemes->contains($modernTheme));
-    }
+        expect($professionalThemes)->toHaveCount(1)
+            ->and($modernThemes)->toHaveCount(1)
+            ->and($professionalThemes->contains($professionalTheme))->toBeTrue()
+            ->and($modernThemes->contains($modernTheme))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_search_themes_by_status(): void
-    {
-        // Arrange
+    it('can search themes by status', function () {
         $activeTheme = Theme::factory()->create(['is_active' => true]);
         $inactiveTheme = Theme::factory()->create(['is_active' => false]);
 
-        // Act
         $activeThemes = Theme::where('is_active', true)->get();
         $inactiveThemes = Theme::where('is_active', false)->get();
 
-        // Assert
-        $this->assertCount(1, $activeThemes);
-        $this->assertCount(1, $inactiveThemes);
-        $this->assertTrue($activeThemes->contains($activeTheme));
-        $this->assertTrue($inactiveThemes->contains($inactiveTheme));
-    }
+        expect($activeThemes)->toHaveCount(1)
+            ->and($inactiveThemes)->toHaveCount(1)
+            ->and($activeThemes->contains($activeTheme))->toBeTrue()
+            ->and($inactiveThemes->contains($inactiveTheme))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_manage_theme_duplication(): void
-    {
-        // Arrange
+    it('can manage theme duplication', function () {
         $originalTheme = Theme::factory()->create([
             'name' => 'Original Theme',
             'version' => '1.0.0',
         ]);
 
-        // Act
         $duplicateTheme = $originalTheme->replicate();
         $duplicateTheme->name = 'Duplicate Theme';
         $duplicateTheme->version = '1.0.1';
         $duplicateTheme->save();
 
-        // Assert
+        expect($duplicateTheme->id)->not->toBe($originalTheme->id)
+            ->and($duplicateTheme->name)->toBe('Duplicate Theme')
+            ->and($duplicateTheme->version)->toBe('1.0.1');
+
         $this->assertDatabaseHas('themes', [
             'id' => $duplicateTheme->id,
             'name' => 'Duplicate Theme',
             'version' => '1.0.1',
         ]);
+    });
 
-        $this->assertNotEquals($originalTheme->id, $duplicateTheme->id);
-        $this->assertEquals('Duplicate Theme', $duplicateTheme->name);
-        $this->assertEquals('1.0.1', $duplicateTheme->version);
-    }
-
-    /** @test */
-    public function it_can_manage_theme_archiving(): void
-    {
-        // Arrange
+    it('can manage theme archiving', function () {
         $theme = Theme::factory()->create(['is_active' => true]);
         $archiveData = [
             'is_active' => false,
@@ -598,10 +498,13 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'replacement_theme_id' => 25,
         ];
 
-        // Act
         $theme->update($archiveData);
 
-        // Assert
+        expect($theme->fresh()->is_active)->toBeFalse()
+            ->and($theme->fresh()->archived_at)->not->toBeNull()
+            ->and($theme->fresh()->archive_reason)->toBe('Sostituito da nuovo tema')
+            ->and($theme->fresh()->replacement_theme_id)->toBe(25);
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
             'is_active' => false,
@@ -609,10 +512,5 @@ class ThemeManagementBusinessLogicTest extends TestCase
             'archive_reason' => 'Sostituito da nuovo tema',
             'replacement_theme_id' => 25,
         ]);
-
-        $this->assertFalse($theme->fresh()->is_active);
-        $this->assertNotNull($theme->fresh()->archived_at);
-        $this->assertEquals('Sostituito da nuovo tema', $theme->fresh()->archive_reason);
-        $this->assertEquals(25, $theme->fresh()->replacement_theme_id);
-    }
+    });
 }

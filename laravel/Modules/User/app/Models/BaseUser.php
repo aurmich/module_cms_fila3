@@ -471,10 +471,10 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
 
 
 
-    public function authentications(): MorphMany
-    {
-        return $this->morphMany(\Modules\User\Models\Authentication::class, 'authenticatable');
-    }
+    //public function authentications(): MorphMany
+    //{
+    //    return $this->morphMany(\Modules\User\Models\Authentication::class, 'authenticatable');
+    //}
 
     /**
      * Check if the user has a specific role.

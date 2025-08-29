@@ -59,8 +59,9 @@ module-analysis.md
 - Modern documentation standard
 - Consistent with web routing conventions
 
-### 4. **Exception: README.md**
-The ONLY file that can use uppercase is `README.md` (standard convention).
+### 4. **Exception: README.md ONLY**
+The ONLY file that can use uppercase characters is `README.md` (standard convention).
+ALL other documentation files must use lowercase with kebab-case (dash-separated).
 
 ## 🔧 Implementation Rules
 
@@ -134,6 +135,8 @@ Before committing any documentation:
 **Last Updated**: December 2024  
 **Version**: 1.0  
 **Status**: ✅ Critical Standard - Always Enforce
+
+
 
 
 

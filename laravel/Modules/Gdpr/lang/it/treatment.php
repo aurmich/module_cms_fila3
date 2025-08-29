@@ -31,6 +31,10 @@ return array (
     array (
       'label' => 'reorderRecords',
     ),
+    'resetFilters' => 
+    array (
+      'label' => 'resetFilters',
+    ),
   ),
   'legal_bases' => 
   array (

@@ -749,3 +749,13 @@ find Modules -name "*Test.php" -path "*/tests/*" | grep -v "Pest"
 php artisan test --env=testing
 APP_ENV=testing php artisan test
 ```
+
+## Documentation Location Rules
+- **NEVER** create documentation in `/var/www/html/_bases/base_saluteora/docs/`
+- **NEVER** create documentation in `/var/www/html/_bases/base_saluteora/laravel/docs/`
+- **ALWAYS** use module-specific documentation: `Modules/{ModuleName}/docs/`
+- **PROJECT-WIDE** guidelines belong in `.ai/guidelines/` directory
+- **ENSURE** module documentation is project-agnostic and reusable
+
+## Module Independence Principle
+All modules must be self-contained with their own documentation. Never create project-specific documentation that would prevent module reuse across different Laravel projects.

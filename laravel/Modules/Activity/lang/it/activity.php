@@ -193,6 +193,10 @@ return array (
     array (
       'label' => 'applyFilters',
     ),
+    'openFilters' => 
+    array (
+      'label' => 'openFilters',
+    ),
   ),
   'filters' => 
   array (

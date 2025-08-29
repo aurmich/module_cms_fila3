@@ -75,7 +75,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property int|null                                                                                                   $activities_count
  * @property \Illuminate\Database\Eloquent\Collection<int, Appointment>                                                 $appointments
  * @property int|null                                                                                                   $appointments_count
- * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication>                         $authentications
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\AuthenticationLog>                         $authentications
  * @property int|null                                                                                                   $authentications_count
  * @property \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client>                                    $clients
  * @property int|null                                                                                                   $clients_count

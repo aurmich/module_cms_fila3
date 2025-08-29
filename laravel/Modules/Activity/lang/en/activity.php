@@ -326,40 +326,4 @@ return [
             '1' => 'monitoring',
         ],
     ],
-    'navigation' => [
-        'name' => 'Activity',
-        'plural' => 'Activities',
-        'group' => [
-            'name' => 'Monitoring',
-            'description' => 'System activity monitoring',
-        ],
-        'label' => 'Activity',
-    ],
-    'fields' => [
-        'user' => [
-            'label' => 'User',
-            'placeholder' => 'Select a user',
-            'help' => 'The user who performed the action',
-            'name' => [
-                'label' => 'Name',
-                'placeholder' => 'Enter the name',
-                'help' => 'Full name of the user',
-            ],
-            'email' => [
-                'label' => 'Email',
-                'placeholder' => 'Enter the email',
-                'help' => 'User email address',
-            ],
-            'role' => [
-                'label' => 'Role',
-                'placeholder' => 'Select a role',
-                'help' => 'User role in the system',
-            ],
-        ],
-        'action' => [
-            'label' => 'Action',
-            'placeholder' => 'Select an action',
-            'help' => 'Action performed by the user',
-        ],
-    ],
 ];

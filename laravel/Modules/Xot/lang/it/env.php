@@ -91,6 +91,11 @@ return array (
       'placeholder' => 'telegram_bot_token',
       'label' => 'telegram_bot_token',
     ),
+    'google_maps_api_key' => 
+    array (
+      'description' => 'google_maps_api_key',
+      'helper_text' => 'google_maps_api_key',
+    ),
   ),
   'actions' => 
   array (

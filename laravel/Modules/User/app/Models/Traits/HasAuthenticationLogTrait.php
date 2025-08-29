@@ -16,12 +16,10 @@ use Modules\User\Models\AuthenticationLog;
  * It includes methods for retrieving the latest authentication logs, login timestamps, IP addresses,
  * and other related information, including tracking consecutive login days.
  *
- * @property MorphMany<AuthenticationLog, static> $authentications      The authentication logs related to the model.
- * @property MorphOne<AuthenticationLog, static>  $latestAuthentication The most recent authentication log entry.
+ * @property MorphMany<AuthenticationLog, $this> $authentications      The authentication logs related to the model.
+ * @property MorphOne<AuthenticationLog, $this>  $latestAuthentication The most recent authentication log entry.
  * @property-read string|null $login_at The timestamp of the last login.
  * @property-read string|null $ip_address The IP address of the last login.
- */
-/**
  * @property MorphMany<AuthenticationLog> $authentications
  * @property MorphOne<AuthenticationLog> $latestAuthentication
  * @property \Illuminate\Support\Carbon|null $login_at
@@ -32,7 +30,7 @@ trait HasAuthenticationLogTrait
     /**
      * Get all of the model's authentication logs.
      *
-     * @return MorphMany<AuthenticationLog, static>
+     * @return MorphMany<AuthenticationLog, $this>
      */
     public function authentications(): MorphMany
     {
@@ -43,7 +41,7 @@ trait HasAuthenticationLogTrait
     /**
      * Get the latest authentication attempt for the model.
      *
-     * @return MorphOne<AuthenticationLog, static>
+     * @return MorphOne<AuthenticationLog, $this>
      */
     public function latestAuthentication(): MorphOne
     {

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Geo\Contracts\HasGeolocation;
-use Modules\Geo\Database\Factories\PlaceFactory;
 
 use function Safe\json_encode;
 
@@ -74,7 +72,7 @@ class Place extends BaseModel implements HasGeolocation
         'political',
     ];
 
-    use HasFactory;
+
 
     protected $fillable = [
         'id', 'post_id', 'post_type', 'model_id', 'model_type',

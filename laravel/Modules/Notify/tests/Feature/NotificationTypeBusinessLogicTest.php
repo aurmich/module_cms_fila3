@@ -2,20 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Modules\Notify\Tests\Feature;
-
 use Modules\Notify\Models\NotificationType;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\Notify\Helpers\ConfigHelper;
 
-class NotificationTypeBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_notification_type_with_basic_information(): void
-    {
-        // Arrange
+describe('Notification Type Business Logic', function () {
+    it('can create notification type with basic information', function () {
         $typeData = [
             'name' => 'Appointment Reminder',
             'slug' => 'appointment-reminder',
@@ -24,10 +15,14 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'is_active' => true,
         ];
 
-        // Act
         $type = NotificationType::create($typeData);
 
-        // Assert
+        expect($type->name)->toBe('Appointment Reminder')
+            ->and($type->slug)->toBe('appointment-reminder')
+            ->and($type->description)->toBe('Promemoria per appuntamenti')
+            ->and($type->category)->toBe('healthcare')
+            ->and($type->is_active)->toBeTrue();
+
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'name' => 'Appointment Reminder',
@@ -36,18 +31,9 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'category' => 'healthcare',
             'is_active' => true,
         ]);
+    });
 
-        $this->assertEquals('Appointment Reminder', $type->name);
-        $this->assertEquals('appointment-reminder', $type->slug);
-        $this->assertEquals('Promemoria per appuntamenti', $type->description);
-        $this->assertEquals('healthcare', $type->category);
-        $this->assertTrue($type->is_active);
-    }
-
-    /** @test */
-    public function it_can_manage_notification_type_channels(): void
-    {
-        // Arrange
+    it('can manage notification type channels', function () {
         $type = NotificationType::factory()->create();
         $channels = [
             'email' => [
@@ -69,27 +55,22 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['channels' => $channels]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'channels' => json_encode($channels),
         ]);
 
-        $this->assertTrue($type->fresh()->channels['email']['enabled']);
-        $this->assertEquals('high', $type->fresh()->channels['email']['priority']);
-        $this->assertEquals('email.appointment-reminder', $type->fresh()->channels['email']['template']);
-        $this->assertTrue($type->fresh()->channels['sms']['enabled']);
-        $this->assertEquals(160, $type->fresh()->channels['sms']['max_length']);
-        $this->assertFalse($type->fresh()->channels['push']['enabled']);
-    }
+        expect($type->fresh()->channels['email']['enabled'])->toBeTrue()
+            ->and($type->fresh()->channels['email']['priority'])->toBe('high')
+            ->and($type->fresh()->channels['email']['template'])->toBe('email.appointment-reminder')
+            ->and($type->fresh()->channels['sms']['enabled'])->toBeTrue()
+            ->and($type->fresh()->channels['sms']['max_length'])->toBe(160)
+            ->and($type->fresh()->channels['push']['enabled'])->toBeFalse();
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_settings(): void
-    {
-        // Arrange
+    it('can manage notification type settings', function () {
         $type = NotificationType::factory()->create();
         $settings = [
             'retry_attempts' => 3,
@@ -104,30 +85,25 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'encryption_required' => false,
         ];
 
-        // Act
         $type->update(['settings' => $settings]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'settings' => json_encode($settings),
         ]);
 
-        $this->assertEquals(3, $type->fresh()->settings['retry_attempts']);
-        $this->assertEquals(300, $type->fresh()->settings['retry_delay']);
-        $this->assertEquals(86400, $type->fresh()->settings['expiration_time']);
-        $this->assertEquals(100, $type->fresh()->settings['batch_size']);
-        $this->assertEquals(10, $type->fresh()->settings['throttle_limit']);
-        $this->assertTrue($type->fresh()->settings['timezone_aware']);
-        $this->assertTrue($type->fresh()->settings['localization_support']);
-        $this->assertTrue($type->fresh()->settings['audit_logging']);
-        $this->assertFalse($type->fresh()->settings['encryption_required']);
-    }
+        expect($type->fresh()->settings['retry_attempts'])->toBe(3)
+            ->and($type->fresh()->settings['retry_delay'])->toBe(300)
+            ->and($type->fresh()->settings['expiration_time'])->toBe(86400)
+            ->and($type->fresh()->settings['batch_size'])->toBe(100)
+            ->and($type->fresh()->settings['throttle_limit'])->toBe(10)
+            ->and($type->fresh()->settings['timezone_aware'])->toBeTrue()
+            ->and($type->fresh()->settings['localization_support'])->toBeTrue()
+            ->and($type->fresh()->settings['audit_logging'])->toBeTrue()
+            ->and($type->fresh()->settings['encryption_required'])->toBeFalse();
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_templates(): void
-    {
-        // Arrange
+    it('can manage notification type templates', function () {
         $type = NotificationType::factory()->create();
         $templates = [
             'email' => [
@@ -138,7 +114,7 @@ class NotificationTypeBusinessLogicTest extends TestCase
                 'text_template' => 'emails.appointment-reminder-text',
             ],
             'sms' => [
-                'message' => 'Promemoria: appuntamento {{appointment_date}} alle {{appointment_time}}. SaluteOra',
+                'message' => 'Promemoria: appuntamento {{appointment_date}} alle {{appointment_time}}. ' . config('app.name', 'Our Platform'),
                 'variables' => ['appointment_date', 'appointment_time'],
                 'max_length' => 160,
             ],
@@ -150,27 +126,22 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['templates' => $templates]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'templates' => json_encode($templates),
         ]);
 
-        $this->assertEquals('Promemoria Appuntamento - {{appointment_date}}', $type->fresh()->templates['email']['subject']);
-        $this->assertContains('patient_name', $type->fresh()->templates['email']['variables']);
-        $this->assertEquals('emails.appointment-reminder', $type->fresh()->templates['email']['html_template']);
-        $this->assertEquals('Promemoria: appuntamento {{appointment_date}} alle {{appointment_time}}. SaluteOra', $type->fresh()->templates['sms']['message']);
-        $this->assertEquals(160, $type->fresh()->templates['sms']['max_length']);
-        $this->assertEquals('Promemoria Appuntamento', $type->fresh()->templates['push']['title']);
-    }
+        expect($type->fresh()->templates['email']['subject'])->toBe('Promemoria Appuntamento - {{appointment_date}}')
+            ->and($type->fresh()->templates['email']['variables'])->toContain('patient_name')
+            ->and($type->fresh()->templates['email']['html_template'])->toBe('emails.appointment-reminder')
+            ->and($type->fresh()->templates['sms']['message'])->toBe('Promemoria: appuntamento {{appointment_date}} alle {{appointment_time}}. ' . config('app.name', 'Our Platform'))
+            ->and($type->fresh()->templates['sms']['max_length'])->toBe(160)
+            ->and($type->fresh()->templates['push']['title'])->toBe('Promemoria Appuntamento');
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_rules(): void
-    {
-        // Arrange
+    it('can manage notification type rules', function () {
         $type = NotificationType::factory()->create();
         $rules = [
             'frequency' => [
@@ -198,29 +169,24 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['rules' => $rules]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'rules' => json_encode($rules),
         ]);
 
-        $this->assertEquals(3, $type->fresh()->rules['frequency']['max_per_day']);
-        $this->assertEquals(10, $type->fresh()->rules['frequency']['max_per_week']);
-        $this->assertEquals('22:00', $type->fresh()->rules['frequency']['quiet_hours']['start']);
-        $this->assertEquals('08:00', $type->fresh()->rules['frequency']['quiet_hours']['end']);
-        $this->assertTrue($type->fresh()->rules['conditions']['require_consent']);
-        $this->assertEquals(3600, $type->fresh()->rules['conditions']['min_advance_notice']);
-        $this->assertContains('patient_name', $type->fresh()->rules['validation']['required_fields']);
-        $this->assertEquals('Y-m-d', $type->fresh()->rules['validation']['field_formats']['appointment_date']);
-    }
+        expect($type->fresh()->rules['frequency']['max_per_day'])->toBe(3)
+            ->and($type->fresh()->rules['frequency']['max_per_week'])->toBe(10)
+            ->and($type->fresh()->rules['frequency']['quiet_hours']['start'])->toBe('22:00')
+            ->and($type->fresh()->rules['frequency']['quiet_hours']['end'])->toBe('08:00')
+            ->and($type->fresh()->rules['conditions']['require_consent'])->toBeTrue()
+            ->and($type->fresh()->rules['conditions']['min_advance_notice'])->toBe(3600)
+            ->and($type->fresh()->rules['validation']['required_fields'])->toContain('patient_name')
+            ->and($type->fresh()->rules['validation']['field_formats']['appointment_date'])->toBe('Y-m-d');
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_permissions(): void
-    {
-        // Arrange
+    it('can manage notification type permissions', function () {
         $type = NotificationType::factory()->create();
         $permissions = [
             'roles' => ['admin', 'doctor', 'nurse'],
@@ -233,28 +199,23 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['permissions' => $permissions]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'permissions' => json_encode($permissions),
         ]);
 
-        $this->assertContains('admin', $type->fresh()->permissions['roles']);
-        $this->assertContains('doctor', $type->fresh()->permissions['roles']);
-        $this->assertContains('notifications.create', $type->fresh()->permissions['permissions']);
-        $this->assertContains('active_patients', $type->fresh()->permissions['user_groups']);
-        $this->assertEquals(1000, $type->fresh()->permissions['restrictions']['max_recipients']);
-        $this->assertContains('IT', $type->fresh()->permissions['restrictions']['geographic_limits']);
-        $this->assertContains('business_hours_only', $type->fresh()->permissions['restrictions']['time_restrictions']);
-    }
+        expect($type->fresh()->permissions['roles'])->toContain('admin')
+            ->and($type->fresh()->permissions['roles'])->toContain('doctor')
+            ->and($type->fresh()->permissions['permissions'])->toContain('notifications.create')
+            ->and($type->fresh()->permissions['user_groups'])->toContain('active_patients')
+            ->and($type->fresh()->permissions['restrictions']['max_recipients'])->toBe(1000)
+            ->and($type->fresh()->permissions['restrictions']['geographic_limits'])->toContain('IT')
+            ->and($type->fresh()->permissions['restrictions']['time_restrictions'])->toContain('business_hours_only');
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_metrics(): void
-    {
-        // Arrange
+    it('can manage notification type metrics', function () {
         $type = NotificationType::factory()->create();
         $metrics = [
             'delivery_rate' => 98.5,
@@ -271,30 +232,25 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'average_response_time' => 2.5, // minutes
         ];
 
-        // Act
         $type->update(['metrics' => $metrics]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'metrics' => json_encode($metrics),
         ]);
 
-        $this->assertEquals(98.5, $type->fresh()->metrics['delivery_rate']);
-        $this->assertEquals(45.2, $type->fresh()->metrics['open_rate']);
-        $this->assertEquals(12.8, $type->fresh()->metrics['click_rate']);
-        $this->assertEquals(1.5, $type->fresh()->metrics['bounce_rate']);
-        $this->assertEquals(15000, $type->fresh()->metrics['total_sent']);
-        $this->assertEquals(14775, $type->fresh()->metrics['total_delivered']);
-        $this->assertEquals(6683, $type->fresh()->metrics['total_opened']);
-        $this->assertEquals(1891, $type->fresh()->metrics['total_clicked']);
-        $this->assertEquals(2.5, $type->fresh()->metrics['average_response_time']);
-    }
+        expect($type->fresh()->metrics['delivery_rate'])->toBe(98.5)
+            ->and($type->fresh()->metrics['open_rate'])->toBe(45.2)
+            ->and($type->fresh()->metrics['click_rate'])->toBe(12.8)
+            ->and($type->fresh()->metrics['bounce_rate'])->toBe(1.5)
+            ->and($type->fresh()->metrics['total_sent'])->toBe(15000)
+            ->and($type->fresh()->metrics['total_delivered'])->toBe(14775)
+            ->and($type->fresh()->metrics['total_opened'])->toBe(6683)
+            ->and($type->fresh()->metrics['total_clicked'])->toBe(1891)
+            ->and($type->fresh()->metrics['average_response_time'])->toBe(2.5);
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_scheduling(): void
-    {
-        // Arrange
+    it('can manage notification type scheduling', function () {
         $type = NotificationType::factory()->create();
         $scheduling = [
             'scheduling_enabled' => true,
@@ -321,30 +277,25 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['scheduling' => $scheduling]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'scheduling' => json_encode($scheduling),
         ]);
 
-        $this->assertTrue($type->fresh()->scheduling['scheduling_enabled']);
-        $this->assertTrue($type->fresh()->scheduling['timezone_aware']);
-        $this->assertEquals('Europe/Rome', $type->fresh()->scheduling['default_timezone']);
-        $this->assertEquals(['09:00', '18:00'], $type->fresh()->scheduling['business_hours']['monday']);
-        $this->assertEquals(['closed'], $type->fresh()->scheduling['business_hours']['sunday']);
-        $this->assertEquals('Natale', $type->fresh()->scheduling['holidays']['2024-12-25']);
-        $this->assertEquals(1, $type->fresh()->scheduling['advance_notice']['min_hours']);
-        $this->assertEquals(7, $type->fresh()->scheduling['advance_notice']['max_days']);
-        $this->assertEquals('09:00', $type->fresh()->scheduling['advance_notice']['preferred_time']);
-    }
+        expect($type->fresh()->scheduling['scheduling_enabled'])->toBeTrue()
+            ->and($type->fresh()->scheduling['timezone_aware'])->toBeTrue()
+            ->and($type->fresh()->scheduling['default_timezone'])->toBe('Europe/Rome')
+            ->and($type->fresh()->scheduling['business_hours']['monday'])->toBe(['09:00', '18:00'])
+            ->and($type->fresh()->scheduling['business_hours']['sunday'])->toBe(['closed'])
+            ->and($type->fresh()->scheduling['holidays']['2024-12-25'])->toBe('Natale')
+            ->and($type->fresh()->scheduling['advance_notice']['min_hours'])->toBe(1)
+            ->and($type->fresh()->scheduling['advance_notice']['max_days'])->toBe(7)
+            ->and($type->fresh()->scheduling['advance_notice']['preferred_time'])->toBe('09:00');
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_integrations(): void
-    {
-        // Arrange
+    it('can manage notification type integrations', function () {
         $type = NotificationType::factory()->create();
         $integrations = [
             'external_services' => [
@@ -353,9 +304,9 @@ class NotificationTypeBusinessLogicTest extends TestCase
                 'push_provider' => 'Firebase',
             ],
             'webhooks' => [
-                'delivery_webhook' => 'https://api.saluteora.com/webhooks/notification-delivered',
-                'bounce_webhook' => 'https://api.saluteora.com/webhooks/notification-bounced',
-                'click_webhook' => 'https://api.saluteora.com/webhooks/notification-clicked',
+                'delivery_webhook' => 'https://api.' . config('app.domain', 'example.com') . '/webhooks/notification-delivered',
+                'bounce_webhook' => 'https://api.' . config('app.domain', 'example.com') . '/webhooks/notification-bounced',
+                'click_webhook' => 'https://api.' . config('app.domain', 'example.com') . '/webhooks/notification-clicked',
             ],
             'api_endpoints' => [
                 'send' => 'POST /api/v1/notifications/send',
@@ -369,64 +320,49 @@ class NotificationTypeBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $type->update(['integrations' => $integrations]);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'integrations' => json_encode($integrations),
         ]);
 
-        $this->assertEquals('SendGrid', $type->fresh()->integrations['external_services']['email_provider']);
-        $this->assertEquals('Twilio', $type->fresh()->integrations['external_services']['sms_provider']);
-        $this->assertEquals('Firebase', $type->fresh()->integrations['external_services']['push_provider']);
-        $this->assertEquals('https://api.saluteora.com/webhooks/notification-delivered', $type->fresh()->integrations['webhooks']['delivery_webhook']);
-        $this->assertEquals('POST /api/v1/notifications/send', $type->fresh()->integrations['api_endpoints']['send']);
-        $this->assertEquals('Salesforce', $type->fresh()->integrations['third_party']['crm_integration']);
-    }
+        expect($type->fresh()->integrations['external_services']['email_provider'])->toBe('SendGrid')
+            ->and($type->fresh()->integrations['external_services']['sms_provider'])->toBe('Twilio')
+            ->and($type->fresh()->integrations['external_services']['push_provider'])->toBe('Firebase')
+            ->and($type->fresh()->integrations['webhooks']['delivery_webhook'])->toBe('https://api.' . config('app.domain', 'example.com') . '/webhooks/notification-delivered')
+            ->and($type->fresh()->integrations['api_endpoints']['send'])->toBe('POST /api/v1/notifications/send')
+            ->and($type->fresh()->integrations['third_party']['crm_integration'])->toBe('Salesforce');
+    });
 
-    /** @test */
-    public function it_can_search_notification_types_by_category(): void
-    {
-        // Arrange
+    it('can search notification types by category', function () {
         $healthcareType = NotificationType::factory()->create(['category' => 'healthcare']);
         $marketingType = NotificationType::factory()->create(['category' => 'marketing']);
         $systemType = NotificationType::factory()->create(['category' => 'system']);
 
-        // Act
         $healthcareTypes = NotificationType::where('category', 'healthcare')->get();
         $marketingTypes = NotificationType::where('category', 'marketing')->get();
 
-        // Assert
-        $this->assertCount(1, $healthcareTypes);
-        $this->assertCount(1, $marketingTypes);
-        $this->assertTrue($healthcareTypes->contains($healthcareType));
-        $this->assertTrue($marketingTypes->contains($marketingType));
-    }
+        expect($healthcareTypes)->toHaveCount(1)
+            ->and($marketingTypes)->toHaveCount(1)
+            ->and($healthcareTypes->contains($healthcareType))->toBeTrue()
+            ->and($marketingTypes->contains($marketingType))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_search_notification_types_by_status(): void
-    {
-        // Arrange
+    it('can search notification types by status', function () {
         $activeType = NotificationType::factory()->create(['is_active' => true]);
         $inactiveType = NotificationType::factory()->create(['is_active' => false]);
 
-        // Act
         $activeTypes = NotificationType::where('is_active', true)->get();
         $inactiveTypes = NotificationType::where('is_active', false)->get();
 
-        // Assert
-        $this->assertCount(1, $activeTypes);
-        $this->assertCount(1, $inactiveTypes);
-        $this->assertTrue($activeTypes->contains($activeType));
-        $this->assertTrue($inactiveTypes->contains($inactiveType));
-    }
+        expect($activeTypes)->toHaveCount(1)
+            ->and($inactiveTypes)->toHaveCount(1)
+            ->and($activeTypes->contains($activeType))->toBeTrue()
+            ->and($inactiveTypes->contains($inactiveType))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_search_notification_types_by_channel_enabled(): void
-    {
-        // Arrange
+    it('can search notification types by channel enabled', function () {
         $emailType = NotificationType::factory()->create([
             'channels' => ['email' => ['enabled' => true], 'sms' => ['enabled' => false]]
         ]);
@@ -434,21 +370,16 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'channels' => ['email' => ['enabled' => false], 'sms' => ['enabled' => true]]
         ]);
 
-        // Act
         $emailTypes = NotificationType::whereJsonContains('channels->email->enabled', true)->get();
         $smsTypes = NotificationType::whereJsonContains('channels->sms->enabled', true)->get();
 
-        // Assert
-        $this->assertCount(1, $emailTypes);
-        $this->assertCount(1, $smsTypes);
-        $this->assertTrue($emailTypes->contains($emailType));
-        $this->assertTrue($smsTypes->contains($smsType));
-    }
+        expect($emailTypes)->toHaveCount(1)
+            ->and($smsTypes)->toHaveCount(1)
+            ->and($emailTypes->contains($emailType))->toBeTrue()
+            ->and($smsTypes->contains($smsType))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_archiving(): void
-    {
-        // Arrange
+    it('can manage notification type archiving', function () {
         $type = NotificationType::factory()->create(['is_active' => true]);
         $archiveData = [
             'is_active' => false,
@@ -457,10 +388,8 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'replacement_type_id' => 15,
         ];
 
-        // Act
         $type->update($archiveData);
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $type->id,
             'is_active' => false,
@@ -469,30 +398,25 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'replacement_type_id' => 15,
         ]);
 
-        $this->assertFalse($type->fresh()->is_active);
-        $this->assertNotNull($type->fresh()->archived_at);
-        $this->assertEquals('Sostituito da nuovo tipo', $type->fresh()->archive_reason);
-        $this->assertEquals(15, $type->fresh()->replacement_type_id);
-    }
+        expect($type->fresh()->is_active)->toBeFalse()
+            ->and($type->fresh()->archived_at)->not->toBeNull()
+            ->and($type->fresh()->archive_reason)->toBe('Sostituito da nuovo tipo')
+            ->and($type->fresh()->replacement_type_id)->toBe(15);
+    });
 
-    /** @test */
-    public function it_can_manage_notification_type_duplication(): void
-    {
-        // Arrange
+    it('can manage notification type duplication', function () {
         $originalType = NotificationType::factory()->create([
             'name' => 'Original Type',
             'slug' => 'original-type',
             'version' => '1.0.0',
         ]);
 
-        // Act
         $duplicateType = $originalType->replicate();
         $duplicateType->name = 'Duplicate Type';
         $duplicateType->slug = 'duplicate-type';
         $duplicateType->version = '1.0.1';
         $duplicateType->save();
 
-        // Assert
         $this->assertDatabaseHas('notification_types', [
             'id' => $duplicateType->id,
             'name' => 'Duplicate Type',
@@ -500,9 +424,9 @@ class NotificationTypeBusinessLogicTest extends TestCase
             'version' => '1.0.1',
         ]);
 
-        $this->assertNotEquals($originalType->id, $duplicateType->id);
-        $this->assertEquals('Duplicate Type', $duplicateType->name);
-        $this->assertEquals('duplicate-type', $duplicateType->slug);
-        $this->assertEquals('1.0.1', $duplicateType->version);
-    }
-}
+        expect($originalType->id)->not->toBe($duplicateType->id)
+            ->and($duplicateType->name)->toBe('Duplicate Type')
+            ->and($duplicateType->slug)->toBe('duplicate-type')
+            ->and($duplicateType->version)->toBe('1.0.1');
+    });
+});

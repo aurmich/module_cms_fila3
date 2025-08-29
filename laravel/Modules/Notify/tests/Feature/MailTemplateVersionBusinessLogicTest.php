@@ -25,7 +25,7 @@ class MailTemplateVersionBusinessLogicTest extends TestCase
             'html_template' => '<!DOCTYPE html><html><body><h1>Conferma Appuntamento</h1><p>Gentile {{patient_name}}, il suo appuntamento è confermato per il {{appointment_date}}.</p></body></html>',
             'text_template' => 'Conferma Appuntamento\n\nGentile {{patient_name}}, il suo appuntamento è confermato per il {{appointment_date}}.',
             'version' => '2.0',
-            'created_by' => 'admin@saluteora.com',
+            'created_by' => 'admin@' . config('app.domain', 'example.com'),
             'change_notes' => 'Aggiornamento design email e aggiunta variabile appointment_date',
         ];
 
@@ -37,7 +37,7 @@ class MailTemplateVersionBusinessLogicTest extends TestCase
             'mailable' => 'AppointmentConfirmation',
             'subject' => 'Conferma Appuntamento - Versione 2.0',
             'version' => '2.0',
-            'created_by' => 'admin@saluteora.com',
+            'created_by' => 'admin@' . config('app.domain', 'example.com'),
             'change_notes' => 'Aggiornamento design email e aggiunta variabile appointment_date',
         ]);
 
@@ -111,12 +111,12 @@ class MailTemplateVersionBusinessLogicTest extends TestCase
         $version = MailTemplateVersion::factory()->create([
             'template_id' => $template->id,
             'version' => '1.5.2',
-            'created_by' => 'developer@saluteora.com',
+            'created_by' => 'developer@' . config('app.domain', 'example.com'),
             'change_notes' => 'Correzione bug nella formattazione HTML e ottimizzazione per mobile',
         ]);
 
         $this->assertEquals('1.5.2', $version->version);
-        $this->assertEquals('developer@saluteora.com', $version->created_by);
+        $this->assertEquals('developer@' . config('app.domain', 'example.com'), $version->created_by);
         $this->assertEquals('Correzione bug nella formattazione HTML e ottimizzazione per mobile', $version->change_notes);
         $this->assertNotNull($version->created_at);
         $this->assertNotNull($version->updated_at);

@@ -8,19 +8,20 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Pages;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
-use Filament\Pages\Dashboard as BaseBashboard;
-use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
+use Filament\Forms\Form;
 use Filament\Widgets\Widget;
-use Filament\Widgets\WidgetConfiguration;
 use Modules\User\Filament\Widgets;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\DatePicker;
+use Filament\Widgets\WidgetConfiguration;
+use Filament\Pages\Dashboard as BaseBashboard;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
+use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
 
-class Dashboard extends BaseBashboard
+class Dashboard extends XotBaseDashboard
 {
-    use HasFiltersForm;
+    
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
     // protected static string $routePath = 'finance';
@@ -41,13 +42,9 @@ class Dashboard extends BaseBashboard
         ];
     }
 
-    public function filtersForm(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Section::make()
-                    ->schema([
-                        DatePicker::make('startDate')
+    public function getFiltersFormSchema():array{
+        return [
+            DatePicker::make('startDate')
                             ->native(false)
                         // ->maxDate(fn (Get $get) => $get('endDate') ?: now()),
                         ,
@@ -56,8 +53,8 @@ class Dashboard extends BaseBashboard
                         // ->minDate(fn (Get $get) => $get('startDate') ?: now())
                         // ->maxDate(now()),
                         ,
-                    ])
-                    ->columns(3),
-            ]);
+        ];
     }
+
+    
 }

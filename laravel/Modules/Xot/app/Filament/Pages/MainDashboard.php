@@ -12,7 +12,7 @@ use Webmozart\Assert\Assert;
 /**
  * Class Modules\Xot\Filament\Pages\MainDashboard.
  */
-class MainDashboard extends Dashboard
+class MainDashboard extends XotBaseDashboard
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
 

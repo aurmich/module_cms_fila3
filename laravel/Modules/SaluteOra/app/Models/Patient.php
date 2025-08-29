@@ -74,7 +74,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $active_consents_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication> $authentications
  * @property-read int|null $authentications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
  * @property-read int|null $clients_count
@@ -185,6 +184,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read int|null $studios_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereAgeRange($value)
  * @mixin IdeHelperPatient
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\AuthenticationLog> $authentications
  * @mixin \Eloquent
  */
 class Patient extends User implements HasMedia

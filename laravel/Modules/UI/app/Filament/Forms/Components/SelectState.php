@@ -7,12 +7,10 @@ namespace Modules\UI\Filament\Forms\Components;
 use Exception;
 use Illuminate\Support\Arr;
 use Spatie\ModelStates\State;
-use Modules\SaluteOra\Models\User;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Columns\SelectColumn;
 use Spatie\ModelStates\HasStatesContract;
-use Modules\SaluteOra\States\User\UserState;
 
 class SelectState extends Select
 {

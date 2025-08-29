@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 
 /**
  * Modules\Activity\Models\Snapshot.
@@ -32,13 +33,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @mixin IdeHelperSnapshot
  * @mixin \Eloquent
  */
-class Snapshot extends BaseSnapshot
+class Snapshot extends SpatieSnapshot
 {
     use HasFactory;
+    /** @var string */
+    protected $connection = 'activity';
     
     /** @var list<string> */
     protected $fillable = ['id', 'aggregate_uuid', 'aggregate_version', 'state', 'created_at', 'updated_at'];
 
-    /** @var string */
-    protected $connection = 'activity';
 }

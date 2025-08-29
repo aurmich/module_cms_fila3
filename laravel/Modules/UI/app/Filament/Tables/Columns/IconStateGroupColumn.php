@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Filament\Tables\Actions\Action;
-use Modules\SaluteOra\Models\Patient;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -77,7 +76,7 @@ class IconStateGroupColumn extends ColumnGroup
                         //$this->loadAppointments();
                         //$this->dispatch('notify', [
                         //    'type' => 'success',
-                        //    'message' => __('saluteora::widgets.doctor_appointments.messages.appointment_confirmed'),
+                        //    'message' => __('ui::messages.action_completed'),
                         //]);
                     })
                 

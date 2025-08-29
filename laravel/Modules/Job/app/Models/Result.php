@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Job\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
@@ -36,19 +35,17 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|Result whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Result whereUpdatedBy($value)
  * @property \Modules\Xot\Contracts\ProfileContract|null $creator
- * @property \Modules\Xot\Contracts\ProfileContract|null $updater
  * @mixin IdeHelperResult
+ * @property-read \Modules\SaluteOra\Models\Profile|null $updater
+ * @method static \Modules\Job\Database\Factories\ResultFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Result extends BaseModel
 {
-    use HasFactory;
-
-    // protected $table = 'task_results';
-
     protected $fillable = [
         'duration',
         'result',
+        'task_id',
     ];
 
     public function task(): BelongsTo

@@ -73,7 +73,6 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @property-read int|null $active_consents_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Activity\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\Authentication> $authentications
  * @property-read int|null $authentications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Passport\Client> $clients
  * @property-read int|null $clients_count
@@ -192,6 +191,7 @@ use Modules\SaluteOra\States\User\IntegrationRequested;
  * @property string|null $age_range
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAgeRange($value)
  * @mixin IdeHelperUser
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\User\Models\AuthenticationLog> $authentications
  * @mixin \Eloquent
  */
 class User extends BaseUser implements HasMedia,HasStatesContract 

@@ -57,7 +57,7 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📝 Creazione attività di sistema...');
         
         // Crea 2000 attività di sistema
-        $activities = Activity::factory()->count(2000)->create([
+        $activities = \Modules\Activity\Database\Factories\ActivityFactory::new()->count(2000)->create([
             'created_at' => Carbon::now()->subDays(rand(1, 90)),
         ]);
         

@@ -230,6 +230,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @mixin IdeHelperMedia
+ * @method static \Modules\Media\Database\Factories\MediaFactory factory($count = null, $state = [])
  * @mixin Eloquent
  */
 class Media extends SpatieMedia
@@ -348,7 +349,6 @@ class Media extends SpatieMedia
     }
 
    /**
-     * ----
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory<static>

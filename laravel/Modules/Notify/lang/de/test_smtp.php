@@ -57,7 +57,7 @@ return [
         ],
         'subject' => [
             'label' => 'Oggetto',
-            'placeholder' => 'Test configurazione SMTP - SaluteOra',
+            'placeholder' => 'Test configurazione SMTP - {{app_name}}',
             'help' => 'Oggetto della email di test per verificare la configurazione',
         ],
         'body_html' => [

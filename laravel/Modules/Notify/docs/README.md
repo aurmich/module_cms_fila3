@@ -2,7 +2,9 @@
 
 ## Panoramica del Modulo
 
-Il modulo **Notify** gestisce il sistema completo di notifiche per SaluteOra, inclusi template email, gestione contatti, temi personalizzabili e tipi di notifica configurabili. È progettato per supportare multiple modalità di invio (email, SMS, push) con gestione avanzata di preferenze utente e compliance GDPR.
+Il modulo **Notify** gestisce il sistema completo di notifiche per progetti Laraxot, inclusi template email, gestione contatti, temi personalizzabili e tipi di notifica configurabili. È progettato per supportare multiple modalità di invio (email, SMS, push) con gestione avanzata di preferenze utente e compliance GDPR. 
+
+**IMPORTANTE**: Questo modulo è completamente riutilizzabile tra progetti diversi e NON deve contenere riferimenti hardcoded a progetti specifici.
 
 ## Struttura del Modulo
 

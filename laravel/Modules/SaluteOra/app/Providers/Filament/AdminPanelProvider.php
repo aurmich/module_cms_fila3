@@ -56,8 +56,9 @@ class AdminPanelProvider extends XotBasePanelProvider
         // Applica tenancy e calendar
         $panel = app(ApplyTenancyToPanelAction::class)->execute($panel);
         $panel = app(ApplyCalendarToPanelAction::class)->execute($panel);
+        /*
         $defaultLocale=Config::string('app.locale');
-
+        
         $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make();//->defaultLocales([config('app.locale')]);
         $boltPlugin = BoltPlugin::make();
 
@@ -67,7 +68,7 @@ class AdminPanelProvider extends XotBasePanelProvider
         ];
         
         $panel->plugins($plugins);
-
+        */
         return $panel;
     }
 

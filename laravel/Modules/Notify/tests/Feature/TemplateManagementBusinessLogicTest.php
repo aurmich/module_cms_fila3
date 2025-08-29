@@ -2,22 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Modules\Notify\Tests\Feature;
-
 use Modules\Notify\Models\NotificationTemplate;
 use Modules\Notify\Models\EmailTemplate;
 use Modules\Notify\Models\Theme;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\Notify\Helpers\ConfigHelper;
 
-class TemplateManagementBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_email_template_with_basic_information(): void
-    {
-        // Arrange
+describe('Template Management Business Logic', function () {
+    it('can create email template with basic information', function () {
         $templateData = [
             'name' => 'Appointment Confirmation',
             'subject' => 'Conferma Appuntamento - {{appointment_date}}',
@@ -26,29 +17,25 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'is_active' => true,
         ];
 
-        // Act
         $template = EmailTemplate::create($templateData);
 
-        // Assert
+        expect($template->name)->toBe('Appointment Confirmation')
+            ->and($template->subject)->toBe('Conferma Appuntamento - {{appointment_date}}')
+            ->and($template->is_active)->toBeTrue();
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'name' => 'Appointment Confirmation',
             'subject' => 'Conferma Appuntamento - {{appointment_date}}',
             'is_active' => true,
         ]);
+    });
 
-        $this->assertEquals('Appointment Confirmation', $template->name);
-        $this->assertEquals('Conferma Appuntamento - {{appointment_date}}', $template->subject);
-        $this->assertTrue($template->is_active);
-    }
-
-    /** @test */
-    public function it_can_create_theme_for_templates(): void
-    {
-        // Arrange
+    it('can create theme for templates', function () {
+        $testData = ConfigHelper::getTestData();
         $themeData = [
-            'name' => 'SaluteOra Default',
-            'description' => 'Tema predefinito per SaluteOra',
+            'name' => $testData['theme_name'] ?? (config('app.name', 'Our Platform') . ' Default'),
+            'description' => $testData['theme_description'] ?? ('Tema predefinito per ' . config('app.name', 'Our Platform')),
             'colors' => [
                 'primary' => '#001F3F',
                 'secondary' => '#3B82F6',
@@ -61,27 +48,22 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'is_active' => true,
         ];
 
-        // Act
         $theme = Theme::create($themeData);
 
-        // Assert
+        expect($theme->name)->toBe($themeData['name'])
+            ->and($theme->colors['primary'])->toBe('#001F3F')
+            ->and($theme->fonts['heading'])->toBe('Segoe UI, Arial, sans-serif')
+            ->and($theme->is_active)->toBeTrue();
+
         $this->assertDatabaseHas('themes', [
             'id' => $theme->id,
-            'name' => 'SaluteOra Default',
-            'description' => 'Tema predefinito per SaluteOra',
+            'name' => $themeData['name'],
+            'description' => $themeData['description'],
             'is_active' => true,
         ]);
+    });
 
-        $this->assertEquals('SaluteOra Default', $theme->name);
-        $this->assertEquals('#001F3F', $theme->colors['primary']);
-        $this->assertEquals('Segoe UI, Arial, sans-serif', $theme->fonts['heading']);
-        $this->assertTrue($theme->is_active);
-    }
-
-    /** @test */
-    public function it_can_manage_template_variables(): void
-    {
-        // Arrange
+    it('can manage template variables', function () {
         $template = EmailTemplate::factory()->create();
         $variables = [
             'patient_name' => 'Nome del paziente',
@@ -91,25 +73,20 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'appointment_time' => 'Orario appuntamento',
         ];
 
-        // Act
         $template->update(['variables' => $variables]);
 
-        // Assert
+        expect($template->fresh()->variables)->toHaveCount(5)
+            ->and($template->fresh()->variables['patient_name'])->toBe('Nome del paziente')
+            ->and($template->fresh()->variables['appointment_date'])->toBe('Data appuntamento')
+            ->and($template->fresh()->variables['doctor_name'])->toBe('Nome del dottore');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'variables' => json_encode($variables),
         ]);
+    });
 
-        $this->assertCount(5, $template->fresh()->variables);
-        $this->assertEquals('Nome del paziente', $template->fresh()->variables['patient_name']);
-        $this->assertEquals('Data appuntamento', $template->fresh()->variables['appointment_date']);
-        $this->assertEquals('Nome del dottore', $template->fresh()->variables['doctor_name']);
-    }
-
-    /** @test */
-    public function it_can_manage_template_versions(): void
-    {
-        // Arrange
+    it('can manage template versions', function () {
         $template = EmailTemplate::factory()->create();
         $versionData = [
             'version' => '2.1.0',
@@ -121,25 +98,20 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'is_current' => true,
         ];
 
-        // Act
         $template->update($versionData);
 
-        // Assert
+        expect($template->fresh()->version)->toBe('2.1.0')
+            ->and($template->fresh()->is_current)->toBeTrue()
+            ->and($template->fresh()->changelog)->toHaveCount(3);
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'version' => '2.1.0',
             'is_current' => true,
         ]);
+    });
 
-        $this->assertEquals('2.1.0', $template->fresh()->version);
-        $this->assertTrue($template->fresh()->is_current);
-        $this->assertCount(3, $template->fresh()->changelog);
-    }
-
-    /** @test */
-    public function it_can_manage_template_categories(): void
-    {
-        // Arrange
+    it('can manage template categories', function () {
         $template = EmailTemplate::factory()->create();
         $categories = [
             'appointments' => 'Appuntamenti',
@@ -148,24 +120,19 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'notifications' => 'Notifiche',
         ];
 
-        // Act
         $template->update(['categories' => $categories]);
 
-        // Assert
+        expect($template->fresh()->categories)->toHaveCount(4)
+            ->and($template->fresh()->categories['appointments'])->toBe('Appuntamenti')
+            ->and($template->fresh()->categories['reminders'])->toBe('Promemoria');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'categories' => json_encode($categories),
         ]);
+    });
 
-        $this->assertCount(4, $template->fresh()->categories);
-        $this->assertEquals('Appuntamenti', $template->fresh()->categories['appointments']);
-        $this->assertEquals('Promemoria', $template->fresh()->categories['reminders']);
-    }
-
-    /** @test */
-    public function it_can_manage_template_permissions(): void
-    {
-        // Arrange
+    it('can manage template permissions', function () {
         $template = EmailTemplate::factory()->create();
         $permissions = [
             'roles' => ['admin', 'doctor'],
@@ -174,24 +141,19 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'access_level' => 'restricted',
         ];
 
-        // Act
         $template->update(['permissions' => $permissions]);
 
-        // Assert
+        expect($template->fresh()->permissions['roles'])->toContain('admin')
+            ->and($template->fresh()->permissions['roles'])->toContain('doctor')
+            ->and($template->fresh()->permissions['access_level'])->toBe('restricted');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'permissions' => json_encode($permissions),
         ]);
+    });
 
-        $this->assertContains('admin', $template->fresh()->permissions['roles']);
-        $this->assertContains('doctor', $template->fresh()->permissions['roles']);
-        $this->assertEquals('restricted', $template->fresh()->permissions['access_level']);
-    }
-
-    /** @test */
-    public function it_can_manage_template_localization(): void
-    {
-        // Arrange
+    it('can manage template localization', function () {
         $template = EmailTemplate::factory()->create();
         $localizationData = [
             'default_locale' => 'it',
@@ -212,29 +174,24 @@ class TemplateManagementBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $template->update($localizationData);
 
-        // Assert
+        expect($template->fresh()->default_locale)->toBe('it')
+            ->and($template->fresh()->supported_locales)->toHaveCount(3)
+            ->and($template->fresh()->translations['it']['subject'])->toBe('Conferma Appuntamento - {{appointment_date}}')
+            ->and($template->fresh()->translations['en']['subject'])->toBe('Appointment Confirmation - {{appointment_date}}');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'default_locale' => 'it',
             'supported_locales' => json_encode(['it', 'en', 'de']),
         ]);
+    });
 
-        $this->assertEquals('it', $template->fresh()->default_locale);
-        $this->assertCount(3, $template->fresh()->supported_locales);
-        $this->assertEquals('Conferma Appuntamento - {{appointment_date}}', $template->fresh()->translations['it']['subject']);
-        $this->assertEquals('Appointment Confirmation - {{appointment_date}}', $template->fresh()->translations['en']['subject']);
-    }
-
-    /** @test */
-    public function it_can_manage_template_metadata(): void
-    {
-        // Arrange
+    it('can manage template metadata', function () {
         $template = EmailTemplate::factory()->create();
         $metadata = [
-            'author' => 'Team SaluteOra',
+            'author' => 'Team ' . config('app.name', 'Our Platform'),
             'created_date' => '2024-01-15',
             'last_modified' => '2024-12-01',
             'tags' => ['appointment', 'confirmation', 'patient'],
@@ -242,25 +199,20 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'estimated_reading_time' => '2 minutes',
         ];
 
-        // Act
         $template->update(['metadata' => $metadata]);
 
-        // Assert
+        expect($template->fresh()->metadata['author'])->toBe('Team ' . config('app.name', 'Our Platform'))
+            ->and($template->fresh()->metadata['created_date'])->toBe('2024-01-15')
+            ->and($template->fresh()->metadata['priority'])->toBe('high')
+            ->and($template->fresh()->metadata['tags'])->toContain('appointment');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'metadata' => json_encode($metadata),
         ]);
+    });
 
-        $this->assertEquals('Team SaluteOra', $template->fresh()->metadata['author']);
-        $this->assertEquals('2024-01-15', $template->fresh()->metadata['created_date']);
-        $this->assertEquals('high', $template->fresh()->metadata['priority']);
-        $this->assertContains('appointment', $template->fresh()->metadata['tags']);
-    }
-
-    /** @test */
-    public function it_can_manage_template_workflow(): void
-    {
-        // Arrange
+    it('can manage template workflow', function () {
         $template = EmailTemplate::factory()->create(['status' => 'draft']);
         $workflowData = [
             'status' => 'pending_review',
@@ -270,35 +222,29 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'published_date' => null,
         ];
 
-        // Act
         $template->update($workflowData);
 
-        // Assert
+        expect($template->fresh()->status)->toBe('pending_review')
+            ->and($template->fresh()->reviewer_id)->toBe(5)
+            ->and($template->fresh()->review_notes)->toBe('Template approvato con modifiche minori');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'status' => 'pending_review',
             'reviewer_id' => 5,
         ]);
 
-        $this->assertEquals('pending_review', $template->fresh()->status);
-        $this->assertEquals(5, $template->fresh()->reviewer_id);
-        $this->assertEquals('Template approvato con modifiche minori', $template->fresh()->review_notes);
-
-        // Act - Publish template
+        // Publish template
         $template->update([
             'status' => 'published',
             'published_date' => now(),
         ]);
 
-        // Assert
-        $this->assertEquals('published', $template->fresh()->status);
-        $this->assertNotNull($template->fresh()->published_date);
-    }
+        expect($template->fresh()->status)->toBe('published')
+            ->and($template->fresh()->published_date)->not->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_manage_template_analytics(): void
-    {
-        // Arrange
+    it('can manage template analytics', function () {
         $template = EmailTemplate::factory()->create();
         $analyticsData = [
             'usage_count' => 1250,
@@ -310,10 +256,13 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'performance_score' => 92,
         ];
 
-        // Act
         $template->update($analyticsData);
 
-        // Assert
+        expect($template->fresh()->usage_count)->toBe(1250)
+            ->and($template->fresh()->success_rate)->toBe(98.5)
+            ->and($template->fresh()->open_rate)->toBe(85.3)
+            ->and($template->fresh()->performance_score)->toBe(92);
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'usage_count' => 1250,
@@ -323,17 +272,9 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'click_rate' => 12.7,
             'performance_score' => 92,
         ]);
+    });
 
-        $this->assertEquals(1250, $template->fresh()->usage_count);
-        $this->assertEquals(98.5, $template->fresh()->success_rate);
-        $this->assertEquals(85.3, $template->fresh()->open_rate);
-        $this->assertEquals(92, $template->fresh()->performance_score);
-    }
-
-    /** @test */
-    public function it_can_manage_template_compatibility(): void
-    {
-        // Arrange
+    it('can manage template compatibility', function () {
         $template = EmailTemplate::factory()->create();
         $compatibilityData = [
             'email_clients' => ['gmail', 'outlook', 'apple_mail'],
@@ -343,10 +284,13 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'compatibility_notes' => 'Testato su tutti i client principali',
         ];
 
-        // Act
         $template->update($compatibilityData);
 
-        // Assert
+        expect($template->fresh()->email_clients)->toHaveCount(3)
+            ->and($template->fresh()->browsers)->toHaveCount(4)
+            ->and($template->fresh()->devices)->toHaveCount(3)
+            ->and($template->fresh()->min_supported_version)->toBe('1.0.0');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'email_clients' => json_encode(['gmail', 'outlook', 'apple_mail']),
@@ -354,17 +298,9 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'devices' => json_encode(['desktop', 'tablet', 'mobile']),
             'min_supported_version' => '1.0.0',
         ]);
+    });
 
-        $this->assertCount(3, $template->fresh()->email_clients);
-        $this->assertCount(4, $template->fresh()->browsers);
-        $this->assertCount(3, $template->fresh()->devices);
-        $this->assertEquals('1.0.0', $template->fresh()->min_supported_version);
-    }
-
-    /** @test */
-    public function it_can_manage_template_archiving(): void
-    {
-        // Arrange
+    it('can manage template archiving', function () {
         $template = EmailTemplate::factory()->create(['is_active' => true]);
         $archiveData = [
             'is_active' => false,
@@ -373,10 +309,13 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'replacement_template_id' => 15,
         ];
 
-        // Act
         $template->update($archiveData);
 
-        // Assert
+        expect($template->fresh()->is_active)->toBeFalse()
+            ->and($template->fresh()->archived_at)->not->toBeNull()
+            ->and($template->fresh()->archive_reason)->toBe('Sostituito da nuovo template')
+            ->and($template->fresh()->replacement_template_id)->toBe(15);
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'is_active' => false,
@@ -384,100 +323,72 @@ class TemplateManagementBusinessLogicTest extends TestCase
             'archive_reason' => 'Sostituito da nuovo template',
             'replacement_template_id' => 15,
         ]);
+    });
 
-        $this->assertFalse($template->fresh()->is_active);
-        $this->assertNotNull($template->fresh()->archived_at);
-        $this->assertEquals('Sostituito da nuovo template', $template->fresh()->archive_reason);
-        $this->assertEquals(15, $template->fresh()->replacement_template_id);
-    }
-
-    /** @test */
-    public function it_can_search_templates_by_category(): void
-    {
-        // Arrange
+    it('can search templates by category', function () {
         $appointmentTemplate = EmailTemplate::factory()->create(['categories' => ['appointments' => 'Appuntamenti']]);
         $reminderTemplate = EmailTemplate::factory()->create(['categories' => ['reminders' => 'Promemoria']]);
         $confirmationTemplate = EmailTemplate::factory()->create(['categories' => ['confirmations' => 'Conferme']]);
 
-        // Act
         $appointmentTemplates = EmailTemplate::whereJsonContains('categories->appointments', 'Appuntamenti')->get();
         $reminderTemplates = EmailTemplate::whereJsonContains('categories->reminders', 'Promemoria')->get();
 
-        // Assert
-        $this->assertCount(1, $appointmentTemplates);
-        $this->assertCount(1, $reminderTemplates);
-        $this->assertTrue($appointmentTemplates->contains($appointmentTemplate));
-        $this->assertTrue($reminderTemplates->contains($reminderTemplate));
-    }
+        expect($appointmentTemplates)->toHaveCount(1)
+            ->and($reminderTemplates)->toHaveCount(1)
+            ->and($appointmentTemplates->contains($appointmentTemplate))->toBeTrue()
+            ->and($reminderTemplates->contains($reminderTemplate))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_search_templates_by_status(): void
-    {
-        // Arrange
+    it('can search templates by status', function () {
         $draftTemplate = EmailTemplate::factory()->create(['status' => 'draft']);
         $publishedTemplate = EmailTemplate::factory()->create(['status' => 'published']);
         $archivedTemplate = EmailTemplate::factory()->create(['status' => 'archived']);
 
-        // Act
         $publishedTemplates = EmailTemplate::where('status', 'published')->get();
         $draftTemplates = EmailTemplate::where('status', 'draft')->get();
 
-        // Assert
-        $this->assertCount(1, $publishedTemplates);
-        $this->assertCount(1, $draftTemplates);
-        $this->assertTrue($publishedTemplates->contains($publishedTemplate));
-        $this->assertTrue($draftTemplates->contains($draftTemplate));
-    }
+        expect($publishedTemplates)->toHaveCount(1)
+            ->and($draftTemplates)->toHaveCount(1)
+            ->and($publishedTemplates->contains($publishedTemplate))->toBeTrue()
+            ->and($draftTemplates->contains($draftTemplate))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_get_templates_with_related_data(): void
-    {
-        // Arrange
+    it('can get templates with related data', function () {
         $template = EmailTemplate::factory()->create();
         $theme = Theme::factory()->create();
 
         $template->update(['theme_id' => $theme->id]);
 
-        // Act
         $templateWithTheme = EmailTemplate::with('theme')->find($template->id);
 
-        // Assert
-        $this->assertNotNull($templateWithTheme);
-        $this->assertTrue($templateWithTheme->relationLoaded('theme'));
-        $this->assertEquals($theme->id, $templateWithTheme->theme->id);
-    }
+        expect($templateWithTheme)->not->toBeNull()
+            ->and($templateWithTheme->relationLoaded('theme'))->toBeTrue()
+            ->and($templateWithTheme->theme->id)->toBe($theme->id);
+    });
 
-    /** @test */
-    public function it_can_manage_template_duplication(): void
-    {
-        // Arrange
+    it('can manage template duplication', function () {
         $originalTemplate = EmailTemplate::factory()->create([
             'name' => 'Original Template',
             'version' => '1.0.0',
         ]);
 
-        // Act
         $duplicateTemplate = $originalTemplate->replicate();
         $duplicateTemplate->name = 'Duplicate Template';
         $duplicateTemplate->version = '1.0.1';
         $duplicateTemplate->save();
 
-        // Assert
+        expect($duplicateTemplate->id)->not->toBe($originalTemplate->id)
+            ->and($duplicateTemplate->name)->toBe('Duplicate Template')
+            ->and($duplicateTemplate->version)->toBe('1.0.1');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $duplicateTemplate->id,
             'name' => 'Duplicate Template',
             'version' => '1.0.1',
         ]);
+    });
 
-        $this->assertNotEquals($originalTemplate->id, $duplicateTemplate->id);
-        $this->assertEquals('Duplicate Template', $duplicateTemplate->name);
-        $this->assertEquals('1.0.1', $duplicateTemplate->version);
-    }
-
-    /** @test */
-    public function it_can_manage_template_validation(): void
-    {
-        // Arrange
+    it('can manage template validation', function () {
         $template = EmailTemplate::factory()->create();
         $validationData = [
             'validation_rules' => [
@@ -492,17 +403,15 @@ class TemplateManagementBusinessLogicTest extends TestCase
             ],
         ];
 
-        // Act
         $template->update($validationData);
 
-        // Assert
+        expect($template->fresh()->validation_rules['patient_name'])->toBe('required|string|max:100')
+            ->and($template->fresh()->validation_messages['patient_name.required'])->toBe('Il nome del paziente è obbligatorio');
+
         $this->assertDatabaseHas('email_templates', [
             'id' => $template->id,
             'validation_rules' => json_encode($validationData['validation_rules']),
             'validation_messages' => json_encode($validationData['validation_messages']),
         ]);
-
-        $this->assertEquals('required|string|max:100', $template->fresh()->validation_rules['patient_name']);
-        $this->assertEquals('Il nome del paziente è obbligatorio', $template->fresh()->validation_messages['patient_name.required']);
-    }
+    });
 }

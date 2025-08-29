@@ -59,7 +59,7 @@ return [
         ],
         'subject' => [
             'label' => 'Subject',
-            'placeholder' => 'SMTP Configuration Test - SaluteOra',
+            'placeholder' => 'SMTP Configuration Test - {{app_name}}',
             'help' => 'Subject of the test email to verify the configuration',
         ],
         'body_html' => [

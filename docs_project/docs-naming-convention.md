@@ -1,68 +1,131 @@
-# Convenzione Naming per Cartelle Docs
+# Convenzione di Naming per Documentazione - Standard SaluteOra
 
-## ⚠️ REGOLA CRITICA ⚠️
+## 🎯 Obiettivo
 
-**TUTTI** i file e le cartelle nelle cartelle `docs` DEVONO essere in **MINUSCOLO**:
-- ✅ CORRETTO: `readme.md`, `project.md`, `technical.md`
-- ❌ ERRATO: `README.md`, `PROJECT.md`, `TECHNICAL.md`
+Stabilire uno **standard uniforme e professionale** per la naming convention di tutti i file di documentazione nel progetto SaluteOra, seguendo best practice internazionali e principi di manutenibilità.
 
-## Motivazione
-- Coerenza con le convenzioni di documentazione
-- Compatibilità cross-platform
-- Facilità di manutenzione
-- Standardizzazione del progetto
+---
 
-## Applicazione
-Questa regola si applica a:
-- Tutte le cartelle `docs/` del progetto
-- Tutti i file `.md` nelle cartelle docs
-- Tutte le sottocartelle delle cartelle docs
-- Qualsiasi file di documentazione
+## 📋 REGOLE OBBLIGATORIE
 
-## Procedura per Correzione
-Quando si identificano file con caratteri maiuscoli:
+### ✅ **Standard Richiesto**
 
-1. **Identificare i file problematici**:
-   ```bash
-   find docs -name "*[A-Z]*" -type f
-   ```
+1. **🌍 Lingua**: SEMPRE inglese
+   - Motivazione: Standard internazionale, team globali, open source
+   - Esempio: `security-guidelines.md` ✅ (non `sicurezza-linee-guida.md` ❌)
 
-2. **Rinominare in minuscolo**:
-   ```bash
-   mv docs/README.md docs/readme.md
-   mv docs/PROJECT.md docs/project.md
-   ```
+2. **🔗 Separatori**: SEMPRE trattini `-` (kebab-case)
+   - Motivazione: URL-friendly, standard web, leggibilità
+   - Esempio: `optimization-analysis.md` ✅ (non `optimization_analysis.md` ❌)
 
-3. **Verificare la correzione**:
-   ```bash
-   find docs -name "*[A-Z]*" -type f
-   # Dovrebbe restituire nessun risultato
-   ```
+3. **📝 Case**: SEMPRE minuscolo (eccetto README.md)
+   - Motivazione: Compatibilità cross-platform, standard Unix
+   - Esempio: `phpstan-fixes.md` ✅ (non `PHPSTAN-FIXES.md` ❌)
 
-## Eccezioni
-- **Nessuna eccezione**: Tutti i file devono essere in minuscolo
-- **Nessun caso speciale**: Anche i file importanti come README devono essere `readme.md`
+4. **📅 Date**: MAI nei nomi file
+   - Motivazione: Git traccia già le date, nomi semantici durano nel tempo
+   - Esempio: `optimization-analysis.md` ✅ (non `optimizations-2025-08-22.md` ❌)
 
-## Comandi Utili
+5. **📄 Estensione**: `.md` per Markdown
+   - Motivazione: Standard documentazione, rendering automatico
+
+---
+
+## 🔄 PROCESSO DI MIGRAZIONE
+
+### Fase 1: Identificazione File Non Conformi
+
 ```bash
-# Trova tutti i file con caratteri maiuscoli
-find docs -name "*[A-Z]*" -type f
+# Trova file con date
+find Modules/*/docs -name "*.md" | grep -E "[0-9]{4}-[0-9]{2}-[0-9]{2}"
 
-# Trova tutte le cartelle con caratteri maiuscoli
-find docs -name "*[A-Z]*" -type d
+# Trova file con underscore  
+find Modules/*/docs -name "*.md" | grep "_"
 
-# Rinomina tutti i README.md in readme.md
-find docs -name "README.md" -type f -exec bash -c 'mv "$1" "$(dirname "$1")/readme.md"' _ {} \;
+# Trova file con maiuscole (eccetto README.md)
+find Modules/*/docs -name "*.md" | grep -v "README.md" | grep "[A-Z]"
 ```
 
-## Checklist
-- [ ] Verificare che tutti i file siano in minuscolo
-- [ ] Verificare che tutte le cartelle siano in minuscolo
-- [ ] Aggiornare tutti i riferimenti nei file
-- [ ] Documentare la correzione
-- [ ] Aggiornare regole e memorie
+### Fase 2: Mapping di Rinominazione
 
-## Collegamenti
-- [Correzione Naming 2025-01-27](readme-naming-correction-2025-01-27.md)
+| File Attuale | File Target | Motivazione |
+|-------------|-------------|-------------|
+| `optimizations-2025-08-22.md` | `optimization-analysis.md` | Rimuove data, semantico |
+| `phpstan_analysis.md` | `phpstan-analysis.md` | Kebab-case standard |
+| `ottimizzazioni.md` | `optimization-analysis.md` | Inglese + semantico |
+| `PHPSTAN-FIXES.md` | `phpstan-fixes.md` | Minuscolo standard |
 
-*Ultimo aggiornamento: 2025-01-27* 
+### Fase 3: Aggiornamento Riferimenti
+
+Per ogni file rinominato:
+1. **Aggiornare link interni** in altri file `.md`
+2. **Aggiornare riferimenti** in codice PHP se esistenti
+3. **Verificare backlink** bidirezionali
+4. **Testare** che non ci siano link rotti
+
+---
+
+## 📝 TEMPLATE DI NAMING
+
+### **Analisi e Reportistica**
+- `{subject}-analysis.md` - Analisi dettagliate
+- `{subject}-report.md` - Report specifici
+- `{subject}-metrics.md` - Metriche e KPI
+
+### **Linee Guida e Standard**
+- `{subject}-guidelines.md` - Linee guida
+- `{subject}-standards.md` - Standard tecnici  
+- `{subject}-best-practices.md` - Best practice
+
+### **Guide Operative**
+- `{subject}-guide.md` - Guide complete
+- `{subject}-tutorial.md` - Tutorial step-by-step
+- `{subject}-quickstart.md` - Guide rapide
+
+### **Risoluzione Problemi**
+- `{subject}-troubleshooting.md` - Risoluzione problemi
+- `{subject}-fixes.md` - Correzioni specifiche
+- `{subject}-issues.md` - Problemi noti
+
+### **Architettura e Design**
+- `{subject}-architecture.md` - Architettura
+- `{subject}-design.md` - Design patterns
+- `{subject}-overview.md` - Panoramiche
+
+---
+
+## 🎖️ BENEFICI DELLO STANDARD
+
+### **Manutenibilità**
+- **Ricerca facilitata** con pattern uniformi
+- **Navigazione intuitiva** tra file correlati
+- **Refactoring sicuro** senza perdere riferimenti
+- **Automazione** script e tool di documentazione
+
+### **Professionalità**
+- **Standard internazionale** per progetti enterprise
+- **Compatibilità** con tool di documentazione
+- **Onboarding** facilitato per nuovi sviluppatori
+- **Open source** compliance
+
+### **Performance**
+- **Caching** più efficiente con nomi uniformi
+- **Indexing** automatico migliorato
+- **Search** più veloce e precisa
+- **CI/CD** pipeline ottimizzate
+
+---
+
+## 🔗 Collegamenti Correlati
+
+- [AI Guidelines](../.ai/guidelines/docs-naming-convention.md)
+- [Cursor Rules](../.cursor/rules/docs-naming-standard.md)
+- [Windsurf Rules](../.windsurf/rules/docs-naming-standard.mdc)
+- [Laraxot Conventions](./laraxot-conventions.md)
+
+---
+
+**IMPORTANTE**: Questa regola è **FONDAMENTALE** per la qualità e professionalità del progetto SaluteOra.
+
+*Ultimo aggiornamento: Gennaio 2025*
+

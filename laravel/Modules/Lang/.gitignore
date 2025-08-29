@@ -50,4 +50,6 @@ Homestead.json
 docs/phpstan/
 
 # Other
--e
+.windsurf/
+.cursor/
+

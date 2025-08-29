@@ -34,6 +34,10 @@ return array (
     array (
       'label' => 'resetFilters',
     ),
+    'applyFilters' => 
+    array (
+      'label' => 'applyFilters',
+    ),
   ),
   'event_types' => 
   array (

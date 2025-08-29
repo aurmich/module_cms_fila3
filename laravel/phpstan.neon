@@ -36,7 +36,8 @@ parameters:
         - ./*/Tests/*
         - ./*/phpinsights.php
         - ./*/rector.php
-        - ./Modules/Activity
+        # - ./Modules/Activity
+        - ./Modules/Media/app/Actions/Image/Merge.php
         - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
         - ./Modules/*/packages/*
         - ./Modules/*/tests/*

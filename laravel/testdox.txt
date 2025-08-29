@@ -1,5 +1,0 @@
-/var/www/html/_bases/base_saluteora/laravel/Modules/SaluteOra/tests/Feature/Folio/IndexPageTest.pest.php
- [ ] it can access homepage
- [ ] it displays welcome content
- [ ] it has correct meta tags
-

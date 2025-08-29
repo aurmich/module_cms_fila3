@@ -2,21 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Modules\Notify\Tests\Feature;
-
 use Modules\Notify\Models\MailTemplateLog;
 use Modules\Notify\Models\MailTemplate;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Carbon\Carbon;
 
-class MailTemplateLogBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_mail_template_log_with_basic_information(): void
-    {
+describe('Mail Template Log Business Logic', function () {
+    it('can create mail template log with basic information', function () {
         $template = MailTemplate::factory()->create();
         
         $logData = [
@@ -52,28 +43,24 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'status_message' => 'Email inviata con successo',
         ]);
 
-        $this->assertEquals('sent', $log->status);
-        $this->assertEquals('Email inviata con successo', $log->status_message);
-        $this->assertEquals('patient@example.com', $log->data['recipient']);
-        $this->assertEquals('Mario Rossi', $log->data['variables']['patient_name']);
-        $this->assertEquals('appointment_confirmation_001', $log->metadata['campaign_id']);
-    }
+        expect($log->status)->toBe('sent')
+            ->and($log->status_message)->toBe('Email inviata con successo')
+            ->and($log->data['recipient'])->toBe('patient@example.com')
+            ->and($log->data['variables']['patient_name'])->toBe('Mario Rossi')
+            ->and($log->metadata['campaign_id'])->toBe('appointment_confirmation_001');
+    });
 
-    /** @test */
-    public function it_can_manage_mail_template_log_relationships(): void
-    {
+    it('can manage mail template log relationships', function () {
         $template = MailTemplate::factory()->create();
         $log = MailTemplateLog::factory()->create([
             'template_id' => $template->id,
         ]);
 
-        $this->assertInstanceOf(MailTemplate::class, $log->template);
-        $this->assertEquals($template->id, $log->template->id);
-    }
+        expect($log->template)->toBeInstanceOf(MailTemplate::class)
+            ->and($log->template->id)->toBe($template->id);
+    });
 
-    /** @test */
-    public function it_can_track_email_lifecycle_events(): void
-    {
+    it('can track email lifecycle events', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -105,16 +92,14 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'clicked_at' => now()->addMinutes(7),
         ]);
 
-        $this->assertEquals('clicked', $log->status);
-        $this->assertNotNull($log->sent_at);
-        $this->assertNotNull($log->delivered_at);
-        $this->assertNotNull($log->opened_at);
-        $this->assertNotNull($log->clicked_at);
-    }
+        expect($log->status)->toBe('clicked')
+            ->and($log->sent_at)->not->toBeNull()
+            ->and($log->delivered_at)->not->toBeNull()
+            ->and($log->opened_at)->not->toBeNull()
+            ->and($log->clicked_at)->not->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_handle_email_failure_scenarios(): void
-    {
+    it('can handle email failure scenarios', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -134,16 +119,14 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('failed', $log->status);
-        $this->assertEquals('Indirizzo email non valido: invalid@email', $log->status_message);
-        $this->assertNotNull($log->failed_at);
-        $this->assertEquals('INVALID_EMAIL', $log->metadata['error_code']);
-        $this->assertEquals(3, $log->metadata['retry_count']);
-    }
+        expect($log->status)->toBe('failed')
+            ->and($log->status_message)->toBe('Indirizzo email non valido: invalid@email')
+            ->and($log->failed_at)->not->toBeNull()
+            ->and($log->metadata['error_code'])->toBe('INVALID_EMAIL')
+            ->and($log->metadata['retry_count'])->toBe(3);
+    });
 
-    /** @test */
-    public function it_can_manage_mailable_polymorphic_relationships(): void
-    {
+    it('can manage mailable polymorphic relationships', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -152,16 +135,12 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'mailable_id' => 456,
         ]);
 
-        $this->assertEquals('App\Models\Appointment', $log->mailable_type);
-        $this->assertEquals(456, $log->mailable_id);
-        
-        // Test della relazione morphTo
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphTo::class, $log->mailable());
-    }
+        expect($log->mailable_type)->toBe('App\Models\Appointment')
+            ->and($log->mailable_id)->toBe(456)
+            ->and($log->mailable())->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphTo::class);
+    });
 
-    /** @test */
-    public function it_can_handle_complex_data_structures(): void
-    {
+    it('can handle complex data structures', function () {
         $template = MailTemplate::factory()->create();
         
         $complexData = [
@@ -180,7 +159,7 @@ class MailTemplateLogBusinessLogicTest extends TestCase
                     'patient_name' => 'Mario Rossi',
                     'appointment_date' => '2024-12-15 10:00:00',
                     'doctor_name' => 'Dr. Bianchi',
-                    'clinic_name' => 'Studio Dentistico SaluteOra',
+                    'clinic_name' => 'Studio Dentistico ' . config('app.name', 'Our Platform'),
                     'clinic_address' => 'Via Roma 123, Milano',
                     'clinic_phone' => '+39 02 1234567',
                 ],
@@ -201,17 +180,15 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'data' => $complexData,
         ]);
 
-        $this->assertEquals('patient@example.com', $log->data['recipient']['email']);
-        $this->assertEquals('Mario Rossi', $log->data['recipient']['name']);
-        $this->assertEquals('it', $log->data['recipient']['preferences']['language']);
-        $this->assertEquals('Dr. Bianchi', $log->data['template_data']['variables']['doctor_name']);
-        $this->assertContains('consent_form.pdf', $log->data['template_data']['attachments']);
-        $this->assertEquals('high', $log->data['delivery_options']['priority']);
-    }
+        expect($log->data['recipient']['email'])->toBe('patient@example.com')
+            ->and($log->data['recipient']['name'])->toBe('Mario Rossi')
+            ->and($log->data['recipient']['preferences']['language'])->toBe('it')
+            ->and($log->data['template_data']['variables']['doctor_name'])->toBe('Dr. Bianchi')
+            ->and($log->data['template_data']['attachments'])->toContain('consent_form.pdf')
+            ->and($log->data['delivery_options']['priority'])->toBe('high');
+    });
 
-    /** @test */
-    public function it_can_manage_metadata_for_analytics(): void
-    {
+    it('can manage metadata for analytics', function () {
         $template = MailTemplate::factory()->create();
         
         $analyticsMetadata = [
@@ -245,17 +222,15 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'metadata' => $analyticsMetadata,
         ]);
 
-        $this->assertEquals('appointment_confirmation_q4_2024', $log->metadata['campaign_id']);
-        $this->assertEquals('new_patients', $log->metadata['segment']);
-        $this->assertEquals('IT', $log->metadata['geolocation']['country']);
-        $this->assertEquals('Milano', $log->metadata['geolocation']['city']);
-        $this->assertEquals('mobile', $log->metadata['device_info']['type']);
-        $this->assertEquals(0.85, $log->metadata['engagement_metrics']['open_rate']);
-    }
+        expect($log->metadata['campaign_id'])->toBe('appointment_confirmation_q4_2024')
+            ->and($log->metadata['segment'])->toBe('new_patients')
+            ->and($log->metadata['geolocation']['country'])->toBe('IT')
+            ->and($log->metadata['geolocation']['city'])->toBe('Milano')
+            ->and($log->metadata['device_info']['type'])->toBe('mobile')
+            ->and($log->metadata['engagement_metrics']['open_rate'])->toBe(0.85);
+    });
 
-    /** @test */
-    public function it_can_handle_delivery_status_transitions(): void
-    {
+    it('can handle delivery status transitions', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -270,8 +245,8 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'status_message' => 'Email inviata al server SMTP',
         ]);
 
-        $this->assertEquals('sent', $log->status);
-        $this->assertNotNull($log->sent_at);
+        expect($log->status)->toBe('sent')
+            ->and($log->sent_at)->not->toBeNull();
 
         // Transizione: sent -> delivered
         $log->update([
@@ -280,8 +255,8 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'status_message' => 'Email consegnata alla casella di posta',
         ]);
 
-        $this->assertEquals('delivered', $log->status);
-        $this->assertNotNull($log->delivered_at);
+        expect($log->status)->toBe('delivered')
+            ->and($log->delivered_at)->not->toBeNull();
 
         // Transizione: delivered -> opened
         $log->update([
@@ -290,13 +265,11 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'status_message' => 'Email aperta dal destinatario',
         ]);
 
-        $this->assertEquals('opened', $log->status);
-        $this->assertNotNull($log->opened_at);
-    }
+        expect($log->status)->toBe('opened')
+            ->and($log->opened_at)->not->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_handle_bounce_and_complaint_scenarios(): void
-    {
+    it('can handle bounce and complaint scenarios', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -317,10 +290,10 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('bounced', $log->status);
-        $this->assertEquals('Indirizzo email inesistente', $log->status_message);
-        $this->assertEquals('hard', $log->metadata['bounce_type']);
-        $this->assertEquals('Address does not exist', $log->metadata['bounce_reason']);
+        expect($log->status)->toBe('bounced')
+            ->and($log->status_message)->toBe('Indirizzo email inesistente')
+            ->and($log->metadata['bounce_type'])->toBe('hard')
+            ->and($log->metadata['bounce_reason'])->toBe('Address does not exist');
 
         // Simula complaint
         $log->update([
@@ -334,14 +307,12 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('complained', $log->status);
-        $this->assertEquals('Email segnalata come spam', $log->status_message);
-        $this->assertEquals('abuse', $log->metadata['complaint_type']);
-    }
+        expect($log->status)->toBe('complained')
+            ->and($log->status_message)->toBe('Email segnalata come spam')
+            ->and($log->metadata['complaint_type'])->toBe('abuse');
+    });
 
-    /** @test */
-    public function it_can_manage_retry_logic(): void
-    {
+    it('can manage retry logic', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -365,8 +336,8 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('retrying', $log->status);
-        $this->assertEquals(1, $log->metadata['retry_count']);
+        expect($log->status)->toBe('retrying')
+            ->and($log->metadata['retry_count'])->toBe(1);
 
         // Secondo retry
         $log->update([
@@ -379,7 +350,7 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals(2, $log->metadata['retry_count']);
+        expect($log->metadata['retry_count'])->toBe(2);
 
         // Terzo retry fallito
         $log->update([
@@ -393,15 +364,13 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('failed', $log->status);
-        $this->assertEquals('Tutti i tentativi falliti', $log->status_message);
-        $this->assertEquals(3, $log->metadata['retry_count']);
-        $this->assertTrue($log->metadata['final_failure']);
-    }
+        expect($log->status)->toBe('failed')
+            ->and($log->status_message)->toBe('Tutti i tentativi falliti')
+            ->and($log->metadata['retry_count'])->toBe(3)
+            ->and($log->metadata['final_failure'])->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_handle_empty_or_null_values_gracefully(): void
-    {
+    it('can handle empty or null values gracefully', function () {
         $template = MailTemplate::factory()->create();
         
         $log = MailTemplateLog::factory()->create([
@@ -416,19 +385,17 @@ class MailTemplateLogBusinessLogicTest extends TestCase
             'clicked_at' => null,
         ]);
 
-        $this->assertNull($log->status_message);
-        $this->assertNull($log->data);
-        $this->assertNull($log->metadata);
-        $this->assertNull($log->sent_at);
-        $this->assertNull($log->delivered_at);
-        $this->assertNull($log->failed_at);
-        $this->assertNull($log->opened_at);
-        $this->assertNull($log->clicked_at);
-    }
+        expect($log->status_message)->toBeNull()
+            ->and($log->data)->toBeNull()
+            ->and($log->metadata)->toBeNull()
+            ->and($log->sent_at)->toBeNull()
+            ->and($log->delivered_at)->toBeNull()
+            ->and($log->failed_at)->toBeNull()
+            ->and($log->opened_at)->toBeNull()
+            ->and($log->clicked_at)->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_validate_timestamp_consistency(): void
-    {
+    it('can validate timestamp consistency', function () {
         $template = MailTemplate::factory()->create();
         
         $now = now();
@@ -441,14 +408,14 @@ class MailTemplateLogBusinessLogicTest extends TestCase
         ]);
 
         // Verifica che i timestamp siano in ordine cronologico
-        $this->assertTrue($log->sent_at->lt($log->delivered_at));
-        $this->assertTrue($log->delivered_at->lt($log->opened_at));
-        $this->assertTrue($log->opened_at->lt($log->clicked_at));
+        expect($log->sent_at->lt($log->delivered_at))->toBeTrue()
+            ->and($log->delivered_at->lt($log->opened_at))->toBeTrue()
+            ->and($log->opened_at->lt($log->clicked_at))->toBeTrue();
 
         // Verifica che i timestamp non siano nel futuro
-        $this->assertTrue($log->sent_at->lte(now()));
-        $this->assertTrue($log->delivered_at->lte(now()));
-        $this->assertTrue($log->opened_at->lte(now()));
-        $this->assertTrue($log->clicked_at->lte(now()));
-    }
-}
+        expect($log->sent_at->lte(now()))->toBeTrue()
+            ->and($log->delivered_at->lte(now()))->toBeTrue()
+            ->and($log->opened_at->lte(now()))->toBeTrue()
+            ->and($log->clicked_at->lte(now()))->toBeTrue();
+    });
+});

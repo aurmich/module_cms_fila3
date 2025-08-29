@@ -623,3 +623,5 @@ class MailTemplateLogTest extends TestCase
     }
 }
 
+
+

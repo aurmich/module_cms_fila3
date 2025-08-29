@@ -82,7 +82,7 @@ class SendNetfunSmsPage extends XotBasePage
                 ->placeholder('+393401234567'),
             'from' => Forms\Components\TextInput::make('from')
                 ->label(__('notify::sms.form.from.label'))
-                ->default('SaluteOra')
+                ->default(config('app.name', 'Our Platform'))
                 ->required()
                 ->maxLength(11)
                 ->helperText(__('notify::sms.form.from.helper')),

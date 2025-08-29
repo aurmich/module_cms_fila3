@@ -326,40 +326,4 @@ return [
             '1' => 'monitoring',
         ],
     ],
-    'navigation' => [
-        'name' => 'Attività', // Added missing translation key
-        'plural' => 'Attività', // Added missing translation key
-        'group' => [
-            'name' => 'Monitoraggio', // Added missing translation key
-            'description' => 'Monitoraggio delle attività di sistema', // Added missing translation key
-        ],
-        'label' => 'Attività', // Added missing translation key
-    ],
-    'fields' => [
-        'user' => [
-            'label' => 'Utente', // Added missing translation key
-            'placeholder' => 'Seleziona un utente', // Added missing translation key
-            'help' => 'L\'utente che ha eseguito l\'azione', // Added missing translation key
-            'name' => [
-                'label' => 'Nome', // Added missing translation key
-                'placeholder' => 'Inserisci il nome', // Added missing translation key
-                'help' => 'Nome completo dell\'utente', // Added missing translation key
-            ],
-            'email' => [
-                'label' => 'Email', // Added missing translation key
-                'placeholder' => 'Inserisci l\'email', // Added missing translation key
-                'help' => 'Indirizzo email dell\'utente', // Added missing translation key
-            ],
-            'role' => [
-                'label' => 'Ruolo', // Added missing translation key
-                'placeholder' => 'Seleziona un ruolo', // Added missing translation key
-                'help' => 'Ruolo dell\'utente nel sistema', // Added missing translation key
-            ],
-        ],
-        'action' => [
-            'label' => 'Azione', // Added missing translation key
-            'placeholder' => 'Seleziona un\'azione', // Added missing translation key
-            'help' => 'Azione eseguita dall\'utente', // Added missing translation key
-        ],
-    ],
 ];

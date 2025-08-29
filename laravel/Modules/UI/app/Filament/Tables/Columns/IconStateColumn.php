@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Spatie\ModelStates\State;
-use Modules\SaluteOra\Models\User;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -81,7 +80,7 @@ class IconStateColumn extends IconColumn
                 }),
             ])
             ->fillForm(function($record){
-                //dddx($record->state);//Modules\SaluteOra\States\User\Pending
+                // Generic state handling - project-specific state classes should be injected
                 return [
                     'state' => $record->state::$name,
                 ];

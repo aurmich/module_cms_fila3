@@ -105,10 +105,13 @@ class StoredEventFactory extends Factory
     {
         return $this->state(fn (array $attributes): array => [
             'event_class' => 'App\\Events\\UserRegistered',
-            'event_properties' => array_merge($attributes['event_properties'] ?? [], [
-                'user_id' => $this->faker->numberBetween(1, 100),
-                'action' => 'user_registered',
-            ]),
+            'event_properties' => array_merge(
+                (array) ($attributes['event_properties'] ?? []),
+                [
+                    'user_id' => $this->faker->numberBetween(1, 100),
+                    'action' => 'user_registered',
+                ]
+            ),
         ]);
     }
 }

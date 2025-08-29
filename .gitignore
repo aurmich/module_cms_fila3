@@ -84,6 +84,7 @@ build/
 node_modules
 docs/cache/
 docs/
+docs_project/
 cache/
 .git-blame-ignore-revs
 .php-cs-fixer.cache
@@ -119,3 +120,10 @@ laravel/teamcity.txt
 laravel/testdox.html
 laravel/testdox.txt
 bashscripts/
+.cursor/
+.windsurf/
+laravel/.ai/
+laravel/junit.xml
+laravel/teamcity.txt
+laravel/testdox.html
+laravel/testdox.txt

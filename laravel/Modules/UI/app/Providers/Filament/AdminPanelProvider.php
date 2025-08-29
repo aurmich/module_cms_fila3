@@ -10,7 +10,7 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\SpatieLaravelTranslatablePlugin;
 use Modules\Xot\Providers\Filament\XotBasePanelProvider;
-use LaraZeus\Bolt\BoltPlugin;
+//use LaraZeus\Bolt\BoltPlugin;
 
 class AdminPanelProvider extends XotBasePanelProvider
 {
@@ -26,7 +26,7 @@ class AdminPanelProvider extends XotBasePanelProvider
         //     ],
         //     'filament-navigation'
         // );
-
+        /*
         $spatieLaravelTranslatablePlugin = SpatieLaravelTranslatablePlugin::make()
             ->defaultLocales(['it', 'en']);
 
@@ -38,7 +38,7 @@ class AdminPanelProvider extends XotBasePanelProvider
         ];
         
         $panel->plugins($plugins);
-
+        */
         return $panel;
     }
 }

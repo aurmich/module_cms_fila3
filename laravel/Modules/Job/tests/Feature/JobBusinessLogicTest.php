@@ -2,20 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Modules\Job\Tests\Feature;
-
 use Modules\Job\Models\Job;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
-class JobBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_job_with_basic_information(): void
-    {
+describe('Job Business Logic', function () {
+    it('can create job with basic information', function () {
         $jobData = [
             'queue' => 'default',
             'payload' => json_encode([
@@ -32,20 +23,19 @@ class JobBusinessLogicTest extends TestCase
 
         $job = Job::create($jobData);
 
+        expect($job)->toBeInstanceOf(Job::class)
+            ->and($job->queue)->toBe('default')
+            ->and($job->attempts)->toBe(0)
+            ->and($job->reserved_at)->toBeNull();
+
         $this->assertDatabaseHas('jobs', [
             'id' => $job->id,
             'queue' => 'default',
             'attempts' => 0,
         ]);
+    });
 
-        $this->assertEquals('default', $job->queue);
-        $this->assertEquals(0, $job->attempts);
-        $this->assertNull($job->reserved_at);
-    }
-
-    /** @test */
-    public function it_can_manage_job_status_correctly(): void
-    {
+    it('can manage job status correctly', function () {
         // Job in attesa
         $waitingJob = Job::create([
             'queue' => 'high',
@@ -54,7 +44,7 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals('waiting', $waitingJob->status);
+        expect($waitingJob->status)->toBe('waiting');
 
         // Job in esecuzione
         $runningJob = Job::create([
@@ -65,12 +55,10 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals('running', $runningJob->status);
-    }
+        expect($runningJob->status)->toBe('running');
+    });
 
-    /** @test */
-    public function it_can_handle_job_attempts_and_retries(): void
-    {
+    it('can handle job attempts and retries', function () {
         $job = Job::create([
             'queue' => 'emails',
             'payload' => json_encode(['displayName' => 'SendEmailJob']),
@@ -84,8 +72,8 @@ class JobBusinessLogicTest extends TestCase
             'reserved_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals(1, $job->attempts);
-        $this->assertEquals('running', $job->status);
+        expect($job->attempts)->toBe(1)
+            ->and($job->status)->toBe('running');
 
         // Secondo tentativo
         $job->update([
@@ -94,13 +82,11 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->addMinutes(5)->timestamp,
         ]);
 
-        $this->assertEquals(2, $job->attempts);
-        $this->assertEquals('waiting', $job->status);
-    }
+        expect($job->attempts)->toBe(2)
+            ->and($job->status)->toBe('waiting');
+    });
 
-    /** @test */
-    public function it_can_extract_display_name_from_payload(): void
-    {
+    it('can extract display name from payload', function () {
         $job = Job::create([
             'queue' => 'notifications',
             'payload' => json_encode([
@@ -112,12 +98,10 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals('App\Jobs\SendNotificationJob', $job->display_name);
-    }
+        expect($job->display_name)->toBe('App\Jobs\SendNotificationJob');
+    });
 
-    /** @test */
-    public function it_can_handle_complex_payload_structures(): void
-    {
+    it('can handle complex payload structures', function () {
         $complexPayload = [
             'displayName' => 'App\Jobs\ComplexProcessingJob',
             'job' => 'Illuminate\Queue\CallQueuedHandler@call',
@@ -148,13 +132,11 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals('App\Jobs\ComplexProcessingJob', $job->display_name);
-        $this->assertEquals('processing', $job->queue);
-    }
+        expect($job->display_name)->toBe('App\Jobs\ComplexProcessingJob')
+            ->and($job->queue)->toBe('processing');
+    });
 
-    /** @test */
-    public function it_can_handle_job_scheduling_and_delays(): void
-    {
+    it('can handle job scheduling and delays', function () {
         $futureTime = now()->addHours(2);
         
         $job = Job::create([
@@ -164,13 +146,11 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => $futureTime->timestamp,
         ]);
 
-        $this->assertTrue($job->available_at > now()->timestamp);
-        $this->assertEquals('waiting', $job->status);
-    }
+        expect($job->available_at)->toBeGreaterThan(now()->timestamp)
+            ->and($job->status)->toBe('waiting');
+    });
 
-    /** @test */
-    public function it_can_manage_job_reservation_and_processing(): void
-    {
+    it('can manage job reservation and processing', function () {
         $job = Job::create([
             'queue' => 'high',
             'payload' => json_encode(['displayName' => 'PriorityJob']),
@@ -185,9 +165,9 @@ class JobBusinessLogicTest extends TestCase
             'attempts' => 1,
         ]);
 
-        $this->assertEquals('running', $job->status);
-        $this->assertEquals(1, $job->attempts);
-        $this->assertNotNull($job->reserved_at);
+        expect($job->status)->toBe('running')
+            ->and($job->attempts)->toBe(1)
+            ->and($job->reserved_at)->not->toBeNull();
 
         // Rilascia il job (fallimento o completamento)
         $job->update([
@@ -196,14 +176,12 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->addMinutes(10)->timestamp, // Delay per retry
         ]);
 
-        $this->assertEquals('waiting', $job->status);
-        $this->assertEquals(2, $job->attempts);
-        $this->assertNull($job->reserved_at);
-    }
+        expect($job->status)->toBe('waiting')
+            ->and($job->attempts)->toBe(2)
+            ->and($job->reserved_at)->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_handle_job_priority_queues(): void
-    {
+    it('can handle job priority queues', function () {
         $highPriorityJob = Job::create([
             'queue' => 'high',
             'payload' => json_encode(['displayName' => 'HighPriorityJob']),
@@ -225,14 +203,12 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertEquals('high', $highPriorityJob->queue);
-        $this->assertEquals('low', $lowPriorityJob->queue);
-        $this->assertEquals('default', $defaultJob->queue);
-    }
+        expect($highPriorityJob->queue)->toBe('high')
+            ->and($lowPriorityJob->queue)->toBe('low')
+            ->and($defaultJob->queue)->toBe('default');
+    });
 
-    /** @test */
-    public function it_can_handle_job_cleanup_and_maintenance(): void
-    {
+    it('can handle job cleanup and maintenance', function () {
         // Job completato (reserved_at impostato ma job non più attivo)
         $completedJob = Job::create([
             'queue' => 'default',
@@ -251,13 +227,11 @@ class JobBusinessLogicTest extends TestCase
         ]);
 
         // Verifica che i job siano gestibili per la pulizia
-        $this->assertTrue($completedJob->reserved_at < now()->subMinutes(30)->timestamp);
-        $this->assertTrue($failedJob->attempts >= 5);
-    }
+        expect($completedJob->reserved_at)->toBeLessThan(now()->subMinutes(30)->timestamp)
+            ->and($failedJob->attempts)->toBeGreaterThanOrEqual(5);
+    });
 
-    /** @test */
-    public function it_can_validate_job_payload_integrity(): void
-    {
+    it('can validate job payload integrity', function () {
         // Payload valido
         $validJob = Job::create([
             'queue' => 'default',
@@ -266,7 +240,7 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertNotNull($validJob->display_name);
+        expect($validJob->display_name)->not->toBeNull();
 
         // Payload non valido (non JSON)
         $invalidJob = Job::create([
@@ -276,12 +250,10 @@ class JobBusinessLogicTest extends TestCase
             'available_at' => now()->timestamp,
         ]);
 
-        $this->assertNull($invalidJob->display_name);
-    }
+        expect($invalidJob->display_name)->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_handle_job_batch_operations(): void
-    {
+    it('can handle job batch operations', function () {
         // Crea un batch di job
         $batchJobs = [];
         for ($i = 1; $i <= 5; $i++) {
@@ -296,12 +268,12 @@ class JobBusinessLogicTest extends TestCase
             ]);
         }
 
-        $this->assertCount(5, $batchJobs);
+        expect($batchJobs)->toHaveCount(5);
         
         foreach ($batchJobs as $job) {
-            $this->assertEquals('batch', $job->queue);
-            $this->assertEquals('BatchJob', $job->display_name);
-            $this->assertEquals('waiting', $job->status);
+            expect($job->queue)->toBe('batch')
+                ->and($job->display_name)->toBe('BatchJob')
+                ->and($job->status)->toBe('waiting');
         }
-    }
-}
+    });
+});

@@ -14,7 +14,7 @@ class ActivityFactory extends Factory
         return [
             'log_name' => $this->faker->randomElement(['default', 'auth', 'system']),
             'description' => $this->faker->sentence(),
-            'subject_type' => $this->faker->randomElement(['Modules\\User\\Models\\User', 'Modules\\SaluteOra\\Models\\Appointment']),
+            'subject_type' => $this->faker->randomElement(['Modules\\User\\Models\\User', 'App\\Models\\Appointment']),
             'subject_id' => $this->faker->randomNumber(),
             'causer_type' => 'Modules\\User\\Models\\User',
             'causer_id' => $this->faker->randomNumber(),

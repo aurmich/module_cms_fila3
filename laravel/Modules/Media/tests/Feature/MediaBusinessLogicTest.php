@@ -2,28 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Modules\Media\Tests\Feature;
-
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Models\Media;
 use Modules\Media\Models\MediaConvert;
 use Modules\Media\Models\TemporaryUpload;
 use Modules\User\Models\User;
-use Tests\TestCase;
 
-class MediaBusinessLogicTest extends TestCase
-{
-    protected function setUp(): void
-    {
-        parent::setUp();
+describe('Media Business Logic', function () {
+    beforeEach(function () {
         Storage::fake('public');
-    }
+    });
 
-    /** @test */
-    public function it_can_create_media_from_temporary_upload(): void
-    {
-        // Arrange
+    it('can create media from temporary upload', function () {
         $user = User::factory()->create();
         $file = UploadedFile::fake()->image('test-image.jpg', 100, 100);
         
@@ -34,7 +25,6 @@ class MediaBusinessLogicTest extends TestCase
             'mime_type' => $file->getMimeType(),
         ]);
 
-        // Act
         $media = Media::factory()->create([
             'user_id' => $user->id,
             'file_name' => $temporaryUpload->file_name,
@@ -44,7 +34,11 @@ class MediaBusinessLogicTest extends TestCase
             'collection_name' => 'default',
         ]);
 
-        // Assert
+        expect($media)->toBeInstanceOf(Media::class)
+            ->and($media->file_name)->toBe($temporaryUpload->file_name)
+            ->and($media->file_size)->toBe($temporaryUpload->file_size)
+            ->and($media->mime_type)->toBe($temporaryUpload->mime_type);
+
         $this->assertDatabaseHas('media', [
             'id' => $media->id,
             'user_id' => $user->id,
@@ -52,23 +46,15 @@ class MediaBusinessLogicTest extends TestCase
             'file_size' => $temporaryUpload->file_size,
             'mime_type' => $temporaryUpload->mime_type,
         ]);
+    });
 
-        $this->assertEquals($temporaryUpload->file_name, $media->file_name);
-        $this->assertEquals($temporaryUpload->file_size, $media->file_size);
-        $this->assertEquals($temporaryUpload->mime_type, $media->mime_type);
-    }
-
-    /** @test */
-    public function it_can_convert_media_to_different_formats(): void
-    {
-        // Arrange
+    it('can convert media to different formats', function () {
         $user = User::factory()->create();
         $media = Media::factory()->create([
             'user_id' => $user->id,
             'mime_type' => 'image/jpeg',
         ]);
 
-        // Act
         $mediaConvert = MediaConvert::factory()->create([
             'media_id' => $media->id,
             'original_format' => 'jpeg',
@@ -76,7 +62,11 @@ class MediaBusinessLogicTest extends TestCase
             'status' => 'pending',
         ]);
 
-        // Assert
+        expect($mediaConvert)->toBeInstanceOf(MediaConvert::class)
+            ->and($mediaConvert->media_id)->toBe($media->id)
+            ->and($mediaConvert->original_format)->toBe('jpeg')
+            ->and($mediaConvert->target_format)->toBe('png');
+
         $this->assertDatabaseHas('media_converts', [
             'id' => $mediaConvert->id,
             'media_id' => $media->id,
@@ -84,20 +74,12 @@ class MediaBusinessLogicTest extends TestCase
             'target_format' => 'png',
             'status' => 'pending',
         ]);
+    });
 
-        $this->assertEquals($media->id, $mediaConvert->media_id);
-        $this->assertEquals('jpeg', $mediaConvert->original_format);
-        $this->assertEquals('png', $mediaConvert->target_format);
-    }
-
-    /** @test */
-    public function it_can_track_temporary_upload_lifecycle(): void
-    {
-        // Arrange
+    it('can track temporary upload lifecycle', function () {
         $user = User::factory()->create();
         $file = UploadedFile::fake()->image('test-image.jpg', 100, 100);
 
-        // Act
         $temporaryUpload = TemporaryUpload::factory()->create([
             'user_id' => $user->id,
             'file_name' => $file->getClientOriginalName(),
@@ -109,23 +91,18 @@ class MediaBusinessLogicTest extends TestCase
         // Simulate upload completion
         $temporaryUpload->update(['status' => 'completed']);
 
-        // Assert
+        expect($temporaryUpload->fresh()->status)->toBe('completed');
+
         $this->assertDatabaseHas('temporary_uploads', [
             'id' => $temporaryUpload->id,
             'user_id' => $user->id,
             'status' => 'completed',
         ]);
+    });
 
-        $this->assertEquals('completed', $temporaryUpload->fresh()->status);
-    }
-
-    /** @test */
-    public function it_can_manage_media_collections(): void
-    {
-        // Arrange
+    it('can manage media collections', function () {
         $user = User::factory()->create();
         
-        // Act
         $profileMedia = Media::factory()->create([
             'user_id' => $user->id,
             'collection_name' => 'profile',
@@ -138,7 +115,9 @@ class MediaBusinessLogicTest extends TestCase
             'disk' => 'public',
         ]);
 
-        // Assert
+        expect($profileMedia->collection_name)->toBe('profile')
+            ->and($documentMedia->collection_name)->toBe('documents');
+
         $this->assertDatabaseHas('media', [
             'id' => $profileMedia->id,
             'collection_name' => 'profile',
@@ -148,49 +127,37 @@ class MediaBusinessLogicTest extends TestCase
             'id' => $documentMedia->id,
             'collection_name' => 'documents',
         ]);
+    });
 
-        $this->assertEquals('profile', $profileMedia->collection_name);
-        $this->assertEquals('documents', $documentMedia->collection_name);
-    }
-
-    /** @test */
-    public function it_can_validate_media_file_types(): void
-    {
-        // Arrange
+    it('can validate media file types', function () {
         $user = User::factory()->create();
         
-        // Act & Assert - Valid image
         $validImage = Media::factory()->create([
             'user_id' => $user->id,
             'mime_type' => 'image/jpeg',
             'file_name' => 'valid-image.jpg',
         ]);
 
-        $this->assertTrue($validImage->isImage());
-        $this->assertFalse($validImage->isDocument());
+        expect($validImage->isImage())->toBeTrue()
+            ->and($validImage->isDocument())->toBeFalse();
 
-        // Act & Assert - Valid document
         $validDocument = Media::factory()->create([
             'user_id' => $user->id,
             'mime_type' => 'application/pdf',
             'file_name' => 'valid-document.pdf',
         ]);
 
-        $this->assertFalse($validDocument->isImage());
-        $this->assertTrue($validDocument->isDocument());
-    }
+        expect($validDocument->isImage())->toBeFalse()
+            ->and($validDocument->isDocument())->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_track_media_conversion_status(): void
-    {
-        // Arrange
+    it('can track media conversion status', function () {
         $user = User::factory()->create();
         $media = Media::factory()->create([
             'user_id' => $user->id,
             'mime_type' => 'image/jpeg',
         ]);
 
-        // Act
         $mediaConvert = MediaConvert::factory()->create([
             'media_id' => $media->id,
             'status' => 'pending',
@@ -200,19 +167,15 @@ class MediaBusinessLogicTest extends TestCase
         $mediaConvert->update(['status' => 'processing']);
         $mediaConvert->update(['status' => 'completed']);
 
-        // Assert
+        expect($mediaConvert->fresh()->status)->toBe('completed');
+
         $this->assertDatabaseHas('media_converts', [
             'id' => $mediaConvert->id,
             'status' => 'completed',
         ]);
+    });
 
-        $this->assertEquals('completed', $mediaConvert->fresh()->status);
-    }
-
-    /** @test */
-    public function it_can_manage_media_permissions(): void
-    {
-        // Arrange
+    it('can manage media permissions', function () {
         $owner = User::factory()->create();
         $otherUser = User::factory()->create();
         
@@ -221,27 +184,19 @@ class MediaBusinessLogicTest extends TestCase
             'is_public' => false,
         ]);
 
-        // Act & Assert - Owner can access
-        $this->assertTrue($media->user_id === $owner->id);
-        $this->assertFalse($media->is_public);
+        expect($media->user_id)->toBe($owner->id)
+            ->and($media->is_public)->toBeFalse()
+            ->and($media->user_id)->not->toBe($otherUser->id);
+    });
 
-        // Act & Assert - Other user cannot access private media
-        $this->assertFalse($media->user_id === $otherUser->id);
-    }
-
-    /** @test */
-    public function it_can_handle_media_deletion(): void
-    {
-        // Arrange
+    it('can handle media deletion', function () {
         $user = User::factory()->create();
         $media = Media::factory()->create([
             'user_id' => $user->id,
         ]);
 
-        // Act
         $media->delete();
 
-        // Assert
         $this->assertSoftDeleted('media', [
             'id' => $media->id,
         ]);
@@ -250,12 +205,9 @@ class MediaBusinessLogicTest extends TestCase
             'id' => $media->id,
             'deleted_at' => null,
         ]);
-    }
+    });
 
-    /** @test */
-    public function it_can_generate_media_urls(): void
-    {
-        // Arrange
+    it('can generate media urls', function () {
         $user = User::factory()->create();
         $media = Media::factory()->create([
             'user_id' => $user->id,
@@ -263,41 +215,31 @@ class MediaBusinessLogicTest extends TestCase
             'disk' => 'public',
         ]);
 
-        // Act
         $url = $media->getUrl();
 
-        // Assert
-        $this->assertNotEmpty($url);
-        $this->assertStringContainsString('test-image.jpg', $url);
-    }
+        expect($url)->not->toBeEmpty()
+            ->and($url)->toContain('test-image.jpg');
+    });
 
-    /** @test */
-    public function it_can_validate_file_size_limits(): void
-    {
-        // Arrange
+    it('can validate file size limits', function () {
         $user = User::factory()->create();
         
-        // Act & Assert - Valid file size
         $validMedia = Media::factory()->create([
             'user_id' => $user->id,
             'file_size' => 1024 * 1024, // 1MB
         ]);
 
-        $this->assertLessThanOrEqual(10 * 1024 * 1024, $validMedia->file_size); // 10MB limit
+        expect($validMedia->file_size)->toBeLessThanOrEqual(10 * 1024 * 1024); // 10MB limit
 
-        // Act & Assert - Large file size
         $largeMedia = Media::factory()->create([
             'user_id' => $user->id,
             'file_size' => 15 * 1024 * 1024, // 15MB
         ]);
 
-        $this->assertGreaterThan(10 * 1024 * 1024, $largeMedia->file_size);
-    }
+        expect($largeMedia->file_size)->toBeGreaterThan(10 * 1024 * 1024);
+    });
 
-    /** @test */
-    public function it_can_track_media_usage_statistics(): void
-    {
-        // Arrange
+    it('can track media usage statistics', function () {
         $user = User::factory()->create();
         
         Media::factory()->count(5)->create([
@@ -310,7 +252,6 @@ class MediaBusinessLogicTest extends TestCase
             'mime_type' => 'application/pdf',
         ]);
 
-        // Act
         $totalMedia = Media::where('user_id', $user->id)->count();
         $imageCount = Media::where('user_id', $user->id)
             ->where('mime_type', 'like', 'image/%')
@@ -319,9 +260,8 @@ class MediaBusinessLogicTest extends TestCase
             ->where('mime_type', 'like', 'application/%')
             ->count();
 
-        // Assert
-        $this->assertEquals(8, $totalMedia);
-        $this->assertEquals(5, $imageCount);
-        $this->assertEquals(3, $documentCount);
-    }
-}
+        expect($totalMedia)->toBe(8)
+            ->and($imageCount)->toBe(5)
+            ->and($documentCount)->toBe(3);
+    });
+});

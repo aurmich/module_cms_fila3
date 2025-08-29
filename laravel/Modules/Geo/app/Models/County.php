@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Geo\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,18 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class County extends BaseModel
 {
-    use HasFactory;
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Modules\Geo\Database\Factories\CountyFactory
-     */
-    protected static function newFactory(): \Modules\Geo\Database\Factories\CountyFactory
-    {
-        return \Modules\Geo\Database\Factories\CountyFactory::new();
-    }
-
     protected $fillable = [
         'state_id',
         'county',

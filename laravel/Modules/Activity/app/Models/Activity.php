@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 /**
  * Class Activity.
@@ -60,6 +62,17 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  */
 class Activity extends SpatieActivity
 {
+    use HasFactory;
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Modules\Activity\Database\Factories\ActivityFactory
+     */
+    protected static function newFactory(): \Modules\Activity\Database\Factories\ActivityFactory
+    {
+        return \Modules\Activity\Database\Factories\ActivityFactory::new();
+    }
     /** @var list<string> */
     protected $fillable = [
         'id',

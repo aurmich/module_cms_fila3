@@ -22,8 +22,8 @@ class PageManagementBusinessLogicTest extends TestCase
             'title' => 'Home Page',
             'slug' => 'home',
             'status' => 'published',
-            'meta_title' => 'Home Page - SaluteOra',
-            'meta_description' => 'Pagina principale di SaluteOra',
+            'meta_title' => 'Home Page - ' . config('app.name', 'Our Platform'),
+            'meta_description' => 'Pagina principale di ' . config('app.name', 'Our Platform'),
         ];
 
         // Act
@@ -35,8 +35,8 @@ class PageManagementBusinessLogicTest extends TestCase
             'title' => 'Home Page',
             'slug' => 'home',
             'status' => 'published',
-            'meta_title' => 'Home Page - SaluteOra',
-            'meta_description' => 'Pagina principale di SaluteOra',
+            'meta_title' => 'Home Page - ' . config('app.name', 'Our Platform'),
+            'meta_description' => 'Pagina principale di ' . config('app.name', 'Our Platform'),
         ]);
 
         $this->assertEquals('Home Page', $page->title);
@@ -51,7 +51,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $contentData = [
             'page_id' => $page->id,
-            'content' => '<h1>Benvenuti su SaluteOra</h1><p>La vostra salute è la nostra priorità.</p>',
+            'content' => '<h1>Benvenuti su ' . config('app.name', 'Our Platform') . '</h1><p>La vostra salute è la nostra priorità.</p>',
             'locale' => 'it',
             'version' => 1,
         ];
@@ -129,7 +129,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'meta_title' => 'Nuovo Meta Title',
             'meta_description' => 'Nuova meta description per SEO',
             'meta_keywords' => 'salute, dentista, milano',
-            'canonical_url' => 'https://saluteora.com/pagina',
+            'canonical_url' => 'https://' . config('app.domain', 'example.com') . '/pagina',
         ];
 
         // Act
@@ -141,7 +141,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'meta_title' => 'Nuovo Meta Title',
             'meta_description' => 'Nuova meta description per SEO',
             'meta_keywords' => 'salute, dentista, milano',
-            'canonical_url' => 'https://saluteora.com/pagina',
+            'canonical_url' => 'https://' . config('app.domain', 'example.com') . '/pagina',
         ]);
     }
 
@@ -552,7 +552,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $redirectData = [
             'redirect_type' => '301',
-            'redirect_url' => 'https://saluteora.com/nuova-pagina',
+            'redirect_url' => 'https://' . config('app.domain', 'example.com') . '/nuova-pagina',
             'redirect_reason' => 'Page moved permanently',
         ];
 
@@ -563,7 +563,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $this->assertDatabaseHas('pages', [
             'id' => $page->id,
             'redirect_type' => '301',
-            'redirect_url' => 'https://saluteora.com/nuova-pagina',
+            'redirect_url' => 'https://' . config('app.domain', 'example.com') . '/nuova-pagina',
             'redirect_reason' => 'Page moved permanently',
         ]);
     }

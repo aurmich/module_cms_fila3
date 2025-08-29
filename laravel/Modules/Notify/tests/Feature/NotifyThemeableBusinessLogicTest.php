@@ -2,49 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Modules\Notify\Tests\Feature;
-
 use Modules\Notify\Models\NotifyThemeable;
 use Modules\Notify\Models\NotifyTheme;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class NotifyThemeableBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
-
-    /** @test */
-    public function it_can_create_notify_themeable_with_basic_information(): void
-    {
+describe('Notify Themeable Business Logic', function () {
+    it('can create notify themeable with basic information', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeableData = [
             'model_type' => 'App\Models\NotificationTemplate',
             'model_id' => 123,
             'notify_theme_id' => $theme->id,
-            'created_by' => 'admin@saluteora.com',
-            'updated_by' => 'admin@saluteora.com',
+            'created_by' => 'admin@' . config('app.domain', 'example.com'),
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ];
 
         $themeable = NotifyThemeable::create($themeableData);
 
-        $this->assertDatabaseHas('notify_themeables', [
+        expect('notify_themeables')->toBeInDatabase([
             'id' => $themeable->id,
             'model_type' => 'App\Models\NotificationTemplate',
             'model_id' => 123,
             'notify_theme_id' => $theme->id,
-            'created_by' => 'admin@saluteora.com',
-            'updated_by' => 'admin@saluteora.com',
+            'created_by' => 'admin@' . config('app.domain', 'example.com'),
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertEquals('App\Models\NotificationTemplate', $themeable->model_type);
-        $this->assertEquals(123, $themeable->model_id);
-        $this->assertEquals($theme->id, $themeable->notify_theme_id);
-    }
+        expect($themeable->model_type)->toBe('App\Models\NotificationTemplate');
+        expect($themeable->model_id)->toBe(123);
+        expect($themeable->notify_theme_id)->toBe($theme->id);
+    });
 
-    /** @test */
-    public function it_can_manage_polymorphic_relationships(): void
-    {
+    it('can manage polymorphic relationships', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeable = NotifyThemeable::factory()->create([
@@ -53,16 +42,13 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             'notify_theme_id' => $theme->id,
         ]);
 
-        $this->assertEquals('App\Models\EmailTemplate', $themeable->model_type);
-        $this->assertEquals(456, $themeable->model_id);
+        expect($themeable->model_type)->toBe('App\Models\EmailTemplate');
+        expect($themeable->model_id)->toBe(456);
         
-        // Test della relazione morphTo
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphTo::class, $themeable->morphTo());
-    }
+        expect($themeable->morphTo())->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphTo::class);
+    });
 
-    /** @test */
-    public function it_can_handle_different_model_types(): void
-    {
+    it('can handle different model types', function () {
         $theme = NotifyTheme::factory()->create();
         
         $modelTypes = [
@@ -80,53 +66,46 @@ class NotifyThemeableBusinessLogicTest extends TestCase
                 'notify_theme_id' => $theme->id,
             ]);
 
-            $this->assertEquals($modelType, $themeable->model_type);
-            $this->assertEquals($index + 1, $themeable->model_id);
+            expect($themeable->model_type)->toBe($modelType);
+            expect($themeable->model_id)->toBe($index + 1);
         }
-    }
+    });
 
-    /** @test */
-    public function it_can_manage_theme_relationships(): void
-    {
+    it('can manage theme relationships', function () {
         $theme = NotifyTheme::factory()->create([
-            'name' => 'SaluteOra Professional',
-            'description' => 'Tema professionale per SaluteOra',
+            'name' => config('app.name', 'Platform') . ' Professional',
+            'description' => 'Tema professionale per ' . config('app.name', 'Platform'),
         ]);
         
         $themeable = NotifyThemeable::factory()->create([
             'notify_theme_id' => $theme->id,
         ]);
 
-        $this->assertInstanceOf(NotifyTheme::class, $themeable->theme);
-        $this->assertEquals($theme->id, $themeable->theme->id);
-        $this->assertEquals('SaluteOra Professional', $themeable->theme->name);
-    }
+        expect($themeable->theme)->toBeInstanceOf(NotifyTheme::class);
+        expect($themeable->theme->id)->toBe($theme->id);
+        expect($themeable->theme->name)->toBe(config('app.name', 'Platform') . ' Professional');
+    });
 
-    /** @test */
-    public function it_can_handle_user_tracking(): void
-    {
+    it('can handle user tracking', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeable = NotifyThemeable::factory()->create([
             'notify_theme_id' => $theme->id,
-            'created_by' => 'developer@saluteora.com',
-            'updated_by' => 'admin@saluteora.com',
+            'created_by' => 'developer@' . config('app.domain', 'example.com'),
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertEquals('developer@saluteora.com', $themeable->created_by);
-        $this->assertEquals('admin@saluteora.com', $themeable->updated_by);
-        $this->assertNotNull($themeable->created_at);
-        $this->assertNotNull($themeable->updated_at);
-    }
+        expect($themeable->created_by)->toBe('developer@' . config('app.domain', 'example.com'));
+        expect($themeable->updated_by)->toBe('admin@' . config('app.domain', 'example.com'));
+        expect($themeable->created_at)->not->toBeNull();
+        expect($themeable->updated_at)->not->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_manage_multiple_theme_assignments(): void
-    {
+    it('can manage multiple theme assignments', function () {
         $theme1 = NotifyTheme::factory()->create(['name' => 'Tema 1']);
         $theme2 = NotifyTheme::factory()->create(['name' => 'Tema 2']);
         $theme3 = NotifyTheme::factory()->create(['name' => 'Tema 3']);
         
-        // Assegna lo stesso modello a temi diversi
         $themeable1 = NotifyThemeable::factory()->create([
             'model_type' => 'App\Models\NotificationTemplate',
             'model_id' => 123,
@@ -145,14 +124,12 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             'notify_theme_id' => $theme3->id,
         ]);
 
-        $this->assertCount(3, NotifyThemeable::where('model_type', 'App\Models\NotificationTemplate')
+        expect(NotifyThemeable::where('model_type', 'App\Models\NotificationTemplate')
             ->where('model_id', 123)
-            ->get());
-    }
+            ->get())->toHaveCount(3);
+    });
 
-    /** @test */
-    public function it_can_handle_theme_switching(): void
-    {
+    it('can handle theme switching', function () {
         $oldTheme = NotifyTheme::factory()->create(['name' => 'Tema Vecchio']);
         $newTheme = NotifyTheme::factory()->create(['name' => 'Tema Nuovo']);
         
@@ -160,23 +137,20 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             'notify_theme_id' => $oldTheme->id,
         ]);
 
-        $this->assertEquals($oldTheme->id, $themeable->notify_theme_id);
-        $this->assertEquals('Tema Vecchio', $themeable->theme->name);
+        expect($themeable->notify_theme_id)->toBe($oldTheme->id);
+        expect($themeable->theme->name)->toBe('Tema Vecchio');
 
-        // Cambia tema
         $themeable->update([
             'notify_theme_id' => $newTheme->id,
-            'updated_by' => 'admin@saluteora.com',
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertEquals($newTheme->id, $themeable->notify_theme_id);
-        $this->assertEquals('Tema Nuovo', $themeable->theme->name);
-        $this->assertEquals('admin@saluteora.com', $themeable->updated_by);
-    }
+        expect($themeable->notify_theme_id)->toBe($newTheme->id);
+        expect($themeable->theme->name)->toBe('Tema Nuovo');
+        expect($themeable->updated_by)->toBe('admin@' . config('app.domain', 'example.com'));
+    });
 
-    /** @test */
-    public function it_can_handle_empty_or_null_values_gracefully(): void
-    {
+    it('can handle empty or null values gracefully', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeable = NotifyThemeable::factory()->create([
@@ -187,16 +161,14 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             'updated_by' => null,
         ]);
 
-        $this->assertNull($themeable->model_type);
-        $this->assertNull($themeable->model_id);
-        $this->assertNull($themeable->created_by);
-        $this->assertNull($themeable->updated_by);
-        $this->assertNotNull($themeable->notify_theme_id); // Campo obbligatorio
-    }
+        expect($themeable->model_type)->toBeNull();
+        expect($themeable->model_id)->toBeNull();
+        expect($themeable->created_by)->toBeNull();
+        expect($themeable->updated_by)->toBeNull();
+        expect($themeable->notify_theme_id)->not->toBeNull();
+    });
 
-    /** @test */
-    public function it_can_validate_model_type_consistency(): void
-    {
+    it('can validate model type consistency', function () {
         $theme = NotifyTheme::factory()->create();
         
         $validModelTypes = [
@@ -215,14 +187,12 @@ class NotifyThemeableBusinessLogicTest extends TestCase
                 'notify_theme_id' => $theme->id,
             ]);
 
-            $this->assertEquals($modelType, $themeable->model_type);
-            $this->assertContains($modelType, $validModelTypes);
+            expect($themeable->model_type)->toBe($modelType);
+            expect($validModelTypes)->toContain($modelType);
         }
-    }
+    });
 
-    /** @test */
-    public function it_can_manage_theme_inheritance(): void
-    {
+    it('can manage theme inheritance', function () {
         $parentTheme = NotifyTheme::factory()->create([
             'name' => 'Tema Base',
             'description' => 'Tema base per tutte le notifiche',
@@ -233,85 +203,72 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             'description' => 'Tema specializzato per appuntamenti',
         ]);
         
-        // Assegna il tema base
         $baseThemeable = NotifyThemeable::factory()->create([
             'model_type' => 'App\Models\NotificationTemplate',
             'model_id' => 123,
             'notify_theme_id' => $parentTheme->id,
         ]);
 
-        // Assegna il tema specializzato
         $specializedThemeable = NotifyThemeable::factory()->create([
             'model_type' => 'App\Models\NotificationTemplate',
             'model_id' => 123,
             'notify_theme_id' => $childTheme->id,
         ]);
 
-        $this->assertEquals('Tema Base', $baseThemeable->theme->name);
-        $this->assertEquals('Tema Specializzato', $specializedThemeable->theme->name);
+        expect($baseThemeable->theme->name)->toBe('Tema Base');
+        expect($specializedThemeable->theme->name)->toBe('Tema Specializzato');
         
-        // Verifica che entrambi i temi siano assegnati allo stesso modello
-        $this->assertEquals($baseThemeable->model_type, $specializedThemeable->model_type);
-        $this->assertEquals($baseThemeable->model_id, $specializedThemeable->model_id);
-    }
+        expect($baseThemeable->model_type)->toBe($specializedThemeable->model_type);
+        expect($baseThemeable->model_id)->toBe($specializedThemeable->model_id);
+    });
 
-    /** @test */
-    public function it_can_handle_theme_removal(): void
-    {
+    it('can handle theme removal', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeable = NotifyThemeable::factory()->create([
             'notify_theme_id' => $theme->id,
         ]);
 
-        $this->assertNotNull($themeable->notify_theme_id);
-        $this->assertEquals($theme->id, $themeable->notify_theme_id);
+        expect($themeable->notify_theme_id)->not->toBeNull();
+        expect($themeable->notify_theme_id)->toBe($theme->id);
 
-        // Rimuovi il tema (imposta a null)
         $themeable->update([
             'notify_theme_id' => null,
-            'updated_by' => 'admin@saluteora.com',
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertNull($themeable->notify_theme_id);
-        $this->assertEquals('admin@saluteora.com', $themeable->updated_by);
-    }
+        expect($themeable->notify_theme_id)->toBeNull();
+        expect($themeable->updated_by)->toBe('admin@' . config('app.domain', 'example.com'));
+    });
 
-    /** @test */
-    public function it_can_manage_audit_trail(): void
-    {
+    it('can manage audit trail', function () {
         $theme = NotifyTheme::factory()->create();
         
         $themeable = NotifyThemeable::factory()->create([
             'notify_theme_id' => $theme->id,
-            'created_by' => 'developer@saluteora.com',
+            'created_by' => 'developer@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertEquals('developer@saluteora.com', $themeable->created_by);
-        $this->assertNotNull($themeable->created_at);
+        expect($themeable->created_by)->toBe('developer@' . config('app.domain', 'example.com'));
+        expect($themeable->created_at)->not->toBeNull();
 
-        // Aggiorna
         $themeable->update([
-            'updated_by' => 'admin@saluteora.com',
+            'updated_by' => 'admin@' . config('app.domain', 'example.com'),
         ]);
 
-        $this->assertEquals('admin@saluteora.com', $themeable->updated_by);
-        $this->assertNotNull($themeable->updated_at);
+        expect($themeable->updated_by)->toBe('admin@' . config('app.domain', 'example.com'));
+        expect($themeable->updated_at)->not->toBeNull();
 
-        // Verifica che i timestamp siano aggiornati
-        $this->assertTrue($themeable->created_at->lte($themeable->updated_at));
-    }
+        expect($themeable->created_at->lte($themeable->updated_at))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_handle_bulk_theme_operations(): void
-    {
+    it('can handle bulk theme operations', function () {
         $theme1 = NotifyTheme::factory()->create(['name' => 'Tema 1']);
         $theme2 = NotifyTheme::factory()->create(['name' => 'Tema 2']);
         $theme3 = NotifyTheme::factory()->create(['name' => 'Tema 3']);
         
         $modelIds = [101, 102, 103, 104, 105];
         
-        // Assegna tutti i modelli al tema 1
         foreach ($modelIds as $modelId) {
             NotifyThemeable::factory()->create([
                 'model_type' => 'App\Models\NotificationTemplate',
@@ -320,23 +277,20 @@ class NotifyThemeableBusinessLogicTest extends TestCase
             ]);
         }
 
-        // Verifica che tutti i modelli abbiano il tema 1
         $theme1Assignments = NotifyThemeable::where('notify_theme_id', $theme1->id)->get();
-        $this->assertCount(5, $theme1Assignments);
+        expect($theme1Assignments)->toHaveCount(5);
 
-        // Cambia tutti i modelli al tema 2
         NotifyThemeable::where('notify_theme_id', $theme1->id)
             ->update([
                 'notify_theme_id' => $theme2->id,
-                'updated_by' => 'admin@saluteora.com',
+                'updated_by' => 'admin@' . config('app.domain', 'example.com'),
             ]);
 
         $theme2Assignments = NotifyThemeable::where('notify_theme_id', $theme2->id)->get();
-        $this->assertCount(5, $theme2Assignments);
+        expect($theme2Assignments)->toHaveCount(5);
 
-        // Verifica che tutti abbiano l'updated_by corretto
         foreach ($theme2Assignments as $assignment) {
-            $this->assertEquals('admin@saluteora.com', $assignment->updated_by);
+            expect($assignment->updated_by)->toBe('admin@' . config('app.domain', 'example.com'));
         }
-    }
-}
+    });
+});
