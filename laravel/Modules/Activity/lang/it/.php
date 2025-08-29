@@ -6,7 +6,7 @@ return array (
     'empty' => 
     array (
       'label' => 'empty',
-      'heading' => 'empty',
+      'heading' => '',
     ),
   ),
 );

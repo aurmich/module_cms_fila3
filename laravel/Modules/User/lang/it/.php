@@ -22,7 +22,7 @@ return array (
   array (
     'empty' => 
     array (
-      'heading' => 'empty',
+      'heading' => '',
       'label' => 'empty',
     ),
   ),
