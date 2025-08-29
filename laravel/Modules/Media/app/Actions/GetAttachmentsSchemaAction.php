@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 use Illuminate\Support\HtmlString;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
@@ -37,7 +38,12 @@ class GetAttachmentsSchemaAction
     {
         $schema = [];
         $sessionId = session()->getId();
+        $prefix=Config::string('media-library.prefix');
+        
         $sessionDir = "session-uploads/{$sessionId}";
+        if($prefix!=''){
+            $sessionDir =$prefix.'/'.$sessionDir;
+        }
         foreach ($attachments as $attachment) {
             $schema[$attachment]=FileUpload::make($attachment)
             //$schema[$attachment]=SpatieMediaLibraryFileUpload::make($attachment)

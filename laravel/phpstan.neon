@@ -36,13 +36,14 @@ parameters:
         - ./*/Tests/*
         - ./*/phpinsights.php
         - ./*/rector.php
+        - ./*/*.blade.php
         # - ./Modules/Activity
         - ./Modules/Media/app/Actions/Image/Merge.php
-        - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
+        # - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
         - ./Modules/*/packages/*
         - ./Modules/*/tests/*
-        - ./Modules/*/vendor/*
-        - ./Modules/*/*.blade.php
+        #- ./Modules/*/vendor/*
+        #- ./Modules/*/*.blade.php
 
     bootstrapFiles:
         # - ./phpstan_bootstrap.php

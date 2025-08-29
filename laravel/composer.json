@@ -72,11 +72,14 @@
             "@php artisan vendor:publish --all",
             "rm -rf database/migrations/*",
             "rm -rf ./app/View/Components/vendor/",
+            "mkdir -p bootstrap/cache",
             "@php artisan migrate",
             "@php artisan filament:upgrade",
             "@php artisan filament:optimize",
             "@php artisan optimize",
             "@php artisan route:clear",
+            "sudo chown -R www-data:www-data ..",
+            "sudo chmod -R g+w ..",
             "@php artisan serve"
         ]
     },
