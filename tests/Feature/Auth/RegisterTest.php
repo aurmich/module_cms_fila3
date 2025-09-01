@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-use Illuminate\Support\Facades\Hash;
-use Modules\Xot\Datas\XotData;
-use function Pest\Laravel\{get, actingAs, assertGuest, assertAuthenticated};
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -16,7 +15,7 @@ uses(\Modules\Xot\Tests\TestCase::class);
 describe('Register Page', function () {
     test('register page renders for guest', function () {
         $locale = app()->getLocale();
-        $response = get('/' . $locale . '/auth/register');
+        $response = get('/'.$locale.'/auth/register');
         $response->assertStatus(200);
     });
 
@@ -24,9 +23,8 @@ describe('Register Page', function () {
         $user = $this->createTestUser();
         actingAs($user);
         $locale = app()->getLocale();
-        $response = get('/' . $locale . '/auth/register');
+        $response = get('/'.$locale.'/auth/register');
         $response->assertRedirect('/');
     });
-
 
 });

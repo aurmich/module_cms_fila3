@@ -9,4 +9,4 @@ return [
         'profile' => 'Modules\User\Models\Profile',
         'user' => 'Modules\User\Models\User',
     ],
-]; 
+];

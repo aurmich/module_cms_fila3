@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Builder\Block;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class LogoBlock extends XotBaseBlock
@@ -17,18 +16,12 @@ class LogoBlock extends XotBaseBlock
         return [
             FileUpload::make('image')
                 ->image()
-                ->directory('logos')
-                
-                ,
+                ->directory('logos'),
 
             TextInput::make('alt')
-                ->required()
-                
-                ,
+                ->required(),
 
-            TextInput::make('text')
-                
-                ,
+            TextInput::make('text'),
 
             Select::make('type')
                 ->options([
@@ -37,25 +30,17 @@ class LogoBlock extends XotBaseBlock
                     'both' => 'Immagine e Testo',
                 ])
                 ->default('both')
-                ->required()
-                
-                ,
+                ->required(),
 
             TextInput::make('width')
-                ->numeric()
-                
-                ,
+                ->numeric(),
 
             TextInput::make('height')
-                ->numeric()
-                
-                ,
+                ->numeric(),
 
             TextInput::make('url')
                 ->default('/')
-                ->required()
-                
-                ,
+                ->required(),
         ];
     }
 

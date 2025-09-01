@@ -30,6 +30,7 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
      * The module namespace.
      */
     protected string $module_ns = __NAMESPACE__;
+
     public string $name = 'Cms';
 
     public function boot(): void
@@ -79,10 +80,10 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
     {
         // ---------- Lang Route Pattern
         // ✅ Controllo sicuro della configurazione laravellocalization
-        $langs = config()->has('laravellocalization.supportedLocales') 
-            ? config('laravellocalization.supportedLocales') 
+        $langs = config()->has('laravellocalization.supportedLocales')
+            ? config('laravellocalization.supportedLocales')
             : ['it' => 'it', 'en' => 'en'];
-            
+
         if (! \is_array($langs)) {
             // throw new \Exception('[.__LINE__.]['.class_basename(__CLASS__).']');
             $langs = ['it' => 'it', 'en' => 'en'];

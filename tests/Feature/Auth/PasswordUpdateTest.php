@@ -2,7 +2,6 @@
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt;
 

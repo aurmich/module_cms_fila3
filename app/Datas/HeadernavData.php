@@ -16,11 +16,17 @@ class HeadernavData extends Data implements Wireable
     use WireableData;
 
     public ?string $background_color = null;
+
     public ?string $background = null;
+
     public ?string $overlay_color = null;
+
     public ?int $overlay_opacity = null;
+
     public ?string $class = null;
+
     public ?string $style = null;
+
     /**
      * The view path.
      *

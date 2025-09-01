@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Get;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Get;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class NavigationBlock extends XotBaseBlock
 {
-    
-
     public static function getBlockSchema(): array
     {
         return [
@@ -34,7 +31,7 @@ class NavigationBlock extends XotBaseBlock
                         ->options([
                             'link' => 'Link',
                             'button' => 'Pulsante',
-                            'dropdown' => 'Menu a tendina'
+                            'dropdown' => 'Menu a tendina',
                         ])
                         ->default('link')
                         ->reactive(),
@@ -44,7 +41,7 @@ class NavigationBlock extends XotBaseBlock
                         ->options([
                             'default' => 'Default',
                             'primary' => 'Primario',
-                            'secondary' => 'Secondario'
+                            'secondary' => 'Secondario',
                         ])
                         ->default('default')
                         ->visible(fn (Get $get) => $get('type') === 'button'),
@@ -64,12 +61,12 @@ class NavigationBlock extends XotBaseBlock
                                 ->label('Tipo')
                                 ->options([
                                     'link' => 'Link',
-                                    'button' => 'Pulsante'
+                                    'button' => 'Pulsante',
                                 ])
-                                ->default('link')
+                                ->default('link'),
                         ])
                         ->visible(fn (Get $get) => $get('type') === 'dropdown')
-                        ->collapsible()
+                        ->collapsible(),
                 ])
                 ->collapsible()
                 ->reorderable(),
@@ -79,7 +76,7 @@ class NavigationBlock extends XotBaseBlock
                 ->options([
                     'start' => 'Sinistra',
                     'center' => 'Centro',
-                    'end' => 'Destra'
+                    'end' => 'Destra',
                 ])
                 ->default('start'),
 
@@ -87,9 +84,9 @@ class NavigationBlock extends XotBaseBlock
                 ->label('Orientamento')
                 ->options([
                     'horizontal' => 'Orizzontale',
-                    'vertical' => 'Verticale'
+                    'vertical' => 'Verticale',
                 ])
-                ->default('horizontal')
+                ->default('horizontal'),
         ];
     }
 

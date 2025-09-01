@@ -41,7 +41,7 @@ class Home extends Page
     public function getViewData(): array
     {
         $data = [];
-        if ([] !== $this->containers) {
+        if ($this->containers !== []) {
             Assert::string($container_last = last($this->containers));
             $item_last = last($this->items);
 
@@ -88,7 +88,7 @@ class Home extends Page
         if (\count($containers) > \count($items)) {
             $view = 'index';
         }
-        if ([] === $containers) {
+        if ($containers === []) {
             $view = 'home';
         }
 
@@ -96,7 +96,7 @@ class Home extends Page
 
         $views = [];
 
-        if ([] !== $containers) {
+        if ($containers !== []) {
             $views[] = 'pub_theme::'.implode('.', $containers).'.'.$view;
 
             $model_root = Str::singular($containers[0]);
@@ -119,7 +119,7 @@ class Home extends Page
     {
         $parameters['lang'] = app()->getLocale();
         $record = $parameters['record'];
-        if ('show' === $name) {
+        if ($name === 'show') {
             $container0 = class_basename($record);
             $container0 = Str::plural($container0);
             $container0 = Str::snake($container0);
@@ -128,7 +128,7 @@ class Home extends Page
 
             return route('test', $parameters);
         }
-        if ('index' === $name) {
+        if ($name === 'index') {
             $container0 = class_basename($record);
             $container0 = Str::plural($container0);
             $container0 = Str::snake($container0);

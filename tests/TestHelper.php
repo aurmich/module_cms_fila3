@@ -6,13 +6,14 @@ namespace Modules\Cms\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Modules\Cms\Models\Module;
+use Modules\User\Models\User;
 use Modules\Xot\Actions\Filament\GetModulesNavigationItems;
 use Modules\User\Models\User;
 use Tests\CreatesApplication;
 
 abstract class TestHelper extends BaseTestCase
 {
-    //use CreatesApplication;
+    // use CreatesApplication;
 
     // in User
     public function getSuperAdminUser()
@@ -51,7 +52,7 @@ abstract class TestHelper extends BaseTestCase
     public function getUserNavigationItemUrlRoles($user)
     {
         return $role_names = $user->getRoleNames()->map(function ($item) {
-            if ('super-admin' !== $item) {
+            if ($item !== 'super-admin') {
                 return '/'.mb_substr($item, 0, -7).'/admin';
             }
         })->filter(fn ($value): bool => ! is_null($value));

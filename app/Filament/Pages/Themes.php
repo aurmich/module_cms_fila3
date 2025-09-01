@@ -12,10 +12,9 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\File;
 use Modules\Cms\Datas\ThemeData;
 use Modules\Tenant\Services\TenantService;
+use Webmozart\Assert\Assert;
 
 use function Safe\json_decode;
-
-use Webmozart\Assert\Assert;
 
 class Themes extends Page
 {

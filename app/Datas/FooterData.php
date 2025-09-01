@@ -16,14 +16,18 @@ class FooterData extends Data implements Wireable
     use WireableData;
 
     public ?string $background_color;
+
     public ?string $background;
+
     public ?string $overlay_color;
+
     /**
      * The view path.
      *
      * @var string
      */
     public $view = 'cms::components.footer';
+
     public ?string $_tpl;
 
     private static ?self $instance = null;

@@ -6,12 +6,9 @@ namespace Modules\Cms\Filament\Resources;
 
 use Filament\Forms;
 use Illuminate\Support\Str;
-use Modules\Cms\Models\Page;
-use Filament\Resources\Concerns\Translatable;
 use Modules\Cms\Filament\Fields\PageContentBuilder;
-use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Cms\Models\Page;
 use Modules\Lang\Filament\Resources\LangBaseResource;
-use Modules\Cms\Filament\Resources\PageResource\Pages;
 
 /**
  * @property Page $record
@@ -35,7 +32,7 @@ class PageResource extends LangBaseResource
 
             Forms\Components\TextInput::make('slug')
                 ->required()
-                //->unique(ignoreRecord: true)
+                // ->unique(ignoreRecord: true)
                 ->afterStateUpdated(static fn (Forms\Set $set, string $state) => $set('slug', Str::slug($state))),
 
             Forms\Components\Section::make('Content')->schema([
@@ -54,6 +51,4 @@ class PageResource extends LangBaseResource
             ]),
         ];
     }
-
-
 }

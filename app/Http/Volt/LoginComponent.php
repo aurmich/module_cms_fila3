@@ -22,8 +22,10 @@ class LoginComponent extends Component
 {
     #[Validate('required|email')]
     public string $email = '';
+
     #[Validate('required')]
     public string $password = '';
+
     public bool $remember = false;
 
     public function authenticate(): RedirectResponse
