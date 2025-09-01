@@ -4,21 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Pages;
 
-<<<<<<< HEAD
-=======
-use Filament\Facades\Filament;
->>>>>>> b32aaf5 (.)
 use Filament\Panel;
 use Filament\Pages\Page;
 use Filament\Widgets\Widget;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use Filament\Widgets\WidgetConfiguration;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Contracts\Support\Htmlable;
-=======
->>>>>>> b32aaf5 (.)
 use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
 class Dashboard extends XotBaseDashboard

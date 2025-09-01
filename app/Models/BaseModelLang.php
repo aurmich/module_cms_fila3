@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
-<<<<<<< HEAD
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Actions\Factory\GetFactoryAction;
 use Modules\Xot\Traits\Updater;
-=======
->>>>>>> b32aaf5 (.)
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -20,8 +17,8 @@ abstract class BaseModelLang extends BaseModel
 {
     use HasTranslations;
 
-    /** @var array<int, string> */
-    public $translatable = [
+     /** @var array<int, string> */
+     public $translatable = [
         'name',
         'blocks',
     ];
@@ -46,6 +43,8 @@ abstract class BaseModelLang extends BaseModel
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
+
+
 
     public function sluggable(): array
     {

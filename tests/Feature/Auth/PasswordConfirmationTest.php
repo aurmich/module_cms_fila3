@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-use Livewire\Volt\Volt as LivewireVolt;
 use Modules\Xot\Datas\XotData;
-
-use function Pest\Laravel\actingAs;
+use Livewire\Volt\Volt as LivewireVolt;
+use function Pest\Laravel\{actingAs, get};
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -16,7 +15,7 @@ test('confirm password screen can be rendered', function () {
     $user = $userClass::factory()->create();
 
     $lang = app()->getLocale();
-    $response = actingAs($user)->get('/'.$lang.'/confirm-password');
+    $response = actingAs($user)->get('/' . $lang . '/confirm-password');
 
     $response->assertStatus(200);
 });

@@ -2,10 +2,7 @@
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b32aaf5 (.)
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt;
 
@@ -43,8 +40,4 @@ test('correct password must be provided to update password', function () {
         ->call('updatePassword');
 
     $response->assertHasErrors(['current_password']);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> b32aaf5 (.)

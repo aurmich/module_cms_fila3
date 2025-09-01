@@ -2,11 +2,7 @@
 
 declare(strict_types=1);
 
-<<<<<<< HEAD
-namespace Modules\Cms\Tests;
-=======
 use Tests\TestCase;
->>>>>>> b32aaf5 (.)
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +22,7 @@ uses(Modules\Cms\Tests\TestCase::class)->in('Feature', 'Unit');
 |--------------------------------------------------------------------------
 |
 | Qui puoi definire aspettative globali per il modulo Cms.
-| Quando definisci here expectation globali, saranno disponibili
+| Quando definisci here expectation globali, saranno disponibili 
 | in tutti i test del modulo.
 |
 */
@@ -47,4 +43,4 @@ uses(Modules\Cms\Tests\TestCase::class)->in('Feature', 'Unit');
 
 // function createTestUser() {
 //     return User::factory()->create();
-// }
+// } 

@@ -6,13 +6,9 @@ namespace Modules\Cms\Tests\Feature\Auth;
 
 use Livewire\Livewire;
 use Modules\User\Filament\Widgets\RegistrationWidget;
-<<<<<<< HEAD
 use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 use function Pest\Laravel\{get, actingAs};
-=======
-use Modules\Xot\Datas\XotData;
->>>>>>> b32aaf5 (.)
 
 // Use Cms specific TestCase only for this file
 uses(\Modules\Xot\Tests\TestCase::class);
@@ -56,21 +52,13 @@ test('widget requires type parameter', function () {
 test('widget can handle form data input', function () {
     // ✅ Utilizzo funzione centralizzata dal TestCase
     $email = static::generateUniqueEmail();
-<<<<<<< HEAD
     
-=======
-
->>>>>>> b32aaf5 (.)
     $widget = Livewire::test(RegistrationWidget::class, ['type' => 'patient'])
         ->set('data.email', $email)
         ->set('data.name', 'Test User')
         ->assertSet('data.email', $email)
         ->assertSet('data.name', 'Test User');
-<<<<<<< HEAD
         
-=======
-
->>>>>>> b32aaf5 (.)
     expect($widget->get('data.email'))->toBe($email);
 });
 
@@ -78,7 +66,6 @@ test('widget maintains state after setting multiple fields', function () {
     $testData = [
         'name' => 'Test Patient',
         'email' => static::generateUniqueEmail(), // ✅ Utilizzo funzione centralizzata
-<<<<<<< HEAD
         'password' => 'TestPassword123!'
     ];
     
@@ -88,17 +75,6 @@ test('widget maintains state after setting multiple fields', function () {
         $widget->set("data.{$field}", $value);
     }
     
-=======
-        'password' => 'TestPassword123!',
-    ];
-
-    $widget = Livewire::test(RegistrationWidget::class, ['type' => 'patient']);
-
-    foreach ($testData as $field => $value) {
-        $widget->set("data.{$field}", $value);
-    }
-
->>>>>>> b32aaf5 (.)
     foreach ($testData as $field => $value) {
         expect($widget->get("data.{$field}"))->toBe($value);
     }
@@ -123,11 +99,7 @@ test('widget calls register method without fatal errors', function () {
 
 test('widget works with Livewire testing framework', function () {
     $widget = Livewire::test(RegistrationWidget::class, ['type' => 'patient']);
-<<<<<<< HEAD
     
-=======
-
->>>>>>> b32aaf5 (.)
     // Verifica che il widget sia compatibile con Livewire testing
     expect($widget)->not()->toBeNull();
 });
@@ -152,11 +124,7 @@ test('widget handles different user types', function () {
 test('widget maintains state after form errors', function () {
     $email = 'invalid-email';
     $name = 'Test User';
-<<<<<<< HEAD
     
-=======
-
->>>>>>> b32aaf5 (.)
     $widget = Livewire::test(RegistrationWidget::class, ['type' => 'patient'])
         ->set('data.email', $email)
         ->set('data.name', $name);

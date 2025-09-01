@@ -17,4 +17,4 @@ class SectionPreview extends Entry
 
         return $static;
     }
-}
+} 

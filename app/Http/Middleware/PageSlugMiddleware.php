@@ -4,30 +4,30 @@ namespace Modules\Cms\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Modules\Cms\Models\Page;
 use Symfony\Component\HttpFoundation\Response;
+use Modules\Cms\Models\Page;
 
 class PageSlugMiddleware
 {
     protected \Illuminate\Contracts\Http\Kernel $kernel;
-
+    
     public function handle(Request $request, Closure $next): Response
     {
         $slug = $request->route('slug');
-
+        
+        
         // Handle case where slug might be null
-        if (! $slug) {
+        if (!$slug) {
             return $next($request);
         }
 
-        $middlewares = Page::getMiddlewareBySlug($slug);
+        $middlewares = Page::getMiddlewareBySlug($slug); 
         // Should return ["auth", "Modules\User\Http\Middleware\EnsureUserHasType:doctor"]
 
         if (empty($middlewares)) {
             return $next($request);
         }
         $this->kernel = app(\Illuminate\Contracts\Http\Kernel::class);
-
         // Execute middlewares manually in a chain
         return $this->executeMiddlewareChain($request, $middlewares, $next);
     }
@@ -49,6 +49,7 @@ class PageSlugMiddleware
         return [$name, $parameters];
     }
 
+    
     /**
      * Execute middleware chain manually
      */
@@ -57,21 +58,23 @@ class PageSlugMiddleware
         if (empty($middlewares)) {
             return $finalNext($request);
         }
-
+        
         $middleware = array_shift($middlewares);
-
-        [$middlewareClass, $parameters] = $this->parseMiddleware($middleware);
-
+       
+       
+        [$middlewareClass, $parameters]=$this->parseMiddleware($middleware);
+        
         // Resolve middleware class name if it's an alias
         $middlewareClass = $this->resolveMiddlewareClass($middlewareClass);
         // Create middleware instance
         $middlewareInstance = app($middlewareClass);
-
+        
+        
         // Create next closure for remaining middlewares
         $next = function ($request) use ($middlewares, $finalNext) {
             return $this->executeMiddlewareChain($request, $middlewares, $finalNext);
         };
-
+        
         // Execute current middleware
         if (empty($parameters)) {
             return $middlewareInstance->handle($request, $next);
@@ -79,23 +82,27 @@ class PageSlugMiddleware
             return $middlewareInstance->handle($request, $next, ...$parameters);
         }
     }
-
+    
     /**
      * Resolve middleware class name from alias
      */
     protected function resolveMiddlewareClass(string $middleware): string
     {
-
+        
+        
         // Get middleware aliases from HTTP kernel
-        // $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
-
+       // $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
+        
         // Try to get from route middleware (custom middleware)
-
+        
         $routeMiddleware = $this->kernel->getRouteMiddleware();
         if (isset($routeMiddleware[$middleware])) {
             return $routeMiddleware[$middleware];
         }
-
+        
+        
+       
+        
         // If not an alias, return as-is (assuming it's a full class name)
         return $middleware;
     }

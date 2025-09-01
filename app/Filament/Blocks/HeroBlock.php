@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Builder\Block;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class HeroBlock extends XotBaseBlock
@@ -15,14 +16,18 @@ class HeroBlock extends XotBaseBlock
     {
         return [
             TextInput::make('title')
-                ->required(),
-            TextInput::make('subtitle'),
+                ->required()
+                ,
+            TextInput::make('subtitle')
+                ,
             FileUpload::make('image')
 
                 ->image()
                 ->directory('hero-images'),
-            TextInput::make('cta_text'),
-            TextInput::make('cta_link'),
+            TextInput::make('cta_text')
+                ,
+            TextInput::make('cta_link')
+                ,
             ColorPicker::make('background_color')
 
                 ->default('#ffffff'),
@@ -31,7 +36,7 @@ class HeroBlock extends XotBaseBlock
                 ->default('#000000'),
             ColorPicker::make('cta_color')
 
-                ->default('#4f46e5'),
+                ->default('#4f46e5')
         ];
     }
 }

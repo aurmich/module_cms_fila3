@@ -4,26 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature;
 
-<<<<<<< HEAD
-=======
-use Illuminate\Foundation\Testing\DatabaseTransactions;
->>>>>>> b32aaf5 (.)
 use Modules\Cms\Models\Page;
 use Modules\Cms\Models\PageContent;
 use Modules\Cms\Models\Section;
 use Tests\TestCase;
-<<<<<<< HEAD
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PageManagementBusinessLogicTest extends TestCase
 {
     use RefreshDatabase;
-=======
-
-class PageManagementBusinessLogicTest extends TestCase
-{
-
->>>>>>> b32aaf5 (.)
 
     /** @test */
     public function it_can_create_page_with_basic_information(): void
@@ -33,13 +22,8 @@ class PageManagementBusinessLogicTest extends TestCase
             'title' => 'Home Page',
             'slug' => 'home',
             'status' => 'published',
-<<<<<<< HEAD
             'meta_title' => 'Home Page - ' . config('app.name', 'Our Platform'),
             'meta_description' => 'Pagina principale di ' . config('app.name', 'Our Platform'),
-=======
-            'meta_title' => 'Home Page - '.config('app.name', 'Our Platform'),
-            'meta_description' => 'Pagina principale di '.config('app.name', 'Our Platform'),
->>>>>>> b32aaf5 (.)
         ];
 
         // Act
@@ -51,7 +35,6 @@ class PageManagementBusinessLogicTest extends TestCase
             'title' => 'Home Page',
             'slug' => 'home',
             'status' => 'published',
-<<<<<<< HEAD
             'meta_title' => 'Home Page - ' . config('app.name', 'Our Platform'),
             'meta_description' => 'Pagina principale di ' . config('app.name', 'Our Platform'),
         ]);
@@ -59,15 +42,6 @@ class PageManagementBusinessLogicTest extends TestCase
         $this->assertEquals('Home Page', $page->title);
         $this->assertEquals('home', $page->slug);
         $this->assertEquals('published', $page->status);
-=======
-            'meta_title' => 'Home Page - '.config('app.name', 'Our Platform'),
-            'meta_description' => 'Pagina principale di '.config('app.name', 'Our Platform'),
-        ]);
-
-        expect('Home Page', $page->title);
-        expect('home', $page->slug);
-        expect('published', $page->status);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -77,11 +51,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $contentData = [
             'page_id' => $page->id,
-<<<<<<< HEAD
             'content' => '<h1>Benvenuti su ' . config('app.name', 'Our Platform') . '</h1><p>La vostra salute è la nostra priorità.</p>',
-=======
-            'content' => '<h1>Benvenuti su '.config('app.name', 'Our Platform').'</h1><p>La vostra salute è la nostra priorità.</p>',
->>>>>>> b32aaf5 (.)
             'locale' => 'it',
             'version' => 1,
         ];
@@ -97,15 +67,9 @@ class PageManagementBusinessLogicTest extends TestCase
             'version' => 1,
         ]);
 
-<<<<<<< HEAD
         $this->assertEquals($page->id, $pageContent->page_id);
         $this->assertEquals('it', $pageContent->locale);
         $this->assertEquals(1, $pageContent->version);
-=======
-        expect($page->id, $pageContent->page_id);
-        expect('it', $pageContent->locale);
-        expect(1, $pageContent->version);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -133,15 +97,9 @@ class PageManagementBusinessLogicTest extends TestCase
             'type' => 'hero',
         ]);
 
-<<<<<<< HEAD
         $this->assertEquals($page->id, $section->page_id);
         $this->assertEquals('Hero Section', $section->title);
         $this->assertEquals(1, $section->order);
-=======
-        expect($page->id, $section->page_id);
-        expect('Hero Section', $section->title);
-        expect(1, $section->order);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -159,11 +117,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'status' => 'published',
         ]);
 
-<<<<<<< HEAD
         $this->assertEquals('published', $page->fresh()->status);
-=======
-        expect('published', $page->fresh()->status);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -175,11 +129,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'meta_title' => 'Nuovo Meta Title',
             'meta_description' => 'Nuova meta description per SEO',
             'meta_keywords' => 'salute, dentista, milano',
-<<<<<<< HEAD
             'canonical_url' => 'https://' . config('app.domain', 'example.com') . '/pagina',
-=======
-            'canonical_url' => 'https://'.config('app.domain', 'example.com').'/pagina',
->>>>>>> b32aaf5 (.)
         ];
 
         // Act
@@ -191,11 +141,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'meta_title' => 'Nuovo Meta Title',
             'meta_description' => 'Nuova meta description per SEO',
             'meta_keywords' => 'salute, dentista, milano',
-<<<<<<< HEAD
             'canonical_url' => 'https://' . config('app.domain', 'example.com') . '/pagina',
-=======
-            'canonical_url' => 'https://'.config('app.domain', 'example.com').'/pagina',
->>>>>>> b32aaf5 (.)
         ]);
     }
 
@@ -225,17 +171,10 @@ class PageManagementBusinessLogicTest extends TestCase
             ->get();
 
         // Assert
-<<<<<<< HEAD
         $this->assertCount(2, $versions);
         $this->assertEquals(2, $versions->first()->version);
         $this->assertEquals(1, $versions->last()->version);
         $this->assertEquals('Versione 2 del contenuto aggiornata', $versions->first()->content);
-=======
-        expect(2, $versions);
-        expect(2, $versions->first()->version);
-        expect(1, $versions->last()->version);
-        expect('Versione 2 del contenuto aggiornata', $versions->first()->content);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -267,17 +206,10 @@ class PageManagementBusinessLogicTest extends TestCase
             ->first();
 
         // Assert
-<<<<<<< HEAD
         $this->assertNotNull($italian);
         $this->assertNotNull($english);
         $this->assertEquals('Contenuto in italiano', $italian->content);
         $this->assertEquals('Content in English', $english->content);
-=======
-        expect($italian);
-        expect($english);
-        expect('Contenuto in italiano', $italian->content);
-        expect('Content in English', $english->content);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -312,17 +244,10 @@ class PageManagementBusinessLogicTest extends TestCase
             ->get();
 
         // Assert
-<<<<<<< HEAD
         $this->assertCount(3, $orderedSections);
         $this->assertEquals('Prima Sezione', $orderedSections[0]->title);
         $this->assertEquals('Seconda Sezione', $orderedSections[1]->title);
         $this->assertEquals('Terza Sezione', $orderedSections[2]->title);
-=======
-        expect(3, $orderedSections);
-        expect('Prima Sezione', $orderedSections[0]->title);
-        expect('Seconda Sezione', $orderedSections[1]->title);
-        expect('Terza Sezione', $orderedSections[2]->title);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -445,17 +370,10 @@ class PageManagementBusinessLogicTest extends TestCase
         $results = Page::where('title', 'like', '%Page%')->get();
 
         // Assert
-<<<<<<< HEAD
         $this->assertCount(2, $results);
         $this->assertTrue($results->contains($page1));
         $this->assertTrue($results->contains($page3));
         $this->assertFalse($results->contains($page2));
-=======
-        expect(2, $results);
-        expect($results->contains($page1));
-        expect($results->contains($page3));
-        expect($results->contains($page2));
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -471,17 +389,10 @@ class PageManagementBusinessLogicTest extends TestCase
         $draftPages = Page::where('status', 'draft')->get();
 
         // Assert
-<<<<<<< HEAD
         $this->assertCount(1, $publishedPages);
         $this->assertCount(1, $draftPages);
         $this->assertTrue($publishedPages->contains($publishedPage));
         $this->assertTrue($draftPages->contains($draftPage));
-=======
-        expect(1, $publishedPages);
-        expect(1, $draftPages);
-        expect($publishedPages->contains($publishedPage));
-        expect($draftPages->contains($draftPage));
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -500,17 +411,10 @@ class PageManagementBusinessLogicTest extends TestCase
         $pageWithContent = Page::with('contents')->find($page->id);
 
         // Assert
-<<<<<<< HEAD
         $this->assertNotNull($pageWithContent);
         $this->assertTrue($pageWithContent->relationLoaded('contents'));
         $this->assertCount(1, $pageWithContent->contents);
         $this->assertEquals('Test content', $pageWithContent->contents->first()->content);
-=======
-        expect($pageWithContent);
-        expect($pageWithContent->relationLoaded('contents'));
-        expect(1, $pageWithContent->contents);
-        expect('Test content', $pageWithContent->contents->first()->content);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -529,17 +433,10 @@ class PageManagementBusinessLogicTest extends TestCase
         $pageWithSections = Page::with('sections')->find($page->id);
 
         // Assert
-<<<<<<< HEAD
         $this->assertNotNull($pageWithSections);
         $this->assertTrue($pageWithSections->relationLoaded('sections'));
         $this->assertCount(1, $pageWithSections->sections);
         $this->assertEquals('Test Section', $pageWithSections->sections->first()->title);
-=======
-        expect($pageWithSections);
-        expect($pageWithSections->relationLoaded('sections'));
-        expect(1, $pageWithSections->sections);
-        expect('Test Section', $pageWithSections->sections->first()->title);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -557,11 +454,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'template' => 'landing',
         ]);
 
-<<<<<<< HEAD
         $this->assertEquals('landing', $page->fresh()->template);
-=======
-        expect('landing', $page->fresh()->template);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -584,13 +477,8 @@ class PageManagementBusinessLogicTest extends TestCase
             'permissions' => json_encode($permissions),
         ]);
 
-<<<<<<< HEAD
         $this->assertTrue($page->fresh()->permissions['view']);
         $this->assertFalse($page->fresh()->permissions['edit']);
-=======
-        expect($page->fresh()->permissions['view']);
-        expect($page->fresh()->permissions['edit']);
->>>>>>> b32aaf5 (.)
     }
 
     /** @test */
@@ -652,11 +540,7 @@ class PageManagementBusinessLogicTest extends TestCase
             'tags' => json_encode($tags),
         ]);
 
-<<<<<<< HEAD
         $this->assertCount(4, $page->fresh()->tags);
-=======
-        expect(4, $page->fresh()->tags);
->>>>>>> b32aaf5 (.)
         $this->assertContains('salute', $page->fresh()->tags);
         $this->assertContains('dentista', $page->fresh()->tags);
     }
@@ -668,11 +552,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $redirectData = [
             'redirect_type' => '301',
-<<<<<<< HEAD
             'redirect_url' => 'https://' . config('app.domain', 'example.com') . '/nuova-pagina',
-=======
-            'redirect_url' => 'https://'.config('app.domain', 'example.com').'/nuova-pagina',
->>>>>>> b32aaf5 (.)
             'redirect_reason' => 'Page moved permanently',
         ];
 
@@ -683,11 +563,7 @@ class PageManagementBusinessLogicTest extends TestCase
         $this->assertDatabaseHas('pages', [
             'id' => $page->id,
             'redirect_type' => '301',
-<<<<<<< HEAD
             'redirect_url' => 'https://' . config('app.domain', 'example.com') . '/nuova-pagina',
-=======
-            'redirect_url' => 'https://'.config('app.domain', 'example.com').'/nuova-pagina',
->>>>>>> b32aaf5 (.)
             'redirect_reason' => 'Page moved permanently',
         ]);
     }

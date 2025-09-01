@@ -18,14 +18,8 @@ use Webmozart\Assert\Assert;
 class PageContent extends Component
 {
     public string $slug;
-<<<<<<< HEAD
     public array $blocks = [];
 
-=======
-
-    public array $blocks = [];
-
->>>>>>> b32aaf5 (.)
     public function __construct(string $slug)
     {
         $this->slug = $slug;

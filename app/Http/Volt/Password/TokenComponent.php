@@ -25,13 +25,11 @@ class TokenComponent extends Component
 {
     #[Validate('required')]
     public string $token = '';
-
     #[Validate('required|email')]
     public string $email = '';
 
     #[Validate('required|min:8|same:passwordConfirmation')]
     public string $password;
-
     public string $passwordConfirmation;
 
     public function mount(string $token): void
@@ -65,7 +63,7 @@ class TokenComponent extends Component
         );
         Assert::string($response);
         Assert::string($trans = trans($response));
-        if ($response == Password::PASSWORD_RESET) {
+        if (Password::PASSWORD_RESET == $response) {
             session()->flash($trans);
 
             return redirect('/');

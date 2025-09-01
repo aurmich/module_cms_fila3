@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Providers;
 
+use Livewire\Volt\Volt;
+use Laravel\Folio\Folio;
 use Illuminate\Support\Arr;
+use Webmozart\Assert\Assert;
+use Modules\Xot\Datas\XotData;
 use Illuminate\Support\Collection;
+use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Folio\Folio;
-use Livewire\Volt\Volt;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Tenant\Services\TenantService;
-use Modules\Xot\Datas\XotData;
-use Nwidart\Modules\Facades\Module;
-use Webmozart\Assert\Assert;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class FolioVoltServiceProvider extends ServiceProvider
 {
@@ -44,11 +44,11 @@ class FolioVoltServiceProvider extends ServiceProvider
         }
         Assert::isArray($base_middleware = Arr::get($middleware, 'base', []));
 
-        // $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
-        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;
-        $base_middleware[] = \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class;
-        // $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class;
-        // $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class;
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class;
+        $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class;
+        $base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class;
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class;
+        //$base_middleware[]=\Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class;
 
         $theme_path = XotData::make()->getPubThemeViewPath('pages');
         /*
@@ -60,16 +60,11 @@ class FolioVoltServiceProvider extends ServiceProvider
             app()->setLocale($currentLocale);
         }
         */
-        // $currentLocale = LaravelLocalization::setLocale() ?? app()->getLocale();
+        //$currentLocale = LaravelLocalization::setLocale() ?? app()->getLocale();
 
         Folio::path($theme_path)
-<<<<<<< HEAD
             ->uri(LaravelLocalization::setLocale() ?? app()->getLocale() )
             //->uri('{lang}')
-=======
-            ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
-            // ->uri('{lang}')
->>>>>>> b32aaf5 (.)
             ->middleware([
                 '*' => $base_middleware,
             ]);
@@ -87,15 +82,10 @@ class FolioVoltServiceProvider extends ServiceProvider
             }
             $paths[] = $path;
             Folio::path($path)
-<<<<<<< HEAD
                 ->uri( LaravelLocalization::setLocale() ?? app()->getLocale() )
                 //->uri('{lang}')
-=======
-                ->uri(LaravelLocalization::setLocale() ?? app()->getLocale())
-                // ->uri('{lang}')
->>>>>>> b32aaf5 (.)
                 ->middleware([
-                    '*' => $base_middleware,
+                    '*' => $base_middleware
                 ]);
         }
 

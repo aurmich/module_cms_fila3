@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Cms\View\Components;
 
-use Illuminate\Contracts\View\View as ViewContract;
-use Illuminate\View\Component;
 use Illuminate\View\View;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
+use Illuminate\View\Component;
+use Modules\Xot\Datas\XotData;
+use Modules\Cms\Datas\BlockData;
+use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Section as SectionModel;
+use Illuminate\Contracts\View\View as ViewContract;
 
 /**
  * Section Component.
@@ -21,23 +27,17 @@ use Modules\Cms\Models\Section as SectionModel;
 class Section extends Component
 {
     public string $slug;
-
     public array $blocks = [];
-
     public ?string $name = null;
-
     public ?string $class = null;
-
     public ?string $id = null;
-
     public ?string $tpl = null;
-
     /**
      * Create a new component instance.
      *
-     * @param  string  $slug  Unique identifier for the section
-     * @param  string|null  $class  Additional CSS classes
-     * @param  string|null  $id  Custom ID for the section
+     * @param string $slug Unique identifier for the section
+     * @param string|null $class Additional CSS classes
+     * @param string|null $id Custom ID for the section
      */
     public function __construct(
         string $slug,
@@ -57,14 +57,13 @@ class Section extends Component
      */
     public function render(): ViewContract
     {
-        $view = 'pub_theme::components.sections.'.$this->slug;
-        if ($this->tpl) {
-            $view .= '.'.$this->tpl;
+        $view='pub_theme::components.sections.'.$this->slug;
+        if($this->tpl){
+            $view.='.'.$this->tpl;
         }
-        if (! view()->exists($view)) {
+        if(!view()->exists($view)){
             throw new \Exception('View '.$view.' not found');
         }
-
         return view($view);
     }
 }

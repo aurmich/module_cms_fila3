@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
+use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;

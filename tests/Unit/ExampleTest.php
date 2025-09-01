@@ -9,26 +9,16 @@ describe('CMS Module', function () {
     it('user admin can view module dashboard', function (): void {
         // Test business logic: check that Module class exists and has required methods
         expect(class_exists(Module::class))->toBeTrue();
-<<<<<<< HEAD
         
         $moduleInstance = new Module();
-=======
-
-        $moduleInstance = new Module;
->>>>>>> b32aaf5 (.)
         expect(method_exists($moduleInstance, 'getRows'))->toBeTrue();
     });
 
     it('user admin can view main dashboard', function (): void {
         // Test business logic: check that navigation action exists
         expect(class_exists(GetModulesNavigationItems::class))->toBeTrue();
-<<<<<<< HEAD
         
         $navigationAction = new GetModulesNavigationItems();
-=======
-
-        $navigationAction = new GetModulesNavigationItems;
->>>>>>> b32aaf5 (.)
         expect(method_exists($navigationAction, 'execute'))->toBeTrue();
     });
 

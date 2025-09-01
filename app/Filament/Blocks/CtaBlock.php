@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Builder\Block;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class CtaBlock extends XotBaseBlock

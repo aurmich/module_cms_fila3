@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Illuminate\Support\HtmlString;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Modules\Cms\Models\Menu;
-use Modules\UI\Filament\Forms\Components\IconPicker;
+use Illuminate\Support\HtmlString;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\UI\Filament\Forms\Components\IconPicker;
+use Modules\Cms\Filament\Resources\MenuResource\Pages;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class MenuResource extends XotBaseResource
 {
@@ -87,4 +91,6 @@ class MenuResource extends XotBaseResource
                 ->columnSpanFull(),
         ];
     }
+
+  
 }

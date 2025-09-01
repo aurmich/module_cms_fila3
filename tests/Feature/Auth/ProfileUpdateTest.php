@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-use Livewire\Volt\Volt as LivewireVolt;
 use Modules\Xot\Datas\XotData;
-
-use function Pest\Laravel\actingAs;
+use Livewire\Volt\Volt as LivewireVolt;
+use function Pest\Laravel\{actingAs, get};
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
 test('profile page is displayed', function () {
     $userClass = XotData::make()->getUserClass();
     $user = $userClass::factory()->create();
-
+    
     $lang = app()->getLocale();
     actingAs($user)
-        ->get('/'.$lang.'/settings/profile')
+        ->get('/' . $lang . '/settings/profile')
         ->assertOk();
 });
 

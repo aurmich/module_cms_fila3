@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Modules\Cms\Tests\Feature\Auth;
 
 use Illuminate\Support\Facades\Auth;
-use Livewire\Volt\Volt as LivewireVolt;
 use Modules\Xot\Datas\XotData;
-
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
-use function Pest\Laravel\post;
+use Livewire\Volt\Volt as LivewireVolt;
+use function Pest\Laravel\{get, post, actingAs};
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -21,7 +18,7 @@ test('login screen can be rendered', function (): void {
 
 test('users can authenticate using the login screen', function (): void {
     $userClass = XotData::make()->getUserClass();
-    $factory = $userClass::factory();
+    $factory=$userClass::factory();
     /*
     $connection_name=app($userClass)->getConnectionName();
     dddx([
@@ -29,7 +26,7 @@ test('users can authenticate using the login screen', function (): void {
     'factory'=>$factory->raw(),
     //'config'=>config('database'),
 
-    ]);
+    ]);  
     */
     $user = $factory->create();
 
@@ -39,10 +36,11 @@ test('users can authenticate using the login screen', function (): void {
         ->call('authenticate');
 
     $response
-        ->assertHasNoErrors();
-    // ->assertRedirect(route('dashboard', absolute: false))
+        ->assertHasNoErrors()
+        //->assertRedirect(route('dashboard', absolute: false))
+        ;
 
-    // expect(Auth::user())->not->toBeNull();
+    //expect(Auth::user())->not->toBeNull();
 });
 /*
 test('users cannot authenticate with invalid password', function (): void {
@@ -55,7 +53,7 @@ test('users cannot authenticate with invalid password', function (): void {
         ->call('login');
 
     $response->assertHasErrors('email');
-
+    
     expect(Auth::guest())->toBeTrue();
 });
 

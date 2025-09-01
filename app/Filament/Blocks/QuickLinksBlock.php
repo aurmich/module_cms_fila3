@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
+use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
@@ -29,11 +30,11 @@ final class QuickLinksBlock extends XotBaseBlock
                     TextInput::make('target')
                         ->label(__('cms::blocks.quick_links.fields.target'))
                         ->default('_self')
-                        ->helperText('Usa "_blank" per aprire in una nuova finestra, "_self" per la stessa finestra'),
+                        ->helperText('Usa "_blank" per aprire in una nuova finestra, "_self" per la stessa finestra')
                 ])
                 ->collapsible()
                 ->defaultItems(0)
-                ->itemLabel(fn (array $state): ?string => $state['label'] ?? null),
+                ->itemLabel(fn (array $state): ?string => $state['label'] ?? null)
         ];
     }
 

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Builder\Block;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class ActionsBlock extends XotBaseBlock
@@ -17,10 +18,14 @@ class ActionsBlock extends XotBaseBlock
             Repeater::make('items')
                 ->schema([
                     TextInput::make('label')
-                        ->required(),
+                        ->required()
+                        
+                        ,
 
                     TextInput::make('url')
-                        ->required(),
+                        ->required()
+                        
+                        ,
 
                     Select::make('style')
                         ->options([
@@ -29,7 +34,9 @@ class ActionsBlock extends XotBaseBlock
                             'outline' => 'Outline',
                             'link' => 'Link',
                         ])
-                        ->required(),
+                        ->required()
+                        
+                        ,
 
                     Select::make('icon')
                         ->options([
@@ -40,7 +47,9 @@ class ActionsBlock extends XotBaseBlock
                             'settings' => 'Impostazioni',
                             'notification' => 'Notifiche',
                             'language' => 'Lingua',
-                        ]),
+                        ])
+                        
+                        ,
 
                     Select::make('size')
                         ->options([
@@ -49,9 +58,13 @@ class ActionsBlock extends XotBaseBlock
                             'md' => 'Medium',
                             'lg' => 'Large',
                         ])
-                        ->default('md'),
+                        ->default('md')
+                        
+                        ,
                 ])
-                ->collapsible(),
+                ->collapsible()
+                
+                ,
 
             Select::make('alignment')
                 ->options([
@@ -59,7 +72,9 @@ class ActionsBlock extends XotBaseBlock
                     'center' => 'Centro',
                     'end' => 'Destra',
                 ])
-                ->default('end'),
+                ->default('end')
+                
+                ,
 
             Select::make('gap')
                 ->options([
@@ -68,7 +83,9 @@ class ActionsBlock extends XotBaseBlock
                     'md' => 'Medium',
                     'lg' => 'Large',
                 ])
-                ->default('md'),
+                ->default('md')
+                
+                ,
         ];
     }
 }

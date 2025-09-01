@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Providers;
 
+use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
+use Modules\Xot\Datas\XotData;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
-use Modules\Xot\Datas\XotData;
 use Modules\Xot\Providers\XotBaseServiceProvider;
-use Webmozart\Assert\Assert;
 
 class CmsServiceProvider extends XotBaseServiceProvider
 {
     public string $name = 'Cms';
-
     public XotData $xot;
-
     protected string $module_dir = __DIR__;
 
     protected string $module_ns = __NAMESPACE__;
+
 
     public function boot(): void
     {
@@ -29,10 +29,10 @@ class CmsServiceProvider extends XotBaseServiceProvider
         if ($this->xot->register_pub_theme) {
             $this->registerNamespaces('pub_theme');
 
-            // $this->registerThemeConfig('pub_theme');
-            // $this->registerThemeLivewireComponents();
+            //$this->registerThemeConfig('pub_theme');
+            //$this->registerThemeLivewireComponents();
         }
-
+        
     }
 
     /**
@@ -58,27 +58,29 @@ class CmsServiceProvider extends XotBaseServiceProvider
             Config::set('view.paths', $paths);
             Config::set('livewire.view_path', $theme_path.'/livewire');
             Config::set('livewire.class_namespace', 'Themes\\'.$this->xot->pub_theme.'\Http\Livewire');
-            // $this->registerFolio();
+            //$this->registerFolio();
         }
 
+        
     }
+
 
     public function registerNamespaces(string $theme_type): void
     {
         $xot = $this->xot;
 
         Assert::string($theme = $xot->{$theme_type});
-        $theme_path = 'Themes/'.$theme;
+        $theme_path='Themes/'.$theme;
         $resource_path = $theme_path.'/resources';
         $lang_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($theme_path.'/lang'));
 
         $theme_dir = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/views'));
-
+        
         app('view')->addNamespace($theme_type, $theme_dir);
         $this->loadTranslationsFrom($lang_dir, $theme_type);
 
         $componentViewPath = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path($resource_path.'/views/components'));
-
+        
         Blade::anonymousComponentPath($componentViewPath);
     }
 }
