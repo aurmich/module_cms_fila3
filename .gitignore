@@ -51,3 +51,7 @@ Homestead.json
 lang/it/.php
 lang/en/.php
 lang/de/.php
+
+# Standard ignores (auto)
+*.bakcup
+*.backup.*
