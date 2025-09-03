@@ -200,10 +200,14 @@ return [
     ],
     'validation' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'required' => 'Dieses Feld ist erforderlich',
 =======
         'required' => 'Questo campo è obbligatorio',
 >>>>>>> f492947 (.)
+=======
+        'required' => 'Dieses Feld ist erforderlich',
+>>>>>>> b48ea51 (.)
         'email' => 'Inserisci un indirizzo email valido',
         'url' => 'Inserisci un URL valido (inizia con http:// o https://)',
     ],

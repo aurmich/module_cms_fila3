@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\View\Components;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
@@ -27,10 +28,23 @@ use Illuminate\Support\Facades\Blade;
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
 >>>>>>> f492947 (.)
+=======
+use Illuminate\Contracts\View\View as ViewContract;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Str;
+use Illuminate\View\Component;
+use Illuminate\View\View;
+use Modules\Cms\Datas\BlockData;
+use Modules\Cms\Models\Page as PageModel;
+use Modules\Xot\Datas\XotData;
+use Webmozart\Assert\Assert;
+>>>>>>> b48ea51 (.)
 
 class PageContent extends Component
 {
     public string $slug;
+<<<<<<< HEAD
 <<<<<<< HEAD
     public array $blocks = [];
 
@@ -47,27 +61,40 @@ class PageContent extends Component
         if (! is_array($blocks)) {
 =======
     public array $blocks=[];
+=======
+    public array $blocks = [];
+>>>>>>> b48ea51 (.)
 
-    public function __construct(string $slug){
+    public function __construct(string $slug)
+    {
         $this->slug = $slug;
         Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
-        $blocks = $page->content_blocks ;
-        if(!is_array($blocks)){
-            $primary_lang=XotData::make()->primary_lang;
-            $blocks = $page->getTranslation('content_blocks',$primary_lang);
+        $blocks = $page->content_blocks;
+        if (! is_array($blocks)) {
+            $primary_lang = XotData::make()->primary_lang;
+            $blocks = $page->getTranslation('content_blocks', $primary_lang);
         }
+<<<<<<< HEAD
         
         
         if(!is_array($blocks)){
 >>>>>>> f492947 (.)
+=======
+
+        if (! is_array($blocks)) {
+>>>>>>> b48ea51 (.)
             $blocks = [];
         }
         $this->blocks = BlockData::collect($blocks);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> f492947 (.)
+=======
+
+>>>>>>> b48ea51 (.)
     /**
      * Get the view / contents that represents the component.
      */
@@ -87,9 +114,13 @@ class PageContent extends Component
         $view = 'cms::components.page-content';
         $view_params = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
         // @phpstan-ignore-next-line
 =======
 >>>>>>> f492947 (.)
+=======
+        // @phpstan-ignore-next-line
+>>>>>>> b48ea51 (.)
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }

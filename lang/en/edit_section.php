@@ -236,10 +236,14 @@ return [
     ],
     'validation' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'required' => 'This field is required',
 =======
         'required' => 'Questo campo è obbligatorio',
 >>>>>>> f492947 (.)
+=======
+        'required' => 'This field is required',
+>>>>>>> b48ea51 (.)
         'slug_exists' => 'Questo slug è già in uso',
         'min' => 'Il valore deve essere almeno :min',
     ],

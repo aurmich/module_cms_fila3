@@ -396,10 +396,14 @@ return [
     ],
     'validation' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'title_required' => 'Der Titel ist erforderlich',
 =======
         'title_required' => 'Il titolo è obbligatorio',
 >>>>>>> f492947 (.)
+=======
+        'title_required' => 'Der Titel ist erforderlich',
+>>>>>>> b48ea51 (.)
         'slug_unique' => 'Questo slug è già in uso',
         'email_format' => 'Inserisci un indirizzo email valido',
         'url_format' => 'Inserisci un URL valido',
@@ -407,10 +411,14 @@ return [
         'image_size' => 'L\'immagine deve essere inferiore a 5MB',
         'video_format' => 'Formato video non supportato',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'required_field' => 'Dieses Feld ist erforderlich',
 =======
         'required_field' => 'Questo campo è obbligatorio',
 >>>>>>> f492947 (.)
+=======
+        'required_field' => 'Dieses Feld ist erforderlich',
+>>>>>>> b48ea51 (.)
         'max_length' => 'Il testo è troppo lungo (massimo :max caratteri)',
         'min_length' => 'Il testo è troppo corto (minimo :min caratteri)',
     ],

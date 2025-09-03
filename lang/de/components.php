@@ -47,6 +47,7 @@ return [
     'form' => [
         'fields' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
             'required' => 'Pflichtfeld',
             'optional' => 'Optional',
         ],
@@ -63,18 +64,28 @@ return [
 =======
             'required' => 'Campo obbligatorio',
             'optional' => 'Opzionale',
+=======
+            'required' => 'Pflichtfeld',
+            'optional' => 'Optional',
+>>>>>>> b48ea51 (.)
         ],
         'validation' => [
-            'required' => 'Questo campo è obbligatorio',
-            'email' => 'Inserisci un indirizzo email valido',
-            'min' => 'Inserisci almeno :min caratteri',
-            'max' => 'Inserisci al massimo :max caratteri',
+            'required' => 'Dieses Feld ist erforderlich',
+            'email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+            'min' => 'Bitte geben Sie mindestens :min Zeichen ein',
+            'max' => 'Bitte geben Sie höchstens :max Zeichen ein',
         ],
         'actions' => [
+<<<<<<< HEAD
             'submit' => 'Invia',
             'reset' => 'Reimposta',
             'cancel' => 'Annulla',
 >>>>>>> f492947 (.)
+=======
+            'submit' => 'Senden',
+            'reset' => 'Zurücksetzen',
+            'cancel' => 'Abbrechen',
+>>>>>>> b48ea51 (.)
         ],
     ],
     'table' => [

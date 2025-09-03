@@ -40,9 +40,13 @@ use Modules\Tenant\Models\Traits\SushiToJsons;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedBy($value)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mixin IdeHelperSection
 =======
 >>>>>>> f492947 (.)
+=======
+ * @mixin IdeHelperSection
+>>>>>>> b48ea51 (.)
  * @mixin \Eloquent
  */
 class Section extends BaseModelLang

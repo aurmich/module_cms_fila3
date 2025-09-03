@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🔧  .gitignore
 # Questo file definisce quali file e cartelle devono essere ignorati dal controllo di versione
 # Organizzato secondo la filosofia di sviluppo : chiarezza, organizzazione e manutenibilità
@@ -160,34 +161,48 @@ storage/*.key
 # Environment and configuration
 =======
 /vendor/
+=======
+# Dependencies
+vendor/
+>>>>>>> b48ea51 (.)
 node_modules/
-npm-debug.log
-*.cache
-*.phar
-*.lock
-*.bak
-*.log
 package-lock.json
+composer.lock
 yarn-error.log
+npm-debug.log
 
-# Laravel 4 specific
+# Build and compiled files
+/build
+/docs/cache
+cache/
+docs/cache/
+
+# Cache and temporary files
+*.cache
+*.lock
+*.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Laravel specific
 bootstrap/compiled.php
 app/storage/
-
-# Laravel 5 & Lumen specific
 public/storage
 public/hot
-
-# Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
-
 storage/*.key
+<<<<<<< HEAD
 >>>>>>> f492947 (.)
+=======
+
+# Environment and configuration
+>>>>>>> b48ea51 (.)
 .env
 Homestead.yaml
 Homestead.json
 /.vagrant
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 # Git related
@@ -206,36 +221,32 @@ Homestead.json
 =======
 .phpunit.result.cache
 *.cache
+=======
+>>>>>>> b48ea51 (.)
 
-.git-rewrite
-/.git-rewrite
-
-vendor/
-vendor
-*.lock
-package-lock.json
-composer.lock
-*.log
-package-lock.json
-
-build/
-/build
-/.git-rewrite
-*.phar
-*.lock
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
+# Git related
 .git-rewrite/
-/docs/cache
-node_modules
+.git-blame-ignore-revs
 
+# Backup files
+*.old
+*.old1
+*.backup
+*.bak
 
+# File di log
+*.log
 
+<<<<<<< HEAD
 
 
 
 docs/cache/
 cache/
 >>>>>>> f492947 (.)
+=======
+#othes
+lang/it/.php
+lang/en/.php
+lang/de/.php
+>>>>>>> b48ea51 (.)

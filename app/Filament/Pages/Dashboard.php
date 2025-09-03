@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Filament\Panel;
 use Filament\Pages\Page;
 use Filament\Widgets\Widget;
@@ -19,15 +20,24 @@ class Dashboard extends XotBaseDashboard
 =======
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
+=======
+>>>>>>> b48ea51 (.)
 use Filament\Panel;
-use Filament\Support\Facades\FilamentIcon;
+use Filament\Pages\Page;
 use Filament\Widgets\Widget;
-use Filament\Widgets\WidgetConfiguration;
-use Illuminate\Contracts\Support\Htmlable;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
+use Filament\Widgets\WidgetConfiguration;
+use Filament\Support\Facades\FilamentIcon;
+use Illuminate\Contracts\Support\Htmlable;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
+<<<<<<< HEAD
 class Dashboard extends Page
 >>>>>>> f492947 (.)
+=======
+class Dashboard extends XotBaseDashboard
+>>>>>>> b48ea51 (.)
 {
     //
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';

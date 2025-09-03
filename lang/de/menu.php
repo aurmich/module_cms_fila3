@@ -88,10 +88,14 @@ return [
     ],
     'validation' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'name_required' => 'Der Name ist erforderlich',
 =======
         'name_required' => 'Il nome è obbligatorio',
 >>>>>>> f492947 (.)
+=======
+        'name_required' => 'Der Name ist erforderlich',
+>>>>>>> b48ea51 (.)
         'slug_unique' => 'Lo slug deve essere unico',
         'type_in' => 'Il tipo deve essere uno tra: main, footer, sidebar',
     ],
