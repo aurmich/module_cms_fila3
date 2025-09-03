@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🔧  .gitignore
 # Questo file definisce quali file e cartelle devono essere ignorati dal controllo di versione
 # Organizzato secondo la filosofia di sviluppo : chiarezza, organizzazione e manutenibilità
@@ -157,10 +158,37 @@ laravel/testdox.txt
 storage/*.key
 
 # Environment and configuration
+=======
+/vendor/
+node_modules/
+npm-debug.log
+*.cache
+*.phar
+*.lock
+*.bak
+*.log
+package-lock.json
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+storage/*.key
+>>>>>>> f492947 (.)
 .env
 Homestead.yaml
 Homestead.json
 /.vagrant
+<<<<<<< HEAD
 
 # Git related
 .git-rewrite/
@@ -175,3 +203,39 @@ Homestead.json
 # File di log
 *.log
 >>>>>>> fd753da3 (.)
+=======
+.phpunit.result.cache
+*.cache
+
+.git-rewrite
+/.git-rewrite
+
+vendor/
+vendor
+*.lock
+package-lock.json
+composer.lock
+*.log
+package-lock.json
+
+build/
+/build
+/.git-rewrite
+*.phar
+*.lock
+.git-blame-ignore-revs
+package-lock.json
+.php-cs-fixer.cache
+package-lock.json
+.git-rewrite/
+/docs/cache
+node_modules
+
+
+
+
+
+
+docs/cache/
+cache/
+>>>>>>> f492947 (.)

@@ -259,6 +259,7 @@ return array (
       'label' => 'cancel',
     ),
   ),
+<<<<<<< HEAD
   'sections' => 
   array (
     'empty' => 
@@ -266,4 +267,6 @@ return array (
       'heading' => '',
     ),
   ),
+=======
+>>>>>>> f492947 (.)
 );

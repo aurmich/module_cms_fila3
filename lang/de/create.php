@@ -199,7 +199,11 @@ return [
         'confirm_delete' => 'Sei sicuro di voler eliminare questo elemento?',
     ],
     'validation' => [
+<<<<<<< HEAD
         'required' => 'Dieses Feld ist erforderlich',
+=======
+        'required' => 'Questo campo è obbligatorio',
+>>>>>>> f492947 (.)
         'email' => 'Inserisci un indirizzo email valido',
         'url' => 'Inserisci un URL valido (inizia con http:// o https://)',
     ],

@@ -235,7 +235,11 @@ return [
         'confirm_delete' => 'Sei sicuro di voler eliminare questa sezione?',
     ],
     'validation' => [
+<<<<<<< HEAD
         'required' => 'This field is required',
+=======
+        'required' => 'Questo campo è obbligatorio',
+>>>>>>> f492947 (.)
         'slug_exists' => 'Questo slug è già in uso',
         'min' => 'Il valore deve essere almeno :min',
     ],

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # creazione ambiente di produzione
 
 # common
@@ -183,6 +184,9 @@ redis-cli
 [![Volt Components](https://img.shields.io/badge/Volt-Single%20File%20Components-orange.svg)](https://laravel.com/docs/volt)
 [![Pest Tests](https://img.shields.io/badge/Pest%20Tests-✅%20Passing-brightgreen.svg)](tests/)
 [![PHP Version](https://img.shields.io/badge/PHP-8.3+-blue.svg)](https://php.net)
+=======
+# Modulo CMS
+>>>>>>> f492947 (.)
 
 Un modulo CMS modulare, estensibile e riutilizzabile per Laravel, con supporto per Filament, Volt e Folio.
 
@@ -323,4 +327,7 @@ Le pull request sono benvenute. Per modifiche importanti, aprire prima una issue
 ## Licenza
 
 MIT
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
+=======
+>>>>>>> f492947 (.)

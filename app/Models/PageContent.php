@@ -37,7 +37,10 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PageContent  whereUpdatedBy($value)
+<<<<<<< HEAD
  * @mixin IdeHelperPageContent
+=======
+>>>>>>> f492947 (.)
  * @mixin \Eloquent
  */
 class PageContent extends BaseModel

@@ -14,10 +14,14 @@ jobs:
       - name: Dependabot metadata
         id: metadata
 <<<<<<< HEAD
+<<<<<<< HEAD
         uses: dependabot/fetch-metadata@v1.3.5
 =======
         uses: dependabot/fetch-metadata@v1.6.0
 >>>>>>> fd753da3 (.)
+=======
+        uses: dependabot/fetch-metadata@v1.6.0
+>>>>>>> f492947 (.)
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           
@@ -34,7 +38,11 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
 <<<<<<< HEAD
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 =======
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 >>>>>>> fd753da3 (.)
+=======
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+>>>>>>> f492947 (.)

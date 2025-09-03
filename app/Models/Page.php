@@ -53,7 +53,10 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
  * @property array<array-key, mixed>|null $middleware
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
+<<<<<<< HEAD
  * @mixin IdeHelperPage
+=======
+>>>>>>> f492947 (.)
  * @mixin \Eloquent
  */
 class Page extends BaseModelLang

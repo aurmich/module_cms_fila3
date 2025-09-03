@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{-- Generic Calendar Component for CMS --}}
 @props([
     'type' => 'patient', // patient|doctor|admin
@@ -13,6 +14,19 @@
         'doctor' => $namespace . '\\DoctorCalendarWidget', 
         'admin' => $namespace . '\\AdminCalendarWidget',
         default => $namespace . '\\PatientCalendarWidget',
+=======
+{{-- Componente Calendar per SaluteOra --}}
+@props([
+    'type' => 'patient', // patient|doctor|admin
+])
+
+@php
+    $widgetClass = match($type) {
+        'patient' => \Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class,
+        'doctor' => \Modules\SaluteOra\Filament\Widgets\DoctorCalendarWidget::class,
+        'admin' => \Modules\SaluteOra\Filament\Widgets\AdminCalendarWidget::class,
+        default => \Modules\SaluteOra\Filament\Widgets\PatientCalendarWidget::class,
+>>>>>>> f492947 (.)
     };
 @endphp
 

@@ -1,9 +1,13 @@
 {
 	"editor.formatOnType": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	"editor.codeLens": false,
 >>>>>>> fd753da3 (.)
+=======
+	"editor.codeLens": false,
+>>>>>>> f492947 (.)
 	"php-cs-fixer.onsave": true,
 	"php-cs-fixer.formatHtml": true,
 	"php-cs-fixer.config": ".php-cs-fixer.php",
@@ -18,10 +22,14 @@
 	"editor.defaultFormatter": "junstyle.php-cs-fixer",
 	"[php]": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"editor.defaultFormatter": "fterrag.vscode-php-cs-fixer"
 =======
 		"editor.defaultFormatter": "junstyle.php-cs-fixer"
 >>>>>>> fd753da3 (.)
+=======
+		"editor.defaultFormatter": "junstyle.php-cs-fixer"
+>>>>>>> f492947 (.)
 	},
 	"editor.tokenColorCustomizations": {
 		"semanticHighlighting": true
@@ -47,7 +55,11 @@
 		"editor.defaultFormatter": "octref.vetur"
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> fd753da3 (.)
+=======
+}
+>>>>>>> f492947 (.)

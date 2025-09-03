@@ -5,11 +5,17 @@ on:
     types: [released]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 permissions:
   contents: write
 
 >>>>>>> fd753da3 (.)
+=======
+permissions:
+  contents: write
+
+>>>>>>> f492947 (.)
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -32,7 +38,11 @@ jobs:
           branch: main
           commit_message: Update CHANGELOG
 <<<<<<< HEAD
+<<<<<<< HEAD
           file_pattern: CHANGELOG.md
 =======
           file_pattern: CHANGELOG.md
 >>>>>>> fd753da3 (.)
+=======
+          file_pattern: CHANGELOG.md
+>>>>>>> f492947 (.)

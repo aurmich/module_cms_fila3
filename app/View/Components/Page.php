@@ -6,10 +6,18 @@ namespace Modules\Cms\View\Components;
 
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Str;
+>>>>>>> f492947 (.)
 use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
 use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Blade;
+>>>>>>> f492947 (.)
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
 
@@ -17,6 +25,7 @@ class Page extends Component
 {
     public string $side;
     public string $slug;
+<<<<<<< HEAD
     public array $blocks = [];
     public array $data = [];
 
@@ -50,14 +59,48 @@ class Page extends Component
         $this->blocks = BlockData::collect($blocks);
     }
 
+=======
+    public array $blocks=[];
+
+    public function __construct(string $side,string $slug,null|string $type=null){
+        $this->side=$side;
+        if($type!==null){
+            $slug=$type.'-'.$slug;
+        }
+        $this->slug = $slug;
+        $field=$side.'_blocks';
+        //Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, $field => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
+        $page=PageModel::firstWhere(['slug' => $slug]);
+        if($page===null){
+            abort(404,'page not found: '.$slug);
+        }
+        $blocks = $page->$field ;
+        if(!is_array($blocks)){
+            $primary_lang=XotData::make()->primary_lang;
+            $blocks = $page->getTranslation($field,$primary_lang);
+        }
+        if(!is_array($blocks)){
+            $blocks = [];
+        }
+               
+        
+        $this->blocks = BlockData::collect($blocks);
+    }
+>>>>>>> f492947 (.)
     /**
      * Get the view / contents that represents the component.
      */
     public function render(): ViewContract
     {
+<<<<<<< HEAD
         $view = 'cms::components.page-content';
         $view_params = [];
         // @phpstan-ignore-next-line
+=======
+
+        $view = 'cms::components.page-content';
+        $view_params = [];
+>>>>>>> f492947 (.)
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }

@@ -6,10 +6,14 @@ on:
       - master
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 permissions:
 =======
 permissions: 
 >>>>>>> fd753da3 (.)
+=======
+permissions: 
+>>>>>>> f492947 (.)
   contents: write
 
 jobs:
@@ -30,6 +34,7 @@ jobs:
     - name: Node
       run: cd docs && npm install
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     - name: Production
       run: cd docs && npm run prod
@@ -40,6 +45,8 @@ jobs:
     - name: gh-pages
       uses: JamesIves/github-pages-deploy-action@v4.4.2
 =======
+=======
+>>>>>>> f492947 (.)
       
     - name: Production
       run: cd docs && npm run prod
@@ -49,7 +56,10 @@ jobs:
 
     - name: gh-pages
       uses: JamesIves/github-pages-deploy-action@latest
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
+=======
+>>>>>>> f492947 (.)
       with:
         branch: gh-pages
         folder: ./docs/build_production

@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Cms\Http\Controllers;
+
+use Illuminate\Routing\Controller;
+use Modules\Predict\Http\Controllers\HomeController as PredictHomeController;
+use Illuminate\Http\Request;
+
+/**
+ * Controller per la homepage CMS che delega ai contenuti prediction market.
+ */
+class HomeController extends Controller
+{
+    /**
+     * Mostra la homepage (root / o /it) con i mercati prediction market.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function __invoke(Request $request)
+    {
+        // Usa il controller del modulo Predict per logica prediction
+        return app(PredictHomeController::class)(request());
+    }
+}

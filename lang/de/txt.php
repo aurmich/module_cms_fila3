@@ -395,14 +395,22 @@ return [
         'video_upload_error' => 'Errore durante il caricamento del video',
     ],
     'validation' => [
+<<<<<<< HEAD
         'title_required' => 'Der Titel ist erforderlich',
+=======
+        'title_required' => 'Il titolo è obbligatorio',
+>>>>>>> f492947 (.)
         'slug_unique' => 'Questo slug è già in uso',
         'email_format' => 'Inserisci un indirizzo email valido',
         'url_format' => 'Inserisci un URL valido',
         'phone_format' => 'Inserisci un numero di telefono valido',
         'image_size' => 'L\'immagine deve essere inferiore a 5MB',
         'video_format' => 'Formato video non supportato',
+<<<<<<< HEAD
         'required_field' => 'Dieses Feld ist erforderlich',
+=======
+        'required_field' => 'Questo campo è obbligatorio',
+>>>>>>> f492947 (.)
         'max_length' => 'Il testo è troppo lungo (massimo :max caratteri)',
         'min_length' => 'Il testo è troppo corto (minimo :min caratteri)',
     ],

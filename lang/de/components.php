@@ -46,6 +46,7 @@ return [
     ],
     'form' => [
         'fields' => [
+<<<<<<< HEAD
             'required' => 'Pflichtfeld',
             'optional' => 'Optional',
         ],
@@ -59,6 +60,21 @@ return [
             'submit' => 'Senden',
             'reset' => 'Zurücksetzen',
             'cancel' => 'Abbrechen',
+=======
+            'required' => 'Campo obbligatorio',
+            'optional' => 'Opzionale',
+        ],
+        'validation' => [
+            'required' => 'Questo campo è obbligatorio',
+            'email' => 'Inserisci un indirizzo email valido',
+            'min' => 'Inserisci almeno :min caratteri',
+            'max' => 'Inserisci al massimo :max caratteri',
+        ],
+        'actions' => [
+            'submit' => 'Invia',
+            'reset' => 'Reimposta',
+            'cancel' => 'Annulla',
+>>>>>>> f492947 (.)
         ],
     ],
     'table' => [

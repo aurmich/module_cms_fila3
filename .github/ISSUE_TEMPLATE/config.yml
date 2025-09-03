@@ -2,6 +2,7 @@ blank_issues_enabled: false
 contact_links:
     - name: Ask a question
 <<<<<<< HEAD
+<<<<<<< HEAD
       url: https://github.com/laraxot/module_geo/discussions/new?category=q-a
       about: Ask the community for help
     - name: Request a feature
@@ -10,6 +11,8 @@ contact_links:
     - name: Report a bug
       url: https://github.com/laraxot/module_geo/issues/new
 =======
+=======
+>>>>>>> f492947 (.)
       url: https://github.com/laraxot/module_cms/discussions/new?category=q-a
       about: Ask the community for help
     - name: Request a feature
@@ -17,5 +20,8 @@ contact_links:
       about: Share ideas for new features
     - name: Report a bug
       url: https://github.com/laraxot/module_cms/issues/new
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
+=======
+>>>>>>> f492947 (.)
       about: Report a reproducable bug
