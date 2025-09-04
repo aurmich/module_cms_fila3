@@ -252,4 +252,4 @@ Per debuggare problemi con `BlockData`:
 - [Componente Page](../components/page.md)
 - [Architettura CMS Agnostica](../components.md)
 - [Best Practices per il Rendering](../best-practices/page-rendering.md)
-- [View Resolution Laravel](https://laravel.com/docs/views) 
+- [View Resolution Laravel](https://laravel.com/project_docs/views) 

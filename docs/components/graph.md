@@ -3,7 +3,7 @@ title: Graph
 description: Graph
 extends: _layouts.documentation
 section: content
-path: it/docs/components
+path: it/project_docs/components
 ---
 
 # Graph {#graph}
@@ -35,8 +35,8 @@ type = "graph"
 </x-graph>
 ```
 
-Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
+Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/project_docs/latest/).
 ## Collegamenti tra versioni di graph.md
-* [graph.md](laravel/Modules/Chart/docs/components/graph.md)
-* [graph.md](laravel/Modules/Cms/docs/components/graph.md)
+* [graph.md](laravel/Modules/Chart/project_docs/components/graph.md)
+* [graph.md](laravel/Modules/Cms/project_docs/components/graph.md)
 

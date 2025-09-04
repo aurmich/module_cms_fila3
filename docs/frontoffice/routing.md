@@ -216,13 +216,13 @@ $locale = app()->getLocale();
 
 ## Collegamenti Bidirezionali
 
-- [Documentazione Generale sul Routing](../../../Xot/docs/ROUTING.md) - Modulo Xot
-- [Architettura Folio + Volt + Filament](../../../Xot/docs/FOLIO_VOLT_ARCHITECTURE.md) - Modulo Xot
-- [Struttura dei Moduli](../../../Xot/docs/MODULE_STRUCTURE.md) - Modulo Xot
-- [Localizzazione](../../../Lang/docs/packages/localization.md) - Modulo Lang
-- [Collegamenti alla Root](../../../../docs/routing.md)
+- [Documentazione Generale sul Routing](../../../Xot/project_docs/ROUTING.md) - Modulo Xot
+- [Architettura Folio + Volt + Filament](../../../Xot/project_docs/FOLIO_VOLT_ARCHITECTURE.md) - Modulo Xot
+- [Struttura dei Moduli](../../../Xot/project_docs/MODULE_STRUCTURE.md) - Modulo Xot
+- [Localizzazione](../../../Lang/project_docs/packages/localization.md) - Modulo Lang
+- [Collegamenti alla Root](../../../../project_docs/routing.md)
 
 ## Collegamenti tra versioni di routing.md
 * [routing.md](docs/routing.md)
-* [routing.md](laravel/Modules/Cms/docs/frontoffice/routing.md)
+* [routing.md](laravel/Modules/Cms/project_docs/frontoffice/routing.md)
 

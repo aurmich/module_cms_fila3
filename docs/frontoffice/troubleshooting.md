@@ -117,7 +117,7 @@ export default defineConfig({
 
 ## Risorse Utili
 
-- [Laravel Vite Documentation](https://laravel.com/docs/12.x/vite)
+- [Laravel Vite Documentation](https://laravel.com/project_docs/12.x/vite)
 - [Vite Troubleshooting Guide](https://vitejs.dev/guide/troubleshooting.html)
 - [Laravel News](https://laravel-news.com)
 
@@ -139,6 +139,6 @@ export default defineConfig({
 - [ ] Verificare la sicurezza 
 
 ## Collegamenti tra versioni di troubleshooting.md
-* [troubleshooting.md](laravel/Modules/Xot/docs/troubleshooting.md)
-* [troubleshooting.md](laravel/Modules/Cms/docs/frontoffice/troubleshooting.md)
+* [troubleshooting.md](laravel/Modules/Xot/project_docs/troubleshooting.md)
+* [troubleshooting.md](laravel/Modules/Cms/project_docs/frontoffice/troubleshooting.md)
 

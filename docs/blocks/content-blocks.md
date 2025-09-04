@@ -201,5 +201,5 @@ class SocialBlock extends Block
 
 - [Documentazione Filament](../filament-resources.md)
 - [Gestione Contenuti](../content-storage.md)
-- [Best Practices UI](../../UI/docs/best-practices.md)
-- [Documentazione Blocchi](../../Xot/docs/blocks.md) 
+- [Best Practices UI](../../UI/project_docs/best-practices.md)
+- [Documentazione Blocchi](../../Xot/project_docs/blocks.md) 

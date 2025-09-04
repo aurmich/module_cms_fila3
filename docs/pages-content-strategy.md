@@ -98,8 +98,8 @@ La pagina servizi deve comunicare:
 ## Collegamenti Strategici
 
 - [Content Management](content-management.md)
-- [UI Components](../UI/docs/components.md)
-- [Theme Blocks](../../Themes/One/docs/blocks.md)
-- [User Experience](../../../docs/frontend/ux-guidelines.md)
+- [UI Components](../UI/project_docs/components.md)
+- [Theme Blocks](../../Themes/One/project_docs/blocks.md)
+- [User Experience](../../../project_docs/frontend/ux-guidelines.md)
 
 *Ultimo aggiornamento: 2025-01-15* 

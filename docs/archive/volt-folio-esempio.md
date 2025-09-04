@@ -273,6 +273,6 @@ class ContactFormTest extends TestCase
 ## Riferimenti
 
 - [Repository Esempio](https://github.com/jasonlbeggs/laravel-news-volt-folio-example)
-- [Documentazione Laravel Volt](https://livewire.laravel.com/docs/volt)
+- [Documentazione Laravel Volt](https://livewire.laravel.com/project_docs/volt)
 - [Documentazione Laravel Folio](https://github.com/laravel/folio)
 - [Livewire](https://livewire.laravel.com) 

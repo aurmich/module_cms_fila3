@@ -80,4 +80,4 @@ La homepage è la pagina principale del sito e richiede una gestione speciale pe
 - [Content Management](./content-management.md)
 - [Page Management](./page-management.md)
 - [Frontend Architecture](./frontend-architecture.md)
-- [Documentazione Core](../Xot/docs/documentation.md)
+- [Documentazione Core](../Xot/project_docs/documentation.md)

@@ -253,8 +253,8 @@ Log::info('Blocchi processati', ['count' => $blocks->count()]);
 
 ## Collegamenti correlati
 
-- [Architettura CMS](/laravel/Modules/Cms/docs/architecture.md)
-- [Sistema BlockData](/laravel/Modules/Cms/docs/data/block-data.md)
-- [Blade Components Rules](/laravel/Modules/Cms/docs/best-practices/blade-components.md)
-- [Best Practices](/laravel/Modules/Cms/docs/best-practices/)
-- [Blocks Documentation](/laravel/Modules/Cms/docs/blocks.md)
+- [Architettura CMS](/laravel/Modules/Cms/project_docs/architecture.md)
+- [Sistema BlockData](/laravel/Modules/Cms/project_docs/data/block-data.md)
+- [Blade Components Rules](/laravel/Modules/Cms/project_docs/best-practices/blade-components.md)
+- [Best Practices](/laravel/Modules/Cms/project_docs/best-practices/)
+- [Blocks Documentation](/laravel/Modules/Cms/project_docs/blocks.md)

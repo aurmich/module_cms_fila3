@@ -2,7 +2,7 @@
 
 ## Introduzione
 
-Questo documento descrive in dettaglio la struttura e il contenuto corretto che **deve** essere mostrato nell'homepage del portale il progetto, basato sulle specifiche ufficiali del progetto contenute nel file `/var/www/html/saluteora/docs/images/2.md`.
+Questo documento descrive in dettaglio la struttura e il contenuto corretto che **deve** essere mostrato nell'homepage del portale il progetto, basato sulle specifiche ufficiali del progetto contenute nel file `/var/www/html/saluteora/project_docs/images/2.md`.
 
 ## Contenuto Testuale Ufficiale
 

@@ -375,7 +375,7 @@ class UserFormTest extends TestCase
 
 ## Riferimenti
 
-- [Laravel Volt Documentation](https://livewire.laravel.com/docs/volt)
+- [Laravel Volt Documentation](https://livewire.laravel.com/project_docs/volt)
 - [Livewire Documentation](https://livewire.laravel.com)
 - [Laravel Documentation](https://laravel.com/docs)
 - [Articolo Originale di Moinuddin Chowdhury](https://medium.com/@moinuddinchowdhury/how-to-create-web-application-using-laravel-volt-the-magical-way-2145071046b2) 

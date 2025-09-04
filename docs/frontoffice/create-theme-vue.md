@@ -226,7 +226,7 @@ npm run copy
 
 - [Documentazione Vue 3](https://vuejs.org/guide/introduction.html)
 - [Documentazione Vite](https://vitejs.dev/guide/)
-- [Documentazione Flowbite](https://flowbite.com/docs/getting-started/introduction/)
+- [Documentazione Flowbite](https://flowbite.com/project_docs/getting-started/introduction/)
 - [Documentazione Flowbite Laravel](https://github.com/themesberg/flowbite-laravel)
 
 ## Alternative

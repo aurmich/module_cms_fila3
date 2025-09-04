@@ -182,10 +182,10 @@ public function render(): View
 ## Link alla Documentazione Generale
 
 Per una documentazione più dettagliata sul sistema di gestione dei contenuti e dei temi, consultare:
-- [Architettura del CMS](/docs/cms/architecture.md)
-- [Sistema dei Temi](/docs/themes/overview.md)
-- [Gestione dei Contenuti](/docs/content/management.md)
+- [Architettura del CMS](/project_docs/cms/architecture.md)
+- [Sistema dei Temi](/project_docs/themes/overview.md)
+- [Gestione dei Contenuti](/project_docs/content/management.md)
 
 ---
 @see laravel/Themes/One/resources/views/pages/index.blade.php
-@see laravel/docs/cms/components.md 
+@see laravel/project_docs/cms/components.md 

@@ -400,5 +400,5 @@ class TodoCreated extends Notification
 
 ### Documentation
 - [Todo App Example by Nuno Maduro](https://nunomaduro.com/todo_application_with_laravel_folio_and_volt)
-- [Laravel Volt](https://livewire.laravel.com/docs/volt)
-- [Laravel Folio](https://laravel.com/docs/folio) 
+- [Laravel Volt](https://livewire.laravel.com/project_docs/volt)
+- [Laravel Folio](https://laravel.com/project_docs/folio) 

@@ -372,10 +372,10 @@ class ProductTest extends TestCase
 ## Riferimenti
 
 - [Laravel Folio Documentation](https://github.com/laravel/folio)
-- [Laravel Volt Documentation](https://livewire.laravel.com/docs/volt)
+- [Laravel Volt Documentation](https://livewire.laravel.com/project_docs/volt)
 - [Filament Documentation](https://filamentphp.com) 
 
 ## Collegamenti tra versioni di product-management.md
-* [product-management.md](laravel/Modules/Cms/docs/product-management.md)
-* [product-management.md](laravel/Modules/Cms/docs/components/product-management.md)
+* [product-management.md](laravel/Modules/Cms/project_docs/product-management.md)
+* [product-management.md](laravel/Modules/Cms/project_docs/components/product-management.md)
 

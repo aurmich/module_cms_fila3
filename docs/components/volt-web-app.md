@@ -380,6 +380,6 @@ trait WithSorting
 ## Risorse Utili
 
 ### Documentation
-- [Laravel Volt](https://livewire.laravel.com/docs/volt)
+- [Laravel Volt](https://livewire.laravel.com/project_docs/volt)
 - [Livewire](https://livewire.laravel.com)
 - [TailwindCSS](https://tailwindcss.com) 

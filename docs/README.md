@@ -1,41 +1,41 @@
 # Modulo CMS
 > **Collegamenti correlati**
-> - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
-> - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
-> - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
-> - [README.md modulo Dental](../../../../laravel/Modules/Dental/docs/README.md)
-> - [README.md modulo GDPR](../../../../laravel/Modules/Gdpr/docs/README.md)
-> - [README.md modulo User](../../../../laravel/Modules/User/docs/README.md)
-> - [README.md modulo Lang](../../../../laravel/Modules/Lang/docs/README.md)
-> - [README.md modulo Patient](../../../../laravel/Modules/Patient/docs/README.md)
-> - [README.md modulo Activity](../../../../laravel/Modules/Activity/docs/README.md)
-> - [README.md modulo Media](../../../../laravel/Modules/Media/docs/README.md)
-> - [README.md modulo Notify](../../../../laravel/Modules/Notify/docs/README.md)
-> - [README.md modulo Reporting](../../../../laravel/Modules/Reporting/docs/README.md)
-> - [README.md modulo Tenant](../../../../laravel/Modules/Tenant/docs/README.md)
-> - [README.md modulo UI](../../../../laravel/Modules/UI/docs/README.md)
-> - [README.md modulo Xot](../../../../laravel/Modules/Xot/docs/README.md)
-> - [README.md modulo Chart](../../../../laravel/Modules/Chart/docs/README.md)
-> - [README.md tema One](../../../../laravel/Themes/One/docs/README.md)
-> - [README.md tema Two](../../../../laravel/Themes/Two/docs/README.md)
-> - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
+> - [README.md documentazione generale SaluteOra](../../../../project_docs/README.md)
+> - [README.md toolkit bashscripts](../../../../bashscripts/project_docs/README.md)
+> - [README.md modulo CMS](../../../../laravel/Modules/Cms/project_docs/README.md)
+> - [README.md modulo Dental](../../../../laravel/Modules/Dental/project_docs/README.md)
+> - [README.md modulo GDPR](../../../../laravel/Modules/Gdpr/project_docs/README.md)
+> - [README.md modulo User](../../../../laravel/Modules/User/project_docs/README.md)
+> - [README.md modulo Lang](../../../../laravel/Modules/Lang/project_docs/README.md)
+> - [README.md modulo Patient](../../../../laravel/Modules/Patient/project_docs/README.md)
+> - [README.md modulo Activity](../../../../laravel/Modules/Activity/project_docs/README.md)
+> - [README.md modulo Media](../../../../laravel/Modules/Media/project_docs/README.md)
+> - [README.md modulo Notify](../../../../laravel/Modules/Notify/project_docs/README.md)
+> - [README.md modulo Reporting](../../../../laravel/Modules/Reporting/project_docs/README.md)
+> - [README.md modulo Tenant](../../../../laravel/Modules/Tenant/project_docs/README.md)
+> - [README.md modulo UI](../../../../laravel/Modules/UI/project_docs/README.md)
+> - [README.md modulo Xot](../../../../laravel/Modules/Xot/project_docs/README.md)
+> - [README.md modulo Chart](../../../../laravel/Modules/Chart/project_docs/README.md)
+> - [README.md tema One](../../../../laravel/Themes/One/project_docs/README.md)
+> - [README.md tema Two](../../../../laravel/Themes/Two/project_docs/README.md)
+> - [Collegamenti documentazione centrale](../../../../project_docs/collegamenti-documentazione.md)
 
-> - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
-> - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
-> - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
-> - [README.md modulo Dental](../../../../laravel/Modules/Dental/docs/README.md)
-> - [README.md modulo GDPR](../../../../laravel/Modules/Gdpr/docs/README.md)
-> - [README.md modulo User](../../../../laravel/Modules/User/docs/README.md)
-> - [README.md modulo Lang](../../../../laravel/Modules/Lang/docs/README.md)
-> - [README.md modulo Media](../../../../laravel/Modules/Media/docs/README.md)
-> - [README.md modulo Notify](../../../../laravel/Modules/Notify/docs/README.md)
-> - [README.md modulo Reporting](../../../../laravel/Modules/Reporting/docs/README.md)
-> - [README.md modulo Tenant](../../../../laravel/Modules/Tenant/docs/README.md)
-> - [README.md modulo UI](../../../../laravel/Modules/UI/docs/README.md)
-> - [README.md modulo Xot](../../../../laravel/Modules/Xot/docs/README.md)
-> - [README.md modulo Chart](../../../../laravel/Modules/Chart/docs/README.md)
-> - [README.md tema One](../../../../laravel/Themes/One/docs/README.md)
-> - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
+> - [README.md documentazione generale SaluteOra](../../../../project_docs/README.md)
+> - [README.md toolkit bashscripts](../../../../bashscripts/project_docs/README.md)
+> - [README.md modulo CMS](../../../../laravel/Modules/Cms/project_docs/README.md)
+> - [README.md modulo Dental](../../../../laravel/Modules/Dental/project_docs/README.md)
+> - [README.md modulo GDPR](../../../../laravel/Modules/Gdpr/project_docs/README.md)
+> - [README.md modulo User](../../../../laravel/Modules/User/project_docs/README.md)
+> - [README.md modulo Lang](../../../../laravel/Modules/Lang/project_docs/README.md)
+> - [README.md modulo Media](../../../../laravel/Modules/Media/project_docs/README.md)
+> - [README.md modulo Notify](../../../../laravel/Modules/Notify/project_docs/README.md)
+> - [README.md modulo Reporting](../../../../laravel/Modules/Reporting/project_docs/README.md)
+> - [README.md modulo Tenant](../../../../laravel/Modules/Tenant/project_docs/README.md)
+> - [README.md modulo UI](../../../../laravel/Modules/UI/project_docs/README.md)
+> - [README.md modulo Xot](../../../../laravel/Modules/Xot/project_docs/README.md)
+> - [README.md modulo Chart](../../../../laravel/Modules/Chart/project_docs/README.md)
+> - [README.md tema One](../../../../laravel/Themes/One/project_docs/README.md)
+> - [Collegamenti documentazione centrale](../../../../project_docs/collegamenti-documentazione.md)
 
 # Jigsaw Docs Starter Template
 
@@ -94,21 +94,21 @@ Il modulo CMS gestisce i contenuti e i widget del sistema, fornendo un sistema f
    - Utilizzare i trait forniti dal modulo
 
 2. **Convenzioni**
-   - Seguire le [convenzioni di naming](../../../docs/standards/file_naming_conventions.md)
+   - Seguire le [convenzioni di naming](../../../project_docs/standards/file_naming_conventions.md)
    - Documentare tutto il codice con PHPDoc
    - Mantenere la struttura dei file coerente
 
 3. **Performance**
    - Utilizzare il caching dove possibile
    - Ottimizzare le query al database
-   - Seguire le [best practices di Laravel](https://laravel.com/docs/11.x/best-practices)
+   - Seguire le [best practices di Laravel](https://laravel.com/project_docs/11.x/best-practices)
 
 ## Collegamenti Bidirezionali
-- [Modulo User](../User/docs/README.md) - Gestione utenti e permessi
-- [Modulo Lang](../Lang/docs/README.md) - Gestione traduzioni
-- [Modulo UI](../UI/docs/README.md) - Componenti di interfaccia
-- [Modulo Xot](../Xot/docs/README.md) - Modulo base e linee guida
-- [Documentazione Principale](../../../docs/README.md) - Documentazione generale
+- [Modulo User](../User/project_docs/README.md) - Gestione utenti e permessi
+- [Modulo Lang](../Lang/project_docs/README.md) - Gestione traduzioni
+- [Modulo UI](../UI/project_docs/README.md) - Componenti di interfaccia
+- [Modulo Xot](../Xot/project_docs/README.md) - Modulo base e linee guida
+- [Documentazione Principale](../../../project_docs/README.md) - Documentazione generale
 
 ## Roadmap e Sviluppo
 - [Roadmap](roadmap.md) - Piano di sviluppo futuro
@@ -120,13 +120,13 @@ Per domande o problemi, consultare:
 1. La [documentazione ufficiale](https://saluteora.com/docs)
 2. Il [forum di supporto](https://saluteora.com/forum)
 3. Il team di sviluppo via [email](mailto:support@saluteora.com)
-> Tip: This configuration file is also where you’ll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official [Jigsaw documentation](https://jigsaw.tighten.co/docs/collections/) to learn more.
+> Tip: This configuration file is also where you’ll define any "collections" (for example, a collection of the contributors to your site, or a collection of blog posts). Check out the official [Jigsaw documentation](https://jigsaw.tighten.co/project_docs/collections/) to learn more.
 
 ---
 
 ### Adding Content
 
-You can write your content using a [variety of file types](http://jigsaw.tighten.co/docs/content-other-file-types/). By default, this starter template expects your content to be located in the `source/docs` folder. If you change this, be sure to update the URL references in `navigation.php`.
+You can write your content using a [variety of file types](http://jigsaw.tighten.co/project_docs/content-other-file-types/). By default, this starter template expects your content to be located in the `source/docs` folder. If you change this, be sure to update the URL references in `navigation.php`.
 
 The first section of each content page contains a YAML header that specifies how it should be rendered. The `title` attribute is used to dynamically generate HTML `title` and OpenGraph tags for each page. The `extends` attribute defines which parent Blade layout this content file will render with (e.g. `_layouts.documentation` will render with `source/_layouts/documentation.blade.php`), and the `section` attribute defines the Blade "section" that expects this content to be placed into it.
 
@@ -139,7 +139,7 @@ section: content
 ---
 ```
 
-[Read more about Jigsaw layouts.](https://jigsaw.tighten.co/docs/content-blade/)
+[Read more about Jigsaw layouts.](https://jigsaw.tighten.co/project_docs/content-blade/)
 
 ---
 
@@ -151,7 +151,7 @@ Then, when Jigsaw builds your site, the entire `/source/assets/` directory conta
 
 Files that don't require processing (such as images and fonts) can be added directly to `/source/assets/`.
 
-[Read more about compiling assets in Jigsaw using Laravel Mix.](http://jigsaw.tighten.co/docs/compiling-assets/)
+[Read more about compiling assets in Jigsaw using Laravel Mix.](http://jigsaw.tighten.co/project_docs/compiling-assets/)
 
 ---
 
@@ -169,8 +169,8 @@ npm run dev
 ```
 
 ## Collegamenti tra versioni di README.md
-* [README.md](bashscripts/docs/README.md)
-* [README.md](bashscripts/docs/it/README.md)
+* [README.md](bashscripts/project_docs/README.md)
+* [README.md](bashscripts/project_docs/it/README.md)
 * [README.md](docs/laravel-app/phpstan/README.md)
 * [README.md](docs/laravel-app/README.md)
 * [README.md](docs/moduli/struttura/README.md)
@@ -201,48 +201,48 @@ npm run dev
 * [README.md](docs/implementazione/reporting/README.md)
 * [README.md](docs/implementazione/isee/README.md)
 * [README.md](docs/it/README.md)
-* [README.md](laravel/vendor/mockery/mockery/docs/README.md)
-* [README.md](laravel/Modules/Chart/docs/README.md)
-* [README.md](laravel/Modules/Reporting/docs/README.md)
-* [README.md](laravel/Modules/Gdpr/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Gdpr/docs/README.md)
-* [README.md](laravel/Modules/Notify/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Notify/docs/README.md)
-* [README.md](laravel/Modules/Xot/docs/filament/README.md)
-* [README.md](laravel/Modules/Xot/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Xot/docs/exceptions/README.md)
-* [README.md](laravel/Modules/Xot/docs/README.md)
-* [README.md](laravel/Modules/Xot/docs/standards/README.md)
-* [README.md](laravel/Modules/Xot/docs/conventions/README.md)
-* [README.md](laravel/Modules/Xot/docs/development/README.md)
-* [README.md](laravel/Modules/Dental/docs/README.md)
-* [README.md](laravel/Modules/User/docs/phpstan/README.md)
-* [README.md](laravel/Modules/User/docs/README.md)
-* [README.md](laravel/Modules/User/resources/views/docs/README.md)
-* [README.md](laravel/Modules/UI/docs/phpstan/README.md)
-* [README.md](laravel/Modules/UI/docs/README.md)
-* [README.md](laravel/Modules/UI/docs/standards/README.md)
-* [README.md](laravel/Modules/UI/docs/themes/README.md)
-* [README.md](laravel/Modules/UI/docs/components/README.md)
-* [README.md](laravel/Modules/Lang/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Lang/docs/README.md)
-* [README.md](laravel/Modules/Job/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Job/docs/README.md)
-* [README.md](laravel/Modules/Media/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Media/docs/README.md)
-* [README.md](laravel/Modules/Tenant/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Tenant/docs/README.md)
-* [README.md](laravel/Modules/Activity/docs/phpstan/README.md)
-* [README.md](laravel/Modules/Activity/docs/README.md)
-* [README.md](laravel/Modules/Patient/docs/README.md)
-* [README.md](laravel/Modules/Patient/docs/standards/README.md)
-* [README.md](laravel/Modules/Patient/docs/value-objects/README.md)
-* [README.md](laravel/Modules/Cms/docs/blocks/README.md)
-* [README.md](laravel/Modules/Cms/docs/README.md)
-* [README.md](laravel/Modules/Cms/docs/standards/README.md)
-* [README.md](laravel/Modules/Cms/docs/content/README.md)
-* [README.md](laravel/Modules/Cms/docs/frontoffice/README.md)
-* [README.md](laravel/Modules/Cms/docs/components/README.md)
-* [README.md](laravel/Themes/Two/docs/README.md)
-* [README.md](laravel/Themes/One/docs/README.md)
+* [README.md](laravel/vendor/mockery/mockery/project_docs/README.md)
+* [README.md](laravel/Modules/Chart/project_docs/README.md)
+* [README.md](laravel/Modules/Reporting/project_docs/README.md)
+* [README.md](laravel/Modules/Gdpr/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Gdpr/project_docs/README.md)
+* [README.md](laravel/Modules/Notify/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Notify/project_docs/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/filament/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/exceptions/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/standards/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/conventions/README.md)
+* [README.md](laravel/Modules/Xot/project_docs/development/README.md)
+* [README.md](laravel/Modules/Dental/project_docs/README.md)
+* [README.md](laravel/Modules/User/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/User/project_docs/README.md)
+* [README.md](laravel/Modules/User/resources/views/project_docs/README.md)
+* [README.md](laravel/Modules/UI/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/UI/project_docs/README.md)
+* [README.md](laravel/Modules/UI/project_docs/standards/README.md)
+* [README.md](laravel/Modules/UI/project_docs/themes/README.md)
+* [README.md](laravel/Modules/UI/project_docs/components/README.md)
+* [README.md](laravel/Modules/Lang/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Lang/project_docs/README.md)
+* [README.md](laravel/Modules/Job/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Job/project_docs/README.md)
+* [README.md](laravel/Modules/Media/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Media/project_docs/README.md)
+* [README.md](laravel/Modules/Tenant/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Tenant/project_docs/README.md)
+* [README.md](laravel/Modules/Activity/project_docs/phpstan/README.md)
+* [README.md](laravel/Modules/Activity/project_docs/README.md)
+* [README.md](laravel/Modules/Patient/project_docs/README.md)
+* [README.md](laravel/Modules/Patient/project_docs/standards/README.md)
+* [README.md](laravel/Modules/Patient/project_docs/value-objects/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/blocks/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/standards/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/content/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/frontoffice/README.md)
+* [README.md](laravel/Modules/Cms/project_docs/components/README.md)
+* [README.md](laravel/Themes/Two/project_docs/README.md)
+* [README.md](laravel/Themes/One/project_docs/README.md)
 

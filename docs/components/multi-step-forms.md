@@ -397,11 +397,11 @@ public function mount()
 ## Risorse Utili
 
 ### Documentation
-- [Laravel Volt Documentation](https://livewire.laravel.com/docs/volt)
-- [Laravel Folio Documentation](https://laravel.com/docs/folio)
-- [Filament Forms Documentation](https://filamentphp.com/docs/forms) 
+- [Laravel Volt Documentation](https://livewire.laravel.com/project_docs/volt)
+- [Laravel Folio Documentation](https://laravel.com/project_docs/folio)
+- [Filament Forms Documentation](https://filamentphp.com/project_docs/forms) 
 
 ## Collegamenti tra versioni di multi-step-forms.md
-* [multi-step-forms.md](laravel/Modules/Cms/docs/multi-step-forms.md)
-* [multi-step-forms.md](laravel/Modules/Cms/docs/components/multi-step-forms.md)
+* [multi-step-forms.md](laravel/Modules/Cms/project_docs/multi-step-forms.md)
+* [multi-step-forms.md](laravel/Modules/Cms/project_docs/components/multi-step-forms.md)
 

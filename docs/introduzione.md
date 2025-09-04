@@ -24,6 +24,6 @@ Una volta configurato il modulo, è possibile utilizzarlo per creare e gestire i
 
 Dipende un po da tutti i Moduli.
 ## Collegamenti tra versioni di introduzione.md
-* [introduzione.md](laravel/Modules/Chart/docs/introduzione.md)
-* [introduzione.md](laravel/Modules/Cms/docs/introduzione.md)
+* [introduzione.md](laravel/Modules/Chart/project_docs/introduzione.md)
+* [introduzione.md](laravel/Modules/Cms/project_docs/introduzione.md)
 

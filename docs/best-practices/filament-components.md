@@ -203,18 +203,18 @@ it('renders filament icon buttons for social links', function () {
 
 ## Riferimenti
 
-- [Documentazione Filament](https://filamentphp.com/docs/3.x/support/blade-components/button)
-- [Componenti Blade Filament](https://filamentphp.com/docs/3.x/support/blade-components)
-- [Best Practices Filament](https://filamentphp.com/docs/3.x/support/overview)
+- [Documentazione Filament](https://filamentphp.com/project_docs/3.x/support/blade-components/button)
+- [Componenti Blade Filament](https://filamentphp.com/project_docs/3.x/support/blade-components)
+- [Best Practices Filament](https://filamentphp.com/project_docs/3.x/support/overview)
 
 ## Collegamenti Interni
-- [Guida ai Temi](/laravel/Themes/One/docs/README.md)
-- [Componenti UI](/laravel/Modules/Cms/docs/components/README.md)
-- [Testing Components](/laravel/Modules/Cms/docs/testing/components.md) 
+- [Guida ai Temi](/laravel/Themes/One/project_docs/README.md)
+- [Componenti UI](/laravel/Modules/Cms/project_docs/components/README.md)
+- [Testing Components](/laravel/Modules/Cms/project_docs/testing/components.md) 
 
 ## Collegamenti tra versioni di filament-components.md
-* [filament-components.md](laravel/Modules/User/docs/best-practices/filament-components.md)
-* [filament-components.md](laravel/Modules/Cms/docs/best-practices/filament-components.md)
-* [filament-components.md](laravel/Modules/Cms/docs/filament-components.md)
-* [filament-components.md](laravel/docs/rules/filament-components.md)
+* [filament-components.md](laravel/Modules/User/project_docs/best-practices/filament-components.md)
+* [filament-components.md](laravel/Modules/Cms/project_docs/best-practices/filament-components.md)
+* [filament-components.md](laravel/Modules/Cms/project_docs/filament-components.md)
+* [filament-components.md](laravel/project_docs/rules/filament-components.md)
 

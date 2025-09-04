@@ -3,11 +3,11 @@
 ## Pacchetti Utilizzati
 
 ### Core
-- [laraxot/module_xot_fila3](../Xot/docs/packages.md) - Modulo base per funzionalità comuni
-- [laraxot/module_ui](../UI/docs/packages.md) - Componenti UI e temi
-- [laraxot/module_tenant_fila3](../Tenant/docs/packages.md) - Gestione multi-tenant
-- [laraxot/module_user_fila3](../User/docs/packages.md) - Gestione utenti e permessi
-- [laraxot/module_lang_fila3](../Lang/docs/packages.md) - Gestione lingue e traduzioni
+- [laraxot/module_xot_fila3](../Xot/project_docs/packages.md) - Modulo base per funzionalità comuni
+- [laraxot/module_ui](../UI/project_docs/packages.md) - Componenti UI e temi
+- [laraxot/module_tenant_fila3](../Tenant/project_docs/packages.md) - Gestione multi-tenant
+- [laraxot/module_user_fila3](../User/project_docs/packages.md) - Gestione utenti e permessi
+- [laraxot/module_lang_fila3](../Lang/project_docs/packages.md) - Gestione lingue e traduzioni
 
 ### Development
 - [spatie/laravel-package-tools](https://github.com/spatie/laravel-package-tools) - Strumenti per lo sviluppo di pacchetti Laravel

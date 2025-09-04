@@ -2,9 +2,9 @@
 
 ## Documentazione Dettagliata
 
-- [Tema One - Gestione Assets](../../../Themes/One/docs/theme-assets.md)
-- [Tema One - Processo di Build](../../../Themes/One/docs/build-process.md)
-- [Tema One - Assets](../../../Themes/One/docs/ASSETS.md)
+- [Tema One - Gestione Assets](../../../Themes/One/project_docs/theme-assets.md)
+- [Tema One - Processo di Build](../../../Themes/One/project_docs/build-process.md)
+- [Tema One - Assets](../../../Themes/One/project_docs/ASSETS.md)
 
 ## Punti Critici
 
@@ -92,7 +92,7 @@
    - Verificare i timestamp dei file 
 
 ## Collegamenti tra versioni di assets.md
-* [assets.md](laravel/Modules/Xot/docs/assets.md)
-* [assets.md](laravel/Modules/Cms/docs/themes/assets.md)
-* [assets.md](laravel/Themes/One/docs/assets.md)
+* [assets.md](laravel/Modules/Xot/project_docs/assets.md)
+* [assets.md](laravel/Modules/Cms/project_docs/themes/assets.md)
+* [assets.md](laravel/Themes/One/project_docs/assets.md)
 

@@ -208,7 +208,7 @@ Route::middleware('web')->group(function () {
 
 ## Risorse Utili
 
-- [Documentazione Filament Widgets](https://filamentphp.com/docs/widgets)
-- [Documentazione Filament Forms](https://filamentphp.com/docs/forms)
-- [Best Practices Filament](https://filamentphp.com/docs/best-practices)
+- [Documentazione Filament Widgets](https://filamentphp.com/project_docs/widgets)
+- [Documentazione Filament Forms](https://filamentphp.com/project_docs/forms)
+- [Best Practices Filament](https://filamentphp.com/project_docs/best-practices)
 - [Documentazione Xot](https://github.com/laraxot/modules) 

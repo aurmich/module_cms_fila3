@@ -39,7 +39,7 @@ L'utilizzo di DaisyUI nel progetto il progetto comporta numerosi benefici:
 
 5. **Facile manutenzione**: Il codice è più leggibile e facile da mantenere grazie alle classi semantiche.
 
-6. **Rispetto dei principi UX**: I componenti DaisyUI supportano naturalmente molte delle [Leggi di UX](/docs/07-frontend/leggi-ux.md) documentate.
+6. **Rispetto dei principi UX**: I componenti DaisyUI supportano naturalmente molte delle [Leggi di UX](/project_docs/07-frontend/leggi-ux.md) documentate.
 
 ## Installazione e Configurazione
 
@@ -620,7 +620,7 @@ Utilizzo:
 - [Repository GitHub](https://github.com/saadeghi/daisyui)
 - [Documentazione Tailwind CSS](https://tailwindcss.com/docs)
 - [Theme Generator DaisyUI](https://daisyui.com/theme-generator/)
-- [Filament + DaisyUI Integration](https://filamentphp.com/docs/panels/themes)
+- [Filament + DaisyUI Integration](https://filamentphp.com/project_docs/panels/themes)
 
 ---
 

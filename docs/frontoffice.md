@@ -283,9 +283,9 @@ Per estendere il frontoffice con nuove funzionalità:
 - [Wizard](ux-wizard-registrazione-paziente.md) - Wizard di registrazione
 
 ## Vedi Anche
-- [Modulo UI](../UI/docs/README.md) - Componenti UI per il frontoffice
-- [Modulo Lang](../Lang/docs/README.md) - Gestione traduzioni
-- [Modulo User](../User/docs/README.md) - Gestione utenti
-- [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
+- [Modulo UI](../UI/project_docs/README.md) - Componenti UI per il frontoffice
+- [Modulo Lang](../Lang/project_docs/README.md) - Gestione traduzioni
+- [Modulo User](../User/project_docs/README.md) - Gestione utenti
+- [Modulo Xot](../Xot/project_docs/README.md) - Classi base e utilities
 - [Documentazione Volt](volt-introduction.md) - Introduzione a Laravel Volt
 - [Documentazione Folio](folio-pages.md) - Gestione delle pagine con Laravel Folio

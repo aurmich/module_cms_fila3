@@ -31,7 +31,7 @@ La homepage deve includere:
 ## Riferimento visivo
 
 L'implementazione deve seguire il design mostrato nell'immagine di riferimento:
-![Riferimento homepage](/var/www/html/saluteora/docs/images/2.png)
+![Riferimento homepage](/var/www/html/saluteora/project_docs/images/2.png)
 
 ## Note implementative
 

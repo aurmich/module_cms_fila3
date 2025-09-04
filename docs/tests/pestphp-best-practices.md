@@ -328,8 +328,8 @@ Applicando questi pattern abbiamo ottenuto:
 - [Registration Widget Test Strategy](./registration-widget-test-strategy.md)
 
 ### **Root Documentation**
-- [Testing Organization](../../../../docs/testing-organization.md)
-- [SaluteOra Testing Architecture](../../../SaluteOra/docs/testing.md)
+- [Testing Organization](../../../../project_docs/testing-organization.md)
+- [SaluteOra Testing Architecture](../../../SaluteOra/project_docs/testing.md)
 
 ---
 **Ultimo aggiornamento**: Gennaio 2025  

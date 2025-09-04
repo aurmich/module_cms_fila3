@@ -146,7 +146,7 @@
 ## Riferimenti
 
 ### Documentazione
-- [Laravel CMS](https://laravel.com/docs/12.x/cms)
+- [Laravel CMS](https://laravel.com/project_docs/12.x/cms)
 - [Filament Documentation](https://filamentphp.com/docs)
 - [Livewire Documentation](https://livewire.laravel.com/docs)
 
@@ -160,20 +160,20 @@
 - Ogni task ha un file di dettaglio nella cartella roadmap
 
 ## Collegamenti tra versioni di roadmap.md
-* [roadmap.md](bashscripts/docs/roadmap.md)
+* [roadmap.md](bashscripts/project_docs/roadmap.md)
 * [roadmap.md](docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Gdpr/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Notify/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Xot/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Dental/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/User/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/UI/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Lang/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Job/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Media/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Tenant/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Activity/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Patient/docs/roadmap.md)
-* [roadmap.md](laravel/Modules/Cms/docs/roadmap.md)
-* [roadmap.md](laravel/Themes/One/docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Gdpr/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Notify/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Xot/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Dental/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/User/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/UI/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Lang/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Job/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Media/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Tenant/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Activity/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Patient/project_docs/roadmap.md)
+* [roadmap.md](laravel/Modules/Cms/project_docs/roadmap.md)
+* [roadmap.md](laravel/Themes/One/project_docs/roadmap.md)
 

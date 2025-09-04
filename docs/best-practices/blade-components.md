@@ -384,8 +384,8 @@ Esempio di utilizzo:
 
 ## Collegamenti correlati
 
-- [Architettura CMS](/laravel/Modules/Cms/docs/architecture.md)
-- [BlockData Documentation](/laravel/Modules/Cms/docs/data/blockdata.md)
-- [Page Component](/laravel/Modules/Cms/docs/components/page.md)
-- [Best Practices Generali](/laravel/Modules/Cms/docs/best-practices/)
-- [Blocks Documentation](/laravel/Modules/Cms/docs/blocks.md) 
+- [Architettura CMS](/laravel/Modules/Cms/project_docs/architecture.md)
+- [BlockData Documentation](/laravel/Modules/Cms/project_docs/data/blockdata.md)
+- [Page Component](/laravel/Modules/Cms/project_docs/components/page.md)
+- [Best Practices Generali](/laravel/Modules/Cms/project_docs/best-practices/)
+- [Blocks Documentation](/laravel/Modules/Cms/project_docs/blocks.md) 

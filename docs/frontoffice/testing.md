@@ -124,7 +124,7 @@ it('should demonstrate this matcher`s usage', async () => {
 
 - [Jest Documentation](https://jestjs.io/)
 - [Cypress Documentation](https://docs.cypress.io/)
-- [Laravel Dusk Documentation](https://laravel.com/docs/12.x/dusk)
+- [Laravel Dusk Documentation](https://laravel.com/project_docs/12.x/dusk)
 
 ## Troubleshooting
 
@@ -146,8 +146,8 @@ it('should demonstrate this matcher`s usage', async () => {
    - Documentare i problemi 
 
 ## Collegamenti tra versioni di testing.md
-* [testing.md](laravel/Modules/Xot/docs/packages/testing.md)
-* [testing.md](laravel/Modules/Xot/docs/development/testing.md)
-* [testing.md](laravel/Modules/Cms/docs/frontoffice/testing.md)
-* [testing.md](laravel/Themes/One/docs/testing.md)
+* [testing.md](laravel/Modules/Xot/project_docs/packages/testing.md)
+* [testing.md](laravel/Modules/Xot/project_docs/development/testing.md)
+* [testing.md](laravel/Modules/Cms/project_docs/frontoffice/testing.md)
+* [testing.md](laravel/Themes/One/project_docs/testing.md)
 

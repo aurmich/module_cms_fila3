@@ -2,9 +2,9 @@
 
 ## Collegamenti correlati
 - [README modulo Cms](./README.md)
-- [Documentazione User](../../User/docs/HEADER_LANGUAGE_AVATAR_IMPLEMENTATION.md)
+- [Documentazione User](../../User/project_docs/HEADER_LANGUAGE_AVATAR_IMPLEMENTATION.md)
 - [Documentazione Sezioni](./SECTIONS_STRUCTURE.md)
-- [Collegamenti Documentazione](/docs/collegamenti-documentazione.md)
+- [Collegamenti Documentazione](/project_docs/collegamenti-documentazione.md)
 
 ## Panoramica
 
@@ -379,4 +379,4 @@ Ecco come dovrebbe apparire il file JSON completo dell'header dopo le modifiche:
 
 - [Documentazione Alpine.js](https://alpinejs.dev/) - Per le interazioni dropdown
 - [Documentazione Filament](https://filamentphp.com/docs) - Per i componenti UI
-- [Documentazione Laravel Localization](https://laravel.com/docs/10.x/localization) - Per la gestione delle lingue
+- [Documentazione Laravel Localization](https://laravel.com/project_docs/10.x/localization) - Per la gestione delle lingue

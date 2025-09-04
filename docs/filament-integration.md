@@ -118,10 +118,10 @@ public function test_filament_components_rendering()
 
 ### 7. Risorse Utili
 
-- [Documentazione Filament](https://filamentphp.com/docs/3.x)
-- [Componenti Blade Filament](https://filamentphp.com/docs/3.x/support/blade-components)
-- [Temi Filament](https://filamentphp.com/docs/3.x/themes)
-- [Plugin Filament](https://filamentphp.com/docs/3.x/plugins)
+- [Documentazione Filament](https://filamentphp.com/project_docs/3.x)
+- [Componenti Blade Filament](https://filamentphp.com/project_docs/3.x/support/blade-components)
+- [Temi Filament](https://filamentphp.com/project_docs/3.x/themes)
+- [Plugin Filament](https://filamentphp.com/project_docs/3.x/plugins)
 
 ## Collegamenti
 
@@ -140,16 +140,16 @@ public function test_filament_components_rendering()
 - [Personalizzazioni](filament-personalizzazioni-avanzate.md) - Personalizzazioni avanzate
 
 ## Vedi Anche
-- [Modulo UI](../UI/docs/README.md) - Componenti di interfaccia
-- [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
-- [Modulo Theme](../Theme/docs/README.md) - Gestione temi
+- [Modulo UI](../UI/project_docs/README.md) - Componenti di interfaccia
+- [Modulo Xot](../Xot/project_docs/README.md) - Classi base e utilities
+- [Modulo Theme](../Theme/project_docs/README.md) - Gestione temi
 - [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
-- [Best Practices](https://filamentphp.com/docs/3.x/best-practices) - Best practices Filament
-- [Componenti Blade](https://filamentphp.com/docs/3.x/support/blade-components) - Componenti Blade
+- [Best Practices](https://filamentphp.com/project_docs/3.x/best-practices) - Best practices Filament
+- [Componenti Blade](https://filamentphp.com/project_docs/3.x/support/blade-components) - Componenti Blade
 - [Testing](../testing.md) 
 
 ## Collegamenti tra versioni di filament-integration.md
-* [filament-integration.md](laravel/Modules/Xot/docs/laraxot/filament-integration.md)
-* [filament-integration.md](laravel/Modules/Cms/docs/roadmap/features/filament-integration.md)
-* [filament-integration.md](laravel/Modules/Cms/docs/filament-integration.md)
+* [filament-integration.md](laravel/Modules/Xot/project_docs/laraxot/filament-integration.md)
+* [filament-integration.md](laravel/Modules/Cms/project_docs/roadmap/features/filament-integration.md)
+* [filament-integration.md](laravel/Modules/Cms/project_docs/filament-integration.md)
 

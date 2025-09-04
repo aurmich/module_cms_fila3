@@ -1,11 +1,11 @@
 # Sistema di Routing e Localizzazione con Laravel Folio
 
 ## Collegamenti correlati
-- [Indice documentazione CMS](/laravel/Modules/Cms/docs/index.md)
-- [Gestione Route Folio](/laravel/Modules/Cms/docs/gestione-route-folio.md)
-- [Frontoffice Flow](/laravel/Modules/Cms/docs/frontoffice-flow.md)
-- [Volt Folio Structure](/laravel/Modules/Cms/docs/volt_folio_structure.md)
-- [Documentazione generale progetto](/docs/README.md)
+- [Indice documentazione CMS](/laravel/Modules/Cms/project_docs/index.md)
+- [Gestione Route Folio](/laravel/Modules/Cms/project_docs/gestione-route-folio.md)
+- [Frontoffice Flow](/laravel/Modules/Cms/project_docs/frontoffice-flow.md)
+- [Volt Folio Structure](/laravel/Modules/Cms/project_docs/volt_folio_structure.md)
+- [Documentazione generale progetto](/project_docs/README.md)
 
 ## Panoramica
 

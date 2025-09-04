@@ -374,5 +374,5 @@ public function mountDashboard()
 
 ### Documentation
 - [Laravel Volt Examples](https://github.com/jasonlbeggs/laravel-news-volt-folio-example)
-- [Livewire Best Practices](https://livewire.laravel.com/docs/best-practices)
-- [Laravel Folio Patterns](https://laravel.com/docs/folio) 
+- [Livewire Best Practices](https://livewire.laravel.com/project_docs/best-practices)
+- [Laravel Folio Patterns](https://laravel.com/project_docs/folio) 

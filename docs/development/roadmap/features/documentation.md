@@ -99,7 +99,7 @@ La documentazione dettagliata degli endpoint, esempi e Swagger/OpenAPI sono in f
 
 ## Collegamenti tra versioni di documentation.md
 * [documentation.md](docs/rules/documentation.md)
-* [documentation.md](laravel/Modules/Xot/docs/documentation.md)
-* [documentation.md](laravel/Modules/Xot/docs/guidelines/documentation.md)
-* [documentation.md](laravel/Modules/Cms/docs/roadmap/features/documentation.md)
+* [documentation.md](laravel/Modules/Xot/project_docs/documentation.md)
+* [documentation.md](laravel/Modules/Xot/project_docs/guidelines/documentation.md)
+* [documentation.md](laravel/Modules/Cms/project_docs/roadmap/features/documentation.md)
 

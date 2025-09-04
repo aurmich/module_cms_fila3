@@ -98,6 +98,6 @@ return [
 
 ## Collegamenti tra versioni di namespaces.md
 * [namespaces.md](docs/conventions/namespaces.md)
-* [namespaces.md](laravel/Modules/Xot/docs/conventions/namespaces.md)
-* [namespaces.md](laravel/Modules/Cms/docs/conventions/namespaces.md)
+* [namespaces.md](laravel/Modules/Xot/project_docs/conventions/namespaces.md)
+* [namespaces.md](laravel/Modules/Cms/project_docs/conventions/namespaces.md)
 

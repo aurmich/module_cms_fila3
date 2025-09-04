@@ -20,9 +20,9 @@ Questo permette di aggiungere, ordinare e rimuovere ogni tipo di blocco.
 - [Documentazione Blocchi](../blocks/README.md)
 - [PageContentBuilder](../filament-forms.md)
 - [Gestione Sezioni](../sections/footer-section.md)
-- [Documentazione UI](../../UI/docs/README.md)
-- [Documentazione Moduli](../../Xot/docs/modules.md)
-- [Linee guida etichette Filament](/docs/filament-block-labels.md)
+- [Documentazione UI](../../UI/project_docs/README.md)
+- [Documentazione Moduli](../../Xot/project_docs/modules.md)
+- [Linee guida etichette Filament](/project_docs/filament-block-labels.md)
 
 ## Note
 - I blocchi sono progettati per essere modulari e riutilizzabili in qualsiasi progetto
@@ -36,10 +36,10 @@ Le etichette dei Filament Blocks **NON** devono essere definite con `->label()`.
 ## Collegamenti tra versioni di footer.md
 * [footer.md](docs/laravel-app/themes/one/components/footer.md)
 * [footer.md](docs/sections/footer.md)
-* [footer.md](laravel/Modules/UI/docs/components/footer.md)
-* [footer.md](laravel/Modules/Cms/docs/blocks/footer.md)
-* [footer.md](laravel/Modules/Cms/docs/themes/one/footer.md)
-* [footer.md](laravel/Modules/Cms/docs/components/footer.md)
-* [footer.md](laravel/Themes/One/docs/components/layouts/footer.md)
-* [footer.md](laravel/Themes/One/docs/sections/footer.md)
+* [footer.md](laravel/Modules/UI/project_docs/components/footer.md)
+* [footer.md](laravel/Modules/Cms/project_docs/blocks/footer.md)
+* [footer.md](laravel/Modules/Cms/project_docs/themes/one/footer.md)
+* [footer.md](laravel/Modules/Cms/project_docs/components/footer.md)
+* [footer.md](laravel/Themes/One/project_docs/components/layouts/footer.md)
+* [footer.md](laravel/Themes/One/project_docs/sections/footer.md)
 

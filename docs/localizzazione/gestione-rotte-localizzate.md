@@ -154,6 +154,6 @@ Se la lingua non viene impostata correttamente, verificare:
 
 ## Riferimenti
 
-- [Documentazione Laravel Folio](https://laravel.com/docs/folio)
+- [Documentazione Laravel Folio](https://laravel.com/project_docs/folio)
 - [Documentazione Laravel Localization](https://github.com/mcamara/laravel-localization)
-- [Modulo Lang - Documentazione](../../../Lang/docs/working-with-locales.md)
+- [Modulo Lang - Documentazione](../../../Lang/project_docs/working-with-locales.md)

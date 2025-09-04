@@ -113,10 +113,10 @@ Le altre ottimizzazioni sono in fase di implementazione:
 - [Roadmap Principale](../../roadmap.md)
 - [Content Management](../features/content-management.md)
 - [Frontend Integration](../features/frontend-integration.md)
-- [Best Practices Performance](../../../Xot/docs/BEST-PRACTICES.md#performance)
+- [Best Practices Performance](../../../Xot/project_docs/BEST-PRACTICES.md#performance)
 
 ## Collegamenti tra versioni di optimization.md
-* [optimization.md](laravel/Modules/Xot/docs/roadmap/performance/optimization.md)
-* [optimization.md](laravel/Modules/Job/docs/optimization.md)
-* [optimization.md](laravel/Modules/Cms/docs/roadmap/performance/optimization.md)
+* [optimization.md](laravel/Modules/Xot/project_docs/roadmap/performance/optimization.md)
+* [optimization.md](laravel/Modules/Job/project_docs/optimization.md)
+* [optimization.md](laravel/Modules/Cms/project_docs/roadmap/performance/optimization.md)
 

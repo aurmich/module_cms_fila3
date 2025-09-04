@@ -44,6 +44,6 @@ return [
 Anche se il file risiede in `app/Filament/Blocks`, il namespace è `Modules\Cms\Filament\Blocks`.
 
 ## Collegamenti
-- [Linee guida Etichette Filament](/docs/filament-block-labels.md)
-- [Linee guida generali Filament Blocks (Xot)](../../Xot/docs/DOCUMENTATION-GUIDELINES.md#filament-blocks)
-- [Linee guida Etichette Filament (root)](/docs/filament-block-labels.md)
+- [Linee guida Etichette Filament](/project_docs/filament-block-labels.md)
+- [Linee guida generali Filament Blocks (Xot)](../../Xot/project_docs/DOCUMENTATION-GUIDELINES.md#filament-blocks)
+- [Linee guida Etichette Filament (root)](/project_docs/filament-block-labels.md)

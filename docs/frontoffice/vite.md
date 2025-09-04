@@ -86,7 +86,7 @@ export default defineConfig({
 
 ## Risorse Utili
 
-- [Documentazione Ufficiale Laravel Vite](https://laravel.com/docs/12.x/vite)
+- [Documentazione Ufficiale Laravel Vite](https://laravel.com/project_docs/12.x/vite)
 - [Laravel Vite Plugin](https://github.com/laravel/vite-plugin)
 - [Tutorial Laracasts](https://laracasts.com/series/laravel-and-vite)
 - [Guida Aulab](https://aulab.it/guide/136/build-e-bundling-degli-asset-in-laravel)

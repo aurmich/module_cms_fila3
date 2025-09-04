@@ -144,12 +144,12 @@ it('uses correct namespace for view models', function () {
 ## Collegamenti
 
 - [PSR-4 Autoloading Standard](https://www.php-fig.org/psr/psr-4/)
-- [Laravel Module Development](https://laravel.com/docs/10.x/packages)
-- [Best Practices](/laravel/Modules/Cms/docs/best-practices/README.md)
-- [Architettura Modulare](/laravel/Modules/Cms/docs/architecture.md) 
+- [Laravel Module Development](https://laravel.com/project_docs/10.x/packages)
+- [Best Practices](/laravel/Modules/Cms/project_docs/best-practices/README.md)
+- [Architettura Modulare](/laravel/Modules/Cms/project_docs/architecture.md) 
 
 ## Collegamenti tra versioni di namespace-conventions.md
-* [namespace-conventions.md](laravel/Modules/Xot/docs/namespace-conventions.md)
-* [namespace-conventions.md](laravel/Modules/User/docs/namespace-conventions.md)
-* [namespace-conventions.md](laravel/Modules/Cms/docs/best-practices/namespace-conventions.md)
+* [namespace-conventions.md](laravel/Modules/Xot/project_docs/namespace-conventions.md)
+* [namespace-conventions.md](laravel/Modules/User/project_docs/namespace-conventions.md)
+* [namespace-conventions.md](laravel/Modules/Cms/project_docs/best-practices/namespace-conventions.md)
 

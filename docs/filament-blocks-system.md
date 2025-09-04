@@ -172,10 +172,10 @@ Ogni blocco supporta diversi contesti:
 - **Block Actions**: Azioni per gestione blocchi
 
 ## Collegamenti
-- [Modulo SaluteOra](../SaluteOra/docs/homepage-architecture.md)
-- [Modulo UI](../UI/docs/blocks-system.md)
-- [Filament Builder](https://filamentphp.com/docs/3.x/forms/fields/builder)
-- [Laravel Folio](../../docs/folio-routing.md)
+- [Modulo SaluteOra](../SaluteOra/project_docs/homepage-architecture.md)
+- [Modulo UI](../UI/project_docs/blocks-system.md)
+- [Filament Builder](https://filamentphp.com/project_docs/3.x/forms/fields/builder)
+- [Laravel Folio](../../project_docs/folio-routing.md)
 
 *Ultimo aggiornamento: Dicembre 2024*
 

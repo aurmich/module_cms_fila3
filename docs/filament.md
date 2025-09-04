@@ -100,12 +100,12 @@ Le pagine custom devono essere collocate in `app/Filament/Pages`:
    - Devono avere un titolo e un slug descrittivi 
 ## Collegamenti tra versioni di filament.md
 * [filament.md](docs/tecnico/filament/filament.md)
-* [filament.md](laravel/Modules/Chart/docs/filament.md)
-* [filament.md](laravel/Modules/Gdpr/docs/filament.md)
-* [filament.md](laravel/Modules/Xot/docs/technical/filament.md)
-* [filament.md](laravel/Modules/Xot/docs/roadmap/integration/filament.md)
-* [filament.md](laravel/Modules/Lang/docs/filament.md)
-* [filament.md](laravel/Modules/Job/docs/filament.md)
-* [filament.md](laravel/Modules/Activity/docs/filament.md)
-* [filament.md](laravel/Modules/Cms/docs/filament.md)
+* [filament.md](laravel/Modules/Chart/project_docs/filament.md)
+* [filament.md](laravel/Modules/Gdpr/project_docs/filament.md)
+* [filament.md](laravel/Modules/Xot/project_docs/technical/filament.md)
+* [filament.md](laravel/Modules/Xot/project_docs/roadmap/integration/filament.md)
+* [filament.md](laravel/Modules/Lang/project_docs/filament.md)
+* [filament.md](laravel/Modules/Job/project_docs/filament.md)
+* [filament.md](laravel/Modules/Activity/project_docs/filament.md)
+* [filament.md](laravel/Modules/Cms/project_docs/filament.md)
 

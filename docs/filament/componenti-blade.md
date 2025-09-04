@@ -73,8 +73,8 @@ I principali componenti Filament che dovremmo utilizzare sono:
 ## Documentazione ufficiale
 
 Per la documentazione completa dei componenti, consultare:
-- [Documentazione ufficiale Filament](https://filamentphp.com/docs/3.x/support/blade-components/overview)
-- [Componenti Blade di Filament](https://filamentphp.com/docs/3.x/support/blade-components/overview)
+- [Documentazione ufficiale Filament](https://filamentphp.com/project_docs/3.x/support/blade-components/overview)
+- [Componenti Blade di Filament](https://filamentphp.com/project_docs/3.x/support/blade-components/overview)
 
 ## Best Practices
 
@@ -145,12 +145,12 @@ Per domande o problemi con i componenti Filament:
 
 ## Collegamenti correlati
 
-- [Regole per l'uso dei componenti Filament](../../../../docs/rules/filament-components.mdc)
-- [Documentazione Filament nel CMS](../../../../docs/filament/componenti-blade.md)
+- [Regole per l'uso dei componenti Filament](../../../../project_docs/rules/filament-components.mdc)
+- [Documentazione Filament nel CMS](../../../../project_docs/filament/componenti-blade.md)
 - [Convenzioni namespace Filament](../convenzioni-namespace-filament.md)
 - [Personalizzazioni avanzate Filament](../filament-personalizzazioni-avanzate.md) 
 
 ## Collegamenti tra versioni di componenti-blade.md
 * [componenti-blade.md](docs/filament/componenti-blade.md)
-* [componenti-blade.md](laravel/Modules/Cms/docs/filament/componenti-blade.md)
+* [componenti-blade.md](laravel/Modules/Cms/project_docs/filament/componenti-blade.md)
 

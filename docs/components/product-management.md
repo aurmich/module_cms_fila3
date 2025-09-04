@@ -474,11 +474,11 @@ $products = computed(function () {
 ## Risorse Utili
 
 ### Documentation
-- [Laravel Volt](https://livewire.laravel.com/docs/volt)
-- [Laravel Folio](https://laravel.com/docs/folio)
-- [Filament Forms](https://filamentphp.com/docs/forms) 
+- [Laravel Volt](https://livewire.laravel.com/project_docs/volt)
+- [Laravel Folio](https://laravel.com/project_docs/folio)
+- [Filament Forms](https://filamentphp.com/project_docs/forms) 
 
 ## Collegamenti tra versioni di product-management.md
-* [product-management.md](laravel/Modules/Cms/docs/product-management.md)
-* [product-management.md](laravel/Modules/Cms/docs/components/product-management.md)
+* [product-management.md](laravel/Modules/Cms/project_docs/product-management.md)
+* [product-management.md](laravel/Modules/Cms/project_docs/components/product-management.md)
 

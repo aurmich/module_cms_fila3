@@ -240,12 +240,12 @@ $emit = function ($event) {
 
 ## Risorse Utili
 
-- [Documentazione Ufficiale Volt](https://livewire.laravel.com/docs/volt)
+- [Documentazione Ufficiale Volt](https://livewire.laravel.com/project_docs/volt)
 - [Blog Laravel - Introducing Volt](https://blog.laravel.com/introducing-volt-an-elegantly-crafted-functional-api-for-livewire)
-- [Laravel Folio](https://laravel.com/docs/folio)
+- [Laravel Folio](https://laravel.com/project_docs/folio)
 - [Esempi di Componenti Volt](https://github.com/livewire/volt/tree/main/examples) 
 
 ## Collegamenti tra versioni di volt-introduction.md
-* [volt-introduction.md](laravel/Modules/Cms/docs/volt-introduction.md)
-* [volt-introduction.md](laravel/Modules/Cms/docs/components/volt-introduction.md)
+* [volt-introduction.md](laravel/Modules/Cms/project_docs/volt-introduction.md)
+* [volt-introduction.md](laravel/Modules/Cms/project_docs/components/volt-introduction.md)
 

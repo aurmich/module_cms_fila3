@@ -280,6 +280,6 @@ class StateTest extends TestCase
 
 ## Risorse Utili
 
-- [Laravel Documentation - Events](https://laravel.com/docs/events)
-- [Laravel Documentation - Notifications](https://laravel.com/docs/notifications)
+- [Laravel Documentation - Events](https://laravel.com/project_docs/events)
+- [Laravel Documentation - Notifications](https://laravel.com/project_docs/notifications)
 - [Design Patterns in PHP](https://refactoring.guru/design-patterns/state/php) 
