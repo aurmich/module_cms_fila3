@@ -66,19 +66,19 @@ class Footer extends Page implements HasForms
         return $form
             ->schema([
                 ColorPicker::make('background_color')
-                    ->label(__('Background Color')),
+                    ->label((string) __('Background Color')),
                 FileUpload::make('background')
-                    ->label(__('Background Image')),
+                    ->label((string) __('Background Image')),
                 ColorPicker::make('overlay_color')
-                    ->label(__('Overlay Color')),
+                    ->label((string) __('Overlay Color')),
                 Select::make('view')
                     ->options($options)
-                    ->label(__('View Template')),
+                    ->label((string) __('View Template')),
                 /*
                 RadioImage::make('_tpl')
                     ->options($options)
                     ->columnSpanFull()
-                    ->label(__('Template Selection')),
+                    ->label((string) __('Template Selection')),
                     */
             ])
             ->columns(2)
@@ -96,12 +96,12 @@ class Footer extends Page implements HasForms
             app(SaveFooterConfigAction::class)->execute($data);
 
             Notification::make()
-                ->title(__('Saved successfully'))
+                ->title((string) __('Saved successfully'))
                 ->success()
                 ->send();
         } catch (Halt $exception) {
             Notification::make()
-                ->title(__('Error!'))
+                ->title((string) __('Error!'))
                 ->danger()
                 ->body($exception->getMessage())
                 ->persistent()
@@ -135,7 +135,7 @@ class Footer extends Page implements HasForms
     {
         return [
             Action::make('updateAction')
-                ->label(__('Save Changes'))
+                ->label((string) __('Save Changes'))
                 ->submit('updateData'),
         ];
     }

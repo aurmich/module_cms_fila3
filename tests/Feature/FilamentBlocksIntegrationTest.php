@@ -5,16 +5,33 @@ declare(strict_types=1);
 namespace Modules\Cms\Tests\Feature;
 
 use function Pest\Laravel\get;
+<<<<<<< HEAD
 use function Pest\Laravel\actingAs;
 use Modules\SaluteOra\Models\User;
 use Modules\SaluteOra\Enums\UserTypeEnum;
+=======
+<<<<<<< HEAD
+=======
+use function Pest\Laravel\actingAs;
+use Modules\SaluteOra\Models\User;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
 
 uses(\Modules\Cms\Tests\TestCase::class);
 
 describe('Filament Blocks Integration', function () {
     it('integrates with PageContentBuilder correctly', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica che il PageContentBuilder funzioni correttamente
         // Questo test verifica l'integrazione tra CMS e frontend
@@ -22,7 +39,15 @@ describe('Filament Blocks Integration', function () {
 
     it('displays blocks with correct data structure', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica struttura dati blocchi
         $response->assertSee('landing-page');
@@ -36,7 +61,15 @@ describe('Filament Blocks Integration', function () {
 
     it('renders blocks using correct view templates', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica che i blocchi usino i template corretti
         // Questo test verifica l'integrazione con il sistema di view
@@ -44,7 +77,15 @@ describe('Filament Blocks Integration', function () {
 
     it('handles block configuration correctly', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica configurazione blocchi
         $response->assertSee('bg-white');
@@ -55,7 +96,15 @@ describe('Filament Blocks Integration', function () {
 
     it('displays block content with proper formatting', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica formattazione contenuto blocchi
         // Titolo e sottotitolo devono essere formattati correttamente
@@ -63,7 +112,15 @@ describe('Filament Blocks Integration', function () {
 
     it('handles block relationships correctly', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica relazioni tra blocchi
         // Questo test verifica che i blocchi si integrino correttamente
@@ -71,7 +128,15 @@ describe('Filament Blocks Integration', function () {
 
     it('renders blocks with correct styling', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica styling blocchi
         $response->assertSee('class="');
@@ -80,7 +145,15 @@ describe('Filament Blocks Integration', function () {
 
     it('handles block validation correctly', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica validazione blocchi
         // Questo test verifica che i blocchi siano validati correttamente
@@ -105,7 +178,15 @@ describe('Filament Blocks Integration', function () {
 
     it('handles block errors gracefully', function () {
         $response = get('/');
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         $response->assertStatus(200);
         // Verifica gestione errori blocchi
         // Questo test verifica che gli errori siano gestiti correttamente
@@ -113,6 +194,23 @@ describe('Filament Blocks Integration', function () {
 
     it('renders blocks with correct performance', function () {
         $startTime = microtime(true);
+<<<<<<< HEAD
+        
+=======
+<<<<<<< HEAD
+
+>>>>>>> 681ae6a (.)
+        $response = get('/');
+        
+        $endTime = microtime(true);
+        $loadTime = ($endTime - $startTime) * 1000;
+        
+        $response->assertStatus(200);
+<<<<<<< HEAD
+        
+=======
+
+=======
         
         $response = get('/');
         
@@ -121,8 +219,17 @@ describe('Filament Blocks Integration', function () {
         
         $response->assertStatus(200);
         
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         // Verifica che i blocchi si carichino entro tempi accettabili
         expect($loadTime)->toBeLessThan(500);
     });
 });
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)

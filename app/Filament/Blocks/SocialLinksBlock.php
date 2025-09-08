@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class SocialLinksBlock extends XotBaseBlock
@@ -15,8 +14,7 @@ class SocialLinksBlock extends XotBaseBlock
     public static function getBlockSchema(): array
     {
         return [
-            TextInput::make('title')
-                ,
+            TextInput::make('title'),
             Repeater::make('links')
                 ->schema([
                     Select::make('platform')
@@ -28,26 +26,20 @@ class SocialLinksBlock extends XotBaseBlock
                             'youtube' => 'YouTube',
                             'github' => 'GitHub',
                         ])
-                        ->required()
-                        
-                        ,
+                        ->required(),
                     TextInput::make('url')
                         ->url()
-                        ->required()
-                        
-                        ,
-                    TextInput::make('icon')
-                        
+                        ->required(),
+                    TextInput::make('icon'),
+
                 ])
-                ->collapsible()
-                
+                ->collapsible(),
+
         ];
     }
 
-   
-
     public static function getBlockLabel(): string
     {
-        return __('cms::filament.blocks.footer.social.label');
+        return (string) __('cms::filament.blocks.footer.social.label');
     }
 }

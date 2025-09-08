@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Pages;
 
-use Filament\Panel;
-use Filament\Pages\Page;
-use Filament\Widgets\Widget;
 use Filament\Facades\Filament;
-use Illuminate\Support\Facades\Route;
-use Filament\Widgets\WidgetConfiguration;
+use Filament\Panel;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Widgets\Widget;
+use Filament\Widgets\WidgetConfiguration;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Route;
 use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
 class Dashboard extends XotBaseDashboard
@@ -31,7 +30,7 @@ class Dashboard extends XotBaseDashboard
     {
         return static::$navigationLabel ??
             static::$title ??
-            __('filament-panels::pages/dashboard.title');
+            (string) __('filament-panels::pages/dashboard.title');
     }
 
     public static function getNavigationIcon(): ?string
@@ -56,7 +55,7 @@ class Dashboard extends XotBaseDashboard
         //    redirect('/blog/admin/dashboard');
         // }
 
-        // if (! $user->hasRole('super-admin')) {
+        // if (! $user->hasRole('super-admin')/** @phpstan-ignore method.nonObject */) {
         //     redirect('/admin');
         // }
     }
@@ -92,6 +91,6 @@ class Dashboard extends XotBaseDashboard
 
     public function getTitle(): string|Htmlable
     {
-        return static::$title ?? __('filament-panels::pages/dashboard.title');
+        return static::$title ?? (string) __('filament-panels::pages/dashboard.title');
     }
 }

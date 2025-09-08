@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
-
-use Spatie\Translatable\HasTranslations;
-use Modules\Xot\Contracts\ProfileContract;
 use Modules\Tenant\Models\Traits\SushiToJsons;
 
 /**
  * Modules\Cms\Models\Section
  *
- * @property array|null                                  $blocks
- * @property string|null                                 $id
- * @property array|null                                  $name
- * @property string|null                                 $slug
- * @property \Illuminate\Support\Carbon|null             $created_at
- * @property \Illuminate\Support\Carbon|null             $updated_at
- * @property string|null                                 $created_by
- * @property string|null                                 $updated_by
- * @property mixed                                       $translations
+ * @property array|null $blocks
+ * @property string|null $id
+ * @property array|null $name
+ * @property string|null $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $created_by
+ * @property string|null $updated_by
+ * @property mixed $translations
+ *
  * @method static \Modules\Cms\Database\Factories\SectionFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Section  newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Section  newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Section  query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section query()
+ *
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
  * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereBlocks($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCreatedBy($value)
@@ -39,6 +39,14 @@ use Modules\Tenant\Models\Traits\SushiToJsons;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereUpdatedBy($value)
+ * @method static Section|null first()
+ * @method static \Illuminate\Database\Eloquent\Collection<int, Section> get()
+ * @method static Section create(array $attributes = [])
+ * @method static Section firstOrCreate(array $attributes = [], array $values = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section where(string|\Closure $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereNotNull(string|\Illuminate\Contracts\Database\Query\Expression $columns)
+ * @method static int count(string $columns = '*')
+ *
  * @mixin IdeHelperSection
  * @mixin \Eloquent
  */
@@ -71,8 +79,6 @@ class Section extends BaseModelLang
         'updated_by' => 'string',
     ];
 
-
-
     /**
      * The attributes that should be cast.
      *
@@ -93,7 +99,7 @@ class Section extends BaseModelLang
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getRows():array
+    public function getRows(): array
     {
         return $this->getSushiRows();
     }

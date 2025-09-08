@@ -65,23 +65,23 @@ class Headernav extends Page implements HasForms
         return $form
             ->schema([
                 ColorPicker::make('background_color')
-                    ->label(__('Background Color')),
+                    ->label((string) __('Background Color')),
                 FileUpload::make('background')
-                    ->label(__('Background Image')),
+                    ->label((string) __('Background Image')),
                 ColorPicker::make('overlay_color')
-                    ->label(__('Overlay Color')),
+                    ->label((string) __('Overlay Color')),
                 TextInput::make('overlay_opacity')
                     ->numeric()
                     ->minValue(0)
                     ->maxValue(100)
-                    ->label(__('Overlay Opacity')),
+                    ->label((string) __('Overlay Opacity')),
                 TextInput::make('class')
-                    ->label(__('CSS Class')),
+                    ->label((string) __('CSS Class')),
                 TextInput::make('style')
-                    ->label(__('Inline Style')),
+                    ->label((string) __('Inline Style')),
                 Select::make('view')
                     ->options($options)
-                    ->label(__('View Template')),
+                    ->label((string) __('View Template')),
             ])
             ->columns(2)
             ->statePath('data');
@@ -98,12 +98,12 @@ class Headernav extends Page implements HasForms
             app(SaveHeadernavConfigAction::class)->execute($data);
 
             Notification::make()
-                ->title(__('Saved successfully'))
+                ->title((string) __('Saved successfully'))
                 ->success()
                 ->send();
         } catch (\Exception $exception) {
             Notification::make()
-                ->title(__('Error!'))
+                ->title((string) __('Error!'))
                 ->danger()
                 ->body($exception->getMessage())
                 ->persistent()
@@ -138,7 +138,7 @@ class Headernav extends Page implements HasForms
     {
         return [
             Action::make('updateAction')
-                ->label(__('Save Changes'))
+                ->label((string) __('Save Changes'))
                 ->submit('updateData'),
         ];
     }

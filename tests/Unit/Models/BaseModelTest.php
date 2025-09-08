@@ -4,6 +4,25 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Unit\Models;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> 681ae6a (.)
+use Modules\Cms\Models\BaseModel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Model;
+use Tests\TestCase;
+
+uses(TestCase::class, RefreshDatabase::class);
+
+beforeEach(function () {
+<<<<<<< HEAD
+    $this->baseModel = new class extends BaseModel {
+=======
+    $this->baseModel = new class extends BaseModel
+    {
+=======
 use Modules\Cms\Models\BaseModel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +32,8 @@ uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function () {
     $this->baseModel = new class extends BaseModel {
+>>>>>>> 09fa59df2d (.)
+>>>>>>> 681ae6a (.)
         protected $table = 'test_cms_table';
     };
 });
