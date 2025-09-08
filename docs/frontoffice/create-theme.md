@@ -65,7 +65,7 @@ theme-name/
     },
     "require": {
         "php": "^8.1",
-        "laravel/framework": "*"
+        "laravel/framework": "^10.0"
     }
 }
 ```

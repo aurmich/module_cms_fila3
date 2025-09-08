@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Modules\Cms\Tests\Feature\Frontoffice\FolioRoutes;
-
 uses(\Modules\Cms\Tests\TestCase::class);
 
 it('GET /it/dashboard acceptable for unauthenticated (redirect/401/403)', function (): void {
