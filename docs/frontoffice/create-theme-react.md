@@ -249,10 +249,10 @@ npm run copy
 
 ## Risorse Utili
 
-- [Documentazione React](https://reactjs.org/project_docs/getting-started.html)
+- [Documentazione React](https://reactjs.org/docs/getting-started.html)
 - [Documentazione Inertia.js](https://inertiajs.com/)
 - [Documentazione Vite](https://vitejs.dev/guide/)
-- [Documentazione Flowbite](https://flowbite.com/project_docs/getting-started/introduction/)
+- [Documentazione Flowbite](https://flowbite.com/docs/getting-started/introduction/)
 - [Documentazione Flowbite Laravel](https://github.com/themesberg/flowbite-laravel)
 
 ## Alternative

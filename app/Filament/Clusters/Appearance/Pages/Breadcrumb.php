@@ -59,11 +59,11 @@ class Breadcrumb extends Page implements HasForms
         return $form
             ->schema([
                 TextInput::make('class')
-                    ->label((string) __('Class'))
-                    ->placeholder((string) __('Enter breadcrumb class')),
+                    ->label(__('Class'))
+                    ->placeholder(__('Enter breadcrumb class')),
                 TextInput::make('style')
-                    ->label((string) __('Style'))
-                    ->placeholder((string) __('Enter breadcrumb style')),
+                    ->label(__('Style'))
+                    ->placeholder(__('Enter breadcrumb style')),
             ])
             ->columns(2)
             ->statePath('data');
@@ -84,12 +84,12 @@ class Breadcrumb extends Page implements HasForms
             TenantService::saveConfig('appearance', $up);
 
             Notification::make()
-                ->title((string) __('Saved successfully'))
+                ->title(__('Saved successfully'))
                 ->success()
                 ->send();
         } catch (Halt $exception) {
             Notification::make()
-                ->title((string) __('Error!'))
+                ->title(__('Error!'))
                 ->danger()
                 ->body($exception->getMessage())
                 ->persistent()
@@ -121,7 +121,7 @@ class Breadcrumb extends Page implements HasForms
     {
         return [
             Action::make('updateAction')
-                ->label((string) __('Save Changes'))
+                ->label(__('Save Changes'))
                 ->submit('updateData'),
         ];
     }

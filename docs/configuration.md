@@ -162,6 +162,6 @@ if (!$result->isValid()) {
 
 ## Collegamenti tra versioni di configuration.md
 * [configuration.md](docs/configuration.md)
-* [configuration.md](laravel/Modules/Xot/project_docs/configuration.md)
-* [configuration.md](laravel/Modules/Cms/project_docs/configuration.md)
+* [configuration.md](laravel/Modules/Xot/docs/configuration.md)
+* [configuration.md](laravel/Modules/Cms/docs/configuration.md)
 

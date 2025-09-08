@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
+use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 final class SocialBlock extends XotBaseBlock
@@ -16,14 +17,14 @@ final class SocialBlock extends XotBaseBlock
         return [
             TextInput::make('title')
                 ->required()
-                ->label((string) __('cms::blocks.social.fields.title')),
+                ->label(__('cms::blocks.social.fields.title')),
 
             Repeater::make('social_links')
-                ->label((string) __('cms::blocks.social.fields.social_links'))
+                ->label(__('cms::blocks.social.fields.social_links'))
                 ->schema([
                     Select::make('platform')
                         ->required()
-                        ->label((string) __('cms::blocks.social.fields.platform'))
+                        ->label(__('cms::blocks.social.fields.platform'))
                         ->options([
                             'facebook' => 'Facebook',
                             'twitter' => 'Twitter',
@@ -35,7 +36,7 @@ final class SocialBlock extends XotBaseBlock
                     TextInput::make('url')
                         ->required()
                         ->url()
-                        ->label((string) __('cms::blocks.social.fields.url')),
+                        ->label(__('cms::blocks.social.fields.url')),
                 ])
                 ->collapsible()
                 ->itemLabel(fn (array $state): ?string => $state['platform'] ?? null)
@@ -45,6 +46,6 @@ final class SocialBlock extends XotBaseBlock
 
     public static function getBlockLabel(): string
     {
-        return (string) __('cms::blocks.social.label');
+        return __('cms::blocks.social.label');
     }
 }

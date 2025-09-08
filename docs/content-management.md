@@ -6,7 +6,7 @@ Il sistema di gestione dei contenuti di il progetto è basato su un'architettura
 ## Componenti Principali
 
 ### PageContent
-- **Modello**: [`Modules\Cms\Models\PageContent`](../laravel/Modules/Cms/project_docs/page-content-management.md)
+- **Modello**: [`Modules\Cms\Models\PageContent`](../laravel/Modules/Cms/docs/page-content-management.md)
 - **Gestione**: Interfaccia admin Filament
 - **Storage**: File JSON con supporto multilingua
 - **Funzionalità**: Blocchi di contenuto flessibili e riutilizzabili
@@ -85,8 +85,8 @@ laravel/
 - Monitorare le dimensioni
 
 ## Links
-- [Documentazione PageContent](../laravel/Modules/Cms/project_docs/page-content-management.md)
-- [Filament Resources](../laravel/Modules/Cms/project_docs/filament-resources.md)
+- [Documentazione PageContent](../laravel/Modules/Cms/docs/page-content-management.md)
+- [Filament Resources](../laravel/Modules/Cms/docs/filament-resources.md)
 - [Performance](performance.md)
 
 ## Note
@@ -102,15 +102,15 @@ Questa documentazione è parte del sistema di documentazione di il progetto. Per
 - [Performance](performance.md) - Ottimizzazione performance
 
 ## Vedi Anche
-- [Modulo UI](../UI/project_docs/README.md) - Componenti di interfaccia
-- [Modulo Lang](../Lang/project_docs/README.md) - Gestione traduzioni
-- [Modulo Theme](../Theme/project_docs/README.md) - Gestione temi
-- [Modulo Xot](../Xot/project_docs/README.md) - Classi base e utilities
+- [Modulo UI](../UI/docs/README.md) - Componenti di interfaccia
+- [Modulo Lang](../Lang/docs/README.md) - Gestione traduzioni
+- [Modulo Theme](../Theme/docs/README.md) - Gestione temi
+- [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
 - [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
-- [Best Practices Laravel](https://laravel.com/project_docs/11.x/best-practices) - Best practices 
+- [Best Practices Laravel](https://laravel.com/docs/11.x/best-practices) - Best practices 
 Questa documentazione è parte del sistema di documentazione di SaluteOra. Per dettagli specifici sui singoli componenti, consultare la documentazione dei rispettivi moduli. 
 
 ## Collegamenti tra versioni di content-management.md
-* [content-management.md](laravel/Modules/Cms/project_docs/content-management.md)
-* [content-management.md](laravel/Modules/Cms/project_docs/roadmap/features/content-management.md)
+* [content-management.md](laravel/Modules/Cms/docs/content-management.md)
+* [content-management.md](laravel/Modules/Cms/docs/roadmap/features/content-management.md)
 

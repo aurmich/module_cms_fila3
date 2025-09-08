@@ -346,5 +346,5 @@ $posts = computed(function () {
 ## Risorse Utili
 
 - [Esempio Completo su GitHub](https://github.com/jasonlbeggs/laravel-news-volt-folio-example)
-- [Documentazione Laravel Volt](https://livewire.laravel.com/project_docs/volt)
-- [Documentazione Laravel Folio](https://laravel.com/project_docs/folio) 
+- [Documentazione Laravel Volt](https://livewire.laravel.com/docs/volt)
+- [Documentazione Laravel Folio](https://laravel.com/docs/folio) 

@@ -1,13 +1,13 @@
 # Indice della Documentazione - Modulo Cms
 
 ## Collegamenti Correlati
-- [Documentazione Generale SaluteOra](../../../../project_docs/README.md)
-- [Collegamenti Documentazione](../../../../project_docs/collegamenti-documentazione.md)
-- [Standard di Documentazione](../../../../project_docs/DOCUMENTATION_STANDARDS.md)
-- [Modulo Xot](../../Xot/project_docs/README.md)
-- [Modulo User](../../User/project_docs/README.md)
-- [Modulo UI](../../UI/project_docs/README.md)
-- [Tema One](../../../Themes/One/project_docs/README.md)
+- [Documentazione Generale SaluteOra](../../../../docs/README.md)
+- [Collegamenti Documentazione](../../../../docs/collegamenti-documentazione.md)
+- [Standard di Documentazione](../../../../docs/DOCUMENTATION_STANDARDS.md)
+- [Modulo Xot](../../Xot/docs/README.md)
+- [Modulo User](../../User/docs/README.md)
+- [Modulo UI](../../UI/docs/README.md)
+- [Tema One](../../../Themes/One/docs/README.md)
 
 ## Categorie Principali
 

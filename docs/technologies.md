@@ -22,13 +22,13 @@ Questo documento descrive le tecnologie principali utilizzate nel modulo CMS.
 - Componenti reattivi
 - Stato locale
 - Azioni e eventi
-- [Documentazione Volt](https://livewire.laravel.com/project_docs/volt)
+- [Documentazione Volt](https://livewire.laravel.com/docs/volt)
 
 ### Laravel Folio
 - Routing basato su file
 - Pagine dinamiche
 - Middleware per pagine
-- [Documentazione Folio](https://laravel.com/project_docs/folio)
+- [Documentazione Folio](https://laravel.com/docs/folio)
 
 ## Database
 
@@ -37,7 +37,7 @@ Questo documento descrive le tecnologie principali utilizzate nel modulo CMS.
 - Supporto transazioni
 - Indici e ottimizzazioni
 - [MySQL Docs](https://dev.mysql.com/doc/)
-- [PostgreSQL Docs](https://www.postgresql.org/project_docs/)
+- [PostgreSQL Docs](https://www.postgresql.org/docs/)
 
 ### Redis
 - Cache distribuita
@@ -105,7 +105,7 @@ Questo documento descrive le tecnologie principali utilizzate nel modulo CMS.
 - Debug e profiling
 - Query monitoring
 - Cache inspection
-- [Telescope Docs](https://laravel.com/project_docs/telescope)
+- [Telescope Docs](https://laravel.com/docs/telescope)
 
 ## Collegamenti
 

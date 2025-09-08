@@ -19,7 +19,7 @@
 - **Modules/Cms/config/laravellocalization.php** (opzionale): estende le impostazioni di localizzazione del modulo.
 - **Modules/Cms/lang/**: traduzioni specifiche del modulo caricate da `registerNamespaces()`.
 - **Modules/Cms/resources/views/pages/**: template Blade delle pagine CMS utilizzate da Folio.
-- **Modules/Cms/project_docs/**: documentazione del modulo (incluso questo file).
+- **Modules/Cms/docs/**: documentazione del modulo (incluso questo file).
 
 ## 3. Temi Pubblici (Themes)
 - **Themes/{pub_theme}/resources/lang/**: traduzioni del tema.

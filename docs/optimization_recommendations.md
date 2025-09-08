@@ -99,7 +99,7 @@ return [
 
 #### Struttura Target Proposta
 ```
-Cms/project_docs/
+Cms/docs/
 ├── README.md (overview, max 100 righe)
 ├── content-management/
 │   ├── README.md
@@ -318,7 +318,7 @@ php artisan cms:seo-audit
 
 ## Collegamenti
 
-- [Analisi Moduli Globale](../../../project_docs/modules_analysis_and_optimization.md)
+- [Analisi Moduli Globale](../../../docs/modules_analysis_and_optimization.md)
 - [Content Management Guide](content-management/)
 - [SEO Best Practices](seo/)
 

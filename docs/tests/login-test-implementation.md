@@ -274,14 +274,14 @@ expect($schema)->toHaveCount(3)
 ## 📚 Related Documentation
 
 ### Internal Links
-- [UserFactory Implementation](../../SaluteOra/project_docs/factories/UserFactory-implementation-final.md)
-- [LoginWidget Documentation](../../User/project_docs/widgets/login-widget.md)
-- [STI Architecture](../../SaluteOra/project_docs/models/sti-architecture.md)
+- [UserFactory Implementation](../../SaluteOra/docs/factories/UserFactory-implementation-final.md)
+- [LoginWidget Documentation](../../User/docs/widgets/login-widget.md)
+- [STI Architecture](../../SaluteOra/docs/models/sti-architecture.md)
 
 ### External References
 - [Pest Testing Documentation](https://pestphp.com/)
-- [Livewire Testing](https://livewire.laravel.com/project_docs/testing)
-- [Laravel Authentication](https://laravel.com/project_docs/authentication)
+- [Livewire Testing](https://livewire.laravel.com/docs/testing)
+- [Laravel Authentication](https://laravel.com/docs/authentication)
 
 ---
 

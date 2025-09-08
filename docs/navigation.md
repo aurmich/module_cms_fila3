@@ -23,7 +23,7 @@ return [
             'Custom 404 Page' => 'docs/custom-404-page',
         ],
     ],
-    'Jigsaw Docs' => 'https://jigsaw.tighten.co/project_docs/installation',
+    'Jigsaw Docs' => 'https://jigsaw.tighten.co/docs/installation',
 ];
 
 // config.php
@@ -34,10 +34,10 @@ $page->navigation
 ```
 
 ## Collegamenti tra versioni di navigation.md
-* [navigation.md](laravel/Modules/Gdpr/project_docs/navigation.md)
-* [navigation.md](laravel/Modules/Xot/project_docs/navigation.md)
-* [navigation.md](laravel/Modules/UI/project_docs/navigation.md)
-* [navigation.md](laravel/Modules/Cms/project_docs/blocks/navigation.md)
-* [navigation.md](laravel/Modules/Cms/project_docs/navigation.md)
-* [navigation.md](laravel/Modules/Cms/project_docs/components/navigation.md)
+* [navigation.md](laravel/Modules/Gdpr/docs/navigation.md)
+* [navigation.md](laravel/Modules/Xot/docs/navigation.md)
+* [navigation.md](laravel/Modules/UI/docs/navigation.md)
+* [navigation.md](laravel/Modules/Cms/docs/blocks/navigation.md)
+* [navigation.md](laravel/Modules/Cms/docs/navigation.md)
+* [navigation.md](laravel/Modules/Cms/docs/components/navigation.md)
 

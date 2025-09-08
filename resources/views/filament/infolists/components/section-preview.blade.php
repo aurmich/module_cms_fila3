@@ -9,7 +9,7 @@
             {!! $content !!}
         @else
             <div class="text-gray-500">
-                {{ (string) __('cms::sections.preview.empty') }}
+                {{ __('cms::sections.preview.empty') }}
             </div>
         @endif
     </div>

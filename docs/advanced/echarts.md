@@ -3,7 +3,7 @@ title: Echarts
 description: Echarts
 extends: _layouts.documentation
 section: content
-path: it/project_docs/advanced/
+path: it/docs/advanced/
 ---
 
 # Echarts {#echarts}
@@ -72,6 +72,6 @@ In questo modo, puoi utilizzare Echarts con Laravel e Apache per creare un grafi
 
 
 ## Collegamenti tra versioni di echarts.md
-* [echarts.md](laravel/Modules/Chart/project_docs/advanced/echarts.md)
-* [echarts.md](laravel/Modules/Cms/project_docs/advanced/echarts.md)
+* [echarts.md](laravel/Modules/Chart/docs/advanced/echarts.md)
+* [echarts.md](laravel/Modules/Cms/docs/advanced/echarts.md)
 

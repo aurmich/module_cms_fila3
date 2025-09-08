@@ -183,6 +183,6 @@ Se le rotte localizzate non funzionano correttamente:
 
 ## Riferimenti
 
-- [Documentazione Laravel Folio](https://laravel.com/project_docs/folio)
+- [Documentazione Laravel Folio](https://laravel.com/docs/folio)
 - [Documentazione Laravel Localization](https://github.com/mcamara/laravel-localization)
 - [Gestione delle Rotte Localizzate](../localizzazione/gestione-rotte-localizzate.md)

@@ -124,4 +124,4 @@ route('pages.show', ['locale' => app()->getLocale(), 'slug' => $page->getTransla
 - [Roadmap Principale](../../roadmap.md)
 - [Content Management](./content-management.md)
 - [Frontend Integration](./frontend-integration.md)
-- [Localizzazione URL](../../../Xot/project_docs/FOLIO_VOLT_ARCHITECTURE.md#localizzazione-degli-url)
+- [Localizzazione URL](../../../Xot/docs/FOLIO_VOLT_ARCHITECTURE.md#localizzazione-degli-url)

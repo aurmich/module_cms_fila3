@@ -6,33 +6,22 @@ namespace Modules\Cms\Models;
 
 use Modules\Tenant\Models\Traits\SushiToJsons;
 use Modules\Xot\Contracts\ProfileContract;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Modules\Cms\Models\Page.
  *
- * @property string $id
+ * @property string                          $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $slug
- * @property string $title
- * @property string $content
- * @property string|null $updated_by
- * @property string|null $created_by
+ * @property string                          $slug
+ * @property string                          $title
+ * @property string                          $content
+ * @property string|null                     $updated_by
+ * @property string|null                     $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
-<<<<<<< HEAD
  * @property string|null                     $deleted_by
  * @property array|null                      $content_blocks
-=======
- * @property string|null $deleted_by
- * @property array|null $content_blocks
- * @property array|null $sidebar_blocks
- * @property array|null $footer_blocks
- * @property array|null $middleware
- * @property mixed $translations
- * @property ProfileContract|null $creator
- * @property ProfileContract|null $updater
- *
->>>>>>> 681ae6a (.)
  * @method static \Illuminate\Database\Eloquent\Builder|Page newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Page newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Page onlyTrashed()
@@ -62,18 +51,8 @@ use Modules\Xot\Contracts\ProfileContract;
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
  * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
- *
  * @property array<array-key, mixed>|null $middleware
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
- * @method static Page|null first()
- * @method static \Illuminate\Database\Eloquent\Collection<int, Page> get()
- * @method static Page create(array $attributes = [])
- * @method static Page firstOrCreate(array $attributes = [], array $values = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Page where(string|\Closure $column, mixed $operator = null, mixed $value = null, string $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereNotNull(string|\Illuminate\Contracts\Database\Query\Expression $columns)
- * @method static int count(string $columns = '*')
- *
  * @mixin IdeHelperPage
  * @mixin \Eloquent
  */
@@ -123,6 +102,8 @@ class Page extends BaseModelLang
         return $this->getSushiRows();
     }
 
+
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -145,10 +126,10 @@ class Page extends BaseModelLang
         ];
     }
 
+
     public static function getMiddlewareBySlug(string $slug): array
     {
         $page = self::where('slug', $slug)->first();
-
         return $page->middleware ?? [];
     }
 }

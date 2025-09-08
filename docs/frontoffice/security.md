@@ -111,7 +111,7 @@ export function validateForm(data) {
 ## Risorse Utili
 
 - [OWASP Security Guidelines](https://owasp.org/www-project-top-ten/)
-- [Laravel Security Documentation](https://laravel.com/project_docs/12.x/security)
+- [Laravel Security Documentation](https://laravel.com/docs/12.x/security)
 - [Content Security Policy Guide](https://content-security-policy.com/)
 
 ## Troubleshooting
@@ -134,7 +134,7 @@ export function validateForm(data) {
    - Testare gli input 
 
 ## Collegamenti tra versioni di security.md
-* [security.md](laravel/Modules/Gdpr/project_docs/packages/security.md)
-* [security.md](laravel/Modules/Cms/project_docs/frontoffice/security.md)
-* [security.md](laravel/Themes/One/project_docs/security.md)
+* [security.md](laravel/Modules/Gdpr/docs/packages/security.md)
+* [security.md](laravel/Modules/Cms/docs/frontoffice/security.md)
+* [security.md](laravel/Themes/One/docs/security.md)
 

@@ -43,8 +43,8 @@ php artisan view:clear
 ```
 
 #### Documentazione Correlata
-- [Documentazione Vite nel Tema](../Themes/TwentyOne/project_docs/vite-error.md)
-- [Processo di Pubblicazione](../Themes/TwentyOne/project_docs/publishing.md)
+- [Documentazione Vite nel Tema](../Themes/TwentyOne/docs/vite-error.md)
+- [Processo di Pubblicazione](../Themes/TwentyOne/docs/publishing.md)
 - [Configurazione Vite](../Themes/TwentyOne/vite.config.js)
 
 ### 2. Manifest non trovato
@@ -97,14 +97,14 @@ Gli asset non vengono aggiornati dopo la pubblicazione.
 ## Collegamenti
 
 ### Documentazione del Tema
-- [Vite Error Documentation](../../Themes/TwentyOne/project_docs/vite-error.md)
-- [Publishing Process](../../Themes/TwentyOne/project_docs/publishing.md)
+- [Vite Error Documentation](../../Themes/TwentyOne/docs/vite-error.md)
+- [Publishing Process](../../Themes/TwentyOne/docs/publishing.md)
 - [Vite Configuration](../../Themes/TwentyOne/vite.config.js)
 
 ### Documentazione Root
-- [Tema Management](../../../project_docs/themes/management.md)
-- [Asset Compilation](../../../project_docs/build/asset-compilation.md)
-- [Cache Management](../../../project_docs/cache/management.md)
+- [Tema Management](../../../docs/themes/management.md)
+- [Asset Compilation](../../../docs/build/asset-compilation.md)
+- [Cache Management](../../../docs/cache/management.md)
 
 ## Note Importanti
 

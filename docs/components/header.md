@@ -52,11 +52,11 @@ Il componente Header è un elemento fondamentale dell'interfaccia utente che for
 ## Collegamenti
 - [Documentazione Componenti](./README.md)
 - [Documentazione Blocchi](../blocks/README.md)
-- [Convenzioni Layout](../../../project_docs/laravel-conventions.md) 
+- [Convenzioni Layout](../../../docs/laravel-conventions.md) 
 
 ## Collegamenti tra versioni di header.md
 * [header.md](docs/sections/header.md)
-* [header.md](laravel/Modules/Cms/project_docs/components/header.md)
-* [header.md](laravel/Modules/Cms/project_docs/sections/header.md)
-* [header.md](laravel/Themes/One/project_docs/sections/header.md)
+* [header.md](laravel/Modules/Cms/docs/components/header.md)
+* [header.md](laravel/Modules/Cms/docs/sections/header.md)
+* [header.md](laravel/Themes/One/docs/sections/header.md)
 

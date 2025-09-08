@@ -119,7 +119,7 @@ Esempio:
 
 ## Collegamenti tra versioni di header.md
 * [header.md](docs/sections/header.md)
-* [header.md](laravel/Modules/Cms/project_docs/components/header.md)
-* [header.md](laravel/Modules/Cms/project_docs/sections/header.md)
-* [header.md](laravel/Themes/One/project_docs/sections/header.md)
+* [header.md](laravel/Modules/Cms/docs/components/header.md)
+* [header.md](laravel/Modules/Cms/docs/sections/header.md)
+* [header.md](laravel/Themes/One/docs/sections/header.md)
 

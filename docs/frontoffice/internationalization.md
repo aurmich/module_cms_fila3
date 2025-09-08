@@ -110,7 +110,7 @@ Route::get('locale/{locale}', function ($locale) {
 
 ## Risorse Utili
 
-- [Documentazione Laravel Localization](https://laravel.com/project_docs/12.x/localization)
+- [Documentazione Laravel Localization](https://laravel.com/docs/12.x/localization)
 - [Vite Plugin Translations](https://github.com/dcodegroup/vite-plugin-laravel-translations)
 - [Laravel Localization Guide](https://laravel-news.com/laravel-localization)
 

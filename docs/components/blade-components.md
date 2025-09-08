@@ -155,6 +155,6 @@ public function test_section_renders_blocks()
 ```
 
 ## Collegamenti
-- [Documentazione Blade](https://laravel.com/project_docs/blade)
+- [Documentazione Blade](https://laravel.com/docs/blade)
 - [Section Component](section-component.md)
-- [Documentazione Root](../../../../project_docs/components.md) 
+- [Documentazione Root](../../../../docs/components.md) 

@@ -114,8 +114,8 @@ I blocchi sono l'unità base di contenuto. Ogni blocco:
 ## Collegamenti tra versioni di architecture.md
 * [architecture.md](docs/tecnico/filament/architecture.md)
 * [architecture.md](docs/rules/architecture.md)
-* [architecture.md](laravel/Modules/Gdpr/project_docs/architecture.md)
-* [architecture.md](laravel/Modules/Cms/project_docs/frontoffice/architecture.md)
-* [architecture.md](laravel/Modules/Cms/project_docs/architecture.md)
-* [architecture.md](laravel/Themes/One/project_docs/roadmap/inspiration/architecture.md)
+* [architecture.md](laravel/Modules/Gdpr/docs/architecture.md)
+* [architecture.md](laravel/Modules/Cms/docs/frontoffice/architecture.md)
+* [architecture.md](laravel/Modules/Cms/docs/architecture.md)
+* [architecture.md](laravel/Themes/One/docs/roadmap/inspiration/architecture.md)
 

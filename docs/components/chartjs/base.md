@@ -3,7 +3,7 @@ title: Base
 description: Base
 extends: _layouts.documentation
 section: content
-path: it/project_docs/components/chartjs
+path: it/docs/components/chartjs
 ---
 
 # Base {#base}
@@ -39,8 +39,8 @@ title="Valori Giornalieri"
 </x-chartjs.base>
 ```
 
-Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/project_docs/latest/).
+Per altre informazioni leggere documentazione [ChartJs](https://www.chartjs.org/docs/latest/).
 ## Collegamenti tra versioni di base.md
-* [base.md](laravel/Modules/Chart/project_docs/components/chartjs/base.md)
-* [base.md](laravel/Modules/Cms/project_docs/components/chartjs/base.md)
+* [base.md](laravel/Modules/Chart/docs/components/chartjs/base.md)
+* [base.md](laravel/Modules/Cms/docs/components/chartjs/base.md)
 

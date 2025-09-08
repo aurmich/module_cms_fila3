@@ -8,20 +8,20 @@ https://github.com/42coders/document-templates
 
 https://phpdox.net/getting-started.html
 
-https://docusaurus.io/project_docs/installation
+https://docusaurus.io/docs/installation
 
 https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/laravel-introduction.html
 
 https://github.com/FriendsOfPHP/Sami
 
-https://larecipe.saleem.dev/project_docs/2.2/installation
+https://larecipe.saleem.dev/docs/2.2/installation
 
 
 https://docs.readthedocs.io/en/stable/tutorial/
 
 https://www.atlantis-cms.com/docs
 
-https://beyondco.de/project_docs/laravel-apidoc-generator/getting-started/documenting-your-api
+https://beyondco.de/docs/laravel-apidoc-generator/getting-started/documenting-your-api
 
 https://scribe.knuckles.wtf/laravel/reference/html
 
@@ -36,7 +36,7 @@ https://docs.getstisla.com/#/en/2.2.0/javascript/modal
 
 https://infyom.com/open-source/
 
-https://lavalite.org/project_docs/master/theme
+https://lavalite.org/docs/master/theme
 
 https://filamentphp.com/
 

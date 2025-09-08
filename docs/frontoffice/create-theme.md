@@ -408,6 +408,6 @@ public function boot(): void
 
 ## Risorse Utili
 
-- [Documentazione Filament Forms](https://filamentphp.com/project_docs/forms)
-- [Documentazione Filament Widgets](https://filamentphp.com/project_docs/widgets)
-- [Best Practices Filament](https://filamentphp.com/project_docs/best-practices)
+- [Documentazione Filament Forms](https://filamentphp.com/docs/forms)
+- [Documentazione Filament Widgets](https://filamentphp.com/docs/widgets)
+- [Best Practices Filament](https://filamentphp.com/docs/best-practices)

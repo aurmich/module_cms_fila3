@@ -131,7 +131,7 @@ return [
 
 ## Risorse Utili
 
-- [Laravel Performance Guide](https://laravel.com/project_docs/12.x/performance)
+- [Laravel Performance Guide](https://laravel.com/docs/12.x/performance)
 - [Vite Performance Optimization](https://vitejs.dev/guide/performance.html)
 - [Web Performance Best Practices](https://web.dev/fast/)
 
@@ -155,12 +155,12 @@ return [
    - Implementare soluzioni 
 
 ## Collegamenti tra versioni di performance.md
-* [performance.md](laravel/vendor/spatie/laravel-data/project_docs/advanced-usage/performance.md)
-* [performance.md](laravel/Modules/Xot/project_docs/features/performance.md)
-* [performance.md](laravel/Modules/Xot/project_docs/packages/performance.md)
-* [performance.md](laravel/Modules/Xot/project_docs/roadmap/architecture/performance.md)
-* [performance.md](laravel/Modules/UI/project_docs/standards/performance.md)
-* [performance.md](laravel/Modules/Lang/project_docs/packages/performance.md)
-* [performance.md](laravel/Modules/Job/project_docs/packages/performance.md)
-* [performance.md](laravel/Modules/Cms/project_docs/frontoffice/performance.md)
+* [performance.md](laravel/vendor/spatie/laravel-data/docs/advanced-usage/performance.md)
+* [performance.md](laravel/Modules/Xot/docs/features/performance.md)
+* [performance.md](laravel/Modules/Xot/docs/packages/performance.md)
+* [performance.md](laravel/Modules/Xot/docs/roadmap/architecture/performance.md)
+* [performance.md](laravel/Modules/UI/docs/standards/performance.md)
+* [performance.md](laravel/Modules/Lang/docs/packages/performance.md)
+* [performance.md](laravel/Modules/Job/docs/packages/performance.md)
+* [performance.md](laravel/Modules/Cms/docs/frontoffice/performance.md)
 

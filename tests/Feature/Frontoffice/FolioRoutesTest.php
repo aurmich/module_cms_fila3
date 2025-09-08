@@ -2,14 +2,6 @@
 
 declare(strict_types=1);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-namespace Modules\Cms\Tests\Feature\Frontoffice;
-
-=======
->>>>>>> 09fa59df2d (.)
->>>>>>> 681ae6a (.)
 use Illuminate\Support\Facades\Artisan;
 
 uses(\Modules\Cms\Tests\TestCase::class);
@@ -51,29 +43,13 @@ it('validates Folio routes basic accessibility and localization', function (): v
         // Root should redirect to /{locale}
         if ($path === '/') {
             $response = $this->get($path);
-<<<<<<< HEAD
             $response->assertRedirect('/' . $locale);
-=======
-<<<<<<< HEAD
-            $response->assertRedirect('/'.$locale);
-
-=======
-            $response->assertRedirect('/' . $locale);
->>>>>>> 09fa59df2d (.)
->>>>>>> 681ae6a (.)
             continue;
         }
 
         // Skip dynamic placeholder routes; they require seeded data or specific tokens
         if (str_contains($path, '{')) {
             $this->markTestSkipped("Dynamic Folio route requires fixture: {$path}");
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 09fa59df2d (.)
->>>>>>> 681ae6a (.)
             continue;
         }
 
@@ -92,24 +68,10 @@ it('validates Folio routes basic accessibility and localization', function (): v
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308, 401, 403]);
 
         // If homepage, assert HTML lang attribute and 200 OK
-<<<<<<< HEAD
         if ($path === '/' . $locale) {
             $response->assertStatus(200);
             $response->assertSee('<html', false);
             $response->assertSee(' lang="' . $locale . '"', false);
-=======
-<<<<<<< HEAD
-        if ($path === '/'.$locale) {
-            $response->assertStatus(200);
-            $response->assertSee('<html', false);
-            $response->assertSee(' lang="'.$locale.'"', false);
-=======
-        if ($path === '/' . $locale) {
-            $response->assertStatus(200);
-            $response->assertSee('<html', false);
-            $response->assertSee(' lang="' . $locale . '"', false);
->>>>>>> 09fa59df2d (.)
->>>>>>> 681ae6a (.)
         }
     }
 });

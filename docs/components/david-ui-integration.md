@@ -286,7 +286,7 @@ public function it_handles_click_events(): void
 ## Risorse Utili
 
 ### Documentation
-- [David UI Documentation](https://www.creative-tim.com/david-ui/project_docs/)
+- [David UI Documentation](https://www.creative-tim.com/david-ui/docs/)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Alpine.js](https://alpinejs.dev/docs)
 

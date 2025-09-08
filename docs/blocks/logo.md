@@ -149,4 +149,4 @@ Le Blade dei blocchi devono includere un wrapper con le classi del tema per sfon
 - [UI Components](../ui/components.md)
 - [Best Practices Immagini](../ui/image-guidelines.md)
 - [Accessibilità](../ui/accessibility.md)
-- [Filament Icons](https://filamentphp.com/project_docs/3.x/support/icons)
+- [Filament Icons](https://filamentphp.com/docs/3.x/support/icons)

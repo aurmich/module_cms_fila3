@@ -92,6 +92,6 @@ Il sistema di gestione media supporta:
 - [Performance Optimization](../performance/optimization.md)
 
 ## Collegamenti tra versioni di content-management.md
-* [content-management.md](laravel/Modules/Cms/project_docs/content-management.md)
-* [content-management.md](laravel/Modules/Cms/project_docs/roadmap/features/content-management.md)
+* [content-management.md](laravel/Modules/Cms/docs/content-management.md)
+* [content-management.md](laravel/Modules/Cms/docs/roadmap/features/content-management.md)
 

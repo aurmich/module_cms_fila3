@@ -158,6 +158,6 @@ Il componente di registrazione gestisce la creazione di nuovi account utente.
 
 ## Risorse Utili
 
-- [Documentazione Laravel Authentication](https://laravel.com/project_docs/authentication)
+- [Documentazione Laravel Authentication](https://laravel.com/docs/authentication)
 - [Documentazione Tailwind CSS](https://tailwindcss.com/docs)
-- [Best Practices per la Sicurezza](https://laravel.com/project_docs/security) 
+- [Best Practices per la Sicurezza](https://laravel.com/docs/security) 

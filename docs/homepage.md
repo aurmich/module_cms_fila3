@@ -105,9 +105,9 @@ Per modifiche strutturali più profonde:
 
 Per una documentazione più approfondita sull'architettura della homepage, consulta:
 
-- [Architettura della Homepage](../laravel/Modules/Cms/project_docs/homepage_architecture.md) - Analisi dettagliata del funzionamento della homepage
-- [Gestione dei Contenuti](../laravel/Modules/Cms/project_docs/content.md) - Come gestire i contenuti tramite file JSON
-- [Frontoffice](../laravel/Modules/Cms/project_docs/frontoffice.md) - Panoramica del frontoffice di il progetto
+- [Architettura della Homepage](../laravel/Modules/Cms/docs/homepage_architecture.md) - Analisi dettagliata del funzionamento della homepage
+- [Gestione dei Contenuti](../laravel/Modules/Cms/docs/content.md) - Come gestire i contenuti tramite file JSON
+- [Frontoffice](../laravel/Modules/Cms/docs/frontoffice.md) - Panoramica del frontoffice di il progetto
 
 ## Riferimenti
 
@@ -124,9 +124,9 @@ Per una documentazione più approfondita sull'architettura della homepage, consu
 - [Frontoffice](frontoffice.md) - Integrazione con il frontoffice
 
 ## Vedi Anche
-- [Modulo UI](../UI/project_docs/README.md) - Componenti UI per la homepage
-- [Modulo Theme](../Theme/project_docs/README.md) - Personalizzazione tema
-- [Modulo Lang](../Lang/project_docs/README.md) - Gestione traduzioni
+- [Modulo UI](../UI/docs/README.md) - Componenti UI per la homepage
+- [Modulo Theme](../Theme/docs/README.md) - Personalizzazione tema
+- [Modulo Lang](../Lang/docs/README.md) - Gestione traduzioni
 - [Gestione Contenuti](content-management.md) - Sistema di gestione contenuti
 - [Sezioni](sections.md) - Gestione delle sezioni
 - [Layout](struttura-layout-componenti-blade-saluteora.md) - Struttura dei layout

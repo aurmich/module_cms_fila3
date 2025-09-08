@@ -154,6 +154,6 @@ npm run copy
 
 ## Collegamenti tra versioni di themes.md
 * [themes.md](docs/rules/themes.md)
-* [themes.md](laravel/Modules/Xot/project_docs/themes.md)
-* [themes.md](laravel/Modules/Cms/project_docs/frontoffice/themes.md)
+* [themes.md](laravel/Modules/Xot/docs/themes.md)
+* [themes.md](laravel/Modules/Cms/docs/frontoffice/themes.md)
 

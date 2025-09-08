@@ -54,15 +54,15 @@ Il componente Footer è un elemento fondamentale dell'interfaccia utente che for
 ## Collegamenti
 - [Documentazione Componenti](./README.md)
 - [Documentazione Blocchi](../blocks/README.md)
-- [Convenzioni Layout](../../../project_docs/laravel-conventions.md) 
+- [Convenzioni Layout](../../../docs/laravel-conventions.md) 
 
 ## Collegamenti tra versioni di footer.md
 * [footer.md](docs/laravel-app/themes/one/components/footer.md)
 * [footer.md](docs/sections/footer.md)
-* [footer.md](laravel/Modules/UI/project_docs/components/footer.md)
-* [footer.md](laravel/Modules/Cms/project_docs/blocks/footer.md)
-* [footer.md](laravel/Modules/Cms/project_docs/themes/one/footer.md)
-* [footer.md](laravel/Modules/Cms/project_docs/components/footer.md)
-* [footer.md](laravel/Themes/One/project_docs/components/layouts/footer.md)
-* [footer.md](laravel/Themes/One/project_docs/sections/footer.md)
+* [footer.md](laravel/Modules/UI/docs/components/footer.md)
+* [footer.md](laravel/Modules/Cms/docs/blocks/footer.md)
+* [footer.md](laravel/Modules/Cms/docs/themes/one/footer.md)
+* [footer.md](laravel/Modules/Cms/docs/components/footer.md)
+* [footer.md](laravel/Themes/One/docs/components/layouts/footer.md)
+* [footer.md](laravel/Themes/One/docs/sections/footer.md)
 

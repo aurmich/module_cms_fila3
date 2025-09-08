@@ -79,7 +79,6 @@ return array (
     array (
       'label' => 'create',
     ),
-<<<<<<< HEAD
     'description' => 
     array (
       'description' => 'description',
@@ -94,8 +93,6 @@ return array (
       'placeholder' => 'disk',
       'helper_text' => 'disk',
     ),
-=======
->>>>>>> 681ae6a (.)
   ),
   'actions' => 
   array (

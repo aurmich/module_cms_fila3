@@ -441,7 +441,7 @@ npm run copy
 - [Documentazione Folio](https://github.com/livewire/folio)
 - [Documentazione Volt](https://github.com/livewire/volt)
 - [Documentazione Filament](https://filamentphp.com/docs)
-- [Documentazione Flowbite](https://flowbite.com/project_docs/getting-started/introduction/)
+- [Documentazione Flowbite](https://flowbite.com/docs/getting-started/introduction/)
 - [Documentazione Flowbite Laravel](https://github.com/themesberg/flowbite-laravel)
 
 ## Alternative

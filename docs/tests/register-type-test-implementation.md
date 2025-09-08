@@ -247,10 +247,10 @@ expect()->extend('toHaveDynamicHeading', function (string $type) {
 ## 🔗 Collegamenti
 
 ### Documentazione Correlata
-- [RegistrationWidget Documentation](../../../User/project_docs/filament/widgets/registration-widget.md)
+- [RegistrationWidget Documentation](../../../User/docs/filament/widgets/registration-widget.md)
 - [Folio Pages Implementation](../folio-pages.md)
 - [Login Test Implementation](./login-test-implementation.md)
-- [Test Organization Rules](../../../project_docs/test-organization-rules.md)
+- [Test Organization Rules](../../../docs/test-organization-rules.md)
 
 ### File Correlati
 - **Page**: `/Themes/One/resources/views/pages/auth/[type]/register.blade.php`

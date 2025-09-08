@@ -171,9 +171,9 @@ Questo documento contiene l'analisi dettagliata dei problemi rilevati da PHPStan
   ```
 
 ## Collegamenti Correlati
-- [Documentazione Generale PHPStan](/project_docs/phpstan/INDEX.md)
+- [Documentazione Generale PHPStan](/docs/phpstan/INDEX.md)
 - [Best Practices CMS](../INDEX.md#best-practices)
-- [Gestione Errori](/project_docs/errors/README.md)
+- [Gestione Errori](/docs/errors/README.md)
 
 ## Monitoraggio
 - Eseguire PHPStan dopo ogni modifica
