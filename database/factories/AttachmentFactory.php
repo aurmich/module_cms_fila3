@@ -20,6 +20,9 @@ class AttachmentFactory extends Factory
     }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> b4e4106 (.)
+=======
+>>>>>>> 137bceb (.)

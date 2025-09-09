@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 137bceb (.)
 <?php
 
 return [
@@ -44,6 +47,7 @@ return [
         ],
     ],
 ];
+<<<<<<< HEAD
 =======
 <?php return array (
   'navigation' => 
@@ -101,3 +105,5 @@ return [
   ),
 );
 >>>>>>> b4e4106 (.)
+=======
+>>>>>>> 137bceb (.)

@@ -24,10 +24,14 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> b4e4106 (.)
+=======
+
+>>>>>>> 137bceb (.)
     'actions' => [
         'create' => 'Create Section',
         'edit' => 'Edit Section',
@@ -36,10 +40,14 @@ return [
         'cancel' => 'Cancel',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> b4e4106 (.)
+=======
+
+>>>>>>> 137bceb (.)
     'messages' => [
         'created' => 'Section created successfully',
         'updated' => 'Section updated successfully',
@@ -47,7 +55,11 @@ return [
         'error' => 'An error occurred',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 ];
 =======
 ]; 
 >>>>>>> b4e4106 (.)
+=======
+];
+>>>>>>> 137bceb (.)

@@ -24,10 +24,14 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> b4e4106 (.)
+=======
+
+>>>>>>> 137bceb (.)
     'actions' => [
         'create' => 'Crea Sezione',
         'edit' => 'Modifica Sezione',
@@ -36,10 +40,14 @@ return [
         'cancel' => 'Annulla',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> b4e4106 (.)
+=======
+
+>>>>>>> 137bceb (.)
     'messages' => [
         'created' => 'Sezione creata con successo',
         'updated' => 'Sezione aggiornata con successo',
@@ -47,7 +55,11 @@ return [
         'error' => 'Si è verificato un errore',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 ];
 =======
 ]; 
 >>>>>>> b4e4106 (.)
+=======
+];
+>>>>>>> 137bceb (.)

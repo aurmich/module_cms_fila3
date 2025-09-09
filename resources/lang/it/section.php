@@ -1,6 +1,9 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 137bceb (.)
 return [
     'navigation' => [
         'label' => 'Sezioni',
@@ -10,6 +13,7 @@ return [
         'sort' => 65,
     ],
 ];
+<<<<<<< HEAD
 =======
 return array (
   'navigation' => 
@@ -21,3 +25,5 @@ return array (
   ),
 );
 >>>>>>> b4e4106 (.)
+=======
+>>>>>>> 137bceb (.)

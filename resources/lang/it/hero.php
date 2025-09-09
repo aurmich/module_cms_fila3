@@ -1,6 +1,9 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 137bceb (.)
 return [
     'fields' => [
         'title' => [
@@ -53,6 +56,7 @@ return [
         ],
     ],
 ];
+<<<<<<< HEAD
 =======
 return array (
   'fields' => 
@@ -116,3 +120,5 @@ return array (
   ),
 );
 >>>>>>> b4e4106 (.)
+=======
+>>>>>>> 137bceb (.)
