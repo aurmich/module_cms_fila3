@@ -26,6 +26,7 @@ README.md export-ignore
 *.scss linguist-vendored
 *.js linguist-vendored
 <<<<<<< HEAD
+<<<<<<< HEAD
 CHANGELOG.md export-ignore
 <<<<<<< HEAD
 >>>>>>> fd753da3 (.)
@@ -34,3 +35,6 @@ CHANGELOG.md export-ignore
 =======
 CHANGELOG.md export-ignore
 >>>>>>> bc33217 (.)
+=======
+CHANGELOG.md export-ignore
+>>>>>>> 91774a0 (.)

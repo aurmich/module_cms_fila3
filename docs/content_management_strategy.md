@@ -92,9 +92,9 @@ Le pagine istituzionali devono:
 ## Collegamento Documentazione Root
 
 Questa strategia integra:
-- [Gestione Homepage](/var/www/html/_bases/base_saluteora/project_docs/gestione-homepage.md)
-- [Best Practice UX](/var/www/html/_bases/base_saluteora/project_docs/ux-design-principles.md)  
-- [Compliance GDPR](/var/www/html/_bases/base_saluteora/project_docs/privacy-compliance.md)
+- [Gestione Homepage](/var/www/html/_bases/base_saluteora/docs/gestione-homepage.md)
+- [Best Practice UX](/var/www/html/_bases/base_saluteora/docs/ux-design-principles.md)  
+- [Compliance GDPR](/var/www/html/_bases/base_saluteora/docs/privacy-compliance.md)
 
 ---
 

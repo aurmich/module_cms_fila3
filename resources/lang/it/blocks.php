@@ -22,7 +22,7 @@ return [
             ],
         ],
     ],
-
+    
     'navigation' => [
         'label' => 'Navigazione',
         'fields' => [
@@ -36,7 +36,7 @@ return [
             ],
         ],
     ],
-
+    
     'social' => [
         'label' => 'Social',
         'fields' => [
@@ -54,4 +54,4 @@ return [
             ],
         ],
     ],
-];
+]; 

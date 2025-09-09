@@ -1,36 +1,42 @@
 <?php
 
-return [
-    'fields' => [
-        'title' => [
-            'label' => 'title',
-            'placeholder' => 'title',
-            'helper_text' => 'title',
-            'description' => 'title',
-        ],
-        'links' => [
-            'label' => 'links',
-            'placeholder' => 'links',
-            'helper_text' => 'links',
-            'description' => 'links',
-        ],
-        'label' => [
-            'label' => 'label',
-            'placeholder' => 'label',
-            'helper_text' => 'label',
-            'description' => 'label',
-        ],
-        'url' => [
-            'label' => 'url',
-            'placeholder' => 'url',
-            'helper_text' => 'url',
-            'description' => 'url',
-        ],
-        'icon' => [
-            'label' => 'icon',
-            'placeholder' => 'icon',
-            'helper_text' => 'icon',
-            'description' => 'icon',
-        ],
-    ],
-];
+return array (
+  'fields' => 
+  array (
+    'title' => 
+    array (
+      'label' => 'title',
+      'placeholder' => 'title',
+      'helper_text' => 'title',
+      'description' => 'title',
+    ),
+    'links' => 
+    array (
+      'label' => 'links',
+      'placeholder' => 'links',
+      'helper_text' => 'links',
+      'description' => 'links',
+    ),
+    'label' => 
+    array (
+      'label' => 'label',
+      'placeholder' => 'label',
+      'helper_text' => 'label',
+      'description' => 'label',
+    ),
+    'url' => 
+    array (
+      'label' => 'url',
+      'placeholder' => 'url',
+      'helper_text' => 'url',
+      'description' => 'url',
+    ),
+    'icon' => 
+    array (
+      'label' => 'icon',
+      'placeholder' => 'icon',
+      'helper_text' => 'icon',
+      'description' => 'icon',
+    ),
+  ),
+);
