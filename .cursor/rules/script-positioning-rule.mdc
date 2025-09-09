@@ -1,0 +1,61 @@
+# Regola Fondamentale: Posizione Script
+
+## Descrizione
+TUTTI gli script (PHP, Bash, Python, etc.) devono essere posizionati SEMPRE nella cartella `bashscripts` del progetto, mai nella directory Laravel o in altre posizioni.
+
+## Regola Assoluta
+- **Posizione corretta**: `/var/www/html/_bases/base_saluteora/bashscripts/`
+- **Posizione vietata**: `/var/www/html/_bases/base_saluteora/laravel/` o qualsiasi altra directory
+- **Categorizzazione**: Gli script devono essere organizzati in sottocartelle appropriate
+
+## Struttura Corretta
+```
+bashscripts/
+├── database/
+│   ├── seeding/
+│   ├── migration/
+│   └── backup/
+├── maintenance/
+│   ├── cleanup/
+│   └── optimization/
+├── deployment/
+│   ├── staging/
+│   └── production/
+└── utilities/
+    ├── monitoring/
+    └── reporting/
+```
+
+## Motivazione
+- Separazione chiara tra codice applicativo e script di utilità
+- Facilità di manutenzione e backup
+- Organizzazione logica per tipo di operazione
+- Rispetto dell'architettura modulare Laraxot
+
+## Anti-pattern da Evitare
+- ❌ Posizionare script nella directory Laravel
+- ❌ Creare script in posizioni casuali
+- ❌ Mescolare script con codice applicativo
+- ❌ Non categorizzare gli script per tipo
+
+## Esempi di Applicazione
+- Script di seeding database → `bashscripts/database/seeding/`
+- Script di manutenzione → `bashscripts/maintenance/`
+- Script di deployment → `bashscripts/deployment/`
+- Script di utilità → `bashscripts/utilities/`
+
+## Checklist
+- [ ] Script posizionato in `bashscripts/` con sottocartella appropriata
+- [ ] Nome file descrittivo e coerente
+- [ ] Documentazione aggiornata con nuova posizione
+- [ ] Riferimenti aggiornati in tutta la documentazione
+
+## Collegamenti
+- [docs/script-organization.md](../../docs/script-organization.md)
+- [docs/bashscripts-structure.md](../../docs/bashscripts-structure.md)
+
+*Ultimo aggiornamento: 2025-01-06*
+description:
+globs:
+alwaysApply: false
+---

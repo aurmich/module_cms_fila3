@@ -23,7 +23,11 @@ return [
             'placeholder' => 'Aggiungi blocchi',
         ],
     ],
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b4e4106 (.)
     'actions' => [
         'create' => 'Crea Sezione',
         'edit' => 'Modifica Sezione',
@@ -31,11 +35,19 @@ return [
         'save' => 'Salva Sezione',
         'cancel' => 'Annulla',
     ],
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b4e4106 (.)
     'messages' => [
         'created' => 'Sezione creata con successo',
         'updated' => 'Sezione aggiornata con successo',
         'deleted' => 'Sezione eliminata con successo',
         'error' => 'Si è verificato un errore',
     ],
+<<<<<<< HEAD
 ];
+=======
+]; 
+>>>>>>> b4e4106 (.)

@@ -22,7 +22,11 @@ return [
             ],
         ],
     ],
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b4e4106 (.)
     'navigation' => [
         'label' => 'Navigation',
         'fields' => [
@@ -36,7 +40,11 @@ return [
             ],
         ],
     ],
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b4e4106 (.)
     'social' => [
         'label' => 'Social',
         'fields' => [
@@ -54,4 +62,8 @@ return [
             ],
         ],
     ],
+<<<<<<< HEAD
 ];
+=======
+]; 
+>>>>>>> b4e4106 (.)

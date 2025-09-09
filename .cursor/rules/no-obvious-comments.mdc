@@ -1,0 +1,88 @@
+# Regola: MAI Commenti Ovvi
+
+## Regola Fondamentale
+**I commenti ovvi vanno arrotolati e ficcati nel culo. MAI scrivere commenti che ripetono quello che il codice già dice chiaramente.**
+
+## Esempi di Commenti Ovvi (VIETATI)
+
+### ❌ ERRATO - Commenti Ovvi
+```php
+// Incrementa il contatore
+$counter++;
+
+// Salva l'utente nel database
+$user->save();
+
+// Controlla se l'utente è autenticato
+if (auth()->check()) {
+    // Fai qualcosa
+}
+
+/**
+ * Classe per gestire gli utenti
+ * Estende il modello base
+ * Implementa le funzionalità CRUD
+ */
+class UserController extends Controller
+{
+    // Metodo per creare un nuovo utente
+    public function create() {
+        // Crea un nuovo utente
+        $user = new User();
+        // Salva l'utente
+        $user->save();
+    }
+}
+```
+
+### ✅ CORRETTO - Solo Commenti Utili
+```php
+$counter++;
+
+$user->save();
+
+if (auth()->check()) {
+    // Logica specifica per utenti autenticati
+}
+
+/**
+ * @property ComponentContainer $emailForm
+ */
+class S3Test extends XotBasePage
+{
+    public function sendEmail(): void
+    {
+        // Validazione e invio email con gestione errori
+        $data = $this->form->getState();
+        $email_data = EmailData::from($data);
+        
+        Mail::to($data['to'])->send(new EmailDataEmail($email_data));
+    }
+}
+```
+
+## Cosa NON Commentare
+
+1. **Nomi di variabili/methodi autoesplicativi**
+2. **Logica semplice e chiara**
+3. **Cicli e controlli standard**
+4. **Proprietà e attributi ovvi**
+5. **Implementazioni standard di framework**
+
+## Cosa Commentare (Solo se Utile)
+
+1. **Logica di business complessa**
+2. **Algoritmi non standard**
+3. **Workaround temporanei**
+4. **Decisioni architetturali importanti**
+5. **PHPDoc per proprietà e metodi pubblici**
+6. **Motivazioni per scelte non ovvie**
+
+## Regola di Vita
+**Se il commento dice esattamente quello che il codice fa, è inutile. Il codice deve parlare da solo.**
+
+*Ultimo aggiornamento: giugno 2025*
+description:
+globs:
+alwaysApply: false
+---

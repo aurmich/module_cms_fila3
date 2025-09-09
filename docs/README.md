@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🗂️ CMS Module - Content Management System
 
 ## 📋 Quick Reference
@@ -34,6 +35,9 @@
 =======
 # Modulo CMS
 >>>>>>> 247d318 (.)
+=======
+# Modulo CMS
+>>>>>>> b4e4106 (.)
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)

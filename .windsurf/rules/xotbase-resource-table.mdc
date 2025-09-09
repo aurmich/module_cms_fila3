@@ -1,0 +1,22 @@
+---
+description: Forbid table() in XotBaseResource subclasses; enforce business-behavior testing
+---
+
+# XotBaseResource Table Rule
+
+- NEVER implement or override `table(Table $table): Table` in classes extending `XotBaseResource`.
+- Provide table configuration via `getListTableColumns(): array` (associative array, string keys) and related granular getters.
+- Do NOT use `->label()`; localization is handled by LangServiceProvider + module translations.
+
+# Testing Philosophy
+- Tests MUST assert business behavior only.
+- Forbidden: testing `$fillable`, `$casts`, `$hidden`, `$table`, `$connection`, or bare relations.
+- Prefer Pest; NEVER use `RefreshDatabase`.
+
+# Rationale
+- Keeps DRY alignment with Xot automation and localization.
+- Prevents brittle tests and implementation lock-in.
+
+# See also
+- `laravel/.ai/guidelines/filament-resource-rules.md`
+- `laravel/.ai/guidelines/testing-business-behavior.md`

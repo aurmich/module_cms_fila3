@@ -397,11 +397,20 @@ class PersonalInfoTest extends TestCase
 
 ## Riferimenti
 
+<<<<<<< HEAD
 - [Documentazione Laravel Volt](https://livewire.laravel.com/project_docs/volt)
+=======
+- [Documentazione Laravel Volt](https://livewire.laravel.com/docs/volt)
+>>>>>>> b4e4106 (.)
 - [Documentazione Laravel Folio](https://github.com/laravel/folio)
 - [Documentazione Laravel](https://laravel.com/docs) 
 
 ## Collegamenti tra versioni di multi-step-forms.md
+<<<<<<< HEAD
 * [multi-step-forms.md](laravel/Modules/Cms/project_docs/multi-step-forms.md)
 * [multi-step-forms.md](laravel/Modules/Cms/project_docs/components/multi-step-forms.md)
+=======
+* [multi-step-forms.md](laravel/Modules/Cms/docs/multi-step-forms.md)
+* [multi-step-forms.md](laravel/Modules/Cms/docs/components/multi-step-forms.md)
+>>>>>>> b4e4106 (.)
 

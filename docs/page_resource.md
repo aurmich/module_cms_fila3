@@ -6,7 +6,11 @@ section: content
 ---
 
 ## 🔗 Collegamenti
+<<<<<<< HEAD
 - [Root – Gestione Contenuti](../../../project_docs/page-content-management.md)
+=======
+- [Root – Gestione Contenuti](../../../docs/page-content-management.md)
+>>>>>>> b4e4106 (.)
 - [Blocchi di Contenuto](blocks.md)
 
 # PageResource {#page-resource}

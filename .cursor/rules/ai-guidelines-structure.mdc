@@ -1,0 +1,34 @@
+# Regola Critica: Struttura AI Guidelines
+
+## Principio Fondamentale
+**NON deve esistere il file `/var/www/html/_bases/base_saluteora/laravel/.ai/guidelines.md`!**
+
+## Struttura Corretta ✅ IMPLEMENTATA
+- **Cartella**: `/var/www/html/_bases/base_saluteora/laravel/.ai/guidelines/`
+- **File**: `laravel-boost-guidelines.md` dentro la cartella
+- **Principi**: DRY + KISS + SOLID + ROBUST + INTELLIGENT + LARAXOT
+
+## Motivazione
+- Mantiene la struttura modulare del progetto
+- Segue i principi architetturali Laraxot
+- Evita duplicazione e confusione
+- Rispetta la separazione delle responsabilità
+
+## Implementazione ✅ COMPLETATA
+1. ✅ Aggiornare sempre i file DENTRO la cartella `.ai/guidelines/`
+2. ✅ Mai creare file `.md` nella root della cartella
+3. ✅ Seguire sempre i principi DRY + KISS + SOLID + ROBUST + INTELLIGENT + LARAXOT
+4. ✅ Mantenere coerenza con l'architettura del progetto
+
+## File Creati
+- `laravel/.ai/guidelines/laravel-boost-guidelines.md` - Linee guida principali
+- Contenuto spostato dal file `.md` della root
+
+## Collegamenti
+- `.cursor/rules/ai-guidelines-structure.mdc`
+- `.cursor/memories/ai-guidelines-structure-critical`
+- `laravel/.ai/guidelines/laravel-boost-guidelines.md`
+description:
+globs:
+alwaysApply: false
+---

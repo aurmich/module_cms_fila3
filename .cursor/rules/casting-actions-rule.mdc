@@ -1,0 +1,60 @@
+# Regola Fondamentale: Uso Azioni Cast Xot
+
+## Descrizione
+Per risolvere i problemi di cast PHPStan, utilizzare **SEMPRE** le azioni di casting pre-esistenti in `laravel/Modules/Xot/app/Actions/Cast` invece di creare soluzioni personalizzate.
+
+## Azioni Disponibili
+
+### SafeStringCastAction
+- **Scopo**: Conversione sicura di valori mixed in string
+- **Uso**: `SafeStringCastAction::cast($value)` o `app(SafeStringCastAction::class)->execute($value)`
+- **Casi d'uso**: Risoluzione errori `encapsedStringPart.nonString`, `binaryOp.invalid`
+
+### SafeIntCastAction
+- **Scopo**: Conversione sicura di valori mixed in int
+- **Uso**: `SafeIntCastAction::cast($value)` o `app(SafeIntCastAction::class)->execute($value)`
+- **Casi d'uso**: Risoluzione errori `argument.type` per parametri int, cast di durate, ID
+
+### SafeFloatCastAction
+- **Scopo**: Conversione sicura di valori mixed in float
+- **Uso**: `SafeFloatCastAction::cast($value)` o `app(SafeFloatCastAction::class)->execute($value)`
+- **Casi d'uso**: Risoluzione errori `argument.type` per parametri float, importi monetari
+
+## Regola Assoluta
+- **MAI** usare cast manuali come `(string)`, `(int)`, `(float)` quando si lavora con valori mixed
+- **SEMPRE** utilizzare le azioni Xot per garantire type safety e consistenza
+- **SEMPRE** documentare l'uso delle azioni di casting nelle correzioni PHPStan
+
+## Esempi di Applicazione
+
+### Prima (ERRATO)
+```php
+// ❌ MAI fare questo
+$name = (string) $mixedValue;
+$duration = (int) $mixedValue;
+$price = (float) $mixedValue;
+```
+
+### Dopo (CORRETTO)
+```php
+// ✅ SEMPRE fare questo
+use Modules\Xot\Actions\Cast\SafeStringCastAction;
+use Modules\Xot\Actions\Cast\SafeIntCastAction;
+use Modules\Xot\Actions\Cast\SafeFloatCastAction;
+
+$name = SafeStringCastAction::cast($mixedValue);
+$duration = SafeIntCastAction::cast($mixedValue);
+$price = SafeFloatCastAction::cast($mixedValue);
+```
+
+## Collegamenti
+- [Modules/Xot/app/Actions/Cast/SafeStringCastAction.php](mdc:../../laravel/Modules/Xot/app/Actions/Cast/SafeStringCastAction.php)
+- [Modules/Xot/app/Actions/Cast/SafeIntCastAction.php](mdc:../../laravel/Modules/Xot/app/Actions/Cast/SafeIntCastAction.php)
+- [Modules/Xot/app/Actions/Cast/SafeFloatCastAction.php](mdc:../../laravel/Modules/Xot/app/Actions/Cast/SafeFloatCastAction.php)
+
+---
+Ultimo aggiornamento: 2025-01-06
+description:
+globs:
+alwaysApply: false
+---

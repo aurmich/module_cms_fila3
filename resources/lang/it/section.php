@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 return [
     'navigation' => [
         'label' => 'Sezioni',
@@ -9,3 +10,14 @@ return [
         'sort' => 65,
     ],
 ];
+=======
+return array (
+  'navigation' => 
+  array (
+    'label' => 'section.navigation',
+    'group' => 'section.navigation',
+    'icon' => 'section.navigation',
+    'sort' => 65,
+  ),
+);
+>>>>>>> b4e4106 (.)

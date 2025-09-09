@@ -69,9 +69,15 @@ ls -la dist/
 - Verifica dell'integrità dei file compilati
 
 ## Collegamenti Correlati
+<<<<<<< HEAD
 - [Documentazione Generale Errori](/project_docs/errors/README.md)
 - [Gestione Temi CMS](../themes/README.md)
 - [Processo di Deploy](../../project_docs/deployment/THEMES.md)
+=======
+- [Documentazione Generale Errori](/docs/errors/README.md)
+- [Gestione Temi CMS](../themes/README.md)
+- [Processo di Deploy](../../docs/deployment/THEMES.md)
+>>>>>>> b4e4106 (.)
 
 ## Note Tecniche
 - La compilazione deve essere eseguita per ogni tema individualmente

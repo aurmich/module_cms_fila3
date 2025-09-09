@@ -1,0 +1,56 @@
+# Memoria: Filosofia dei Test - Modelli "Slim"
+
+## Regola Fondamentale
+**I modelli sono "slim" - NON testare fillable, casts, hidden!**
+
+## Cosa NON Testare (VIETATO)
+- ❌ `$fillable` - dettagli implementativi
+- ❌ `$casts` - configurazioni base  
+- ❌ `$hidden` - dettagli implementativi
+- ❌ Relazioni base Eloquent
+- ❌ `$table`, `$connection` - configurazioni
+
+## Cosa Testare (BUSINESS LOGIC)
+- ✅ Metodi custom di business
+- ✅ Scopes personalizzati
+- ✅ Accessors/Mutators custom
+- ✅ Eventi di business
+- ✅ Policy e autorizzazioni
+- ✅ Validazioni custom
+- ✅ Metodi di calcolo business
+
+## Filosofia
+- **Frontend**: Testa azioni e risultati
+- **Dati**: Verifica presenza e correttezza
+- **Business Logic**: Focus sulla logica, non sui dettagli tecnici
+- **Modelli**: Sono "slim", non "fat"
+
+## Esempio Corretto
+```php
+// ✅ Test business logic
+public function test_calculate_appointment_duration(): void
+{
+    $appointment = Appointment::factory()->create([
+        'start_time' => '09:00:00',
+        'end_time' => '10:30:00'
+    ]);
+    
+    $this->assertEquals(90, $appointment->getDurationInMinutes());
+}
+```
+
+## Esempio Errato
+```php
+// ❌ Test inutile dei fillable
+public function test_fillable_fields(): void
+{
+    $this->assertContains('name', (new Doctor)->getFillable());
+}
+```
+
+## Regola Assoluta
+**Testa la LOGICA DI BUSINESS, non i DETTAGLI IMPLEMENTATIVI!**
+description:
+globs:
+alwaysApply: false
+---

@@ -1,0 +1,60 @@
+---
+description: Consolidated lessons learned for Laraxot/SaluteOra (2025-08-25)
+---
+
+# Lessons Learned – Consolidated Rules (2025-08-25)
+
+- Mirrors module docs at `Modules/Xot/docs/lessons-learned-2025-08-25.md`.
+- Purpose: guide Cursor/Windsurf assistants with enforced, battle-tested rules.
+
+## Filament translations
+- Never use `->label()` / `->placeholder()` in components. Labels come from LangServiceProvider and module lang files.
+- Use expanded translation structure: label, placeholder, tooltip, helper_text, description, icon, color.
+- Widget view path: `module::filament.widgets.name`.
+
+## Namespaces & structure
+- `Modules\\<Module>\\...` only; never include `App` segment in module namespaces.
+- HTTP under `app/Http/`, Livewire under `app/Http/Livewire`, Widgets under `Modules/<Module>/Filament/Widgets`.
+
+## Models & typing
+- Extend module `BaseModel` only. Implement `protected function casts(): array`.
+- Docblock `$fillable`, `$hidden`, `$dates`, `$with` as `list<string>`; add PHPDoc for properties/relations.
+- Prefer Xot Cast Actions in `Modules/Xot/app/Actions/Cast/`.
+
+## Migrations
+- Extend `XotBaseMigration`, no `down()`.
+- One-file-per-table via `tableCreate`/`tableUpdate`, guard with `hasTable/hasColumn`.
+
+## FullCalendar
+- Use `config()` (not `options()`); dedicated widget or `WidgetConfiguration` return.
+- Centralize plugins/locale/timezone/business rules in `AdminPanelProvider`.
+
+## Documentation policy
+- No root `docs/`. Use `docs_project/` (global) and `Modules/<Module>/docs/` (module).
+- Lowercase filenames; only `README.md` may be uppercase.
+
+## PHPStan
+- Do not modify `laravel/phpstan.neon`. Use CLI flags and per-module targets. Aim level 9+; keep array types explicit.
+
+## Testing
+- Never use `RefreshDatabase`. Test business behavior/observable outcomes.
+
+## URL localization & frontoffice
+- Prefix routes with locale `/{locale}/...` using `app()->getLocale()`.
+- Homepage blade: `Themes/One/resources/views/pages/index.blade.php`; content: `config/local/saluteora/database/content/pages/home.json`; root `/` -> `/{locale}`.
+
+## Icons & assets (SaluteOra)
+- SVG in `laravel/Modules/SaluteOra/resources/svg/`, kebab-case; reference as `saluteora-{name}`.
+
+## Translation hygiene
+- Never remove content; only add. Set `helper_text` to `''` when equal to key name.
+- Fix non-IT files that contain Italian text.
+
+## Architecture boundaries
+- Base modules (User, UI, Xot) must not depend on domain modules. Use contracts or move features.
+
+## Filament base classes & arrays
+- Use `XotBase*` classes; return associative arrays with string keys in table/form methods.
+
+## FullCalendar security hooks
+- Locale/timezone, business hours, select/drag constraints, emergency styling. JS callbacks: `eventDidMount`, `eventClassNames`, `selectAllow`, `eventAllow`.

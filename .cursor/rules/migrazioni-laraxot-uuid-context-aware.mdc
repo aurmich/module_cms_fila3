@@ -1,0 +1,124 @@
+# Regole Migrazioni Laraxot: Context-Aware per UUID e Polimorfismo
+
+## Regola Critica: Modifica File Esistente + Timestamp Update
+
+### Principio Assoluto
+Per modificare tabelle esistenti:
+- **MODIFICARE** direttamente la migrazione originale
+- **AGGIORNARE** timestamp nel nome file
+- **NON creare** mai nuove migrazioni separate
+
+### Motivazioni Architetturali
+- **Single Source of Truth**: Una tabella = Una migrazione
+- **Evoluzione organica**: La migrazione cresce nel tempo
+- **Idempotenza**: Esecuzione multipla sicura
+- **Debugging**: Storia in un punto
+
+## Regola Critica: Polimorfismo UUID-Aware
+
+### Principio Context-Aware
+In sistemi con modelli misti (UUID + integer):
+- **Colonne polimorfiche** `{relation}_id` DEVONO essere `string`
+- **NON usare** `unsignedBigInteger` per morphs con UUID
+- **Analizzare** tipi ID prima di definire colonne
+
+### Esempio Tecnico
+```php
+// ✅ CORRETTO - supporta UUID e integer:
+$table->string('causer_id')->nullable();
+
+// ❌ SBAGLIATO - supporta solo integer:
+$table->unsignedBigInteger('causer_id')->nullable();
+```
+
+### Casi Reali
+```php
+// User UUID: causer_id = "550e8400-e29b-41d4-a716-446655440000"
+// Admin Integer: causer_id = "123" (convertito in string)
+```
+
+## Pattern Corretto
+
+### Migrazione Context-Aware
+```php
+return new class extends XotBaseMigration {
+    public function up(): void {
+        $this->tableCreate(function (Blueprint $table) {
+            // Creazione con supporto UUID
+            $table->nullableMorphs('causer'); // Crea string per sistemi misti
+        });
+        
+        $this->tableUpdate(function (Blueprint $table) {
+            // Aggiornamento sicuro
+            if ($this->hasColumn('causer_id')) {
+                $table->string('causer_id')->nullable()->change();
+            }
+        });
+    }
+};
+```
+
+## Anti-Pattern da Evitare
+
+### ❌ Nuova Migrazione per Modifica
+```php
+// SBAGLIATO: File separato per modifica
+// 2024_01_15_update_activity_table.php
+return new class extends XotBaseMigration {
+    public function up(): void {
+        $this->tableUpdate(function (Blueprint $table) {
+            $table->string('causer_id')->nullable()->change();
+        });
+    }
+};
+```
+
+### ❌ Tipo Sbagliato per UUID
+```php
+// SBAGLIATO: Non supporta UUID
+$table->unsignedBigInteger('causer_id')->nullable()->change();
+```
+
+## Checklist Context-Aware
+
+### Prima di Modificare
+- [ ] Esiste già migrazione per questa tabella?
+- [ ] Che tipi ID usano i modelli coinvolti?
+- [ ] Ci sono relazioni polimorfiche?
+- [ ] Il sistema è misto UUID/integer?
+
+### Durante la Modifica
+- [ ] Modifico SOLO migrazione esistente
+- [ ] Aggiorno timestamp nome file
+- [ ] Uso tipi dati appropriati per contesto
+- [ ] Mantengo controlli condizionali
+
+## Filosofia Laraxot
+
+### Context-Aware Development
+- **Analizzare** sempre architettura esistente
+- **Adattare** soluzioni al sistema reale
+- **Non applicare** meccanicamente best practice generiche
+- **Considerare** impatti sistemici
+
+### Evoluzione vs Frammentazione
+- **Evoluzione**: Crescita organica controllata
+- **Frammentazione**: Esplosione micro-modifiche
+- **Preferire**: Consolidamento in punti di verità
+- **Evitare**: Distribuzione conoscenza
+
+## Memorizzazione Permanente
+
+Questa regola è stata appresa da caso reale:
+- **Errore**: Creazione nuova migrazione per modifica causer_id
+- **Correzione**: Modifica migrazione esistente + timestamp update
+- **Insight**: Polimorfismo richiede string per UUID support
+- **Lezione**: Context-aware development vs applicazione meccanica
+
+## Collegamenti
+- [Activity Migration](../../laravel/Modules/Activity/docs/errori_migrazione_activity_table_lezioni.md)
+- [Principi Completi](../../docs/principi_migrazioni_laraxot_uuid_polimorfismo.md)
+- [Migration Rules Xot](../../laravel/Modules/Xot/docs/migration_rules.md)
+
+*Ultimo aggiornamento: Gennaio 2025*
+*Caso studio: Activity table causer_id nullable con UUID support*

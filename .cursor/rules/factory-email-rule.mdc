@@ -1,0 +1,97 @@
+# Regola Critica: Email nelle Factory - MAI @example.com
+
+## ⚠️ REGOLA ASSOLUTAMENTE VIETATA ⚠️
+**MAI utilizzare email fittizie come "@example.com" nelle factory**
+
+## Cosa NON Fare (VIETATO)
+```php
+// ❌ ASSOLUTAMENTE VIETATO
+'email' => 'patient+'.uniqid('', true).'@example.com',
+'email' => 'user@example.com',
+'email' => 'test@test.com',
+'email' => 'admin@admin.com',
+```
+
+## Cosa Fare SEMPRE (OBBLIGATORIO)
+```php
+// ✅ SEMPRE OBBLIGATORIO
+'email' => $this->faker->unique()->safeEmail(),
+'email' => $this->faker->unique()->email(),
+'email' => $this->faker->unique()->freeEmail(),
+```
+
+## Motivazione
+- **Realismo**: I faker generano email realistiche e valide
+- **Unicità**: `unique()` garantisce email non duplicate
+- **Professionalità**: Codice di produzione, non di test amatoriale
+- **Qualità**: Standard elevato per tutto il progetto
+
+## Esempi di Faker Email Disponibili
+
+### Laravel Faker
+```php
+$this->faker->unique()->safeEmail()        // user@example.org
+$this->faker->unique()->email()            // user@example.com
+$this->faker->unique()->freeEmail()        // user@gmail.com
+$this->faker->unique()->companyEmail()     // user@company.com
+$this->faker->unique()->userName() . '@' . $this->faker->domainName()
+```
+
+### Pattern Corretto per Factory
+```php
+public function definition(): array
+{
+    return [
+        'name' => $this->faker->firstName(),
+        'last_name' => $this->faker->lastName(),
+        'email' => $this->faker->unique()->safeEmail(), // ✅ SEMPRE così
+        'phone' => $this->faker->phoneNumber(),
+        // ... altri campi
+    ];
+}
+```
+
+## Checklist Obbligatoria
+
+### Prima di ogni commit:
+- [ ] Ho rimosso tutte le email "@example.com"?
+- [ ] Ho usato sempre i faker appropriati?
+- [ ] Ho verificato che le email siano uniche con `unique()`?
+
+### Durante lo sviluppo:
+- [ ] Sto usando i faker per tutti i campi email?
+- [ ] Sto evitando stringhe hardcoded per email?
+- [ ] Sto garantendo l'unicità delle email?
+
+## Anti-Pattern da Eliminare
+
+1. **Email hardcoded**: `'email' => 'test@test.com'`
+2. **Pattern fittizi**: `'email' => 'user+'.uniqid().'@example.com'`
+3. **Domini fake**: `'email' => 'admin@admin.com'`
+4. **Stringhe statiche**: `'email' => 'user@example.com'`
+
+## Responsabilità
+
+### Sviluppatore:
+- **MAI** committare factory con email "@example.com"
+- **SEMPRE** usare faker appropriati
+- **VERIFICARE** l'unicità delle email
+
+### Code Review:
+- **RIFIUTARE** PR con email hardcoded
+- **VERIFICARE** l'uso corretto dei faker
+- **GARANTIRE** la qualità del codice
+
+## Collegamenti
+
+- [Regola del Buon Boy Scout](boy-scout-rule.mdc)
+- [Factory Critical Rules](factory-critical-rules.mdc)
+- [Laravel Faker Documentation](https://fakerphp.github.io/)
+
+---
+
+**⚠️ RICORDA SEMPRE: MAI @example.com, SEMPRE faker appropriati! Questa regola è SACRA! ⚠️**
+description:
+globs:
+alwaysApply: false
+---

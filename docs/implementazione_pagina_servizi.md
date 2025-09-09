@@ -26,14 +26,22 @@ L'implementazione riflette una comprensione profonda delle implicazioni:
 ### 1. Aggiornamento Documentazione
 
 #### A. Strategia Contenuti CMS
+<<<<<<< HEAD
 **File**: `laravel/Modules/Cms/project_docs/pages-content-strategy.md`
+=======
+**File**: `laravel/Modules/Cms/docs/pages-content-strategy.md`
+>>>>>>> b4e4106 (.)
 - Filosofia dei contenuti modulari e riutilizzabili
 - Principi guida: accessibilità, chiarezza, inclusività, esperienza umana
 - Architettura narrativa per la pagina servizi
 - Tone of voice empatico, competente e rassicurante
 
 #### B. Componenti Servizi Tema
+<<<<<<< HEAD
 **File**: `laravel/Themes/One/project_docs/components/services-blocks.md`
+=======
+**File**: `laravel/Themes/One/docs/components/services-blocks.md`
+>>>>>>> b4e4106 (.)
 - Documentazione tecnica dei componenti specializzati
 - Filosofia design: calore umano, chiarezza medica, accessibilità
 - Palette colori sanitaria e principi UX
@@ -166,6 +174,7 @@ L'implementazione riflette una comprensione profonda delle implicazioni:
 
 ### Strategici
 - [Strategia Contenuti CMS](pages-content-strategy.md)
+<<<<<<< HEAD
 - [Componenti Servizi](../../Themes/One/project_docs/components/services-blocks.md)
 - [Content Strategy Frontend](../../../project_docs/frontend/content-strategy.md)
 
@@ -178,6 +187,20 @@ L'implementazione riflette una comprensione profonda delle implicazioni:
 - [Architettura Sistema](../../../project_docs/architettura_sistema.md)
 - [Rules](../../../project_docs/rules.md)
 - [README Principale](../../../project_docs/README.md)
+=======
+- [Componenti Servizi](../../Themes/One/docs/components/services-blocks.md)
+- [Content Strategy Frontend](../../../docs/frontend/content-strategy.md)
+
+### Tecnici
+- [Blocks Architecture](blocks.md)
+- [Component System](../../Themes/One/docs/components.md)
+- [Content Management](content-management.md)
+
+### Filosofici
+- [Architettura Sistema](../../../docs/architettura_sistema.md)
+- [Rules](../../../docs/rules.md)
+- [README Principale](../../../docs/README.md)
+>>>>>>> b4e4106 (.)
 
 ## ✅ Checklist Completamento
 

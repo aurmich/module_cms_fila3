@@ -1,0 +1,44 @@
+# Memoria: Azioni Cast Xot - Regola Fondamentale
+
+## Regola Assoluta da Rispettare SEMPRE
+- **Per risolvere problemi di cast PHPStan**: utilizzare **SEMPRE** le azioni pre-esistenti in `laravel/Modules/Xot/app/Actions/Cast`
+- **MAI** creare soluzioni personalizzate o usare cast manuali `(string)`, `(int)`, `(float)` con valori mixed
+- **SEMPRE** garantire type safety e consistenza usando le azioni Xot
+
+## Azioni Disponibili e Loro Uso
+
+### SafeStringCastAction
+- **Risolve**: `encapsedStringPart.nonString`, `binaryOp.invalid`
+- **Uso**: `SafeStringCastAction::cast($mixedValue)`
+- **Esempio**: Conversione sicura di nomi, descrizioni, testi
+
+### SafeIntCastAction  
+- **Risolve**: `argument.type` per parametri int, cast di durate, ID
+- **Uso**: `SafeIntCastAction::cast($mixedValue)`
+- **Esempio**: Conversione sicura di durate appuntamenti, ID utenti
+
+### SafeFloatCastAction
+- **Risolve**: `argument.type` per parametri float, importi monetari
+- **Uso**: `SafeFloatCastAction::cast($mixedValue)`
+- **Esempio**: Conversione sicura di prezzi, percentuali, importi
+
+## Pattern di Correzione Standard
+1. Identificare l'errore PHPStan di cast
+2. Importare l'azione di casting appropriata
+3. Sostituire il cast manuale con la chiamata all'azione
+4. Documentare la correzione
+5. Verificare che PHPStan non segnali più errori
+
+## Importanza
+Questa regola è fondamentale per:
+- Mantenere la coerenza del codebase
+- Garantire type safety
+- Evitare duplicazione di logica di cast
+- Rispettare i principi DRY e KISS del progetto
+
+---
+Ultimo aggiornamento: 2025-01-06
+description:
+globs:
+alwaysApply: false
+---

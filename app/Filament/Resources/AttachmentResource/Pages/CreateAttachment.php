@@ -27,7 +27,11 @@ class CreateAttachment extends LangBaseCreateRecord
                 $currentLocale => [$uuid => $filename]
             ];
         }
+<<<<<<< HEAD
         
+=======
+        /** @phpstan-ignore-next-line */
+>>>>>>> b4e4106 (.)
         return parent::mutateFormDataBeforeSave($data);
     }
 }

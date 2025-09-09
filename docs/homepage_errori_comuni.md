@@ -7,7 +7,11 @@ Questo documento elenca e analizza gli errori più comuni che possono verificars
 ## Errore #1: Confondere le Fonti dei Contenuti
 
 ### Problema
+<<<<<<< HEAD
 Uno degli errori più comuni è cercare le specifiche dei contenuti dell'homepage nei documenti di progetto generali, invece di consultare il file dedicato `/var/www/html/saluteora/project_docs/images/2.md` che contiene le specifiche esatte dell'interfaccia.
+=======
+Uno degli errori più comuni è cercare le specifiche dei contenuti dell'homepage nei documenti di progetto generali, invece di consultare il file dedicato `/var/www/html/saluteora/docs/images/2.md` che contiene le specifiche esatte dell'interfaccia.
+>>>>>>> b4e4106 (.)
 
 ### Impatto
 - Contenuti incoerenti rispetto al design approvato

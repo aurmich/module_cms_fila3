@@ -1,0 +1,82 @@
+# REGOLA ARCHITETTURALE CRITICA: Direzione Dipendenze Modulari
+
+## PRINCIPIO FONDAMENTALE
+
+**Il modulo User è un modulo BASE che NON può dipendere da SaluteOra. È SaluteOra che può dipendere da User, non il contrario!**
+
+## DIREZIONE DELLE DIPENDENZE
+
+### ✅ CORRETTO
+- SaluteOra → User (Specifico → Base)
+- Patient → User (Specifico → Base)
+- Studio → Geo (Specifico → Base)
+
+### ❌ ERRATO - VIETATO
+- User → SaluteOra (Base → Specifico)
+- User → Patient (Base → Specifico)
+- Geo → Studio (Base → Specifico)
+
+## GERARCHIA MODULARE
+
+**Livello 1: Moduli Base**
+- Xot, User, Geo, UI
+
+**Livello 2: Moduli Specifici**
+- SaluteOra, Patient, Studio, Appointment
+
+**Regola**: Livello 2 → Livello 1 (SEMPRE)
+
+## IMPLEMENTAZIONE
+
+### ✅ Modulo Base (User)
+```php
+namespace Modules\User\Models;
+class User extends BaseModel
+{
+    // SOLO funzionalità base
+    // NESSUN riferimento a moduli specifici
+}
+```
+
+### ✅ Modulo Specifico (SaluteOra)
+```php
+namespace Modules\SaluteOra\Models;
+use Modules\User\Models\User as BaseUser;
+
+class User extends BaseUser
+{
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+}
+```
+
+### ❌ VIOLAZIONE CRITICA
+```php
+// Nel modulo User - VIETATO!
+use Modules\SaluteOra\Models\Appointment; // ERRORE!
+```
+
+## BENEFICI
+
+- **Riusabilità**: Moduli base portabili
+- **Manutenibilità**: Modifiche isolate
+- **Testabilità**: Test indipendenti
+- **Scalabilità**: Estensione senza impatto
+
+## VERIFICA
+
+```bash
+# Deve restituire NIENTE
+grep -r "SaluteOra" Modules/User/ --include="*.php"
+```
+
+## COLLEGAMENTI
+
+- [docs/modular-architecture-dependency-rules.md](../../docs/modular-architecture-dependency-rules.md)
+- [laravel/.ai/guidelines/modular-architecture-dependency-rules.md](../../laravel/.ai/guidelines/modular-architecture-dependency-rules.md)
+
+---
+
+**VIOLAZIONI compromettono l'architettura modulare del sistema.**
