@@ -336,10 +336,6 @@ class TodoTest extends TestCase
 ## Riferimenti
 
 - [Laravel Folio Documentation](https://github.com/laravel/folio)
-<<<<<<< HEAD
-- [Laravel Volt Documentation](https://livewire.laravel.com/project_docs/volt)
-=======
 - [Laravel Volt Documentation](https://livewire.laravel.com/docs/volt)
->>>>>>> b4e4106 (.)
 - [Livewire Documentation](https://livewire.laravel.com)
 - [Articolo Originale di Nuno Maduro](https://nunomaduro.com/todo_application_with_laravel_folio_and_volt) 

@@ -1,10 +1,6 @@
 # Gestione della Homepage in il progetto
 
-<<<<<<< HEAD
-Questo documento fornisce una panoramica generale della gestione della homepage in il progetto. Per i dettagli tecnici dell'implementazione, consultare la [documentazione tecnica nel modulo CMS](../laravel/Modules/Cms/project_docs/homepage.md).
-=======
 Questo documento fornisce una panoramica generale della gestione della homepage in il progetto. Per i dettagli tecnici dell'implementazione, consultare la [documentazione tecnica nel modulo CMS](../laravel/Modules/Cms/docs/homepage.md).
->>>>>>> b4e4106 (.)
 
 ## Panoramica
 
@@ -112,15 +108,9 @@ I contenuti della homepage sono gestiti attraverso un sistema basato su JSON che
 - Flessibilità nella struttura
 
 Per i dettagli tecnici sulla gestione dei contenuti, consultare:
-<<<<<<< HEAD
-- [Documentazione Tecnica CMS](../laravel/Modules/Cms/project_docs/homepage.md)
-- [Gestione dei Blocchi](../laravel/Modules/Cms/project_docs/content-blocks.md)
-- [Sistema dei Temi](../laravel/Modules/Cms/project_docs/themes.md)
-=======
 - [Documentazione Tecnica CMS](../laravel/Modules/Cms/docs/homepage.md)
 - [Gestione dei Blocchi](../laravel/Modules/Cms/docs/content-blocks.md)
 - [Sistema dei Temi](../laravel/Modules/Cms/docs/themes.md)
->>>>>>> b4e4106 (.)
 
 ## Collegamenti alla Documentazione
 

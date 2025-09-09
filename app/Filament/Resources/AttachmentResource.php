@@ -31,11 +31,7 @@ class AttachmentResource extends LangBaseResource
         return [
             'title' => TextInput::make('title')
                 ->required()
-<<<<<<< HEAD
-                ->live(onBlur: true)
-=======
                 //->live(onBlur: true)
->>>>>>> b4e4106 (.)
                 //->afterStateUpdated(function ($state, callable $set) {
                 //    $set('slug', Str::slug($state));
                 //})
@@ -45,15 +41,8 @@ class AttachmentResource extends LangBaseResource
                 ->required()
                 //->unique(ignoreRecord: true)
                 ,
-<<<<<<< HEAD
-                
-            'description' => Textarea::make('description'),
-            
-            'disk' => Select::make('disk')->options(AttachmentDiskEnum::class),
-=======
             'description' => Textarea::make('description'),
              'disk'=>Select::make('disk')->options(AttachmentDiskEnum::class),
->>>>>>> b4e4106 (.)
             
             'attachment' => FileUpload::make('attachment')
                 ->directory('attachments')
@@ -84,8 +73,4 @@ class AttachmentResource extends LangBaseResource
             'edit' => Pages\EditAttachment::route('/{record}/edit'),
         ];
     }    
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b4e4106 (.)

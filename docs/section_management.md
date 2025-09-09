@@ -119,14 +119,7 @@ Ogni sezione può contenere diversi tipi di blocchi:
 
 ## Collegamenti
 - [Documentazione Blocchi](blocks/README.md)
-<<<<<<< HEAD
-- [Documentazione UI](../../UI/project_docs/README.md)
-- [Documentazione Root](../../../../project_docs/README.md)
-- [Documentazione Root – Sezioni](../../../../project_docs/sections.md)
-- [Panoramica Gestione Pagine (Root)](../../../../project_docs/page-content-management.md)
-=======
 - [Documentazione UI](../../UI/docs/README.md)
 - [Documentazione Root](../../../../docs/README.md)
 - [Documentazione Root – Sezioni](../../../../docs/sections.md)
 - [Panoramica Gestione Pagine (Root)](../../../../docs/page-content-management.md)
->>>>>>> b4e4106 (.)

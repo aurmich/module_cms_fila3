@@ -19,10 +19,4 @@ class AttachmentFactory extends Factory
         return [];
     }
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> b4e4106 (.)
-=======
->>>>>>> 137bceb (.)

@@ -186,8 +186,5 @@ Ogni blocco supporta diversi contesti:
 
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> b4e4106 (.)
