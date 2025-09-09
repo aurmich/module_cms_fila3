@@ -1,1 +1,0 @@
-[{"name":"analyze-patient-data-command","class":"AnalyzePatientDataCommand","module":null,"path":null,"ns":"Modules\\SaluteOra\\Console\\Commands\\AnalyzePatientDataCommand"},{"name":"send-appointment-reminders-command","class":"SendAppointmentRemindersCommand","module":null,"path":null,"ns":"Modules\\SaluteOra\\Console\\Commands\\SendAppointmentRemindersCommand"}]

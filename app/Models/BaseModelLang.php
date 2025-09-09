@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace Modules\Cms\Models;
 
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
->>>>>>> f492947 (.)
-=======
->>>>>>> b48ea51 (.)
-=======
->>>>>>> bc33217 (.)
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Actions\Factory\GetFactoryAction;
 use Modules\Xot\Traits\Updater;

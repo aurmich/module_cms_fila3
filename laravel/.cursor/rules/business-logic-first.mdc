@@ -1,7 +1,0 @@
-# Business Logic First (Global Rule)
-
-- Focus tests, reviews, and docs on domain behavior and user-visible outcomes.
-- Avoid coupling to implementation details (fillable, table names, PKs, private methods, specific query structures).
-- Prefer verifying workflows, invariants, and state transitions via actions, HTTP endpoints, widgets, and domain services.
-- Combine with NO RefreshDatabase policy: minimal fixtures, explicit setup when DB is needed.
-- Applies across modules, CI, and code reviews.

@@ -87,19 +87,7 @@ return [
         'item_added' => 'Voce aggiunta con successo',
     ],
     'validation' => [
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         'name_required' => 'Der Name ist erforderlich',
-=======
-        'name_required' => 'Il nome è obbligatorio',
->>>>>>> f492947 (.)
-=======
-        'name_required' => 'Der Name ist erforderlich',
->>>>>>> b48ea51 (.)
-=======
-        'name_required' => 'Der Name ist erforderlich',
->>>>>>> bc33217 (.)
         'slug_unique' => 'Lo slug deve essere unico',
         'type_in' => 'Il tipo deve essere uno tra: main, footer, sidebar',
     ],

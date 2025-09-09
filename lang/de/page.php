@@ -134,27 +134,9 @@ return [
         'restored' => 'Pagina ripristinata con successo',
     ],
     'validation' => [
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         'title_required' => 'Der Titel ist erforderlich',
         'slug_unique' => 'Der Slug muss eindeutig sein',
         'content_required' => 'Der Inhalt ist erforderlich',
-=======
-        'title_required' => 'Il titolo è obbligatorio',
-        'slug_unique' => 'Lo slug deve essere unico',
-        'content_required' => 'Il contenuto è obbligatorio',
->>>>>>> f492947 (.)
-=======
-        'title_required' => 'Der Titel ist erforderlich',
-        'slug_unique' => 'Der Slug muss eindeutig sein',
-        'content_required' => 'Der Inhalt ist erforderlich',
->>>>>>> b48ea51 (.)
-=======
-        'title_required' => 'Der Titel ist erforderlich',
-        'slug_unique' => 'Der Slug muss eindeutig sein',
-        'content_required' => 'Der Inhalt ist erforderlich',
->>>>>>> bc33217 (.)
     ],
     'model' => [
         'label' => 'page.model',

@@ -237,19 +237,7 @@ return [
         'unsaved_changes' => 'Hai modifiche non salvate',
     ],
     'validation' => [
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         'required' => 'Dieses Feld ist erforderlich',
-=======
-        'required' => 'Questo campo è obbligatorio',
->>>>>>> f492947 (.)
-=======
-        'required' => 'Dieses Feld ist erforderlich',
->>>>>>> b48ea51 (.)
-=======
-        'required' => 'Dieses Feld ist erforderlich',
->>>>>>> bc33217 (.)
         'slug_exists' => 'Questo slug è già in uso',
         'invalid_url' => 'Inserisci un URL valido',
         'min' => 'Il valore deve essere almeno :min',

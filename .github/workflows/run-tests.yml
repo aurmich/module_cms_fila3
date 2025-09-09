@@ -48,16 +48,4 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         run: vendor/bin/pest
-=======
-        run: vendor/bin/pest
->>>>>>> fd753da3 (.)
-=======
-        run: vendor/bin/pest
->>>>>>> f492947 (.)
-=======
-        run: vendor/bin/pest
->>>>>>> bc33217 (.)

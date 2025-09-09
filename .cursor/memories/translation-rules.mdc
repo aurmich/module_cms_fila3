@@ -90,7 +90,7 @@ return [
 - **PROCESSO**: Se esistono entrambi, assemblare contenuti e eliminare quello minuscolo
 
 ## REGOLA CRITICA PER CONFLITTI GIT: RISOLVERE IMMEDIATAMENTE
-- **VIETATO**: Lasciare marker `<<< HEAD` nei file
+- **VIETATO**: Lasciare marker git nei file
 - **OBBLIGATORIO**: Risolvere immediatamente tutti i conflitti
 - **OBBLIGATORIO**: Eliminare file binari con conflitti
 

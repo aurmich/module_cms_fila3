@@ -5,27 +5,8 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources\SectionResource\Pages;
 
 use Filament\Actions;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\ViewEntry;
-=======
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Infolists\Components\TextEntry;
-=======
->>>>>>> b48ea51 (.)
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\ViewEntry;
-<<<<<<< HEAD
-use Filament\Infolists\Components\Entries\CustomEntry;
->>>>>>> f492947 (.)
-=======
->>>>>>> b48ea51 (.)
-=======
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\ViewEntry;
->>>>>>> bc33217 (.)
 use Modules\Cms\Filament\Resources\SectionResource;
 use Modules\Lang\Filament\Resources\Pages\LangBaseViewRecord;
 
@@ -35,39 +16,13 @@ class ViewSection extends LangBaseViewRecord
 
     public function getInfolistSchema(): array
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b48ea51 (.)
-=======
->>>>>>> bc33217 (.)
         // $view='pub_theme::components.sections.'.$this->record->slug;
         $view = 'cms::sections.preview';
         // @phpstan-ignore-next-line
         if (! view()->exists($view)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
             throw new \Exception('View '.$view.' not found');
         }
 
-=======
-        //$view='pub_theme::components.sections.'.$this->record->slug;
-        $view='cms::sections.preview';
-        if(!view()->exists($view)){
-            throw new \Exception('View '.$view.' not found');
-        }
->>>>>>> f492947 (.)
-=======
-            throw new \Exception('View '.$view.' not found');
-        }
-
->>>>>>> b48ea51 (.)
-=======
-            throw new \Exception('View '.$view.' not found');
-        }
-
->>>>>>> bc33217 (.)
         return [
             Section::make('Anteprima')
                 ->schema([
@@ -78,19 +33,7 @@ class ViewSection extends LangBaseViewRecord
                 ]),
         ];
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> f492947 (.)
-=======
-
->>>>>>> b48ea51 (.)
-=======
-
->>>>>>> bc33217 (.)
     /*
     protected function getHeaderActions(): array
     {

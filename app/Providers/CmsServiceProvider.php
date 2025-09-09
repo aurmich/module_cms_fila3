@@ -52,7 +52,6 @@ class CmsServiceProvider extends XotBaseServiceProvider
         // }
 
         if ($this->xot->register_pub_theme) {
-            
             Assert::isArray($paths = config('view.paths'));
             $theme_path = app(\Modules\Xot\Actions\File\FixPathAction::class)->execute(base_path('Themes/'.$this->xot->pub_theme.'/resources/views'));
             $paths = array_merge([$theme_path], $paths);
@@ -60,8 +59,6 @@ class CmsServiceProvider extends XotBaseServiceProvider
             Config::set('livewire.view_path', $theme_path.'/livewire');
             Config::set('livewire.class_namespace', 'Themes\\'.$this->xot->pub_theme.'\Http\Livewire');
             //$this->registerFolio();
-        }else{
-           
         }
 
         

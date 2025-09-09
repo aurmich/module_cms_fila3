@@ -1,17 +1,6 @@
 {
 	"editor.formatOnType": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	"editor.codeLens": false,
->>>>>>> fd753da3 (.)
-=======
-	"editor.codeLens": false,
->>>>>>> f492947 (.)
-=======
-	"editor.codeLens": false,
->>>>>>> bc33217 (.)
 	"php-cs-fixer.onsave": true,
 	"php-cs-fixer.formatHtml": true,
 	"php-cs-fixer.config": ".php-cs-fixer.php",
@@ -25,19 +14,7 @@
 	"php-cs-fixer.allowRisky": true,
 	"editor.defaultFormatter": "junstyle.php-cs-fixer",
 	"[php]": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		"editor.defaultFormatter": "fterrag.vscode-php-cs-fixer"
-=======
 		"editor.defaultFormatter": "junstyle.php-cs-fixer"
->>>>>>> fd753da3 (.)
-=======
-		"editor.defaultFormatter": "junstyle.php-cs-fixer"
->>>>>>> f492947 (.)
-=======
-		"editor.defaultFormatter": "junstyle.php-cs-fixer"
->>>>>>> bc33217 (.)
 	},
 	"editor.tokenColorCustomizations": {
 		"semanticHighlighting": true
@@ -62,16 +39,4 @@
 	"[vue]": {
 		"editor.defaultFormatter": "octref.vetur"
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fd753da3 (.)
-=======
-}
->>>>>>> f492947 (.)
-=======
-}
->>>>>>> bc33217 (.)

@@ -7,18 +7,7 @@ namespace Modules\Cms\Tests;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Modules\Cms\Models\Module;
 use Modules\Xot\Actions\Filament\GetModulesNavigationItems;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Modules\User\Models\User;
-=======
->>>>>>> f492947 (.)
-=======
-use Modules\User\Models\User;
->>>>>>> b48ea51 (.)
-=======
-use Modules\User\Models\User;
->>>>>>> bc33217 (.)
 use Tests\CreatesApplication;
 
 abstract class TestHelper extends BaseTestCase

@@ -5,19 +5,7 @@ on:
     branches:
       - master
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-permissions:
-=======
 permissions: 
->>>>>>> fd753da3 (.)
-=======
-permissions: 
->>>>>>> f492947 (.)
-=======
-permissions: 
->>>>>>> bc33217 (.)
   contents: write
 
 jobs:
@@ -37,23 +25,6 @@ jobs:
 
     - name: Node
       run: cd docs && npm install
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    - name: Production
-      run: cd docs && npm run prod
-
-    - name: CNAME
-      run: cd docs && echo "laraxot.github.io/module_geo" > ./build_production/CNAME
-
-    - name: gh-pages
-      uses: JamesIves/github-pages-deploy-action@v4.4.2
-=======
-=======
->>>>>>> f492947 (.)
-=======
->>>>>>> bc33217 (.)
       
     - name: Production
       run: cd docs && npm run prod
@@ -63,13 +34,6 @@ jobs:
 
     - name: gh-pages
       uses: JamesIves/github-pages-deploy-action@latest
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> fd753da3 (.)
-=======
->>>>>>> f492947 (.)
-=======
->>>>>>> bc33217 (.)
       with:
         branch: gh-pages
         folder: ./docs/build_production

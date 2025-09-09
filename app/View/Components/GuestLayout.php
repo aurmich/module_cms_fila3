@@ -16,18 +16,7 @@ class GuestLayout extends Component
     {
         $view = 'pub_theme::layouts.guest';
         $view_params = [];
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         // @phpstan-ignore-next-line
-=======
->>>>>>> f492947 (.)
-=======
-        // @phpstan-ignore-next-line
->>>>>>> b48ea51 (.)
-=======
-        // @phpstan-ignore-next-line
->>>>>>> bc33217 (.)
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }
