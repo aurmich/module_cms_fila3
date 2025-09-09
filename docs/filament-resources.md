@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Filament Resources - Modulo Cms
 
 ## Panoramica
@@ -82,6 +83,8 @@ public function getTableColumns(): array
 
 *Ultimo aggiornamento: Dicembre 2024*
 =======
+=======
+>>>>>>> bc33217 (.)
 # Filament Resources nel CMS
 
 ## Struttura Directory
@@ -200,5 +203,8 @@ return [
 * [filament-resources.md](laravel/Modules/Gdpr/docs/filament-resources.md)
 * [filament-resources.md](laravel/Modules/Xot/docs/filament-resources.md)
 * [filament-resources.md](laravel/Modules/Cms/docs/filament-resources.md)
+<<<<<<< HEAD
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)
 

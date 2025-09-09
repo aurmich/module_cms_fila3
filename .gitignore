@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🔧  .gitignore
 # Questo file definisce quali file e cartelle devono essere ignorati dal controllo di versione
 # Organizzato secondo la filosofia di sviluppo : chiarezza, organizzazione e manutenibilità
@@ -51,6 +52,8 @@ package-lock.json
 
 # 📱 Laravel specifici
 =======
+=======
+>>>>>>> bc33217 (.)
 # Dependencies
 vendor/
 node_modules/
@@ -73,6 +76,7 @@ docs/cache/
 .php-cs-fixer.cache
 
 # Laravel specific
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
 bootstrap/compiled.php
 app/storage/
@@ -185,6 +189,8 @@ docs/cache/
 .php-cs-fixer.cache
 
 # Laravel specific
+=======
+>>>>>>> bc33217 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -193,15 +199,21 @@ public_html/storage
 public_html/hot
 storage/*.key
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> f492947 (.)
 =======
 
 # Environment and configuration
 >>>>>>> b48ea51 (.)
+=======
+
+# Environment and configuration
+>>>>>>> bc33217 (.)
 .env
 Homestead.yaml
 Homestead.json
 /.vagrant
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -223,6 +235,8 @@ Homestead.json
 *.cache
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 
 # Git related
 .git-rewrite/
@@ -238,6 +252,7 @@ Homestead.json
 *.log
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -245,8 +260,13 @@ docs/cache/
 cache/
 >>>>>>> f492947 (.)
 =======
+=======
+>>>>>>> bc33217 (.)
 #othes
 lang/it/.php
 lang/en/.php
 lang/de/.php
+<<<<<<< HEAD
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)

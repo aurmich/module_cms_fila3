@@ -89,6 +89,7 @@ return [
     'validation' => [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         'name_required' => 'The name is required',
 =======
         'name_required' => 'Il nome è obbligatorio',
@@ -96,6 +97,9 @@ return [
 =======
         'name_required' => 'The name is required',
 >>>>>>> b48ea51 (.)
+=======
+        'name_required' => 'The name is required',
+>>>>>>> bc33217 (.)
         'slug_unique' => 'Lo slug deve essere unico',
         'blocks_required' => 'I blocchi di contenuto sono obbligatori',
     ],

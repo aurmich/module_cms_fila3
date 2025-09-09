@@ -136,6 +136,7 @@ return [
     'validation' => [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         'title_required' => 'Der Titel ist erforderlich',
         'slug_unique' => 'Der Slug muss eindeutig sein',
         'content_required' => 'Der Inhalt ist erforderlich',
@@ -149,6 +150,11 @@ return [
         'slug_unique' => 'Der Slug muss eindeutig sein',
         'content_required' => 'Der Inhalt ist erforderlich',
 >>>>>>> b48ea51 (.)
+=======
+        'title_required' => 'Der Titel ist erforderlich',
+        'slug_unique' => 'Der Slug muss eindeutig sein',
+        'content_required' => 'Der Inhalt ist erforderlich',
+>>>>>>> bc33217 (.)
     ],
     'model' => [
         'label' => 'page.model',

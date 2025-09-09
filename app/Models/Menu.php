@@ -126,12 +126,16 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  * @property-read string $path
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mixin IdeHelperMenu
 =======
 >>>>>>> f492947 (.)
 =======
  * @mixin IdeHelperMenu
 >>>>>>> b48ea51 (.)
+=======
+ * @mixin IdeHelperMenu
+>>>>>>> bc33217 (.)
  * @mixin \Eloquent
  */
 class Menu extends BaseModel implements HasRecursiveRelationshipsContract

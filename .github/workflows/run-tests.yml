@@ -50,6 +50,7 @@ jobs:
       - name: Execute tests
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         run: vendor/bin/pest
 =======
         run: vendor/bin/pest
@@ -57,3 +58,6 @@ jobs:
 =======
         run: vendor/bin/pest
 >>>>>>> f492947 (.)
+=======
+        run: vendor/bin/pest
+>>>>>>> bc33217 (.)

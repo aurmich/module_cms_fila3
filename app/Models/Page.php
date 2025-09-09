@@ -55,12 +55,16 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mixin IdeHelperPage
 =======
 >>>>>>> f492947 (.)
 =======
  * @mixin IdeHelperPage
 >>>>>>> b48ea51 (.)
+=======
+ * @mixin IdeHelperPage
+>>>>>>> bc33217 (.)
  * @mixin \Eloquent
  */
 class Page extends BaseModelLang

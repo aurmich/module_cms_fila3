@@ -201,6 +201,7 @@ return [
     'validation' => [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         'required' => 'This field is required',
 =======
         'required' => 'Questo campo è obbligatorio',
@@ -208,6 +209,9 @@ return [
 =======
         'required' => 'This field is required',
 >>>>>>> b48ea51 (.)
+=======
+        'required' => 'This field is required',
+>>>>>>> bc33217 (.)
         'email' => 'Inserisci un indirizzo email valido',
         'url' => 'Inserisci un URL valido (inizia con http:// o https://)',
     ],

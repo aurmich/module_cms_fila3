@@ -6,9 +6,12 @@ updates:
       interval: "daily"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -25,6 +28,9 @@ updates:
       - "npm"
       - "dependencies"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
 =======
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)

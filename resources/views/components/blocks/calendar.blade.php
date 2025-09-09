@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
 {{-- Generic Calendar Component for CMS --}}
 @props([
     'type' => 'patient', // patient|doctor|admin
@@ -15,6 +18,7 @@
         'doctor' => $namespace . '\\DoctorCalendarWidget', 
         'admin' => $namespace . '\\AdminCalendarWidget',
         default => $namespace . '\\PatientCalendarWidget',
+<<<<<<< HEAD
 =======
 {{-- Componente Calendar per SaluteOra --}}
 =======
@@ -42,6 +46,8 @@
         'admin' => $namespace . '\\AdminCalendarWidget',
         default => $namespace . '\\PatientCalendarWidget',
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
     };
 @endphp
 

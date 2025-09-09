@@ -183,9 +183,15 @@ Ogni blocco supporta diversi contesti:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> bc33217 (.)
 
 
 
 
+<<<<<<< HEAD
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)

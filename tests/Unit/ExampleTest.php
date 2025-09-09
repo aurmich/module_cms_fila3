@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
 use Modules\Cms\Models\Module;
 use Modules\Xot\Actions\Filament\GetModulesNavigationItems;
 
@@ -41,6 +44,7 @@ describe('CMS Module', function () {
             ->and(GetModulesNavigationItems::class)->toBeString();
     });
 });
+<<<<<<< HEAD
 =======
 uses(Modules\Cms\Tests\TestHelper::class);
 
@@ -90,3 +94,5 @@ it('user admin can view module dashboard', function (): void {
     $this->actingAs($this->super_admin_user)->get('http://multiv.local/barbershop/admin/dashboard')->assertStatus(200); // ->assertSee($modules_name);
 })->todo();
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)

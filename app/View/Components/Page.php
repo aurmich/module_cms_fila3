@@ -8,15 +8,19 @@ use Illuminate\View\View;
 use Illuminate\Support\Arr;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use Illuminate\Support\Str;
 >>>>>>> f492947 (.)
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
 use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -24,6 +28,8 @@ use Illuminate\Support\Facades\Blade;
 >>>>>>> f492947 (.)
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
 
@@ -33,6 +39,9 @@ class Page extends Component
     public string $slug;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
     public array $blocks = [];
     public array $data = [];
 
@@ -66,6 +75,7 @@ class Page extends Component
         $this->blocks = BlockData::collect($blocks);
     }
 
+<<<<<<< HEAD
 =======
     public array $blocks=[];
 =======
@@ -107,11 +117,14 @@ class Page extends Component
 =======
 
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
     /**
      * Get the view / contents that represents the component.
      */
     public function render(): ViewContract
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         $view = 'cms::components.page-content';
@@ -127,6 +140,11 @@ class Page extends Component
         $view_params = [];
         // @phpstan-ignore-next-line
 >>>>>>> b48ea51 (.)
+=======
+        $view = 'cms::components.page-content';
+        $view_params = [];
+        // @phpstan-ignore-next-line
+>>>>>>> bc33217 (.)
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
         }

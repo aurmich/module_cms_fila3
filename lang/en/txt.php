@@ -397,6 +397,7 @@ return [
     'validation' => [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         'title_required' => 'The title is required',
 =======
         'title_required' => 'Il titolo è obbligatorio',
@@ -404,12 +405,16 @@ return [
 =======
         'title_required' => 'The title is required',
 >>>>>>> b48ea51 (.)
+=======
+        'title_required' => 'The title is required',
+>>>>>>> bc33217 (.)
         'slug_unique' => 'Questo slug è già in uso',
         'email_format' => 'Inserisci un indirizzo email valido',
         'url_format' => 'Inserisci un URL valido',
         'phone_format' => 'Inserisci un numero di telefono valido',
         'image_size' => 'L\'immagine deve essere inferiore a 5MB',
         'video_format' => 'Formato video non supportato',
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         'required_field' => 'This field is required',
@@ -419,6 +424,9 @@ return [
 =======
         'required_field' => 'This field is required',
 >>>>>>> b48ea51 (.)
+=======
+        'required_field' => 'This field is required',
+>>>>>>> bc33217 (.)
         'max_length' => 'Il testo è troppo lungo (massimo :max caratteri)',
         'min_length' => 'Il testo è troppo corto (minimo :min caratteri)',
     ],

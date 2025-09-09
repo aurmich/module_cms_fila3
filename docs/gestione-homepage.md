@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
 # Gestione della Homepage
 
 ## Struttura e Modifica Corretta
@@ -13,6 +16,7 @@ La homepage del portale è gestita attraverso un file JSON che definisce i blocc
 ### Struttura del file JSON
 
 Il file JSON della homepage ha la seguente struttura:
+<<<<<<< HEAD
 =======
 # Gestione della Homepage in il progetto
 =======
@@ -53,6 +57,8 @@ Il file `1.json` contiene la struttura completa della homepage:
 =======
 Il file JSON della homepage ha la seguente struttura:
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 
 ```json
 {
@@ -60,6 +66,9 @@ Il file JSON della homepage ha la seguente struttura:
     "title": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
         "it": "Promozione della salute orale per le gestanti"
     },
     "slug": "home",
@@ -107,6 +116,7 @@ Per aggiornare il testo principale della homepage:
         "alignment": "left",
         "background_color": "bg-white",
         "text_color": "text-gray-900"
+<<<<<<< HEAD
 =======
         "it": "il progetto - Promozione della salute orale per le gestanti"
 =======
@@ -122,11 +132,16 @@ Per aggiornare il testo principale della homepage:
         ]
 <<<<<<< HEAD
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)
     }
 }
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
 ### Esempio di modifica per aggiungere un pulsante "INIZIA ORA"
 
 ```json
@@ -141,6 +156,7 @@ Per aggiornare il testo principale della homepage:
         "background_color": "bg-white",
         "text_color": "text-gray-900",
         "button_color": "bg-indigo-600 hover:bg-indigo-700"
+<<<<<<< HEAD
 =======
 ### Struttura dei Blocchi
 =======
@@ -189,12 +205,17 @@ Per aggiornare il testo principale della homepage:
         "background_color": "bg-white",
         "text_color": "text-gray-900"
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
     }
 }
 ```
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
 ## Analisi dell'Errore Commesso
 
 ### Errore identificato
@@ -267,6 +288,7 @@ Per personalizzare la homepage:
 - Seguire le convenzioni di naming
 - Documentare tutte le modifiche
 - Testare su diversi dispositivi e browser
+<<<<<<< HEAD
 =======
 ## Tipi di Blocchi Disponibili
 =======
@@ -368,3 +390,5 @@ Per personalizzare la homepage:
 - Documentare tutte le modifiche
 - Testare su diversi dispositivi e browser
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)

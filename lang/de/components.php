@@ -48,6 +48,9 @@ return [
         'fields' => [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bc33217 (.)
             'required' => 'Pflichtfeld',
             'optional' => 'Optional',
         ],
@@ -61,6 +64,7 @@ return [
             'submit' => 'Senden',
             'reset' => 'Zurücksetzen',
             'cancel' => 'Abbrechen',
+<<<<<<< HEAD
 =======
             'required' => 'Campo obbligatorio',
             'optional' => 'Opzionale',
@@ -86,6 +90,8 @@ return [
             'reset' => 'Zurücksetzen',
             'cancel' => 'Abbrechen',
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
         ],
     ],
     'table' => [

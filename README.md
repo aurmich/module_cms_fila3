@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # creazione ambiente di produzione
 
 # common
@@ -176,6 +177,8 @@ redis-cli
 =======
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 # 🌐 Cms - Il SISTEMA di GESTIONE CONTENUTI più AVANZATO! 📝
 
 <!-- Dynamic validation badges -->
@@ -188,11 +191,14 @@ redis-cli
 [![Pest Tests](https://img.shields.io/badge/Pest%20Tests-✅%20Passing-brightgreen.svg)](tests/)
 [![PHP Version](https://img.shields.io/badge/PHP-8.3+-blue.svg)](https://php.net)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # Modulo CMS
 >>>>>>> f492947 (.)
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 
 Un modulo CMS modulare, estensibile e riutilizzabile per Laravel, con supporto per Filament, Volt e Folio.
 
@@ -334,6 +340,9 @@ Le pull request sono benvenute. Per modifiche importanti, aprire prima una issue
 
 MIT
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> fd753da3 (.)
 =======
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)

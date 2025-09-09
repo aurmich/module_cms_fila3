@@ -6,6 +6,7 @@ on:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 permissions:
   contents: write
@@ -16,6 +17,11 @@ permissions:
   contents: write
 
 >>>>>>> f492947 (.)
+=======
+permissions:
+  contents: write
+
+>>>>>>> bc33217 (.)
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -39,6 +45,7 @@ jobs:
           commit_message: Update CHANGELOG
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           file_pattern: CHANGELOG.md
 =======
           file_pattern: CHANGELOG.md
@@ -46,3 +53,6 @@ jobs:
 =======
           file_pattern: CHANGELOG.md
 >>>>>>> f492947 (.)
+=======
+          file_pattern: CHANGELOG.md
+>>>>>>> bc33217 (.)

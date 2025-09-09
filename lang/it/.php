@@ -261,13 +261,17 @@ return array (
   ),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
   'sections' => 
   array (
     'empty' => 
     array (
       'heading' => '',
+<<<<<<< HEAD
 <<<<<<< HEAD
     ),
   ),
@@ -278,4 +282,9 @@ return array (
     ),
   ),
 >>>>>>> b48ea51 (.)
+=======
+      'label' => 'empty',
+    ),
+  ),
+>>>>>>> bc33217 (.)
 );

@@ -79,6 +79,23 @@ return array (
     array (
       'label' => 'create',
     ),
+<<<<<<< HEAD
+=======
+    'description' => 
+    array (
+      'description' => 'description',
+      'label' => 'description',
+      'placeholder' => 'description',
+      'helper_text' => 'description',
+    ),
+    'disk' => 
+    array (
+      'description' => 'disk',
+      'label' => 'disk',
+      'placeholder' => 'disk',
+      'helper_text' => 'disk',
+    ),
+>>>>>>> bc33217 (.)
   ),
   'actions' => 
   array (

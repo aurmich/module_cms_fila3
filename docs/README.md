@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Modulo Cms - Content Management System
 
 ## Panoramica
@@ -32,6 +33,8 @@ laravel/Modules/Cms/
 ## Funzionalità Principali
 =======
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 # Modulo CMS
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
@@ -54,6 +57,7 @@ laravel/Modules/Cms/
 > - [README.md tema Two](../../../../laravel/Themes/Two/docs/README.md)
 > - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ### 1. Gestione Menu
 - Creazione e gestione di menu dinamici
@@ -172,6 +176,8 @@ php artisan test --filter=Cms
 *Stato: Correzioni necessarie per CreateMenu e EditMenu*
 *Versione: 1.0*
 =======
+=======
+>>>>>>> bc33217 (.)
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
 > - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
@@ -397,5 +403,8 @@ npm run dev
 * [README.md](laravel/Modules/Cms/docs/components/README.md)
 * [README.md](laravel/Themes/Two/docs/README.md)
 * [README.md](laravel/Themes/One/docs/README.md)
+<<<<<<< HEAD
 >>>>>>> b48ea51 (.)
+=======
+>>>>>>> bc33217 (.)
 

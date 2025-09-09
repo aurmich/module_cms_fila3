@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 * text=auto eol=lf
 
 *.blade.php diff=html
@@ -18,12 +19,18 @@ README.md export-ignore
 =======
 =======
 >>>>>>> f492947 (.)
+=======
+>>>>>>> bc33217 (.)
 * text=auto
 *.css linguist-vendored
 *.scss linguist-vendored
 *.js linguist-vendored
+<<<<<<< HEAD
 CHANGELOG.md export-ignore
 <<<<<<< HEAD
 >>>>>>> fd753da3 (.)
 =======
 >>>>>>> f492947 (.)
+=======
+CHANGELOG.md export-ignore
+>>>>>>> bc33217 (.)

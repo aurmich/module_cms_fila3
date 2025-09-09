@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
+<<<<<<< HEAD
 use Modules\Tenant\Models\Traits\SushiToJsons;
 use Modules\Xot\Contracts\ProfileContract;
 use Spatie\Translatable\HasTranslations;
@@ -12,6 +13,17 @@ use Filament\Forms\Components\RichEditor\Models\Concerns\InteractsWithRichConten
 use Filament\Forms\Components\RichEditor\Models\Contracts\HasRichContent;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+=======
+use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Translatable\HasTranslations;
+use Modules\Xot\Contracts\ProfileContract;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\Tenant\Models\Traits\SushiToJsons;
+use Filament\Forms\Components\RichEditor\Models\Contracts\HasRichContent;
+use Filament\Forms\Components\RichEditor\Models\Concerns\InteractsWithRichContent;
+use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibraryFileAttachmentProvider;
+>>>>>>> bc33217 (.)
 
 /**
  * ---
@@ -24,12 +36,22 @@ class Attachment extends BaseModelLang implements HasMedia
     /** @var array<int, string> */
     public $translatable = [
         'title',
+<<<<<<< HEAD
+=======
+        'description',
+>>>>>>> bc33217 (.)
         'attachment',
     ];
 
     protected $fillable = [
         'title',
+<<<<<<< HEAD
         'slug',
+=======
+        'description',
+        'slug',
+        'disk',
+>>>>>>> bc33217 (.)
         'attachment',
     ];
 
@@ -41,7 +63,13 @@ class Attachment extends BaseModelLang implements HasMedia
     protected array $schema = [
         'id' => 'integer',
         'title' => 'json',
+<<<<<<< HEAD
         'slug' => 'string',
+=======
+        'description' => 'json',
+        'slug' => 'string',
+        'disk' => 'string',
+>>>>>>> bc33217 (.)
         'attachment' => 'json',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -94,6 +122,10 @@ class Attachment extends BaseModelLang implements HasMedia
     {
         return [
             'id' => 'string',
+<<<<<<< HEAD
+=======
+            'disk' => 'string',
+>>>>>>> bc33217 (.)
             'uuid' => 'string',
             'date' => 'datetime',
             'published_at' => 'datetime',
@@ -132,4 +164,15 @@ class Attachment extends BaseModelLang implements HasMedia
         
         return null;
     }
+<<<<<<< HEAD
+=======
+
+
+    public function asset(): string
+    {
+        $file = array_values($this->attachment)[0];
+        $path = Storage::disk($this->disk)->url($file);
+        return $path;
+    }
+>>>>>>> bc33217 (.)
 }
