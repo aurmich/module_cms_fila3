@@ -13,12 +13,12 @@ alwaysApply: true
 ## Required Properties
 
 ### `public string $name`
-- MUST be set to the module name in PascalCase (e.g., 'SaluteMo')
+- MUST be set to the module name in PascalCase (e.g., 'example')
 - MUST be marked as `public`
 - Used for route registration and error handling
 
 ### `protected string $namespace`
-- MUST be set to the module's controller namespace (e.g., 'Modules\\SaluteMo\\Http\\Controllers')
+- MUST be set to the module's controller namespace (e.g., 'Modules\\example\\Http\\Controllers')
 - Used for controller resolution in routes
 
 ## Optional Properties

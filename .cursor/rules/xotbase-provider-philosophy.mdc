@@ -45,7 +45,7 @@ alwaysApply: false
 
 ### 2.1 Nome del Modulo
 ```php
-public string $name = 'SaluteMo';
+public string $name = 'example';
 ```
 - **Significato**: Identità del modulo
 - **Filosofia**: Come il nome di una persona, definisce l'essenza
@@ -54,7 +54,7 @@ public string $name = 'SaluteMo';
 
 ### 2.2 Nome in Lowercase
 ```php
-public string $nameLower = 'salutemo';
+public string $nameLower = 'example';
 ```
 - **Significato**: Versione lowercase per uso interno
 - **Filosofia**: Come l'umiltà nella vita, il lowercase nel codice
@@ -63,7 +63,7 @@ public string $nameLower = 'salutemo';
 
 ### 2.3 Namespace (RouteServiceProvider)
 ```php
-protected $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
+protected $namespace = 'Modules\\example\\Http\\Controllers';
 ```
 - **Significato**: Spazio dei nomi per i controller
 - **Filosofia**: Come l'indirizzo di una casa, definisce la posizione
@@ -184,7 +184,7 @@ protected string $module_ns = __NAMESPACE__;
 ### 7.1 Implementazione Corretta
 ```php
 /**
- * Service provider per il modulo SaluteMo.
+ * Service provider per il modulo example.
  *
  * Estende XotBaseServiceProvider per garantire:
  * - Centralizzazione di config, views, traduzioni, migrations, comandi, Livewire/Blade components
@@ -193,10 +193,10 @@ protected string $module_ns = __NAMESPACE__;
  *
  * Politica: "Non avrai altro provider all'infuori di XotBase..."
  */
-class SaluteMoServiceProvider extends XotBaseServiceProvider
+class exampleServiceProvider extends XotBaseServiceProvider
 {
-    public string $name = 'SaluteMo';
-    public string $nameLower = 'salutemo';
+    public string $name = 'example';
+    public string $nameLower = 'example';
 }
 ```
 
@@ -209,7 +209,7 @@ class SaluteMoServiceProvider extends XotBaseServiceProvider
  */
 use Illuminate\Support\ServiceProvider;
 
-class SaluteMoServiceProvider extends ServiceProvider
+class exampleServiceProvider extends ServiceProvider
 {
     // ERRORE: Duplicazione di logica già presente in XotBase
     public function boot(): void

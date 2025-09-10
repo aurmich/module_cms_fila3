@@ -8,7 +8,7 @@
 
 ## Key Modules Identified
 - **SaluteOra**: Main module with models (Patient, Doctor, Appointment)
-- **SaluteMo**: Dashboard and main application logic
+- **example**: Dashboard and main application logic
 - **User**: User management and authentication
 - **Xot**: Base framework module with common functionality
 

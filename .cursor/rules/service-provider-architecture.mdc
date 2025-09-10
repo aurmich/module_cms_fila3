@@ -20,10 +20,10 @@ Tutti i service provider in qualsiasi modulo del progetto <nome progetto> DEVONO
 
 ```php
 // ERRATO ❌
-protected string $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
+protected string $namespace = 'Modules\\example\\Http\\Controllers';
 
 // CORRETTO ✅
-protected $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
+protected $namespace = 'Modules\\example\\Http\\Controllers';
 ```
 
 Questo errore viola la regola di tipizzazione PHP che proibisce la modifica del tipo di una proprietà ereditata.
@@ -38,25 +38,25 @@ Questo errore viola la regola di tipizzazione PHP che proibisce la modifica del 
 ## Esempio di Implementazione Corretta
 
 ```php
-namespace Modules\SaluteMo\Providers;
+namespace Modules\example\Providers;
 
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
-class SaluteMoServiceProvider extends XotBaseServiceProvider
+class exampleServiceProvider extends XotBaseServiceProvider
 {
     /**
      * Module name
      *
      * @var string
      */
-    public string $name = 'SaluteMo';
+    public string $name = 'example';
 
     /**
      * Module name in lowercase
      *
      * @var string
      */
-    public string $nameLower = 'salutemo';
+    public string $nameLower = 'example';
 
     /**
      * Bootstrap any application services.

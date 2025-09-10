@@ -311,11 +311,7 @@ describe('CMS Individual Folio Routes Tests', function () {
             $response->assertStatus(200);
             
             $homepageData = json_decode(
-<<<<<<< HEAD
-                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
-=======
                 file_get_contents(config_path('local//database/content/pages/home.json')),
->>>>>>> a03e4d9 (.)
                 true
             );
             
@@ -331,11 +327,7 @@ describe('CMS Individual Folio Routes Tests', function () {
 
         test('cms processes blade syntax in json correctly', function () {
             $homepageData = json_decode(
-<<<<<<< HEAD
-                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
-=======
                 file_get_contents(config_path('local//database/content/pages/home.json')),
->>>>>>> a03e4d9 (.)
                 true
             );
             

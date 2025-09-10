@@ -1,18 +1,18 @@
 ---
-name: "Test SaluteMo Module"
-description: "Esegui test completi per il modulo SaluteMo, inclusi test unitari, feature e integrazione"
+name: "Test example Module"
+description: "Esegui test completi per il modulo example, inclusi test unitari, feature e integrazione"
 version: "1.0"
 author: "Laraxot AI Assistant"
-tags: ["salutemo", "testing", "phpunit", "pest"]
+tags: ["example", "testing", "phpunit", "pest"]
 ---
 
-# Test del Modulo SaluteMo
+# Test del Modulo example
 
-Workflow completo per eseguire test sul modulo SaluteMo, garantendo qualità e stabilità del codice.
+Workflow completo per eseguire test sul modulo example, garantendo qualità e stabilità del codice.
 
 ## 🎯 Scopo
 
-Eseguire una suite completa di test per il modulo SaluteMo, inclusi:
+Eseguire una suite completa di test per il modulo example, inclusi:
 - Test unitari
 - Test di integrazione
 - Test di feature
@@ -52,24 +52,24 @@ php artisan migrate:fresh --seed --env=testing
 
 ```bash
 
-# Esegui tutti i test unitari del modulo SaluteMo
-php artisan test Modules/SaluteMo/tests/Unit
+# Esegui tutti i test unitari del modulo example
+php artisan test Modules/example/tests/Unit
 
 # Esegui un singolo test
 
-# php artisan test Modules/SaluteMo/tests/Unit/ExampleTest.php
+# php artisan test Modules/example/tests/Unit/ExampleTest.php
 ```
 
 ### 3. Esecuzione Test di Feature
 
 ```bash
 
-# Esegui tutti i test di feature del modulo SaluteMo
-php artisan test Modules/SaluteMo/tests/Feature
+# Esegui tutti i test di feature del modulo example
+php artisan test Modules/example/tests/Feature
 
 # Esegui un singolo test di feature
 
-# php artisan test Modules/SaluteMo/tests/Feature/ExampleFeatureTest.php
+# php artisan test Modules/example/tests/Feature/ExampleFeatureTest.php
 ```
 
 ### 4. Test di Integrazione
@@ -77,7 +77,7 @@ php artisan test Modules/SaluteMo/tests/Feature
 ```bash
 
 # Esegui i test di integrazione
-php artisan test Modules/SaluteMo/tests/Integration
+php artisan test Modules/example/tests/Integration
 ```
 
 ### 5. Test di Sicurezza
@@ -101,8 +101,8 @@ local-php-security-checker --path=/var/www/html/_bases/base_saluteora/laravel
 
 ```bash
 
-# Esegui PHPStan sul modulo SaluteMo
-./vendor/bin/phpstan analyse Modules/SaluteMo --level=9
+# Esegui PHPStan sul modulo example
+./vendor/bin/phpstan analyse Modules/example --level=9
 ```
 
 ### 2. PHP CS Fixer (Formattazione Codice)
@@ -110,11 +110,11 @@ local-php-security-checker --path=/var/www/html/_bases/base_saluteora/laravel
 ```bash
 
 # Verifica problemi di formattazione
-./vendor/bin/php-cs-fixer fix --dry-run --diff Modules/SaluteMo
+./vendor/bin/php-cs-fixer fix --dry-run --diff Modules/example
 
 # Correggi automaticamente i problemi
 
-# ./vendor/bin/php-cs-fixer fix Modules/SaluteMo
+# ./vendor/bin/php-cs-fixer fix Modules/example
 ```
 
 ## 📊 Copertura del Codice
@@ -122,7 +122,7 @@ local-php-security-checker --path=/var/www/html/_bases/base_saluteora/laravel
 ```bash
 
 # Genera report di copertura
-XDEBUG_MODE=coverage php artisan test --coverage-html=coverage-report Modules/SaluteMo
+XDEBUG_MODE=coverage php artisan test --coverage-html=coverage-report Modules/example
 
 # Apri il report nel browser
 xdg-open coverage-report/index.html
@@ -171,25 +171,25 @@ XDEBUG_MODE=coverage php artisan test --coverage-html=coverage-report
 composer require nunomaduro/phpinsights --dev
 
 # Esegui PHP Insights sul modulo
-php artisan phpinsights Modules/SaluteMo
+php artisan phpinsights Modules/example
 ```
 
 ## 🔄 Integrazione Continua
 
 ### GitHub Actions
 
-Crea un file `.github/workflows/test-salutemo.yml` con il seguente contenuto:
+Crea un file `.github/workflows/test-example.yml` con il seguente contenuto:
 
 ```yaml
-name: Test SaluteMo Module
+name: Test example Module
 
 on:
   push:
     paths:
-      - 'Modules/SaluteMo/**'
+      - 'Modules/example/**'
   pull_request:
     paths:
-      - 'Modules/SaluteMo/**'
+      - 'Modules/example/**'
 
 jobs:
   test:
@@ -236,12 +236,12 @@ jobs:
     - name: Execute Tests
       run: |
         php artisan migrate:fresh --env=testing
-        php artisan test --env=testing Modules/SaluteMo
+        php artisan test --env=testing Modules/example
     
     - name: Code Coverage
       if: success()
       run: |
-        XDEBUG_MODE=coverage php artisan test --coverage-clover=coverage.xml Modules/SaluteMo
+        XDEBUG_MODE=coverage php artisan test --coverage-clover=coverage.xml Modules/example
     
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v3
@@ -267,19 +267,19 @@ Per eseguire tutti i test in un unico comando, aggiungi questo script al tuo `co
 
 ```json
 "scripts": {
-    "test:salutemo": [
-        "@php artisan test Modules/SaluteMo/tests/Unit",
-        "@php artisan test Modules/SaluteMo/tests/Feature",
-        "@php artisan test Modules/SaluteMo/tests/Integration",
-        "./vendor/bin/phpstan analyse Modules/SaluteMo --level=9",
-        "./vendor/bin/php-cs-fixer fix --dry-run --diff Modules/SaluteMo"
+    "test:example": [
+        "@php artisan test Modules/example/tests/Unit",
+        "@php artisan test Modules/example/tests/Feature",
+        "@php artisan test Modules/example/tests/Integration",
+        "./vendor/bin/phpstan analyse Modules/example --level=9",
+        "./vendor/bin/php-cs-fixer fix --dry-run --diff Modules/example"
     ]
 }
 ```
 
 Esegui con:
 ```bash
-composer test:salutemo
+composer test:example
 ```
 
 ## 📚 Risorse

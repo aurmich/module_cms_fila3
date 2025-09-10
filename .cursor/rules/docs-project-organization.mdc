@@ -82,7 +82,7 @@ laravel/Modules/UI/docs/module-icons-design-system.md
 
 ### Controllo File Specifici di Moduli in docs_project
 ```bash
-ls -la docs_project/ | grep -E "(doctor|appointment|saluteora|salutemo|ui-table|module-icons)" | wc -l
+ls -la docs_project/ | grep -E "(doctor|appointment|saluteora|example|ui-table|module-icons)" | wc -l
 # Risultato dovrebbe essere: 0
 ```
 

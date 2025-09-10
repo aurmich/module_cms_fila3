@@ -34,8 +34,8 @@
 ## Esempio Corretto
 ```php
 class RouteServiceProvider extends XotBaseRouteServiceProvider {
-    public string $name = 'SaluteMo';
-    protected string $moduleNamespace = 'Modules\\SaluteMo\\Http\\Controllers';
+    public string $name = 'example';
+    protected string $moduleNamespace = 'Modules\\example\\Http\\Controllers';
     protected string $module_dir = __DIR__;
     protected string $module_ns = __NAMESPACE__;
     // Override solo se serve logica custom
@@ -48,5 +48,5 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider {
 - Non documentare override
 
 ## Collegamenti
-- [docs/provider_issues.md](../../laravel/Modules/SaluteMo/docs/provider_issues.md)
-- [docs/providers_specification.md](../../laravel/Modules/SaluteMo/docs/providers_specification.md)
+- [docs/provider_issues.md](../../laravel/Modules/example/docs/provider_issues.md)
+- [docs/providers_specification.md](../../laravel/Modules/example/docs/providers_specification.md)

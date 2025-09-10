@@ -1,12 +1,12 @@
 ---
 name: no-project-specific-bashscripts
-summary: Shared bashscripts/ must be project-agnostic. No SaluteOra/SaluteMo-specific scripts under bashscripts/
+summary: Shared bashscripts/ must be project-agnostic. No SaluteOra/example-specific scripts under bashscripts/
 ---
 
 # Rule: Shared bashscripts/ is project-agnostic
 
 ## Forbidden
-- Any script in `bashscripts/` that references specific modules or domain classes (e.g., `Modules/SaluteOra`, `Modules/SaluteMo`)
+- Any script in `bashscripts/` that references specific modules or domain classes (e.g., `Modules/SaluteOra`, `Modules/example`)
 - Project-scoped data seeding scripts under `bashscripts/database/` or `bashscripts/database/seeding/`
 
 ## Allowed
@@ -16,7 +16,7 @@ summary: Shared bashscripts/ must be project-agnostic. No SaluteOra/SaluteMo-spe
 - Run `bashscripts/validate-shared-scripts.sh` in CI and locally.
 - If violations are found, move scripts to the appropriate module path, e.g.:
   - `laravel/Modules/SaluteOra/database/seeders/scripts/`
-  - `laravel/Modules/SaluteMo/database/seeders/scripts/`
+  - `laravel/Modules/example/database/seeders/scripts/`
 
 ## Migration Guidance
 - Use `git mv` to preserve history when possible.
