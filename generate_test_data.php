@@ -85,8 +85,13 @@ class TestDataGenerator
             // Create factory instance and generate records
             $factory = new $factoryClass();
             $records = $factory->count(100)->create();
+            
+            // Ensure we can call count() on the result
+            if (!method_exists($records, 'count') && !is_countable($records)) {
+                throw new \Exception('Records object does not support count() method');
+            }
 
-            $count = is_countable($records) ? count($records) : 1;
+            $count = is_countable($records) ? count($records) : ($records !== null ? 1 : 0);
             echo "✅ Created {$count} records\n";
             
             $this->results[$module][$modelName] = [
@@ -150,12 +155,12 @@ class TestDataGenerator
             
             foreach ($models as $modelName => $factoryClass) {
                 // Convert factory class to model class
-                $modelClass = str_replace('\Database\Factories\\', '\Models\\', $factoryClass);
-                $modelClass = str_replace('Factory', '', $modelClass);
+                $modelClassParts = str_replace('\Database\Factories\\', '\Models\\', $factoryClass);
+                $modelClass = str_replace('Factory', '', $modelClassParts);
                 
                 echo "// {$modelName}\n";
                 echo "(new {$factoryClass}())->count(100)->create();\n";
-                echo "// Alternative: {$modelClass}::factory()->count(100)->create(); // if HasFactory trait is added\n\n";
+                echo "// Alternative: " . $modelClass . "::factory()->count(100)->create(); // if HasFactory trait is added\n\n";
             }
         }
     }

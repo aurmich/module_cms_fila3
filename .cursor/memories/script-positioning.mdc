@@ -1,7 +1,7 @@
 # Memoria: Posizione Script - Regola Fondamentale
 
 ## Regola Assoluta da Rispettare SEMPRE
-- **TUTTI gli script** (PHP, Bash, Python, etc.) vanno SEMPRE in `/var/www/html/_bases/base_saluteora/bashscripts/`
+- **TUTTI gli script** (PHP, Bash, Python, etc.) vanno SEMPRE in `/var/www/html/_bases/base_techplanner_fila3_mono/bashscripts/`
 - **MAI** mettere script nella directory Laravel o in altre posizioni
 - Gli script devono essere categorizzati in sottocartelle appropriate
 

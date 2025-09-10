@@ -43,7 +43,7 @@ class Show extends Component
     /**
      * I contenuti della pagina.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $pageContent = [];
 
@@ -80,11 +80,12 @@ class Show extends Component
 
         // Se la cache è abilitata, tenta di recuperare dalla cache
         if ($this->cache) {
-            $this->pageContent = Cache::remember(
+            $cached = Cache::remember(
                 $cacheKey,
                 now()->addHours(24),
                 fn () => $this->fetchPageContent()
             );
+            $this->pageContent = is_array($cached) ? $cached : [];
         } else {
             $this->pageContent = $this->fetchPageContent();
         }
@@ -93,7 +94,7 @@ class Show extends Component
     /**
      * Recupera i contenuti della pagina dal database.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function fetchPageContent(): array
     {
@@ -110,14 +111,14 @@ class Show extends Component
             // Recupera e processa i contenuti della pagina
             return [
                 'title' => $page->title,
-                'subtitle' => $page->subtitle,
+                'subtitle' => null, // Property doesn't exist in Page model
                 'content' => $page->content,
                 'meta' => [
-                    'description' => $page->meta_description,
-                    'keywords' => $page->meta_keywords,
+                    'description' => null, // Property doesn't exist in Page model
+                    'keywords' => null, // Property doesn't exist in Page model
                 ],
-                'blocks' => $page->blocks ?? [],
-                'layout' => $page->layout ?? 'default',
+                'blocks' => $page->content_blocks ?? [],
+                'layout' => 'default',
             ];
         } catch (\Exception $e) {
             if ($this->debug) {

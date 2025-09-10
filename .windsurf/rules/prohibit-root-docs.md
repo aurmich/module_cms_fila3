@@ -1,7 +1,7 @@
 # prohibit root-level docs directory
 
 ## rule
-- The directory `docs/` MUST NOT exist at the project root: `/var/www/html/_bases/base_saluteora/docs/`.
+- The directory `docs/` MUST NOT exist at the project root: `/var/www/html/_bases/base_techplanner_fila3_mono/docs/`.
 - Global documentation MUST live in `docs_project/`.
 - Module-specific documentation MUST live in `laravel/Modules/<ModuleName>/docs/`.
 - All docs paths and filenames must be lowercase, except `README.md`.

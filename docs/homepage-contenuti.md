@@ -31,7 +31,7 @@ La homepage deve includere:
 ## Riferimento visivo
 
 L'implementazione deve seguire il design mostrato nell'immagine di riferimento:
-![Riferimento homepage](/var/www/html/saluteora/docs/images/2.png)
+![Riferimento homepage](/var/www/html/_bases/base_techplanner_fila3_mono/docs/images/2.png)
 
 ## Note implementative
 
@@ -45,5 +45,5 @@ L'implementazione deve seguire il design mostrato nell'immagine di riferimento:
 Se il contenuto della homepage deve essere modificato, è necessario:
 
 1. Aggiornare questo documento
-2. Aggiornare il file JSON corrispondente in `/var/www/html/saluteora/laravel/config/local/saluteora/database/content/pages/1.json`
+2. Aggiornare il file JSON corrispondente in `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/config/local/saluteora/database/content/pages/1.json`
 3. Verificare che le modifiche siano correttamente visualizzate in tutte le versioni (mobile, tablet, desktop)

@@ -1,10 +1,10 @@
 # SaluteOra Project Structure - Key Learnings
 
 ## Project Root Structure
-- **Root**: `/var/www/html/_bases/base_saluteora/`
-- **Laravel**: `/var/www/html/_bases/base_saluteora/laravel/`
-- **Modules**: `/var/www/html/_bases/base_saluteora/laravel/Modules/`
-- **Themes**: `/var/www/html/_bases/base_saluteora/laravel/Themes/One/`
+- **Root**: `/var/www/html/_bases/base_techplanner_fila3_mono/`
+- **Laravel**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/`
+- **Modules**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/`
+- **Themes**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/`
 
 ## Key Modules Identified
 - **SaluteOra**: Main module with models (Patient, Doctor, Appointment)

@@ -28,7 +28,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     });
 
     test('json content structure is properly loaded by cms', function () {
-        $homepageJsonPath = config_path('local/saluteora/database/content/pages/home.json');
+        $homepageJsonPath = config_path('local/TechPlanner/database/content/pages/home.json');
         expect(file_exists($homepageJsonPath))->toBeTrue('Homepage JSON must exist for CMS');
         
         $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
@@ -70,7 +70,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         
         // Load homepage blocks
         $homepageData = json_decode(
-            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
             true
         );
         
@@ -89,7 +89,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         
         // Load expected content from JSON
         $homepageData = json_decode(
-            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
             true
         );
         
@@ -117,7 +117,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         
         // Load blocks to verify theme views
         $homepageData = json_decode(
-            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
             true
         );
         
@@ -132,7 +132,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms handles multilingual content correctly', function () {
         $homepageData = json_decode(
-            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
             true
         );
         
@@ -169,7 +169,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     });
 
     test('cms json storage pattern is consistent', function () {
-        $pagesPath = config_path('local/saluteora/database/content/pages/');
+        $pagesPath = config_path('local/TechPlanner/database/content/pages/');
         expect(file_exists($pagesPath))->toBeTrue('CMS pages directory should exist');
         
         $homepageJsonPath = $pagesPath . 'home.json';
@@ -197,7 +197,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms blade syntax processing works in json', function () {
         $homepageData = json_decode(
-            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
             true
         );
         

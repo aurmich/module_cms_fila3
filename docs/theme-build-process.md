@@ -9,7 +9,7 @@ Il tema principale di il progetto ("One") richiede due step separati per compila
 1. **Build degli asset** - Compila i file sorgente in file ottimizzati:
 
 ```bash
-cd /var/www/html/saluteora/laravel/Themes/One
+cd /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One
 npm run build
 ```
 

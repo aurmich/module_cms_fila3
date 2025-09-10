@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use function Safe\file_put_contents;
+
 /**
  * Business Data Generation Script
  * Creates 100 records for each core business model using Tinker commands

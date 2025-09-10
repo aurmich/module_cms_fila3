@@ -1,7 +1,7 @@
 # Memoria: Fix Modularità Parental STI - Dicembre 2024
 
 ## Contesto del Problema
-**File coinvolto**: `/var/www/html/_bases/base_saluteora/laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php`
+**File coinvolto**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php`
 
 **Errore critico commesso**: Creazione di dipendenza diretta dal modulo User generico al modulo SaluteOra specifico attraverso l'import:
 ```php

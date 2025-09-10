@@ -8,7 +8,7 @@ Trovati 7 errori al livello 5.
 
 ## Errori e suggerimenti
 
-### File: `/var/www/html/saluteora/laravel/Modules/Cms/app/Filament/Resources/PageContentResource/Pages/ListPageContents.php`
+### File: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/Cms/app/Filament/Resources/PageContentResource/Pages/ListPageContents.php`
 
 #### Linea 39: Method Modules\Cms\Filament\Resources\PageContentResource\Pages\ListPageContents::getListTableColumns() should return array<string, Filament\Tables\Columns\Column> but returns array<int, Filament\Tables\Columns\TextColumn>.
 
@@ -34,7 +34,7 @@ Trovati 7 errori al livello 5.
 - Le variabili siano inizializzate prima dell'uso
 - I nomi di metodi e proprietà siano corretti
 
-### File: `/var/www/html/saluteora/laravel/Modules/Cms/app/Filament/Resources/PageResource/Pages/ListPages.php`
+### File: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/Cms/app/Filament/Resources/PageResource/Pages/ListPages.php`
 
 #### Linea 87: Method Modules\Cms\Filament\Resources\PageResource\Pages\ListPages::getTableActions() should return array<string, Filament\Tables\Actions\Action
 
@@ -52,7 +52,7 @@ Trovati 7 errori al livello 5.
 - Le variabili siano inizializzate prima dell'uso
 - I nomi di metodi e proprietà siano corretti
 
-### File: `/var/www/html/saluteora/laravel/Modules/Cms/app/Http/Volt/VerifyComponent.php`
+### File: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/Cms/app/Http/Volt/VerifyComponent.php`
 
 #### Linea 37: Parameter #1 $user of class Illuminate\Auth\Events\Verified constructor expects Illuminate\Contracts\Auth\MustVerifyEmail, Modules\User\Models\User given.
 
@@ -62,7 +62,7 @@ Trovati 7 errori al livello 5.
 - Le variabili siano inizializzate prima dell'uso
 - I nomi di metodi e proprietà siano corretti
 
-### File: `/var/www/html/saluteora/laravel/Modules/Cms/app/Models/Menu.php`
+### File: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/Cms/app/Models/Menu.php`
 
 #### Linea 160: PHPDoc tag @var with type class-string<Modules\Xot\Contracts\HasRecursiveRelationshipsContract> is not subtype of native type 'Modules\\Cms\\Models\\Menu'.
 

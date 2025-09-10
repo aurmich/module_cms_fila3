@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use function Safe\scandir;
+use function Safe\glob;
+use function Safe\file_get_contents;
+
 /**
  * Business Logic Analysis Script
  * Analyzes all modules for models, factories, and seeders

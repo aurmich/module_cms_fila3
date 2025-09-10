@@ -27,10 +27,10 @@ Usa `/console-command` in Windsurf Cascade per creare Command perfetti secondo i
 ```bash
 
 # Studia sempre il capolavoro:
-cat /var/www/html/_bases/base_saluteora/laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php
+cat /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php
 
 # Controlla documentazione filosofica:
-cat /var/www/html/_bases/base_saluteora/laravel/Modules/User/docs/console_commands_philosophy.md
+cat /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/User/docs/console_commands_philosophy.md
 ```
 
 ## Fase 2: Implementazione Template Supremo

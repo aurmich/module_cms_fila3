@@ -2,7 +2,7 @@
 
 ## Introduzione
 
-Questo documento descrive in dettaglio la struttura e il contenuto corretto che **deve** essere mostrato nell'homepage del portale il progetto, basato sulle specifiche ufficiali del progetto contenute nel file `/var/www/html/saluteora/docs/images/2.md`.
+Questo documento descrive in dettaglio la struttura e il contenuto corretto che **deve** essere mostrato nell'homepage del portale il progetto, basato sulle specifiche ufficiali del progetto contenute nel file `/var/www/html/_bases/base_techplanner_fila3_mono/docs/images/2.md`.
 
 ## Contenuto Testuale Ufficiale
 
@@ -52,7 +52,7 @@ Il layout dell'homepage deve essere strutturato in modo chiaro e accessibile:
 
 ## Implementazione nel File JSON
 
-Il contenuto sopra descritto deve essere correttamente implementato nel file `/var/www/html/saluteora/laravel/config/local/saluteora/database/content/pages/1.json` attraverso i blocchi di tipo "hero" e "paragraph", mantenendo la fedeltà assoluta al testo specificato.
+Il contenuto sopra descritto deve essere correttamente implementato nel file `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/config/local/saluteora/database/content/pages/1.json` attraverso i blocchi di tipo "hero" e "paragraph", mantenendo la fedeltà assoluta al testo specificato.
 
 ## Verifica dell'Implementazione
 

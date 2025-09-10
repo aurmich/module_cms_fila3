@@ -1,10 +1,10 @@
 # Regola Critica: Struttura AI Guidelines
 
 ## Principio Fondamentale
-**NON deve esistere il file `/var/www/html/_bases/base_saluteora/laravel/.ai/guidelines.md`!**
+**NON deve esistere il file `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/.ai/guidelines.md`!**
 
 ## Struttura Corretta ✅ IMPLEMENTATA
-- **Cartella**: `/var/www/html/_bases/base_saluteora/laravel/.ai/guidelines/`
+- **Cartella**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/.ai/guidelines/`
 - **File**: `laravel-boost-guidelines.md` dentro la cartella
 - **Principi**: DRY + KISS + SOLID + ROBUST + INTELLIGENT + LARAXOT
 

@@ -6,11 +6,11 @@ Nel progetto il progetto, i temi sono componenti di presentazione separati dai m
 
 ## Posizionamento Corretto
 
-I temi devono essere posizionati nella directory `/var/www/html/saluteora/laravel/Themes/` e **NON** nella directory Modules.
+I temi devono essere posizionati nella directory `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/` e **NON** nella directory Modules.
 
 ### Struttura Corretta
 ```
-/var/www/html/saluteora/laravel/
+/var/www/html/_bases/base_techplanner_fila3_mono/laravel/
 ├── Modules/           # Componenti funzionali
 │   ├── Xot/
 │   ├── User/
@@ -23,7 +23,7 @@ I temi devono essere posizionati nella directory `/var/www/html/saluteora/larave
 
 Il tema principale utilizzato in il progetto è ThemeOne, basato su Filament 3, che deve essere installato in:
 ```
-/var/www/html/saluteora/laravel/Themes/One/
+/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/
 ```
 
 ### Installazione Corretta

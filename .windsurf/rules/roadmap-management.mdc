@@ -7,15 +7,15 @@ alwaysApply: false
 
 ## Documento di Riferimento Principale
 Il documento **principale** per la roadmap frontoffice è:
-- `/var/www/html/_bases/base_saluteora/docs/roadmap_frontoffice.md`
+- `/var/www/html/_bases/base_techplanner_fila3_mono/docs/roadmap_frontoffice.md`
 
 ## Documenti di Stato Dettagliati
-- `/var/www/html/_bases/base_saluteora/docs/stato_aggiornamenti_lavori_dettagliato_gennaio_2025.md`
-- `/var/www/html/_bases/base_saluteora/docs/stato_avanzamenti_lavori_2025_05_28.md`
+- `/var/www/html/_bases/base_techplanner_fila3_mono/docs/stato_aggiornamenti_lavori_dettagliato_gennaio_2025.md`
+- `/var/www/html/_bases/base_techplanner_fila3_mono/docs/stato_avanzamenti_lavori_2025_05_28.md`
 
 ## Struttura File Dettaglio
 Tutti i file di dettaglio risiedono in:
-- `/var/www/html/_bases/base_saluteora/docs/roadmap_frontoffice/`
+- `/var/www/html/_bases/base_techplanner_fila3_mono/docs/roadmap_frontoffice/`
 
 ### File Critici Nuovi
 - `31-mobile-optimization.md` - Ottimizzazione mobile (Priorità Alta)
