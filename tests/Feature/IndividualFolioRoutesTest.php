@@ -289,7 +289,7 @@ describe('CMS Individual Folio Routes Tests', function () {
             $response->assertStatus(200);
             
             // Verifica che il JSON della homepage sia caricato correttamente
-            $homepageJsonPath = config_path('local/TechPlanner/database/content/pages/home.json');
+            $homepageJsonPath = config_path('local/saluteora/database/content/pages/home.json');
             expect(file_exists($homepageJsonPath))->toBeTrue();
             
             $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
@@ -311,7 +311,7 @@ describe('CMS Individual Folio Routes Tests', function () {
             $response->assertStatus(200);
             
             $homepageData = json_decode(
-                file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
+                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
                 true
             );
             
@@ -327,7 +327,7 @@ describe('CMS Individual Folio Routes Tests', function () {
 
         test('cms processes blade syntax in json correctly', function () {
             $homepageData = json_decode(
-                file_get_contents(config_path('local/TechPlanner/database/content/pages/home.json')), 
+                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
                 true
             );
             

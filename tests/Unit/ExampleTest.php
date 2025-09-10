@@ -40,10 +40,6 @@ describe('CMS Module', function () {
             ->and(GetModulesNavigationItems::class)->toBeString();
     });
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 759476f (.)
 uses(Modules\Cms\Tests\TestHelper::class);
 
 beforeEach(function (): void {

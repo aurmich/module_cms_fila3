@@ -53,9 +53,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Modules\Cms\Database\Factories\PageFactory factory($count = null, $state = [])
  * @property array<array-key, mixed>|null $middleware
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Page whereMiddleware($value)
- * @property string|null $subtitle
- * @property string|null $meta_description
- * @property string|null $meta_keywords
  * @mixin IdeHelperPage
  * @mixin \Eloquent
  */

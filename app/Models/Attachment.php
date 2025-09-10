@@ -16,10 +16,6 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
 
 /**
  * ---
-<<<<<<< HEAD
- *
-=======
->>>>>>> 759476f (.)
  * @property string $id
  * @property string $title
  * @property string $description
@@ -38,33 +34,6 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
  * @property \Modules\Xot\Contracts\ProfileContract $created_by_profile
  * @property \Modules\Xot\Contracts\ProfileContract $updated_by_profile
  * @property \Modules\Xot\Contracts\ProfileContract $deleted_by_profile
-<<<<<<< HEAD
- * @property-read \Modules\TechPlanner\Models\Profile|null $creator
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read mixed $translations
- * @property-read \Modules\TechPlanner\Models\Profile|null $updater
- * @method static \Modules\Cms\Database\Factories\AttachmentFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereAttachment($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereDisk($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereUpdatedBy($value)
- * @mixin \Eloquent
-=======
->>>>>>> 759476f (.)
  */
 class Attachment extends BaseModelLang implements HasMedia
 {
