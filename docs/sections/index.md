@@ -6,14 +6,14 @@
 - [Sezioni](../sections.md)
 - [Gestione Sezioni](../section-management.md)
 - [Documentazione Generale](../../../../../docs/README.md)
-- [Documentazione Generale SaluteOra](../../../../../docs/README.md)
+- [Documentazione Generale ](../../../../../docs/README.md)
 - [Collegamenti Documentazione](../../../../../docs/collegamenti-documentazione.md)
 - [Implementazione nell'UI](../../../UI/docs/sections/INDEX.md)
 - [Implementazione nel Tema One](../../../../Themes/One/docs/sections/INDEX.md)
 
 ## Panoramica
 Le sezioni sono componenti strutturali che compongono le pagine del sito. Ogni sezione può contenere diversi blocchi e viene definita tramite file JSON di configurazione.
-Le sezioni sono componenti strutturali che compongono le pagine del sito SaluteOra. Ogni sezione può contenere diversi blocchi e viene definita tramite file JSON di configurazione.
+Le sezioni sono componenti strutturali che compongono le pagine del sito . Ogni sezione può contenere diversi blocchi e viene definita tramite file JSON di configurazione.
 
 ## Sezioni Principali
 

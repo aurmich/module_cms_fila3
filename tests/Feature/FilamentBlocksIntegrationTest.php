@@ -90,7 +90,7 @@ describe('Filament Blocks Integration', function () {
         // Test italiano
         $response = get('/');
         $response->assertStatus(200);
-        $response->assertSee('Benvenuta su SaluteOra');
+        $response->assertSee('Benvenuta su ');
 
         // Test inglese
         $response = get('/en');

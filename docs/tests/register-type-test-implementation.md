@@ -103,7 +103,7 @@ expect($response)
 - PHPDoc completi per coverage
 
 ### 2. **Multi-Module Integration**
-- Import da moduli SaluteOra, User, Cms
+- Import da moduli , User, Cms
 - Cross-module component testing
 - Theme integration validation
 

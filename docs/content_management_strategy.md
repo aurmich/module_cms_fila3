@@ -11,7 +11,7 @@ Seguendo i principi **zen** e **minimalista** di Laraxot, la gestione dei conten
 - **Fiducia**: Linguaggio professionale e rassicurante
 - **Etica**: Rispetto della privacy e dei diritti del paziente
 
-### 🏥 **Contesto Sanitario SaluteOra**
+### 🏥 **Contesto Sanitario **
 Le pagine istituzionali devono:
 - Trasmettere **competenza medica** e **affidabilità**
 - Garantire **compliance normativa** (GDPR, Codice Privacy)

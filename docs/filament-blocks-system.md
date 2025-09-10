@@ -147,7 +147,7 @@ Ogni blocco supporta diversi contesti:
 - **Validation**: Validazione dati e business rules
 - **Integration**: Integrazione con Filament e frontend
 
-### Test SaluteOra (Frontend Integration)
+### Test  (Frontend Integration)
 - **Rendering**: Visualizzazione corretta dei contenuti
 - **Performance**: Tempi di caricamento e ottimizzazioni
 - **SEO**: Meta tags e struttura semantica
@@ -161,7 +161,7 @@ Ogni blocco supporta diversi contesti:
 - **Filament Integration**: Interfaccia amministrativa
 - **Content Storage**: Gestione JSON e database
 
-### Modulo SaluteOra
+### Modulo 
 - **Frontend Logic**: Rendering e logica business
 - **Volt Components**: State management e interazioni
 - **CMS Integration**: Coordinamento con sistema contenuti
@@ -172,7 +172,7 @@ Ogni blocco supporta diversi contesti:
 - **Block Actions**: Azioni per gestione blocchi
 
 ## Collegamenti
-- [Modulo SaluteOra](../SaluteOra/docs/homepage-architecture.md)
+- [Modulo ](../<nome modulo>/docs/homepage-architecture.md)
 - [Modulo UI](../UI/docs/blocks-system.md)
 - [Filament Builder](https://filamentphp.com/docs/3.x/forms/fields/builder)
 - [Laravel Folio](../../docs/folio-routing.md)

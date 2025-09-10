@@ -84,7 +84,11 @@ describe('Filament Builder Blocks System', function () {
     test('block views follow theme pattern', function () {
         // Test with actual homepage JSON
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+=======
+            file_get_contents(config_path('local//database/content/pages/home.json')),
+>>>>>>> a03e4d9 (.)
             true
         );
         
@@ -103,7 +107,7 @@ describe('Filament Builder Blocks System', function () {
     });
 
     test('json storage pattern is consistent', function () {
-        $homepageJsonPath = config_path('local/saluteora/database/content/pages/home.json');
+        $homepageJsonPath = config_path('local//database/content/pages/home.json');
         expect(file_exists($homepageJsonPath))->toBeTrue('Homepage JSON should exist');
         
         $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
@@ -154,7 +158,11 @@ describe('Filament Builder Blocks System', function () {
         
         // Verify blocks are rendered
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+=======
+            file_get_contents(config_path('local//database/content/pages/home.json')),
+>>>>>>> a03e4d9 (.)
             true
         );
         
@@ -170,7 +178,11 @@ describe('Filament Builder Blocks System', function () {
 
     test('block data validation and security', function () {
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+=======
+            file_get_contents(config_path('local//database/content/pages/home.json')),
+>>>>>>> a03e4d9 (.)
             true
         );
         
@@ -221,7 +233,11 @@ describe('Filament Builder Blocks System', function () {
         $startTime = microtime(true);
         
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+=======
+            file_get_contents(config_path('local//database/content/pages/home.json')),
+>>>>>>> a03e4d9 (.)
             true
         );
         

@@ -185,4 +185,4 @@ Il sistema di test è ora **pronto per produzione** con:
 
 *Ultimo aggiornamento: Dicembre 2024*  
 *Versione: 2.0 - Helper Functions Centralized*  
-*Compatibilità: SaluteOra, PestPHP 2.x, Laravel 10+* 
+*Compatibilità: , PestPHP 2.x, Laravel 10+* 

@@ -2,7 +2,7 @@
 
 ## 📊 Panoramica Generale
 
-Il modulo Cms è il sistema di gestione contenuti di SaluteOra, fornendo modelli e funzionalità per la gestione di pagine, menu, sezioni e contenuti dinamici. Questo documento fornisce un'analisi completa dello stato attuale di factory, seeder e test, con focus sulla business logic.
+Il modulo Cms è il sistema di gestione contenuti di , fornendo modelli e funzionalità per la gestione di pagine, menu, sezioni e contenuti dinamici. Questo documento fornisce un'analisi completa dello stato attuale di factory, seeder e test, con focus sulla business logic.
 
 ## 🏗️ Struttura Modelli e Relazioni
 
@@ -241,5 +241,5 @@ Il modulo Cms è il sistema di gestione contenuti di SaluteOra, fornendo modelli
 **Ultimo aggiornamento**: Dicembre 2024
 **Versione**: 1.0
 **Stato**: In Progress
-**Responsabile**: Team Sviluppo SaluteOra
+**Responsabile**: Team Sviluppo 
 **Prossima Revisione**: Gennaio 2025

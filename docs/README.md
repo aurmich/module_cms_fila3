@@ -1,6 +1,6 @@
 # Modulo CMS
 > **Collegamenti correlati**
-> - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
+> - [README.md documentazione generale ](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
 > - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
 > - [README.md modulo Dental](../../../../laravel/Modules/Dental/docs/README.md)
@@ -20,7 +20,7 @@
 > - [README.md tema Two](../../../../laravel/Themes/Two/docs/README.md)
 > - [Collegamenti documentazione centrale](../../../../docs/collegamenti-documentazione.md)
 
-> - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
+> - [README.md documentazione generale ](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
 > - [README.md modulo CMS](../../../../laravel/Modules/Cms/docs/README.md)
 > - [README.md modulo Dental](../../../../laravel/Modules/Dental/docs/README.md)

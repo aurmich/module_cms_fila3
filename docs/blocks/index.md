@@ -11,11 +11,11 @@
 
 ## Panoramica
 I blocchi sono componenti riutilizzabili che compongono le sezioni del sito. Ogni blocco ha uno scopo specifico e può essere inserito in diverse sezioni tramite i file JSON di configurazione.
-- [Documentazione Generale SaluteOra](../../../../../docs/README.md)
+- [Documentazione Generale ](../../../../../docs/README.md)
 - [Collegamenti Documentazione](../../../../../docs/collegamenti-documentazione.md)
 
 ## Panoramica
-I blocchi sono componenti riutilizzabili che compongono le sezioni del sito SaluteOra. Ogni blocco ha uno scopo specifico e può essere inserito in diverse sezioni tramite i file JSON di configurazione.
+I blocchi sono componenti riutilizzabili che compongono le sezioni del sito . Ogni blocco ha uno scopo specifico e può essere inserito in diverse sezioni tramite i file JSON di configurazione.
 
 ## Blocchi Disponibili
 

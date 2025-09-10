@@ -2,7 +2,7 @@
 
 ## 🎯 Overview
 
-Durante l'implementazione dei test per `RegisterTypeTest` e `RegisterTypeWidgetTest`, abbiamo identificato **pattern vincenti** e **anti-pattern critici** per PestPHP nel progetto SaluteOra.
+Durante l'implementazione dei test per `RegisterTypeTest` e `RegisterTypeWidgetTest`, abbiamo identificato **pattern vincenti** e **anti-pattern critici** per PestPHP nel progetto .
 
 ## ✅ Struttura File Corretta
 
@@ -329,7 +329,7 @@ Applicando questi pattern abbiamo ottenuto:
 
 ### **Root Documentation**
 - [Testing Organization](../../../../docs/testing-organization.md)
-- [SaluteOra Testing Architecture](../../../SaluteOra/docs/testing.md)
+- [ Testing Architecture](../../../<nome modulo>/docs/testing.md)
 
 ---
 **Ultimo aggiornamento**: Gennaio 2025  

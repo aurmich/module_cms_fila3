@@ -1,7 +1,7 @@
 # Indice della Documentazione - Modulo Cms
 
 ## Collegamenti Correlati
-- [Documentazione Generale SaluteOra](../../../../docs/README.md)
+- [Documentazione Generale ](../../../../docs/README.md)
 - [Collegamenti Documentazione](../../../../docs/collegamenti-documentazione.md)
 - [Standard di Documentazione](../../../../docs/DOCUMENTATION_STANDARDS.md)
 - [Modulo Xot](../../Xot/docs/README.md)

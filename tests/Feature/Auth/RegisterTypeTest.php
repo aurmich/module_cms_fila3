@@ -22,7 +22,7 @@ uses(\Modules\Xot\Tests\TestCase::class);
  * 3. Dynamic content is correctly displayed based on user type
  * 4. Required components (Livewire widget) are present
  * 
- * The Cms module must remain independent from SaluteOra; all user operations
+ * The Cms module must remain independent ; all user operations
  * go through XotData to obtain the correct User class.
  */
 

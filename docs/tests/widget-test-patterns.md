@@ -2,7 +2,7 @@
 
 ## 🏆 **Pattern Vincente Confermato**
 
-Dopo test approfonditi, abbiamo stabilito il **Gold Standard** per i test widget Filament in Laraxot SaluteOra.
+Dopo test approfonditi, abbiamo stabilito il **Gold Standard** per i test widget Filament in Laraxot .
 
 ## ✅ **RegisterTypeWidgetTest.php - Modello di Riferimento**
 
@@ -45,7 +45,7 @@ function mockXotData(): void
     $mockXotData = \Mockery::mock(\Modules\Xot\Datas\XotData::class)->makePartial();
     
     $mockXotData->shouldReceive('getUserClass')
-        ->andReturn(\Modules\SaluteOra\Models\User::class);
+        ->andReturn(\Modules\<nome modulo>\Models\User::class);
         
     $mockXotData->shouldReceive('make')
         ->andReturn($mockXotData);
@@ -150,7 +150,7 @@ function mockXotData(): void
     $mockXotData = \Mockery::mock(\Modules\Xot\Datas\XotData::class)->makePartial();
     
     $mockXotData->shouldReceive('getUserClass')
-        ->andReturn(\Modules\SaluteOra\Models\User::class);
+        ->andReturn(\Modules\<nome modulo>\Models\User::class);
         
     $mockXotData->shouldReceive('make')
         ->andReturn($mockXotData);

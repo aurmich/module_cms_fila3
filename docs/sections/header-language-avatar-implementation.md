@@ -9,7 +9,7 @@
 ## Panoramica
 
 Questo documento descrive come implementare nell'header della piattaforma:
-Questo documento descrive come implementare nell'header di SaluteOra:
+Questo documento descrive come implementare nell'header di :
 1. Un selettore di lingua
 2. Un dropdown con l'avatar dell'utente contenente il link di logout
 
@@ -209,7 +209,7 @@ Ecco come dovrebbe apparire il file JSON completo dell'header dopo le modifiche:
                     "view": "cms::blocks.logo",
                     "src": "patient::images/logo.svg",
                     "alt": "Logo Piattaforma",
-                    "alt": "Logo SaluteOra",
+                    "alt": "Logo ",
                     "width": 150,
                     "height": 32
                 }
@@ -284,7 +284,7 @@ Ecco come dovrebbe apparire il file JSON completo dell'header dopo le modifiche:
                     "view": "cms::blocks.logo",
                     "src": "patient::images/logo.svg",
                     "alt": "Platform Logo",
-                    "alt": "SaluteOra Logo",
+                    "alt": " Logo",
                     "width": 150,
                     "height": 32
                 }

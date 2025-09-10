@@ -44,7 +44,7 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=noreply@example.com
 MAIL_FROM_NAME="il progetto"
 ```
-MAIL_FROM_NAME="SaluteOra"
+MAIL_FROM_NAME=""
 ```
 ## Collegamenti tra versioni di test-smtp-page.md
 * [test-smtp-page.md](laravel/Modules/Notify/docs/test-smtp-page.md)

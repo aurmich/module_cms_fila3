@@ -160,7 +160,7 @@ Livewire::test(LoginWidget::class)
 
 ### Architettura XotData
 - ✅ Utilizzato `XotData::make()->getUserClass()` 
-- ✅ Nessuna dipendenza hard-coded a SaluteOra
+- ✅ Nessuna dipendenza hard-coded a 
 - ✅ Test modulari e riutilizzabili
 
 ## 📚 **Best Practice Documentate**

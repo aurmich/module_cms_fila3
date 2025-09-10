@@ -108,7 +108,7 @@ Questa documentazione è parte del sistema di documentazione di il progetto. Per
 - [Modulo Xot](../Xot/docs/README.md) - Classi base e utilities
 - [Documentazione Filament](https://filamentphp.com/docs) - Documentazione ufficiale
 - [Best Practices Laravel](https://laravel.com/docs/11.x/best-practices) - Best practices 
-Questa documentazione è parte del sistema di documentazione di SaluteOra. Per dettagli specifici sui singoli componenti, consultare la documentazione dei rispettivi moduli. 
+Questa documentazione è parte del sistema di documentazione di . Per dettagli specifici sui singoli componenti, consultare la documentazione dei rispettivi moduli. 
 
 ## Collegamenti tra versioni di content-management.md
 * [content-management.md](laravel/Modules/Cms/docs/content-management.md)

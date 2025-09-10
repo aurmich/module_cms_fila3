@@ -7,7 +7,7 @@ Implementazione completa dei test per la funzionalità di login basata su:
 - **Livewire Volt** per reattività
 - **LoginWidget** del modulo User (Filament)
 - **STI (Single Table Inheritance)** per i tipi di utente
-- **Factory avanzate** del modulo SaluteOra
+- **Factory avanzate** del modulo 
 
 ## 📋 Test Coverage Completo
 
@@ -108,7 +108,7 @@ Livewire::test(LoginWidget::class)
 - Return types sempre specificati
 
 ### 2. **Multi-Module Integration**
-- Import da moduli SaluteOra, User, Xot
+- Import da moduli , User, Xot
 - Factory avanzate per dati realistici
 - Cross-module authentication flow
 
@@ -253,8 +253,8 @@ expect($schema)->toHaveCount(3)
 ### Module Dependencies
 - **Modules\Xot\Tests\TestCase** - Base test class
 - **Modules\User\Filament\Widgets\LoginWidget** - Widget under test
-- **Modules\SaluteOra\Models\*** - STI user models
-- **Modules\SaluteOra\Enums\UserTypeEnum** - User types
+- **Modules\<nome modulo>\Models\*** - STI user models
+- **Modules\<nome modulo>\Enums\UserTypeEnum** - User types
 
 ## 📈 Maintenance & Updates
 
@@ -274,9 +274,9 @@ expect($schema)->toHaveCount(3)
 ## 📚 Related Documentation
 
 ### Internal Links
-- [UserFactory Implementation](../../SaluteOra/docs/factories/UserFactory-implementation-final.md)
+- [UserFactory Implementation](../../<nome modulo>/docs/factories/UserFactory-implementation-final.md)
 - [LoginWidget Documentation](../../User/docs/widgets/login-widget.md)
-- [STI Architecture](../../SaluteOra/docs/models/sti-architecture.md)
+- [STI Architecture](../../<nome modulo>/docs/models/sti-architecture.md)
 
 ### External References
 - [Pest Testing Documentation](https://pestphp.com/)

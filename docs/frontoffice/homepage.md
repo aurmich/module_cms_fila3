@@ -123,7 +123,7 @@ La homepage utilizza il sistema **Filament Builder Blocks** per gestione dinamic
 - Test caricamento JSON
 - Test PageContentBuilder
 
-### Modulo SaluteOra Tests  
+### Modulo  Tests  
 - Test integrazione frontend
 - Test logica business specifica
 - Test tipi utente (patient, doctor, admin)

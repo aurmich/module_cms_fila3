@@ -21,7 +21,7 @@
 #### 1. Riusabilità Compromessa (CRITICO)
 - **194+ occorrenze hardcoded** di "saluteora" 
 - **Path assoluti** in configurazioni e esempi
-- **Content specifico** per SaluteOra in examples
+- **Content specifico** per  in examples
 - **URL hardcoded** in documentazione
 
 #### 2. Documentazione Frammentata (IMPORTANTE)
@@ -42,7 +42,7 @@
 #### Generalizzazione Content Examples
 ```php
 // ❌ PROBLEMI ATTUALI
-'title' => 'Servizi Sanitari SaluteOra',
+'title' => 'Servizi Sanitari ',
 'content' => 'Benvenuti nel nostro studio medico...',
 'url' => 'https://saluteora.com/servizi'
 
@@ -306,7 +306,7 @@ php artisan cms:seo-audit
 - **NON alterare** l'integrazione Filament (funzionante)
 
 ### Focus Miglioramenti
-- **Solo** generalizzare content specifico SaluteOra
+- **Solo** generalizzare content specifico 
 - **Solo** ottimizzare performance dove necessario
 - **Solo** riorganizzare documentazione frammentata
 

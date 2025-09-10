@@ -17,7 +17,7 @@ describe('Homepage Content Management', function () {
         
         $response->assertStatus(200);
         // Verifica che il contenuto JSON sia caricato correttamente
-        $response->assertSee('SaluteOra - Promozione della salute orale per le gestanti');
+        $response->assertSee(' - Promozione della salute orale per le gestanti');
     });
 
     it('displays content blocks with correct structure', function () {
@@ -26,7 +26,7 @@ describe('Homepage Content Management', function () {
         $response->assertStatus(200);
         // Verifica struttura blocchi
         $response->assertSee('landing-page');
-        $response->assertSee('Benvenuta su SaluteOra');
+        $response->assertSee('Benvenuta su ');
         $response->assertSee('il portale che vuole garantire alle pazienti vulnerabili');
     });
 
@@ -53,7 +53,7 @@ describe('Homepage Content Management', function () {
         // Test italiano (default)
         $response = get('/');
         $response->assertStatus(200);
-        $response->assertSee('Benvenuta su SaluteOra');
+        $response->assertSee('Benvenuta su ');
 
         // Test inglese
         $response = get('/en');
@@ -111,7 +111,7 @@ describe('Homepage Content Management', function () {
         // Verifica ordine contenuti
         // Il titolo deve apparire prima del sottotitolo
         $content = $response->getContent();
-        $titlePos = strpos($content, 'SaluteOra - Promozione della salute orale per le gestanti');
+        $titlePos = strpos($content, ' - Promozione della salute orale per le gestanti');
         $subtitlePos = strpos($content, 'il portale che vuole garantire alle pazienti vulnerabili');
         
         expect($titlePos)->toBeLessThan($subtitlePos);
