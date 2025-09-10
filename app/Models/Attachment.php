@@ -16,7 +16,10 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
 
 /**
  * ---
+<<<<<<< HEAD
  *
+=======
+>>>>>>> 759476f (.)
  * @property string $id
  * @property string $title
  * @property string $description
@@ -35,6 +38,7 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
  * @property \Modules\Xot\Contracts\ProfileContract $created_by_profile
  * @property \Modules\Xot\Contracts\ProfileContract $updated_by_profile
  * @property \Modules\Xot\Contracts\ProfileContract $deleted_by_profile
+<<<<<<< HEAD
  * @property-read \Modules\TechPlanner\Models\Profile|null $creator
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Modules\Media\Models\Media> $media
  * @property-read int|null $media_count
@@ -59,6 +63,8 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attachment whereUpdatedBy($value)
  * @mixin \Eloquent
+=======
+>>>>>>> 759476f (.)
  */
 class Attachment extends BaseModelLang implements HasMedia
 {

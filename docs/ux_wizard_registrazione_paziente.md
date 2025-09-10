@@ -205,4 +205,8 @@ L'applicazione di questi principi di UX al wizard di registrazione paziente dovr
 - [Laws of UX](https://lawsofux.com/)
 - [Documenti di progettazione il progetto](/docs/07-frontend/leggi-ux.md)
 - [Documentazione Filament Forms](https://filamentphp.com/docs/forms)
+<<<<<<< HEAD
 - [Best Practices Filament](/docs/tecnico/filament/best-practices.md) 
+=======
+- [Best Practices Filament](/docs/tecnico/filament/best-practices.md) 
+>>>>>>> 759476f (.)

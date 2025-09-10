@@ -29,10 +29,13 @@ class DownloadAttachmentPlaceHolder extends Placeholder
             'asset'=>$attachment->asset(),
         ];
         $view='pub_theme::filament.forms.components.download-attachment-place-holder';
+<<<<<<< HEAD
         //*@phpstan-ignore-next-line
         if(!view()->exists($view)){
             throw new \Exception("View $view does not exist");
         }
+=======
+>>>>>>> 759476f (.)
         $out=view($view,$data);
         
         return new HtmlString($out->render());

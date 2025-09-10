@@ -23,6 +23,11 @@ laravel-news-volt-folio-example/
 {
     "require": {
         "php": "^8.1",
+<<<<<<< HEAD
+=======
+        "laravel/framework": "*",
+=======
+>>>>>>> 759476f (.)
         "laravel/framework": "^10.0",
         "livewire/volt": "^1.0",
         "livewire/livewire": "^3.0"

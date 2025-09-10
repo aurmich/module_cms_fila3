@@ -466,4 +466,8 @@ Per approfondimenti, consultare:
 - [Leggi di UX applicate a il progetto](/docs/07-frontend/leggi-ux.md)
 - [UX del Wizard di Registrazione](/docs/07-frontend/ux-wizard-registrazione-paziente.md)
 - [DaisyUI Documentation](https://daisyui.com/components/)
+<<<<<<< HEAD
 - [Filament Documentation](https://filamentphp.com/docs/forms) 
+=======
+- [Filament Documentation](https://filamentphp.com/docs/forms) 
+>>>>>>> 759476f (.)
