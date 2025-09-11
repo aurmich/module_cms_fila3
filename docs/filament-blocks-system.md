@@ -83,11 +83,7 @@ I contenuti sono salvati in file JSON con struttura:
 ```
 
 ### Percorso Storage
-<<<<<<< HEAD
-**Base**: `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/config/local/saluteora/database/content/pages/`
-=======
-**Base**: `/var/www/html/_bases/base_saluteora/laravel/config/local/saluteora/database/content/pages/`
->>>>>>> e79ffbd (.)
+**Base**: `config/local/saluteora/database/content/pages/`
 
 **File**: `{slug}.json` (es. `home.json`, `about.json`)
 

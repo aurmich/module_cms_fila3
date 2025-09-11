@@ -46,8 +46,4 @@ test('password is not confirmed with invalid password', function () {
         ->call('confirmPassword');
 
     $response->assertHasErrors(['password']);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e79ffbd (.)

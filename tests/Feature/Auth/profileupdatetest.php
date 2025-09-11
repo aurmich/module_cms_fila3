@@ -87,8 +87,4 @@ test('correct password must be provided to delete account', function () {
     $response->assertHasErrors(['password']);
 
     expect($user->fresh())->not->toBeNull();
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e79ffbd (.)

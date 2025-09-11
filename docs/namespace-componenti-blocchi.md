@@ -15,11 +15,7 @@ In il progetto, il tema pubblico viene referenziato con il namespace `pub_theme:
 
 Il namespace `pub_theme::components.blocks.hero.simple` corrisponde fisicamente al file:
 ```
-<<<<<<< HEAD
 /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/blocks/hero/simple.blade.php
-=======
-/var/www/html/saluteora/laravel/Themes/One/resources/views/components/blocks/hero/simple.blade.php
->>>>>>> e79ffbd (.)
 ```
 
 Se il file fisico non esiste, il sistema genererà un errore del tipo:

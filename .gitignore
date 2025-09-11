@@ -42,6 +42,7 @@ Homestead.json
 *.old
 *.old1
 *.backup
+*.backup.*
 *.bak
 
 # File di log

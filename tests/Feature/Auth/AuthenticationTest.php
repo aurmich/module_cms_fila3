@@ -67,8 +67,4 @@ test('users can logout', function (): void {
 
     expect(Auth::guest())->toBeTrue();
 });
-<<<<<<< HEAD
 */
-=======
-*/
->>>>>>> e79ffbd (.)

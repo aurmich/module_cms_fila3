@@ -4,11 +4,8 @@ Questo documento definisce le linee guida per l'analisi e l'identificazione corr
 
 ## Problema Identificato
 
-<<<<<<< HEAD
 Durante l'analisi del componente `<x-ui.marketing.header />` nel file `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/layouts/app.blade.php`, è stato commesso un errore nell'identificazione del file corrispondente. L'errore è stato causato da un'analisi superficiale dei risultati di ricerca, senza una verifica adeguata dell'esistenza e del contenuto del file.
-=======
 Durante l'analisi del componente `<x-ui.marketing.header />` nel file `/var/www/html/saluteora/laravel/Themes/One/resources/views/components/layouts/app.blade.php`, è stato commesso un errore nell'identificazione del file corrispondente. L'errore è stato causato da un'analisi superficiale dei risultati di ricerca, senza una verifica adeguata dell'esistenza e del contenuto del file.
->>>>>>> e79ffbd (.)
 
 ## Metodologia Corretta per l'Analisi dei Componenti Blade
 
@@ -27,11 +24,8 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 1. **Ricerca del File**
    ```bash
    # Esempio di ricerca corretta
-<<<<<<< HEAD
    find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/marketing/header.blade.php"
-=======
    find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/marketing/header.blade.php"
->>>>>>> e79ffbd (.)
    ```
 
 2. **Verifica dell'Esistenza**
@@ -41,11 +35,8 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 3. **Visualizzazione del Contenuto**
    ```php
    # Esempio di visualizzazione corretta
-<<<<<<< HEAD
    view_file /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
    view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
->>>>>>> e79ffbd (.)
    ```
 
 4. **Analisi del Contenuto**
@@ -68,11 +59,8 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 
 ```php
 // 1. Cercare il file
-<<<<<<< HEAD
 find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/header.blade.php"
-=======
 find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/header.blade.php"
->>>>>>> e79ffbd (.)
 
 // Risultati:
 // ui/app/header.blade.php
@@ -82,33 +70,24 @@ find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/componen
 // Il file ui/marketing/header.blade.php esiste
 
 // 3. Visualizzare il contenuto
-<<<<<<< HEAD
 view_file /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
 view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
->>>>>>> e79ffbd (.)
 
 // 4. Analizzare il contenuto
 // Il file contiene un header per la sezione marketing
 
 // 5. Documentare le conclusioni
 // Il componente <x-ui.marketing.header /> corrisponde al file 
-<<<<<<< HEAD
 // /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
 // /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
->>>>>>> e79ffbd (.)
 ```
 
 ### Esempio Errato (Da Evitare)
 
 ```php
 // 1. Cercare il file in modo generico
-<<<<<<< HEAD
 find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/header.blade.php"
-=======
 find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/header.blade.php"
->>>>>>> e79ffbd (.)
 
 // 2. Saltare la verifica dell'esistenza del file specifico
 

@@ -160,8 +160,4 @@ test('createTestUser creates valid instances', function (): void {
     $foundUser = $userClass::where('email', $user->email)->first();
     expect($foundUser)->not->toBeNull();
     expect($foundUser->email)->toBe($user->email);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e79ffbd (.)

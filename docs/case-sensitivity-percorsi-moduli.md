@@ -73,14 +73,7 @@ Le uniche eccezioni legittime sono:
 
 Prima di creare nuove cartelle, verificare sempre la struttura esistente:
 
-```bash
-# Esempio di comando per verificare la struttura
-<<<<<<< HEAD
-find /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/User -type d -maxdepth 1
-=======
-find /var/www/html/saluteora/laravel/Modules/User -type d -maxdepth 1
->>>>>>> e79ffbd (.)
-```
+
 
 ### 2. Utilizzare Comandi Artisan
 
