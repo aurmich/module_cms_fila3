@@ -107,25 +107,36 @@ class ThemeComposer
 
         return '#';
     }
+<<<<<<< HEAD
     /**
      * @deprecated
     
+=======
+
+>>>>>>> e79ffbd (.)
     public function headernav(): Renderable
     {
         $headernav = HeadernavData::make();
 
         return $headernav->view();
     }
+<<<<<<< HEAD
     */
     /** 
      * @deprecated
      * @return Renderable
      
+=======
+
+>>>>>>> e79ffbd (.)
     public function footer(): Renderable
     {
         $footer = FooterData::make();
 
         return $footer->view();
     }
+<<<<<<< HEAD
         */
+=======
+>>>>>>> e79ffbd (.)
 }

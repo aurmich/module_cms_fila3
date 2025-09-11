@@ -34,10 +34,14 @@ class VerifyComponent extends Component
 
         $user->sendEmailVerificationNotification();
 
+<<<<<<< HEAD
         // Cast to MustVerifyEmail for the Verified event
         if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail) {
             event(new Verified($user));
         }
+=======
+        event(new Verified($user));
+>>>>>>> e79ffbd (.)
 
         $this->dispatch('resent');
         session()->flash('resent');
