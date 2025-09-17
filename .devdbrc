@@ -1,6 +1,10 @@
 [
   {
     "type": "sqlite",
+<<<<<<< HEAD
     "path": "/var/www/html/_bases/base_saluteora/laravel/database/saluteora_data.sqlite"
+=======
+    "path": "../laravel/database/saluteora_data.sqlite"
+>>>>>>> 12a72f2 (.)
   }
 ]
