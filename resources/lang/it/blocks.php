@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 return [
     'logo' => [
         'label' => 'Logo',
@@ -22,7 +25,6 @@ return [
             ],
         ],
     ],
-    
     'navigation' => [
         'label' => 'Navigazione',
         'fields' => [
@@ -36,7 +38,6 @@ return [
             ],
         ],
     ],
-    
     'social' => [
         'label' => 'Social',
         'fields' => [
@@ -54,4 +55,4 @@ return [
             ],
         ],
     ],
-]; 
+];

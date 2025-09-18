@@ -5,45 +5,39 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Get;
-use Illuminate\Support\Str;
-use Modules\Cms\Models\Attachment;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Modules\Cms\Enums\AttachmentDiskEnum;
-use Modules\Lang\Filament\Resources\LangBaseResource;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Modules\Cms\Filament\Resources\AttachmentResource\Pages;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Modules\Cms\Enums\AttachmentDiskEnum;
+use Modules\Cms\Filament\Resources\AttachmentResource\Pages;
+use Modules\Cms\Models\Attachment;
+use Modules\Lang\Filament\Resources\LangBaseResource;
 
 class AttachmentResource extends LangBaseResource
 {
-    protected static ?string $model = Attachment::class;
+    protected static null|string $model = Attachment::class;
 
-    
+    #[\Override]
     public static function getFormSchema(): array
     {
         return [
-            'title' => TextInput::make('title')
-                ->required()
-                //->live(onBlur: true)
-                //->afterStateUpdated(function ($state, callable $set) {
-                //    $set('slug', Str::slug($state));
-                //})
-                ,
-            
-            'slug' => TextInput::make('slug')
-                ->required()
-                //->unique(ignoreRecord: true)
-                ,
+            'title' => TextInput::make('title')->required(),
+            //->live(onBlur: true)
+            //->afterStateUpdated(function ($state, callable $set) {
+            //    $set('slug', Str::slug($state));
+            //})
+            'slug' => TextInput::make('slug')->required(),
+            //->unique(ignoreRecord: true)
             'description' => Textarea::make('description'),
-             'disk'=>Select::make('disk')->options(AttachmentDiskEnum::class),
-            
+            'disk' => Select::make('disk')->options(AttachmentDiskEnum::class),
             'attachment' => FileUpload::make('attachment')
                 ->directory('attachments')
                 ->preserveFilenames()
@@ -51,20 +45,22 @@ class AttachmentResource extends LangBaseResource
                 ->multiple(false)
                 ->downloadable()
                 ->openable()
-                ->disk(fn (Get $get) => $get('disk'))
-                //->getUploadedFileNameForStorageUsing(
-                //    fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                //),
+                ->disk(fn(Get $get) => $get('disk')),
+            //->getUploadedFileNameForStorageUsing(
+            //    fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+            //),
         ];
     }
-    
+
+    #[\Override]
     public static function getRelations(): array
     {
         return [
-            //
+            
         ];
     }
-    
+
+    #[\Override]
     public static function getPages(): array
     {
         return [
@@ -72,5 +68,5 @@ class AttachmentResource extends LangBaseResource
             'create' => Pages\CreateAttachment::route('/create'),
             'edit' => Pages\EditAttachment::route('/{record}/edit'),
         ];
-    }    
+    }
 }

@@ -35,17 +35,17 @@ class Headernav extends Page implements HasForms
     /**
      * @var HeadernavData|null the form data
      */
-    public ?HeadernavData $headernavData = null;
+    public null|HeadernavData $headernavData = null;
 
-    public ?array $data = [];
+    public null|array $data = [];
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static null|string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'cms::filament.clusters.appearance.pages.headernav';
 
-    protected static ?string $cluster = Appearance::class;
+    protected static null|string $cluster = Appearance::class;
 
-    protected static ?int $navigationSort = 1;
+    protected static null|int $navigationSort = 1;
 
     /**
      * Initialize the page and fill the form state.
@@ -64,24 +64,17 @@ class Headernav extends Page implements HasForms
 
         return $form
             ->schema([
-                ColorPicker::make('background_color')
-                    ->label(__('Background Color')),
-                FileUpload::make('background')
-                    ->label(__('Background Image')),
-                ColorPicker::make('overlay_color')
-                    ->label(__('Overlay Color')),
+                ColorPicker::make('background_color')->label(__('Background Color')),
+                FileUpload::make('background')->label(__('Background Image')),
+                ColorPicker::make('overlay_color')->label(__('Overlay Color')),
                 TextInput::make('overlay_opacity')
                     ->numeric()
                     ->minValue(0)
                     ->maxValue(100)
                     ->label(__('Overlay Opacity')),
-                TextInput::make('class')
-                    ->label(__('CSS Class')),
-                TextInput::make('style')
-                    ->label(__('Inline Style')),
-                Select::make('view')
-                    ->options($options)
-                    ->label(__('View Template')),
+                TextInput::make('class')->label(__('CSS Class')),
+                TextInput::make('style')->label(__('Inline Style')),
+                Select::make('view')->options($options)->label(__('View Template')),
             ])
             ->columns(2)
             ->statePath('data');
@@ -137,9 +130,7 @@ class Headernav extends Page implements HasForms
     protected function getUpdateFormActions(): array
     {
         return [
-            Action::make('updateAction')
-                ->label(__('Save Changes'))
-                ->submit('updateData'),
+            Action::make('updateAction')->label(__('Save Changes'))->submit('updateData'),
         ];
     }
 }

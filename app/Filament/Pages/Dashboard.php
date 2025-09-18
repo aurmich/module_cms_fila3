@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Pages;
 
-use Filament\Panel;
-use Filament\Pages\Page;
-use Filament\Widgets\Widget;
 use Filament\Facades\Filament;
-use Illuminate\Support\Facades\Route;
-use Filament\Widgets\WidgetConfiguration;
+use Filament\Pages\Page;
+use Filament\Panel;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Widgets\Widget;
+use Filament\Widgets\WidgetConfiguration;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Route;
 use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
 class Dashboard extends XotBaseDashboard
 {
-    //
+    
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static null|string $navigationIcon = 'heroicon-o-home';
 
-    protected static ?string $navigationGroup = 'Dashboards';
+    protected static null|string $navigationGroup = 'Dashboards';
 
     /**
      * @var view-string
@@ -29,16 +29,16 @@ class Dashboard extends XotBaseDashboard
 
     public static function getNavigationLabel(): string
     {
-        return static::$navigationLabel ??
-            static::$title ??
-            __('filament-panels::pages/dashboard.title');
+        return static::$navigationLabel ?? static::$title ?? __('filament-panels::pages/dashboard.title');
     }
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): null|string
     {
-        return static::$navigationIcon
-            ?? FilamentIcon::resolve('panels::pages.dashboard.navigation-item')
-            ?? (Filament::hasTopNavigation() ? 'heroicon-m-home' : 'heroicon-o-home');
+        return (
+            static::$navigationIcon ??
+            FilamentIcon::resolve('panels::pages.dashboard.navigation-item') ??
+                (Filament::hasTopNavigation() ? 'heroicon-m-home' : 'heroicon-o-home')
+        );
     }
 
     public static function routes(Panel $panel): void
@@ -55,7 +55,6 @@ class Dashboard extends XotBaseDashboard
         // if (1 === $user->roles->count()) {
         //    redirect('/blog/admin/dashboard');
         // }
-
         // if (! $user->hasRole('super-admin')) {
         //     redirect('/admin');
         // }

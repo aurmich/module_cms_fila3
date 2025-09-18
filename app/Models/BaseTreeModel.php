@@ -143,7 +143,6 @@ abstract class BaseTreeModel extends BaseModel implements HasRecursiveRelationsh
         'id' => 'integer',
         'title' => 'string',
         'parent_id' => 'integer',
-
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'created_by' => 'string',
@@ -151,6 +150,7 @@ abstract class BaseTreeModel extends BaseModel implements HasRecursiveRelationsh
     ];
 
     /** @return array<string, string> */
+    #[\Override]
     protected function casts(): array
     {
         return [
@@ -160,6 +160,7 @@ abstract class BaseTreeModel extends BaseModel implements HasRecursiveRelationsh
         ];
     }
 
+    #[\Override]
     public function getLabel(): string
     {
         return $this->title;

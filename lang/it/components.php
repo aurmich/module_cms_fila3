@@ -1,28 +1,28 @@
 <?php
+
 declare(strict_types=1);
 
 return [
     'alert' => [
-        'title'   => 'Avviso',
-        'types'   => [
-            'info'    => 'Informazione',
+        'title' => 'Avviso',
+        'types' => [
+            'info' => 'Informazione',
             'success' => 'Successo',
             'warning' => 'Attenzione',
-            'error'   => 'Errore',
+            'error' => 'Errore',
         ],
         'actions' => [
             'dismiss' => 'Chiudi',
         ],
     ],
-
     'button' => [
         'types' => [
-            'primary'   => 'Primario',
+            'primary' => 'Primario',
             'secondary' => 'Secondario',
-            'danger'    => 'Pericolo',
-            'warning'   => 'Attenzione',
-            'info'      => 'Info',
-            'success'   => 'Successo',
+            'danger' => 'Pericolo',
+            'warning' => 'Attenzione',
+            'info' => 'Info',
+            'success' => 'Successo',
         ],
         'sizes' => [
             'xs' => 'Extra piccolo',
@@ -32,75 +32,68 @@ return [
             'xl' => 'Extra grande',
         ],
     ],
-
     'card' => [
         'actions' => [
-            'expand'   => 'Espandi',
+            'expand' => 'Espandi',
             'collapse' => 'Comprimi',
-            'close'    => 'Chiudi',
+            'close' => 'Chiudi',
         ],
     ],
-
     'modal' => [
         'actions' => [
-            'close'   => 'Chiudi',
+            'close' => 'Chiudi',
             'confirm' => 'Conferma',
-            'cancel'  => 'Annulla',
+            'cancel' => 'Annulla',
         ],
     ],
-
     'form' => [
-        'fields'     => [
+        'fields' => [
             'required' => 'Campo obbligatorio',
             'optional' => 'Opzionale',
         ],
         'validation' => [
             'required' => 'Questo campo è obbligatorio',
-            'email'    => 'Inserisci un indirizzo email valido',
-            'min'      => 'Inserisci almeno :min caratteri',
-            'max'      => 'Inserisci al massimo :max caratteri',
+            'email' => 'Inserisci un indirizzo email valido',
+            'min' => 'Inserisci almeno :min caratteri',
+            'max' => 'Inserisci al massimo :max caratteri',
         ],
-        'actions'    => [
+        'actions' => [
             'submit' => 'Invia',
-            'reset'  => 'Reimposta',
+            'reset' => 'Reimposta',
             'cancel' => 'Annulla',
         ],
     ],
-
     'table' => [
-        'actions'    => [
-            'edit'   => 'Modifica',
+        'actions' => [
+            'edit' => 'Modifica',
             'delete' => 'Elimina',
-            'view'   => 'Visualizza',
+            'view' => 'Visualizza',
         ],
-        'empty'      => 'Nessun dato disponibile',
+        'empty' => 'Nessun dato disponibile',
         'pagination' => [
             'previous' => 'Precedente',
-            'next'     => 'Successivo',
-            'showing'  => 'Visualizzazione',
-            'to'       => 'a',
-            'of'       => 'di',
-            'results'  => 'risultati',
+            'next' => 'Successivo',
+            'showing' => 'Visualizzazione',
+            'to' => 'a',
+            'of' => 'di',
+            'results' => 'risultati',
         ],
     ],
-
     'tabs' => [
         'actions' => [
             'previous' => 'Precedente',
-            'next'     => 'Successivo',
+            'next' => 'Successivo',
         ],
     ],
-
     'loading' => [
         'text' => 'Caricamento in corso...',
     ],
-
     'error' => [
-        'title'       => 'Errore',
+        'title' => 'Errore',
         'description' => 'Si è verificato un errore',
-        'actions'     => [
+        'actions' => [
             'retry' => 'Riprova',
-            'back'  => 'Indietro',
+            'back' => 'Indietro',
         ],
     ],
 ];

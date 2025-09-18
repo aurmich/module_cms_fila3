@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Models;
 
-
-use Spatie\Translatable\HasTranslations;
-use Modules\Xot\Contracts\ProfileContract;
 use Modules\Tenant\Models\Traits\SushiToJsons;
+use Modules\Xot\Contracts\ProfileContract;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Modules\Cms\Models\Section
@@ -71,13 +70,12 @@ class Section extends BaseModelLang
         'updated_by' => 'string',
     ];
 
-
-
     /**
      * The attributes that should be cast.
      *
      * @return array<string, string>
      */
+    #[\Override]
     protected function casts(): array
     {
         return [
@@ -93,7 +91,7 @@ class Section extends BaseModelLang
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getRows():array
+    public function getRows(): array
     {
         return $this->getSushiRows();
     }

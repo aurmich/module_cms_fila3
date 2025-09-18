@@ -39,7 +39,6 @@ return [
             'label' => 'Livello',
             'help' => 'Livello gerarchico del contenuto',
         ],
-        
         // Visual & Media
         'image' => [
             'label' => 'Immagine',
@@ -72,7 +71,6 @@ return [
             'placeholder' => '16:9, 4:3, 1:1',
             'helper_text' => 'Rapporto di proporzione per il ridimensionamento',
         ],
-        
         // Styling & Layout
         'background' => [
             'label' => 'Sfondo',
@@ -98,7 +96,6 @@ return [
             'placeholder' => 'URL o percorso del file',
             'helper_text' => 'Percorso della risorsa multimediale',
         ],
-        
         // Interaction Elements
         'buttons' => [
             'label' => 'Pulsanti',
@@ -129,7 +126,6 @@ return [
             'placeholder' => 'https://destinazione.it',
             'helper_text' => 'URL di destinazione del pulsante',
         ],
-        
         // Navigation & Structure
         'label' => [
             'label' => 'Etichetta',
@@ -161,7 +157,6 @@ return [
             'placeholder' => 'Seleziona icona',
             'helper_text' => 'Icona rappresentativa dell\'elemento',
         ],
-        
         // Company & Contact
         'company_name' => [
             'label' => 'Nome Azienda',
@@ -188,7 +183,6 @@ return [
             'placeholder' => 'Via Roma, 123 - 00100 Roma',
             'helper_text' => 'Indirizzo fisico completo',
         ],
-        
         // Technical Fields
         'type' => [
             'label' => 'Tipo',
@@ -217,7 +211,6 @@ return [
             'placeholder' => 'Valore numerico',
             'helper_text' => 'Valore numerico per statistiche o contatori',
         ],
-        
         // Block Management
         'content_blocks' => [
             'label' => 'Blocchi Contenuto',
@@ -239,7 +232,6 @@ return [
             'helper_text' => 'Sezioni principali che compongono la pagina',
         ],
     ],
-    
     'actions' => [
         'save' => 'Salva modifiche',
         'save_and_close' => 'Salva e chiudi',
@@ -248,14 +240,12 @@ return [
         'add_block' => 'Aggiungi blocco',
         'remove_block' => 'Rimuovi blocco',
     ],
-
     'messages' => [
         'saved' => 'Modifiche salvate con successo',
         'error' => 'Si è verificato un errore durante il salvataggio',
         'confirm_delete' => 'Sei sicuro di voler eliminare questo elemento?',
         'unsaved_changes' => 'Hai modifiche non salvate',
     ],
-
     'validation' => [
         'required' => 'Questo campo è obbligatorio',
         'slug_exists' => 'Questo slug è già in uso',
@@ -263,7 +253,6 @@ return [
         'min' => 'Il valore deve essere almeno :min',
         'max' => 'Il valore non può superare :max',
     ],
-
     'sections' => [
         'content' => 'Contenuto',
         'media' => 'Media',

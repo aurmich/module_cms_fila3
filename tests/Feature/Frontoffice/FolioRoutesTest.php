@@ -68,7 +68,7 @@ it('validates Folio routes basic accessibility and localization', function (): v
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308, 401, 403]);
 
         // If homepage, assert HTML lang attribute and 200 OK
-        if ($path === '/' . $locale) {
+        if ($path === ('/' . $locale)) {
             $response->assertStatus(200);
             $response->assertSee('<html', false);
             $response->assertSee(' lang="' . $locale . '"', false);

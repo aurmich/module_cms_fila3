@@ -32,7 +32,8 @@ class Module extends BaseModel
 
     /** @var list<string> */
     protected $fillable = [
-        'id', 'name',
+        'id',
+        'name',
     ];
 
     public function getRows(): array

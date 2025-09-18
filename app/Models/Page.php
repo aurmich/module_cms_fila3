@@ -88,14 +88,11 @@ class Page extends BaseModelLang
         'middleware' => 'json',
         'content' => 'string',
         'description' => 'string',
-        
         'content_blocks' => 'json',
         'sidebar_blocks' => 'json',
         'footer_blocks' => 'json',
-
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
@@ -105,12 +102,11 @@ class Page extends BaseModelLang
         return $this->getSushiRows();
     }
 
-
-
     /**
      * The attributes that should be mutated to dates.
      *
      * @return array<string, string> */
+    #[\Override]
     protected function casts(): array
     {
         return [
@@ -128,7 +124,6 @@ class Page extends BaseModelLang
             'middleware' => 'array',
         ];
     }
-
 
     public static function getMiddlewareBySlug(string $slug): array
     {

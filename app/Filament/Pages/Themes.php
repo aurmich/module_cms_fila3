@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * @see https://github.com/3x1io/filament-themes/blob/main/src/Pages/Themes.php
  */
@@ -12,20 +13,19 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\File;
 use Modules\Cms\Datas\ThemeData;
 use Modules\Tenant\Services\TenantService;
+use Webmozart\Assert\Assert;
 
 use function Safe\json_decode;
-
-use Webmozart\Assert\Assert;
 
 class Themes extends Page
 {
     public array $data = [];
 
-    protected static ?string $navigationIcon = 'heroicon-o-paint-brush';
+    protected static null|string $navigationIcon = 'heroicon-o-paint-brush';
 
     protected static string $view = 'cms::filament.pages.themes';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static null|string $navigationGroup = 'Settings';
 
     public function changePubTheme(string $name): void
     {
@@ -39,24 +39,24 @@ class Themes extends Page
     }
 
     /*
-    public static function getNavigationGroup(): ?string
-    {
-        return config('filament-themes.group') ?? static::$navigationGroup;
-    }
-    */
+     * public static function getNavigationGroup(): ?string
+     * {
+     * return config('filament-themes.group') ?? static::$navigationGroup;
+     * }
+     */
 
     /**
      * @return array[]
      */
     protected function getViewData(): array
     {
-        $themes = File::directories(base_path().str('/Themes')->replace('/', \DIRECTORY_SEPARATOR));
+        $themes = File::directories(base_path() . str('/Themes')->replace('/', \DIRECTORY_SEPARATOR));
         $data = [];
         if ($themes) {
             foreach ($themes as $key => $item) {
-                Assert::string($item);
-                $filename = $item.DIRECTORY_SEPARATOR.'theme.json';
-                if (! File::exists($filename)) {
+                Assert::string($item, __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
+                $filename = $item . DIRECTORY_SEPARATOR . 'theme.json';
+                if (!File::exists($filename)) {
                     $theme_data = ThemeData::from(['name' => basename((string) $item)]);
                     File::put($filename, $theme_data->toJson());
                 }
@@ -77,15 +77,15 @@ class Themes extends Page
     }
 
     /*
-    protected static function shouldRegisterNavigation(): bool
-    {
-        return auth()->user()->can('page_Themes');
-    }
-
-
-    public function mount(): void
-    {
-        abort_unless(auth()->user()->can('page_Themes'), 403);
-    }
-    */
+     * protected static function shouldRegisterNavigation(): bool
+     * {
+     * return auth()->user()->can('page_Themes');
+     * }
+     *
+     *
+     * public function mount(): void
+     * {
+     * abort_unless(auth()->user()->can('page_Themes'), 403);
+     * }
+     */
 }

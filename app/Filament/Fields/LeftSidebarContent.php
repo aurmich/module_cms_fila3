@@ -8,13 +8,8 @@ use Filament\Forms\Components\Builder;
 
 class LeftSidebarContent
 {
-    public static function make(
-        string $name,
-        string $context = 'form',
-    ): Builder {
-        return Builder::make($name)
-            ->blocks([
-            ])
-            ->collapsible();
+    public static function make(string $name, string $_context = 'form'): Builder
+    {
+        return Builder::make($name)->blocks([])->collapsible();
     }
 }

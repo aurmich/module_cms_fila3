@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 return [
     'adm_theme' => 'AdminLTE',
     'enable_ads' => false,
@@ -9,4 +12,4 @@ return [
         'profile' => 'Modules\User\Models\Profile',
         'user' => 'Modules\User\Models\User',
     ],
-]; 
+];

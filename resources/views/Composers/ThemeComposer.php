@@ -48,36 +48,57 @@ class ThemeComposer
 
     public function showPageContent(string $slug): Renderable
     {
-        Assert::isInstanceOf($page = Page::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), Page::class, '['.__LINE__.']['.__FILE__.']');
+        Assert::isInstanceOf(
+            $page = Page::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]),
+            Page::class,
+            '[' . __LINE__ . '][' . __FILE__ . ']',
+        );
         // $page = Page::firstOrCreate(['slug' => $slug], ['content_blocks' => []]);
         $blocks = $page->content_blocks;
-        if (! is_array($blocks)) {
+        if (!is_array($blocks)) {
             $blocks = [];
         }
-        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $blocks, model: $page);
+        $page = new \Modules\UI\View\Components\Render\Blocks(
+            blocks: $blocks,
+            model: $page,
+        );
 
         return $page->render();
     }
 
     public function showPageSidebarContent(string $slug): Renderable
     {
-        Assert::isInstanceOf($page = Page::firstOrCreate(['slug' => $slug], ['sidebar_blocks' => []]), Page::class, '['.__LINE__.']['.__FILE__.']');
+        Assert::isInstanceOf(
+            $page = Page::firstOrCreate(['slug' => $slug], ['sidebar_blocks' => []]),
+            Page::class,
+            '[' . __LINE__ . '][' . __FILE__ . ']',
+        );
         // $page = Page::firstOrCreate(['slug' => $slug], ['content_blocks' => []]);
 
-        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $page->sidebar_blocks, model: $page);
+        $page = new \Modules\UI\View\Components\Render\Blocks(
+            blocks: $page->sidebar_blocks,
+            model: $page,
+        );
 
         return $page->render();
     }
 
     public function showContent(string $slug): Renderable
     {
-        Assert::isInstanceOf($page = PageContent::firstOrCreate(['slug' => $slug], ['blocks' => []]), PageContent::class, '['.__LINE__.']['.__FILE__.']');
+        Assert::isInstanceOf(
+            $page = PageContent::firstOrCreate(['slug' => $slug], ['blocks' => []]),
+            PageContent::class,
+            '[' . __LINE__ . '][' . __FILE__ . ']',
+        );
 
-        if (! is_array($page->blocks)) {
+        if (!is_array($page->blocks)) {
             return view('ui::empty');
         }
 
-        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $page->blocks, model: $page);
+        $page = new \Modules\UI\View\Components\Render\Blocks(
+            blocks: $page->blocks,
+            model: $page,
+        );
 
         return $page->render();
     }
@@ -87,7 +108,7 @@ class ThemeComposer
         return Page::all();
     }
 
-    public function getPageModel(string $slug): ?Page
+    public function getPageModel(string $slug): null|Page
     {
         return Page::where('slug', $slug)->first();
     }
@@ -96,7 +117,7 @@ class ThemeComposer
     {
         $page = $this->getPageModel($slug);
         if ($page instanceof Page) {
-            return '/'.app()->getLocale().'/pages/'.$slug;
+            return '/' . app()->getLocale() . '/pages/' . $slug;
         }
 
         return '#';

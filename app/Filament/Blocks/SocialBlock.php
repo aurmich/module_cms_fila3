@@ -6,19 +6,17 @@ namespace Modules\Cms\Filament\Blocks;
 
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 final class SocialBlock extends XotBaseBlock
 {
+    #[\Override]
     public static function getBlockSchema(): array
     {
         return [
-            TextInput::make('title')
-                ->required()
-                ->label(__('cms::blocks.social.fields.title')),
-
+            TextInput::make('title')->required()->label(__('cms::blocks.social.fields.title')),
             Repeater::make('social_links')
                 ->label(__('cms::blocks.social.fields.social_links'))
                 ->schema([
@@ -32,14 +30,13 @@ final class SocialBlock extends XotBaseBlock
                             'linkedin' => 'LinkedIn',
                             'youtube' => 'YouTube',
                         ]),
-
                     TextInput::make('url')
                         ->required()
                         ->url()
                         ->label(__('cms::blocks.social.fields.url')),
                 ])
                 ->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['platform'] ?? null)
+                ->itemLabel(fn(array $state): null|string => $state['platform'] ?? null)
                 ->defaultItems(1),
         ];
     }

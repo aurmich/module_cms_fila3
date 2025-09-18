@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 return [
     'fields' => [
         'name' => [
@@ -23,7 +26,6 @@ return [
             'placeholder' => 'Aggiungi blocchi',
         ],
     ],
-    
     'actions' => [
         'create' => 'Crea Sezione',
         'edit' => 'Modifica Sezione',
@@ -31,11 +33,10 @@ return [
         'save' => 'Salva Sezione',
         'cancel' => 'Annulla',
     ],
-    
     'messages' => [
         'created' => 'Sezione creata con successo',
         'updated' => 'Sezione aggiornata con successo',
         'deleted' => 'Sezione eliminata con successo',
         'error' => 'Si è verificato un errore',
     ],
-]; 
+];

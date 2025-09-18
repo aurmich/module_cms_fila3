@@ -34,15 +34,24 @@ class FrontPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Front/Resources'), for: 'App\\Filament\\Front\\Resources')
-            ->discoverPages(in: app_path('Filament/Front/Pages'), for: 'App\\Filament\\Front\\Pages')
+            ->discoverResources(
+                in: app_path('Filament/Front/Resources'),
+                for: 'App\\Filament\\Front\\Resources',
+            )
+            ->discoverPages(
+                in: app_path('Filament/Front/Pages'),
+                for: 'App\\Filament\\Front\\Pages',
+            )
             ->pages([
                 //  Dashboard::class,
                 // Login::class,
                 Themes::class,
                 EditProfile::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Front/Widgets'), for: 'App\\Filament\\Front\\Widgets')
+            ->discoverWidgets(
+                in: app_path('Filament/Front/Widgets'),
+                for: 'App\\Filament\\Front\\Widgets',
+            )
             ->widgets([
                 // AccountWidget::class,
                 // FilamentInfoWidget::class,

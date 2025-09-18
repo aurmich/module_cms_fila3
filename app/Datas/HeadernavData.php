@@ -15,12 +15,12 @@ class HeadernavData extends Data implements Wireable
 {
     use WireableData;
 
-    public ?string $background_color = null;
-    public ?string $background = null;
-    public ?string $overlay_color = null;
-    public ?int $overlay_opacity = null;
-    public ?string $class = null;
-    public ?string $style = null;
+    public null|string $background_color = null;
+    public null|string $background = null;
+    public null|string $overlay_color = null;
+    public null|int $overlay_opacity = null;
+    public null|string $class = null;
+    public null|string $style = null;
     /**
      * The view path.
      *
@@ -28,11 +28,11 @@ class HeadernavData extends Data implements Wireable
      */
     public $view = 'cms::components.headernav';
 
-    private static ?self $instance = null;
+    private static null|self $instance = null;
 
     public static function make(): self
     {
-        if (! self::$instance instanceof HeadernavData) {
+        if (!(self::$instance instanceof HeadernavData)) {
             // if (! self::$instance) {
             $data = TenantService::getConfig('appearance');
             $data = Arr::get($data, 'headernav', []);
@@ -44,8 +44,8 @@ class HeadernavData extends Data implements Wireable
 
     public function view(): Renderable
     {
-        if (! view()->exists($this->view)) {
-            $message = 'The view ['.$this->view.'] does not exist';
+        if (!view()->exists($this->view)) {
+            $message = 'The view [' . $this->view . '] does not exist';
             throw new \Exception($message);
         }
         /** @var array<string, mixed> $view_params */

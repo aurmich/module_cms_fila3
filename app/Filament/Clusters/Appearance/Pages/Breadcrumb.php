@@ -33,15 +33,15 @@ class Breadcrumb extends Page implements HasForms
      *
      * @var array<string, mixed>|null
      */
-    public ?array $data = [];
+    public null|array $data = [];
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static null|string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'cms::filament.clusters.appearance.pages.headernav';
 
-    protected static ?string $cluster = Appearance::class;
+    protected static null|string $cluster = Appearance::class;
 
-    protected static ?int $navigationSort = 2;
+    protected static null|int $navigationSort = 2;
 
     /**
      * Mount the page and initialize the form state.
@@ -58,12 +58,8 @@ class Breadcrumb extends Page implements HasForms
     {
         return $form
             ->schema([
-                TextInput::make('class')
-                    ->label(__('Class'))
-                    ->placeholder(__('Enter breadcrumb class')),
-                TextInput::make('style')
-                    ->label(__('Style'))
-                    ->placeholder(__('Enter breadcrumb style')),
+                TextInput::make('class')->label(__('Class'))->placeholder(__('Enter breadcrumb class')),
+                TextInput::make('style')->label(__('Style'))->placeholder(__('Enter breadcrumb style')),
             ])
             ->columns(2)
             ->statePath('data');
@@ -120,9 +116,7 @@ class Breadcrumb extends Page implements HasForms
     protected function getUpdateFormActions(): array
     {
         return [
-            Action::make('updateAction')
-                ->label(__('Save Changes'))
-                ->submit('updateData'),
+            Action::make('updateAction')->label(__('Save Changes'))->submit('updateData'),
         ];
     }
 }

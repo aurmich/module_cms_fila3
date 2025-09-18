@@ -11,32 +11,19 @@ use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 final class LinksBlock extends XotBaseBlock
 {
-
-
+    #[\Override]
     public static function getBlockSchema(): array
     {
         return [
-            TextInput::make('title')
-                ->required()
-,
-
+            TextInput::make('title')->required(),
             Repeater::make('links')
                 ->schema([
-                    TextInput::make('label')
-                        ->required()
-,
-
-                    TextInput::make('url')
-                        ->required()
-                        ->url()
-,
-
-                    TextInput::make('icon')
-
+                    TextInput::make('label')->required(),
+                    TextInput::make('url')->required()->url(),
+                    TextInput::make('icon'),
                 ])
                 ->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['label'] ?? null)
-,
+                ->itemLabel(fn(array $state): null|string => $state['label'] ?? null),
         ];
     }
 

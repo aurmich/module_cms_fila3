@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
-use Modules\Xot\Datas\XotData;
 use Livewire\Volt\Volt as LivewireVolt;
-use function Pest\Laravel\{actingAs, get};
+use Modules\Xot\Datas\XotData;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -26,13 +28,9 @@ test('password can be confirmed', function () {
 
     actingAs($user);
 
-    $response = LivewireVolt::test('auth.confirm-password')
-        ->set('password', 'password')
-        ->call('confirmPassword');
+    $response = LivewireVolt::test('auth.confirm-password')->set('password', 'password')->call('confirmPassword');
 
-    $response
-        ->assertHasNoErrors()
-        ->assertRedirect(route('dashboard', absolute: false));
+    $response->assertHasNoErrors()->assertRedirect(route('dashboard', absolute: false));
 });
 
 test('password is not confirmed with invalid password', function () {
@@ -41,9 +39,7 @@ test('password is not confirmed with invalid password', function () {
 
     actingAs($user);
 
-    $response = LivewireVolt::test('auth.confirm-password')
-        ->set('password', 'wrong-password')
-        ->call('confirmPassword');
+    $response = LivewireVolt::test('auth.confirm-password')->set('password', 'wrong-password')->call('confirmPassword');
 
     $response->assertHasErrors(['password']);
 });

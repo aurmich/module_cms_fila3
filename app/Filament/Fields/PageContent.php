@@ -11,28 +11,22 @@ use Webmozart\Assert\Assert;
 
 class PageContent
 {
-    public static function make(
-        string $name,
-        string $context = 'form',
-    ): Builder {
+    public static function make(string $name, string $context = 'form'): Builder
+    {
         $blocks = app(GetAllBlocksAction::class)->execute();
 
-        $blocks = $blocks->map(
-            function ($block) use ($context) {
-                Assert::isInstanceOf($block, ComponentFileData::class, '['.__LINE__.']['.__FILE__.']');
-                $class = $block->class;
+        $blocks = $blocks->map(function ($block) use ($context) {
+            Assert::isInstanceOf($block, ComponentFileData::class, '[' . __LINE__ . '][' . __FILE__ . ']');
+            $class = $block->class;
 
-                return $class::make(context: $context);
-            }
-        );
+            return $class::make(context: $context);
+        });
 
         /**
          * @var array<Builder\Block>
          */
         $blocks_array = $blocks->items();
 
-        return Builder::make($name)
-            ->blocks($blocks_array)
-            ->collapsible();
+        return Builder::make($name)->blocks($blocks_array)->collapsible();
     }
 }

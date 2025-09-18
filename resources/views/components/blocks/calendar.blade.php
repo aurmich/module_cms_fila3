@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 {{-- Generic Calendar Component for CMS --}}
 @props([
     'type' => 'patient', // patient|doctor|admin

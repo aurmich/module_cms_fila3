@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 @if (!empty($pageContent['error']))
     <div class="alert alert-danger">
         {{ $pageContent['error'] }}

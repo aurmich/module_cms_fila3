@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 @php
     $section = $getRecord();
     $currentLocale = app()->getLocale();
@@ -37,4 +42,4 @@
             Nessuna traduzione disponibile per la lingua corrente
         </div>
     @endif
-</div> 
+</div>

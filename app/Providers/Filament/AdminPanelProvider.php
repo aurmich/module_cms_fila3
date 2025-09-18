@@ -12,6 +12,7 @@ class AdminPanelProvider extends XotBasePanelProvider
 {
     protected string $module = 'Cms';
 
+    #[\Override]
     public function panel(Panel $panel): Panel
     {
         $panel->plugins([

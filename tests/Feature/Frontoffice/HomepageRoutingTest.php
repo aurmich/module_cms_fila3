@@ -6,10 +6,10 @@ declare(strict_types=1);
 uses(\Modules\Xot\Tests\TestCase::class);
 
 beforeEach(function (): void {
-    if (! function_exists('moduleEnabled')) {
+    if (!function_exists('moduleEnabled')) {
         $this->markTestSkipped('moduleEnabled() helper not available.');
     }
-    if (! moduleEnabled('Cms')) {
+    if (!moduleEnabled('Cms')) {
         $this->markTestSkipped('Module Cms is disabled');
     }
 });

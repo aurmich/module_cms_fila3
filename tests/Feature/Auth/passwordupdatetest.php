@@ -1,7 +1,9 @@
 <?php
 
-namespace Modules\Cms\Tests\Feature\Auth;
+declare(strict_types=1);
 
+
+namespace Modules\Cms\Tests\Feature\Auth;
 
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt;

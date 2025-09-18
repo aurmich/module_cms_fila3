@@ -25,17 +25,17 @@ class XotPanelController extends BaseController
          * 1 => userPanel.
          */
         /*
-        $func = '\Modules\Xot\Jobs\PanelCrud\\'.Str::studly($method).'Job';
-
-        $data = $arg[0];
-        if ($arg[0] instanceof Request) {
-            $data = $data->all();
-        }
-        $panel = $func::dispatchNow($data, $arg[1]);
-
-        return $panel->out();
-        */
-        $act = '\Modules\Cms\Actions\Panel\\'.Str::studly($method).'Action';
+         * $func = '\Modules\Xot\Jobs\PanelCrud\\'.Str::studly($method).'Job';
+         *
+         * $data = $arg[0];
+         * if ($arg[0] instanceof Request) {
+         * $data = $data->all();
+         * }
+         * $panel = $func::dispatchNow($data, $arg[1]);
+         *
+         * return $panel->out();
+         */
+        $act = '\Modules\Cms\Actions\Panel\\' . Str::studly($method) . 'Action';
         $data = $arg[0];
         if ($arg[0] instanceof Request) {
             $data = $data->all();

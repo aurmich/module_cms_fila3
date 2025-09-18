@@ -9,7 +9,7 @@ use Modules\Cms\Models\Conf;
 
 /**
  * Conf Factory
- * 
+ *
  * @extends Factory<Conf>
  */
 class ConfFactory extends Factory

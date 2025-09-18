@@ -4,29 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class ActionsBlock extends XotBaseBlock
 {
+    #[\Override]
     public static function getBlockSchema(): array
     {
         return [
             Repeater::make('items')
                 ->schema([
-                    TextInput::make('label')
-                        ->required()
-                        
-                        ,
-
-                    TextInput::make('url')
-                        ->required()
-                        
-                        ,
-
+                    TextInput::make('label')->required(),
+                    TextInput::make('url')->required(),
                     Select::make('style')
                         ->options([
                             'primary' => 'Primario',
@@ -34,23 +27,16 @@ class ActionsBlock extends XotBaseBlock
                             'outline' => 'Outline',
                             'link' => 'Link',
                         ])
-                        ->required()
-                        
-                        ,
-
-                    Select::make('icon')
-                        ->options([
-                            'search' => 'Ricerca',
-                            'user' => 'Utente',
-                            'cart' => 'Carrello',
-                            'menu' => 'Menu',
-                            'settings' => 'Impostazioni',
-                            'notification' => 'Notifiche',
-                            'language' => 'Lingua',
-                        ])
-                        
-                        ,
-
+                        ->required(),
+                    Select::make('icon')->options([
+                        'search' => 'Ricerca',
+                        'user' => 'Utente',
+                        'cart' => 'Carrello',
+                        'menu' => 'Menu',
+                        'settings' => 'Impostazioni',
+                        'notification' => 'Notifiche',
+                        'language' => 'Lingua',
+                    ]),
                     Select::make('size')
                         ->options([
                             'xs' => 'Extra Small',
@@ -58,24 +44,16 @@ class ActionsBlock extends XotBaseBlock
                             'md' => 'Medium',
                             'lg' => 'Large',
                         ])
-                        ->default('md')
-                        
-                        ,
+                        ->default('md'),
                 ])
-                ->collapsible()
-                
-                ,
-
+                ->collapsible(),
             Select::make('alignment')
                 ->options([
                     'start' => 'Sinistra',
                     'center' => 'Centro',
                     'end' => 'Destra',
                 ])
-                ->default('end')
-                
-                ,
-
+                ->default('end'),
             Select::make('gap')
                 ->options([
                     'xs' => 'Extra Small',
@@ -83,9 +61,7 @@ class ActionsBlock extends XotBaseBlock
                     'md' => 'Medium',
                     'lg' => 'Large',
                 ])
-                ->default('md')
-                
-                ,
+                ->default('md'),
         ];
     }
 }

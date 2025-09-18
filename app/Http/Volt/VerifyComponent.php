@@ -19,14 +19,14 @@ class VerifyComponent extends Component
     public function resend(): void
     {
         /*
-        if (auth()->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard'));
-        }
-
-        auth()->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-        */
+         * if (auth()->user()->hasVerifiedEmail()) {
+         * return redirect()->intended(route('dashboard'));
+         * }
+         *
+         * auth()->user()->sendEmailVerificationNotification();
+         *
+         * return back()->with('status', 'verification-link-sent');
+         */
         Assert::notNull($user = auth()->user());
         if ($user->hasVerifiedEmail()) {
             redirect('/');

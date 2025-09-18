@@ -16,21 +16,21 @@ return new class extends XotBaseMigration {
     public function up(): void
     {
         // -- CREATE --
-        $this->tableCreate(
-            static function (Blueprint $table): void {
-                $table->id();
+        $this->tableCreate(static function (Blueprint $table): void {
+            $table->id();
 
-                $table->string('slug')->unique()->index();
-                $table->string('name');
-                $table->json('blocks')->nullable();
-                // $table->json('blocks')->default(new Expression('(JSON_ARRAY())'));
-            }
-        );
+            $table->string('slug')->unique()->index();
+            $table->string('name');
+            $table->json('blocks')->nullable();
+
+            // $table->json('blocks')->default(new Expression('(JSON_ARRAY())'));
+        });
         // -- UPDATE --
-        $this->tableUpdate(
-            function (Blueprint $table): void {
-                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
-            }
-        );
+        $this->tableUpdate(function (Blueprint $table): void {
+            $this->updateTimestamps(
+                table: $table,
+                hasSoftDeletes: true,
+            );
+        });
     }
 };

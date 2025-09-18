@@ -29,22 +29,22 @@ class LoginComponent extends Component
     public function authenticate(): RedirectResponse
     {
         /*
-        $credentials = $this->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (auth()->attempt($credentials, $this->remember)) {
-            session()->regenerate();
-
-            $this->redirect(route('cms.dashboard'));
-        }
-
-        $this->addError('email', trans('auth.failed'));
-        */
+         * $credentials = $this->validate([
+         * 'email' => ['required', 'email'],
+         * 'password' => ['required'],
+         * ]);
+         *
+         * if (auth()->attempt($credentials, $this->remember)) {
+         * session()->regenerate();
+         *
+         * $this->redirect(route('cms.dashboard'));
+         * }
+         *
+         * $this->addError('email', trans('auth.failed'));
+         */
         $this->validate();
 
-        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             $this->addError('email', trans('auth.failed'));
 
             // return;

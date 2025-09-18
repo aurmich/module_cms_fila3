@@ -62,12 +62,9 @@ class PageContent extends BaseModel
         'id' => 'integer',
         'name' => 'json',
         'slug' => 'string',
-
         'blocks' => 'json',
-
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
@@ -90,12 +87,12 @@ class PageContent extends BaseModel
      * The attributes that should be mutated to dates.
      *
      * @return array<string, string> */
+    #[\Override]
     protected function casts(): array
     {
         return [
             'id' => 'string',
             'uuid' => 'string',
-
             'name' => 'string',
             'slug' => 'string',
             'blocks' => 'array',

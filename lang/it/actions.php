@@ -14,7 +14,6 @@ return [
         'sort' => 120,
         'badge' => 'Gestione azioni CMS',
     ],
-
     // ==============================================
     // MODEL INFORMATION
     // ==============================================
@@ -23,7 +22,6 @@ return [
         'plural' => 'Azioni CMS',
         'description' => 'Sistema di azioni e controlli per il Content Management System',
     ],
-
     // ==============================================
     // FIELDS - STRUTTURA ESPANSA OBBLIGATORIA
     // ==============================================
@@ -85,7 +83,6 @@ return [
             'help' => 'Imposta la spaziatura adeguata per una buona leggibilità',
         ],
     ],
-
     // ==============================================
     // ACTIONS - STRUTTURA ESPANSA OBBLIGATORIA
     // ==============================================
@@ -145,7 +142,6 @@ return [
             'tooltip' => 'Visualizza anteprima dell\'azione',
         ],
     ],
-
     // ==============================================
     // SECTIONS - ORGANIZZAZIONE FORM
     // ==============================================
@@ -166,7 +162,6 @@ return [
             'icon' => 'heroicon-o-cog',
         ],
     ],
-
     // ==============================================
     // FILTERS - RICERCA E FILTRI
     // ==============================================
@@ -184,7 +179,6 @@ return [
             'placeholder' => 'Filtra per allineamento',
         ],
     ],
-
     // ==============================================
     // MESSAGES - FEEDBACK UTENTE
     // ==============================================
@@ -201,7 +195,6 @@ return [
         'error_permission' => 'Non hai i permessi per eseguire questa azione.',
         'success_operation' => 'Operazione completata con successo',
     ],
-
     // ==============================================
     // VALIDATION - MESSAGGI DI VALIDAZIONE
     // ==============================================
@@ -211,7 +204,6 @@ return [
         'style_required' => 'Lo stile è obbligatorio',
         'icon_required' => 'L\'icona è obbligatoria',
     ],
-
     // ==============================================
     // OPTIONS - OPZIONI E VALORI PREDEFINITI
     // ==============================================

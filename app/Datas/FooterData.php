@@ -15,22 +15,22 @@ class FooterData extends Data implements Wireable
 {
     use WireableData;
 
-    public ?string $background_color;
-    public ?string $background;
-    public ?string $overlay_color;
+    public null|string $background_color;
+    public null|string $background;
+    public null|string $overlay_color;
     /**
      * The view path.
      *
      * @var string
      */
     public $view = 'cms::components.footer';
-    public ?string $_tpl;
+    public null|string $_tpl;
 
-    private static ?self $instance = null;
+    private static null|self $instance = null;
 
     public static function make(): self
     {
-        if (! self::$instance instanceof FooterData) {
+        if (!(self::$instance instanceof FooterData)) {
             $data = TenantService::getConfig('appearance');
             $data = Arr::get($data, 'footer', []);
             self::$instance = self::from($data);
@@ -41,8 +41,8 @@ class FooterData extends Data implements Wireable
 
     public function view(): Renderable
     {
-        if (! view()->exists($this->view)) {
-            $message = 'The view ['.$this->view.'] does not exist';
+        if (!view()->exists($this->view)) {
+            $message = 'The view [' . $this->view . '] does not exist';
             throw new \Exception($message);
         }
         /** @var array<string, mixed> */

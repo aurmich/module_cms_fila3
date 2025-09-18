@@ -31,22 +31,22 @@ class RegisterComponent extends Component
     public function register(): RedirectResponse
     {
         /*
-        $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        $user = \App\Models\User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => bcrypt($this->password),
-        ]);
-
-        auth()->login($user);
-
-        return redirect()->intended(route('cms.dashboard'));
-        */
+         * $validated = $this->validate([
+         * 'name' => ['required', 'string', 'max:255'],
+         * 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+         * 'password' => ['required', 'string', 'min:8', 'confirmed'],
+         * ]);
+         *
+         * $user = \App\Models\User::create([
+         * 'name' => $this->name,
+         * 'email' => $this->email,
+         * 'password' => bcrypt($this->password),
+         * ]);
+         *
+         * auth()->login($user);
+         *
+         * return redirect()->intended(route('cms.dashboard'));
+         */
         $this->validate();
 
         $user = User::create([

@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 @extends('cms::layouts.master')
 
 @section('content')

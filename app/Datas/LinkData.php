@@ -18,5 +18,5 @@ class LinkData extends Data
 
     public bool $render = true;
 
-    public ?string $onclick = null;
+    public null|string $onclick = null;
 }

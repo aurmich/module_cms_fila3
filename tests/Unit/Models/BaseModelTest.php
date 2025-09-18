@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Unit\Models;
 
-use Modules\Cms\Models\BaseModel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\Cms\Models\BaseModel;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);

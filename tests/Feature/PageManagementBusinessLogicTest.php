@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Cms\Models\Page;
 use Modules\Cms\Models\PageContent;
 use Modules\Cms\Models\Section;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PageManagementBusinessLogicTest extends TestCase
 {
@@ -51,7 +51,12 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $contentData = [
             'page_id' => $page->id,
-            'content' => '<h1>Benvenuti su ' . config('app.name', 'Our Platform') . '</h1><p>La vostra salute è la nostra priorità.</p>',
+            'content' =>
+
+                    '<h1>Benvenuti su ' .
+                    config('app.name', 'Our Platform') .
+                    '</h1><p>La vostra salute è la nostra priorità.</p>'
+                ,
             'locale' => 'it',
             'version' => 1,
         ];
@@ -197,13 +202,9 @@ class PageManagementBusinessLogicTest extends TestCase
         ]);
 
         // Act
-        $italian = PageContent::where('page_id', $page->id)
-            ->where('locale', 'it')
-            ->first();
+        $italian = PageContent::where('page_id', $page->id)->where('locale', 'it')->first();
 
-        $english = PageContent::where('page_id', $page->id)
-            ->where('locale', 'en')
-            ->first();
+        $english = PageContent::where('page_id', $page->id)->where('locale', 'en')->first();
 
         // Assert
         $this->assertNotNull($italian);
@@ -239,9 +240,7 @@ class PageManagementBusinessLogicTest extends TestCase
         ]);
 
         // Act
-        $orderedSections = Section::where('page_id', $page->id)
-            ->orderBy('order', 'asc')
-            ->get();
+        $orderedSections = Section::where('page_id', $page->id)->orderBy('order', 'asc')->get();
 
         // Assert
         $this->assertCount(3, $orderedSections);

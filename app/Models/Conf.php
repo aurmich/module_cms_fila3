@@ -28,7 +28,8 @@ class Conf extends Model
 
     /** @var list<string> */
     protected $fillable = [
-        'id', 'name',
+        'id',
+        'name',
     ];
 
     public function getRows(): array
@@ -39,10 +40,10 @@ class Conf extends Model
     }
 
     /*
-    protected function sushiShouldCache() {
-        return false;
-    }
-    */
+     * protected function sushiShouldCache() {
+     * return false;
+     * }
+     */
     /**
      * Undocumented function.
      */

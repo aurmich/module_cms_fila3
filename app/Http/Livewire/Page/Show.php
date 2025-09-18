@@ -31,7 +31,7 @@ class Show extends Component
      *
      * @var string|null
      */
-    public ?string $theme = null;
+    public null|string $theme = null;
 
     /**
      * Se mostrare informazioni di debug.
@@ -80,11 +80,7 @@ class Show extends Component
 
         // Se la cache è abilitata, tenta di recuperare dalla cache
         if ($this->cache) {
-            $cached = Cache::remember(
-                $cacheKey,
-                now()->addHours(24),
-                fn () => $this->fetchPageContent()
-            );
+            $cached = Cache::remember($cacheKey, now()->addHours(24), $this->fetchPageContent(...));
             $this->pageContent = is_array($cached) ? $cached : [];
         } else {
             $this->pageContent = $this->fetchPageContent();
@@ -100,11 +96,9 @@ class Show extends Component
     {
         try {
             // Recupera la pagina dal database
-            $page = Page::where('slug', $this->slug)
-                ->where('lang', app()->getLocale())
-                ->first();
+            $page = Page::where('slug', $this->slug)->where('lang', app()->getLocale())->first();
 
-            if (! $page) {
+            if (!$page) {
                 return ['error' => 'Page not found', 'slug' => $this->slug];
             }
 

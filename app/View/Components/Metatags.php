@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Cms\View\Components;
 
-use Illuminate\View\View;
-use Illuminate\View\Component;
-use Modules\Xot\Datas\MetatagData;
-use Modules\Xot\Actions\GetViewAction;
 use Illuminate\Contracts\View\View as ViewContract;
+use Illuminate\View\Component;
+use Illuminate\View\View;
+use Modules\Xot\Actions\GetViewAction;
+use Modules\Xot\Datas\MetatagData;
 
 class Metatags extends Component
 {
@@ -17,18 +17,17 @@ class Metatags extends Component
      */
     public function render(): ViewContract
     {
-        $metatag=MetatagData::make();
-        $view=app(GetViewAction::class)->execute();
-        
+        $metatag = MetatagData::make();
+        $view = app(GetViewAction::class)->execute();
+
         $view_params = [
-            'meta'=>$metatag,
+            'meta' => $metatag,
         ];
         // @phpstan-ignore-next-line
-        if (! view()->exists($view)) {
-            throw new \Exception('view not found: '.$view);
+        if (!view()->exists($view)) {
+            throw new \Exception('view not found: ' . $view);
         }
 
         return view($view, $view_params);
-        
     }
 }

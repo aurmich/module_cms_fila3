@@ -16,7 +16,7 @@ use Livewire\Volt\Component;
 class ResetComponent extends Component
 {
     #[Validate('required|email')]
-    public ?string $email = null;
+    public null|string $email = null;
 
     /**
      * Summary of emailSentMessage.
@@ -31,7 +31,7 @@ class ResetComponent extends Component
 
         $response = Password::broker()->sendResetLink(['email' => $this->email]);
 
-        if (Password::RESET_LINK_SENT == $response) {
+        if (Password::RESET_LINK_SENT === $response) {
             $this->emailSentMessage = trans($response);
 
             return;
