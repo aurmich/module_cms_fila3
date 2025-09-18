@@ -156,3 +156,8 @@ database/Migrations_old
 database/Seeders_old
 database/Factories_old
 database_old
+
+# 🚫 File specifici del progetto
+*.fila2
+laravel
+public_html
