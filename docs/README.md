@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Modulo CMS - Content Management System
 
 ## 🎯 Panoramica
@@ -54,7 +53,6 @@ Modules/Cms/
 
 ---
 **Ultimo aggiornamento**: Gennaio 2025
-=======
 # Modulo CMS
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
@@ -303,4 +301,3 @@ npm run dev
 * [README.md](laravel/Themes/Two/docs/README.md)
 * [README.md](laravel/Themes/One/docs/README.md)
 
->>>>>>> 12a72f2 (.)
