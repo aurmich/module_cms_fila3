@@ -71,6 +71,7 @@ class Page extends BaseModelLang
 
     protected $fillable = [
         'content',
+        'description',
         'slug',
         'title',
         'middleware',
@@ -85,7 +86,8 @@ class Page extends BaseModelLang
         'slug' => 'string',
         'middleware' => 'json',
         'content' => 'string',
-
+        'description' => 'string',
+        
         'content_blocks' => 'json',
         'sidebar_blocks' => 'json',
         'footer_blocks' => 'json',

@@ -107,6 +107,7 @@ Thumbs.db
 .cursor/
 .phpstorm.meta.php
 
+<<<<<<< HEAD
 # ==============================================
 # DOCUMENTATION CACHE
 # ==============================================
@@ -145,3 +146,16 @@ cms_test_data.sql
 # ==============================================
 # END OF CMS .GITIGNORE
 # ==============================================
+=======
+#othes
+lang/it/.php
+lang/en/.php
+lang/de/.php
+
+# Old directories to ignore
+resources/views/Components_old
+database/Migrations_old
+database/Seeders_old
+database/Factories_old
+database_old
+>>>>>>> b9daf9de5 (.)

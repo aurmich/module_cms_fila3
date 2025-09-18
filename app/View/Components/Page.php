@@ -10,6 +10,7 @@ use Webmozart\Assert\Assert;
 use Illuminate\View\Component;
 use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
+use Modules\Xot\Datas\MetatagData;
 use Modules\Cms\Models\Page as PageModel;
 use Illuminate\Contracts\View\View as ViewContract;
 
@@ -34,6 +35,10 @@ class Page extends Component
         if (null === $page) {
             abort(404, 'page not found: '.$slug);
         }
+        $metatag=MetatagData::make();
+        $metatag->concatTitle($page->title);
+        
+        $metatag->concatDescription($page->description);
         $blocks = $page->$field;
         if (! is_array($blocks)) {
             $primary_lang = XotData::make()->primary_lang;
