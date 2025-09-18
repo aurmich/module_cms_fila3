@@ -47,6 +47,7 @@ Nel progetto il progetto utilizziamo classi base personalizzate invece delle cla
 - Questo può causare problemi con Larastan che cerca le classi standard di Laravel
 
 Per risolvere questi problemi, è importante:
+
 1. Escludere classi specifiche negli `ignoreErrors`
 2. Aggiungere i percorsi personalizzati nei `scanDirectories` (come ../Xot)
 
@@ -120,4 +121,74 @@ Utilizzare Rector per correggere automaticamente le chiamate alle funzioni:
 ```bash
 composer require --dev rector/rector
 vendor/bin/rector process app/ --config vendor/thecodingmachine/safe/rector-migrate.php
-``` 
+```
+
+## Errori Comuni e Soluzioni
+
+### Metodi Non Trovati in MetatagData
+
+**Problema**: PHPStan segnala errori per metodi non esistenti come `concatTitle()` e `concatDescription()` nella classe `MetatagData`.
+
+**Soluzione**: Implementare i metodi mancanti nella classe `MetatagData`:
+
+```php
+/**
+ * Concatenate a title to the existing title.
+ * This method allows adding page-specific titles to the base site title.
+ *
+ * @param string $title The title to concatenate
+ * @return self
+ */
+public function concatTitle(string $title): self
+{
+    if (empty($this->title)) {
+        $this->title = $title;
+    } else {
+        $this->title = $title . ' - ' . $this->title;
+    }
+    
+    return $this;
+}
+
+/**
+ * Concatenate a description to the existing description.
+ * This method allows adding page-specific descriptions to the base site description.
+ *
+ * @param string $description The description to concatenate
+ * @return self
+ */
+public function concatDescription(string $description): self
+{
+    if (empty($this->description)) {
+        $this->description = $description;
+    } else {
+        $this->description = $description . ' ' . $this->description;
+    }
+    
+    return $this;
+}
+```
+
+### Proprietà Non Documentate nei Modelli
+
+**Problema**: PHPStan segnala accesso a proprietà non definite nei modelli.
+
+**Soluzione**: Aggiungere le proprietà mancanti al PHPDoc del modello:
+
+```php
+/**
+ * @property string|null $description
+ */
+```
+
+### Chiavi Duplicate nei File di Traduzione
+
+**Problema**: PHPStan segnala chiavi duplicate nei file di traduzione.
+
+**Soluzione**: Rimuovere le chiavi duplicate mantenendo solo la prima occorrenza.
+
+## Collegamenti Correlati
+
+- [Componenti CMS](components.md) - Documentazione dei componenti CMS
+- [Best Practices](best-practices/) - Best practices per lo sviluppo
+- [Modulo Xot](../Xot/docs/) - Documentazione del modulo base Xot
