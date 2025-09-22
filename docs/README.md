@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Modulo CMS - Content Management System
 
 ## 🎯 Panoramica
@@ -56,7 +57,43 @@ Modules/Cms/
 **Ultimo aggiornamento**: Gennaio 2025
 =======
 >>>>>>> bc33217 (.)
+=======
+# 🗂️ CMS Module - Content Management System
+
+## 📋 Quick Reference
+| Categoria | Guida | File |
+|-----------|-------| ---- |
+| **Content** | Management | [content-management.md](content-management.md) |
+| **Components** | Blade | [components.md](components.md) |
+| **Filament** | Integration | [filament-integration.md](filament-integration.md) |
+| **Folio** | Pages | [folio-pages.md](folio-pages.md) |
+| **Homepage** | Structure | [homepage-management.md](homepage-management.md) |
+| **Architecture** | XotData | [architecture-xotdata-pattern.md](architecture-xotdata-pattern.md) |
+| **Troubleshooting** | Git Issues | [git-conflicts-resolution-impact.md](git-conflicts-resolution-impact.md) |
+
+## 🎯 Core Features
+- **Content Management**: Flexible content creation and editing
+- **Folio Integration**: File-based routing system
+- **Filament Resources**: Admin panel for content management
+- **Blade Components**: Reusable UI components
+- **Homepage Builder**: Dynamic homepage construction
+- **Multi-language**: Full i18n support
+
+## 📁 Documentation Structure
+- Core files in root level
+- `/blocks/` - Content blocks documentation
+- `/components/` - Component guides
+- `/content/` - Content management
+- `/frontoffice/` - Public facing features
+- `/standards/` - Development standards
+
+---
+*Principio DRY: Sistema CMS flessibile, documentazione organizzata per funzionalità.*
+
+=======
+>>>>>>> ee68b43 (.)
 # Modulo CMS
+>>>>>>> 247d318 (.)
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)
