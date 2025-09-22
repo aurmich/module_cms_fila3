@@ -6,6 +6,7 @@ namespace Modules\Cms\View\Components;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
@@ -18,6 +19,8 @@ use Webmozart\Assert\Assert;
 =======
 =======
 >>>>>>> ee68b43 (.)
+=======
+>>>>>>> 7a22847 (.)
 use Illuminate\View\View;
 use Illuminate\Support\Arr;
 use Webmozart\Assert\Assert;
@@ -25,9 +28,8 @@ use Illuminate\View\Component;
 use Modules\Xot\Datas\XotData;
 use Modules\Cms\Datas\BlockData;
 use Modules\Cms\Models\Page as PageModel;
-=======
->>>>>>> 9266864 (.)
 use Illuminate\Contracts\View\View as ViewContract;
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> bc33217 (.)
 =======
@@ -38,13 +40,14 @@ use Modules\Cms\Models\Page as PageModel;
 use Modules\Xot\Datas\XotData;
 use Webmozart\Assert\Assert;
 >>>>>>> ee68b43 (.)
+=======
+>>>>>>> 7a22847 (.)
 
 class Page extends Component
 {
     public string $side;
     public string $slug;
     public array $blocks = [];
-<<<<<<< HEAD
     public array $data = [];
 
 <<<<<<< HEAD
@@ -54,11 +57,6 @@ class Page extends Component
 >>>>>>> bc33217 (.)
     {
         $this->data = $data;
-=======
-
-    public function __construct(string $side, string $slug, ?string $type = null)
-    {
->>>>>>> 9266864 (.)
         $this->side = $side;
         if (null !== $type) {
 <<<<<<< HEAD
@@ -103,14 +101,11 @@ class Page extends Component
         if (! is_array($blocks)) {
             $blocks = [];
         }
-<<<<<<< HEAD
         $blocks = Arr::map($blocks, function ($block) use ($data) {
             $block['data'] = array_merge($data,$block['data']);
 >>>>>>> bc33217 (.)
             return $block;
         });
-=======
->>>>>>> 9266864 (.)
 
         $this->blocks = BlockData::collect($blocks);
     }

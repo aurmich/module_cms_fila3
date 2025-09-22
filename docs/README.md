@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Modulo CMS - Content Management System
 
 ## 🎯 Panoramica
@@ -58,6 +59,8 @@ Modules/Cms/
 =======
 >>>>>>> bc33217 (.)
 =======
+=======
+>>>>>>> 7a22847 (.)
 # 🗂️ CMS Module - Content Management System
 
 ## 📋 Quick Reference
@@ -89,11 +92,14 @@ Modules/Cms/
 
 ---
 *Principio DRY: Sistema CMS flessibile, documentazione organizzata per funzionalità.*
+<<<<<<< HEAD
 
 =======
 >>>>>>> ee68b43 (.)
 # Modulo CMS
 >>>>>>> 247d318 (.)
+=======
+>>>>>>> 7a22847 (.)
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
 > - [README.md toolkit bashscripts](../../../../bashscripts/docs/README.md)

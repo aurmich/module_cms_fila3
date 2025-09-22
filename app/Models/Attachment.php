@@ -48,7 +48,28 @@ use Filament\Forms\Components\RichEditor\FileAttachmentProviders\SpatieMediaLibr
 
 /**
  * ---
+<<<<<<< HEAD
 >>>>>>> bc33217 (.)
+=======
+ * @property string $id
+ * @property string $title
+ * @property string $description
+ * @property string $slug
+ * @property string $disk
+ * @property array $attachment
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property string $created_by
+ * @property string $updated_by
+ * @property \Illuminate\Support\Carbon $deleted_at
+ * @property string $deleted_by
+ * @property \Modules\Xot\Contracts\ProfileContract $created_by_profile
+ * @property \Modules\Xot\Contracts\ProfileContract $updated_by_profile
+ * @property \Modules\Xot\Contracts\ProfileContract $deleted_by_profile
+ * @property \Modules\Xot\Contracts\ProfileContract $created_by_profile
+ * @property \Modules\Xot\Contracts\ProfileContract $updated_by_profile
+ * @property \Modules\Xot\Contracts\ProfileContract $deleted_by_profile
+>>>>>>> 7a22847 (.)
  */
 class Attachment extends BaseModelLang implements HasMedia
 {
@@ -232,7 +253,7 @@ class Attachment extends BaseModelLang implements HasMedia
             ]);
     }
 
-    public function getAttachmentForLocale(string $locale = null): ?string
+    public function getAttachmentForLocale(string|null $locale = null): ?string
     {
         $locale = $locale ?? app()->getLocale();
         $media = $this->getFirstMedia('attachments');

@@ -20,6 +20,7 @@ class DownloadAttachmentPlaceHolder extends Placeholder
 =======
 namespace Modules\Cms\Filament\Forms\Components;
 
+use Webmozart\Assert\Assert;
 use Illuminate\Support\HtmlString;
 use Modules\Cms\Models\Attachment;
 use Filament\Forms\Components\Placeholder;
@@ -60,6 +61,7 @@ class DownloadAttachmentPlaceHolder extends Placeholder
 =======
         $name=$this->getName();
         $attachment = Attachment::firstWhere('slug', $name);   
+        Assert::isInstanceOf($attachment, Attachment::class);
         $data=[
             'title'=>$attachment->title,
             'description'=>$attachment->description,
