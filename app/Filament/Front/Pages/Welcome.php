@@ -25,11 +25,19 @@ class Welcome extends Page
 
     public array $items = [];
 
+<<<<<<< HEAD
     public null|Model $model = null;
     // use InteractsWithTable;
     // use InteractsWithForms;
 
     protected static null|string $navigationIcon = 'heroicon-o-document-text';
+=======
+    public ?Model $model = null;
+    // use InteractsWithTable;
+    // use InteractsWithForms;
+
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+>>>>>>> bc33217 (.)
 
     // protected static string $view = 'cms::filament.front.pages.welcome';
     protected static string $view = 'pub_theme::home';
@@ -42,7 +50,11 @@ class Welcome extends Page
         if (is_string($lang)) {
             app()->setLocale($lang);
         }
+<<<<<<< HEAD
         [$this->containers, $this->items] = params2ContainerItem();
+=======
+        [$this->containers,$this->items] = params2ContainerItem();
+>>>>>>> bc33217 (.)
         $this->initView();
     }
 
@@ -50,14 +62,23 @@ class Welcome extends Page
     {
         $data = [];
         if ([] !== $this->containers) {
+<<<<<<< HEAD
             Assert::string($container_last = last($this->containers),'['.__LINE__.']['.__FILE__.']');
+=======
+            Assert::string($container_last = last($this->containers));
+>>>>>>> bc33217 (.)
             $item_last = last($this->items);
 
             $container_last_singular = Str::singular($container_last);
 
             $container_last_model = TenantService::model($container_last_singular);
+<<<<<<< HEAD
             if (!method_exists($container_last_model, 'getFrontRouteKeyName')) {
                 throw new \Exception('[WIP][' . __LINE__ . '][' . __FILE__ . ']');
+=======
+            if (! method_exists($container_last_model, 'getFrontRouteKeyName')) {
+                throw new \Exception('[WIP]['.__LINE__.']['.__FILE__.']');
+>>>>>>> bc33217 (.)
             }
             $container_last_key_name = $container_last_model->getFrontRouteKeyName();
 
@@ -94,6 +115,7 @@ class Welcome extends Page
         $views = [];
 
         if ([] !== $containers) {
+<<<<<<< HEAD
             $views[] = 'pub_theme::' . implode('.', $containers) . '.' . $view;
             Assert::string($model_class = TenantService::modelClass($containers[0]), __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
             $module_name = Str::between($model_class, 'Modules\\', '\Models\\');
@@ -104,11 +126,30 @@ class Welcome extends Page
         }
 
         $view_work = Arr::first($views, view()->exists(...));
+=======
+            $views[] = 'pub_theme::'.implode('.', $containers).'.'.$view;
+            Assert::string($model_class = TenantService::modelClass($containers[0]));
+            $module_name = Str::between($model_class, 'Modules\\', '\Models\\');
+            $module_name_low = Str::lower($module_name);
+            $views[] = $module_name_low.'::'.implode('.', $containers).'.'.$view;
+        } else {
+            $views[] = 'pub_theme::'.$view;
+        }
+
+        $view_work = Arr::first(
+            $views,
+            static fn (string $view) => view()->exists($view)
+        );
+>>>>>>> bc33217 (.)
 
         if (null === $view_work) {
             dddx($views);
         }
+<<<<<<< HEAD
         Assert::string($view_work, __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
+=======
+        Assert::string($view_work);
+>>>>>>> bc33217 (.)
 
         self::$view = $view_work;
     }

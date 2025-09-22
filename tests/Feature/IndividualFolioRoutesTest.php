@@ -4,15 +4,26 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature;
 
+<<<<<<< HEAD
 use Modules\SaluteOra\Enums\UserTypeEnum;
 use Modules\SaluteOra\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
+=======
+use function Pest\Laravel\get;
+use function Pest\Laravel\actingAs;
+use Modules\SaluteOra\Models\User;
+use Modules\SaluteOra\Enums\UserTypeEnum;
+>>>>>>> bc33217 (.)
 
 uses(\Modules\Cms\Tests\TestCase::class);
 
 describe('CMS Individual Folio Routes Tests', function () {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> bc33217 (.)
     beforeEach(function () {
         $this->lang = app()->getLocale();
     });
@@ -20,9 +31,15 @@ describe('CMS Individual Folio Routes Tests', function () {
     // Test homepage dal punto di vista CMS
     test('cms: route GET /{locale} (homepage)', function () {
         $response = get('/' . $this->lang);
+<<<<<<< HEAD
 
         $response->assertStatus(200);
 
+=======
+        
+        $response->assertStatus(200);
+        
+>>>>>>> bc33217 (.)
         // Verifica integrazione CMS specifica
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -39,7 +56,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/login: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verifica che il CMS carichi correttamente i contenuti auth
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -53,7 +74,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/register: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verifica che il CMS gestisca correttamente la registrazione
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -67,7 +92,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/logout: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verifica rendering CMS per logout
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -80,7 +109,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/logout_fixed: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -92,7 +125,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/password/confirm: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -104,7 +141,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/password/reset: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -116,7 +157,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/password/{token}: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308, 404]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -128,7 +173,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/verify: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308, 401, 403]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -140,7 +189,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/thank-you: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -152,7 +205,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/register/thank-you: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -164,7 +221,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/{type}/register (patient): ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verifica che CMS gestisca correttamente la registrazione per tipo
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -178,7 +239,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/auth/{type}/register (doctor): ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
         $response->assertSee('<form');
@@ -187,9 +252,15 @@ describe('CMS Individual Folio Routes Tests', function () {
     // Test pagine CMS specifiche
     test('cms: route GET /{locale}/pages', function () {
         $response = get('/' . $this->lang . '/pages');
+<<<<<<< HEAD
 
         $response->assertStatus(200);
 
+=======
+        
+        $response->assertStatus(200);
+        
+>>>>>>> bc33217 (.)
         // Verifica che CMS gestisca l'indice delle pagine
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
@@ -197,10 +268,17 @@ describe('CMS Individual Folio Routes Tests', function () {
 
     test('cms: route GET /{locale}/pages/{slug}', function () {
         $response = get('/' . $this->lang . '/pages/test-slug');
+<<<<<<< HEAD
 
         // Le pagine dinamiche potrebbero non esistere
         expect($response->status())->toBeIn([200, 404]);
 
+=======
+        
+        // Le pagine dinamiche potrebbero non esistere
+        expect($response->status())->toBeIn([200, 404]);
+        
+>>>>>>> bc33217 (.)
         if ($response->status() === 200) {
             // Verifica che CMS carichi correttamente la pagina dinamica
             $response->assertSee('<!DOCTYPE html>');
@@ -216,7 +294,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/learn: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -228,7 +310,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/genesis/about: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -240,7 +326,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/genesis/power-ups: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -252,7 +342,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/classi-css: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -264,7 +358,11 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/registration/thank-you: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
@@ -276,13 +374,18 @@ describe('CMS Individual Folio Routes Tests', function () {
             $this->markTestSkipped('Server error on /{locale}/errors/password-expired: ' . $status);
         }
         expect($status)->toBeIn([200, 204, 301, 302, 303, 307, 308, 401, 403]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         $response->assertSee('<!DOCTYPE html>');
         $response->assertSee('<html');
     });
 
     // Test CMS con contenuti JSON
     describe('CMS Content Management Routes', function () {
+<<<<<<< HEAD
         test('cms verifies json content loading for homepage', function () {
             $response = get('/' . $this->lang);
             $response->assertStatus(200);
@@ -296,6 +399,22 @@ describe('CMS Individual Folio Routes Tests', function () {
 
             $content = $response->getContent();
 
+=======
+        
+        test('cms verifies json content loading for homepage', function () {
+            $response = get('/' . $this->lang);
+            $response->assertStatus(200);
+            
+            // Verifica che il JSON della homepage sia caricato correttamente
+            $homepageJsonPath = config_path('local/saluteora/database/content/pages/home.json');
+            expect(file_exists($homepageJsonPath))->toBeTrue();
+            
+            $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
+            expect($homepageData['content_blocks'])->toHaveKey($this->lang);
+            
+            $content = $response->getContent();
+            
+>>>>>>> bc33217 (.)
             // Verifica che i blocchi JSON siano renderizzati
             $blocks = $homepageData['content_blocks'][$this->lang];
             foreach ($blocks as $block) {
@@ -308,6 +427,7 @@ describe('CMS Individual Folio Routes Tests', function () {
         test('cms handles theme view resolution correctly', function () {
             $response = get('/' . $this->lang);
             $response->assertStatus(200);
+<<<<<<< HEAD
 
             $homepageData = json_decode(
                 file_get_contents(config_path('local/saluteora/database/content/pages/home.json')),
@@ -316,6 +436,16 @@ describe('CMS Individual Folio Routes Tests', function () {
 
             $blocks = $homepageData['content_blocks'][$this->lang];
 
+=======
+            
+            $homepageData = json_decode(
+                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+                true
+            );
+            
+            $blocks = $homepageData['content_blocks'][$this->lang];
+            
+>>>>>>> bc33217 (.)
             // Verifica che le viste seguano il pattern theme
             foreach ($blocks as $block) {
                 $view = $block['data']['view'];
@@ -326,6 +456,7 @@ describe('CMS Individual Folio Routes Tests', function () {
 
         test('cms processes blade syntax in json correctly', function () {
             $homepageData = json_decode(
+<<<<<<< HEAD
                 file_get_contents(config_path('local/saluteora/database/content/pages/home.json')),
                 true,
             );
@@ -341,6 +472,23 @@ describe('CMS Individual Folio Routes Tests', function () {
                 $response = get('/' . $this->lang);
                 $content = $response->getContent();
 
+=======
+                file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+                true
+            );
+            
+            $blocks = $homepageData['content_blocks'][$this->lang];
+            $landingBlock = collect($blocks)->firstWhere('type', 'landing-page');
+            
+            if ($landingBlock) {
+                // Verifica che la sintassi Blade sia nel JSON
+                expect($landingBlock['data']['cta_link'])->toContain("{{ route('register') }}");
+                
+                // Verifica che sia processata correttamente nella pagina
+                $response = get('/' . $this->lang);
+                $content = $response->getContent();
+                
+>>>>>>> bc33217 (.)
                 $expectedUrl = route('register');
                 expect($content)->toContain($expectedUrl);
             }
@@ -350,6 +498,7 @@ describe('CMS Individual Folio Routes Tests', function () {
     // Test performance CMS
     test('cms: homepage renders within acceptable time', function () {
         $startTime = microtime(true);
+<<<<<<< HEAD
 
         $response = get('/' . $this->lang);
         $response->assertStatus(200);
@@ -357,6 +506,15 @@ describe('CMS Individual Folio Routes Tests', function () {
         $endTime = microtime(true);
         $loadTime = ($endTime - $startTime) * 1000;
 
+=======
+        
+        $response = get('/' . $this->lang);
+        $response->assertStatus(200);
+        
+        $endTime = microtime(true);
+        $loadTime = ($endTime - $startTime) * 1000;
+        
+>>>>>>> bc33217 (.)
         // CMS dovrebbe renderizzare la homepage velocemente
         expect($loadTime)->toBeLessThan(1500, 'CMS homepage should load within 1.5 seconds');
     });
@@ -366,6 +524,7 @@ describe('CMS Individual Folio Routes Tests', function () {
             '/' . $this->lang . '/auth/login',
             '/' . $this->lang . '/auth/register',
         ];
+<<<<<<< HEAD
 
         foreach ($authRoutes as $route) {
             $startTime = microtime(true);
@@ -380,3 +539,19 @@ describe('CMS Individual Folio Routes Tests', function () {
         }
     });
 });
+=======
+        
+        foreach ($authRoutes as $route) {
+            $startTime = microtime(true);
+            
+            $response = get($route);
+            $response->assertStatus(200);
+            
+            $endTime = microtime(true);
+            $loadTime = ($endTime - $startTime) * 1000;
+            
+            expect($loadTime)->toBeLessThan(1000, "CMS route {$route} should load within 1 second");
+        }
+    });
+});
+>>>>>>> bc33217 (.)

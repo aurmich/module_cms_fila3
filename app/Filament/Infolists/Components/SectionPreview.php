@@ -17,4 +17,8 @@ class SectionPreview extends Entry
 
         return $static;
     }
+<<<<<<< HEAD
 }
+=======
+} 
+>>>>>>> bc33217 (.)

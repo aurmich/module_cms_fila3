@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature;
 
+<<<<<<< HEAD
 use Illuminate\Foundation\Testing\RefreshDatabase;
+=======
+>>>>>>> bc33217 (.)
 use Modules\Cms\Models\Page;
 use Modules\Cms\Models\PageContent;
 use Modules\Cms\Models\Section;
 use Tests\TestCase;
+<<<<<<< HEAD
+=======
+use Illuminate\Foundation\Testing\RefreshDatabase;
+>>>>>>> bc33217 (.)
 
 class PageManagementBusinessLogicTest extends TestCase
 {
@@ -51,12 +58,16 @@ class PageManagementBusinessLogicTest extends TestCase
         $page = Page::factory()->create();
         $contentData = [
             'page_id' => $page->id,
+<<<<<<< HEAD
             'content' =>
 
                     '<h1>Benvenuti su ' .
                     config('app.name', 'Our Platform') .
                     '</h1><p>La vostra salute è la nostra priorità.</p>'
                 ,
+=======
+            'content' => '<h1>Benvenuti su ' . config('app.name', 'Our Platform') . '</h1><p>La vostra salute è la nostra priorità.</p>',
+>>>>>>> bc33217 (.)
             'locale' => 'it',
             'version' => 1,
         ];
@@ -202,9 +213,19 @@ class PageManagementBusinessLogicTest extends TestCase
         ]);
 
         // Act
+<<<<<<< HEAD
         $italian = PageContent::where('page_id', $page->id)->where('locale', 'it')->first();
 
         $english = PageContent::where('page_id', $page->id)->where('locale', 'en')->first();
+=======
+        $italian = PageContent::where('page_id', $page->id)
+            ->where('locale', 'it')
+            ->first();
+
+        $english = PageContent::where('page_id', $page->id)
+            ->where('locale', 'en')
+            ->first();
+>>>>>>> bc33217 (.)
 
         // Assert
         $this->assertNotNull($italian);
@@ -240,7 +261,13 @@ class PageManagementBusinessLogicTest extends TestCase
         ]);
 
         // Act
+<<<<<<< HEAD
         $orderedSections = Section::where('page_id', $page->id)->orderBy('order', 'asc')->get();
+=======
+        $orderedSections = Section::where('page_id', $page->id)
+            ->orderBy('order', 'asc')
+            ->get();
+>>>>>>> bc33217 (.)
 
         // Assert
         $this->assertCount(3, $orderedSections);

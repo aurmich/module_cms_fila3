@@ -5,7 +5,11 @@
 La homepage del sito è costruita utilizzando un sistema di componenti modulare basato su blocchi. La configurazione della homepage si trova in:
 
 ```
+<<<<<<< HEAD
 .../laravel/config/<nome dominio al contrario>/database/content/pages/1.json
+=======
+/var/www/html/saluteora/laravel/config/local/saluteora/database/content/pages/1.json
+>>>>>>> bc33217 (.)
 ```
 
 ## Come Funziona
@@ -16,7 +20,11 @@ La homepage del sito è costruita utilizzando un sistema di componenti modulare 
 - Supporto multilingua con chiavi per ogni lingua
 
 ### Rendering
+<<<<<<< HEAD
 - Il tema One (`../Themes/One`) gestisce il rendering
+=======
+- Il tema One (`/var/www/html/saluteora/laravel/Themes/One`) gestisce il rendering
+>>>>>>> bc33217 (.)
 - I componenti sono caricati dinamicamente dal modulo UI
 - Il layout è gestito da `x-layouts.marketing`
 

@@ -1,7 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
  return [
+=======
+return [
+>>>>>>> bc33217 (.)
     'navigation' => [
         'name' => 'Pagina',
         'plural' => 'Pagine',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources;
 
 use Filament\Forms;
+<<<<<<< HEAD
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Tables;
@@ -18,10 +19,26 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 class MenuResource extends XotBaseResource
 {
     protected static null|string $model = Menu::class;
+=======
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Modules\Cms\Models\Menu;
+use Illuminate\Support\HtmlString;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\UI\Filament\Forms\Components\IconPicker;
+use Modules\Cms\Filament\Resources\MenuResource\Pages;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+
+class MenuResource extends XotBaseResource
+{
+    protected static ?string $model = Menu::class;
+>>>>>>> bc33217 (.)
 
     /**
      * @return array<Forms\Components\Component>
      */
+<<<<<<< HEAD
     #[\Override]
     public static function getFormSchema(): array
     {
@@ -33,17 +50,40 @@ class MenuResource extends XotBaseResource
                 ->schema([
                     Forms\Components\Grid::make(2)->schema([
                         Forms\Components\TextInput::make('title')->required()->columnSpan(1),
+=======
+    public static function getFormSchema(): array
+    {
+        return [
+            'title' => Forms\Components\TextInput::make('title')
+                ->required()
+                ->maxLength(2048)
+            // ->reactive()
+            // ->unique()
+            ,
+            'items' => Forms\Components\Repeater::make('items')
+                ->schema([
+                    Forms\Components\Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->columnSpan(1),
+
+>>>>>>> bc33217 (.)
                         Forms\Components\TextInput::make('url')
                             // ->helperText('Se di tipo internal inserisci lo slug del titolo, se external inserisci l\'url completo (https://dominio)')
                             ->required()
                             ->columnSpan(1),
                     ]),
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc33217 (.)
                     Forms\Components\Radio::make('type')
                         ->options([
                             'internal' => 'page slug',
                             'external' => 'external',
                             'route_name' => 'route name',
                         ])
+<<<<<<< HEAD
                         ->helperText(
                             new HtmlString(
                                 '- "page slug" inserire nel campo Url lo slug del titolo di una pagina creata,
@@ -54,6 +94,15 @@ class MenuResource extends XotBaseResource
                         ->default('internal')
                         ->required()
                         ->inline(),
+=======
+                        ->helperText(new HtmlString('- "page slug" inserire nel campo Url lo slug del titolo di una pagina creata,
+                                                    <br> - "external" inserire nel campo Url il l\'intero link di un sito esterno,
+                                                    <br> - "route name" inserire nel campo Url il nome della route'))
+                        ->default('internal')
+                        ->required()
+                        ->inline(),
+
+>>>>>>> bc33217 (.)
                     SpatieMediaLibraryFileUpload::make('image')
                         // ->image()
                         // ->maxSize(5000)
@@ -66,10 +115,18 @@ class MenuResource extends XotBaseResource
                         // ->conversion('thumbnail')
                         ->disk('uploads')
                         ->directory('photos')
+<<<<<<< HEAD
                         ->collection('menu'),
                     // ->preserveFilenames()
                     // Forms\Components\Select::make('parent_id')
                     
+=======
+                        ->collection('menu')
+                    // ->preserveFilenames()
+                    ,
+                    // Forms\Components\Select::make('parent_id')
+                    //
+>>>>>>> bc33217 (.)
                     //     ->options(
                     //         Menu::getTreeMenuOptions()
                     //     )
@@ -80,10 +137,21 @@ class MenuResource extends XotBaseResource
                             'default' => 1,
                             'lg' => 3,
                             '2xl' => 5,
+<<<<<<< HEAD
                         ]),
                     // ->layout(\Guava\FilamentIconPicker\Layout::ON_TOP)
+=======
+                        ])
+                    // ->layout(\Guava\FilamentIconPicker\Layout::ON_TOP)
+                    ,
+>>>>>>> bc33217 (.)
                 ])
                 ->columnSpanFull(),
         ];
     }
+<<<<<<< HEAD
+=======
+
+  
+>>>>>>> bc33217 (.)
 }

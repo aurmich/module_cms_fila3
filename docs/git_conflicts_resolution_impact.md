@@ -146,9 +146,15 @@ php artisan lang:check
 ## Documentazione Correlata
 
 ### Moduli Correlati
+<<<<<<< HEAD
 - [Geo Conflict Resolution](../../Geo/docs/conflict-resolution.md)
 - [User Theme Conflicts](../../User/docs/theme-translation-conflicts-resolution.md)
 - [Xot Git Conflicts](../../Xot/docs/git-conflicts-resolution-2025-01-06.md)
+=======
+- [Geo Conflict Resolution](../../Geo/project_docs/conflict-resolution.md)
+- [User Theme Conflicts](../../User/project_docs/theme-translation-conflicts-resolution.md)
+- [Xot Git Conflicts](../../Xot/project_docs/git-conflicts-resolution-2025-01-06.md)
+>>>>>>> bc33217 (.)
 
 ### Documentazione Cms
 - [Content Management](content-management.md)
@@ -188,9 +194,15 @@ php artisan lang:check
 ## Collegamenti Correlati
 
 ### Documentazione Moduli
+<<<<<<< HEAD
 - [Geo Conflict Resolution](../../Geo/docs/conflict-resolution.md)
 - [User Theme Conflicts](../../User/docs/theme-translation-conflicts-resolution.md)
 - [Xot Git Conflicts](../../Xot/docs/git-conflicts-resolution-2025-01-06.md)
+=======
+- [Geo Conflict Resolution](../../Geo/project_docs/conflict-resolution.md)
+- [User Theme Conflicts](../../User/project_docs/theme-translation-conflicts-resolution.md)
+- [Xot Git Conflicts](../../Xot/project_docs/git-conflicts-resolution-2025-01-06.md)
+>>>>>>> bc33217 (.)
 
 ### Documentazione Cms
 - [Content Management](content-management.md)

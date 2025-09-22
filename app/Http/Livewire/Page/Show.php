@@ -31,7 +31,11 @@ class Show extends Component
      *
      * @var string|null
      */
+<<<<<<< HEAD
     public null|string $theme = null;
+=======
+    public ?string $theme = null;
+>>>>>>> bc33217 (.)
 
     /**
      * Se mostrare informazioni di debug.
@@ -43,7 +47,11 @@ class Show extends Component
     /**
      * I contenuti della pagina.
      *
+<<<<<<< HEAD
      * @var array<string, mixed>
+=======
+     * @var array
+>>>>>>> bc33217 (.)
      */
     protected array $pageContent = [];
 
@@ -80,8 +88,16 @@ class Show extends Component
 
         // Se la cache è abilitata, tenta di recuperare dalla cache
         if ($this->cache) {
+<<<<<<< HEAD
             $cached = Cache::remember($cacheKey, now()->addHours(24), $this->fetchPageContent(...));
             $this->pageContent = is_array($cached) ? $cached : [];
+=======
+            $this->pageContent = Cache::remember(
+                $cacheKey,
+                now()->addHours(24),
+                fn () => $this->fetchPageContent()
+            );
+>>>>>>> bc33217 (.)
         } else {
             $this->pageContent = $this->fetchPageContent();
         }
@@ -90,21 +106,34 @@ class Show extends Component
     /**
      * Recupera i contenuti della pagina dal database.
      *
+<<<<<<< HEAD
      * @return array<string, mixed>
+=======
+     * @return array
+>>>>>>> bc33217 (.)
      */
     protected function fetchPageContent(): array
     {
         try {
             // Recupera la pagina dal database
+<<<<<<< HEAD
             $page = Page::where('slug', $this->slug)->where('lang', app()->getLocale())->first();
 
             if (!$page) {
+=======
+            $page = Page::where('slug', $this->slug)
+                ->where('lang', app()->getLocale())
+                ->first();
+
+            if (! $page) {
+>>>>>>> bc33217 (.)
                 return ['error' => 'Page not found', 'slug' => $this->slug];
             }
 
             // Recupera e processa i contenuti della pagina
             return [
                 'title' => $page->title,
+<<<<<<< HEAD
                 'subtitle' => null, // Property doesn't exist in Page model
                 'content' => $page->content,
                 'meta' => [
@@ -113,6 +142,16 @@ class Show extends Component
                 ],
                 'blocks' => $page->content_blocks ?? [],
                 'layout' => 'default',
+=======
+                'subtitle' => $page->subtitle,
+                'content' => $page->content,
+                'meta' => [
+                    'description' => $page->meta_description,
+                    'keywords' => $page->meta_keywords,
+                ],
+                'blocks' => $page->blocks ?? [],
+                'layout' => $page->layout ?? 'default',
+>>>>>>> bc33217 (.)
             ];
         } catch (\Exception $e) {
             if ($this->debug) {

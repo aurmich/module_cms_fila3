@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <?php
 
 declare(strict_types=1);
 
 ?>
+=======
+>>>>>>> bc33217 (.)
 <x-filament-panels::page>
 
     <x-filament-panels::form wire:submit="updateData">

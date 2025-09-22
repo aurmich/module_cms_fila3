@@ -73,5 +73,9 @@ Il sistema di gestione delle pagine permette di creare, modificare e organizzare
 ## Collegamenti
 - [Content Management](./content-management.md)
 - [Frontend Architecture](./frontend-architecture.md)
+<<<<<<< HEAD
 - [Documentazione Core](../Xot/docs/documentation.md) 
 - [Documentazione Core](../Xot/docs/documentation.md) 
+=======
+- [Documentazione Core](../Xot/project_docs/documentation.md) 
+>>>>>>> bc33217 (.)

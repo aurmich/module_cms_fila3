@@ -11,6 +11,7 @@ use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 final class QuickLinksBlock extends XotBaseBlock
 {
+<<<<<<< HEAD
     #[\Override]
     public static function getBlockSchema(): array
     {
@@ -29,6 +30,32 @@ final class QuickLinksBlock extends XotBaseBlock
                 ->collapsible()
                 ->defaultItems(0)
                 ->itemLabel(fn(array $state): null|string => $state['label'] ?? null),
+=======
+    public static function getBlockSchema(): array
+    {
+        return [
+            TextInput::make('title')
+                ->label(__('cms::blocks.quick_links.fields.title'))
+                ->required(),
+
+            Repeater::make('links')
+                ->label(__('cms::blocks.quick_links.fields.links'))
+                ->schema([
+                    TextInput::make('label')
+                        ->label(__('cms::blocks.quick_links.fields.label'))
+                        ->required(),
+                    TextInput::make('url')
+                        ->label(__('cms::blocks.quick_links.fields.url'))
+                        ->required(),
+                    TextInput::make('target')
+                        ->label(__('cms::blocks.quick_links.fields.target'))
+                        ->default('_self')
+                        ->helperText('Usa "_blank" per aprire in una nuova finestra, "_self" per la stessa finestra')
+                ])
+                ->collapsible()
+                ->defaultItems(0)
+                ->itemLabel(fn (array $state): ?string => $state['label'] ?? null)
+>>>>>>> bc33217 (.)
         ];
     }
 

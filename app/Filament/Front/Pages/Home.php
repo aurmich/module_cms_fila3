@@ -25,7 +25,11 @@ class Home extends Page
 
     public array $items = [];
 
+<<<<<<< HEAD
     protected static null|string $navigationIcon = 'heroicon-o-document-text';
+=======
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+>>>>>>> bc33217 (.)
 
     // protected static string $view = 'cms::filament.front.pages.welcome';
     protected static string $view = 'pub_theme::home';
@@ -34,7 +38,11 @@ class Home extends Page
 
     public function mount(): void
     {
+<<<<<<< HEAD
         [$this->containers, $this->items] = params2ContainerItem();
+=======
+        [$this->containers,$this->items] = params2ContainerItem();
+>>>>>>> bc33217 (.)
         $this->initView();
     }
 
@@ -42,6 +50,7 @@ class Home extends Page
     {
         $data = [];
         if ([] !== $this->containers) {
+<<<<<<< HEAD
             Assert::string($container_last = last($this->containers),'['.__LINE__.']['.__FILE__.']');
             $item_last = last($this->items);
 
@@ -55,6 +64,18 @@ class Home extends Page
             $container_last_key_name = app($container_last_model)->getRouteKeyName();
 
             $row = $container_last_model::where($container_last_key_name, $item_last)->first();
+=======
+            Assert::string($container_last = last($this->containers));
+            $item_last = last($this->items);
+
+            $container_last_singular = Str::singular($container_last);
+            Assert::notNull($container_last_model = \Illuminate\Database\Eloquent\Relations\Relation::getMorphedModel($container_last_singular), '['.__LINE__.']['.__FILE__.']');
+
+            $container_last_key_name = app($container_last_model)->getRouteKeyName();
+
+            $row = $container_last_model::where($container_last_key_name, $item_last)
+                ->first();
+>>>>>>> bc33217 (.)
             $data[$container_last_singular] = $row;
         }
 
@@ -62,6 +83,7 @@ class Home extends Page
     }
 
     /*
+<<<<<<< HEAD
      * public function mountOLD(?string $lang = null,
      * ?string $container0 = null, ?string $item0 = null,
      * ?string $container1 = null, ?string $item1 = null,
@@ -80,6 +102,26 @@ class Home extends Page
      * }
      * }
      */
+=======
+    public function mountOLD(?string $lang = null,
+        ?string $container0 = null, ?string $item0 = null,
+        ?string $container1 = null, ?string $item1 = null,
+        ?string $container2 = null, ?string $item2 = null,
+        ?string $container3 = null, ?string $item3 = null
+    ) {
+        $containers = [];
+        $items = [];
+        for ($i = 0; $i < 4; ++$i) {
+            if ($container_curr = ${'container'.$i}) {
+                $containers[$i] = $container_curr;
+            }
+            if ($item_curr = ${'item'.$i}) {
+                $items[$i] = $item_curr;
+            }
+        }
+    }
+    */
+>>>>>>> bc33217 (.)
     public function initView(): void
     {
         $containers = $this->containers;
@@ -100,6 +142,7 @@ class Home extends Page
         $views = [];
 
         if ([] !== $containers) {
+<<<<<<< HEAD
             $views[] = 'pub_theme::' . implode('.', $containers) . '.' . $view;
 
             $model_root = Str::singular($containers[0]);
@@ -114,6 +157,22 @@ class Home extends Page
 
         $view_work = Arr::first($views, view()->exists(...));
         Assert::string($view_work, __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
+=======
+            $views[] = 'pub_theme::'.implode('.', $containers).'.'.$view;
+
+            $model_root = Str::singular($containers[0]);
+            Assert::string($res = \Illuminate\Database\Eloquent\Relations\Relation::getMorphedModel($model_root));
+
+            $module_name = Str::between($res, 'Modules\\', '\Models\\');
+            $module_name_low = Str::lower($module_name);
+            $views[] = $module_name_low.'::'.implode('.', $containers).'.'.$view;
+        } else {
+            $views[] = 'pub_theme::'.$view;
+        }
+
+        $view_work = Arr::first($views, static fn (string $view) => view()->exists($view));
+        Assert::string($view_work);
+>>>>>>> bc33217 (.)
 
         self::$view = $view_work;
     }

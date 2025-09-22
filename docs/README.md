@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Modulo CMS - Content Management System
 
 ## 🎯 Panoramica
@@ -53,6 +54,8 @@ Modules/Cms/
 
 ---
 **Ultimo aggiornamento**: Gennaio 2025
+=======
+>>>>>>> bc33217 (.)
 # Modulo CMS
 > **Collegamenti correlati**
 > - [README.md documentazione generale SaluteOra](../../../../docs/README.md)
@@ -126,7 +129,10 @@ Il modulo CMS gestisce i contenuti e i widget del sistema, fornendo un sistema f
    - [Configurazione](configuration.md)
    - [Testing](testing.md)
    - [PHPStan](phpstan.md)
+<<<<<<< HEAD
    - [Correzioni PHPStan](phpstan-fixes.md)
+=======
+>>>>>>> bc33217 (.)
 
 6. [UX/UI](#ux-ui)
    - [Web Design](webdesign.md)

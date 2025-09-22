@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
+<<<<<<< HEAD
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
+=======
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Builder\Block;
+>>>>>>> bc33217 (.)
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class ParagraphBlock extends XotBaseBlock
 {
+<<<<<<< HEAD
     #[\Override]
+=======
+>>>>>>> bc33217 (.)
     public static function getBlockSchema(): array
     {
         return [

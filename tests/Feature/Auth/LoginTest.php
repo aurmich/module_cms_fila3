@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature\Auth;
 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt as LivewireVolt;
@@ -16,6 +17,16 @@ use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
+=======
+use Modules\Xot\Datas\XotData;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Livewire\Volt\Volt as LivewireVolt;
+use Modules\Xot\Contracts\UserContract;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use function Pest\Laravel\{get, post, actingAs, assertGuest, assertAuthenticated};
+
+>>>>>>> bc33217 (.)
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -28,6 +39,7 @@ describe('Frontend Login Page Rendering', function () {
         $response = get('/' . $locale . '/auth/login');
         $response->assertStatus(200);
     });
+<<<<<<< HEAD
 
     test('login page contains login widget', function () {
         $locale = app()->getLocale();
@@ -44,6 +56,26 @@ describe('Frontend Login Page Rendering', function () {
         //->assertSee('crea un nuovo account')
         //->assertSee('logo-v2.png')
         ;
+=======
+    
+    test('login page contains login widget', function () {
+        $locale = app()->getLocale();
+        $response = get('/' . $locale . '/auth/login');
+        $response->assertStatus(200)
+                 //->assertSee('@livewire')
+                 //->assertSee('LoginWidget')
+                 ;
+    });
+    
+    test('login page has required form elements', function () {
+        $locale = app()->getLocale();
+        $response = get('/' . $locale . '/auth/login');
+        $response->assertStatus(200)
+                 //->assertSee('Hai dimenticato la password?')
+                 //->assertSee('crea un nuovo account')
+                 //->assertSee('logo-v2.png')
+                 ;
+>>>>>>> bc33217 (.)
     });
 });
 
@@ -53,13 +85,18 @@ describe('Frontend Login Page Localization', function () {
         $response = get('/it/auth/login');
         $response->assertStatus(200);
     });
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> bc33217 (.)
     //test('login page works in english', function () {
     //    app()->setLocale('en');
     //    LaravelLocalization::setLocale('en');
     //    $response = get('/en/auth/login');
     //    //$response->assertStatus(200);
     //});
+<<<<<<< HEAD
 
     test('login page contains localized content', function () {
         $response = get('/it/auth/login');
@@ -68,6 +105,15 @@ describe('Frontend Login Page Localization', function () {
             ->assertSee('Hai dimenticato la password?')
             ->assertSee(__('pub_theme::auth.login.title'))
             ->assertSee(__('pub_theme::auth.login.or'));
+=======
+    
+    test('login page contains localized content', function () {
+        $response = get('/it/auth/login');
+        $response->assertStatus(200)
+                 ->assertSee('Hai dimenticato la password?')
+                 ->assertSee(__('pub_theme::auth.login.title'))
+                 ->assertSee(__('pub_theme::auth.login.or'));
+>>>>>>> bc33217 (.)
     });
 });
 
@@ -78,13 +124,20 @@ describe('Frontend Login Page Authentication', function () {
             'email' => $email,
             'password' => Hash::make('password123'),
         ]);
+<<<<<<< HEAD
 
         assertGuest();
 
+=======
+        
+        assertGuest();
+        
+>>>>>>> bc33217 (.)
         $response = LivewireVolt::test('auth.login')
             ->set('email', $email)
             ->set('password', 'password123')
             ->call('authenticate');
+<<<<<<< HEAD
 
         $response->assertHasNoErrors();
         assertAuthenticated();
@@ -96,11 +149,27 @@ describe('Frontend Login Page Authentication', function () {
 
         $response->assertRedirect('/');
     });
+=======
+        
+        $response->assertHasNoErrors();
+        assertAuthenticated();
+        
+        actingAs($user);
+        
+        $locale = app()->getLocale();
+        $response = get('/' . $locale . '/auth/login');
+        
+        $response->assertRedirect('/');
+    });
+    
+    
+>>>>>>> bc33217 (.)
 });
 
 describe('Frontend Login Page Integration', function () {
     test('authenticated users are redirected from login page', function () {
         $user = $this->createTestUser();
+<<<<<<< HEAD
 
         actingAs($user);
 
@@ -110,6 +179,19 @@ describe('Frontend Login Page Integration', function () {
         // May redirect to dashboard or intended page
         $response->assertStatus(302);
     });
+=======
+        
+        actingAs($user);
+        
+        $locale = app()->getLocale();
+        $response = get('/' . $locale . '/auth/login');
+        
+        // May redirect to dashboard or intended page
+        $response->assertStatus(302);
+    });
+    
+    
+>>>>>>> bc33217 (.)
 });
 
 describe('Frontend Login Session Management', function () {
@@ -119,36 +201,63 @@ describe('Frontend Login Session Management', function () {
             'email' => $email,
             'password' => Hash::make('password123'),
         ]);
+<<<<<<< HEAD
 
         assertGuest();
 
+=======
+        
+        assertGuest();
+        
+>>>>>>> bc33217 (.)
         $response = LivewireVolt::test('auth.login')
             ->set('email', $email)
             ->set('password', 'password123')
             ->set('remember', true)
             ->call('authenticate');
+<<<<<<< HEAD
 
         $response->assertHasNoErrors();
         assertAuthenticated();
     });
 
+=======
+        
+        $response->assertHasNoErrors();
+        assertAuthenticated();
+    });
+    
+>>>>>>> bc33217 (.)
     test('session regeneration on login', function () {
         $email = $this->generateUniqueEmail();
         $this->createTestUser([
             'email' => $email,
             'password' => Hash::make('password123'),
         ]);
+<<<<<<< HEAD
 
         // Store original session ID
         $originalSessionId = session()->getId();
 
+=======
+        
+        // Store original session ID
+        $originalSessionId = session()->getId();
+        
+>>>>>>> bc33217 (.)
         LivewireVolt::test('auth.login')
             ->set('email', $email)
             ->set('password', 'password123')
             ->call('authenticate');
+<<<<<<< HEAD
 
         assertAuthenticated();
 
+=======
+        
+        assertAuthenticated();
+        
+>>>>>>> bc33217 (.)
         // Session should be regenerated for security
         expect(session()->getId())->not->toBe($originalSessionId);
     });
@@ -161,7 +270,11 @@ describe('Frontend Login Security', function () {
             'email' => $email,
             'password' => Hash::make('password123'),
         ]);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Multiple failed attempts
         for ($i = 0; $i < 5; $i++) {
             LivewireVolt::test('auth.login')
@@ -169,13 +282,21 @@ describe('Frontend Login Security', function () {
                 ->set('password', 'wrong_password')
                 ->call('authenticate');
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Should be rate limited after too many attempts
         $response = LivewireVolt::test('auth.login')
             ->set('email', $email)
             ->set('password', 'password123')
             ->call('authenticate');
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // May have throttling errors
         // This test verifies the system handles rate limiting appropriately
         expect($response)->not->toBeNull();
@@ -190,13 +311,20 @@ describe('Frontend Login User Types', function () {
             'email' => $email,
             'password' => Hash::make('password123'),
         ]);
+<<<<<<< HEAD
 
         assertGuest();
 
+=======
+        
+        assertGuest();
+        
+>>>>>>> bc33217 (.)
         $response = LivewireVolt::test('auth.login')
             ->set('email', $email)
             ->set('password', 'password123')
             ->call('authenticate');
+<<<<<<< HEAD
 
         $response->assertHasNoErrors();
         assertAuthenticated();
@@ -205,5 +333,15 @@ describe('Frontend Login User Types', function () {
         $authenticatedUser = Auth::user();
         expect($authenticatedUser)->not->toBeNull();
         expect($authenticatedUser?->email)->toBe($email);
+=======
+        
+        $response->assertHasNoErrors();
+        assertAuthenticated();
+        
+        // Verify authenticated user
+        $authenticatedUser = Auth::user();
+        expect($authenticatedUser)->not->toBeNull();
+        expect($authenticatedUser->email)->toBe($email);
+>>>>>>> bc33217 (.)
     });
 });

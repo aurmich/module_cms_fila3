@@ -36,6 +36,7 @@ class Footer extends Page implements HasForms
     /**
      * @var FooterData|null the form data
      */
+<<<<<<< HEAD
     public null|FooterData $footerData = null;
 
     public null|array $data = [];
@@ -47,6 +48,19 @@ class Footer extends Page implements HasForms
     protected static null|string $cluster = Appearance::class;
 
     protected static null|int $navigationSort = 2;
+=======
+    public ?FooterData $footerData = null;
+
+    public ?array $data = [];
+
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
+    protected static string $view = 'cms::filament.clusters.appearance.pages.headernav';
+
+    protected static ?string $cluster = Appearance::class;
+
+    protected static ?int $navigationSort = 2;
+>>>>>>> bc33217 (.)
 
     /**
      * Initialize the page and fill the form state.
@@ -65,6 +79,7 @@ class Footer extends Page implements HasForms
 
         return $form
             ->schema([
+<<<<<<< HEAD
                 ColorPicker::make('background_color')->label(__('Background Color')),
                 FileUpload::make('background')->label(__('Background Image')),
                 ColorPicker::make('overlay_color')->label(__('Overlay Color')),
@@ -75,6 +90,23 @@ class Footer extends Page implements HasForms
                  * ->columnSpanFull()
                  * ->label(__('Template Selection')),
                  */
+=======
+                ColorPicker::make('background_color')
+                    ->label(__('Background Color')),
+                FileUpload::make('background')
+                    ->label(__('Background Image')),
+                ColorPicker::make('overlay_color')
+                    ->label(__('Overlay Color')),
+                Select::make('view')
+                    ->options($options)
+                    ->label(__('View Template')),
+                /*
+                RadioImage::make('_tpl')
+                    ->options($options)
+                    ->columnSpanFull()
+                    ->label(__('Template Selection')),
+                    */
+>>>>>>> bc33217 (.)
             ])
             ->columns(2)
             ->statePath('data');
@@ -129,7 +161,13 @@ class Footer extends Page implements HasForms
     protected function getUpdateFormActions(): array
     {
         return [
+<<<<<<< HEAD
             Action::make('updateAction')->label(__('Save Changes'))->submit('updateData'),
+=======
+            Action::make('updateAction')
+                ->label(__('Save Changes'))
+                ->submit('updateData'),
+>>>>>>> bc33217 (.)
         ];
     }
 }

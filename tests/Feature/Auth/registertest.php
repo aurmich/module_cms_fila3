@@ -6,11 +6,15 @@ namespace Modules\Cms\Tests\Feature\Auth;
 
 use Illuminate\Support\Facades\Hash;
 use Modules\Xot\Datas\XotData;
+<<<<<<< HEAD
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
+=======
+use function Pest\Laravel\{get, actingAs, assertGuest, assertAuthenticated};
+>>>>>>> bc33217 (.)
 
 uses(\Modules\Xot\Tests\TestCase::class);
 
@@ -31,4 +35,9 @@ describe('Register Page', function () {
         $response = get('/' . $locale . '/auth/register');
         $response->assertRedirect('/');
     });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bc33217 (.)
 });

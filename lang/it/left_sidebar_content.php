@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 declare(strict_types=1);
@@ -8,3 +9,14 @@ declare(strict_types=1);
         ],
     ],
 ];
+=======
+<?php return array (
+  'fields' => 
+  array (
+    'sidebar_blocks' => 
+    array (
+      'label' => 'sidebar_blocks',
+    ),
+  ),
+);
+>>>>>>> bc33217 (.)

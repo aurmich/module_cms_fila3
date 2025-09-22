@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\View\Components;
 
+<<<<<<< HEAD
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
@@ -13,6 +14,16 @@ use Modules\Cms\Models\Page as PageModel;
 use Modules\Xot\Datas\MetatagData;
 use Modules\Xot\Datas\XotData;
 use Webmozart\Assert\Assert;
+=======
+use Illuminate\View\View;
+use Illuminate\Support\Arr;
+use Webmozart\Assert\Assert;
+use Illuminate\View\Component;
+use Modules\Xot\Datas\XotData;
+use Modules\Cms\Datas\BlockData;
+use Modules\Cms\Models\Page as PageModel;
+use Illuminate\Contracts\View\View as ViewContract;
+>>>>>>> bc33217 (.)
 
 class Page extends Component
 {
@@ -21,11 +32,16 @@ class Page extends Component
     public array $blocks = [];
     public array $data = [];
 
+<<<<<<< HEAD
     public function __construct(string $side, string $slug, null|string $type = null, array $data = [])
+=======
+    public function __construct(string $side, string $slug, ?string $type = null, array $data = [])
+>>>>>>> bc33217 (.)
     {
         $this->data = $data;
         $this->side = $side;
         if (null !== $type) {
+<<<<<<< HEAD
             $slug = $type . '-' . $slug;
         }
         $this->slug = $slug;
@@ -49,6 +65,27 @@ class Page extends Component
         }
         $blocks = Arr::map($blocks, function ($block) use ($data) {
             $block['data'] = array_merge($data, $block['data']);
+=======
+            $slug = $type.'-'.$slug;
+        }
+        $this->slug = $slug;
+        $field = $side.'_blocks';
+        // Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, $field => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
+        $page = PageModel::firstWhere(['slug' => $slug]);
+        if (null === $page) {
+            abort(404, 'page not found: '.$slug);
+        }
+        $blocks = $page->$field;
+        if (! is_array($blocks)) {
+            $primary_lang = XotData::make()->primary_lang;
+            $blocks = $page->getTranslation($field, $primary_lang);
+        }
+        if (! is_array($blocks)) {
+            $blocks = [];
+        }
+        $blocks = Arr::map($blocks, function ($block) use ($data) {
+            $block['data'] = array_merge($data,$block['data']);
+>>>>>>> bc33217 (.)
             return $block;
         });
 
@@ -63,8 +100,13 @@ class Page extends Component
         $view = 'cms::components.page-content';
         $view_params = [];
         // @phpstan-ignore-next-line
+<<<<<<< HEAD
         if (!view()->exists($view)) {
             throw new \Exception('view not found: ' . $view);
+=======
+        if (! view()->exists($view)) {
+            throw new \Exception('view not found: '.$view);
+>>>>>>> bc33217 (.)
         }
 
         return view($view, $view_params);

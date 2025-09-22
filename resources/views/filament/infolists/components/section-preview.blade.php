@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <?php
 
 declare(strict_types=1);
 
 ?>
+=======
+>>>>>>> bc33217 (.)
 @php
     $section = $getRecord();
     $content = $section->content;
@@ -18,4 +21,8 @@ declare(strict_types=1);
             </div>
         @endif
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div> 
+>>>>>>> bc33217 (.)

@@ -16,7 +16,11 @@ final class GetViewThemeByViewAction
         $tmp = Str::after($view, '::');
 
         $view1 = inAdmin() ? 'adm_theme' : 'pub_theme';
+<<<<<<< HEAD
         $view1 = $view1 . '::' . $tmp;
+=======
+        $view1 = $view1.'::'.$tmp;
+>>>>>>> bc33217 (.)
 
         // if ('' != $view) {
         //     $view1 .= '.'.$view;

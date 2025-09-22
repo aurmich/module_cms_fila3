@@ -1,6 +1,10 @@
 # Guida all'Implementazione UX in il progetto
 
+<<<<<<< HEAD
 Questa guida fornisce indicazioni pratiche su come implementare i principi UX documentati in [Leggi di UX](/docs/07-frontend/leggi-ux.md) nel progetto il progetto. È rivolta agli sviluppatori e ai designer che lavorano sul progetto.
+=======
+Questa guida fornisce indicazioni pratiche su come implementare i principi UX documentati in [Leggi di UX](/project_docs/07-frontend/leggi-ux.md) nel progetto il progetto. È rivolta agli sviluppatori e ai designer che lavorano sul progetto.
+>>>>>>> bc33217 (.)
 
 ## Indice
 1. [Principi Generali](#principi-generali)
@@ -463,8 +467,15 @@ Repeater::make('documents')
 Applicando sistematicamente queste linee guida, il progetto il progetto manterrà una UX coerente, intuitiva ed efficiente. Ricordate che l'obiettivo finale è rendere l'interfaccia il più possibile trasparente, permettendo agli utenti di concentrarsi sul loro lavoro piuttosto che sull'interazione con il sistema.
 
 Per approfondimenti, consultare:
+<<<<<<< HEAD
 - [Leggi di UX applicate a il progetto](/docs/07-frontend/leggi-ux.md)
 - [UX del Wizard di Registrazione](/docs/07-frontend/ux-wizard-registrazione-paziente.md)
 - [DaisyUI Documentation](https://daisyui.com/components/)
 - [Filament Documentation](https://filamentphp.com/docs/forms) 
 - [Filament Documentation](https://filamentphp.com/docs/forms) 
+=======
+- [Leggi di UX applicate a il progetto](/project_docs/07-frontend/leggi-ux.md)
+- [UX del Wizard di Registrazione](/project_docs/07-frontend/ux-wizard-registrazione-paziente.md)
+- [DaisyUI Documentation](https://daisyui.com/components/)
+- [Filament Documentation](https://filamentphp.com/project_docs/forms) 
+>>>>>>> bc33217 (.)

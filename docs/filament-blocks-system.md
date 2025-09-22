@@ -83,7 +83,11 @@ I contenuti sono salvati in file JSON con struttura:
 ```
 
 ### Percorso Storage
+<<<<<<< HEAD
 **Base**: `config/local/saluteora/database/content/pages/`
+=======
+**Base**: `/var/www/html/_bases/base_saluteora/laravel/config/local/saluteora/database/content/pages/`
+>>>>>>> bc33217 (.)
 
 **File**: `{slug}.json` (es. `home.json`, `about.json`)
 
@@ -186,7 +190,10 @@ Ogni blocco supporta diversi contesti:
 
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> bc33217 (.)

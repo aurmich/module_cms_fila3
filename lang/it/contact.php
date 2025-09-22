@@ -10,11 +10,19 @@ return [
         'color' => 'primary',
         'sort' => 10,
     ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc33217 (.)
     'model' => [
         'label' => 'Contatto',
         'plural' => 'Contatti',
         'description' => 'Gestione informazioni di contatto dello studio',
     ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc33217 (.)
     'fields' => [
         'title' => [
             'label' => 'Titolo Contatto',
@@ -47,6 +55,10 @@ return [
             'help' => 'URL per aprire la posizione su Google Maps o servizi simili',
         ],
     ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc33217 (.)
     'actions' => [
         'create' => [
             'label' => 'Nuovo Contatto',
@@ -71,6 +83,10 @@ return [
             'confirmation' => 'Questa azione è irreversibile',
         ],
     ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc33217 (.)
     'messages' => [
         'empty_state' => 'Nessun contatto configurato',
         'loading' => 'Caricamento contatti in corso...',

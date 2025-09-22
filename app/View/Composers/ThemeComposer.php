@@ -37,12 +37,20 @@ class ThemeComposer
             return route('page_slug.view', ['lang' => $lang, 'slug' => $menu['url']]);
         }
         if ('external' === $menu['type']) {
+<<<<<<< HEAD
             Assert::string($url = $menu['url'], __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
+=======
+            Assert::string($url = $menu['url']);
+>>>>>>> bc33217 (.)
 
             return $url;
         }
         if ('route_name' === $menu['type']) {
+<<<<<<< HEAD
             Assert::string($url = $menu['url'], __FILE__ . ':' . __LINE__ . ' - ' . class_basename(__CLASS__));
+=======
+            Assert::string($url = $menu['url']);
+>>>>>>> bc33217 (.)
 
             return route($url, ['lang' => $lang]);
         }
@@ -52,6 +60,7 @@ class ThemeComposer
 
     public function showPageContent(string $slug): Renderable
     {
+<<<<<<< HEAD
         Assert::isInstanceOf(
             $page = Page::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]),
             Page::class,
@@ -67,12 +76,23 @@ class ThemeComposer
             blocks: $blocks,
             model: $page,
         );
+=======
+        Assert::isInstanceOf($page = Page::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), Page::class, '['.__LINE__.']['.__FILE__.']');
+
+        $blocks = $page->content_blocks;
+
+        if (! is_array($blocks)) {
+            $blocks = [];
+        }
+        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $blocks, model: $page);
+>>>>>>> bc33217 (.)
 
         return $page->render();
     }
 
     public function showPageSidebarContent(string $slug): Renderable
     {
+<<<<<<< HEAD
         Assert::isInstanceOf(
             $page = Page::firstOrCreate(['slug' => $slug], ['sidebar_blocks' => []]),
             Page::class,
@@ -84,12 +104,19 @@ class ThemeComposer
             blocks: $page->sidebar_blocks,
             model: $page,
         );
+=======
+        Assert::isInstanceOf($page = Page::firstOrCreate(['slug' => $slug], ['sidebar_blocks' => []]), Page::class, '['.__LINE__.']['.__FILE__.']');
+        // $page = Page::firstOrCreate(['slug' => $slug], ['content_blocks' => []]);
+
+        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $page->sidebar_blocks, model: $page);
+>>>>>>> bc33217 (.)
 
         return $page->render();
     }
 
     public function showContent(string $slug): Renderable
     {
+<<<<<<< HEAD
         Assert::isInstanceOf(
             $page = PageContent::firstOrCreate(['slug' => $slug], ['blocks' => []]),
             PageContent::class,
@@ -105,6 +132,16 @@ class ThemeComposer
             blocks: $blocks,
             model: $page,
         );
+=======
+        Assert::isInstanceOf($page = PageContent::firstOrCreate(['slug' => $slug], ['blocks' => []]), PageContent::class, '['.__LINE__.']['.__FILE__.']');
+
+        $blocks = $page->blocks;
+        if (! is_array($blocks)) {
+            return view('ui::empty');
+        }
+
+        $page = new \Modules\UI\View\Components\Render\Blocks(blocks: $blocks, model: $page);
+>>>>>>> bc33217 (.)
 
         return $page->render();
     }
@@ -114,7 +151,11 @@ class ThemeComposer
         return Page::all();
     }
 
+<<<<<<< HEAD
     public function getPageModel(string $slug): null|Page
+=======
+    public function getPageModel(string $slug): ?Page
+>>>>>>> bc33217 (.)
     {
         return Page::where('slug', $slug)->first();
     }
@@ -123,12 +164,17 @@ class ThemeComposer
     {
         $page = $this->getPageModel($slug);
         if ($page instanceof Page) {
+<<<<<<< HEAD
             return '/' . app()->getLocale() . '/pages/' . $slug;
+=======
+            return '/'.app()->getLocale().'/pages/'.$slug;
+>>>>>>> bc33217 (.)
         }
 
         return '#';
     }
 
+<<<<<<< HEAD
     /**
      * @deprecated
      *
@@ -150,4 +196,19 @@ class ThemeComposer
      * return $footer->view();
      * }
      */
+=======
+    public function headernav(): Renderable
+    {
+        $headernav = HeadernavData::make();
+
+        return $headernav->view();
+    }
+
+    public function footer(): Renderable
+    {
+        $footer = FooterData::make();
+
+        return $footer->view();
+    }
+>>>>>>> bc33217 (.)
 }

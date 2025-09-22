@@ -6,10 +6,17 @@ declare(strict_types=1);
 uses(\Modules\Xot\Tests\TestCase::class);
 
 beforeEach(function (): void {
+<<<<<<< HEAD
     if (!function_exists('moduleEnabled')) {
         $this->markTestSkipped('moduleEnabled() helper not available.');
     }
     if (!moduleEnabled('Cms')) {
+=======
+    if (! function_exists('moduleEnabled')) {
+        $this->markTestSkipped('moduleEnabled() helper not available.');
+    }
+    if (! moduleEnabled('Cms')) {
+>>>>>>> bc33217 (.)
         $this->markTestSkipped('Module Cms is disabled');
     }
 });

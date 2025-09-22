@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources;
 
 use Filament\Forms;
+<<<<<<< HEAD
 use Filament\Resources\Concerns\Translatable;
 use Illuminate\Support\Str;
 use Modules\Cms\Filament\Fields\PageContentBuilder;
@@ -12,15 +13,29 @@ use Modules\Cms\Filament\Resources\PageResource\Pages;
 use Modules\Cms\Models\Page;
 use Modules\Lang\Filament\Resources\LangBaseResource;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+=======
+use Illuminate\Support\Str;
+use Modules\Cms\Models\Page;
+use Filament\Resources\Concerns\Translatable;
+use Modules\Cms\Filament\Fields\PageContentBuilder;
+use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Lang\Filament\Resources\LangBaseResource;
+use Modules\Cms\Filament\Resources\PageResource\Pages;
+>>>>>>> bc33217 (.)
 
 /**
  * @property Page $record
  */
 class PageResource extends LangBaseResource
 {
+<<<<<<< HEAD
     protected static null|string $model = Page::class;
 
     #[\Override]
+=======
+    protected static ?string $model = Page::class;
+
+>>>>>>> bc33217 (.)
     public static function getFormSchema(): array
     {
         return [
@@ -33,6 +48,7 @@ class PageResource extends LangBaseResource
                     }
                     $set('slug', Str::slug($state));
                 }),
+<<<<<<< HEAD
             Forms\Components\TextInput::make('slug')
                 ->required()
                 //->unique(ignoreRecord: true)
@@ -48,4 +64,30 @@ class PageResource extends LangBaseResource
             ]),
         ];
     }
+=======
+
+            Forms\Components\TextInput::make('slug')
+                ->required()
+                //->unique(ignoreRecord: true)
+                ->afterStateUpdated(static fn (Forms\Set $set, string $state) => $set('slug', Str::slug($state))),
+
+            Forms\Components\Section::make('Content')->schema([
+                PageContentBuilder::make('content_blocks')
+                    ->columnSpanFull(),
+            ]),
+
+            Forms\Components\Section::make('Sidebar')->schema([
+                PageContentBuilder::make('sidebar_blocks')
+                    ->columnSpanFull(),
+            ]),
+
+            Forms\Components\Section::make('Footer')->schema([
+                PageContentBuilder::make('footer_blocks')
+                    ->columnSpanFull(),
+            ]),
+        ];
+    }
+
+
+>>>>>>> bc33217 (.)
 }

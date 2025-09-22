@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ==============================================
 # LARAXOT MODULE CMS - .GITIGNORE
 # ==============================================
@@ -51,6 +52,30 @@ lerna-debug.log*
 # ==============================================
 # LARAVEL SPECIFIC
 # ==============================================
+=======
+# Dependencies
+vendor/
+node_modules/
+package-lock.json
+composer.lock
+yarn-error.log
+npm-debug.log
+
+# Build and compiled files
+/build
+/docs/cache
+cache/
+docs/cache/
+
+# Cache and temporary files
+*.cache
+*.lock
+*.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Laravel specific
+>>>>>>> bc33217 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -58,6 +83,7 @@ public/hot
 public_html/storage
 public_html/hot
 storage/*.key
+<<<<<<< HEAD
 .env
 .env.*
 !.env.example
@@ -145,10 +171,33 @@ cms_test_data.sql
 # ==============================================
 # END OF CMS .GITIGNORE
 # ==============================================
+=======
+
+# Environment and configuration
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Git related
+.git-rewrite/
+.git-blame-ignore-revs
+
+# Backup files
+*.old
+*.old1
+*.backup
+*.bak
+
+# File di log
+*.log
+
+>>>>>>> bc33217 (.)
 #othes
 lang/it/.php
 lang/en/.php
 lang/de/.php
+<<<<<<< HEAD
 
 # Old directories to ignore
 resources/views/Components_old
@@ -161,3 +210,5 @@ database_old
 *.fila2
 laravel
 public_html
+=======
+>>>>>>> bc33217 (.)

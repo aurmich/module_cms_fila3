@@ -1,8 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
+=======
+>>>>>>> bc33217 (.)
 return [
     'adm_theme' => 'AdminLTE',
     'enable_ads' => false,
@@ -12,4 +15,8 @@ return [
         'profile' => 'Modules\User\Models\Profile',
         'user' => 'Modules\User\Models\User',
     ],
+<<<<<<< HEAD
 ];
+=======
+]; 
+>>>>>>> bc33217 (.)

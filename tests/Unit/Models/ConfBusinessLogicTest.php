@@ -11,7 +11,11 @@ describe('Conf Business Logic', function () {
 
     test('conf uses sushi trait for in-memory data', function () {
         $traits = class_uses(Conf::class);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         expect($traits)->toHaveKey(\Sushi\Sushi::class);
     });
 
@@ -21,20 +25,36 @@ describe('Conf Business Logic', function () {
             'id',
             'name',
         ];
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         expect($conf->getFillable())->toEqual($expectedFillable);
     });
 
     test('conf uses name as route key', function () {
         $conf = new Conf();
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         expect($conf->getRouteKeyName())->toBe('name');
     });
 
     test('conf can get rows from tenant service', function () {
         $conf = new Conf();
+<<<<<<< HEAD
 
         expect(method_exists($conf, 'getRows'))->toBeTrue();
         expect($conf->getRows())->toBeArray();
     });
 });
+=======
+        
+        expect(method_exists($conf, 'getRows'))->toBeTrue();
+        expect($conf->getRows())->toBeArray();
+    });
+});
+>>>>>>> bc33217 (.)

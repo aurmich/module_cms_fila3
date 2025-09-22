@@ -4,13 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests\Feature;
 
+<<<<<<< HEAD
 use Modules\UI\Actions\Block\GetAllBlocksAction;
 
 use function Pest\Laravel\get;
+=======
+use function Pest\Laravel\get;
+use Modules\UI\Actions\Block\GetAllBlocksAction;
+>>>>>>> bc33217 (.)
 
 uses(\Modules\Cms\Tests\TestCase::class);
 
 describe('Homepage Filament Builder Blocks - CMS Module', function () {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> bc33217 (.)
     beforeEach(function () {
         $this->lang = app()->getLocale();
     });
@@ -18,9 +27,15 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('homepage renders through cms page component system', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
+<<<<<<< HEAD
 
         $content = $response->getContent();
 
+=======
+        
+        $content = $response->getContent();
+        
+>>>>>>> bc33217 (.)
         // Verify CMS page component integration
         expect($content)->toContain('x-page');
         expect($content)->toContain('side="content"');
@@ -30,14 +45,24 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('json content structure is properly loaded by cms', function () {
         $homepageJsonPath = config_path('local/saluteora/database/content/pages/home.json');
         expect(file_exists($homepageJsonPath))->toBeTrue('Homepage JSON must exist for CMS');
+<<<<<<< HEAD
 
         $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
 
+=======
+        
+        $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
+        
+>>>>>>> bc33217 (.)
         // Verify CMS-specific JSON structure
         expect($homepageData)->toHaveKeys(['id', 'slug', 'content_blocks']);
         expect($homepageData['slug'])->toBe('home');
         expect($homepageData['content_blocks'])->toHaveKey($this->lang);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verify blocks structure for CMS processing
         $blocks = $homepageData['content_blocks'][$this->lang];
         foreach ($blocks as $block) {
@@ -49,10 +74,17 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms blocks discovery system works correctly', function () {
         $allBlocks = app(GetAllBlocksAction::class)->execute();
+<<<<<<< HEAD
 
         expect($allBlocks)->toBeInstanceOf(\Spatie\LaravelData\DataCollection::class);
         expect($allBlocks->count())->toBeGreaterThan(0);
 
+=======
+        
+        expect($allBlocks)->toBeInstanceOf(\Spatie\LaravelData\DataCollection::class);
+        expect($allBlocks->count())->toBeGreaterThan(0);
+        
+>>>>>>> bc33217 (.)
         // Verify CMS blocks are discovered
         $cmsBlocks = $allBlocks->filter(fn($block) => $block->module === 'Cms');
         if ($cmsBlocks->count() > 0) {
@@ -67,6 +99,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         // Verify the UI Blocks render component exists and works
         $blocksClass = \Modules\UI\View\Components\Render\Blocks::class;
         expect(class_exists($blocksClass))->toBeTrue('Blocks render component should exist');
+<<<<<<< HEAD
 
         // Load homepage blocks
         $homepageData = json_decode(
@@ -76,6 +109,17 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
         $blocks = $homepageData['content_blocks'][$this->lang];
 
+=======
+        
+        // Load homepage blocks
+        $homepageData = json_decode(
+            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            true
+        );
+        
+        $blocks = $homepageData['content_blocks'][$this->lang];
+        
+>>>>>>> bc33217 (.)
         // Test component instantiation with blocks
         $component = new $blocksClass($blocks);
         expect($component->blocks)->toEqual($blocks);
@@ -84,6 +128,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('homepage content management through cms works correctly', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
+<<<<<<< HEAD
 
         $content = $response->getContent();
 
@@ -95,6 +140,19 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
         $blocks = $homepageData['content_blocks'][$this->lang];
 
+=======
+        
+        $content = $response->getContent();
+        
+        // Load expected content from JSON
+        $homepageData = json_decode(
+            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            true
+        );
+        
+        $blocks = $homepageData['content_blocks'][$this->lang];
+        
+>>>>>>> bc33217 (.)
         // Verify that CMS-managed content appears on page
         foreach ($blocks as $block) {
             if (isset($block['data']['title'])) {
@@ -109,6 +167,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('cms theme integration renders blocks correctly', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
+<<<<<<< HEAD
 
         $content = $response->getContent();
 
@@ -123,6 +182,22 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
         $blocks = $homepageData['content_blocks'][$this->lang];
 
+=======
+        
+        $content = $response->getContent();
+        
+        // Verify theme-specific rendering
+        expect($content)->toContain('pub_theme::');
+        
+        // Load blocks to verify theme views
+        $homepageData = json_decode(
+            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            true
+        );
+        
+        $blocks = $homepageData['content_blocks'][$this->lang];
+        
+>>>>>>> bc33217 (.)
         foreach ($blocks as $block) {
             $view = $block['data']['view'];
             expect($view)->toStartWith('pub_theme::');
@@ -132,6 +207,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms handles multilingual content correctly', function () {
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')),
             true,
         );
@@ -148,6 +224,24 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
 
+=======
+            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            true
+        );
+        
+        // Verify CMS multilingual structure
+        expect($homepageData['content_blocks'])->toBeArray();
+        expect($homepageData['title'])->toBeArray();
+        
+        // Verify current locale has content
+        expect($homepageData['content_blocks'])->toHaveKey($this->lang);
+        expect($homepageData['title'])->toHaveKey($this->lang);
+        
+        // Test rendering with current locale
+        $response = get('/' . $this->lang);
+        $response->assertOk();
+        
+>>>>>>> bc33217 (.)
         $content = $response->getContent();
         expect($content)->toContain($homepageData['title'][$this->lang]);
     });
@@ -155,6 +249,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('cms page component passes correct data to blocks', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
+<<<<<<< HEAD
 
         $content = $response->getContent();
 
@@ -162,6 +257,15 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         expect($content)->toContain('side="content"');
         expect($content)->toContain('slug="home"');
 
+=======
+        
+        $content = $response->getContent();
+        
+        // Verify page component attributes are correct
+        expect($content)->toContain('side="content"');
+        expect($content)->toContain('slug="home"');
+        
+>>>>>>> bc33217 (.)
         // If user is authenticated, type should be passed
         if (auth()->check()) {
             expect($content)->toContain('type=');
@@ -171,6 +275,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('cms json storage pattern is consistent', function () {
         $pagesPath = config_path('local/saluteora/database/content/pages/');
         expect(file_exists($pagesPath))->toBeTrue('CMS pages directory should exist');
+<<<<<<< HEAD
 
         $homepageJsonPath = $pagesPath . 'home.json';
         expect(file_exists($homepageJsonPath))->toBeTrue('Homepage JSON should exist');
@@ -181,11 +286,27 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         expect($homepageData)->toHaveKeys(['id', 'slug', 'content_blocks']);
         expect($homepageData['slug'])->toBe('home');
 
+=======
+        
+        $homepageJsonPath = $pagesPath . 'home.json';
+        expect(file_exists($homepageJsonPath))->toBeTrue('Homepage JSON should exist');
+        
+        $homepageData = json_decode(file_get_contents($homepageJsonPath), true);
+        
+        // Verify CMS-required fields
+        expect($homepageData)->toHaveKeys(['id', 'slug', 'content_blocks']);
+        expect($homepageData['slug'])->toBe('home');
+        
+>>>>>>> bc33217 (.)
         // Verify blocks structure
         foreach ($homepageData['content_blocks'] as $locale => $blocks) {
             expect($locale)->toBeString();
             expect($blocks)->toBeArray();
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> bc33217 (.)
             foreach ($blocks as $block) {
                 expect($block)->toHaveKeys(['type', 'data']);
                 expect($block['type'])->toBeString();
@@ -197,6 +318,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms blade syntax processing works in json', function () {
         $homepageData = json_decode(
+<<<<<<< HEAD
             file_get_contents(config_path('local/saluteora/database/content/pages/home.json')),
             true,
         );
@@ -212,6 +334,23 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
             $response = get('/' . $this->lang);
             $content = $response->getContent();
 
+=======
+            file_get_contents(config_path('local/saluteora/database/content/pages/home.json')), 
+            true
+        );
+        
+        $blocks = $homepageData['content_blocks'][$this->lang];
+        $landingBlock = collect($blocks)->firstWhere('type', 'landing-page');
+        
+        if ($landingBlock) {
+            // Verify Blade syntax exists in JSON
+            expect($landingBlock['data']['cta_link'])->toContain("{{ route('register') }}");
+            
+            // Verify it's processed correctly on the page
+            $response = get('/' . $this->lang);
+            $content = $response->getContent();
+            
+>>>>>>> bc33217 (.)
             $expectedUrl = route('register');
             expect($content)->toContain($expectedUrl);
         }
@@ -220,16 +359,26 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
     test('cms renders valid html structure', function () {
         $response = get('/' . $this->lang);
         $response->assertOk();
+<<<<<<< HEAD
 
         $content = $response->getContent();
 
+=======
+        
+        $content = $response->getContent();
+        
+>>>>>>> bc33217 (.)
         // Verify HTML structure
         expect($content)->toContain('<!DOCTYPE html>');
         expect($content)->toContain('<html');
         expect($content)->toContain('<head>');
         expect($content)->toContain('<body>');
         expect($content)->toContain('<title>');
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> bc33217 (.)
         // Verify meta tags
         expect($content)->toContain('<meta name="viewport"');
         expect($content)->toContain('<meta name="description"');
@@ -237,6 +386,7 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
 
     test('cms performance for block rendering is acceptable', function () {
         $startTime = microtime(true);
+<<<<<<< HEAD
 
         $response = get('/' . $this->lang);
         $response->assertOk();
@@ -247,3 +397,15 @@ describe('Homepage Filament Builder Blocks - CMS Module', function () {
         expect($renderTime)->toBeLessThan(2.0, 'CMS block rendering should be fast');
     });
 });
+=======
+        
+        $response = get('/' . $this->lang);
+        $response->assertOk();
+        
+        $renderTime = microtime(true) - $startTime;
+        
+        // CMS should render blocks efficiently
+        expect($renderTime)->toBeLessThan(2.0, 'CMS block rendering should be fast');
+    });
+});
+>>>>>>> bc33217 (.)
