@@ -39,10 +39,7 @@ return [
             'placeholder' => 'Inserisci il testo',
             'helper_text' => 'Contenuto testuale semplice senza formattazione',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Media & Visual Elements
         'image' => [
             'label' => 'Immagine',
@@ -65,10 +62,7 @@ return [
             'placeholder' => '300px, auto, 50vh',
             'helper_text' => 'Altezza dell\'elemento in pixel, percentuale o viewport',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Layout & Design
         'style' => [
             'label' => 'Stile',
@@ -119,10 +113,7 @@ return [
             'placeholder' => '#007BFF, blu, primary',
             'helper_text' => 'Colore dei pulsanti call-to-action',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Navigation & Links
         'items' => [
             'label' => 'Elementi',
@@ -152,10 +143,7 @@ return [
             'placeholder' => 'Seleziona icona rappresentativa',
             'helper_text' => 'Icona da mostrare accanto al testo o come elemento standalone',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // UI Components
         'view' => [
             'label' => 'Template',
@@ -177,10 +165,7 @@ return [
             'placeholder' => 'Elementi nested o subordinati',
             'helper_text' => 'Elementi contenuti o dipendenti da questo elemento',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Company & Contact Information
         'email' => [
             'label' => 'Email',
@@ -214,10 +199,7 @@ return [
             'placeholder' => '2024 Nome Azienda. Tutti i diritti riservati.',
             'helper_text' => 'Testo di copyright da visualizzare nel footer',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Call-to-Action Elements
         'button_text' => [
             'label' => 'Testo del pulsante',
@@ -242,10 +224,7 @@ return [
             'help' => 'URL di destinazione per la call-to-action',
             'helper_text' => 'URL della pagina di destinazione per la CTA',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Social Media
         'social_links' => [
             'label' => 'Link Social',
@@ -262,10 +241,7 @@ return [
             'placeholder' => 'Lista di link di navigazione',
             'helper_text' => 'Collezione di collegamenti per menu o footer',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Statistics & Data
         'stats' => [
             'label' => 'Statistiche',
@@ -277,10 +253,7 @@ return [
             'placeholder' => 'Valore numerico',
             'helper_text' => 'Valore numerico per contatori o statistiche',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Page Structure
         'sections' => [
             'label' => 'Sezioni',
@@ -303,10 +276,7 @@ return [
             'placeholder' => 'Contenuti del piè di pagina',
             'helper_text' => 'Elementi da includere nel footer del sito',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Interactive Elements
         'placeholder' => [
             'label' => 'Placeholder',
@@ -323,10 +293,7 @@ return [
             'placeholder' => 'Si è verificato un errore',
             'helper_text' => 'Messaggio mostrato in caso di errore',
         ],
-<<<<<<< HEAD
-=======
         
->>>>>>> bc33217 (.)
         // Advanced Layout
         'background' => [
             'label' => 'Sfondo',
@@ -384,10 +351,7 @@ return [
             'helper_text' => 'Video da incorporare o collegare',
         ],
     ],
-<<<<<<< HEAD
-=======
     
->>>>>>> bc33217 (.)
     'actions' => [
         'save' => [
             'label' => 'Salva',
@@ -405,10 +369,7 @@ return [
             'help' => 'Modifica la lingua di editing per contenuti multilingua',
         ],
     ],
-<<<<<<< HEAD
-=======
     
->>>>>>> bc33217 (.)
     'sections' => [
         'content' => [
             'label' => 'Contenuto',
@@ -447,10 +408,7 @@ return [
             'description' => 'Impostazioni tecniche e personalizzazioni',
         ],
     ],
-<<<<<<< HEAD
-=======
     
->>>>>>> bc33217 (.)
     'messages' => [
         'content_saved' => 'Contenuto salvato con successo',
         'save_error' => 'Si è verificato un errore durante il salvataggio',
@@ -464,10 +422,7 @@ return [
         'video_upload_success' => 'Video caricato con successo',
         'video_upload_error' => 'Errore durante il caricamento del video',
     ],
-<<<<<<< HEAD
-=======
     
->>>>>>> bc33217 (.)
     'validation' => [
         'title_required' => 'Il titolo è obbligatorio',
         'slug_unique' => 'Questo slug è già in uso',

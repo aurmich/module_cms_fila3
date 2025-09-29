@@ -4,30 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-<<<<<<< HEAD
-use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-=======
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Builder\Block;
->>>>>>> bc33217 (.)
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class LogoBlock extends XotBaseBlock
 {
-<<<<<<< HEAD
-    #[\Override]
-    public static function getBlockSchema(): array
-    {
-        return [
-            FileUpload::make('image')->image()->directory('logos'),
-            TextInput::make('alt')->required(),
-            TextInput::make('text'),
-=======
     public static function getBlockSchema(): array
     {
         return [
@@ -46,7 +30,6 @@ class LogoBlock extends XotBaseBlock
                 
                 ,
 
->>>>>>> bc33217 (.)
             Select::make('type')
                 ->options([
                     'image' => 'Solo Immagine',
@@ -54,12 +37,6 @@ class LogoBlock extends XotBaseBlock
                     'both' => 'Immagine e Testo',
                 ])
                 ->default('both')
-<<<<<<< HEAD
-                ->required(),
-            TextInput::make('width')->numeric(),
-            TextInput::make('height')->numeric(),
-            TextInput::make('url')->default('/')->required(),
-=======
                 ->required()
                 
                 ,
@@ -79,7 +56,6 @@ class LogoBlock extends XotBaseBlock
                 ->required()
                 
                 ,
->>>>>>> bc33217 (.)
         ];
     }
 

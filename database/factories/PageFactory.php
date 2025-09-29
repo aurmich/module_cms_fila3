@@ -4,16 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Database\Factories;
 
-<<<<<<< HEAD
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use Modules\Cms\Models\Page;
-use Webmozart\Assert\Assert;
-
-use function Safe\preg_replace;
-
-=======
 use Illuminate\Support\Str;
 use Modules\Cms\Models\Page;
 use Webmozart\Assert\Assert;
@@ -22,7 +12,6 @@ use function Safe\preg_replace;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
->>>>>>> bc33217 (.)
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Cms\Models\Page>
  */

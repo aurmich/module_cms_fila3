@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace Modules\Cms\Models;
 
 use Modules\Tenant\Models\Traits\SushiToJsons;
-<<<<<<< HEAD
-use Modules\Xot\Actions\Tree\GetTreeOptionsByModelClassAction;
-use Modules\Xot\Contracts\HasRecursiveRelationshipsContract;
-=======
 use Modules\Xot\Contracts\HasRecursiveRelationshipsContract;
 use Modules\Xot\Actions\Tree\GetTreeOptionsByModelClassAction;
->>>>>>> bc33217 (.)
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 /**
@@ -148,10 +143,7 @@ class Menu extends BaseModel implements HasRecursiveRelationshipsContract
         'id' => 'integer',
         'title' => 'string',
         'parent_id' => 'integer',
-<<<<<<< HEAD
-=======
 
->>>>>>> bc33217 (.)
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'created_by' => 'string',
@@ -173,20 +165,12 @@ class Menu extends BaseModel implements HasRecursiveRelationshipsContract
         return $this->getSushiRows();
     }
 
-<<<<<<< HEAD
-    #[\Override]
-=======
->>>>>>> bc33217 (.)
     public function getLabel(): string
     {
         return $this->title;
     }
 
     /** @return array<string, string> */
-<<<<<<< HEAD
-    #[\Override]
-=======
->>>>>>> bc33217 (.)
     protected function casts(): array
     {
         return [

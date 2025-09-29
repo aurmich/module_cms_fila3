@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-declare(strict_types=1);
-
-?>
-=======
->>>>>>> bc33217 (.)
 <div id="draggable" class="ui-widget-content">
     <p>Drag me to my target</p>
 </div>

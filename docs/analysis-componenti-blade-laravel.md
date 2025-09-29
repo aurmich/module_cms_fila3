@@ -4,10 +4,7 @@ Questo documento definisce le linee guida per l'analisi e l'identificazione corr
 
 ## Problema Identificato
 
-<<<<<<< HEAD
 Durante l'analisi del componente `<x-ui.marketing.header />` nel file `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/layouts/app.blade.php`, è stato commesso un errore nell'identificazione del file corrispondente. L'errore è stato causato da un'analisi superficiale dei risultati di ricerca, senza una verifica adeguata dell'esistenza e del contenuto del file.
-=======
->>>>>>> bc33217 (.)
 Durante l'analisi del componente `<x-ui.marketing.header />` nel file `/var/www/html/saluteora/laravel/Themes/One/resources/views/components/layouts/app.blade.php`, è stato commesso un errore nell'identificazione del file corrispondente. L'errore è stato causato da un'analisi superficiale dei risultati di ricerca, senza una verifica adeguata dell'esistenza e del contenuto del file.
 
 ## Metodologia Corretta per l'Analisi dei Componenti Blade
@@ -27,10 +24,7 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 1. **Ricerca del File**
    ```bash
    # Esempio di ricerca corretta
-<<<<<<< HEAD
    find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/marketing/header.blade.php"
-=======
->>>>>>> bc33217 (.)
    find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/marketing/header.blade.php"
    ```
 
@@ -41,10 +35,7 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 3. **Visualizzazione del Contenuto**
    ```php
    # Esempio di visualizzazione corretta
-<<<<<<< HEAD
    view_file /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
->>>>>>> bc33217 (.)
    view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
    ```
 
@@ -68,10 +59,7 @@ I componenti Blade in Laravel seguono una convenzione di naming specifica:
 
 ```php
 // 1. Cercare il file
-<<<<<<< HEAD
 find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/header.blade.php"
-=======
->>>>>>> bc33217 (.)
 find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/header.blade.php"
 
 // Risultati:
@@ -82,10 +70,7 @@ find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/componen
 // Il file ui/marketing/header.blade.php esiste
 
 // 3. Visualizzare il contenuto
-<<<<<<< HEAD
 view_file /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
->>>>>>> bc33217 (.)
 view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
 
 // 4. Analizzare il contenuto
@@ -93,10 +78,7 @@ view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/
 
 // 5. Documentare le conclusioni
 // Il componente <x-ui.marketing.header /> corrisponde al file 
-<<<<<<< HEAD
 // /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
-=======
->>>>>>> bc33217 (.)
 // /var/www/html/saluteora/laravel/Themes/One/resources/views/components/ui/marketing/header.blade.php
 ```
 
@@ -104,10 +86,7 @@ view_file /var/www/html/saluteora/laravel/Themes/One/resources/views/components/
 
 ```php
 // 1. Cercare il file in modo generico
-<<<<<<< HEAD
 find_by_name /var/www/html/_bases/base_techplanner_fila3_mono/laravel/Themes/One/resources/views/components "**/header.blade.php"
-=======
->>>>>>> bc33217 (.)
 find_by_name /var/www/html/saluteora/laravel/Themes/One/resources/views/components "**/header.blade.php"
 
 // 2. Saltare la verifica dell'esistenza del file specifico

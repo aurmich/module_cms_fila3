@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-declare(strict_types=1);
-
-?>
-=======
->>>>>>> bc33217 (.)
 {{--
 <div class="col-4">
     <x-card>

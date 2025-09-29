@@ -12,16 +12,6 @@ class ListAttachments extends LangBaseListRecords
 {
     protected static string $resource = AttachmentResource::class;
 
-<<<<<<< HEAD
-    public function getTableColumns(): array
-    {
-        return [
-            'title' => TextColumn::make('title')->searchable(),
-            'slug' => TextColumn::make('slug')->searchable(),
-            'attachment' => TextColumn::make('attachment')->searchable(),
-        ];
-    }
-=======
 
     public function getTableColumns(): array
     {
@@ -36,5 +26,4 @@ class ListAttachments extends LangBaseListRecords
     }
 
    
->>>>>>> bc33217 (.)
 }

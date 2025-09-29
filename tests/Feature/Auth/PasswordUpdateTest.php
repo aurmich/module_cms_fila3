@@ -1,16 +1,8 @@
 <?php
 
-<<<<<<< HEAD
-declare(strict_types=1);
-
-
-namespace Modules\Cms\Tests\Feature\Auth;
-
-=======
 namespace Modules\Cms\Tests\Feature\Auth;
 
 
->>>>>>> bc33217 (.)
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt;
 
@@ -48,8 +40,4 @@ test('correct password must be provided to update password', function () {
         ->call('updatePassword');
 
     $response->assertHasErrors(['current_password']);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> bc33217 (.)

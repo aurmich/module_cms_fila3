@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Tests;
 
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase as BaseTestCase;
-=======
 use Tests\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
->>>>>>> bc33217 (.)
 
 /**
  * TestCase base per il modulo Cms.
@@ -18,9 +13,6 @@ use Illuminate\Support\Facades\Artisan;
 abstract class TestCase extends BaseTestCase
 {
     
-<<<<<<< HEAD
-}
-=======
     
     protected function setUp(): void
     {
@@ -51,4 +43,3 @@ abstract class TestCase extends BaseTestCase
         */
     }
 }
->>>>>>> bc33217 (.)

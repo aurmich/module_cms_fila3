@@ -8,11 +8,7 @@ Trovati 1 errori al livello 2.
 
 ## Errori e suggerimenti
 
-<<<<<<< HEAD
 ### File: `../laravel/Modules/Cms/app/Models/Menu.php`
-=======
-### File: `/var/www/html/saluteora/laravel/Modules/Cms/app/Models/Menu.php`
->>>>>>> bc33217 (.)
 
 #### Linea 160: PHPDoc tag @var with type class-string<Modules\Xot\Contracts\HasRecursiveRelationshipsContract> is not subtype of native type 'Modules\\Cms\\Models\\Menu'.
 

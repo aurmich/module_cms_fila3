@@ -71,13 +71,7 @@ abstract class BaseModel extends Model
         return [
             'id' => 'string',
             'uuid' => 'string',
-<<<<<<< HEAD
-            'published_at' => 'datetime',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-=======
             'published_at' => 'datetime', 'created_at' => 'datetime', 'updated_at' => 'datetime',
->>>>>>> bc33217 (.)
         ];
     }
 }

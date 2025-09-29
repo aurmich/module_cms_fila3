@@ -1,11 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-declare(strict_types=1);
-
-
-=======
->>>>>>> bc33217 (.)
 return [
     'logo' => [
         'label' => 'Logo',
@@ -28,10 +22,7 @@ return [
             ],
         ],
     ],
-<<<<<<< HEAD
-=======
-
->>>>>>> bc33217 (.)
+    
     'navigation' => [
         'label' => 'Navigazione',
         'fields' => [
@@ -45,10 +36,7 @@ return [
             ],
         ],
     ],
-<<<<<<< HEAD
-=======
-
->>>>>>> bc33217 (.)
+    
     'social' => [
         'label' => 'Social',
         'fields' => [
@@ -66,4 +54,4 @@ return [
             ],
         ],
     ],
-];
+]; 

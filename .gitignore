@@ -1,58 +1,3 @@
-<<<<<<< HEAD
-# ==============================================
-# LARAXOT MODULE CMS - .GITIGNORE
-# ==============================================
-# Modulo CMS Laraxot - Template standardizzato
-# Ultimo aggiornamento: 2025-01-06
-# ==============================================
-
-# ==============================================
-# DEPENDENCIES & PACKAGES
-# ==============================================
-vendor/
-node_modules/
-package-lock.json
-yarn.lock
-composer.lock
-
-# ==============================================
-# BUILD & COMPILED FILES
-# ==============================================
-/build
-build/
-dist/
-docs/cache/
-cache/
-
-# ==============================================
-# CACHE & TEMPORARY FILES
-# ==============================================
-*.cache
-*.lock
-*.phar
-*.jar
-*.tmp
-*.swp
-*.swo
-*.stackdump
-*:Zone.Identifier
-v8-compile-cache-*
-.php-cs-fixer.cache
-.phpunit.result.cache
-
-# ==============================================
-# LOG FILES
-# ==============================================
-*.log
-error_log
-npm-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# ==============================================
-# LARAVEL SPECIFIC
-# ==============================================
-=======
 # Dependencies
 vendor/
 node_modules/
@@ -75,7 +20,6 @@ docs/cache/
 .php-cs-fixer.cache
 
 # Laravel specific
->>>>>>> bc33217 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -83,95 +27,6 @@ public/hot
 public_html/storage
 public_html/hot
 storage/*.key
-<<<<<<< HEAD
-.env
-.env.*
-!.env.example
-
-# ==============================================
-# ENVIRONMENT & CONFIGURATION
-# ==============================================
-Homestead.yaml
-Homestead.json
-/.vagrant
-/.idea
-.phpintel
-
-# ==============================================
-# GIT SPECIFIC
-# ==============================================
-.git-rewrite/
-.git-blame-ignore-revs
-
-# ==============================================
-# SYSTEM FILES
-# ==============================================
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# ==============================================
-# BACKUP FILES
-# ==============================================
-*.old
-*.old1
-*.old2
-*.backup
-*.backup.*
-*.bak
-*.bakcup
-*.new
-
-# ==============================================
-# DEVELOPMENT TOOLS
-# ==============================================
-.windsurf/
-.cursor/
-.phpstorm.meta.php
-
-# ==============================================
-# DOCUMENTATION CACHE
-# ==============================================
-docs/phpstan/
-docs/cache/
-
-# ==============================================
-# OLD DIRECTORIES (LEGACY CLEANUP)
-# ==============================================
-resources/views/Components_old/
-database/Migrations_old/
-database/Seeders_old/
-database/Factories_old/
-database_old/
-
-# ==============================================
-# MODULE SPECIFIC - CMS
-# ==============================================
-# File di configurazione locale
-config/local.php
-config/development.php
-
-# Contenuti temporanei
-content/temp/
-content/drafts/
-content/uploads/temp/
-
-# Cache contenuti
-storage/cms/
-storage/content/
-
-# File di test
-test_content.json
-cms_test_data.sql
-
-# ==============================================
-# END OF CMS .GITIGNORE
-# ==============================================
-=======
 
 # Environment and configuration
 .env
@@ -187,20 +42,16 @@ Homestead.json
 *.old
 *.old1
 *.backup
+*.backup.*
 *.bak
 
 # File di log
 *.log
 
->>>>>>> bc33217 (.)
 #othes
 lang/it/.php
 lang/en/.php
 lang/de/.php
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 60fbb5b8e (.)
 
 # Old directories to ignore
 resources/views/Components_old
@@ -208,13 +59,3 @@ database/Migrations_old
 database/Seeders_old
 database/Factories_old
 database_old
-<<<<<<< HEAD
-
-# 🚫 File specifici del progetto
-*.fila2
-laravel
-public_html
-=======
->>>>>>> bc33217 (.)
-=======
->>>>>>> 60fbb5b8e (.)

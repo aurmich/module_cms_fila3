@@ -23,28 +23,14 @@ class PageContent extends Component
     public function __construct(string $slug)
     {
         $this->slug = $slug;
-<<<<<<< HEAD
-        Assert::isInstanceOf(
-            $page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]),
-            PageModel::class,
-            '[' . __LINE__ . '][' . __FILE__ . ']',
-        );
-        $blocks = $page->content_blocks;
-        if (!is_array($blocks)) {
-=======
         Assert::isInstanceOf($page = PageModel::firstOrCreate(['slug' => $slug], ['title' => $slug, 'content_blocks' => []]), PageModel::class, '['.__LINE__.']['.__FILE__.']');
         $blocks = $page->content_blocks;
         if (! is_array($blocks)) {
->>>>>>> bc33217 (.)
             $primary_lang = XotData::make()->primary_lang;
             $blocks = $page->getTranslation('content_blocks', $primary_lang);
         }
 
-<<<<<<< HEAD
-        if (!is_array($blocks)) {
-=======
         if (! is_array($blocks)) {
->>>>>>> bc33217 (.)
             $blocks = [];
         }
         $this->blocks = BlockData::collect($blocks);
@@ -56,23 +42,6 @@ class PageContent extends Component
     public function render(): ViewContract
     {
         /*
-<<<<<<< HEAD
-         * $comps=Blade::getClassComponentAliases();
-         * $paths = Blade::getAnonymousComponentPaths();
-         * $filtered=Arr::where($comps,function ($value,$key){
-         * return Str::startsWith($key,'blocks.');
-         * });
-         * dddx([
-         * 'filtered'=>$filtered
-         * ,'paths'=>$paths
-         * ]);
-         */
-        $view = 'cms::components.page-content';
-        $view_params = [];
-        // @phpstan-ignore-next-line
-        if (!view()->exists($view)) {
-            throw new \Exception('view not found: ' . $view);
-=======
         $comps=Blade::getClassComponentAliases();
         $paths = Blade::getAnonymousComponentPaths();
         $filtered=Arr::where($comps,function ($value,$key){
@@ -88,7 +57,6 @@ class PageContent extends Component
         // @phpstan-ignore-next-line
         if (! view()->exists($view)) {
             throw new \Exception('view not found: '.$view);
->>>>>>> bc33217 (.)
         }
 
         return view($view, $view_params);

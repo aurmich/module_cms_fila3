@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-declare(strict_types=1);
-
-?>
-=======
->>>>>>> bc33217 (.)
 @extends('cms::layouts.master')
 
 @section('content')

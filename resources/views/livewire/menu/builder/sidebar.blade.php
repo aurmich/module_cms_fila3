@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-declare(strict_types=1);
-
-?>
-=======
->>>>>>> bc33217 (.)
 <div id="menu-settings-column" class="metabox-holder">
 
     <div class="clear"></div>

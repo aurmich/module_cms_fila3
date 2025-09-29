@@ -3,7 +3,6 @@
 Questo documento fornisce un collegamento alla documentazione dettagliata del componente Header nel modulo CMS.
 
 ## Collegamenti
-<<<<<<< HEAD
 - [Documentazione Componente Header](./components/header.md)
 - [Documentazione Blocco Navigazione](./blocks/navigation.md)
 - [Errore Null Data nel Header](./errors/header-null-data-error.md)
@@ -20,10 +19,6 @@ Il componente Header include controlli di sicurezza per gestire il caso in cui n
 - Verifica tipo array per proprietà dinamiche
 - Fallback sicuro con menu di default
 - Gestione errori graceful senza interruzioni del rendering 
-=======
-- [Documentazione Componente Header](../../laravel/Modules/Cms/docs/components/header.md)
-- [Documentazione Blocco Navigazione](../../laravel/Modules/Cms/docs/blocks/navigation.md)
->>>>>>> bc33217 (.)
 
 ## Utilizzo nel Progetto
 Il componente Header è utilizzato come elemento principale di navigazione in tutte le pagine del sito. Per maggiori dettagli sulla sua implementazione e configurazione, consultare la documentazione del modulo CMS. 

@@ -16,14 +16,7 @@ use Spatie\Translatable\HasTranslations;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string                          $slug
  * @property string                          $title
-<<<<<<< HEAD
-<<<<<<< HEAD
- * @property string|null                     $description
-=======
->>>>>>> bc33217 (.)
-=======
  * @property string                          $description
->>>>>>> 60fbb5b8e (.)
  * @property string                          $content
  * @property string|null                     $updated_by
  * @property string|null                     $created_by
@@ -79,14 +72,7 @@ class Page extends BaseModelLang
 
     protected $fillable = [
         'content',
-<<<<<<< HEAD
-<<<<<<< HEAD
         'description',
-=======
->>>>>>> bc33217 (.)
-=======
-        'description',
->>>>>>> 60fbb5b8e (.)
         'slug',
         'title',
         'middleware',
@@ -101,20 +87,8 @@ class Page extends BaseModelLang
         'slug' => 'string',
         'middleware' => 'json',
         'content' => 'string',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        'description' => 'string',
-        'content_blocks' => 'json',
-        'sidebar_blocks' => 'json',
-        'footer_blocks' => 'json',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-=======
-
-=======
         'description' => 'string',
         
->>>>>>> 60fbb5b8e (.)
         'content_blocks' => 'json',
         'sidebar_blocks' => 'json',
         'footer_blocks' => 'json',
@@ -122,7 +96,6 @@ class Page extends BaseModelLang
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
 
->>>>>>> bc33217 (.)
         'created_by' => 'string',
         'updated_by' => 'string',
     ];
@@ -132,19 +105,12 @@ class Page extends BaseModelLang
         return $this->getSushiRows();
     }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> bc33217 (.)
     /**
      * The attributes that should be mutated to dates.
      *
      * @return array<string, string> */
-<<<<<<< HEAD
-    #[\Override]
-=======
->>>>>>> bc33217 (.)
     protected function casts(): array
     {
         return [
@@ -163,10 +129,7 @@ class Page extends BaseModelLang
         ];
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> bc33217 (.)
     public static function getMiddlewareBySlug(string $slug): array
     {
         $page = self::where('slug', $slug)->first();

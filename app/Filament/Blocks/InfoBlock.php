@@ -12,14 +12,6 @@ use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 final class InfoBlock extends XotBaseBlock
 {
-<<<<<<< HEAD
-    #[\Override]
-    public static function getBlockSchema(): array
-    {
-        return [
-            TextInput::make('title')->required()->label(__('cms::blocks.info.fields.title')),
-            RichEditor::make('description')->required()->label(__('cms::blocks.info.fields.description')),
-=======
     public static function getBlockSchema(): array
     {
         return [
@@ -31,19 +23,14 @@ final class InfoBlock extends XotBaseBlock
                 ->required()
                 ->label(__('cms::blocks.info.fields.description')),
 
->>>>>>> bc33217 (.)
             FileUpload::make('logo')
                 ->image()
                 ->required()
                 ->label(__('cms::blocks.info.fields.logo')),
-<<<<<<< HEAD
-            TextInput::make('copyright')->required()->label(__('cms::blocks.info.fields.copyright')),
-=======
 
             TextInput::make('copyright')
                 ->required()
                 ->label(__('cms::blocks.info.fields.copyright')),
->>>>>>> bc33217 (.)
         ];
     }
 

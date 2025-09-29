@@ -4,33 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Filament\Blocks;
 
-<<<<<<< HEAD
-use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-=======
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Builder\Block;
->>>>>>> bc33217 (.)
 use Modules\Xot\Filament\Blocks\XotBaseBlock;
 
 class FeatureSectionsBlock extends XotBaseBlock
 {
-<<<<<<< HEAD
-    #[\Override]
-    public static function getBlockSchema(): array
-    {
-        return [
-            TextInput::make('title')->label('Titolo')->required(),
-            Repeater::make('sections')
-                ->label('Sezioni')
-                ->schema([
-                    TextInput::make('title')->label('Titolo')->required(),
-                    TextInput::make('description')->label('Descrizione')->required(),
-=======
     public static function getBlockSchema(): array
     {
         return [
@@ -46,7 +27,6 @@ class FeatureSectionsBlock extends XotBaseBlock
                     TextInput::make('description')
                         ->label('Descrizione')
                         ->required(),
->>>>>>> bc33217 (.)
                     Select::make('icon')
                         ->label('Icona')
                         ->options([

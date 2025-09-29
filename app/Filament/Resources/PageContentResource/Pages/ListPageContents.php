@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace Modules\Cms\Filament\Resources\PageContentResource\Pages;
 
 use Filament\Actions;
-<<<<<<< HEAD
-use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\ActionsPosition;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Table;
-use Modules\Cms\Filament\Resources\PageContentResource;
-use Modules\Lang\Filament\Resources\Pages\LangBaseListRecords;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
-use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-=======
 use Filament\Tables\Table;
 use Filament\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
@@ -38,7 +21,6 @@ use Modules\Cms\Filament\Resources\PageContentResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\Lang\Filament\Resources\Pages\LangBaseListRecords;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
->>>>>>> bc33217 (.)
 
 class ListPageContents extends LangBaseListRecords
 {
@@ -56,22 +38,6 @@ class ListPageContents extends LangBaseListRecords
     public function getTableColumns(): array
     {
         return [
-<<<<<<< HEAD
-            TextColumn::make('name')->sortable()->searchable(),
-            TextColumn::make('slug')->sortable()->searchable(),
-        ];
-    }
-
-    /*
-     * protected function getHeaderActions(): array
-     * {
-     * return [
-     * CreateAction::make(),
-     * Actions\LocaleSwitcher::make(),
-     * ];
-     * }
-     */
-=======
             TextColumn::make('name')
                 ->sortable()
                 ->searchable(),
@@ -93,5 +59,4 @@ class ListPageContents extends LangBaseListRecords
     */
 
     
->>>>>>> bc33217 (.)
 }

@@ -21,11 +21,7 @@ class XotComposer
     public function compose(View $view): void
     {
         $user = Auth::user();
-<<<<<<< HEAD
-        if (!($user instanceof Authenticatable)) {
-=======
         if (! $user instanceof Authenticatable) {
->>>>>>> bc33217 (.)
             return;
         }
 

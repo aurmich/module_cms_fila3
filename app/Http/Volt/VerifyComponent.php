@@ -19,16 +19,6 @@ class VerifyComponent extends Component
     public function resend(): void
     {
         /*
-<<<<<<< HEAD
-         * if (auth()->user()->hasVerifiedEmail()) {
-         * return redirect()->intended(route('dashboard'));
-         * }
-         *
-         * auth()->user()->sendEmailVerificationNotification();
-         *
-         * return back()->with('status', 'verification-link-sent');
-         */
-=======
         if (auth()->user()->hasVerifiedEmail()) {
             return redirect()->intended(route('dashboard'));
         }
@@ -37,7 +27,6 @@ class VerifyComponent extends Component
 
         return back()->with('status', 'verification-link-sent');
         */
->>>>>>> bc33217 (.)
         Assert::notNull($user = auth()->user());
         if ($user->hasVerifiedEmail()) {
             redirect('/');
@@ -45,14 +34,10 @@ class VerifyComponent extends Component
 
         $user->sendEmailVerificationNotification();
 
-<<<<<<< HEAD
         // Cast to MustVerifyEmail for the Verified event
         if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail) {
             event(new Verified($user));
         }
-=======
-        event(new Verified($user));
->>>>>>> bc33217 (.)
 
         $this->dispatch('resent');
         session()->flash('resent');
