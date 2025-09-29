@@ -198,6 +198,9 @@ lang/it/.php
 lang/en/.php
 lang/de/.php
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 60fbb5b8e (.)
 
 # Old directories to ignore
 resources/views/Components_old
@@ -205,6 +208,7 @@ database/Migrations_old
 database/Seeders_old
 database/Factories_old
 database_old
+<<<<<<< HEAD
 
 # 🚫 File specifici del progetto
 *.fila2
@@ -212,3 +216,5 @@ laravel
 public_html
 =======
 >>>>>>> bc33217 (.)
+=======
+>>>>>>> 60fbb5b8e (.)
